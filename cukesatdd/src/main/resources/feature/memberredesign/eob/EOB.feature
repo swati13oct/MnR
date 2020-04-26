@@ -1,170 +1,213 @@
 @eob @fastandfurious
-Feature: 1.04 To Test EOB for Members
+Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
 
-  ######################   EOB Regression ###############################
-  @eob6 @febRelease2018 @hsideob @regressionMember
-  Scenario Outline: plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify NICE EOB and click on the pdf
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPEob |
+
+
+  #note: skip the API and UI count comparison for now because service is unstable
+  @eob01 @E2E @regressionMember 
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates site leaving pop up
-    And the user slects the desired date range
-      | Plan Type  | <planType>  |
-      | Date Range | <dateRange> |
-      | EOB Type   | <eobType>   |
-    Then the user validates EOB count
-      | EOB COUNT | <eobCount> |
-    And the user validates how to read medical eob PDF
+    Then the user navigates to EOB page
+    Then the user validates the header section content
+    Then the user validates site leaving pop up after clicking Adobe link
+    #note: moved to footer feature
+    #Then the user validates Need Help section
+    And the user selects the eob type
       | EOB Type | <eobType> |
-    And the user clicks on first eob from the list
+    #----- Validate Date Range Custom Search invalid cases ----  
+    When the user selects Custom Search with blank From and To Date values
+    Then the user validates blank Date errors 
+    When the user selects Custom Search with To Date older From Date values
+    Then the user validates To Date older than From Date errors
+    When the user selects Custom Search with Date Range greater than 18 months
+    Then the user validates greater than 18 months error
+    Then the user selects Custom Search with future date for From and To Date values
+    Then the user validates future Date errors
+    #----- Validate Date Range Last 90 Days ----  
+    And the user selects the desired date range
+      | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    #Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 6 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 6 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    #Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 12 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 12 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    #Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 18 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Custom Search ----  
+    And the user selects the desired date range
+      | Date Range | Custom Search |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    #Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Final validation ----  
+    #Then the user validates the eob count for all available search ranges
+    #  | Flag Zero EOB User | <flagZeroEob> |
 
-    @COSMOS_EOBs
+    @COSMOS_MEDICAL @devRegression
     Examples: 
-      | planType | memberType   | dateRange      | eobType           | eobCount |
-      | MAPD     | COSMOS_EOB_R | Last 18 months | Medical           |       17 |
-      | MA       | COSMOS_EOB_R | Last 12 months | Medical           |       10 |
-      | MAPD     | COSMOS_EOB_R | Last 6 months  | Prescription Drug |        4 |
+      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
 
-    @NICE_EOBs
+    @COSMOS_MEDICAL
     Examples: 
-      | planType | memberType | dateRange      | eobType           | eobCount |
-      | MAPD     | NICE_EOB_R | Last 18 months | Prescription Drug |       12 |
-      | MAPD     | NICE_EOB_R | Last 6 months  | Medical           |        3 |
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 02    | MA       | COSMOS_EOB_R      | Medical           | true        |
 
+    @COSMOS_DRUG  @devRegression
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 03    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
+
+    @NICE_MEDICAL
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |  
+      | 05    | MA       | NICE_EOB_R        | Medical           | true        | 
+
+    @NICE_DRUG
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        | 
+
+    #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
+    #note: adobe links won't come up till very very late
+    @RX_PDP
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
+      | 08    | PDP      | LIS_GROUP_Rx_EOB  | Prescription Drug | true        |
+
+    @RX_PDP_COMBO
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 09    | PDP      | LIS_PDP_SSP_COMBO_EOB | Prescription Drug | true        |
+      | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
+
+
+  @eob02 @regressionMember
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    Then the user validates the header section content
+    Then the user validates site leaving pop up after clicking Adobe link
+    #note: moved to footer feature
+    #Then the user validates Need Help section
+    And the user selects the eob type
+      | EOB Type | <eobType> |
+    #----- Validate Date Range Last 90 Days ----  
+    And the user selects the desired date range
+      | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 3-6 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 3-6 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 6-12 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 6-12 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Validate Date Range Last 12- months ----  
+    And the user selects the desired date range
+      | Date Range | Last 12-18 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+    #Then the user validates EOB count between API and UI are the same
+    #----- Final validation ----  
+    #Then the user validates the eob count for all available search ranges
+    #  | Flag Zero EOB User | <flagZeroEob> |
+
+    # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @SHIP_EOBs
     Examples: 
-      | planType     | memberType | dateRange        | eobType | eobCount |
-      | SHIP_ACTIVE  | SHIP_EOB   | Last 6-12 months | Medical |        1 |
-      | SHIP_ACTIVE2 | SHIP_EOB2  | Last 6-12 months | Medical |        1 |
+      | index | planType                 | memberType         | eobType | flagZeroEob |
+      | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
-    @Rx_EOBs
     Examples: 
-      | planType | memberType | dateRange      | eobType           | eobCount | 
-      | PDP      | Rx_EOB     | Last 12 months | Prescription Drug |        9 | 
-      | PDP      | RxGrp_EOB  | Last 18 months | Prescription Drug |       14 | 
+      | index | planType                 | memberType         | eobType | flagZeroEob |
+      | 05    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+      | 06    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
 
-  #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
-  #     |15166    | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
-  #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
-  ########################### END EOB  Regression #######################################
-  @eob1 @Eobsiteleavingpopup
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>- Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
+
+  @eob02 @regression_06_06_18FnF @regressionMember
+  Scenario Outline: -index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates site leaving pop up
+    Then the user navigates to EOB page
+    Then the user validates the eob page content for PHIP
 
+    @PHIP_EOBs
     Examples: 
-      | TID   | planType | memberType          |
-      | 15140 | MAPD     | IndividualAARPWOEOB |
-      | 15120 | MA       | IndividualAARPWOEOB |
+      | index | TID   | planType | memberType |
+      | 13    | 15174 | PHIP     | SHIP_EOB   |
 
-  @eob2 @eobCountdaterange
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> -To verify EOB result list
+
+  #note: pending coverage until SSUP individual user is available
+  #@eob03 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+  #Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP member accessing EOB page via top menu sub link
+  #  Given login with following details logins in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #  When I navigate to the claims Summary page from dashboard or testharness page
+  #  #Then Explanation of benefits sub navigation under Claims tab is not displayed
+  #  Then Explanation of benefits deep link is invoked and validate the Page
+  #
+  #  Examples: 
+  #    | index | FID    | planType | memberType              |
+  #    | 14    | 267688 | SSUP     | EOB_Deeplink_Individual |
+
+
+  @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+  Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    And the user slects the desired date range
-      | Plan Type  | <planType>  |
-      | Date Range | <dateRange> |
-      | EOB Type   | <eobType>   |
-    Then the user validates EOB count
-      | EOB COUNT | <eobCount> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    Then the user validate sub option EXPLANATION OF BENEFITS under Claims option
 
+    @SSP_EOBs
     Examples: 
-      | TID   | planType | memberType  | dateRange | eobType           | eobCount |
-      | 15134 | PCP      | withEOB     | 18 Months | Medical           |        4 |
-      | 15140 | MAPD     | aarpWithEOB | 90 Days   | Medical           |        4 |
-      | 15140 | MAPD     | aarpWithEOB | 6 Months  | Medical           |        8 |
-      | 15140 | MAPD     | aarpWithEOB | 12 Months | Medical           |        8 |
-      | 15140 | MAPD     | aarpWithEOB | 18 Months | Medical           |        8 |
-      | 15140 | MAPD     | aarpWithEOB | 6 Months  | Prescription Drug |        1 |
-      | 15140 | MAPD     | aarpWithEOB | 12 Months | Prescription Drug |        1 |
-      | 15140 | MAPD     | aarpWithEOB | 18 Months | Prescription Drug |        1 |
-
-  @eob3 @planTypeValidation @hsideob2
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -  To verify different plan types under combo tabs
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    And the user navigates to EOB page_hsid
-    Then the user validates content displayed on EOB page without combo tabs
-      | Plan Type | <planType> |
-
-    Examples: 
-      | TID   | planType | memberType |
-      | 15140 | MAPD     | NICE_EOB   |
-
-  # |15120 | MA          | IndividualAARPWOEOB						 |
-  @eob4 @dropDownFuntion
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> - To validate page functionality with different dropdowns
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page and validates the page
-      | Date Range | <dateRange>   |
-      | Plan Type  | <planType>    |
-      | EOB Type   | <eobTypeData> |
-    Then the user validates content displayed on EOB page without combo tabs
-      | Plan Type | <planType> |
-
-    Examples: 
-      | TID   | planType | memberType          | eobTypeData       | dateRange   |
-      | 15140 | MAPD     | IndividualAARPWOEOB | Medical           | 6 Months    |
-      | 15140 | MAPD     | IndividualAARPWOEOB | Prescription Drug | 6 Months    |
-      | 15140 | MAPD     | IndividualAARPWOEOB | Medical           | 12 Months   |
-      | 15140 | MAPD     | IndividualAARPWOEOB | Medical           | 18 Months   |
-      | 15140 | MAPD     | IndividualAARPWOEOB | Medical           | 90 Days     |
-      | 15165 | SHIP     | Individual          | Medical           | 6-12 Months |
-      | 15165 | SHIP     | Individual          | Medical           | 90 Days     |
-
-  @eob5 @learnAboutMedicalEOB
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange>- To verify How to read a medical EOB PDF
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page and validates the page
-      | Date Range | <dateRange>   |
-      | Plan Type  | <planType>    |
-      | EOB Type   | <eobTypeData> |
-    And the user validates how to read medical eob PDF
-
-    Examples: 
-      | TID   | planType | memberType  | dateRange | eobTypeData |
-      | 15134 | PCP      | withEOB     | 18 Months | Medica      |
-      | 15140 | MAPD     | aarpWithEOB | 90 Days   | Medical     |
-      | 15140 | MAPD     | aarpWithEOB | 6 Months  | Medical     |
-      | 15140 | MAPD     | aarpWithEOB | 12 Months | Medical     |
-      | 15140 | MAPD     | aarpWithEOB | 18 Months | Medical     |
-
-  @eob7 @regression_06_06_18FnF
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify EOB accessible for PDP + MEDSup Plan
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates content displayed on EOB page
-      | Plan Tab | <planTab1> |
-    Then the user validates content displayed on EOB page
-      | Plan Tab | <planTab2> |
-
-    Examples: 
-      | TID   | planType | memberType     | dateRange      | eobType | eobCount | planTab1 | planTab2 |
-      | 15167 | PDP      | comboEOBMedSup | Last 18 Months | Medical |        0 | PDP      | MedSup   |
-
-  @eob11 @regression_06_06_18FnF
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - TC010_Check EOB displays error message_ PHIP- Active Plan member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates content displayed on EOB page
-      | Plan Tab | <planTab1> |
-    And the user gets the error message for PHIP member
-
-    Examples: 
-      | TID   | planType | memberType |
-      | 15174 | PHIP     | SHIP       |
+      | index | FID    | planType | memberType | 
+      | 15    | 267688 | SSUP     | GROUP_EOB  | 

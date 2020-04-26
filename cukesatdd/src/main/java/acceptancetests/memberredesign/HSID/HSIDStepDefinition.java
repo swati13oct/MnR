@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,8 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
@@ -711,12 +714,9 @@ public class HSIDStepDefinition {
 	//^^^ note: added for 'sorry' login error workaround	
 
 	//----------- updated to handle microapp
-	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
-	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
-		//tbd boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -731,6 +731,12 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
+
+		//note: use this to determine if need to validate footer on sign-in page
+		//note: after obtaining the value, remove it so it will not look for it on csv
+		String validateFooter = memberAttributesMap.get("Validate Footer");
+		memberAttributesMap.remove("Validate Footer");
+
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
@@ -774,18 +780,18 @@ public class HSIDStepDefinition {
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
 			if ((planType != null) && (category == null)) { //note: input has planType only
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("1 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType == null) && (category != null)) { //note: input has memberType only
-				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+				if (category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("2 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType != null) && (category != null)) { //note: input has both planType and memberType
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
-						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))
+						|| category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))
 						) {
 					teamSpecialCase=true;		
 					System.out.println("3 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
@@ -812,14 +818,14 @@ public class HSIDStepDefinition {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
 
+			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+				loginPage.validateFooter();
+				System.out.println("Finished validating sign-in page footer");
+			}
+
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage=null;
-				try {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
-				}
 				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
 				return;
@@ -827,9 +833,9 @@ public class HSIDStepDefinition {
 			AccountHomePage accountHomePage=null;
 			try {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-			} catch (UnhandledAlertException ae) {
+			} catch (Exception ae) {
 				System.out.println("Exception: "+ae);
-				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Exception", false);
 			}
 			
 			if (accountHomePage != null) {
@@ -848,11 +854,14 @@ public class HSIDStepDefinition {
 				} else {
 					loginPage = new LoginPage(wd);
 				}
+				if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+					loginPage.validateFooter();
+					System.out.println("Finished validating sign-in page footer");
+				}
+				
 				TestHarness testHarnessPage=null;
 				try {
 					if (testHarnessUseDropdown) {
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
 						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
 						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
@@ -994,6 +1003,11 @@ public class HSIDStepDefinition {
 				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			} else if (deepLinkUrl.contains("member/claims.html")) {
+				ClaimsSummaryPage claimsSummaryPage=null;
+				claimsSummaryPage =  (ClaimsSummaryPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", claimsSummaryPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE,claimsSummaryPage);
 			} else {
 				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
 			}
@@ -1025,6 +1039,7 @@ public class HSIDStepDefinition {
 				&& !feature.equals("UCPMyDocuments")
 				&& !feature.equals("UCPHealthWellness")
 				&& !feature.equals("UCPBenefits")
+				&& !feature.equals("UCPEob")
 				) {
 			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
 		}
@@ -1032,6 +1047,8 @@ public class HSIDStepDefinition {
 		System.out.println("feature="+feature);
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		if (MRScenario.environment.equals("stage")) 
+			configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
@@ -1046,11 +1063,11 @@ public class HSIDStepDefinition {
 				String value=e.getText();
 				if (value.equalsIgnoreCase("false")) {
 					if (MRScenario.environment.toLowerCase().contains("stage")) 
-						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+", stopping all tests now", false);
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now", false);
 					else
-						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"', not on stage, okay to move on...");
+						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", not on stage, okay to move on...");
 				} else {
-					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"', okay to move on...");
+					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", okay to move on...");
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
@@ -1058,7 +1075,7 @@ public class HSIDStepDefinition {
 		} catch (Exception e) {
 			if (MRScenario.environment.toLowerCase().contains("stage")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now.", false);
 			} else {
 				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
 			}

@@ -3,6 +3,7 @@ package acceptancetests.acquisition.ole;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -18,6 +19,7 @@ import pages.acquisition.ole.CoverageInformationPage;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PlanPremiumPage;
@@ -29,9 +31,11 @@ import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -42,6 +46,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -516,8 +521,8 @@ public class oleStepDefinition {
 
 	}	
 	
-	@Then("^the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage$")
-	public void  the_user_validates_requierd_fields_for_Preliminary_Questions_Page_CSNP(DataTable Flags) throws Throwable {
+	@Then("^the user validates the required fields for CSNP plans on Medicare Information Page$")
+	public void  the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable Flags) throws Throwable {
 
 
 		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
@@ -527,35 +532,17 @@ public class oleStepDefinition {
 					.getCells().get(0), personalAttributesRow.get(i)
 					.getCells().get(1));
 		}
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
-			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-			
-			String plantype = PreliminaryFlagsMap.get("plan_type");
-			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, plantype);
-						
-			if (useranddisclosure!= null){
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
-						useranddisclosure);
-				System.out.println("OLE Preliminary Questions Page is Displayed");
-				
-			}
-			 
-		}		
+			String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String planName = (String)getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			medicareInfoPage.validate_Required_Fields_CSNP(medicaidNumber, planName);
 	}
 
 
 	@Then("^the user navigates to Medicare Information Page$")
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		PersonalInformationPage personalInfoPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		MedicareInformationPage medicareInfoPage = personalInfoPage.navigate_to_medicare_info_page();
 		if (medicareInfoPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
@@ -569,8 +556,8 @@ public class oleStepDefinition {
 	
 	@Then("^the user navigates to Medicare Information Page for PDP$")
 	public void the_user_navigates_to_Medicare_Information_Page_PDP() throws Throwable {
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page_PDP();
+		PersonalInformationPage personalInfoPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		MedicareInformationPage medicareInfoPage = personalInfoPage.navigate_to_medicare_info_page();
 		if (medicareInfoPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
@@ -584,7 +571,7 @@ public class oleStepDefinition {
 
 	@Then("^the user validates Medicare Information Page required fields$")
 	public void the_user_validates_Medicare_Information_Page_required_fields() throws Throwable {
-		/*MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean Validation_Status = medicareInfoPage.validate_required_fields();
 		if(Validation_Status){
 			System.out.println("Medicare Information Page required fields : "+Validation_Status);
@@ -594,7 +581,7 @@ public class oleStepDefinition {
 		else{
 			System.out.println("Medicare Information Page required fields : "+Validation_Status);
 			Assert.fail();
-		}*/
+		}
 	}
 	@Then("^the user enters following required Medicare Informations$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages(DataTable planAttributes) throws Throwable {
@@ -668,8 +655,8 @@ public class oleStepDefinition {
 		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
 		if (isInformationFilled) {
 
-			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
-			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+		//	getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
+		//	getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
 			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
@@ -822,8 +809,7 @@ public class oleStepDefinition {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
 
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
-					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,prelimineryQuestionsPage);
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
@@ -897,7 +883,7 @@ public class oleStepDefinition {
 	
 	
 	
-	@Then("^the user validates requierd fields for Preliminary Questions Page$")
+	@Then("^the user validates requierd ESRD on Medicare Info Page$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Page(DataTable Flags) throws Throwable {
 
 
@@ -908,30 +894,32 @@ public class oleStepDefinition {
 					.getCells().get(0), personalAttributesRow.get(i)
 					.getCells().get(1));
 		}
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-			String plantype = PreliminaryFlagsMap.get("plan_type");
+			//String plantype = PreliminaryFlagsMap.get("plan_type");
 
-			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			boolean Validation_Status = prelimineryQuestionsPage.validate_Required_Fields(PlanType, MedicaidNumber);
+			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber);
 			if(Validation_Status){
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
 				Assert.assertTrue(true);
 			}
 			else{
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "+Validation_Status);
 				Assert.fail();
 			}
-		}
+		//}
 	}
 	
 
@@ -1152,16 +1140,18 @@ public class oleStepDefinition {
 
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
-			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+			PersonalInformationPage personalInformationPage = welcomePage.navigate_to_Personal_Information_page();
 
 			if (personalInformationPage != null) {
 
@@ -1172,7 +1162,7 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE Personal Information Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user navigates to Use and Disclosure Page$")
@@ -1198,14 +1188,16 @@ public class oleStepDefinition {
 
 	@Then("^the user enters following required information in Personal Information Page$")
 	public void the_user_enters_following_required_information_in_Personal_Information_Page(DataTable arg1) throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 			Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -1218,6 +1210,8 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
+				getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MemberDetailsMap.get("First Name"));
+				getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MemberDetailsMap.get("Last Name"));
 				getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 				getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
 				getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
@@ -1232,19 +1226,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
-		}
+		//}
 	}
 
 	@Then("^the user validates the Plan details in Personal Information Page OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_Personal_Information_Page_OLE_Right_Rail() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 			PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -1263,25 +1259,27 @@ public class oleStepDefinition {
 				System.out.println("Plan Details Validation in OLE Personal Information PAGE : "+Validation_Status);
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates the Member details dynamic display in Personal Information Page$")
 	public void the_user_validates_the_Member_details_in_Personal_Information_Page_OLE_Right_Rail() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 			MemberDetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
 			MemberDetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
 			MemberDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-
+			MemberDetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
 			boolean Validation_Status = personalInformationPage.validate_member_details(MemberDetailsMap);
 			if(Validation_Status){
 				System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Passed");
@@ -1292,19 +1290,21 @@ public class oleStepDefinition {
 				System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Failed");
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 
 	@Then("^the user validates TFN in Right Rail on Personal Information Page$")
 	public void the_user_validates_TFN_in_Right_Rail_on_Personal_Information_Page() throws Throwable {		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-	boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-	if(alreadyEnrolled_Flag){
-		System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		Assert.assertTrue(true);
-	}
-	else{
+		/*
+		 * boolean alreadyEnrolled_Flag =
+		 * (alreadyEnrolled.contentEquals("true"))?true:false; if(alreadyEnrolled_Flag){
+		 * System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = personalInformationPage.ValidateTFNMedicareInfo(TFN);
@@ -1317,19 +1317,21 @@ public class oleStepDefinition {
 			System.out.println("TFN, Wunderman Validation in OLE Personal Information PAGE : "+Validation_Status);
 			Assert.fail();
 		}
-	}
+	//}
 	}
 
 	@Then("^the user validates Leave OLE modal for Personal Information Page$")
 	public void the_user_validates_Leave_OLE_modal_for_Personal_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			LeavingOLEmodal leaveOLEmodal = personalInformationPage.OpenLeaveOLEmodal();
 			if (leaveOLEmodal != null) {
@@ -1350,19 +1352,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates Learn more modal for Personal Information Page$")
 	public void the_user_validates_Learn_more_modal_for_Personal_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			LearnMoreModal learnMoremodal = personalInformationPage.OpenLearnMore();
 			if (learnMoremodal != null) {
@@ -1382,19 +1386,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("Back to OLE Application page -OLE Personal Information Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates cancellation modal for Personal Information Page$")
 	public void the_user_validates_cancellation_modal_for_Personal_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 
 			CancelOLEModal cancelOLEmodal = personalInformationPage.OpenCancelOLE();
@@ -1416,20 +1422,22 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
-		}
+		//}
 	}
 
 
 	@Then("^the user navigates to SEP Page$")
 	public void the_user_navigates_to_SEP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page();
 
@@ -1442,19 +1450,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE SEP Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates the Plan details in SEP Page OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_SEP_Page_OLE_Right_Rail() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 			Map<String, String> PlanDetailsMap = new HashMap<String, String>();
@@ -1474,19 +1484,21 @@ public class oleStepDefinition {
 				System.out.println("Plan Details Validation in OLE SEP PAGE : "+Validation_Status);
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates TFN in Right Rail on SEP Page$")
 	public void the_user_validates_TFN_in_Right_Rail_on_SEP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 			boolean Validation_Status = specialElectionPeriodPage.ValidateTFNMedicareInfo(TFN);
@@ -1499,19 +1511,21 @@ public class oleStepDefinition {
 				System.out.println("TFN, Wunderman Validation in OLE SEP PAGE : "+Validation_Status);
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates Leave OLE modal for SEP Page$")
 	public void the_user_validates_Leave_OLE_modal_for_SEP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			LeavingOLEmodal leaveOLEmodal = specialElectionPeriodPage.OpenLeaveOLEmodal();
 			if (leaveOLEmodal != null) {
@@ -1532,19 +1546,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates Learn more modal for SEP Page$")
 	public void the_user_validates_Learn_more_modal_for_SEP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			LearnMoreModal learnMoremodal = specialElectionPeriodPage.OpenLearnMore();
 			if (learnMoremodal != null) {
@@ -1565,20 +1581,22 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("Back to OLE Application page -OLE SEP Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates cancellation modal for SEP Page$")
 	public void the_user_validates_cancellation_modal_for_SEP_Page() throws Throwable {
 
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 			CancelOLEModal cancelOLEmodal = specialElectionPeriodPage.OpenCancelOLE();
@@ -1599,20 +1617,22 @@ public class oleStepDefinition {
 			else
 				Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
 
-		}
+	//}
 	}
 
 	@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
 	public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		System.out.println("alreadyEnrolled_Flag value is"+alreadyEnrolled_Flag);
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * System.out.println("alreadyEnrolled_Flag value is"+alreadyEnrolled_Flag);
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
@@ -1625,19 +1645,21 @@ public class oleStepDefinition {
 				System.out.println("Plan Type Options in OLE SEP PAGE : "+Validation_Status);
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user selects the following options for SEP Page$")
 	public void the_user_selects_the_following_options_for_SEP_Page(DataTable SEPoptions) throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
 			Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
@@ -1659,20 +1681,22 @@ public class oleStepDefinition {
 			else
 				Assert.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
 
-		}
+		//}
 	}
 
 
 	@Then("^the user navigates to Coverage and Health Information Page$")
 	public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			CoverageInformationPage coverageInformationPage = specialElectionPeriodPage.navigate_to_Coverage_Information_page();
 			if (coverageInformationPage != null) {
@@ -1683,44 +1707,48 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE Coverage and Health Information Page is NOT Displayed");
-		}
+		//}
 	}
 
-	@Then("^the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page$")
+	@Then("^the user validates the dispalyed sections for the Plan Type in Medicare Information Page$")
 	public void the_user_validates_the_dispalyed_sections_for_the_Plan_Type_in_Coverage_and_Health_Information_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
-			CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			MedicareInformationPage medInformationPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-			boolean Validation_Status = coverageInformationPage.validate_CoverageInfo_Questions_for_planType(PlanType);
+			boolean Validation_Status = medInformationPage.validate_CoverageInfo_Questions_for_planType(PlanType);
 			if(Validation_Status){
 				System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Passed");
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE, coverageInformationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInformationPage);
 				Assert.assertTrue(true);
 			}
 			else{
 				System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Failed");
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
-	@Then("^the user answers following questions in Coverage and Health Information Page$")
+	@Then("^the user answers following questions in Medicare Information Page$")
 	public void the_user_answers_following_questions_in_Coverage_and_Health_Information_Page(DataTable arg1) throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
 			Map<String, String> QuestionMap = new HashMap<String, String>();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
@@ -1731,33 +1759,37 @@ public class oleStepDefinition {
 			/*		String PDPquestionFlag = QuestionMap.get("PDP Question");
 		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
 			 */
-			CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
-			boolean areQuestionsAnswered = coverageInformationPage.answer_following_questions(QuestionMap);
+			MedicareInformationPage medInformationPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			boolean areQuestionsAnswered = medInformationPage.answer_following_questions(QuestionMap);
 			if (areQuestionsAnswered) {
 
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
-						coverageInformationPage);
+			/*
+			 * getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
+			 * medInformationPage);
+			 */
 				System.out.println("Coverage and Health Information Page : Data entered");
 			}
 			else
 				Assert.fail("Coverage and Health Information Page : Data entry FAILED");
-		}
+		//}
 
 	}
 
 
 	@Then("^the user navigates to Proposed Effective Date Page$")
 	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
-			CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
-			ProposedEffectiveDatePage proposedEffectiveDatePage = coverageInformationPage.navigate_to_Proposed_Effective_Date_Page();
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+		SpecialElectionPeriodPage sepPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+			ProposedEffectiveDatePage proposedEffectiveDatePage = sepPage.navigate_to_Proposed_Effective_Date_Page();
 			if (proposedEffectiveDatePage != null) {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE,
@@ -1766,19 +1798,21 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE Proposed Effective Date Page is NOT Displayed");
-		}
+		//}
 	}
 
 	@Then("^the user validates Proposed Effective Date is Displayed$")
 	public void the_user_validates_proposed_effective_date_display() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			ProposedEffectiveDatePage proposedEffectiveDatePage  = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
 			boolean Validation_Status = proposedEffectiveDatePage.validate_proposed_effective_date_options();
 			if(Validation_Status){
@@ -1790,19 +1824,21 @@ public class oleStepDefinition {
 				System.out.println("Proposed Effective Date display : Validation Failed");
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user navigates to PCP Page and validates PCP page is not displayed for PDP$")
 	public void the_user_navigates_to_PCP_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			if(planType.contentEquals("PDP")){
@@ -1827,19 +1863,21 @@ public class oleStepDefinition {
 				else
 					Assert.fail("OLE PCP Page is NOT Displayed for Plantype : "+planType);
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates PCP page for MA and MAPD PFFS plans$")
 	public void the_user_validates_PCP_page_for_MD_and_MAPD_PFFS_plans() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
@@ -1857,19 +1895,21 @@ public class oleStepDefinition {
 					Assert.fail();
 				}
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates Look up Provider for MA MAPD and DSNP plans\\.$")
 	public void the_user_validates_Look_up_Provider_for_MA_MAPD_and_DSNP_plans() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
@@ -1887,20 +1927,22 @@ public class oleStepDefinition {
 					Assert.fail();
 				}
 			}
-		}
+		//}
 		// Write code here that turns the phrase above into concrete actions
 	}
 
 	@Then("^the user navigates to Monthly Plan Premium Page$")
 	public void the_user_navigates_to_Monthly_Plan_Premium_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 
@@ -1915,19 +1957,21 @@ public class oleStepDefinition {
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
 			}
-		}
+		//}
 	}
 
 	@Then("^the user navigates to Optional Benefits Page for following plans with available Riders$")
 	public void the_user_navigates_to_optional_rider_Page(DataTable Flags) {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 			Map<String, String> RiderFlagMap = new HashMap<String, String>();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
@@ -1949,18 +1993,20 @@ public class oleStepDefinition {
 					Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
 
 			}
-		}
+		//}
 	}
 	@Then("^the user navigates to Authorization Page for plan as per following rider options$")
 	public void the_user_navigates_to_authorization(DataTable Flags) {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 			Map<String, String> RiderFlagMap = new HashMap<String, String>();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
@@ -1994,19 +2040,21 @@ public class oleStepDefinition {
 				else
 					Assert.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates required fields for Authorization Page$")
 	public void the_user_validates_required_fields_for_Authorization_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 			boolean Validation_Status = authorizationPage.validate_required_field();
 			if(Validation_Status){
@@ -2019,19 +2067,21 @@ public class oleStepDefinition {
 				System.out.println("Authorization Page : Required fields NOT validated");
 				Assert.fail("Authorization Page : Required fields NOT validated");
 			}
-		}
+		//}
 	}
 
 	@Then("^the user navigates to Review and Submit Page$")
 	public void the_user_navigates_to_Review_and_Submit_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 			ReviewSubmitPage reviewSubmitPage = authorizationPage.navigate_to_Review_Submit_Page();
 			if (reviewSubmitPage != null) {
@@ -2042,20 +2092,22 @@ public class oleStepDefinition {
 			}
 			else
 				Assert.fail("OLE Review and Submit page is NOT Displayed");
-		}
+		//}
 	}
 
 
 	@Then("^the user validates the Plan and Member details on Review and Submit Page$")
 	public void the_user_validates_the_Plan_and_Member_details_on_Review_and_Submit_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 			Map<String, String> DetailsMap = new HashMap<String, String>();
 			DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -2093,19 +2145,21 @@ public class oleStepDefinition {
 				System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
 				Assert.fail();
 			}
-		}
+		//}
 	}
 
 	@Then("^the user clicks on Submit Enrollment to complete enrollment$")
 	public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
-		if (alreadyEnrolled_Flag) {
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
-		} else {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true :
+		 * false; if (alreadyEnrolled_Flag) { System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
+		 * "true"); Assert.assertTrue(true); } else {
+		 */
 			if (!(MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 				ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
@@ -2121,19 +2175,21 @@ public class oleStepDefinition {
 			} else {
 				System.out.println("Skipping the submit functionality in Offline-Prod environment");
 			}
-		}
+		//}
 	}
 
 	@Then("^the user validates Plan and Member Details on Confirmation Page$")
 	public void the_user_validates_Plan_and_Membber_Details_on_Confirmation_Page() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
-		if (alreadyEnrolled_Flag) {
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
-		} else {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true :
+		 * false; if (alreadyEnrolled_Flag) { System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
+		 * "true"); Assert.assertTrue(true); } else {
+		 */
 			if (!(MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 				OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
@@ -2165,19 +2221,21 @@ public class oleStepDefinition {
 			} else {
 				System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment");
 			}
-		}
+		//}
 	}
 
 	@Then("^the user Validates Next Steps in Confirmation Page for the Plan Type\\.$")
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}
-		else{
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
 
 			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {
@@ -2201,7 +2259,7 @@ public class oleStepDefinition {
 						oleConfirmationPage);
 				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
 			}
-		}
+		//}
 	}
 
 
@@ -2263,6 +2321,134 @@ public class oleStepDefinition {
  		}
  
  	}
+	
+	/** user Lands on the OLe Testharness Page */
+	@Given("^the user is on OLE TestHarness page$")
+	public void validateUserIsOnOLETestharnessPage(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, siteName, TestharnessPage);
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) aquisitionhomepage.GetOLETestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.OLE_TESTHARNESS_PAGE, oleTestHarnessPage);
+
+	}
+
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@When("^the user navigates to OLE WelcomePage using following information$")
+	public void user_navigates_toOLEWelcomePageusingfollowinginformation(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String SiteId = givenAttributesMap.get("SiteId");
+		String PBPNumber = givenAttributesMap.get("PBPNumber");
+		String ClientCode = givenAttributesMap.get("ClientCode");
+		String SegmentId = givenAttributesMap.get("SegmentId");
+		String PlanTypeTH = givenAttributesMap.get("PlanTypeTH");
+		String TFN = givenAttributesMap.get("TFN");
+		String psc = givenAttributesMap.get("psc");
+		String PlanYear = givenAttributesMap.get("Plan Year");
+		String env = givenAttributesMap.get("env");
+		String FipsCode = givenAttributesMap.get("FipsCode");
+		String CMScode = givenAttributesMap.get("CMScode");
+		String HNumber = givenAttributesMap.get("HNumber");
+		String PlanType = givenAttributesMap.get("Plan Type");
+		String PlanName = givenAttributesMap.get("Plan Name");
+		String County = givenAttributesMap.get("County Name");
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String IsMultiCounty = givenAttributesMap.get("Is Multi County");
+		String StateCode = givenAttributesMap.get("StateCode");
+		String RiderFlag = givenAttributesMap.get("Rider Flag");
+		String PrefferedPlanId = givenAttributesMap.get("PrefferedPlan Id");
+		String PlanCode = givenAttributesMap.get("Plan Code");
+		String mapsPlanType = givenAttributesMap.get("maps PlanType");
+		String OLEisCNS = givenAttributesMap.get("OLEis CNS");
+		String clientProdCode = givenAttributesMap.get("client ProdCode");
+		String OLEisCSNP = givenAttributesMap.get("OLEis CSNP");
+		String Fitness = givenAttributesMap.get("Fitness");
+		String Vision = givenAttributesMap.get("Vision");
+		String Hearing = givenAttributesMap.get("Hearing");
+		String Dental = givenAttributesMap.get("Dental");
+		String salesagentid = givenAttributesMap.get("salesagent id");
+		String PlanPremium = givenAttributesMap.get("Premium");
+		String lineOfBusiness = givenAttributesMap.get("lineOf Business");
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteId);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("Plan Year is : " + PlanYear);
+
+		// String PlanPremium = "";
+		// String TFN;
+		// String SiteName;
+		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
+		// -----------------------------------------------------------------------------------------------------
+		WelcomePage welcomePage;
+		if (SiteName.contains("uhc")) {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+
+		} else if (SiteName.contains("aarp")) {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+		} else {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+
+		}
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the OLE Welcome Page");
+	}
+	
 } 
 
 

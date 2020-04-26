@@ -30,6 +30,8 @@ public class SetUpRecurringPage extends UhcDriver {
 	@FindBy(id = "div_cardInfo")
 	private WebElement EnterCreditInfo;
 
+	@FindBy(id = "routing-number")
+	private WebElement RoutingNumberField;
 	public SetUpRecurringPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -41,7 +43,7 @@ public class SetUpRecurringPage extends UhcDriver {
 		System.out.println("clicked on Checking account radio button");
 		NextButton.click();
 		System.out.println("clicked on Next button");
-		if (validate(CheckingAccountInformationHeader)) {
+		if (validate(RoutingNumberField)) {
 			System.out.println("User is on Form Page for EFT");
 			return new PaymentsFormPage(driver);
 		} else

@@ -1,7 +1,5 @@
 package pages.regression.pharmaciesandprescriptions;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -95,7 +93,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
-
+	
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
 	protected WebElement comboTab_MAPD;
 
@@ -169,7 +167,32 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'planmaterials')]//a")
 	protected WebElement viewPlanMaterialsLnk;
-
+	
+	@FindBy(css=".DRUG_PRICING_TILE_Group #pharmacyTileLinkId")
+	protected WebElement LookUpDrugsButton;
+	
+	@FindBy(css=".MEDICINE_CABINET_TILE #pharmacyTileLinkId")
+	protected WebElement orderPrescriptionsButton;
+	
+	@FindBy(css=".ORDER_STATUS_TILE #pharmacyTileLinkId")
+	protected WebElement checkDelieryStatusButton;
+	
+	@FindBy(css=".BENEFITS_INFORMATION #pharmacyTileLinkId")
+	protected WebElement drugCostSummaryButton;
+	
+	@FindBy(id ="page_title")
+	protected WebElement BenefitsInformationHeaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement searchForADrugHeaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement welcometextinheaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement orderStatusTextInHeaderOptumRx;
+	
+	
 	public PharmaciesAndPrescriptionsWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

@@ -11,7 +11,7 @@ import atdd.framework.UhcDriver;
 
 public class PaymentsFormPage extends UhcDriver {
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(id = "routing-number")
@@ -63,6 +63,7 @@ public class PaymentsFormPage extends UhcDriver {
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
 
+		
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -228,7 +229,7 @@ public class PaymentsFormPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(CheckingAccountInformationHeader);
+		validate(routingNumberField);
 
 	}
 

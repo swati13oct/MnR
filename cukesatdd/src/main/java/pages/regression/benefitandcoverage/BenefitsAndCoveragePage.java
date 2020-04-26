@@ -1972,20 +1972,29 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 * this method checks that Order Plan Materials Sub Navigation Link 
 	 * under Benefits and Coverage is NOT displayed
 	 */
-	public void validateOrderPlanMaterialsSubNavNotDisplayed() {
-		System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
+	public void validateOrderPlanMaterialsSubNavNotDisplayed()
+	{
+        
+        System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
 
-		if (!orderMaterialsTab.isDisplayed())
-		{
-			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
-		}
-		else 
-		{
-			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");
-			Assert.fail("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");       
-		}
+        Dimension size = driver.findElement(By.id("ordermaterials")).getSize();
+        System.out.println(size);
+        int height = size.getHeight();
+        System.out.println("Height is "+height);
+        int width = size.getWidth();
+        System.out.println("Width is "+width);
+        if (height == 0)
+        {
+                       System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
+        }
 
-	}
+        else 
+        {
+                       System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");
+                       Assert.fail("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");       
+        }
+
+}
 
 	public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
 	{
@@ -2991,13 +3000,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-either- coinsurance of 5% of the cost of the drug\n"
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$0.00\n"
-				+"$0.00\n"
+				+"$5.00\n"
+				+"$5.00\n"
 				+"Tier 3\n"
-				+"$131.00\n"
+				+"$47.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"$290.00\n"
+				+"$100.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"

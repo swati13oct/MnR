@@ -428,6 +428,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   public static final String ADD_DRUG_DETAILS = "addDrugDetails";
 	   public static final String DCE_TESTHARNESS_PAGE = "dceTestHarnessPage";
 	   public static final String VPP_TESTHARNESS_PAGE = "vppTestHarnessPage";
+	   public static final String OLE_TESTHARNESS_PAGE = "oleTestHarnessPage";
 	   
 	   public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	   public static final String SAVING_OPPORTUNITY = "savingopportunity";
@@ -683,6 +684,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String COMPARE_PAGE_INFO="compare_page_info";
 	public static final String ACQ_PAGE_TYPE="acq_page_type";
 	public static final String ACQ_PAGE_DRIVER="acq_page_driver";
+	public static final String ALREADY_ENROLLED_FLAG = "true";
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
 	
@@ -691,5 +693,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String CQ_LOGIN_PAGE = "cqLoginPage";
 
 	public static final String CQ_PAGE = "cqPage";
+	
+	public static final String CAMPAIGN_TFN_PAGE = "campaigntfnpage";
+
 	
 }

@@ -23,7 +23,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -51,7 +55,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec=30;
+	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -431,23 +435,18 @@ try {
             return jsonObject;
     }
 
-	/***
-	 * the method clicks on an element using javaScriptExecutor
-	 * 
-	 * @param element
-	 */
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("Element Clicked");
+		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
 	}
+	
+	public static String getidentifier(WebElement element) {
+	      String elementStr = element.toString();
+	      return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
 
-	/***
-	 * the method scrolls page upto element's location
-	 * 
-	 * @param element
-	 * @return
-	 */
+	      }
+
 	public boolean scrollToView(WebElement element) {
 		try {
 
@@ -495,7 +494,7 @@ try {
 	public void switchToNewTabNew(WebElement Element) {
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		Element.click();
+		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -728,7 +727,7 @@ try {
 		}
 	}
 	
-	public void checkModelPopup(WebDriver driver) {
+	public  void checkModelPopup(WebDriver driver) {
 		 checkModelPopup(driver,defaultTimeoutInSec);
 	}
 	
@@ -981,6 +980,21 @@ try {
 	public void fixFormResubmission(boolean positive) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
+	}
+	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
+		String ReturnValue = "";
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
+			LocalStorage localStorage = webStorage.getLocalStorage();		
+			ReturnValue = localStorage.getItem(StorageKey);
+			System.out.println("Local Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		else if(StorageType.equalsIgnoreCase("session storage") || StorageType.equalsIgnoreCase("sessionstorage") ) {
+			SessionStorage sessionStorage = webStorage.getSessionStorage();
+			ReturnValue = sessionStorage.getItem(StorageKey);
+			System.out.println("Session Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		return ReturnValue;
 	}
 	
 	public void threadsleep(int sec) {

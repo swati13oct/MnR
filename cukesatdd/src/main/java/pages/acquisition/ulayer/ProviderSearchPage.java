@@ -55,7 +55,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
-	@FindBy(xpath="(//*[contains(text(),'Check Provider Coverage')])[2]")
+	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -65,7 +65,7 @@ public class ProviderSearchPage extends UhcDriver {
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
@@ -179,8 +179,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
-	validateNew(Checkcoverage);
-	jsClickNew(Checkcoverage);
+	Checkcoverage.click();
+	/*validateNew(Checkcoverage);
+	jsClickNew(Checkcoverage);*/
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -306,7 +307,7 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(Viewsavebtn);
 		validateNew(providerNameText);
 		validateNew(Checkcoverage);
-		jsClickNew(Checkcoverage);
+		Checkcoverage.click();
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

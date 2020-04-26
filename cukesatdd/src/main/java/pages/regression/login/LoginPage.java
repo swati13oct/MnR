@@ -3,6 +3,8 @@
  */
 package pages.regression.login;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -17,6 +19,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.SecurityQuestionsPage;
 import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
@@ -70,6 +73,11 @@ public class LoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
 	private WebElement homePageNotice;
 
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
 
 	    
 	    MRScenario loginScenario;
@@ -86,6 +94,12 @@ public class LoginPage extends UhcDriver {
 			
 		}
 
+		public void validateFooter() {
+			FooterPage footerPg=new FooterPage(driver);
+			footerPg.validateSignInPgFooter();
+		}
+
+		
 		private boolean teamSpecialCase;
 		//tbd private boolean isMicroApp;
 		//tbd public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
@@ -95,7 +109,6 @@ public class LoginPage extends UhcDriver {
 			teamSpecialCase=input_teamSpecialCase;
 			//tbd this.isMicroApp=isMicroApp;
 			openAndValidate();
-			
 		}
 
 		public void openAndValidate() {
@@ -223,17 +236,24 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (!(null==MRScenario.environmentMedicare)&& (MRScenario.environmentMedicare.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
-						if (validate(homePageNotice,0)) {
-							homePageNotice.click();
-							CommonUtility.checkPageIsReady(driver);
-						}
-
-						Thread.sleep(3000);
+					if (noWaitValidate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice2,0)) {
+						homePageNotice2.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice3,0)) {
+						homePageNotice3.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
+					if (null!=MRScenario.environment 
+							&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
+						//note: sometimes take longer to load page on team env
+						Thread.sleep(4000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
-					Thread.sleep(2000);
-					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+						Thread.sleep(2000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
 					}
 				} else {
 					System.out.println("TimeOut!!!");
@@ -312,6 +332,10 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+					if (noWaitValidate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;
@@ -439,4 +463,22 @@ public class LoginPage extends UhcDriver {
 			}
 			return null;
 		}
+		
+		public boolean noWaitValidate(WebElement element, long timeoutInSec) {
+			//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			try {
+				if (element.isDisplayed()) {
+					System.out.println("Element '"+element.toString()+"' found!!!!");
+					return true;
+				} else {
+					System.out.println("Element '"+element.toString()+"' not found/not visible");
+				}
+			} catch (Exception e) {
+				System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+			}
+			//note: default in UhcDriver is 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+			return false;
+		} 
 }

@@ -192,3 +192,55 @@ Feature: 1.07 Member DCE Page
     Examples: 
       | planType | memberType | drug    | dosage           | quantity | frequency     |
       | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      
+      
+  @formualrypdflink
+  Scenario Outline:  DCE Tool to search a plan for a drug that requires Prior Authorization or Step Therapy on the 2020 formulary
+  Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+  When I navigate to drug look up page
+  Then I will verify the Formulary pdf link
+  When I delete all added drugs
+  And I am using the DCE Tool to search a drug that requires Prior Authorization on the 2020 formulary
+  	  | Drug      | <drug>       |
+      | Dosage    | <dosage>    |
+      | Quantity  | <quantity>  |
+      | Frequency | <frequency> |
+  And I am using the DCE Tool to search a drug that requires Step Therapy on the 2020 formulary
+  	  | Med     | <Medicine>   |
+      | Dose    | <dose>       |
+      | Amount  | <quantity2>  |
+      | Limit   | <frequency2> |
+  And I navigate to step2 page
+  Then I will verify the Formulary pdf link
+  When I navigate to costs tab
+  Then I will verify the Formulary pdf link
+  Examples: 
+      | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
+      | MAPD|MAPD_DCE  		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
+     
+    
+  #@velocity_Dasher @US1994091 @DCE_PriorAuth_and_StepThrpy @tamzid
+  #Scenario Outline:  DCE Tool to search a plan for a drug that requires Prior Authorization or Step Therapy on the 2020 formulary
+  #Given login with following details logins in the member portal and validate elements
+  #    | Plan Type   | <planType>   |
+  #    | Member Type | <memberType> |
+  #When I navigate to drug look up page
+  #When I delete all added drugs
+  #And I am using the DCE Tool to search a drug that requires Prior Authorization on the 2020 formulary
+  #	  | Drug      | <drug>       |
+  #    | Dosage    | <dosage>    |
+  #    | Quantity  | <quantity>  |
+  #    | Frequency | <frequency> |
+  #And I am using the DCE Tool to search a drug that requires Step Therapy on the 2020 formulary
+  #	  | Med     | <Medicine>   |
+  #    | Dose    | <dose>       |
+  #    | Amount  | <quantity2>  |
+  #    | Limit   | <frequency2> |
+  #Then I will see a PA link and ST link appear in the drug limits section
+  #And The link will open the relevant PDF in a new tab
+  #Examples: 
+  #    | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
+  #    |  PDP     | PDP_DCE 		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
+     

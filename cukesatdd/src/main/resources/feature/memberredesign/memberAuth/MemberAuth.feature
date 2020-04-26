@@ -198,9 +198,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  | MemUserName     | planType | option              | csrError                             |
       | qavgogine | qavgogine | q2_jun_aarp0101 | MAPD     | Replacement ID card | are not authorized to order material |
 
- 
-
-  @memauth11 @MemberAuthFederalOneTimeCC  @MemberAuth_Payments @fastandfurious @Feb_release_2019
+  @memauth11 @MemberAuthFederalOneTimeCC @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate One Time CC Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -222,9 +220,8 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType          | Name | CreditCardNumber | validMonth | validYear | csrError              |
+      | UID     | username  | password  | planType | memberType                        | Name | CreditCardNumber | validMonth | validYear | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_MakePaymentsCCTotal_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
-
 
   @memauth12 @MemberAuthFederalSetupRecurrEFT @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate Set up Recurring EFT Payment Submission Error for Member Auth
@@ -251,11 +248,10 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType  | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
+      | UID     | username  | password  | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
 
-  
-  @memauth13 @MemberAuthFederalSetupRecurrCC  @MemberAuth_Payments @fastandfurious @Feb_release_2019
+  @memauth13 @MemberAuthFederalSetupRecurrCC @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate Setup Recurring CC Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -277,7 +273,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType | Name | CreditCardNumber | validMonth | validYear | csrError              |
+      | UID     | username  | password  | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecCC_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
 
   @memauth14 @MemberAuthFederalUpdateRecurrEFT @MemberAuth_Payments @fastandfurious @Feb_release_2019
@@ -305,11 +301,10 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
+      | UID     | username  | password  | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
 
-
-@memauth15 @MemberAuthFederalUpdateRecurrCC @MemberAuth_Payments @fastandfurious @Feb_release_2019
+  @memauth15 @MemberAuthFederalUpdateRecurrCC @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To Verify Update Recurring for CC Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -327,15 +322,14 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CreditCardNumber | <CreditCardNumber> |
       | Month            | <validMonth>       |
       | Year             | <validYear>        |
-   And user navigates to Member Auth Update Review Page and validates error message for Submit or Continue
+    And user navigates to Member Auth Update Review Page and validates error message for Submit or Continue
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType | Name | CreditCardNumber | validMonth | validYear | csrError              |
+      | UID     | username  | password  | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
 
-
- @memauth16 @MemberAuthUpdateRecurrStopFed @MemberAuth_Payments @fastandfurious @Feb_release_2019
+  @memauth16 @MemberAuthUpdateRecurrStopFed @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate STOP Recurring Update Payement Submission Error for Member Auth for Fed Member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -352,7 +346,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType                   | csrError              |
+      | UID     | username  | password  | planType | memberType                     | csrError              |
       | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrStop_Payments | are not authorized to |
 
   @memauth17 @MemberAuthUpdateRecurrStopSHIP @MemberAuth_Payments @fastandfurious @Feb_release_2019
@@ -372,7 +366,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType                   | csrError              |
+      | UID     | username  | password  | planType | memberType                                 | csrError              |
       | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate_Payments | are not authorized to |
 
   @memauth18 @MemberAuthUpdateRecurrEFTSHIP @MemberAuth_Payments @fastandfurious @Feb_release_2019
@@ -400,38 +394,38 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | CSR Error | <csrError> |
 
     Examples: 
-      | UID     | username  | password  | planType | memberType                   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
+      | UID     | username  | password  | planType | memberType                                 | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
       | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
 
-    @memAuthProd
-    Scenario Outline: Plan Type: <planType>, Member Type: <memberType> - To validate SHIP Update Recurring Paymnet EFT Submission Error for Member Auth
+  @memAuthProd
+  Scenario Outline: Plan Type: <planType>, Member Type: <memberType> - To validate SHIP Update Recurring Paymnet EFT Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
     And Member Enters the Username he wants to search
-   	  | MemUsername | <memUserName> |
-   	And user clicks on member to select
-   	And the user navigates to profile and preference page
-   	And the user validates the profile page and the preference page and navigates to claims page in prod
-   		|Plan Type | <planType> |
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    And the user navigates to profile and preference page
+    And the user validates the profile page and the preference page and navigates to claims page in prod
+      | Plan Type | <planType> |
     And the user validates the claims page and navigates to eob page in prod
-       |Plan Type | <planType> |
-       |Claim Period | <claimPeriod> |
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
     And the user validates the EOB page and navigates to benefits and coverage page in prod
-      	| Date Range | <dateRange> |
-      	| Plan Type | <planType> |
-     And the user validates the benefits and coverage page in prod
-       | Plan Type | <planType> |
-     And the user navigates to the documents and resources page and validates PDFs in prod
-    	 | Plan Type | <planType> |
-     And the user navigates to the order plan materials page and validates in prod
-     	| Plan Type | <planType> |
-     And the user navigates to payments page and validates in prod
-      	| Plan Type | <planType> |
-      	
-      Examples:
-      | UID     | username  | password  | memUserName | planType | claimPeriod | dateRange |
-     | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |
-      | F243897 | ashah120 | Life1628 |  TARA9 |PDP| Last 24 months| Last 18 months |
-       | F243897 | ashah120 | Life1628 |  TARA9 |SHIP| Last 24 months| Last 12-18 months |
+      | Date Range | <dateRange> |
+      | Plan Type  | <planType>  |
+    And the user validates the benefits and coverage page in prod
+      | Plan Type | <planType> |
+    And the user navigates to the documents and resources page and validates PDFs in prod
+      | Plan Type | <planType> |
+    And the user navigates to the order plan materials page and validates in prod
+      | Plan Type | <planType> |
+    And the user navigates to payments page and validates in prod
+      | Plan Type | <planType> |
+
+    Examples: 
+      | UID     | username | password | memUserName | planType | claimPeriod    | dateRange         |
+      | F243897 | ashah120 | Mnrqa001 | DSOADY17    | MAPD     | Last 24 months | Last 18 months    |
+      | F243897 | ashah120 | Mnrqa001 | TARA9       | PDP      | Last 24 months | Last 18 months    |
+      | F243897 | ashah120 | Mnrqa001 | TARA9       | SHIP     | Last 24 months | Last 12-18 months |

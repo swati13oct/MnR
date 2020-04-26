@@ -188,6 +188,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
+	@FindBy(xpath = "//button[@class='btn btn-no']")
+	private WebElement iPerceptionPopUpNoButton;
+	
 	@FindBy(xpath = "//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 
@@ -763,7 +766,9 @@ public class AccountHomePage extends UhcDriver {
 					// inside shadow-root element
 					try {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
-								"#dropdown-toggle-2 > span > span:nth-child(2)");
+								"#dropdown-toggle-2");
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#dropdown-options-2 > a:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
 						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
@@ -979,30 +984,40 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			String StageProfilePageURL = "https://stage-medicare.uhc.com//member/account/profile.html";
-			System.out.println("Direct navigate to Profile Page url");
+			String StageProfilePageURL = "https://stage-medicare.uhc.com/member/account/profile.html";
+			System.out.println("Directly navigating to the Profile Page by passing the URL");
 			driver.navigate().to(StageProfilePageURL);
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto generated catch block
 				e.printStackTrace();
 			}
 
-			if (validate(iPerceptionPopUp)) {
-				iPerceptionPopUp.click();
-				System.out.println("iPerception Pop Up displayed");
+			
+			try 
+				{
+				System.out.println("Trying to switch to iPerception iframe if it is present");	
+				driver.switchTo().frame("IPerceptionsEmbed");
+				if (validate(iPerceptionPopUpNoButton)) {
+					iPerceptionPopUpNoButton.click();
+					System.out.println("iPerception Pop Up No button was clicked");
+					driver.switchTo().defaultContent();
+				}
+				
+			} catch (Exception e) {
+				System.out.println("iPerception Pop Up was not displayed");
 			}
 
 			CommonUtility.waitForPageLoad(driver, heading, 5);
 			if (driver.getTitle().contains("Profile")) {
-				System.out.println("here : " + heading.getText());
+				System.out.println("Header (h1) of the page is : " + heading.getText());
 				return new ProfileandPreferencesPage(driver);
 			}
 		}
 		return null;
 	}
-
+	
 	public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
 		// TODO Auto-generated method stub
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
@@ -1086,16 +1101,26 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name element after waiting for 20 seconds");
-		Thread.sleep(20000);
-		waitForHomePage(helloPerson);
-		System.out.println("Hello Name element was displayed : " + helloPerson.getText());
+		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
+		
+		try {
+			//waitForHomePage(helloPerson);
+			CommonUtility.waitForPageLoad(driver, helloPerson, 20);
+			System.out.println("Hello Name element was displayed : " + helloPerson.getText());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Hello Name element was not displayed after wait, failing the test case");
+			Assert.fail();
+			}
 		String title = driver.getTitle();
 		System.out.println(title);
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
-
-	}
+		System.out.println("Checking if title of dashboard page contains Home | UnitedHealthcare ");
+		Assert.assertTrue(title.contains("Home | UnitedHealthcare"));
+		System.out.println("Assert condition on title of dashboard page that it contains Home | UnitedHealthcare in it was passed");
+		System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
+			}
+	
+	
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
 
@@ -1537,19 +1562,19 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.contains("team-a")
-				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
+		if (MRScenario.environment.equalsIgnoreCase("team-h")
+				|| MRScenario.environment.equalsIgnoreCase("test-a")
+				|| MRScenario.environment.contains("team-a")
+				|| (MRScenario.environment.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
-			System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("offline")) {
+			System.out.println("user is on '" + MRScenario.environment + "' login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if (MRScenario.isTestHarness != null && MRScenario.isTestHarness.equals("YES")) {
@@ -1859,14 +1884,17 @@ public class AccountHomePage extends UhcDriver {
 		Thread.sleep(6000);
 
 		if (validate(paymentsLink)) {
-
+			checkModelPopup(driver,5);
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			return new PaymentHistoryPage(driver);
 		} else if (validate(TestHarnesspaymentsLink)) {
-
 			System.out.println("TestHarness Page Payments Link is displayed");
 			TestHarnesspaymentsLink.click();
+			checkModelPopup(driver,5);
 			return new PaymentHistoryPage(driver);
 		}	else {
 			// NOTE:
@@ -1875,8 +1903,14 @@ public class AccountHomePage extends UhcDriver {
 			// go to secondary page first then locate the payment tab.
 			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");
 			navigateDirectToBnCPag();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			Assert.assertTrue("PROBLEM - unable to locate the payment link on secondary page", validate(paymentsLink3));
 			paymentsLink3.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			/* tbd 
 			try {
 				String Page_URL = "https://" + MRScenario.environment
@@ -2236,8 +2270,8 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateFindCareCostTab() {
-		if (validate(findCareCost)) {
-			Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		if (validate(findCareCost,0)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", validate(findCareCost,0));
 		} else {
 			System.out.println(
 					"Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
@@ -2351,7 +2385,7 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateHeader() {
-		Assert.assertTrue("Header is not displayed", header.isDisplayed());
+		Assert.assertTrue("Header is not displayed", validate(header,0));
 		/**
 		 * Wait till page is loaded button is enabled.
 		 */
@@ -2362,7 +2396,7 @@ public class AccountHomePage extends UhcDriver {
 	 * Validate claims Tab
 	 */
 	public void validateClaims() {
-		Assert.assertTrue("Claims tab is not displayed", claims.isDisplayed());
+		Assert.assertTrue("Claims tab is not displayed", validate(claims,0));
 	}
 
 	/**
@@ -2437,6 +2471,25 @@ public class AccountHomePage extends UhcDriver {
 	 */
 	public void validateCoverageBenefitsL2Tabs() {
 		waitforElement(coverageBenefits);
+		if (validate(coverageBenefits,0)) {
+			coverageBenefits.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Assert.assertTrue("benefitsSummary is displayed", validate(benefitsSummary,0));
+			Assert.assertTrue("formsAndResources is displayed", validate(formsAndResources,0));
+			Assert.assertTrue("orderMaterials is displayed", validate(orderMaterials,0));
+		}
+	}
+
+
+	/**
+	 * Validate Coverage and Benefits Level 2 Tabs
+	 */
+	public void validateCoverageBenefitsL2TabsForTerminated() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
 			coverageBenefits.click();
 			try {
@@ -2445,12 +2498,10 @@ public class AccountHomePage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Assert.assertTrue("benefitsSummary is displayed", benefitsSummary.isDisplayed());
 			Assert.assertTrue("formsAndResources is displayed", formsAndResources.isDisplayed());
-			Assert.assertTrue("orderMaterials is displayed", orderMaterials.isDisplayed());
+
 		}
 	}
-
 	/**
 	 * click on Benefits Summary
 	 */
@@ -2530,16 +2581,16 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateHelp() {
-		Assert.assertTrue("Help tab is displayed", help.isDisplayed());
+		Assert.assertTrue("Help tab is displayed", validate(help,0));
 	}
 
 	public void validateAccountProfile() {
-		if (logOut.isDisplayed()) {
-			Assert.assertTrue("Account/Profile tab is displayed", accountProfile.isDisplayed());
+		if (validate(logOut,0)) {
+			Assert.assertTrue("Account/Profile tab is displayed",validate(accountProfile,0));
 			clickAccountProfile();
 			clickLogout();
 		} else
-			Assert.assertFalse("Account/Profile tab is not displayed", !accountProfile.isDisplayed());
+			Assert.assertFalse("Account/Profile tab is not displayed", !validate(accountProfile,0));
 
 	}
 
@@ -2558,7 +2609,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void clickLogout() {
-		if (logOut.isDisplayed()) {
+		if (validate(logOut,0)) {
 			logOut.click();
 			if (driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
 				Assert.assertTrue("user is logged out", true);
@@ -3227,26 +3278,6 @@ public class AccountHomePage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 	}
 
-	// This method validates login for bswift SSO
-	public void validatebswiftSSO() throws InterruptedException {
-		Thread.sleep(10000);
-		System.out.println(" @@@ The title of the page is " + driver.getTitle());
-		if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {
-			System.out.println("On the dashboard ");
-		}
-		Thread.sleep(10000);
-		System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("https://member.int.uhc.com/retiree/dashboard"))
-			;
-		System.out.println("****CE member is on the dashboard****");
-
-		if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue(false);
-		}
-	}
-	
 		public FormsAndResourcesPage navigatetoFormsnResourcesWithTimeout(String memberType, String planType)
 			throws InterruptedException {
 		checkForIPerceptionModel(driver);
@@ -3587,4 +3618,5 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue(idCard.contains("VIEW & PRINT MEMBER ID CARDS"));
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
 	}
+	
 }

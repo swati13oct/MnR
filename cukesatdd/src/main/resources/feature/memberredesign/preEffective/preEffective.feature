@@ -21,7 +21,6 @@ Feature: 1.15 Member pre-effective functionality
     And user is navigated to Forms and Resource page
     And user clicks on claims tab from Forms and Resources page
     And verify that subnavigation is supressed on the claims page
-      | Member Type | <memberType> |
     And verify that correct preeffective message is displayed on claims page
     And verify segment ID on claims page
       | Plan Type      | <planType>      |
