@@ -866,7 +866,7 @@ public class CommonConstants {
 	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "OptumRDC_Manual_Dev";
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
-	public static final String APPIUM_DEFAULT_VERSION = "1.15.0";
+	public static final String APPIUM_DEFAULT_VERSION = "1.15.1";
 	public static final String APPIUM_VERSION = "1.15.1";
 	
 }

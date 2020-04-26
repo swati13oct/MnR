@@ -43,8 +43,8 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds                | travel                 | doctors    | DoctorsName | isMultiDoctor |
       |   90201 | NO            |                  | MAPD          | Medicaid,condition,facility | within,another,primary | innetwork  |             |               |
       |   12345 | NO            |                  | MAPD          | None                        | None                   | outnetwork |             |               |
-      |   36035 | YES           | Pike County      | MA            | Medicaid,condition          | within,another         | innetwork  |             |               |
-      |   21212 | YES           | Baltimore County | PDP           | facility                    | primary                | outnetwork |             |               |
+      |   36035 | YES           | Pike County      | NA            | Medicaid,condition          | within,another         | innetwork  |             |               |
+      |   21212 | YES           | Baltimore County | NA            | facility                    | primary                | outnetwork |             |               |
 
   @PRE @planrecommendation @doctorspage @doctorspageerrorScenario @F372731 @regression
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Doctors page error scenarios in Plan Recommendation Engine
@@ -66,7 +66,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds                | travel | doctors |
       |   90201 | NO            |              | MAPD          | Medicaid                    | within |         |
-      |   78006 | YES           | Bexar County | MA            | Medicaid,condition,facility | within |         |
+      |   78006 | YES           | Bexar County | NA            | Medicaid,condition,facility | within |         |
 
   @PRE @planrecommendation @doctorspage @previousfunctionbeforeContinue @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Previous Button functionality before Click continue of doctors page in Plan Recommendation Engine
@@ -90,7 +90,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds                | travel                 | doctors    | DoctorsName | isMultiDoctor |
       |   78006 | YES           | Bexar County | MAPD          | Medicaid,condition,facility | within,another,primary | innetwork  |             |               |
-      |   45634 | NO            |              | PDP           | None                        | None                   | outnetwork |             |               |
+      |   45634 | NO            |              | NA            | None                        | None                   | outnetwork |             |               |
 
   @doctorspage @doctorspage @doctorspageConfirmationmodel @F372731 @regression
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate doctors page Confirmation Model scenarios in Plan Recommendation Engine
@@ -113,6 +113,6 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds                | travel                 | doctors   | DoctorsName | isMultiDoctor |
-			|   90201 | NO            |          | MA            | Medicaid,condition,facility | within,another,primary | mydoctors | John        | YES           |
-      |   10002 | NO            | New York | MAPD          | facility                    | primary                | mydoctors | John         | YES           |
+      |   90201 | NO            |          | NA            | Medicaid,condition,facility | within,another,primary | mydoctors | John        | YES           |
+      |   10002 | NO            | New York | MAPD          | facility                    | primary                | mydoctors | John        | YES           |
 #      |   35034 | YES           |Bibb County |MAPD         | Medicaid,condition,facility|within,another,primary|mydoctors  |John|NO|

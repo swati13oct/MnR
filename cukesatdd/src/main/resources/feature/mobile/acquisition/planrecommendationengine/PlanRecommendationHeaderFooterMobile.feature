@@ -6,7 +6,7 @@ Feature: Plan Selector Tool flow - Verify Header and Footer in plan recommendati
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to PRE landing page mobile
     Then user validate presence of Header elements on landing page mobile
-    
+
   @PRE @planrecommandonationmobile @headerfootermobile @footerelements @F383639
   Scenario: - To validate mobile footer elements in medicare page
     Given the user is on UHC medicare acquisition site mobile
@@ -38,7 +38,7 @@ Feature: Plan Selector Tool flow - Verify Header and Footer in plan recommendati
     When user navigates to PRE landing page mobile
     Then user validates all Links from header mobile
 
-@PRE @planrecommandonationmobile @headerfootermobile @footerlinksvalidation @F383639
+  @PRE @planrecommandonationmobile @headerfootermobile @footerlinksvalidation @F383639
   Scenario: - To validate mobile footer links in medicare page
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to PRE landing page mobile

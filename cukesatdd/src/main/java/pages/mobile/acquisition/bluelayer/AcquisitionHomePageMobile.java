@@ -64,16 +64,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	public void openPRE() {
 		if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")) {
-			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
-			// startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc",
-			// "digital-uatv2"));
+			//startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
+			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc","digital-uatv2"));
 		} else {
-			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
-			// startNewMobile(AARP_ACQISITION_PAGE_URL);
+			//startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
-
+	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will proceed with URL if 'Your connection is not private' page appears
+	 */
 	public void fixPrivateConnectionMobile() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";

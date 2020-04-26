@@ -26,7 +26,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Pharmacy";
+                String page = "Step 7: Pharmacy";
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -44,8 +44,11 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                 @FindBy(xpath = "//*[@class='progress-bar-info']/p")
                 private WebElement pageProgressPercentage;
                 
-                @FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(2)")
+                @FindBy(css = "div legend.primary-question-tex")
                 private WebElement pharmacyTitle;
+                
+                @FindBy(css = "div legend.primary-question-tex span>sup")
+            	private WebElement pharmacyPagePrimaryQuestionMark;
                 
                 @FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(3)")
                 private WebElement pharmacyTitleInfo;
@@ -82,22 +85,20 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 validate(planSelectorPageTilte);
                                                 Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 7: Pharmacy"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("48% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(pharmacyTitle);
                                                 Assert.assertTrue(pharmacyTitle.getText().contains("pharmacy"));
-                                                validate(pharmacyTitleInfo);
-                                                Assert.assertTrue(pharmacyTitleInfo.getText().contains("pharmacy"));
+                                                validate(pharmacyPagePrimaryQuestionMark);
                                                 validate(onlinePharmacy, 30);
                                                 Assert.assertTrue(onlinePharmacy.getText().contains("Online"));
                                                 validate(retailPharmacy, 30);
                                                 Assert.assertTrue(retailPharmacy.getText().contains("Retail"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
                                 
@@ -122,7 +123,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                 	pharmacypageOptions(pharmacy);
                                     continueBtn.click();
                                     System.out.println("Validating " + page + " page Continue button functionality");
-//                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                                    desktopCommonUtils.nextPageValidation(page.toUpperCase());
                                 }  
                                 
 //Pharmacy Page Function Verification     
@@ -141,13 +142,13 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 pharmacypageOptions(pharmacy);
                                                 if(radioselect.isDisplayed()) {
                                                                 validate(pageProgressPercentage, 30);
-                                                                Assert.assertTrue(pageProgressPercentage.getText().contains("48% Complete"));
+                                                                Assert.assertTrue(pageProgressPercentage.getText().contains("60% Complete"));
                                                 }else {
                                                                 System.out.println("Pharmacy Type not selected in Doctors Page");
                                                 }
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
                 public void browserBack() {

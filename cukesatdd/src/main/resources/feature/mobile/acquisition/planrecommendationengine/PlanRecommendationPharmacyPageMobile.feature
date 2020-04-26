@@ -19,13 +19,14 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
       | Doctors Selection   | <DoctorsSelection> |
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
-    Then user selects skip option in Drug page mobile
-      | Drug Selection | <DrugSelection> |
+    And user selects add drug option in Drug page mobile
+      | Drug Selection | <DrugSelection>                                                        |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate elements in Pharmacy page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10003 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               |
 
   @PRE @planrecommandonationmobile @pharmacypagemobile @pharmacypagepageoptionselectionmobile @F374226
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Pharmacy page funtions in Plan Recommendation Engine Mobile
@@ -45,15 +46,16 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
       | Doctors Selection   | <DoctorsSelection> |
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
-    Then user selects skip option in Drug page mobile
-      | Drug Selection | <DrugSelection> |
+    And user selects add drug option in Drug page mobile
+      | Drug Selection | <DrugSelection>                                                        |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user selects Pharmacy in Pharmacy page mobile
       | Pharmacy Selection | <PharmacySelection> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Online            |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Retail            |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
+      |   10003 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Online            |
+      |   10003 | NO            | New York | NA            | None         | Travel       | willing to use   |             |               | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            |
 
   @PRE @planrecommandonationmobile @pharmacypagemobile @pharmacypagepageoptionerrorscemobile @F374226
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Pharmacy page funtions Error Scenario in Plan Recommendation Engine Mobile
@@ -73,11 +75,12 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
       | Doctors Selection   | <DoctorsSelection> |
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
-    Then user selects skip option in Drug page mobile
-      | Drug Selection | <DrugSelection> |
+    And user selects add drug option in Drug page mobile
+      | Drug Selection | <DrugSelection>                                                        |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user selects Pharmacy in Pharmacy page mobile and validate errors
       | Pharmacy Selection | <PharmacySelection> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          |                   |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
+      |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               |                   |

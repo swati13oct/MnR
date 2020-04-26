@@ -35,7 +35,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Drug Costs";
+                String page = "Step 6: Drug Costs";
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -181,9 +181,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 validate(planSelectorPageTilte);
                                                 Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug Costs"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(drugTitle);
@@ -194,7 +193,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 Assert.assertTrue(noOption.getText().contains("No"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 //Drugs Search Page Element Verification Method
@@ -204,9 +203,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			currentPageUrl.contains("/plan-recommendation-engine.html/");
                             			validate(planSelectorPageTilte);
                             			validate(pageStepsNumberName, 30);
-                            			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
                             			validate(pageProgressPercentage, 30);
-                            			Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
                             			validate(progressbar);
                             			validate(drugsearchbuildpres);
                             			validate(drugsearchdescription);
@@ -252,7 +249,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 	drugpageOptions(drugsSelection);
                                 	continueBtn.click();
                             		System.out.println("Validating " + page + " page Continue button functionality");
-                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
                             	}
                                 
 //Drug option selects in Drug page
@@ -310,6 +307,16 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		System.out.println("Validating " + page + " page Continue button functionality");
                             		desktopCommonUtils.nextPageValidation(page.toUpperCase());
                             	}
+                                
+// Continue with ZeroDrug Function
+                                
+                                public void continueNextpageZeroDrug() {
+                            		validate(drugsearchBox,30);
+                            		threadsleep(2000);
+                            		continueBtn.click();
+                            		System.out.println("Validating " + page + " page Continue button functionality");
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+                            	}                                
                                 
 //Validating Result Count
                                 public void validateResultsCount() {

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
 
 public class CommonutilitiesMobile extends UhcDriver {
@@ -25,6 +26,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 	}
+
+	String flow;
 
 	// --- From here Common for all page starts ---
 	@FindBy(css = ".progress-bar-title>h1")
@@ -51,7 +54,6 @@ public class CommonutilitiesMobile extends UhcDriver {
 	@FindBy(css = "body header")
 	public WebElement headerSection;
 
-	
 	@FindBy(css = ".container div>button[class*='primary button']")
 	private WebElement continueBtn;
 
@@ -63,7 +65,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 
 	// --- Common elements Ends above ---
 
-	public String currentPageName, previousPageName, previousPagePercentage, nextPageName, nextPagePercentage;
+	public String currentPageName, currrentPagePercentage, previousPageName, previousPagePercentage, nextPageName,
+			nextPagePercentage;
 
 	public void mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount,
 			boolean swipeUp) {
@@ -82,9 +85,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 			System.out.println("Element not visible footer banner");
 		}
 	}
-	
-	public void mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount,
-			boolean swipeUp) {
+
+	public void mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
 		try {
 			validate(headerSection, 30);
 			validate(element, 30);
@@ -100,42 +102,46 @@ public class CommonutilitiesMobile extends UhcDriver {
 			System.out.println("Element not visible");
 		}
 	}
-	
-	public void mobileLocateElementClick(WebElement element)
-	{
-		mobileFindElementBeforeCallBanner(element,"50%",8,true);
-		mobileFindElementAfterHeader(element,"50%",4,false);
+
+	public void mobileLocateElementClick(WebElement element) {
+		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
+		mobileFindElementAfterHeader(element, "50%", 4, false);
 		element.click();
 	}
-	
-	public void mobileLocateElement(WebElement element)
-	{
-		mobileFindElementBeforeCallBanner(element,"50%",8,true);
-		mobileFindElementAfterHeader(element,"50%",4,false);
+
+	public void mobileLocateElement(WebElement element) {
+		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
+		mobileFindElementAfterHeader(element, "50%", 4, false);
 	}
-	
-	public void mobileLocateElementClick(WebElement element,int swipeup,int swipedown)
-	{
-		mobileFindElementBeforeCallBanner(element,"50%",swipeup,true);
-		mobileFindElementAfterHeader(element,"50%",swipedown,false);
+	public void mobileLocateElement(WebElement element,String swipepercentage) {
+		mobileFindElementBeforeCallBanner(element, swipepercentage, 8, true);
+		mobileFindElementAfterHeader(element, swipepercentage, 4, false);
+	}
+
+	public void mobileLocateElementClick(WebElement element, int swipeup, int swipedown) {
+		mobileFindElementBeforeCallBanner(element, "50%", swipeup, true);
+		mobileFindElementAfterHeader(element, "50%", swipedown, false);
 		element.click();
 	}
-	
-	public void mobileLocateElementSendkeys(WebElement element,String keys)
-	{
+
+	public void mobileLocateElementSendkeys(WebElement element, String keys) {
 		mobileLocateElement(element);
-		mobileactionsendkeys(element,keys);
+		mobileactionsendkeys(element, keys);
 	}
-	
+
 	public void fixPrivateConnectionMobile() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";
 			threadsleep(1000);
 			if (driver.findElement(By.cssSelector("body.ssl h1")).getText()
 					.contains("Your connection is not private")) {
-				driver.findElement(By.cssSelector("button#details-button")).click();
+				driver.navigate().refresh();
+				pageloadcomplete();
+				jsClickNew(driver.findElement(By.cssSelector("button#details-button")));
+				//driver.findElement(By.cssSelector("button#details-button")).click();
 				threadsleep(1000);
-				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				//driver.findElement(By.cssSelector("a#proceed-link")).click();
+				jsClickNew(driver.findElement(By.cssSelector("a#proceed-link")));
 				threadsleep(1000);
 				pageloadcomplete();
 			}
@@ -167,8 +173,24 @@ public class CommonutilitiesMobile extends UhcDriver {
 		}
 	}
 
+	// Current page percentage validation Mobile
+	public void currentPageValidation(String pageName) {
+		System.out.println("Current page Validation Mobile");
+		findPagedetails(pageName);
+		try {
+			//pageloadcomplete();
+			threadsleep(3000);
+			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pageName.toUpperCase()),
+					"Current page name validation failed");
+			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(currrentPagePercentage),
+					"Current page % validation failed");
+		} catch (Exception e) {
+			System.out.println("Unable to validate Current page functionality or not Visible");
+		}
+	}
+
 	// Previous Button Functionality Mobile
-	public void previouspageValidation(String pageName) {
+	public void previousPageValidation(String pageName) {
 		System.out.println("Previous page Validation Mobile");
 		findPagedetails(pageName);
 		try {
@@ -176,9 +198,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 			threadsleep(3000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName.toUpperCase()),
 					"Previous page name validation failed");
-			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),"Previous page % validation failed");
+			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),
+					"Previous page % validation failed");
 		} catch (Exception e) {
-			System.out.println("Unable to validate previous button functionality are not Visible");
+			System.out.println("Unable to validate previous button functionality or not Visible");
 		}
 	}
 
@@ -186,89 +209,166 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public void nextPageValidation(String pageName) {
 		System.out.println("Next page Validation Mobile");
 		findPagedetails(pageName);
-		try {
-			pageloadcomplete();
-			threadsleep(1000);
+		if (nextPageName.contains("NULL") == false) {
 			try {
-			WebDriverWait wait = new WebDriverWait(driver, 20);
-			wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
-			}catch(Exception e) {
-				Assert.assertTrue(false,"Next page name validation failed");
+				pageloadcomplete();
+				threadsleep(1000);
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 20);
+					wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
+				} catch (Exception e) {
+					Assert.assertTrue(false, "Next page name validation failed");
+				}
+				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),
+						"Next page % validation failed");
+			} catch (Exception e) {
+				System.out.println("Unable to validate Continue button functionality on Next page");
 			}
-			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),"Next page % validation failed");
-		} catch (Exception e) {
-			System.out.println("Unable to validate Continue button functionality on Next page");
 		}
 	}
 
 	public void findPagedetails(String pageName) {
+		flow = PlanRecommendationStepDefinitionMobile.PREflow;
 		currentPageName = pageName.toUpperCase().trim();
 		previousPageName = new String();
 		previousPagePercentage = new String();
 		nextPageName = new String();
 		nextPagePercentage = new String();
-		// Update the else as else if for each page
+		currrentPagePercentage = new String();
 		if (currentPageName.contains("LOCATION")) {
 			nextPageName = "Coverage";
-			nextPagePercentage = "8%";
+			nextPagePercentage = "10%";
+			currrentPagePercentage = "0%";
 		}
-		else if (currentPageName.contains("COVERAGE")) {
-			previousPageName = "Location";
-			previousPagePercentage = "8%";
-			nextPageName = "Special";
-			nextPagePercentage = "16%";
-		} else if (currentPageName.contains("SPECIAL")) {
-			previousPageName = "Coverage";
-			previousPagePercentage = "16%";
-			nextPageName = "Care";
-			nextPagePercentage = "24%";
-		}else if (currentPageName.contains("TRAVEL")||currentPageName.contains("CARE")) {
-			previousPageName = "Special";
-			previousPagePercentage = "24%";
-			nextPageName = "Doctor";
-			nextPagePercentage = "32%";
-		}else if (currentPageName.contains("DOCTOR")) {
-			previousPageName = "Care";
-			previousPagePercentage = "32%";
-			nextPageName = "Drug";
-			nextPagePercentage = "40%";
-		}else if (currentPageName.contains("DRUG")) {
-			previousPageName = "Doctor";
-			previousPagePercentage = "40%";
-			nextPageName = "Pharmacy";
-			nextPagePercentage = "48%";
-		}else if (currentPageName.contains("PHARMACY")) {
-			previousPageName = "Drug";
-			previousPagePercentage = "48%";
-			nextPageName = "Additional";
-			nextPagePercentage = "56%";
-		}else if (currentPageName.contains("ADDITIONAL")) {
-			previousPageName = "Pharmacy";
-			previousPagePercentage = "56%";
-			nextPageName = "Cost";
-			nextPagePercentage = "64%";
-		}else if (currentPageName.contains("COST")) {
-			previousPageName = "Additional";
-			previousPagePercentage = "64%";
-			nextPageName = "";
-			nextPagePercentage = "";
-		}else {
-			previousPageName = "";
-			previousPagePercentage = "";
-			nextPageName = "";
-			nextPagePercentage = "";
+		// Update the else and else if for each page
+		if (flow.equalsIgnoreCase("PDP")) {
+			if (currentPageName.contains("COVERAGE")) {
+				previousPageName = "Location";
+				previousPagePercentage = "10%";
+				nextPageName = "Drug";
+				nextPagePercentage = "20%";
+				currrentPagePercentage = "10%";
+			}
+			if (currentPageName.contains("DRUG")) {
+				previousPageName = "Coverage";
+				previousPagePercentage = "20%";
+				nextPageName = "Pharmacy";
+				nextPagePercentage = "53%";
+				currrentPagePercentage = "20%";
+				if (currentPageName.contains("DRUG COSTSSKIP")) {
+					nextPageName = "NULL";
+					nextPagePercentage = "NULL";
+				}
+			}
+			if (currentPageName.contains("PHARMACY")) {
+				previousPageName = "Drug";
+				previousPagePercentage = "53%";
+				nextPageName = "NULL";
+				nextPagePercentage = "NULL";
+				currrentPagePercentage = "53%";
+			}
+		} else {
+			if (currentPageName.contains("COVERAGE")) {
+				previousPageName = "Location";
+				previousPagePercentage = "10%";
+				nextPageName = "Special";
+				nextPagePercentage = "20%";
+				currrentPagePercentage = "10%";
+			} else if (currentPageName.contains("SPECIAL")) {
+				previousPageName = "Coverage";
+				previousPagePercentage = "20%";
+				nextPageName = "Care";
+				nextPagePercentage = "30%";
+				currrentPagePercentage = "20%";
+				if (flow.equalsIgnoreCase("MA")) {
+					nextPagePercentage = "33%";
+				}
+			} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE AWAY")) {
+				previousPageName = "Special";
+				previousPagePercentage = "30%";
+				nextPageName = "Doctor";
+				nextPagePercentage = "40%";
+				currrentPagePercentage = "30%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "33%";
+					nextPagePercentage = "46%";
+					currrentPagePercentage = "33%";
+				}
+			} else if (currentPageName.contains("DOCTOR")) {
+				previousPageName = "Care";
+				previousPagePercentage = "40%";
+				nextPageName = "Drug";
+				nextPagePercentage = "50%";
+				currrentPagePercentage = "40%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "46%";
+					nextPageName = "Additional";
+					nextPagePercentage = "59%";
+					currrentPagePercentage = "46%";
+				}
+			} else if (currentPageName.contains("DRUG")) {
+				previousPageName = "Doctor";
+				previousPagePercentage = "50%";
+				nextPageName = "Pharmacy";
+				nextPagePercentage = "60%";
+				currrentPagePercentage = "50%";
+				if (currentPageName.contains("DRUG COSTSSKIP"))
+					if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NA"))) {
+						nextPageName = "Additional";
+						nextPagePercentage = "70%";
+					}
+			} else if (currentPageName.contains("PHARMACY")) {
+				previousPageName = "Drug";
+				previousPagePercentage = "60%";
+				nextPageName = "Additional";
+				nextPagePercentage = "70%";
+				currrentPagePercentage = "60%";
+			} else if (currentPageName.contains("ADDITIONAL")) {
+				previousPageName = "Pharmacy";
+				previousPagePercentage = "70%";
+				nextPageName = "Cost";
+				nextPagePercentage = "80%";
+				currrentPagePercentage = "70%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPageName = "Doctor";
+					previousPagePercentage = "59%";
+					nextPagePercentage = "72%";
+					currrentPagePercentage = "59%";
+				}
+				if (currentPageName.contains("SKIP")) {
+					previousPageName = "Drug";
+					previousPagePercentage = "60%";
+				}
+			} else if (currentPageName.contains("COST")) {
+				previousPageName = "Additional";
+				previousPagePercentage = "80%";
+				nextPageName = "";
+				nextPagePercentage = "";
+				currrentPagePercentage = "80%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "72%";
+					currrentPagePercentage = "72%";
+				}
+			} else {
+				previousPageName = "";
+				previousPagePercentage = "";
+				nextPageName = "";
+				nextPagePercentage = "";
+			}
 		}
 		previousPagePercentage = previousPagePercentage + " COMPLETE";
 		nextPagePercentage = nextPagePercentage + " COMPLETE";
+		currrentPagePercentage = currrentPagePercentage + " COMPLETE";
 	}
 
 	public void mobleErrorValidation(String pagename) {
 		System.out.println("Error Validation");
 		validate(errorMessage, 30);
-		Assert.assertTrue(errorMessage.getText().toUpperCase().contains("PLEASE")|(errorMessage.getText().toUpperCase().contains("NO")));
+		Assert.assertTrue(errorMessage.getText().toUpperCase().contains("PLEASE")
+				| (errorMessage.getText().toUpperCase().contains("NO")));
 		Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pagename.toUpperCase()));
 	}
-	
+
 	public void browserBack() {
 		driver.navigate().back();
 	}
