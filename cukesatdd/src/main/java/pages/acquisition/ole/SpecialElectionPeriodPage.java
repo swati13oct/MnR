@@ -135,6 +135,9 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[@for = 'dualeligible']")
 	private WebElement DualEligible_DSNP;
 	
+	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	private WebElement pedHeader;
+	
 	
 	public SpecialElectionPeriodPage(WebDriver driver) {
 		super(driver);
@@ -390,6 +393,20 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		return new SpecialElectionPeriodPage(driver);
 	}
 
+	return null;
+}
+
+public ProposedEffectiveDatePage navigate_to_Proposed_Effective_Date_Page() {
+
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", NextBtn);*/
+	
+	if(validateNew(pedHeader)){
+		System.out.println("OLE Proposed Effective Date Page is Displayed");
+		return new ProposedEffectiveDatePage(driver);
+	}
 	return null;
 }
 

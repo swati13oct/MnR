@@ -1,5 +1,5 @@
 @eob @fastandfurious
-Feature: 1.04.1 To Test EOB for Members - E2E
+Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
 
   Background: If run on stage then feature security flag needs to be true
      Given feature security flag must set to true when testing on stage env
@@ -104,12 +104,12 @@ Feature: 1.04.1 To Test EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
-      | 08    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
+      | 08    | PDP      | LIS_GROUP_Rx_EOB  | Prescription Drug | true        |
 
     @RX_PDP_COMBO
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 09    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
+      | 09    | PDP      | LIS_PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
 
@@ -162,11 +162,12 @@ Feature: 1.04.1 To Test EOB for Members - E2E
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
-    @SHIP_EOBs
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | 05    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+      | 06    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
 
 
   @eob02 @regression_06_06_18FnF @regressionMember
