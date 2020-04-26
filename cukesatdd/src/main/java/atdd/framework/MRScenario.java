@@ -51,6 +51,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
@@ -111,6 +113,8 @@ public class MRScenario {
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
 	public static String mobileDeviceName = "";
+	public static String mobileDeviceOSName = "";
+	public static String mobileDeviceOSVersion = "";
 	public static String desktopBrowserName;
 	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
@@ -119,7 +123,7 @@ public class MRScenario {
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
-	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public static String TESTOBJECTAPIKEY = "";
 	
 	public static final String HSID_ENV="PDB_STAGE";
 	public static final String HSIDDB_USERNAME="njain112";
@@ -164,23 +168,26 @@ public class MRScenario {
 			environmentMedicare = environment;
 			browsername = props.get("BrowserName");
 			isTestHarness = props.get("isTestHarness");
-			isHSIDCompatible = props.get("isHSIDCompatible");
-			mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
-					: System.getenv("DEVICE_NAME"));
-			mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT")) ? props.get("SaucslabDeviceName")
-					: mobileDeviceName;
-
+			isHSIDCompatible = props.get("isHSIDCompatible");			
 		} else { // running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE) ? "Yes"
 					: System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
 		}
-
+		
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER)
 				? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 
+		TESTOBJECTAPIKEY = (null == System.getenv("SAUCSLABS_TESTOBJECT_APIKEY") ? props.get("SaucelabsTestObjectAPIKey")
+				: System.getenv("SAUCSLABS_TESTOBJECT_APIKEY"));
+		mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucelabsDeviceName")
+				: System.getenv("DEVICE_NAME"));
+		mobileDeviceOSName = (null == System.getenv("DEVICE_OS_NAME") ? props.get("SaucelabsDeviceOSName")
+				: System.getenv("DEVICE_OS_NAME"));
+		mobileDeviceOSVersion = (null == System.getenv("DEVICE_OS_VERSION") ? props.get("SaucelabsDeviceOSVersion")
+				: System.getenv("DEVICE_OS_VERSION"));
 		sauceLabsMobileTunnelIdentifier = (null == System
 				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER)
 						? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
@@ -1137,14 +1144,7 @@ try {
 	}
 
 	public AppiumDriver getMobileDriver() {
-
-		String findDeviceName = "iPhone X"; // Default device
-		String mobileOSName;
-		mobileDeviceName = System.getenv("DEVICE_NAME");
-		if(mobileDeviceName==null)
-			mobileDeviceName =props.get("SaucslabDeviceName");
-		String deviceName = mobileDeviceName.toUpperCase().trim();
-		System.out.println("Given device : " + deviceName);
+		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
@@ -1156,47 +1156,25 @@ try {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
-
-		if (deviceName.contains("IPHONEX") || deviceName.contains("IPHONE X"))
-			findDeviceName = "iPhone X";
-		if (deviceName.contains("IPHONE8") || deviceName.contains("IPHONE 8"))
-			findDeviceName = "iPhone 8";
-		if (deviceName.contains("S9") || deviceName.equals("SAMSUNG") || deviceName.contains("GALAXY"))
-			findDeviceName = "Samsung Galaxy S9";
-		if (deviceName.contains("S8+") || deviceName.contains("S8 +") || deviceName.contains("S8PLUS")
-				|| deviceName.contains("S8 PLUS"))
-			findDeviceName = "Samsung Galaxy S8+";
-		if (deviceName.contains("S8"))
-			findDeviceName = "Samsung Galaxy S8";
-
-		capabilities.setCapability("deviceName", findDeviceName);
-
-		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
-			mobileOSName = "Android";
-			capabilities.setCapability("platformVersion", "8");
-			capabilities.setCapability("phoneOnly", "true");
-		} else {
-			mobileOSName = "iOS";
-			capabilities.setCapability("phoneOnly", "true");
-			capabilities.setCapability("platformVersion", "13");
-		}
-		capabilities.setCapability("platformName", mobileOSName);
+		capabilities.setCapability("deviceName", mobileDeviceName);
+		capabilities.setCapability("platformName", mobileDeviceOSName);
+		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + findDeviceName + " in  "
+		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
 				+ sauceLabsMobileTunnelIdentifier + " environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
-		// capabilities.setCapability("acceptSslCerts", true);
+		//capabilities.setCapability("acceptSslCerts", true);
 		capabilities.setCapability("forceMjsonwp", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		try {
-			if (mobileOSName.equalsIgnoreCase("Android"))
+			if (mobileDeviceOSName.equalsIgnoreCase("Android"))
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
 			else
 				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(findDeviceName + " JobURL  --- "
+			System.out.println(mobileDeviceName + " JobURL  --- "
 					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
 			// System.out.println("JobReportURL ---

@@ -72,6 +72,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigates to Zip Code page mobile$")
 	public void user_navigates_to_zipcode_page_mobile() {
+		HeaderFooterMobile header = new HeaderFooterMobile(wd);
+		header.navigatePRELandingpageMobile();
 		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
 		prelandingpage.navigatezipcodepagemobile();
 	}
@@ -411,6 +413,36 @@ public class PlanRecommendationStepDefinitionMobile {
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
 		String zip = inputValues.get("Zip Code");
 		resultpage.navigateVPP(zip);
+   	}
+	
+	@Then("^user adds Doctors in vpp summary page mobile$")
+   	public void add_providers_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.addProviderVPP(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
+   	}
+	
+	@Then("^user navigate Doctors lookup session in Doctors page mobile$")
+	public void navigate_doctors_lookup_session() {
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		doctorpage.navigateDoctorsmodalsession();
+	}
+	
+	@When("^user navigates to Zip Code page from vpp mobile$")
+	public void user_navigates_to_zipcode_page_fromvpp_mobile() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.navigatePRE();
+		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+		prelandingpage.navigatezipcodepagemobile();
+	}
+	
+	@And("^user verifies doctors session in Doctors page mobile$")
+   	public void verify_doctors_session_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String multiDoctor = inputValues.get("Multi Doctor");
+		resultpage.getProvidersPRE(multiDoctor);
+		resultpage.verifyProvidersSession(multiDoctor);
    	}
 	
 	public void readfeaturedata(DataTable data) {

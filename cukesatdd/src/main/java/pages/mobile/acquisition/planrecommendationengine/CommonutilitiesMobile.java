@@ -135,9 +135,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 			threadsleep(1000);
 			if (driver.findElement(By.cssSelector("body.ssl h1")).getText()
 					.contains("Your connection is not private")) {
-				driver.findElement(By.cssSelector("button#details-button")).click();
+				driver.navigate().refresh();
+				pageloadcomplete();
+				jsClickNew(driver.findElement(By.cssSelector("button#details-button")));
+				//driver.findElement(By.cssSelector("button#details-button")).click();
 				threadsleep(1000);
-				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				//driver.findElement(By.cssSelector("a#proceed-link")).click();
+				jsClickNew(driver.findElement(By.cssSelector("a#proceed-link")));
 				threadsleep(1000);
 				pageloadcomplete();
 			}

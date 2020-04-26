@@ -174,6 +174,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
+		zipCode.clear();
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			hidekeypad();
@@ -206,16 +207,13 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void navigatezipcodepagemobile() {
-		HeaderFooterMobile header = new HeaderFooterMobile(driver);
-		header.navigatePRELandingpageMobile();
-		
 		//driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
 		//pageloadcomplete();
 		///driver.navigate().refresh();
 		
 		pageloadcomplete();
-		//validate(getStartedBtn, 30);
 		mobileUtils.mobileLocateElementClick(getStartedBtn);
+		validate(zipCode,30);
 	}
 
 	public void validatecontains(String primarystring, String substring) {

@@ -218,7 +218,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 	}
 
-	public void getConfimationPopupResults(int count) {
+	public ArrayList<String> getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		if (count == modalDoctorsList.size() && count == confirmationSize) {
 			confirmationResults = new ArrayList<String>();
@@ -231,9 +231,10 @@ public class DoctorsMobilePage extends UhcDriver {
 			System.out.println("Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
+		return confirmationResults;
 	}
 
-	public void validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
+	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		threadsleep(2000);
 		werallyResults = null;
 		Set<String> windows = driver.getWindowHandles();
@@ -260,6 +261,7 @@ public class DoctorsMobilePage extends UhcDriver {
 			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
+		return werallyResults;
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
@@ -325,4 +327,10 @@ public class DoctorsMobilePage extends UhcDriver {
 		pageStepsNumberName.getText().toUpperCase().contains(page.toUpperCase());
 	}
 
+	public void navigateDoctorsmodalsession() {
+		mobileUtils.mobileLocateElementClick(doctorLookupOption);
+		System.out.println("Dooctor Lookup Type Clicked");
+		mobileUtils.mobileLocateElementClick(continueBtn);
+	}
+	
 }

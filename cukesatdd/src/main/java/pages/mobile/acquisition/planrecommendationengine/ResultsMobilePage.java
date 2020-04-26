@@ -3,6 +3,10 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -141,9 +145,20 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "button#zipcodebtn")
 	private WebElement homePageFindPlans;
 
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-provider")
+	private WebElement enterProvidersInfoMA1stPlan;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a[id*='provider-title']")
+	private WebElement providersInfoMA1stPlan;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='ProviderName']")
+	private List<WebElement> providersListMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
-	private WebElement enterDrugInfoMS1stPlan;
+	private WebElement enterDrugInfoMA1stPlan;
 
+	@FindBy(css = "a#selector")
+	private WebElement startnowButton;
 	
 	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
@@ -340,11 +355,75 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public void navigateVPP(String zip) {
 		validate(homePageZiptxt,60);
-		mobileactionsendkeys(MSPlanDOB, zip);
+		mobileactionsendkeys(homePageZiptxt, zip);
 		hidekeypad();
-		mobileUtils.mobileLocateElementClick(MSPlanGender);
-		threadsleep(8000);
-		
+		mobileUtils.mobileLocateElementClick(homePageFindPlans);
+		validate(planZipInfo, 60);
+		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		threadsleep(5000);// Plan loader
+		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
 	}
 	
+	static ArrayList<String> werallyResults = new ArrayList<String>();
+	static ArrayList<String> confirmationResults = new ArrayList<String>();
+	DoctorsMobilePage docmobile = new DoctorsMobilePage(driver);
+	int count = 1;
+	
+	public void addProviderVPP(String name,String multi) {
+		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		String curdriverhandle = driver.getWindowHandle();
+		mobileUtils.mobileLocateElementClick(enterProvidersInfoMA1stPlan);
+		if(multi.equalsIgnoreCase("Yes"))
+			count = 3;
+		werallyResults=docmobile.validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", name, count);
+		verifyProviderVPP(werallyResults,count);
+	}
+	
+	public void verifyProviderVPP(ArrayList<String> providers,int count) {
+		ArrayList<String> vppResults = new ArrayList<String>();
+		for(WebElement e:providersListMA1stPlan) {
+			vppResults.add(e.getText().trim());
+		}
+		Assert.assertTrue(vppResults.size()==count,"Providers count mismatch in VPP");
+		containsname(providers,vppResults);
+	}
+	
+	public boolean containsname(ArrayList<String> werallypreproviders, ArrayList<String> vppprovider) {
+		boolean result = true;
+		for (int i = 0; i < werallypreproviders.size(); i++) {
+			String wname[] = werallypreproviders.get(i).replace(",", "").replace(".", "").split(" ");
+			List<String> wnam = Arrays.asList(wname);
+			for (int j = 0; j < vppprovider.size(); j++) {
+				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").split(" ");
+				List<String> dnam = Arrays.asList(dname);
+				if (wnam.containsAll(dnam)) {
+					result = true;
+					break;
+				} else {
+					result = false;
+				}
+			}
+		}
+		System.out.println("Doctors Name validation Result " + result);
+		Assert.assertTrue(result,"Providers name mismatch");
+		return result;
+	}
+	
+	public void getProvidersPRE(String multi) {
+		if(multi.equalsIgnoreCase("Yes"))
+			count = 3;
+		confirmationResults=docmobile.getConfimationPopupResults(count);
+	}
+	
+	public void verifyProvidersSession(String multi) {
+		if(multi.equalsIgnoreCase("Yes"))
+			count = 3;
+		docmobile.verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
+	}
+	
+	public void navigatePRE() {
+		mobileUtils.mobileLocateElementClick(startnowButton);
+		pageloadcomplete();
+		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
+	}
 }
