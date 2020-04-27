@@ -757,8 +757,8 @@ try {
 	 */
 	@FindBy(xpath="//body")
 	protected WebElement timeJson;
+	public String getMemTestEnvSysTime() {
 		String timeStr = "";
-		public String getMemTestEnvSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
@@ -823,19 +823,11 @@ try {
 		return timeStr;
 	}
 
-	/**
-	 * @author Murali - mmurugas
-	 * This method will open give URL in mobile 
-	 */	
 	public void startNewMobile(String url) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(url);
 	}
 	
-	/**
-	 * @author Murali - mmurugas
-	 * This method will perform vertical swipe on mobile screen for given %
-	 */
 	public void mobileswipe(String percentage,boolean swipeup) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
@@ -863,10 +855,6 @@ try {
 		}
 	}
 	
-	/**
-	 * @author Murali - mmurugas
-	 * This method will hide mobile keypad
-	 */
 	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
 		try {
@@ -943,10 +931,6 @@ try {
 		}
 	}
 	
-	/**
-	 * @author Murali - mmurugas
-	 * This method will select option from dropdown based on visible text mobile
-	 */
 	public void mobileSelectOption(Select element,String option) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			element.selectByVisibleText(option);
@@ -993,15 +977,10 @@ try {
 		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());
 	}
 	
-	/**
-	 * @author Murali - mmurugas
-	 * This method will re-submit if form submission popup arises mobile 
-	 */	
 	public void fixFormResubmission(boolean positive) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
 	}
-	
 	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
 		String ReturnValue = "";
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -1024,54 +1003,6 @@ try {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @author Murali - mmurugas
-	 * This method will perform horizontal swipe on mobile screen
-	 */
-	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
-		AppiumDriver mobiledriver = (AppiumDriver) driver;
-		TouchAction mact = new TouchAction(mobiledriver);
-		Dimension size = mobiledriver.manage().window().getSize();
-		//Starting x location set to % of the width (near left end)
-	    percentage = "0.".concat(percentage.replace("%", ""));
-	    int startx = (int) (size.width * Float.valueOf(1-Float.valueOf(percentage)));
-		//Ending x location set to 90% of the width (near right end)
-	    int endx = (int) (size.width * 0.90);
-	    //Y position set to 30% of height Vertically
-	    int starty = (int) (size.height * 0.3);
-	    System.out.println(size+" "+startx+" "+endx+" "+starty);
-		threadsleep(500);
-		if(swiperight)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
-		else
-			mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
-	}
-
-	public void mobileswipeHorizantal(String percentage, int count,boolean swiperight) {
-		for (int i = 1; i <= count; i++) {
-			mobileswipeHorizantal(percentage,swiperight);
-		}
-	}
-	
-	public void waitforElementInvisibilityInTime(WebElement element, long timeout) {
-		System.out.println("Checking Element Invisibility");
-		WebDriverWait wait = new WebDriverWait(driver, timeout);
-		wait.until(ExpectedConditions.invisibilityOf(element));
-	}
-	
-	public void mobileactiondragdrop(WebElement dragelement,WebElement dropelement,boolean swipeVertical) {
-			System.out.println("Drag Drop");	
-			AppiumDriver mobiledriver = (AppiumDriver) driver;
-			TouchAction mact = new TouchAction(mobiledriver);
-			int dragx = dragelement.getLocation().getX();
-			int dragy = dragelement.getLocation().getY();
-			int dropx =dropelement.getLocation().getX();
-			int dropy =dropelement.getLocation().getY();
-			System.out.println(dragx+","+dragy+","+dropx+","+dropy);
-			mact.longPress(PointOption.point(dragx, dragy)).moveTo(PointOption.point(dropx, dropy)).release().perform();
-			System.out.println("All");
 	}
 
 }

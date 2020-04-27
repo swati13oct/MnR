@@ -31,6 +31,9 @@ public class WerallyMobilePage extends UhcDriver {
 
 	String page = "Werally";
 
+	@FindBy(id = "planSelectorTool")
+	private WebElement iframePst;
+
 	// Werally page Elements
 
 	// --- From here Common for all page starts ---
@@ -91,8 +94,7 @@ public class WerallyMobilePage extends UhcDriver {
 			if (actualResultscount >= count) {
 				for (int i = count-1; i >= 0; i--) {
 					threadsleep(1000);
-					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim()+" "
-					+searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']")).getText().trim());
+					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
 					WebElement save = searchResults.get(i).findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
 					save.click();
 					threadsleep(1000);
