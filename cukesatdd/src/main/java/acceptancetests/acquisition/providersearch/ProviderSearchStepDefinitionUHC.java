@@ -51,6 +51,7 @@ public class ProviderSearchStepDefinitionUHC {
 
 	}
 
+	
 	/**
 	 * @toDo:the user performs plan search using following information in the
 	 *           UMS site
@@ -276,6 +277,34 @@ public class ProviderSearchStepDefinitionUHC {
 				Assert.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
 
 			}
+		}
+		
+		/**
+		 * @toDo: user Enters a zipcode
+		 */
+		@When("^the user enters the zipcode and counts the plan$")
+		public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
+
+				List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+				Map<String, String> memberAttributesMap = new HashMap<String, String>();
+				for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+					memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+							memberAttributesRow.get(i).getCells().get(1));
+				}
+
+				String zipcode = memberAttributesMap.get("Zip Code");
+				String plancount = memberAttributesMap.get("Plancount");
+
+
+				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+				 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode);
+				 int strplancount = Integer.parseInt(plancount);
+				 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
+				 if(intPlanCounts!=strplancount){
+					Assert.fail("Plan count is not matching");
+				 }
 		}
 	
 }
