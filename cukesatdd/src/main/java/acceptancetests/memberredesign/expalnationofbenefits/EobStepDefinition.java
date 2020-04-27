@@ -13,12 +13,12 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
+import pages.regression.explanationofbenefits.Eob;
 import pages.regression.explanationofbenefits.EobApiResponse;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
@@ -130,6 +130,7 @@ public class EobStepDefinition {
 		eobCountMap.putAll(searchResultMap);
 		System.out.println("TEST - back from search: hashMap="+Arrays.asList(eobCountMap)); 
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT_MAP, eobCountMap);
+		getLoginScenario().saveBean(EobCommonConstants.TESTAPI, false);
 	}
 
 	@Then("^the user obtains API response info for validation$")
@@ -146,25 +147,74 @@ public class EobStepDefinition {
 			//note: there are two requests for dream, need to fix up the string
 			List<String> tmpResponsJson=eobPage.getApiRequestUrl(planType, memberType, eobType);
 			String m_requestUrl=tmpResponsJson.get(0);
-			String r_requestUrl=tmpResponsJson.get(1);
 			System.out.println("TEST - m_requestUrl="+m_requestUrl);
-			System.out.println("TEST - r_requestUrl="+r_requestUrl);
-			
 			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
-			String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
-
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
 			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
+			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
 
-			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
-
-			//note: merge the two into one
-			if (r_eobResponseObj.getNumEobs()>0) 
-			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			EobApiResponse r_eobResponseObj=new EobApiResponse();
+			if (!planType.equals("MA")) {
+				String r_requestUrl=tmpResponsJson.get(1);
+				System.out.println("TEST - r_requestUrl="+r_requestUrl);
+				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
+				r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
+				Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
+				System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
+			}
+			//note: remove duplicated compoundDoc
+			List<Eob> uniqueEobList=new ArrayList<Eob>();
+			if (eobResponseObj.getListOfEob().size()>0) {
+				uniqueEobList.add(eobResponseObj.getListOfEob().get(0));
+				for(int i=1; i<eobResponseObj.getListOfEob().size(); i++) {
+					boolean found=false;
+					System.out.println("TEST - 1 - check to see if compoundDoc='"+eobResponseObj.getListOfEob().get(i).getCompoundDoc()+"' has been added to the list yet");
+					for(int k=0; k<uniqueEobList.size(); k++) {
+						if (eobResponseObj.getListOfEob().get(i).getCompoundDoc().equals(uniqueEobList.get(k).getCompoundDoc())) {
+							found=true;
+							System.out.println("TEST - already added, skip");
+							break;
+						}
+					}
+					if (!found) {
+						System.out.println("TEST - not yet added, add it");
+						uniqueEobList.add(eobResponseObj.getListOfEob().get(i));
+					}
+				}
+			}
+			for(int i=0; i<r_eobResponseObj.getListOfEob().size(); i++) {
+				boolean found=false;
+				System.out.println("TEST - 2 - check to see if compoundDoc='"+r_eobResponseObj.getListOfEob().get(i).getCompoundDoc()+"' has been added to the list yet");
+				for(int k=0; k<uniqueEobList.size(); k++) {
+					if (r_eobResponseObj.getListOfEob().get(i).getCompoundDoc().equals(uniqueEobList.get(k).getCompoundDoc())) {
+						found=true;
+						System.out.println("TEST - already added, skip");
+						break;
+					}
+				}
+				if (!found) {
+					System.out.println("TEST - not yet added, add it");
+					uniqueEobList.add(r_eobResponseObj.getListOfEob().get(i));
+				}
+			}
 			
-			eobResponseObj.sortListOfEob();
-			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+			
+			System.out.println("After cleaning up the duplicates...");
+			for (Eob e: uniqueEobList) {
+				e.printDetail();
+			}
+			System.out.println("--------------------------------...");
+			//note: merge the two into one
+			//tbd if (r_eobResponseObj.getNumEobs()>0) 
+			//tbd eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			
+			EobApiResponse UniqueEobResponseObj= new EobApiResponse();
+			UniqueEobResponseObj.setErrorCode(eobResponseObj.getErrorCode());
+			UniqueEobResponseObj.setSuccess(eobResponseObj.isSuccess());
+			UniqueEobResponseObj.setListOfEob(uniqueEobList);
+			
+			UniqueEobResponseObj.sortListOfEobLatestFirst();
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, UniqueEobResponseObj);
 			
 			/* tbd 
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
@@ -198,7 +248,9 @@ public class EobStepDefinition {
 			isComboUser=true;
 		String memberId=eobPage.getMemberId(isComboUser, planType);
 		getLoginScenario().saveBean(EobCommonConstants.MEMBERID, memberId);
+		getLoginScenario().saveBean(EobCommonConstants.TESTAPI, true);
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates the eob count for all available search ranges$") 
@@ -325,7 +377,16 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateHeaderSectionContent_DREAMEOB(planType);
 	}
-	
+
+	@Then("^the user validates the right rail section content$")
+	public void validate_rightRail() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
+		eobPage.validateRightRail_DREAMEOB(planType, ui_eobResultCount);
+	}
+
 	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")
 	public void validate_sspContent() {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
@@ -398,27 +459,29 @@ public class EobStepDefinition {
 	@Then("^the user validates EOB count between API and UI are the same$")
 	public void user_validate_api_ui_count_match() {
 		int eobResultCount= (Integer) getLoginScenario().getBean(EobCommonConstants.UI_EOB_COUNT);
+		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
+		Assert.assertTrue("PROBLEM - should not run this step if you are not running 'Then the user obtains API response info for validation' step...", testApiFlag);
 		EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
 		int eobCountFromApi=eobApiResponse.getNumEobs();
 		Assert.assertTrue("PROBLEM - number of EOB count is not the same between API and UI.  UI has '"+eobResultCount+"' | API has '"+eobCountFromApi+"' ", eobResultCount==eobCountFromApi);
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Then("^the user validates search result section content for DREAM EOB$")
 	public void user_validate_searchResult_dream() {
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
-		
+		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
 		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
-		
+
 		if (ui_eobResultCount>0) {
 			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
-			//TODO comment out for now b/c current UI not working as copy deck version
-			//eobPage.validateTextElements(planType, memberType, eobTypeData);
-			eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse);
+			eobPage.validateSearchResultTableHeader_DREAMEOB();
+			List<String> testNote=eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse, testApiFlag);
+			List<String> existingNote=(List<String>) getLoginScenario().getBean(EobCommonConstants.TEST_RESULT_NOTE);
+			existingNote.addAll(testNote);
+			getLoginScenario().saveBean(EobCommonConstants.TEST_RESULT_NOTE,existingNote);
 		} else {
 			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
 		}
@@ -437,14 +500,19 @@ public class EobStepDefinition {
 		}
 	}
 
-	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$")
+	@SuppressWarnings("unchecked")
+	@And("^the user clicks on each eob on first page to validate pdf for DREAM EOB$")
 	public void the_user_clicks_on_first_eob_from_the_list_dream() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
+		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.validateEobEntries_dream(planType, memberId);
+			List<String> testNote=eobPage.validateEobEntries_dream(planType, memberId, testApiFlag, eobCount);
+			List<String> existingNote=(List<String>) getLoginScenario().getBean(EobCommonConstants.TEST_RESULT_NOTE);
+			existingNote.addAll(testNote);
+			getLoginScenario().saveBean(EobCommonConstants.TEST_RESULT_NOTE,existingNote);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}
@@ -575,7 +643,7 @@ public class EobStepDefinition {
 
 	@Then("^the user selects the desired date range on Dream EOB Page$")
 	public void the_user_slects_the_desired_date_range_on_Dream_EOB_Page(DataTable arg1) throws Throwable {
-		DreamEOBPage eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -585,15 +653,15 @@ public class EobStepDefinition {
 		}
 
 		String dateRange = memberAttributesMap.get("Date Range");
-		eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange);
-
+		eobPage.selectDateRange_dream(dateRange);
+		//note: default will not validate w/ API info unless the step to get API response is executed
+		getLoginScenario().saveBean(EobCommonConstants.TESTAPI, false);
 	}
 
 
 	@Then("^the user selects the desired eob type on Dream EOB Page$")
 	public void the_user_slects_the_desired_eobType_on_Dream_EOB_Page(DataTable arg1) throws Throwable {
-		DreamEOBPage eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -603,8 +671,7 @@ public class EobStepDefinition {
 		}
 
 		String dateRange = memberAttributesMap.get("Date Range");
-		eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange);
+		eobPage.selectDateRange_dream(dateRange);
 	}
 
 	@Then("^the user validates EOB count on Dream EOB Page$")
@@ -618,8 +685,8 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String eobCount = memberAttributesMap.get("EOB COUNT");
-		DreamEOBPage eobPage =  (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateEOBStatements(eobCount);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateEOBStatements_dream(eobCount);
 	}
 
 	@Then("^the user validates EOB PDF size is not (\\d+)kb on Dream EOB Page$")

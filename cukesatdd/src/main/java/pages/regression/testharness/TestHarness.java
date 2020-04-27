@@ -9,6 +9,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -598,6 +599,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
 			return new DrugCostEstimatorPage(driver);
@@ -637,10 +639,20 @@ public class TestHarness extends UhcDriver {
 				|| MRScenario.environment.contains("team-a")) {
 
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
-//				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				jsClickNew(eobTestharnessLink);
+				try {
+					jsClickNew(eobTestharnessLink);
+				} catch (UnhandledAlertException ae) {
+					Alert alert = driver.switchTo().alert();
+					System.out.println("Alert text="+alert.getText());
+					if (alert.getText().contains("an error while processing your information")) {
+						Assert.assertTrue("***** getting unexpected alert error while accessing EOB page - Got Alert message: "+alert.getText(), false);
+					} else {
+						alert.accept();
+						CommonUtility.checkPageIsReady(driver);
+					}
+				}
+
 				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
-				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
@@ -978,6 +990,7 @@ public class TestHarness extends UhcDriver {
 		orderMaterials.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		checkModelPopup(driver,5);
 		if (heading.isDisplayed()) {
 			return new OrderMaterialsPage(driver);
 		}
@@ -993,6 +1006,7 @@ public class TestHarness extends UhcDriver {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(premiumPayment);
 		premiumPayment.click();
+		checkModelPopup(driver,5);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentHistoryPage(driver);
 		}
