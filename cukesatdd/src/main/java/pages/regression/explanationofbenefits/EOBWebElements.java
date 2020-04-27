@@ -108,6 +108,12 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 
+	@FindBy(xpath = "//div[contains(@class,'learnmore') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Learn More About EOB')]")
+	protected WebElement rightRailLearnMoreHeader;
+
+	@FindBy(xpath = "//a[contains(text(),'How to read your monthly Medical Explanation of Benefits')]")
+	protected WebElement rightRailLearnMoreLink;
+
 	@FindBy(xpath = "//h1")
 	protected WebElement pageHeader;
 
@@ -333,6 +339,18 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//h2[contains(text(),'Spending')]")
 	protected WebElement spendingCostSummaryPgHeader;
+
+	@FindBy(id="date-range-1")
+	protected WebElement eobMonthDateRange;
+
+	@FindBy(xpath="//table//tr/th[1][contains(text(),'Date')]")
+	protected WebElement tblHeaderDate;
+	
+	@FindBy(xpath="//table//tr/th[2][contains(text(),'EOB Type')]")
+	protected WebElement tblHeaderType;
+	
+	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
+	protected WebElement tblHeaderStmt;
 	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);

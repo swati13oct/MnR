@@ -1,4 +1,4 @@
-@myDocuments  @thePredators @regressionMember @E2E @feature-F368974
+@myDocuments  @thePredators @regressionMember @E2E @feature-F368974 @F434260
 Feature: 1.06.7 Member My Documents Page
 
   Background: If run on stage then feature security flag needs to be true

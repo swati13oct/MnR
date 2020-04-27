@@ -1562,19 +1562,19 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.contains("team-a")
-				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
+		if (MRScenario.environment.equalsIgnoreCase("team-h")
+				|| MRScenario.environment.equalsIgnoreCase("test-a")
+				|| MRScenario.environment.contains("team-a")
+				|| (MRScenario.environment.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
-			System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("offline")) {
+			System.out.println("user is on '" + MRScenario.environment + "' login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if (MRScenario.isTestHarness != null && MRScenario.isTestHarness.equals("YES")) {

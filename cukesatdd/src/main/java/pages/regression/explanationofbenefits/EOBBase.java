@@ -415,7 +415,7 @@ public class EOBBase extends EOBWebElements{
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200.  Actual statusValue='"+statusValue+"'", statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
@@ -430,50 +430,53 @@ public class EOBBase extends EOBWebElements{
 		
 		if (eobType.equals("dream")) {
 			//note: need to do two search
+			System.out.println("TEST - first API request...");
 			String lookForText1="/dreamEob/search?memberNumber=";
 			String lookForText2="responseReceived";
-			String lookForText3="/medical";
-			if (planType.equals("PDP")) {
-				lookForText3="/rx";
-			} else if (planType.contains("SHIP")) {
-				lookForText3="/ship";
-			}
+			//tbd String lookForText3="/medical";
+			//tbd if (planType.equals("PDP")) {
+			//tbd	lookForText3="/rx";
+			//tbd } else if (planType.contains("SHIP")) {
+			//tbd	lookForText3="/ship";
+			//tbd }
 
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
-				System.out.println("TEST each line="+line);
-				if (memberType.contains("COMBO")) {
-					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
-						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+				//System.out.println("TEST each line="+line);
+				//tbd if (memberType.contains("COMBO")) {
+				//tbd 	if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
+				//tbd 		apiReqeust=line;
+				//tbd 		System.out.println("TEST found line="+line);
 						//break;  //note: only break if looking for the first response, otherwise always take the latest line
-					}
-				} else {
+				//tbd 	}
+				//tbd } else {
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
 						System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
-				} 
+					//tbd } 
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
 			String m_urlStr=parseLine(apiReqeust);
 			System.out.println("TEST - m_urlStr="+m_urlStr);
 			urlList.add(m_urlStr);
 			
-			lookForText1="/dreamEob/rx/search?medicareId";
-			for (LogEntry entry : entries) {
-				String line=entry.getMessage();
-				//tbd System.out.println("TEST each line="+line);
-				if (line.contains(lookForText1) && line.contains(lookForText2)) {
-					apiReqeust=line;
-					System.out.println("TEST found line="+line);
-					//break; //note: only break if looking for the first response, otherwise always take the latest line
+			if (!planType.equals("MA")) {
+				System.out.println("TEST - second API request...");
+				lookForText1="/dreamEob/rx/search?medicareId";
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
 				}
+				String r_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - r_urlStr="+r_urlStr);
+				urlList.add(r_urlStr);
 			}
-			String r_urlStr=parseLine(apiReqeust);
-			System.out.println("TEST - r_urlStr="+r_urlStr);
-			urlList.add(r_urlStr);
 			return urlList; 
 		} else {
 			String lookForText1="/member/claims/eob/search";  //note: non-Dream case
@@ -522,7 +525,7 @@ public class EOBBase extends EOBWebElements{
 		}
 		String apiResponseJsonStr=apiResponseJson.getText();
 		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
-		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
+		if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"") && !apiResponseJsonStr.contains("\"errorCode\":\"206\"")) {
 			sleepBySec(5);
 			System.out.println("Retry one more time before giving up...");
 			driver.get(inputUrl);
@@ -577,12 +580,14 @@ public class EOBBase extends EOBWebElements{
 			String eobDate = (String) eachObj.get("eobDate");
 			String esp = (String) eachObj.get("esp");
 			String eobType = (String) eachObj.get("eobType");
+			String compoundDoc=(String) eachObj.get("compoundDoc");
+			
 			if (eobType!=null && !eobType.equals("")) { 
-				System.out.println("TEST - this is DREAM EOB");
-				apiResponse.addEob(eobDate, esp, eobType);
+				System.out.println("TEST - this is DREAM EOB - eobDate="+eobDate+" | espType="+eobType+" | esp="+esp+" | compoundDoc="+compoundDoc);
+				apiResponse.addEob(eobDate, esp, eobType, compoundDoc);
 			} else {
-				System.out.println("TEST - this is NON-DREAM EOB");
-				apiResponse.addEob(eobDate, esp);
+				System.out.println("TEST - this is NON-DREAM EOB - eobDate="+eobDate+" | esp="+esp+" | compoundDoc="+compoundDoc);
+				apiResponse.addEob(eobDate, esp, compoundDoc);
 			}
 		} 
 		return apiResponse;
