@@ -32,8 +32,8 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds      |
-      |   10001 | NO            | New York | MAPD          | Condition         |
-      |   10002 | NO            | New York | NA            | Medicaid,Facility |
+      |   10001 | NO            | New York | MA            | Condition         |
+      |   10002 | NO            | New York | PDP           | Medicaid,Facility |
       |   10003 | NO            | New York | MA            | None              |
 
   @PRE @planrecommandonationmobile @specialneedspagemobile @snperrorvalidationmobile @F372729
@@ -52,4 +52,4 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds   |
       |   10001 | NO            | New York | MA            |                |
-      |   10002 | NO            | New York | NA            | Condition,None |
+      |   10002 | NO            | New York | MA            | Condition,None |

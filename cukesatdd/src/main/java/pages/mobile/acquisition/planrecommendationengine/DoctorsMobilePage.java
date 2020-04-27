@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class DoctorsMobilePage extends UhcDriver {
 
@@ -27,14 +28,20 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		checkModelPopup(driver);
+		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Step 5: Doctors";
+	String page = "Doctors";
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	WerallyMobilePage werally = new WerallyMobilePage(driver);
 	ArrayList<String> werallyResults = new ArrayList<String>();
 	ArrayList<String> confirmationResults = new ArrayList<String>();
+
+	@FindBy(id = "planSelectorTool")
+	private WebElement iframePst;
 
 	// Doctors Page Elements
 
@@ -90,6 +97,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	private WebElement doctorLookupOption;
 
 	// Doctors Page Modal popup
+
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalFinddoctors;
 
@@ -103,6 +111,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	private WebElement modalDescription;
 
 	// Doctors Page Confirmation Modal popup
+
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
 
@@ -123,11 +132,13 @@ public class DoctorsMobilePage extends UhcDriver {
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 5: Doctors"));
 		validate(pageProgressPercentage, 30);
-		mobileUtils.currentPageValidation(page.toUpperCase());
+		Assert.assertTrue(pageProgressPercentage.getText().contains("32% Complete"));
 		validate(progressbar);
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
+
 		validate(doctorPagePrimaryQuestion);
 		Assert.assertTrue(doctorPagePrimaryQuestion.getText().contains("doctors"));
 		validate(doctorPagePrimaryQuestionMark);
@@ -138,10 +149,11 @@ public class DoctorsMobilePage extends UhcDriver {
 		Assert.assertTrue(doctorWantOption.getText().contains("want"));
 		validate(doctorLookupOption, 30);
 		Assert.assertTrue(doctorLookupOption.getText().contains("lookup"));
+
 		mobileUtils.mobileLocateElementClick(doctorWantOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		mobileUtils.previousPageValidation(page.toUpperCase());
+		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 
 	public void doctorspage(String doctorsSelection, String doctorsName, String multiDoctor, String status) {
@@ -218,23 +230,22 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 	}
 
-	public ArrayList<String> getConfimationPopupResults(int count) {
+	public void getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		if (count == modalDoctorsList.size() && count == confirmationSize) {
 			confirmationResults = new ArrayList<String>();
 			for (int i = 0; i < count; i++)
 				confirmationResults.add(
-						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().replace("\n", " ").trim());
+						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().trim());
 			Collections.sort(confirmationResults);
 			System.out.println(confirmationResults);
 		} else {
 			System.out.println("Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
-		return confirmationResults;
 	}
 
-	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
+	public void validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		threadsleep(2000);
 		werallyResults = null;
 		Set<String> windows = driver.getWindowHandles();
@@ -261,7 +272,6 @@ public class DoctorsMobilePage extends UhcDriver {
 			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
-		return werallyResults;
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
@@ -327,10 +337,4 @@ public class DoctorsMobilePage extends UhcDriver {
 		pageStepsNumberName.getText().toUpperCase().contains(page.toUpperCase());
 	}
 
-	public void navigateDoctorsmodalsession() {
-		mobileUtils.mobileLocateElementClick(doctorLookupOption);
-		System.out.println("Dooctor Lookup Type Clicked");
-		mobileUtils.mobileLocateElementClick(continueBtn);
-	}
-	
 }

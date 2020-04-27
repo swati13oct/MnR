@@ -28,7 +28,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Step 2: Coverage Options";
+	String page = "Coverage Options";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -88,8 +88,9 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		validate(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 2: Coverage Option"));
 		validate(pageProgressPercentage, 30);
-		desktopCommonUtils.currentPageValidation(page.toUpperCase());
+		Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(coverageTitle);
@@ -104,7 +105,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		Assert.assertTrue(plantypeNone.getText().contains("don't"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previousPageValidation(page.toUpperCase());
+		desktopCommonUtils.previouspageValidation(page.toUpperCase());
 	}
 
 //Coverage Option Page Function Verification		
@@ -130,7 +131,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		}
 		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-//		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Coverage option page - Select Plantype and click on Previous Button	
@@ -162,7 +163,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		}
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previousPageValidation(page.toUpperCase());
+		desktopCommonUtils.previouspageValidation(page.toUpperCase());
 	}
 
 //Coverage Option Page Function Verification			

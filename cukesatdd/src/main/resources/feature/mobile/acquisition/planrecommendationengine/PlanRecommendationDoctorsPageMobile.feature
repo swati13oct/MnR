@@ -19,7 +19,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption |
-      |   10001 | NO            | New York | NA            | Condition    | Travel       |
+      |   10001 | NO            | New York | MA            | Condition    | Travel       |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageoptionselectionmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> - To validate Doctors page fucntions in Plan Recommendation Engine Mobile
@@ -42,8 +42,8 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York | MAPD          | None         | Travel       | willing to use   |             |               |
-      |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               |
+      |   10001 | NO            | New York | MA            | None         | Travel       | willing to use   |             |               |
+      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageoptionselectionmobile @doctorslookupmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DoctorsName: <DoctorsName> -MultipleDoctors: <isMultiDoctor> - To validate Doctors page fucntions with lookup in Plan Recommendation Engine Mobile
@@ -66,8 +66,8 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York | MAPD          | None         | Travel       | lookup           | sue         | NO            |
-      |   10002 | NO            | New York | MAPD          | None         | Travel       | lookup           | sue         | YES           |
+      |   10001 | NO            | New York | MA            | None         | Travel       | lookup           | sue         | NO            |
+      |   10002 | NO            | New York | MA            | None         | Travel       | lookup           | sue         | YES           |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageerrorvalidationmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile
@@ -90,7 +90,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York | NA            | None         | Travel       |                  |             |               |
+      |   10001 | NO            | New York | MA            | None         | Travel       |                  |             |               |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepagecancelmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page modal cancel functions in Plan Recommendation Engine Mobile
@@ -112,5 +112,5 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York    | NA            | None         | Travel       |             |               |
-      |   35034 | YES           | Bibb County | NA            | None         | Travel       | robert      | NO            |
+      |   10001 | NO            | New York    | MA            | None         | Travel       |             |               |
+      |   35034 | YES           | Bibb County | MA            | None         | Travel       | robert      | YES           |

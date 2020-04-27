@@ -28,7 +28,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
-	String page = "Step 3: Special Needs";
+	String page = "Special";
 	
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
@@ -133,8 +133,9 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			validate(planSelectorPageTilte);
 			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
+			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 3: Special Needs"));
 			validate(pageProgressPercentage, 30);
-			desktopCommonUtils.currentPageValidation(page.toUpperCase());
+			Assert.assertTrue(pageProgressPercentage.getText().contains("16% Complete"));
 			validate(pageRequiredInfo);
 			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			validate(coverageTitle);
@@ -149,7 +150,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			Assert.assertTrue(snpNone.getText().contains("None"));
 			previousBtn.click();
 			System.out.println("Validationg "+page+" page Previous button functionality");
-			desktopCommonUtils.previousPageValidation(page.toUpperCase());
+			desktopCommonUtils.previouspageValidation(page.toUpperCase());
 		}
 		
 // Splitting the input options and selecting it and Verifying the More Information Content

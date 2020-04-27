@@ -22,7 +22,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	public void openAndValidate() {
 	}
 
-	String page = "Step 8: Additional Services";
+	String page = "Additional";
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
@@ -118,16 +118,18 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	@FindBy(css = "div>div:nth-of-type(4)>fieldset.radioGroupOpt uhc-alert")
 	private WebElement fitnessError;
 
-	// Additional Page Element Verification Method
-	public void additionalpage(String drugInfo) {
+//Additional Page Element Verification Method 
+
+	public void additionalpage() {
 		System.out.println("Validating Additional Services Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 8: Additional"));
 		validate(pageProgressPercentage, 30);
-		mobileUtils.currentPageValidation(page.toUpperCase());
+		Assert.assertTrue(pageProgressPercentage.getText().contains("56% Complete"));
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(additionalPagePrimaryQuestion);
@@ -135,6 +137,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		validate(additionalPagePrimaryQuestionMark);
 		validate(additionalPagePrimaryQuestionDecsription);
 		Assert.assertTrue(additionalPagePrimaryQuestionDecsription.getText().contains("additional"));
+
 		validate(dentalQuestion, 30);
 		Assert.assertTrue(dentalQuestion.getText().contains("Dental"));
 		validate(hearingQuestion, 30);
@@ -143,16 +146,15 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		Assert.assertTrue(visionQuestion.getText().contains("Vision"));
 		validate(fitnessQuestion, 30);
 		Assert.assertTrue(fitnessQuestion.getText().contains("Fitness"));
+
 		mobileUtils.mobileLocateElementClick(dentalYes);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		if(drugInfo.toUpperCase().contains("SKIP"))
-			mobileUtils.previousPageValidation(page.toUpperCase()+"skip");
-		else
-			mobileUtils.previousPageValidation(page.toUpperCase());
+		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 
-	// Selecting additional options in Additional Page
+// Selecting additional options in additional Page
+
 	public void additionalpageOptions(String dental, String hearing, String vision, String fitness) {
 		System.out.println("Additional option selection in additional Page");
 		validate(dentalQuestion);
@@ -193,9 +195,10 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		}
 	}
 
-	// Selecting additional options and processed to Additional Service Page
+// Selecting additional options and processed to Additional Service Page
+
 	public void additionalpageFunctional(String additionalOptions) {
-		System.out.println("Additional Page Functional Operations");
+		System.out.println("additional Page Functional Operations");
 		additionalpageOptions(additionalOptions.split(",")[0], additionalOptions.split(",")[1],
 				additionalOptions.split(",")[2], additionalOptions.split(",")[3]);
 		mobileUtils.mobileLocateElementClick(continueBtn);
@@ -203,9 +206,10 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 
-	// Additional Page Error Function Verification
+//Additional Page Error Function Verification     
+
 	public void additionalpageerror(String additionalOptions) {
-		System.out.println("Additional option is not selected - Error Scenario in Additional Page");
+		System.out.println("Additional option is not selected - Error Scenario in additional Page");
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		Assert.assertTrue(dentalError.getText().contains("No"));
 		Assert.assertTrue(hearingError.getText().contains("No"));
