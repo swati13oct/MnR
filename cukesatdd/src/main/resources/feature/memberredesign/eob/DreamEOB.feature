@@ -67,25 +67,25 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 01    | MAPD     | COSMOS_DEOB       | 1 new both, 1 old C, 1 or 2 old D overlap | true|
-      | 07    | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
+      | 02    | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
 
     @dreamEob01b 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 06    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
-      | 03    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
+      | 03    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
+      | 04    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 08    | MA       | COSMOS_EOB_R      | old C                             | false       |
-      | 02    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
+      | 05    | MA       | COSMOS_EOB_R      | old C                             | false       |
+      | 06    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @dreamEob01d 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
-      | 04    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+      | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
+      | 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
 
     @dreamEob01e
     Examples: 

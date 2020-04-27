@@ -352,6 +352,12 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
 	protected WebElement tblHeaderStmt;
 	
+	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'In some instances')]")
+	protected WebElement contactusStmt;
+	
+	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'In some instances')]//a")
+	protected WebElement contactusLnk;
+	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

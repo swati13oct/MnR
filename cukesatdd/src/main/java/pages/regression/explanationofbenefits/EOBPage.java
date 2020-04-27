@@ -189,7 +189,7 @@ public class EOBPage extends EOBBase{
 	 * NOTE: Right rail for medical pdf info will only show for MAPD / MA users and if there is EOB
 	 * @param planType
 	 */
-	public void validateRightRail_DREAMEOB(String planType, int ui_eobResultCount) {
+	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
 		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
@@ -219,7 +219,8 @@ public class EOBPage extends EOBBase{
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
 			sleepBySec(3);
-			goToSpecificComboTab(planType);
+			if (memberType.contains("COMBO")) 
+				goToSpecificComboTab(planType);
 		}
 	}
 
@@ -1136,6 +1137,16 @@ public class EOBPage extends EOBBase{
 		for (String s: testNote)
 			System.out.println(s);
 		return testNote;
+	}
+	
+	public void validateContactUsStmt_DREAMEOB(String planType) {
+		if (planType.equals("MA") || planType.equals("MAPD")) {
+			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination", eobValidate(contactusStmt));
+			Assert.assertTrue("PROBLEM - unable to locate the contact us link under pagination", eobValidate(contactusLnk));
+		} else {
+			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination", !eobValidate(contactusStmt));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us link under pagination", !eobValidate(contactusLnk));
+		}
 	}
 
 
