@@ -29,6 +29,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsP
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
@@ -55,6 +56,7 @@ public class PlanRecommendationEngineStepDefinition {
 	WebDriver wd;
 	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
+	public static String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
@@ -62,6 +64,11 @@ public class PlanRecommendationEngineStepDefinition {
 		for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0),
 			inputRow.get(i).getCells().get(1));
+		}
+		String temp = inputValues.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 	
@@ -206,7 +213,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 	}
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -221,7 +228,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 		planSelectorhomepage.landingpage();
 }
 	
@@ -280,7 +287,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void elements_coverage_page() {
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 		
 	}
@@ -367,7 +374,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_doctor_page() {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDoctorspage.doctorspage();
                     
     }
@@ -418,7 +425,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_drugs_page() {
     				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDrugspage.drugspage();
                     
     }
@@ -470,7 +477,7 @@ public class PlanRecommendationEngineStepDefinition {
    		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
    		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
-   		planSelectorDrugspage.continueNextpage();
+   		planSelectorDrugspage.continueNextpageZeroDrug();
    	}
     
        @And("^user not selects prescription options in drug page$")
@@ -495,7 +502,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_pharmacy_page() {
     	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPharmacyepage.pharmacypage();
    		
    	}
@@ -528,11 +535,12 @@ public class PlanRecommendationEngineStepDefinition {
    	}
 	
    	@Then("^user validate elements in additional services page$")
-   	public void elements_additional_page() {
+   	public void elements_additional_page(DataTable givenAttributes) {
+   		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
-   		planSelectorAdditionalpage.additionalpage();
+//   		headerAndFooter.breadCrumbs();
+   		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
 	@Then("^user selects additional services option in additional services page$")
@@ -553,7 +561,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_costpreferences_page() {
 		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPreferencespage.costpreferencepage();
    	}
 	
@@ -573,4 +581,36 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorPreferencespage.costPreferencepageerror();
 		}
 	}
+	
+	@Then("^user validate elements in loading results page$")
+   	public void elements_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+//   		headerAndFooter.breadCrumbs();
+   		planSelectorResultspage.resultsloadingpage();
+   	}
+	
+	@Then("^user validate recommendations in results page$")
+   	public void view_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		planSelectorResultspage.resultsUI(zip,county,r1,plan,r2,false);
+   	}
+	
+	@Then("^user validate tie recommendations in results page$")
+   	public void view_tie_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		planSelectorResultspage.resultsUI(zip,county,r1,plan,r2,true);
+   	}
 }

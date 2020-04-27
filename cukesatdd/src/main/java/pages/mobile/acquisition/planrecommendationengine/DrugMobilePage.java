@@ -15,7 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class DrugMobilePage extends UhcDriver {
 
@@ -26,20 +25,14 @@ public class DrugMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
-		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Drug";
+	String page = "Step 6: Drug Costs";
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	WerallyMobilePage werally = new WerallyMobilePage(driver);
 	ArrayList<String> werallyResults = new ArrayList<String>();
 	ArrayList<String> confirmationResults = new ArrayList<String>();
-
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst;
 
 	// drugs Page Elements
 
@@ -112,6 +105,9 @@ public class DrugMobilePage extends UhcDriver {
 
 	// drugs Page Modal popup
 
+	@FindBy(css = "#modal div.modal-header")
+	private WebElement modalheader;
+	
 	@FindBy(css = "#modal uhc-radio[class*='checked']")
 	private WebElement modalSelcetedDrug;
 
@@ -173,9 +169,8 @@ public class DrugMobilePage extends UhcDriver {
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+		mobileUtils.currentPageValidation(page.toUpperCase());
 		validate(progressbar);
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
@@ -190,7 +185,7 @@ public class DrugMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(drugAddOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		mobileUtils.previouspageValidation(page.toUpperCase());
+		mobileUtils.previousPageValidation(page.toUpperCase());
 	}
 
 	public void chooseOption(String drugsSelection) {
@@ -212,7 +207,7 @@ public class DrugMobilePage extends UhcDriver {
 		chooseOption(drugsSelection);
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		mobileUtils.nextPageValidation(page.toUpperCase());
+		mobileUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 
 	public void drugsInitiate(String drugSelection) {
@@ -267,6 +262,14 @@ public class DrugMobilePage extends UhcDriver {
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 
+	public void continueNextpageZeroDrug() {
+		validate(drugsearchBox, 30);
+		threadsleep(2000);
+		mobileUtils.mobileLocateElementClick(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		mobileUtils.nextPageValidation(page.toUpperCase() + "skip");
+	}
+
 	// Drugs Search Page Element Verification Method
 	public void drugsSearchpageElements() {
 		System.out.println("Drugs Search Validating Page: ");
@@ -276,7 +279,6 @@ public class DrugMobilePage extends UhcDriver {
 		validate(pageStepsNumberName, 30);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
 		validate(progressbar);
 		validate(drugsearchbuildpres);
 		validate(drugsearchdescription);
@@ -332,15 +334,18 @@ public class DrugMobilePage extends UhcDriver {
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
 				mobileSelectOption(pack, packageName);
-				packageName=pack.getFirstSelectedOption().getText().trim();
+				packageName = pack.getFirstSelectedOption().getText().trim();
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
 				mobileactionsendkeys(modalQuantity, count);
+				modalheader.click();
+				threadsleep(2000);
 			}
 			if (threeeMonthfrequency)
 				mobileSelectOption(freq, "Every 3 Months");
-			dosage=dos.getFirstSelectedOption().getText().trim().split(" ")[1]+" "+dos.getFirstSelectedOption().getText().trim().split(" ")[2];
+			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
+					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
 			count = modalQuantity.getAttribute("ng-reflect-model").trim();
 			String frequence = freq.getFirstSelectedOption().getText().trim();
@@ -351,12 +356,14 @@ public class DrugMobilePage extends UhcDriver {
 				threadsleep(2000);
 				// Generic modal
 				if (switchGeneric) {
+					//justtry();
 					modalGenericSwitch.click();
+					//jsClickNew(modalGenericSwitch);
 					drugName = modalGenericDrug.getText();
 				}
 				modalcontinue.click();
 			}
-			validateAddedDrugname(drugName,dosage,count,frequence);
+			validateAddedDrugname(drugName, dosage, count, frequence);
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
@@ -371,8 +378,8 @@ public class DrugMobilePage extends UhcDriver {
 		Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
 				"Added drug name Mistmatch from selected one : " + drugName);
 	}
-	
-	public void validateAddedDrugname(String drugName,String dosage,String count,String frequence) {
+
+	public void validateAddedDrugname(String drugName, String dosage, String count, String frequence) {
 		String drugData = drugsList.get(0).getText().toUpperCase();
 		Assert.assertTrue(drugData.contains(drugName.toUpperCase()),
 				"Added drug name Mistmatch from selected one : " + drugName);
@@ -522,16 +529,15 @@ public class DrugMobilePage extends UhcDriver {
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
 		modalcontinue.click();
-		
-		/* Not working in PRE but working in PROD
-		modalQuantity.clear();
-		modalQuantity.click();
-		modalcontinue.click();
-		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
-				"Expected Error Message is not displayed");
-				*/
-		
-		validate(modalQuantity,30);
+
+		/*
+		 * Not working in PRE but working in PROD modalQuantity.clear();
+		 * modalQuantity.click(); modalcontinue.click();
+		 * Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
+		 * "Expected Error Message is not displayed");
+		 */
+
+		validate(modalQuantity, 30);
 		modalQuantity.clear();
 		mobileactionsendkeys(modalQuantity, count);
 		modalcontinue.click();
@@ -578,7 +584,7 @@ public class DrugMobilePage extends UhcDriver {
 		}
 		validateAddedDrugname(drugName);
 	}
-	
+
 	public void drugNotFound(String searchText) {
 		validate(drugsearchBox, 30);
 		mobileUtils.mobileLocateElementSendkeys(drugsearchBox, searchText);
@@ -588,4 +594,11 @@ public class DrugMobilePage extends UhcDriver {
 				"Expected Error Message not displayed");
 	}
 
+	public void justtry() {
+		System.out.println("aart");
+		modalGenericKeep.click();
+		mobileactiondragdrop(modalGenericKeep,modalheader,true);
+		System.out.println("end");
+	}
+	
 }

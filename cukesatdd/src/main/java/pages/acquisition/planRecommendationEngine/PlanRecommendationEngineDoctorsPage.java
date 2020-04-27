@@ -34,11 +34,12 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Doctors";
+                String page = "Step 5: Doctors";
                 
                 PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
             	ArrayList<String> werallyResults = new ArrayList<String>();
             	ArrayList<String> confirmationResults = new ArrayList<String>();
+            	ArrayList<String> confirmationSpecialtyResults = new ArrayList<String>();
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -129,9 +130,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 validate(planSelectorPageTilte);
                                                 Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 5: Doctors"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("32% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(doctorsTitle);
@@ -144,7 +144,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 Assert.assertTrue(mydoctors.getText().contains("current doctors"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 // Selecting doctor options in Doctor Page
@@ -194,7 +194,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 }
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 //Doctors Page Function Verification                                      
@@ -273,12 +273,21 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 public void getConfimationPopupResults(int count) {
                             		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
                             		if(count==modalDoctorsList.size() && count==confirmationSize) {
-                            			for (int i = count; i > 0; i--) {
-                            				confirmationResults.add(driver.findElement(By.cssSelector("#modal .modal-content .row:nth-of-type(2) uhc-list-item:nth-child("+ i +") .list-item-content>div>strong")).getText().trim());
+                            			confirmationResults = new ArrayList<String>();
+                            			confirmationSpecialtyResults = new ArrayList<String>();
+                            			for (int i = 0; i < count; i++) {
+                            				confirmationResults.add(
+                            						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content p:nth-child(1)")).getText().replace("\n", " ").trim());
+                            			confirmationSpecialtyResults.add(
+                        						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content p:nth-child(2)")).getText().replace("\n", " ").trim());
                             			}
                             			Collections.sort(confirmationResults);
+                            			Collections.sort(confirmationSpecialtyResults);
                             			System.out.println("confirmationResults Size is : "+confirmationResults.size());
                             			System.out.println("confirmationResults Content is : "+confirmationResults);
+                            			System.out.println("confirmationSpecialtyResults Size is : "+confirmationSpecialtyResults.size());
+                            			System.out.println("confirmationSpecialtyResults Content is : "+confirmationSpecialtyResults);
+                            			
                             		}
                             		else {
                             			System.out.println("Modal Results Count mismatch");

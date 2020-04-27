@@ -533,8 +533,8 @@ public class oleStepDefinition {
 
 	}	
 	
-	@Then("^the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage$")
-	public void  the_user_validates_requierd_fields_for_Preliminary_Questions_Page_CSNP(DataTable Flags) throws Throwable {
+	@Then("^the user validates the required fields for CSNP plans on Medicare Information Page$")
+	public void  the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable Flags) throws Throwable {
 
 
 		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
@@ -544,29 +544,10 @@ public class oleStepDefinition {
 					.getCells().get(0), personalAttributesRow.get(i)
 					.getCells().get(1));
 		}
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
-		 */
-			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-			String PlanName = PreliminaryFlagsMap.get("PlanName");
-			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, PlanName);
-						
-			if (useranddisclosure!= null){
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
-						useranddisclosure);
-				System.out.println("OLE Preliminary Questions Page is Displayed");
-				
-			}
-			 
-		//}		
+			String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String planName = (String)getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			medicareInfoPage.validate_Required_Fields_CSNP(medicaidNumber, planName);
 	}
 
 
