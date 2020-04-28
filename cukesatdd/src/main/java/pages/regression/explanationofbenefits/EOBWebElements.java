@@ -328,6 +328,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//*[contatins(text(),'We are currently experiencing an internal server problem')]")
 	protected WebElement internalServerError;
 	
+	@FindBy(xpath="//div[@id='servicefailerrnvda']")
+	protected WebElement internalServerError2;
+	
 	@FindBy(xpath="//nav[@id='sub-nav']//a[contains(@href,'spending-and-cost-summary')]")
 	protected WebElement spendingCostSummaryTab_topSubMenu;
 	
