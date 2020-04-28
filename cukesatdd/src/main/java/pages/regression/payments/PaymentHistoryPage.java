@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.footer.FooterPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -965,11 +966,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 
 	public OneTimePaymentPage clickOnMakeOneTimePayment() throws Exception {
-		Thread.sleep(20000);
-		waitforElement(MakeOneTimepaymentButton);
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		TestHarness.checkForIPerceptionModel(driver);
 		MakeOneTimepaymentButton.click();
 		System.out.println("User clicked on Make one time payment");
 		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
 			return new OneTimePaymentPage(driver);
 		} else
 			return null;
