@@ -377,6 +377,8 @@ public class TestHarness extends UhcDriver {
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
+			checkForIPerceptionModel(driver);
+		    checkForIPerceptionModel(driver);
 			PaymentPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, 60);
@@ -549,10 +551,12 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
+		TestHarness.checkForIPerceptionModel(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
 		validateNew(testHarnessContactUsPageLink);
+		TestHarness.checkForIPerceptionModel(driver);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		try {
