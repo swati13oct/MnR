@@ -2135,6 +2135,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	       return null;
 		}
 		
+		public void  validateCallpopupAcq() throws InterruptedException {
+			//CommonUtility.checkPageIsReady(driver);
+			callsam.click();
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+			driver.switchTo().activeElement();
+			System.out.println(CallSamTFN.getText());
+			if(CallSamTFN.getText().isEmpty()){
+			 System.out.println("Call Pop up text is not present");
+			}else{
+			CallSamTFNClose.click();
+			validateNew(callsam);
+			System.out.println("SAM Call pop up is closed");
+			}
+			//CallSamTFNClose.click();
+			//validateNew(callsam);		
+		
+			
+		}
+		
 	public AcquisitionHomePage  navigateToPage(String page) {
 		String pageURL = driver.getCurrentUrl()+page;
 		System.out.println("==pageURL=="+pageURL);
