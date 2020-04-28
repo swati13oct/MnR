@@ -371,7 +371,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSamAcq();
 		aquisitionhomepage.validateCallSamContentAcq();
-		aquisitionhomepage.validateCallpopup();
+		aquisitionhomepage.validateCallpopupAcq();
 	}
 
 	@Then("^the user validates SAM re-active Chat on UHC site$")
