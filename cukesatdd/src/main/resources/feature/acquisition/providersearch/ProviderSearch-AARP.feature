@@ -40,7 +40,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
-    Then the user enters the zipcode and counts the plan Ulayer
+    When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>  |
       | Plancount | <plancount>  |
     Examples: 
@@ -53,7 +53,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
-    Then the user enters the zipcode and counts the plan Ulayer
+    When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>  |
       | Plancount | <plancount>  |
     Examples: 
