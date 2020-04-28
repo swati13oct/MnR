@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.google.common.base.Strings;
 
 import atdd.framework.UhcDriver;
+import pages.regression.testharness.TestHarness;
 
 /**
  * @author pperugu
@@ -127,7 +128,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='page-header']//div[@class='row']//h1")
 	private WebElement PageHeader;
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//h2[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 	
 	@FindBy(xpath = "//button[text()='Edit Payment Information']")
@@ -139,10 +140,14 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "termsAgree")
 	private WebElement AgreeCheckBox;
 	
+	@FindBy(xpath = "/html/body/div[2]/div/main/div[2]/div[3]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[3]/div/p")
+	private WebElement moreThanonePaymentError;
+	
+	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	
@@ -537,7 +542,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 
 	public void selectAndEnterAmount(String otherAmount) {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
@@ -584,7 +591,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
@@ -597,30 +606,36 @@ public class OneTimePaymentPage extends UhcDriver {
 			System.out.println("Navigated to EFT form page");
 			return new PaymentsFormPage(driver);
 		} else {
-			System.out.println("Form Page is not displayed");
+			System.out.println("EFT Form Page is not displayed");
 			return null;
 		}
 	}
 	
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(EditPaymentInformation);
+		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
+		TestHarness.checkForIPerceptionModel(driver);
 		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Authorize Monthly Payments button");
+		System.out.println("Clicked on Submit button on Review Payment page");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("One-Time Payment Submitted")) {
-			System.out.println("User is on Confirmation Page for One time payment");
+		String title = driver.getTitle();
+		System.out.println("Title of the page is "+title);
+		
+		if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
-			System.out.println("Confirmation Page for one time payment not displayed");
+			System.out.println("Confirmation Page for one time payment was not displayed");
 			return null;
 		}
 	}
@@ -648,6 +663,19 @@ public class OneTimePaymentPage extends UhcDriver {
 			System.out.println("Confirmation Page for setup recurring not displayed for ship");
 			return null;
 		}
+	}
+	
+	public void errorForSecondPayment() {
+		String errorMessage= moreThanonePaymentError.getText();
+		if (errorMessage.contains("Only one payment request can be submitted per business day")) 
+		{
+			System.out.println("Error message displayed on the page is "+errorMessage);
+			System.out.println("Correct error message is displayed on the page, Test Passed");
+			
+		} else {
+			Assert.fail();
+		}
+
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class PharmacyMobilePage extends UhcDriver {
 
@@ -20,13 +21,19 @@ public class PharmacyMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		checkModelPopup(driver);
+		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Step 7: Pharmacy";
+	String page = "Pharmacy";
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
-	// Pharmacy Page Elements
+	@FindBy(id = "planSelectorTool")
+	private WebElement iframePst;
+
+	// drugs Page Elements
 
 	// --- From here Common for all page starts ---
 	@FindBy(css = ".progress-bar-title>h1")
@@ -76,15 +83,16 @@ public class PharmacyMobilePage extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
 	private WebElement pharmacyRetailOption;
 
-	// Pharmacy Page Element Verification Method
+	// Drugs Page Element Verification Method
 	public void pharmacypageElements() {
 		System.out.println("Pharmacy Validating Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 7: Pharmacy"));
 		validate(pageProgressPercentage, 30);
-		mobileUtils.currentPageValidation(page.toUpperCase());
+		Assert.assertTrue(pageProgressPercentage.getText().contains("48% Complete"));
 		validate(progressbar);
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
@@ -99,10 +107,9 @@ public class PharmacyMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(pharmacyOnlineOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		mobileUtils.previousPageValidation(page.toUpperCase());
+		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
-
-	// Selecting option in Pharmacy Page
+	
 	public void chooseOption(String pharamacySelection) {
 		if (!(pharamacySelection.isEmpty())) {
 			if (pharamacySelection.equalsIgnoreCase("Online")) {
@@ -112,18 +119,17 @@ public class PharmacyMobilePage extends UhcDriver {
 				mobileUtils.mobileLocateElementClick(pharmacyOnlineOption);
 				System.out.println("Plan Type " + pharamacySelection + " Clicked");
 			}
-			mobileUtils.mobileLocateElementClick(continueBtn);
-			System.out.println("Validating " + page + " page Continue button functionality");
-			mobileUtils.nextPageValidation(page.toUpperCase());
-		} else {
-			mobileUtils.mobileLocateElementClick(continueBtn);
-			mobileUtils.mobleErrorValidation(page);
+		}else {
+				mobileUtils.mobileLocateElementClick(continueBtn);
+				mobileUtils.mobleErrorValidation(page);
 		}
 	}
-
-	// Pharmacy Page Selection
+	
 	public void pharmacyFunctional(String pharamacySelection, String status) {
 		chooseOption(pharamacySelection);
+		mobileUtils.mobileLocateElementClick(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		//mobileUtils.nextPageValidation(page.toUpperCase());
 	}
-
+	
 }

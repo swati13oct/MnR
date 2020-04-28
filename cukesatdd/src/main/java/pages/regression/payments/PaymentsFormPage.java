@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.regression.testharness.TestHarness;
 
 public class PaymentsFormPage extends UhcDriver {
 
@@ -167,7 +168,7 @@ public class PaymentsFormPage extends UhcDriver {
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-
+		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -175,6 +176,7 @@ public class PaymentsFormPage extends UhcDriver {
 		firstNameField.sendKeys(firstName);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
+		TestHarness.checkForIPerceptionModel(driver);
 		ContinueButton.click();
 		System.out.println("Clicked on Contuine button");
 		try {
@@ -183,11 +185,11 @@ public class PaymentsFormPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Review Your One-Time Payment Information")) {
-			System.out.println("User is on Review Your One-Time Payment Information Page");
+		if (driver.getTitle().contains("Review Payment")) {
+			System.out.println("User is on Review Payment Page");
 			return new OneTimePaymentPage(driver);
 		} else {
-			System.out.println("Review Your One-Time Payment Information not displayed");
+			System.out.println("Review Payment Page was not displayed");
 			return null;
 		}
 	}
