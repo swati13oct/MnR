@@ -438,6 +438,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
 
+	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
+	protected WebElement dashboardCovideModalDismissLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1101,6 +1104,22 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
+		
+	CommonUtility.checkPageIsReadyNew(driver);	
+	 try {
+		 System.out.println("Now checking if Dashboard page Covid modal appeared");
+         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
+    
+  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
+  				  {
+  			  System.out.println("Dashboard covid modal window was displayed");
+  			  dashboardCovideModalDismissLink.click();
+  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
+  				  }
+  		         		  
+		} catch (Exception e) {
+			System.out.println("Dashboard covid modal window was not displayed");
+		}
 		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
 		
 		try {
