@@ -227,10 +227,10 @@ public class ProviderSearchStepDefinitionUHC {
 		
 		public void providerSearch_details_in_Uhc_site_from_HomePage() {
 			
-			AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			
-			ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
+			ProviderSearchPage providerSearchPage = aquisitionhomepage.clicksOnRallyToolFromHomePage();
 
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
