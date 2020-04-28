@@ -26,7 +26,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "termError")
 	private WebElement TermsCheckRadioButton;
-
+	
+	@FindBy(xpath = "//*[@id='custom-page-sub-title']")
+	private WebElement thankyouText;
+	
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
 
@@ -45,7 +48,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='parsys overview']//div[@class='row'][1]//div[@ng-if='models.submitAutomaticFailure']/p[2]")
 	private WebElement OneTimePaymentError;
 
-	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
+	@FindBy(xpath = "//*[@ng-click='backToPaymentHistoryPage()']")
 	private WebElement BackToPaymentHistoryPage;
 
 	@FindBy(xpath = "//*[@id='nav']/button[2]")
@@ -247,9 +250,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	public PaymentHistoryPage ScrollDownToBackButton() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,700)", "");
-
 		if (BackToPaymentHistoryPage.isDisplayed()) {
+			System.out.println("Now clicking on Back to Payment History button on confirmation page");
 			BackToPaymentHistoryPage.click();
+			System.out.println("Back to Payment history button has been clicked");
 			return new PaymentHistoryPage(driver);
 		} else
 			return null;
@@ -297,8 +301,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
-
-	}
+		}
 
 	
 	public void validateEFTSetupVerificationforShip() {
@@ -309,9 +312,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-
-		validate(TermsCheckRadioButton);
-
+		System.out.println("Checking thankyou");
+		validate(thankyouText);
+		System.out.println("Checked thankyou");
 	}
 
 }
