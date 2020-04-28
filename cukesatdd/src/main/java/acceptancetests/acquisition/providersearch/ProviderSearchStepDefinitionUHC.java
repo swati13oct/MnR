@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VPPTestHarnessPage;
@@ -297,9 +296,9 @@ public class ProviderSearchStepDefinitionUHC {
 				String plancount = memberAttributesMap.get("Plancount");
 
 
-				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				ProviderSearchPage providerSearchPageObj = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-				 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode);
+				 int intPlanCounts =providerSearchPageObj.entersZipcodeAndPlancount(zipcode);
 				 int strplancount = Integer.parseInt(plancount);
 				 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
 				 if(intPlanCounts!=strplancount){
