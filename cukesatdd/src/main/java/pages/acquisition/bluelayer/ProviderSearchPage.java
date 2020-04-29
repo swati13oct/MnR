@@ -312,7 +312,7 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 	}
 	
 
-	public int entersZipcodeAndPlancount(String zipcode) {
+	public int entersZipcodeAndPlancountblayer(String zipcode) {
 
 		validateNew(zipCodeTextfield);	
 		zipCodeTextfield.sendKeys(zipcode);
