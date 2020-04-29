@@ -95,6 +95,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
    	
+	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
+	protected WebElement dashboardCovideModalDismissLink;	
+	
        public MemberAuthPage(WebDriver driver) {
               super(driver);
               PageFactory.initElements(driver, this);
@@ -260,7 +263,8 @@ public MemberSearchPage navigateToMemberAuth(){
 
 public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
        
-       waitforElement(MemberPopUpLogin);
+       //waitforElement(MemberPopUpLogin);
+       CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
        Thread.sleep(2000);
        if (MemberPopUpLogin.isDisplayed()){
               System.out.println("Pop up Login Button is displayed");       
@@ -296,8 +300,24 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 					// TODO Auto-generated catch block
 					
 				}
-									
-            	  waitforElement(SuperUser_DashboardBanner);
+            	  CommonUtility.checkPageIsReadyNew(driver);	
+            		 try {
+            			 System.out.println("Now checking if Dashboard page Covid modal appeared");
+            	         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
+            	    
+            	  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
+            	  				  {
+            	  			  System.out.println("Dashboard covid modal window was displayed");
+            	  			  dashboardCovideModalDismissLink.click();
+            	  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
+            	  				  }
+            	  		         		  
+            			} catch (Exception e) {
+            				System.out.println("Dashboard covid modal window was not displayed");
+            			}
+            	  CommonUtility.checkPageIsReadyNew(driver);
+            	  CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
+            	 // waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
             		  System.out.println("CSR Dashboard Page is displayed for the Member");      
             		  return new AccountHomePage(driver);             

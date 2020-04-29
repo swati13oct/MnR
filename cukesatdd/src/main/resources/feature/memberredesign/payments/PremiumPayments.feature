@@ -346,34 +346,35 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
   #Test Case 15
   @regressionMember
-  Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - Test Case 15 - To validate the Edit Payment flow for Member Auth
+  Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 15 - To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
     And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And User Clicks on the Pop up displayed
-    Then User Scrolls down to validate Payment History and Scrolls up
-    And the user clicks on MemAuth Edit Automatic Payment button
+      | MemUsername | <member> |
+    And user clicks on member to select
+    And memberauth user navigates to Payment Overview Page
 
+    #Steps to be added and member needs to be replaced with recurring eft
     Examples: 
-      | TID   | username  | password  | MemUserName     |
-      | 15118 | qavgogine | qavgogine | q2_jun_aarp0058 |
+      | TID   | username  | password  | member    |
+      | 15118 | qavgogine | qavgogine | canrec001 |
 
   #Test Case 16
   @regressionMember
-  Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - Test Case 16 - To validate the oneTime Payment flow for Member Auth
+  Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 16 - To validate the error message when memberauth user tries to submit oneTime EFT Payment
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
     And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And User Clicks on the Pop up displayed
-    Then User Scrolls down to validate Payment History and Scrolls up
-    And the user clicks on Make One Time Payment button
-    And the user makes one time payment and navigate futher
+      | MemUsername | <member> |
+    And user clicks on member to select
+    And memberauth user navigates to Payment Overview Page
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
@@ -382,11 +383,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-    And the user confirms the Submit disabled in Member site
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    And the user is displayed with an error message that he is not authorized
 
     Examples: 
-      | TID   | username  | password  | MemUserName   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15118 | qavgogine | qavgogine | q4_dec_uhc150 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | TID   | username  | password  | member    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15118 | qavgogine | qavgogine | canrec001 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   #Test Case 17
   @regressionMember
