@@ -1142,11 +1142,12 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public void validateContactUsStmt_DREAMEOB(String planType) {
+		Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'If you are having difficulty...'", eobValidate(contactusStmt1));
 		if (planType.equals("MA") || planType.equals("MAPD")) {
-			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination", eobValidate(contactusStmt));
+			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'In some instances...'", eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - unable to locate the contact us link under pagination", eobValidate(contactusLnk));
 		} else {
-			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination", !eobValidate(contactusStmt));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination - 'In some instances...'", !eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us link under pagination", !eobValidate(contactusLnk));
 		}
 	}

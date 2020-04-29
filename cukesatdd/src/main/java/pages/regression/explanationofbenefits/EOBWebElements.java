@@ -355,10 +355,13 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
 	protected WebElement tblHeaderStmt;
 	
-	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'In some instances')]")
-	protected WebElement contactusStmt;
+	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'If you are having')]")
+	protected WebElement contactusStmt1;
+
+	@FindBy(xpath="//p[contains(text(),'In some instances')]")
+	protected WebElement contactusStmt2;
 	
-	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'In some instances')]//a")
+	@FindBy(xpath="//p//strong[contains(text(),'Is there a provider')]/../u/a")
 	protected WebElement contactusLnk;
 	
 	public EOBWebElements(WebDriver driver) {
