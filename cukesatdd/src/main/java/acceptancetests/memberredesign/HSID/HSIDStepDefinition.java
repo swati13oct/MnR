@@ -825,13 +825,7 @@ public class HSIDStepDefinition {
 
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage=null;
-				//try {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
-				/* } catch (Exception ae) {
-					System.out.println("Exception: "+ae);
-					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
-					
-				} */
 				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
 				return;
@@ -868,8 +862,6 @@ public class HSIDStepDefinition {
 				TestHarness testHarnessPage=null;
 				try {
 					if (testHarnessUseDropdown) {
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
 						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
 						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
@@ -1091,5 +1083,4 @@ public class HSIDStepDefinition {
 		}
 		d.quit();
 	}
-
 }

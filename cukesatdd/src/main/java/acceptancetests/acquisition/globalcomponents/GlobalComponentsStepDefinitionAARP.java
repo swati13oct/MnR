@@ -366,7 +366,7 @@ public class GlobalComponentsStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSamAcq();
 		aquisitionhomepage.validateCallSamContentAcq();
-		aquisitionhomepage.validateCallpopup();	
+		aquisitionhomepage.validateCallpopupAcq();	
 	}
 
 	@Then("^the user validates SAM re-active Chat$")

@@ -3,47 +3,59 @@ package pages.regression.explanationofbenefits;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class Eob implements Comparable<Eob>{
 	
 	protected Date eobDate;
 	protected String esp;
 	protected String eobType;
-
+	protected String compoundDoc;
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	
 	public Eob() {
 		this.eobDate=new Date();
 		this.esp="";
 		this.eobType="";
+		this.compoundDoc="";
 	}
 
-	public Eob(Date eobDate, String esp) {
+	public Eob(Date eobDate, String esp, String compoundDoc) {
 		this.eobDate=eobDate;
 		this.esp=esp;
 		this.eobType="";
+		this.compoundDoc="";
 	}
 	
-	public Eob(Date eobDate, String esp, String eobType) {
+	public Eob(Date eobDate, String esp, String eobType, String compoundDoc) {
 		this.eobDate=eobDate;
 		this.esp=esp;
 		this.eobType=eobType;
+		this.compoundDoc=compoundDoc;
 	}
 	
 	public void printDetail() {
-		System.out.print("EOB detail");
-		System.out.print(":  eobDate="+eobDate.toString());
-		System.out.print("|  esp="+esp);
+		//tbd SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		String eobDateStr= sdf.format(eobDate);
+
+		System.out.print("EOB API detail");
+		System.out.print(":  eobDate="+eobDateStr);
+		System.out.print(" |  esp="+esp);
+		System.out.print(" |  compoundDoc="+compoundDoc);
 		if (!eobType.equals(""))
 			System.out.print("|  eobType="+eobType);
 		System.out.println("\n");
 	}
 
 	public void printDetail(Eob inputEob) {
-		System.out.print("EOB detail");
-		System.out.print(":  eobDate="+inputEob.getEobDate());
-		System.out.print("|  esp="+inputEob.getEsp());
+		//tbd sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		String eobDateStr= sdf.format(eobDate);
+
+		System.out.print("EOB API detail");
+		System.out.print(":  eobDate="+eobDateStr);
+		System.out.print(" |  esp="+inputEob.getEsp());
+		System.out.print(" |  compoundDoc="+inputEob.getCompoundDoc());
 		if (!inputEob.getEobType().equals(""))
-			System.out.print("|  eobType="+inputEob.getEobType());
+			System.out.print(" |  eobType="+inputEob.getEobType());
 		System.out.println("\n");
 	}
 
@@ -54,6 +66,14 @@ public class Eob implements Comparable<Eob>{
 	public String getEobDateStr() {
 		return eobDate.toString();
 	}
+	
+	public String getCompoundDoc() {
+		return compoundDoc;
+	}
+
+	public void setCompoundDoc(String compoundDoc) {
+		this.compoundDoc = compoundDoc;
+	}
 
 	public void setEobDate(Date eobDate) {
 		this.eobDate = eobDate;
@@ -61,7 +81,8 @@ public class Eob implements Comparable<Eob>{
 	
 	public void setEobDate(String eobDate) {
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			//tbd SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			//tbd sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 			this.eobDate  = sdf.parse(eobDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -86,8 +107,9 @@ public class Eob implements Comparable<Eob>{
 
 	@Override
 	public int compareTo(Eob e) {
-		this.getEobDate().compareTo(e.getEobDate());
-		return 0;
+		if (this.getEobDate()==null || e.getEobDate()==null) 
+			return 0;
+		return e.getEobDate().compareTo(this.getEobDate());
 	}
 
 

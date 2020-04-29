@@ -14,7 +14,10 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,6 +53,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -64,7 +68,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@Autowired
 	MRScenario loginScenario;
-
+	
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
@@ -162,7 +166,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@When("^the user navigates to Recurring payment history$")
+/*	@When("^the user navigates to Recurring payment history$")
 	public void user_views_Recurring_payment_history() throws InterruptedException {
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -173,7 +177,7 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("User is on Recurring Payment History");
 		}
 
-	}
+	}*/
 
 	@When("^the user navigates to Ship Recurring payment history$")
 	public void user_Ship_Recurring_payment_history() throws InterruptedException {
@@ -239,7 +243,7 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	@And("^the user clicks on Make One Time Payment button$")
+/*	@And("^the user clicks on Make One Time Payment button$")
 	public void click_on_OTP_btn() throws InterruptedException {
 
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
@@ -251,7 +255,7 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user is on one time payment page");
 		}
 
-	}
+	}*/
 
 	@And("^the user clicks on Edit Automatic Payment button$")
 	public void click_on_Recurring_btn() {
@@ -532,19 +536,12 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
 
-	@And("^the user confirms the Submit disabled in Member site$")
-	public void submit_disabled_payment_uhc() throws InterruptedException {
-		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-
-		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.MemAuthConfirmOTP();
-
-		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
-			Assert.assertTrue(true);
-		} else
-			System.out.println("Submit button maybe enabled");
-	}
+	@And("^the user is displayed with an error message that he is not authorized$")
+	public void errormessagedisplayed_unauthorized() throws InterruptedException {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		oneTimePaymentPage.validateErrorMessageUnauthorized();
+			}
 
 	@And("^the user confirms the AutoPay Disabled for Memauth$")
 	public void confirms_payment_DisableButton() throws InterruptedException {
@@ -562,13 +559,14 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user moves to Go to Payment History Page button$")
-	public void Go_toPayment_History_page() throws InterruptedException {
-		ConfirmOneTimePaymentPage oneTimePaymentSuccessPageScroll = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
-		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.ScrollDownToBackButton();
-		if (paymentHistoryPage != null) {
+	public void Go_toPayment_History_page()  {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		PaymentHistoryPage paymentHistoryPage = confirmOneTimePaymentPage.ScrollDownToBackButton();
+			
+			if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-			System.out.println("user has reached back");
+			System.out.println("User is on Payment History Page");
 		}
 	}
 
@@ -1456,6 +1454,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 		OneTimePaymentPage oneTimePaymentPage=null;
 		if(null !=paymentHistoryPage){
+			
 			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePayment();
 		}
 
@@ -1494,7 +1493,7 @@ public class OneTimePaymentAarpStepDefintion {
 		PaymentsFormPage paymentsFormPage = oneTimePaymentPage.clickOnContuineButton();
 		if (paymentsFormPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
-			System.out.println("User is on UPG Credit cards page");
+			System.out.println("User is on One time EFT Payment Form Page");
 
 		}
 	}
@@ -1695,7 +1694,7 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnMakeOneTime(memberAttributesMap);
 		if (oneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
-			System.out.println("User is on Review one Time payment for Checking account");
+			System.out.println("User is on Review payment page for Checking account");
 		}
 
 	}
@@ -1810,6 +1809,7 @@ public class OneTimePaymentAarpStepDefintion {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
 		confirmOneTimePaymentPage.OneTimeEFTverification();
+		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 		
 
 	}
@@ -2208,4 +2208,37 @@ public class OneTimePaymentAarpStepDefintion {
 		paymentHistoryPage.validatePDFDownloadLink();
 	}
 	// ^^^ note: added for F247601 Payment History SHIP testing	
+	
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	
+	@And("^the error is displayed on review payment page for second payment$")
+	public void error_displayed_second_payment() throws InterruptedException {
+
+		Thread.sleep(2000);
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+
+		oneTimePaymentPage.errorForSecondPayment();
+
+		
+	}
 }
