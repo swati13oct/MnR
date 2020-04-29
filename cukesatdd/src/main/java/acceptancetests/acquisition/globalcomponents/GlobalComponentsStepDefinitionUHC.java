@@ -369,17 +369,17 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	public void the_user_validates_SAM_Call_Icon_uhc() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamAcq();
-		aquisitionhomepage.validateCallSamContentAcq();
-		aquisitionhomepage.validateCallpopupAcq();
+		aquisitionhomepage.validateCallSam();
+		aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallpopup();
 	}
 
 	@Then("^the user validates SAM re-active Chat on UHC site$")
 	public void the_user_validates_SAM_re_active_Chat_uhc() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSamAcq();
-		aquisitionhomepage.validateChatSamContentAcq();
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateChatSamContent();
 		aquisitionhomepage.validateChatpopup();
 
 	}
