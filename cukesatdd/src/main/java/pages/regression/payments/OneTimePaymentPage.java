@@ -132,7 +132,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//h2[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 	
-	@FindBy(xpath = "//button[text()='Edit Payment Information']")
+	@FindBy(xpath = "(//button[text()='Edit Payment Information'])[2]")
 	private WebElement EditPaymentInformation;
 	
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
@@ -618,7 +618,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
 		TestHarness.checkForIPerceptionModel(driver);
-		validate(EditPaymentInformation);
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
@@ -636,7 +636,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		String title = driver.getTitle();
-		System.out.println("Title of the page is "+title);
+		System.out.println("Current title of the page is "+title);
 		
 		if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
 			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
@@ -656,18 +656,20 @@ public class OneTimePaymentPage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		jsClickNew(AgreeCheckBox);
 		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Contuine button");
+		System.out.println("Clicked on Authorize Payments button");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
 			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
 			return null;
 		}
 	}

@@ -22,6 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.footer.FooterPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
@@ -392,6 +393,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
+	private WebElement ShipTab;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Prescription Drug Plan')]")
+	private WebElement FedTab;
+	
+	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
+	private WebElement PayDate;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -968,8 +978,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	public OneTimePaymentPage clickOnMakeOneTimePayment() throws Exception {
 		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 		TestHarness.checkForIPerceptionModel(driver);
-		TestHarness.checkForIPerceptionModel(driver);
-		MakeOneTimepaymentButton.click();
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButton.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
 		System.out.println("User clicked on Make one time payment");
 		if (validate(OtherAmountButton)) {
 			System.out.println("Other amount radio button was visible");
@@ -1041,21 +1056,16 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 
 	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
-		Thread.sleep(20000);
-		waitforElement(SetUpRecurringPaymentsButtonShip);
+		
+		CommonUtility.waitForPageLoad(driver, SetUpRecurringPaymentsButtonShip, 20);
 		SetUpRecurringPaymentsButtonShip.click();
-		System.out.println("User clicked on Setup Recurring Paymets Button");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.out.println(driver.getCurrentUrl());
-			e.printStackTrace();
-		}
+		System.out.println("User clicked on Setup Recurring Payment Button");
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Set Up Recurring Payments")) {
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
 		} else {
-			System.out.println("Update Set Up Recurring Payments not displayed for ship");
+			System.out.println("Set Up Recurring Payments page not displayed for ship");
 			return null;
 		}
 	}
@@ -1685,7 +1695,34 @@ public class PaymentHistoryPage extends UhcDriver {
 		validateNew(paymentHistoryApp);
 		validateNew(oneTimePaymentBtn);
 	}
-	
-	
-	
-}
+
+			public PaymentHistoryPage navigateToSHIPTab() {
+			TestHarness.checkForIPerceptionModel(driver);
+			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+			System.out.println("Now clicking on SHIP Tab");
+			ShipTab.click();
+			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+			CommonUtility.checkPageIsReadyNew(driver);
+			
+			if (PayDate.getText().contains("Paid through Date")) {
+				System.out.println("ShipTab with amount displayed");
+				return new PaymentHistoryPage(driver);
+			} else {
+				System.out.println("Ship tab issue");
+				return null;
+			}
+		}
+
+			public PaymentHistoryPage navigateToFedTab() {
+			TestHarness.checkForIPerceptionModel(driver);
+			CommonUtility.waitForPageLoad(driver, FedTab, 20);
+			System.out.println("Now clicking on Federal Plan Tab");
+			FedTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);	
+			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+			return new PaymentHistoryPage(driver);
+			
+		}
+		
+		
+	}
