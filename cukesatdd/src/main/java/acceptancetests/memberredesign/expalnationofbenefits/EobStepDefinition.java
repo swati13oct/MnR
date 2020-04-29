@@ -390,11 +390,7 @@ public class EobStepDefinition {
 
 	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")
 	public void validate_sspContent() {
-		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		WebDriver d=claimsSummPg.driver;
-		boolean doBasicPgValidation=false;
-		EOBPage eobPage =  new EOBPage(d, doBasicPgValidation);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if(memberType.contains("GROUP"))
 			Assert.assertTrue("PROBLEM - SSP Group user should be able to see the EOB sub tab on top menu for Claims option", eobPage.findEobOptionUnderClaims()); 

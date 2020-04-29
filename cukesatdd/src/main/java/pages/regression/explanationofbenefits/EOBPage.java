@@ -81,6 +81,7 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validatePhipContent() {
+		CommonUtility.waitForPageLoad(driver, phipError, 5);
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for PHIP user", eobValidate(phipError));
 		String expText="You can view your AARP Personal Health Insurance Plan Explanation of Benefits information by logging in to Myuhc.com.";

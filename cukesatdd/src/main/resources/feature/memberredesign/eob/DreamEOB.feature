@@ -7,7 +7,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
 
   @dreamEob01 @E2E @regressionMember 
-  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify DREAM EOB page content and PDFs
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
