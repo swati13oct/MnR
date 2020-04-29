@@ -1,4 +1,4 @@
-@accountProfileProfile @thePredators 
+@accountProfileProfile @thePredators @F402311 
 Feature: 1.02 Member Profile page
 
   Background: If run on stage then feature security flag needs to be true

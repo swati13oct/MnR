@@ -438,6 +438,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
 
+	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
+	protected WebElement dashboardCovideModalDismissLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1101,6 +1104,22 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
+		
+	CommonUtility.checkPageIsReadyNew(driver);	
+	 try {
+		 System.out.println("Now checking if Dashboard page Covid modal appeared");
+         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
+    
+  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
+  				  {
+  			  System.out.println("Dashboard covid modal window was displayed");
+  			  dashboardCovideModalDismissLink.click();
+  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
+  				  }
+  		         		  
+		} catch (Exception e) {
+			System.out.println("Dashboard covid modal window was not displayed");
+		}
 		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
 		
 		try {
@@ -1562,19 +1581,19 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.contains("team-a")
-				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
+		if (MRScenario.environment.equalsIgnoreCase("team-h")
+				|| MRScenario.environment.equalsIgnoreCase("test-a")
+				|| MRScenario.environment.contains("team-a")
+				|| (MRScenario.environment.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
-			System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("offline")) {
+			System.out.println("user is on '" + MRScenario.environment + "' login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if (MRScenario.isTestHarness != null && MRScenario.isTestHarness.equals("YES")) {

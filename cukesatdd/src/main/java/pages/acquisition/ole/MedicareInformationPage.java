@@ -6,7 +6,7 @@ package pages.acquisition.ole;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -105,10 +105,10 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "emailConfirmationYes")
 	private WebElement emailConfirmationYesBtn;
 	
-	@FindBy(xpath = "//*[@id='partAEffectiveDate' or @id='partAdate']")
+	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
 	private WebElement partAStartDateField;
 	
-	@FindBy(xpath = "//*[@id='partBEffectiveDate' or @id='partBdate']")
+	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
 	private WebElement partBStartDateField;
 	
 	@FindBy(id = "view-learn-enrollment")
@@ -135,6 +135,120 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'Are you enrolled in your state Medicaid program?')]")
 	private WebElement Preliminary_Questions;
 	
+	@FindBy(xpath = "//*[contains(text(), 'Are you enrolled in your state Medicaid program?')]")
+	private WebElement MedicaidQuestion;
+	
+	@FindBy(id = "hasMedicaidEnrolleeNo")
+	private WebElement medicaiddno;
+	
+	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who are NOT enrolled in Medicaid.')]")
+	private WebElement MedicaidErrorText;
+
+	@FindBy(id = "hasMedicaidEnrollee")
+	private WebElement MedicaidError;
+	
+	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who have End-Stage Renal Disease.')]")
+	private WebElement esrdErrorText;
+
+	@FindBy(id = "hasEndStateRenalDisease")
+	private WebElement esrdError;
+
+	//ESRD Question
+	
+	@FindBy(xpath = "//*[contains(text(), 'Do you have End-Stage Renal Disease (ESRD)?')]")
+	private WebElement ESRDQuestion;
+
+	@FindBy(id = "hasEndStateRenalDiseaseYes")
+	private WebElement esrdYes;
+
+	@FindBy(id = "hasEndStateRenalDiseaseNo")
+	private WebElement esrdNo;
+	
+	@FindBy(id = "hasMedicaidEnrolleeYes")
+	private WebElement medicaiddyes;
+	
+	@FindBy(xpath = "//*[@for='disclosureHealth']")
+	private WebElement disclosureBox;
+	
+	@FindBy(id = "medicaidNumber0")
+	private WebElement medicaidnumTxtBx;
+	
+	@FindBy(xpath = "//*[contains(@class, 'subques-err-msg req')]")
+	private WebElement MedicaidRequired_ErrorMessage;
+
+	@FindBy(id = "ole-force-cancel-button")
+	private WebElement CancelButton;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Do you have other insurance that will cover your prescription drugs in addition')]")
+	private WebElement PDP_Question;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
+	private WebElement OtherIns_Question;
+	
+	@FindBy(id = "hasLongTermCareFacilityYes")
+	private WebElement LongTerm_Question_Yes;
+	
+	@FindBy(id = "hasPrescriptionDrugCoverageYes")
+	private WebElement PDPQuestion_Yes;
+	
+	//=============================================================================	
+	
+		// Diabetes questions
+		
+		@FindBy(id = "diabetes")
+		private WebElement diabetesQuestion1;
+		
+		@FindBy(xpath="//*[contains(@for,'diabetesQuestionYes')]")
+		private WebElement diabetesQuestions1Yes;
+		
+		@FindBy(xpath="//*[contains(@for,'oralMedicationQuestionNo')]")
+		private WebElement diabetesQuestions2No;
+		
+		
+		
+	//===============================================================================	
+
+		// chronicHeartFailure Questions
+		
+		@FindBy(id = "chronicHeartFailure")
+		private WebElement chronicHeartFailureQuestion1;
+		
+		@FindBy(xpath="//*[contains(@for,'chronicHeartFailureQuestionNo')]")
+		private WebElement chronicHeartFailureQuestion1No;
+		
+		@FindBy(xpath="//*[contains(@for,'shortnessOfBreathQuestionNo')]")
+		private WebElement chronicHeartFailureQuestion2No;
+		
+		@FindBy(xpath="//*[contains(@for,'counseledEducationQuestionNo')]")
+		private WebElement chronicHeartFailureQuestion3No;
+		
+	//==================================================================================
+		
+		//Cardiovascular Disorders
+		
+		
+		
+		@FindBy(id = "thromboembolicdisorder")
+		private WebElement CardiovascularDisordersQuestion1;
+		
+		@FindBy(xpath="//*[contains(@for,'thromboembolicdisorderQuestionNo')]")
+		private WebElement CardiovascularDisordersQ1No;
+		
+		@FindBy(xpath="//*[contains(@for,'heartattackQuestionNo')]")
+		private WebElement CardiovascularDisordersQ2No;
+		
+		@FindBy(xpath="//*[contains(@for,'medicalattentionQuestionNo')]")
+		private WebElement CardiovascularDisordersQ3No;
+		
+		@FindBy(xpath="//*[contains(@for,'ClopidogrelQuestionNo')]")
+		private WebElement CardiovascularDisordersQ4No;
+		
+		@FindBy(xpath="//*[contains(@for,'defibrillatorQuestionNo')]")
+		private WebElement CardiovascularDisordersQ5No;
+		
+		@FindBy(xpath="//*[contains(@for,'heartorlegsQuestionNo')]")
+		private WebElement CardiovascularDisordersQ6No;
+	
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
@@ -151,22 +265,10 @@ public class MedicareInformationPage extends UhcDriver{
 		//validateNew(SelectCardB);
 	}
 
-	/*public boolean validate_required_fields() {
+	public boolean validate_required_fields() {
 		boolean flag = true;
 		
-		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
-			if(validateNonPresenceOfElement(firstNameField)&& validateNonPresenceOfElement(lastNameField) && validateNonPresenceOfElement(claimNumberField)
-					&& validateNonPresenceOfElement(partAStartDateField)&& validateNonPresenceOfElement(partBStartDateField)){
-				System.out.println("Medicare Information Fields are not Displayed when Card Type is not selected");
-				flag= true;
-			}
-			else{
-				System.out.println("Validation for Required Medicare Card Type Selection failed ");
-				flag= false;
-			}
-		}
-		SelectCardA.click();
-		if(validateNew(firstNameField)&& validateNew(lastNameField) && validateNew(claimNumberField)
+		if(validateNew(claimNumberField)
 				&& validateNew(partAStartDateField)&& validateNew(partBStartDateField)){
 			
 			System.out.println("Medicare Information Fields are Displayed when Card Type is selected");
@@ -175,11 +277,11 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		
 		return flag;
-	} */
+	} 
 
 	public boolean enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
-		String FirstName = MedicareDetailsMap.get("First Name");
-		String LastName = MedicareDetailsMap.get("Last Name");
+		//String FirstName = MedicareDetailsMap.get("First Name");
+		//String LastName = MedicareDetailsMap.get("Last Name");
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
@@ -214,8 +316,8 @@ public class MedicareInformationPage extends UhcDriver{
 				//return null;
 			}
 		} */
-		sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
+	//	sendkeysNew(firstNameField, FirstName);
+		//sendkeysNew(lastNameField, LastName);
 		sendkeysNew(claimNumberField, MedicareNumber);
 
 
@@ -493,6 +595,229 @@ public boolean validate_alreadyEnrolled_ErrorMessage() {
 	}
 	return false;
 }
+
+public boolean validate_Required_Fields(String planType, String medicaidNumber, String planName) {
+	System.out.println("PlanType : "+planType+" Medicare Number : "+medicaidNumber);
+	boolean validation_Flag = true;
+	//ESRD question validation for MA and DSNP
+	if (planType.contains("MA")|| planType.contains("SNP")){
+		if(validate(ESRDQuestion)){
+			System.out.println("ESRD question is displayed for MA/DSNP plans in Preliminary Questions Page");
+			esrdYes.click();
+			System.out.println("ESRD question : YES clicked"+esrdYes.isSelected());
+			if(validate(esrdError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
+				System.out.println("ESRD error and Cancel Enrollment button are displayed for MA/DSNP plans, YES answer to ESRD question");
+				validation_Flag = true;
+				esrdNo.click();
+				System.out.println("ESRD question : No clicked"+esrdNo.isSelected());
+				if(validateNonPresenceOfElement(esrdError) && validateNonPresenceOfElement(CancelButton) && validate(NextBtn)){
+					System.out.println("ESRD error and Cancel Enrollment button are NOT displayed for NO answer to ESRD question");
+					validation_Flag = true;
+				}
+				else{
+					System.out.println("ESRD error and Cancel Enrollment button are displayed for NO answer to ESRD question");
+					validation_Flag = false;
+				}
+			}
+			else{
+				System.out.println("ESRD required validation failed for MA/DSNP in PreliminaryPage");
+				validation_Flag = false;
+			}
+		}
+		else{
+			System.out.println("ESRD question is NOT displayed for MA/DSNP plans in Preliminary Questions Page");
+			validation_Flag = false;
+		}
+	}
+	else{
+		if(validateNonPresenceOfElement(ESRDQuestion)){
+			System.out.println("ESRD question is not displayed for PDP Plan Type");
+			validation_Flag = true;
+		}
+		else{
+			System.out.println("ESRD question is displayed for PDP Plan Type : Validation Failed");
+			validation_Flag = false;
+		}
+	}
+		
+	System.out.println("ESRD question Validation Status for "+planType+" : "+validation_Flag);
+	boolean Medicaid_Validation = true;
+	//Medicaid Question validation for DSNP only
+	if(planName.contains("D-SNP")){
+		System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
+		medicaiddno.click();
+		System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+		if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
+			System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
+			//validation_Flag = (validation_Flag==false)?false:true;
+			medicaiddyes.click();
+			System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
+			NextBtn.click();
+			
+			if(validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)){
+				System.out.println("Medicaid Number Required : Error Message is Disabled");
+				Medicaid_Validation = true;
+				medicaidnumTxtBx.sendKeys(medicaidNumber);
+				System.out.println("Medicare Number is enetered : "+medicaidNumber);
+				if(validateNonPresenceOfElement(RequiredField_ErrorMessage)&& validateNonPresenceOfElement(MedicaidRequired_ErrorMessage))
+				{
+					System.out.println("Error Message is not Displayed when Medicaid Number is entered");
+					Medicaid_Validation = true;
+				}
+			}
+			else{
+				System.out.println("Medicaid Number Required FAILED : Error Message is NOT Disabled");
+				Medicaid_Validation = false;
+			}
+		}else{
+			System.out.println("Medicaid required validation failed for DSNP in Medicare Information Page");
+			Medicaid_Validation = false;
+		}
+		System.out.println("Medicaid question Validation Status for "+planType+" : "+Medicaid_Validation);
+		validation_Flag = (validation_Flag==false || Medicaid_Validation==false)?false:true;
+	}
+	else{
+		if(validate(MedicaidQuestion) && NextBtn.isEnabled()){
+			System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
+			medicaiddno.click();
+			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("Next Button is enabled when Medicaid question Answered NO");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}else{
+				System.out.println("non DSNP - Medicare Question 'No' : validation failed");
+				Medicaid_Validation = false;
+			}
+			medicaiddyes.click();
+			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("non DSNP - Medicare Number not required");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}
+			else{
+				System.out.println("non DSNP - Medicare Number not required : validation failed");
+				Medicaid_Validation = false;
+			}
+		}
+	}
+		validation_Flag = (validation_Flag==false)?false:true;
+		System.out.println("Validation Status for Preliminary Question Page for Plan Type - "+planType+" : "+validation_Flag);
+		
+		return validation_Flag;
+	
+}
+public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
+	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
+	
+			if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
+				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
+				medicaiddno.click();
+				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+				
+					//Diabetes questions
+					Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
+					validateNew(diabetesQuestions1Yes);
+					jsClickNew(diabetesQuestions1Yes);
+					validateNew(diabetesQuestions2No);
+					jsClickNew(diabetesQuestions2No);
+					Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
+					validateNew(chronicHeartFailureQuestion1No);
+					jsClickNew(chronicHeartFailureQuestion1No);	
+					validateNew(chronicHeartFailureQuestion2No);
+					jsClickNew(chronicHeartFailureQuestion2No);	
+					validateNew(chronicHeartFailureQuestion3No);
+					jsClickNew(chronicHeartFailureQuestion3No);	
+					Assert.assertTrue(validateNew(CardiovascularDisordersQuestion1), "Cardiovascular Disorders Question are present");
+					validateNew(CardiovascularDisordersQ1No);
+					jsClickNew(CardiovascularDisordersQ1No);	
+					validateNew(CardiovascularDisordersQ2No);
+					jsClickNew(CardiovascularDisordersQ2No);	
+					validateNew(CardiovascularDisordersQ3No);
+					jsClickNew(CardiovascularDisordersQ3No);
+					validateNew(CardiovascularDisordersQ4No);
+					jsClickNew(CardiovascularDisordersQ4No);	
+					validateNew(CardiovascularDisordersQ5No);
+					jsClickNew(CardiovascularDisordersQ5No);
+					validateNew(CardiovascularDisordersQ6No);
+					jsClickNew(CardiovascularDisordersQ6No);
+
+					
+				//	waitforElement(disclosureBox);
+					return true;
+		            
+	    }else if(PlanName.contains("Silver")){
+			System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
+			medicaiddno.click();
+			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+			
+				//Diabetes questions
+				Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
+				validateNew(diabetesQuestions1Yes);
+				jsClickNew(diabetesQuestions1Yes);
+				validateNew(diabetesQuestions2No);
+				jsClickNew(diabetesQuestions2No);
+				Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
+				validateNew(chronicHeartFailureQuestion1No);
+				jsClickNew(chronicHeartFailureQuestion1No);	
+				validateNew(chronicHeartFailureQuestion2No);
+				jsClickNew(chronicHeartFailureQuestion2No);	
+				validateNew(chronicHeartFailureQuestion3No);
+				jsClickNew(chronicHeartFailureQuestion3No);				
+			//	waitforElement(disclosureBox);
+				return true;
+	    }
+	
+			else return false;	
+	
+	
+}
+
+public boolean validate_CoverageInfo_Questions_for_planType(String planType) {
+	boolean Validation_Flag = true;
+	System.out.println("PlanType : "+planType);
+	
+	//&& validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question) removed as it does not appear in UI
+	if(planType.contentEquals("PDP")){
+		if(validate(PDP_Question)){
+			System.out.println("Coverage and Health Information Validation for PDP plan : Validation Passed");
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("Coverage and Health Information Validation for PDP plan : Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	// validate(LongTerm_Question) was removed from next else statement. As it does not display in UI
+	else{
+		if(validateNew(PDP_Question)&& validateNew(OtherIns_Question)){
+			System.out.println("Coverage and Health Information Validation for "+planType+" plan : Validation Passed");
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("Coverage and Health Information Validation for "+planType+" plan : Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	return Validation_Flag;
+}
+
+public boolean answer_following_questions(Map<String, String> questionMap) {
+	String PDPquestionFlag = questionMap.get("PDP Question");
+	String LongTermQuestionFlag = questionMap.get("LongTerm Question");
+
+	if(PDPquestionFlag.equalsIgnoreCase("yes")){
+		PDPQuestion_Yes.click();
+	}
+	if(LongTermQuestionFlag.equalsIgnoreCase("yes")){
+		LongTerm_Question_Yes.click();
+	}
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+		return true;
+	}
+	return false;
+}
+
 
 /**
 * Generate a random number of given length
