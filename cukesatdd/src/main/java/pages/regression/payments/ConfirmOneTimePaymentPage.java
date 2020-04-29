@@ -312,9 +312,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		System.out.println("Checking thankyou");
+		System.out.println("Checking thankyou message on page");
 		validate(thankyouText);
-		System.out.println("Checked thankyou");
+		System.out.println("Checked thankyou message on page");
 	}
 
 }

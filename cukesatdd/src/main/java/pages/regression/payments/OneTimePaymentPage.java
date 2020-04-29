@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.google.common.base.Strings;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.regression.testharness.TestHarness;
 
@@ -142,6 +143,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	@FindBy(xpath = "/html/body/div[2]/div/main/div[2]/div[3]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[3]/div/p")
 	private WebElement moreThanonePaymentError;
+	
+	@FindBy(id = "memAuthPaymentSubmitError")
+	private WebElement csrUnauthorizedErrorMessage;
 	
 	
 	public OneTimePaymentPage(WebDriver driver) {
@@ -623,11 +627,14 @@ public class OneTimePaymentPage extends UhcDriver {
 		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Submit button on Review Payment page");
 		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.out.println(driver.getCurrentUrl());
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is  "+driver.getCurrentUrl());
+			} catch (InterruptedException e) {
+			System.out.println("Catch block URL is "+driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		String title = driver.getTitle();
 		System.out.println("Title of the page is "+title);
 		
@@ -678,6 +685,19 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	}
 
+	public void validateErrorMessageUnauthorized() {
+		String errorMessage= csrUnauthorizedErrorMessage.getText();
+		if (errorMessage.contains("You not authorised to submit the information and proceed to the next page")) 
+		{
+			System.out.println("Error message displayed on the page is "+errorMessage);
+			System.out.println("Correct error message is displayed on the page, Test Passed");
+			
+		} else {
+			Assert.fail();
+		}
+
+	}
+	
 	@Override
 	public void openAndValidate() {
 		validate(routingNumberField);
