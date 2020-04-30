@@ -88,7 +88,7 @@ public class EOBPage extends EOBBase{
 		String actText=phipError.getText();
 		Assert.assertTrue("PROBLEM - unable to locate the expected error message for PHIP user.  "
 				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
-				actText.contains(expText));
+				actText.toLowerCase().contains(expText.toLowerCase()));
 	}
 
 	public void validateHeaderSectionContent(String planType) {
@@ -323,13 +323,13 @@ public class EOBPage extends EOBBase{
 	 * @param targetEobType
 	 * @return
 	 */
-	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange, String targetEobType){
+	public HashMap<String,Integer> selectDateRange(String planType, String memberType, String targetDateRange, String targetEobType){
 		int maxRetry=3;
 		int count=0;
 		
 		while (count < maxRetry) {
 			System.out.println("Proceed to do search range - try# "+count);
-			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 			Select dateRangeOptions = new Select(eobDateRangeDropdown);
 			dateRangeOptions.selectByVisibleText(targetDateRange);
 			CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
@@ -385,20 +385,25 @@ public class EOBPage extends EOBBase{
 			}
 			waitForEobPageToLoad(15, 5);
 			//note: for the case either spinner still spining or getting internal server error, try again before aborting test
-			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError) || !eobValidate(eobCount)) {
+			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError) || eobValidate(internalServerError2)|| !eobValidate(eobCount)) {
 				count=count+1;
 				if (count < maxRetry) {
 					System.out.println("Going to refresh the page and retry the search again before giving up...");
 					driver.navigate().refresh();
+					if (memberType.contains("COMBO")) 
+						goToSpecificComboTab(planType);
 					CommonUtility.checkPageIsReady(driver);
 					selectEobType(planType, targetEobType);
-				} else
-					Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue, abort test now", false);
+				} else {
+					if (eobValidate(internalServerError) || eobValidate(internalServerError2)) 
+						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and getting internal system error, abort test now", false);
+					else 
+						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue or internal system error, abort test now", false);
+				}
 			} else {
 				System.out.println("TEST - EOB finished loading, moving on to next step...");
 				break;
 			}
-
 		}
 		Assert.assertTrue("PROBLEM - getting internal server problem (already retried the search '"+count+"' times and still getting server problem error)", !eobValidate(internalServerError));
 		sleepBySec(3);
