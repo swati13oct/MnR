@@ -92,3 +92,10 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
       | index | planType | memberType        | note                              | flagZeroEob |
       | 09    | PDP      | LIS_PDP_SSP_COMBO_EOB | old D                         | false       |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| old D                             | false       |
+
+    @dreamEob01f
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
+      | 11    | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
+      | 12    | MAPD     | ES_D_NICE_EOBB    | 1 new D spanish, old M            | true        |
+      
