@@ -10,7 +10,14 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
+       #New Changes
+     When user Click on Is my Provider covered link ums
+      | PlanName | <planName> |
+    When user selects a provider and retuns to VPP page in ums
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+      | PlanName | <planName> |  
+     
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
 #    Then the user validates TFN in Welcome OLE Right Rail
