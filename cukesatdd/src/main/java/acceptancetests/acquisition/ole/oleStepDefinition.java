@@ -906,10 +906,10 @@ public class oleStepDefinition {
 		 */
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-			//String plantype = PreliminaryFlagsMap.get("plan_type");
-
+			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			
 			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber);
+			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber,planName);
 			if(Validation_Status){
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);

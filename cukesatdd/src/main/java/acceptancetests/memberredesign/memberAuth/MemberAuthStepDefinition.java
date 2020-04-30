@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -324,6 +325,21 @@ public class MemberAuthStepDefinition{
 			Assert.fail();
 		}
 	}
+	
+	@And("^memberauth user navigates to Payment Overview Page$")
+	public void memberauth_user_navigatesto_paymentoverview() throws InterruptedException{
+		AccountHomePage accountHomePage;
+		accountHomePage = (AccountHomePage) getLoginScenario()
+							.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+					PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+					if (paymentHistoryPage != null) {
+						getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+						System.out.println("User is on Payment overview screen");
+					}
+		
+	}
+	
+	
 	@Then ("^the user click on EOB link and navigates to EOB page$")
 	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
