@@ -192,32 +192,15 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@When("^the user navigates to Combo payment history page$")
-	public void Combo_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		}
-
-	}
-
+	
 	@When("^the user navigates to Ship tab and validates the amount$")
 	public void ship_tab_amount_validation() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ComboTab);
-		AHPage = AHPage.navigateToSHIPTab();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		} else {
-			System.out.println("Unable to navegate to Ship tab");
-		}
-
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToSHIPTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
 	}
 
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
@@ -1991,7 +1974,6 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap);
 		if (oneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
-			System.out.println("User is on Review Automatic payment for EFT");
 		}
 
 	}
@@ -2239,6 +2221,18 @@ public class OneTimePaymentAarpStepDefintion {
 
 		oneTimePaymentPage.errorForSecondPayment();
 
+	
 		
 	}
+	
+	@When("^user clicks on Federal Plan Tab$")
+	public void userClicksOnFederalPlanTab() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToFedTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
+	}
+	
 }
