@@ -10,7 +10,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
 #    Then the user validates TFN in Welcome OLE Right Rail
