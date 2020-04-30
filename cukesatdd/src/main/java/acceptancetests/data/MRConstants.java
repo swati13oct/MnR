@@ -389,6 +389,15 @@ public class MRConstants {
   public static final String MICROAPP_URL="https://www."+MRScenario.environment+"test-medicare.ocp-elr-core-nonprod.optum.com/";
   
   public static final String OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP="https://www."+MRScenario.environment+"test-mymedicareaccount.ocp-elr-core-nonprod.optum.com/content/medicare/login/memberRedesign.html?testharness=true";
+
+ public static final String STAGE_DEEPLINK_URL_payments = "https://stage-medicare.uhc.com/?TARGET=SMSR/medicare/member/payments/overview.html%3fdeeplink=true";
+  public static final String STAGE_DEEPLINK_URL_claims = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true";
+  public static final String STAGE_DEEPLINK_URL_eob = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/eob.html%3fdeeplink=true";
+  public static final String STAGE_DEEPLINK_URL_accountProfile = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/account/profile.html%3fdeeplink=true";
+  public static final String STAGE_DEEPLINK_URL_coverageandBenefit = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true"; 
+  public static final String STAGE_DEEPLINK_URL_health_and_wellness = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/health-and-wellness.html%3fdeeplink=true";
+  public static final String STAGE_DEEPLINK_URL_my_Documents = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/documents/overview.html%3fdeeplink=true";
+
  }
 
 	    

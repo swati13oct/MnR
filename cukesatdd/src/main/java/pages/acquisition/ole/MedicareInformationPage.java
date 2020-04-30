@@ -596,7 +596,7 @@ public boolean validate_alreadyEnrolled_ErrorMessage() {
 	return false;
 }
 
-public boolean validate_Required_Fields(String planType, String medicaidNumber) {
+public boolean validate_Required_Fields(String planType, String medicaidNumber, String planName) {
 	System.out.println("PlanType : "+planType+" Medicare Number : "+medicaidNumber);
 	boolean validation_Flag = true;
 	//ESRD question validation for MA and DSNP
@@ -639,57 +639,67 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber) 
 			validation_Flag = false;
 		}
 	}
-		/*
-		 * System.out.println("ESRD question Validation Status for "+planType+" : "
-		 * +validation_Flag); boolean Medicaid_Validation = true; //Medicaid Question
-		 * validation for DSNP only if(planType.equals("SNP")){
-		 * System.out.println("Medicaid Question is displayed for "+planType+" : "
-		 * +validate(MedicaidQuestion)); medicaiddno.click();
-		 * System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected())
-		 * ; if(validate(MedicaidError) && validate(CancelButton) &&
-		 * validateNonPresenceOfElement(NextBtn)){ System.out.
-		 * println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question"
-		 * ); //validation_Flag = (validation_Flag==false)?false:true;
-		 * medicaiddyes.click();
-		 * System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected(
-		 * )); NextBtn.click(); if(validate(RequiredField_ErrorMessage) &&
-		 * validate(MedicaidRequired_ErrorMessage)){
-		 * System.out.println("Medicaid Number Required : Error Message is Disabled");
-		 * Medicaid_Validation = true; medicaidnumTxtBx.sendKeys(medicaidNumber);
-		 * System.out.println("Medicare Number is enetered : "+medicaidNumber);
-		 * if(validateNonPresenceOfElement(RequiredField_ErrorMessage)&&
-		 * validateNonPresenceOfElement(MedicaidRequired_ErrorMessage)) { System.out.
-		 * println("Error Message is not Displayed when Medicaid Number is entered");
-		 * Medicaid_Validation = true; } } else{ System.out.
-		 * println("Medicaid Number Required FAILED : Error Message is NOT Disabled");
-		 * Medicaid_Validation = false; } } else{ System.out.
-		 * println("Medicaid required validation failed for DSNP in PreliminaryPage");
-		 * Medicaid_Validation = false; }
-		 * System.out.println("Medicaid question Validation Status for "+planType+" : "
-		 * +Medicaid_Validation); validation_Flag = (validation_Flag==false ||
-		 * Medicaid_Validation==false)?false:true; } else{ if(validate(MedicaidQuestion)
-		 * && NextBtn.isEnabled()){ System.out.
-		 * println("Medicaid Number question is not required for non-DSNP : validation pass"
-		 * ); medicaiddno.click();
-		 * System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected())
-		 * ; if(validateNonPresenceOfElement(MedicaidError) &&
-		 * validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
-		 * System.out.
-		 * println("Next Button is enabled when Medicaid question Answered NO");
-		 * Medicaid_Validation = (!Medicaid_Validation)?false:true; } else{
-		 * System.out.println("non DSNP - Medicare Question 'No' : validation failed");
-		 * Medicaid_Validation = false; } medicaiddyes.click();
-		 * System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected(
-		 * )); if(validateNonPresenceOfElement(MedicaidError) &&
-		 * validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
-		 * System.out.println("non DSNP - Medicare Number not required");
-		 * Medicaid_Validation = (!Medicaid_Validation)?false:true; } else{ System.out.
-		 * println("non DSNP - Medicare Number not required : validation failed");
-		 * Medicaid_Validation = false; } }
-		 * 
-		 * }
-		 */
-
+		
+	System.out.println("ESRD question Validation Status for "+planType+" : "+validation_Flag);
+	boolean Medicaid_Validation = true;
+	//Medicaid Question validation for DSNP only
+	if(planName.contains("D-SNP")){
+		System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
+		medicaiddno.click();
+		System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+		if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
+			System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
+			//validation_Flag = (validation_Flag==false)?false:true;
+			medicaiddyes.click();
+			System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
+			NextBtn.click();
+			
+			if(validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)){
+				System.out.println("Medicaid Number Required : Error Message is Disabled");
+				Medicaid_Validation = true;
+				medicaidnumTxtBx.sendKeys(medicaidNumber);
+				System.out.println("Medicare Number is enetered : "+medicaidNumber);
+				if(validateNonPresenceOfElement(RequiredField_ErrorMessage)&& validateNonPresenceOfElement(MedicaidRequired_ErrorMessage))
+				{
+					System.out.println("Error Message is not Displayed when Medicaid Number is entered");
+					Medicaid_Validation = true;
+				}
+			}
+			else{
+				System.out.println("Medicaid Number Required FAILED : Error Message is NOT Disabled");
+				Medicaid_Validation = false;
+			}
+		}else{
+			System.out.println("Medicaid required validation failed for DSNP in Medicare Information Page");
+			Medicaid_Validation = false;
+		}
+		System.out.println("Medicaid question Validation Status for "+planType+" : "+Medicaid_Validation);
+		validation_Flag = (validation_Flag==false || Medicaid_Validation==false)?false:true;
+	}
+	else{
+		if(validate(MedicaidQuestion) && NextBtn.isEnabled()){
+			System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
+			jsClickNew(medicaiddno);
+			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("Next Button is enabled when Medicaid question Answered NO");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}else{
+				System.out.println("non DSNP - Medicare Question 'No' : validation failed");
+				Medicaid_Validation = false;
+			}
+			jsClickNew(medicaiddyes);
+			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("non DSNP - Medicare Number not required");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}
+			else{
+				System.out.println("non DSNP - Medicare Number not required : validation failed");
+				Medicaid_Validation = false;
+			}
+		}
+	}
 		validation_Flag = (validation_Flag==false)?false:true;
 		System.out.println("Validation Status for Preliminary Question Page for Plan Type - "+planType+" : "+validation_Flag);
 		

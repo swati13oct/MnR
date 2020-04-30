@@ -703,5 +703,13 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String CAMPAIGN_TFN_PAGE = "campaigntfnpage";
 
+public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklogin";
+	public static final String STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE= "claimsdeeplinklogin";
+	public static final String STAGE_EOB_DEEPLINK_lOGIN_PAGE= "eobdeeplinklogin";
+	public static final String STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE= "accountProfiledeeplinklogin";
+	public static final String STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE="coverageandBenefits";
+	public static final String STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE="healthandwellnessdeeplinklogin";
+	public static final String STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE="myDocumentsdeeplinklogin";
+
 	
 }
