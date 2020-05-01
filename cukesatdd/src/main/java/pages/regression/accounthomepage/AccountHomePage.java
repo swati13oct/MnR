@@ -225,13 +225,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[4]")
 	private WebElement ShipPremiumPayment;
 
-	// @FindBy(id = "payment-date")
-	@FindBy(xpath = "//*[@id='menubutton']")
-	private WebElement HistoryDropdown;
-
-	@FindBy(xpath = "(//*[@id='paymentTable'])[1]")
-	private WebElement HistoryTable;
-
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
 
@@ -1306,40 +1299,6 @@ public class AccountHomePage extends UhcDriver {
 		// note: need to mouse over to select
 		System.out.println("Payment History Exists");
 		jse.executeScript("window.scrollBy(0,-1100)", "");
-
-		return new pages.regression.payments.PaymentHistoryPage(driver);
-	}
-
-	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,550)", "");
-
-		waitforElement(HistoryDropdown);
-
-		// tbd Select dateRange = new Select(HistoryDropdown);
-		// tbd dateRange.selectByVisibleText("Last 6 months");
-
-		// note: need to mouse over to select
-		Actions builder = new Actions(driver);
-		WebElement last6Month = driver.findElement(By.xpath("//*[@id='menu2']/li[2]/a"));
-		builder.moveToElement(HistoryDropdown).perform();
-		builder.click(last6Month);
-
-		Thread.sleep(6000);
-
-		try {
-			if (HistoryTable.isDisplayed()) {
-				System.out.println("Payment History Exists");
-				jse.executeScript("window.scrollBy(0,-1100)", "");
-				Thread.sleep(5000);
-			}
-		} catch (Exception e) {
-			System.out.println("History table not present for this member");
-
-		}
-
-		jse.executeScript("window.scrollBy(0,-1000)", "");
-		Thread.sleep(5000);
 
 		return new pages.regression.payments.PaymentHistoryPage(driver);
 	}

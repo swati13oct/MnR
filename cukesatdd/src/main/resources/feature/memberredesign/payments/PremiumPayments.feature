@@ -431,14 +431,14 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
   #Test Case 18
   @regressionMember
-  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Cancel Model PopUP for Recurring EFT
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down and validate that Payment History Section and scrolls up
+    And user clicks on Update Automatic payments on payment overview page
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on cancel button in Recurring EFT flow
 
     Examples: 
@@ -448,13 +448,13 @@ Feature: 1.19 Verify the premium payment flows on member portal
   #Test Case 19
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Message for Recurring EFT
-    Given login with following details logins in the member portal and validate elements
+     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down and validate that Payment History Section and scrolls up
+    And user clicks on Update Automatic payments on payment overview page
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on Authorize button to validate error message
 
     Examples: 

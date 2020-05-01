@@ -290,7 +290,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1")
 	private WebElement hcePageText;
 	
-	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
+		
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -381,7 +383,16 @@ public class TestHarness extends UhcDriver {
 		    checkForIPerceptionModel(driver);
 			PaymentPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		CommonUtility.waitForPageLoad(driver, heading, 60);		
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		if (MakeAPaymentButton.isDisplayed())
+		{
+		System.out.println("Make a payment button was displayed on Payments page");
+		}
+		else
+		{
+			Assert.fail("Make a payment button was not displayed on Payments page");
+		}
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
 		}
