@@ -1,5 +1,5 @@
 @acq_CHATCALL_UHC
-Feature: 1.13 ACQ UHC- To test SAM Icons in UHC site
+Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename>
