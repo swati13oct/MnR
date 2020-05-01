@@ -65,6 +65,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	public HsidRegistrationPersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		validateFields();
 	}
 
 	@Override
@@ -73,12 +74,12 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	}
 
 	public void validateFields() {
-		validate(firstName);
-		validate(lastName);
-		validate(dob);
-		validate(zipCode);
-		validate(memberId);
-		validate(continuebutton);
+		validateNew(firstName);
+		validateNew(lastName);
+		validateNew(dob);
+		validateNew(zipCode);
+		validateNew(memberId);
+		validateNew(continuebutton);
 	}
 
 	public void populatefields(String firstName, String lastName, String dob, String zipcode, String memberId) {
