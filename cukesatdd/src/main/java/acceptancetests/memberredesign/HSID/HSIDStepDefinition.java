@@ -318,7 +318,7 @@ public class HSIDStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
+		
 
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = (HsidRegistrationPersonalCreateAccount) loginPage
 				.doLoginWith2(userName, pwd);
@@ -816,7 +816,7 @@ public class HSIDStepDefinition {
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-			loginPage.validateelements();
+		
 
 			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
 				loginPage.validateFooter();
@@ -991,7 +991,7 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//tbd String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
-		loginPage.validateelements();
+		
 		try {
 			if (deepLinkUrl.contains("my-documents")) {
 				MyDocumentsPage	myDocumentsPage=null;

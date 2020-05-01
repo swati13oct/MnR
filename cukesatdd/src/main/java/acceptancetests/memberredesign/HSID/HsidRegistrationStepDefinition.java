@@ -45,7 +45,7 @@ public class HsidRegistrationStepDefinition {
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		System.out.println("*****the user is on medicare sign in page*****");
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
@@ -346,7 +346,7 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
+		
 
 		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
 		System.out.println("New user name is-"+userName);
@@ -417,7 +417,7 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
+		
 
 		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
 		//return the page (here the page is SaveProfilePrefrencePage & SplashPage= name i give to the  ) 
@@ -444,11 +444,11 @@ public class HsidRegistrationStepDefinition {
 		
 		
 		String password = memberAttributesMap.get("password");
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
+		
 
 		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
 		System.out.println("New user name is-"+userName);
