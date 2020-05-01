@@ -160,7 +160,7 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);
-		//validateNew(mnrSignInButton);
+		validateNew(mnrSignInButton);
 		/*
 		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
 		 * CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
