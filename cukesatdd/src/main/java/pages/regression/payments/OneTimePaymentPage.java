@@ -651,6 +651,16 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 
 	public void validateErrorMessageUnauthorized() {
+		
+		System.out.println("Scrolling to Error Message");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", csrUnauthorizedErrorMessage); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String errorMessage= csrUnauthorizedErrorMessage.getText();
 		if (errorMessage.contains("You not authorised to submit the information and proceed to the next page")) 
 		{
