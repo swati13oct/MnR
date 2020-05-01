@@ -2,11 +2,15 @@ package pages.regression.payments;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.regression.testharness.TestHarness;
 
@@ -47,6 +51,31 @@ public class PaymentsFormPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
+	
+	@FindBy(xpath = "//button[@class='btn btn--secondary cancelbutton cancel-wcag']")
+	private WebElement cancelButton;
+	
+	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
+	private WebElement cancelButtonOnModal;
+	
+	@FindBy(id = "routingNumErr")
+	private WebElement Error1;
+	
+	@FindBy(id = "confirmRoutingNumErr")
+	private WebElement Error2;
+	
+	@FindBy(id = "accountNumErr")
+	private WebElement Error3;
+	
+	@FindBy(id = "confirmAccNumErr")
+	private WebElement Error4;
+	
+	@FindBy(id = "firstNameErr")
+	private WebElement Error5;
+	
+	@FindBy(id = "lastNameErr")
+	private WebElement Error6;
+	
 
 	public PaymentsFormPage(WebDriver driver) {
 		super(driver);
@@ -235,4 +264,77 @@ public class PaymentsFormPage extends UhcDriver {
 
 	}
 
+	public PaymentHistoryPage clickonCancelButton() {		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, cancelButton, 20);
+		System.out.println("Clicking on cancel button of Update Checking Account EFT form");
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, cancelButtonOnModal, 20);
+		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form");
+		cancelButtonOnModal.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+		if (driver.getCurrentUrl().contains("payments/overview.html"))
+				{
+			System.out.println("User is on Payment Overview Page after clicking cancel");
+			return new PaymentHistoryPage(driver);
+				}
+		else {
+			System.out.println("Payment Overview Page was not displayed on clicking cancel");
+			Assert.fail("Payment Overview Page was not displayed on clicking cancel");
+		}
+		return null;
+	}
+
+	public PaymentsFormPage ErrorMessageValidation() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+		}
+		
+		System.out.println("Scrolling to Continue Button");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", ContinueButton); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Clicking on  on Continue button");
+		ContinueButton.click();
+		System.out.println("Scrolling to top of page for error messages");
+		JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+		jse3.executeScript("arguments[0].scrollIntoView()", Error1); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Text on Error1 is "+Error1.getText());
+		System.out.println("Text on Error2 is "+Error2.getText());
+		System.out.println("Text on Error3 is "+Error3.getText());
+		System.out.println("Text on Error4 is "+Error4.getText());
+		System.out.println("Text on Error5 is "+Error5.getText());
+		System.out.println("Text on Error6 is "+Error6.getText());
+		
+		if ((Error1.getText().contains("Your routing number is either missing or was entered incorrectly. Please review and re-enter your Routing number."))			
+	         && (Error2.getText().contains("The information in the Confirm routing number field is either missing or was entered incorrectly. Please review and re-enter your Routing number."))
+	         && (Error3.getText().contains("Your account number is either missing or was entered incorrectly. Please review and re-enter your account number."))
+	         && (Error4.getText().contains("The information in the Confirm account number field is either missing or was entered incorrectly. Please review and re-enter your account number."))	
+	         && (Error5.getText().contains("The account holder's first name is either missing or was entered incorrectly. Please review and re-enter your first name."))
+	         && (Error6.getText().contains("The account holder's last name is either missing or was entered incorrectly. Please review and re-enter your last name."))
+				)
+		{
+			System.out.println("The error messages were correct , test case is passed");
+			return new PaymentsFormPage(driver);
+		}
+		else
+		{
+			Assert.fail("The error messages were not correct , test case failed");
+			return null;
+		}
+	}
 }

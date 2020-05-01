@@ -203,11 +203,13 @@ public class OneTimePaymentAarpStepDefintion {
 				 
 	}
 
-	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
+	@Then("^User Scrolls down and validate that Payment History Section and scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.DashPage);
-		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUp();
+		
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user has scrolled up");
@@ -291,18 +293,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user selects the Checking account option on New page$")
-	public void click_on_Checking_account_Payment_btn() {
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CC_BUTTON);
-		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtn();
-
-		if (oneTimePayment != null) {
-			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");
-		}
-	}
-
+	
 	@And("^the user selects the Setup AutoCreditCard option on New page$")
 	public void click_on_SetupCCA_Auto_Payment_btn() {
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
@@ -343,14 +334,15 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user clicks on cancel button in Recurring EFT flow$")
 	public void click_on_Cancel_payment_btn() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPayments();
-		if (paymenthistory != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
-
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		         paymentsFormPage.clickonCancelButton();
+		
 		}
-	}
+		
+		
+	
 
 	@And("^the user clicks on cancel button on Make one time flow$")
 	public void click_on_Cancel_payment_btn_OTP_flow_new() {
@@ -366,14 +358,11 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user clicks on Authorize button to validate error message$")
 	public void click_on_Authorize_button() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		OneTimePaymentPage OverviewPage = oneTimePayment.ErrorMessageValidation();
-
-		if (OverviewPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-
-		}
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		paymentsFormPage.ErrorMessageValidation();
+		
 	}
 
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
@@ -1812,8 +1801,7 @@ public class OneTimePaymentAarpStepDefintion {
 		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPayment();
 		if (updateRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
-			System.out.println("User is on Setup Recurring Payments screen");
-		}
+			}
 	}
 
 	@Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")

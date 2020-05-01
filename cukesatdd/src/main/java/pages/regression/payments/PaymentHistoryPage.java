@@ -20,6 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.regression.accounthomepage.AccountHomePage;
@@ -271,7 +272,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']")
 	private WebElement unpaidRadio;
 
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table")
+	@FindBy(xpath = "//*[@id='paymentTable']")
 	private WebElement paymentTable;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
@@ -401,6 +402,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
+	
+	@FindBy(id = "menubutton")
+	private WebElement menubutton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -663,48 +667,16 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public PaymentHistoryPage AutoPayNew() {
 
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
-		try {
-			if (setUpAutoPayButton.isDisplayed()) {
-				setUpAutoPayButton.click();
-				System.out.println("clicked on Setup New Payment button");
-				try {
-					Thread.sleep(2000);
-					if (validate(SetUpNewPayment)) {
-						SetUpNewPayment.click();
-						System.out.println("clicked on Setup New Payment button");
-						return new PaymentHistoryPage(driver);
-					} else
-						return new PaymentHistoryPage(driver);
-				} catch (Exception e) {
-					System.out.println("Set up Pop up not displayed");
-				}
-
-			} else {
-				System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
-			}
-
-		} catch (Exception e) {
-			System.out.println("No Auto payment button exists");
-		}
-
-		waitforElement(AutoPayButton);
-		AutoPayButton.click();
-
-		waitforElement(SetUpNewPayment);
-
-		if (validate(SetUpNewPayment)) {
-			SetUpNewPayment.click();
-			System.out.println("clicked on Setup New Payment button");
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
+		System.out.println("Clicking on Edit Automatic Payments button");
+		EditAutomaticPaymentsButton.click();
+		System.out.println("Edit Automatic Payments button has been clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Checking for Continue button on next page");
+		if (driver.findElement(By.xpath("//*[@id='cc-enhancement']/section/div/div[1]/div[1]/form/div[2]/button[1]")).isDisplayed())
+			{
+			
 			return new PaymentHistoryPage(driver);
 		} else
 			return null;
@@ -1015,9 +987,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPayment() throws Exception {
-		Thread.sleep(20000);
-		waitforElement(EditAutomaticPaymentsButton);
-		EditAutomaticPaymentsButton.click();
+		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
+        Thread.sleep(5000);
+		try {
+			EditAutomaticPaymentsButton.click();
+		} catch (Exception e1) {
+			System.out.println("Edit Automation Payment button was not clicked or displayed");	
+		}
 		System.out.println("User clicked on Update Automatic Button");
 		try {
 			Thread.sleep(5000);
@@ -1724,5 +1700,53 @@ public class PaymentHistoryPage extends UhcDriver {
 			
 		}
 		
-		
+			public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+				CommonUtility.waitForPageLoad(driver, menubutton, 20);
+				CommonUtility.waitForPageLoad(driver, paymentTable, 20);
+								
+				System.out.println("Now Scrolling to daterange dropdown");				
+				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+				jse3.executeScript("arguments[0].scrollIntoView()", menubutton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.println("Hovering mouse over daterange dropdown");	
+				Actions action = new Actions(driver);
+				action.moveToElement(menubutton).build().perform();
+				
+				System.out.println("waiting for 5 seconds");	
+				Thread.sleep(5000);
+				System.out.println("Selecting the date from dropdown - Last 6 months ");
+				
+				driver.findElement(By.linkText("Last 6 months")).click();
+				
+				System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, paymentTable, 20);
+			    
+			    try {
+					if (paymentTable.isDisplayed()) {
+						System.out.println("Payment History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Payment history table was not displayed, test failed");
+					Assert.fail();
+
+					}
+			    
+				System.out.println("Now Scrolling to Make A One-Time Payment Button");
+				JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+				jse4.executeScript("arguments[0].scrollIntoView()", MakeOneTimepaymentButton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return new PaymentHistoryPage(driver);
+			}
 	}
