@@ -273,6 +273,13 @@ public class PaymentsFormPage extends UhcDriver {
 		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form");
 		cancelButtonOnModal.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			System.out.println("Waiting for 10 seconds to go back to Payment Overview page");
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (driver.getCurrentUrl().contains("payments/overview.html"))
 				{

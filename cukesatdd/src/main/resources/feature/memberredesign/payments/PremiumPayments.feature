@@ -230,7 +230,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | FID    | planType | memberType   |
       | 247601 | PDP      | IDCardmember |
 
-  #Test Case 11
+  #Test Case 11 - UHC MAPD Plan member with direct pay
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 11 - Verify if the user is able to make one time payment for EFT
     Given login with following details logins in the member portal and validate elements
@@ -253,7 +253,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | HouseholdID |
-      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 50021390205 |
+      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 80012942508 |
 
   #Test Case 12
   @regressionMember
@@ -305,7 +305,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  #Test Case 14
+  #Test Case 14 - AARP MAPD Plan member
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -342,7 +342,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID |
-      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 30025500703 |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 90019633509 |
 
   #Test Case 15
   @regressionMember
@@ -390,7 +390,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | TID   | username  | password  | member    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | 15118 | qavgogine | qavgogine | canrec001 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 |
 
-  #Test Case 17
+  #Test Case 17 - COMBO member - Needs a SHIP/HIP member with Setup Recurring Payment button and a Fed MAPD/PDP Plan member
   @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 17 - Verify Payment Submission for Combo member - Recurrung EFT for SHIP and One Time EFT for Federal
     Given login with following details logins in the member portal and validate elements
@@ -427,9 +427,9 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID  |
-      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 480005321748 |
+      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 60023626906 |
 
-  #Test Case 18
+  #Test Case 18 -Member with Recurring method already setup and with billing history
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
@@ -445,7 +445,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | UID       | planType | memberType                |
       | US1463204 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 19
+  #Test Case 19 - Member with Recurring method already setup and with billing history
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Message for Recurring EFT
      Given login with following details logins in the member portal and validate elements
