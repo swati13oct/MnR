@@ -301,20 +301,37 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		String verifyConfirmationNumberPresent = ConfirmationNumber.getText();
+		if(verifyConfirmationNumberPresent != null)
+		{
+			System.out.println("Confirmation number was displayed, Test Case is Passed");
+		    Assert.assertTrue(true);
 		}
+		else
+		{
+			Assert.fail("Confirmation Number was not dispalyed, Test Case if failed");
+		}
+	}
 
 	
 	public void validateEFTSetupVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		PaymentsDataVerificationonConfirmationPage();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
+			} else 
+			{
+			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
+			}
 		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
 	}
 	
 	@Override
 	public void openAndValidate() {
-		System.out.println("Checking thankyou message on page");
-		validate(thankyouText);
-		System.out.println("Checked thankyou message on page");
+		System.out.println("Openandvalidate method of ConfirmOneTimePaymentPage");
+		
 	}
 
 }
