@@ -33,7 +33,7 @@ import atdd.framework.UhcDriver;
 import pages.member_deprecated.ulayer.OneTimePaymentsPage;
 import pages.member_deprecated.ulayer.PlanComparePage;
 import pages.member_deprecated.ulayer.Rallytool_Page;
-import pages.member_deprecated.ulayer.TestHarness;
+//import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
@@ -52,6 +52,7 @@ import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.WebDriverException;
+import pages.regression.testharness.*;
 
 public class AccountHomePage extends UhcDriver {
 
@@ -438,6 +439,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
 
+	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
+	protected WebElement dashboardCovideModalDismissLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1101,6 +1105,22 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
+		
+	CommonUtility.checkPageIsReadyNew(driver);	
+	 try {
+		 System.out.println("Now checking if Dashboard page Covid modal appeared");
+         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
+    
+  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
+  				  {
+  			  System.out.println("Dashboard covid modal window was displayed");
+  			  dashboardCovideModalDismissLink.click();
+  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
+  				  }
+  		         		  
+		} catch (Exception e) {
+			System.out.println("Dashboard covid modal window was not displayed");
+		}
 		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
 		
 		try {
@@ -1226,25 +1246,13 @@ public class AccountHomePage extends UhcDriver {
 
 	public AccountHomePage navigateToSHIPTab() {
 
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
+		TestHarness.checkForIPerceptionModel(driver);
 
 		waitforElement(ShipTab);
 		System.out.println("Ship tab loaded");
 		ShipTab.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		if (PayDate.getText().contains("Paid through Date")) {
 			System.out.println("ShipTab with amount displayed");
 			return new AccountHomePage(driver);
@@ -1865,68 +1873,29 @@ public class AccountHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException {
 
-		/*
-		 * WebDriverWait wait = new WebDriverWait(driver, 30);
-		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		 */
-		try {
-			System.out.println("iPerception Pop Up is Present");
-			driver.switchTo().frame("IPerceptionsEmbed");
-			iPerceptionCloseButton.click();
-			// driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
-
-		CommonUtility.checkPageIsReady(driver);
-
-		Thread.sleep(6000);
-
-		if (validate(paymentsLink)) {
-			checkModelPopup(driver,5);
-			System.out.println("payment link is displayed on the header");
-			paymentsLink.click();
-			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
-			CommonUtility.checkPageIsReady(driver);
-			return new PaymentHistoryPage(driver);
-		} else if (validate(TestHarnesspaymentsLink)) {
-			System.out.println("TestHarness Page Payments Link is displayed");
+        TestHarness.checkForIPerceptionModel(driver);		
+        CommonUtility.checkPageIsReadyNew(driver);
+		TestHarness.checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("testharness")) {
+			System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
+			TestHarness.checkForIPerceptionModel(driver);
 			TestHarnesspaymentsLink.click();
-			checkModelPopup(driver,5);
+			TestHarness.checkForIPerceptionModel(driver);
 			return new PaymentHistoryPage(driver);
-		}	else {
-			// NOTE:
-			// work-around, when Home, data maintained by Rally, is out of sync,
-			// payment tab may not show
-			// go to secondary page first then locate the payment tab.
-			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");
+		}	
+		else {		
+			System.out.println("Page was not testharness, trying alternate way to access Payments page from Dashboard");
+			System.out.println("Navigating to B&C Page First");
 			navigateDirectToBnCPag();
-			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
-			CommonUtility.checkPageIsReady(driver);
-			Assert.assertTrue("PROBLEM - unable to locate the payment link on secondary page", validate(paymentsLink3));
-			paymentsLink3.click();
-			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
-			CommonUtility.checkPageIsReady(driver);
-			/* tbd 
+			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Navigating to Premium Payment page now");
 			try {
-				String Page_URL = "https://" + MRScenario.environment
-						+ "-medicare.uhc.com/aarp/member/payments/overview.html";
-				// String Page_URL = driver.getCurrentUrl().split(".com")[0];
-				driver.navigate().to(Page_URL);
-			} catch (Exception e1) { 
-				try {
-					coverageBenefits.click();
-				} catch (NoSuchElementException e) {
-					dashboard_coverageBenefits.click();x
-					
-				}
-				WebDriverWait wait = new WebDriverWait(driver, 30);
-			}*/
-			System.out.println("Navigated to Payments Overview Page URL : " + driver.getCurrentUrl());
+				paymentsLink3.click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Could not navidate to Premium Payment page");
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new PaymentHistoryPage(driver);
 		}
 	}
@@ -2831,49 +2800,43 @@ public class AccountHomePage extends UhcDriver {
 	
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
+		if (MRScenario.environment.equalsIgnoreCase("stage")
 				&& ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
+				if (driver.getCurrentUrl().contains("/dashboard"))
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("Current URL is "+driver.getCurrentUrl());
+				CommonUtility.waitForPageLoad(driver, heading, 20);
 				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
 
 			}
-		} else if (MRScenario.environmentMedicare.equals("stage")
+		} else if (MRScenario.environment.equals("stage")
 				&& ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
-			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
-			System.out.println(driver.getCurrentUrl());
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits-coverage.html");
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is "+driver.getCurrentUrl());
 			if (driver.getTitle().contains("Benefits")) {
 				System.out.println(driver.getTitle());
 				return new BenefitsAndCoveragePage(driver);
 			}
 
-		} else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")) {
+		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
-		} else if (MRScenario.environmentMedicare.equals("team-c")) {
+		} else if (MRScenario.environment.equals("team-c")) {
 			driver.navigate().to(
 					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
-		} else if (MRScenario.environmentMedicare.equals("team-e")) {
+		} else if (MRScenario.environment.equals("team-e")) {
 			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
 			CommonUtility.waitForPageLoad(driver, heading, 30);
 			System.out.println(driver.getCurrentUrl());
@@ -2884,11 +2847,6 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
 		}
-
-		/*
-		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-		 * System.out.println("iPerception Pop Up displayed"); }
-		 */
 
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {

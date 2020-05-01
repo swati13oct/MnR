@@ -6,6 +6,7 @@ import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -95,6 +96,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
    	
+	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
+	protected WebElement dashboardCovideModalDismissLink;	
+	
        public MemberAuthPage(WebDriver driver) {
               super(driver);
               PageFactory.initElements(driver, this);
@@ -260,11 +264,21 @@ public MemberSearchPage navigateToMemberAuth(){
 
 public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
        
-       waitforElement(MemberPopUpLogin);
+       //waitforElement(MemberPopUpLogin);
+       CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
        Thread.sleep(2000);
        if (MemberPopUpLogin.isDisplayed()){
               System.out.println("Pop up Login Button is displayed");       
               Thread.sleep(2000);
+              System.out.println("Scrolling to Login Button");
+      		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+      		jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin); 
+      		try {
+      			Thread.sleep(2000);
+      		} catch (InterruptedException e) {
+      			// TODO Auto-generated catch block
+      			e.printStackTrace();
+      		}
               MemberPopUpLogin.click();  
               System.out.println("popup login button clicked");
               System.out.println("wait for 5 seconds");
@@ -296,8 +310,24 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 					// TODO Auto-generated catch block
 					
 				}
-									
-            	  waitforElement(SuperUser_DashboardBanner);
+            	  CommonUtility.checkPageIsReadyNew(driver);	
+            		 try {
+            			 System.out.println("Now checking if Dashboard page Covid modal appeared");
+            	         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
+            	    
+            	  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
+            	  				  {
+            	  			  System.out.println("Dashboard covid modal window was displayed");
+            	  			  dashboardCovideModalDismissLink.click();
+            	  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
+            	  				  }
+            	  		         		  
+            			} catch (Exception e) {
+            				System.out.println("Dashboard covid modal window was not displayed");
+            			}
+            	  CommonUtility.checkPageIsReadyNew(driver);
+            	  CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
+            	 // waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
             		  System.out.println("CSR Dashboard Page is displayed for the Member");      
             		  return new AccountHomePage(driver);             

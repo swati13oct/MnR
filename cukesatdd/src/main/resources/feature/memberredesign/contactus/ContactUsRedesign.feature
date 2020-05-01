@@ -82,8 +82,10 @@ Feature: 1.16 Member Contact us Page
       | 15380 | MAPD     | CALPERSGroup_ContactUs | Payment Information | abc                | xyz                       |                    123 |                           789 | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
       | 15380 | MAPD     | GEORGIAGroup_ContactUs | Payment Information |                    |                           |                        |                               | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
 
-  @contactUs4 @SHIPEmailUsFunctionality @regressionMember
-  Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify SHIP Email Us Widget Confirm Request in contact us redesign page
+ 
+  # This test case will be executed once email id is updated to Kana test email address(aarpmemberadvantages.kanatest@optum.com)
+  @contactUs4 @SHIPEmailUsFunctionality 
+   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify SHIP Email Us Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
