@@ -397,8 +397,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
 	private WebElement ShipTab;
 	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Hospital Indemnity Insurance Plan')]")
+	private WebElement hipTab;
+	
+	
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Prescription Drug Plan')]")
 	private WebElement FedTab;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Advantage Prescription Drug Plan')]")
+	private WebElement FedMAPDTab;
 	
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
@@ -1676,15 +1683,22 @@ public class PaymentHistoryPage extends UhcDriver {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
 			System.out.println("Now clicking on SHIP Tab");
-			ShipTab.click();
+		
+			try {
+				ShipTab.click();
+			} catch (Exception e) {
+				System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
+				hipTab.click();
+				System.out.println("HIP plan Tab was clicked");
+			}
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			CommonUtility.checkPageIsReadyNew(driver);
 			
 			if (PayDate.getText().contains("Paid through Date")) {
-				System.out.println("ShipTab with amount displayed");
+				System.out.println("ShipTab or hipTab with amount displayed");
 				return new PaymentHistoryPage(driver);
 			} else {
-				System.out.println("Ship tab issue");
+				System.out.println("Ship/hip tab issue");
 				return null;
 			}
 		}
@@ -1692,8 +1706,14 @@ public class PaymentHistoryPage extends UhcDriver {
 			public PaymentHistoryPage navigateToFedTab() {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, FedTab, 20);
-			System.out.println("Now clicking on Federal Plan Tab");
-			FedTab.click();
+			System.out.println("Now clicking on Federal PDP Plan Tab");
+			try {
+				FedTab.click();
+			} catch (Exception e) {
+				System.out.println("Federal PDP Plan Tab was not displayed. now trying if Fed MAPD Plan tab was displayed");
+				FedMAPDTab.click();
+				System.out.println("Federal MAPD Plan Tab has been clicked");
+			}
 			CommonUtility.checkPageIsReadyNew(driver);	
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			return new PaymentHistoryPage(driver);
