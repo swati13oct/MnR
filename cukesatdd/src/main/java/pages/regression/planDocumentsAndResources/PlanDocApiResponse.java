@@ -179,7 +179,7 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("3")) {
-					if (!memberType.contains("PREEFF")) {
+					//tbd if (!memberType.contains("PREEFF")) {
 						String docCategory="Summary of Benefits";
 						//note: Conversation with Keri where Feb copy deck is not available yet
 						//note: since PDP GROUP is showing the doc in Membership Materials, then use it as expected behavior
@@ -197,7 +197,7 @@ public class PlanDocApiResponse {
 							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
-					}
+					//tbd }
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
 					docObjMap.put(docCategory, docObj);
@@ -459,6 +459,16 @@ public class PlanDocApiResponse {
 						planMatl_zh_curYr_docList.add(docObjMap);
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
+				} else if (docObj.getType().equals("1042")) {
+					String docCategory="Moving to your new plan";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
 				}					
 				//--------------	
 		    //note: for next year section
@@ -628,7 +638,16 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
-
+				} else if (docObj.getType().equals("1042")) {
+					String docCategory="Moving to your new plan";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
 				} else if (docObj.getType().equals("7025")) {
 					String docCategory="Vendor Information Sheet";
 					docObjMap.put(docCategory, docObj);

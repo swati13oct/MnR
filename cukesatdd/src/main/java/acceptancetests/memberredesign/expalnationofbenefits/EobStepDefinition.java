@@ -101,10 +101,11 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		getLoginScenario().saveBean(EobCommonConstants.DATE_RANGE, dateRange);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String eobTypeData=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,dateRange, eobTypeData);
+		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,memberType, dateRange, eobTypeData);
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT, searchResultMap.get(dateRange));
 
 		//note: store info to display at end of test
@@ -381,19 +382,16 @@ public class EobStepDefinition {
 	@Then("^the user validates the right rail section content$")
 	public void validate_rightRail() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
 		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
-		eobPage.validateRightRail_DREAMEOB(planType, ui_eobResultCount);
+		eobPage.validateRightRail_DREAMEOB(planType, memberType, ui_eobResultCount);
 	}
 
 	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")
 	public void validate_sspContent() {
-		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		WebDriver d=claimsSummPg.driver;
-		boolean doBasicPgValidation=false;
-		EOBPage eobPage =  new EOBPage(d, doBasicPgValidation);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if(memberType.contains("GROUP"))
 			Assert.assertTrue("PROBLEM - SSP Group user should be able to see the EOB sub tab on top menu for Claims option", eobPage.findEobOptionUnderClaims()); 
@@ -470,6 +468,7 @@ public class EobStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates search result section content for DREAM EOB$")
 	public void user_validate_searchResult_dream() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
@@ -478,6 +477,7 @@ public class EobStepDefinition {
 		if (ui_eobResultCount>0) {
 			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
 			eobPage.validateSearchResultTableHeader_DREAMEOB();
+			eobPage.validateContactUsStmt_DREAMEOB(planType);
 			List<String> testNote=eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse, testApiFlag);
 			List<String> existingNote=(List<String>) getLoginScenario().getBean(EobCommonConstants.TEST_RESULT_NOTE);
 			existingNote.addAll(testNote);
