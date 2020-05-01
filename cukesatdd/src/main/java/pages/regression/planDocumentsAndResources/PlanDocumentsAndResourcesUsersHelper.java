@@ -318,7 +318,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Moving to your new plan");
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
@@ -940,6 +940,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Moving to your new plan");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");

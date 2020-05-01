@@ -128,17 +128,17 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
-#    Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
-#    #Then the user validates EOB count between API and UI are the same
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
       | Date Range | Last 3-6 months |
-#    Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
-#    #Then the user validates EOB count between API and UI are the same
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
       | Date Range | Last 6-12 months |
@@ -163,11 +163,8 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
       | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
-
-    Examples: 
-      | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 05    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
-      | 06    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
+      | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+      | 14    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
 
 
   @eob02 @regression_06_06_18FnF @regressionMember
@@ -181,7 +178,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     @PHIP_EOBs
     Examples: 
       | index | TID   | planType | memberType |
-      | 13    | 15174 | PHIP     | SHIP_EOB   |
+      | 15    | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -196,7 +193,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
   #
   #  Examples: 
   #    | index | FID    | planType | memberType              |
-  #    | 14    | 267688 | SSUP     | EOB_Deeplink_Individual |
+  #    | 16    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
 
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
@@ -205,11 +202,9 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
     Then the user navigates to EOB page
-
-    When I navigate to the claims Summary page from dashboard or testharness page
     Then the user validate sub option EXPLANATION OF BENEFITS under Claims option
 
     @SSP_EOBs
     Examples: 
       | index | FID    | planType | memberType | 
-      | 15    | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | 267688 | SSUP     | GROUP_EOB  | 

@@ -600,6 +600,7 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
+		checkModelPopup(driver,5);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
