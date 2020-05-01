@@ -192,39 +192,24 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@When("^the user navigates to Combo payment history page$")
-	public void Combo_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		}
-
-	}
-
+	
 	@When("^the user navigates to Ship tab and validates the amount$")
 	public void ship_tab_amount_validation() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ComboTab);
-		AHPage = AHPage.navigateToSHIPTab();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		} else {
-			System.out.println("Unable to navegate to Ship tab");
-		}
-
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToSHIPTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
 	}
 
-	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
+	@Then("^User Scrolls down and validate that Payment History Section and scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.DashPage);
-		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUp();
+		
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user has scrolled up");
@@ -308,18 +293,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user selects the Checking account option on New page$")
-	public void click_on_Checking_account_Payment_btn() {
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CC_BUTTON);
-		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtn();
-
-		if (oneTimePayment != null) {
-			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");
-		}
-	}
-
+	
 	@And("^the user selects the Setup AutoCreditCard option on New page$")
 	public void click_on_SetupCCA_Auto_Payment_btn() {
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
@@ -360,14 +334,15 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user clicks on cancel button in Recurring EFT flow$")
 	public void click_on_Cancel_payment_btn() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPayments();
-		if (paymenthistory != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
-
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		         paymentsFormPage.clickonCancelButton();
+		
 		}
-	}
+		
+		
+	
 
 	@And("^the user clicks on cancel button on Make one time flow$")
 	public void click_on_Cancel_payment_btn_OTP_flow_new() {
@@ -383,14 +358,11 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user clicks on Authorize button to validate error message$")
 	public void click_on_Authorize_button() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		OneTimePaymentPage OverviewPage = oneTimePayment.ErrorMessageValidation();
-
-		if (OverviewPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-
-		}
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		paymentsFormPage.ErrorMessageValidation();
+		
 	}
 
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
@@ -1829,8 +1801,7 @@ public class OneTimePaymentAarpStepDefintion {
 		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPayment();
 		if (updateRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
-			System.out.println("User is on Setup Recurring Payments screen");
-		}
+			}
 	}
 
 	@Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
@@ -1991,7 +1962,6 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap);
 		if (oneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
-			System.out.println("User is on Review Automatic payment for EFT");
 		}
 
 	}
@@ -2239,6 +2209,18 @@ public class OneTimePaymentAarpStepDefintion {
 
 		oneTimePaymentPage.errorForSecondPayment();
 
+	
 		
 	}
+	
+	@When("^user clicks on Federal Plan Tab$")
+	public void userClicksOnFederalPlanTab() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToFedTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
+	}
+	
 }
