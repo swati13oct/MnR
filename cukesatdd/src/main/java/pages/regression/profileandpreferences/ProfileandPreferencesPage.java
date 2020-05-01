@@ -2992,12 +2992,18 @@ private WebElement cancelButtonOnPhoneSavepre;
 			enrollmentOptions.click();
 			saveButtonInPhoneEdit.click();
 			BackArrowbutton.click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println(updatedHomePhoneAfterSave.getText() + updatedMobilePhoneAfterSave.getText());
 			if (updatedHomePhoneAfterSave.getText().contains("123-456-7890")
 					&& updatedMobilePhoneAfterSave.getText().contains("123-456-7890"))
 				Assert.assertTrue(true);
 			else {
-				Assert.fail("Not able to validate the Phone  update functionality for  member");
+				Assert.fail("Not able to validate the Phone update functionality for member");
 			}
 			
 		}
