@@ -104,12 +104,12 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
-      | 08    | PDP      | LIS_GROUP_Rx_EOB  | Prescription Drug | true        |
+      | 08    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
 
     @RX_PDP_COMBO
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 09    | PDP      | LIS_PDP_SSP_COMBO_EOB | Prescription Drug | true        |
+      | 09    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
 

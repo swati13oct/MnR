@@ -103,12 +103,21 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
 
-
+	@FindBy(xpath="//button[@id='hsid-submit']")
+	protected WebElement oldSignInBtn;
+	
+	@FindBy(xpath="//input[@id='hsid-username']")
+	protected WebElement oldUsername;
+	
+	@FindBy(xpath="//input[@id='hsid-password']")
+	protected WebElement oldPassword;
 	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
 
+	boolean doOldSignin;
+	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
 		return loginScenario;
@@ -160,13 +169,19 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(mnrSignInButton);
+		//validateNew(mnrSignInButton);
+		
 		/*
 		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
 		 * CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
 		 * 
 		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
 		 */
+		//note: take out this when new sign-in is stable
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
+		else
+			doOldSignin=true;
 	}
 
 
@@ -174,12 +189,17 @@ public class HSIDLoginPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		startNew(deepLinkUrl);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(mnrSignInButton);
+		//validateNew(mnrSignInButton);
 		/*
 		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 		 */
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
+		else
+			doOldSignin=true;
+
 	}
 
 	public void validateHsidPageElements() {
@@ -229,13 +249,19 @@ public class HSIDLoginPage extends UhcDriver {
 	 */
 	public Object doLoginWith(String username, String password) {
 
+		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
+			System.out.println(driver.getCurrentUrl());
+			sendkeys(oldUsername, username);
+			sendkeys(oldPassword, password);
+			oldSignInBtn.click();
+		} else {
 			System.out.println(driver.getCurrentUrl());
 			mnrSignInButton.click();
 			validateHsidPageElements();
 			sendkeys(userNameField, username);
 			sendkeys(passwordField, password);
 			hsidSignInButton.click();
-			
+		}
 
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
