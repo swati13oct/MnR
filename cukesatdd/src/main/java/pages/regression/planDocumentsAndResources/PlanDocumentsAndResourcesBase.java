@@ -578,6 +578,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "1021";
 		if (docName.toLowerCase().equalsIgnoreCase("Your Plan Getting Started".toLowerCase()) ) 
 			return "7010";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Summary".toLowerCase()) ) 
+			return "6016";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Information".toLowerCase()) ) 
+			return "6017";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}

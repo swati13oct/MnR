@@ -747,7 +747,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates City of Hartford prescription Drug Benefits table
-@abc
+
     Examples: 
       | TID   | planType | memberType   |
       | 15367 | MAPD     | Hartford_BnC |
@@ -960,7 +960,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | UID     | planType | memberType     |
-      | 1410989 | MAPDVill_BnC | Individual_BnC |
+      | 1410989 | MAPDVill | Individual_BnC |
       
      @benefitsAndCoverage39 @UpdatedTextDocumentsAndResources @dec_release_2018 @toBeRemoved
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify updated text for Pdfs in Documents and Resources
