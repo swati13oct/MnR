@@ -230,7 +230,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | FID    | planType | memberType   |
       | 247601 | PDP      | IDCardmember |
 
-  #Test Case 11
+  #Test Case 11 - UHC MAPD Plan member with direct pay
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 11 - Verify if the user is able to make one time payment for EFT
     Given login with following details logins in the member portal and validate elements
@@ -252,8 +252,8 @@ Feature: 1.19 Verify the premium payment flows on member portal
     Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
-      | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | HouseholdID |
+      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 80012942508 |
 
   #Test Case 12
   @regressionMember
@@ -305,7 +305,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  #Test Case 14
+  #Test Case 14 - AARP MAPD Plan member
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -341,8 +341,8 @@ Feature: 1.19 Verify the premium payment flows on member portal
     And the error is displayed on review payment page for second payment
 
     Examples: 
-      | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 90019633509 |
 
   #Test Case 15
   @regressionMember
@@ -388,19 +388,18 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID   | username  | password  | member    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15118 | qavgogine | qavgogine | canrec001 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | 15118 | qavgogine | qavgogine | canrec001 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 |
 
-  #Test Case 17
+  #Test Case 17 - COMBO member - Needs a SHIP/HIP member with Setup Recurring Payment button and a Fed MAPD/PDP Plan member
   @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 17 - Verify Payment for Combo member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 17 - Verify Payment Submission for Combo member - Recurrung EFT for SHIP and One Time EFT for Federal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Combo payment history page
+    When the user clicks on Premium Payments on Header
     When the user navigates to Ship tab and validates the amount
-    Then User Scrolls down to validate Payment History and Scrolls up
-    And the user clicks on Edit Automatic Payment button
-    And the user makes auto payment in AARP site
+    And user clicks on Setup Automatic payments on payment overview page for Ship
+    And user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Setup Recurring for Ship
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -408,10 +407,13 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-    And the user confirms the Autopayment in UHC site
+    And user navigates to Review Your Payment screen and selects agreements and click on Contuine Button for EFT Ship
+    Then User navigates to payment confirmation page and verifies sucessful EFT for setup Recurring for Ship
     And the user moves to Go to Payment History Page button
-    And the user clicks on Make One Time Payment button
-    And the user makes one time payment and navigate futher
+    And user clicks on Federal Plan Tab
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
@@ -420,38 +422,39 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-    And the user confirms the Autopayment in UHC site
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
-      | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID  |
+      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 60023626906 |
 
-  #Test Case 18
+  #Test Case 18 -Member with Recurring method already setup and with billing history
   @regressionMember
-  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Cancel Model PopUP for Recurring EFT
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down and validate that Payment History Section and scrolls up
+    And user clicks on Update Automatic payments on payment overview page
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on cancel button in Recurring EFT flow
 
     Examples: 
       | UID       | planType | memberType                |
       | US1463204 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 19
+  #Test Case 19 - Member with Recurring method already setup and with billing history
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Message for Recurring EFT
-    Given login with following details logins in the member portal and validate elements
+     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down and validate that Payment History Section and scrolls up
+    And user clicks on Update Automatic payments on payment overview page
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on Authorize button to validate error message
 
     Examples: 

@@ -1,5 +1,5 @@
 @acq_CALLCHAT_AARP
-Feature: 2.13 ACQ AARP- To test SAM Icons in AARP site
+Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site on <pagename>
 Given the user is on the AARP medicare site landing page
