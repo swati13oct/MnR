@@ -301,8 +301,8 @@ Feature: VPP Testharness flow Navigations for AARP Site
 
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
-      | 00021 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
-      | 00022 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00021 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-12-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-12-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
 
   ##############
   ##Testharness providersearch Scenarios
@@ -355,7 +355,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
     When the user enters following information in the AARP Acquisition Site VPPDCE TestHarness page
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty>   |
       | Plan Name       | <planName>        |
     And user selects helper mode for Redirect to VPP from DCE on AARP
     And the user views the plans of the below plan type in AARP site and select Next year
