@@ -69,7 +69,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
     
-   @devRegression
+    @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory |
       | 15090 | MAPD     | Individual_BnC | NON LIS       |
@@ -111,7 +111,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
-   @devRegression
+
+    @devRegression
     Examples: 
       | TID   | planType | memberType        |
       | 15093 | PDP      | TEXASERSGroup_BnC |
@@ -213,8 +214,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType             | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_regressionMember
@@ -294,7 +295,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies |  ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos       | 2      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos       | 2      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
   @benefitsAndCoverage21 @CMAncillarysection2  @BnC_Part4_regressionMember
@@ -364,8 +365,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validates the remove Rider functionality
 
     Examples: 
-    
-    | TID   | planType | memberType     | copayCategory |
+      | TID   | planType | memberType     | copayCategory |
       | 15090 | MAPD     | Individual_BnC | NON LIS       |
     
       
@@ -747,7 +747,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates City of Hartford prescription Drug Benefits table
-
+@abc
     Examples: 
       | TID   | planType | memberType   |
       | 15367 | MAPD     | Hartford_BnC |

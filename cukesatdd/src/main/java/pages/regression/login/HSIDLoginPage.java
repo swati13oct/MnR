@@ -64,7 +64,7 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'submitBtn')]")
 	private WebElement hsidSignInButton;
 	
-	@FindBy(xpath = "//*[contains(@onClick,'HSIDSignIn')]")
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSID') and contains(text(),'Sign In')]")
 	private WebElement mnrSignInButton;
 	
 	@FindBy(xpath = "//*[contains(@onClick,'HSIDRegistration')]")
