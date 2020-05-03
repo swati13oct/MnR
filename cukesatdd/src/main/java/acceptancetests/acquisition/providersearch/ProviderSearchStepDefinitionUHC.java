@@ -164,6 +164,19 @@ public class ProviderSearchStepDefinitionUHC {
 		}
 	}
 	
+	/**
+	 * @toDo:user user selects a Multiple providers
+	 */
+	@When("^user selects a multiple providers and retuns to VPP page in ums$")
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_ums() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
 	
 	/**
 	 * @toDo: user performs plan search using following information

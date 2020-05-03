@@ -13,12 +13,12 @@ Feature: 2.05.1.ACQ-OLE MA UMS
        #New Changes
      When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planName> |  
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planName> |
-    Then the user validates the Plan details on OLE
+    When user selects a multiple providers and retuns to VPP page in ums
+    #Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+     # | PlanName | <planName> |  
+    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
+     # | Plan Name | <planName> |
+    #Then the user validates the Plan details on OLE
 #    Then the user validates TFN in Welcome OLE Right Rail
 #    Then the user validates Learn more modal for Welcome OLE
 #    Then the user validates Leave OLE modal for Welcome OLE
