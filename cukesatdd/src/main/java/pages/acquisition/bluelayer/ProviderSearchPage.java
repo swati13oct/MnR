@@ -206,6 +206,7 @@ public class ProviderSearchPage extends UhcDriver {
 	return new VPPPlanSummaryPage(driver);
 	}
 	
+	//// TODO Selecting Multiple PCP providers
 	public VPPPlanSummaryPage MultipleselectsProvider()  {
 		GetStarted.click();
 
@@ -224,40 +225,22 @@ public class ProviderSearchPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, element, 45);
 			jsClickNew(element);
 			
-			System.out.println("Entered into for loop and clicked on Save button");
 			if(validate(selectLocationOption)){
-				System.out.println("Entered into if Condition");
 				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
-				System.out.println("Checkbox loaded");
+				
 				selectLocationOption.click();
-				System.out.println("clicked on checkbox");
-
 				
-				
-				//jsClickNew(selectLocationOption);
 				validateNew(NewsaveBtn2);
-				
-				//saveBtn2.click();
+	
 				jsClickNew(NewsaveBtn2);
-				System.out.println("clicked on save button");
-				
 				
 			}
-			
 			
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
 			jsClickNew(BtnClose);
 			
-			
-				/*for(WebElement elements:SaveBtns)
-				{
-					CommonUtility.waitForPageLoadNew(driver, elements, 45);
-					elements.click();
-				} */
 		}
-		
-		
-		
+			
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
 		jsClickNew(Savedproviders);
