@@ -6,6 +6,7 @@ package pages.regression.login;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -79,6 +80,14 @@ public class LoginPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
 
+	@FindBy(xpath="//*[@id='main-message']/h1")
+	protected WebElement privacyNotice;
+	
+	@FindBy(xpath="//*[@id='details-button']")
+	protected WebElement advancedLink;
+	
+	@FindBy(xpath="//*[@id='proceed-link']")
+	protected WebElement proceedLink;	
 	    
 	    MRScenario loginScenario;
 		
@@ -203,6 +212,20 @@ public class LoginPage extends UhcDriver {
 		}
 		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
+			try {
+				if(privacyNotice.getText().contains("Your connection is not private"))
+				{
+				System.out.println("Privacy error page opened, clicking on Advanced");
+				advancedLink.click();
+				System.out.println("Clicked on Advanced");
+				Thread.sleep(4000);
+				System.out.println("Clicking on Proceed Link");
+				proceedLink.click();
+				System.out.println("Clicked on Proceed Link");
+				} 
+				}catch (Exception e) {
+				System.out.println("Privacy error Page didn't appear");
+			}
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
 			signInButton.click();
