@@ -311,7 +311,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 					
 				}
             	  CommonUtility.checkPageIsReadyNew(driver);	
-            		 try {
+            		/* try {
             			 System.out.println("Now checking if Dashboard page Covid modal appeared");
             	         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
             	    
@@ -324,7 +324,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
             	  		         		  
             			} catch (Exception e) {
             				System.out.println("Dashboard covid modal window was not displayed");
-            			}
+            			}*/
             	  CommonUtility.checkPageIsReadyNew(driver);
             	  CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
             	 // waitforElement(SuperUser_DashboardBanner);
