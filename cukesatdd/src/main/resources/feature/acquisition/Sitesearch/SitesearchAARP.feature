@@ -1,4 +1,4 @@
-@SiteSearchResultsAARP @f294024
+@SiteSearchResultsAARP @F294024
 Feature:2.03-Acq-To test Sitesearch results in AMP site
 
 @SiteSearchAARP @SiteSearchRegressionAARP
