@@ -140,7 +140,7 @@ Examples:
    
    
    @hsid6 @Login @US968315 @regressionMember
-   Scenario Outline:Verify HSID login functionality.
+   Scenario Outline:Verify HSID login functionality for <planType> <memberType>
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|

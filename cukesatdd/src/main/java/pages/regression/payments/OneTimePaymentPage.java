@@ -120,9 +120,6 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
 	private WebElement PaymentCancelModelPopup;
 
-	@FindBy(id = "form_routingNumber")
-	private WebElement Error1;
-
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
 
@@ -132,7 +129,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//h2[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 	
-	@FindBy(xpath = "//button[text()='Edit Payment Information']")
+	@FindBy(xpath = "(//button[text()='Edit Payment Information'])[2]")
 	private WebElement EditPaymentInformation;
 	
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
@@ -147,6 +144,17 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "memAuthPaymentSubmitError")
 	private WebElement csrUnauthorizedErrorMessage;
 	
+	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
+	private WebElement NextPaymentSummary;
+
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
+	private WebElement NextPaymentProcess;
+
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
+	private WebElement RemainingAmountSummary;
+	
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
+	private WebElement RemainingAmount;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -511,41 +519,7 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 	}
 
-	public OneTimePaymentPage ErrorMessageValidation() {
-
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		}
-		System.out.println("Going to scroll down");
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,650)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		}
-		System.out.println("will click on Authorize button");
-		AuthorizeButton.click();
-		try {
-			Thread.sleep(2000);
-			jse.executeScript("window.scrollBy(0,650)", "");
-		} catch (Exception e) {
-		}
-		AuthorizeButton.click();
-		try {
-			Thread.sleep(2000);
-			jse.executeScript("window.scrollBy(0,650)", "");
-		} catch (Exception e) {
-		}
-		AuthorizeButton.click();
-		if (Error1.getText().contains("Please enter a valid Routing Number"))
-			return new OneTimePaymentPage(driver);
-		else
-			return null;
-
-	}
-
-	public void selectAndEnterAmount(String otherAmount) {
+	    public void selectAndEnterAmount(String otherAmount) {
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
 		TestHarness.checkForIPerceptionModel(driver);
@@ -618,7 +592,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
 		TestHarness.checkForIPerceptionModel(driver);
-		validate(EditPaymentInformation);
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
@@ -636,7 +610,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		String title = driver.getTitle();
-		System.out.println("Title of the page is "+title);
+		System.out.println("Current title of the page is "+title);
 		
 		if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
 			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
@@ -656,18 +630,20 @@ public class OneTimePaymentPage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		jsClickNew(AgreeCheckBox);
 		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Contuine button");
+		System.out.println("Clicked on Authorize Payments button");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
 			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
 			return null;
 		}
 	}
@@ -686,6 +662,16 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 
 	public void validateErrorMessageUnauthorized() {
+		
+		System.out.println("Scrolling to Error Message");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", csrUnauthorizedErrorMessage); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String errorMessage= csrUnauthorizedErrorMessage.getText();
 		if (errorMessage.contains("You not authorised to submit the information and proceed to the next page")) 
 		{
@@ -697,6 +683,29 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 
 	}
+	
+	public OneTimePaymentPage BalanceSummaryValidation() {
+
+		
+		System.out.println("in new method for summary validation");
+		try {
+			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
+				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
+				return new OneTimePaymentPage(driver);
+			}
+		} catch (Exception e) {
+			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
+				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
+				return new OneTimePaymentPage(driver);
+			} else
+				return null;
+		}
+
+		return null;
+	}
+
 	
 	@Override
 	public void openAndValidate() {
