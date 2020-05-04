@@ -20,6 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.regression.accounthomepage.AccountHomePage;
@@ -170,18 +171,6 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
 
-	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
-	private WebElement NextPaymentSummary;
-
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
-	private WebElement NextPaymentProcess;
-
-	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
-	private WebElement RemainingAmountSummary;
-
-	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
-	private WebElement RemainingAmount;
-
 	@FindBy(id = "amountInput")
 	private WebElement AmountInput;
 
@@ -271,7 +260,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']")
 	private WebElement unpaidRadio;
 
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table")
+	@FindBy(xpath = "//*[@id='paymentTable']")
 	private WebElement paymentTable;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
@@ -396,11 +385,21 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
 	private WebElement ShipTab;
 	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Hospital Indemnity Insurance Plan')]")
+	private WebElement hipTab;
+	
+	
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Prescription Drug Plan')]")
 	private WebElement FedTab;
 	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Advantage Prescription Drug Plan')]")
+	private WebElement FedMAPDTab;
+	
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
+	
+	@FindBy(id = "menubutton")
+	private WebElement menubutton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -663,48 +662,16 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public PaymentHistoryPage AutoPayNew() {
 
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
-		try {
-			if (setUpAutoPayButton.isDisplayed()) {
-				setUpAutoPayButton.click();
-				System.out.println("clicked on Setup New Payment button");
-				try {
-					Thread.sleep(2000);
-					if (validate(SetUpNewPayment)) {
-						SetUpNewPayment.click();
-						System.out.println("clicked on Setup New Payment button");
-						return new PaymentHistoryPage(driver);
-					} else
-						return new PaymentHistoryPage(driver);
-				} catch (Exception e) {
-					System.out.println("Set up Pop up not displayed");
-				}
-
-			} else {
-				System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
-			}
-
-		} catch (Exception e) {
-			System.out.println("No Auto payment button exists");
-		}
-
-		waitforElement(AutoPayButton);
-		AutoPayButton.click();
-
-		waitforElement(SetUpNewPayment);
-
-		if (validate(SetUpNewPayment)) {
-			SetUpNewPayment.click();
-			System.out.println("clicked on Setup New Payment button");
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
+		System.out.println("Clicking on Edit Automatic Payments button");
+		EditAutomaticPaymentsButton.click();
+		System.out.println("Edit Automatic Payments button has been clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Checking for Continue button on next page");
+		if (driver.findElement(By.xpath("//*[@id='cc-enhancement']/section/div/div[1]/div[1]/form/div[2]/button[1]")).isDisplayed())
+			{
+			
 			return new PaymentHistoryPage(driver);
 		} else
 			return null;
@@ -903,36 +870,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			return null;
 	}
 
-	public OneTimePaymentPage BalanceSummaryValidation() {
-
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		}
-		System.out.println("in new method for summary validation");
-		try {
-			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			}
-		} catch (Exception e) {
-			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			} else
-				return null;
-		}
-
-		return null;
-	}
-
+	
 	public PaymentHistoryPage AutoPayNewCC() {
 
 		try {
@@ -1015,9 +953,14 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPayment() throws Exception {
-		Thread.sleep(20000);
-		waitforElement(EditAutomaticPaymentsButton);
-		EditAutomaticPaymentsButton.click();
+		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
+		Thread.sleep(5000);
+		try {
+			TestHarness.checkForIPerceptionModel(driver);
+			EditAutomaticPaymentsButton.click();
+		} catch (Exception e1) {
+			System.out.println("Edit Automation Payment button was not clicked or displayed");	
+		}
 		System.out.println("User clicked on Update Automatic Button");
 		try {
 			Thread.sleep(5000);
@@ -1075,6 +1018,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("Validate payment history section header");
 		try {
 			Assert.assertTrue("PROBLEM - unable to locate the payment history section header",PaymentHistorySectionHeader.isDisplayed());
+			System.out.println("Payment history section header has been validated");
 		} catch (Exception e) {
 			Assert.assertTrue("PROBLEM - unable to locate the payment history section header",false);
 		}
@@ -1083,6 +1027,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public void validatePaymentHistoryDateRageDefault() {
 		System.out.println("Validate default date range value");
 		String actualDefaultDateRange=DateRangerDropDown.getText();
+		System.out.println(actualDefaultDateRange);
 		String expectedDefaultDateRange="Last 90 days";
 		Assert.assertTrue("PROBLEM - default Date Range is not as expected. Expected="+expectedDefaultDateRange+" | Actual="+actualDefaultDateRange, expectedDefaultDateRange.equals(actualDefaultDateRange));
 
@@ -1102,7 +1047,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, nonCustomSearchResultText, 10);
 			String actualResultText=nonCustomSearchResultText.getText();
 			System.out.println("resultText="+actualResultText);
-			String expect_line="Total search results for premium payments from the "+expectedDefaultDateRange+". If you have questions about your payments, please CONTACT US.";
+			String expect_line="Total search results for premium payments from the "+expectedDefaultDateRange+". If you have questions about your payments, CONTACT US.";
 			Assert.assertTrue("PROBLEM - Unexpected result text content. \nExpected='"+expect_line+"' \nActual='"+actualResultText+"'", actualResultText.equals(expect_line));
 
 		} catch (Exception e) {
@@ -1112,7 +1057,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public void validateDefaultPaymentStatusOption() {
-		System.out.println("Validate payment status default option is All");
+		System.out.println("Validate payment status Paid , Unpaid are checked by deault");
 		try {
 			if (paymentStatusAllRadioLabel.isDisplayed()) {
 				Assert.assertTrue("PROBLEM - Payment Status All radio should be selected by default",paymentStatusAllRadio.isSelected());
@@ -1700,15 +1645,22 @@ public class PaymentHistoryPage extends UhcDriver {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
 			System.out.println("Now clicking on SHIP Tab");
-			ShipTab.click();
+		
+			try {
+				ShipTab.click();
+			} catch (Exception e) {
+				System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
+				hipTab.click();
+				System.out.println("HIP plan Tab was clicked");
+			}
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			CommonUtility.checkPageIsReadyNew(driver);
 			
 			if (PayDate.getText().contains("Paid through Date")) {
-				System.out.println("ShipTab with amount displayed");
+				System.out.println("ShipTab or hipTab with amount displayed");
 				return new PaymentHistoryPage(driver);
 			} else {
-				System.out.println("Ship tab issue");
+				System.out.println("Ship/hip tab issue");
 				return null;
 			}
 		}
@@ -1716,13 +1668,67 @@ public class PaymentHistoryPage extends UhcDriver {
 			public PaymentHistoryPage navigateToFedTab() {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, FedTab, 20);
-			System.out.println("Now clicking on Federal Plan Tab");
-			FedTab.click();
+			System.out.println("Now clicking on Federal PDP Plan Tab");
+			try {
+				FedTab.click();
+			} catch (Exception e) {
+				System.out.println("Federal PDP Plan Tab was not displayed. now trying if Fed MAPD Plan tab was displayed");
+				FedMAPDTab.click();
+				System.out.println("Federal MAPD Plan Tab has been clicked");
+			}
 			CommonUtility.checkPageIsReadyNew(driver);	
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			return new PaymentHistoryPage(driver);
 			
 		}
 		
-		
+			public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+				CommonUtility.waitForPageLoad(driver, menubutton, 20);
+				CommonUtility.waitForPageLoad(driver, paymentTable, 20);
+								
+				System.out.println("Now Scrolling to daterange dropdown");				
+				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+				jse3.executeScript("arguments[0].scrollIntoView()", menubutton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.println("Hovering mouse over daterange dropdown");	
+				Actions action = new Actions(driver);
+				action.moveToElement(menubutton).build().perform();
+				
+				System.out.println("waiting for 5 seconds");	
+				Thread.sleep(5000);
+				System.out.println("Selecting the date from dropdown - Last 6 months ");
+				
+				driver.findElement(By.linkText("Last 6 months")).click();
+				
+				System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, paymentTable, 20);
+			    
+			    try {
+					if (paymentTable.isDisplayed()) {
+						System.out.println("Payment History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Payment history table was not displayed, test failed");
+					Assert.fail();
+
+					}
+			    
+				System.out.println("Now Scrolling to Make A One-Time Payment Button");
+				JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+				jse4.executeScript("arguments[0].scrollIntoView()", MakeOneTimepaymentButton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return new PaymentHistoryPage(driver);
+			}
 	}

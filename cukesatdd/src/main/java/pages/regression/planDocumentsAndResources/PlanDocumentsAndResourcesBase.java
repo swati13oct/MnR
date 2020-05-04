@@ -563,7 +563,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
 			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
-			return "-99"; //note: don't know what it should be yet
+			return "1042"; 
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Benefits Table".toLowerCase()) ) 
 			return "5002"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
