@@ -203,12 +203,22 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 
 	public void validateHsidPageElements() {
-		
+		try {
 		validateNew(userNameField);
 		validateNew(passwordField);
 		validateNew(hsidSignInButton);
 		validateNew(usernamelink);
 		validateNew(passwordlink);
+		} catch(UnhandledAlertException ae) {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+
+			validateNew(userNameField);
+			validateNew(passwordField);
+			validateNew(hsidSignInButton);
+			validateNew(usernamelink);
+			validateNew(passwordlink);
+		}
 	}
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
