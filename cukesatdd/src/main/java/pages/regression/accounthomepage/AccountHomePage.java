@@ -1100,7 +1100,7 @@ public class AccountHomePage extends UhcDriver {
 	public void verifyPageTitle() throws InterruptedException {
 		
 	CommonUtility.checkPageIsReadyNew(driver);	
-	 try {
+/*	 try {
 		 System.out.println("Now checking if Dashboard page Covid modal appeared");
          CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
     
@@ -1113,7 +1113,7 @@ public class AccountHomePage extends UhcDriver {
   		         		  
 		} catch (Exception e) {
 			System.out.println("Dashboard covid modal window was not displayed");
-		}
+		}*/
 		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
 		
 		try {
@@ -1832,9 +1832,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException {
 
-        TestHarness.checkForIPerceptionModel(driver);		
         CommonUtility.checkPageIsReadyNew(driver);
-		TestHarness.checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("testharness")) {
 			System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 			TestHarness.checkForIPerceptionModel(driver);
@@ -1855,6 +1853,7 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("Could not navidate to Premium Payment page");
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
+			TestHarness.checkForIPerceptionModel(driver);
 			return new PaymentHistoryPage(driver);
 		}
 	}

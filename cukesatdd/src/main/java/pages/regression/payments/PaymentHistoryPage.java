@@ -171,18 +171,6 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
 
-	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
-	private WebElement NextPaymentSummary;
-
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
-	private WebElement NextPaymentProcess;
-
-	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
-	private WebElement RemainingAmountSummary;
-
-	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
-	private WebElement RemainingAmount;
-
 	@FindBy(id = "amountInput")
 	private WebElement AmountInput;
 
@@ -397,8 +385,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
 	private WebElement ShipTab;
 	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Hospital Indemnity Insurance Plan')]")
+	private WebElement hipTab;
+	
+	
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Prescription Drug Plan')]")
 	private WebElement FedTab;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Advantage Prescription Drug Plan')]")
+	private WebElement FedMAPDTab;
 	
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
@@ -875,36 +870,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			return null;
 	}
 
-	public OneTimePaymentPage BalanceSummaryValidation() {
-
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		}
-		System.out.println("in new method for summary validation");
-		try {
-			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			}
-		} catch (Exception e) {
-			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			} else
-				return null;
-		}
-
-		return null;
-	}
-
+	
 	public PaymentHistoryPage AutoPayNewCC() {
 
 		try {
@@ -988,8 +954,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	public UpdateRecurringPage clickOnEditAutomaticPayment() throws Exception {
 		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
-        Thread.sleep(5000);
+		Thread.sleep(5000);
 		try {
+			TestHarness.checkForIPerceptionModel(driver);
 			EditAutomaticPaymentsButton.click();
 		} catch (Exception e1) {
 			System.out.println("Edit Automation Payment button was not clicked or displayed");	
@@ -1051,6 +1018,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("Validate payment history section header");
 		try {
 			Assert.assertTrue("PROBLEM - unable to locate the payment history section header",PaymentHistorySectionHeader.isDisplayed());
+			System.out.println("Payment history section header has been validated");
 		} catch (Exception e) {
 			Assert.assertTrue("PROBLEM - unable to locate the payment history section header",false);
 		}
@@ -1059,6 +1027,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public void validatePaymentHistoryDateRageDefault() {
 		System.out.println("Validate default date range value");
 		String actualDefaultDateRange=DateRangerDropDown.getText();
+		System.out.println(actualDefaultDateRange);
 		String expectedDefaultDateRange="Last 90 days";
 		Assert.assertTrue("PROBLEM - default Date Range is not as expected. Expected="+expectedDefaultDateRange+" | Actual="+actualDefaultDateRange, expectedDefaultDateRange.equals(actualDefaultDateRange));
 
@@ -1078,7 +1047,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, nonCustomSearchResultText, 10);
 			String actualResultText=nonCustomSearchResultText.getText();
 			System.out.println("resultText="+actualResultText);
-			String expect_line="Total search results for premium payments from the "+expectedDefaultDateRange+". If you have questions about your payments, please CONTACT US.";
+			String expect_line="Total search results for premium payments from the "+expectedDefaultDateRange+". If you have questions about your payments, CONTACT US.";
 			Assert.assertTrue("PROBLEM - Unexpected result text content. \nExpected='"+expect_line+"' \nActual='"+actualResultText+"'", actualResultText.equals(expect_line));
 
 		} catch (Exception e) {
@@ -1088,7 +1057,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public void validateDefaultPaymentStatusOption() {
-		System.out.println("Validate payment status default option is All");
+		System.out.println("Validate payment status Paid , Unpaid are checked by deault");
 		try {
 			if (paymentStatusAllRadioLabel.isDisplayed()) {
 				Assert.assertTrue("PROBLEM - Payment Status All radio should be selected by default",paymentStatusAllRadio.isSelected());
@@ -1676,15 +1645,22 @@ public class PaymentHistoryPage extends UhcDriver {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
 			System.out.println("Now clicking on SHIP Tab");
-			ShipTab.click();
+		
+			try {
+				ShipTab.click();
+			} catch (Exception e) {
+				System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
+				hipTab.click();
+				System.out.println("HIP plan Tab was clicked");
+			}
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			CommonUtility.checkPageIsReadyNew(driver);
 			
 			if (PayDate.getText().contains("Paid through Date")) {
-				System.out.println("ShipTab with amount displayed");
+				System.out.println("ShipTab or hipTab with amount displayed");
 				return new PaymentHistoryPage(driver);
 			} else {
-				System.out.println("Ship tab issue");
+				System.out.println("Ship/hip tab issue");
 				return null;
 			}
 		}
@@ -1692,8 +1668,14 @@ public class PaymentHistoryPage extends UhcDriver {
 			public PaymentHistoryPage navigateToFedTab() {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, FedTab, 20);
-			System.out.println("Now clicking on Federal Plan Tab");
-			FedTab.click();
+			System.out.println("Now clicking on Federal PDP Plan Tab");
+			try {
+				FedTab.click();
+			} catch (Exception e) {
+				System.out.println("Federal PDP Plan Tab was not displayed. now trying if Fed MAPD Plan tab was displayed");
+				FedMAPDTab.click();
+				System.out.println("Federal MAPD Plan Tab has been clicked");
+			}
 			CommonUtility.checkPageIsReadyNew(driver);	
 			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
 			return new PaymentHistoryPage(driver);

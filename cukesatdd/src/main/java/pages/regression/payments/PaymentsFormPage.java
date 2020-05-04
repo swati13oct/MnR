@@ -267,12 +267,28 @@ public class PaymentsFormPage extends UhcDriver {
 	public PaymentHistoryPage clickonCancelButton() {		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, cancelButton, 20);
-		System.out.println("Clicking on cancel button of Update Checking Account EFT form");
+		System.out.println("Clicking on cancel button of Update Checking Account or One Time Payment EFT form");
+		System.out.println("Scrolling to Cancel Button");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", cancelButton); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cancelButton.click();
 		CommonUtility.waitForPageLoad(driver, cancelButtonOnModal, 20);
-		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form");
+		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form or One Time Payment EFT form");
 		cancelButtonOnModal.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			System.out.println("Waiting for 10 seconds to go back to Payment Overview page");
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (driver.getCurrentUrl().contains("payments/overview.html"))
 				{
@@ -285,7 +301,7 @@ public class PaymentsFormPage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	public PaymentsFormPage ErrorMessageValidation() {
 
 		try {
