@@ -23,7 +23,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import junit.framework.Assert;
+import org.testng.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
@@ -285,7 +285,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -318,23 +318,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
-   	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]/div/a[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
    	private WebElement chatsamtooltip;
    	
-   	@FindBy(xpath ="//*[@id='inner-chat']")
+   	@FindBy(xpath ="//*[contains(@id,'inner-chat')]")
    	private WebElement chatSamPopup;
 
-   	@FindBy(xpath ="//*[@id='sp-chat-frame']")
+   	@FindBy(xpath ="//*[contains(@id,'sp-chat-frame')]")
    	private WebElement ProActivechatPopup;
 
-				@FindBy(xpath ="//*[@id='agent-name']")
-			private WebElement ChatSamHead;
+	@FindBy(xpath ="//*[@id='agent-name']")
+	private WebElement ChatSamHead;
 			
-			@FindBy(xpath ="//*[@id='sp-close-frame']")
-			private WebElement ChatSamTFNClose;
-			
+	@FindBy(xpath ="//*[contains(@id,'sp-close-frame'])")
+	private WebElement ChatSamTFNClose;
+		
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'first_name')]")
+	private WebElement samChatFirstNameField;
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'last_name')]")
+	private WebElement samChatLastNameField;
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'zip_code')]")
+	private WebElement samChatZipField;
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
+	private WebElement samChatEmailField;
 		  	
-		   	String ChatSamText= "Chat with a Licensed Insurance Agent";
+	String ChatSamText= "Chat with a Licensed Insurance Agent";
 	  
 	  @FindBy(id = "pharmacy-zip-search")
 		private WebElement thpharmacyzipsearch;
@@ -1687,7 +1698,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	
-	public AcquisitionHomePage validateCallSam() throws InterruptedException {
+	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		try {
 			validateNew(callsam);
@@ -1697,14 +1708,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			if (present) {
 			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			  return new AcquisitionHomePage(driver);
+			  
 			}
-		else
-			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
-		return null;
+		/*
+		 * else System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		 */
+	
 	}
 	
-	public AcquisitionHomePage validateCallSamContent() throws InterruptedException {
+	public void validateCallSamContent() throws InterruptedException {
 	
 	Actions action = new Actions(driver);
 	WebElement element = callsam;
@@ -1716,14 +1728,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	if (CallSam.equalsIgnoreCase(toolTipText)) {
 	  System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-	  return new AcquisitionHomePage(driver);
+	 // return new AcquisitionHomePage(driver);
 	}
 	else
-		System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
-	return null;
+		Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	//return null;
 	}
 	
-	public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
+	public void validateCallpopup() throws InterruptedException {
 	//CommonUtility.checkPageIsReady(driver);
 	callsam.click();
 	System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
@@ -1733,32 +1745,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	//validateNew(callsam);		
 	//return null;
 		if(CallSamTFN.getText().isEmpty()){
-				return null;
-			}else{
+				//return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		}else{
 			CallSamTFNClose.click();
 			validateNew(callsam);	
-			 return new AcquisitionHomePage(driver);
-			}
+			// return new AcquisitionHomePage(driver);
+		}
 	}
 	
-	public AcquisitionHomePage validateChatSam() throws InterruptedException {
+	public void validateChatSam() throws InterruptedException {
 	boolean present;
 	try {
-	validateNew(chatsam);
-	present = true;
+		validateNew(chatsam);
+		present = true;
 	} catch (NoSuchElementException e) {
-	present = false;
+		present = false;
 	}
 	if (present) {
-	  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-	  return new AcquisitionHomePage(driver);
-	}
-	else
-		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
-	return null;
+	  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@"); 
+	  validateChatSamContent();	
+	  }
+	
 	}
 	
-	public AcquisitionHomePage validateChatSamContent() throws InterruptedException {
+	public void validateChatSamContent() throws InterruptedException {
 	
 	Actions action = new Actions(driver);
 	WebElement element = chatsam;
@@ -1770,14 +1781,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
 	  System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
-	  return new AcquisitionHomePage(driver);
+	 // return new AcquisitionHomePage(driver);
 	}
 	else
-		System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
-	return null;
+		Assert.fail("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	//return null;
 	}
 	
-	public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
+	public void validateChatpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
 		validateNew(chatsam);
 		jsClickNew(chatsam);
@@ -1788,7 +1799,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(ChatSamHead.getText());
 		ChatSamTFNClose.click();
 		validateNew(chatsam);		*/
-		return null;
+		//return null;
 	}
 	
 	
@@ -1950,7 +1961,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage","ucp_geotrackingState" );
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : "+StateSessionStorage);
-		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
+		Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"),"Geolocation State validation Failed ");
 	}
 
 	public void validateDisclaimer() {
@@ -1963,7 +1974,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	  validateNew(visitAARPFooterLink);
 	  String hRef = visitAARPFooterLink.getAttribute("href");
 	  System.out.println("href for Visit AARP.org link : "+hRef);
-	  Assert.assertTrue("Incorrect href for Visit AARP.org : "+hRef,hRef.contains("www.aarp.org"));
+	  Assert.assertTrue(hRef.contains("www.aarp.org"),"Incorrect href for Visit AARP.org : "+hRef);
 	  visitAARPFooterLink.isEnabled();
 	}
 
@@ -2269,90 +2280,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	}
 	
-	//***** below functions are used to validate SAM Call Icon on All of the Acquisition Pages
-	public void validateCallSamAcq() throws InterruptedException {
-		boolean present;
-		try {
-			validateNew(callsam);
-			present = true;
-			} catch (NoSuchElementException e) {
-			present = false;
-			}
-			if (present) {
-			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			}
-		else
-			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");		
-	}
-	
-	public void validateCallSamContentAcq() throws InterruptedException {
-	
-	Actions action = new Actions(driver);
-	WebElement element = callsam;
-	action.moveToElement(element).perform();
-	String toolTipText = callsamtooltip.getText();
-	System.out.println("====================================================================");
-	System.out.println(toolTipText);
-	System.out.println("====================================================================");
-	
-	if (CallSam.equalsIgnoreCase(toolTipText)) {
-	  System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-	}
-	else
-		System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
-	}
-	
-	public AcquisitionHomePage validateChatSamAcq() throws InterruptedException {
-		boolean present;
-		try {
-		validateNew(chatsam);
-		present = true;
-		} catch (NoSuchElementException e) {
-		present = false;
-		}
-		if (present) {
-		  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-		}
-		else
-			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
-		return null;
-		}
-		
-		public AcquisitionHomePage validateChatSamContentAcq() throws InterruptedException {
-		
-		Actions action = new Actions(driver);
-		WebElement element = chatsam;
-		action.moveToElement(element).perform();
-		String ChattoolTipText = chatsamtooltip.getText();
-		System.out.println("====================================================================");
-		System.out.println(ChattoolTipText);
-		System.out.println("====================================================================");
-		
-		if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
-		  System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
-		}
-		else
-			System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
-		return null;
-		}
-
-		public void  validateCallpopupAcq() throws InterruptedException {
-			//CommonUtility.checkPageIsReady(driver);
-			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
-			driver.switchTo().activeElement();
-			System.out.println(CallSamTFN.getText());
-			//CallSamTFNClose.click();
-			//validateNew(callsam);		
-			//return null;
-				if(CallSamTFN.getText().isEmpty()){
-					System.out.println("Call pop up text is not present");	
-					}else{
-					CallSamTFNClose.click();
-					validateNew(callsam);	
-					System.out.println("SAM Call pop up is closed"); 
-					}
-			} 
+	 
 public AcquisitionHomePage  navigateToPage(String page) {
 		String pageURL = driver.getCurrentUrl()+page;
 		System.out.println("==pageURL=="+pageURL);

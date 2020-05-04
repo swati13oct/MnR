@@ -679,7 +679,7 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 	else{
 		if(validate(MedicaidQuestion) && NextBtn.isEnabled()){
 			System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
-			medicaiddno.click();
+			jsClickNew(medicaiddno);
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("Next Button is enabled when Medicaid question Answered NO");
@@ -688,7 +688,7 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 				System.out.println("non DSNP - Medicare Question 'No' : validation failed");
 				Medicaid_Validation = false;
 			}
-			medicaiddyes.click();
+			jsClickNew(medicaiddyes);
 			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("non DSNP - Medicare Number not required");

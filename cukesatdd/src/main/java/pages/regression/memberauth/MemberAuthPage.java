@@ -6,6 +6,7 @@ import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -269,6 +270,15 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
        if (MemberPopUpLogin.isDisplayed()){
               System.out.println("Pop up Login Button is displayed");       
               Thread.sleep(2000);
+              System.out.println("Scrolling to Login Button");
+      		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+      		jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin); 
+      		try {
+      			Thread.sleep(2000);
+      		} catch (InterruptedException e) {
+      			// TODO Auto-generated catch block
+      			e.printStackTrace();
+      		}
               MemberPopUpLogin.click();  
               System.out.println("popup login button clicked");
               System.out.println("wait for 5 seconds");
@@ -301,7 +311,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 					
 				}
             	  CommonUtility.checkPageIsReadyNew(driver);	
-            		 try {
+            		/* try {
             			 System.out.println("Now checking if Dashboard page Covid modal appeared");
             	         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
             	    
@@ -314,7 +324,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
             	  		         		  
             			} catch (Exception e) {
             				System.out.println("Dashboard covid modal window was not displayed");
-            			}
+            			}*/
             	  CommonUtility.checkPageIsReadyNew(driver);
             	  CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
             	 // waitforElement(SuperUser_DashboardBanner);

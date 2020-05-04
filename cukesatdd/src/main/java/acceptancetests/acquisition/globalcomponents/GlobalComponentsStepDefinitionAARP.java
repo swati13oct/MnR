@@ -364,17 +364,17 @@ public class GlobalComponentsStepDefinitionAARP {
 	public void the_user_validates_SAM_Call_Icon() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamAcq();
-		aquisitionhomepage.validateCallSamContentAcq();
-		aquisitionhomepage.validateCallpopupAcq();	
+		aquisitionhomepage.validateCallSam();
+		aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallpopup();	
 	}
 
 	@Then("^the user validates SAM re-active Chat$")
 	public void the_user_validates_SAM_re_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSamAcq();
-		aquisitionhomepage.validateChatSamContentAcq();
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateChatSamContent();
 		aquisitionhomepage.validateChatpopup();	
 		
 	}
