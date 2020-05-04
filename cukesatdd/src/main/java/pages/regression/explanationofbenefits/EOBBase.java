@@ -415,7 +415,7 @@ public class EOBBase extends EOBWebElements{
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200.  Actual statusValue='"+statusValue+"'", statusValue==200 || statusValue==206);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200 or 206.  Actual statusValue='"+statusValue+"'", statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
@@ -433,29 +433,15 @@ public class EOBBase extends EOBWebElements{
 			System.out.println("TEST - first API request...");
 			String lookForText1="/dreamEob/search?memberNumber=";
 			String lookForText2="responseReceived";
-			//tbd String lookForText3="/medical";
-			//tbd if (planType.equals("PDP")) {
-			//tbd	lookForText3="/rx";
-			//tbd } else if (planType.contains("SHIP")) {
-			//tbd	lookForText3="/ship";
-			//tbd }
 
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
 				//System.out.println("TEST each line="+line);
-				//tbd if (memberType.contains("COMBO")) {
-				//tbd 	if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
-				//tbd 		apiReqeust=line;
-				//tbd 		System.out.println("TEST found line="+line);
-						//break;  //note: only break if looking for the first response, otherwise always take the latest line
-				//tbd 	}
-				//tbd } else {
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
 						System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
-					//tbd } 
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
 			String m_urlStr=parseLine(apiReqeust);

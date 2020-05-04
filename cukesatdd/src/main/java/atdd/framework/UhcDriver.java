@@ -761,10 +761,12 @@ try {
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
-		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		//tbd String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/UCPUserManagement/time/getSystemTime";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		if (MRScenario.environment.contains("team-ci"))
-			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+			//urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/UCPUserManagement/time/getSystemTime";
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
