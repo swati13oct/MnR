@@ -64,10 +64,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'submitBtn')]")
 	private WebElement hsidSignInButton;
 	
-	@FindBy(xpath = "//*[contains(@onClick,'HSIDSignIn')]")
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
-	@FindBy(xpath = "//*[contains(@onClick,'HSIDRegistration')]")
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDRegistration')]")
 	private WebElement registerNowButton;
 
 	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/username')]")
