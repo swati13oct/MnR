@@ -1,6 +1,10 @@
 package pages.regression.payments;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -13,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -26,10 +31,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "termError")
 	private WebElement TermsCheckRadioButton;
-	
+
 	@FindBy(xpath = "//*[@id='custom-page-sub-title']")
 	private WebElement thankyouText;
-	
+
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
 
@@ -331,7 +336,42 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		System.out.println("Openandvalidate method of ConfirmOneTimePaymentPage");
-		
+
+	}
+
+	public void deletePaymetnRecordFromGPS(Map<String, String> paymentTypeMap) {
+		try (Connection con = MRScenario.getGPSuat3Connection()) {
+			String referenceNmbr = ConfirmationNumber.getText();
+			String paymentType = paymentTypeMap.get("Payment Type");
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			stmt = con.createStatement();
+			if (paymentType.equalsIgnoreCase("OneTime")) {
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id ='"
+						+ referenceNmbr + "'");
+				System.out.println("One Time payment has been deleted from household_billing_profile database");
+				Assert.assertTrue("One Time payment has been deleted from household_billing_profile database", true);
+			} else if (paymentType.equalsIgnoreCase("Recurring")) {
+				stmt.executeUpdate(
+						"delete from insured_plan_billing where household_billing_profile_id= '" + referenceNmbr + "'");
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id= '"
+						+ referenceNmbr + "'");
+				System.out.println(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database");
+				Assert.assertTrue(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database",
+						true);
+			}
+
+			else {
+				System.out.println("Payment entry not deleted successfully from the GPS");
+				Assert.fail("Payment entry not deleted successfully from the GPS DB");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }
