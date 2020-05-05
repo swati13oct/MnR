@@ -702,7 +702,9 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	
 	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
-
+		validateNew(mnrSignInButton);
+		mnrSignInButton.click();
+		validateNew(userNameField);
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
