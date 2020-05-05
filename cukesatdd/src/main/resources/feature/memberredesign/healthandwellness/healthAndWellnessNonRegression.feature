@@ -1,17 +1,7 @@
 @healthAndWellness @regressionMember
-Feature: 1.09 Member Health and Wellness Page
+Feature: 1.09.2 Member Health and Wellness Page - Non Regression
 
-  #----- beginning of test for offline prod - local run only ------------------
-  # DO NOT REMOVE this scenario
-  # This scenario is not part of the regular regression run BUT is for aiding the team to do offline prod testing if needed
-  # note: this setup is for the case when we need to validate on offline-prod environment
-  # note: this is intended for local run where you can put in your own member auth username/password and offline username
-  # note: run with environment variable set to offline. -Denvironment="prod"
-  # note: *** DO NOT save your login or test username to github ***
-  # note: replace the following fields with valid value -
-  # note:   username = your memAuth page login username
-  # note:   password = your memAuth page login password
-  # note:   MemUsername =  username of the user on offline prod that you want to test
+  #----- beginning of test for non-regression ------------------
   Scenario Outline: To validate via member authorization access for health and wellness
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -20,6 +10,10 @@ Feature: 1.09 Member Health and Wellness Page
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
     And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
     And I navigate to the Health and Wellness page
     And I should see the H&W Generic dashboard
@@ -28,9 +22,23 @@ Feature: 1.09 Member Health and Wellness Page
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-
+    @nonReg__healthAndWellness01a
     Examples: 
-      | index | username   | password   | MemUserName  | planType | memberType        | hasReward | hasRenewActive |
-      |    01 | myUsername | myPassword | testUsername | MAPD     | RewardsMember     | true      | true           |
+      | TID   | username   | password   | MemUserName  | planType | memberType        | hasReward | hasRenewActive |
+      | 15340 | myUsername | myPassword | testUsername | MAPD     | RewardsMember     | true      | true           |
+      | 15341 | myUsername | myPassword | testUsername | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | myUsername | myPassword | testUsername | MA       | UHC_RewardsMember | true      | true           |
+
+    @nonReg__healthAndWellness01b
+    Examples: 
+      | TID   | username   | password   | MemUserName  | planType | memberType        | hasReward | hasRenewActive |
+      | 15342 | myUsername | myPassword | testUsername | PDP      | RewardsMember     | false     | false          |
+      | xxxxx | myUsername | myPassword | testUsername | SHIP     | RewardsMember     | false     | true           |
+
+    @nonReg__healthAndWellness01c
+    Examples: 
+      | TID   | username   | password   | MemUserName  | planType | memberType        | hasReward | hasRenewActive |
+      | 15343 | myUsername | myPassword | testUsername | FED_SHIP_COMBO | RewardsMember     | false    | false   |
+      | 15343 | myUsername | myPassword | testUsername | SHIP_FED_COMBO | RewardsMember     | false    | true    |
  
- 
+  

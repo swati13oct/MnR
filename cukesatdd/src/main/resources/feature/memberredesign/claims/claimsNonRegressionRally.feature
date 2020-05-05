@@ -17,7 +17,7 @@ Feature: 1.12.3 Member Rally claims - Non Regression
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <username> |
+      | Username | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
     Then the user navigates to EOB page

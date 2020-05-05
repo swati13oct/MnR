@@ -25,7 +25,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Then the user click MyClaims top menu sub option
     Then user validates landing on Rally Claims Page
     
-    @memAuth_rallyClaims01a
+@abc    @memAuth_rallyClaims01a
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | qavgogine  | qavgogine | q1_uhc_ma001 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
@@ -34,7 +34,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     @memAuth_rallyClaims01b
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-#     | 15268 | qavgogine  | qavgogine | testUsername | PCP      | Individual          | COSMOS_CLAIMS   | 
+      | 15268 | qavgogine  | qavgogine | q2_jun_sofl0002| PCP    | Individual          | COSMOS_CLAIMS   | 
 
     @memAuth_rallyClaims01c
     Examples: 

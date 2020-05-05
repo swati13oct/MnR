@@ -45,6 +45,7 @@ import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
@@ -2013,18 +2014,24 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 	
-	/*  @FindBy(tagName = "arcade-header") 
-	 private WebElement shadowRootHeader1;
+	public HealthAndWellnessPage navigateDirectToHwPag() {
+				checkModelPopup(driver,5);
+				if (noWaitValidate(shadowRootHeader)) {
+					System.out.println("located shadow-root element, attempt to process further...");
+					WebElement root1 = expandRootElement(shadowRootHeader);
+					try {
+						WebElement hwTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-health-wellness]"));
+						hwTopMenuShadowRootLink.click();
+					} catch (Exception e) {
+						Assert.assertTrue("PROBLEM - unable to locate Health & Wellness link on Rally Dashboard top menu", false);
+					}		
+					
+				} 
+				CommonUtility.checkPageIsReady(driver);
+				checkModelPopup(driver,5);
 
-	 @FindBy(tagName = "header") 
-	 private WebElement shadowRootHeader2;
-	
-	public WebElement expandHeaderShadowRootElement(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
-				element);
-		System.out.println("expaned element...");
-		return ele;
-	} */
+		return new HealthAndWellnessPage(driver);
+	}
 
 	public EOBPage navigateDirectToEOBPag() {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
