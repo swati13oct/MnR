@@ -1731,7 +1731,7 @@ public class OneTimePaymentAarpStepDefintion {
 				Assert.assertTrue(true);
 			}else{
 				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
-				
+				Assert.fail();
 			}
 
 		}

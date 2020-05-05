@@ -156,6 +156,10 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
 	private WebElement RemainingAmount;
 	
+	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
+	
+	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -632,11 +636,12 @@ public class OneTimePaymentPage extends UhcDriver {
 		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Authorize Payments button");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
-		}
+		}		
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
