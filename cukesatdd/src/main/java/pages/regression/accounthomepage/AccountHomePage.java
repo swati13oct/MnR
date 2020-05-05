@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -33,6 +34,7 @@ import atdd.framework.UhcDriver;
 import pages.member_deprecated.ulayer.OneTimePaymentsPage;
 import pages.member_deprecated.ulayer.PlanComparePage;
 import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.memberrdesignVBF.RallyDashboardPage;
 //import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
@@ -407,7 +409,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement specificclaimlinkforeob;
 
 	
-	 @FindBy(tagName = "arcade-shared-header") 
+	 @FindBy(tagName = "arcade-header") 
 	 private WebElement shadowRootHeader;
 	 
 
@@ -435,6 +437,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
 	protected WebElement dashboardCovideModalDismissLink;
 	
+	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
+	private WebElement EOB_Dashboard;
+	
+	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
+	protected WebElement eobTopMenuLink;
+
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -2004,35 +2012,54 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 
 	}
+	
+	/*  @FindBy(tagName = "arcade-header") 
+	 private WebElement shadowRootHeader1;
+
+	 @FindBy(tagName = "header") 
+	 private WebElement shadowRootHeader2;
+	
+	public WebElement expandHeaderShadowRootElement(WebElement element) {
+		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+				element);
+		System.out.println("expaned element...");
+		return ele;
+	} */
 
 	public EOBPage navigateDirectToEOBPag() {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
-
-		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-
+		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")
+				|| MRScenario.environment.contains("team-a") ) {
 			if (MRScenario.isTestHarness.equals("YES")) {
-				//				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on testharness page table", validate(eobTestharnessLink,0));
 				eobTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				try {
-					if (iPerceptionPopUp.isDisplayed()) {
-						iPerceptionPopUp.click();
-					}
-				} catch (Exception e) {
-					System.out.println("iPerception Pop Up not displayed");
+				checkModelPopup(driver,5);
+				if (noWaitValidate(shadowRootHeader)) {
+					System.out.println("located shadow-root element, attempt to process further...");
+					WebElement root1 = expandRootElement(shadowRootHeader);
+					try {
+						WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
+						//WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[href$='claims.html']"));
+						claimsTopMenuShadowRootLink.click();
+					} catch (Exception e) {
+						Assert.assertTrue("PROBLEM - unable to locate Claims link on Rally Dashboard top menu", false);
+					}		
+					
+					if (noWaitValidate(explainationOfBenefits)) 
+						explainationOfBenefits.click();
+					else if (noWaitValidate(eobTopMenuLink)) 
+						eobTopMenuLink.click();
+					else 
+						Assert.assertTrue("PROBLEM - unable to locate Explanation of Benefits tab in Claims' sub menu with expected WebElements", false);
+				} else {
+					System.out.println("no shadow-root element, attempt to use the link in the rally dashboard page body");
+					Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on the Rally Dashboard page body", noWaitValidate(EOB_Dashboard));
+					EOB_Dashboard.click();
 				}
-
-				// validate(medicalEobLink);
-				/*
-				 * if(medicalEobLink.isDisplayed()){ medicalEobLink.click();
-				 * }else{
-				 */
-				// scrollToView(medicalEobLinkOther);
-				// medicalEobLinkOther.click();
-				// }
-
-				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				CommonUtility.checkPageIsReady(driver);
+				checkModelPopup(driver,5);
 			}
 		} else {
 			System.out.println(
@@ -2046,7 +2073,7 @@ public class AccountHomePage extends UhcDriver {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
 
-		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")) {
 
 			if (MRScenario.isTestHarness.equals("YES")) {
 				//				startNew("https://stage-medicare.uhc.com/member/eob.html");
@@ -2060,6 +2087,8 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("iPerception Pop Up not displayed");
 				}
 
+				validateNew(EOB_Dashboard,0);
+				EOB_Dashboard.click();
 				// validate(medicalEobLink);
 				/*
 				 * if(medicalEobLink.isDisplayed()){ medicalEobLink.click();
@@ -2069,7 +2098,7 @@ public class AccountHomePage extends UhcDriver {
 				// medicalEobLinkOther.click();
 				// }
 
-				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				//startNew("https://stage-medicare.uhc.com/member/eob.html");
 			}
 		} else {
 			System.out.println(
@@ -3082,6 +3111,7 @@ public class AccountHomePage extends UhcDriver {
 		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
+			
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputSelector));
 				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", noWaitValidate(element));

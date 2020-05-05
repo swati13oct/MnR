@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.Claims;
+package atdd.runners.MemberRegression.Claims.deprecated;
 
 import org.junit.runner.RunWith;
 

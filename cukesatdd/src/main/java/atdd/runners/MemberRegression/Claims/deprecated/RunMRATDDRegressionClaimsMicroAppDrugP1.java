@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.Claims;
+package atdd.runners.MemberRegression.Claims.deprecated;
 
 import org.junit.runner.RunWith;
 
@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppDevDrugP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppDevDrugP2")
+jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppDrugP1.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppDrugP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppDevDrugP2.json" }, tags = { "@devRegression","@claimsMicroApp","@pdp_drug" })
-public class RunMRATDDRegressionClaimsMicroAppDevDrugP2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppDrugP1.json" }, tags = { "@claimsMicroApp","@mapd_drug" })
+public class RunMRATDDRegressionClaimsMicroAppDrugP1 {
 //note: use this runner for drug claims
 }

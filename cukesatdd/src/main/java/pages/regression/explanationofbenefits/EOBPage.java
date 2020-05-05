@@ -1217,6 +1217,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
+		Assert.assertTrue("PROBLEM - should not locate old 'Claims Summary' link on top menu after Rally Claims cut over", !eobValidate(oldClaimsSubTopMenu));
 		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
 	}
 
