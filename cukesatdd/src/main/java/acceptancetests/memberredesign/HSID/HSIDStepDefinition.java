@@ -1479,9 +1479,6 @@ public class HSIDStepDefinition {
 								String userName = memberAttributesMap.get("Username");
 
 								getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-
-								WebDriver wd = getLoginScenario().getWebDriver();
-								getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 								getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 								getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 

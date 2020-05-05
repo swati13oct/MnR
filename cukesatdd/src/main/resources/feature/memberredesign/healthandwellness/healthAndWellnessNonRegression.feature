@@ -1,4 +1,4 @@
-@healthAndWellness @regressionMember
+@healthAndWellness
 Feature: 1.09.2 Member Health and Wellness Page - Non Regression
 
   #----- beginning of test for non-regression ------------------

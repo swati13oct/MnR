@@ -1,4 +1,4 @@
-@healthAndWellness @regressionMember
+@healthAndWellness
 Feature: 1.09.1 Member Health and Wellness Page - Member Auth
 
   #----- beginning of test for non-regression------------------

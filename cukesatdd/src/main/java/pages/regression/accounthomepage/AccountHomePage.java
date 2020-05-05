@@ -11,8 +11,10 @@ import java.util.regex.Pattern;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -443,6 +445,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
+	
+	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
+	protected WebElement planDocResPgLink;
 
 	private PageData myAccountHome;
 
@@ -3334,6 +3339,11 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
+				checkModelPopup(driver,5);
+			} else if (MRScenario.environment.contains("prod")) {
+				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
+				checkModelPopup(driver, 5);
+				planDocResPgLink.click();
 			} else {
 				if (driver.getCurrentUrl().contains("mymedicareaccount"))
 					driver.navigate().to("https://" + MRScenario.environmentMedicare
@@ -3366,6 +3376,17 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}		
 
+	public boolean isAlertPresent() {
+		try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				System.out.println("Detected Alert popup, accept it and move on...");
+		} catch (NoAlertPresentException Ex) {
+			System.out.println("DID NOT detect Alert popup, move on...");
+			return false;
+		}
+		return true;
+	}
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
 		checkForIPerceptionModel(driver);
