@@ -208,6 +208,7 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	//// TODO Selecting Multiple PCP providers
 	public VPPPlanSummaryPage MultipleselectsProvider()  {
+	
 		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
@@ -219,6 +220,7 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		jsClickNew(Physician);
 		
+		int counter = 0;
 		
 		for(WebElement element :MulitpleSaveBtns)
 		{
@@ -238,6 +240,11 @@ public class ProviderSearchPage extends UhcDriver {
 			
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
 			jsClickNew(BtnClose);
+			
+			counter++;
+			if(counter == 3) {
+				break;
+			}
 			
 		}
 			
