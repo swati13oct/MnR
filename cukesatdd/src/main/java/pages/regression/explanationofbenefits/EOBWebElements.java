@@ -328,6 +328,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//*[contatins(text(),'We are currently experiencing an internal server problem')]")
 	protected WebElement internalServerError;
 	
+	@FindBy(xpath="//div[@id='servicefailerrnvda']")
+	protected WebElement internalServerError2;
+	
 	@FindBy(xpath="//nav[@id='sub-nav']//a[contains(@href,'spending-and-cost-summary')]")
 	protected WebElement spendingCostSummaryTab_topSubMenu;
 	
@@ -351,6 +354,15 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
 	protected WebElement tblHeaderStmt;
+	
+	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'If you are having')]")
+	protected WebElement contactusStmt1;
+
+	@FindBy(xpath="//p[contains(text(),'In some instances')]")
+	protected WebElement contactusStmt2;
+	
+	@FindBy(xpath="//p//strong[contains(text(),'Is there a provider')]/../u/a")
+	protected WebElement contactusLnk;
 	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);

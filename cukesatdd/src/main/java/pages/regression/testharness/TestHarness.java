@@ -290,7 +290,12 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1")
 	private WebElement hcePageText;
 	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
 	
+	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
+	private WebElement TestHarnesspaymentsLink;
+		
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -348,10 +353,9 @@ public class TestHarness extends UhcDriver {
 	 */
 	public PaymentHistoryPage navigateToPaymentOverview() throws InterruptedException {
 		
-		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
-		if(validateNew(premPaymentsTab))
-			premPaymentsTab.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		premPaymentsTab.click();		
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
@@ -375,17 +379,31 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
-		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
-		if(validateNew(PaymentPageLink))
-			PaymentPageLink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		    CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("testharness")) {
+				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
+				TestHarness.checkForIPerceptionModel(driver);
+				TestHarnesspaymentsLink.click();
+				TestHarness.checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		if (MakeAPaymentButton.isDisplayed())
+		{
+		System.out.println("Make a payment button was displayed on Payments page");
+		return new PaymentHistoryPage(driver);
+		}
+		else
+		{
+			Assert.fail("Make a payment button was not displayed on Payments page");
+		}
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
 		}
-		return null;
+		
+	    }
+			return null;
+			
 	}
-	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPageSkipBtnValidation() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
@@ -549,10 +567,12 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
+		TestHarness.checkForIPerceptionModel(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
 		validateNew(testHarnessContactUsPageLink);
+		TestHarness.checkForIPerceptionModel(driver);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		try {
@@ -596,6 +616,7 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
+		checkModelPopup(driver,5);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
