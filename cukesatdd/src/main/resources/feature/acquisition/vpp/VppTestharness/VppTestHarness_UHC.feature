@@ -207,7 +207,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | year |
       | 00012 | vppdeeplink | Blayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
-      | 00013 | vppdeeplink | Blayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+      #| 00013 | vppdeeplink | Blayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 
   @vppTestharnessUHC07 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
@@ -319,8 +319,8 @@ Feature: VPP Testharness flow Navigations for UHC Site
 
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
-      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
-      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-08-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-08-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
 
   ##############
   ##Testharness providersearch Scenarios

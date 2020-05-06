@@ -35,6 +35,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Predicate;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -114,7 +115,7 @@ public abstract class UhcDriver {
         }
 
 
-	public void sendkeys(WebElement element, String message) {
+	public static void sendkeys(WebElement element, String message) {
 		element.click();
 		element.clear();
 		element.sendKeys(message);
@@ -492,7 +493,7 @@ try {
 	 * @param Element
 	 */
 	public void switchToNewTabNew(WebElement Element) {
-		String parentHandle = driver.getWindowHandle();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
@@ -501,7 +502,7 @@ try {
 		for (int i = 0; i < initialCount + 1; i++) {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
-			if (!currentHandle.contentEquals(parentHandle))
+			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 				break;
 		}
 	}

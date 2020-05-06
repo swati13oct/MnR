@@ -135,7 +135,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryAARP04 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
