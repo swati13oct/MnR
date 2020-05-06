@@ -2,7 +2,7 @@
 Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
 
   @vppNextActionModalRegression_1 @prodRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MAPD Plan when no Drug cost/provider exists
+  Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MAPD Plan when no Drug cost/provider exists
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -18,7 +18,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       
       
       @vppNextActionModalRegressionMAPDAddDrug
-    Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MAPD Plan when Drug cost exists
+    Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MAPD Plan when Drug cost exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -33,7 +33,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |  19019 | No              | Iowa County     | MAPD     |
       
       @vppNextActionModalAddProvider
-    Scenario Outline: UserStory: <TID> -plan type: <plantype> Test to verify the Next action modal for MAPD plan when Provider exists
+    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for MAPD plan when Provider exists
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -48,7 +48,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |  19019 | No              | Iowa County    | MAPD     |
       
       @vppNextActionModalAddDrugAndProviderEnrollPlan
-    Scenario Outline: UserStory: <TID> -plan type: <plantype> Test to verify the Next action modal for MAPD plan when Provider and Drug cost exists
+    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for MAPD plan when Provider and Drug cost exists
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -64,7 +64,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       
       
       @vppNextActionModalRegressionMA
-     Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MA Plan when no Drug cost exists
+     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MA Plan when no Drug cost exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -78,7 +78,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       
       
       @vppNextActionModalRegressionMAAddDrug
-     Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MA Plan when Drug cost exists
+     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MA Plan when Drug cost exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -92,7 +92,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       
       
       @vppNextActionModalRegressionMAAddProvider
-     Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MA Plan when Provider exists
+     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MA Plan when Provider exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -105,7 +105,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | MA     |
       
       @vppNextActionModalRegressionMAAddDrugAndProviderEnrollPlan
-    Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for MA Plan when both Drug cost and Provider exists
+    Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for MA Plan when both Drug cost and Provider exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -118,7 +118,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | MA     |
       
       @vppNextActionModalRegressionPDP
-     Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for PDP Plan when no Drug cost exists
+     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for PDP Plan when no Drug cost exists
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -131,7 +131,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | PDP      |      
       
       @vppNextActionModalRegressionPDPAddDrug
-     Scenario Outline: UserStory: <TID> -plan type: <plantype> -Test to verify the Next action modal for PDP Plan when Drug cost exists
+     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for PDP Plan when Drug cost exists
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
