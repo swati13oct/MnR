@@ -363,6 +363,15 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//a[starts-with(@id,'messages')]")
 	private WebElement Rallymessageslink;
 	
+	@FindBy(xpath ="//a[@class='ogn-genesys-chat-button']")
+	private WebElement chatLink; 
+	
+	@FindBy(xpath ="//span[@id='omni-chat-offline']")
+	private WebElement chatoffline;
+	
+	@FindBy(xpath ="//p[contains(text(),'Start a secure Chat session with an Advocate now.')]")
+	private WebElement chatMessage; 
+	
 
 	public JSONObject contactUsJson;
 
@@ -1187,6 +1196,46 @@ public void NavigateRallyandclickonmessagesLink() {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	}
-
-
+	
+	/**
+	 * Validate the go to CHAT with us for SHIP member 
+	 */
+	public void validateChatWithUs(){
+		try {
+			validateNew(chatMessage);
+			if (chatMessage.isDisplayed());
+			System.out.println("**Chat message seen is:->"+chatMessage);
+			if(
+				driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) {
+				System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+				System.out.println("** User landed on Contact us Page **");
+				Assert.assertTrue(driver.getTitle().contains("Help & Contact Us"));
+				return ;
+				} else {
+					Assert.fail("The element " + chatMessage.getText() + "is not found");
+				}
+		//	waitforElement(chatoffline);
+			//validateNew(chatLink);
+			//waitforElement(chatLink);
+			//Assert.assertTrue(validate(chatLink));
+			try {
+				chatLink.click();
+				System.out.println("** Chat link clicked **");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//chatLink.isDisplayed();
+			
+			//if(chatLink.isDisplayed());
+			
+			//chatLink.click();
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
