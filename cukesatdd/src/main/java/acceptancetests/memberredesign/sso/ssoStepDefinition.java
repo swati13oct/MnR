@@ -170,6 +170,10 @@ public void security_and_password_reset_link_should_not_be_visible() throws Thro
 @Given("^User lands on the ping federate SSO test harness page$")
 public void the_user_is_pingFederate_Testharness_Page() throws InterruptedException{
 	WebDriver wd = getLoginScenario().getWebDriver();
+	
+	//adding to get screenshots
+	 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	 
 	bswiftPage bswiftpage = new bswiftPage(wd);
 	bswiftpage.navigateToLoginURL1();
 	getLoginScenario().saveBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift, bswiftpage);	
