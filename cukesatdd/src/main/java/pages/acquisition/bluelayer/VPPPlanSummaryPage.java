@@ -3713,7 +3713,9 @@ catch (Exception e) {
 	
 	--------------------------*/
 	
-	public boolean providerinforetreive(String planName){	
+	//public boolean providerinforetreive(String planName){	
+	
+	public ArrayList<String> providerinforetreive(String planName){
 		
 		try {
 			Thread.sleep(2000);
@@ -3724,22 +3726,18 @@ catch (Exception e) {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
-        System.out.println(mproviderinfo);
+		System.out.println(mproviderinfo);
         ProviderSearchLink.click();
-	
-		List li = new ArrayList();
-		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'AARP Medicare Advantage SecureHorizons (HMO)')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//li//span"));
+        ArrayList<String> providerNames = new ArrayList<String>();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
 		for(WebElement element:providers)
 		{
 			String providername = element.getText();
-			li.add(providername);
+			providerNames.add(providername);
 		}
 		
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
-		}
-		
-		return false;
+		return providerNames;
 	}
 		
 }
