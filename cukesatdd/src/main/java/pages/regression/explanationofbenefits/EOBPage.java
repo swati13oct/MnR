@@ -393,7 +393,8 @@ public class EOBPage extends EOBBase{
 					if (memberType.contains("COMBO")) 
 						goToSpecificComboTab(planType);
 					CommonUtility.checkPageIsReady(driver);
-					selectEobType(planType, targetEobType);
+					if (targetEobType!=null)
+						selectEobType(planType, targetEobType);
 				} else {
 					if (eobValidate(internalServerError) || eobValidate(internalServerError2)) 
 						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and getting internal system error, abort test now", false);

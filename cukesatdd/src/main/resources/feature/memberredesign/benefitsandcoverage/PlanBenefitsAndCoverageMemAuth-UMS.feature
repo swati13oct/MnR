@@ -8,7 +8,7 @@ Feature: 1.01 Member  benefits and Coverage page
 ###############################Regression Scenarios Begin Here ########################################
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
   @memAuth_benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_memAuth
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

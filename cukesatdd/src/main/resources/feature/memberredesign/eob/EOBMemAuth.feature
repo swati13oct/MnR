@@ -8,7 +8,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
 
   #note: skip the API and UI count comparison for now because service is unstable
   @memAuth_eob01 @E2E  
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: To validate via member authorization access for EOB page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

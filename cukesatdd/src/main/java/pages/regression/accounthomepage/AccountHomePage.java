@@ -287,6 +287,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
+	
+	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'pharmacy-locator')]")
+	private WebElement section_pharmacySearchLink;
+
+	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'drug-lookup')]")
+	private WebElement section_drugLocator;
 
 	// for Header
 	@FindBy(id = "premiumpayment_3")
@@ -780,7 +786,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("test is through stage");
 		} // Testing through Stage
-		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
@@ -788,6 +794,27 @@ public class AccountHomePage extends UhcDriver {
 					acctProfile.click();
 					acctSetting.click();
 				} else {
+					checkModelPopup(driver,5);
+					if (noWaitValidate(shadowRootHeader)) {
+						System.out.println("located shadow-root element, attempt to process further...");
+						WebElement root1 = expandRootElement(shadowRootHeader);
+						try {
+							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
+							acctSettingMenuShadowRootBtn.click();
+						} catch (Exception e) {
+							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
+						}
+						try {
+							WebElement acctSettingLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_ACCOUNT_SETTINGS]"));
+							acctSettingLink.click();
+						} catch (Exception e) {
+							Assert.assertTrue("PROBLEM - unable to locate Account Profile link on Rally Dashboard top menu", false);
+						}
+							
+					} 
+					CommonUtility.checkPageIsReady(driver);
+					checkModelPopup(driver,5);
+					/* tbd 
 
 					// note: check to see if account setting dropdown link is
 					// inside shadow-root element
@@ -843,6 +870,7 @@ public class AccountHomePage extends UhcDriver {
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					}
+				*/
 				} 
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
@@ -1630,7 +1658,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 		checkForIPerceptionModel(driver);
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
+		if (MRScenario.environment.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
@@ -1645,7 +1673,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println("URL for testing: " + Page_URL);
 			driver.navigate().to(Page_URL);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
+		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.contains("prod")) {
 			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("pharmacylocator");
 			} else {
@@ -1653,7 +1681,15 @@ public class AccountHomePage extends UhcDriver {
 				if (driver.getCurrentUrl().contains("/dashboard")) {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 					CommonUtility.waitForPageLoad(driver, pharmacySearchLink, 5);
-					pharmacySearchLink.click();
+					if (noWaitValidate(pharmacySearchLink))
+						pharmacySearchLink.click();
+					else if (noWaitValidate(section_pharmacySearchLink)) {
+						scrollElementToCenterScreen(section_pharmacySearchLink);
+						moveMouseToElement(section_pharmacySearchLink);
+						section_pharmacySearchLink.click();
+					}
+					else 
+						Assert.assertTrue("PROBLEM - unable to locate pharmacy locator link on Rally Dashboard page", false);
 					System.out.println("Clicked pharmacy Search Link...");
 					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 				}
@@ -2282,7 +2318,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println(
 					"Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
-			locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='find-care']");
+			locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]");
 		}
 
 	}
@@ -2836,68 +2872,33 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
-	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+	 public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+		 checkModelPopup(driver,5);
+		 if (noWaitValidate(shadowRootHeader)) {
+			 System.out.println("located shadow-root element, attempt to process further...");
+			 WebElement root1 = expandRootElement(shadowRootHeader);
+			 try {
+				 WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				 benefitsTopMenuShadowRootLink.click();
+			 } catch (Exception e) {
+				 Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			 }		
 
-		if (MRScenario.environment.equalsIgnoreCase("stage")
-				&& ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
-			System.out.println("user is on Stage login page");
-				if (driver.getCurrentUrl().contains("/dashboard"))
-			{
-				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+		 } 
+		 CommonUtility.checkPageIsReady(driver);
+		 checkModelPopup(driver,5);
 
-				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-				CommonUtility.checkPageIsReadyNew(driver);
-				System.out.println("Current URL is "+driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 20);
-				if (driver.getTitle().contains("Benefits")) {
-					System.out.println(driver.getTitle());
-					return new BenefitsAndCoveragePage(driver);
-				}
+		 CommonUtility.waitForPageLoad(driver, heading, 50);
+		 if (driver.getTitle().contains("Benefits")) {
+			 return new BenefitsAndCoveragePage(driver);
+		 }
 
-			}
-		} else if (MRScenario.environment.equals("stage")
-				&& ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
-			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits-coverage.html");
-			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current URL is "+driver.getCurrentUrl());
-			if (driver.getTitle().contains("Benefits")) {
-				System.out.println(driver.getTitle());
-				return new BenefitsAndCoveragePage(driver);
-			}
-
-		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
-
-			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-			System.out.println(driver.getCurrentUrl());
-		} else if (MRScenario.environment.equals("team-c")) {
-			driver.navigate().to(
-					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-			System.out.println(driver.getCurrentUrl());
-			return new BenefitsAndCoveragePage(driver);
-		} else if (MRScenario.environment.equals("team-e")) {
-			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
-			CommonUtility.waitForPageLoad(driver, heading, 30);
-			System.out.println(driver.getCurrentUrl());
-			return new BenefitsAndCoveragePage(driver);
-		} else {
-			driver.navigate().to(
-					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-			System.out.println(driver.getCurrentUrl());
-			return new BenefitsAndCoveragePage(driver);
-		}
-
-		CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
-			return new BenefitsAndCoveragePage(driver);
-		}
-
-		return null;
-
-	}
+		 return null;
+	 }
 
 	public BenefitsAndCoveragePage navigateToBandCPag() {
 
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard"))
@@ -2922,8 +2923,8 @@ public class AccountHomePage extends UhcDriver {
 			}
 		}
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+		else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")
+				|| MRScenario.environment.equals("team-e")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
@@ -3476,6 +3477,13 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public boolean findShadowRootTopMenuLinkForPnP() {
+		String pnpTopMenuItemCssStr="a[data-testid*=nav-link-pharmacies]";
+		WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+				pnpTopMenuItemCssStr);
+		if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
+			return true;
+		return false;
+		/* tbd 
 		//note: use the 2nd menu link as the base and determine which one I really need
 		// if 2 is FIND CARE then 6 is PnP
 		// if 2 is CARE then 5 is PnP
@@ -3511,6 +3519,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 		} 
 		return false;
+		*/
 	}
 	
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
@@ -3630,6 +3639,21 @@ public class AccountHomePage extends UhcDriver {
 		String idCard = viewRecomend.getAttribute("innerText");
 		Assert.assertTrue(idCard.contains("VIEW & PRINT MEMBER ID CARDS"));
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
+	}
+	
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
+	
+	public void scrollElementToCenterScreen(WebElement element) {
+		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
+		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+		System.out.println("TEST - move element to center view"); 
+		/* JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
 	
 }

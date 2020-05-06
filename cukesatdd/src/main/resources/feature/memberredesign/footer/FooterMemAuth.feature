@@ -2,7 +2,7 @@
 Feature: 1.05.1 Member Footer validation - Member Auth
 
   @memAuth_footer01 @thePredators
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

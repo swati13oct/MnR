@@ -1,8 +1,8 @@
 @orderPlanMaterials @thePredators
 Feature: 1.10.1 Member  order materials Page - Member Auth
 
-  @memAuth_orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember @regressionMember_Testharness
-  Scenario Outline: To validate via member authorization access for health and wellness
+  @memAuth_orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -93,7 +93,7 @@ Feature: 1.10.1 Member  order materials Page - Member Auth
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
   # note: This test is applicable to test via rally login only, validation will be skipped if access through testharness
   # note:
-  @memAuth_orderPlanMaterials02 @TerminatedMemberNegativeScenario @regressionMember @regressionMember_Testharness
+  @memAuth_orderPlanMaterials02 @TerminatedMemberNegativeScenario
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Terminated members cannot access Order Plan materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

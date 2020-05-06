@@ -7,7 +7,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 
   #------------------------------------------
   @memAuth_planAndDocuments01 @header @myDocuments @eob @renewMagazine @adobe @needHelp
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

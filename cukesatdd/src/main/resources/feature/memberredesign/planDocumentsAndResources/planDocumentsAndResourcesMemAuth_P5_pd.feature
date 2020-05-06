@@ -7,7 +7,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 
   #------------------------------------------
   @memAuth_planAndDocuments05 @providerPharmacyDirectories
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

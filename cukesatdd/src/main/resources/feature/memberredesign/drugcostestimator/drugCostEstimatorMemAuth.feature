@@ -19,7 +19,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | 15327 | SSUP     | SSUP_DCE     |
 
   @memAuth_drugCostEstimator2
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

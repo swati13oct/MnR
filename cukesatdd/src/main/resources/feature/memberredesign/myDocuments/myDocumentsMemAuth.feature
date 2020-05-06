@@ -6,7 +6,7 @@ Feature: 1.06.7 Member My Documents Page
   #    | Feature           | UCPMyDocuments |
 
   @memAuth_myDocuments01
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

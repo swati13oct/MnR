@@ -2,7 +2,7 @@
 Feature: 1.09.1 Member Health and Wellness Page - Member Auth
 
   #----- beginning of test for non-regression------------------
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

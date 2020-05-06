@@ -7,7 +7,7 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 
   #------------------------------------------
   @memAuth_planAndDocuments02 @planMaterials
-  Scenario Outline: To validate via member authorization access for health and wellness
+  Scenario Outline: To validate via member authorization access for  Plan Documents and Resources page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
