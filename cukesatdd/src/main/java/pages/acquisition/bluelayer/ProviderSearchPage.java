@@ -219,7 +219,7 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		jsClickNew(Physician);
 		
-		
+		//int counter = 0;
 		for(WebElement element :MulitpleSaveBtns)
 		{
 			CommonUtility.waitForPageLoadNew(driver, element, 45);
@@ -238,6 +238,12 @@ public class ProviderSearchPage extends UhcDriver {
 			
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
 			jsClickNew(BtnClose);
+			
+			//counter++;
+//			if(counter==2)
+//			{
+//				break;
+//			}
 			
 		}
 			

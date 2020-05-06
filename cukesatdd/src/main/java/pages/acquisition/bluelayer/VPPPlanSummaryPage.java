@@ -3696,5 +3696,52 @@ catch (Exception e) {
 		}
 		return false;
 	}
+	/* ---------------------
+	 ArrayList<String> providersForCompare=new ArrayList<String>();
 	
+	if (providersForCompare > 4) {
+		System.out.println("There are more than 4 providers, only first 4 will be compared");
+		providersForCompare=4;
+	}
+	if(ProvidersCovered !=null){
+		for(int i = 0; i<providersForCompare; i++){
+			ProvidersCovered.get(i).click();
+			System.out.println("Plan added to compare : "+i);
+		}
+	}
+	return providersForCompare;
+	
+	--------------------------*/
+	
+	public boolean providerinforetreive(String planName){	
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+        System.out.println(mproviderinfo);
+        ProviderSearchLink.click();
+	
+		List li = new ArrayList();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'AARP Medicare Advantage SecureHorizons (HMO)')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//li//span"));
+		for(WebElement element:providers)
+		{
+			String providername = element.getText();
+			li.add(providername);
+		}
+		
+		if (mproviderinfo.toLowerCase().contains("providers covered")) {
+			return true;
+		}
+		
+		return false;
+	}
+		
 }
+
+
