@@ -498,7 +498,22 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag(String Plantype) {
 
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")) {
+			checkModelPopup(driver,5);
+			if (noWaitValidate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+					benefitsTopMenuShadowRootLink.click();
+				} catch (Exception e) {
+					Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+				}		
+
+			} 
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			/* tbd 
 			if (Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP")
 					|| Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA")
 					|| Plantype.equalsIgnoreCase("MAPDRX") || Plantype.equalsIgnoreCase("MAPDVill")) {
@@ -578,22 +593,21 @@ public class AccountHomePage extends UhcDriver {
 
 				}
 			}
-		}
-
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-c")) {
+			*/
+		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")
+				|| MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-c")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else {
 			if (Plantype.equalsIgnoreCase("PCP")) {
-				driver.navigate().to("https://" + MRScenario.environmentMedicare
+				driver.navigate().to("https://" + MRScenario.environment
 						+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 			} else if (Plantype.equalsIgnoreCase("MEDICA")) {
-				driver.navigate().to("https://" + MRScenario.environmentMedicare
+				driver.navigate().to("https://" + MRScenario.environment
 						+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 			} else {
-				driver.navigate().to("https://" + MRScenario.environmentMedicare
+				driver.navigate().to("https://" + MRScenario.environment
 						+ "-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 			}
 		}
@@ -2020,21 +2034,20 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public HealthAndWellnessPage navigateDirectToHwPag() {
-				checkModelPopup(driver,5);
-				if (noWaitValidate(shadowRootHeader)) {
-					System.out.println("located shadow-root element, attempt to process further...");
-					WebElement root1 = expandRootElement(shadowRootHeader);
-					try {
-						WebElement hwTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-health-wellness]"));
-						hwTopMenuShadowRootLink.click();
-					} catch (Exception e) {
-						Assert.assertTrue("PROBLEM - unable to locate Health & Wellness link on Rally Dashboard top menu", false);
-					}		
-					
-				} 
-				CommonUtility.checkPageIsReady(driver);
-				checkModelPopup(driver,5);
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement hwTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-health-wellness]"));
+				hwTopMenuShadowRootLink.click();
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Health & Wellness link on Rally Dashboard top menu", false);
+			}		
 
+		} 
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
 		return new HealthAndWellnessPage(driver);
 	}
 

@@ -1,4 +1,4 @@
-@planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
+@planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
@@ -69,7 +69,7 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 	@memAuth_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 12-031 | 15303       | qavgogine | qavgogine | testusername    | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+      | 12-031 | 15303       | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-032 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 
@@ -82,19 +82,19 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 	@memAuth_active_pdp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 16-035 | 15126,15127 | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
-      | 17-036 | 15131,15233 | qavgogine | qavgogine | testusername    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
+      | 16-035 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
+      | 17-036 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
 
 	@memAuth_active_ssup
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 18-037 | 15131,15233 | qavgogine | qavgogine | testusername    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | false | false |
+      | 18-037 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | false | false |
 
 	@memAuth_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 19-038 | 15119,15304 | qavgogine | qavgogine | testusername    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
-      | 20-116 | 15119,15304 | qavgogine | qavgogine | testusername    | true  | true  | true  | true  | false | false |  
+      | 19-038 | 15119,15304 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+      | 20-116 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR   | true  | true  | true  | true  | false | false |  
 
 
 
