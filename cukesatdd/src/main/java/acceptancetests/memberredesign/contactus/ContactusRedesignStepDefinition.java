@@ -501,6 +501,12 @@ public class ContactusRedesignStepDefinition {
 		contactus.validateSSOInboxViaMessengerLink();
 	}
 	
+	@Then("^the user validates the CHAT section$")
+	public void validate_Chat_Section() {	
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.validateChatWithUs();		
+	}
+	
 	
 	
 }
