@@ -336,6 +336,10 @@ public class MRConstants {
   public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
 
   public static final String STAGE_SSO_TESTHANESS_URL = "http://apsrs7264.uhc.com:8080/content/admin-tools/sso-test.html";  
+  
+  public static String AARP_TELESALES_AGENT_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
+  
+  public static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/admin/shopper-profile.html/login";
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;

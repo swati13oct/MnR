@@ -146,6 +146,12 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String REQUEST_MAILED_INFORMATION_UHC = "RequestmailedinformationUHC";
 
 	public static final String VISITOR_PROFILE_PAGE = "VisitorProfilePage";
+	
+	public static final String SHOPPER_PROFILE_PAGE = "ShopperProfileAgentLogin";
+	
+	public static final String PROFILE_SEARCH = "ProfileSearch";
+	
+	public static final String CREATE_A_PROFILE= "CreateProfile";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
 
@@ -428,6 +434,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   public static final String ADD_DRUG_DETAILS = "addDrugDetails";
 	   public static final String DCE_TESTHARNESS_PAGE = "dceTestHarnessPage";
 	   public static final String VPP_TESTHARNESS_PAGE = "vppTestHarnessPage";
+	   public static final String VP_TESTHARNESS_PAGE = "vpTestHarnessPage";
 	   public static final String OLE_TESTHARNESS_PAGE = "oleTestHarnessPage";
 	   
 	   public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
