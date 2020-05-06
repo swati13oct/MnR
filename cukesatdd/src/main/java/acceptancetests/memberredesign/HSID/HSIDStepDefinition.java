@@ -36,6 +36,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.deeplinkPages.ClaimsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.aarpChatAgentLogin;
 import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
 import pages.regression.deeplinkPages.coverageandBenefitsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
@@ -1483,4 +1484,32 @@ public class HSIDStepDefinition {
 								getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 
 							}
+
+							/** 
+								 * @todo :agent lands on login page 
+								 */
+								@Given("^agentlogin lands on page$") 
+								public void agentloginandsnpage() throws InterruptedException{
+									WebDriver wd = getLoginScenario().getWebDriver();
+									aarpChatAgentLogin aarpChatAgentLogin = new aarpChatAgentLogin(wd);
+									aarpChatAgentLogin.navigateToLoginURL();
+									aarpChatAgentLogin.validatePageElements();
+									getLoginScenario().saveBean(PageConstants.AARP_CHAT_AGENT_LOGIN,aarpChatAgentLogin );	
+								}
+								/** 
+								 * @todo :agent enters credentials 
+								 */
+								 @Given("^agent enters credentials$") 
+								 public void agententercredentials() throws InterruptedException{
+									 Thread.sleep(5000);
+									 String username = "AARPStage7";
+									aarpChatAgentLogin.enterusername(username);
+									 String password =  "AARPStage7";
+									aarpChatAgentLogin.enterpassword(password);	
+									 aarpChatAgentLogin.clickSubmit();
+									
+									 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
+								     Thread.sleep(3000);
+								     aarpChatAgentLogin.aarpchatagentreadystate();
+								}			 
 }
