@@ -211,6 +211,19 @@ public class ProviderSearchPage extends UhcDriver {
 		
 	}
 	
+	public int entersZipcodeAndPlancount(String zipcode) {
+
+		validateNew(zipCodeTextfield);	
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		continueButton.click();
+		
+	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li/h2/button[contains(@class,'link')]"));
+	   
+	    return topicDropDownValues.size();
+	}
+	
+	
 	public void selectsProviderFromGlobaHeader() {
 		
 
