@@ -34,6 +34,7 @@ import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
@@ -709,6 +710,9 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error validating plans in  VPP plan summary page",
 				plansummaryPage.validateVPPPlanSummaryPage());
+		String SiteName = "UHG_ACQ";
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	
 	}
 
 	/**
@@ -1065,13 +1069,31 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+		String savePlanNames = memberAttributesMap.get("Test Plans");
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	@Then("^user saves two MS plans as favorite on UHC site$")
@@ -1080,13 +1102,10 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MS Test Plans");
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
 
 		// ----- MS plan type ----------------------------
-		String planType = "MS";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
 	}
 
 	@Then("^user gets a create profile prompt on UHC site$")
@@ -2479,7 +2498,7 @@ public class VppStepDefinitionUHC {
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
 		if(isMultutiCounty.equalsIgnoreCase("YES")) {
-			vppTestHarnessPage.SelectCounty(CountyName);
+			vppTestHarnessPage.SelectCountyforplanDetails(CountyName);
 		}
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
 		if(vppPlanDetailsPage!=null){
@@ -2645,5 +2664,195 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
+	}
+	
+	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	@Given("^the user is on VistorProfile TestHarness page for UHC$")
+	public void validateUserIsOnAARP_VPTestharnessPage_for_UHC(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage.GetVisitorProfileTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE,vpTestHarnessPage);
+	}
+	
+	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on UHC$")
+	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinGuestprofileLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user Enters Fields and selects helper mode for Save plans in Authenticated profile to VP with plans data on UHC$")
+	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_UHC(
+			DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String uuid = inputAttributesMap.get("UUID");
+		String isguest = inputAttributesMap.get("IsGuest");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid, isguest);
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on UHC site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithDrugsandPharmacyinVisitorProfile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Providers in Visitor Profile on UHC site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithProvidersinVisitorProfile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_LaunchVPwithProvidersLink();
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects plan to compare from visitor Profile on UHC site$")
+	public void user_selectsplantoComparefromVisitorProfile_on_UHC(DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Plancompare = inputAttributesMap.get("Plan compare");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		ComparePlansPageBlayer planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
+
+		if (planComparePage != null) {
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		} else {
+			Assert.fail("Error Loading on Plan Compare page");
+		}
+
+	}
+
+	@Then("^verify plans added in plan compare on visitor Profile for UHC$")
+	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forUHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
+	}
+
+	@And("^user Enters plan info to land on plan details from visitor Profile on UHC site$")
+	public void user_EntersplaninfotolandonplandetailsfromvisitorProfileonUHCsite(DataTable inputAttributes)
+			throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String ContractNo = inputAttributesMap.get("Contract Number");
+		String PbpNo = inputAttributesMap.get("PBP Number");
+		String SegId = inputAttributesMap.get("Segment ID");
+		String CountyCD = inputAttributesMap.get("County code");
+		String product = inputAttributesMap.get("Product");
+		String year = inputAttributesMap.get("Plan Year");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		PlanDetailsPage vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode, ContractNo,
+				PbpNo, SegId, CountyCD, product, year);
+
+		if (vppPlanDetailsPage != null) {
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		} else {
+			Assert.fail("Error Loading on Plan Details Page page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch OLE for Guest profile on UHC$")
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_UHC(DataTable givenAttributes) throws Exception {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		String PlanName = memberAttributesMap.get("Plan Name");
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanType = memberAttributesMap.get("Plan Type");
+		
+		
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		WelcomePage welcomePage = vpTestHarnessPage.NavigateToOLEfromVP();
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		} else {
+			Assert.fail("Error Loading OLE Welcome page");
+		}
+	}
+	
+	@And("^user selects Delete Drug and Pharamcy on the Authenticated profile on UHC site$")
+	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteDrugAndPharamacy();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	
+	@And("^user selects Delete Provider on the Authenticated profile on UHC site$")
+	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteProvider();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
 	}
 } 
