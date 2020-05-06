@@ -1,7 +1,5 @@
 package pages.acquisition.ulayer;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +10,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +28,6 @@ import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -235,8 +231,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
-
-	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
+	
+	
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 	
 	@FindBy(id="ghn_lnk_2")
@@ -1403,6 +1400,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+
 
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
@@ -1522,6 +1521,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		}else {
@@ -1736,6 +1736,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
+			return new VisitorProfileTestHarnessPage(driver);
+		}
 		public OLETestHarnessPage GetOLETestHarnessPage() {
 			return new OLETestHarnessPage(driver);
 		}
