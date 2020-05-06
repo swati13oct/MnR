@@ -393,7 +393,8 @@ public class EOBPage extends EOBBase{
 					if (memberType.contains("COMBO")) 
 						goToSpecificComboTab(planType);
 					CommonUtility.checkPageIsReady(driver);
-					selectEobType(planType, targetEobType);
+					if (targetEobType!=null)
+						selectEobType(planType, targetEobType);
 				} else {
 					if (eobValidate(internalServerError) || eobValidate(internalServerError2)) 
 						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and getting internal system error, abort test now", false);
@@ -1149,9 +1150,16 @@ public class EOBPage extends EOBBase{
 	
 	public void validateContactUsStmt_DREAMEOB(String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'If you are having difficulty...'", eobValidate(contactusStmt1));
+		String expUrl="/member/contact-us/overview.html";
+		String actUrl=contactusStmtLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		 
 		if (planType.equals("MA") || planType.equals("MAPD")) {
 			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'In some instances...'", eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - unable to locate the contact us link under pagination", eobValidate(contactusLnk));
+			expUrl="needhelpsectioncontactus";
+			actUrl=contactusLnk.getAttribute("href");
+			Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 		} else {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination - 'In some instances...'", !eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us link under pagination", !eobValidate(contactusLnk));
@@ -1217,6 +1225,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
+		Assert.assertTrue("PROBLEM - should not locate old 'Claims Summary' link on top menu after Rally Claims cut over", !eobValidate(oldClaimsSubTopMenu));
 		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
 	}
 
