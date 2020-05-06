@@ -2526,7 +2526,7 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
 		if(isMultutiCounty.equalsIgnoreCase("YES")) {
-			vppTestHarnessPage.SelectCounty(CountyName);
+			vppTestHarnessPage.SelectCountyforplanDetails(CountyName);
 		}
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
 		if(vppPlanDetailsPage!=null){
