@@ -1149,9 +1149,16 @@ public class EOBPage extends EOBBase{
 	
 	public void validateContactUsStmt_DREAMEOB(String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'If you are having difficulty...'", eobValidate(contactusStmt1));
+		String expUrl="/member/contact-us/overview.html";
+		String actUrl=contactusStmtLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		 
 		if (planType.equals("MA") || planType.equals("MAPD")) {
 			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'In some instances...'", eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - unable to locate the contact us link under pagination", eobValidate(contactusLnk));
+			expUrl="needhelpsectioncontactus";
+			actUrl=contactusLnk.getAttribute("href");
+			Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 		} else {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination - 'In some instances...'", !eobValidate(contactusStmt2));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us link under pagination", !eobValidate(contactusLnk));

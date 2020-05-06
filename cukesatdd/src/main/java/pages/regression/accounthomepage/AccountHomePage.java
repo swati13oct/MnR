@@ -448,7 +448,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
-
+	
+	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'ordermaterials')]")
+	protected WebElement desktopOrderPlanFromBenefitSubLink;
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1983,6 +1985,29 @@ public class AccountHomePage extends UhcDriver {
 	 * under BnC on rally page
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPageFromTopMenu() throws InterruptedException {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsMenuShadowRootLink.click();
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Coverage And Benefits link on Rally Dashboard top menu", false);
+			}
+		} 
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		Assert.assertTrue("PROBLEM - unable to locate Order Plan Materials sub link from top menu Coverage & Benefits option", noWaitValidate(desktopOrderPlanFromBenefitSubLink));
+		desktopOrderPlanFromBenefitSubLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		if (validate(orderplanHeadertxt)) {
+			return new OrderMaterialsPage(driver);
+		}
+		return null;
+		/* tbd 
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			WebElement topMenuBnCLink = driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]"));
@@ -2030,6 +2055,7 @@ public class AccountHomePage extends UhcDriver {
 			return new OrderMaterialsPage(driver);
 		}
 		return null;
+		*/
 
 	}
 	
