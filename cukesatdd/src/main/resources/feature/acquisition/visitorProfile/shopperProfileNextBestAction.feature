@@ -17,10 +17,6 @@ Scenario Outline: Test to verify the color of "Is my doctor/provider covered?" b
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
-    And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
 
     Examples: 
       | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
