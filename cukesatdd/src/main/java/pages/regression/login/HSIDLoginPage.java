@@ -64,10 +64,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'submitBtn')]")
 	private WebElement hsidSignInButton;
 	
-	@FindBy(xpath = "//*[contains(@onClick,'HSIDSignIn')]")
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
-	@FindBy(xpath = "//*[contains(@onClick,'HSIDRegistration')]")
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDRegistration')]")
 	private WebElement registerNowButton;
 
 	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/username')]")
@@ -76,7 +76,7 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/password')]")
 	private WebElement passwordlink;
 
-	@FindBy(xpath = "//*[contains(@class,'strong success') and contains(text(),'Email Confirmed')]")
+	@FindBy(xpath = "//*[contains(@class,'strong success') and contains(text(),'Email confirmed')]")
 	private WebElement EmailConfirmedtext;
 
 	@FindBy(id = "username")
@@ -702,7 +702,9 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	
 	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
-
+		validateNew(mnrSignInButton);
+		mnrSignInButton.click();
+		validateNew(userNameField);
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);

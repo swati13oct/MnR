@@ -23,12 +23,11 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import org.testng.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -259,8 +258,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
-
-	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
+	
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "state-select")
@@ -1945,7 +1944,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPTestHarnessPage GetVPPTestHarnessPage() {
 		return new VPPTestHarnessPage(driver);
+		}
+	
+	public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
+		return new VisitorProfileTestHarnessPage(driver);
 	}
+	
 
 	public void validateStateDropDown() {
 		validateNew(stateDropDown);
@@ -2285,4 +2289,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 
 	}
+
+
 }

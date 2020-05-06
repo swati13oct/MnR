@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -80,6 +81,8 @@ public class PlanPremiumPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Supplemental')]")))){
+			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//label[text()='Yes, I want to add ']"))), "unable to find Yes option available for rider");
+			System.out.println("Validated Yes option available");
 			System.out.println("OLE Supplemental Benefits page is Displayed");
 			return new SupplementalBenefitsPage(driver);
 		}
