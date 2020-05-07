@@ -9,7 +9,7 @@ And user opens the page to validate on UHC
 Then the user validates whether call icon is visible on UHC   
 Then the user validates whether chat icon is visible on UHC
 
-@headerUHC_1 @samChatCall_1
+@headerUHC_1 @samChatCall_1 @samChatRegression
 Examples: 
 | pagename |
 |/|
