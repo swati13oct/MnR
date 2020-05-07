@@ -405,10 +405,13 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
@@ -467,6 +470,32 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("es")) {
 						memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6016")) {
+					String docCategory="Plan Summary";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6017")) {
+					String docCategory="Plan Information";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}					
@@ -689,10 +718,13 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
@@ -732,6 +764,32 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("7010")) {
 					String docCategory="Your Plan Getting Started";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6016")) {
+					String docCategory="Plan Summary";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6017")) {
+					String docCategory="Plan Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
