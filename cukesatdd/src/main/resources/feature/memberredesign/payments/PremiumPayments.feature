@@ -161,7 +161,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
   #Test Case 07
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> - Test Case 07 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -184,7 +184,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 08
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> -  Test Case 08 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -312,7 +312,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 14 - AARP MAPD Plan member
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
