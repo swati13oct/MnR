@@ -381,9 +381,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='secondarySearchInput']")
 	private WebElement SecondarySearchInput;
-
+	
 	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
+	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -2372,5 +2373,58 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		}
 		// driver.navigate().back();
+	}
+
+public void validateResultSummaryPage() {
+		// CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		/* int sizeofSearchResults=driver.findElements(By.xpath("")) */
+		if (SearchResults.isDisplayed()) {
+			System.out.println("@@@Search results is displayed@@@");
+			validate(SearchResults, 10);
+
+		} else {
+			System.out.println("@@@Search results is not  displayed@@@");
+		}
+	}
+
+	public void insertValueIntoSecondSearchBox(String inputValue) {
+		System.out.println("Click on clear button");
+		driver.findElement(By.className("clear-button")).click();
+		System.out.println("Insert value into secondary searchbox");
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+	}
+
+	public void validateErrorMsg(String inputValue, String newSearchValue) {
+		switch (inputValue) {
+		case "Empty":
+			System.out.println("Varify Error message for " + inputValue + "");
+			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
+			assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
+			break;
+		case "InvalidCharacter":
+			System.out.println("Validating invalid character message");
+			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			System.out.println("invalidSearch : >>>>> " + invalidSearch);
+			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			// assertTrue(invalidSearch.contains("No pages were found containing
+			// "+newSearchValue+"."));
+			break;
+		case "Numbers":
+			System.out.println("Numbers");
+			break;
+		}
+	}
+
+	public void enterSecondarySearchValue(String str) {
+		System.out.println("@@@inside secondary search validation method@@@");
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+		SecondaryClearBtn.click();
+		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+		SecondarySearchInput.sendKeys(str);
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
+		SecondarySearchBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+
 	}
 }
