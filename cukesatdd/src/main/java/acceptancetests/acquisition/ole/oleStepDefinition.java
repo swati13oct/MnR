@@ -36,7 +36,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
@@ -2453,10 +2453,11 @@ public class oleStepDefinition {
 	
 	
 	/**
+	 * @param planName 
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in VPP page are same
 	 */
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
-	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
+	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
 
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -2471,16 +2472,15 @@ public class oleStepDefinition {
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
 		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
-		/* Please use this step 
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ArrayList<String> vppproviders = plansummaryPage.providerinforetreive(planName);
 		
-		ArrayList<String> VPPproviders = plansummaryPage.providerinfo(planName);
-		Assert.assertFalse("Providers not added",providers.isEmpty());
 		
-		System.out.println("List of providers in VPP page is: "+ VPPproviders);
-		System.out.println("List of providers in PCP page is: "+ PCPproviders);
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
-		if(VPPproviders.equals(PCPproviders))
+		if(vppproviders.equals(pcpproviders))
 		{
 			System.out.println("List of providers in VPP AND OLE Page are equal");
 		}
@@ -2488,7 +2488,7 @@ public class oleStepDefinition {
 		{
 			System.out.println("List of providers in VPP AND OLE Page are not equal");
 		}
-				*/
+				
 		}
 	/**
 	 * @toDo: Select the provider in PCP and continue to OLE Flow
