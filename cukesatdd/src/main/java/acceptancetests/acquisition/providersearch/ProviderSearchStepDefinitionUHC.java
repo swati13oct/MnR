@@ -311,6 +311,7 @@ public class ProviderSearchStepDefinitionUHC {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			
 			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+			plansummaryPage.setStringList(providers);
 			Assert.assertFalse("Providers not added",providers.isEmpty());
 			
 			}

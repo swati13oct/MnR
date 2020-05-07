@@ -3544,6 +3544,8 @@ catch (Exception e) {
 	
 	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
 	private WebElement comparePgnHeader;
+
+	private ArrayList<String> stringList;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3738,6 +3740,17 @@ catch (Exception e) {
 		}
 		
 		return providerNames;
+	}
+	
+	public void setStringList(ArrayList<String> stringList) {
+		
+	    this.stringList = stringList;
+
+	}
+	
+	public ArrayList<String> getStringList() {
+	    return stringList;
+
 	}
 		
 }

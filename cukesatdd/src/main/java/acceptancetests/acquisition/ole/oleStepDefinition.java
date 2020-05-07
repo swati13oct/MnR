@@ -2457,7 +2457,8 @@ public class oleStepDefinition {
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in VPP page are same
 	 */
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
-	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
 
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -2466,21 +2467,37 @@ public class oleStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-
-		String plantype = givenAttributesMap.get("Plantype");
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
 
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
 		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ArrayList<String> vppproviders = plansummaryPage.providerinforetreive(planName);
+		ArrayList<String> vppproviders = plansummaryPage.getStringList();
+		
+		//ArrayList<String> vppproviders = plansummaryPage.providerinforetreive(planName);
 		
 		
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
 		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
-		if(vppproviders.equals(pcpproviders))
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+		/*if(vppproviders.equals(pcpproviders))
 		{
 			System.out.println("List of providers in VPP AND OLE Page are equal");
 		}
@@ -2488,7 +2505,7 @@ public class oleStepDefinition {
 		{
 			System.out.println("List of providers in VPP AND OLE Page are not equal");
 		}
-				
+		*/		
 		}
 	/**
 	 * @toDo: Select the provider in PCP and continue to OLE Flow

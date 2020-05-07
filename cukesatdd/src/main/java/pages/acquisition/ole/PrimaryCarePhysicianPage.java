@@ -347,8 +347,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li"));
 		for(WebElement element:pcpproviders)
 		{
-			String providername = element.getText();
-			PCPproviderNames.add(providername);
+			String provider = element.getText();
+			String [] providerArray = provider.split("In-Network");
+			PCPproviderNames.add(providerArray[0].trim());
 		}
 			
 		return PCPproviderNames;
