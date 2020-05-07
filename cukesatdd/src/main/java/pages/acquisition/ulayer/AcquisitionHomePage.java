@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -342,7 +345,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
    	
-   	
+   	@FindBy(xpath = "//input[@id='search-field']")
+	private WebElement EnterSearch;
+
+	@FindBy(xpath = "//button[@type='submit']")
+	private WebElement SubmitBtn;
+
+	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
+	private WebElement SearchResults;
+
+	@FindBy(xpath = "//h2[@class='search-results-count']")
+	private WebElement SearchResultsCount;
+	
+	@FindBy(xpath="//a[@dtmname='pagination:previous']")
+	private WebElement PreviousBtn;
+	
+	
+	@FindBy(xpath="//a[@dtmname='pagination:next']")
+	private WebElement NextBtn;
+	
+	@FindBy(xpath="//button[@class='btn button-transparent clear-button']")
+	private WebElement SecondaryClearBtn;
+	
+	@FindBy(xpath="//input[@id='secondarySearchInput']")
+	private WebElement SecondarySearchInput;
+	
+	@FindBy(xpath="//button[@class='btn button-transparent clear-button']/following::button[1]")
+	private WebElement SecondarySearchBtn;
+
    	
    	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -2090,6 +2120,128 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		return null;
 		
+	}
+	public void enterSearchtextvalue(String inputvalue) {
+		// driver.switchTo().defaultContent();
+		CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
+		EnterSearch.sendKeys(inputvalue);
+		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
+		SubmitBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		
+
+	}
+	
+	public void enterSecondarySearchValue(String str) {
+	System.out.println("@@@inside secondary search validation method@@@");
+	CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+	SecondaryClearBtn.click();
+	CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+	SecondarySearchInput.sendKeys(str);
+	CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
+	SecondarySearchBtn.click();
+	CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		
+	}
+
+	public void validateFifteenResults() {
+		System.out.println("@@@@@Inside fifteen results validation@@@");
+		int sizeofResults = driver.findElements(By.xpath("//div[@class='list-heading']")).size();
+		System.out.println("number of results displayed on UI" + sizeofResults);
+		if (sizeofResults <= 15) {
+			System.out.println("@@@Inside results displayed less than or equal to 15");
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("@@@Inside results displayed Incorrectly");
+			Assert.assertTrue(false);
+		}
+
+	}
+
+	public void validateCountResults() {
+		System.out.println("@@@inside count results validation@@");
+		String SearchResultsCountUI = SearchResultsCount.getText();
+		System.out.println("SearchResultsCountUI" + SearchResultsCountUI);
+		
+		String[] arr=SearchResultsCountUI.split("\\s+");
+		String expectedCount=arr[3];
+		System.out.println("Expected count from UI"+expectedCount);
+		String SearchResultsCountAttribute = SearchResultsCount.getAttribute("dtmname");
+		System.out.println("SearchResultsCountAttribute" + SearchResultsCountAttribute);
+		String [] arr1=SearchResultsCountAttribute.split("\\s+");
+		String expectedCountfromAttribute=arr1[0];
+		System.out.println("Expected Count from Attribute"+expectedCountfromAttribute);
+		Assert.assertEquals(expectedCount, expectedCountfromAttribute);
+		System.out.println("check");
+
+	}
+
+	public void validatePaginationofSearchResults() {
+		System.out.println("Inside the pagination validation@@@@");
+		int sizeofpages = driver.findElements(By.xpath("//*[@class='pagination']/li/a")).size();
+		System.out.println("size of pages" + sizeofpages);
+		for (int i = 2; i < sizeofpages; i++) {
+			System.out.println("@@Inside pagination click@@@");
+			threadsleep(5);
+			driver.findElement(By.xpath("(//*[@class='pagination']/li/a)["+i+"]")).click();
+			CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
+			this.validateFifteenResults();
+			threadsleep(5);
+			int sizeofNext=driver.findElements(By.xpath("//a[@dtmname='pagination:next']")).size();
+			System.out.println("sizeofNext"+sizeofNext);
+			if(!NextBtn.isDisplayed()) {
+				System.out.println("@@@@Inside next button disappear loop");
+				CommonUtility.waitForPageLoadNewForClick(driver, PreviousBtn, 30);
+				PreviousBtn.click();
+				this.validateFifteenResults();
+				break;
+			}
+
+		}
+		//driver.navigate().back();
+
+	}
+
+	public void validateResultSummaryPage() {
+		// CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		/* int sizeofSearchResults=driver.findElements(By.xpath("")) */
+		if (SearchResults.isDisplayed()) {
+			System.out.println("@@@Search results is displayed@@@");
+			validate(SearchResults, 10);
+
+		}
+
+		else {
+			System.out.println("@@@Search results is not  displayed@@@");
+		}
+	}
+
+	public void insertValueIntoSecondSearchBox(String inputValue) {
+		System.out.println("Click on clear button");
+		driver.findElement(By.className("clear-button")).click();
+		System.out.println("Insert value into secondary searchbox");
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+	}
+
+	public void validateErrorMsg(String inputValue,String newSearchValue) {
+		switch (inputValue) {
+		case "Empty":
+			System.out.println("Varify Error message for "+inputValue+"");
+			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
+			assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
+			break;
+		case "InvalidCharacter":
+			System.out.println("Validating invalid character message");
+			String invalidSearch= driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			System.out.println("invalidSearch : >>>>> "+invalidSearch);
+			assertTrue(invalidSearch.contains("Your search - "+newSearchValue+" - did not match any documents."));
+		//	assertTrue(invalidSearch.contains("No pages were found containing "+newSearchValue+"."));
+			break;
+		case "Numbers":
+			System.out.println("Numbers");
+			break;
+		}
 	}
 
 	}

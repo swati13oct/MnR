@@ -255,7 +255,7 @@ Feature: 1.16 Member Contact us Page
     Examples: 
       | TID   | plantype | memberType  | phoneNumber | formatPhoneNumber | expectedMessage                                                                                                                                                      |
       | 152243 | PCP    | ContactUsPCP |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
-      | 15224 | Medica  | Individual_needHelp |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
+      | 15224 | MEDICA  | Individual_needHelp |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
 
         @contactUs8 @validateLabelsonContactUsPage @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify View qquestion button and common questions on the contactUS redesign page
