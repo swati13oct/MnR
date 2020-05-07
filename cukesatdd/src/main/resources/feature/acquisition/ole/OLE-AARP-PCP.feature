@@ -12,13 +12,13 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | Plan Type | <plantype> |
        #New Changes
     When the user Click on Is my Provider covered link Ulayer
-      | PlanName | <planname> |  
+      | PlanName | <planName> |  
    	When user selects a multiple providers and retuns to VPP page in Ulayer
     Then User store the information provided from rally to vpp page in Ulayer 
     | PlanName | <planName> |  
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE
       | Plan Name | <planName> |
-   	Then the user validates the Plan details on OLE
+Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
    	Then the user validates Leave OLE modal for Welcome OLE
