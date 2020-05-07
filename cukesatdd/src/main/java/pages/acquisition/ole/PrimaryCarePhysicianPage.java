@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ole;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -336,4 +337,33 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		}
 	}
 
+	public ArrayList<String> pcpinforetreive(String plantype){
+	
+		WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+		String mPCPinfo=PCPSearchLink.getText();
+		System.out.println(mPCPinfo);
+		PCPSearchLink.click();
+        ArrayList<String> PCPproviderNames = new ArrayList<String>();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li"));
+		for(WebElement element:providers)
+		{
+			String providername = element.getText();
+			PCPproviderNames.add(providername);
+		}
+			
+		return PCPproviderNames;
+	}
+	
+	public PrimaryCarePhysicianPage navigate_PCPPage() {
+		WebElement PCPSearchLink = driver.findElement(By.xpath("//*[@class='inputradio']"));
+		PCPSearchLink.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		
+		return null;
+			
+	}	
 }
+	
