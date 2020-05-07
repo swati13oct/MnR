@@ -2478,7 +2478,7 @@ public class oleStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		ArrayList<String> vppproviders = plansummaryPage.getStringList();
 		
-		//ArrayList<String> vppproviders = plansummaryPage.providerinforetreive(planName);
+	
 		
 		
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
