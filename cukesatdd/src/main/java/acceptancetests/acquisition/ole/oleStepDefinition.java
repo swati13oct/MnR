@@ -2470,12 +2470,11 @@ public class oleStepDefinition {
 
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
-		//Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
-		/* Please use this step  
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		/* Please use this step 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
 		
 		ArrayList<String> VPPproviders = plansummaryPage.providerinfo(planName);
-		ArrayList<String> PCPproviders = pcpPage.pcpinforetreive(plantype);
 		Assert.assertFalse("Providers not added",providers.isEmpty());
 		
 		System.out.println("List of providers in VPP page is: "+ VPPproviders);

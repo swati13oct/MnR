@@ -344,8 +344,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		System.out.println(mPCPinfo);
 		PCPSearchLink.click();
         ArrayList<String> PCPproviderNames = new ArrayList<String>();
-		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li"));
-		for(WebElement element:providers)
+		List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li"));
+		for(WebElement element:pcpproviders)
 		{
 			String providername = element.getText();
 			PCPproviderNames.add(providername);
