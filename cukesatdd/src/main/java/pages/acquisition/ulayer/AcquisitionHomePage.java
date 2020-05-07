@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

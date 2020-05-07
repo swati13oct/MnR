@@ -1962,7 +1962,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPTestHarnessPage GetVPPTestHarnessPage() {
 		return new VPPTestHarnessPage(driver);
 	}
-		}
+		
 	
 	public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
 		return new VisitorProfileTestHarnessPage(driver);
