@@ -2521,8 +2521,8 @@ public class oleStepDefinition {
 	/**
 	 * @toDo: Updated for the AARP welcome page site for OLE
 	 */
-	@Then("^the user navigates to clicks on Enroll Now for AARP site to start the OLE $")
-	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE(DataTable planAttributes) throws Throwable {
+	@Then("^the user clicks on Enroll for AARP site to start the OLE $")
+	public void the_user_clicks_on_Enroll_for_AARP_site_to_start_the_OLE(DataTable planAttributes) throws Throwable {
 
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
