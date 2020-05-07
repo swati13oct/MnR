@@ -6,18 +6,18 @@ package pages.acquisition.ole;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author sdwaraka
@@ -303,5 +303,21 @@ public class WelcomePage extends UhcDriver{
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
 		validateBenefits(hi, HearingImg);	
+	}
+	
+	public boolean validateNextButtonIsClickable() {
+		
+		boolean enrollInNotPossible = false;
+		try
+	    {
+	        WebDriverWait wait = new WebDriverWait(driver, 5);
+	        wait.until(ExpectedConditions.elementToBeClickable(NextBtn));
+	        enrollInNotPossible = true;
+	        return enrollInNotPossible;
+	    }
+	    catch (Exception e)
+	    {
+	        return enrollInNotPossible;
+	    }		
 	}
 }

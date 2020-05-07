@@ -26,12 +26,11 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import org.testng.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -263,7 +262,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "state-select")
@@ -1962,7 +1961,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPTestHarnessPage GetVPPTestHarnessPage() {
 		return new VPPTestHarnessPage(driver);
 	}
-
+		}
+	
+	public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
+		return new VisitorProfileTestHarnessPage(driver);
+	}
 	public void validateStateDropDown() {
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, "California");
@@ -2370,58 +2373,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 	}
-
-	public void validateResultSummaryPage() {
-		// CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
-		/* int sizeofSearchResults=driver.findElements(By.xpath("")) */
-		if (SearchResults.isDisplayed()) {
-			System.out.println("@@@Search results is displayed@@@");
-			validate(SearchResults, 10);
-
-		} else {
-			System.out.println("@@@Search results is not  displayed@@@");
-		}
-	}
-
-	public void insertValueIntoSecondSearchBox(String inputValue) {
-		System.out.println("Click on clear button");
-		driver.findElement(By.className("clear-button")).click();
-		System.out.println("Insert value into secondary searchbox");
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
-	}
-
-	public void validateErrorMsg(String inputValue, String newSearchValue) {
-		switch (inputValue) {
-		case "Empty":
-			System.out.println("Varify Error message for " + inputValue + "");
-			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
-			assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
-			break;
-		case "InvalidCharacter":
-			System.out.println("Validating invalid character message");
-			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
-			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
-			// assertTrue(invalidSearch.contains("No pages were found containing
-			// "+newSearchValue+"."));
-			break;
-		case "Numbers":
-			System.out.println("Numbers");
-			break;
-		}
-	}
-
-	public void enterSecondarySearchValue(String str) {
-		System.out.println("@@@inside secondary search validation method@@@");
-		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
-		SecondaryClearBtn.click();
-		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
-		SecondarySearchInput.sendKeys(str);
-		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
-		SecondarySearchBtn.click();
-		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
-
-	}
-
 }

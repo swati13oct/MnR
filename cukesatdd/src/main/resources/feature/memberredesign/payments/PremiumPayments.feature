@@ -18,8 +18,8 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
-      | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2020 |
-      | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2020 |
+      | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2024 |
+      | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2024 |
 
   #Test Case 01
   @regressionMember
@@ -37,11 +37,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to payment overview screen and selects agreements and click on Make one time payemnt
     Then User navigates to payment confirmation page for CC flow
-
+ And the user delete recurring payment record from GPS so that he can run recurring payment again
+	| Payment Type   | <paymentType>         |
     Examples: 
-      | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
-      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2020 |
-      | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2020 |
+      | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear | paymentType |
+      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2028 | OneTime |
+   	 | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2028 | OneTime |
 
   #Test Case 02
   @regressionMember
@@ -62,12 +63,14 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder last name   | <lastName>         |
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
-
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+	| Payment Type   | <paymentType>         |
     Examples: 
-      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-
+      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
+     | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring     |
+    | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring    |
+ 
+  
   #Test Case 03
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 03 - Verify Setup Recurring for CC
@@ -84,11 +87,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
-
+And the user delete recurring payment record from GPS so that he can run recurring payment again
+	| Payment Type   | <paymentType>         |
     Examples: 
-      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear |
-      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2020 |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2020 |
+      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear |   paymentType |
+      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
+      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
 
   #Test Case 04
   @regressionMember
@@ -109,11 +113,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder last name   | <lastName>         |
     And user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring
-
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+	| Payment Type   | <paymentType>         |
     Examples: 
-      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |   paymentType |
+      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   Recurring     |
+      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   Recurring     |
 
   #Test Case 05
   @regressionMember
@@ -131,11 +136,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for CC
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring
-
+ And the user delete recurring payment record from GPS so that he can run recurring payment again
+	| Payment Type   | <paymentType>         |
     Examples: 
-      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear |
-      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2020 |
-      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2020 |
+      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear |  paymentType |
+      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
+      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring     |
 
   #Test Case 06
   @regressionMember
@@ -155,7 +161,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
   #Test Case 07
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> - Test Case 07 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -178,7 +184,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 08
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> -  Test Case 08 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -306,7 +312,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 14 - AARP MAPD Plan member
-  @regressionMember
+  @regressionMember 
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
