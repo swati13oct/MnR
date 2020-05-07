@@ -16,12 +16,12 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then I should not see drug look up on home page
-@abc
+
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType   |
       | 15326 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | SHIP_DCE     |
-#      | 15337 | qavgogine | qavgogine | testusername    | MA       | MA_DCE       |
-#      | 15327 | qavgogine | qavgogine | testusername    | SSUP     | SSUP_DCE     |
+      | 15337 | qavgogine | qavgogine | testusername    | MA       | MA_DCE       |
+      | 15327 | qavgogine | qavgogine | testusername    | SSUP     | SSUP_DCE     |
 
   @memAuth_drugCostEstimator2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
