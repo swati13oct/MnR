@@ -118,7 +118,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
 	private WebElement reqACallPhoneNumber;
 
 	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
@@ -198,7 +198,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
 
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']/div[1]//b")
+	@FindBy(xpath="(//div[@class='message-block-header'])[2]//p")
 	private WebElement requestACallSuccessMessageHeader;
 
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
