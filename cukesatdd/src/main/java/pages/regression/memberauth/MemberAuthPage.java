@@ -87,7 +87,7 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[4]")
 	private WebElement dashboard_coverageBenefits;
    
-	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	@FindBy(xpath = "(//*[contains(@class,'btn btn-outline-primary')])[1]")
 	private WebElement homePageNotice;
 
 	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
@@ -97,7 +97,16 @@ public class MemberAuthPage extends UhcDriver {
 	protected WebElement homePageNotice3;
    	
 	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
-	protected WebElement dashboardCovideModalDismissLink;	
+	protected WebElement dashboardCovideModalDismissLink;
+	
+	@FindBy(xpath="//*[@id='main-message']/h1")
+	protected WebElement privacyNotice;
+	
+	@FindBy(xpath="//*[@id='details-button']")
+	protected WebElement advancedLink;
+	
+	@FindBy(xpath="//*[@id='proceed-link']")
+	protected WebElement proceedLink;
 	
        public MemberAuthPage(WebDriver driver) {
               super(driver);
@@ -118,6 +127,8 @@ public class MemberAuthPage extends UhcDriver {
     		   MEMBER_AUTH =  MRConstants.ONLINE_PROD_MEMBER_AUTH;
     	   else if(MRScenario.environment.equalsIgnoreCase("offline"))
     		   MEMBER_AUTH =  MRConstants.OFFLINE_PROD_MEMBER_AUTH;
+    	   else if(MRScenario.environment.equalsIgnoreCase("team-h"))
+    		   MEMBER_AUTH =  MRConstants.TEAMH_MEMBER_AUTH;
     	   
     	     start(MEMBER_AUTH);
               System.out.println("Member Auth URL - "+MEMBER_AUTH);
@@ -150,7 +161,22 @@ public class MemberAuthPage extends UhcDriver {
        }
        
        public MemberAuthPage FirstLogin(String loginname, String  loginpassword) throws InterruptedException{
-              username.sendKeys(loginname);
+    	   try {
+				if(privacyNotice.getText().contains("Your connection is not private"))
+				{
+				System.out.println("Privacy error page opened, clicking on Advanced");
+				advancedLink.click();
+				System.out.println("Clicked on Advanced");
+				Thread.sleep(4000);
+				System.out.println("Clicking on Proceed Link");
+				proceedLink.click();
+				System.out.println("Clicked on Proceed Link");
+				} 
+				}catch (Exception e) {
+				System.out.println("Privacy error Page didn't appear");
+			}
+    	   
+    	      username.sendKeys(loginname);
               password.sendKeys(loginpassword);
              search.click();
               waitforElement(memberUsername);
@@ -163,7 +189,8 @@ public class MemberAuthPage extends UhcDriver {
        }
        
        public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException{
-              memberUsername.clear();
+                 	  
+    	      memberUsername.clear();
               memberUsername.sendKeys(MemberUserName);        
               FinalSearchButton.click();
               
@@ -293,8 +320,10 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
       		}
       		
               System.out.println("Switched to new tab");
-              if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")){
+              
+              if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("team-h")){
             	  try {
+            		CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
 					if (validate(homePageNotice,0)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
@@ -311,21 +340,6 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 					
 				}
             	  CommonUtility.checkPageIsReadyNew(driver);	
-            		/* try {
-            			 System.out.println("Now checking if Dashboard page Covid modal appeared");
-            	         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
-            	    
-            	  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
-            	  				  {
-            	  			  System.out.println("Dashboard covid modal window was displayed");
-            	  			  dashboardCovideModalDismissLink.click();
-            	  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
-            	  				  }
-            	  		         		  
-            			} catch (Exception e) {
-            				System.out.println("Dashboard covid modal window was not displayed");
-            			}*/
-            	  CommonUtility.checkPageIsReadyNew(driver);
             	  CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
             	 // waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){

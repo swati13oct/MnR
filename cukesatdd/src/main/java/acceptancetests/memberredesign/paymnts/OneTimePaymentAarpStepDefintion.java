@@ -528,6 +528,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void Go_toPayment_History_page()  {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		
 		PaymentHistoryPage paymentHistoryPage = confirmOneTimePaymentPage.ScrollDownToBackButton();
 			
 			if (paymentHistoryPage != null) {
@@ -1803,9 +1804,12 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_One_time() throws Throwable {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
-		confirmOneTimePaymentPage.OneTimeEFTverification();
-		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
-		
+		String verifyConfirmationNumberPresent = confirmOneTimePaymentPage.OneTimeEFTverification();
+		getLoginScenario().saveBean(PageConstants.CONFIRMATION_NUMBER, verifyConfirmationNumberPresent);
+				
+		//getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+		//Updated the row above (changed the constant to use Oracle deletion statement
+		getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 
 	}
 
@@ -2234,8 +2238,8 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
-		oneTimePaymentPage.errorForSecondPayment();
-
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage.errorForSecondPayment();
+	    getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 	
 		
 	}
@@ -2252,7 +2256,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecord(DataTable givenAttributes) throws InterruptedException{
-		System.out.println("******the user delete recurring payment record from GPS so that he can run recurring payment again*****");
+		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
 		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
 		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < paymentTypeRow.size(); i++) {
@@ -2265,6 +2269,26 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 		
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+
+		
+	}
+	
+	@And("^Exception the user delete recurring payment record from GPS so that he can run recurring payment again$")
+	public void DeletePaymentRecordforexception(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		String confirmationnumberfromPageConstant = (String)getLoginScenario().getBean(PageConstants.CONFIRMATION_NUMBER);
+		System.out.println("Value of confirmation number from Page Constants is "+confirmationnumberfromPageConstant);
+		confirmOneTimePaymentPage.deletePaymetnRecordFromGPSforexception(paymentTypeMap,confirmationnumberfromPageConstant);
 
 		
 	}
