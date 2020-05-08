@@ -164,7 +164,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Plan Name | <planName> |
       | Plan Type | <plantype> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
+#    Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
@@ -196,7 +196,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
+#    Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
