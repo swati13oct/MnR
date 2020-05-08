@@ -45,8 +45,6 @@ Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP sit
     And I go to the view plan details page and access DCE flow from prescription drugs tab
       | Plan Name | <planname> |
       | Plan Type | <plantype> |
-    And I verify the plan name in AARP
-     | Plan Name | <planname> |
     And I have added a drug to my drug list
       | Drug | <drug> |
     And user selects drug details

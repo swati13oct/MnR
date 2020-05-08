@@ -320,6 +320,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 	
+	@FindBy(xpath="button[ng-click='addDrugs($event)']")
+	private WebElement getStartedBtn;
+	
+	@FindBy(xpath="button[ng-click='getProviders())']")
+	private WebElement findMyDoctorBtn;
+	
+	@FindBy(xpath="//button[contains(text(),'Continue Enrollment')]")
+	private WebElement contEnrollmentBtn;
+	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
@@ -714,6 +723,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return validatePopup;
 	}
 
+	public void validateButton() {
+		validate(getStartedBtn);
+		validate(findMyDoctorBtn);
+		validate(contEnrollmentBtn);
+	}
+	
+	public void clickOnButtonInPlanSummaryPage(String BtnName) {
+		if(BtnName.equalsIgnoreCase("Get Started")) {
+			getStartedBtn.click();
+		} else if(BtnName.equalsIgnoreCase("Find My Doctors")) {
+			findMyDoctorBtn.click();
+		} else if(BtnName.equalsIgnoreCase("Continue Enrollment")) {
+			contEnrollmentBtn.click();
+		}
+	}
 
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {

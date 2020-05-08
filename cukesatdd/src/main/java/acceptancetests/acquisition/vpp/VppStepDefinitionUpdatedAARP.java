@@ -401,6 +401,22 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in validating the Plan Summary Page");
 	}
 	
+	@And("^user Verify Next Best Action Modal for MAPD Plan$")
+	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.validateButton();
+	}
+	
+	@And("^user Verify Next Best Action Modal for MAPD Plan and click on Get Started$")
+	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.validateButton();
+		vppplansummarypage.clickOnButtonInPlanSummaryPage("Get Started");
+		
+	}
+	
 	@And("^User click on add to compare checkbox and click on view details link on AARP$")
 	public void user_click_on_compare_checkbox_AARP() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
