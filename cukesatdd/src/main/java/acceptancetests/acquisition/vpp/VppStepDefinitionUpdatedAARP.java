@@ -2732,7 +2732,6 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
-	
 	@Then("^Navigate to Visitor Profile page on AARP site$")
 	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2929,6 +2928,108 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
+	}
+	
+	@Then("^the user enter the searchValue in the search text box and hits enter$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+			throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("search Value");
+		System.out.println("Search value" + InputValue);
+		Thread.sleep(3000);
+
+		aquisitionhomepage.enterSearchtextvalue(InputValue);
+
+	}
+	
+
+@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
+public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+	for (int i = 0; i < AttributesRow.size(); i++) {
+
+		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+	}
+	String InputValue = urlAttributesMap.get("NewSearchValue");
+	System.out.println("NewSearchValue" + InputValue);
+	Thread.sleep(3000);
+	
+	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+ 
+}
+
+	@Then("^the user should see fifteen results before pagination$")
+	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateFifteenResults();
+
+	}
+
+	@Then("^the user validates count of results aganist the total shown at top of the page$")
+	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCountResults();
+	}
+
+	@Then("^the user validates pagination and results displayed$")
+	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validatePaginationofSearchResults();
+	}
+
+	@Then("^the user validates Error message$")
+	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String error = urlAttributesMap.get("Error");
+		String newSearchValue=urlAttributesMap.get("NewSearchValue");
+		System.out.println("Error : " + error);
+		Thread.sleep(3000);
+		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+	}
+
+	@Then("^the user clear secondary search box and insert new search value$")
+	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("New Search Value");
+		System.out.println("New Search Value" + InputValue);
+		Thread.sleep(3000);
+		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+
 	}
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
