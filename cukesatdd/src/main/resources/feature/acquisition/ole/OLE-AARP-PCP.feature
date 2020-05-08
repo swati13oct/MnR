@@ -19,7 +19,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
     #Then the user view VPP Page and click on Enroll AARP site to start the OLEPage
       | Plan Name | <planName> |
-Then the user validates the Plan details on OLE
+		Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
    	Then the user validates Leave OLE modal for Welcome OLE
@@ -73,7 +73,7 @@ Then the user validates the Plan details on OLE
     #Then the user validates Proposed Effective Date is Displayed
 		Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
  		#Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed
+    Then the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed
       | PlanName  | <planName> |
       | Plan Type | <plantype> |
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.

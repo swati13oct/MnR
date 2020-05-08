@@ -2511,6 +2511,49 @@ public class oleStepDefinition {
 	 * @toDo: Select the provider in PCP and continue to OLE Flow
 	 */
 			
+	/**
+	 * @param planName 
+	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in VPP page are same
+	 */
+	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed$")
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_AARP_VPP_displayed(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ArrayList<String> vppproviders = planSummaryPage.getStringList();
+		
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
+		
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+	}
 	@Then("^the user select providers from the PCP page and continue to OLE Flow$")
 	public void the_user_select_providers_from_the_PCP_page_and_continue_to_OLE_Flow() throws Throwable {		
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
