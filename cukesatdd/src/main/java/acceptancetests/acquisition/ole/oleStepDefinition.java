@@ -2521,9 +2521,8 @@ public class oleStepDefinition {
 	/**
 	 * @toDo: Updated for the AARP welcome page site for OLE
 	 */
-	@Then("^the user clicks on Enroll for AARP site to start the OLE $")
-	public void the_user_clicks_on_Enroll_for_AARP_site_to_start_the_OLE(DataTable planAttributes) throws Throwable {
-
+	@Then("^the user view VPP Page and click on Enroll AARP site to start the OLEPage$")
+	public void the_user_view_VPP_Page_and_click_on_Enroll_AARP_site_to_start_the_OLEPage(DataTable planAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2552,7 +2551,7 @@ public class oleStepDefinition {
 			
 		}
 		else{
-			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);

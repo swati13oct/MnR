@@ -1,6 +1,6 @@
 @fastandfurious @OLE @MA_OLE_AARP_PCP @prodRegression
 Feature: 2.05.1.ACQ-OLE MA UMS
-
+ 
   @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
      Given the user is on AARP medicare acquisition site landing page
@@ -16,7 +16,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
    	When user selects a multiple providers and retuns to VPP page in Ulayer
     Then User store the information provided from rally to vpp page in Ulayer 
     | PlanName | <planName> |  
-    Then the user clicks on Enroll for AARP site to start the OLE
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+    #Then the user view VPP Page and click on Enroll AARP site to start the OLEPage
       | Plan Name | <planName> |
 Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
