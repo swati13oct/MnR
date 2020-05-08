@@ -8,7 +8,7 @@ And user opens the page to validate on AARP
 Then the user validates whether call icon is visible on AARP 
 Then the user validates whether chat icon is visible on AARP
 
-@header_1 @samChatCall_1
+@header_1 @samChatCall_1 @samChatRegression
 Examples: 
 | pagename |
 |/|

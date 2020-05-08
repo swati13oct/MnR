@@ -36,7 +36,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -608,6 +607,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 		private WebElement medSuppOleDobHeading;
+		
+		@FindBy(id="dupIconFlyOut")
+		private WebElement shoppingCartIcon;
 		
 		@FindBy(id = "MPAED")
 		private WebElement medSuppOleHospitalPartA;
@@ -2766,7 +2768,7 @@ public void validateDefaultNoSavedPlan(String planType) {
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 	
-			if(planType.equalsIgnoreCase("MS")) {
+			if(planType.equalsIgnoreCase("MS")) {                                                                                                                                                                                                 
 				 testPlanXpath="//h2[text()='"+plan+"']";
 			} else {
 			 testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
@@ -2816,7 +2818,29 @@ public void validateDefaultNoSavedPlan(String planType) {
 	
 		}
 	}
-public void validateAbilityToSavePlans(String savePlanNames, String planType) {
+
+	/**
+	 * Save the given Medsupp plans
+	 * @param savePlanNames
+	 */
+	public void saveMSPlans(String savePlanNames) {
+		
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan: listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 	String subPath=determineSubpath(planType);
 	String headerPath=determineHeaderPath(planType);
 	
@@ -3695,6 +3719,20 @@ catch (Exception e) {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 	
 }

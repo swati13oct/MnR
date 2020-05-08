@@ -158,6 +158,7 @@ public class MemberAuthStepDefinition{
 			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
 					.get(0), profileAttributesRow.get(i).getCells().get(1));
 		}		
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
 
 		MemberAuthPage mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
 		

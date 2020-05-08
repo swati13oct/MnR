@@ -336,6 +336,19 @@ public class VPPTestHarnessPage extends UhcDriver {
 		}
 
 	}
+	
+	public void SelectCountyforplanDetails(String countyName) throws Exception {
+		if (validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			Thread.sleep(10000);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
+
+	}
 
 	public VPPPlanSummaryPage navigateToVPP() {
 		validateNew(vppTop);

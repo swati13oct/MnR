@@ -336,6 +336,10 @@ public class MRConstants {
   public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
 
   public static final String STAGE_SSO_TESTHANESS_URL = "http://apsrs7264.uhc.com:8080/content/admin-tools/sso-test.html";  
+  
+  public static String AARP_TELESALES_AGENT_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
+  
+  public static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/admin/shopper-profile.html/login";
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
@@ -393,7 +397,7 @@ public class MRConstants {
   public static final String STAGE_DEEPLINK_URL_coverageandBenefit = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true"; 
   public static final String STAGE_DEEPLINK_URL_health_and_wellness = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/health-and-wellness.html%3fdeeplink=true";
   public static final String STAGE_DEEPLINK_URL_my_Documents = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/documents/overview.html%3fdeeplink=true";
-
+  public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
  }
 
 	    

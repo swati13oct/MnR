@@ -91,3 +91,12 @@ Feature: To test member Signin from various Deeplinks
     Examples: 
       | username            | password   |
       | q3_sep_UAT4_AARP008 | Password@1 |
+      
+    @agentSigninforAARPCHAT
+  Scenario Outline: Verify AARP chat agent login in.
+    Given agentlogin lands on page
+    And agent enters credentials
+
+    Examples: 
+      | username   | password   |
+      | AARPStage7 | AARPStage7 |   
