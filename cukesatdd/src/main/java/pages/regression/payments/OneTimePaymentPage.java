@@ -653,7 +653,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 	
-	public void errorForSecondPayment() {
+	public ConfirmOneTimePaymentPage errorForSecondPayment() {
 		String errorMessage= moreThanonePaymentError.getText();
 		if (errorMessage.contains("Only one payment request can be submitted per business day")) 
 		{
@@ -662,15 +662,16 @@ public class OneTimePaymentPage extends UhcDriver {
 			
 		} else {
 			Assert.fail();
+			return null;
 		}
-
+		return new ConfirmOneTimePaymentPage(driver); 
 	}
 
 	public void validateErrorMessageUnauthorized() {
 		
-		System.out.println("Scrolling to Error Message");
+		System.out.println("Scrolling to Submit button to view the Error Message");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-		jse2.executeScript("arguments[0].scrollIntoView()", csrUnauthorizedErrorMessage); 
+		jse2.executeScript("arguments[0].scrollIntoView()", AuthorizeMonthlyPaymentstButton); 
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
