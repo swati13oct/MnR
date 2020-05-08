@@ -3,20 +3,25 @@ Feature: 1.07.1 Member DCE Page - Member Auth
 
   @memAuth_drugCostEstimator1 @Member_dce_not @NegativeScenario
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.2 To Verify MR portal members DCE should not come for AARP federal members
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     Then I should not see drug look up on home page
 
-    @devRegression
     Examples: 
-      | TID   | planType | memberType   |
-      | 15326 | SHIP     | SHIP_DCE     |
-      | 15337 | MA       | MA_DCE       |
-
-    Examples: 
-      | TID   | planType | memberType   |
-      | 15327 | SSUP     | SSUP_DCE     |
+      | TID   | username  | password  | MemUserName     | planType | memberType   |
+      | 15326 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | SHIP_DCE     |
+      | 15337 | qavgogine | qavgogine | testusername    | MA       | MA_DCE       |
+      | 15327 | qavgogine | qavgogine | testusername    | SSUP     | SSUP_DCE     |
 
   @memAuth_drugCostEstimator2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
@@ -44,7 +49,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
 
     Examples: 
       | TID   | username  | password  | MemUserName     | planType       | memberType |drug1   | dosage1          | quantity1 | frequency1  |
-      | 15325 | qavgogine | qavgogine | testusername    | MAPD           |MAPD_DCE    |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
+      | 15325 | qavgogine | qavgogine | q3_sep_UAT4_AARP209    | MAPD           |MAPD_DCE    |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @memAuth_drugCostEstimator3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
@@ -67,8 +72,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     And I should see pharmacy saver pharmacies in results
 
     Examples: 
-      | TID   | planType       | memberType |zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
-      | 15325 | MAPD           |MAPD_DCE |   06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
+      | TID   | username  | password  | MemUserName     | planType       | memberType | zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
+      | 15325 | qavgogine | qavgogine | testusername    | MAPD           | MAPD_DCE   | 06450   | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @memAuth_drugCostEstimator4
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
@@ -103,11 +108,10 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
     Examples: 
-      | TID   | planType                       |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
-      | 15325 | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
-
-  # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
-  #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+      | TID   | username  | password  | MemUserName     | username  | password        | MemUserName     | planType                       |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
+      | 15325 | qavgogine | qavgogine | testusername    | MAPD      | MAPD_DCE        | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+    # | 15331 | qavgogine | qavgogine | testusername    | PDP       | NonLISSplittier | Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+    # | 15333 | qavgogine | qavgogine | testusername    | COMBO     | ComboDCEmember  | Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
 
   #@memAuth_drugCostEstimator5 @drugToolNotDisplayed #This is already covered above
   #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify DCE drug tile is not displayed for certain members
@@ -127,9 +131,9 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     Then I click on drug lookup tile which takes me to optum rx sso landing page
 
     Examples: 
-      | TID   | planType      |memberType |
-      # | 15329   | MAPD|MAPD_GROUP_DCE  |
-      | 15338 | PDP|PDP_GROUP_DCE |
+      | TID   | username  | password  | MemUserName     | planType      | memberType |
+    # | 15329 | qavgogine | qavgogine | testusername    | MAPD          | MAPD_GROUP_DCE  |
+      | 15338 | qavgogine | qavgogine | testusername    | PDP           | PDP_GROUP_DCE |
 
   @memAuth_drugCostEstimator7 @switch_to_generic_case_1
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that  pharmacy is selected and it suggests the user with an appropriate save money message.
@@ -152,8 +156,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     And any cost savings will be applied to my total cost savings in Step3
 
     Examples: 
-      | TID   | planType                       |memberType | drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | TID   | username  | password  | MemUserName     | planType                       |memberType | drug    | dosage           | quantity | frequency     |
+      | 15325 | qavgogine | qavgogine | testusername    | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @memAuth_drugCostEstimator8 @switch_to_generic_case_2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is not selected and it suggests the user with an appropriate save money message and cost savings are also updated
@@ -175,8 +179,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     Then the drug name will automatically update within the Drug List
 
     Examples: 
-      | TID   | planType                       | memberType |drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD|MAPD_DCE| Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | TID   | username  | password  | MemUserName     | planType                       | memberType |drug    | dosage           | quantity | frequency     |
+      | 15325 | qavgogine | qavgogine | testusername    | MAPD|MAPD_DCE| Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @vbfGate @MemberVBF
   Scenario Outline: plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
@@ -199,8 +203,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     And any cost savings will be applied to my total cost savings in Step3
 
     Examples: 
-      | planType | memberType | drug    | dosage           | quantity | frequency     |
-      | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | username  | password  | MemUserName     | planType | memberType | drug    | dosage           | quantity | frequency     |
+      | qavgogine | qavgogine | testusername    | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
       
       
   @formualrypdflink
@@ -226,8 +230,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth
   When I navigate to costs tab
   Then I will verify the Formulary pdf link
   Examples: 
-      | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
-      | MAPD|MAPD_DCE  		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
+      | username  | password  | MemUserName     | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
+      | qavgogine | qavgogine | testusername    | MAPD|MAPD_DCE  		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
      
     
   #@velocity_Dasher @US1994091 @DCE_PriorAuth_and_StepThrpy @tamzid
@@ -250,6 +254,6 @@ Feature: 1.07.1 Member DCE Page - Member Auth
   #Then I will see a PA link and ST link appear in the drug limits section
   #And The link will open the relevant PDF in a new tab
   #Examples: 
-  #    | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
-  #    |  PDP     | PDP_DCE 		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
+  #    | planType | username  | password  | MemUserName     | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
+  #    |  PDP     | qavgogine | qavgogine | testusername    | PDP_DCE 		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
      
