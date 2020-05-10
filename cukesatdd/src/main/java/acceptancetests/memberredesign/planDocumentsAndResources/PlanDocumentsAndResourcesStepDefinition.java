@@ -8,6 +8,7 @@ import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesUsersHelper;
 import pages.regression.testharness.TestHarness;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -127,7 +128,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
 		if (memberType.toUpperCase().contains("COMBO")) 
 			planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
-		int currentYear=Integer.parseInt(planDocumentsAndResourcesPage.getCurrentYear());
+		int currentYear=0;
+		if (MRScenario.environment.contains("prod")) {
+			currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		} else {
+			currentYear=Integer.parseInt(planDocumentsAndResourcesPage.getCurrentYear());
+		}
 		int nextYear=currentYear+1;
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_CURRENT_YEAR, String.valueOf(currentYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_NEXT_YEAR, String.valueOf(nextYear));

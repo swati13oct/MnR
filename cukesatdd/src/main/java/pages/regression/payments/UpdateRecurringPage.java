@@ -25,7 +25,7 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(id = "optionsRadios30")
 	private WebElement CancelPaymentRadioBtn;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios30' and not(attribute::class)]")
+	@FindBy(xpath = "//label[@for='optionsRadios40' and not(attribute::class)]")
 	private WebElement CanceltRadioBtnShip;
 
 	@FindBy(xpath = "//button[@class='btn btn--primary payment-selection__btn']")
