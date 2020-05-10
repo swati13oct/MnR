@@ -16,8 +16,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
    	When user selects a multiple providers and retuns to VPP page in Ulayer
     Then User store the information provided from rally to vpp page in Ulayer 
     | PlanName | <planName> |  
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-    #Then the user view VPP Page and click on Enroll AARP site to start the OLEPage
+    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
+    Then the user view VPP Page and click on Enroll AARP site to start the OLEPage
       | Plan Name | <planName> |
 		Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail

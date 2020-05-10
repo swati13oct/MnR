@@ -2590,14 +2590,14 @@ public class oleStepDefinition {
 			pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan_AARP(PlanName,PlanType);
 			
 		}
 		else{
 			pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan_AARP(PlanName,PlanType);
 
 		} //--------------------------------------------------------------------------------------------------------------------
 		
