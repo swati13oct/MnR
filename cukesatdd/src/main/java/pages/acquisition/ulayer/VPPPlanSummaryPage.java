@@ -638,6 +638,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id="dupIconFlyOut")
 		private WebElement shoppingCartIcon;
 		
+		@FindBy(css = "div#drugsBanner>div")
+		private WebElement prescriptions;
+		
+		@FindBys(value = { @FindBy(css = "div#providersBanner ul.providers-list>li") })
+		private List<WebElement> providersList;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -3421,5 +3426,33 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		public void savePDPPlans() {
 			
+		}
+		
+		/**
+		 * Validate the Agent Mode Banners for Non Member
+		 * @param planName
+		 */
+		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers) {
+			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
+			
+			//Validate Providers
+			String[] provider = providers.split(",");
+			for(int i=0;i<providersList.size();i++) {
+				Assert.assertEquals(provider[i], providersList.get(i).getText().trim());
+				System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+			}
+			validatePlanSummary();
+			//Validate Plan Name
+			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+			driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			
+			//Validate Drugs
+			String[] drugs = drugNames.split(",");
+			List<WebElement> drugList = driver.findElements(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li"));
+			for(int i=0;i<drugList.size();i++) {
+				Assert.assertEquals(drugs[i], driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")).getText().trim());
+				System.out.println("#########"+driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")).getText().trim()+"#########");
+			}
 		}
 }

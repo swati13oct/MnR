@@ -16,34 +16,46 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
-public class CreateProfile extends UhcDriver {
+public class NonMemberCreateProfile extends UhcDriver {
 	
-	@FindBy(id = "email")
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='email']")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "firstName")
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='firstName']")
 	private WebElement firstName;
 	
-	@FindBy(id = "lastName")
+	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//input[@id='lastName']")
 	private WebElement lastName;
 	
-	@FindBy(id = "mbi")
-	private WebElement mbi;
-	
-	@FindBy(id = "dob")
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='dob']")
 	private WebElement dob;
 	
-	@FindBy(xpath = "//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//label[@for='male']")
+	private WebElement male;
+	
+	@FindBy(xpath = "//label[@for='female']")
+	private WebElement female;
+	
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='zipCode']")
+	private WebElement zipCode;
+	
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//button[contains(text(),'Profile')]")
 	private WebElement btnCreateProfile;
+	
+	@FindBy(xpath="//div[contains(@class,'progress-bar')]")
+	private WebElement progressBar;
 	
 	@FindBy(xpath = "//h5")
 	private WebElement shopperProfileCreationHeader;
+	
+	@FindBy(xpath="//input[@type='checkbox']")
+	private WebElement termsCheck;
 	
 	@FindBy(css="p.success.text-success")
 	private WebElement successMessage;
 	
 	
-	public CreateProfile(WebDriver driver) {
+	public NonMemberCreateProfile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -52,10 +64,14 @@ public class CreateProfile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 15);
-		CommonUtility.waitForPageLoadNew(driver, mbi, 15);
 		CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 15);
 	}
 	
+	/**
+	 * Create a Profile with the details
+	 * @param details
+	 * @return
+	 */
 	public VPPPlanSummaryPage createProfile(DataTable details) {
 		
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
@@ -69,7 +85,9 @@ public class CreateProfile extends UhcDriver {
 		
 		String DOB = givenAttributesMap.get("DOB");
 		
-		String MBI = givenAttributesMap.get("MBI");
+		String gender = givenAttributesMap.get("Gender");
+		
+		String zipcode = givenAttributesMap.get("Zipcode");
 		
 		String fname = givenAttributesMap.get("First Name");
 		
@@ -80,12 +98,18 @@ public class CreateProfile extends UhcDriver {
 			sendkeys(visitorEmail, emailID);
 			sendkeys(firstName, fname);
 			sendkeys(lastName, lname);
-			sendkeys(mbi, MBI);
 			sendkeys(dob, DOB);
+			sendkeys(zipCode, zipcode);
+			if(gender.equalsIgnoreCase("f"))
+				female.click();
+			else
+				male.click();
+			termsCheck.click();
 			btnCreateProfile.click();
+			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
 			switchToNewTab();
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}else {
@@ -93,7 +117,7 @@ public class CreateProfile extends UhcDriver {
 				return null;
 			}
 		} catch (Exception e) {
-			Assert.fail("###############Create A Profile Failed###############");
+			Assert.fail("###############Create A Profile Failed For NON MEMBER###############");
 			return null;
 		}
 	}

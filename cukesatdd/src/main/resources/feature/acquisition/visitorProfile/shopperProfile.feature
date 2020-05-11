@@ -174,7 +174,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | fname    | lname     |
       | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
-  @createProfile
+  @createProfileMember
   Scenario Outline: Telesales agent searching for the Creating a profile
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -196,3 +196,30 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                      | dob        | mbi           | fname  | lname  | planName                                         |
       | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA | MASONE | UnitedHealthcare Medicare Advantage Assure (HMO) |
+
+  @createProfileNonMember
+  Scenario Outline: Telesales agent Creating a Non Member Profile
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address for NonMember
+      | Email      | <email> |
+      | DOB        | <dob>   |
+      | First Name | <fname> |
+      | Last Name  | <lname> |
+    And click on Create Profile button for NonMember
+    Then create a profile with the following details for NonMember
+      | Email      | <email>   |
+      | DOB        | <dob>     |
+      | Gender     | <gender>  |
+      | First Name | <fname>   |
+      | Last Name  | <lname>   |
+      | Zipcode    | <zipCode> |
+    Then I land on the plan summary page of VPP for NonMember
+      | Plan Name | <planName>  |
+      | Drugs     | <drugNames> |
+      | Providers | <providers> |
+
+    Examples: 
+      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                       | providers                                 |
+      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | sildenafil citrate TAB 20MG,atorvastatin calcium TAB 10MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
