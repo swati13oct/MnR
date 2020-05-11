@@ -3404,26 +3404,4 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 		
-		public WelcomePage Enroll_OLE_Plan_AARP(String planName,String planType) throws InterruptedException {
-			WebElement enrollForPlan = null;
-			System.out.println("Enroll in Plan for Plan : "+planName);
-			if(planType.equalsIgnoreCase("PDP")) {
-				//driver.navigate().refresh();
-				Thread.sleep(5000);
-				enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
-			}else {
-				enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(text(),'Enroll in Plan') and not(attribute::data-ng-show)]"));
-			}
-			if(enrollForPlan!=null){
-				validateNew(enrollForPlan);
-				jsClickNew(enrollForPlan);
-			}
-			CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-			if(driver.getCurrentUrl().contains("welcome")){
-				System.out.println("OLE Welcome Page is Displayed");
-				return new WelcomePage(driver);
-			}
-			return null;
-		}
-		
 	}
