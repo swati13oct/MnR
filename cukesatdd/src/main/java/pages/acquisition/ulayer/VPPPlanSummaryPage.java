@@ -3450,9 +3450,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 			//Validate Drugs
 			String[] drugs = drugNames.split(",");
 			List<WebElement> drugList = driver.findElements(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li"));
+			
 			for(int i=0;i<drugList.size();i++) {
-				Assert.assertEquals(drugs[i], driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")).getText().trim());
-				System.out.println("#########"+driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")).getText().trim()+"#########");
+				scrollToView(driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")));
+				Assert.assertEquals(drugs[i], driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim());
+				System.out.println("#########"+driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
 			}
 		}
 }
