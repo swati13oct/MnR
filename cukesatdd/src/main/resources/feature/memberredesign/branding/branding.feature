@@ -2,7 +2,7 @@
 Feature: 1.14 Member Branding functionality
 
   @branding1 @regression @regression_branding @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that correct brand logos are displayed on Dashboard and Secondary Pages for members.
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -26,7 +26,7 @@ Feature: 1.14 Member Branding functionality
       | 15150 | MAPD     | UHCAARPCOMBO_Branding   | NON LIS       | images/branding/aarp.svg             | dam/UCP/Images/logo/AARP.svg        | TC_04_ Branding for Members with multiple active plans                       |
 
   @branding2 @regression @regression_branding @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that correct brand logos and cologos are displayed on Dashboard and Secondary Pages for Group members.
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -42,10 +42,10 @@ Feature: 1.14 Member Branding functionality
       | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
 
     Examples: 
-      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard     | logoToBeDisplayedOnSecondaryPage | cologoToBeDisplayedOnDashboard      | cologoToBeDisplayedOnSecondaryPage                            | Test Case                                                  |
-    # | 15154 | MAPD     | ALPEEHIP_Branding | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR15500/alpeehip.svg          | dam/UCP/Images/Images/logos-cobranding/ALPEEHIP.svg           | TC_09_ Co-branding for AL PEEHIP Plan member               |
-      | 15155 | MAPD     | Villages_Branding | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MRH1045025/TheVillages-01.svg | dam/UCP/Images/Images/logos-cobranding/Villages.svg           | TC_10_ Co-branding for The Villages Individual Plan member |
-      | 15156 | MAPD     | NCSHP_Branding    | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12309/NCSHP_Logo.svg        | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg         | TC_11_ Co-branding for Group Retiree Plans                 |
-     #| 15156 | MAPD     | Calpers_Branding  | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg           | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_11_ Co-branding for Group Retiree Plans                 |
-      | 15156 | MAPD     | SHBP_Branding     | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12472/gadch.svg             | dam/UCP/Images/Images/logos-cobranding/SHBP.svg               | TC_11_ Co-branding for Group Retiree Plans                 |
+      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard     | logoToBeDisplayedOnSecondaryPage | cologoToBeDisplayedOnDashboard      | cologoToBeDisplayedOnSecondaryPage                    | Test Case                                                  |
+   #  | 15154 | MAPD     | ALPEEHIP_Branding | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR15500/alpeehip.svg          | dam/UCP/Images/Images/logos-cobranding/ALPEEHIP.svg   | TC_09_ Co-branding for AL PEEHIP Plan member               |
+      | 15155 | MAPD     | Villages_Branding | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MRH1045025/TheVillages-01.svg | dam/UCP/Images/Images/logos-cobranding/Villages.svg   | TC_09_ Co-branding for The Villages Individual Plan member |
+      | 15156 | MAPD     | NCSHP_Branding    | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12309/NCSHP_Logo.svg        | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_10_ Co-branding for Group Retiree Plans -NCSHP_Branding |
+   #  | 15156 | MAPD     | Calpers_Branding  | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg           | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_11_ Co-branding for Group Retiree Plans         |
+      | 15156 | MAPD     | SHBP_Branding     | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12472/gadch.svg             | dam/UCP/Images/Images/logos-cobranding/SHBP.svg       | TC_11_ Co-branding for Group Retiree Plans- SHBP_Branding  |
 # commented ALPEEHIP and Calpers

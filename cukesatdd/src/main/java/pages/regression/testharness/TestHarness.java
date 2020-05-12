@@ -395,7 +395,20 @@ public class TestHarness extends UhcDriver {
 		}
 		else
 		{
-			Assert.fail("Make a payment button was not displayed on Payments page");
+			System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+			driver.navigate().refresh();
+			if (MakeAPaymentButton.isDisplayed())
+				
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				return new PaymentHistoryPage(driver);
+				}
+			else
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				Assert.fail("Make a payment button was not displayed on Payments page");
+			}
+			
 		}
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
