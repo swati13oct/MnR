@@ -77,8 +77,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | PlanName  | <planName> |
       | Plan Type | <plantype> |
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.
-    Then the user select providers from the PCP page and continue to OLE Flow
-    Then the user navigates to Monthly Plan Premium Page
+    #Then the user select providers from the PCP page and continue to OLE Flow
+    #Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
