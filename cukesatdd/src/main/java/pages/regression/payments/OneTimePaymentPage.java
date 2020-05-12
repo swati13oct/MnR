@@ -616,7 +616,8 @@ public class OneTimePaymentPage extends UhcDriver {
 		String title = driver.getTitle();
 		System.out.println("Current title of the page is "+title);
 		
-		if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		//if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		if (driver.getTitle().contains("Your payment has been submitted")) {
 			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {

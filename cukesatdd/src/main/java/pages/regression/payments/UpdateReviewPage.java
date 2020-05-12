@@ -135,7 +135,7 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Your Updated Payment Method")) {
+		if (driver.getCurrentUrl().contains("member/payments/recurring/setup-recurring/overview")) {
 			System.out.println("User is on Confirmation Page for Update Recurring for ship");
 			return new UpdateConfirmationPage(driver);
 		} else {
