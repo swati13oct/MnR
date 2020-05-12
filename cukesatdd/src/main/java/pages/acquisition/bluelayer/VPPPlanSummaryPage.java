@@ -613,6 +613,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(id = "MPAED")
 		private WebElement medSuppOleHospitalPartA;
+		
+		@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
+		private WebElement nextBestActionModal;
+		
+		@FindBy(xpath = "//div[@class='component_title']")
+		private WebElement nextBestActionModalMsg;
+		
+		@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
+		private WebElement nextBestActionModalGetStartedBtn;
+		
+		private static String NEXT_ACTION_MODAL_MSG_DRUG_COST="How much will my drug cost";
+		
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
 		}
@@ -3735,4 +3747,27 @@ catch (Exception e) {
 		}
 	}
 	
+	
+	/**
+	 * @author rravind8
+	 * This method verifies the NBA Modal for Drug Cost
+	 */
+	public void verifyNextBestActionModalForDrugCost() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Drug Cost message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_DRUG_COST+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	/**
+	 * @author rravind8
+	 * This method clicks on Get Started Button on the Next Best Action Modal
+	 */
+	public void clickNextBestActionModalGetStartedBtn() {
+		nextBestActionModalGetStartedBtn.click();
+	}
 }

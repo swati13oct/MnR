@@ -1005,4 +1005,29 @@ public class VppPlanSummaryStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
+	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page_in_UMS_site(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCost();
+	}
+	
+	@When("^user clicks on Get Started button$")
+	public void user_clicks_on_Get_Started_button() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickNextBestActionModalGetStartedBtn();
+	}
+
+	
+	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page in UMS site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_UMS_site() {
+	    
+	}
+	
+	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page_in_UMS_site() {
+	    
+	}
+	
 } 

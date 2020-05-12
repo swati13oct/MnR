@@ -1,7 +1,7 @@
 @vppNextActionModalBlayer @F445017
 Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
 
-  @vppNextActionModalRegression_1 @prodRegression
+  @vppNextActionModalRegression_1 @prodRegression @testUHC
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -9,10 +9,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
     Then user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-     #Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+     Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+     When user clicks on Get Started button
+     Then user should be navigated to DCE page
       Examples:
       | zipcode | isMultutiCounty | county         | plantype |
       |   19019 | No              | Iowa County    | MAPD     |
@@ -26,12 +27,12 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
     Then user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-      #Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
-      #When user clicks on Get Started button
-      And I have added a drug to my drug list on ums site
+      Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+     	When user clicks on Get Started button
+     	Then user should be navigated to DCE page
+      When I have added a drug to my drug list on ums site
       | Drug | <drug> |
     And user selects drug details in ums site
       | Drug      | <drug>      |
@@ -52,7 +53,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | Zip | <zipcode> |
     And user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #Then user should be able to see the NBA modal to add providers on the VPP summary page in UMS site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page in UMS site
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |planName| radius   |
       |  19019 | No              | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
@@ -65,13 +66,12 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
      Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
     Then user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
      When user Click on Is my Provider covered link ums
       | PlanName | <planname> |
      When user selects a provider and retuns to VPP page in ums
-    #Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+    Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
       Examples: 
       |zipcode | isMultutiCounty | county         | plantype |planname                          |
       |  19019 | No              | Iowa County    | MAPD     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -84,13 +84,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
     Then user views plans of the below plan type in UMS site
-    When user Click on Is my Provider covered link ums
       | PlanName | <planname> |
-     When user selects a provider and retuns to VPP page in ums
-    #Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
-    #When user clicks on Get Started button
+    Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+    When user clicks on Get Started button
+    Then user should be navigated to DCE page
       And I have added a drug to my drug list on ums site
       | Drug | <drug> |
     And user selects drug details in ums site
@@ -112,7 +110,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | Zip | <zipcode> |
     And user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-      #Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site
+      Then user should be able to see the NBA modal to add drugs on the VPP summary page in UMS site
+      When user Click on Is my Provider covered link ums
+      | PlanName | <planname> |
+     When user selects a provider and retuns to VPP page in ums
+     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site
       Examples: 
       |zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded |planName| radius   |
       |  19019 | No              | Iowa County    | MAPD     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |

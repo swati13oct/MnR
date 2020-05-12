@@ -610,7 +610,21 @@ public class DCEVPPAcqStepDefinitionUHC {
 		}
 	}
 	
-	
+	@Then("^user should be navigated to DCE page$")
+	public void user_should_be_navigated_to_DCE_page(){
+		/*
+		 * DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage)
+		 * getLoginScenario() .getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		 * drugCostEstimatorPage.validateDCEPageDisplayed();
+		 * drugCostEstimatorPage.validateDceLandingPage();
+		 */
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		DrugCostEstimatorPage drugCostEstimatorPage=new DrugCostEstimatorPage(wd);
+		if(drugCostEstimatorPage!=null){
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+		}
+		drugCostEstimatorPage.validateDCEPageDisplayed();
+	}
 
 }
 
