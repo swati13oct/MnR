@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionHealthRecordP1.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthRecordP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/healthandRecord" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthRecordP1.json" }, tags = { "@ihr_a" })
 public class RunMRATDDRegressionHealthRecordP1 {
 
