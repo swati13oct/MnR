@@ -40,7 +40,7 @@ public class CallToActionStepDefinition {
 		return memberAttributesMap;
 	}
 
-	@When("^a P&P notification is activated$")
+	@When("^a PnP notification is activated$")
 	public void a_P_P_notification_is_activated() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -49,7 +49,7 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^I must see that message at the top of the P&P page$")
+	@Then("^I must see that message at the top of the PnP page$")
 	public void i_must_see_that_message_at_the_top_of_the_P_P_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -66,7 +66,7 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
-    @Then("^P&P notification will not be displayed on other pages$")
+    @Then("^PnP notification will not be displayed on other pages$")
 	public void P_P_notification_will_not_be_displayed_on_Other_pages() throws Throwable {
     	PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -75,7 +75,7 @@ public class CallToActionStepDefinition {
 	    
 	}
      
-    @When("^user navigates back to P&P page$")
+    @When("^user navigates back to PnP page$")
 	public void user_navigates_back_to_P_P_page() throws Throwable {
     	PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -84,7 +84,7 @@ public class CallToActionStepDefinition {
 	    
 	}
     
-	@Then("^this message will only appear on the main P&P page$")
+	@Then("^this message will only appear on the main PnP page$")
 	public void this_message_will_only_appear_on_the_main_P_P_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -93,15 +93,15 @@ public class CallToActionStepDefinition {
 	}
 
 	@When("^I click the cross icon to close the notification$")
-	public void i_click_the_cross_icon_to_close_the_notification(String arg1) throws Throwable {
+	public void i_click_the_cross_icon_to_close_the_notification() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.closePharmacies_PrescriptionNotification();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	    
 	}
+	    
 
-	@Then("^it will remove the notification from the top of the P&P page$")
+	@Then("^it will remove the notification from the top of the PnP page$")
 	public void it_will_remove_the_notification_from_the_top_of_the_P_P_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -233,8 +233,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 	
-	@Then("^user view What's New Call To Action$")
-	public void user_view_What_s_New_Call_To_Action() throws Throwable {
+	@Then("^user view Whats New Call To Action$")
+	public void user_view_Whats_New_call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateWhatsNewCallToActionOnPnPPage();
@@ -243,8 +243,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^user validates an image for What's New Call To Action$")
-	public void user_validates_an_image_for_What_s_New_Call_To_Action() throws Throwable {
+	@Then("^user validates an image for Whats New Call To Action$")
+	public void user_validates_an_image_for_Whats_New_call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateImageWhatsNewCallToActionOnPnPPage();
@@ -253,8 +253,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^user validates a title for What's New Call To Action$")
-	public void user_validates_a_title_for_What_s_New_Call_To_Action() throws Throwable {
+	@Then("^user validates a title for Whats New Call To Action$")
+	public void user_validates_a_title_for_Whats_New_call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateTitleWhatsNewCallToActionOnPnPPage();
@@ -263,8 +263,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^user validates a description for What's New Call To Action$")
-	public void user_validates_a_description_for_What_s_New_Call_To_Action() throws Throwable {
+	@Then("^user validates a description for Whats New Call To Action$")
+	public void user_validates_a_description_for_Whats_New_call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDescriptionWhatsNewCallToActionOnPnPPage();
@@ -321,8 +321,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^user validates the What's New text content displayed fourth within that section$")
-	public void user_validates_the_What_s_New_text_content_displayed_fourth_within_that_section() throws Throwable {
+	@Then("^user validates the Whats New text content displayed fourth within that section$")
+	public void user_validates_the_whats_New_text_content_displayed_fourth_within_that_section() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePositionOfCallToActionOnPnPPage();
@@ -343,7 +343,7 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^I will be directed to the Drug Estimator Tool \\(current state version\\)$")
+	@Then("^I will be directed to the Drug Estimator Tool current state version$")
 	public void i_will_be_directed_to_the_Drug_Estimator_Tool_current_state_version() throws Throwable {
 	   
 	    
@@ -357,7 +357,7 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user navigates to Optum Rx Drug pricing Page using Single Sign On\\(SSO\\) on new tab$")
+	@Then("^user navigates to Optum Rx Drug pricing Page using Single Sign On SSO on new tab$")
 	public void user_navigates_to_Optum_Rx_Drug_pricing_Page_using_Single_Sign_On_SSO_on_new_tab() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -376,7 +376,7 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@When("^user Navigates to Pharmacy Locator tool \\(current state version\\)$")
+	@When("^user Navigates to Pharmacy Locator tool current state version$")
 	public void user_Navigates_to_Pharmacy_Locator_tool_current_state_version() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -409,16 +409,16 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@When("^user clicks on What's New call to action$")
-	public void user_clicks_on_What_s_New_call_to_action() throws Throwable {
+	@When("^user clicks on Whats New call to action$")
+	public void user_clicks_on_Whats_New_call_to_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickWhatsNewCallToAction();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	    
 	}
 
-	@Then("^user will be directed to the What's New page$")
-	public void user_navigates_to_the_What_s_New_page() throws Throwable {
+	@Then("^user will be directed to the Whats New page$")
+	public void user_navigates_to_the_Whats_New_Page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateNavigationToWhatsNewPage();
@@ -426,8 +426,8 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@Then("^user validates the header on What's New Page$")
-	public void user_validates_the_header_on_What_s_New_Page() throws Throwable {
+	@Then("^user validates the header on Whats New Page$")
+	public void user_validates_the_header_on_Whats_New_Page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages();
