@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -356,9 +357,21 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	}
 	
 	public PrimaryCarePhysicianPage navigate_PCPPage() {
-		WebElement PCPSearchLink = driver.findElement(By.xpath("//*[@class='inputradio']"));
+		boolean flag;
+		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
 		PCPSearchLink.click();
-		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement radioBtn = driver.findElement(By.xpath("//div[@class='ole-provider-list']//li[1]"));
+		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
+		Assert.assertTrue("PCP is not highlighted by blue colour", flag);
+		String actualProvider = driver.findElement(By.xpath("//*[@class='inputradio'])[1]//following-sibling::label/span")).getText().trim();
+		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[@class='provider-info__data']")).getText().trim();
+		Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
