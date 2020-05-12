@@ -710,6 +710,7 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE="coverageandBenefits";
 	public static final String STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE="healthandwellnessdeeplinklogin";
 	public static final String STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE="myDocumentsdeeplinklogin";
+	public static final String AARP_CHAT_AGENT_LOGIN="aarpChatAgentLogin";
 
-	
+	public static final String CONFIRMATION_NUMBER="verifyConfirmationNumberPresent";
 }

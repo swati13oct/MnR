@@ -3181,7 +3181,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 	
-	public MedSuppOLEPage fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
+	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode,zipCode); 
 		Thread.sleep(1000);
 		sendkeys(DOB, DateOfBirth);
@@ -3218,10 +3218,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		jsClickNew(Start_ApplicationBtn);
+		
 		/*if(!driver.findElement(By.xpath("//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
 			Start_ApplicationBtn.click();
 		}*/
+		
+	}
+	
+	public MedSuppOLEPage clickOnStartApplication() {
+		
+		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validate(insuredStatus, 45))
 			return new MedSuppOLEPage(driver);

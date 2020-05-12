@@ -115,7 +115,7 @@ public abstract class UhcDriver {
         }
 
 
-	public void sendkeys(WebElement element, String message) {
+	public static void sendkeys(WebElement element, String message) {
 		element.click();
 		element.clear();
 		element.sendKeys(message);
