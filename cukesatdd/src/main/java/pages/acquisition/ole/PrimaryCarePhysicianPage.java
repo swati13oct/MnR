@@ -366,11 +366,17 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement radioBtn = driver.findElement(By.xpath("//div[@class='ole-provider-list']//li[1]"));
+		WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
 		Assert.assertTrue("PCP is not highlighted by blue colour", flag);
-		String actualProvider = driver.findElement(By.xpath("//*[@class='inputradio'])[1]//following-sibling::label/span")).getText().trim();
-		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[@class='provider-info__data']")).getText().trim();
+		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText().trim();
+		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider or PCP Full Name: ']//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
+		String PCPNumber= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
+		
+		System.out.println("PCP Name is Displayed"+actualProvider);
+		System.out.println("PCP Name is Displayed"+expectedProvider);
+		System.out.println("PCP Number is Displayed"+PCPNumber);
+		
 		Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		validateNew(NextBtn);
