@@ -608,6 +608,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 		private WebElement medSuppOleDobHeading;
 		
+		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
+		private WebElement rockyMountainLogo;
+		
 		@FindBy(id="dupIconFlyOut")
 		private WebElement shoppingCartIcon;
 		
@@ -615,6 +618,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		private WebElement medSuppOleHospitalPartA;
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
+			
+		
+			
 		}
 
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3733,6 +3739,28 @@ catch (Exception e) {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
-	}
+		}
 	
+	/**
+	 * Navigate to Rocky Mountain  Page
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	public void clickOnLearnMoreButton(String planName) throws InterruptedException {
+		WebElement learnMore = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		Thread.sleep(6000);
+		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
+		if (learnMore != null) {
+			validateNew(learnMore);
+			switchToNewTabNew(learnMore);
+		}
+		if (driver.getCurrentUrl().contains("rmhp.org")) {
+			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
+			validateNew(rockyMountainLogo);
+			System.out.println("Validated Rocky Mountian Logo");
+
+		}
+	}
 }

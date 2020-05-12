@@ -638,6 +638,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id="dupIconFlyOut")
 		private WebElement shoppingCartIcon;
 		
+		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
+		private WebElement rockyMountainLogo;
+		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -3422,4 +3425,27 @@ for (int i = 0; i < initialCount + 1; i++) {
 		public void savePDPPlans() {
 			
 		}
+		
+		/**
+		 * Navigate to Rocky Mountain  Page
+		 * @return
+		 * @throws InterruptedException 
+		 */
+	public void clickOnLearnMoreButton(String planName) throws InterruptedException {
+		WebElement learnMore = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		Thread.sleep(6000);
+		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
+		if (learnMore != null) {
+			validateNew(learnMore);
+			switchToNewTabNew(learnMore);
+		}
+		if (driver.getCurrentUrl().contains("rmhp.org")) {
+			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
+			validateNew(rockyMountainLogo);
+			System.out.println("Validated Rocky Mountian Logo");
+
+		}
+	}
 }

@@ -377,9 +377,9 @@ Feature: Vpp to plan Summary AARP Scenarios
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county        | plantype | address                    | city   | state   | firstName | lastName | emailAddress  |
-      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
-      | 15550 |   30606 | YES           | Clarke County | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE | GEORGIA | test      | test     | test@test.com |
+      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  |
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
+      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |
 
   @vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
   Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
@@ -416,3 +416,22 @@ Feature: Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
+
+  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More AARP for Rocky or people plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |
+      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
