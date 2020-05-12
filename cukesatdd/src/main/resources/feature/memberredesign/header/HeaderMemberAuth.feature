@@ -2,7 +2,7 @@
 Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
-  @memAuth_header01 @mapd_header @member_redesign_header @headerRegression
+  @memAuth_header01 @mapd_header @member_redesign_header @headerRegression @mapd_header_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify HSID login functionality and header
   Scenario Outline: To validate via member authorization access for header
     Given the user is on member auth login flow page
@@ -37,14 +37,14 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     Examples: 
       | TID         | username  | password  | MemUserName     | planType | memberType    | flow  |
       | 15164,15171 | qavgogine | qavgogine | q3_sep_UAT4_UHC017    | MAPD     | Individual    | header|
-      | 15164,15171 | qavgogine | qavgogine | testusername    | PDP      | Individual    | header|
+      | 15164,15171 | qavgogine | qavgogine | q3_sep_UAT4_AARP057    | PDP      | Individual    | header|
 
     Examples: 
       | TID         | username  | password  | MemUserName     | planType | memberType    | flow  |
-      | 15164,15171 | qavgogine | qavgogine | testusername    | MEDICA   | Individual    | header|
+      | 15164,15171 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Individual    | header|
      
 
-  @memAuth_header02 @premiumpaymentsheader
+  @memAuth_header02 @premiumpaymentsheader @premiumpaymentsheader_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check the Premium Payments Tab in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -54,12 +54,12 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 		@headerRegression
 	    Examples: 
 	      | TID   | username  | password  | MemUserName     | planType | memberType              |
-	      | 15252 | qavgogine | qavgogine | testusername    | MAPD     | GroupLessSubsidy_header |
+	      | 15252 | qavgogine | qavgogine | LepAndMonthlyPremium01    | MAPD     | GroupLessSubsidy_header |
 	    
 	    @F287624 @US2037787 @US2037966
 	    Examples: 
 	      | TID       | username  | password  | MemUserName     | planType    | memberType                    |
-	      | US2037787 | qavgogine | qavgogine | testusername    | PDP_SSP     | comboAllNot100Subsidy_header  |
+	      | US2037787 | qavgogine | qavgogine | q3_sep_Active_combo_005    | PDP_SSP     | comboAllNot100Subsidy_header  |
 	    # disable for now without suitable user - covered by comboAll100Subsidy_header case where SHIP payment tab is showing
 	    #  | US2037966 | qavgogine | qavgogine | testusername    | PDP_SSP     | comboSomeHas100Subsidy_header |
 
@@ -104,7 +104,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 	      
 	      
 
-  @memAuth_header05 @no_findcareheader @headerRegression
+  @memAuth_header05 @no_findcareheader @headerRegression @no_findcareheader_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -115,9 +115,9 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 			
 	    Examples: 
 	      | TID   | username  | password  | MemUserName     | planType | memberType | flow   |
-	      | 15251 | qavgogine | qavgogine | testusername    | SHIP     | Medsupp    | header |
+	      | 15251 | qavgogine | qavgogine | q1_feb_2020SHIP_019    | SHIP     | Medsupp    | header |
 
-  @memAuth_header06 @terminated @headerRegression 
+  @memAuth_header06 @terminated @headerRegression @terminated_MemAuth
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given login with following details logins in the member portal and validate elements
 	      | Member Type | <memberType> |
@@ -131,7 +131,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 	     
 	    Examples: 
 	      | TID   | username  | password  | MemUserName     | memberType           |
-	      | 15162 | qavgogine | qavgogine | testusername    | Terminated_header    |  
+	      | 15162 | qavgogine | qavgogine | q2_june_Cosmos_Seg078    | Terminated_header    |
 	
 ############End of non regression scenarios###################
 	
