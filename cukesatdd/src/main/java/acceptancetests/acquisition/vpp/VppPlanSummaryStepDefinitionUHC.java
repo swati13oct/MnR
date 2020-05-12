@@ -1016,10 +1016,20 @@ public class VppPlanSummaryStepDefinitionUHC {
 	public void user_clicks_on_Get_Started_button() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickNextBestActionModalGetStartedBtn();
+		DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage)plansummaryPage.clickNextBestActionModalGetStartedBtn();
+		if (drugCostEstimatorPage != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+		}
 	}
 
-	
+	@Then("^user should be navigated to DCE page$")
+	public void user_should_be_navigated_to_DCE_page() {
+		
+		  DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage)
+		  getLoginScenario() .getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		  drugCostEstimatorPage.validateDCEPageDisplayed();
+		  drugCostEstimatorPage.validateDceLandingPage();
+	}
 	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page in UMS site$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_UMS_site() {
 	    

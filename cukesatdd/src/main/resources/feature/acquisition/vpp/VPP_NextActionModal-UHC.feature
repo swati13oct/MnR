@@ -1,7 +1,7 @@
 @vppNextActionModalBlayer @F445017
 Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
 
-  @vppNextActionModalRegression_1 @prodRegression @testUHC
+  @vppNextActionModalRegression_1 @prodRegression
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -19,7 +19,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | MAPD     |
       
       
-      @vppNextActionModalRegressionMAPDAddDrug
+      @vppNextActionModalRegressionMAPDAddDrug @testUHC
     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when Drug cost exists
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

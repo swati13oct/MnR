@@ -3767,7 +3767,10 @@ catch (Exception e) {
 	 * @author rravind8
 	 * This method clicks on Get Started Button on the Next Best Action Modal
 	 */
-	public void clickNextBestActionModalGetStartedBtn() {
+	public DrugCostEstimatorPage clickNextBestActionModalGetStartedBtn() {
 		nextBestActionModalGetStartedBtn.click();
+		if(currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
 	}
 }

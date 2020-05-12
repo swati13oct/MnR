@@ -33,8 +33,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.checkPageIsReadyNew(driver);
-		openAndValidate();
+		//CommonUtility.checkPageIsReadyNew(driver);
+		//openAndValidate();
 	
 	}
 
@@ -2146,6 +2146,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public DrugCostEstimatorPage validateDCEPageDisplayed() {
+		waitforElementNew(drugCostEstimatorPageHeaderText,15);
 		Assert.assertTrue("DCE page is not loaded", drugCostEstimatorPageHeaderText.getText().equals("Drug Cost Estimator"));
 		return null;
 	}
