@@ -11,7 +11,7 @@ Feature: MVP - Call to Action
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    When a PnP notification is activated
+		When a PnP notification is activated
     Then I must see that message at the top of the PnP page
     When user navigate to any other page
     Then PnP notification will not be displayed on other pages

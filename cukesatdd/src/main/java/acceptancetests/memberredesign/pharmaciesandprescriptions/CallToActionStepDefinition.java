@@ -273,24 +273,6 @@ public class CallToActionStepDefinition {
 	    
 	}
 
-	@When("^user validates header section content$")
-	public void user_validates_header_section_content() throws Throwable {
-	   
-	    
-	}
-
-	@When("^user validates pharmacies text content$")
-	public void user_validates_pharmacies_text_content() throws Throwable {
-	   
-	    
-	}
-
-	@When("^user validates pharmacies tiles section content$")
-	public void user_validates_pharmacies_tiles_section_content() throws Throwable {
-	   
-	    
-	}
-
 	@Then("^user validates the Find and Price text content displayed first within that section$")
 	public void user_validates_the_Find_and_Price_text_content_displayed_first_within_that_section() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -339,8 +321,11 @@ public class CallToActionStepDefinition {
 
 	@When("^I click on the Find and Price call to action$")
 	public void i_click_on_the_Find_and_Price_call_to_action() throws Throwable {
-	   
-	    
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickOnFindAndPriceCallToAction();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		    
 	}
 
 	@Then("^I will be directed to the Drug Estimator Tool current state version$")
