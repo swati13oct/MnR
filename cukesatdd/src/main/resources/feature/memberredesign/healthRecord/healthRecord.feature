@@ -13,7 +13,7 @@ Feature: 1.19 Member Individual Health Record
 	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
-	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
+#	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
 	Then the user navigates to Payments page and validate Health Record link display behavior
 	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
