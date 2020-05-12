@@ -383,6 +383,7 @@ public class MRConstants {
   //vvv note:
   public static final String OFFLINE_PROD_MEMBER_AUTH = "https://offline-generic.uhc.com/memberonlineaccount#/memberAuthLogin";
   public static final String ONLINE_PROD_MEMBER_AUTH = "https://generic.uhc.com/memberonlineaccount#/memberAuthLogin";
+  public static final String TEAMH_MEMBER_AUTH = "https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/content/medicare/memberauth.html#/memberAuthLogin";
   //^^^ note:
   public static final String STAGE_SSO_TESTHANESS_URL_bswift = "http://apsr9052.uhc.com:9080/adapterTest2/ucpInboundTestHarness.html";
   

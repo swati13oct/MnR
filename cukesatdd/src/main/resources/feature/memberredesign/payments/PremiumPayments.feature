@@ -37,12 +37,13 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to payment overview screen and selects agreements and click on Make one time payemnt
     Then User navigates to payment confirmation page for CC flow
- And the user delete recurring payment record from GPS so that he can run recurring payment again
-	| Payment Type   | <paymentType>         |
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2028 | OneTime |
-   	 | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2028 | OneTime |
+      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2028 | OneTime     |
+      | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2028 | OneTime     |
 
   #Test Case 02
   @regressionMember
@@ -64,13 +65,13 @@ Feature: 1.19 Verify the premium payment flows on member portal
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
     And the user delete recurring payment record from GPS so that he can run recurring payment again
-	| Payment Type   | <paymentType>         |
+      | Payment Type | <paymentType> |
+
     Examples: 
       | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-     | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring     |
-    | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring    |
- 
-  
+      | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+
   #Test Case 03
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 03 - Verify Setup Recurring for CC
@@ -87,12 +88,13 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
-And the user delete recurring payment record from GPS so that he can run recurring payment again
-	| Payment Type   | <paymentType>         |
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+
     Examples: 
-      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear |   paymentType |
-      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
+      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |
+      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
+      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |
 
   #Test Case 04
   @regressionMember
@@ -114,11 +116,12 @@ And the user delete recurring payment record from GPS so that he can run recurri
     And user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring
     And the user delete recurring payment record from GPS so that he can run recurring payment again
-	| Payment Type   | <paymentType>         |
+      | Payment Type | <paymentType> |
+
     Examples: 
-      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |   paymentType |
-      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   Recurring     |
-      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   Recurring     |
+      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
+      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   #Test Case 05
   @regressionMember
@@ -136,12 +139,13 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | Year             | <validYear>        |
     And user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for CC
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring
- And the user delete recurring payment record from GPS so that he can run recurring payment again
-	| Payment Type   | <paymentType>         |
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+
     Examples: 
-      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear |  paymentType |
-      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 |  Recurring     |
-      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring     |
+      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear | paymentType |
+      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
+      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |
 
   #Test Case 06
   @regressionMember
@@ -161,7 +165,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
   #Test Case 07
-  @regressionMember 
+  @regressionMember
   Scenario Outline: TID: <TID> - Test Case 07 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -184,7 +188,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 08
-  @regressionMember 
+  @regressionMember
   Scenario Outline: TID: <TID> -  Test Case 08 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -256,10 +260,12 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | Account holder last name   | <lastName>         |
     And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
     Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
 
     Examples: 
-      | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | HouseholdID |
-      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 80012942508 |
+      | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | HouseholdID | paymentType |
+      | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 80012942508 | OneTime     |
 
   #Test Case 12
   @regressionMember
@@ -312,7 +318,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 14 - AARP MAPD Plan member
-  @regressionMember 
+  @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -345,14 +351,16 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | Account holder last name   | <lastName>         |
     And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
     And the error is displayed on review payment page for second payment
+    And Exception the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
 
     Examples: 
-      | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID |
-      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 90019633509 |
+      | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 90019633509 | OneTime     |
 
   #Test Case 15
   @regressionMember
-  Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 15 - To validate the Edit EFT Payment flow for Member Auth
+  Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 15 - To validate the unauthorized error message in Edit EFT Payment flow for Member Auth User
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -373,8 +381,7 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | Account holder last name   | <lastName>         |
     And CSR navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT
     And the user is displayed with an error message on Edit Recurring EFT Review that he is not authorized
-    
- 
+
     Examples: 
       | TID   | username  | password  | member          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | 15118 | qavgogine | qavgogine | q2_june_rto0002 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
@@ -442,10 +449,12 @@ And the user delete recurring payment record from GPS so that he can run recurri
       | Account holder last name   | <lastName>         |
     And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
     Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
 
     Examples: 
-      | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID |
-      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 60023626906 |
+      | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
+      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 60023626906 | OneTime     |
 
   #Test Case 18 -Member with Recurring method already setup and with billing history
   @regressionMember
