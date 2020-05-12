@@ -2293,4 +2293,47 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@When("^user SHIP selects other amount and enters \"([^\"]*)\" and selects Checking Account and click on Next button$")
+	public void user_selects_other_amount_and(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+		PaymentsFormPage paymentsFormPage = oneTimePaymentPage.clickOnContuineButton();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on One time EFT Payment Form Page");
+
+		}
+}
+	
+	@Given("^user SHIP Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA$")
+	public void SHIP_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button_for_Make_one_time_CA(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap); 
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
+			System.out.println("User is on Review payment page for Checking account");
+		}
+
+	}
+	@Then("^SHIP User navigates to payment confirmation page and verifies ConfirmationNo for One time$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_SHIP() throws Throwable {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+				confirmOneTimePaymentPage.OneTimeEFTverificationSHIP();		
+		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);		
+		getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+
+
+	}
+	
 }
