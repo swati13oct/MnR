@@ -341,6 +341,16 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
-	}	
+	}
+	
+	//F436319
+		public boolean pnpNotificationPositionValidate(WebElement element) {
+			return !element.getCssValue("margin-top").equals(null);
+		}	
+		
+		//F436319
+		public void closePnPNotification(WebElement element) {
+			element.click();
+		}
 
 }

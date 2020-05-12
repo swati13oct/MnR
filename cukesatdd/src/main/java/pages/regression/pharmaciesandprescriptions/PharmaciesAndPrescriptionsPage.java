@@ -454,4 +454,237 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		
 	}
+	
+	//F436319
+		public void validatePharmacies_PrescriptionNotification() {
+			Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", 
+					pnpValidate(PnPNotification));		
+		}
+		
+		//F436319
+		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages() {
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", 
+					pnpValidate(PnPNotification));		
+		}
+		 
+		//F436319
+		public void validatePharmacies_PrescriptionNotificationPosition() {
+			Assert.assertTrue("PROBLEM - unable to locate pnp page notification position element", 
+					pnpNotificationPositionValidate(PnPNotification));
+		}
+		
+		//F436319
+		public void navigateBackToPnPPage() {
+			driver.navigate().back();
+		}
+		
+		//F436319
+		public void clickWhatsNewCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Whats New Call to Action element", 
+					pnpValidate(whatsNewCallToActnBtn));
+			whatsNewCallToActnBtn.click();
+		}
+			
+		//F436319
+		public void validateNavigationToWhatsNewPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Whats New Page Header element", 
+				pnpValidate(whatsNewPageHeader));
+		}
+			
+		//F436319
+		public void closePharmacies_PrescriptionNotification() {
+				Assert.assertTrue("PROBLEM - unable to locate close icon on pnp page notification element", 
+						pnpNotificationPositionValidate(PnPNotificationCloseBtn));
+				closePnPNotification(PnPNotificationCloseBtn);
+		}
+		
+		//F436319	
+		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", 
+					pnpValidate(PnPNotification));		
+		}
+		
+		//F436319	
+		public void validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage() {
+			validateNavigationToWhatsNewPage();
+			navigateBackToPnPPage();
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", 
+					pnpValidate(PnPNotification));		
+		}
+		
+		//F436319 Find and Price
+		public void validateFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Tile element", 
+					pnpValidate(findAndPriceTile));		
+		}
+		
+		//F436319
+		public void validateImageFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Image element", 
+					pnpValidate(findPrescriotionImage));		
+		}
+		
+		//F436319
+		public void validateTitleFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Title element", 
+					pnpValidate(findPrescriptionTitle));		
+		}
+			
+		//F436319
+		public void validateDescriptionFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Description element", 
+				    pnpValidate(findPrescriptionDesc));	
+		}
+		
+		//F436319 Pharmacy Locator Call To Action
+		public void validatePharmacyLocatorCallToActionOnPnPPage() {
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Tile element", 
+						pnpValidate(pharmacyLocatorTile));		
+		}
+			
+		//F436319
+		public void validateImagePharmacyLocatorCallToActionOnPnPPage() {
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Image element", 
+						pnpValidate(pharmacyLocatorImage));		
+		}
+			
+		//F436319
+		public void validateTitlePharmacyLocatorCallToActionOnPnPPage() {
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Title element", 
+						pnpValidate(pharmacyLocatorTitle));		
+		}
+				
+		//F436319
+		public void validateDescriptionPharmacyLocatorCallToActionOnPnPPage() {
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator  call to action Description element", 
+					    pnpValidate(pharmacyLocatorDesc));	
+		}
+		
+		//F436319 Refill Home Delivery Call To Action
+		public void validateRefillHomeDeliveryCallToActionOnPnPPage() {
+					Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Tile element", 
+							pnpValidate(RefillHomeDeliveryTile));		
+		}
+				
+		//F436319
+		public void validateImageRefillHomeDeliveryCallToActionOnPnPPage() {
+					Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Image element", 
+							pnpValidate(managePresciptionImage));		
+		}
+				
+		//F436319
+		public void validateTitleRefillHomeDeliveryCallToActionOnPnPPage() {
+					Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Title element", 
+							pnpValidate(managePrescriptionTitle));		
+		}
+					
+		//F436319
+		public void validateDescriptionRefillHomeDeliveryCallToActionOnPnPPage() {
+					Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery  call to action Description  element", 
+						    pnpValidate(managePrescriptionDesc));	
+		}
+		
+		//F436319 Whats New Call To Action
+		public void validateWhatsNewCallToActionOnPnPPage() {
+						Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element", 
+								pnpValidate(whatsNewTile));		
+		}
+					
+		//F436319
+		public void validateImageWhatsNewCallToActionOnPnPPage() {
+						Assert.assertTrue("PROBLEM - unable to locate whats new call to action Image element", 
+								pnpValidate(whatsNewImage));		
+		}
+					
+		//F436319
+		public void validateTitleWhatsNewCallToActionOnPnPPage() {
+						Assert.assertTrue("PROBLEM - unable to locate whats new call to action  Title element", 
+								pnpValidate(whatsNewTitle));		
+		}
+						
+		//F436319
+		public void validateDescriptionWhatsNewCallToActionOnPnPPage() {
+						Assert.assertTrue("PROBLEM - unable to locate whats new call to action Description element", 
+							    pnpValidate(whatsNewDesc));	
+		}
+		
+		//F436319
+		public void validatePositionOfCallToActionOnPnPPage() {
+			//code goes here, need UI
+		}
+		
+		//F436319
+		public void clickOnFindAndPriceCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price Call to Action element", 
+					pnpValidate(findPrescriptionsCallToActnBtn));
+			findPrescriptionsCallToActnBtn.click();
+			
+		}
+		
+		//F436319	
+		public void validateNavigationToOptumRxDrugPricingPageOnNewTab() {
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle= (String) handles.iterator().next();
+			if (winHandle!=pnpPageHandle){
+				String OptumRxDrugPricePageHandle=winHandle;
+				driver.switchTo().window(OptumRxDrugPricePageHandle);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Drug Price Page Header element", 
+						pnpValidate(OptumRxDrugPricePageHeader));
+			}		
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+			
+		}
+		
+		//F436319
+		public void clickOnPharmacyLocatorCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to Action element", 
+					pnpValidate(pharmacyLocatorCallToActnBtn));
+			pharmacyLocatorCallToActnBtn.click();
+				
+		}
+		
+		//F436319	
+		public void validateNavigationToPharmacyLocatorToolPage() {
+			/*
+			 * Set handles = driver.getWindowHandles(); String pnpPageHandle =
+			 * driver.getWindowHandle(); handles.remove(pnpPageHandle); String winHandle=
+			 * (String) handles.iterator().next(); if (winHandle!=pnpPageHandle){ String
+			 * OptumRxDrugPricePageHandle=winHandle;
+			 * driver.switchTo().window(OptumRxDrugPricePageHandle); }
+			 */
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Tool Header element", 
+								pnpValidate(PharmacyLocatorToolHeader));
+			/*
+			 * driver.close(); driver.switchTo().window(pnpPageHandle);
+			 */
+				
+		}
+			
+		//F436319
+		public void clickOnRefillHomeDeliveryCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to Action element", 
+					pnpValidate(managePrescriptionCallToActnBtn));
+			managePrescriptionCallToActnBtn.click();
+					
+		}
+		
+		//F436319	
+		public void validateNavigationToOptumRxMedicineCabinetOnNewTab() {
+				
+			Set handles = driver.getWindowHandles();
+		    String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle= (String) handles.iterator().next();
+			if (winHandle!=pnpPageHandle){ 
+				String OptumRxMedicineCabinetPageHandle=winHandle;
+				driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Medicine Cabinet Page Header element", 
+						pnpValidate(OptumRxMedicineCabinetHeader));
+			 }			
+			 driver.close(); driver.switchTo().window(pnpPageHandle);			 
+					
+		}
 }
