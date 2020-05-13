@@ -768,6 +768,8 @@ try {
 		if (MRScenario.environment.contains("team-ci"))
 			//urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
 			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/UCPUserManagement/time/getSystemTime";
+		if (MRScenario.environment.contains("team-voc"))
+			urlGetSysTime=urlGetSysTime.replace("www.", "");
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
