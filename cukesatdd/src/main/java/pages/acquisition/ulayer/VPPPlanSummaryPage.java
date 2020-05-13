@@ -320,13 +320,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 	
-	@FindBy(xpath="button[ng-click='addDrugs($event)']")
+	@FindBy(xpath = "//button[contains(text(),'Get Started')]")
 	private WebElement getStartedBtn;
-	
-	@FindBy(xpath="button[ng-click='getProviders())']")
+
+	@FindBy(xpath = "button[ng-click='getProviders())']")
 	private WebElement findMyDoctorBtn;
-	
-	@FindBy(xpath="//button[contains(text(),'Continue Enrollment')]")
+
+	@FindBy(xpath = "//button[contains(text(),'Continue Enrollment')]")
 	private WebElement contEnrollmentBtn;
 	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
@@ -723,23 +723,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return validatePopup;
 	}
 
-	public void validateButton() {
-		validate(getStartedBtn);
-		validate(findMyDoctorBtn);
-		validate(contEnrollmentBtn);
+	public void validateButton(String BtnName) {
+		if (BtnName.equalsIgnoreCase("Get Started")) {
+			validate(getStartedBtn);
+		} else if (BtnName.equalsIgnoreCase("Find My Doctors")) {
+			validate(findMyDoctorBtn);
+		} else if (BtnName.equalsIgnoreCase("Continue Enrollment")) {
+			validate(contEnrollmentBtn);
+		}
 	}
-	
+
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
-		if(BtnName.equalsIgnoreCase("Get Started")) {
+		if (BtnName.equalsIgnoreCase("Get Started")) {
 			getStartedBtn.click();
-		} else if(BtnName.equalsIgnoreCase("Find My Doctors")) {
+		} else if (BtnName.equalsIgnoreCase("Find My Doctors")) {
 			findMyDoctorBtn.click();
-		} else if(BtnName.equalsIgnoreCase("Continue Enrollment")) {
+		} else if (BtnName.equalsIgnoreCase("Continue Enrollment")) {
 			contEnrollmentBtn.click();
 		}
 	}
 
 	public void viewPlanSummary(String planType) {
+		//driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work

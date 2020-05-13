@@ -1350,6 +1350,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new DrugCostEstimatorPage(driver);
 		return null;
 	}
+	
+	public DrugCostEstimatorPage navigateToDCEToolFromVPP() throws InterruptedException {
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
 
 	public VPPPlanSummaryPage ZipcodeSearch(String zipcode) {
 		try {
