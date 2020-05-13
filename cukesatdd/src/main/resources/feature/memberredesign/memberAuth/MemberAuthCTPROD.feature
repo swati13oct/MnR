@@ -2,7 +2,7 @@
 Feature: S1.1 To test Member Auth SSO Micro App.
 
   @regressionMemberPROD
-  Scenario Outline: TC01_To test single signon using member auth - Search with Username
+  Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search with Username
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -23,7 +23,7 @@ Feature: S1.1 To test Member Auth SSO Micro App.
       | jkuma14  | Brock@02 | sandrakaye86                         | Scenario 8: Search using legacy username                        |
 
   @regressionMemberPROD
-  Scenario Outline: TC02_To test single signon using member auth - Search using memberid and dob
+  Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

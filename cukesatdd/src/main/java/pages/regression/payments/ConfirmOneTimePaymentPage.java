@@ -68,6 +68,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
 	private WebElement OnlyOnePaymentRequestMessage;
+	
+	@FindBy(xpath = " //h1[@id='custom-page-title']")
+	private WebElement ConfirmationText; 
 
 	
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
@@ -424,6 +427,22 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+	public void OneTimeEFTverificationSHIP() {
+		validate(ConfirmationText);
+		System.out.println("Your confirmation text is:- " + ConfirmationText.getText());
+		PaymentsDataVerificationonConfirmationPage();
+		String verifyConfirmationTextPresent = ConfirmationText.getText();
+			if(verifyConfirmationTextPresent.contains("Your payment has been submitted")){					
+		System.out.println("Your payment submission confirmation text displyed is :- " + ConfirmationText.getText());
+		System.out.println("Confirmation text was displayed, Test Case is Passed");
+	    Assert.assertTrue(true);
+			}
+			else
+			{
+				Assert.fail("Confirmation text was not dispalyed, Test Case if failed");
+			}		
+	
 	}
 
 

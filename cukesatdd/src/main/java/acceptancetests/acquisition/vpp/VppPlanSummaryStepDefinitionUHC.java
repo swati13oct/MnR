@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -1003,6 +1004,44 @@ public class VppPlanSummaryStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@Then("^the user clicks on Learn More UMS for Rocky Mountain plans$")
+	public void the_user_clicks_on_Learn_More_for_UHC_for_Rocky_Mountain_plans(DataTable planAttributes)
+			throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
+	}
+	
+	@Then("^the user clicks on Learn More UMS for people Health plans$")
+	public void the_user_clicks_on_Learn_More_for_UHC_for_people_Health_plans(DataTable planAttributes)
+			throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
 	}
 	
 } 
