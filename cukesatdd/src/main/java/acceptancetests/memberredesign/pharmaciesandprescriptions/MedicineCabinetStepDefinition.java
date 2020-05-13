@@ -102,10 +102,21 @@ public class MedicineCabinetStepDefinition {
 	public void user_validates_his_active_prescriptions_displayed_on_the_page() throws Throwable {
 
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateViewAllMedicationsLink();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
 	}
 
 	@Then("^user validates the medication name$")
 	public void user_validates_the_medication_name() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateMedicationName();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}
@@ -114,10 +125,24 @@ public class MedicineCabinetStepDefinition {
 	public void user_validates_an_image_of_the_medication() throws Throwable {
 
 
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateImage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+
 	}
 
 	@Then("^user validates the strength of the medication$")
 	public void user_validates_the_strength_of_the_medication() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateStrength();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}
@@ -125,11 +150,22 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates the price I paid for the medication$")
 	public void user_validates_the_price_I_paid_for_the_medication() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePriceMemberPaid();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
 	@Then("^user validates the pharmacy where the medication was last filled$")
 	public void user_validates_the_pharmacy_where_the_medication_was_last_filled() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePharmacyLastFilled();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 
 	}
@@ -137,11 +173,21 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates the day supply of the medication$")
 	public void user_validates_the_day_supply_of_the_medication() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDayOfSupply();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
 	@Then("^user validates the order status if applicable$")
 	public void user_validates_the_order_status_if_applicable() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOrderStatus();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}
@@ -149,11 +195,22 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates any relevant calls to action to manage the medication$")
 	public void user_validates_any_relevant_calls_to_action_to_manage_the_medication() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRelevantCallToAction();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
 	@Then("^user validates information on remaining refills$")
 	public void user_validates_information_on_remaining_refills() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateInfoOnRemainingRefills();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 
 	}
@@ -161,17 +218,31 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates a phone number if no refills are available and the drug is not eligible for transfer$")
 	public void user_validates_a_phone_number_if_no_refills_are_available_and_the_drug_is_not_eligible_for_transfer() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePhoneNumber();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
 	@When("^user clicks medication name of one of his active prescriptions listed on the Medicine cabinet$")
 	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Medicine_cabinet() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickOnMedicationName();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
 	@Then("^user validates the Drug Detail overview page for that prescription/medication in the same browser tab$")
 	public void user_validates_the_Drug_Detail_overview_page_for_that_prescription_medication_in_the_same_browser_tab() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDrugDetailOverview();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}

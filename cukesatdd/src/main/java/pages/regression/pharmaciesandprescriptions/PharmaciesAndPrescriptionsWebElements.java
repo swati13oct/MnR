@@ -301,5 +301,55 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    @FindBy(xpath="//h1[contains(text(),'My Drugs')]")
 	    protected WebElement MyDrugsPageHeader;
 
+	    // identical class
+
+	   @FindBy(xpath="/html/body/div[3]/div[1]/main/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/a")
+	   protected WebElement MedicationName;
+
+	   @FindBy(xpath="/html/body/div[3]/div[1]/main/div/div[2]/div/div[2]/div/div[1]/div[1]/img")
+	   protected WebElement Image;
+
+	   @FindBy(xpath="//a[contains(text(),'mg')]")
+	   protected WebElement Strength;
+
+
+	   @FindBy(xpath="//div[@class='sc-LzLtQ ikghia']")
+	   protected WebElement PriceMemberPaid;
+
+
+     	@FindBy(xpath="//div[@class='sc-LzLtN ijGRvz']")
+	    protected WebElement PharmacyLastFilled;
+
+
+	    @FindBy(xpath="//div[@class='sc-LzLtP ijXKDR']")
+	     protected WebElement DayOfSupply;
+
+
+
+	    @FindBy(xpath="")
+	    protected WebElement OrderStatus;
+
+
+     	@FindBy(xpath="")
+    	protected WebElement RelevantCallToAction;
+
+
+	    @FindBy(xpath="")
+	    protected WebElement InfoOnRemainingRefills;
+
+
+	    @FindBy(xpath="")
+	    protected WebElement PhoneNumber;
+
+
+
+	   @FindBy(xpath="//span[contains(text(),'Overview')]")
+	   protected WebElement Overview;
+
+
+
+
+
+
 
 }

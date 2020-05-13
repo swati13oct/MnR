@@ -722,4 +722,77 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(MyDrugsPageHeader));
 	}
 
+
+	public void validateMedicationName() {
+		Assert.assertTrue("PROBLEM - unable to locate Medication Name elements",
+				pnpValidate(MedicationName));
+	}
+
+	public void validateImage() {
+		Assert.assertTrue("PROBLEM - unable to locate Medication image elements",
+				pnpValidate(Image));
+	}
+
+	public void validateStrength() {
+		Assert.assertTrue("PROBLEM - unable to locate  strength of the medication elements",
+
+				pnpValidate(Strength));
+	}
+
+	public void validatePriceMemberPaid() {
+		Assert.assertTrue("PROBLEM - unable to locate  the price member paid elements",
+
+				pnpValidate(PriceMemberPaid));
+	}
+
+	public void validatePharmacyLastFilled() {
+		Assert.assertTrue("PROBLEM - unable to locate pharmacy where the medication was last filled elements",
+
+				pnpValidate(PharmacyLastFilled));
+	}
+
+	public void validateDayOfSupply() {
+		Assert.assertTrue("PROBLEM - unable to locate day supply of the medication elements",
+
+				pnpValidate(DayOfSupply));
+	}
+
+	public void validateOrderStatus() {
+		Assert.assertTrue("PROBLEM - unable to locate order status elements",
+
+				pnpValidate(OrderStatus));
+	}
+
+	public void validateRelevantCallToAction() {
+		Assert.assertTrue("PROBLEM - unable to locate any relevant calls to action elements",
+
+				pnpValidate(RelevantCallToAction));
+	}
+
+	public void validateInfoOnRemainingRefills() {
+		Assert.assertTrue("PROBLEM - unable to locate Information On Remaining Refills elements",
+
+				pnpValidate(InfoOnRemainingRefills));
+	}
+
+	public void validatePhoneNumber() {
+		Assert.assertTrue("PROBLEM - unable to locate phone number elements",
+
+				pnpValidate(RelevantCallToAction));
+	}
+
+	public void clickOnMedicationName() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+				pnpValidate(MedicationName));
+		MedicationName.click();
+
+	}
+
+	public void validateDrugDetailOverview() {
+		Assert.assertTrue("PROBLEM - unable to locate Drug Detail overview  elements",
+
+				pnpValidate(Overview));
+	}
+
+
 }
