@@ -25,9 +25,9 @@ Feature: 1.19 Member Individual Health Record
 
     @no_ihr_a
     Examples: 
-	    | FID     | planType | memberType         | expectLink  | 
-	    | F424804 | SHIP     | NO_IHR             | false       |
-	    | F424804 | MA       | EXCLUDE_IHR        | false       |
+	    | FID     | planType                 | memberType         | expectLink  | 
+	    | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+	    | F424804 | MA                       | EXCLUDE_IHR        | false       |
 
     @no_ihr_b
     Examples: 
