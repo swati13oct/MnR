@@ -12,7 +12,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Enrolled Plan Name | <planName> |
 
     Examples: 
       | username  | password  | email                  | planName                                             |
@@ -28,7 +28,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name  | <lname> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Enrolled Plan Name | <planName> |
 
     Examples: 
       | username  | password  | fname  | lname   | planName                                             |
@@ -43,7 +43,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Enrolled Plan Name | <planName> |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -127,7 +127,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Enrolled Plan Name | <planName> |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
