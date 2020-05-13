@@ -1056,6 +1056,8 @@ public class HSIDStepDefinition {
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 		if (MRScenario.environment.equals("stage")) 
 			configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
+		if (MRScenario.environment.contains("team-voc")) 
+			configPgUrl=configPgUrl.replace("www.", "");
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
