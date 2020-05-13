@@ -108,7 +108,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then user saves two plans as favorite on AARP site
+    Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
@@ -140,15 +140,15 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
-    Then user saves two plans as favorite on AARP site
+    Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
 
     Examples: 
-      | username  | password  | email                  | plantype | enrolledplanName                                    | planName                                            | drugNames | providers      | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | No        | SHAHBAZ, MAJID | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                            | drugNames | providers      | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | No        | SHAHBAZ, MAJID | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
