@@ -3417,9 +3417,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
-				String[] provider = providers.split(",");
 				for(int i=0;i<providersList.size();i++) {
-					Assert.assertEquals(provider[i], providersList.get(i).getText().trim());
+					Assert.assertTrue(providers.contains(providersList.get(i).getText().trim()));
 					System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
 				}
 			}else {
@@ -3434,12 +3433,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 			
 			if(!drugNames.equalsIgnoreCase("no")) {
 				//Validate Drugs
-				List<WebElement> drugList = driver.findElements(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li"));
+				List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
 				
 				for(int i=0;i<drugList.size();i++) {
-					scrollToView(driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")));
-					Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
-					System.out.println("#########"+driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+					scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+					Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+					System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
 				}
 			}else {
 				System.out.println("#########"+prescriptions.getText().trim()+"#########");

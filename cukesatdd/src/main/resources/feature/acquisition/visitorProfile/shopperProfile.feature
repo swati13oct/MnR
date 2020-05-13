@@ -18,8 +18,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | email                  | enrolledplanName                                     | planName                                             | drugNames         | providers |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        |
+      | username  | password  | email                  | enrolledplanName                                     | planName                                             | drugNames | providers             |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -37,8 +37,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames         | providers |
-      | qavgogine | qavgogine | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        |
+      | username  | password  | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames | providers             |
+      | qavgogine | qavgogine | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
 
   @searchProfileAndAddPlans
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -63,8 +63,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                             | drugNames         | providers | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                     | plantype | enrolledplanName                  | planName                                | drugNames | providers                 | testPlans                                                                    |
+      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | ALLA, M.D., SREENIVASA R. | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
 
   @searchProfileAndAddDrugs
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
@@ -97,8 +97,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email                  | planName                                             | plan                                                | plantype | drug    | dosage   | quantity | frequency     | branded |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
+      | username  | password  | email                 | plan                                    | plantype | drug    | dosage   | quantity | frequency     | branded |
+      | qavgogine | qavgogine | FAN.HGHBMR@MASKED.COM | AARP Medicare Advantage Walgreens (PPO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
 
   @searchProfileAndProviderFlow
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
@@ -124,8 +124,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email                  | plantype | planname                                            | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email               | plantype | planname                                            | testPlans                                                                                               |
+      | qavgogine | qavgogine | MACHELLE@MEMBER.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
@@ -147,8 +147,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
 
     Examples: 
-      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                             | drugNames         | providers | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                  | plantype | enrolledplanName                                    | planName                                            | drugNames | providers      | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | No        | SHAHBAZ, MAJID | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
@@ -210,7 +210,7 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames | providers             |
-      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No        | No                    |
+      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No        | JENSON, PETER M       |
       | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No        | PLASENCIA, M.D., LUIS |
 
   @createProfileNonMember
