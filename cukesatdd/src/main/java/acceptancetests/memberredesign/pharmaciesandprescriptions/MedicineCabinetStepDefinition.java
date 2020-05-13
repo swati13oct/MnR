@@ -33,7 +33,6 @@ public class MedicineCabinetStepDefinition {
 	}
 
 
-
 	@Then("^user views the Medicine Cabinet$")
 	public void user_views_the_Medicine_Cabinet() throws Throwable {
 
@@ -48,22 +47,25 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates first five of his active prescriptions$")
 	public void user_validates_first_five_of_his_active_prescriptions() throws Throwable {
 
+
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateActivePrescriptions();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
-	}
-
-	@Then("^user validates medications will be displayed beginning with the ones that have an associated call to action // how do we make sure that\\?$")
-	public void user_validates_medications_will_be_displayed_beginning_with_the_ones_that_have_an_associated_call_to_action_how_do_we_make_sure_that() throws Throwable {
 
 
 	}
 
-	@Then("^user valides \"([^\"]*)\" link text$")
-	public void user_valides_link_text(String arg1) throws Throwable {
+	@Then("^user validates medications will be displayed beginning with the ones that have an associated call to action$")
+	public void user_validates_medications_will_be_displayed_beginning_with_the_ones_that_have_an_associated_call_to_action() throws Throwable {
+
+
+	}
+
+	@Then("^user valides View all medications link text$")
+	public void user_valides_View_all_medications_link_text() throws Throwable {
 
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -71,21 +73,22 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateViewAllMedicationsLink();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
-
 	}
 
-	@When("^user clicks \"([^\"]*)\" link$")
-	public void user_clicks_link(String arg1) throws Throwable {
+	@When("^user clicks View all medications link$")
+	public void user_clicks_View_all_medications_link() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnViewAllMedicationsLink();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
+
 	}
 
 	@Then("^user will be directed to My Drugs page$")
 	public void user_will_be_directed_to_My_Drugs_page() throws Throwable {
+
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -179,20 +182,20 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user validates that home delivery drug is associated with a current order // how \\?$")
-	public void user_validates_that_home_delivery_drug_is_associated_with_a_current_order_how() throws Throwable {
+	@When("^user validates that home delivery drug is associated with a current order$")
+	public void user_validates_that_home_delivery_drug_is_associated_with_a_current_order() throws Throwable {
 
 
 	}
 
-	@Then("^user validates the order status //  \\(Request Received, Verifying with Doctor, Order Verified, Processing, ShippedDelivered\\)$")
-	public void user_validates_the_order_status_Request_Received_Verifying_with_Doctor_Order_Verified_Processing_ShippedDelivered() throws Throwable {
+	@Then("^user validates the order status$")
+	public void user_validates_the_order_status() throws Throwable {
 
 
 	}
 
-	@When("^user views a home delivery drug order // different from home delivery drug listed in his medicine cabinet\\?$")
-	public void user_views_a_home_delivery_drug_order_different_from_home_delivery_drug_listed_in_his_medicine_cabinet() throws Throwable {
+	@When("^user views a home delivery drug order$")
+	public void user_views_a_home_delivery_drug_order() throws Throwable {
 
 
 	}
@@ -212,10 +215,11 @@ public class MedicineCabinetStepDefinition {
 	@When("^user views a status of Request received$")
 	public void user_views_a_status_of_Request_received() throws Throwable {
 
+
 	}
 
-	@Then("^user views (\\d+)/(\\d+) Harvey Ball on that medication's row // how to validate it\\?$")
-	public void user_views_Harvey_Ball_on_that_medication_s_row_how_to_validate_it(int arg1, int arg2) throws Throwable {
+	@Then("^user views (\\d+)/(\\d+) Harvey Ball on that medication's row$")
+	public void user_views_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
 
 
 	}
@@ -226,8 +230,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views  a (\\d+)/(\\d+) Harvey Ball on that medication's row // how to validate it\\?$")
-	public void user_views_a_Harvey_Ball_on_that_medication_s_row_how_to_validate_it(int arg1, int arg2) throws Throwable {
+	@Then("^user views  a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
+	public void user_views_a_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
 
 
 	}
@@ -238,8 +242,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views a (\\d+)/(\\d+) Harvey Ball on that medication's row// how to validate it\\?$")
-	public void user_views_a_Harvey_Ball_on_that_medication_s_row_how_to_validate_it() throws Throwable {
+	@Then("^user views a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
+	public void user_views_a_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 
 
 	}
@@ -250,8 +254,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views a full Harvey Ball with a checkmark on that medication's row// how to validate it\\?$")
-	public void user_views_a_full_Harvey_Ball_with_a_checkmark_on_that_medication_s_row_how_to_validate_it() throws Throwable {
+	@Then("^user views a full Harvey Ball with a checkmark on that medication's row$")
+	public void user_views_a_full_Harvey_Ball_with_a_checkmark_on_that_medication_s_row() throws Throwable {
 
 
 	}
@@ -268,20 +272,20 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user validates a red \"([^\"]*)\" indicator$")
-	public void user_validates_a_red_indicator(String arg1) throws Throwable {
+	@Then("^user validates a red On Hold indicator$")
+	public void user_validates_a_red_On_Hold_indicator() throws Throwable {
 
 
 	}
 
-	@Then("^user validates a green \"([^\"]*)\" button on that medication's row$")
-	public void user_validates_a_green_button_on_that_medication_s_row(String arg1) throws Throwable {
+	@Then("^user validates a green Resolve hold button on that medication's row$")
+	public void user_validates_a_green_Resolve_hold_button_on_that_medication_s_row() throws Throwable {
 
 
 	}
 
-	@Then("^user validates the external link icon in the button // what icon and how to validate it\\?$")
-	public void user_validates_the_external_link_icon_in_the_button_what_icon_and_how_to_validate_it() throws Throwable {
+	@Then("^user validates the external link icon in the button$")
+	public void user_validates_the_external_link_icon_in_the_button() throws Throwable {
 
 
 	}
@@ -310,26 +314,20 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user views a \"([^\"]*)\" call to action button on that medication's row // one active medications is eligible for a refil$")
-	public void user_views_a_call_to_action_button_on_that_medication_s_row_one_active_medications_is_eligible_for_a_refil(String arg1) throws Throwable {
+	@When("^user views a Refill Medication call to action button on that medication's row$")
+	public void user_views_a_Refill_Medication_call_to_action_button_on_that_medication_s_row() throws Throwable {
 
 
 	}
 
-	@When("^user views a \"([^\"]*)\" call to action button on that medication's row// one active medications is eligible for a renew$")
-	public void user_views_a_call_to_action_button_on_that_medication_s_row_one_active_medications_is_eligible_for_a_renew(String arg1) throws Throwable {
+	@When("^user views  an active medication currently in progress for home delivery$")
+	public void user_views_an_active_medication_currently_in_progress_for_home_delivery() throws Throwable {
 
 
 	}
 
-	@When("^user views  an active medication currently in progress for home delivery // \\(Request Received, Verifying with Doctor, Order Verified, Processing/Processed, Shipped\\)$")
-	public void user_views_an_active_medication_currently_in_progress_for_home_delivery_Request_Received_Verifying_with_Doctor_Order_Verified_Processing_Processed_Shipped() throws Throwable {
-
-
-	}
-
-	@Then("^user views a \"([^\"]*)\" call to action button on that medication's row$")
-	public void user_views_a_call_to_action_button_on_that_medication_s_row(String arg1) throws Throwable {
+	@Then("^user views a Track Status call to action button on that medication's row$")
+	public void user_views_a_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
 
 
 	}
@@ -340,8 +338,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user views a \"([^\"]*)\" call to action button on that medication's row$")
-	public void user_views_a_call_to_action_button_on_that_medication_s_row() throws Throwable {
+	@Then("^user views a View Order call to action button on that medication's row$")
+	public void user_views_a_View_Order_call_to_action_button_on_that_medication_s_row() throws Throwable {
 
 
 	}
@@ -376,8 +374,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user clicks the \"([^\"]*)\" call to action button on that medication's row$")
-	public void user_clicks_the_call_to_action_button_on_that_medication_s_row(String arg1) throws Throwable {
+	@When("^user clicks the Track Status call to action button on that medication's row$")
+	public void user_clicks_the_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
 
 
 	}
@@ -387,6 +385,14 @@ public class MedicineCabinetStepDefinition {
 
 
 	}
+
+	@When("^user clicks the View order call to action button on that medication's row$")
+	public void user_clicks_the_View_order_call_to_action_button_on_that_medication_s_row() throws Throwable {
+
+
+	}
+
+
 
 
 }
