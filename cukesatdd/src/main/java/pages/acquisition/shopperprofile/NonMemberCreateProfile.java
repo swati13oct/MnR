@@ -109,7 +109,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
 			switchToNewTab();
-			Thread.sleep(15000);
+			Thread.sleep(20000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}else {
