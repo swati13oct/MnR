@@ -21,14 +21,17 @@ import pages.regression.login.ConfirmSecurityQuestion;
  */
 public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 
-	@FindBy(xpath="//span[contains(text(),'Sign in')]")
+	@FindBy(xpath="//*[contains(@id,'submitBtn')]")
 	private static  WebElement signIn;
 	
-	@FindBy(xpath="//input[@id='hsid-username']")
+	@FindBy(xpath="//*[contains(@id,'EMAIL')]")
 	private static  WebElement username;
 	
-	@FindBy(xpath="//input[@id='hsid-password']")
+	@FindBy(xpath="//*[contains(@id,'PASSWORD')]")
 	private static  WebElement password;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
+	private WebElement mnrSignInButton;
 	
 	@FindBy (xpath="//div[@class='col']//a[@class='btn btn-outline-primary'][contains(text(),'Continue')]")
 	private static  WebElement conti;
@@ -62,7 +65,8 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 			
 			// This method validated the elements on the DEEPLINK page 
 			public void validatePageElements(){
-				System.out.println("****UI ELEMENTS BEING VAIDATED On deep link page ***");
+				System.out.println(driver.getCurrentUrl());
+				mnrSignInButton.click();
 				validateNew(username);
 				validateNew(password);
 				validateNew(signIn);						

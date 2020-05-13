@@ -286,7 +286,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
-    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+    Then SHIP User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
       | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
