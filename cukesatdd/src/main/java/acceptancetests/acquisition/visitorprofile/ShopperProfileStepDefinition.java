@@ -103,11 +103,17 @@ public class ShopperProfileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plan = givenAttributesMap.get("Plan Name");
+		
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+		
 	    
 		VPPPlanSummaryPage vppPlanSumamry = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		vppPlanSumamry.validateAgentModeBanners(plan);
+		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")

@@ -191,11 +191,15 @@ Feature: 1.08. ACQ- Shopper Profile
       | First Name | <fname> |
       | Last Name  | <lname> |
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | email                      | dob        | mbi           | fname  | lname  | planName                                         |
-      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA | MASONE | UnitedHealthcare Medicare Advantage Assure (HMO) |
+      | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames | providers             |
+      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No        | No                    |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No        | PLASENCIA, M.D., LUIS |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
