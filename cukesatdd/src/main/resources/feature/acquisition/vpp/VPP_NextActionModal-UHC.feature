@@ -50,7 +50,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
     And I navigate to step3 page and click on Back to Plans button
     Then user should be able to see the NBA modal to add providers on the VPP summary page in UMS site
     When user clicks on Find My Doctor button in UMS Site
-    Then user should be navigate to Provider search page
+    Then user should be redirected to Provider search Rally page in UMS site
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |planName| radius   |
       |  19019 | No              | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
@@ -140,7 +140,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | Plan Type | <plantype> |
 		Then user should be able to see the NBA modal to add providers on the VPP summary page in UMS site
      When user clicks on Find My Doctor button in UMS Site
-     Then user should be redirected to Provider search Rally page
+     Then user should be redirected to Provider search Rally page in UMS site
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded |planName| radius   |
       |   19019 | No              | Iowa County    | MAPD      |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles | 

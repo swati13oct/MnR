@@ -310,7 +310,7 @@ public class ProviderSearchStepDefinitionUHC {
 			}
 		}
 		
-		@Then("^user should be redirected to Provider search Rally page$")
+		@Then("^user should be redirected to Provider search Rally page in UMS site$")
 		public void user_should_be_redirected_to_Provider_search_Rally_page() throws Throwable {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
