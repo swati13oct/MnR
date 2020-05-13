@@ -12,11 +12,14 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <planName> |
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | email                  | planName                                             |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) |
+      | username  | password  | email                  | enrolledplanName                                     | planName                                             | drugNames         | providers |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -28,11 +31,14 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name  | <lname> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <planName> |
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | fname  | lname   | planName                                             |
-      | qavgogine | qavgogine | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) |
+      | username  | password  | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames         | providers |
+      | qavgogine | qavgogine | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        |
 
   @searchProfileAndAddPlans
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -43,7 +49,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <planName> |
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -54,8 +63,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                             | drugNames         | providers | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileAndAddDrugs
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
@@ -127,7 +136,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <planName> |
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -135,8 +147,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
 
     Examples: 
-      | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                             | drugNames         | providers | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | Aromasin TAB 25MG | No        | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
