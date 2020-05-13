@@ -856,9 +856,8 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h")) || MRScenario.environment.contains("team-voc")) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
-					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
 					loginPage = new LoginPage(wd);
 				}
