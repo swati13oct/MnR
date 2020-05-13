@@ -998,8 +998,8 @@ public class VppPlanSummaryStepDefinitionAARP {
 			
 	}
 	
-	@Then("^the user clicks on Learn More AARP for Rocky or people plans$")
-	public void the_user_clicks_on_Learn_More_for_AARP_for_Rocky_or_people_plans(DataTable planAttributes)
+	@Then("^the user clicks on Learn More AARP for Rocky Mountain plans$")
+	public void the_user_clicks_on_Learn_More_for_AARP_for_Rocky_Mountain_plans(DataTable planAttributes)
 			throws Throwable {
 
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -1014,7 +1014,26 @@ public class VppPlanSummaryStepDefinitionAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		planSummaryPage.clickOnLearnMoreButton(planName);
+		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
+	}
+	
+	@Then("^the user clicks on Learn More AARP for people Health plans$")
+	public void the_user_clicks_on_Learn_More_for_AARP_for_people_Health_plans(DataTable planAttributes)
+			throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
 	}
 }
 		

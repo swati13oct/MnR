@@ -429,9 +429,32 @@ Feature: Vpp to plan Summary AARP Scenarios
     #And the user validates available plans for selected plan types in the AARP site
     And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
-    Then the user clicks on Learn More AARP for Rocky or people plans
+    Then the user clicks on Learn More AARP for Rocky Mountain plans
       | Plan Name | <planName> |
 
     Examples: 
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
+
+  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More AARP for people Health plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |
+      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |
+      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

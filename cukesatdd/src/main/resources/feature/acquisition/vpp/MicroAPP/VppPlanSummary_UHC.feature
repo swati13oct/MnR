@@ -410,9 +410,32 @@ Feature: Vpp to plan Summary UHC Scenarios
       | Plan Type | <plantype> |
     And the user validates plan summary for the below plan in UMS site
       | Plan Name | <planName> |
-    Then the user clicks on Learn More UMS for Rocky or people plans
+    Then the user clicks on Learn More UMS for Rocky Mountain plans
       | Plan Name | <planName> |
 
     Examples: 
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
+
+  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    And the user validates plan summary for the below plan in UMS site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More UMS for people Health plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |
+      | US2567133  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |
+      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |
+      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      
