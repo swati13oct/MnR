@@ -106,6 +106,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 				male.click();
 			termsCheck.click();
 			btnCreateProfile.click();
+			Thread.sleep(5000);
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
 			switchToNewTab();

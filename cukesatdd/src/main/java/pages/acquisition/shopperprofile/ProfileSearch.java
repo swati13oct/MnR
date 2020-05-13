@@ -195,7 +195,7 @@ public class ProfileSearch extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			driver.switchTo().window(tabs.get(0)).close();
 			driver.switchTo().window(tabs.get(1));
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}else {

@@ -108,7 +108,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then agent saves two plans as favorite on AARP site for user
+    Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
