@@ -275,8 +275,8 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Member Type | <memberType> |
     Then the user navigates to payment history
     And user clicks on Make one time payment on payment overview page
-    And user selects other amount and enters "1.00" and selects Checking Account and click on Next button
-    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
+    And user SHIP selects other amount and enters "1.00" and selects Checking Account and click on Next button
+    And user SHIP Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |

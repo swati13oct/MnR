@@ -26,6 +26,9 @@ public class UpdateConfirmationPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Payment Method:')]")
 	private WebElement PaymentMethod;
+	
+	@FindBy(xpath = " //h1[@id='custom-page-title']")
+	private WebElement ConfirmationText; 
 
 	public UpdateConfirmationPage(WebDriver driver) {
 		super(driver);
@@ -62,10 +65,24 @@ public class UpdateConfirmationPage extends UhcDriver {
 	}
 
 	public void validateEFTUpdateVerificationforShip() {
-		validate(MakeOneTimePaymentLink);
+		/*validate(MakeOneTimePaymentLink);
 		UpdatePaymentsDataVerificationonConfirmationPage();
-		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
-	}
+		System.out.println("User has sucessfully setup recurring payment for Ship EFT");*/
+			validate(ConfirmationText);
+			System.out.println("Your confirmation text is : " + ConfirmationText.getText());
+			UpdatePaymentsDataVerificationonConfirmationPage();		
+			String verifyConfirmationTextPresent = ConfirmationText.getText();		
+			if(verifyConfirmationTextPresent.contains("Recurring Payment Request Submitted")){	
+			System.out.println("Update Recurring for Checking Account for Ship Member text displayed is :- " + ConfirmationText.getText());
+			System.out.println("Recurring paymnet submitted was displayed, Test Case is Passed");
+		    Assert.assertTrue(true);
+				}
+				else
+				{
+					Assert.fail("Recurring paymnet submitted was not dispalyed, Test Case if failed");
+				}		
+		}
+	
 
 	public void validateStopRevurringVerificationforShip() {
 		validate(MakeOneTimePaymentLink);

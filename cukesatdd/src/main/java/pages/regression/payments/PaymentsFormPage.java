@@ -249,7 +249,8 @@ public class PaymentsFormPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Review Your Recurring Payments Information")) {
+		//if (driver.getTitle().contains("Review Your Recurring Payments Information")) {
+		if (driver.getCurrentUrl().contains("payments/onetime")) {
 			System.out.println("User is on Review Your Recurring Payments Information Page");
 			return new OneTimePaymentPage(driver);
 		} else {
