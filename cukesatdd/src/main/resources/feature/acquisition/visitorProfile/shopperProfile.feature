@@ -225,5 +225,5 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers | <providers> |
 
     Examples: 
-      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                       | providers                                 |
-      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | sildenafil citrate TAB 20MG,atorvastatin calcium TAB 10MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
+      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                    | providers                                 |
+      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
