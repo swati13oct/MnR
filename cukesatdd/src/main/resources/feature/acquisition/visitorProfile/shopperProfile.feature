@@ -53,7 +53,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
-    Then user saves two plans as favorite on AARP site
+    Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
