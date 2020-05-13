@@ -22,6 +22,7 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.KeywordSearch;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
@@ -1012,8 +1013,8 @@ public class VppPlanSummaryStepDefinitionUHC {
 		plansummaryPage.verifyNextBestActionModalForDrugCost();
 	}
 	
-	@When("^user clicks on Get Started button$")
-	public void user_clicks_on_Get_Started_button() {
+	@When("^user clicks on Get Started button in UMS site$")
+	public void user_clicks_on_Get_Started_button_in_UMS_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage)plansummaryPage.clickNextBestActionModalGetStartedBtn();
@@ -1022,8 +1023,8 @@ public class VppPlanSummaryStepDefinitionUHC {
 		}
 	}
 
-	@Then("^user should be navigated to DCE page$")
-	public void user_should_be_navigated_to_DCE_page() {
+	@Then("^user should be navigated to DCE page in UMS site$")
+	public void user_should_be_navigated_to_DCE_page_in_UMS_site() {
 		
 		  DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage)
 		  getLoginScenario() .getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1032,12 +1033,62 @@ public class VppPlanSummaryStepDefinitionUHC {
 	}
 	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page in UMS site$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_UMS_site() {
-	    
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForProviderSearch();
+	}
+	
+	@When("^user clicks on Find My Doctor button in UMS Site$")
+	public void user_clicks_on_Find_My_Doctor_button_in_UMS_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage)plansummaryPage.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
 	}
 	
 	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page_in_UMS_site() {
-	    
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
 	}
 	
+	@Then("^user saves plan as favorite on UMS site$")
+	public void user_saves_plan_as_favorite_on_UMS_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.savePlan(PlanName);
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans in UMS site$")
+	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans_in_UMS_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+	}
+	
+	List<String> allPlanNames=null;
+	@When("^user clicks on Continue Enrollment button in UMS Site$")
+	public void user_clicks_on_Continue_Enrollment_button_in_UMS_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		allPlanNames=plansummaryPage.getAllPlanNames();
+		plansummaryPage.clickContinueEnrollmentBtn();
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with all plans in UMS site$")
+	public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans_in_UMS_site(DataTable arg1) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
+		
+	}
 } 

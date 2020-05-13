@@ -599,6 +599,11 @@ public class DCEVPPAcqStepDefinitionUHC {
 		}
 	}
 
-	
+	@When("^I navigate to step3 page and click on Back to Plans button$")
+	public void i_navigate_to_step_page_and_click_on_Back_to_Plans_button() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+		dce.clickBackToPlansBtn();
+	}
 
 }

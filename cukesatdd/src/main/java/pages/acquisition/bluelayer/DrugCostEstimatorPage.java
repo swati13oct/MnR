@@ -477,6 +477,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='drugcostestimatorDetails']/preceding::h1")
     private WebElement drugCostEstimatorPageHeaderText;
+	
+	@FindBy(id="atddBackToPlans")
+    private WebElement backToPlansBtn;
 			
 	public WebElement getImgLoadingIndicator() {
 		return imgLoadingIndicator;
@@ -2149,5 +2152,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		waitforElementNew(drugCostEstimatorPageHeaderText,15);
 		Assert.assertTrue("DCE page is not loaded", drugCostEstimatorPageHeaderText.getText().equals("Drug Cost Estimator"));
 		return null;
+	}
+	
+	public void clickBackToPlansBtn() {
+		backToPlansBtn.click();
 	}
 }
