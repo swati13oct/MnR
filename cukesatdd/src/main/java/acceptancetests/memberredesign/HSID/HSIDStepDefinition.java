@@ -1098,6 +1098,7 @@ public class HSIDStepDefinition {
 	@Given("^member lands on the payment deeplink page$")
 	public void the_user_is_onPayments_deeplink_Page() throws InterruptedException{
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
 		paymentsDeeplinkLoginPage.navigateToLoginURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
@@ -1108,6 +1109,7 @@ public class HSIDStepDefinition {
 	@Given("^member lands on the claims deeplink page$")
 	public void the_user_is_Onclaims_deeplink_Page() throws InterruptedException{
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		ClaimsDeeplinkLoginPage claimsDeeplinkLoginPage = new ClaimsDeeplinkLoginPage(wd);
 		claimsDeeplinkLoginPage.navigateToLoginURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE,claimsDeeplinkLoginPage );	
@@ -1204,6 +1206,7 @@ public class HSIDStepDefinition {
 			@Given("^member lands on the eob deeplink page$")
 			public void the_user_is_on_eob_deeplink_Page() throws InterruptedException{
 				WebDriver wd = getLoginScenario().getWebDriver();
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 				eobDeeplinkLoginPage eobDeeplinkLoginPage = new eobDeeplinkLoginPage(wd);
 				eobDeeplinkLoginPage.navigateToLoginURL();
 				getLoginScenario().saveBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE,eobDeeplinkLoginPage );	
@@ -1257,6 +1260,7 @@ public class HSIDStepDefinition {
 				@Given("^member lands on the accountProfile deeplink page$")
 				public void the_user_is_on_accountProfile_deeplink_Page() throws InterruptedException{
 					WebDriver wd = getLoginScenario().getWebDriver();
+					getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 					accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = new accountsProfileDeeplinkLoginPage(wd);
 					accountsProfileDeeplinkLoginPage.navigateToLoginURL();
 					getLoginScenario().saveBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE,accountsProfileDeeplinkLoginPage );	
@@ -1311,6 +1315,7 @@ public class HSIDStepDefinition {
 					@Given("^member lands on the coverageandBenefits deeplink page$")
 					public void the_user_is_on_coverageandBenefits_deeplink_Page() throws InterruptedException{
 						WebDriver wd = getLoginScenario().getWebDriver();
+						getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 						coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = new coverageandBenefitsDeeplinkLoginPage(wd);
 						coverageandBenefitsDeeplinkLoginPage.navigateToLoginURL();
 						getLoginScenario().saveBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE,coverageandBenefitsDeeplinkLoginPage );	
@@ -1364,6 +1369,7 @@ public class HSIDStepDefinition {
 						@Given("^member lands on the healthwellness deeplink page$")
 						public void the_user_is_on_healthwellness_deeplink_Page() throws InterruptedException{
 							WebDriver wd = getLoginScenario().getWebDriver();
+							getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 							healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = new healthwellnessDeepLinkLoginPage(wd);
 							healthwellnessDeepLinkLoginPage.navigateToLoginURL();
 							getLoginScenario().saveBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE,healthwellnessDeepLinkLoginPage );	
@@ -1417,6 +1423,7 @@ public class HSIDStepDefinition {
 							@Given("^member lands on the myDocuments deeplink page$")
 							public void the_user_is_on_myDocuments_deeplink_Page() throws InterruptedException{
 								WebDriver wd = getLoginScenario().getWebDriver();
+								getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 								myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = new myDocumentsDeeplinkLoginPage(wd);
 								myDocumentsDeeplinkLoginPage.navigateToLoginURL();
 								getLoginScenario().saveBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE,myDocumentsDeeplinkLoginPage );	
@@ -1492,6 +1499,7 @@ public class HSIDStepDefinition {
 								@Given("^agentlogin lands on page$") 
 								public void agentloginandsnpage() throws InterruptedException{
 									WebDriver wd = getLoginScenario().getWebDriver();
+									getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 									aarpChatAgentLogin aarpChatAgentLogin = new aarpChatAgentLogin(wd);
 									aarpChatAgentLogin.navigateToLoginURL();
 									aarpChatAgentLogin.validatePageElements();
