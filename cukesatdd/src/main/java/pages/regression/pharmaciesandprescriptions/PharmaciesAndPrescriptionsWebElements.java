@@ -288,6 +288,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		@FindBy(xpath="")
 		protected WebElement OptumRxMedicineCabinetHeader;
 
+	   //Medicine Cabinet
+	    @FindBy(xpath="//div[contains(text(),'Medicine Cabinet')]")
+	    protected WebElement MedicineCabinetHeader;
+
+	    @FindBy(xpath="//div[contains(text(),'Medication')]")
+     	protected WebElement Medications;
+
+    	@FindBy(xpath="//a[contains(text(),'View all ')]")
+     	protected WebElement ViewAllMedications;
+
+	    @FindBy(xpath="//h1[contains(text(),'My Drugs')]")
+	    protected WebElement MyDrugsPageHeader;
 
 
 }

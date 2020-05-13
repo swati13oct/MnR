@@ -687,4 +687,39 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			 driver.close(); driver.switchTo().window(pnpPageHandle);			 
 					
 		}
+
+
+	//F392596 Meidine Cabinet
+	public void validateMedicineCabinetHeader() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Header element",
+				pnpValidate(MedicineCabinetHeader));
+	}
+
+
+	public void validateActivePrescriptions() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Active Prescriptions text element",
+				pnpValidate(Medications));
+	}
+
+
+	public void validateViewAllMedicationsLink() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+				pnpValidate(ViewAllMedications));
+	}
+
+
+	//F392596
+	public void clickOnViewAllMedicationsLink() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+				pnpValidate(ViewAllMedications));
+		ViewAllMedications.click();
+
+	}
+
+	//F392596
+	public void validateMyDrugsPage() {
+		Assert.assertTrue("PROBLEM - unable to locate My Drugs Page Header element",
+				pnpValidate(MyDrugsPageHeader));
+	}
+
 }
