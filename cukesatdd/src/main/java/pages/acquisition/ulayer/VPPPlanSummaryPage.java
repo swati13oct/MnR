@@ -3429,9 +3429,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 			validatePlanSummary();
 			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
-			driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
 			
 			if(!drugNames.equalsIgnoreCase("no")) {
+				
+				driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
 				//Validate Drugs
 				List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
 				
@@ -3486,16 +3487,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 			validatePlanSummary();
 			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
-			driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
 			
 			//Validate Drugs
 			if(!drugNames.equalsIgnoreCase("no")) {
-				List<WebElement> drugList = driver.findElements(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li"));
+				driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+				
+				//Validate Drugs
+				List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
 				
 				for(int i=0;i<drugList.size();i++) {
-					scrollToView(driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]")));
-					Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
-					System.out.println("#########"+driver.findElement(By.xpath("//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+					scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+					Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+					System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
 				}
 			}else {
 				System.out.println("#########"+prescriptions.getText().trim()+"#########");
