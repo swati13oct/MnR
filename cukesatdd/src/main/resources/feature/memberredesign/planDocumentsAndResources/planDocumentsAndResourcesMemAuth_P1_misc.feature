@@ -7,7 +7,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 
   #------------------------------------------
   @memAuth_planAndDocuments01 @header @myDocuments @eob @renewMagazine @adobe @needHelp
-  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp 
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -64,7 +64,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | qavgogine | qavgogine | q2_may_rally017    | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
       | 10-010 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@memAuth_active_mapd

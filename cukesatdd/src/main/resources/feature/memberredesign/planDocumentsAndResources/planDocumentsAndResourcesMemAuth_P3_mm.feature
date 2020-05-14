@@ -7,7 +7,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 
   #------------------------------------------
   @memAuth_planAndDocuments03 @membershipMaterials 
-  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Membership Materials
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -56,7 +56,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | qavgogine | qavgogine | q2_may_rally017    | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
+      | 09-047 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
       | 10-048 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
 
 	@memAuth_active_mapd

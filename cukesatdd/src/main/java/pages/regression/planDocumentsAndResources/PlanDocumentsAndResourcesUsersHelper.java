@@ -596,7 +596,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				//targetTestDocList.add("Medical Reimbursement Form (Online)"); //note: this one is for COSMOS only
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}

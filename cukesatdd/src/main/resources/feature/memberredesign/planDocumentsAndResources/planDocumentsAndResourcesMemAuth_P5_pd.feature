@@ -7,7 +7,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 
   #------------------------------------------
   @memAuth_planAndDocuments05 @providerPharmacyDirectories
-  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Provider Directory -or- Pharmacy Directory -or- Provider and Pharmacy Directories
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -62,7 +62,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09--085 | 15129      | qavgogine | qavgogine | q2_may_rally017    | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | 09--085 | 15129      | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
       | 10-086 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@memAuth_active_mapd

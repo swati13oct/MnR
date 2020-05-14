@@ -7,7 +7,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 
   #------------------------------------------
   @memAuth_planAndDocuments06 @formsAndResources
-  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Forms And Resources
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -69,7 +69,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 09-104 | 15129       | qavgogine | qavgogine | q2_may_rally017    | MA       | IND_EFF_PDnR          | true   | false    | true    | true   | true   | false   | true   | true   |
+      | 09-104 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | IND_EFF_PDnR          | true   | false    | true    | true   | true   | false   | true   | true   |
       | 10-105 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
 
 	@memAuth_active_mapd
