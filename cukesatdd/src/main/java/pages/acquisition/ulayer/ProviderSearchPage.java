@@ -55,7 +55,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
-//	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")

@@ -21,6 +21,9 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 	@FindBy(xpath = "//button")
 	private WebElement btnLogin;
 	
+	@FindBy(id = "visitorsEmail")
+	private WebElement visitorEmail;
+	
 	
 	public ShopperProfileAgentLogin(WebDriver driver) {
 		super(driver);
@@ -33,12 +36,14 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 		}
 		else if (MRScenario.environment.equals("stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		}else {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+			CommonUtility.waitForPageLoadNew(driver, username, 45);
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		
-		CommonUtility.waitForPageLoadNew(driver, username, 45);
+		
 	}
 
 	/**
@@ -48,12 +53,17 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 	 * @return
 	 */
 	public ProfileSearch doAgentLogin(String userName,String passWord) {
-		
-		waitforElement(username);
-		sendkeys(username, userName);
-		sendkeys(password, passWord);
-		btnLogin.click();
-		if(driver.getCurrentUrl().contains("shopper-profile.html")) {
+		if (MRScenario.environment.equals("offline")) {
+		}
+		else if (MRScenario.environment.equals("stage")) {
+			System.out.println("########Skipping sign In for stage########");
+		}else {
+			waitforElement(username);
+			sendkeys(username, userName);
+			sendkeys(password, passWord);
+			btnLogin.click();
+		}
+		if(driver.getCurrentUrl().contains("search-profile")) {
 			return new ProfileSearch(driver);
 		}else {
 			System.out.println("Agent login is failed");

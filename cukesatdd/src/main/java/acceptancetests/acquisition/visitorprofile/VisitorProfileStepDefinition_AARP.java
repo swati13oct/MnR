@@ -18,6 +18,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 /**
@@ -80,6 +81,17 @@ public class VisitorProfileStepDefinition_AARP {
 		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
+	}
+	
+	@And("^the user clicks on the add plans button in the profile in agent mode in AARP site$")
+	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_agent_mode_in_AARP_site() throws Exception {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		VPPPlanSummaryPage planSummary = visitorProfilePage.addPlanForMember();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
 	
 	@And("^the user returns to the visitor profile page$")

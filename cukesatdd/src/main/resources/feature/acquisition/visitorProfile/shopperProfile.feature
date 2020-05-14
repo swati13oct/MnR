@@ -108,6 +108,10 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
+    Then Navigate to Visitor Profile page on AARP site
+    And user delets the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+    And the user clicks on the add plans button in the profile in agent mode in AARP site
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
