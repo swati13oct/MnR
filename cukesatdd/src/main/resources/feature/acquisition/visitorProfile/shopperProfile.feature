@@ -97,8 +97,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email                 | plan                                    | plantype | drug    | dosage   | quantity | frequency     | branded |
-      | qavgogine | qavgogine | FAN.HGHBMR@MASKED.COM | AARP Medicare Advantage Walgreens (PPO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
+      | username  | password  | email              | plan                                    | plantype | drug    | dosage   | quantity | frequency     | branded |
+      | qavgogine | qavgogine | MAKAYLA@MEMBER.COM | AARP Medicare Advantage Walgreens (PPO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
 
   @searchProfileAndProviderFlow
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
