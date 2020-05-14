@@ -616,7 +616,8 @@ public class OneTimePaymentPage extends UhcDriver {
 		String title = driver.getTitle();
 		System.out.println("Current title of the page is "+title);
 		
-		if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		//if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		if (driver.getTitle().contains("Your payment has been submitted")) {
 			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
@@ -653,7 +654,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 	
-	public void errorForSecondPayment() {
+	public ConfirmOneTimePaymentPage errorForSecondPayment() {
 		String errorMessage= moreThanonePaymentError.getText();
 		if (errorMessage.contains("Only one payment request can be submitted per business day")) 
 		{
@@ -662,15 +663,16 @@ public class OneTimePaymentPage extends UhcDriver {
 			
 		} else {
 			Assert.fail();
+			return null;
 		}
-
+		return new ConfirmOneTimePaymentPage(driver); 
 	}
 
 	public void validateErrorMessageUnauthorized() {
 		
-		System.out.println("Scrolling to Error Message");
+		System.out.println("Scrolling to Submit button to view the Error Message");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-		jse2.executeScript("arguments[0].scrollIntoView()", csrUnauthorizedErrorMessage); 
+		jse2.executeScript("arguments[0].scrollIntoView()", AuthorizeMonthlyPaymentstButton); 
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

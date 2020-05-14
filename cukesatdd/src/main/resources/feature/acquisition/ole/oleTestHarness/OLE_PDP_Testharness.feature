@@ -1,5 +1,5 @@
 @OLEMicroAPP_PDP
-Feature: OLE Testharness page for AARP for MAPD
+Feature: OLE Testharness page for AARP for PDP
 
   @OLEMicroAppPDP01
   Scenario Outline: TID: <TID> -plan type: <PlanType> - Ole Testharness page to confirmation page for PDP
