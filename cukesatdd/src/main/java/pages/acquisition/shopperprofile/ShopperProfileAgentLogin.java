@@ -62,6 +62,7 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 			sendkeys(username, userName);
 			sendkeys(password, passWord);
 			btnLogin.click();
+			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		}
 		if(driver.getCurrentUrl().contains("search-profile")) {
 			return new ProfileSearch(driver);
