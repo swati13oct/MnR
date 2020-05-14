@@ -32,7 +32,7 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		//note: at the beginning of the year when the year switch happens, the doc link may not be updated right away w/ the right year in the link
 		//note: so don't dynamic determine it for now
 		currentYear="2020";
-		String season="winter";
+		String season="spring";
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/index.html";
 		String redirectUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
