@@ -55,7 +55,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
-	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+//	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -86,7 +86,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@class,'action-btn negative print')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
 	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//*[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]")

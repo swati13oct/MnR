@@ -124,8 +124,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email               | plantype | planname                                            | testPlans                                                                                               |
-      | qavgogine | qavgogine | MACHELLE@MEMBER.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email           | plantype | planname                                | testPlans                                                                                |
+      | qavgogine | qavgogine | DELTON@OWEN.com | MAPD     | AARP Medicare Advantage Walgreens (PPO) | AARP Medicare Advantage Walgreens (PPO),UnitedHealthcare Medicare Advantage Plan 3 (HMO) |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
@@ -145,10 +145,12 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
+    And user delets the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                  | plantype | enrolledplanName                                     | planName                                            | drugNames | providers      | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | No        | SHAHBAZ, MAJID | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email            | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
+      | qavgogine | qavgogine | KARRY@MEMBER.COM | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
