@@ -944,6 +944,9 @@ try {
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after " + browserVersion);
+		
+		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1024x768"
+				: System.getProperty(CommonConstants.SCREEN_RESOLUTION));
 
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? "null" : System.getProperty("phantomjs"));
@@ -1034,19 +1037,20 @@ try {
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", screenResolution);
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1024x768");
+				capabilities.setCapability("screenResolution", screenResolution);
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("chrome")) {
 				System.out.println("Inside chrome");
 				capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1080");
+				capabilities.setCapability("screenResolution", screenResolution);
 				capabilities.setCapability("recordMp4", true);
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("edge")) {
@@ -1054,7 +1058,7 @@ try {
 				capabilities = DesiredCapabilities.edge();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1080");
+				capabilities.setCapability("screenResolution", screenResolution);
 				capabilities.setCapability("maxDuration", "3600");
 			}
 			if (!(null == capabilities)) {
