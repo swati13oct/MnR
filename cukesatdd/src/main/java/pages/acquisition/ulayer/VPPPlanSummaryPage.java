@@ -3441,7 +3441,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 		
-	}
+	
 		/**
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
 		 * @param planName
