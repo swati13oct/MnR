@@ -232,6 +232,9 @@ public class TestHarness extends UhcDriver {
 	 @FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
      private WebElement cologoImage;
 	
+	 @FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Pharmacies & prescriptions')]")
+		private WebElement PharPresLink;
+	 
      @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and prescriptions page') or contains(text(),'Go to Pharmacies & prescriptions page')]")
      private WebElement testHarnessPharPresLink;
 
@@ -1312,6 +1315,27 @@ public class TestHarness extends UhcDriver {
     			testHarnessPharPresLink.click();
     		}
     		CommonUtility.checkPageIsReady(driver);
+    		checkForIPerceptionModel(driver);
+    		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+    			return new PharmaciesAndPrescriptionsPage(driver);
+    		}
+    		return null;
+    	}
+    	
+    	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPageNew() {
+    		System.out.println("Inside navigateToPharAndPresFromTestHarnessPageNew() in TestHarness Class");
+    		try {
+    			System.out.println(driver);
+    		}
+    		catch (Exception e )
+    		{
+    			System.out.print("Inside navigateToPharAndPresFromTestHarnessPageNew ()"+ e.getMessage());
+    		}    		
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		CommonUtility.waitForPageLoad(driver,PharPresLink,30 );
+			validateNew(PharPresLink);
+			PharPresLink.click();
+    		CommonUtility.checkPageIsReadyNew(driver);
     		checkForIPerceptionModel(driver);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);

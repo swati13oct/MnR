@@ -503,19 +503,17 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", 
 					pnpValidate(PnPNotification));		
 		}
-		
+				
 		//F436319	
 		public void validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage() {
-			validateNavigationToWhatsNewPage();
-			navigateBackToPnPPage();
 			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", 
-					pnpValidate(PnPNotification));		
+					pnpValidate(PnPNotification));
 		}
 		
 		//F436319 Find and Price
 		public void validateFindAndPriceCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Tile element", 
-					pnpValidate(findAndPriceTile));		
+					pnpValidate(findPrescriptionsCallToActnBtn));		
 		}
 		
 		//F436319
@@ -539,7 +537,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		//F436319 Pharmacy Locator Call To Action
 		public void validatePharmacyLocatorCallToActionOnPnPPage() {
 				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Tile element", 
-						pnpValidate(pharmacyLocatorTile));		
+						pnpValidate(pharmacyLocatorCallToActnBtn));		
 		}
 			
 		//F436319
@@ -563,7 +561,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		//F436319 Refill Home Delivery Call To Action
 		public void validateRefillHomeDeliveryCallToActionOnPnPPage() {
 					Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Tile element", 
-							pnpValidate(RefillHomeDeliveryTile));		
+							pnpValidate(managePrescriptionCallToActnBtn));		
 		}
 				
 		//F436319
@@ -587,8 +585,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		//F436319 Whats New Call To Action
 		public void validateWhatsNewCallToActionOnPnPPage() {
 						Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element", 
-								pnpValidate(whatsNewTile));		
+								pnpValidate(whatsNewCallToActnBtn));
 		}
+		
+		//F436319 Whats New Call To Action
+				public void validateWhatsNewCallToActionNOTDisplayedOnPnPPage() {
+					Assert.assertFalse("PROBLEM - able to locate whats new call to action element", 
+									    pnpValidate(whatsNewCallToActnBtn));
+				}
 					
 		//F436319
 		public void validateImageWhatsNewCallToActionOnPnPPage() {
@@ -609,8 +613,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		
 		//F436319
-		public void validatePositionOfCallToActionOnPnPPage() {
-			//code goes here, need UI
+		public void validatePositionOfCallToActionOnPnPPage(int position,String callToActionTitle) {
+			List<WebElement> callToActions = driver.findElements(By.xpath("//div[@class='sc-LzLMQ ejtotn']//button//h2"));
+			WebElement element = callToActions.get(position);
+			position =position+1;
+			if (element.getText().equalsIgnoreCase(callToActionTitle)) {
+				Assert.assertEquals("SUCCESS - "+callToActionTitle+ "Is placed on position :: "+ position,true,  pnpValidate(element));
+			}
+			else {
+				Assert.assertTrue("PROBLEM - unable to locate expected position of call to action for "+ callToActionTitle,false);
+			}			
 		}
 		
 		//F436319
@@ -648,19 +660,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		//F436319	
 		public void validateNavigationToPharmacyLocatorToolPage() {
-			/*
-			 * Set handles = driver.getWindowHandles(); String pnpPageHandle =
-			 * driver.getWindowHandle(); handles.remove(pnpPageHandle); String winHandle=
-			 * (String) handles.iterator().next(); if (winHandle!=pnpPageHandle){ String
-			 * OptumRxDrugPricePageHandle=winHandle;
-			 * driver.switchTo().window(OptumRxDrugPricePageHandle); }
-			 */
-				Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Tool Header element", 
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Tool Header element", 
 								pnpValidate(PharmacyLocatorToolHeader));
-			/*
-			 * driver.close(); driver.switchTo().window(pnpPageHandle);
-			 */
-				
+					
 		}
 			
 		//F436319
