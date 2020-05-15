@@ -320,10 +320,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
+	private WebElement nextBestActionModal;
+	
+	@FindBy(xpath = "//div[@class='component_title']")
+	private WebElement nextBestActionModalMsg;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors']")
+	private WebElement nextBestActionModalFindMyDoctorsBtn;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	
 	@FindBy(xpath = "//button[contains(text(),'Get Started')]")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "button[ng-click='getProviders())']")
+	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Continue Enrollment')]")
@@ -333,6 +345,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Will my doctors covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="Continue Enrollment";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -737,12 +751,58 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
 			getStartedBtn.click();
 		} else if (BtnName.equalsIgnoreCase("Find My Doctors")) {
+			waitTillElementClickableInTime(findMyDoctorBtn, 5);
 			findMyDoctorBtn.click();
 		} else if (BtnName.equalsIgnoreCase("Continue Enrollment")) {
+			waitTillElementClickableInTime(contEnrollmentBtn, 5);
 			contEnrollmentBtn.click();
 		}
 	}
-
+	
+	public void verifyNextBestActionModalForProviderSearch() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Provider search message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
+		nextBestActionModalFindMyDoctorsBtn.click();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+				break;
+		}
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+				}
+		return null;
+	}
+	
+	public void verifyNextBestActionModalForEnrollPlan() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_ENROLL_PLAN+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public void clickContinueEnrollmentBtn() {
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
+	
 	public void viewPlanSummary(String planType) {
 		//driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
