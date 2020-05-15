@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-        jsonReport = "target/cucumber-RunMRATDDRegressionFooterNeedHelp.json",detailedReport = true, detailedAggregatedReport = true,
-        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionFooterNeedHelp")
+        jsonReport = "target/cucumber-RunMRATDDRegressionFooterNeedHelpMemAuth.json",detailedReport = true, detailedAggregatedReport = true,
+        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionFooterNeedHelpMemAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
         features = { "src/main/resources/feature/memberredesign/footer" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooterNeedHelp.json" }, tags = { "@footer03","footer04","@MemberAuthNeedHelp" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooterNeedHelpMemAuth.json" }, tags = { "@memAuth_footer03,@memAuth_footer04","@MemberAuthNeedHelp" })
 public class RunMRATDDRegressionFooterNeedHelpMemAuth {
 
 }

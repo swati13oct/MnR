@@ -43,10 +43,18 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       
   @memAuth_footer02 @thePredators @shipFooter @MemberAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Validate Footer | yes      |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
     Then the user navigates to payment history page
@@ -76,9 +84,18 @@ Feature: 1.05.1 Member Footer validation - Member Auth
     # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
     # note: if system is in future date, payment page may not show for user and this test will end up failing
     # note: this scenario covers multiple testcases: TID 15347,15348,15349,15350,15351
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
@@ -105,10 +122,18 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       
   @memAuth_footer04 @thePredators @shipFooter @needHelp @F423677 @MemberAuthNeedHelp
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Validate Footer | yes      |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page

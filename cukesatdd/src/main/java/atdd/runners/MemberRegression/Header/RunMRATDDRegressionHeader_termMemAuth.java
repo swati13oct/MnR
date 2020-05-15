@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-        jsonReport = "target/cucumber-RunMRATDDRegressionHeader_term.json",detailedReport = true, detailedAggregatedReport = true,
-        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_term")
+        jsonReport = "target/cucumber-RunMRATDDRegressionHeader_termMemAuth.json",detailedReport = true, detailedAggregatedReport = true,
+        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_termMemAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
         features = { "src/main/resources/feature/memberredesign/header" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_term.json" }, tags = { "@terminated_MemAuth" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_termMemAuth.json" }, tags = { "@terminated_MemAuth" })
 public class RunMRATDDRegressionHeader_termMemAuth {
 
 }

@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-        jsonReport = "target/cucumber-RunMRATDDRegressionHeader_withoutFindcare.json",detailedReport = true, detailedAggregatedReport = true,
-        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_withoutFindcare")
+        jsonReport = "target/cucumber-RunMRATDDRegressionHeader_withoutFindcareMemAuth.json",detailedReport = true, detailedAggregatedReport = true,
+        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_withoutFindcareMemAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
         features = { "src/main/resources/feature/memberredesign/header" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_withoutFindcare.json" }, tags = { "@no_findcareheader_MemAuth" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_withoutFindcareMemAuth.json" }, tags = { "@no_findcareheader_MemAuth" })
 public class RunMRATDDRegressionHeader_withoutFindcareMemAuth {
 
 }
