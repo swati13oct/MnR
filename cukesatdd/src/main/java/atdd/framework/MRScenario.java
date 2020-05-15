@@ -1037,7 +1037,6 @@ try {
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", screenResolution);
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
