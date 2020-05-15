@@ -712,5 +712,5 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE="myDocumentsdeeplinklogin";
 	public static final String AARP_CHAT_AGENT_LOGIN="aarpChatAgentLogin";
 
-	
+	public static final String CONFIRMATION_NUMBER="verifyConfirmationNumberPresent";
 }
