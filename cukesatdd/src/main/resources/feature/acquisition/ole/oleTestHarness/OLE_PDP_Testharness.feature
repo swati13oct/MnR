@@ -1,5 +1,5 @@
 @OLEMicroAPP_PDP
-Feature: OLE Testharness page for AARP for MAPD
+Feature: OLE Testharness page for AARP for PDP
 
   @OLEMicroAppPDP01
   Scenario Outline: TID: <TID> -plan type: <PlanType> - Ole Testharness page to confirmation page for PDP
@@ -44,27 +44,10 @@ Feature: OLE Testharness page for AARP for MAPD
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
-    Then the user enters following required Medicare Information
-      | First Name         | <firstname>         |
-      | Last Name          | <lastname>          |
-      | Medicare Number    | <medicarenumber>    |
-      | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
-      | Card Type          | <cardtype>          |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd fields for Preliminary Questions Page
-      | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
+      | First Name               | <firstname>              |
+      | Last Name                | <lastname>               |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
@@ -78,21 +61,38 @@ Feature: OLE Testharness page for AARP for MAPD
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
+    Then the user navigates to Medicare Information Page
+    Then the user validates Medicare Information Page required fields
+    Then the user enters following required Medicare Information
+      | Medicare Number    | <medicarenumber>    |
+      | SSN Flag           | <ssnflag>           |
+      | PartA Date         | <partadate>         |
+      | PartB Date         | <partbdate>         |
+      | Card Type          | <cardtype>          |
+      | Email Confirmation | <emailConfirmation> |
+      | Go Green           | <goGreen>           |
+      | Email              | <email>             |
+    Then the user validates TFN in Medicare Info OLE Right Rail
+    Then the user validates the Plan details in Medicare Info OLE Right Rail
+    #    Then the user navigates to Preliminary Questions Page
+    Then the user validates requierd ESRD on Medicare Info Page
+      | MedicaidNumber | <medicaidnumber> |
+    #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+    Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
+    Then the user answers following questions in Medicare Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
     Then the user navigates to SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-    Then the user navigates to Coverage and Health Information Page
-    Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
-    Then the user answers following questions in Coverage and Health Information Page
-      | PDP Question      | <pdpFlag>      |
-      | LongTerm Question | <longTermFlag> |
+    #    Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |

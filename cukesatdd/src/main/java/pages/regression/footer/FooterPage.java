@@ -3,6 +3,7 @@ package pages.regression.footer;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -430,6 +431,7 @@ public class FooterPage extends UhcDriver {
 
 	public FooterPage NavigateToProfileandPref(){
 		footerCheckModelPopup(driver);
+		scrollElementToCenterScreen(accountprofile);
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
@@ -833,6 +835,16 @@ public class FooterPage extends UhcDriver {
 		targetTab.click();
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(1000); //note: keep to give it a sec to stable	}
+	}
+
+	public void scrollElementToCenterScreen(WebElement element) {
+		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
+		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+		System.out.println("TEST - move element to center view"); 
+		/* JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
 
 }

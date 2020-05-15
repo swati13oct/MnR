@@ -192,39 +192,24 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@When("^the user navigates to Combo payment history page$")
-	public void Combo_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		}
-
-	}
-
+	
 	@When("^the user navigates to Ship tab and validates the amount$")
 	public void ship_tab_amount_validation() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ComboTab);
-		AHPage = AHPage.navigateToSHIPTab();
-
-		if (AHPage != null) {
-			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
-			System.out.println("User is on Recurring Payment History");
-		} else {
-			System.out.println("Unable to navegate to Ship tab");
-		}
-
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToSHIPTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
 	}
 
-	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
+	@Then("^User Scrolls down and validate that Payment History Section and scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.DashPage);
-		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUp();
+		
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user has scrolled up");
@@ -308,18 +293,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user selects the Checking account option on New page$")
-	public void click_on_Checking_account_Payment_btn() {
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CC_BUTTON);
-		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtn();
-
-		if (oneTimePayment != null) {
-			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");
-		}
-	}
-
+	
 	@And("^the user selects the Setup AutoCreditCard option on New page$")
 	public void click_on_SetupCCA_Auto_Payment_btn() {
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
@@ -347,50 +321,33 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user validates the Payment Summary option on New page OTP$")
 	public void validate_Payment_Summary_Payment_on_OTP() {
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CC_BUTTON);
-		OneTimePaymentPage oneTimePayment = paymenthistory.BalanceSummaryValidation();
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.BalanceSummaryValidation();
 
-		if (oneTimePayment != null) {
-			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			
 		}
 
 	}
 
-	@And("^the user clicks on cancel button in Recurring EFT flow$")
+	@And("^the user clicks on cancel button in One time EFT or Recurring EFT flow$")
 	public void click_on_Cancel_payment_btn() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPayments();
-		if (paymenthistory != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
-
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		         paymentsFormPage.clickonCancelButton();
+		
 		}
-	}
-
-	@And("^the user clicks on cancel button on Make one time flow$")
-	public void click_on_Cancel_payment_btn_OTP_flow_new() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPaymentsOneTime();
-
-		if (paymenthistory != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
-
-		}
-	}
-
+			
 	@And("^the user clicks on Authorize button to validate error message$")
 	public void click_on_Authorize_button() {
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.One_Time_Payments_Page);
-		OneTimePaymentPage OverviewPage = oneTimePayment.ErrorMessageValidation();
-
-		if (OverviewPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-
-		}
+		
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		paymentsFormPage.ErrorMessageValidation();
+		
 	}
 
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
@@ -543,6 +500,15 @@ public class OneTimePaymentAarpStepDefintion {
 		oneTimePaymentPage.validateErrorMessageUnauthorized();
 			}
 
+	
+	@And("^the user is displayed with an error message on Edit Recurring EFT Review that he is not authorized$")
+	public void errormessagedisplayedEditEFT_unauthorized() throws InterruptedException {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		updateReviewPage.validateErrorMessageUnauthorized();
+			}
+	
+	
 	@And("^the user confirms the AutoPay Disabled for Memauth$")
 	public void confirms_payment_DisableButton() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
@@ -562,6 +528,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void Go_toPayment_History_page()  {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		
 		PaymentHistoryPage paymentHistoryPage = confirmOneTimePaymentPage.ScrollDownToBackButton();
 			
 			if (paymentHistoryPage != null) {
@@ -1608,20 +1575,21 @@ public class OneTimePaymentAarpStepDefintion {
 	@Then("^User navigates to payment confirmation page for CC flow$")
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
 
-		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Only one payment request message is Displayed in in review one time PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}else {
-
-
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Only one payment request message is Displayed in in review one time PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); }else {
+		 */
 			ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
-
 			confirmOneTimePaymentPage.OneTimeCCverification();
-		}
+			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
+	//	}
 	}
 
 	@Given("^user clicks on Set up Automatic payments on payment overview page$")
@@ -1769,13 +1737,37 @@ public class OneTimePaymentAarpStepDefintion {
 			}
 
 		}
-
-
-
-
-
 	}
 
+	@Given("^CSR navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
+	public void CSR_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFT();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on Update confirmation page for Checking account");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		} else {
+
+			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				
+			}
+
+		}
+	}
+	
 	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC$")
 	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_CC()
 			throws Throwable {
@@ -1791,26 +1783,33 @@ public class OneTimePaymentAarpStepDefintion {
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT() throws Throwable {
 
-		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Only one payment request message is Displayed  : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}else {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){
+		 * System.out.println("Only one payment request message is Displayed  : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); }else {
+		 */
 			RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
 					.getBean(PageConstants.Recurring_Confirmation_Page);
 			recurringConfirmationPage.validateEFTRecurrVerification();
-		}
+			Assert.assertTrue(true);
+	//	}
 	}
 	
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for One time$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_One_time() throws Throwable {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
-		confirmOneTimePaymentPage.OneTimeEFTverification();
-		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
-		
+		String verifyConfirmationNumberPresent = confirmOneTimePaymentPage.OneTimeEFTverification();
+		getLoginScenario().saveBean(PageConstants.CONFIRMATION_NUMBER, verifyConfirmationNumberPresent);
+				
+		//getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+		//Updated the row above (changed the constant to use Oracle deletion statement
+		getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 
 	}
 
@@ -1829,8 +1828,7 @@ public class OneTimePaymentAarpStepDefintion {
 		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPayment();
 		if (updateRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
-			System.out.println("User is on Setup Recurring Payments screen");
-		}
+			}
 	}
 
 	@Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
@@ -1892,18 +1890,22 @@ public class OneTimePaymentAarpStepDefintion {
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT_for_Update_Recurring()
 			throws Throwable {
-		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Only one payment request message is Displayed  : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
-			Assert.assertTrue(true);
-		}else {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){
+		 * System.out.println("Only one payment request message is Displayed  : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); }else {
+		 */
 
 			UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
 					.getBean(PageConstants.Update_Confirmation_Page);
 			updateConfirmationPage.validateEFTUpdateVerification();
-		}
+			Assert.assertTrue("Update Recurring for Checking Account is done",true);
+	//	}
 	}
 
 	@Given("^user selects CreditDebit Card on Update Automatic recurring payments page and Click on Next$")
@@ -1991,7 +1993,6 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap);
 		if (oneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
-			System.out.println("User is on Review Automatic payment for EFT");
 		}
 
 	}
@@ -2194,12 +2195,12 @@ public class OneTimePaymentAarpStepDefintion {
 		paymentHistoryPage.validateOnlyUnpaidOptionSelected();
 	}	
 	
-	@Then("^user expands show payment history for supplement insurance plan section$")
+	/*@Then("^user expands show payment history for supplement insurance plan section$")
 	public void user_expands_show_payment_history_for_supplement_insurance_plan_section() {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
 		paymentHistoryPage.validatePaymentHistoryForSupplementInsurancePlan();
-	}	
+	}	*/
 	
 	@Then("^user validates download PDF for monthly bill PDF$")
 	public void user_validates_download_Link_for_monthly_bill_PDF() throws Throwable {
@@ -2237,8 +2238,102 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
-		oneTimePaymentPage.errorForSecondPayment();
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage.errorForSecondPayment();
+	    getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+	
+		
+	}
+	
+	@When("^user clicks on Federal Plan Tab$")
+	public void userClicksOnFederalPlanTab() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		    paymentHistoryPage.navigateToFedTab();
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				 
+	}
+	
+	@And("^the user delete recurring payment record from GPS so that he can run recurring payment again$")
+	public void DeletePaymentRecord(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		
+		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
 
 		
 	}
+	
+	@And("^Exception the user delete recurring payment record from GPS so that he can run recurring payment again$")
+	public void DeletePaymentRecordforexception(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		String confirmationnumberfromPageConstant = (String)getLoginScenario().getBean(PageConstants.CONFIRMATION_NUMBER);
+		System.out.println("Value of confirmation number from Page Constants is "+confirmationnumberfromPageConstant);
+		confirmOneTimePaymentPage.deletePaymetnRecordFromGPSforexception(paymentTypeMap,confirmationnumberfromPageConstant);
+
+		
+	}
+	
+	@When("^user SHIP selects other amount and enters \"([^\"]*)\" and selects Checking Account and click on Next button$")
+	public void user_selects_other_amount_and(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+		PaymentsFormPage paymentsFormPage = oneTimePaymentPage.clickOnContuineButton();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on One time EFT Payment Form Page");
+
+		}
+}
+	
+	@Given("^user SHIP Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA$")
+	public void SHIP_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button_for_Make_one_time_CA(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap); 
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
+			System.out.println("User is on Review payment page for Checking account");
+		}
+
+	}
+	@Then("^SHIP User navigates to payment confirmation page and verifies ConfirmationNo for One time$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_SHIP() throws Throwable {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+				confirmOneTimePaymentPage.OneTimeEFTverificationSHIP();		
+		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);		
+		getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+
+
+	}
+	
 }

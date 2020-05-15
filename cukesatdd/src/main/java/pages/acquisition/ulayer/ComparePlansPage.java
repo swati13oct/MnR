@@ -554,7 +554,6 @@ public class ComparePlansPage extends UhcDriver {
      }
 	
 	public void validatenewlyAddPlan() {
-   	 
    	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
 		int plansForCompare=allMAPlans.size();
 		if (plansForCompare == 3) {
@@ -564,5 +563,14 @@ public class ComparePlansPage extends UhcDriver {
 		else Assert.assertTrue(false); 		
 	}
 		
+	public void validatePlansAddedonPlancompareforVisitorProfile() {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		int plansForCompare = allMAPlans.size();
+		if (plansForCompare == 2) {
+			Assert.assertTrue(true);
+			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
+		} else
+			Assert.assertTrue(false);
+	}
 }
 

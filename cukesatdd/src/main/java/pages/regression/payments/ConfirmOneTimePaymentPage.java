@@ -1,6 +1,10 @@
 package pages.regression.payments;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -12,7 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -26,10 +32,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "termError")
 	private WebElement TermsCheckRadioButton;
-	
+
 	@FindBy(xpath = "//*[@id='custom-page-sub-title']")
 	private WebElement thankyouText;
-	
+
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
 
@@ -62,7 +68,11 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
 	private WebElement OnlyOnePaymentRequestMessage;
+	
+	@FindBy(xpath = " //h1[@id='custom-page-title']")
+	private WebElement ConfirmationText; 
 
+	
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -297,24 +307,143 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	}
 	
-	public void OneTimeEFTverification() {
+	public String OneTimeEFTverification() {
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		String verifyConfirmationNumberPresent = ConfirmationNumber.getText();
+		//getLoginScenario().saveBean(PageConstants.CONFIRMATION_NUMBER, verifyConfirmationNumberPresent);
+				
+		if(verifyConfirmationNumberPresent != null)
+		{
+			System.out.println("Confirmation number was displayed, Test Case is Passed");
+			
+		    Assert.assertTrue(true);
 		}
+		else
+		{
+			Assert.fail("Confirmation Number was not dispalyed, Test Case if failed");
+			
+		}
+		
+		return verifyConfirmationNumberPresent;
+	}
 
+	
 	
 	public void validateEFTSetupVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		PaymentsDataVerificationonConfirmationPage();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
+			} else 
+			{
+			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
+			}
 		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
 	}
 	
 	@Override
 	public void openAndValidate() {
-		System.out.println("Checking thankyou message on page");
-		validate(thankyouText);
-		System.out.println("Checked thankyou message on page");
+		System.out.println("Openandvalidate method of ConfirmOneTimePaymentPage");
+
 	}
+
+	public void deletePaymetnRecordFromGPS(Map<String, String> paymentTypeMap) {
+		
+	
+		try (Connection con = MRScenario.getGPSuat3Connection()) {
+					
+		   String referenceNmbr = ConfirmationNumber.getText();								
+			System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
+			String paymentType = paymentTypeMap.get("Payment Type");
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			stmt = con.createStatement();
+			if (paymentType.equalsIgnoreCase("OneTime")) {
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id ='"
+						+ referenceNmbr + "'");
+				System.out.println("One Time payment has been deleted from household_billing_profile database");
+				Assert.assertTrue("One Time payment has been deleted from household_billing_profile database", true);
+			} else if (paymentType.equalsIgnoreCase("Recurring")) {
+				stmt.executeUpdate(
+						"delete from insured_plan_billing where household_billing_profile_id= '" + referenceNmbr + "'");
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id= '"
+						+ referenceNmbr + "'");
+				System.out.println(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database");
+				Assert.assertTrue(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database",
+						true);
+			}
+
+			else {
+				System.out.println("Payment entry not deleted successfully from the GPS");
+				Assert.fail("Payment entry not deleted successfully from the GPS DB");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void deletePaymetnRecordFromGPSforexception(Map<String, String> paymentTypeMap, String referenceNmbr) {
+		
+		System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
+		try (Connection con = MRScenario.getGPSuat3Connection()) {
+					
+		   //String referenceNmbr = ConfirmationNumber.getText();								
+			System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
+			String paymentType = paymentTypeMap.get("Payment Type");
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			stmt = con.createStatement();
+			if (paymentType.equalsIgnoreCase("OneTime")) {
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id ='"
+						+ referenceNmbr + "'");
+				System.out.println("One Time payment has been deleted from household_billing_profile database");
+				Assert.assertTrue("One Time payment has been deleted from household_billing_profile database", true);
+			} else if (paymentType.equalsIgnoreCase("Recurring")) {
+				stmt.executeUpdate(
+						"delete from insured_plan_billing where household_billing_profile_id= '" + referenceNmbr + "'");
+				stmt.executeUpdate("delete from household_billing_profile where household_billing_profile_id= '"
+						+ referenceNmbr + "'");
+				System.out.println(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database");
+				Assert.assertTrue(
+						"Recurring payment has been deleted from insured_plan_billing and household_billing_profile database",
+						true);
+			}
+
+			else {
+				System.out.println("Payment entry not deleted successfully from the GPS");
+				Assert.fail("Payment entry not deleted successfully from the GPS DB");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public void OneTimeEFTverificationSHIP() {
+		validate(ConfirmationText);
+		System.out.println("Your confirmation text is:- " + ConfirmationText.getText());
+		PaymentsDataVerificationonConfirmationPage();
+		String verifyConfirmationTextPresent = ConfirmationText.getText();
+			if(verifyConfirmationTextPresent.contains("Your payment has been submitted")){					
+		System.out.println("Your payment submission confirmation text displyed is :- " + ConfirmationText.getText());
+		System.out.println("Confirmation text was displayed, Test Case is Passed");
+	    Assert.assertTrue(true);
+			}
+			else
+			{
+				Assert.fail("Confirmation text was not dispalyed, Test Case if failed");
+			}		
+	
+	}
+
 
 }

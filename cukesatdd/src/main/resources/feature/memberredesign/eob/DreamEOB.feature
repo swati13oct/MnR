@@ -7,7 +7,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
 
   @dreamEob01 @E2E @regressionMember 
-  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify DREAM EOB page content and PDFs
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -67,28 +67,35 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 01    | MAPD     | COSMOS_DEOB       | 1 new both, 1 old C, 1 or 2 old D overlap | true|
-      | 07    | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
+      | 02    | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
 
     @dreamEob01b 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 06    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
-      | 03    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
+      | 03    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
+      | 04    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 08    | MA       | COSMOS_EOB_R      | old C                             | false       |
-      | 02    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
+      | 05    | MA       | COSMOS_EOB_R      | old C                             | false       |
+      | 06    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @dreamEob01d 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
-      | 04    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+      | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
+      | 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
 
     @dreamEob01e
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 09    | PDP      | LIS_PDP_SSP_COMBO_EOB | old D                         | false       |
+      | 09    | PDP      | PDP_SSP_COMBO_EOB | old D                             | false       |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| old D                             | false       |
+
+    @dreamEob01f
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
+      | 11    | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
+      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |
+      

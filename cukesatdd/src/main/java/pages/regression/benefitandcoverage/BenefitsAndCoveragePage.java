@@ -2620,7 +2620,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-either- coinsurance of 5% of the cost of the drug\n"
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$7.00\n"
+				+"$10.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs \n"
 				+"Tier 3\n"
 				+"$45.00\n"
@@ -2661,7 +2661,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$0.00\n\n"
 
 +"Specialist:\n"
-+"$40.00";
++"$25.00";
 
 		if(officeVisitSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the Office visit section is displaying correctly", true);
@@ -2677,7 +2677,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	
 	public void hospitalVisitSection(){
 		String TableData= "INPATIENT HOSPITAL CARE\n"
-				+"days 1 - 8 : $225.00 Copay per day\n"
+				+"days 1 - 8 : $150.00 Copay per day\n"
 				+"days 9 - 90 : $0.00 Copay per day";
 	
 
@@ -2696,8 +2696,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void outPatientSection(){
 		String TableData="OUTPATIENT HOSPITAL SERVICES (INCLUDES AMBULATORY SERVICES)\n"
-				+"Type 1: $0.00 - $150.00\n"
-				+"Type 2:  $0.00 - $250.00";
+				+"Type 1: $0.00 - $100.00\n"
+				+"Type 2:  $0.00 - $150.00";
 		if(outPatientSection.getText().contains(TableData.toString())){
 			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
 			System.out.println("The data in the outPatient section  is displaying correctly");  
@@ -2730,7 +2730,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void outNetworkSection(){
 		String TableData= "OUT-OF-NETWORK\n"
 
-+"N/A";
++"$7,500.00";
 		
 
 		if(outNetworkSection.getText().equals(TableData.toString())){
@@ -3000,13 +3000,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-either- coinsurance of 5% of the cost of the drug\n"
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$5.00\n"
-				+"$5.00\n"
+				+"$0.00\n"
+				+"$0.00\n"
 				+"Tier 3\n"
-				+"$47.00\n"
+				+"$131.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"$100.00\n"
+				+"$290.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"
@@ -3042,8 +3042,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-either- coinsurance of 5% of the cost of the drug\n"
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$10.00\n"
-				+"$10.00\n"
+				+"$5.00\n"
+				+"$5.00\n"
 				+"Tier 3\n"
 				+"$47.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"

@@ -55,22 +55,28 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='Finish']")
 	private WebElement doneButtonInIperceptionSmileySurvey;
 
-	@FindBy(xpath = "//*[@id='hsid-username']")
+	@FindBy(xpath = "//*[contains(@id,'EMAIL')]")
 	private WebElement userNameField;
 
-	@FindBy(xpath = "//*[@id='hsid-password']")
+	@FindBy(xpath = "//*[contains(@id,'PASSWORD')]")
 	private WebElement passwordField;
 
-	@FindBy(id = "hsid-submit")
-	private WebElement signInButton;
+	@FindBy(xpath = "//*[contains(@id,'submitBtn')]")
+	private WebElement hsidSignInButton;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
+	private WebElement mnrSignInButton;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDRegistration')]")
+	private WebElement registerNowButton;
 
-	@FindBy(id = "hsid-FUn")
+	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/username')]")
 	private WebElement usernamelink;
 
-	@FindBy(id = "hsid-FPwd")
+	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/password')]")
 	private WebElement passwordlink;
 
-	@FindBy(xpath = "//div[@id='hsid-commonError']/p/span[2]")
+	@FindBy(xpath = "//*[contains(@class,'strong success') and contains(text(),'Email confirmed')]")
 	private WebElement EmailConfirmedtext;
 
 	@FindBy(id = "username")
@@ -97,12 +103,21 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
 
-
+	@FindBy(xpath="//button[@id='hsid-submit']")
+	protected WebElement oldSignInBtn;
+	
+	@FindBy(xpath="//input[@id='hsid-username']")
+	protected WebElement oldUsername;
+	
+	@FindBy(xpath="//input[@id='hsid-password']")
+	protected WebElement oldPassword;
 	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
 
+	boolean doOldSignin;
+	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
 		return loginScenario;
@@ -154,11 +169,19 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
-		// validateNew(signInButton);
+		//validateNew(mnrSignInButton);
+		
+		/*
+		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+		 * CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
+		 * 
+		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
+		 */
+		//note: take out this when new sign-in is stable
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
 		else
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			doOldSignin=true;
 	}
 
 
@@ -166,30 +189,42 @@ public class HSIDLoginPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		startNew(deepLinkUrl);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
-		// validateNew(signInButton);
+		//validateNew(mnrSignInButton);
+		/*
+		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
+		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+		 */
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
 		else
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			doOldSignin=true;
+
 	}
 
-	public void validateelements() {
+	public void validateHsidPageElements() {
 		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		validateNew(userNameField);
+		validateNew(passwordField);
+		validateNew(hsidSignInButton);
+		validateNew(usernamelink);
+		validateNew(passwordlink);
+		} catch(UnhandledAlertException ae) {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+
+			validateNew(userNameField);
+			validateNew(passwordField);
+			validateNew(hsidSignInButton);
+			validateNew(usernamelink);
+			validateNew(passwordlink);
 		}
-		validate(userNameField);
-		validate(passwordField);
-		validate(signInButton);
-		validate(usernamelink);
-		validate(passwordlink);
 	}
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
-		driver.get(REGIRATION_URL);
-	
+		//driver.get(REGIRATION_URL);
+		validateNew(registerNowButton);
+		registerNowButton.click();
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 
@@ -201,7 +236,7 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 		try {
 			Thread.sleep(40000);
 		} catch (InterruptedException e) {
@@ -224,10 +259,19 @@ public class HSIDLoginPage extends UhcDriver {
 	 */
 	public Object doLoginWith(String username, String password) {
 
+		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
 			System.out.println(driver.getCurrentUrl());
+			sendkeys(oldUsername, username);
+			sendkeys(oldPassword, password);
+			oldSignInBtn.click();
+		} else {
+			System.out.println(driver.getCurrentUrl());
+			mnrSignInButton.click();
+			validateHsidPageElements();
 			sendkeys(userNameField, username);
 			sendkeys(passwordField, password);
-			signInButton.click();
+			hsidSignInButton.click();
+		}
 
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
@@ -541,7 +585,7 @@ public class HSIDLoginPage extends UhcDriver {
         System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 		
 		try {
 			Thread.sleep(35000);
@@ -694,11 +738,13 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	
 	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
-
+		validateNew(mnrSignInButton);
+		mnrSignInButton.click();
+		validateNew(userNameField);
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 
 		//wait for some form of header to show
 

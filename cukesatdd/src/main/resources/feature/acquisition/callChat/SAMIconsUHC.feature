@@ -1,5 +1,5 @@
 @acq_CHATCALL_UHC
-Feature: 1.13 ACQ UHC- To test SAM Icons in UHC site
+Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename>
@@ -9,7 +9,7 @@ And user opens the page to validate on UHC
 Then the user validates whether call icon is visible on UHC   
 Then the user validates whether chat icon is visible on UHC
 
-@headerUHC_1 @samChatCall_1
+@headerUHC_1 @samChatCall_1 @samChatRegression
 Examples: 
 | pagename |
 |/|

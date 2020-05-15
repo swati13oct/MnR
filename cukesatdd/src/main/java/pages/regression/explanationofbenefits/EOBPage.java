@@ -81,16 +81,19 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validatePhipContent() {
+		CommonUtility.waitForPageLoad(driver, phipError, 5);
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for PHIP user", eobValidate(phipError));
 		String expText="You can view your AARP Personal Health Insurance Plan Explanation of Benefits information by logging in to Myuhc.com.";
 		String actText=phipError.getText();
 		Assert.assertTrue("PROBLEM - unable to locate the expected error message for PHIP user.  "
 				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
-				actText.contains(expText));
+				actText.toLowerCase().contains(expText.toLowerCase()));
 	}
 
 	public void validateHeaderSectionContent(String planType) {
+		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
@@ -189,7 +192,7 @@ public class EOBPage extends EOBBase{
 	 * NOTE: Right rail for medical pdf info will only show for MAPD / MA users and if there is EOB
 	 * @param planType
 	 */
-	public void validateRightRail_DREAMEOB(String planType, int ui_eobResultCount) {
+	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
 		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
@@ -219,7 +222,8 @@ public class EOBPage extends EOBBase{
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
 			sleepBySec(3);
-			goToSpecificComboTab(planType);
+			if (memberType.contains("COMBO")) 
+				goToSpecificComboTab(planType);
 		}
 	}
 
@@ -319,13 +323,13 @@ public class EOBPage extends EOBBase{
 	 * @param targetEobType
 	 * @return
 	 */
-	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange, String targetEobType){
+	public HashMap<String,Integer> selectDateRange(String planType, String memberType, String targetDateRange, String targetEobType){
 		int maxRetry=3;
 		int count=0;
 		
 		while (count < maxRetry) {
 			System.out.println("Proceed to do search range - try# "+count);
-			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 			Select dateRangeOptions = new Select(eobDateRangeDropdown);
 			dateRangeOptions.selectByVisibleText(targetDateRange);
 			CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
@@ -381,20 +385,26 @@ public class EOBPage extends EOBBase{
 			}
 			waitForEobPageToLoad(15, 5);
 			//note: for the case either spinner still spining or getting internal server error, try again before aborting test
-			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError) || !eobValidate(eobCount)) {
+			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError) || eobValidate(internalServerError2)|| !eobValidate(eobCount)) {
 				count=count+1;
 				if (count < maxRetry) {
 					System.out.println("Going to refresh the page and retry the search again before giving up...");
 					driver.navigate().refresh();
+					if (memberType.contains("COMBO")) 
+						goToSpecificComboTab(planType);
 					CommonUtility.checkPageIsReady(driver);
-					selectEobType(planType, targetEobType);
-				} else
-					Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue, abort test now", false);
+					if (targetEobType!=null)
+						selectEobType(planType, targetEobType);
+				} else {
+					if (eobValidate(internalServerError) || eobValidate(internalServerError2)) 
+						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and getting internal system error, abort test now", false);
+					else 
+						Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue or internal system error, abort test now", false);
+				}
 			} else {
 				System.out.println("TEST - EOB finished loading, moving on to next step...");
 				break;
 			}
-
 		}
 		Assert.assertTrue("PROBLEM - getting internal server problem (already retried the search '"+count+"' times and still getting server problem error)", !eobValidate(internalServerError));
 		sleepBySec(3);
@@ -923,7 +933,7 @@ public class EOBPage extends EOBBase{
 
 			//note - validate the pagination
 			System.out.println(i % 10);
-			if (i % 9 == 0 && i != 0) {
+			if (i % 10 == 0 && i != 0) {
 				if(i==(ui_eobCountInt-1)) {
 					System.out.println("At last EOB for Member - No Next Page arrow");
 					break;
@@ -1137,6 +1147,24 @@ public class EOBPage extends EOBBase{
 			System.out.println(s);
 		return testNote;
 	}
+	
+	public void validateContactUsStmt_DREAMEOB(String planType) {
+		Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'If you are having difficulty...'", eobValidate(contactusStmt1));
+		String expUrl="/member/contact-us/overview.html";
+		String actUrl=contactusStmtLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		 
+		if (planType.equals("MA") || planType.equals("MAPD")) {
+			Assert.assertTrue("PROBLEM - unable to locate the contact us statement under pagination - 'In some instances...'", eobValidate(contactusStmt2));
+			Assert.assertTrue("PROBLEM - unable to locate the contact us link under pagination", eobValidate(contactusLnk));
+			expUrl="needhelpsectioncontactus";
+			actUrl=contactusLnk.getAttribute("href");
+			Assert.assertTrue("PROBLEM - href value for 'Contact Us' link in '' statement is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		} else {
+			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us statement under pagination - 'In some instances...'", !eobValidate(contactusStmt2));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate the contact us link under pagination", !eobValidate(contactusLnk));
+		}
+	}
 
 
 	public int getNumEobAfterSearch(){
@@ -1197,6 +1225,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
+		Assert.assertTrue("PROBLEM - should not locate old 'Claims Summary' link on top menu after Rally Claims cut over", !eobValidate(oldClaimsSubTopMenu));
 		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
 	}
 
