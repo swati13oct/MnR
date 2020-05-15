@@ -68,6 +68,12 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "header-number")
 	private WebElement shoppingCartNumber;
 	
+	@FindBy(xpath = "//div[contains(@class,'compare')]/button")
+	private WebElement comparePlans;
+	
+	@FindBy(css = "button.cta-button.create-profile")
+	private WebElement comparePlansOnPopup;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -314,6 +320,25 @@ public class VisitorProfilePage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
 			System.out.println("visitorprofiletestharness Page is Displayed");
 			return new VPPTestHarnessPage(driver);
+		}
+		return null;
+	}
+	
+	public ComparePlansPage planCompare(String plans) {
+	
+		comparePlans.click();
+		CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
+		String[] plan = plans.split(",");
+		for(int i=0;i<4;i++) {
+			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
+		}
+		comparePlansOnPopup.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("/plan-compare")) {
+			System.out.println("Navigation to Plan Compare page is Passed");
+			return new ComparePlansPage(driver);
+		} else {
+			Assert.fail("Navigation to Plan Compare page is failed");
 		}
 		return null;
 	}

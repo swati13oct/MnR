@@ -85,7 +85,7 @@ public class MemberCreateProfile extends UhcDriver {
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);
 			switchToNewTab();
-			Thread.sleep(20000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}else {

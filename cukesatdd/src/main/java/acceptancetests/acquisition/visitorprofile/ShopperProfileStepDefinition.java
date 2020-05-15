@@ -246,7 +246,6 @@ public class ShopperProfileStepDefinition {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
 			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			Thread.sleep(15000);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -275,8 +274,6 @@ public class ShopperProfileStepDefinition {
 	
 	@Then("^I ask the shopper calling in to provide me with the Email Address for NonMember$")
 	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Email_Address_Non_Member(DataTable memberDetails){
-	    
-		
 		
 		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 				.getBean(PageConstants.PROFILE_SEARCH);
