@@ -32,7 +32,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     @prod_healthAndWellness01b
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15342 | ashah120  | Mnrqa002  | nawal1215       | PDP      | RewardsMember     | true      | false          |
+      | 15342 | ashah120  | Mnrqa002  | nawal1215       | PDP      | RewardsMember     | false     | false          |
       | xxxxx | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | RewardsMember     | false     | true           |
 
     @prod_healthAndWellness01c
