@@ -38,7 +38,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     @prod_healthAndWellness01c
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | ashah120  | Mnrqa002  | aliceb1105@aol.com | FED_SHIP_COMBO | RewardsMember | true | false          |
+      | 15343 | ashah120  | Mnrqa002  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
 	#note: can't find a prod combo user w/ SHIP priority yet
     # | 15343 | ashah120  | Mnrqa002  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
  
