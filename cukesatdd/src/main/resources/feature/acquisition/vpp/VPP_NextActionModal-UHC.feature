@@ -302,7 +302,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |testPlans|
       |   19019 | No              | Iowa County    | MAPD     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |AARP Medicare Advantage Choice Plan 1 (PPO),AARP Medicare Advantage Choice Plan 2 (PPO)|
   
-  @vppNextActionModalEnrollPlanPopupWithAllPlans @testUHC
+  @vppNextActionModalEnrollPlanPopupWithAllPlans
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
