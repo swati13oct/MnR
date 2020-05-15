@@ -61,7 +61,7 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 09-066 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
+      | 09-066 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
       | 10-067 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 
 	@memAuth_active_mapd

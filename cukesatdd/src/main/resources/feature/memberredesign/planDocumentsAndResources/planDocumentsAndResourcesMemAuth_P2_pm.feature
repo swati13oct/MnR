@@ -58,7 +58,7 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+      | 09-028 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
       | 10-029 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
  
 	@memAuth_active_mapd
