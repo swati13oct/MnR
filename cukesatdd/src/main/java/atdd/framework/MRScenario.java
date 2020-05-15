@@ -945,7 +945,7 @@ try {
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after " + browserVersion);
 		
-		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1024x768"
+		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1920x1080"
 				: System.getProperty(CommonConstants.SCREEN_RESOLUTION));
 
 		// Again, Jenkins takes precedent.
