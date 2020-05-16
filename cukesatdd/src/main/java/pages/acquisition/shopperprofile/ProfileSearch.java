@@ -189,6 +189,7 @@ public class ProfileSearch extends UhcDriver {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
+			Thread.sleep(10000);
 			ArrayList<String> tabs = new ArrayList<String>(
                     driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
