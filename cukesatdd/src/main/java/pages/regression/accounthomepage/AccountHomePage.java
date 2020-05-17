@@ -665,7 +665,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 	
 		    		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
+		if (MRScenario.environment.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
 		{
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -681,14 +681,14 @@ public class AccountHomePage extends UhcDriver {
 			 {
 					System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
-					driver.navigate().to("https://" + MRScenario.environmentMedicare
+					driver.navigate().to("https://" + MRScenario.environment
 							+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 			 }
 		if (driver.getCurrentUrl().contains("/medica/dashboard"))
 					 {
 							System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
-							driver.navigate().to("https://" + MRScenario.environmentMedicare
+							driver.navigate().to("https://" + MRScenario.environment
 							+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 					 }
 	    if (driver.getCurrentUrl().contains("/retiree/dashboard"))
@@ -718,7 +718,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		}										
 			
-		else if (MRScenario.environmentMedicare.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+		else if (MRScenario.environment.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			if (driver.getTitle().contains("Benefits")) {
@@ -726,16 +726,16 @@ public class AccountHomePage extends UhcDriver {
 				return new BenefitsAndCoveragePage(driver);
 			}
 
-		} else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")) {
+		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
-		} else if (MRScenario.environmentMedicare.equals("team-c")) {
+		} else if (MRScenario.environment.equals("team-c")) {
 			driver.navigate().to(
 					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
-		} else if (MRScenario.environmentMedicare.equals("team-e")) {
+		} else if (MRScenario.environment.equals("team-e")) {
 			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
 			CommonUtility.waitForPageLoad(driver, heading, 30);
 			System.out.println(driver.getCurrentUrl());
