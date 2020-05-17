@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -643,7 +644,7 @@ public class AccountHomePage extends UhcDriver {
 	 * waiting for Hello-Person name text to be displayed on page
 	 */
 
-	public BenefitsAndCoveragePage navigateToBandCPage() 
+	public BenefitsAndCoveragePage navigateToBandCPage(String PlanType)
 	
 	{
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
@@ -717,8 +718,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		}										
 			
-        else if (MRScenario.environmentMedicare.equals("stage")
-				&& ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+		else if (MRScenario.environmentMedicare.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			if (driver.getTitle().contains("Benefits")) {
@@ -740,7 +740,56 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, heading, 30);
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
-		} else {
+		} else if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+			
+
+			if (validate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					// Going inside shadow root to get element, in this case the
+					// logo is in the shadow root header
+					System.out.println("Value of Plan Type is: "+PlanType);
+					
+					if (PlanType.equalsIgnoreCase("SHIP"))
+					{	
+					WebElement BenefitsandCoverageTab = root1.findElement(By
+							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(3)"));
+					System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
+					TestHarness.checkForIPerceptionModel(driver);
+					BenefitsandCoverageTab.click();
+					}
+					else 
+					{
+						WebElement BenefitsandCoverageTab = root1.findElement(By
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
+						TestHarness.checkForIPerceptionModel(driver);
+						BenefitsandCoverageTab.click();
+					}
+					
+					System.out.println("Benefits an Coverage tab has been clicked");	
+					CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is : "+driver.getCurrentUrl());
+			if (driver.getCurrentUrl().contains("benefits"))
+			{
+				System.out.println("Current URL contains benefits text in it, returning BenefitsAndCoveragePage");	
+			return new BenefitsAndCoveragePage(driver);
+		     } 
+			else
+			{
+				Assert.fail("Current URL doesn't contains benefits text in it, benefits page didn't appear , failed");
+			}
+			}
+				catch(Exception e)
+			{
+				System.out.println("Could not locate shadow root element for benefits and coverage tab");
+				Assert.fail("Could not locate shadow root element for benefits and coverage tab");
+			}
+		}
+		}
+		else
+		{
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
@@ -1534,19 +1583,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(9000);
-		if (logoImage.isDisplayed()) {
-			// CommonUtility.waitForPageLoad(driver,logoImage,30);
-			String logo_src = logoImage.getAttribute("src");
-			String logo_alt = logoImage.getAttribute("alt");
-			System.out.println("Actual logo's source on Dashboard page is   " + logo_src
-					+ " and Expected logo source    " + logoToBeDisplayedOnDashboard + " .");
-			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-			System.out.println("Dashboard page Primary logo assert condition is passed");
-		} else {
-			// tbd locateElementWithinShadowRoot(shadowRootHeader, "div > span >
-			// div > header > div.container.utility-nav-container > a > img");
+		CommonUtility.waitForPageLoad(driver, helloPerson, 20);
+	    //locateElementWithinShadowRoot(shadowRootHeader, "div > span > div > header > div.container.utility-nav-container > a > img");
+		
 			if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1 = expandRootElement(shadowRootHeader);
@@ -1556,34 +1595,163 @@ public class AccountHomePage extends UhcDriver {
 					WebElement logo = root1.findElement(By
 							.cssSelector("div > span > div > header > div.container.utility-nav-container > a > img"));
 					Assert.assertTrue("Dashboard header is not displayed", validate(logo));
-					String logo_src = logo.getAttribute("src");
-					String logo_alt = logo.getAttribute("alt");
-					System.out.println("Actual logo's source on Dashboard page is   " + logo_src
-							+ " and Expected logo source    " + logoToBeDisplayedOnDashboard + " .");
-					System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-					Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-					System.out.println("Dashboard page Primary logo assert condition is passed");
-				} catch (Exception e) {
-					System.out.println("can't locate element. Exception e=" + e);
+                    String logo_alt = logo.getAttribute("alt");
+                    System.out.println("Actual logo's alt text on Dashboard page is   " + logo_alt);
+					System.out.println("Logo to be verified on dashboard is  : " + logoToBeDisplayedOnDashboard);
+					if (logoToBeDisplayedOnDashboard.equalsIgnoreCase("AARP"))
+					{
+						System.out.println("Expected logo's alt text on Dashboard page for AARP is - AARP: Medicare Plans from UnitedHealthcare ");
+						Assert.assertTrue(logo_alt.contains("AARP: Medicare Plans from UnitedHealthcare"));
+						System.out.println("Dashboard page Primary logo alt text condition is passed");
+					}
+					
+					else if (logoToBeDisplayedOnDashboard.equalsIgnoreCase("MEDICA"))
+					
+					{
+						System.out.println("Expected logo's alt text on Dashboard page for Medica is - Medica Healthcare ");
+						Assert.assertTrue(logo_alt.contains("Medica Healthcare"));
+						System.out.println("Dashboard page Primary logo alt text condition is passed");
+					}
+					
+					else if (logoToBeDisplayedOnDashboard.equalsIgnoreCase("PCP"))
+						
+					{
+						System.out.println("Expected logo's alt text on Dashboard page for PCP is - Preferred Care Partners ");
+						Assert.assertTrue(logo_alt.contains("Preferred Care Partners"));
+						System.out.println("Dashboard page Primary logo alt text condition is passed");
+					}
+					
+					else if (logoToBeDisplayedOnDashboard.equalsIgnoreCase("UHC"))
+						
+					{
+						System.out.println("Expected logo's alt text on Dashboard page for UHC is - UnitedHealthcare");
+						Assert.assertTrue(logo_alt.contains("UnitedHealthcare"));
+						System.out.println("Dashboard page Primary logo alt text condition is passed");
+					}
+					
+                    else if (logoToBeDisplayedOnDashboard.equalsIgnoreCase("TEXASERS"))
+						
+					{
+						System.out.println("Expected logo's alt text on Dashboard page for TEXASERS is - Health Select Medicare RX of Texas ");
+						Assert.assertTrue(logo_alt.contains("Health Select Medicare RX of Texas"));
+						System.out.println("Dashboard page Primary logo alt text condition is passed");
+					}
+					
+					else
+					{
+						Assert.fail("Dashboard page Primary logo alt text condition is failed");
+					}
+					
+					System.out.println("naturalWidth of logo is "+logo.getAttribute("naturalWidth"));
+					 
+                    System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+			        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logo);
+			        if (!ImagePresent)
+			        {
+			         System.out.println("naturalWidth of logo is "+logo.getAttribute("naturalWidth"));
+			         System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+			         Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+			        }
+			        else
+			        {
+			        	System.out.println("naturalWidth of logo is "+logo.getAttribute("naturalWidth"));
+			            System.out.println("naturalWidth is not zero , Logo image was displayed.");
+			         }
+
+				    } 
+				catch (Exception e) {
+					System.out.println("can't locate Dashboard logo element. Exception e=" + e);
 					Assert.assertTrue("Dashboard header not functioning as expected", false);
 				}
 			} else {
-				System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+				System.out.println("no shadow-root element , not sure what's going on w/ the header on rally");
 				Assert.assertTrue("Dashboard header is not displayed", false);
 			}
 
 		}
-	}
-
+	
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver, cologoImage, 30);
-		String cologo_src = cologoImage.getAttribute("src");
-		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual cologo's source on Dashboard page is   " + cologo_src
-				+ " and Expected cologo source    " + cologoToBeDisplayedOnDashboard + " .");
-		System.out.println("cologo's alt text on Dashboard page is   " + cologo_alt);
-		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnDashboard));
-		System.out.println("Dashboard page cologo assert condition is passed");
+		if (validate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				// Going inside shadow root to get element, in this case the
+				// logo is in the shadow root header
+				WebElement cologo = root1.findElement(By
+						.cssSelector("div > span > div > header > div.container.utility-nav-container > a > img.secondary-logo"));
+				String cologo_alt = cologo.getAttribute("alt");
+                System.out.println("Actual cologo's alt text on Dashboard page is   " + cologo_alt);
+				System.out.println("CoLogo to be verified on dashboard is  : " + cologoToBeDisplayedOnDashboard);
+				if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("Villages"))
+				{
+					System.out.println("Expected cologo's alt text on Dashboard page for Villages is - M&R - The Villages");
+					Assert.assertTrue(cologo_alt.contains("M&R - The Villages"));
+					System.out.println("Dashboard page cologo alt text condition is passed");
+				}
+				
+				else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("SHBP"))
+				
+				{
+					System.out.println("Expected cologo's alt text on Dashboard page for SHBP is - M&R - GA DCH");
+					Assert.assertTrue(cologo_alt.contains("M&R - GA DCH"));
+					System.out.println("Dashboard page cologo alt text condition is passed");
+				}
+				
+				else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("NCSHP"))
+					
+				{
+					System.out.println("Expected cologo's alt text on Dashboard page for NCSHP is - M&R - NCSHP ");
+					Assert.assertTrue(cologo_alt.contains("M&R - NCSHP"));
+					System.out.println("Dashboard page cologo alt text condition is passed");
+				}
+				
+				else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("UHC"))
+					
+				{
+					System.out.println("Expected logo's alt text on Dashboard page for UHC is - UnitedHealthcare");
+					Assert.assertTrue(cologo_alt.contains("UnitedHealthcare"));
+					System.out.println("Dashboard page Primary logo alt text condition is passed");
+				}
+				
+                else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("TEXASERS"))
+					
+				{
+					System.out.println("Expected logo's alt text on Dashboard page for TEXASERS is - Health Select Medicare RX of Texas ");
+					Assert.assertTrue(cologo_alt.contains("Health Select Medicare RX of Texas"));
+					System.out.println("Dashboard page Primary logo alt text condition is passed");
+				}
+				
+				else
+				{
+					Assert.fail("Dashboard page cologo alt text condition is failed");
+				}
+				
+				System.out.println("naturalWidth of cologo is "+cologo.getAttribute("naturalWidth"));
+				 
+                System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+		        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologo);
+		        if (!ImagePresent)
+		        {
+		        	
+		         System.out.println("naturalWidth of cologo is "+cologo.getAttribute("naturalWidth"));
+		         System.out.println("naturalWidth is not greater than zero , cologo image was not displayed.");
+		         Assert.fail("naturalWidth is not greater than zero , cologo image was not displayed.");
+		        }
+		        else
+		        {
+		        	System.out.println("naturalWidth of cologo is "+cologo.getAttribute("naturalWidth"));
+		            System.out.println("naturalWidth is not zero , coLogo image was displayed.");
+		         }
+
+			    } 
+			catch (Exception e) {
+				System.out.println("can't locate cologo element. Exception e=" + e);
+				Assert.fail("can't locate cologo element.");
+			}
+		} else {
+			System.out.println("no shadow-root element , not sure what's going on w/ the header on rally");
+			Assert.assertTrue("Dashboard header is not displayed", false);
+		}
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
@@ -1907,22 +2075,54 @@ public class AccountHomePage extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 		}	
 		else {		
-			System.out.println("Page was not testharness, trying alternate way to access Payments page from Dashboard");
-			System.out.println("Navigating to B&C Page First");
-			navigateDirectToBnCPag();
-			TestHarness.checkForIPerceptionModel(driver);
-			System.out.println("Navigating to Premium Payment page now");
-			try {
-				paymentsLink3.click();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Could not navidate to Premium Payment page");
+			System.out.println("Page was not testharness, trying shadow root element to access Payments page from Dashboard");
+			/*	System.out.println("Navigating to B&C Page First");
+				navigateDirectToBnCPag();
+				TestHarness.checkForIPerceptionModel(driver);
+				System.out.println("Navigating to Premium Payment page now");
+				try {
+					paymentsLink3.click();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Could not navidate to Premium Payment page");
+				}*/
+				if (validate(shadowRootHeader)) {
+					System.out.println("located shadow-root element, attempt to process further...");
+					WebElement root1 = expandRootElement(shadowRootHeader);
+					try {
+						// Going inside shadow root to get element, in this case the
+						// logo is in the shadow root header
+						WebElement PremiumPaymentsTab = root1.findElement(By
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
+						
+						System.out.println("shadow-root element has been located, now clicking on Premium Payments tab");	
+						TestHarness.checkForIPerceptionModel(driver);
+						PremiumPaymentsTab.click();
+						System.out.println("Premium PaymentsTabtab has been clicked");	
+						CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("Current URL is : "+driver.getCurrentUrl());
+				if (driver.getCurrentUrl().contains("payments"))
+				{
+					System.out.println("Current URL contains payments text in it, returning PaymentHistoryPage");	
+				return new PaymentHistoryPage(driver);
+			     } 
+				else
+				{
+					Assert.fail("Current URL doesn't contains payments text in it, payments page didn't appear , failed");
+				}
+				}
+					catch(Exception e)
+				{
+					System.out.println("Could not locate shadow root element for payments tab");
+					Assert.fail("Could not locate shadow root element for payments tab");
+				}
 			}
-			CommonUtility.checkPageIsReadyNew(driver);
-			TestHarness.checkForIPerceptionModel(driver);
-			return new PaymentHistoryPage(driver);
+				
+				CommonUtility.checkPageIsReadyNew(driver);
+				TestHarness.checkForIPerceptionModel(driver);
+				return new PaymentHistoryPage(driver);
+			}
 		}
-	}
 
 	public PaymentHistoryPage navigateToPaymentPage() throws InterruptedException {
 		try {
@@ -3655,8 +3855,4 @@ public class AccountHomePage extends UhcDriver {
 		/* JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
-	
-
-
-	
 }
