@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
@@ -33,8 +34,8 @@ public class MedicineCabinetStepDefinition {
 	}
 
 
-	@Then("^user views the Medicine Cabinet$")
-	public void user_views_the_Medicine_Cabinet() throws Throwable {
+	@Then("^user views the Current Medications$")
+	public void user_views_the_Current_Medications() throws Throwable {
 
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -44,8 +45,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user validates first five of his active prescriptions$")
-	public void user_validates_first_five_of_his_active_prescriptions() throws Throwable {
+	@Then("^user validates first six of his active prescriptions$")
+	public void user_validates_first_six_of_his_active_prescriptions() throws Throwable {
 
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -86,8 +87,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user will be directed to My Drugs page$")
-	public void user_will_be_directed_to_My_Drugs_page() throws Throwable {
+	@Then("^user will be directed to My Medications page$")
+	public void user_will_be_directed_to_My_Medications_page() throws Throwable {
 
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -97,6 +98,30 @@ public class MedicineCabinetStepDefinition {
 
 
 	}
+
+	@Then("^user validates a number in parentheses$")
+	public void user_validates_a_number_in_parentheses() throws Throwable {
+
+
+
+	}
+
+	@And("^user validates the number will correspond to the total number of active medications he has$")
+	public void user_validates_the_number_will_correspond_to_the_total_number_of_active_medications_he_has() throws Throwable {
+
+
+
+	}
+
+
+	@Then("^user validates the disclaimer Medication appearance subject to change$")
+	public void user_validates_the_disclaimer_Medication_appearance_subject_to_change() throws Throwable {
+
+
+
+	}
+
+
 
 	@Then("^user validates his active prescriptions displayed on the page$")
 	public void user_validates_his_active_prescriptions_displayed_on_the_page() throws Throwable {

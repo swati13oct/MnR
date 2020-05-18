@@ -1,9 +1,8 @@
+Feature: MVP - Current Medications
+  I am a user of the M&R Portal with Rx benefits, I must have access to Current Medications on P&P Page
 
-Feature: MVP - Medicine Cabinet
-  I am a user of the M&R Portal with Rx benefits, I must have access to Medicine Cabinet on P&P Page
 
-
-  @MedicineCabinet @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927@tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medicine cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -12,8 +11,8 @@ Feature: MVP - Medicine Cabinet
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user views the Medicine Cabinet
-    And user validates first five of his active prescriptions
+    Then user views the Current Medications
+    And user validates first six of his active prescriptions
     And user validates medications will be displayed beginning with the ones that have an associated call to action
 
     Examples:
@@ -21,7 +20,7 @@ Feature: MVP - Medicine Cabinet
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views all medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -30,7 +29,7 @@ Feature: MVP - Medicine Cabinet
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user views the Medicine Cabinet
+    Then user views the Current Medications
     And user valides View all medications link text
 
     Examples:
@@ -39,7 +38,7 @@ Feature: MVP - Medicine Cabinet
 
 
 
-  @MedicineCabinet @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views all active medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -48,13 +47,51 @@ Feature: MVP - Medicine Cabinet
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
+    Then user views the Current Medications
     When user clicks View all medications link
-    Then user will be directed to My Drugs page
+    Then user will be directed to My Medications page
 
     Examples:
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
+
+  @CurrentMedications @F392596 @US2301927
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Current Medications
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Expect Link | <expectLink> |
+    Then user views the Current Medications
+    Then user validates a number in parentheses
+    And user validates the number will correspond to the total number of active medications he has
+
+    Examples:
+      | FID     | planType | memberType             | expectLink |
+      | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
+
+
+
+
+  @CurrentMedications @F392596 @US2301927
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication image disclaimer
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Expect Link | <expectLink> |
+    Then user views the Current Medications
+    Then user validates the disclaimer Medication appearance subject to change
+
+
+    Examples:
+      | FID     | planType | memberType             | expectLink |
+      | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
   @MedicineCabinet @F392596 @US2301928
