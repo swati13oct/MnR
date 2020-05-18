@@ -1251,23 +1251,54 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
+		System.out.println("Actual logo's source on Secondary page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);          
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page main logo assert condition is passed");              
-	}
+		System.out.println("Secondary page main logo assert condition for image source is passed");  
+		
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+			        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+			        if (!ImagePresent)
+			        {
+			         System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			         System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+			         Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+			        }
+			        else
+			        {
+			        	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			            System.out.println("naturalWidth is not zero , Logo image was displayed.");
+			         }
 
+	}
+	
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
+		System.out.println("Actual cologo's source on secondary page is   " + cologo_src
 				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page co logo assert condition is passed");
+		System.out.println("Secondary page co logo assert condition for image source is passed");
+		System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+		System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+        if (!ImagePresent)
+        {
+         System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+         System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+         Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+        }
+        else
+        {
+        	System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+            System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+            
+        }
 	}
-
+	
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {
 		validateWithValue("Paln name", planName2);
