@@ -125,7 +125,10 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
-				} else {
+				}else if("team-uhc-rx".equalsIgnoreCase(MRScenario.environment)){
+					System.out.println("Running on team-uhc-rx env");
+					PAGE_URL=MRConstants.D_Rx_TESTHARNESS;
+					}else {
 					PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
