@@ -1077,7 +1077,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	
 	List<String> allPlanNames=null;
 	@When("^user clicks on Continue Enrollment button in UMS Site$")
-	public void user_clicks_on_Continue_Enrollment_button_in_UMS_Site() throws Throwable {
+	public void user_clicks_on_Continue_Enrollment_button_in_UMS_Site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		allPlanNames=plansummaryPage.getAllPlanNames();

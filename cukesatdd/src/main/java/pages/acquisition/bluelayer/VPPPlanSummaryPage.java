@@ -637,15 +637,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='uhc-modal']")
 	private WebElement selectPlanForEnrolModal;
 
-	@FindBy(xpath = "//div[@id='plan-list-1']//div[contains(@class,'plan-name-div')]//a[contains(@class,'ng-binding')]")
+	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 	private List<WebElement> planNames;
 
 	@FindBy(xpath = "//div[contains(@class,'d-flex flex-column flex-lg-row align-items-lg-center')]/p")
 	private List<WebElement> plansInPopup;
 
-	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drug cost";
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Will my doctors covered?";
-	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "Continue Enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Will my doctors be covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "Continue my enrollment";
 
 	public WebElement getLoadingIndicator() {
 		return loadingIndicator;
@@ -4060,8 +4060,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
-				WebElement savePlan = driver.findElement(By.xpath("//h3/a[text()='" + plan
-						+ "']/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
+				WebElement savePlan = driver.findElement(By.xpath("(//*[contains(text(),'"+plan+"')]/..//following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')])[1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 			}
