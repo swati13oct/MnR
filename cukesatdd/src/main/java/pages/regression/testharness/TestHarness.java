@@ -1620,9 +1620,9 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		   public void userdirectlyaccessesmyhcesso() {
-				// TODO Auto-generated method stub
 			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
 			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
+				 
 			   try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -1661,6 +1661,7 @@ public class TestHarness extends UhcDriver {
 			   try {
 				   System.out.println("Waiting for 5 seconds");
 					Thread.sleep(5000);
+					CommonUtility.checkPageIsReadyNew(driver);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
