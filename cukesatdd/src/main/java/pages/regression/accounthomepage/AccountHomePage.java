@@ -214,6 +214,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "continueSubmitButton")
 	private WebElement continueButton;
+	
+	@FindBy(xpath="//button[@name='Update']")
+	private WebElement continueButtonmyHCESSO;
+	
+	@FindBy(xpath="//h1")
+	private WebElement hcePageText;
 
 	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
@@ -456,10 +462,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
 	
+	@FindBy(name="zipCode")
+	private WebElement zipCodeTextBox;
+	
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'ordermaterials')]")
 	protected WebElement desktopOrderPlanFromBenefitSubLink;
 	private PageData myAccountHome;
-
+	
 	public JSONObject accountHomeJson;
 
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
@@ -3854,5 +3863,85 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("TEST - move element to center view"); 
 		/* JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", element); */
+	}
+	
+	 public void userdirectlyaccessesmyhcessoPROD() {
+			// TODO Auto-generated method stub
+		 
+		 if (MRScenario.environment.equalsIgnoreCase("prod"))  
+		  {
+		   System.out.println("Accessing http://medicare.uhc.com/myhce");
+		   driver.navigate().to("http://medicare.uhc.com/myhce");
+		  }
+		 else if (MRScenario.environment.equalsIgnoreCase("offline"))  
+		  {
+		   System.out.println("Accessing http://offline.medicare.uhc.com/myhce");
+		   driver.navigate().to("http://offline.medicare.uhc.com/myhce");
+		  }  
+		   
+		   try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   System.out.println("Current URL is :  "+driver.getCurrentUrl());
+		   
+		   }
+	 
+	 public void userEntersZipCodePROD(String zipCode) {
+		   
+		   	try {
+		   		if (driver.getTitle().contains("Zip Code Entry Page"))
+		   				{
+		   			System.out.println("Zip code Page / zip entry text box field was displayed");
+		   			CommonUtility.waitForPageLoad(driver, zipCodeTextBox, 20);
+		   			System.out.println("Now entering Zip code fetched from feature file");
+		   			sendkeys(zipCodeTextBox, zipCode);
+		   			System.out.println("Zip code was enetered");
+		   				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Zip code Page / zip entry text box field was not displayed, failing this test script");
+				Assert.fail("Zip code text box fiels was not displayed");
+			}
+		       }
+	 
+	 public void clickContinueonZipEntryPagePROD() {
+			// TODO Auto-generated method stub
+		   System.out.println("Now clicking Continue button for myHCE SSO");
+		   continueButtonmyHCESSO.click();
+		   System.out.println("Continue button was clicked");
+		   try {
+			   System.out.println("Waiting for 5 seconds");
+				Thread.sleep(5000);
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	 
+	 public void checkuserlandsonhceestimatorpagePROD() {
+		 System.out.println("Current URL is :  "+driver.getCurrentUrl());
+		 System.out.println("Now checking for header element h1 of the page");
+		 
+			try {
+				String gethcePageText = hcePageText.getText();
+				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
+		   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
+		   				{
+		   			System.out.println("myHealthcare Cost Estimator Text was displayed");
+		   			
+		   				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("myHealthcare Cost Estimator Text was not displayed in h1 header of myhce page, failing this test script");
+				Assert.fail("myHealthcare Cost Estimator Text was not displayed");
+			}
+		
+		
 	}
 }
