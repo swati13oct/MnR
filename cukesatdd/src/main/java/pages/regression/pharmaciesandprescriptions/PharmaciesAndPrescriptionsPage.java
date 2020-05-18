@@ -690,21 +690,28 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 
 	//F392596 Meidine Cabinet
-	public void validateMedicineCabinetHeader() {
+	public void validateCurrentMedicationsHeader() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Header element",
-				pnpValidate(MedicineCabinetHeader));
+				pnpValidate(CurrentMedicationsHeader));
 	}
 
 
 	public void validateActivePrescriptions() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Active Prescriptions text element",
+
+
 				pnpValidate(Medications));
 	}
 
 
-	public void validateViewAllMedicationsLink() {
+	public void validateNumberInParenthesis() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
-				pnpValidate(ViewAllMedications));
+				pnpValidate(NumberInParenthesis));
+	}
+
+	public void validateDisclaimer() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+				pnpValidate(Disclaimer));
 	}
 
 
@@ -793,6 +800,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 				pnpValidate(Overview));
 	}
+
+	public void validateViewAllMedicationsLink() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+				pnpValidate(ViewAllMedications));
+	}
+
 
 
 }
