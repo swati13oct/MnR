@@ -129,7 +129,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		if (memberType.toUpperCase().contains("COMBO")) 
 			planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
 		int currentYear=0;
-		if (MRScenario.environment.contains("prod")) {
+		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		} else {
 			currentYear=Integer.parseInt(planDocumentsAndResourcesPage.getCurrentYear());

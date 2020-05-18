@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  {
 
@@ -33,6 +34,8 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		//note: so don't dynamic determine it for now
 		currentYear="2020";
 		String season="spring";
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+			season="winter"; //note: offline-prod and prod maynot catch up w/ lower/stage env yet
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/index.html";
 		String redirectUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
@@ -52,8 +55,8 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		testInputInfoMap.put("switchTab", "true");
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
-			String actualUrl=lnkElment.getAttribute("href");
-			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
+			String actualUrl=lnkElment.getAttribute("href");			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
+
 			validateLinkDest(testInputInfoMap, lnkElment);
 		} else {
 			Assert.assertTrue("PROBLEM - should not see '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElment));

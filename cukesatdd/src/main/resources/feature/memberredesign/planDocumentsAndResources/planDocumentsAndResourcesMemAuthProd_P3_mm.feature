@@ -1,12 +1,12 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
-Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - Member Auth
+Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - Member Auth - PROD
 
   #Background: If run on stage then feature security flag needs to be true
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
-  @memAuth_planAndDocuments03 @membershipMaterials 
+  @prod_planAndDocuments03 @membershipMaterials 
   Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Membership Materials
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -33,66 +33,66 @@ Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - M
 	  | Spanish Documents                  | <mm_es> | 
 	  | Chinese Documents                  | <mm_zh> | 
 
-#	@memAuth_preeffective_ma_mapd
+#	@prod_preeffective_ma_mapd
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 01-039 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
-#      | 02-040 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-#      | 03-041 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 01-039 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 02-040 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
+#      | 03-041 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
-#	@memAuth_preeffective_pdp
+#	@prod_preeffective_pdp
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 04-042 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
-#      | 05-043 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
+#      | 04-042 | xxxxx       | ashah120  | Mnrqa002  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 05-043 | xxxxx       | ashah120  | Mnrqa002  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
 
-#	@memAuth_terminated_ma_mapd
+#	@prod_terminated_ma_mapd
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 06-044 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
-#      | 07-045 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
-#      | 08-046 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
+#      | 06-044 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
+#      | 07-045 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
+#      | 08-046 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
-	@memAuth_active_ma
+	@prod_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
-      | 10-048 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
+      | 09-047 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
+      | 10-048 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
 
-	@memAuth_active_mapd
+	@prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 11-049 | 15108       | qavgogine | qavgogine | q2_apr_aarp0250    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+      | 11-049 | 15108       | ashah120  | Mnrqa002  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
 
-	@memAuth_active_mapd
+	@prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 12-050 | 15303       | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
+      | 12-050 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
 #     ### note: PEEHIP group terminated as of 12/31/2019
-#     #| 13-051 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
+#     #| 13-051 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
-#	@memAuth_active_pcp_medica
+#	@prod_active_pcp_medica
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 14-052 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
-#      | 15-053 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
+#      | 14-052 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
+#      | 15-053 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
-	@memAuth_active_pdp
+@abc	@prod_active_pdp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 16-054 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
-      | 17-055 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
+      | 16-054 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+#      | 17-055 | 15131,15233 | ashah120  | Mnrqa002  | MON48DA    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
 
-	@memAuth_active_ssup
+	@prod_active_ssup
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 18-056 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
+      | 18-056 | 15131,15233 | ashah120  | Mnrqa002  | PTHUYNH50    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
-	@memAuth_active_ship
+	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 19-057 | 15119,15304 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
-      | 20-117 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
+      | 19-057 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+#      | 20-117 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 
      

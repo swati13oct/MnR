@@ -3555,7 +3555,9 @@ public class AccountHomePage extends UhcDriver {
 		
 	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(String memberType, String planType, int forceTimeoutInMin)
 				throws InterruptedException {
-		checkForIPerceptionModel(driver);
+		//tbd checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver, 5);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -3589,9 +3591,10 @@ public class AccountHomePage extends UhcDriver {
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
 				checkModelPopup(driver,5);
-			} else if (MRScenario.environment.contains("prod")) {
+			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
 				checkModelPopup(driver, 5);
+				scrollElementToCenterScreen(planDocResPgLink);
 				planDocResPgLink.click();
 			} else {
 				if (driver.getCurrentUrl().contains("mymedicareaccount"))
@@ -3618,6 +3621,7 @@ public class AccountHomePage extends UhcDriver {
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+		checkModelPopup(driver, 5);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new PlanDocumentsAndResourcesPage(driver);
