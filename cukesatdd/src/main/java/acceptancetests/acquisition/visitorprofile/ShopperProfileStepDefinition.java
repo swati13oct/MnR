@@ -84,8 +84,6 @@ public class ShopperProfileStepDefinition {
 			
 			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
 			
-			Thread.sleep(20000);
-			
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
 		} catch (Exception e) {
 			e.printStackTrace();
