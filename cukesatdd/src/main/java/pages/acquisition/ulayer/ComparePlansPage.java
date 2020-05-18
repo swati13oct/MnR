@@ -572,5 +572,13 @@ public class ComparePlansPage extends UhcDriver {
 		} else
 			Assert.assertTrue(false);
 	}
+	
+	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		String[] plan = plans.split(",");
+		for(int i=0;i<allMAPlans.size();i++) {
+			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
+		}
+	}
 }
 

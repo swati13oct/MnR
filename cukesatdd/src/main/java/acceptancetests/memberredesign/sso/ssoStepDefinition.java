@@ -32,6 +32,7 @@ import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.GlobalTearDown;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -272,14 +273,25 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
 }
  @And("^user directly access the SSO link for myhce$")
  public void userdirectlyaccessesmyhcesso() throws Throwable {
- 	
- 	System.out.println("Now directly accessing the SSO link for myhce");
+	 
+	 if (MRScenario.environment.equalsIgnoreCase("stage"))
+	{
+	System.out.println("Now directly accessing the SSO link for myhce");
  	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
  	testHarnessPage.userdirectlyaccessesmyhcesso();	
  	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
-}
+	}
+	 else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline"))
+ 	{
+			System.out.println("Now directly accessing the SSO link for myhce");
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.userdirectlyaccessesmyhcessoPROD();	
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+ 	}
+ 	}
  
- @And("^user enters zip code on myhce page and clicks on continue button$")
+
+@And("^user enters zip code on myhce page and clicks on continue button$")
  /*This method will enter zip code during myhce SSO */
  public void userenterszipcode (DataTable givenAttributes) throws InterruptedException{
 		/* Reading the given attribute from feature file */
@@ -292,20 +304,38 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String zipCode = memberAttributesMap.get("Zip Code");	
+		String zipCode = memberAttributesMap.get("Zip Code");
+		
+		if (MRScenario.environment.equalsIgnoreCase("stage")){
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		testHarnessPage.userEntersZipCode(zipCode);
 		testHarnessPage.clickContinueonZipEntryPage();
+		
 		getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+		}
+		else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline"))
+		{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.userEntersZipCodePROD(zipCode);
+			accountHomePage.clickContinueonZipEntryPagePROD();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);	
+		}
  }
  
  @Then("^user lands on hceestimator landing page$")
  public void userlandsonhceestimatorpage() throws Throwable {
- 	
+	if (MRScenario.environment.equalsIgnoreCase("stage")){
  	System.out.println("Now checking if user landed on myhce page");
  	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
  	testHarnessPage.checkuserlandsonhceestimatorpage();	
  	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	}
+	else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline"))
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.checkuserlandsonhceestimatorpagePROD();
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);	
+	}
 }
 
  @Then("^user scrolls down to OptumRx SSO link to perform outbound OptumRx SSO$")

@@ -1,5 +1,5 @@
 @sso
-Feature: 1.13 Member SSO functionality for SSO groups
+Feature: 1.13 Member Inbound and Outbound SSO functionality for M&R Member Portal
 
   @sso1 @US1048825 @regression @regression_sso 
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.
@@ -111,12 +111,13 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | canopyhealth  | DSKFJ     | LDSKFJOWE  |    11111945 | 6MT8NY0CV01 | https://stage-medicare.uhc.com/sso/inbound/canopy         |
 
   @regressionMember
-  Scenario Outline: Verify that user is able to perfom Outbound SSO - University of Kentucky
+  Scenario Outline: Verify that user - <member> is able to perfom Outbound SSO - University of Kentucky - Express Scripts SSO
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     And user clicks on benefits and coverage tab on home page or test harness page
+    | PlanType | <planType> |
     And user scrolls down to Express Scripts link to perform outbound SSO
     Then user clicks on Express Scripts link and lands on Express Scripts SSO page in new window
 
@@ -125,7 +126,7 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | TC_University Of Kentucky |
 
   @regressionMember
-  Scenario Outline: Verify that user is able to perfom Outbound SSO - MyHCE
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - MyHCE_<Test Scenario>
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -140,12 +141,13 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | XXXXX | MAPD     | myhce      | NON LIS       |   30736 | TC_SHBP_Georgia_myHCE |
 
   @regressionMember
-  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Benefits and Coverage Page
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Benefits and Coverage Page from <optumrxssolink>
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     And user clicks on benefits and coverage tab on home page or test harness page
+      | PlanType | <planType> |
     And user scrolls down to OptumRx SSO link to perform outbound OptumRx SSO
       | OptumRx SSO Link | <optumrxssolink> |
     And user clicks on OptumRx SSO link and lands on OptumRx SSO Page in new window
@@ -158,7 +160,7 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        |
 
   @regressionMember
-  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
