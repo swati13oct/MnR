@@ -26,6 +26,24 @@ public class DeleteProfile extends UhcDriver {
 	@FindBy(xpath="//button/preceding-sibling::p")
 	private WebElement deletedMessage;
 	
+	@FindBy(xpath="//a[text()='Non Member']")
+	private WebElement nonMemberTab;
+	
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='email']")
+	private WebElement visitorEmail;
+	
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='firstName']")
+	private WebElement firstName;
+	
+	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//input[@id='lastName']")
+	private WebElement lastName;
+	
+	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='dob']")
+	private WebElement dobNonMember;
+	
+	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//button")
+	private WebElement btnDeleteNonMember;
+	
 	public static final String DELETE_PROFILE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/delete-profile";
 	
 	public static final String DELETE_PROFILE_URL_STAGE = "https://stage-generic.uhc.com/admin/shopper-profile.html/delete-profile";
@@ -63,6 +81,28 @@ public class DeleteProfile extends UhcDriver {
 			sendkeys(mbi, MBI);
 			sendkeys(dob, dateOfBirth);
 			btnDelete.click();
+			CommonUtility.waitForPageLoadNew(driver, deletedMessage, 15);
+			System.out.println("##################"+deletedMessage.getText().trim()+"##################");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Delete a non member profile using email,dob,fname and lname
+	 * @param emailID
+	 * @param dateOfBirth
+	 * @param fname
+	 * @param lname
+	 */
+	public void deleteANonMemberProfile(String emailID, String dateOfBirth, String fname,String lname) {
+		try {
+			nonMemberTab.click();
+			sendkeys(visitorEmail, emailID);
+			sendkeys(dobNonMember, dateOfBirth);
+			sendkeys(firstName, fname);
+			sendkeys(lastName, lname);
+			btnDeleteNonMember.click();
 			CommonUtility.waitForPageLoadNew(driver, deletedMessage, 15);
 			System.out.println("##################"+deletedMessage.getText().trim()+"##################");
 		} catch (Exception e) {
