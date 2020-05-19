@@ -180,10 +180,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(css=".BENEFITS_INFORMATION #pharmacyTileLinkId")
 	protected WebElement drugCostSummaryButton;
 	
-	@FindBy(id ="page_title")
+	@FindBy(xpath = "//h1")
 	protected WebElement BenefitsInformationHeaderOptumRx;
 	
-	@FindBy(id ="page_title")
+	@FindBy(xpath = "//h1")
 	protected WebElement searchForADrugHeaderOptumRx;
 	
 	@FindBy(id ="page_title")
