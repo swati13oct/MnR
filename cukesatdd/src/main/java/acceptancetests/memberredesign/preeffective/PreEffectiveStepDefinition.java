@@ -62,7 +62,7 @@ public class PreEffectiveStepDefinition {
 @Given("^verify that preeffective message is displayed on the home page or test harness page$")
 public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throwable {
 	
-	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if ((MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))|| (MRScenario.environment.equals("prod")) || (MRScenario.environment.equals("offline")))
 	{
 		
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -197,13 +197,12 @@ public void userGoesToBenefitAndCoveragePage() throws Throwable {
 public void validateBenefitsAndCoverageSubNavigationIsNotDisplayed() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	//BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.validatePlanBenefitsSummarySubNavNotDisplayed();
 	benefitsCoveragePage.validatePlanDocumentsResourcesSubNavNotDisplayed();
 	benefitsCoveragePage.validateOrderPlanMaterialsSubNavNotDisplayed();
 }
 
-@Then("^verify that correct preeffective message and plan documents button are displayed on coverage and benefits page$")
+@Then("^verify that correct preeffective message is displayed on coverage and benefits page$")
 public void validateCorrectMessageIsDisplayedOnBenefitsCoevargePage() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -416,11 +415,10 @@ public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)th
 	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
 	{	
 	
-		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);  
-		newclaimsSummarypage.checkModelPopup(newclaimsSummarypage.driver);
-		//tbd newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
-		newclaimsSummarypage.verifyPaymentTabIsDisplayedForPreEffectiveMembers();
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+		.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);      
+		formsAndResourcesPage.verifyPaymentTabIsDisplayedForPreEffectiveMembers();
+		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);           
 	}
 	
 	else
