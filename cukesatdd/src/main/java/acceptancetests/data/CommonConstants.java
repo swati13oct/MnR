@@ -868,5 +868,6 @@ public class CommonConstants {
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
 	public static final String APPIUM_DEFAULT_VERSION = "1.15.0";
 	public static final String APPIUM_VERSION = "1.15.1";
+	public static final String SCREEN_RESOLUTION = "screenResolution";
 	
 }
