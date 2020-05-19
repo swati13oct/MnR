@@ -71,7 +71,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
 	private WebElement acctSetting;
 
-	@FindBy(xpath = "(//h2)[1]")
+	@FindBy(xpath = "//h2[@class='ng-scope' and @translate='FUTURE_MESSAGE_COVERAGE_START']")
 	private WebElement preEffectiveMessage;
 
 	@FindBy(id = "plan_material_fnr2018")
@@ -3176,21 +3176,13 @@ public class AccountHomePage extends UhcDriver {
 	 */
 	public void validatePreEffectiveMessagePresent() throws InterruptedException {
 		Thread.sleep(2000);
-		CommonUtility.waitForPageLoad(driver, preEffectiveMessage, 20);
-		try{
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
-		System.out.println("Message displayed on Dashboard for this member is: " + preMessage_text);
+		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains("Use this site to find helpful information while"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Get early access to your new plan materials and manage your document delivery preferences."));
 		System.out.println("Second assert on the preeffective message is passed");
-		}
-		catch (Exception e)
-		{
-		Assert.fail("Failed to read Pre-effective message for member on Dashboard page");	
-		}
-		
 	}
 
 	public BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
@@ -3645,7 +3637,7 @@ public class AccountHomePage extends UhcDriver {
 		return true;
 	}
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
-		System.out.println("user is on '" + MRScenario.environment + "' login page");
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
@@ -3675,17 +3667,17 @@ public class AccountHomePage extends UhcDriver {
 		//note: use the 2nd menu link as the base and determine which one I really need
 		// if 2 is FIND CARE then 6 is PnP
 		// if 2 is CARE then 5 is PnP
-		String secondTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(2)";
+		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 		WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader,
 				secondTopMenuItemCssStr);
 		if (secondTopMenuItem.getText().contains("FIND CARE")) {
-			String pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(5)";
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
 					pnpTopMenuItemCssStr);
 			if (isPnpLink(pnpTopMenuLink.getText())) 
 				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
 		} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
-			String pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(4)";
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
 					pnpTopMenuItemCssStr);
 			if (isPnpLink(pnpTopMenuLink.getText())) 
@@ -3949,73 +3941,7 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("myHealthcare Cost Estimator Text was not displayed in h1 header of myhce page, failing this test script");
 				Assert.fail("myHealthcare Cost Estimator Text was not displayed");
 			}
-		}
-	 
-	public PharmaciesAndPrescriptionsPage ssousernavigateToPharmaciesAndPrescriptionsPage(String PlanType)
-
-	{
-		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
-
-		try {
-			if (helloPerson.isDisplayed()) {
-				System.out.println("Hello PersonName on Dashboard home page was found");
-			} else {
-				waitForHomePage(welcome);
-				System.out.println("Welcome on Dashboard home page was found");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-
-		}
-
-		if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
-			if (validate(shadowRootHeader)) {
-				System.out.println("located shadow-root element, attempt to process further...");
-				WebElement root1 = expandRootElement(shadowRootHeader);
-				try {
-					System.out.println("Value of PlanType is: "+PlanType);
-
-					if (PlanType.equalsIgnoreCase("GroupMAPDWithoutPayment")) {
-						WebElement PharmaciesAndPrescriptionsTab = root1
-								.findElement(By.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
-						System.out.println(
-								"shadow-root element has been located, now clicking on Pharmacies And Prescriptions tab");
-						TestHarness.checkForIPerceptionModel(driver);
-						PharmaciesAndPrescriptionsTab.click();
-					}
-
-					else {
-						WebElement PharmaciesAndPrescriptionsTab = root1
-								.findElement(By.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(6)"));
-						System.out.println(
-								"shadow-root element has been located, now clicking on Pharmacies And Prescriptions tab");
-						TestHarness.checkForIPerceptionModel(driver);
-						PharmaciesAndPrescriptionsTab.click();
-					}
-					
-					System.out.println("Pharmacies And Prescriptions tab has been clicked");
-					CommonUtility.checkPageIsReadyNew(driver);
-					System.out.println("Current URL is : " + driver.getCurrentUrl());
-					if (driver.getCurrentUrl().contains("pharmacy")) {
-						System.out.println(
-								"Current URL contains pharmacy text in it, returning PharmaciesAndPrescriptionsPage");
-						return new PharmaciesAndPrescriptionsPage(driver);
-					} else {
-						Assert.fail(
-								"Current URL doesn't contains pharmacy text in it, benefits page didn't appear , failed");
-					}
-				} catch (Exception e) {
-					System.out.println("Plan Type was not MAPD, check for error");
-
-				}
-			} else {
-				System.out.println("Could not locate shadow root element for Pharmacies And Prescriptions tab");
-				Assert.fail("Could not locate shadow root element for Pharmacies And Prescriptions tab");
-			}
-		} else if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("Add condition here for Stage Dashboard, if needed");
-			Assert.fail("Add condition here for Stage Dashboard, if needed");
-		}
-		return null;
+		
+		
 	}
 }
