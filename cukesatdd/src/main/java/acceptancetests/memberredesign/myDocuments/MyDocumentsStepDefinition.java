@@ -135,7 +135,6 @@ public class MyDocumentsStepDefinition {
 	@And("^then the user validates the Documents Table if present in past twenty four months time frame$")	
 	public void validate_the_Documents_Table24Months(DataTable memberAttributes) throws InterruptedException { 
 		int currentNumberOfRowsInDocumentsTable = 0;
-		previousNumberOfRowsInDocumentsTable=0;
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String documentsExpected=memberAttributesMap.get("Documents Expected");
 
@@ -146,7 +145,7 @@ public class MyDocumentsStepDefinition {
 			myDocumentsPage.validateTableHeaders();	
 			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
 			myDocumentsPage.validateTableContent();
-			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table,currentNumberOfRowsInDocumentsTable="+currentNumberOfRowsInDocumentsTable+" previousNumberOfRowsInDocumentsTable="+ previousNumberOfRowsInDocumentsTable, currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
 		/**
