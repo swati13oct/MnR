@@ -381,7 +381,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
 		System.out.println("Header text of page is  "+getHeaderText);
-		if (driver.getCurrentUrl().contains("optumrx.com/secure/benefits-and-claims/benefits-information") 
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/benefits-and-claims/benefits-information") 
 				&& BenefitsInformationHeaderOptumRx.getText().contains("Benefits Information"))
 		{
 			System.out.println("Benefit Information Header was displayed on page and OptumRx SSO URL was correct");
@@ -401,15 +401,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = searchForADrugHeaderOptumRx.getText();
 		System.out.println("Header text of page is  "+getHeaderText);
-		if (driver.getCurrentUrl().contains("optumrx.com/secure/member-tools/drug-search") 
-				&& searchForADrugHeaderOptumRx.getText().contains("Search for a drug"))
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/member-tools/drug-pricing") 
+				&& BenefitsInformationHeaderOptumRx.getText().contains("Drug pricing"))
 		{
-			System.out.println("Search for a drug Header was displayed on page and OptumRx SSO URL was correct");
+			System.out.println("Drug pricing Header was displayed on page and OptumRx SSO URL was correct");
 		}
 		else
 		{
-			System.out.println("OptumRx SSO URL was incorrect or Search for a drug  header was not displayed, failing test script");
-			Assert.fail("Meesage: OptumRx SSO URL was incorrect or Search for a drug  header was not displayed, failing test script");
+			System.out.println("OptumRx SSO URL was incorrect or Drug pricing header was not displayed, failing test script");
+			Assert.fail();
 		}
 		}
 		
@@ -421,7 +421,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = welcometextinheaderOptumRx.getText();
 		System.out.println("Header text of page is  "+getHeaderText);
-		if (driver.getCurrentUrl().contains("optumrx.com/secure/my-medicine-cabinet") 
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/my-medicine-cabinet") 
 				&& welcometextinheaderOptumRx.getText().contains("Welcome,"))
 		{
 			System.out.println("Welcome, text in Header was displayed on page and OptumRx SSO URL was correct");
@@ -441,7 +441,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = orderStatusTextInHeaderOptumRx.getText();
 		System.out.println("Header text of page is  "+getHeaderText);
-		if (driver.getCurrentUrl().contains("optumrx.com/secure/order-status") 
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/order-status") 
 				&& orderStatusTextInHeaderOptumRx.getText().contains("Order status"))
 		{
 			System.out.println("Order status text in Header was displayed on page and OptumRx SSO URL was correct");
