@@ -74,6 +74,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "button.cta-button.create-profile")
 	private WebElement comparePlansOnPopup;
 	
+	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
+	private WebElement enrollBtn;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -331,7 +334,7 @@ public class VisitorProfilePage extends UhcDriver {
 			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
 		}
 		comparePlansOnPopup.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");
 			return new ComparePlansPage(driver);
