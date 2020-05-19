@@ -11,7 +11,7 @@ import org.junit.Assert;
  *     getExpectedDocList_XXXX_YYYY - each of these should contain a list of expected doc for that test user
  *   updateTestInputInfoMap - for forms and resources docs, each doc should have an entry here
  */
-public class PlanDocumentsAndResourcesUsersHelper {
+public class PlanDocumentsAndResourcesUsersHelperProd {
 
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER

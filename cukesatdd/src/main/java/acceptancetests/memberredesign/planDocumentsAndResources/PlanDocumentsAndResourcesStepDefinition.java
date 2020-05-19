@@ -6,6 +6,7 @@ import pages.regression.planDocumentsAndResources.PlanDocApiResponse;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesFnRDocsHelper;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesUsersHelper;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesUsersHelperProd;
 import pages.regression.testharness.TestHarness;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +40,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 	PlanDocumentsAndResourcesFnRDocsHelper docHelper_FnR=new PlanDocumentsAndResourcesFnRDocsHelper();
 	PlanDocumentsAndResourcesUsersHelper userHelper=new PlanDocumentsAndResourcesUsersHelper();
+	PlanDocumentsAndResourcesUsersHelperProd userHelperProd=new PlanDocumentsAndResourcesUsersHelperProd();
 
 	@Autowired
 	MRScenario loginScenario;
@@ -268,7 +270,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			String targetYr=yearsMap.get("currentYear");
 			String language="English";
 
-			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
+			//tbd List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
+			List<String> expDocList=new ArrayList<String>();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+			expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang);
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -456,7 +463,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			String targetYr=yearsMap.get("currentYear");
 			String language="English";
 
-			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
+			//tbd List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
+			List<String> expDocList=new ArrayList<String>();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+			expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang);
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -661,7 +673,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			String targetLang="EN";
 			String targetYr=yearsMap.get(period);
 
-			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			List<String> expDocList=new ArrayList<String>();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -690,7 +708,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ES";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -719,7 +742,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ZH";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -748,7 +775,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="EN";
 			targetYr=yearsMap.get("nextYear");
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -777,7 +808,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ES";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -806,7 +841,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ZH";
 			targetYr=yearsMap.get("nextYear");
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -967,7 +1006,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
 			String targetYr=yearsMap.get(period);
-			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			List<String> expDocList=new ArrayList<String>();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -996,7 +1040,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ES";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -1025,7 +1073,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ZH";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -1054,7 +1106,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="EN";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -1083,7 +1139,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ES";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -1112,7 +1172,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ZH";
 			targetYr=yearsMap.get(period);
 
-			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			//tbd expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
+			else
+				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","nextYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -1385,7 +1449,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			List<String> docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
 
-			List<String> targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd List<String> targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			List<String> targetDocList=new ArrayList<String>();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1410,7 +1479,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(reimbursementFormsDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1437,7 +1510,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1463,7 +1540,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
 
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1489,7 +1570,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
 
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1515,7 +1600,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
 
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+			else
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1542,7 +1631,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 				//sectionNote.addAll(docSection_note);
 
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 				for(String doc: targetDocList) {
 					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
@@ -1570,7 +1663,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
 
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				//tbd targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 				for(String doc: targetDocList) {
 					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);

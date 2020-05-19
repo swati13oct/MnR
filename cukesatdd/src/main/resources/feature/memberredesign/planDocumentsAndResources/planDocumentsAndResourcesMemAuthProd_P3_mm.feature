@@ -77,11 +77,11 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #      | 14-052 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
 #      | 15-053 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
-@abc	@prod_active_pdp
+	@prod_active_pdp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 16-054 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
-#      | 17-055 | 15131,15233 | ashah120  | Mnrqa002  | MON48DA    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
+      | 17-055 | 15131,15233 | ashah120  | Mnrqa002  | MON48DA    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
 
 	@prod_active_ssup
 	Examples: 
