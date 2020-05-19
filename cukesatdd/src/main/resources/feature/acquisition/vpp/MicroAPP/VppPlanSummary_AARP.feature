@@ -1,5 +1,5 @@
 @vppPlanSummaryAARP
-Feature: Vpp to plan Summary AARP Scenarios
+Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
   @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
