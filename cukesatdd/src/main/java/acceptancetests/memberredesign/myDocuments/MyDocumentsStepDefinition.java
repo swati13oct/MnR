@@ -135,6 +135,7 @@ public class MyDocumentsStepDefinition {
 	@And("^then the user validates the Documents Table if present in past twenty four months time frame$")	
 	public void validate_the_Documents_Table24Months(DataTable memberAttributes) throws InterruptedException { 
 		int currentNumberOfRowsInDocumentsTable = 0;
+		previousNumberOfRowsInDocumentsTable=0;
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String documentsExpected=memberAttributesMap.get("Documents Expected");
 
