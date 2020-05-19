@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
@@ -100,6 +101,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
+		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
@@ -107,6 +109,7 @@ public class HealthRecordStepDefinition {
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 		}
 		testNote.add("\tPASSED - Health Record link destination validation");
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
@@ -159,9 +162,9 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
+		//tbd if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//tbd 	healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		//tbd else
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 		testNote.add("\tPASSED - Health Record link destination validation");
 
@@ -211,9 +214,9 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
+		//tbd if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//tbd 	healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		//tbd else
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
@@ -359,11 +362,14 @@ public class HealthRecordStepDefinition {
 			//healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 			//return;
 		} else {
+			String planDocUrl=wd.getCurrentUrl();
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
 				healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 			else
 				healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 			testNote.add("\tPASSED - Health Record link destination validation");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, planDocUrl);
+			CommonUtility.checkPageIsReady(wd);
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		}
