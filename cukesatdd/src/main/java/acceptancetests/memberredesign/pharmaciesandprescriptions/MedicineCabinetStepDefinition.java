@@ -63,6 +63,12 @@ public class MedicineCabinetStepDefinition {
 	public void user_validates_medications_will_be_displayed_beginning_with_the_ones_that_have_an_associated_call_to_action() throws Throwable {
 
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateAssociatedCallToAction();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
 	}
 
 	@Then("^user valides View all medications link text$")
@@ -93,7 +99,7 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateMyDrugsPage();
+		pnpPg.validateMyMedicationsPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
@@ -114,6 +120,12 @@ public class MedicineCabinetStepDefinition {
 	@And("^user validates the number will correspond to the total number of active medications he has$")
 	public void user_validates_the_number_will_correspond_to_the_total_number_of_active_medications_he_has() throws Throwable {
 
+
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateCorrespondingNumberInParenthesis();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}

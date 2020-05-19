@@ -691,26 +691,46 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	//F392596 Meidine Cabinet
 	public void validateCurrentMedicationsHeader() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Header element",
+		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
 				pnpValidate(CurrentMedicationsHeader));
 	}
 
 
 	public void validateActivePrescriptions() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet Active Prescriptions text element",
 
+		List<WebElement> sixMedications=SixMedications;
 
-				pnpValidate(Medications));
+		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
+				pnpValidate(sixMedications.get(5)));
+	}
+
+	public void validateAssociatedCallToAction() {
+
+		List<WebElement> associatedCallToAction=AssociatedCallToAction;
+
+		Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element",
+				pnpValidate(associatedCallToAction.get(AssociatedCallToAction.size()-1)));
 	}
 
 
 	public void validateNumberInParenthesis() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
-				pnpValidate(NumberInParenthesis));
+
+
+		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
+				pnpValidateAlphaNumeric(NumberInParenthesis,3));
+	}
+
+
+	public void validateCorrespondingNumberInParenthesis() {
+
+		String numberTXT=NumberInParenthesis.getText();
+		int number=Integer.parseInt(numberTXT.replaceAll("[^0-9]",""));
+		Assert.assertTrue("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
+				pnpValidateAlphaNumeric(NumberInParenthesis,3));
 	}
 
 	public void validateDisclaimer() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
 				pnpValidate(Disclaimer));
 	}
 
@@ -724,9 +744,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	//F392596
-	public void validateMyDrugsPage() {
-		Assert.assertTrue("PROBLEM - unable to locate My Drugs Page Header element",
-				pnpValidate(MyDrugsPageHeader));
+	public void validateMyMedicationsPage() {
+		Assert.assertTrue("PROBLEM - unable to locate My Medications Page Header element",
+				pnpValidate(MyMedicationsPageHeader));
 	}
 
 

@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import atdd.framework.UhcDriver;
 
+import java.util.List;
+
 /**
  * Functionality : WebElements for Pharmacies & Prescriptions page
  */
@@ -292,14 +294,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    @FindBy(xpath="//div[contains(text(),'CurrentMedications')]")
 	    protected WebElement CurrentMedicationsHeader;
 
-	    @FindBy(xpath="//div[contains(text(),'Medication')]")
-     	protected WebElement Medications;
+	    @FindBy(xpath="//div[@class='sc-LzLtN ijGRvz']")
+     	protected List<WebElement> SixMedications;
+
+     	@FindBy(xpath="//div[@class='")
+	    protected List<WebElement> AssociatedCallToAction;
 
     	@FindBy(xpath="//a[contains(text(),'View all ')]")
      	protected WebElement ViewAllMedications;
 
 	    @FindBy(xpath="//h1[contains(text(),'My Drugs')]")
-	    protected WebElement MyDrugsPageHeader;
+	    protected WebElement MyMedicationsPageHeader;
 
 	    // identical class
 
@@ -350,7 +355,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	@FindBy(xpath="//span[contains(text(),'')]")
 	    protected WebElement NumberInParenthesis;
 
-     	@FindBy(xpath="//span[contains(text(),'')]")
+     	@FindBy(xpath="//span[contains(text(),'Medication appearance subject to change')]")
     	protected WebElement Disclaimer;
 
 
