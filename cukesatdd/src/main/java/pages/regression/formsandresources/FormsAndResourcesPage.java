@@ -518,6 +518,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='myDocButtonText']")
 	public WebElement myDocumentsButton;
+	
+	@FindBy(xpath="//a[@id='premiumpayment_4']")
+	protected WebElement pymtTabTopMenu;
 
 	public WebElement getEobSectionall() {
 		return eobSectionall;
@@ -2653,4 +2656,17 @@ System.out.println(memberType);
 		}
 		return true;
 	}
+	
+	public void verifyPaymentTabIsDisplayedForPreEffectiveMembers() {
+		
+		if(pymtTabTopMenu.isDisplayed())
+		{
+			System.out.println("Premium Payment tab was displayed on secondary page - Forms and Resources, Test Passed");
+		}
+		else
+		{
+			Assert.fail("Premium Payment tab was NOT displayed on secondary page - Forms and Resources, Test FAILED");
+		}
+	}
+	
 }

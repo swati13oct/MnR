@@ -71,7 +71,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
 	private WebElement acctSetting;
 
-	@FindBy(xpath = "//h2[@class='ng-scope' and @translate='FUTURE_MESSAGE_COVERAGE_START']")
+	@FindBy(xpath = "(//h2)[1]")
 	private WebElement preEffectiveMessage;
 
 	@FindBy(id = "plan_material_fnr2018")
@@ -3176,13 +3176,21 @@ public class AccountHomePage extends UhcDriver {
 	 */
 	public void validatePreEffectiveMessagePresent() throws InterruptedException {
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoad(driver, preEffectiveMessage, 20);
+		try{
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
-		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
+		System.out.println("Message displayed on Dashboard for this member is: " + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains("Use this site to find helpful information while"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Get early access to your new plan materials and manage your document delivery preferences."));
 		System.out.println("Second assert on the preeffective message is passed");
+		}
+		catch (Exception e)
+		{
+		Assert.fail("Failed to read Pre-effective message for member on Dashboard page");	
+		}
+		
 	}
 
 	public BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
