@@ -124,8 +124,25 @@ public class VppPlanSummaryStepDefinitionAARP {
 
 		plansummaryPage.viewPlanSummary(plantype);
 		}
-
 	
+	List<String> allPlanNames=null;
+	@When("^user clicks on Continue Enrollment button in AARP Site$")
+	public void user_clicks_on_Continue_Enrollment_button_in_aarp_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		allPlanNames=plansummaryPage.getAllPlanNames();
+		plansummaryPage.clickContinueEnrollmentBtn();
+	}
+
+	@Then("^user saves plan as favorite on AARP site$")
+	public void user_saves_plan_as_favorite_on_UMS_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.savePlan(PlanName);
+	}
      /**
 	 * @toDo:user view plan details of the above selected plan in AARP site and
 	 *            validates
@@ -996,6 +1013,26 @@ public class VppPlanSummaryStepDefinitionAARP {
 
 		}
 			
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site$")
+	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans_in_aarp_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with unsaved plans in AARP site$")
+	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_unsaved_plans_in_aarp_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.verifySelectPlanForEnrollModalForUnSavedPlans(PlanName);
 	}
 }
 		

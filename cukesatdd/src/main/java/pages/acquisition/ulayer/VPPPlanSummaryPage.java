@@ -96,7 +96,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
 
-
+	@FindBy(xpath="//a[@id='popupClose']")
+	private WebElement closeProfilePopup;
+	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement showPdpPlans;
 
@@ -317,9 +319,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
 	private WebElement planOverviewFindPlanButton;
 
-	@FindBy(xpath="//a[@id='popupClose']")
-	private WebElement closeProfilePopup;
-	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 	
@@ -346,7 +345,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Will my doctors covered?";
-	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="Continue Enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="Continue my enrollment";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -421,7 +420,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
-
+		
+		@FindBy(id = "sign-up-modal-header")
+		private WebElement createProfilePopup;
+		
+		@FindBy(xpath = "//div[contains(@class,'d-flex flex-column flex-lg-row align-items-lg-center')]/p")
+		private List<WebElement> plansInPopup;
+		
+		@FindBy(xpath = "//div[@class='uhc-modal']")
+		private WebElement selectPlanForEnrolModal;
+		
 		@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
 		private WebElement startDrpDwnOption;
 
@@ -633,6 +641,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//span[@class='multiple-added-text show']")
 		private WebElement multipleCompareText;
 		
+		@FindBy(xpath = "//div[@id='plan-list-1']//div[contains(@class,'plan-name-div')]//a[contains(@class,'ng-binding')]")
+		private List<WebElement> planNames;
 		
 		@FindBy(id = "change-location")
 		private WebElement changeLocationBtn;
@@ -2347,6 +2357,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 		validateNew(PlanSelectorToolRightRail);
 		System.out.println("Plan Selector Tool Section is present");    
 	}
+	
+	public List<String> getAllPlanNames()
+	{
+		List<String> allPlanNames=new ArrayList<String>();
+		for(WebElement plan:planNames) {
+			allPlanNames.add(plan.getText());
+		}
+		return allPlanNames;
+	}
 
 	public void validatePlanSelectorPageInRightRail() {
 		validateNew(StartPlanSelector);
@@ -3508,7 +3527,58 @@ for (int i = 0; i < initialCount + 1; i++) {
 			}
 		}
 		
-		public void savePDPPlans() {
-			
+		public void savePlan(String planName)
+		{		
+			try {
+				List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+				System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+				Thread.sleep(5000);
+				for (String plan: listOfTestPlans) {
+					WebElement savePlan = driver.findElement(By.xpath("//h3/a[text()='"+plan+"']/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				}
+				if(createProfilePopup.isDisplayed()) {
+					closeProfilePopup.click();
+				}
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public void verifySelectPlanForEnrollModalForSavedPlans(String planName) {
+			try {
+				List<String> expectedPlanNames = Arrays.asList(planName.split(","));
+				List<String> actualPlanNames=new ArrayList<String>();
+				if(selectPlanForEnrolModal.isDisplayed()) {
+					for(WebElement plan:plansInPopup) {
+						actualPlanNames.add(plan.getText());
+					}
+					System.out.println(expectedPlanNames);
+					System.out.println(actualPlanNames);
+					Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans"+expectedPlanNames+ "\n Actual plans"+actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+				}
+			}
+			catch(Exception ex) {
+				System.out.println("NBA modal not found");
+			}
+		}
+		public void verifySelectPlanForEnrollModalForUnSavedPlans(String planName) {
+			try {
+				List<String> expectedPlanNames = Arrays.asList(planName.split(","));
+				List<String> actualPlanNames=new ArrayList<String>();
+				if(selectPlanForEnrolModal.isDisplayed()) {
+					for(WebElement plan:plansInPopup) {
+						actualPlanNames.add(plan.getText());
+					}
+					System.out.println(expectedPlanNames);
+					System.out.println(actualPlanNames);
+					Assert.assertTrue("UnSaved plans not displayed in Enroll Popup.../n Expected plans"+expectedPlanNames+ "\n Actual plans"+actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+				}
+			}
+			catch(Exception ex) {
+				System.out.println("NBA modal not found");
+			}
 		}
 }
