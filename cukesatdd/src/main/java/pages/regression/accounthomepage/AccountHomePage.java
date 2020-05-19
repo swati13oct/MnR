@@ -3380,7 +3380,13 @@ public class AccountHomePage extends UhcDriver {
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
 				checkModelPopup(driver,5);
-			} else if (MRScenario.environment.contains("prod")) {
+			} 
+			else if (MRScenario.environment.contains("prod")) {
+				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
+				checkModelPopup(driver, 5);
+				planDocResPgLink.click();
+			}
+			else if (MRScenario.environment.contains("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
 				checkModelPopup(driver, 5);
 				planDocResPgLink.click();

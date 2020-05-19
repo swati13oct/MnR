@@ -87,7 +87,7 @@ public class MyDocumentsStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
 		} else {
 			int forceTimeoutInMin=5;
-			System.out.println("Proceeed to Plan Documents & Resources page");
+			System.out.println("Proceed to Plan Documents & Resources page");
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage = accountHomePage.navigateDirectToPlanDocPage(memberType,planType, forceTimeoutInMin);
 			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
