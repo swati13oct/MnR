@@ -2,7 +2,7 @@
 Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
-  @memAuth_header01 @mapd_header @member_redesign_header @headerRegression @mapd_header_MemAuth
+  @memAuth_header01 @mapd_header_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate via member authorization access for header
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -43,7 +43,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
       | 15164,15171 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Individual    | header|
      
 
-  @memAuth_header02 @premiumpaymentsheader @premiumpaymentsheader_MemAuth
+  @memAuth_header02 @premiumpaymentsheader_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check the Premium Payments Tab in the header
 	     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -121,7 +121,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 	      
 	      
 
-  @memAuth_header05 @no_findcareheader @headerRegression @no_findcareheader_MemAuth
+  @memAuth_header05 @no_findcareheader_MemAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -142,7 +142,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 	      | TID   | username  | password  | MemUserName     | planType | memberType | flow   |
 	      | 15251 | qavgogine | qavgogine | q1_feb_2020SHIP_019    | SHIP     | Medsupp    | header |
 
-  @memAuth_header06 @terminated @headerRegression @terminated_MemAuth
+  @memAuth_header06 @terminated_MemAuth
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given the user is on member auth login flow page
     When the member is able to login with correct username and password

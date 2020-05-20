@@ -1,7 +1,7 @@
 @footer @member_redesign_footer
 Feature: 1.05.1 Member Footer validation - Member Auth
 
-  @memAuth_footer01 @thePredators @MemberAuth @MemberAuth
+  @memAuth_footer01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -41,7 +41,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth
      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Ind_footer                 |
      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Ind_footer                 |
       
-  @memAuth_footer02 @thePredators @shipFooter @MemberAuth
+  @memAuth_footer02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -79,7 +79,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       | TID   | username  | password  | MemUserName     | planType | memberType             |
       | 15347 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_footer             |
 
-  @memAuth_footer03 @thePredators @needHelp @F423677 @MemberAuthNeedHelp
+  @memAuth_footer03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
     # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
     # note: if system is in future date, payment page may not show for user and this test will end up failing
@@ -120,7 +120,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth
      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Ind_footer                 |
      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Ind_footer                 |
       
-  @memAuth_footer04 @thePredators @shipFooter @needHelp @F423677 @MemberAuthNeedHelp
+  @memAuth_footer04
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

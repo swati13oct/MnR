@@ -19,7 +19,7 @@ import cucumber.api.CucumberOptions;
         overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionFooterMemAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
         features = { "src/main/resources/feature/memberredesign/footer" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooterMemAuth.json" }, tags = { "@memAuth_footer01,@memAuth_footer02","@MemberAuth" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooterMemAuth.json" }, tags = { "@memAuth_footer01","@memAuth_footer02","@memAuth_footer03","memAuth_footer04" })
 public class RunMRATDDRegressionFooterMemAuth {
 
 }
