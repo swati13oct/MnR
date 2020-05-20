@@ -1,5 +1,5 @@
 @vppPlanDetailsAARP
-Feature: Vpp to plan Details AARP Scenarios
+Feature: 1.01.2-Vpp to plan Details AARP Scenarios
 
   @vppPlanDetailsAARP01 @vppPlanDetailsAARPRun01 @vppPlanDetailsAARPRegression
   Scenario Outline: TestCaseID: <TCID> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
