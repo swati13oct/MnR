@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -55,6 +56,8 @@ public class HealthRecordStepDefinition {
 	@Then("^the user validates Health Record link display behavior on Account Profile dropdown base on test input$")
 	public void user_validate_healthRecordLink(DataTable memberAttributes) throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -87,6 +90,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user validates clicking Health Record link will open new tab to the target page$")
 	public void user_validate_healthRecordLinkDestination() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -117,6 +121,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Find Care page if applicable and validate Health Record link display behavior$")
 	public void user_toFindCare() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -176,6 +181,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Claims page if applicable and validate Health Record link display behavior$")
 	public void user_toClaims() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -228,6 +234,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to EOB page and validate Health Record link display behavior$")
 	public void user_toEob() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -283,6 +290,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Benefits page and validate Health Record link display behavior$")
 	public void user_toBenefits() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -327,6 +335,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior$")
 	public void user_toBenefitsToPlanDocToMyDoc() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -421,6 +430,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Order Plan Material page and validate Health Record link display behavior$")
 	public void user_toBenefitsToOrder() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -473,6 +483,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Payments page and validate Health Record link display behavior$")
 	public void user_toPayments() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -535,6 +546,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior$")
 	public void user_toPharmaciesAndPrescriptions() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -592,6 +604,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Health and Wellness page and validate Health Record link display behavior$")
 	public void user_toHealthAndWellness() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -647,6 +660,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Contact Us page and validate Health Record link display behavior$")
 	public void user_toContactUs() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -690,6 +704,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Pharmacy Locator page and validate Health Record link display behavior$")
 	public void user_toPharmacyLocator() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -742,6 +757,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to DCE page and validate Health Record link display behavior$")
 	public void user_toDce() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -794,6 +810,7 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Account Settings page and validate Health Record link display behavior$")
 	public void user_toAcctSettings() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
