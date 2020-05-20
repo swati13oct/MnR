@@ -177,7 +177,7 @@ Feature: MVP - Current Medications
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify request received
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -196,7 +196,7 @@ Feature: MVP - Current Medications
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
