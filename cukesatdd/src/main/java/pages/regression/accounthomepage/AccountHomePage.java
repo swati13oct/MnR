@@ -2117,7 +2117,7 @@ public class AccountHomePage extends UhcDriver {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
 		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")
-				|| MRScenario.environment.contains("team-a") ) {
+				|| MRScenario.environment.contains("team-a") || MRScenario.environment.contains("offline")) {
 			if (MRScenario.isTestHarness.equals("YES")) {
 				Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on testharness page table", validate(eobTestharnessLink,0));
 				eobTestharnessLink.click();
