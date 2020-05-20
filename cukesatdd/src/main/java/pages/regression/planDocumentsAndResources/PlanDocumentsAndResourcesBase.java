@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +37,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	public PlanDocumentsAndResourcesBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	public void openAndValidate() throws InterruptedException {
@@ -565,7 +567,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				return "8003";
 		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
 			return "7001";
-		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Guide".toLowerCase()) ) 
 			return "1042"; 
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Benefits Table".toLowerCase()) ) 
 			return "5002"; //note: SHIP

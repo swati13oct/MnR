@@ -298,7 +298,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Formulary/Drug List - Comprehensive");
+				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Additional Drug Coverage");
 				targetTestDocList.add("Prior Authorization Criteria");
 				targetTestDocList.add("Step Therapy Criteria");
@@ -318,11 +318,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");
+				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Summary of Benefits");
@@ -342,7 +343,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Additional Drug Coverage");
 				return targetTestDocList;
@@ -412,6 +413,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -443,8 +445,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				targetTestDocList.add("Seasonal flu shot information");
-				targetTestDocList.add("Emergency Room Copayment Waiver Request");
-				targetTestDocList.add("Naturopathy Provider Directory");
+				//targetTestDocList.add("Emergency Room Copayment Waiver Request");
+				//targetTestDocList.add("Naturopathy Provider Directory");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
@@ -940,7 +942,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");
@@ -1282,7 +1284,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Prior Authorization Criteria");
 				targetTestDocList.add("Step Therapy Criteria");
@@ -1302,9 +1304,10 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Plan Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
@@ -1327,7 +1330,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
@@ -1628,7 +1631,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");
@@ -3352,8 +3355,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Moving to your new plan");
-				targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Plan Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");

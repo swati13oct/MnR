@@ -1282,6 +1282,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
     		checkForIPerceptionModel(driver);
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
     		JavascriptExecutor jse = (JavascriptExecutor) driver;

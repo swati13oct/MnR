@@ -1,6 +1,8 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -15,6 +17,7 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 
 	public PlanDocumentsAndResourcesPM(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override

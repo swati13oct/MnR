@@ -83,12 +83,12 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 16-035 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
-      | 17-036 | 15131,15233 | ashah120  | Mnrqa002  | MON48DA    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
+      | 17-036 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
 
 	@prod_active_ssup
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 18-037 | 15131,15233 | ashah120  | Mnrqa002  | PTHUYNH50    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | false | false |
+      | 18-037 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | false | false |
 
 	@prod_active_ship
 	Examples: 

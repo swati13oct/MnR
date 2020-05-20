@@ -3557,6 +3557,7 @@ public class AccountHomePage extends UhcDriver {
 				throws InterruptedException {
 		//tbd checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReady(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		checkModelPopup(driver, 5);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();

@@ -463,9 +463,7 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1042")) {
-					String docCategory="Moving to your new plan";
-					if (planType.equalsIgnoreCase("PDP"))
-						docCategory="Quick Start Guide";
+					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						memMatl_en_curYr_docList.add(docObjMap);
@@ -670,9 +668,7 @@ public class PlanDocApiResponse {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1042")) {
-					String docCategory="Moving to your new plan";
-					if (planType.equalsIgnoreCase("PDP"))
-						docCategory="Quick Start Guide";
+					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						memMatl_en_nxtYr_docList.add(docObjMap);
