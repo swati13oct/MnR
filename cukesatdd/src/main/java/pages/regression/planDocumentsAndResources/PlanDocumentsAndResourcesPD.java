@@ -189,7 +189,11 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				redirectUrl="https://www.myuhc.com/member/prewelcome.do";
 			} else {
 				expectedUrl="https://member.int.uhc.com/UHC/find-care";
-				redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
+				if ((testInputInfoMap.get("planType").equalsIgnoreCase("MA") || testInputInfoMap.get("planType").equalsIgnoreCase("MAPD")) 
+						&& testInputInfoMap.get("memberType").toUpperCase().contains("GROUP")) 
+					redirectUrl="https://member.int.uhc.com/retiree/find-care"; //note: depending on the env, sometimes these will get systest3 also
+				else
+					redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
 			}
 		}
 

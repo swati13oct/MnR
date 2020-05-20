@@ -106,6 +106,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		}
 		//----------------------------------------------
 		Assert.assertTrue("PROBLEM - unable to locate sub-section '"+subSection_FnR+"' in '"+section+"' section", planDocValidate(subSectionElement));
+		scrollElementToCenterScreen(subSectionElement);
 		moveMouseToElement(subSectionElement);
 		subSectionElement.click();
 		System.out.println("TEST - clicked subsection to collapse it");
