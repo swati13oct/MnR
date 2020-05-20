@@ -110,7 +110,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement findCareTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-find-care]"));
 				findCareTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Benefits link on top menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate FindCare link on top menu", false);
 			}
 		}
 		return driver;

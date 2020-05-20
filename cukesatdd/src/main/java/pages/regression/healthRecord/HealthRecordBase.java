@@ -252,7 +252,6 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 		checkModelPopup(driver,1);
 		handleComboTabIfComboUser(planType, memberType);
 		checkModelPopup(driver,1);
-
 		return driver;
 	}
 

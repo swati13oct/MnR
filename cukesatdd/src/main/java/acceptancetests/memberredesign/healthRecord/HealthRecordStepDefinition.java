@@ -76,6 +76,10 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
+				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
@@ -130,7 +134,10 @@ public class HealthRecordStepDefinition {
 		String targetPage="Find Care";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
-		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("SSUP")) {
+		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("SSUP")
+				|| memberType.toUpperCase().contains("COMBO_SHIP_") 
+				|| memberType.toUpperCase().contains("TERM_") 
+				) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for plan type '"+MRScenario.environment+"'");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -153,6 +160,10 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
+				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
@@ -206,6 +217,10 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
+				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
@@ -252,7 +267,7 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 			wd=healthRecordPage.navigateToEobPageViaTestharnessTbl();
 		} else {
 			wd=healthRecordPage.navigateToEobPage();
@@ -569,14 +584,17 @@ public class HealthRecordStepDefinition {
 		wd=healthRecordPage.navigateToPnpPage();
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
-		if (memberType.toUpperCase().contains("COMBO") && 
-				(memberType.toUpperCase().contains("MA") && memberType.toUpperCase().contains("PDP") && memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
-		}
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
+		//note: PnP page doesn't have its own ProductSummary API run, it depends on what was the prior page on
+		//note: ATDD step sequence will land to the target test plan tab first before going to the target page
+		//note: so prior page would be on SHIP plan then clicking PnP will be the SHIP behavior which will NOT have IHR link
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
+				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
@@ -625,14 +643,14 @@ public class HealthRecordStepDefinition {
 		wd=healthRecordPage.navigateToHwPage();
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
-		if (memberType.toUpperCase().contains("COMBO") && 
-				(memberType.toUpperCase().contains("MA") && memberType.toUpperCase().contains("PDP") && memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
-		}
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
+				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
