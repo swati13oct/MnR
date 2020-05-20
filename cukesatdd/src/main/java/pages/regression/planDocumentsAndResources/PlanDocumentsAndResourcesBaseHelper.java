@@ -166,8 +166,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		
-		
 	}
 	
 	public void refreshPage(String planType, String memberType, String origUrlBeforeClick) {
@@ -232,15 +230,19 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		try {
 			if (planType.equalsIgnoreCase("mapd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", planDocValidate(comboTab_MAPD));
+				scrollElementToCenterScreen(comboTab_MAPD);
 				comboTab_MAPD.click();
 			} else if (planType.equalsIgnoreCase("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", planDocValidate(comboTab_SHIP));
+				scrollElementToCenterScreen(comboTab_SHIP);
 				comboTab_SHIP.click();
 			} else if (planType.equalsIgnoreCase("pdp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", planDocValidate(comboTab_PDP));
+				scrollElementToCenterScreen(comboTab_PDP);
 				comboTab_PDP.click();
 			} else if (planType.equalsIgnoreCase("ssp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", planDocValidate(comboTab_SSP));
+				scrollElementToCenterScreen(comboTab_SSP);
 				comboTab_SSP.click();
 			} else {
 				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
@@ -261,17 +263,25 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		else {
 			try {
 				if (planType.equalsIgnoreCase("mapd")) {
-					if (planDocValidate(comboTab_MAPD))
+					if (planDocValidate(comboTab_MAPD)) {
+						scrollElementToCenterScreen(comboTab_MAPD);
 						comboTab_MAPD.click();
+					}
 				} else if (planType.equalsIgnoreCase("ship")) {
-					if (planDocValidate(comboTab_SHIP)) 
+					if (planDocValidate(comboTab_SHIP)) {
+						scrollElementToCenterScreen(comboTab_SHIP);
 						comboTab_SHIP.click();
+					}
 				} else if (planType.equalsIgnoreCase("pdp")) {
-					if (planDocValidate(comboTab_PDP))
+					if (planDocValidate(comboTab_PDP)) {
+						scrollElementToCenterScreen(comboTab_PDP);
 						comboTab_PDP.click();
+					}
 				} else if (planType.equalsIgnoreCase("ssp")) {
-					if (planDocValidate(comboTab_SSP)) 
+					if (planDocValidate(comboTab_SSP)) {
+						scrollElementToCenterScreen(comboTab_SSP);
 						comboTab_SSP.click();
+					}
 				} 
 			} catch(Exception e) {
 				e.printStackTrace();
