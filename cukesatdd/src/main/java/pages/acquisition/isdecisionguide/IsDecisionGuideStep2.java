@@ -310,8 +310,11 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		String phNo = memberAttributesMap.get("phNo");
 		String mobileFlag = memberAttributesMap.get("mobileFlag");
 
-		DateOfBirthTxt.clear();
-		DateOfBirthTxt.sendKeys(DOB);
+		//DateOfBirthTxt.clear();
+       validateNew(DateOfBirthTxt);
+		
+		if(validateNew(DateOfBirthTxt)&& DateOfBirthTxt.isDisplayed())
+			DateOfBirthTxt.sendKeys(DOB);
 		PartBStartMonth.findElement(By.xpath("//*[contains(text(), '"+partBmonth+"')]")).click();
 		PartBStartYear.findElement(By.xpath("//*[contains(text(), '"+partByear+"')]")).click();
 		AARP_MembershipNo.sendKeys(aarpNo);

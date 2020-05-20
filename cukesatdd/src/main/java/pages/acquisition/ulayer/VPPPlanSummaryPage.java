@@ -1604,6 +1604,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		NextYearRadio.click();
 		System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
+
 		SelectYearGoBtn.click();*/
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
