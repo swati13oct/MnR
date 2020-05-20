@@ -433,14 +433,7 @@
     <groupId>io.appium</groupId>
     <artifactId>java-client</artifactId>
     <version>7.3.0</version>
-	</dependency>		
-		<dependency>
-    <groupId>jdbcJar</groupId>
-    <artifactId>ojdbc6</artifactId>
-    <scope>system</scope>
-    <version>11.2.0.4.0</version>
-    <systemPath>${basedir}/src/main/resources/lib/ojdbc6.jar</systemPath>
-</dependency>
+	</dependency>
 	</dependencies>
 	
 </project>

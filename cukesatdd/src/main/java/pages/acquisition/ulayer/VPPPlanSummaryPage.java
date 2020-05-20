@@ -3266,6 +3266,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
 	private WebElement comparePgnHeader;
+
+	private ArrayList<String> stringList;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3412,6 +3414,43 @@ for (int i = 0; i < initialCount + 1; i++) {
 			}
 			return false;
 		}
+		public ArrayList<String> providerinforetreive(String planName){
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+			String mproviderinfo=ProviderSearchLink.getText();
+			System.out.println(mproviderinfo);
+	        ProviderSearchLink.click();
+	        ArrayList<String> providerNames = new ArrayList<String>();
+			List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+			for(WebElement element:providers)
+			{
+				String providername = element.getText();
+				providerNames.add(providername);
+			}
+			
+			return providerNames;
+		}
+		//
+		public void setStringList(ArrayList<String> stringList) {
+			
+		    this.stringList = stringList;
+
+		}
+		
+		public ArrayList<String> getStringList() {
+		    return stringList;
+
+		}
+		
+	
 		/**
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
 		 * @param planName
