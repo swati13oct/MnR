@@ -307,7 +307,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
-
+	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
+	
+	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
+	private WebElement makeapayment;
 
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
@@ -4017,5 +4022,68 @@ public class AccountHomePage extends UhcDriver {
 			Assert.fail("Add condition here for Stage Dashboard, if needed");
 		}
 		return null;
+	}
+	public PaymentHistoryPage navigateDirectToPaymentHitorypage() {
+
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
+	    System.out.println("Member auth agent is on the Dashboard page");
+	    System.out.println(driver.getCurrentUrl());
+	    
+	  if (driver.getCurrentUrl().contains("/dashboard")) {
+	    System.out.println("Member auth agent is on the Dashboard page");
+		CommonUtility.waitForPageLoad(driver, makeapayment, 9);
+		if (validate(makeapayment)) {
+			makeapayment.click();
+		
+			} else if (driver.getCurrentUrl().contains("/dashboard")) {
+				try {
+					if (iPerceptionPopUp.isDisplayed()) {
+						iPerceptionPopUp.click();
+					}
+				} catch (Exception e) {
+					System.out.println("iPerception Pop Up not displayed");
+				}
+
+				validateNew(makeapayment,0);
+				makeapayment.click();				
+			}
+		} else {
+			System.out.println(
+					"This script is only intended to be run using test harness");
+		}
+	  try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	  if (MakeAPaymentButton.isDisplayed())
+		{
+		System.out.println("Make a payment button was displayed on Payments page");
+		return new PaymentHistoryPage(driver);
+		}
+		else
+		{
+			System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+			driver.navigate().refresh();
+			if (MakeAPaymentButton.isDisplayed())
+				
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				return new PaymentHistoryPage(driver);
+				}
+			else
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				Assert.fail("Make a payment button was not displayed on Payments page");
+			}
+			
+		}
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver);
+		}
+		
+	    }
+			return null;		
 	}
 }
