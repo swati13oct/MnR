@@ -247,7 +247,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	@When("^user clicks on Find My Doctor button in AARP Site$")
-	public void user_clicks_on_Find_My_Doctor_button_in_UMS_Site() throws Throwable {
+	public void user_clicks_on_Find_My_Doctor_button_in_aarp_Site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		ProviderSearchPage providerSearchPage = (ProviderSearchPage)plansummaryPage.clickNextBestActionModalFindMyDoctorsBtn();
