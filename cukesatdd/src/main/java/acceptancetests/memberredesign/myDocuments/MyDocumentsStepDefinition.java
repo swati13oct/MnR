@@ -179,6 +179,8 @@ public class MyDocumentsStepDefinition {
 			Assert.assertTrue("Problem with Number of Documents in the Documents Table. currentNumberOfRowsInDocumentsTable='"+currentNumberOfRowsInDocumentsTable+"' | previousNumberOfRowsInDocumentsTable='"+previousNumberOfRowsInDocumentsTable+"'", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
+		else
+			previousNumberOfRowsInDocumentsTable=0;
 	}
 	
 	/**
