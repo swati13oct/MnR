@@ -1,5 +1,4 @@
-@regressionMember
-Feature: S1.1 To test Member Auth SSO Micro App.
+Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
   @regressionMemberPROD
   Scenario Outline: Scenario -<Scenario> - Test Case_To test single signon using member auth - Search with Username

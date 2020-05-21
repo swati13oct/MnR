@@ -1,5 +1,5 @@
 @vppPlanDetailsUHC
-Feature: Vpp to plan Details UHC Scenarios
+Feature: 2.01.2-Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC01 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan

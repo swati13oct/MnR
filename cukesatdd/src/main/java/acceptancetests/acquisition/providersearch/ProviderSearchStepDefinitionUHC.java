@@ -2,6 +2,7 @@ package acceptancetests.acquisition.providersearch;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -164,6 +165,19 @@ public class ProviderSearchStepDefinitionUHC {
 		}
 	}
 	
+	/**
+	 * @toDo:user user selects a Multiple providers
+	 */
+	@When("^user selects a multiple providers and retuns to VPP page in ums$")
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_ums() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
 	
 	/**
 	 * @toDo: user performs plan search using following information
@@ -309,6 +323,32 @@ public class ProviderSearchStepDefinitionUHC {
 
 			}
 		}
+		
+		
+		//
+		@Then("^User store the information provided from rally to vpp page in ums$")
+			public void user_store_the_information_provided_from_rally_to_vpp_page_in_ums(DataTable givenAttributes) {
+			
+			List<DataTableRow> givenAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> givenAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+
+			String planName = givenAttributesMap.get("PlanName");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+			plansummaryPage.setStringList(providers);
+			Assert.assertFalse("Providers not added",providers.isEmpty());
+			
+			}
+			
 		
 	
 }
