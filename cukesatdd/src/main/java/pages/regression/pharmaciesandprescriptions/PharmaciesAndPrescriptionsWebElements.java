@@ -361,6 +361,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	@FindBy(xpath="//span[contains(text(),'Medication appearance subject to change')]")
     	protected WebElement Disclaimer;
 
+     	@FindBy(xpath="//span[contains(text(),'Request received')]")
+    	protected List<WebElement> RequestReceived;
+
+	    @FindBy(xpath="//span[contains(text(),'OptumRx')]")
+	    protected List<WebElement> OptumRx;
+
+	   @FindBy(xpath="//span[contains(text(),'OptumRx')]")
+	   protected List<WebElement> Processing;
+
+
+
+
 
 //************************Added By Naresh***********************************************************
      	

@@ -92,7 +92,7 @@ Feature: MVP - Current Medications
     Examples:
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
-#
+
 
   @MedicineCabinet @F392596 @US2301928
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medication information on medicine cabinet
@@ -116,11 +116,9 @@ Feature: MVP - Current Medications
     And user validates information on remaining refills
     And user validates a button "Contact Pharmacy" to contact my retail pharmacy
     
-
     Examples:
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
-
 
   @MedicineCabinet @F392596 @US2301929
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on medicine cabinet
@@ -178,7 +176,7 @@ Feature: MVP - Current Medications
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify request received
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -197,7 +195,7 @@ Feature: MVP - Current Medications
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -517,5 +515,3 @@ Feature: MVP - Current Medications
     Examples:
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
-
-

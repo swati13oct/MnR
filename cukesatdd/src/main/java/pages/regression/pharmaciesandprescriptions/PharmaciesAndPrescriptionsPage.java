@@ -725,8 +725,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		String numberTXT=NumberInParenthesis.getText();
 		int number=Integer.parseInt(numberTXT.replaceAll("[^0-9]",""));
-		Assert.assertTrue("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
-				pnpValidateAlphaNumeric(NumberInParenthesis,3));
+		int num2=10;
+		Assert.assertEquals("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",number,num2);
+//		Assert.assertTrue("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
+//				pnpValidateAlphaNumeric(NumberInParenthesis,3));
 	}
 
 	public void validateDisclaimer() {
@@ -818,7 +820,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(ViewAllMedications));
 	}
 
-	
+	public void validateRequestReceived() {
+
+		List<WebElement> requestReceived=RequestReceived;
+		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
+
+				pnpValidate(requestReceived.get(0)));
+	}
+
+	public void validateOptumRx() {
+
+		List<WebElement> optumRx=OptumRx;
+		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
+
+				pnpValidate(optumRx.get(0)));
+	}
+
+	public void validateProcessing() {
+
+		List<WebElement> processing=Processing;
+		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
+
+				pnpValidate(processing.get(0)));
+	}
+
+
 
 
 }

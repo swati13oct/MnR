@@ -316,6 +316,13 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_home_delivery_drug_order() throws Throwable {
 
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOptumRx();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+
 	}
 
 	@Then("^user validates the status of Verifying with doctor or status of Order verified$")
@@ -334,6 +341,12 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_status_of_Request_received() throws Throwable {
 
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRequestReceived();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
 	}
 
 	@Then("^user views (\\d+)/(\\d+) Harvey Ball on that medication's row$")
@@ -344,6 +357,12 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user views a status of Processing$")
 	public void user_views_a_status_of_Processing() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateProcessing();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 
 	}
