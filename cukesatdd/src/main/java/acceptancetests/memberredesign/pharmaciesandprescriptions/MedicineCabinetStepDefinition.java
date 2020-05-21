@@ -353,6 +353,11 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
 
 
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHalfHarveyBall();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 	}
 
 	@When("^user views a status of Processing$")
@@ -369,6 +374,11 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views  a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
 	public void user_views_a_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateThreeFourthHarveyBall();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}
@@ -399,6 +409,12 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views active medications$")
 	public void user_views_active_medications() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateActivePrescriptions();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}
@@ -453,6 +469,25 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user views a Refill Medication call to action button on that medication's row$")
 	public void user_views_a_Refill_Medication_call_to_action_button_on_that_medication_s_row() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRefillMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+	}
+
+
+	@When("^user views a Renew Medication call to action button on that medication's row$")
+	public void user_views_a_Renew_Medication_call_to_action_button_on_that_medication_s_row() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRenewMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
 	}

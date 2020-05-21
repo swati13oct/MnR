@@ -367,8 +367,23 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    @FindBy(xpath="//span[contains(text(),'OptumRx')]")
 	    protected List<WebElement> OptumRx;
 
-	   @FindBy(xpath="//span[contains(text(),'OptumRx')]")
-	   protected List<WebElement> Processing;
+	    @FindBy(xpath="//span[contains(text(),'OptumRx')]")
+	    protected List<WebElement> Processing;
+
+	    @FindBy(xpath="(//div[@class='sc-LzLtT hBUvHG'])[last()]")
+	    protected WebElement HalfHarveyBall;
+
+	    @FindBy(xpath="")
+		protected WebElement ThreeFourthHarveyBall;
+
+    	@FindBy(xpath="//span[contains(text(),'Refill')]")
+    	protected WebElement RefillMedications;
+
+	    @FindBy(xpath="//span[contains(text(),'Renew')]")
+	    protected WebElement RenewMedications;
+
+
+
 
 
 

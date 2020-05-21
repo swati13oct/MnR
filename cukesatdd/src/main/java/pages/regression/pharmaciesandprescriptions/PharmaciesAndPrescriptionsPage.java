@@ -725,10 +725,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		String numberTXT=NumberInParenthesis.getText();
 		int number=Integer.parseInt(numberTXT.replaceAll("[^0-9]",""));
-		int num2=10;
-		Assert.assertEquals("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",number,num2);
-//		Assert.assertTrue("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
-//				pnpValidateAlphaNumeric(NumberInParenthesis,3));
+		String totalNumber=ViewAllMedications.getAttribute("data-test-total-medication");
+		int number2=Integer.parseInt(totalNumber.replaceAll("[^0-9]",""));
+		Assert.assertEquals("PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",number,number2);
+
 	}
 
 	public void validateDisclaimer() {
@@ -842,6 +842,34 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
 				pnpValidate(processing.get(0)));
+	}
+
+	public void validateHalfHarveyBall() {
+
+		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements",
+
+				pnpValidate(HalfHarveyBall));
+	}
+
+	public void validateThreeFourthHarveyBall() {
+
+		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
+
+				pnpValidate(ThreeFourthHarveyBall));
+	}
+
+	public void validateRefillMedications() {
+
+
+		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element",
+				pnpValidate(RefillMedications));
+	}
+
+	public void validateRenewMedications() {
+
+
+		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element",
+				pnpValidate(RenewMedications));
 	}
 
 

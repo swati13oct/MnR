@@ -356,7 +356,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -374,7 +374,7 @@ Feature: MVP - Current Medications
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
 
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -384,7 +384,7 @@ Feature: MVP - Current Medications
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
     Then user views active medications
-    When user views a Refill Medication call to action button on that medication's row
+    When user views a Renew Medication call to action button on that medication's row
     Then user validates the external link icon in the button
 
     Examples:
