@@ -1,9 +1,9 @@
 @benefitsAndCoverage @thePredators @codeMonkeys @regression_06_06_18
 Feature: 1.01 Member  benefits and Coverage page
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
-      | Feature           | UCPBenefits |
+#  Background: If run on stage then feature security flag needs to be true
+#     Given feature security flag must set to true when testing on stage env
+#      | Feature           | UCPBenefits |
 
 ###############################Regression Scenarios Begin Here ########################################
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
@@ -126,6 +126,21 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
+	Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     Then verify ancillary benefit section is not displayed
     And the user validates plan overview and summary on Bnc page for ship members
      | Benefits Expected | <numberOfBenefitCards> |
@@ -146,8 +161,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validate vas tiles on vas page
 
     Examples: 
-      | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards |  
-      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                  |
+      | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards | Identifier           | count | rider   |
+      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember
@@ -165,6 +180,21 @@ Feature: 1.01 Member  benefits and Coverage page
       | Monthly premium | <monthlypremium> |
     And the user validates headers on Bnc page for indi members
       | Plan Type       | <planType>       |
+   Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
    # And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
    And the user validates the Out of Pocket Max section
@@ -214,23 +244,38 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name                  | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier         | count | rider   |
+      | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | 1         | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2         |                          |                           |                                        |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        | IndEffectiveMedica | 6     | NoRider |
 
-#TC13_Benefits_for_MA_SSUP_MEDSUPMember
+  #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
+    Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     And the user validates the Benefits for MA member
       | Plan Type | <planType> |
 
     Examples: 
-      | TID   | planType | memberType     |
-      | 15096 | MA       | Individual_BnC |
-      | 15098 | SSUP     | Group_BnC      |
+      | TID   | planType | memberType     | Identifier      | count | rider   |
+      | 15096 | MA       | Individual_BnC | IndEffectiveUHC | 5     | Rider   |
+      | 15098 | SSUP     | COMBO_Group_BnC| GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
   @benefitsAndCoverage14_2 @CMFedDrugNonLis  @BnC_Part4_regressionMember
@@ -248,6 +293,21 @@ Feature: 1.01 Member  benefits and Coverage page
       | Monthly premium | <monthlypremium> |
      And the user validates headers on Bnc page for indi members
       | Plan Type       | <planType>       |
+   Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     #And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section
@@ -294,8 +354,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies |  ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos       | 2      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies |  ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name            | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier      | count | rider   |
+      | 15097 | PCP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | 1         | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2         |                          |                           |                                         |                             | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        | IndEffectivePCP | 6     | NoRider |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
   @benefitsAndCoverage21 @CMAncillarysection2  @BnC_Part4_regressionMember
@@ -327,15 +387,30 @@ Feature: 1.01 Member  benefits and Coverage page
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
+   Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     Then verify ancillary benefit section is not displayed
     And the user validates the Vas section on benefits and coverage page is not displayed
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory |
-      | 15239 | PDP      | Group_BnC      | NON LIS       |
-      | 15238 | MAPD     | Individual_BnC | NON LIS       |
+      | TID   | planType | memberType     | copayCategory | Identifier       | count | rider   |
+      | 15239 | PDP      | Group_BnC      | NON LIS       | GrpEffectiveUHC  | 3     | NoRider | 
+      | 15238 | MAPD     | Individual_BnC | NON LIS       | IndEffectiveAARP | 7     | Rider   |
 
-    #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
+  #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
   @benefitsAndCoverage5 @WaystoSaveforPdp @regression  @BnC_Part5_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
@@ -351,8 +426,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15243 | PDP      | MailOrderPharamacy_BnC |
       | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
-    #TC20_Rider for Fed MA,MAPD plans only  
-        # note: Due to timing that it takes for GPS to do the update (add or remove),
+  #TC20_Rider for Fed MA,MAPD plans only  
+  # note: Due to timing that it takes for GPS to do the update (add or remove),
   # this testcase result will not be stable. Since can't predict time for GPS to finish the update,
   # so the add or remove button does't always show up within the time the code expects it to.
   @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression
@@ -404,7 +479,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
-      | 15248 | PDP     | PDPLIS_Bnc  | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | 15248 | PDP      | PDPLIS_Bnc  | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
   #TC25_Group members_MAPD_LIS(3,4)
   @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 
@@ -520,7 +595,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name             | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-     | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC24_Group NON LIS_PDP
   @benefitsAndCoverage27 @CMPDPGroupNonLis @BnC_Part7_regressionMember
@@ -575,6 +650,21 @@ Feature: 1.01 Member  benefits and Coverage page
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
+	Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     And the user validates Lis member plan overview section
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -615,8 +705,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            |
-      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | NoRider |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_regressionMember
@@ -687,7 +777,7 @@ Feature: 1.01 Member  benefits and Coverage page
    @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealth Passport Program | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | UnitedHealth Passport ProgramSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | UnitedHealth Passport ProgramChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1         | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2         |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
   
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @benefitsAndCoverage15 @CMFedPDPNonLis @BnC_Part8_regressionMember
@@ -697,6 +787,21 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigate to Benefits and Coverage page
+	  Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -735,8 +840,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
 
 
   @benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @BnC_Part8_regressionMember
@@ -1155,9 +1260,10 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the deductible card for no deductible member
 
     Examples: 
-      | UID       | planType      | memberType   |
-      | US1564217 | MAGroup_BnC   | NoDeductible |
-      | US1564217 | MAPDGroup_BnC | NoDeductible |
+      | UID       | planType      | memberType                   |
+     # note: need to find a MA Group user that has the PLAN DEDUCTIBLE tile with content There is no deductible for this plan
+     # | US1564217 | MAGroup_BnC  | NoDeductible                 |
+      | US1564217 | MAPDGroup_BnC | NoDeductible                 |
 
   @benefitsAndCoverage41 @F250386 @MedicalDeductibleCards @GroupSingleDeductible @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> -Verify Deductible cards for Single deductible
@@ -1170,7 +1276,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | UID       | planType      | memberType       | deductible1 |
-      | US1564214 | MAGroup_BnC   | SingleDeductible | $185        |
+      | US1564214 | MAGroup_BnC   | SingleDeductible | $198        |
       | US1564214 | MAPDGroup_BnC | SingleDeductible | $250        |
 
   @benefitsAndCoverage42 @F250386 @MedicalDeductibleCards @GroupDualDeductible @Mar_release_2019
@@ -1185,7 +1291,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | UID       | planType     | memberType     | deductible1 | deductible2 |
-      | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
-      | US1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
+    # | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
+      | US1564213 | MAGroup2_BnC | DualDeductible | $1,408      | $198        |
 
 
