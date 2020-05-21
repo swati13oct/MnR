@@ -209,7 +209,7 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validatePharmacyLastFilled();
+		//pnpPg.validatePharmacyLastFilled();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 
@@ -260,16 +260,17 @@ public class MedicineCabinetStepDefinition {
 
 
 	}
-
-	@Then("^user validates a phone number if no refills are available and the drug is not eligible for transfer$")
-	public void user_validates_a_phone_number_if_no_refills_are_available_and_the_drug_is_not_eligible_for_transfer() throws Throwable {
-
+	
+	@Then("^user validates a button \"([^\"]*)\" to contact my retail pharmacy$")
+	public void user_validates_a_button_to_contact_my_retail_pharmacy(String expectedVal) {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validatePhoneNumber();
+		pnpPg.validateContactNumberButton(expectedVal);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
+
+
+	
 
 	@When("^user clicks medication name of one of his active prescriptions listed on the Medicine cabinet$")
 	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Medicine_cabinet() throws Throwable {

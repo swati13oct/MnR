@@ -751,61 +751,53 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 
 	public void validateMedicationName() {
-		Assert.assertTrue("PROBLEM - unable to locate Medication Name elements",
-				pnpValidate(MedicationName));
+		Assert.assertTrue("PROBLEM -  Medication Name Value not available",
+				validateFieldValueContent(listOfDrugName));
 	}
 
 	public void validateImage() {
-		Assert.assertTrue("PROBLEM - unable to locate Medication image elements",
-				pnpValidate(Image));
+		Assert.assertTrue("PROBLEM - Medication Drug Image not available",
+				validateFieldValueContent(listOfDrugImage));
 	}
 
 	public void validateStrength() {
-		Assert.assertTrue("PROBLEM - unable to locate  strength of the medication elements",
-
-				pnpValidate(Strength));
+		Assert.assertTrue("PROBLEM - Strength of the medicine Strength not available",
+				validateFieldValueContent(listOfMedicineStrength));
 	}
 
 	public void validatePriceMemberPaid() {
-		Assert.assertTrue("PROBLEM - unable to locate  the price member paid elements",
-
-				pnpValidate(PriceMemberPaid));
+		Assert.assertTrue("PROBLEM - You Paid Amount not available",
+				validateFieldValueContent(listOfYouPaid));
 	}
 
-	public void validatePharmacyLastFilled() {
-		Assert.assertTrue("PROBLEM - unable to locate pharmacy where the medication was last filled elements",
-
-				pnpValidate(PharmacyLastFilled));
+	public void validateRefillsLeft() {
+		Assert.assertTrue("PROBLEM - Refills Left not available",
+				validateFieldValueContent(listOfRefillsLeft));
 	}
 
 	public void validateDayOfSupply() {
-		Assert.assertTrue("PROBLEM - unable to locate day supply of the medication elements",
-
-				pnpValidate(DayOfSupply));
+		Assert.assertTrue("PROBLEM - Days Of Supply not available",
+				validateFieldValueContent(listOfDaysSupply));
 	}
 
 	public void validateOrderStatus() {
-		Assert.assertTrue("PROBLEM - unable to locate order status elements",
-
-				pnpValidate(OrderStatus));
+		Assert.assertTrue("PROBLEM - Order Status for Medication not available",
+				validateFieldValueContent(listOfDaysSupply));
 	}
 
 	public void validateRelevantCallToAction() {
-		Assert.assertTrue("PROBLEM - unable to locate any relevant calls to action elements",
-
-				pnpValidate(RelevantCallToAction));
+		Assert.assertTrue("PROBLEM - Relevant calls to action not available",
+				validateCallToActionsForHDDrug());
 	}
 
 	public void validateInfoOnRemainingRefills() {
-		Assert.assertTrue("PROBLEM - unable to locate Information On Remaining Refills elements",
-
-				pnpValidate(InfoOnRemainingRefills));
+		Assert.assertTrue("PROBLEM - Information On Remaining Refills not available",
+				validateFieldValueContent(listOfRefillsLeft));
 	}
 
-	public void validatePhoneNumber() {
-		Assert.assertTrue("PROBLEM - unable to locate phone number elements",
-
-				pnpValidate(RelevantCallToAction));
+	public void validateContactNumberButton(String expectedContactPharmacy) {
+		Assert.assertTrue("PROBLEM - Contact Pharmacy Button not available",
+				validateContactPharmacyButtonForRetailDrug(expectedContactPharmacy));
 	}
 
 	public void clickOnMedicationName() {
@@ -826,6 +818,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(ViewAllMedications));
 	}
 
+	
 
 
 }

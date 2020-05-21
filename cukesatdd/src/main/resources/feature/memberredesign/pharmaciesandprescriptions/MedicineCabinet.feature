@@ -92,7 +92,7 @@ Feature: MVP - Current Medications
     Examples:
       | FID     | planType | memberType             | expectLink |
       | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
-
+#
 
   @MedicineCabinet @F392596 @US2301928
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medication information on medicine cabinet
@@ -103,7 +103,7 @@ Feature: MVP - Current Medications
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user views the Medicine Cabinet
+    Then user views the Current Medications
     And user validates his active prescriptions displayed on the page
     And user validates the medication name
     And user validates an image of the medication
@@ -114,7 +114,8 @@ Feature: MVP - Current Medications
     And user validates the order status if applicable
     And user validates any relevant calls to action to manage the medication
     And user validates information on remaining refills
-    And user validates a phone number if no refills are available and the drug is not eligible for transfer
+    And user validates a button "Contact Pharmacy" to contact my retail pharmacy
+    
 
     Examples:
       | FID     | planType | memberType             | expectLink |
