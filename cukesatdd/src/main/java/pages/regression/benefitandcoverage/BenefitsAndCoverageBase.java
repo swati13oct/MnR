@@ -17,6 +17,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.testharness.TestHarness;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 /**
  * @Functionality : To check Benefits and Coverage page
@@ -984,6 +985,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if (linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM"))
 		{	
 		System.out.println("Clicking on VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link");
+		TestHarness.checkForIPerceptionModel(driver);
 		viewYourCurrentPrescriptionDrugCostSummaryLink.click();   	
 		System.out.println("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link has been clicked");
 		}
@@ -991,6 +993,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
 		{	
 		System.out.println("Clicking on LookUpDrugs Button");
+		TestHarness.checkForIPerceptionModel(driver);
 		LookUpDrugsButton.click();   	
 		System.out.println("LookUpDrugs Button has been clicked");
 		}
@@ -998,6 +1001,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink"))
 		{	
 		System.out.println("Clicking on View Details At Optumrx Link");
+		TestHarness.checkForIPerceptionModel(driver);
 		viewDetailsAtOptumrxLink.click();   	
 		System.out.println("View Details At Optumrx Link has been clicked");
 		}

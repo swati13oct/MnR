@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppUlayer
-Feature: 1.02-Plan summary in vpp flow AARP
+Feature: 1.02-Favorite Plans in vpp flow AARP
 
  # @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer1 @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site

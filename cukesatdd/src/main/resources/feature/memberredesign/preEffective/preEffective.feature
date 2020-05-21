@@ -1,7 +1,6 @@
-@preEffective @codetransformers
 Feature: 1.15 Member pre-effective functionality
 
-  @preEffective1 @regressionMember @codetransformers
+  @regressionMember
   Scenario Outline: -planType: <planType> -Segment ID: <segmentId> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -12,24 +11,24 @@ Feature: 1.15 Member pre-effective functionality
       | Member Type | <memberType> |
     And user clicks on the benefits and coverage tab on the dashboard home page or test harness page
     And verify that subnavigation is supressed on the coverage and benefits page
-    And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
+    And verify that correct preeffective message is displayed on coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
       | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
       | Member Type | <memberType> |
     And user click on the plan documents button
     And user is navigated to Forms and Resource page
-    And user clicks on claims tab from Forms and Resources page
-    And verify that subnavigation is supressed on the claims page
-    And verify that correct preeffective message is displayed on claims page
-    And verify segment ID on claims page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Segment ID  | <segmentId>  |
-    And verify that correct phone number is displayed in technical support section of claims page
-      | Technical TFN | <technicalTFN> |
-    And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
-      | Member Type | <memberType> |
+#    And user clicks on claims tab from Forms and Resources page
+#    And verify that subnavigation is supressed on the claims page
+#    And verify that correct preeffective message is displayed on claims page
+#    And verify segment ID on claims page
+#      | Plan Type   | <planType>   |
+#      | Member Type | <memberType> |
+#      | Segment ID  | <segmentId>  |
+#    And verify that correct phone number is displayed in technical support section of claims page
+#      | Technical TFN | <technicalTFN> |
+#    And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
+#      | Member Type | <memberType> |
     And verify that payment tab is displayed to Preeffective member from secondary pages
       | Member Type | <memberType> |
 
@@ -47,7 +46,7 @@ Feature: 1.15 Member pre-effective functionality
   #   | IndMAPD         | preeffectiveIndMAPD_002   | NON LIS       | 1-888-980-8125| 002       |
  
  
-  @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
+ @regressionMember1
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
