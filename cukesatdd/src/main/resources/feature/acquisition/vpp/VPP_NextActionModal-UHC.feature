@@ -262,7 +262,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | MAPD     |PDP|Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
       
       
-      @vppNextActionModalRegressionMAAddProvider @testUHC
+      @vppNextActionModalRegressionMAAddProvider
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Provider Search on VPP summary page for MAPD Plan when user adds Drug cost from PDP page
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
