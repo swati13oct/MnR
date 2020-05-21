@@ -156,4 +156,4 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
       | TID   | username  | password  | MemUserName     | planType | memberType             |
       | 15347 | ashah120 | Mnrqa002 | lloydkoby32    | SHIP     | IND_footer             |
       #note: combo user with SHIP priority
-      | xxxxx | ashah120 | Mnrqa002 | q2_jun_uhc0009    | MAPD     | SHIP_FED_COMBO_footer  |
+      #| xxxxx | ashah120 | Mnrqa002 | q2_jun_uhc0009    | MAPD     | SHIP_FED_COMBO_footer  |
