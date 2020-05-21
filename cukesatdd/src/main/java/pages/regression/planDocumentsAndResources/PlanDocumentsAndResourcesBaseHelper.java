@@ -322,10 +322,15 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 
 	}
 	
-	public void backToTopOfPage() {
+	public void backToTopOfPage(String planType, String memberType) {
 		//moveMouseToElement(pageHeader);
 		checkModelPopup(driver, 5);
 		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
+		if (memberType.toLowerCase().contains("combo")) { 
+			System.out.println("This test is for combo plans, select the tab accordingly");
+			goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
+			goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+		}
 	}
 
 	/**

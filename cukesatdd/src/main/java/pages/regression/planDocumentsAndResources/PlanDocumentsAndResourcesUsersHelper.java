@@ -412,7 +412,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
-				targetTestDocList.add("Prescription Drug Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}

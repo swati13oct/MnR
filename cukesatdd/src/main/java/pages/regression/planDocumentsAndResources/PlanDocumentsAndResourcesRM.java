@@ -37,8 +37,6 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		//note: so don't dynamic determine it for now
 		currentYear="2020";
 		String season="spring";
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-			season="winter"; //note: offline-prod and prod maynot catch up w/ lower/stage env yet
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/index.html";
 		String redirectUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {

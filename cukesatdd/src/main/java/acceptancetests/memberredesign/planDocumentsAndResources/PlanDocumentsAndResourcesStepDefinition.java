@@ -234,7 +234,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -370,6 +370,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validates section Plan Materials$")
 	public void validateSection_PM_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Plan Materials";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -383,7 +385,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -435,7 +437,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -560,6 +562,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validates section Membership Materials or Welcome Guide$")
 	public void validateSection_MM_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Membership Materials";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -572,7 +576,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -643,7 +647,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -880,6 +884,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validates section Annual Notice of Changes Documents$")
 	public void validateSection_ANOC_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Annual Notice of Changes Documents";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -892,7 +898,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -970,7 +976,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -1212,6 +1218,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	public void validateSection_PD_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Provider and Pharmacy Directories";
 		if (planType.equals("MA")) 
 			section="Provider Directory";
@@ -1228,7 +1235,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -1258,6 +1265,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user validate My Documents section$")
 	public void validateSection_MD(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="My Documents";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1270,7 +1279,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		//note: validate jumplink
 
 		testInputInfoMap.put("section", section);
@@ -1290,6 +1299,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validate My Documents section$")
 	public void validateSection_MD_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="My Documents";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1302,7 +1313,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		//note: validate jumplink
 
 		testInputInfoMap.put("section", section);
@@ -1318,6 +1329,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user validate Explanation of Benefits section$")
 	public void validateSection_EOB(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Explanation of Benefits (EOB)";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1336,7 +1349,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		//note: validate jumplink
 
 		testInputInfoMap.put("section", section);
@@ -1366,6 +1379,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validate Explanation of Benefits section$")
 	public void validateSection_EOB_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Explanation of Benefits (EOB)";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1378,7 +1393,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		//note: validate jumplink
 
 		testInputInfoMap.put("section", section);
@@ -1428,7 +1443,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -1700,6 +1715,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validate Forms and Resources section$")
 	public void validateSection_FnR_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Forms And Resources";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1712,7 +1729,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 
 		testInputInfoMap.put("section", section);
 
@@ -1735,6 +1752,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user validate Renew Magazine section$")
 	public void validateSection_RM(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Renew Magazine";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1747,7 +1766,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink
@@ -1776,6 +1795,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@Then("^user sanity validate Renew Magazine section$")
 	public void validateSection_RM_sanity(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
 		String section="Renew Magazine";
 		List<String> sectionNote=new ArrayList<String>();
 		sectionNote.add("\n===============================================================================");
@@ -1788,7 +1809,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		//note: first go back to top of the page
-		planDocumentsAndResourcesPage.backToTopOfPage();
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink

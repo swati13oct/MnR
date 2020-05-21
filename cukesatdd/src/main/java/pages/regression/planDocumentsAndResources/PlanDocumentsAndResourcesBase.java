@@ -359,7 +359,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		}
 		
 		//note: not all docs on UI are coming via the same API, so only validate if actualFromUi >= expectedFromApi
-		Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected as the ones from API. NOTE: If UI is matching with API but you are getting this error, check your input in PlanDocumentsAndResourcesUserHelper to see if expected list match with what's on UI.  API Expected='"+expectedSize+"' | UI Actual='"+actualSize+"'", actualSize>=expectedSize);
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
+			Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected as the ones from API. NOTE: If UI is matching with API but you are getting this error, check your input in PlanDocumentsAndResourcesUserHelperProd to see if expected list match with what's on UI.  API Expected='"+expectedSize+"' | UI Actual='"+actualSize+"'", actualSize>=expectedSize);
+		else
+			Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected as the ones from API. NOTE: If UI is matching with API but you are getting this error, check your input in PlanDocumentsAndResourcesUserHelper to see if expected list match with what's on UI.  API Expected='"+expectedSize+"' | UI Actual='"+actualSize+"'", actualSize>=expectedSize);
 		
 		boolean foundAll=true;
 

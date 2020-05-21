@@ -122,6 +122,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("UnitedHealth Passport Program"); 
 				//targetTestDocList.add("Health & Wellness Products Catalog");
 				//targetTestDocList.add("HEALTH PRODUCTS BENEFIT");
 				return targetTestDocList;
@@ -413,7 +414,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
-				targetTestDocList.add("Prescription Drug Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -1457,7 +1458,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Privacy Notice");
-				targetTestDocList.add("CDI Long Notice");
+				targetTestDocList.add("CDI Long Notice (CA Only)");
 				//targetTestDocList.add("CDI Long Notice (CA Only)");
 				return targetTestDocList;
 			} 
@@ -1478,7 +1479,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Plan Summary");
 				targetTestDocList.add("Plan Information");
-				targetTestDocList.add("CDI Long Notice");
+				//targetTestDocList.add("CDI Long Notice");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {

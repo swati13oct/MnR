@@ -10,6 +10,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 
+import atdd.framework.MRScenario;
+
 public class PlanDocApiResponse {
 
 	protected boolean success;
@@ -405,13 +407,16 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
@@ -718,13 +723,16 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") && MRScenario.environment.contains("stage"))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
