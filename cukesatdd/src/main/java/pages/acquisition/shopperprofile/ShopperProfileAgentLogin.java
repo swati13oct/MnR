@@ -32,7 +32,9 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 	}
 	
 	public void openAndValidate() {
-		if (MRScenario.environment.equals("offline")) {
+		if (MRScenario.environment.equals("offline-stage")) {
+			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		}
 		else if (MRScenario.environment.equals("stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
@@ -42,8 +44,6 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, username, 45);
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		
-		
 	}
 
 	/**
