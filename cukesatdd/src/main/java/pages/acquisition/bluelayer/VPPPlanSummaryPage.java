@@ -3979,6 +3979,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
 	 */
 	public void verifyNextBestActionModalForDrugCost() {
+		waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
 				Assert.assertTrue(
@@ -4004,6 +4005,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyNextBestActionModalForProviderSearch() {
+		waitforElementVisibilityInTime(nextBestActionModalFindMyDoctorsBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
 				Assert.assertTrue(
@@ -4038,6 +4040,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyNextBestActionModalForEnrollPlan() {
+		waitforElementVisibilityInTime(nextBestActionModalContinueEnrollmentBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
 				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"
