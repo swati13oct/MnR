@@ -33,7 +33,7 @@ Feature: Med Supp Plans (IS) Decision Guide flow in UHC site
       | AARPno     | aarpNo     |
       | PhNo       | phNo       |
       | MobileFlag | mobileFlag |
-    Then the user clicks Submit to submit Decision Guide on UMS site on UMS site
+    Then the user clicks Submit to submit Decision Guide on UMS site
     Then the user validates Thank You Page on UMS site
 
     Examples: 

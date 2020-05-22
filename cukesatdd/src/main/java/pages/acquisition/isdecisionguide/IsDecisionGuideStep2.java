@@ -49,7 +49,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 	private WebElement Step2Tab;
 	
 	//Form Elements
-	@FindBy(xpath = "//input[contains(@class, 'dob') and contains(@id, 'form-dob') and contains(@name, 'dob')]")
+	@FindBy(xpath = "//input[contains(@class, 'dob')]")
 	private WebElement DateOfBirthTxt;
 	
 	@FindBy(xpath = "//a[contains(@class, 'dob-modal-trigger') and contains(@id, 'form-dob-modal-trigger') and contains(@name, 'dob-modal-trigger')]")
@@ -302,8 +302,8 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		return flag;
 	}
 	
-	public void enterUserInfoStep2(Map<String, String> memberAttributesMap) {
-		String DOB = memberAttributesMap.get("dob");
+	public void enterUserInfoStep2(Map<String, String> memberAttributesMap) throws InterruptedException {
+		String DOB = memberAttributesMap.get("DOB");
 		String partBmonth = memberAttributesMap.get("partBmonth");
 		String partByear = memberAttributesMap.get("partByear");
 		String aarpNo = memberAttributesMap.get("aarpNo");
@@ -311,6 +311,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		String mobileFlag = memberAttributesMap.get("mobileFlag");
 
 		//DateOfBirthTxt.clear();
+		Thread.sleep(2000);
        validateNew(DateOfBirthTxt);
 		
 		if(validateNew(DateOfBirthTxt)&& DateOfBirthTxt.isDisplayed())

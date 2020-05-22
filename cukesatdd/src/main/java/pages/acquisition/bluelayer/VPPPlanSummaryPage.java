@@ -36,6 +36,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -493,7 +494,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
 
-		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
+		@FindBy(xpath = "//select[@id='msVppdpsd']//option[3]")
 		private WebElement startDrpDwnOption;
 		
 		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
@@ -952,7 +953,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
                            maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
-            			driver.navigate().refresh();
+            			//driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
                             sleepBySec(2);
                             msPlansViewLink.click();
@@ -3286,21 +3287,18 @@ public void closeOriginalTabAndOpenNewTab() {
 }
 //^^^ note: added for US1598162	
 
-public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
-	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+	
+	validateNew(DOB,30);
 	System.out.println("MedSup page form is displayed");
-	medSupZipcode.sendKeys(zipcode);
-	Thread.sleep(2000);
-	validateNew(DOB);
-	DOB.click();
-	Thread.sleep(2000);
+	jsClickNew(DOB);
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
+	Thread.sleep(2000);
 	jsClickNew(MaleGender);
 	Thread.sleep(2000);
-	jsClickNew(monthDrpDwn_PartA);
-	validateNew(monthDrpDwnOption);
+	monthDrpDwn_PartA.click();
+	Thread.sleep(2000);
 	monthDrpDwnOption.click();
 	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
@@ -3316,15 +3314,15 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	yearBDrpDwn.click();
 	Thread.sleep(2000);
 	yearBDrpDwnOption.click();
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	startDrpDwn.click();
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	startDrpDwnOption.click();
-	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
+	Thread.sleep(4000);
 	ViewPlanMedSupPage.click();
-	
 }
+
 
 public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
 	checkModelPopup(driver,25);
@@ -3456,6 +3454,20 @@ catch (Exception e) {
 	Assert.assertFalse("Application has not been retrived successfully", false);
 }
 }
+//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
+	//a[contains(@class, 'EBRC')]
+	
+	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	private WebElement DecisionGuideLink;
+	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
+		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
+		DecisionGuideLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("medicare-information.html"))
+			return new IsDecisionGuideStep1(driver);
+		else
+			return null;
+	}
 
 	/**
 	 * Validate Create Profile Prompt

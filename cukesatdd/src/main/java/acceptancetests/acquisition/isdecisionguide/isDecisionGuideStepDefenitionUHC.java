@@ -32,13 +32,12 @@ import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -83,8 +82,11 @@ public class isDecisionGuideStepDefenitionUHC    {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String dateOfBirth= memberAttributesMap.get("DOB");
+		//String zipcode= memberAttributesMap.get("zipcode");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.MedSupFormValidation(dateOfBirth,zipcode);
 		plansummaryPage.MedSupFormValidation(dateOfBirth);
+		
 	}
 	 
 	
@@ -233,8 +235,8 @@ public class isDecisionGuideStepDefenitionUHC    {
 
 	}
 
-	@Then("^the user validates Thank You Page on UMS site $")
-	public void the_user_validates_Thank_You_Pageon_UMS_site() throws Throwable {
+	@Then("^the user validates Thank You Page on UMS site$")
+	public void the_user_validates_Thank_You_Page_on_UMS_site() throws Throwable {
 		
 	}
 
