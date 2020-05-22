@@ -171,7 +171,7 @@ Feature: MVP - Current Medications
     Then user views the Medicine Cabinet
     When user views a home delivery drug order
     And user views a status of Request received
-    Then user views 1/4 Harvey Ball on that medication's row
+    Then user views one fourth Harvey Ball on that medication's row
     Examples:
       | FID     | planType | memberType             |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
@@ -188,7 +188,7 @@ Feature: MVP - Current Medications
     Then user views the Medicine Cabinet
     When user views a home delivery drug order
     And user views a status of Processing
-    Then user views  a 1/2 Harvey Ball on that medication's row
+    Then user views  a half Harvey Ball on that medication's row
     Examples:
       | FID     | planType | memberType             |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |

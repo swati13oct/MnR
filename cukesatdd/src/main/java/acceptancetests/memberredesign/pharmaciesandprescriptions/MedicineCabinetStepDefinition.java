@@ -311,13 +311,14 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views (\\d+)/(\\d+) Harvey Ball on that medication's row$")
-	public void user_views_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
+	@Then("^user views one fourth Harvey Ball on that medication's row$")
+	public void user_views_one_fourth_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateHalfHarveyBall();
+		pnpPg.validateDeliveredOrderStatusForHDDrug("Request received","25");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
@@ -331,14 +332,13 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views  a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
-	public void user_views_a_Harvey_Ball_on_that_medication_s_row(int arg1, int arg2) throws Throwable {
+	@Then("^user views  a half Harvey Ball on that medication's row$")
+	public void user_views_a_half_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateThreeFourthHarveyBall();
+		pnpPg.validateDeliveredOrderStatusForHDDrug("Processing","50");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@When("^user views a status of Shipped$")

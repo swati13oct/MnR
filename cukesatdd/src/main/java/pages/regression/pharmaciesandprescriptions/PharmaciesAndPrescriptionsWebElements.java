@@ -374,7 +374,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    protected WebElement HalfHarveyBall;
 
 	    @FindBy(xpath="")
-		protected WebElement ThreeFourthHarveyBall;
+		protected WebElement oneFourthHarveyBall;
 
     	@FindBy(xpath="//span[contains(text(),'Refill')]")
     	protected WebElement RefillMedications;

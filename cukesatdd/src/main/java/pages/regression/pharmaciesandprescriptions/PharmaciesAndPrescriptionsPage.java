@@ -680,7 +680,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> sixMedications = SixMedications;
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				pnpValidate(sixMedications.get(5)));
+				sixMedications.size()==6);
 	}
 
 	public void validateAssociatedCallToAction() {
@@ -694,7 +694,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateNumberInParenthesis() {
 
 		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
-				pnpValidateAlphaNumeric(NumberInParenthesis, 3));
+				NumberInParenthesis.getText().matches("[a-zA-Z0-9]+"));
 	}
 
 	public void validateCorrespondingNumberInParenthesis() {
@@ -816,7 +816,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> optumRx = OptumRx;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(optumRx.get(0)));
+				optumRx.size()>0);
 	}
 
 	public void validateProcessing() {
@@ -858,9 +858,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(HalfHarveyBall));
 	}
 
-	public void validateThreeFourthHarveyBall() {
+	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
-				pnpValidate(ThreeFourthHarveyBall));
+				pnpValidate(oneFourthHarveyBall));
 	}
 
 	public void validateRefillMedications() {
