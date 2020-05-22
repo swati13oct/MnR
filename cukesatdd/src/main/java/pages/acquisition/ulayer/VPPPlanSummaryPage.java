@@ -810,6 +810,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public void clickContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
 		nextBestActionModalContinueEnrollmentBtn.click();
 	}
 	
@@ -3534,7 +3535,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
 				Thread.sleep(5000);
 				for (String plan: listOfTestPlans) {
-					WebElement savePlan = driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
+					WebElement savePlan = driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
 					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 					((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				}

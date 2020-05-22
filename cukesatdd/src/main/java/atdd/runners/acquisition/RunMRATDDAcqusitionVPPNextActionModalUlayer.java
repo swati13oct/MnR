@@ -15,6 +15,7 @@ import cucumber.api.CucumberOptions;
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalUlayer.json" }, tags = { "@vppNextActionModalUlayer" })
-public class RunMRATDDAcqusitionVPPNextActionModalUlayer { 
- //vppNextActionModalRegressionMAPDAddDrug
+
+public class RunMRATDDAcqusitionVPPNextActionModalUlayer {
+
 }
