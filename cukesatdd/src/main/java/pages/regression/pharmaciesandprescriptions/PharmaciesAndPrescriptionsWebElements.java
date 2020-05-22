@@ -391,121 +391,42 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 //************************Added By Naresh***********************************************************
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//a[@data-testid='medication-data-name']")
      	protected List<WebElement> listOfDrugName;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//img[@class='sc-LzLtg ebebwo']")
      	protected List<WebElement> listOfDrugImage;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-refills-left']")
      	protected List<WebElement> listOfMedicineStrength;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-refills-left']")
      	protected List<WebElement> listOfRefillsLeft;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-day-supply']")
      	protected List<WebElement> listOfDaysSupply;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-you-paid']")
      	protected List<WebElement> listOfYouPaid;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@class='sc-LzLuB inbXFg']")
      	protected List<WebElement> listOfPharmacyName;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//span[@data-testid='medication-data-order-status']")
      	protected List<WebElement> listOfOrderStatus;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]//button")
      	protected List<WebElement> listOfCallToActionOnMedication;
      	
      	@FindBy(xpath="")
      	protected WebElement contactPharmacyNumber;
      	
+     	@FindBy(xpath="//div[@data-testid='medication-status-percent-0']")
+     	protected List<WebElement> listOfHarveyBall;
      	
      	
      	
-     	public List<String> getDrugNameListValue(){
-     		List<String> listOfDrug=new ArrayList<>();
-     		for(WebElement ele:listOfDrugName) {
-     			listOfDrug.add(ele.getText());
-     		}
-     		return listOfDrug;
-     	}
-     	
-     	public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
-     		for(WebElement ele:listOfWebElement) {
-     			if(ele.getText().isEmpty()) {
-     				return false;
-     			}
-     		}
-     		return true; 
-     	}
-     	
-     	public boolean validateMedicineStrengthFieldValue() {
-     		for(WebElement ele:listOfMedicineStrength) {
-     			if(ele.getText().isEmpty()) {
-     				return false;
-     			}
-     		}
-     		return true; 
-     	}
-     	
-     	public List<Integer> getListOfIndexForRetailPharmacy() {
-     		List<Integer> listOfIndex = new ArrayList<>();
-     		for(int i=0; i<listOfPharmacyName.size();i++) {
-     			if(!listOfPharmacyName.get(i).getText().equals("OptumRx")) {
-     				listOfIndex.add(i);
-     			}
-     		}
-     		return listOfIndex;
-     	}
-     	
-     	public List<Integer> getListOfIndexForHDPharmacy() {
-     		List<Integer> listOfIndex = new ArrayList<>();
-     		for(int i=0; i<listOfPharmacyName.size();i++) {
-     			if(listOfPharmacyName.get(i).getText().equals("OptumRx")) {
-     				listOfIndex.add(i);
-     			}
-     		}
-     		return listOfIndex;
-     	}
-     	
-     	List<String> listOfCallToActionForHDMedicine;
-     	
-     	public boolean validateCallToActionsForHDDrug() {
-     		List<Integer> listOfIndex=getListOfIndexForHDPharmacy();
-     		for(Integer val:listOfIndex) {
-     		if(!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedication.get(val).getText())){
-     			return false;
-     		}
-     		}
-     		return true;
-     	}
-     	
-     	public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonValue) {
-     		List<Integer> listOfIndex=getListOfIndexForRetailPharmacy();
-     		for(Integer val:listOfIndex) {
-         		if(!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue) && listOfCallToActionOnMedication.get(val).getTagName().equals("button"))){
-         			return false;
-         		}
-         		}
-         		return true;
-     	}
-     	
-     	public void clickOnContactPharmacy() {
-     		List<Integer> listOfIndex=getListOfIndexForRetailPharmacy();
-     		Random rand = new Random();
-     		int rand_int = rand.nextInt(listOfIndex.size());
-     		listOfCallToActionOnMedication.get(listOfIndex.get(rand_int));
-     	}
-     	
-     	//Need to add the Regex for Number 
-     	public boolean validateContactPharmacyPopUpHavingNumber() {
-     		String contactNumber=contactPharmacyNumber.getText();
-     		return !contactNumber.isEmpty() && contactNumber.matches("");
-     	}
-     	
-     	
+     	     	
      	
      	
      	
