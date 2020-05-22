@@ -367,8 +367,23 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    @FindBy(xpath="//span[contains(text(),'OptumRx')]")
 	    protected List<WebElement> OptumRx;
 
-	   @FindBy(xpath="//span[contains(text(),'OptumRx')]")
-	   protected List<WebElement> Processing;
+	    @FindBy(xpath="//span[contains(text(),'OptumRx')]")
+	    protected List<WebElement> Processing;
+
+	    @FindBy(xpath="(//div[@class='sc-LzLtT hBUvHG'])[last()]")
+	    protected WebElement HalfHarveyBall;
+
+	    @FindBy(xpath="")
+		protected WebElement ThreeFourthHarveyBall;
+
+    	@FindBy(xpath="//span[contains(text(),'Refill')]")
+    	protected WebElement RefillMedications;
+
+	    @FindBy(xpath="//span[contains(text(),'Renew')]")
+	    protected WebElement RenewMedications;
+
+
+
 
 
 
@@ -376,39 +391,39 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 //************************Added By Naresh***********************************************************
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//a[@data-testid='medication-data-name']")
      	protected List<WebElement> listOfDrugName;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//img[@class='sc-LzLtg ebebwo']")
      	protected List<WebElement> listOfDrugImage;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-refills-left']")
      	protected List<WebElement> listOfMedicineStrength;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-refills-left']")
      	protected List<WebElement> listOfRefillsLeft;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-day-supply']")
      	protected List<WebElement> listOfDaysSupply;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@data-testid='medication-data-you-paid']")
      	protected List<WebElement> listOfYouPaid;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//div[@class='sc-LzLuB inbXFg']")
      	protected List<WebElement> listOfPharmacyName;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//span[@data-testid='medication-data-order-status']")
      	protected List<WebElement> listOfOrderStatus;
      	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]//button")
      	protected List<WebElement> listOfCallToActionOnMedication;
      	
      	@FindBy(xpath="")
      	protected WebElement contactPharmacyNumber;
      	
-     	
-     	
-     	
+     	@FindBy(xpath="//div[@data-testid='medication-status-percent-0']")
+     	protected List<WebElement> listOfHarveyBall;
+   
      	public List<String> getDrugNameListValue(){
      		List<String> listOfDrug=new ArrayList<>();
      		for(WebElement ele:listOfDrugName) {
@@ -500,23 +515,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK sc-LzLPX eA-DpTF']")
      	protected WebElement MedicationName_OnDrugInfoPage;
-     	
-     	
-     	
-     	
-     	
-     	
-     	
-     	
-     	
-    
-
-
-
-
-
-
-
 
 
 }
