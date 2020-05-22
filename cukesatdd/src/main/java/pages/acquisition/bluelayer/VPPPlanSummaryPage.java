@@ -3996,7 +3996,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 *         Action Modal
 	 */
 	public DrugCostEstimatorPage clickNextBestActionModalGetStartedBtn() {
-		waitTillElementClickableInTime(nextBestActionModalGetStartedBtn,15);
+		waitTillElementClickableInTime(nextBestActionModalGetStartedBtn,20);
 		nextBestActionModalGetStartedBtn.click();
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
@@ -4017,8 +4017,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
-	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
-		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn,15);
+	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() throws InterruptedException {
+		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn,20);
 		nextBestActionModalFindMyDoctorsBtn.click();
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
@@ -4030,6 +4030,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 				break;
 		}
+		Thread.sleep(5000);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
 		}
@@ -4049,7 +4050,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickContinueEnrollmentBtn() {
-		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,20);
 		nextBestActionModalContinueEnrollmentBtn.click();
 	}
 
@@ -4063,6 +4064,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				WebElement savePlan = driver.findElement(By.xpath("(//*[contains(text(),'"+plan+"')]/..//following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')])[1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				Thread.sleep(5000);
 			}
 			if (createProfilePopup.isDisplayed()) {
 				closeProfilePopup.click();
