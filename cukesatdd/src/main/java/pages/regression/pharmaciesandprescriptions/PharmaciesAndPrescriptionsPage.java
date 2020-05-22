@@ -36,6 +36,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	@Override
 	public void openAndValidate() { 
 	}
+	
+	private static String activeMedicineName;
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
@@ -804,15 +806,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void clickOnMedicationName() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
-				pnpValidate(MedicationName));
-		MedicationName.click();
+				pnpValidate(FirstCurrentMedication));
+		FirstCurrentMedication.click();
 
 	}
 
 	public void validateDrugDetailOverview() {
-		Assert.assertTrue("PROBLEM - unable to locate Drug Detail overview  elements",
-
-				pnpValidate(Overview));
+		String currentURL = driver.getCurrentUrl();
+		boolean flag = true;
+		if(currentURL.contains("overview.html#/medication-information")) {
+			Assert.assertTrue("SUCCESS - User redirected to medication information overview page",
+					flag);
+		}else {
+		Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page",
+				flag);
+		}
 	}
 
 	public void validateViewAllMedicationsLink() {
@@ -844,6 +852,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(processing.get(0)));
 	}
 
+	//F392596 Meidine Cabinet
+	public String clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
+		Assert.assertTrue("PROBLEM - unable to locate Learn More Button element",
+				pnpValidate(LearnMoreBtn_CurrentMedication));
+		activeMedicineName = FirstCurrentMedication.getText();// this will get Text of first active medication
+		LearnMoreBtn_CurrentMedication.click();
+		return activeMedicineName;
+	}
+
+	//F392596 Meidine Cabinet
+	public void validateDrugInfopage() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+				pnpValidate(MedicationName_OnDrugInfoPage));
+		boolean flag = true;
+		
+		if(activeMedicineName.contains(MedicationName_OnDrugInfoPage.getText())){
+			Assert.assertTrue("SUCCESS - User is redirected to expected active drug info page.",flag);
+		}else
+		{
+			flag = false;
+			Assert.assertTrue("PROBLEM -  User is NOT redirected to expected active drug info page.",
+					flag);
+		}	
+		
+	}
 
 
 

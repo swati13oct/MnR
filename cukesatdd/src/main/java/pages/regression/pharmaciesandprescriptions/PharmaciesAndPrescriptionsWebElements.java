@@ -294,7 +294,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		protected WebElement OptumRxMedicineCabinetHeader;
 
 	   //Medicine Cabinet
-	    @FindBy(xpath="//div[contains(text(),'CurrentMedications')]")
+	    @FindBy(xpath="//div[contains(text(),'Current Medications')]")
 	    protected WebElement CurrentMedicationsHeader;
 
 	    @FindBy(xpath="//div[@class='sc-LzLtN ijGRvz']")
@@ -489,6 +489,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      		String contactNumber=contactPharmacyNumber.getText();
      		return !contactNumber.isEmpty() && contactNumber.matches("");
      	}
+     	
+     	
+    // ********************* Kiran ************************	
+     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]")
+     	protected WebElement LearnMoreBtn_CurrentMedication;
+     	
+     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]//parent::a//parent::div//parent::div//parent::div/preceding-sibling::div//a[@data-testid='medication-data-name']")
+     	protected WebElement FirstCurrentMedication;
+     	
+     	@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK sc-LzLPX eA-DpTF']")
+     	protected WebElement MedicationName_OnDrugInfoPage;
+     	
      	
      	
      	

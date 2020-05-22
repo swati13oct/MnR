@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MedicineCabinetStepDefinition {
-
+	private static String activeMedicineName;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -44,7 +44,24 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-
+	
+	@When("^user clicks on the Learn More button on one of my active prescriptions listed under Current Medications$")
+	public void user_clicks_on_the_Learn_More_button_on_one_of_my_active_prescriptions_listed_under_Current_Medications() throws Throwable{
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		activeMedicineName = pnpPg.clickOnLearnMoreButtonDisplayedOnCurrentMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		
+	}
+	
+	@Then("^validate user redirects to the Drug Info page for that prescription/medication in the same browser tab$")
+	public void validate_user_redirects_to_the_Drug_Info_page_for_that_prescription_medication_in_the_same_browser_tab() throws Throwable{
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDrugInfopage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);		
+	}
+	
 	@Then("^user validates first six of his active prescriptions$")
 	public void user_validates_first_six_of_his_active_prescriptions() throws Throwable {
 
@@ -272,8 +289,8 @@ public class MedicineCabinetStepDefinition {
 
 	
 
-	@When("^user clicks medication name of one of his active prescriptions listed on the Medicine cabinet$")
-	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Medicine_cabinet() throws Throwable {
+	@When("^user clicks medication name of one of his active prescriptions listed on the Current Medications$")
+	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Current_Medications() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -283,8 +300,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user validates the Drug Detail overview page for that prescription/medication in the same browser tab$")
-	public void user_validates_the_Drug_Detail_overview_page_for_that_prescription_medication_in_the_same_browser_tab() throws Throwable {
+	@Then("^user validates the Drug Info overview page for that prescription/medication in the same browser tab$")
+	public void user_validates_the_Drug_Info_overview_page_for_that_prescription_medication_in_the_same_browser_tab() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -339,7 +356,6 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user views a status of Request received$")
 	public void user_views_a_status_of_Request_received() throws Throwable {
-
 
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
