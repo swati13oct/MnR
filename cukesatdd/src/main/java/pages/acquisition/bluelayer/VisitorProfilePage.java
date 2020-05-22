@@ -71,6 +71,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 	
+	@FindBy(css="div.print-back>a:first-child")
+	private WebElement backToPlans;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -136,7 +139,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
-			Thread.sleep(20000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
 			}
@@ -157,8 +160,6 @@ public class VisitorProfilePage extends UhcDriver {
 				planYearBtn2020.click();
 		}else
 			System.out.println("No plan buttons were present");
-
-		
 	}
 	
 	/**
@@ -272,5 +273,21 @@ public class VisitorProfilePage extends UhcDriver {
 			drug.findElement(By.xpath("//button")).click();
 		}*/
 		Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+	}
+	
+	/**
+	 * Back to VPP
+	 */
+	public VPPPlanSummaryPage backToPlans() {
+		try {
+			backToPlans.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
+			return new VPPPlanSummaryPage(driver);
+			}
+		}catch (Exception e) {
+		e.printStackTrace();
+		}
+		return null;
 	}
 }

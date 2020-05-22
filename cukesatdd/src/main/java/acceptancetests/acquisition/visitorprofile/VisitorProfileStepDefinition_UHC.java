@@ -263,6 +263,17 @@ public class VisitorProfileStepDefinition_UHC {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deleteAllProviders();
 	}
+	
+	@And("^the user back to VPP plan summary page in ums$")
+	public void the_user_back_to_VPP_plan_summary_page_in_ums() {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
 } 
 
 
