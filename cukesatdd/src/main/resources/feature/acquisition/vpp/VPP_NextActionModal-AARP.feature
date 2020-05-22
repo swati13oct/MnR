@@ -1,9 +1,9 @@
 
-@vppNextActionModalUlayer @445017
+  @vppNextActionModalUlayer @445017
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
 #**************************************************************MAPD*************************************************************************
-  @vppNextActionModalRegression_1
+  @vppNBARegression_1
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -18,7 +18,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county         | plantype |
       |   19019 | No              | Iowa County    | MAPD     | 
     
-    @vppNextActionModalRegressionMAPDAddDrug
+    @vppNBARegressionMAPDAddDrug
     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when Drug cost exists
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -44,11 +44,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-   And I navigate to step3 page and validate
+    And I navigate to step3 page and validate
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
     Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    Then user clicks on Find My Doctor button in AARP Site
+    When user clicks on Find My Doctor button in AARP Site
     And user should be redirected to Provider search Rally page in AARP site
     
     Examples: 
@@ -85,7 +85,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
     #Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    Then user clicks on Find My Doctor button in AARP Site
+    When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
       
@@ -125,7 +125,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And the user clicks on return link to navigate to plan summary
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype1> |
-    Then user verify NBA modal to add providers on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
       
     Examples:
     | zipcode | isMultutiCounty | county         | plantype   |plantype1|drug    | dosage   | quantity | frequency     | branded |planName| radius   |
@@ -189,7 +189,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   10001 | NO              | New York County    | MAPD        | AARP Medicare Advantage Plan 2 (HMO)           |
       
-      @vppNBASavedMAPD
+      @vppNBASavedMAPDPlan
       Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -201,7 +201,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Plan Type | <plantype> |
     Then user saves plan as favorite on AARP site
       | Plan Type  | <testPlans>  |
-    Then user Verify and click perform on Next Best Action Modal for Get Started
+   Then user Verify and click perform on Next Best Action Modal for Get Started
     And I have added a drug to my drug list from VPP
       | Drug | <drug> |
     And user selects drug details
@@ -221,7 +221,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
     #Then user verify NBA modal to add providers on the VPP summary page in AARP site
-    Then user clicks on Find My Doctor button in AARP Site
+    When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
@@ -229,13 +229,13 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Test Plans   | <testPlans> |
      
       Examples: 
-      | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |radius  |testPlans|
-      |  19019 | No               | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles|AARP Medicare Advantage Choice Plan 2 (PPO)|
+      | zipcode | isMultutiCounty | county               | plantype | drug    | dosage   | quantity | frequency     | branded |radius  |testPlans|
+      |  19019 | No               | Iowa County      | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles    |AARP Medicare Advantage Choice Plan 1 (PPO)|
       
       
-      @vppUnsavedEnrollMAPD
+      @vppUnsavedEnrollMAPDPlan
       
-      Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and no plans are saved
+    Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and no plans are saved
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -264,7 +264,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
     #Then user verify NBA modal to add providers on the VPP summary page in AARP site
-    Then user clicks on Find My Doctor button in AARP Site
+    When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
@@ -389,14 +389,14 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-   Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site  ------------- 
+   Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site 
     
     Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | PDP      | 15 miles |
       
      
-      @vppSavedPDPAndEnrollNBA
+      @vppSavedPDPEnrollNBA
       Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -409,7 +409,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user saves plan as favorite on AARP site
       | Plan Type  | <testPlans>  |
      Then user Verify and click perform on Next Best Action Modal for Get Started
-     And I have added a drug to my drug list from VPP
+    And I have added a drug to my drug list from VPP
       | Drug | <drug> |
     And user selects drug details
       | Drug      | <drug>      |

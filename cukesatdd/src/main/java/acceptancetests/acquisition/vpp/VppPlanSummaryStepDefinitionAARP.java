@@ -135,7 +135,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	}
 
 	@Then("^user saves plan as favorite on AARP site$")
-	public void user_saves_plan_as_favorite_on_UMS_site(DataTable givenAttributes) {
+	public void user_saves_plan_as_favorite_on_aarp_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
