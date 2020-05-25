@@ -1,10 +1,14 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.itextpdf.text.log.SysoCounter;
+
 import atdd.framework.UhcDriver;
 
 import java.util.ArrayList;
@@ -15,6 +19,7 @@ import java.util.Random;
  * Functionality : WebElements for Pharmacies & Prescriptions page
  */
 public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
+	
 	//note: need help section
 	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
 	protected WebElement needHelp_SectionHeader;
@@ -288,6 +293,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		protected WebElement OptumRxDrugPricePageHeader;
 		
 		@FindBy(xpath="")
+		protected WebElement OptumRxLandingPageHeader;
+		
+		@FindBy(xpath="")
 		protected WebElement PharmacyLocatorToolHeader;
 		
 		@FindBy(xpath="")
@@ -393,7 +401,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	@FindBy(xpath="//a[@data-testid='medication-data-name']")
      	protected List<WebElement> listOfDrugName;
-     	
+     	   	
      	@FindBy(xpath="//img[@class='sc-LzLtg ebebwo']")
      	protected List<WebElement> listOfDrugImage;
      	
@@ -507,14 +515,63 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	
     // ********************* Kiran ************************	
-     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]")
-     	protected WebElement LearnMoreBtn_CurrentMedication;
-     	
-     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]//parent::a//parent::div//parent::div//parent::div/preceding-sibling::div//a[@data-testid='medication-data-name']")
-     	protected WebElement FirstCurrentMedication;
-     	
-     	@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK sc-LzLPX eA-DpTF']")
+     	@FindBy(xpath="")
      	protected WebElement MedicationName_OnDrugInfoPage;
+     	
+     	@FindBy(xpath="//span[text()='LEARN MORE']/parent::button")
+     	protected List<WebElement> listOfLearnMore;// need to update by Kiran
+     	
+     	@FindBy(xpath="")
+     	protected List<WebElement> listOfHDMedication;// need to update by Kiran
+     	
+     	List<Integer> listOfIndex = new ArrayList<>();
+     	Random rand = new Random();
+     	int rand_int;
+     	private static String DrugName;
+     	private static String DrugNameLearnMore;
+     	
+     	public String  getDrugName() {
+     		return DrugName;
+     	}
+     	
+     	public String  getDrugNameLearnMore() {
+     		return DrugNameLearnMore;
+     	}	
+     	
+     	public List<Integer> getListOfIndexForDrugName() {
+     		//List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfDrugName.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+     	}
+     	
+     	
+     	public void  clickOnActiveMedicationDisplayedOnCurrentMedications() {
+     		rand_int = rand.nextInt(listOfIndex.size());
+     		listOfDrugName.get(listOfIndex.get(rand_int)).click();
+     		DrugName = listOfDrugName.get(listOfIndex.get(rand_int)).getText();
+     		System.out.println("Clicked on Active Medication :: " + DrugName);
+       	}     	
+     	
+     	public List<Integer> getListOfIndexForLearnMore() {
+     		for(int i=0; i<listOfLearnMore.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+     	}
+     	
+    	public void clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
+    		int rand_int = rand.nextInt(listOfIndex.size());
+     		listOfLearnMore.get(listOfIndex.get(rand_int)).click();
+     		//need to find the drug name 
+     		//DrugNameLearnMore = listOfLearnMore.get(listOfIndex.get(rand_int));
+     	}
+    	
+    	public void clickRefillMedicationsCTA() {
+    		//pnpValidate(RefillMedications);
+    		RefillMedications.click();
+    	}
 
 
 }
