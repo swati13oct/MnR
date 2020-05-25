@@ -31,10 +31,10 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
       | SNP Options | <SpecialNeeds> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds      |
-      |   10001 | NO            | New York | MA            | Condition         |
-      |   10002 | NO            | New York | PDP           | Medicaid,Facility |
-      |   10003 | NO            | New York | MA            | None              |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds     |
+      |   10001 | NO            | New York | MAPD          | Chronic          |
+      |   10002 | NO            | New York | None          | Medicaid,Nursing |
+      |   10003 | NO            | New York | MA            | None             |
 
   @PRE @planrecommandonationmobile @specialneedspagemobile @snperrorvalidationmobile @F372729
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Status:<status> - To validate special needs page error validation using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile
@@ -50,6 +50,6 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
       | SNP Options | <SpecialNeeds> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds   |
-      |   10001 | NO            | New York | MA            |                |
-      |   10002 | NO            | New York | MA            | Condition,None |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds |
+      |   10001 | NO            | New York | MA            |              |
+      |   10002 | NO            | New York | None          | Chronic,None |

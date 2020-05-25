@@ -1,5 +1,9 @@
 package acceptancetests.mobile.acquisition.planrecommendationengine;
 
+/**
+ * @author Murali - mmurugas
+ */
+
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 
@@ -18,10 +22,13 @@ import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -44,6 +51,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	AppiumDriver wd;
 	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
+	public static String PREflow="";
 
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
@@ -69,6 +77,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigates to Zip Code page mobile$")
 	public void user_navigates_to_zipcode_page_mobile() {
+		HeaderFooterMobile header = new HeaderFooterMobile(wd);
+		header.navigatePRELandingpageMobile();
 		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
 		prelandingpage.navigatezipcodepagemobile();
 	}
@@ -105,7 +115,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
 		preheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
 		preheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
-		preheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
+		//preheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
 	}
 
 	@Then("^user validate Footer Functionality of Plan Recommendation Engine mobile$")
@@ -298,7 +308,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.drugsInitiate(inputValues.get("Drug Selection"));
-		drugpage.continueNextpage();
+		drugpage.continueNextpageZeroDrug();
 	}
 	
 	@Then("^user search and not found a drug in Drug page mobile$")
@@ -332,9 +342,10 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 	
 	@Then("^user validate elements in additional services page mobile$")
-   	public void elements_additional_page() {
+   	public void elements_additional_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
    		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
-   		additionalpage.additionalpage();
+   		additionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
 	@Then("^user selects additional services option in additional services page mobile$")
@@ -370,11 +381,219 @@ public class PlanRecommendationStepDefinitionMobile {
    		costpage.costPreferencepageerror();
    	}
 	
+	@Then("^user validate elements in loading page mobile$")
+   	public void elements_loading_page() {
+		LoadingMobilePage loadingpage =  new LoadingMobilePage(wd);
+		loadingpage.loadingresultspage();
+   	}
+	
+	@Then("^user validate recommendations in results page mobile$")
+   	public void view_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String r2 = inputValues.get("2nd Recommendation");
+		resultpage.resultsUI(zip,county,r1,r2,false);
+   	}
+	
+	@Then("^user validate tie recommendations in results page mobile$")
+   	public void view_tie_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String r2 = inputValues.get("2nd Recommendation");
+		resultpage.resultsUI(zip,county,r1,r2,true);
+   	}
+	
+	@Given("^user navigates to vpp summary page mobile$")
+   	public void navigate_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.navigateVPP(inputValues);
+   	}
+	
+	@Then("^user adds Doctors in vpp summary page mobile$")
+   	public void add_providers_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.addProviderVPP(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
+   	}
+	
+	@Then("^user navigate Doctors lookup session in Doctors page mobile$")
+	public void navigate_doctors_lookup_session() {
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		doctorpage.navigateDoctorsmodalsession();
+	}
+	
+	@When("^user navigates to Zip Code page from vpp mobile$")
+	public void user_navigates_to_zipcode_page_fromvpp_mobile() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.navigatePRE();
+		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+		prelandingpage.navigatezipcodepagemobile();
+	}
+	
+	@And("^user verifies doctors session in Doctors page mobile$")
+   	public void verify_doctors_session_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String multiDoctor = inputValues.get("Multi Doctor");
+		resultpage.getProvidersPRE(multiDoctor);
+		resultpage.verifyProvidersSession(multiDoctor);
+   	}
+	
+	@Then("^user adds Providers in Doctors page mobile$")
+	public void add_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		doctorpage.addProvidersPRE(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
+	}
+	
+	@And("^user verifies doctors session in VPP page mobile$")
+   	public void verify_doctors_session_vpp_page() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.verifyProviderPREVPP();
+   	}
+	
+	@Then("^user adds drugs in Drug page mobile$")
+	public void add_drugsPRE_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DrugMobilePage drugpage = new DrugMobilePage(wd);
+		drugpage.addDrugsPRE(inputValues.get("Drug Details"));
+		drugpage.getDrugsdetails();
+		drugpage.continueNextpage();
+	}
+	
+	@And("^user verifies drugs session in VPP page mobile$")
+   	public void verify_drugs_session_vpp_page() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.verifyDrugPREVPP();
+   	}
+	
+	@Then("^user edits Doctors in Doctors page mobile$")
+	public void edit_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		doctorpage.editProvider(inputValues.get("Doctors Search Text1"), inputValues.get("Multi Doctor1"),
+				inputValues.get("Doctors Search Text2"), inputValues.get("Multi Doctor2"));
+	}
+	
+	@When("^user navigates to Zip Code page from vpp plans mobile$")
+	public void user_navigates_to_zipcode_page_fromvpp_pdp_mobile() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.navigateVPPPRE();
+		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+		prelandingpage.navigatezipcodepagemobile();
+	}
+	
+	@And("^user validte zip info in location page mobile$")
+	public void user_validates_zipcodepage_mobile(DataTable inputdata) {
+		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
+		readfeaturedata(inputdata);
+		prezipcodemobile.zipcodeInfoValidationmobile(inputValues);
+	}
+	
+	@When("^user navigates to Zip Code page from vpp plans using startover mobile$")
+	public void user_navigates_to_zipcode_page_fromvpp_pdp_startover_mobile() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.navigateVPPPREStartover();
+		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+		prelandingpage.navigatezipcodepagemobile();
+	}
+	
+	@And("^user verifies existing PRE provider session using startover mobile$")
+   	public void verify_exisitng_pre_doctors_session_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage docpage =  new DoctorsMobilePage(wd);
+		String multiDoctor = inputValues.get("Multi Doctor");
+		docpage.verifyExisitngPREDoclist(multiDoctor);
+		docpage.nextPageValidationDoctor();
+   	}
+	
+	@And("^user verifies exisitng PRE drug session using startover mobile$")
+   	public void verify_exisitng_pre_drugs_session_drug_page() {
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.verifyExisitngPREDruglist();
+		drugpage.continueNextpage();
+   	}
+
+	@Then("^user validte error function in drug option selection page mobile$")
+	public void drugs_option_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DrugMobilePage drugpage = new DrugMobilePage(wd);
+		drugpage.chooseOption(inputValues.get("Drug Selection"));
+	}
+	
+	@Then("^user validate recommendation rankings in results page mobile$")
+   	public void verify_rankings_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String recom = inputValues.get("Recommendation");
+		String plansorder = inputValues.get("Ranking plans Order");
+		resultpage.validateRankingPlans(recom,plansorder);
+   	}
+	
+	@Then("^verify continue function on \"([^\"]*)\" page mobile$")
+   	public void proceed_next_page(String page) {
+		CommonutilitiesMobile mobiletutli =  new CommonutilitiesMobile(wd);
+		mobiletutli.continueNextpage(page.trim().toUpperCase(),false);
+   	}
+	
+	@And("^user verifies existing PRE provider session using startnow mobile$")
+   	public void verify_exisitng_pre_doctors_session_doctors_startnow_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage docpage =  new DoctorsMobilePage(wd);
+		String multiDoctor = inputValues.get("Multi Doctor");
+		docpage.verifyExisitngPREDoclist(multiDoctor);
+		docpage.nextPageNameValidationDoctor();
+   	}
+	
+	@And("^user verifies exisitng PRE drug session using startnow mobile$")
+   	public void verify_exisitng_pre_drugs_session_drug_startnow_page() {
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.verifyExisitngPREDruglist();
+		drugpage.continueNextpageNameDrug();
+   	}
+	
+	@When("^user validate email plan list from vpp mobile$")
+	public void user_sendPlanEmail_fromvpp_pdp_mobile(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		String recom = inputValues.get("Recommendation");
+		String email = inputValues.get("EmailID");
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.sendEmail(recom,email);
+	}
+	
+	@Then("^user selects Doctors in Doctors page and validate next page name mobile$")
+	public void select_doctors_next_page_name(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		String status = "Positive_NextPageName";
+		doctorpage.doctorspage(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
+				inputValues.get("Multi Doctor"), status);
+	}
+	
+	@Then("^user validate UI and API recommendation rankings in results page mobile$")
+   	public void verify_UIAPI_rankings_results_page() {
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.validateUIAPIRecommendations();
+		resultpage.validateUIAPIRankingPlans();
+   	}
+	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
 		for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
+		}
+		String temp = inputValues.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 
