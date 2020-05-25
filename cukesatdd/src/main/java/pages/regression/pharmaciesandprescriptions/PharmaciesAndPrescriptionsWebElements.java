@@ -424,6 +424,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	@FindBy(xpath="//div[@data-testid='medication-status-percent-0']")
      	protected List<WebElement> listOfHarveyBall;
      	
+     	@FindBy(xpath="")
+     	protected List<WebElement> listOfExtrnalLinkOnHold;
+     	
+     	
      	
      	
      	     	

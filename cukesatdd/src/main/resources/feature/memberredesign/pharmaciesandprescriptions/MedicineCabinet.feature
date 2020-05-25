@@ -107,8 +107,8 @@ Feature: MVP - Current Medications
     And user validates a button "Contact Pharmacy" to contact my retail pharmacy
 
     Examples: 
-      | FID     | planType | memberType             | expectLink |
-      | F392596 | MAPD     | AARP_Individual_PnP_rx | yes        |
+      | FID     | planType | memberType             | 
+      | F392596 | MAPD     | AARP_Individual_PnP_rx | 
 
   @MedicineCabinet @F392596 @US2301929
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on medicine cabinet
@@ -508,16 +508,16 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType             |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    And 
-    When one of my active medications has a payment method hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+  #@CurrentMedications @F392596 @US2508869
+  #Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
+    #Given login with following details logins in the uhc rx portal
+      #| Plan Type   | <planType>   |
+      #| Member Type | <memberType> |
+    #When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    #And user have active medications
+    #And one of user active medications has a payment method hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
@@ -526,11 +526,14 @@ Feature: MVP - Current Medications
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on verify address hold
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has an address hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has an address hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
@@ -540,10 +543,11 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has a price adjustment hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has a price adjustment hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
@@ -553,10 +557,11 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has a Call hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has a Call hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
@@ -566,10 +571,11 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has an informational hold on it
-    Then I will NOT see a red "On Hold" indicator 
-    And I will NOT see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has an informational hold on it
+    Then user will NOT see a "Red" "On Hold" indicator
+    And user will NOT see a "Green" "Resolve hold" button on that medication row
 
     Examples: 
       | FID     | planType | memberType             |

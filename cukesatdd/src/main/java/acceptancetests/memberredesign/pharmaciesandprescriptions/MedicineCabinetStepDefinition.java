@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -135,7 +136,8 @@ public class MedicineCabinetStepDefinition {
 	public void user_validates_his_active_prescriptions_displayed_on_the_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateViewAllMedicationsLink();
+		//pnpPg.validateViewAllMedicationsLink();
+		Assert.assertTrue("PROBLEM - user active prescription not displayed on the page ", pnpPg.getDrugNameListValue().size()>0);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -145,7 +147,6 @@ public class MedicineCabinetStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateMedicationName();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates an image of the medication$")
@@ -154,17 +155,14 @@ public class MedicineCabinetStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateImage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates the strength of the medication$")
 	public void user_validates_the_strength_of_the_medication() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateStrength();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates the price I paid for the medication$")
@@ -194,32 +192,26 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user validates the order status if applicable$")
 	public void user_validates_the_order_status_if_applicable() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateOrderStatus();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates any relevant calls to action to manage the medication$")
 	public void user_validates_any_relevant_calls_to_action_to_manage_the_medication() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateRelevantCallToAction();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates information on remaining refills$")
 	public void user_validates_information_on_remaining_refills() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateInfoOnRemainingRefills();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates a button \"([^\"]*)\" to contact my retail pharmacy$")
@@ -233,23 +225,19 @@ public class MedicineCabinetStepDefinition {
 	@When("^user clicks medication name of one of his active prescriptions listed on the Medicine cabinet$")
 	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Medicine_cabinet()
 			throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnMedicationName();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates the Drug Detail overview page for that prescription/medication in the same browser tab$")
 	public void user_validates_the_Drug_Detail_overview_page_for_that_prescription_medication_in_the_same_browser_tab()
 			throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDrugDetailOverview();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@When("^user views a home delivery drug listed in his medicine cabinet$")
@@ -337,7 +325,6 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
 	public void user_views_a_Harvey_Ball_on_that_medication_s_row() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDeliveredOrderStatusForHDDrug("Shipped","75");
@@ -362,7 +349,6 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views active medications$")
 	public void user_views_active_medications() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateActivePrescriptions();
@@ -531,4 +517,92 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validatePhoneNumberOnPopUp();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	static String holdType;
+	@When("^one of user active medications has a Call hold on it$")
+	public void one_of_user_active_medications_has_a_Call_hold_on_it()  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		holdType="Call Hold";
+		pnpPg.validateCallHoldForHDMedication(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@When("^one of user active medications has a price adjustment hold on it$")
+	public void one_of_user_active_medications_has_a_price_adjustment_hold_on_it()  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		holdType="Price Adjustment Hold";
+		pnpPg.validateCallHoldForHDMedication(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@When("^one of user active medications has an address hold on it$")
+	public void one_of_user_active_medications_has_a_address_hold_on_it()  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		holdType="Address Hold";
+		pnpPg.validateCallHoldForHDMedication(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@When("^one of user active medications has a payment method hold on it$")
+	public void one_of_user_active_medications_has_a_payment_method_hold_on_it()  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		holdType="Payment Method Hold";
+		pnpPg.validateCallHoldForHDMedication(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see a \"([^\"]*)\" \"([^\"]*)\" indicator$")
+	public void user_will_see_a_red_indicator(String buttonColor,String buttonValue) {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOnHoldIndicatorForHDDrug(buttonColor,buttonValue,holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see a \"([^\"]*)\" \"([^\"]*)\" button on that medication row$")
+	public void user_will_see_a_green_button_on_that_medication_row(String buttonColor,String buttonValue)  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOnResolveHoldBtnForHDDrug(buttonColor, buttonValue, holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^the button will include the external link icon$")
+	public void the_button_will_include_the_external_link_icon()  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateExternalLnkOnButtonForHDDrug(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^one of user active medications has an informational hold on it$")
+	public void one_of_user_active_medications_has_an_informational_hold_on_it() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		holdType="Informational Hold";
+		pnpPg.validateInformationalHoldForHDMedication(holdType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will NOT see a \"([^\"]*)\" \"([^\"]*)\" indicator$")
+	public void user_will_NOT_see_a_red_indicator(String buttonColor,String buttonValue)  {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		Assert.assertFalse("PROBLEM - On Resolve Hold Button not available for HD Medication ",pnpPg.validateResolveHoldButtonForHDDrug(buttonColor,buttonValue,holdType));
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will NOT see a \"([^\"]*)\" \"([^\"]*)\" button on that medication row$")
+	public void user_will_NOT_see_a_green_button_on_that_medication_row(String buttonColor,String buttonValue) {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		Assert.assertFalse("PROBLEM - External Link not available on Button for HD Medication ", pnpPg.validateExternalLinkOnButton(holdType));
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+
 }
