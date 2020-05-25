@@ -116,7 +116,7 @@ public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttr
 		{
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
-			System.out.println("Not checking if Premium Payments tab is displayed on Dashboard");
+			System.out.println("Now checking if Premium Payments tab is displayed on Dashboard");
 			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 			accountHomePage.validatePremiumPaymentTabDisplayedOnDashboard(planType);	
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);

@@ -12,6 +12,7 @@ Feature: 1.15 Member pre-effective functionality
     And verify that preeffective message is displayed on the home page or test harness page
     And verify that payment tab is displayed to Preeffective member on dashboard or test harness page
       | Member Type | <memberType> |
+      | PlanType | <planType> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that subnavigation is supressed on the coverage and benefits page

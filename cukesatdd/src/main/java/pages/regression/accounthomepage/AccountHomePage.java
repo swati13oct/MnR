@@ -659,26 +659,30 @@ public class AccountHomePage extends UhcDriver {
 	 * waiting for Hello-Person name text to be displayed on page
 	 */
 
-	public BenefitsAndCoveragePage navigateToBandCPage(String PlanType)
-	
-	{
-		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+	public BenefitsAndCoveragePage navigateToBandCPage(String PlanType){
+	System.out.println("Checking for Welcome or Hello on Dashboard home page now");
 			
 			try {
+				CommonUtility.waitForPageLoad(driver, helloPerson, 5);
 				if (helloPerson.isDisplayed()) 
 				{
-					System.out.println("Hello PersonName on Dashboard home page was found");
-				} 
-				else 
-				{
-					waitForHomePage(welcome);
-					System.out.println("Welcome on Dashboard home page was found");
+					System.out.println("Hello PersonName on Dashboard home page was found and exact message is :"+helloPerson.getText());
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Catch block - Hello or Welcome message was not found on Dashboard home page ");	
+			    }
+			catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Catch block - Hello PersonName message was not found on Dashboard home page, ignore if it is pre-effective member ");	
+				}	
+			try 
+			{
+				CommonUtility.waitForPageLoad(driver, welcome, 5);
+			    if (welcome.isDisplayed()) 
+			    System.out.println("Welcome message displayed on Dashboard is: "+welcome.getText());
 			}
-	
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Catch block - Welcome message was not found on Dashboard home page, ignore if it active member ");	
+		}
 		    		
 		if (MRScenario.environment.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
 		{
