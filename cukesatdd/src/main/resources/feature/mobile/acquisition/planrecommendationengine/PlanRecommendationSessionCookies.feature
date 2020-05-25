@@ -115,7 +115,27 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
 
     Examples: 
       | Zipcode | isMultiCounty | County       | Zipcode1 | isMultiCounty1 | County1     |
-      |   10003 | NO            | New York     |    94203 | NO             | Sacramento  |
+      |   84315 | YES           | Davis County |    35034 | YES            | Bibb County |
+
+  @PRE @planrecommandonationmobile @zipsessionVPPtoPRE @F428517
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty>  - To validate zip code session from VPP to PRE in Mobile
+    Given the user is on UHC medicare acquisition site mobile
+    When user navigates to vpp summary page mobile
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <County>        |
+    And user navigates to Zip Code page from vpp plans mobile
+    Then user validte zip info in location page mobile
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <County>        |
+    And runs questionnaire at zipcode page mobile
+      | Zip Code        | <Zipcode1>       |
+      | Is Multi County | <isMultiCounty1> |
+      | County Name     | <County1>        |
+
+    Examples: 
+      | Zipcode | isMultiCounty | County       | Zipcode1 | isMultiCounty1 | County1     |
       |   84315 | YES           | Davis County |    35034 | YES            | Bibb County |
 
   @PRE @planrecommandonationmobile @startovermobile @F427582
