@@ -37,6 +37,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	@Override
 	public void openAndValidate() {
 	}
+	
+	private static String activeMedicineName;
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", pnpValidate(pgHeader));
@@ -678,7 +680,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> sixMedications = SixMedications;
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				pnpValidate(sixMedications.get(5)));
+				sixMedications.size()==6);
 	}
 
 	public void validateAssociatedCallToAction() {
@@ -692,7 +694,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateNumberInParenthesis() {
 
 		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
-				pnpValidateAlphaNumeric(NumberInParenthesis, 3));
+				NumberInParenthesis.getText().matches("[a-zA-Z0-9]+"));
 	}
 
 	public void validateCorrespondingNumberInParenthesis() {
@@ -771,8 +773,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void clickOnMedicationName() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(MedicationName));
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+				pnpValidate(FirstCurrentMedication));
+		FirstCurrentMedication.click();
+		/*Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(MedicationName));
 		MedicationName.click();
+		 */
 
 	}
 
@@ -781,9 +787,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateDrugDetailOverview() {
-		Assert.assertTrue("PROBLEM - unable to locate Drug Detail overview  elements",
-
-				pnpValidate(Overview));
+		String currentURL = driver.getCurrentUrl();
+		boolean flag = true;
+		if(currentURL.contains("overview.html#/medication-information")) {
+			Assert.assertTrue("SUCCESS - User redirected to medication information overview page",
+					flag);
+		}else {
+		Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page",
+				flag);
+		}
 	}
 
 	public void validateViewAllMedicationsLink() {
@@ -804,7 +816,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> optumRx = OptumRx;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(optumRx.get(0)));
+				optumRx.size()>0);
 	}
 
 	public void validateProcessing() {
@@ -815,28 +827,48 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(processing.get(0)));
 	}
 
+	//F392596 Meidine Cabinet
+	public String clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
+		Assert.assertTrue("PROBLEM - unable to locate Learn More Button element",
+				pnpValidate(LearnMoreBtn_CurrentMedication));
+		activeMedicineName = FirstCurrentMedication.getText();// this will get Text of first active medication
+		LearnMoreBtn_CurrentMedication.click();
+		return activeMedicineName;
+	}
+
+	//F392596 Meidine Cabinet
+	public void validateDrugInfopage() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+				pnpValidate(MedicationName_OnDrugInfoPage));
+		boolean flag = true;
+		
+		if(activeMedicineName.contains(MedicationName_OnDrugInfoPage.getText())){
+			Assert.assertTrue("SUCCESS - User is redirected to expected active drug info page.",flag);
+		}else
+		{
+			flag = false;
+			Assert.assertTrue("PROBLEM -  User is NOT redirected to expected active drug info page.",
+					flag);
+		}	
+		
+	}
+
 	public void validateHalfHarveyBall() {
-
 		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements",
-
 				pnpValidate(HalfHarveyBall));
 	}
 
-	public void validateThreeFourthHarveyBall() {
-
+	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
-
-				pnpValidate(ThreeFourthHarveyBall));
+				pnpValidate(oneFourthHarveyBall));
 	}
 
 	public void validateRefillMedications() {
-
 		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element",
 				pnpValidate(RefillMedications));
 	}
 
 	public void validateRenewMedications() {
-
 		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element", pnpValidate(RenewMedications));
 	}
 

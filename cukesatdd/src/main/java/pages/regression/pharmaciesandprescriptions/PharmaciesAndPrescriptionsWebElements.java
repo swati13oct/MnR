@@ -294,7 +294,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		protected WebElement OptumRxMedicineCabinetHeader;
 
 	   //Medicine Cabinet
-	    @FindBy(xpath="//div[contains(text(),'CurrentMedications')]")
+	    @FindBy(xpath="//div[contains(text(),'Current Medications')]")
 	    protected WebElement CurrentMedicationsHeader;
 
 	    @FindBy(xpath="//div[@class='sc-LzLtN ijGRvz']")
@@ -374,7 +374,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    protected WebElement HalfHarveyBall;
 
 	    @FindBy(xpath="")
-		protected WebElement ThreeFourthHarveyBall;
+		protected WebElement oneFourthHarveyBall;
 
     	@FindBy(xpath="//span[contains(text(),'Refill')]")
     	protected WebElement RefillMedications;
@@ -423,28 +423,102 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	@FindBy(xpath="//div[@data-testid='medication-status-percent-0']")
      	protected List<WebElement> listOfHarveyBall;
+   
+     	public List<String> getDrugNameListValue(){
+     		List<String> listOfDrug=new ArrayList<>();
+     		for(WebElement ele:listOfDrugName) {
+     			listOfDrug.add(ele.getText());
+     		}
+     		return listOfDrug;
+     	}
+     	
+     	public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
+     		for(WebElement ele:listOfWebElement) {
+     			if(ele.getText().isEmpty()) {
+     				return false;
+     			}
+     		}
+     		return true; 
+     	}
+     	
+     	public boolean validateMedicineStrengthFieldValue() {
+     		for(WebElement ele:listOfMedicineStrength) {
+     			if(ele.getText().isEmpty()) {
+     				return false;
+     			}
+     		}
+     		return true; 
+     	}
+     	
+     	public List<Integer> getListOfIndexForRetailPharmacy() {
+     		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfPharmacyName.size();i++) {
+     			if(!listOfPharmacyName.get(i).getText().equals("OptumRx")) {
+     				listOfIndex.add(i);
+     			}
+     		}
+     		return listOfIndex;
+     	}
+     	
+     	public List<Integer> getListOfIndexForHDPharmacy() {
+     		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfPharmacyName.size();i++) {
+     			if(listOfPharmacyName.get(i).getText().equals("OptumRx")) {
+     				listOfIndex.add(i);
+     			}
+     		}
+     		return listOfIndex;
+     	}
+     	
+     	List<String> listOfCallToActionForHDMedicine;
+     	
+     	public boolean validateCallToActionsForHDDrug() {
+     		List<Integer> listOfIndex=getListOfIndexForHDPharmacy();
+     		for(Integer val:listOfIndex) {
+     		if(!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedication.get(val).getText())){
+     			return false;
+     		}
+     		}
+     		return true;
+     	}
+     	
+     	public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonValue) {
+     		List<Integer> listOfIndex=getListOfIndexForRetailPharmacy();
+     		for(Integer val:listOfIndex) {
+         		if(!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue) && listOfCallToActionOnMedication.get(val).getTagName().equals("button"))){
+         			return false;
+         		}
+         		}
+         		return true;
+     	}
+     	
+     	public void clickOnContactPharmacy() {
+     		List<Integer> listOfIndex=getListOfIndexForRetailPharmacy();
+     		Random rand = new Random();
+     		int rand_int = rand.nextInt(listOfIndex.size());
+     		listOfCallToActionOnMedication.get(listOfIndex.get(rand_int));
+     	}
+     	
+     	//Need to add the Regex for Number 
+     	public boolean validateContactPharmacyPopUpHavingNumber() {
+     		String contactNumber=contactPharmacyNumber.getText();
+     		return !contactNumber.isEmpty() && contactNumber.matches("");
+     	}
      	
      	@FindBy(xpath="")
      	protected List<WebElement> listOfExtrnalLinkOnHold;
      	
      	
      	
+    // ********************* Kiran ************************	
+     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]")
+     	protected WebElement LearnMoreBtn_CurrentMedication;
      	
-     	     	
+     	@FindBy(xpath="(//span[text()='LEARN MORE']/parent::button)[1]//parent::a//parent::div//parent::div//parent::div/preceding-sibling::div//a[@data-testid='medication-data-name']")
+     	protected WebElement FirstCurrentMedication;
      	
-     	
-     	
-     	
-     	
-     	
-    
-
-
-
-
-
-
-
+     	@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK sc-LzLPX eA-DpTF']")
+     	protected WebElement MedicationName_OnDrugInfoPage;
 
 
 }
