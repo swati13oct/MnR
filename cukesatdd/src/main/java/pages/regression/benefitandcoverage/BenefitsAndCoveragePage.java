@@ -24,7 +24,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
+import pages.memberrdesignVBF.TestHarness;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -54,7 +56,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 
 	/**
-	 * To check headers on Benfits and coverage page
+	 *To check headers on Benefits and coverage page
 	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 		try {
@@ -2041,6 +2043,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	{
 		System.out.println("Now checking for Tech Support Number for Pre-effective members");
 		System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+		System.out.println("Expected Tech Support phone number from feature file is "+technicalPhNo);
 		Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
 		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
@@ -3131,5 +3134,31 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(SearchProvider,0);
 		validateNew(StartSearch,0);
 	}
-}
+	
+	public void navigateToSHIPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Plan Tab");
+		try {
+			ShipTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SHIP Plan Tab was not displayed");
+			Assert.fail("SHIP Plan Tab was not displayed");
+		}
+	}
 
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
+	}
+}

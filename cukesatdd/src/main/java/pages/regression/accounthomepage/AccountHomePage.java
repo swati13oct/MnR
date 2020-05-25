@@ -393,7 +393,8 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "hello-person")
 	private WebElement helloPerson;
-	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")
+	
+	@FindBy(xpath = "//h1[contains(text(),'Welcome to your new plan')]")
 	private WebElement welcome;
 
 	@FindBy(xpath = "//*[@id='ordermaterials']")
@@ -675,7 +676,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				
+				System.out.println("Catch block - Hello or Welcome message was not found on Dashboard home page ");	
 			}
 	
 		    		
@@ -3165,15 +3166,59 @@ public class AccountHomePage extends UhcDriver {
 
 	/*
 	 * This method checks that Premium Payment tab is displayed for
-	 * Pre-Effective members
+	 * Pre-Effective members on dashboard page
 	 */
-	public void validatePremiumPaymentTabDisplayed() throws InterruptedException {
+	public void validatePremiumPaymentTabDisplayedOnDashboard(String planType) throws InterruptedException {
 		Thread.sleep(2000);
-		System.out.println("Now checking for Premium Payment Tab on Dashboard");
-		Assert.assertTrue(driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]")).isDisplayed());
-		System.out.println("Premium Payment tab was displayed on Dashboard");
-
+		System.out.println("Now checking for Premium Payment Tab on Dashboard via shadowroot");
+		if (validate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				System.out.println("Value of Plan Type is: "+planType);
+				if (planType.equalsIgnoreCase("SHIP"))
+				{	
+				WebElement PremiumPaymentTab = root1.findElement(By
+						.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+				System.out.println("shadow-root element has been located");	
+				TestHarness.checkForIPerceptionModel(driver);
+				System.out.println("getText() of Premium Payment is :" +PremiumPaymentTab.getText());
+				if (PremiumPaymentTab.isDisplayed() && PremiumPaymentTab.getText().contains("PREMIUM PAYMENTS"))
+				{
+					System.out.println("Premium Payments tab was displayed");	
+				}
+				
+				else
+				{
+				Assert.fail("Premium Payments tab was NOT displayed, Test Step is failed");	
+				}
+			}
+			else 
+				{
+					WebElement PremiumPaymentTab = root1.findElement(By
+							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
+					System.out.println("shadow-root element has been located");	
+					TestHarness.checkForIPerceptionModel(driver);
+					System.out.println("getText() of Premium Payment is :" +PremiumPaymentTab.getText());
+					if (PremiumPaymentTab.isDisplayed() && PremiumPaymentTab.getText().contains("PREMIUM PAYMENTS"))
+					{
+						System.out.println("Premium Payments tab was displayed");	
+					}
+					
+					else
+					{
+					Assert.fail("Premium Payments tab was NOT displayed, Test Step is failed");	
+					}
+				}
+			}
+		catch(Exception e)
+		{
+			System.out.println("Could not locate shadow root element for benefits and coverage tab");
+			Assert.fail("Could not locate shadow root element for benefits and coverage tab");
+		}
+	
 	}
+}
 
 	/*
 	 * This method checks that correct pre-Effective message is displayed on
