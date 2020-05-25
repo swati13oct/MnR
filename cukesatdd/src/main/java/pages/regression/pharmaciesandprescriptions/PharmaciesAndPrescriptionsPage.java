@@ -679,7 +679,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> sixMedications = SixMedications;
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				pnpValidate(sixMedications.get(5)));
+				sixMedications.size()==6);
 	}
 
 	public void validateAssociatedCallToAction() {
@@ -693,7 +693,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateNumberInParenthesis() {
 
 		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
-				pnpValidateAlphaNumeric(NumberInParenthesis, 3));
+				NumberInParenthesis.getText().matches("[a-zA-Z0-9]+"));
 	}
 
 	public void validateCorrespondingNumberInParenthesis() {
@@ -788,6 +788,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateContactPharmacyButtonForRetailDrug(expectedButtonColor, expectedContactPharmacy));
 	}
 
+
+/*	public void clickOnMedicationName() {
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+				pnpValidate(FirstCurrentMedication));
+		FirstCurrentMedication.click();
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(MedicationName));
+		MedicationName.click();
+		 
+	}*/
+
 	public void validatePharmacyName() {
 		Assert.assertTrue("PROBLEM - Pharmacy Name  not available", validateFieldValueContent(listOfPharmacyName));
 	}
@@ -831,7 +841,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> optumRx = OptumRx;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(optumRx.get(0)));
+				optumRx.size()>0);
 	}
 
 	public void validateProcessing() {
@@ -869,9 +879,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(HalfHarveyBall));
 	}
 
-	public void validateThreeFourthHarveyBall() {
+	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
-				pnpValidate(ThreeFourthHarveyBall));
+				pnpValidate(oneFourthHarveyBall));
 	}
 
 	public void validateRefillMedications() {
@@ -892,22 +902,30 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
-		for (WebElement ele : listOfWebElement) {
-			if (ele.getText().isEmpty()) {
-				return false;
+		if (listOfWebElement.size() > 0) {
+			for (WebElement ele : listOfWebElement) {
+				if (ele.getText().isEmpty()) {
+					return false;
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	public boolean validateMedicineStrengthFieldValue() {
-		for (WebElement ele : listOfDrugName) {
-			String[] arrayOfMedicineName = ele.getText().split(" ");
-			if (arrayOfMedicineName[arrayOfMedicineName.length - 1].isEmpty()) {
-				return false;
+		if (listOfDrugName.size() > 0) {
+			for (WebElement ele : listOfDrugName) {
+				String[] arrayOfMedicineName = ele.getText().split(" ");
+				if (arrayOfMedicineName[arrayOfMedicineName.length - 1].isEmpty()) {
+					return false;
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	public List<Integer> getListOfIndexForRetailPharmacy() {
@@ -934,24 +952,32 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public boolean validateCallToActionsForHDDrug() {
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
-		for (Integer val : listOfIndex) {
-			if (!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedication.get(val).getText())) {
-				return false;
+		if (listOfIndex.size() > 0) {
+			for (Integer val : listOfIndex) {
+				if (!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedication.get(val).getText())) {
+					return false;
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonColor, String expectedButtonValue) {
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
-		for (Integer val : listOfIndex) {
-			if (!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue)
-					&& listOfCallToActionOnMedication.get(val).getTagName().equals("button"))
-					&& listOfCallToActionOnMedication.get(val).getCssValue("color").equals("#008000")) {
-				return false;
+		if (listOfIndex.size() > 0) {
+			for (Integer val : listOfIndex) {
+				if (!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue)
+						&& listOfCallToActionOnMedication.get(val).getTagName().equals("button"))
+						&& listOfCallToActionOnMedication.get(val).getCssValue("color").equals("#008000")) {
+					return false;
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	public void clickOnContactPharmacy() {
@@ -969,12 +995,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public boolean validateOrderStatusForAssociatedCTA() {
 		List<Integer> listOfIndex = getListOfIndexForTrackCTA();
-		for (Integer val : listOfIndex) {
-			if (listOfOrderStatus.get(val).getText().isEmpty()) {
-				return false;
+		if (listOfIndex.size() > 0) {
+			for (Integer val : listOfIndex) {
+				if (listOfOrderStatus.get(val).getText().isEmpty()) {
+					return false;
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 	
 	public List<Integer> getListOfIndexForTrackCTA() {
@@ -1019,8 +1049,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return listOfIndex;
 	}
-		
-	public boolean validateHarveyBallForHDDrugOrder(String orderStatus,String ballSize) {
+
+	public boolean validateHarveyBallForHDDrugOrder(String orderStatus, String ballSize) {
 		List<Integer> listOfIndex = getOrderStatusIndexBasedOnStatusValue(orderStatus);
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
@@ -1042,13 +1072,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus,String ballSize) {
 		Assert.assertTrue("PROBLEM - "+ballSize+" Harvey Ball not available for "+orderStatus+" order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus,ballSize));
 	}
-		
+
 	public void validateShippedOrderStatusForHDDrug(String orderStatus) {
-		Assert.assertTrue("PROBLEM - Shipped Order not available on Current Medication", getOrderStatusIndexBasedOnStatusValue(orderStatus).size()>0);
-	}
-	
-	public void validateDeliveredOrderStatusForHDDrug(String orderStatus,String ballSize) {
-		Assert.assertTrue("PROBLEM - "+ballSize+"Harvey Ball not available for "+orderStatus+" order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus,ballSize));
+		Assert.assertTrue("PROBLEM - Shipped Order not available on Current Medication",
+				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
 	}
 
 	public boolean validateHDDrugDisplayedOnCurrentMedication() {
@@ -1083,6 +1110,122 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		driver.close();
 		driver.switchTo().window(pnpPageHandle);
+	}
+
+	public void validateDeliveredOrderStatusForHDDrug(String orderStatus, String ballSize) {
+		Assert.assertTrue("PROBLEM - " + ballSize + "Harvey Ball not available for " + orderStatus
+				+ " order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus, ballSize));
+	}
+
+	public List<Integer> getIndexOfMedicationHavingHold(String holdType) {
+		List<Integer> listOfIndex = new ArrayList<>();
+		// Need to get the element having attribute which identify the hold type
+
+		for (int i = 0; i < listOfPharmacyName.size(); i++) {
+			if (listOfPharmacyName.get(i).getText().equals(holdType)) {
+				listOfIndex.add(i);
+			}
+		}
+		return listOfIndex;
+	}
+
+	public boolean validateCurrentMedicationHavingHold(String holdType) {
+		for (int i = 0; i < listOfPharmacyName.size(); i++) {
+			if (listOfPharmacyName.get(i).getText().contains(holdType)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean validateOnHoldIndicator(String holdColor, String holdIndicator, String holdType) {
+		List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+
+		// Need to provide the hold color hash val
+		if (listOfIndex.size() != 0) {
+			for (Integer val : listOfIndex) {
+				if (!(listOfOrderStatus.get(val).getText().contains(holdIndicator))
+						&& !(listOfOrderStatus.get(val).getCssValue("color").equals(holdColor))) {
+					return false;
+				}
+			}
+			return true;
+
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateResolveHoldButtonForHDDrug(String expectedButtonColor, String expectedButtonValue,
+			String holdType) {
+		List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+		if (listOfIndex.size() != 0) {
+			for (Integer val : listOfIndex) {
+				if (!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue)
+						&& listOfCallToActionOnMedication.get(val).getTagName().equals("button"))
+						&& listOfCallToActionOnMedication.get(val).getCssValue("color").equals("#008000")) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateExternalLinkOnButton(String holdType) {
+		List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+		/// Need to check the Parameter having external Link
+		if (listOfIndex.size() != 0) {
+			for (Integer val : listOfIndex) {
+				if (!(listOfExtrnalLinkOnHold.get(val).getText().equals("NeedToCheckTheParameter"))) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void validatePaymentHoldForHDMedication(String holdType) {
+		Assert.assertTrue("PROBLEM - Payment Hold not available for HD Medication ",
+				validateCurrentMedicationHavingHold(holdType));
+	}
+
+	public void validateOnHoldIndicatorForHDDrug(String holdColor, String holdIndicator, String holdType) {
+		Assert.assertTrue("PROBLEM - On Hold Indicator not available for HD Medication ",
+				validateOnHoldIndicator(holdColor, holdIndicator, holdType));
+	}
+
+	public void validateOnResolveHoldBtnForHDDrug(String holdColor, String buttonValue, String holdType) {
+		Assert.assertTrue("PROBLEM - On Resolve Hold Button not available for HD Medication ",
+				validateResolveHoldButtonForHDDrug(holdColor, buttonValue, holdType));
+	}
+
+	public void validateExternalLnkOnButtonForHDDrug(String holdType) {
+		Assert.assertTrue("PROBLEM - External Link not available on Button for HD Medication ",
+				validateExternalLinkOnButton(holdType));
+	}
+
+	public void validateAddressHoldForHDMedication(String holdType) {
+		Assert.assertTrue("PROBLEM - Address Hold not available for HD Medication ",
+				validateCurrentMedicationHavingHold(holdType));
+	}
+
+	public void validatePriceAdjsutmentHoldForHDMedication(String holdType) {
+		Assert.assertTrue("PROBLEM - Price Adjustment Hold not available for HD Medication ",
+				validateCurrentMedicationHavingHold(holdType));
+	}
+
+	public void validateCallHoldForHDMedication(String holdType) {
+		Assert.assertTrue("PROBLEM - Call Hold not available for HD Medication ",
+				validateCurrentMedicationHavingHold(holdType));
+	}
+
+	public void validateInformationalHoldForHDMedication(String holdType) {
+		Assert.assertTrue("PROBLEM - Call Hold not available for HD Medication ",
+				validateCurrentMedicationHavingHold(holdType));
 	}
 }
 

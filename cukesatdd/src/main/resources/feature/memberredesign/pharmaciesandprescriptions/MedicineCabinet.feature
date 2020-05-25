@@ -22,7 +22,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     Then user views the Current Medications
     And user valides View all medications link text
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -35,7 +35,7 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user clicks View all medications link
     Then user will be directed to My Medications page
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -60,7 +60,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     Then user views the Current Medications
     Then user validates the disclaimer Medication appearance subject to change
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -82,7 +82,7 @@ Feature: MVP - Current Medications
     And user validates any relevant calls to action to manage the medication
     And user validates information on remaining refills
     And user validates a button "Contact Pharmacy" to contact my retail pharmacy
-	Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -95,11 +95,12 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user clicks medication name of one of his active prescriptions listed on the Current Medications
     Then user validates the Drug Info overview page for that prescription/medication in the same browser tab
-    Examples:
+
+    Examples: 
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
- @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user  selects Learn More button on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -148,8 +149,8 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Request received
-    Then user views 1/4 Harvey Ball on that medication's row
-    Examples:
+    Then user views one fourth Harvey Ball on that medication's row
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -162,8 +163,8 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Processing
-    Then user views  a 1/2 Harvey Ball on that medication's row
-    Examples:
+    Then user views  a half Harvey Ball on that medication's row
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -177,7 +178,7 @@ Feature: MVP - Current Medications
     When user views a home delivery drug order
     And user views a status of Shipped
     Then user views a 3/4 Harvey Ball on that medication's row
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -191,8 +192,8 @@ Feature: MVP - Current Medications
     When user views a home delivery drug order
     And user views a status of  Delivered
     Then user views a full Harvey Ball with a checkmark on that medication's row
-    Examples:
-      | FID     | planType | memberType           |
+    Examples: 
+	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @MedicineCabinet @F392596 @US2508869
@@ -207,7 +208,7 @@ Feature: MVP - Current Medications
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button
     Examples:
-      | FID     | planType | memberType           |
+	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @MedicineCabinet @F392596 @US2508869
@@ -222,7 +223,7 @@ Feature: MVP - Current Medications
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button
     Examples:
-      | FID     | planType | memberType           |
+	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @MedicineCabinet @F392596 @US2508869
@@ -231,12 +232,12 @@ Feature: MVP - Current Medications
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    Then user views active medications
+	Then user views active medications
     When user views one of his active medications has  a price adjustment hold on it
     Then user validates a red On Hold indicator
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button
-    Examples:
+	Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -251,7 +252,7 @@ Feature: MVP - Current Medications
     Then user validates a red On Hold indicator
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button
-	Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -265,7 +266,7 @@ Feature: MVP - Current Medications
     When user views one of his active medications has an informational hold on it
     Then user validates a red On Hold indicator
     Then user validates a green Resolve hold button on that medication's row
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -278,7 +279,7 @@ Feature: MVP - Current Medications
     Then user views active medications
     When user views a Refill Medication call to action button on that medication's row
     Then user validates the external link icon in the button
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -291,7 +292,7 @@ Feature: MVP - Current Medications
     Then user views active medications
     When user views a Renew Medication call to action button on that medication's row
     Then user validates the external link icon in the button
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -303,7 +304,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     When user views  an active medication currently in progress for home delivery
     Then user views a Track Status call to action button on that medication's row
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -315,7 +316,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     When user views an active medication home delivery order that has been delivered
     Then user views a View Order call to action button on that medication's row
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -329,7 +330,7 @@ Feature: MVP - Current Medications
     When user views a Refill Medication call to action button on that medication's row
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -343,8 +344,7 @@ Feature: MVP - Current Medications
     When user views a Renew Medication call to action button on that medication's row
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -358,7 +358,7 @@ Feature: MVP - Current Medications
     When user views a home delivery medication on hold
     When user clicks the Resolve Hold call to action button
     Then user views the OptumRx landing page in a new browser tab
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
@@ -373,7 +373,7 @@ Feature: MVP - Current Medications
     When user clicks the Track Status call to action button on that medication's row
     Then user views the Home Delivery tab on the Drug Info page for that medication
     Examples:
-      | FID     | planType | memberType           |
+	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran
@@ -387,7 +387,7 @@ Feature: MVP - Current Medications
     When user clicks the View order call to action button on that medication's row
     Then user views the Home Delivery tab on the Drug Info page for that medication
     Examples:
-      | FID     | planType | memberType           |
+	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @CurrentMedications @F392596 @US2618672
@@ -399,6 +399,7 @@ Feature: MVP - Current Medications
     And user have active retail medications
     Then user will view active retail medications
     And user will see a "Green" "Contact Pharmacy" button
+
     Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
@@ -423,24 +424,26 @@ Feature: MVP - Current Medications
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    And No Data here
-    When one of my active medications has a payment method hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    And user have active medications
+    And one of user active medications has a payment method hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
-    
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on verify address hold
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has an address hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has an address hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
@@ -450,11 +453,13 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has a price adjustment hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has a price adjustment hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
+
     Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
@@ -462,11 +467,13 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has a Call hold on it
-    Then I will see a red "On Hold" indicator 
-    And I will see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has a Call hold on it
+    Then user will see a "Red" "On Hold" indicator
+    And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
+
     Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
@@ -474,10 +481,12 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    And I have active medications
-    When one of my active medications has an informational hold on it
-    Then I will NOT see a red "On Hold" indicator 
-    And I will NOT see a green "Resolve hold" button on that medication's row
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    And user have active medications
+    When one of user active medications has an informational hold on it
+    Then user will NOT see a "Red" "On Hold" indicator
+    And user will NOT see a "Green" "Resolve hold" button on that medication row
+
     Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |

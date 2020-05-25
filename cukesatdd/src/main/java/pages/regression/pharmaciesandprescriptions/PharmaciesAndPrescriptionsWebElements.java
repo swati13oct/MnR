@@ -382,7 +382,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    protected WebElement HalfHarveyBall;
 
 	    @FindBy(xpath="")
-		protected WebElement ThreeFourthHarveyBall;
+		protected WebElement oneFourthHarveyBall;
 
     	@FindBy(xpath="//span[contains(text(),'Refill')]")
     	protected WebElement RefillMedications;
@@ -513,6 +513,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      		return !contactNumber.isEmpty() && contactNumber.matches("");
      	}
      	
+     	@FindBy(xpath="")
+     	protected List<WebElement> listOfExtrnalLinkOnHold;
+     	
+     	
      	
     // ********************* Kiran ************************	
      	@FindBy(xpath="")
@@ -539,7 +543,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	}	
      	
      	public List<Integer> getListOfIndexForDrugName() {
-     		//List<Integer> listOfIndex = new ArrayList<>();
      		for(int i=0; i<listOfDrugName.size();i++) {
      				listOfIndex.add(i);
      		}
@@ -562,7 +565,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	}
      	
     	public void clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
-    		int rand_int = rand.nextInt(listOfIndex.size());
+    		rand_int = rand.nextInt(listOfIndex.size());
      		listOfLearnMore.get(listOfIndex.get(rand_int)).click();
      		//need to find the drug name 
      		//DrugNameLearnMore = listOfLearnMore.get(listOfIndex.get(rand_int));
