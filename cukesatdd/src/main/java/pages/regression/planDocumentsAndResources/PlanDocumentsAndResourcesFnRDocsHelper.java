@@ -191,8 +191,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || docName.equals("Medicare Plan Appeals & Grievances Form")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medicare_Appeals_Grievances_Form.pdf");
-			if (memberType.contains("GROUP"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
+			//tbd if (memberType.contains("GROUP"))
+			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -249,7 +249,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
 			//tbd if (memberType.toUpperCase().contains("GROUP")) 
 			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
-			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSUP"))
+			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSP"))
 					&& memberType.toUpperCase().contains("GROUP")) 
 			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
 			//tbd else if (planType.toUpperCase().equals("MA")) 
