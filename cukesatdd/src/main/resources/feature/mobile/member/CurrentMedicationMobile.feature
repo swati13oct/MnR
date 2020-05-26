@@ -6,7 +6,8 @@
     Given login with following details logins in the uhc rx portal On Mobile
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page on Mobile
     And user have active retail medications
     Then user will see a "Green" "Contact Pharmacy" button
+    And user will see
  

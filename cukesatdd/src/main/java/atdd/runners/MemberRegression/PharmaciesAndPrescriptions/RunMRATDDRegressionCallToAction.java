@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionCallToAction.json",detailedRepo
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionCallToAction")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionCallToAction.json" }, tags = { "@F436319" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionCallToAction.json" }, tags = { "@F436319" }, monochrome=true)
 public class RunMRATDDRegressionCallToAction {
 
 }
