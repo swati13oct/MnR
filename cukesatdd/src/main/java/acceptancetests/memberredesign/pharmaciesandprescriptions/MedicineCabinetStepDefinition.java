@@ -56,7 +56,8 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_on_the_Learn_More_button_on_one_of_my_active_prescriptions_listed_under_Current_Medications() throws Throwable{
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		activeMedicineName = pnpPg.clickOnLearnMoreButtonDisplayedOnCurrentMedications();
+		pnpPg.clickOnLearnMoreButtonDisplayedOnCurrentMedications();
+		//activeMedicineName = pnpPg.clickOnLearnMoreButtonDisplayedOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 		
 	}
@@ -245,7 +246,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_medication_name_of_one_of_his_active_prescriptions_listed_on_the_Current_Medications() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickOnMedicationName();
+		pnpPg.clickOnActiveMedicationDisplayedOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -257,20 +258,23 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user views a home delivery drug listed in his medicine cabinet$")
-	public void user_views_a_home_delivery_drug_listed_in_his_medicine_cabinet() throws Throwable {
+	@When("^user views a home delivery drug listed in his Current Medications$")
+	public void user_views_a_home_delivery_drug_listed_in_his_Current_Medications() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHDDrug();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
-	@When("^user validates that home delivery drug is associated with a current order$")
+	@Then("^user validates that home delivery drug is associated with a current order$")
 	public void user_validates_that_home_delivery_drug_is_associated_with_a_current_order() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHDAssociateOrderStatus();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates the order status$")
-	public void user_validates_the_order_status() throws Throwable {
-
-	}
 
 	@When("^user views a home delivery drug order$")
 	public void user_views_a_home_delivery_drug_order() throws Throwable {
@@ -284,12 +288,21 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user validates the status of Verifying with doctor or status of Order verified$")
 	public void user_validates_the_status_of_Verifying_with_doctor_or_status_of_Order_verified() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOrderStatusForHDDrug("Verifying with doctor");
+		pnpPg.validateOrderStatusForHDDrug("Order Verified");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
 	@Then("^user views an empty Harvey Ball on that medication's row$")
 	public void user_views_an_empty_Harvey_Ball_on_that_medication_s_row() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHarveyBallOrderStatusForHDDrug("Verifying with doctor","0");
+		pnpPg.validateHarveyBallOrderStatusForHDDrug("Order Verified","0");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 	@When("^user views a status of Request received$")
@@ -417,7 +430,7 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateRefillMedications();
+		//pnpPg.validateRefillMedications(); need to verify --> Kiran
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -454,12 +467,18 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user clicks Refill Medication call to action button$")
 	public void user_clicks_Refill_Medication_call_to_action_button() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickRefillMedicationsCTA();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 	@Then("^user views the OptumRx landing page in a new browser tab$")
 	public void user_views_the_OptumRx_landing_page_in_a_new_browser_tab() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOptumRxLandingPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 	@When("^user clicks the Renew Medication call to action button$")
@@ -482,8 +501,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views the Home Delivery tab on the Drug Details page for that medication$")
-	public void user_views_the_Home_Delivery_tab_on_the_Drug_Details_page_for_that_medication() throws Throwable {
+	@Then("^user views the Home Delivery tab on the Drug Info page for that medication$")
+	public void user_views_the_Home_Delivery_tab_on_the_Drug_Info_page_for_that_medication() throws Throwable {
 
 	}
 

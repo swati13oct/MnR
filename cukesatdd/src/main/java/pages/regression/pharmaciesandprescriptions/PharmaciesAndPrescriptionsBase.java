@@ -370,6 +370,8 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return false;
 	}
+	
+
 
 
 
