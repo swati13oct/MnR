@@ -294,10 +294,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	    @FindBy(xpath="//div[contains(text(),'Current Medications')]")
 	    protected WebElement CurrentMedicationsHeader;
 
-	    @FindBy(xpath="//div[@class='sc-LzLtN ijGRvz']")
-     	protected List<WebElement> SixMedications;
+	    @FindBy(xpath="//span[contains(text(),'LEARN MORE')]")
+     	protected List<WebElement> sixMedications;
 
-     	@FindBy(xpath="//div[@class='")
+     	@FindBy(xpath="//span[@data-test-component='text']")
 	    protected List<WebElement> AssociatedCallToAction;
 
     	@FindBy(xpath="//a[contains(text(),'View all ')]")
@@ -567,4 +567,24 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
     		//pnpValidate(RefillMedications);
     		RefillMedications.click();
     	}
+
+	  public boolean sixActivePrescription() {
+
+     		if(sixMedications.size()==6){
+     			return true;
+			}else {
+     			return false;
+			}
+	   }
+
+	   public boolean associatedCallToAction() {
+
+		if(AssociatedCallToAction.get(AssociatedCallToAction.size() - 1).isDisplayed()){
+			return true;
+		}else {
+			return false;
+		}
+	  }
+
+
 }

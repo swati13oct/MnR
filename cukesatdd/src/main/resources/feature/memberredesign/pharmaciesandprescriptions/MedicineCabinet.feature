@@ -6,7 +6,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user validates first six of his active prescriptions
     And user validates medications will be displayed beginning with the ones that have an associated call to action
@@ -19,7 +19,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user valides View all medications link text
     Examples: 
@@ -31,7 +31,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user clicks View all medications link
     Then user will be directed to My Medications page
@@ -44,7 +44,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     Then user validates a number in parentheses
     And user validates the number will correspond to the total number of active medications he has
@@ -57,7 +57,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     Then user validates the disclaimer Medication appearance subject to change
     Examples: 
@@ -145,7 +145,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Request received
@@ -159,7 +159,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Processing
@@ -275,7 +275,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views a Refill Medication call to action button on that medication's row
     Then user validates the external link icon in the button
@@ -288,7 +288,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views a Renew Medication call to action button on that medication's row
     Then user validates the external link icon in the button
@@ -395,7 +395,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active retail medications
     Then user will view active retail medications
     And user will see a "Green" "Contact Pharmacy" button
@@ -409,7 +409,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active retail medications
     And user select the green "Contact Pharmacy" button
     Then user will view a popup with the phone number available to call
@@ -423,7 +423,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     And one of user active medications has a payment method hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -439,7 +439,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has an address hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -453,7 +453,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has a price adjustment hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -467,7 +467,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has a Call hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -481,7 +481,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has an informational hold on it
     Then user will NOT see a "Red" "On Hold" indicator

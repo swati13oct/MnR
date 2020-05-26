@@ -685,18 +685,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateActivePrescriptions() {
 
-		List<WebElement> sixMedications = SixMedications;
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				sixMedications.size() == 6);
+				sixActivePrescription());
 	}
 
 	public void validateAssociatedCallToAction() {
 
-		List<WebElement> associatedCallToAction = AssociatedCallToAction;
 
 		Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element",
-				pnpValidate(associatedCallToAction.get(AssociatedCallToAction.size() - 1)));
+				associatedCallToAction());
 	}
 
 	public void validateNumberInParenthesis() {
