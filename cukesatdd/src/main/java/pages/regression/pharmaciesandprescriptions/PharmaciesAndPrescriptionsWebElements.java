@@ -209,29 +209,26 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	//************************************************************************
 		//F436319
-		@FindBy(xpath="//div[@class='sc-LzLsE iVLzSR sc-LzLLC ebMTfg']")
+		//@FindBy(xpath="//div[@class='sc-LzLsE iVLzSR sc-LzLLC ebMTfg']")--> updated
+		//@FindBy(xpath="//div[@class='sc-LzLsE iVLzSR sc-LzLLD ebVpJp']")--> Updated
+		@FindBy(xpath="//div[@class='sc-LzLsE iVLzSR sc-LzLMg emWRhd']")		
 		protected WebElement PnPNotification;
 		
-		@FindBy(xpath="")
+		@FindBy(xpath="//span[@data-test-component='text']//span")
 		protected WebElement PnPNotificationCloseBtn;
 		
-		//Find and Price Call to Action
-		@FindBy(xpath="")
-		protected WebElement findAndPriceTile;
-		
-		@FindBy(xpath="//*[@id='FindAndPriceADrug_svg__a']/.")
+		@FindBy(xpath="//span[@data-test-component='text']//span")
+		protected WebElement PnPNotificationPosition;
+				
+		@FindBy(xpath="(//*[@id='FindAndPriceADrug_svg__a']/.)[1]")
 		protected WebElement findPrescriotionImage;
 		
-		@FindBy(xpath="//h2[contains(text(),'Find')]")
+		@FindBy(xpath="(//h2[contains(text(),'Find')])[1]")
 		protected WebElement findPrescriptionTitle;
 		
-		@FindBy(xpath="//p[contains(text(),'Look up')]")
+		@FindBy(xpath="(//p[contains(text(),'Look up')])[1]")
 		protected WebElement findPrescriptionDesc;
-		
-		//Pharmacy Locator Call To Action
-		@FindBy(xpath="")
-		protected WebElement pharmacyLocatorTile;
-		
+				
 		@FindBy(xpath="//*[@id='PharmacyLocator_svg__a']")
 		protected WebElement pharmacyLocatorImage;
 		
@@ -241,10 +238,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		@FindBy(xpath="//p[contains(text(),'Find a pharmacy')]")
 		protected WebElement pharmacyLocatorDesc;
 		
-		//Refill Home Delivery Call to Action
-		@FindBy(xpath="")
-		protected WebElement RefillHomeDeliveryTile;
-		
 		@FindBy(xpath="//*[@id='CheckOrderStatus_svg__a']")
 		protected WebElement managePresciptionImage;
 		
@@ -253,10 +246,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		
 		@FindBy(xpath="//p[contains(text(),'Refill')]")
 		protected WebElement managePrescriptionDesc;	
-		
-		//Whats new Call to Action
-		@FindBy(xpath="")
-		protected WebElement whatsNewTile;
 		
 		@FindBy(xpath="//p[contains(text(),'Check')]/ancestor::button//div[@class='sc-LzLMh enfnLm']/*")
 		protected WebElement whatsNewImage;
@@ -269,7 +258,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		
 		// Call to Action Buttons	
 		
-		@FindBy(xpath="//h2[contains(text(),'Find')]/ancestor::button")
+		@FindBy(xpath="(//h2[contains(text(),'Find')]/ancestor::button)[1]")
 		protected WebElement findPrescriptionsCallToActnBtn;
 
 		@FindBy(xpath="//h2[contains(text(),'Pharmacy')]/ancestor::button")
@@ -281,7 +270,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		@FindBy(xpath="//h2[contains(text(),'Whats')]/ancestor::button")
 		protected WebElement whatsNewCallToActnBtn;
 		
-		@FindBy(xpath="")
+		@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK']")
 		protected WebElement whatsNewPageHeader;
 		
 		@FindBy(xpath="")

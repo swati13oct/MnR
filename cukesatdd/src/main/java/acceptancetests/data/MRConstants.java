@@ -348,6 +348,7 @@ public class MRConstants {
   public static final String TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/login/overview.html/?testharness=true";
   public static final String TEAMCI_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
   public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
+  public static final String D_Rx_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
 	   
 
   /** DeRegister URLs*/

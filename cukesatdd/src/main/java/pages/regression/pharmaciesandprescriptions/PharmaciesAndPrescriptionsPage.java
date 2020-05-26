@@ -37,7 +37,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	@Override
 	public void openAndValidate() {
 	}
-	
+
 	private static String activeMedicineName;
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
@@ -495,7 +495,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Find and Price
 	public void validateFindAndPriceCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Tile element",
-				pnpValidate(findAndPriceTile));
+				pnpValidate(findPrescriptionsCallToActnBtn));
 	}
 
 	// F436319
@@ -519,7 +519,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Pharmacy Locator Call To Action
 	public void validatePharmacyLocatorCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Tile element",
-				pnpValidate(pharmacyLocatorTile));
+				pnpValidate(pharmacyLocatorCallToActnBtn));
 	}
 
 	// F436319
@@ -543,7 +543,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Refill Home Delivery Call To Action
 	public void validateRefillHomeDeliveryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Tile element",
-				pnpValidate(RefillHomeDeliveryTile));
+				pnpValidate(managePrescriptionCallToActnBtn));
 	}
 
 	// F436319
@@ -567,7 +567,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Whats New Call To Action
 	public void validateWhatsNewCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element",
-				pnpValidate(whatsNewTile));
+				pnpValidate(whatsNewCallToActnBtn));
 	}
 
 	// F436319
@@ -680,7 +680,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> sixMedications = SixMedications;
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				sixMedications.size()==6);
+				sixMedications.size() == 6);
 	}
 
 	public void validateAssociatedCallToAction() {
@@ -773,11 +773,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void clickOnMedicationName() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
-				pnpValidate(FirstCurrentMedication));
+		Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(FirstCurrentMedication));
 		FirstCurrentMedication.click();
-		/*Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(MedicationName));
-		MedicationName.click();
+		/*
+		 * Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+		 * pnpValidate(MedicationName)); MedicationName.click();
 		 */
 
 	}
@@ -789,12 +789,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateDrugDetailOverview() {
 		String currentURL = driver.getCurrentUrl();
 		boolean flag = true;
-		if(currentURL.contains("overview.html#/medication-information")) {
-			Assert.assertTrue("SUCCESS - User redirected to medication information overview page",
-					flag);
-		}else {
-		Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page",
-				flag);
+		if (currentURL.contains("overview.html#/medication-information")) {
+			Assert.assertTrue("SUCCESS - User redirected to medication information overview page", flag);
+		} else {
+			Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page", flag);
 		}
 	}
 
@@ -816,7 +814,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<WebElement> optumRx = OptumRx;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				optumRx.size()>0);
+				optumRx.size() > 0);
 	}
 
 	public void validateProcessing() {
@@ -827,7 +825,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(processing.get(0)));
 	}
 
-	//F392596 Meidine Cabinet
+	// F392596 Meidine Cabinet
 	public String clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
 		Assert.assertTrue("PROBLEM - unable to locate Learn More Button element",
 				pnpValidate(LearnMoreBtn_CurrentMedication));
@@ -836,26 +834,23 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return activeMedicineName;
 	}
 
-	//F392596 Meidine Cabinet
+	// F392596 Meidine Cabinet
 	public void validateDrugInfopage() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
 				pnpValidate(MedicationName_OnDrugInfoPage));
 		boolean flag = true;
-		
-		if(activeMedicineName.contains(MedicationName_OnDrugInfoPage.getText())){
-			Assert.assertTrue("SUCCESS - User is redirected to expected active drug info page.",flag);
-		}else
-		{
+
+		if (activeMedicineName.contains(MedicationName_OnDrugInfoPage.getText())) {
+			Assert.assertTrue("SUCCESS - User is redirected to expected active drug info page.", flag);
+		} else {
 			flag = false;
-			Assert.assertTrue("PROBLEM -  User is NOT redirected to expected active drug info page.",
-					flag);
-		}	
-		
+			Assert.assertTrue("PROBLEM -  User is NOT redirected to expected active drug info page.", flag);
+		}
+
 	}
 
 	public void validateHalfHarveyBall() {
-		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements",
-				pnpValidate(HalfHarveyBall));
+		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", pnpValidate(HalfHarveyBall));
 	}
 
 	public void validateOneFourthHarveyBall() {
@@ -1177,22 +1172,36 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - Call Hold not available for HD Medication ",
 				validateCurrentMedicationHavingHold(holdType));
 	}
-	
+
 	public void clickOnNextPageArrow() {
 		nextPageArrow.click();
 	}
-	
+
 	public boolean verifyRemainingPrescriptions() {
-		if(listOfDrugName.size()>0) {
+		if (listOfDrugName.size() > 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public void validateRemainingPrescriptionsOnMyMedPage() {
 		Assert.assertTrue("PROBLEM - Active Prescription not available on Next My Medication Page ",
 				verifyRemainingPrescriptions());
 	}
+
+	// F436319
+	public void validatePositionOfCallToActionOnPnPPage(int position, String callToActionTitle) {
+		List<WebElement> callToActions = driver.findElements(By.xpath("//div[@class='sc-LzLMQ ejtotn']//button//h2"));
+		WebElement element = callToActions.get(position);
+		position = position + 1;
+		if (element.getText().equalsIgnoreCase(callToActionTitle)) {
+			Assert.assertEquals("SUCCESS - " + callToActionTitle + "Is placed on position :: " + position, true,
+					pnpValidate(element));
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate expected position of call to action for " + callToActionTitle,
+					false);
+		}
+	}
+
 }
