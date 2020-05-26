@@ -306,7 +306,6 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement findCareCost;
 	
 	
-	
 	/*
 	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
 	 * private WebElement
@@ -457,6 +456,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'ordermaterials')]")
 	protected WebElement desktopOrderPlanFromBenefitSubLink;
+	
+	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
+	private WebElement pharamciesAndPrescriptionsLink;
+	
+	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
+	private WebElement findAPharmacyLink;
+	
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1687,6 +1695,11 @@ public class AccountHomePage extends UhcDriver {
 						scrollElementToCenterScreen(section_pharmacySearchLink);
 						moveMouseToElement(section_pharmacySearchLink);
 						section_pharmacySearchLink.click();
+					}
+					else if(noWaitValidate(pharamciesAndPrescriptionsLink)){
+						pharamciesAndPrescriptionsLink.click();
+						CommonUtility.waitForPageLoad(driver, findAPharmacyLink, 5);
+					    findAPharmacyLink.click();
 					}
 					else 
 						Assert.assertTrue("PROBLEM - unable to locate pharmacy locator link on Rally Dashboard page", false);
