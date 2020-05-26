@@ -25,7 +25,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		String memberType=testInputInfoMap.get("memberType");
 		if (docName.equals("How to read your bill")) {
 			testInputInfoMap.put("docName", docName);
-			testInputInfoMap.put("expectedUrl","/content/dam/shared/documents/How_To_Read_Your_Bill.pdf");
+			//tbd testInputInfoMap.put("expectedUrl","/content/dam/shared/documents/How_To_Read_Your_Bill.pdf");
+			testInputInfoMap.put("expectedUrl","/content/dam/UHCD/Individual/How_To_Read_Your_Bill.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab","true");
@@ -190,8 +191,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || docName.equals("Medicare Plan Appeals & Grievances Form")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medicare_Appeals_Grievances_Form.pdf");
-			if (memberType.contains("PEEHIP_GROUP"))
-				testInputInfoMap.put("expectedUrl", "/Group/Medicare_Appeals_Grievances_Form_PO_Box_6103.pdf");
+			if (memberType.contains("GROUP"))
+				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -248,8 +249,9 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
 			//tbd if (memberType.toUpperCase().contains("GROUP")) 
 			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
-			//tbd if (planType.toUpperCase().equals("MAPD") && memberType.toUpperCase().contains("GROUP")) 
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
+			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSUP"))
+					&& memberType.toUpperCase().contains("GROUP")) 
+			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
 			//tbd else if (planType.toUpperCase().equals("MA")) 
 			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf");
 			if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
@@ -333,11 +335,13 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_MAPD.pdf");
 			//tbd if (planType.toUpperCase().equals("PCP") || planType.toUpperCase().equals("MEDICA"))
 			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_MAPD.pdf");
-			if (planType.toUpperCase().equals("PDP"))
-				if (memberType.toUpperCase().contains("GROUP"))
-					testInputInfoMap.put("expectedUrl", "/Group//Disenrollment_Form_Group__PDP.pdf");
-				else
-					testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_PDP.pdf");
+			//tbd if (planType.toUpperCase().equals("PDP"))
+			//tbd 	if (memberType.toUpperCase().contains("GROUP"))
+			//tbd 		testInputInfoMap.put("expectedUrl", "/Group/Disenrollment_Form_Group__PDP.pdf");
+			//tbd 	else
+			//tbd 		testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_PDP.pdf");
+			if (planType.toUpperCase().equals("PDP")) 
+				testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_PDP.pdf");
 			else if (planType.toUpperCase().equals("MA"))
 				if (memberType.toUpperCase().contains("GROUP"))
 					testInputInfoMap.put("expectedUrl", "/Group/Disenrollment_Form_Group_MA.pdf");
