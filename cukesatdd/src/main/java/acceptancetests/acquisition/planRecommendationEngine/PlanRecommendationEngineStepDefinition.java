@@ -680,8 +680,8 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.navigateVPP(zip);
    	}
 	
-	@When("^I have added a drug to my drug list$")
-	public void I_have_added_a_drug_to_my_drug_list(DataTable givenAttributes) {
+	@When("^I have added a drugs to my drug list$")
+	public void added_drugs_to_my_drug_list(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
@@ -694,11 +694,8 @@ public class PlanRecommendationEngineStepDefinition {
 			Assert.fail("Drug Details content not loaded");
 	}
 
-	/**
-	 * @toDo:
-	 */
-	@And("^user selects drug details in drugs page$")
-	public void user_select_drugs(DataTable givenAttributes){
+	@And("^user selects drugs details in drugs page$")
+	public void user_select_drugs_drug_page(DataTable givenAttributes){
 		readfeaturedata(givenAttributes);
 		String drug = inputValues.get("Drug");
 		String dosage = inputValues.get("Dosage");
@@ -711,11 +708,9 @@ public class PlanRecommendationEngineStepDefinition {
 		DrugDetails.selectFrequency(frequency);		
 	}
 	
-	/**
-	 * @toDo:
-	 */
-	@When("^user successfully adds drug$")
-	public void user_successfully_adds_drug(DataTable givenAttributes){
+	
+	@When("^user successfully adds drugs$")
+	public void user_successfully_adds_drugs(DataTable givenAttributes){
 		readfeaturedata(givenAttributes);
 		String isBranded = inputValues.get("Is Branded Drug");
 		String drug = inputValues.get("Drug");
@@ -729,25 +724,22 @@ public class PlanRecommendationEngineStepDefinition {
 		DrugDetails.validateAddedDrug(drug);
 	}
 	
-	/**
-	 * @toDo:
-	 */
-	@And("^I navigate to step2 page$")
-	public void I_navigate_to_step2_page_aarp () 	{
+	@And("^I navigate to step2 page in DCE$")
+	public void I_navigate_to_step2_page_dce () 	{
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
 		dce.navigateToStep2();
 	}
 	
 	
-	@When("^I select the first pharmacy$")
-	public void I_select_the_drug() {
+	@When("^I select the first pharmacy in DCE$")
+	public void I_select_the_drug_dce() {
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
 		dce.select_first_pharmacy();
 		
 	}
 	
-	@Then("^I navigate to step3 page and validate$")
-	public void I_navigate_to_step_page(DataTable givenAttributes)  {
+	@Then("^I navigate to step3 page and validate in DCE$")
+	public void I_navigate_to_step_page_dce(DataTable givenAttributes)  {
 		readfeaturedata(givenAttributes);
 		String drug = inputValues.get("Drug");
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
@@ -758,8 +750,8 @@ public class PlanRecommendationEngineStepDefinition {
 		   Assert.fail("Error:the drug did not display on step 3 page"); 
 	}
 	
-	@And("^the user clicks on return link to navigate to plan summary$")
-	public void clickOnReturnLink(){
+	@And("^the user clicks on return link to navigate to plan summary page$")
+	public void clickOnReturnLink_page(){
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
 		dce.clickReturnToSummaryLink();
 	}

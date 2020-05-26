@@ -86,21 +86,21 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
-    And I have added a drug to my drug list
+    And I have added a drugs to my drug list
       | Drug | <drug> |
-    And user selects drug details in drugs page
+    And user selects drugs details in drugs page
       | Drug      | <drug>      |
       | Dosage    | <dosage>    |
       | Quantity  | <quantity>  |
       | Frequency | <frequency> |
-    When user successfully adds drug
+    When user successfully adds drugs
       | Is Branded Drug | <branded> |
       | Drug            | <drug>    |
-    And I navigate to step2 page
-    And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step2 page in DCE
+    And I select the first pharmacy in DCE
+    And I navigate to step3 page and validate in DCE
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    And the user clicks on return link to navigate to plan summary page
     Then user validate drugs details from DCE to VPP and PRE page
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
