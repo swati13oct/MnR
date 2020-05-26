@@ -1177,4 +1177,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - Call Hold not available for HD Medication ",
 				validateCurrentMedicationHavingHold(holdType));
 	}
+	
+	public void clickOnNextPageArrow() {
+		nextPageArrow.click();
+	}
+	
+	public boolean verifyRemainingPrescriptions() {
+		if(listOfDrugName.size()>0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void validateRemainingPrescriptionsOnMyMedPage() {
+		Assert.assertTrue("PROBLEM - Active Prescription not available on Next My Medication Page ",
+				verifyRemainingPrescriptions());
+	}
 }

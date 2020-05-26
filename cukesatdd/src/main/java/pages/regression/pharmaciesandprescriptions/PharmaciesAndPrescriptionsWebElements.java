@@ -519,6 +519,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	@FindBy(xpath="//h1[@class='sc-LzLrZ faEGzK sc-LzLPX eA-DpTF']")
      	protected WebElement MedicationName_OnDrugInfoPage;
+     	
+     	@FindBy(xpath="")
+     	protected WebElement nextPageArrow;
 
 
 }
