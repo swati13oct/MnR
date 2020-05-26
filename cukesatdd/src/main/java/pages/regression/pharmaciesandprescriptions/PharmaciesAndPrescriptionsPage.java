@@ -700,24 +700,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateNumberInParenthesis() {
 
 		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
-				NumberInParenthesis.getText().matches("[a-zA-Z0-9]+"));
+				alphaNumeric());
 	}
 
 	public void validateCorrespondingNumberInParenthesis() {
 
-		String numberTXT = NumberInParenthesis.getText();
-		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
-		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medication");
-		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
-		Assert.assertEquals(
+
+		Assert.assertTrue(
 				"PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
-				number, number2);
+				corredpondingMedicationsNumbers());
 
 	}
 
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
-				pnpValidate(Disclaimer));
+				disclaimer());
 	}
 
 	// F392596
@@ -762,6 +759,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateOrderStatus() {
 		Assert.assertTrue("PROBLEM - Order Status for applicable Medication not available",
 				validateOrderStatusForAssociatedCTA());
+	}
+
+	public void validateTrackStatusButton() {
+		Assert.assertTrue("PROBLEM - Track Status button for applicable Medication not available",
+				validateTrackStatusBtn());
+	}
+
+	public void validateDelivered() {
+		Assert.assertTrue("PROBLEM - Delivered for applicable Medication not available",
+				validateDeliveredStatus());
+	}
+
+	public void validateViewOrderButton() {
+		Assert.assertTrue("PROBLEM - View Order button for applicable Medication not available",
+				viewOrderButton());
 	}
 	
 	public void validateHDAssociateOrderStatus() {
