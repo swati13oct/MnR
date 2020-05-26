@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -87,6 +91,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview div.plan-name-div")
+	private List<WebElement> MAPlansId;
 	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-provider")
 	private WebElement enterProvidersInfoMA1stPlan;
@@ -190,6 +197,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview:nth-of-type(1) h3")
 	private WebElement PDP1stPlanName;
 	
+	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview h3")
+	private List<WebElement> PDPPlansId;
+	
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview:nth-of-type(1) .enrollment>div>a")
 	private WebElement PDP1stPlanEnroll;
 	
@@ -210,6 +220,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) h3")
 	private WebElement SNP1stPlanName;
+	
+	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview div.plan-name-div")
+	private List<WebElement> SNPPlansId;
 
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) .enroll-details>a:nth-of-type(2)")
 	private WebElement SNP1stPlanEnroll;
@@ -893,6 +906,184 @@ public void sendEmail(String plan, String email) {
 	emailSendButton.click();
 	validate(emailSuccess,15);
 	emailCloseButton.click();
+}
+
+public void validateUIAPIRecommendations() {
+	System.out.println("Validating UI vs API Plans Recommendation : ");
+	plansLoader();
+
+	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationResults");
+	String MAPriority = getAPIPlansRecommendation(rankingJSON, "MA");
+	String MSPriority = getAPIPlansRecommendation(rankingJSON, "MS");
+	String PDPPriority = getAPIPlansRecommendation(rankingJSON, "PDP");
+	String SNPPriority = getAPIPlansRecommendation(rankingJSON, "SNP");
+	String R1 = "", R2 = "";
+	int totalcount = 0;
+	if (MAPriority.length() == 1) {
+		totalcount++;
+		if (MAPriority.equals("1"))
+			R1 = "MA";
+		else
+			R2 = "MA";
+	}
+	if (MSPriority.length() == 1) {
+		totalcount++;
+		if (MSPriority.equals("1"))
+			R1 = "MS";
+		else
+			R2 = "MS";
+	}
+	if (PDPPriority.length() == 1) {
+		totalcount++;
+		R1 = "PDP";
+	}
+	if (SNPPriority.length() == 1) {
+		totalcount++;
+		R1 = "SNP";
+	}
+
+	if (totalcount > 2)
+		Assert.assertTrue(false, "Recommendation Count should not exceeds 2");
+
+	String recom = "Recommended";
+	String recom1 = "#1 Recommendation";
+	String recom2 = "#2 Recommendation";
+	if (R1.equals("1") && R2.equals("2"))
+		validateRecommendations(R1, recom1, R2, recom2);
+	if (R1.length() == 1 && R2.length() == 0)
+		validateRecommendations(R1, recom1, "", "");
+	if (R1.equals(R2) && R1.length() == 1)
+		validateRecommendations(R1, recom, R2, recom);
+	System.out.println("API vs UI Plan Recommendation Successful");
+}	
+
+public void validateUIAPIRankingPlans() {
+	System.out.println("Validating UI vs API Plans Ranking : ");
+	plansLoader();
+	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationResults");
+	List<String> maAPIRankings = getAPIPlansRanking(rankingJSON,"MA");
+	if(maAPIRankings.size()>0) {
+	validate(MA1stPlanName, 60);
+	verifyAPIRankings(MAPlansId,maAPIRankings);
+	driver.navigate().refresh();
+	plansLoader();
+	}
+	List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON,"PDP");
+	validate(PDP1stPlanName, 60);
+	verifyAPIRankings(PDPPlansId,pdpAPIRankings);
+	driver.navigate().refresh();
+	plansLoader();
+	List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON,"SNP");
+	if(snpAPIRankings.size()>0) {
+	validate(SNP1stPlanName, 60);
+	verifyAPIRankings(SNPPlansId,snpAPIRankings);
+	}
+}
+
+
+public List<String> getAPIPlansRanking(String rankingJSON, String givenPlanType) {
+
+	List<String> rankingOrder = new ArrayList<String>();
+	JSONParser parser = new JSONParser();
+	JSONArray jarray= new JSONArray();;
+	try {
+		jarray = (JSONArray) parser.parse(rankingJSON);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	JSONObject jsonObj = new JSONObject();
+	System.out.println(jarray.size());
+	System.out.println("GivenPlanType : " + givenPlanType);
+
+	for (int i = 0; i < jarray.size(); i++) {
+		// System.out.println(jarray.get(i));
+		jsonObj = (JSONObject) jarray.get(i);
+		String playtype = (String) jsonObj.get("planType");
+		// System.out.println("playtype : " + playtype);
+
+		if (playtype.equalsIgnoreCase(givenPlanType)) {
+			String priority = (String) jsonObj.get("priority");
+			System.out.println("priority : " + priority);
+			jarray = (JSONArray) jsonObj.get("planResponses");
+			System.out.println("Total Plans : " + jarray.size());
+			if(jarray.size()==0)
+				break;
+			int j = 0;
+			while (j < jarray.size()) {
+				System.out.println(jarray.get(j));
+				jsonObj = (JSONObject) jarray.get(j);
+				String apiRank = (String) jsonObj.get("rank");
+				System.out.println("Rank : " + apiRank);
+
+				if (Integer.parseInt(apiRank) == j + 1) {
+					String planID = (String) jsonObj.get("planId");
+					System.out.println(planID);
+					rankingOrder.add((String) jsonObj.get("planId"));
+					j++;
+				}
+			}
+			break;
+		}
+	}
+	return rankingOrder;
+}
+
+
+public String getAPIPlansRecommendation(String rankingJSON, String givenPlanType) {
+	JSONParser parser = new JSONParser();
+	JSONArray jarray = new JSONArray();
+	try {
+		jarray = (JSONArray) parser.parse(rankingJSON);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	JSONObject jsonObj = new JSONObject();
+	String recom = "";
+	//System.out.println(jarray.size());
+	System.out.println("GivenPlanType : " + givenPlanType);
+	for (int i = 0; i < jarray.size(); i++) {
+		jsonObj = (JSONObject) jarray.get(i);
+		String playtype = (String) jsonObj.get("planType");
+		if (playtype.equalsIgnoreCase(givenPlanType)) {
+			recom = (String) jsonObj.get("priority");
+			System.out.println("priority : " + recom);
+			break;
+		}
+	}
+	return recom.trim();
+}
+
+public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings) {
+	
+	List<String> vppPlans = new ArrayList<String>();
+	System.out.println(plansId.size());
+	for (WebElement e : plansId)
+		vppPlans.add(getplanId(e));
+	for (int i = 0; i < APIRankings.size(); i++) {
+		Assert.assertTrue(vppPlans.get(i).toUpperCase().contains(APIRankings.get(i).toUpperCase()),
+				"Invalid Plan Ranking between API and UI : " + vppPlans.get(i) + "<-> " + APIRankings.get(i));
+	}
+	System.out.println("API vs UI Plan Ranking Successful");
+}
+
+public String getplanId(WebElement plan) {
+	String planName = "";
+	String planId="";
+	int i = 0;
+	while (i < 5) {
+		planName = plan.getText().trim();
+		planId = plan.getAttribute("id");
+		System.out.println(planName);
+		if (planName.isEmpty()) {
+			i++;
+		} else
+			break;
+	}
+	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
+	System.out.println("UI Plan ID : "+planId);
+	return planId;
 }
 	
 }

@@ -88,7 +88,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zip Code | <Zipcode> |
     And I have added a drug to my drug list
       | Drug | <drug> |
-    And user selects drug details
+    And user selects drug details in drugs page
       | Drug      | <drug>      |
       | Dosage    | <dosage>    |
       | Quantity  | <quantity>  |
@@ -353,8 +353,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | Email                  |
       |   10003 | NO            | New York | PDP           | No             | julia_dowden@optum.com |
-      
-    @PRE @planrecommandonation @EmailList @F452764
+
+  @PRE @planrecommandonation @EmailList @F452764
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate Email plan list in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -384,4 +384,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Ranking plans Order | <RankingplansOrder>     |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder      |
+      |   32111 | No            | Marion   | MAPD          | Medicaid     | outsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
+      |   10001 | No            | New York | MAPD          | None         | None      | UHCNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |

@@ -217,7 +217,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.navigationToPlanRecommendationEngine();
+//		headerAndFooter.navigationToPlanRecommendationEngine();
 		headerAndFooter.breadCrumbs();
 	}
 	
@@ -697,8 +697,8 @@ public class PlanRecommendationEngineStepDefinition {
 	/**
 	 * @toDo:
 	 */
-	@And("^user selects drug details$")
-	public void user_selects_drug_details(DataTable givenAttributes){
+	@And("^user selects drug details in drugs page$")
+	public void user_select_drugs(DataTable givenAttributes){
 		readfeaturedata(givenAttributes);
 		String drug = inputValues.get("Drug");
 		String dosage = inputValues.get("Dosage");
@@ -913,4 +913,11 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"), status);
 	}
+	
+	@Then("^user validate UI and API recommendation rankings in results page$")
+   	public void verify_UI_API_rankings_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+//		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRankingPlans();
+   	}
 }
