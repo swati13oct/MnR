@@ -2269,7 +2269,7 @@ public class OneTimePaymentAarpStepDefintion {
 		recurringConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
 	}
 	
-	@And("^delete recurring payment record from GPS so that he can run recurring payment again$")
+	@And("^the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecord(DataTable givenAttributes) throws InterruptedException{
 		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
 		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
