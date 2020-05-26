@@ -40,6 +40,15 @@ public class CurrentMedicationStepDefinition {
 
 	AppiumDriver wd;
 	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
 
 	@Given("^login with following details logins in the uhc rx portal On Mobile$")
 	public void login_with_following_details_logins_in_the_uhc_rx_portal_On_Mobile(DataTable memberAttributes) {
