@@ -249,13 +249,13 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
 			//tbd if (memberType.toUpperCase().contains("GROUP")) 
 			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
+			//tbd else if (planType.toUpperCase().equals("MA")) 
+			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf");
+			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
+				testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf");
 			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSP"))
 					&& memberType.toUpperCase().contains("GROUP")) 
 			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
-			//tbd else if (planType.toUpperCase().equals("MA")) 
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf");
-			if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
-				testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
