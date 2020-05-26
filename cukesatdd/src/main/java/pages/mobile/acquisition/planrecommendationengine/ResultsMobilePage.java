@@ -734,12 +734,10 @@ public class ResultsMobilePage extends UhcDriver {
 		}
 	}
 
-	
 	public List<String> getAPIPlansRanking(String rankingJSON, String givenPlanType) {
-
 		List<String> rankingOrder = new ArrayList<String>();
 		JSONParser parser = new JSONParser();
-		JSONArray jarray= new JSONArray();;
+		JSONArray jarray = new JSONArray();
 		try {
 			jarray = (JSONArray) parser.parse(rankingJSON);
 		} catch (ParseException e) {
@@ -761,10 +759,9 @@ public class ResultsMobilePage extends UhcDriver {
 				System.out.println("priority : " + priority);
 				jarray = (JSONArray) jsonObj.get("planResponses");
 				System.out.println("Total Plans : " + jarray.size());
-				if(jarray.size()==0)
+				if (jarray.size() == 0)
 					break;
-				int j = 0;
-				while (j < jarray.size()) {
+				for (int j = 0; j < jarray.size(); j++) {
 					System.out.println(jarray.get(j));
 					jsonObj = (JSONObject) jarray.get(j);
 					String apiRank = (String) jsonObj.get("rank");
@@ -774,16 +771,30 @@ public class ResultsMobilePage extends UhcDriver {
 						String planID = (String) jsonObj.get("planId");
 						System.out.println(planID);
 						rankingOrder.add((String) jsonObj.get("planId"));
-						j++;
+					} // If Rank order is changed in JSON response
+					else {
+						System.out.println("JSON Ranking Order changed finding accurate Rank...");
+						for (int k = 0; k < jarray.size(); k++) {
+							//System.out.println(jarray.get(k));
+							jsonObj = (JSONObject) jarray.get(k);
+							apiRank = (String) jsonObj.get("rank");
+							//System.out.println("Rank : " + apiRank);
+							if (Integer.parseInt(apiRank) == j + 1) {
+								String planID = (String) jsonObj.get("planId");
+								System.out.println(planID);
+								rankingOrder.add((String) jsonObj.get("planId"));
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
 		}
+		Assert.assertTrue(rankingOrder.size()==jarray.size(), "API ranking count is not in sync with plans count");
 		return rankingOrder;
 	}
 
-	
 	public String getAPIPlansRecommendation(String rankingJSON, String givenPlanType) {
 		JSONParser parser = new JSONParser();
 		JSONArray jarray = new JSONArray();

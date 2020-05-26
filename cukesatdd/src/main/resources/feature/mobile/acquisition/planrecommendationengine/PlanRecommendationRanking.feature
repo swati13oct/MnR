@@ -151,22 +151,3 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | OutsideUS    | AcceptsMedicare  |             |               | No            | No,No,No,Yes                  | Higher               | SNP                   | D-SNP:C-SNP:I-SNP |
       |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | OutsideUS    | AcceptsMedicare  |             |               | No            | No,No,No,Yes                  | Higher               | SNP                   | C-SNP:I-SNP:D-SNP |
       |   32111 | No            | Marion | MAPD          | Nursing                  | OutsideUS    | AcceptsMedicare  |             |               | No            | No,No,No,Yes                  | Higher               | SNP                   | I-SNP:D-SNP:C-SNP |
-
-  @PRE @Rankingmobile @APIRankingmobile @F358846
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -Rankings <RankingplansOrder>- To validate API ranking plans in PRE Mobile
-    Given the user is on UHC medicare acquisition site mobile
-    And user navigates to Zip Code page mobile
-    And runs questionnaire at zipcode page mobile
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | County Name     | <County>        |
-    And user selects plan type in coverage options page mobile
-      | Plan Type | <isCoverageOpt> |
-    Then user selects add drug option without drugs in Drug page mobile
-      | Drug Selection | <DrugSelection> |
-    And user validate elements in loading page mobile
-    Then user validate UI and API recommendation rankings in results page mobile
-
-    Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | 
-      |   10001 | No            | New York | PDP           | Yes           | 
