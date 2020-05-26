@@ -3,6 +3,8 @@ package pages.regression.planDocumentsAndResources;
 import java.util.HashMap;
 import org.junit.Assert;
 
+import atdd.framework.MRScenario;
+
 /**
  * @Functionality : Plan Documents and Resources page - setup test data for testing
  * These are the places that need updating if adding/modify test users:
@@ -191,8 +193,9 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || docName.equals("Medicare Plan Appeals & Grievances Form")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medicare_Appeals_Grievances_Form.pdf");
-			//tbd if (memberType.contains("GROUP"))
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
+			if (MRScenario.environment.equalsIgnoreCase("offline") && MRScenario.environment.equalsIgnoreCase("prod"))
+				if(planType.equalsIgnoreCase("MAPD") && memberType.contains("GROUP"))
+					testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
