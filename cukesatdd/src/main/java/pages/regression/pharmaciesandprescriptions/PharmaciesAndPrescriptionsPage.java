@@ -762,6 +762,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateOrderStatusForHDDrug());
 	}
 	
+	public void validateHDOrderStatusForInProg() {
+		Assert.assertTrue("PROBLEM - Order Status for in progress Home Delivery Drug not available",
+				validateOrderStatusForHDDrug());
+	}
+	
 	List<String> listOfOrderStatusForHDMedicine = new ArrayList<>(Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Processing","Shipped","Delivered"));
 	
 	public boolean validateOrderStatusForHDDrug() {
@@ -1063,7 +1068,55 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		} else {
 			return false;
 		}
-	}	
+	}
+	
+	
+	public boolean clickOnTrackOrderStatus(String orderStatus) {
+		return true;		
+	}
+	
+	public boolean clickOnHDDrugCTA(String orderStatus,String callToAction) {
+		List<Integer> listOfIndex = getOrderStatusIndexBasedOnStatusValue(orderStatus);
+		if (listOfIndex.size() != 0) {
+			for (Integer val : listOfIndex) {
+				if (listOfCallToActionOnMedication.get(val).getText().equals(callToAction)) {
+					listOfCallToActionOnMedication.get(val).click();
+					return true;
+				}else {
+					return false;
+					}
+				}
+			}
+		return false;		
+	}
+	
+	public boolean validateOderStatusPageURL() {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-status")) {
+			return true;
+		}
+		else {
+			return false;
+		}		
+	}
+	
+	public void validateOderStatusPage() {
+		Assert.assertTrue("PROBLEM - Order Status page is not displayed",validateOderStatusPageURL());		
+	}
+	
+	public void validateClickOnHDDrugCTA(String orderStatus,String callToAction) {
+		Assert.assertTrue("PROBLEM - "+ orderStatus+ " Call to action button is not available on Current Medication",clickOnHDDrugCTA(orderStatus, callToAction));
+	}
+	
+	public void validateClickOnTrackOrderStatus() {
+		List<String> list = Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Processing","Processed","Shipped");
+		ArrayList<String> inprogressOrderStatus = new ArrayList<String>();
+		inprogressOrderStatus.addAll(list);
+		for(String status:inprogressOrderStatus) {
+			clickOnTrackOrderStatus(status);
+		}
+		//getListOfIndexForTrackCTA();
+		//Assert.assertTrue("PROBLEM -  "+ callToAction +" call to action button is not available for In Progress Order on Current Medication",clickOnTrackOrderStatus()));
+	}
 	
 	public void validateOrderStatusForHDDrug(String orderStatus) {
 		Assert.assertTrue("PROBLEM - "+orderStatus+ " Status not available on Current Medication", getOrderStatusIndexBasedOnStatusValue(orderStatus).size()>0);

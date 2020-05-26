@@ -17,6 +17,8 @@ import acceptancetests.data.PageConstants;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -425,29 +427,30 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user views a Refill Medication call to action button on that medication's row$")
-	public void user_views_a_Refill_Medication_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
+	@When("^user have a home delivery medication eligible for refill$")
+	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		//pnpPg.validateRefillMedications(); need to verify --> Kiran
+		pnpPg.validateOrderStatusForHDDrug("refill");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
-	@When("^user views a Renew Medication call to action button on that medication's row$")
-	public void user_views_a_Renew_Medication_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
+	@When("^user views a home delivery medication eligible for renewal$")
+	public void user_views_a_home_delivery_medication_eligible_for_renewal() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateRenewMedications();
+		pnpPg.validateOrderStatusForHDDrug("renewal");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
-	@When("^user views  an active medication currently in progress for home delivery$")
+	@When("^user views an active medication currently in progress for home delivery$")
 	public void user_views_an_active_medication_currently_in_progress_for_home_delivery() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHDOrderStatusForInProg();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 	@Then("^user views a Track Status call to action button on that medication's row$")
@@ -469,7 +472,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_Refill_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickRefillMedicationsCTA();
+		pnpPg.validateClickOnHDDrugCTA("refill","Refill Medication");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -483,27 +486,48 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user clicks the Renew Medication call to action button$")
 	public void user_clicks_the_Renew_Medication_call_to_action_button() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateClickOnHDDrugCTA("renwal","Renew Medication");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 	@When("^user views a home delivery medication on hold$")
 	public void user_views_a_home_delivery_medication_on_hold() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOrderStatusForHDDrug("on hold");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
 	@When("^user clicks the Resolve Hold call to action button$")
 	public void user_clicks_the_Resolve_Hold_call_to_action_button() throws Throwable {
-
-	}
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateClickOnHDDrugCTA("on hold","Resolve Hold");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	
+	} 
 
 	@When("^user clicks the Track Status call to action button on that medication's row$")
 	public void user_clicks_the_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
+		/*PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		//pnpPg.
+		
+		
+		// -->
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);*/
+	
 	}
 
-	@Then("^user views the Home Delivery tab on the Drug Info page for that medication$")
-	public void user_views_the_Home_Delivery_tab_on_the_Drug_Info_page_for_that_medication() throws Throwable {
-
+	@Then("^user view the Order Status page for that medication$")
+	public void user_view_the_Order_Status_page_for_that_medication() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOderStatusPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	
 	}
 
 	@When("^user clicks the View order call to action button on that medication's row$")
