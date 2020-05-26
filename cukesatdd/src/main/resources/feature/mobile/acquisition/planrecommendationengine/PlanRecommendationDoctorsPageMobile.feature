@@ -83,7 +83,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
       | SNP Options | <SpecialNeeds> |
     And user selects Travel options in Travel Page mobile
       | Travel Options | <TravelOption> |
-    Then user selects Doctors in Doctors page mobile and validate errors
+    Then user selects Doctors in Doctors page and validate errors mobile
       | Doctors Selection   | <DoctorsSelection> |
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
@@ -106,7 +106,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
       | SNP Options | <SpecialNeeds> |
     And user selects Travel options in Travel Page mobile
       | Travel Options | <TravelOption> |
-    Then user selects Doctors in Doctors page mobile and cancels the selection
+    Then user selects Doctors in Doctors page and cancels the selection mobile
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 

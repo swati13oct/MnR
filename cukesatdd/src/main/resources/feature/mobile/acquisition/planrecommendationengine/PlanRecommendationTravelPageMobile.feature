@@ -52,7 +52,7 @@ Feature: Plan Recommendation Engie flow - Verify Care Away from Home - Travel pa
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page mobile
       | SNP Options | <SpecialNeeds> |
-    Then user selects Travel options in Travel Page mobile and validate errors
+    Then user selects Travel options in Travel Page and validate errors mobile
       | Travel Options | <TravelOption> |
 
     Examples: 

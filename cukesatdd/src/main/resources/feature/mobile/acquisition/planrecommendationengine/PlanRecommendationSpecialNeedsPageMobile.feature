@@ -46,7 +46,7 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
       | County Name     | <County>        |
     And user selects plan type in coverage options page mobile
       | Plan Type | <isCoverageOpt> |
-    Then user selects SNP options in Special Needs Page mobile and validate errors
+    Then user selects SNP options in Special Needs Page and validate errors mobile
       | SNP Options | <SpecialNeeds> |
 
     Examples: 
