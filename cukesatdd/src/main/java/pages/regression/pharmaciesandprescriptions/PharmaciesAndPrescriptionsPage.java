@@ -571,6 +571,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element",
 				pnpValidate(whatsNewCallToActnBtn));
 	}
+	
+	//F436319 Whats New Call To Action
+	public void validateWhatsNewCallToActionNOTDisplayedOnPnPPage() {
+		Assert.assertFalse("PROBLEM - able to locate whats new call to action element", 
+						    pnpValidate(whatsNewCallToActnBtn));
+	}
 
 	// F436319
 	public void validateImageWhatsNewCallToActionOnPnPPage() {
