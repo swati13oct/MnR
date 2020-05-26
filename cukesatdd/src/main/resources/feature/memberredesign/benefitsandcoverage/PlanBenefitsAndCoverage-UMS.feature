@@ -85,7 +85,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | Combo    | ComboFEDShip_BnC |
+      | 15091 | SHIP_HIP    | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
   #Peehip members are discontinued from PROD. None of the available members are Active .Terminated members dont have the BNC page display.
