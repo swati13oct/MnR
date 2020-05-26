@@ -187,7 +187,7 @@ q2_jun_grp0082/Password@1,Peehip,Group_BnC,,
 q2_jun_grp0255/Password@1,SSUP,COMBO_Group_BnC,,
 eff_ssup_grp01/Password@11,SSUP,Group_BnC,GrpEffectiveSSUP,NoRider
 q2_jun_ship0003/Password@1,MedSupp,Individual_BnC,EffectiveShipMedSupp,NoRider
-q3_sep_Active_combo_002/Password@1,Combo,ComboFEDShip_BnC,,
+q3_sep_Active_combo_002/Password@1,SHIP_HIP,ComboFEDShip_BnC,,
 q1_feb_2020SHIP_003/Password@1,HIP,SHIP_BnC,,
 q2_june_combo0017/Password@1,Combo,MAPDANDSHIP_BnC,,
 q3_Sep_UAT4_Sofl020/Password@1,Medica,Individual_BnC,NON LIS,
