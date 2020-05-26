@@ -1,5 +1,5 @@
 @vppPlanCompareUHC 
-Feature: Vpp to plan Compare UHC Scenarios
+Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
   @vppPlanCompareUHC01 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> Plan Type: <plantype> - Verify Rally Tool from plan compare for UHC

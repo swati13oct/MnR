@@ -146,9 +146,16 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Look up Drugs')]")
 	protected WebElement LookUpDrugsButton;
+	
+	@FindBy(xpath = "//span[contains(text(),'DRUG LOOKUP')]")
+	protected WebElement LookUpDrugsButtonSection;
+	
 
 	@FindBy(xpath = "//a[contains(text(),'VIEW DETAILS AT OPTUMRX.COM')]")
 	protected WebElement viewDetailsAtOptumrxLink;	
+	
+	@FindBy(xpath = "//p[contains(text(),'PRESCRIPTION DRUG COST SUMMARY')]")
+	protected WebElement viewDetailsAtOptumrxLinkSection;	
 	
 	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	protected WebElement DrugCopayHeader;
@@ -1024,12 +1031,18 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(linkText = "Express Scripts")
 	protected WebElement expressScriptsLink;
 	
+	@FindBy(xpath = "//h3[contains(text(),'Access your Drug Benefits')]")
+	protected WebElement accessYourDrugBenefitsHeader;	
+	
 	@FindBy(id = "proceedbtn")
 	protected WebElement proceedButtonExpressScriptsSSOSiteLeavingPopup;
 	
 	@FindBy(xpath = "//div[@class='intlogo']")
 	protected WebElement ExpressScriptsLogo;
 
+	@FindBy(xpath = "//a[@id='intlogo']")
+	protected WebElement ExpressScriptsLogoPROD;
+	
 	@FindBy(xpath = "//h1")
 	protected WebElement BenefitsInformationHeaderOptumRx;
 	
@@ -1038,6 +1051,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(linkText = "VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM")
 	protected WebElement viewYourCurrentPrescriptionDrugCostSummaryLink;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
+	protected WebElement ShipTab;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Senior Supplement Plan')]")
+	protected WebElement SSUPTab;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

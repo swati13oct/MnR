@@ -713,4 +713,16 @@ public class MemberAuthStepDefinition{
 	
 	}
 	
+	@Then("^the user navigates to payments overview page$")
+	public void the_user_navigates_to_payments_overview_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigateDirectToPaymentHitorypage();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
 }

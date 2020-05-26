@@ -24,7 +24,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
+import pages.memberrdesignVBF.TestHarness;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -54,7 +56,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 
 	/**
-	 * To check headers on Benfits and coverage page
+	 *To check headers on Benefits and coverage page
 	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 		try {
@@ -1251,23 +1253,54 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
+		System.out.println("Actual logo's source on Secondary page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);          
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page main logo assert condition is passed");              
-	}
+		System.out.println("Secondary page main logo assert condition for image source is passed");  
+		
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+			        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+			        if (!ImagePresent)
+			        {
+			         System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			         System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+			         Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+			        }
+			        else
+			        {
+			        	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			            System.out.println("naturalWidth is not zero , Logo image was displayed.");
+			         }
 
+	}
+	
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
+		System.out.println("Actual cologo's source on secondary page is   " + cologo_src
 				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page co logo assert condition is passed");
+		System.out.println("Secondary page co logo assert condition for image source is passed");
+		System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+		System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+        if (!ImagePresent)
+        {
+         System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+         System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+         Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+        }
+        else
+        {
+        	System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+            System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+            
+        }
 	}
-
+	
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {
 		validateWithValue("Paln name", planName2);
@@ -2010,6 +2043,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	{
 		System.out.println("Now checking for Tech Support Number for Pre-effective members");
 		System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+		System.out.println("Expected Tech Support phone number from feature file is "+technicalPhNo);
 		Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
 		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
@@ -3100,5 +3134,31 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(SearchProvider,0);
 		validateNew(StartSearch,0);
 	}
-}
+	
+	public void navigateToSHIPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Plan Tab");
+		try {
+			ShipTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SHIP Plan Tab was not displayed");
+			Assert.fail("SHIP Plan Tab was not displayed");
+		}
+	}
 
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
+	}
+}

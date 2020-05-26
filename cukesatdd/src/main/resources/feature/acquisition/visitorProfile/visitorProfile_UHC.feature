@@ -193,7 +193,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
       | Plan Name | <planName> |
       | Plan Type | <plantype> |
-    Then the user validates TFN in Welcome OLE Right Rail
+#    Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
@@ -225,7 +225,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
+#    Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
