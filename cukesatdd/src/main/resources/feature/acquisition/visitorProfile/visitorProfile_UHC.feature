@@ -37,7 +37,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2019 |
 
-  @addDrugsDCE
+  @addDrugsDCE @prodRegression
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -94,7 +94,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              | plantype | planYear |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |     2020 |
 
-  @addPlansVPP
+  @addPlansVPP @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -146,7 +146,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | UID       | zipcode | isMultiCounty | plantype | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
-  @vPPMSSavedPlan
+  @vPPMSSavedPlan @prodRegression
   Scenario Outline: Verify user is save medsupp plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -263,7 +263,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   #Examples:
   #| UID       | zipcode | isMultiCounty | county          | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
   #| US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
-  @providerFlowUHC
+  @providerFlowUHC @prodVP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -357,3 +357,26 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Examples: 
       | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | testPlans                                                                 |
       |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+
+   @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC @prodRegression
+  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
+ 		Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user saves all plans as favorite on UHC site
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then Navigate to Visitor Profile page on UHC site
+    And user validates the added plans on visitor profile page of UHC site
+      | Test Plans | <testPlans> |
+    And user selects four plans to compare from visitor Profile on UHC site
+      | Test Plans | <testPlans> |
+    Then verify the plans on plan compare page on UHC site
+      | Test Plans | <testPlans> |
+
+    Examples: 
+      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                                                                                                                                                                                        |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+   
