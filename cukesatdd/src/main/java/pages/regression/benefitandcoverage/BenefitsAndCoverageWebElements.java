@@ -643,7 +643,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]//*[contains(text(),'View other documents')]")
 	protected WebElement viewDocsAndResourcesLinkShip;
 
-	@FindBy(id = "benefitsSummary")
+	@FindBy(id = "//*[@id=benefitsSummary]")
 	protected WebElement benefitsSummarySection;
 
 	@FindBy(id = "formsandresourcesC1")
