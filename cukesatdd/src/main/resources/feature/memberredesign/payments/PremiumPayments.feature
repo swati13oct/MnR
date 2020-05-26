@@ -64,7 +64,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Account holder last name   | <lastName>         |
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
-    And the user delete recurring payment record from GPS so that he can run recurring payment again
+    And delete confirmation number GPS for recurring payment
       | Payment Type | <paymentType> |
 
     Examples: 
@@ -88,12 +88,12 @@ Feature: 1.19 Verify the premium payment flows on member portal
       | Year             | <validYear>        |
     And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
-    And the user delete recurring payment record from GPS so that he can run recurring payment again
+    And delete confirmation number GPS for recurring payment
       | Payment Type | <paymentType> |
 
     Examples: 
       | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |
-      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
+      | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
       | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |
 
   #Test Case 04
