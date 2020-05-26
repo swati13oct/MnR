@@ -230,7 +230,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
      
       Examples: 
       | zipcode | isMultutiCounty | county               | plantype | drug    | dosage   | quantity | frequency     | branded |radius  |testPlans|
-      |  19019 | No               | Iowa County      | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles    |AARP Medicare Advantage Choice Plan 1 (PPO)|
+      |  19019 | No               | Iowa County      | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles    |AARP Medicare Advantage Choice Plan 2 (PPO),AARP Medicare Advantage Choice Plan 1 (PPO)|
       
       
       @vppUnsavedEnrollMAPDPlan
@@ -434,7 +434,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     
      Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |testPlans|
-      |   19019 | No              | Iowa County    | PDP      |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles  | AARP MedicareRx Walgreens (PDP) |
+      |   19019 | No              | Iowa County    | PDP      |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles  | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)|
   
    @vppPDPToMAPD
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for MAPD Plan when user adds Drug cost from PDP page
