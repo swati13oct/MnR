@@ -9,4 +9,5 @@
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page on Mobile
     And user have active retail medications
     Then user will see a "Green" "Contact Pharmacy" button
+    And user will see
  
