@@ -73,7 +73,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page- Member Auth - PROD
    @prod_pharmaciesandprescriptions01d
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | ashah120 | Mnrqa002 | q3_sep_UAT4_UHC116    | PDP      | COMBO_GROUP_PnP	    | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | Norm749    | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################

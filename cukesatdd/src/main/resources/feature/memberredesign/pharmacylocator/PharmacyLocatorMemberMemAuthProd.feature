@@ -115,14 +115,14 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	@prod_pharmacylocator2b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15295	| ashah120 | Mnrqa002 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | False             | True            | True                 |
 
 	@prod_pharmacylocator2b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15274	| ashah120 | Mnrqa002 | lanecarolb    | MA       | TexasRx_Pharmacylocator	   | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
-	  | 15274	| ashah120 | Mnrqa002 | ILIAM51    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	  #| 15274	| ashah120 | Mnrqa002 | lanecarolb    | MA       | TexasRx_Pharmacylocator	   | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
+	  | 15274	| ashah120 | Mnrqa002 | ILIAM51    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | False             | False                 |
 	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
 	# | 15273	| Mnrqa002 | Mnrqa002 | testusername    | MAPD     | Peehip_Pharmacylocator  	   | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 
