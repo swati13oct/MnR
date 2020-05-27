@@ -1,5 +1,5 @@
 @fastandfurious @OLE @MA_OLE_UHC_PCP @prodRegression  @F401735 @F427603
-Feature: 2.05.1.ACQ-OLE MA UMS
+Feature: 2.05.1.ACQ-OLE MA AMS
 
   @MA_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
@@ -15,10 +15,12 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | PlanName | <planName> |
     When user selects a multiple providers and retuns to VPP page in ums
     Then User store the information provided from rally to vpp page in ums 
-    | PlanName | <planName> |  
+    	| PlanName | <planName> |  
    	Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planName> |
+    	| Plan Name | <planName> |
    	Then the user validates the Plan details on OLE
+   	Then the User Validates Marketing Bullets for Welcome OLE
+   		| PlanName | <planName> |
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
    	Then the user validates Leave OLE modal for Welcome OLE

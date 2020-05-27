@@ -360,6 +360,14 @@ public class ProviderSearchStepDefinitionAARP {
 	plansummaryPage.setStringList(providers);
 	Assert.assertFalse("Providers not added",providers.isEmpty());
 	
+	//Adding Line for Marketing bullet points
+	VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
+	plansummaryPage1.setStringList(vppmarketingBullets);
+	Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+	// Line End for Marketing bullet points
 	}
 		
 

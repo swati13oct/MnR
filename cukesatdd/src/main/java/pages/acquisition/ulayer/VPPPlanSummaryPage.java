@@ -3704,4 +3704,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 	}
+
+
+	public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+		
+	}
+
 }
