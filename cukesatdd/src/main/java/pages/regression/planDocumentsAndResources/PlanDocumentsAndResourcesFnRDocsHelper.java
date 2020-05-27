@@ -257,7 +257,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
 					|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
 				testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf");
-			if ((planType.toUpperCase().equals("MA") || planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSP"))
+			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSP"))
 					&& memberType.toUpperCase().contains("GROUP")) 
 			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
