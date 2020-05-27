@@ -26,7 +26,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Additional";
+	String page = "Additional Services";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -35,7 +35,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 
 // Additional Services page Elements
 
-	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
+	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
 
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
@@ -111,22 +111,21 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 	
 //Additional Page Element Verification Method 
 
-	public void additionalpage() {
+	public void additionalpage(String drugInfo) {
 		System.out.println("Validating Additional Services Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 8: Additional"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("56% Complete"));
+		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(additionalTitle);
-		Assert.assertTrue(additionalTitle.getText().contains("additional"));
+//		Assert.assertTrue(additionalTitle.getText().contains("additional"));
 		validate(additionalTitleInfo);
-		Assert.assertTrue(additionalTitleInfo.getText().contains("additional"));
+//		Assert.assertTrue(additionalTitleInfo.getText().contains("additional"));
 		
 		validate(dentalQuestion, 30);
 		Assert.assertTrue(dentalQuestion.getText().contains("Dental"));
@@ -139,7 +138,10 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		if(drugInfo.toUpperCase().contains("NO"))
+			desktopCommonUtils.previousPageValidation(page.toUpperCase()+"skip");
+		else
+			desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 // Selecting additional options in additional Page
@@ -190,18 +192,18 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Additional Page Error Function Verification     
 
 	public void additionalpageerror(String additionalOptions) {
-		System.out.println("Additional option is not selected - Error Scenario in additional Page");
+		System.out.println("Additional option is not selected - Error Scenario in Additional Page");
 		continueBtn.click();
-		Assert.assertTrue(dentalError.getText().contains("No"));
-		Assert.assertTrue(hearingError.getText().contains("No"));
-		Assert.assertTrue(visionError.getText().contains("No"));
-		Assert.assertTrue(fitnessError.getText().contains("No"));
+		Assert.assertTrue(dentalError.getText().toUpperCase().contains("NO"));
+		Assert.assertTrue(hearingError.getText().toUpperCase().contains("NO"));
+		Assert.assertTrue(visionError.getText().toUpperCase().contains("NO"));
+		Assert.assertTrue(fitnessError.getText().toUpperCase().contains("NO"));
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 		if(validate(dentalError,5)==true) {
 			System.out.println("Dental Error is not closed");

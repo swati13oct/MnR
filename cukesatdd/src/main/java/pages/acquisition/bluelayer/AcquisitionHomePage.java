@@ -1836,15 +1836,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
-		if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")) {
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
-			// startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc",
-			// "digital-uatv2"));
-		} else {
-			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
-			// startNew(AARP_ACQISITION_PAGE_URL);
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
+			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
+		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
+			//startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			startNew(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
 		}
-		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
