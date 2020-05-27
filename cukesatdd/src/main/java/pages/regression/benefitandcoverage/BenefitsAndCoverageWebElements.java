@@ -1098,6 +1098,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Senior Supplement Plan')]")
 	protected WebElement comboTab_SSP_planDoc;
 
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
+	protected WebElement ShipTab;
+	
+	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Senior Supplement Plan')]")
+	protected WebElement SSUPTab;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

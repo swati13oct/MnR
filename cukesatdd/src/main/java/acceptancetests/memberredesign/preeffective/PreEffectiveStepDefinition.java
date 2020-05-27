@@ -108,16 +108,17 @@ public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttr
 	}
 
 	String memberType = memberAttributesMap.get("Member Type");
-	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
-	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
+	String planType = memberAttributesMap.get("PlanType");
+
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly") || memberType.equalsIgnoreCase("preeffectivePDPSHIPCOMBO")) 
 	{	
-		if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+		if ((MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness)) || (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")))
 		{
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
-			System.out.println("Not checking the Premium Payments link on Dashboard as the header elements cannot be identified.");
-			//AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-			//accountHomePage.validatePremiumPaymentTabDisplayed();	
+			System.out.println("Now checking if Premium Payments tab is displayed on Dashboard");
+			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+			accountHomePage.validatePremiumPaymentTabDisplayedOnDashboard(planType);	
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		
@@ -131,13 +132,13 @@ public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttr
 			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 		}
 		else {
-			System.out.println("Not verifying that Premium payment tab is displayed as the environment is not set to team-h or Stage");
+			System.out.println("Not verifying that Premium payment tab is displayed as the environment is not set to team-h or Stage or offline or prod");
 		}
 	}	
 	
 	else
 	{
-		System.out.println("Premium Payments tab was not validated and the step was skipped");
+		System.out.println("Premium Payments tab was not validated for the member type as they are not eligible for payments and the step was skipped");
 	}
    }
 	
@@ -223,6 +224,25 @@ public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage(Da
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
 	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
+	
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsCoveragePage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
+
+}
+
+@Then("^verify that correct SHIP phone number is displayed in technical support section of coverage and benefits page$")
+public void validateCorrectSHIPTechSupportNumberIsDisplayedOnBenefitsCoevargePage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN SHIP");
 	
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -412,7 +432,7 @@ public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)th
 
 	String memberType = memberAttributesMap.get("Member Type");
 	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
-	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly") || memberType.equalsIgnoreCase("preeffectivePDPSHIPCOMBO"))  
 	{	
 	
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -628,5 +648,139 @@ public void verity_that_correct_phone_number_is_displayed_in_Technical_Support_s
 	
                
 }
+
+@Then("^user clicks on the Premium Payment tab from Forms and Resources Page$")
+public void userClicksOnPremiumPaymentFromFormsAndResources(DataTable givenAttributes)throws Throwable {
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly") || memberType.equalsIgnoreCase("preeffectivePDPSHIPCOMBO")) 
+	{	
+	
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+		.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);      
+		PaymentHistoryPage paymentHistoryPage = formsAndResourcesPage.userClicksOnPremiumPaymentFromFormsAndResources();
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			
+		}           
+	}
+	
+	else
+	{
+		System.out.println("Premium Payments tab was not validated and the step was skipped as per Member Type used");
+	}
+}
+
+@Then("^verify that correct phone number is displayed in technical support section of Payments page$")
+public void validateCorrectTechSupportNumberIsDisplayedOnPaymentsPage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
+	String memberType = memberAttributesMap.get("Member Type");
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly") || memberType.equalsIgnoreCase("preeffectivePDPSHIPCOMBO")) 
+	{
+    PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+			.getBean(PageConstants.Payments_History_Page);	
+	paymentHistoryPage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
+	}
+	else
+	{
+		System.out.println("Tech Support number on Premium Payments tab was not validated and the step was skipped as per Member Type used");
+	}
+	}
+
+@When("^user clicks on SHIP Plan Tab on Benefits and Coverage tab$")
+public void userClicksOnSHIPPlanTabOnBenefitsPage() throws InterruptedException {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	
+	benefitsCoveragePage.navigateToSHIPTab();
+	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			 
+}
+
+@When("^user clicks on SSUP Plan Tab on Benefits and Coverage tab$")
+public void userClicksOnSSUPPlanTabOnBenefitsPage() throws InterruptedException {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	
+	benefitsCoveragePage.navigateToSSUPTab();
+	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			 
+}
+
+@When("^user clicks on SHIP Plan Tab on Payments page$")
+public void userClicksOnSHIPPlanTabOnPaymentsPage() throws InterruptedException {
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+			.getBean(PageConstants.Payments_History_Page);	
+	paymentHistoryPage.navigateToSHIPTab();
+	getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			 
+}
+@Then("^verify that correct SHIP phone number is displayed in technical support section of payments page$")
+public void validateCorrectSHIPTechSupportNumberIsDisplayedOnPaymentsPage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN SHIP");
+	
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+			.getBean(PageConstants.Payments_History_Page);	
+	paymentHistoryPage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
+	getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+}
+
+@Then("^verify that correct phone number is displayed in technical support section of forms and resources page$")
+public void validateCorrectTechSupportNumberIsDisplayedOnFormsAndResourcesPage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
+	
+	FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+			.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+	formsAndResourcesPage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
+	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+}
+
+@When("^user clicks on SSUP Plan Tab on forms and resources tab$")
+public void userClicksOnSSUPPlanTabOnFormsAndResourcesPage() throws InterruptedException {
+	FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+			.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+	
+	formsAndResourcesPage.navigateToSSUPTab();
+	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+			 
+}
+
 
 }

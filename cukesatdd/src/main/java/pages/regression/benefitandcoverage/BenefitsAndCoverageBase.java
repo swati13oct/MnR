@@ -572,6 +572,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
 		System.out.println("Now clicking the View Plan Documents Button");
 		viewPlanDocumentsButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		return new FormsAndResourcesPage(driver);
 	}
 	

@@ -1,7 +1,7 @@
 #!groovy
 //original author: Brian Wyka
 //modified for M&R by Olga Mackevica          
-// Global Variables
+// Global Variables    
 def pom, fullGitCommit, pipelineVersion
 def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
 def gitHubRepoUrl = 'https://github.optum.com/consumer-portals/mratdd.git'
