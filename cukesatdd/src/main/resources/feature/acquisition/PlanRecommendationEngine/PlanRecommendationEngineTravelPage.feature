@@ -15,10 +15,10 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
     Then user validate elements in Travel page
 
     Examples: 
-      | Zipcode | isMultiCounty | isCoverageOpt | specialNeeds                |
-      |   90201 | NO            | MAPD          | Medicaid,condition,facility |
+      | Zipcode | isMultiCounty | isCoverageOpt | specialNeeds             |
+      |   90201 | NO            | MAPD          | Medicaid,chronic,nursing |
 
-  @PRE @planrecommendation @travelpage @travelpageoptionselection @F372739 @regression
+  @PRE @planrecommendation @travelpage @travelpageoptionselection @F372739
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page positive scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -34,14 +34,14 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
       | Travel Options | <travel> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds                | travel                 |
-      |   90201 | NO            |              | MAPD          | Medicaid,condition,facility | within,another,primary |
-      |   78006 | YES           | Bexar County | MA            | Medicaid,condition,facility | within,another,primary |
-      |   45634 | NO            |              | PDP           | condition,facility          | within,another         |
-      |   10001 | NO            |              | NA            | facility                    | within                 |
-      |   12345 | NO            |              | MAPD          | None                        | None                   |
+      | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | travel                     |
+      |   90201 | NO            |              | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
+      |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
+      |   45634 | NO            |              | MAPD          | chronic,nursing          | withinUS,outsideUS         |
+      |   10001 | NO            |              | None          | nursing                  | withinUS                   |
+      |   12345 | NO            |              | MAPD          | None                     | None                       |
 
-  @PRE @planrecommendation @travelpage @travelpageerrorScenario @F372739 @regression
+  @PRE @planrecommendation @travelpage @travelpageerrorScenario @F372739
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page error scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -57,6 +57,6 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
       | Travel Options | <travel> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds                | travel              |
-      |   90201 | NO            |                  | MAPD          | Medicaid,condition,facility | within,another,None |
-      |   21212 | YES           | Baltimore County | MA            | facility                    |                     |
+      | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | travel                  |
+      |   90201 | NO            |                  | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,None |
+      |   21212 | YES           | Baltimore County | None          | nursing                  |                         |

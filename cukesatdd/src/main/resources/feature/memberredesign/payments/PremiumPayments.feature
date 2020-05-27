@@ -43,7 +43,7 @@ Feature: 1.19 Verify the premium payment flows on member portal
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear | paymentType |
       | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2028 | OneTime     |
-      | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2028 | OneTime     |
+     | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2028 | OneTime     |
 
   #Test Case 02
   @regressionMember
@@ -161,8 +161,8 @@ Feature: 1.19 Verify the premium payment flows on member portal
 
     Examples: 
       | TID       | planType | memberType                  |
-      | F242866   | MAPD     | UpdateRecurrStop_Payments   |
-      | US1588469 | PDP      | ComboUpdateStopRec_Payments |
+     | F242866   | MAPD     | UpdateRecurrStop_Payments   |
+     | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
   #Test Case 07
   @regressionMember
