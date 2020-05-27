@@ -473,6 +473,16 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'ordermaterials')]")
 	protected WebElement desktopOrderPlanFromBenefitSubLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'btn btn-outline-primary')])[1]")
+	private WebElement homePageNotice;
+
+	@FindBy(xpath = "//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+
+	@FindBy(xpath = "//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
+	
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -1225,25 +1235,32 @@ public class AccountHomePage extends UhcDriver {
 
 	public void verifyPageTitle() throws InterruptedException {
 		
-	CommonUtility.checkPageIsReadyNew(driver);	
-/*	 try {
-		 System.out.println("Now checking if Dashboard page Covid modal appeared");
-         CommonUtility.waitForPageLoad(driver, dashboardCovideModalDismissLink, 20);
-    
-  		  if (driver.getCurrentUrl().contains("/modal/coronavirus-prompt"))
-  				  {
-  			  System.out.println("Dashboard covid modal window was displayed");
-  			  dashboardCovideModalDismissLink.click();
-  			  System.out.println("Dismiss link on Dashboard covid modal window was clicked");
-  				  }
-  		         		  
-		} catch (Exception e) {
-			System.out.println("Dashboard covid modal window was not displayed");
-		}*/
+	    CommonUtility.checkPageIsReadyNew(driver);	
+	    if (driver.getCurrentUrl().contains("bannerpopup.html")) {
+			System.out.println("COVID 19 Banner page has appeared");
+			try {
+				CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
+				if (validate(homePageNotice, 0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (validate(homePageNotice2, 0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (validate(homePageNotice3, 0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}
+				Thread.sleep(3000);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Catch block");
+			}
+		} else {
+			System.out.println("COVID 19 Banner page did not appear");
+		}
 		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
-		
 		try {
-			//waitForHomePage(helloPerson);
+			
 			CommonUtility.waitForPageLoad(driver, helloPerson, 20);
 			System.out.println("Hello Name element was displayed : " + helloPerson.getText());
 		} catch (Exception e) {

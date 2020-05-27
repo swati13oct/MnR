@@ -170,7 +170,7 @@ public class ssoStepDefinition {
 	 */
 	@Given("^User lands on the ping federate SSO test harness page$")
 	public void the_user_is_pingFederate_Testharness_Page() throws InterruptedException {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		// adding to get screenshots
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -208,6 +208,7 @@ public class ssoStepDefinition {
 		String lastName = memberAttributesMap.get("Last Name");
 		String dateOfBirth = memberAttributesMap.get("DOB");
 		String mbi = memberAttributesMap.get("MBI");
+		String uhcid = memberAttributesMap.get("UHC_ID");
 		String applandingurl = memberAttributesMap.get("APPLANDINGURL");
 		System.out.println("Fetching values of various fields from Feature File");
 		System.out.println("firstName: " + firstName + "   lastName: " + lastName + "    dob: " + dateOfBirth
@@ -227,6 +228,8 @@ public class ssoStepDefinition {
 		System.out.println("Entered dob as : " + dateOfBirth);
 		bswiftpage.enterapplandingURL(applandingurl);
 		System.out.println("Entered APPLANDINGURL as : " + applandingurl);
+		bswiftpage.enterUHCID(uhcid);
+		System.out.println("Entered UHC_ID as : " + uhcid);
 
 	}
 
