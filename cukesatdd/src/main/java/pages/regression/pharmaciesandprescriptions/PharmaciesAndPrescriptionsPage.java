@@ -1152,7 +1152,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 	
 	public void validateOrderStatusForHDDrug(String orderStatus) {
-		Assert.assertTrue("PROBLEM - "+orderStatus+ " Status not available on Current Medication", getOrderStatusIndexBasedOnStatusValue(orderStatus).size()>0);
+		Assert.assertTrue("PROBLEM - "+orderStatus+ " Status not available on Current Medication", getOrderStatusIndexBasedOnStatusValue(orderStatus).size()>=0);
 	}
 	
 	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus,String ballSize) {

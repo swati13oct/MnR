@@ -52,7 +52,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927 @tip
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication image disclaimer
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -270,18 +270,18 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views a Refill Medication call to action button on that medication's row
+    When user have a home delivery medication eligible for refill
     Then user validates the external link icon in the button
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill_renewal |
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
@@ -290,19 +290,19 @@ Feature: MVP - Current Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views a Renew Medication call to action button on that medication's row
+    When user views a home delivery medication eligible for renewal
     Then user validates the external link icon in the button
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill_renewal |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869@tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When user views  an active medication currently in progress for home delivery
+    When user views an active medication currently in progress for home delivery
     Then user views a Track Status call to action button on that medication's row
     Examples: 
       | FID     | planType | memberType           |

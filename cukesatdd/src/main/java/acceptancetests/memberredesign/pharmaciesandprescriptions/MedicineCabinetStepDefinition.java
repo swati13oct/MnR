@@ -405,6 +405,7 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates the external link icon in the button$")
 	public void user_validates_the_external_link_icon_in_the_button() throws Throwable {
 
+
 	}
 
 	@When("^user views one of his active medications has a address hold on it$")
@@ -431,7 +432,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOrderStatusForHDDrug("refill");
+		pnpPg.validateOrderStatusForHDDrug("Refill");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
