@@ -5,6 +5,7 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -325,15 +326,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='component_title']")
 	private WebElement nextBestActionModalMsg;
 	
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors']")
-	private WebElement nextBestActionModalFindMyDoctorsBtn;
-	
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
-	private WebElement nextBestActionModalContinueEnrollmentBtn;
-	
-	@FindBy(xpath = "//button[contains(text(),'Get Started')]")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
 
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
+	private WebElement nextBestActionModalFindMyDoctorsBtn;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue to enrollment']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
@@ -641,7 +642,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//span[@class='multiple-added-text show']")
 		private WebElement multipleCompareText;
 		
-		@FindBy(xpath = "//div[@id='plan-list-1']//div[contains(@class,'plan-name-div')]//a[contains(@class,'ng-binding')]")
+		@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 		private List<WebElement> planNames;
 		
 		@FindBy(id = "change-location")
@@ -3549,36 +3550,59 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 		
 		public void verifySelectPlanForEnrollModalForSavedPlans(String planName) {
-			try {
-				List<String> expectedPlanNames = Arrays.asList(planName.split(","));
-				List<String> actualPlanNames=new ArrayList<String>();
-				if(selectPlanForEnrolModal.isDisplayed()) {
-					for(WebElement plan:plansInPopup) {
-						actualPlanNames.add(plan.getText());
+			try
+			{
+			List<String> expectedPlanNames = Arrays.asList(planName.split(","));
+			List<String> actualPlanNames = new ArrayList<String>();
+			if (selectPlanForEnrolModal.isDisplayed()) {
+				for (WebElement plan : plansInPopup) {
+					String text = plan.getText();
+					for (WebElement child : plan.findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
 					}
-					System.out.println(expectedPlanNames);
-					System.out.println(actualPlanNames);
-					Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans"+expectedPlanNames+ "\n Actual plans"+actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+					actualPlanNames.add(text.trim());
 				}
+				Collections.sort(expectedPlanNames);
+				Collections.sort(actualPlanNames);
+				System.out.println(expectedPlanNames);
+				System.out.println(actualPlanNames);
+				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
 			}
-			catch(Exception ex) {
+			} catch (Exception ex) {
 				System.out.println("NBA modal not found");
 			}
 		}
-		public void verifySelectPlanForEnrollModalForUnSavedPlans(String planName) {
-			try {
-				List<String> expectedPlanNames = Arrays.asList(planName.split(","));
-				List<String> actualPlanNames=new ArrayList<String>();
-				if(selectPlanForEnrolModal.isDisplayed()) {
-					for(WebElement plan:plansInPopup) {
-						actualPlanNames.add(plan.getText());
-					}
-					System.out.println(expectedPlanNames);
-					System.out.println(actualPlanNames);
-					Assert.assertTrue("UnSaved plans not displayed in Enroll Popup.../n Expected plans"+expectedPlanNames+ "\n Actual plans"+actualPlanNames, actualPlanNames.equals(expectedPlanNames));
-				}
+
+		public List<String> getSavedPlanNames() {
+			List<String> allPlanNames = new ArrayList<String>();
+			for (WebElement plan : planNames) {
+				allPlanNames.add(plan.getText());
 			}
-			catch(Exception ex) {
+			return allPlanNames;
+		}
+		
+		public void verifySelectPlanForEnrollModalForallPlans(List<String>allPlanNames) {
+			try {
+				List<String> actualPlanNames = new ArrayList<String>();
+				if (selectPlanForEnrolModal.isDisplayed()) {
+					for (WebElement plan : plansInPopup) {
+						String text = plan.getText();
+						for (WebElement child : plan.findElements(By.xpath("./*"))) {
+							text = text.replaceFirst(child.getText(), "");
+						}
+						actualPlanNames.add(text.trim());
+					}
+					Collections.sort(allPlanNames);
+					Collections.sort(actualPlanNames);
+					System.out.println(allPlanNames);
+					System.out.println(actualPlanNames);
+					Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
+							+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
+				}
+				
+			}
+				catch(Exception ex) {
 				System.out.println("NBA modal not found");
 			}
 		}

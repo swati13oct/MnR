@@ -1,4 +1,3 @@
-
   @vppNextActionModalUlayer @445017
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
@@ -93,7 +92,6 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |planName                                 |radius  |
       |  19019 | No               | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan|15 miles|
         
-    
    @vppNBAMAPDToPDP 
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when user adds Drug cost from MAPD page
    Given the user is on AARP medicare acquisition site landing page
@@ -226,14 +224,13 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
-      | Test Plans   | <testPlans> |
+       | Test Plans   | <testPlans> |
      
-      Examples: 
-      | zipcode | isMultutiCounty | county               | plantype | drug    | dosage   | quantity | frequency     | branded |radius  |testPlans|
-      |  19019 | No               | Iowa County      | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles    |AARP Medicare Advantage Choice Plan 2 (PPO),AARP Medicare Advantage Choice Plan 1 (PPO)|
-      
-      
-      @vppUnsavedEnrollMAPDPlan
+     Examples: 
+       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |testPlans|
+       |   19019 | No              | Iowa County    | MAPD     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |AARP Medicare Advantage Choice Plan 1 (PPO),AARP Medicare Advantage Choice Plan 2 (PPO)|
+  
+   @vppUnsavedEnrollMAPDPlan
       
     Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and no plans are saved
     Given the user is on AARP medicare acquisition site landing page
@@ -268,12 +265,12 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with unsaved plans in AARP site
+    Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
     | Test Plans   | <testPlans> |
       Examples: 
-      | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |planName                                 |radius  |testPlans|
-      |  19019 | No               | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan|15 miles|AARP Medicare Advantage Choice Plan 2 (PPO),AARP Medicare Advantage Choice Plan 1 (PPO),AARP Medicare Advantage (HMO)|
-      
+      | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |
+      |   19019 | No              | Iowa County    | MAPD     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |
+  
       
    #*****************************************************PDP**************************************************************************************
       
@@ -322,7 +319,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
    And I navigate to step3 page and validate
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
-   Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    
       Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                       | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | PDP     | AARP MedicareRx Walgreens (PDP) | 15 miles |
@@ -358,12 +356,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And the user clicks on return link to navigate to plan summary
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with unsaved plans in AARP site
-    | Test Plans   | <testPlans> |
+      | Test Plans   | <testPlans> |
       Examples:
-      | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                       | radius   |testPlans|
-      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | PDP     | AARP MedicareRx Walgreens (PDP) | 15 miles |AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP)|
-      
+       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |
+       |   19019 | No              | Iowa County    | PDP     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |
+       
        @vppDCEFlowtoNextActionModalPDP
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when drug added from DCE
     Given the user is on the AARP medicare site landing page
@@ -389,7 +386,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-   Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site 
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site 
     
     Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | radius   |
@@ -432,9 +429,47 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
    Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
       | Test Plans   | <testPlans>  |
     
-     Examples: 
+    Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |testPlans|
-      |   19019 | No              | Iowa County    | PDP      |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles  | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)|
+      |   19019 | No              | Iowa County    | PDP     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |AARP MedicareRx Walgreens (PDP),AARP MedicareRx Saver Plus (PDP)|
+   
+  @vppunSavedPDPPlans
+   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for PDP Plan when Drug cost and Enroll for All Plans 
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the AARP site
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    Then user Verify and click perform on Next Best Action Modal for Get Started
+    And I have added a drug to my drug list from VPP
+      | Drug | <drug> |
+    And user selects drug details
+      | Drug      | <drug>      |
+      | Dosage    | <dosage>    |
+      | Quantity  | <quantity>  |
+      | Frequency | <frequency> |
+    When user successfully adds drug
+      | Is Branded Drug | <branded> |
+      | Drug            | <drug>    |
+    And I navigate to step2 page
+    And the user selects the pharmacy tab information like miles, zipcode and pharmacy type
+      | Zipcode | <zipcode> |
+      | Radius  | <radius>  |
+    And I select the first pharmacy
+    And I navigate to step3 page and validate
+      | Drug | <drug> |
+    And the user clicks on return link to navigate to plan summary
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    Then user clicks on Continue Enrollment button in AARP Site
+    Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
+       | Test Plans   | <testPlans> |
+      Examples:
+       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |
+       |   19019 | No              | Iowa County    | PDP     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |
+      
   
    @vppPDPToMAPD
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for MAPD Plan when user adds Drug cost from PDP page
