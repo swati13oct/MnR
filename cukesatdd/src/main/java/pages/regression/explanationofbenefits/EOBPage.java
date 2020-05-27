@@ -205,6 +205,7 @@ public class EOBPage extends EOBBase{
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int beforeClicked_numTabs=beforeClicked_tabs.size();	
 
+			scrollElementToCenterScreen(rightRailLearnMoreLink);
 			rightRailLearnMoreLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
@@ -1127,7 +1128,7 @@ public class EOBPage extends EOBBase{
 				System.out.println(newTab.size());
 				Assert.assertTrue("PROBLEM - clicked PDF but didn't open a new tab to load PDF", newTab.size()>1);
 				//note: Use the list of window handles to switch between windows
-				driver.switchTo().window(newTab.get(1));
+				driver.switchTo().window(newTab.get(newTab.size()-1));
 				CommonUtility.checkPageIsReady(driver);
 
 				//--------------------------------------
@@ -1141,7 +1142,7 @@ public class EOBPage extends EOBBase{
 				}
 				//--------------------------------------
 				driver.close();
-				driver.switchTo().window(newTab.get(0));
+				driver.switchTo().window(newTab.get(newTab.size()-2));
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
 			}
