@@ -345,7 +345,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		List<String> noteList=new ArrayList<String> ();
 		int expectedSize=exp_docListFromApi.size();
 		int actualSize=act_docListFromUi.size();
-		System.out.println("Compare number of doc: Expected="+expectedSize+" | Actual="+actualSize);
+		System.out.println("Compare number of doc: Expected doc frokm API="+expectedSize+" | Actual doc from UI="+actualSize);
 		if (!expDocDisplay) {
 			boolean condition=false;
 			if (section.equals("Annual Notice of Changes Documents")) {
@@ -738,6 +738,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			selectLangFromDropdown(section, targetLang);
 
 		for(String expDocName: expDocList) {
+			System.out.println("************************************************************");
+			System.out.println("TEST - looking for expDocName '"+expDocName+"' on UI");
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
 			Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
 			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");

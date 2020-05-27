@@ -959,6 +959,7 @@ public class EOBPage extends EOBBase{
 	public void validateEobEntries (String planType, String memberId) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
+		scrollElementToCenterScreen(eobFirst);
 		eobFirst.click();
 		sleepBySec(5);
 
@@ -966,7 +967,8 @@ public class EOBPage extends EOBBase{
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
-		driver.switchTo().window(newTab.get(1));
+		//tbd driver.switchTo().window(newTab.get(1));
+		driver.switchTo().window(newTab.get(newTab.size()-1));
 		CommonUtility.checkPageIsReady(driver);
 
 		String pdfUrl = driver.getCurrentUrl();
@@ -1032,7 +1034,7 @@ public class EOBPage extends EOBBase{
 
 		//note: Switch back to original window
 		driver.close();
-		driver.switchTo().window(newTab.get(0));
+		driver.switchTo().window(newTab.get(newTab.size()-2));
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(5);
 	}

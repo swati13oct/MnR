@@ -371,31 +371,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 				acctSettingMenuShadowRootBtn.click();
 			} catch (Exception e) {
 				e.printStackTrace();
-				//tbd Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
 			}
 			try {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
-
-				/* tbd 
-				String winHandleBefore = driver.getWindowHandle();
-				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int beforeClicked_numTabs=beforeClicked_tabs.size();	
-				*/
 				
 				healthRecordLink.click();
 				CommonUtility.checkPageIsReady(driver);
 				checkModelPopup(driver,1);
-
-				/* tbd 
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();
-				Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'Health Record' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				CommonUtility.checkPageIsReady(driver);
-
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				*/
 
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Account Profile link on Rally Dashboard top menu", false);

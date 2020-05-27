@@ -2875,7 +2875,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos Alternativos");
 				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport");
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {

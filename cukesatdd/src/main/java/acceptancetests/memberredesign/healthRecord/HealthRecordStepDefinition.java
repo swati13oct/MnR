@@ -53,6 +53,7 @@ public class HealthRecordStepDefinition {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user validates Health Record link display behavior on Account Profile dropdown base on test input$")
 	public void user_validate_healthRecordLink(DataTable memberAttributes) throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -91,6 +92,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}				
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user validates clicking Health Record link will open new tab to the target page$")
 	public void user_validate_healthRecordLinkDestination() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -122,6 +124,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Find Care page if applicable and validate Health Record link display behavior$")
 	public void user_toFindCare() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -178,9 +181,6 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		//tbd if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
-		//tbd 	healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		//tbd else
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 		testNote.add("\tPASSED - Health Record link destination validation");
 
@@ -189,6 +189,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Claims page if applicable and validate Health Record link display behavior$")
 	public void user_toClaims() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -235,9 +236,6 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		//tbd if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
-		//tbd 	healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		//tbd else
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
@@ -246,6 +244,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to EOB page and validate Health Record link display behavior$")
 	public void user_toEob() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -291,10 +290,8 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+		//note: already on secondary page, no need to deal with rally dashboard navigation
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -302,6 +299,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Benefits page and validate Health Record link display behavior$")
 	public void user_toBenefits() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -318,6 +316,18 @@ public class HealthRecordStepDefinition {
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToBenefitsPage();
 
+		//note: consumerDetail only show up on secondary page, get all the info now for later use
+		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+		boolean isComboUser=memberType.toLowerCase().contains("combo");
+		String lookForPlanCategory=planType;
+		if (planType.toUpperCase().contains("SHIP")) {
+			String[] tmp=planType.split("_");
+			Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+			lookForPlanCategory=tmp[1];
+		}
+		boolean hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+		getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
+		
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
@@ -336,10 +346,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -347,6 +354,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior$")
 	public void user_toBenefitsToPlanDocToMyDoc() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -387,10 +395,8 @@ public class HealthRecordStepDefinition {
 			//return;
 		} else {
 			String planDocUrl=wd.getCurrentUrl();
-			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+			//note: already on secondary page, no need to deal with rally dashboard navigation
 				healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-			else
-				healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 			testNote.add("\tPASSED - Health Record link destination validation");
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, planDocUrl);
 			CommonUtility.checkPageIsReady(wd);
@@ -431,10 +437,8 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -442,6 +446,7 @@ public class HealthRecordStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Order Plan Material page and validate Health Record link display behavior$")
 	public void user_toBenefitsToOrder() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -485,16 +490,16 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
-		testNote.add("\tPASSED - Health Record link destination validation");
+
+			testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Payments page and validate Health Record link display behavior$")
 	public void user_toPayments() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -510,15 +515,7 @@ public class HealthRecordStepDefinition {
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 
-		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
-		boolean isComboUser=memberType.toLowerCase().contains("combo");
-		String lookForPlanCategory=planType;
-		if (planType.toUpperCase().contains("SHIP")) {
-			String[] tmp=planType.split("_");
-			Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
-			lookForPlanCategory=tmp[1];
-		}
-		boolean hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+		boolean hasPaymentTab = (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB);
 		if (!hasPaymentTab) {
 			System.out.println(planType+" user hasPaymentTab=false, doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for plan type '"+MRScenario.environment+"'");
@@ -548,16 +545,15 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior$")
 	public void user_toPharmaciesAndPrescriptions() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -609,16 +605,15 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Health and Wellness page and validate Health Record link display behavior$")
 	public void user_toHealthAndWellness() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -665,16 +660,16 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Contact Us page and validate Health Record link display behavior$")
 	public void user_toContactUs() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -709,16 +704,16 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Pharmacy Locator page and validate Health Record link display behavior$")
 	public void user_toPharmacyLocator() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -762,16 +757,16 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to DCE page and validate Health Record link display behavior$")
 	public void user_toDce() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -815,16 +810,16 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Account Settings page and validate Health Record link display behavior$")
 	public void user_toAcctSettings() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -859,10 +854,9 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+		//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
-		else
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);

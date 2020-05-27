@@ -1459,8 +1459,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Privacy Notice");
-				targetTestDocList.add("CDI Long Notice (CA Only)");
-				//targetTestDocList.add("CDI Long Notice (CA Only)");
+				targetTestDocList.add("CDI Long Notice");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
