@@ -2616,6 +2616,47 @@ public class oleStepDefinition {
 		}
 	
 	}
+	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
+	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		//String plantype = givenAttributesMap.get("Plan Type");
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
+		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
+		
+		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
+		
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage1 = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ArrayList<String> vppmarketingBullets = planSummaryPage1.getStringList();
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		
+		if(vppmarketingBullets.size()<=9)
+		{
+			Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		}
+		else {
+			for(String bullets : marketingBullets){
+				if(vppmarketingBullets.contains(bullets)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("MarketingBullets does not match", false); 
+			    }
+			}
+		}
+	
+	}
 		
 } 
 
