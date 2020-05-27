@@ -3,7 +3,7 @@
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
 #**************************************************************MAPD*************************************************************************
-  @vppNBARegression_1
+  @vppNextActionModalRegression_1 @prodRegressionMAPD
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -18,7 +18,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county         | plantype |
       |   19019 | No              | Iowa County    | MAPD     | 
     
-    @vppNBARegressionMAPDAddDrug
+    @vppNBAAddDrugMAPD
     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when Drug cost exists
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -132,7 +132,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       |   19019 | No              | Iowa County    | MAPD     |PDP      |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
       
       
-    @vppDCEFlowtoNextActionModal
+    @vppDCEFlowtoNextActionModalMAPD
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when drug added from DCE
    Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
@@ -279,7 +279,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       
      
       
-       @vppNextActionModalRegressionPDP
+       @vppNBAPDPNoDrug
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for PDP Plan when no Drugs added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -293,7 +293,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county         | plantype |
       |   19019 | No              | Iowa County    | PDP      |      
       
-      @vppNextActionModalRegressionPDPAddDrug
+      @vppNBAPDPAddDrug
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when Drugs are added
    Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
