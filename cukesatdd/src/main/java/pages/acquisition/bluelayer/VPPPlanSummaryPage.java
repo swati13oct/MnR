@@ -640,7 +640,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 	private List<WebElement> planNames;
 
-	@FindBy(xpath = "//div[contains(@class,'d-flex flex-column flex-lg-row align-items-lg-center')]/p[contains(@id,'plan')]")
+	@FindBy(xpath = "//div[contains(@class,'d-flex flex-column flex-lg-row align-items-lg-center')]/p")
 	private List<WebElement> plansInPopup;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
@@ -4084,11 +4084,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
-					String text=plan.getText();
-					for(WebElement child:plan.findElements(By.xpath("./*"))) {
-						text=text.replaceFirst(child.getText(), "");
-						}
-					actualPlanNames.add(text.trim());
+					/*
+					 * String text=plan.getText(); for(WebElement
+					 * child:plan.findElements(By.xpath("./*"))) {
+					 * text=text.replaceFirst(child.getText(), ""); }
+					 * actualPlanNames.add(text.trim());
+					 */
+					actualPlanNames.add(plan.getText());
 				}
 				Collections.sort(expectedPlanNames);
 				Collections.sort(actualPlanNames);
@@ -4115,11 +4117,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
-					String text=plan.getText();
-					for(WebElement child:plan.findElements(By.xpath("./*"))) {
-						text=text.replaceFirst(child.getText(), "");
-						}
-					actualPlanNames.add(text.trim());
+					/*
+					 * String text=plan.getText(); for(WebElement
+					 * child:plan.findElements(By.xpath("./*"))) {
+					 * text=text.replaceFirst(child.getText(), ""); }
+					 */
+					//actualPlanNames.add(text.trim());
+					actualPlanNames.add(plan.getText());
 				}
 				Collections.sort(allPlanNames);
 				Collections.sort(actualPlanNames);
