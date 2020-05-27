@@ -3355,7 +3355,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				//targetTestDocList.add("Moving to your new plan");
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");

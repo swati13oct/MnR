@@ -75,11 +75,15 @@ public class HealthRecordStepDefinition {
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
-			expComboTab=true;
+		System.out.println("MRScenario.isTestHarness="+MRScenario.isTestHarness);
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
+			if (memberType.toLowerCase().contains("combo"))
+				expComboTab=true;
+		}
+		System.out.println("expComboTab="+expComboTab);
 		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
@@ -165,7 +169,7 @@ public class HealthRecordStepDefinition {
 		//	expComboTab=true;
 		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
@@ -181,7 +185,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 		testNote.add("\tPASSED - Health Record link destination validation");
 
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -220,7 +224,7 @@ public class HealthRecordStepDefinition {
 		//	expComboTab=true;
 		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
@@ -236,7 +240,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -327,7 +331,7 @@ public class HealthRecordStepDefinition {
 		}
 		boolean hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
-		
+
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
@@ -346,7 +350,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -396,7 +400,7 @@ public class HealthRecordStepDefinition {
 		} else {
 			String planDocUrl=wd.getCurrentUrl();
 			//note: already on secondary page, no need to deal with rally dashboard navigation
-				healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 			testNote.add("\tPASSED - Health Record link destination validation");
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, planDocUrl);
 			CommonUtility.checkPageIsReady(wd);
@@ -438,7 +442,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -491,9 +495,9 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
-			testNote.add("\tPASSED - Health Record link destination validation");
+		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -545,7 +549,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -589,7 +593,7 @@ public class HealthRecordStepDefinition {
 		//note: so prior page would be on SHIP plan then clicking PnP will be the SHIP behavior which will NOT have IHR link
 		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
@@ -605,7 +609,7 @@ public class HealthRecordStepDefinition {
 			return;
 		}
 
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -644,7 +648,7 @@ public class HealthRecordStepDefinition {
 		//	expComboTab=true;
 		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
-				expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
+			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
@@ -661,7 +665,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -705,7 +709,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -758,7 +762,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -811,7 +815,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -855,7 +859,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		//note: already on secondary page, no need to deal with rally dashboard navigation
-			healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
+		healthRecordPage.navigateFromTestHarnessToHeathRecordPageAndThenCloseTab();
 
 		testNote.add("\tPASSED - Health Record link destination validation");
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);

@@ -1116,6 +1116,7 @@ public class EOBPage extends EOBBase{
 			try {
 				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", eobValidate(eob));
+				scrollElementToCenterScreen(eob);
 				moveMouseToElement(eob);
 				eob.click();
 				CommonUtility.checkPageIsReady(driver);

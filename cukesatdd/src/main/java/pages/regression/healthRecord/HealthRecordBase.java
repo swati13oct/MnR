@@ -250,7 +250,8 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 		driver.get(originalUrl);
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
-		handleComboTabIfComboUser(planType, memberType);
+		if (!originalUrl.contains("/dashboard")) //note: rally dashboard has no tab for combo
+			handleComboTabIfComboUser(planType, memberType);
 		checkModelPopup(driver,1);
 		return driver;
 	}
