@@ -1,7 +1,7 @@
 Feature: MVP - Current Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to Current Medications on P&P Page
 
-  @CurrentMedications @F392596 @US2301927 @tip
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medicine cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -52,7 +52,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication image disclaimer
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -296,7 +296,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -308,7 +308,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
