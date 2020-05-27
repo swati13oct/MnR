@@ -3997,7 +3997,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 *         Action Modal
 	 */
 	public DrugCostEstimatorPage clickNextBestActionModalGetStartedBtn() {
-		waitTillElementClickableInTime(nextBestActionModalGetStartedBtn,20);
+		waitTillElementClickableInTime(nextBestActionModalGetStartedBtn, 20);
 		nextBestActionModalGetStartedBtn.click();
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
@@ -4020,7 +4020,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() throws InterruptedException {
-		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn,20);
+		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
 		nextBestActionModalFindMyDoctorsBtn.click();
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
@@ -4053,7 +4053,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickContinueEnrollmentBtn() {
-		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,20);
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 20);
 		nextBestActionModalContinueEnrollmentBtn.click();
 	}
 
@@ -4064,7 +4064,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
-				WebElement savePlan = driver.findElement(By.xpath("(//*[contains(text(),'"+plan+"')]/..//following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')])[1]"));
+				WebElement savePlan = driver.findElement(By.xpath("(//*[contains(text(),'" + plan
+						+ "')]/..//following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')])[1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				Thread.sleep(5000);
@@ -4084,13 +4085,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
-					/*
-					 * String text=plan.getText(); for(WebElement
-					 * child:plan.findElements(By.xpath("./*"))) {
-					 * text=text.replaceFirst(child.getText(), ""); }
-					 * actualPlanNames.add(text.trim());
-					 */
-					actualPlanNames.add(plan.getText());
+					String text = plan.getText();
+					for (WebElement child : plan.findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					actualPlanNames.add(text.trim());
 				}
 				Collections.sort(expectedPlanNames);
 				Collections.sort(actualPlanNames);
@@ -4117,13 +4116,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
-					/*
-					 * String text=plan.getText(); for(WebElement
-					 * child:plan.findElements(By.xpath("./*"))) {
-					 * text=text.replaceFirst(child.getText(), ""); }
-					 */
-					//actualPlanNames.add(text.trim());
-					actualPlanNames.add(plan.getText());
+					String text = plan.getText();
+					for (WebElement child : plan.findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					actualPlanNames.add(text.trim());
 				}
 				Collections.sort(allPlanNames);
 				Collections.sort(actualPlanNames);
