@@ -180,6 +180,9 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-provider")
 	private WebElement enterProvidersInfoMA1stPlan;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
+	private WebElement enterDrugsInfoMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a[id*='provider-title']")
 	private WebElement providersInfoMA1stPlan;
 	
@@ -545,6 +548,7 @@ public class ResultsMobilePage extends UhcDriver {
 	
 	public ArrayList<String> getDrugsVPP() {
 		threadsleep(5000);
+		validate(drugsInfoMA1stPlan,60);
 		mobileUtils.mobileLocateElementClick(drugsInfoMA1stPlan);
 		vppDrugsResults = new ArrayList<String>();
 		for(WebElement e:drugsListMA1stPlan) {
@@ -850,6 +854,15 @@ public class ResultsMobilePage extends UhcDriver {
 		Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 		System.out.println("UI Plan ID : "+planId);
 		return planId;
+	}
+	
+	public void useraddDrugsVPP(String drugDetails) {
+		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		mobileUtils.mobileLocateElementClick(enterDrugsInfoMA1stPlan);
+		DCEMobilePage dcemobile = new DCEMobilePage(driver);
+		dcemobile.drugsHandlerWithdetails(drugDetails);
+		dcemobile.choosePharmacyandBacktoPlans();
+		getDrugsVPP();
 	}
 
 }

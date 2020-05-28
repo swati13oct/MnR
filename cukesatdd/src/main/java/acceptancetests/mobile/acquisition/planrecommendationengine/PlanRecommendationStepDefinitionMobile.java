@@ -583,6 +583,19 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.validateUIAPIRankingPlans();
    	}
 	
+	@Then("^user adds Drugs in vpp summary page mobile$")
+   	public void add_drugs_vpp_summary_page_mobile(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.useraddDrugsVPP(inputValues.get("Drug Details"));
+   	}
+	
+	@Then("^user navigate drugs list page and verifies drugs session in Drugs page mobile$")
+   	public void verifies_drugs_vpp_pre__mobile() {
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.verifyExisitngVPPDruglist();
+   	}
+	
 	public void readfeaturedataMobile(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();

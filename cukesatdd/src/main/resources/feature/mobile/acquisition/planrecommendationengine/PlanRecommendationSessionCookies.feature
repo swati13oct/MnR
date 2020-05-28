@@ -349,3 +349,33 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | Email                  |
       |   32111 | No            | Marion   | MAPD          | Medicaid     | OutsideUS    | AcceptsMedicare  |             |               | No            | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
       |   10001 | No            | New York | MAPD          | None         | None         | UHCNetwork       |             |               | No            | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |
+
+  @PRE @planrecommandonationmobile @drugsessionVPPtoPRE @F456839
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Drugs session from VPP to PRE for MA plans in Mobile
+    Given the user is on UHC medicare acquisition site mobile
+    And user navigates to vpp summary page mobile
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <County>        |
+    When user adds Drugs in vpp summary page mobile
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    And user navigates to Zip Code page from vpp mobile
+    And runs questionnaire at zipcode page mobile
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <County>        |
+    And user selects plan type in coverage options page mobile
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page mobile
+      | SNP Options | <SpecialNeeds> |
+    And user selects Travel options in Travel Page mobile
+      | Travel Options | <TravelOption> |
+    And user selects Doctors in Doctors page mobile
+      | Doctors Selection   | <DoctorsSelection> |
+      | Doctors Search Text | <DoctorsName>      |
+      | Multi Doctor        | <isMultiDoctor>    |
+    Then user navigate drugs list page and verifies drugs session in Drugs page mobile
+
+    Examples: 
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
