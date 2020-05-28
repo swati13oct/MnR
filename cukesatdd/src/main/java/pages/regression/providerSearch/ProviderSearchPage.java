@@ -42,32 +42,47 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 		if (noWaitValidate(dashboard_findProviderLnk)) {
 		 	dashboard_findProviderLnk.click();
 		} else {
-			if(MRScenario.environment.contains("stage")) {
-				if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("PDP")) {
-					if (memberType.toUpperCase().contains("IND")) {
-						if (memberType.toUpperCase().contains("AARP")) {
-							driver.get("https://member.int.uhc.com/aarp/find-care");
-						} else if(memberType.toUpperCase().contains("UHC")) {
-							driver.get("https://member.int.uhc.com/medicare/find-care");
-						} else if(memberType.toUpperCase().contains("MEDICA")) {
-							driver.get("https://member.int.mymedicareaccount.uhc.com/medica/find-care");
-						} else if(memberType.toUpperCase().contains("PCP")) {
-							driver.get("https://member.int.mymedicareaccount.uhc.com/pcp/find-care");
-						} else
-							Assert.assertTrue("PROBLEM - please indicate AARP or UHC in your memberType input", false);
-					} else if (memberType.toUpperCase().contains("GRP")) {
-						driver.get("https://member.int.uhc.com/retiree/find-care");
-					} else {
-						Assert.assertTrue("PROBLEM - please indicate IND or GRP in your memberType input", false);
-					}
-
-				} else {
-					Assert.assertTrue("PROBLEM - I haven't code this yet... planType='"+planType+"' | memberType='"+memberType+"'", false);
-				}
-			} else if (MRScenario.environment.contains("offline")) {
-				Assert.assertTrue("TBD", false);
+			String envStr="member.int.uhc.com";
+			if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+				envStr="member.int.mymedicareaccount.uhc.com";
+			if (MRScenario.environment.contains("offline")) {
+				if (planType.equalsIgnoreCase("MA"))
+					envStr="connect.bluesteel.werally.in";
+				else if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+					envStr="member.uat.mymedicareaccount.com";
+				else
+					envStr="member.uat.uhc.com";
 			} else if (MRScenario.environment.contains("prod")) {
-				Assert.assertTrue("TBD", false);
+				if (planType.equalsIgnoreCase("MA"))
+					envStr="connect.werally.com";
+				else if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+					envStr="member.uhc.mymedicareaccount.com";
+				else
+					envStr="member.uhc.com";
+			}
+			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("PDP")) {
+				if ((planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("PDP"))
+						&& memberType.toUpperCase().contains("IND")) {
+					if ((MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
+							&& planType.equalsIgnoreCase("MA")){
+						driver.get("https://"+envStr+"/medicalProvider/root?showBackButton=true");
+					} else if (memberType.toUpperCase().contains("AARP")) {
+						driver.get("https://"+envStr+"/aarp/find-care");
+					} else if(memberType.toUpperCase().contains("UHC")) {
+						driver.get("https://"+envStr+"/medicare/find-care");
+					} else if(memberType.toUpperCase().contains("MEDICA")) {
+						driver.get("https://"+envStr+"/medica/find-care");
+					} else if(memberType.toUpperCase().contains("PCP")) {
+						driver.get("https://"+envStr+"/pcp/find-care");
+					} else
+						Assert.assertTrue("PROBLEM - please indicate AARP or UHC in your memberType input", false);
+				} else if (memberType.toUpperCase().contains("GRP")) {
+					driver.get("https://"+envStr+"/retiree/find-care");
+				} else {
+					Assert.assertTrue("PROBLEM - please indicate IND or GRP in your memberType input", false);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - I haven't code this yet... planType='"+planType+"' | memberType='"+memberType+"'", false);
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);

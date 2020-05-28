@@ -2,7 +2,7 @@
 Feature: 1.20.1 Member Provider Search - Member Auth
 
   @memAuth_providerSearch01
-  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
+  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

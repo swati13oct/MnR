@@ -64,7 +64,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 2
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 11-106 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true   | true    | true   | true   |
 
-@abc	@active_mapd_2of2
+	@active_mapd_2of2
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 12-107 | 15303       | MAPD     | GROUP_EFF_PDnR        | true   | false   | true   | true   |	  

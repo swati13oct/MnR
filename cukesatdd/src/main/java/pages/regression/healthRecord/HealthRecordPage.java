@@ -380,7 +380,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Account Profile link on Rally Dashboard top menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Health Record link on Rally Dashboard top menu", false);
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate Rally Dashboard top menu", false);

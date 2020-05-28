@@ -55,7 +55,7 @@ Feature: 1.19.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
-	    | 09    | F424804 | qavgogine | qavgogine | q2_june_Cosmos_Seg078   | MAPD     | TERM_IHR           | true       |
+	    | 09    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_012   | MAPD     | TERM_IHR           | true       |
 
     @memAuth_ihr_c
     Examples: 
