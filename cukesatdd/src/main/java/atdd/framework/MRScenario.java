@@ -1084,7 +1084,6 @@ try {
 						+ System.getProperty("environment") + " environment";
 				capabilities.setCapability("name", jobName);
 				try {
-
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
 import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.claims.ClaimsSummaryPage;

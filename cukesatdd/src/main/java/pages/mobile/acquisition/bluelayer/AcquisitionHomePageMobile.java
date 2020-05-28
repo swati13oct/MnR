@@ -8,13 +8,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.itextpdf.text.log.SysoCounter;
-
 /*@author pagarwa5*/
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 
 
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {

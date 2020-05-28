@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.vbfacquisition_deprecated.ulayer.ResponsivePlanDetails;
-import pages.member_deprecated.ulayer.Rallytool_Page;
 import atdd.framework.UhcDriver;
+import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.vbfacquisition_deprecated.ulayer.ResponsivePlanDetails;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {
 

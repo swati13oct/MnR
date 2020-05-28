@@ -3,15 +3,6 @@
  */
 package pages.memberrdesignVBF;
 
-/*import org.json.JSONException;
-import org.json.JSONObject;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.UnsupportedCommandException;*/
-import junit.framework.Assert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +12,14 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+/*import org.json.JSONException;
+import org.json.JSONObject;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.UnsupportedCommandException;*/
+import junit.framework.Assert;
 
 /**
  * @author pjaising

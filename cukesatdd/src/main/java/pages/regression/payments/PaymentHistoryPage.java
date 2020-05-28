@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -20,19 +19,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.footer.FooterPage;
-import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
-import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
+import pages.memberrdesignVBF.TestHarness;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.footer.FooterPage;
 
 /**
  * @author pperugu

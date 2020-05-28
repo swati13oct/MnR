@@ -16,14 +16,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
 
 /**
  * @author pjaising

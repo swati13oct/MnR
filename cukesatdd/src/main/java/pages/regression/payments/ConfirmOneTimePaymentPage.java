@@ -16,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
 
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;

@@ -1,10 +1,12 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+
 import org.junit.Assert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import acceptancetests.util.CommonUtility;
 
 public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  {
