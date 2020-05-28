@@ -356,7 +356,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And the user clicks on return link to navigate to plan summary
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
-      | Test Plans   | <testPlans> |
+     
       Examples:
        | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |
        |   19019 | No              | Iowa County    | PDP     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |
