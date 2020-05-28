@@ -1,5 +1,6 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -40,7 +43,6 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	private static String activeMedicineName;
-
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", pnpValidate(pgHeader));
@@ -571,11 +573,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element",
 				pnpValidate(whatsNewCallToActnBtn));
 	}
-	
-	//F436319 Whats New Call To Action
+
+	// F436319 Whats New Call To Action
 	public void validateWhatsNewCallToActionNOTDisplayedOnPnPPage() {
-		Assert.assertFalse("PROBLEM - able to locate whats new call to action element", 
-						    pnpValidate(whatsNewCallToActnBtn));
+		Assert.assertFalse("PROBLEM - able to locate whats new call to action element",
+				pnpValidate(whatsNewCallToActnBtn));
 	}
 
 	// F436319
@@ -679,6 +681,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F392596 Meidine Cabinet
 	public void validateCurrentMedicationsHeader() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", CurrentMedicationsHeader);
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
 				pnpValidate(CurrentMedicationsHeader));
 	}
@@ -741,7 +745,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateImage() {
-		Assert.assertTrue("PROBLEM - Medication Drug Image not available", validateFieldValueContent(listOfDrugImage));
+		Assert.assertTrue("PROBLEM - Medication Drug Image not available", validateDrugImage(listOfDrugImage));
 	}
 
 	public void validateStrength() {
@@ -765,14 +769,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - Order Status for applicable Medication not available",
 				validateOrderStatusForAssociatedCTA());
 	}
-	
+
 	public void validateHDAssociateOrderStatus() {
 		Assert.assertTrue("PROBLEM - Order Status for applicable Home Delivery Drug not available",
 				validateOrderStatusForHDDrug());
 	}
-	
-	List<String> listOfOrderStatusForHDMedicine = new ArrayList<>(Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Processing","Shipped","Delivered"));
-	
+
+	List<String> listOfOrderStatusForHDMedicine = new ArrayList<>(Arrays.asList("Request Received",
+			"Verifying with Doctor", "Order Verified", "Processing", "Shipped", "Delivered"));
+
 	public boolean validateOrderStatusForHDDrug() {
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
 		for (Integer val : listOfIndex) {
@@ -797,17 +802,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateContactPharmacyButtonForRetailDrug(expectedButtonColor, expectedContactPharmacy));
 	}
 
-
-
-/*	public void clickOnMedicationName() {
-		Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
-				pnpValidate(FirstCurrentMedication));
-		FirstCurrentMedication.click();
-		Assert.assertTrue("PROBLEM - unable to locate Medicine name element", pnpValidate(MedicationName));
-		MedicationName.click();
-		 
-	}*/
-
+	/*
+	 * public void clickOnMedicationName() {
+	 * Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+	 * pnpValidate(FirstCurrentMedication)); FirstCurrentMedication.click();
+	 * Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+	 * pnpValidate(MedicationName)); MedicationName.click();
+	 * 
+	 * }
+	 */
 
 	public void validatePharmacyName() {
 		Assert.assertTrue("PROBLEM - Pharmacy Name  not available", validateFieldValueContent(listOfPharmacyName));
@@ -818,19 +821,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		String drugName = pnpBase.getDrugName();
 		String currentURL = driver.getCurrentUrl();
 		boolean flag = true;
-		if(currentURL.contains("overview.html#/medication-information")) {
-			Assert.assertTrue("SUCCESS - User redirected to medication information overview page",
-					flag);
-			if(drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
-				Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page",
-						flag);
-			}else {
-				Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page",
-						flag);
-			}			
-		}else {
-		Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page",
-				flag);
+		if (currentURL.contains("overview.html#/medication-information")) {
+			Assert.assertTrue("SUCCESS - User redirected to medication information overview page", flag);
+			if (drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
+				Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page", flag);
+			} else {
+				Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page", flag);
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page", flag);
 		}
 	}
 
@@ -848,10 +847,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOptumRx() {
-
 		List<WebElement> optumRx = OptumRx;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
-
 				optumRx.size() > 0);
 	}
 
@@ -863,37 +860,33 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(processing.get(0)));
 	}
 
+	/*
+	 * // F392596 Meidine Cabinet public String
+	 * clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
+	 * Assert.assertTrue("PROBLEM - unable to locate Learn More Button element",
+	 * pnpValidate(LearnMoreBtn_CurrentMedication)); activeMedicineName =
+	 * FirstCurrentMedication.getText();// this will get Text of first active
+	 * medication LearnMoreBtn_CurrentMedication.click(); return activeMedicineName;
+	 * }
+	 */
 
-	/*// F392596 Meidine Cabinet
-	public String clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
-		Assert.assertTrue("PROBLEM - unable to locate Learn More Button element",
-				pnpValidate(LearnMoreBtn_CurrentMedication));
-		activeMedicineName = FirstCurrentMedication.getText();// this will get Text of first active medication
-		LearnMoreBtn_CurrentMedication.click();
-		return activeMedicineName;
-	}*/
-
-
-	//F392596 Meidine Cabinet// when user click on learn more button on current medication on PNP page.
+	// F392596 Meidine Cabinet// when user click on learn more button on current
+	// medication on PNP page.
 	public void validateDrugInfopage() {
 		PharmaciesAndPrescriptionsBase pnpBase = new PharmaciesAndPrescriptionsBase(driver);
 		String drugName = pnpBase.getDrugNameLearnMore();
 		String currentURL = driver.getCurrentUrl();
 		boolean flag = true;
 
-		if(currentURL.contains("overview.html#/medication-information")) {
-			Assert.assertTrue("SUCCESS - User redirected to medication information overview page",
-					flag);
-			if(drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
-				Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page",
-						flag);
-			}else {
-				Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page",
-						flag);
-			}			
-		}else {
-		Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page",
-				flag);
+		if (currentURL.contains("overview.html#/medication-information")) {
+			Assert.assertTrue("SUCCESS - User redirected to medication information overview page", flag);
+			if (drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
+				Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page", flag);
+			} else {
+				Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page", flag);
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page", flag);
 		}
 
 	}
@@ -918,8 +911,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public List<String> getDrugNameListValue() {
 		List<String> listOfDrug = new ArrayList<>();
-		for (WebElement ele : listOfDrugName) {
-			listOfDrug.add(ele.getText());
+		try {
+
+			for (WebElement ele : listOfDrugName) {
+				System.out.println("Value of Drug Name :" + ele.getText());
+				listOfDrug.add(ele.getText());
+			}
+		} catch (Exception e) {
+			System.out.println("Test" + e.getMessage());
 		}
 		return listOfDrug;
 	}
@@ -927,7 +926,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
 		if (listOfWebElement.size() > 0) {
 			for (WebElement ele : listOfWebElement) {
+				System.out.println("Value of Element :" + ele.getText());
 				if (ele.getText().isEmpty()) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateDrugImage(List<WebElement> listOfWebElement) {
+		if (listOfWebElement.size() > 0) {
+			for (WebElement ele : listOfWebElement) {
+				if (ele.getAttribute("src").isEmpty()) {
 					return false;
 				}
 			}
@@ -958,6 +971,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				listOfIndex.add(i);
 			}
 		}
+		System.out.println("List of Retail Pharmacy :"+listOfIndex);
 		return listOfIndex;
 	}
 
@@ -971,10 +985,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfIndex;
 	}
 
-	List<String> listOfCallToActionForHDMedicine;
+	String[] listOfCallToActionForHDMed = { "TRACK STATUS", "RESOLVE HOLD" };
 
 	public boolean validateCallToActionsForHDDrug() {
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
+		List<String> listOfCallToActionForHDMedicine = Arrays.asList(listOfCallToActionForHDMed);
 		if (listOfIndex.size() > 0) {
 			for (Integer val : listOfIndex) {
 				if (!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedication.get(val).getText())) {
@@ -990,14 +1005,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonColor, String expectedButtonValue) {
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		if (listOfIndex.size() > 0) {
+			int count=0;
 			for (Integer val : listOfIndex) {
-				if (!(listOfCallToActionOnMedication.get(val).getText().equals(expectedButtonValue)
-						&& listOfCallToActionOnMedication.get(val).getTagName().equals("button"))
-						&& listOfCallToActionOnMedication.get(val).getCssValue("color").equals("#008000")) {
-					return false;
+				if (listOfCallToActionOnMedication.get(val).getText().equalsIgnoreCase(expectedButtonValue)
+						&& listOfCallToActionOnMedicationBtn.get(val).getTagName().equals("button")
+						&& listOfCallToActionOnMedicationBtn.get(val).getCssValue("background-color").equals("rgba(13, 136, 11, 1)")) {
+					count=count+1;
 				}
 			}
-			return true;
+			return count==listOfIndex.size();
 		} else {
 			return false;
 		}
@@ -1007,36 +1023,54 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		Random rand = new Random();
 		int rand_int = rand.nextInt(listOfIndex.size());
-		listOfCallToActionOnMedication.get(listOfIndex.get(rand_int));
+		System.out.println(listOfIndex.get(rand_int));
+		listOfCallToActionOnMedication.get(listOfIndex.get(rand_int)).click();
 	}
 
 	// Need to add the Regex for Number
 	public boolean validateContactPharmacyPopUpHavingNumber() {
+		if(pnpValidate(contactPharmacyPopUp)){
 		String contactNumber = contactPharmacyNumber.getText();
-		return !contactNumber.isEmpty() && contactNumber.matches("");
+		return !contactNumber.isEmpty();
+		}
+		else {
+			Assert.assertTrue("PROBLEM - Contacr Pharmacy PopUp not available", false);
+		}
+		return false;
 	}
 
 	public boolean validateOrderStatusForAssociatedCTA() {
 		List<Integer> listOfIndex = getListOfIndexForTrackCTA();
-		if (listOfIndex.size() > 0) {
-			for (Integer val : listOfIndex) {
-				if (listOfOrderStatus.get(val).getText().isEmpty()) {
+		try {
+			if (listOfIndex.size() > 0) {
+				if (listOfIndex.size() == listOfOrderStatus.size()) {
+					for (int i = 0; i < listOfOrderStatus.size(); i++) {
+						if (listOfOrderStatus.get(i).getText().isEmpty()) {
+							return false;
+						}
+					}
+				}else {
 					return false;
 				}
+				return true;
+			} else {
+				return false;
 			}
-			return true;
-		} else {
-			return false;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		return false;
 	}
-	
+
 	public List<Integer> getListOfIndexForTrackCTA() {
 		List<Integer> listOfIndex = new ArrayList<>();
 		for (int i = 0; i < listOfCallToActionOnMedication.size(); i++) {
-			if (listOfCallToActionOnMedication.get(i).getText().equals("Track")) {
+			System.out.println(listOfCallToActionOnMedication.get(i).getText());
+			if (listOfCallToActionOnMedication.get(i).getText().equalsIgnoreCase("Track Status")) {
 				listOfIndex.add(i);
 			}
 		}
+		System.out.println("List of Index For Track Status " + listOfIndex);
 		return listOfIndex;
 	}
 
@@ -1048,6 +1082,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
+				System.out.println("Retail Pharmacy Name :"+listOfPharmacyName.get(val).getText());
 				if (listOfPharmacyName.get(val).getText().equals("OptumRx")) {
 					return false;
 				}
@@ -1066,7 +1101,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public List<Integer> getOrderStatusIndexBasedOnStatusValue(String orderStatus) {
 		List<Integer> listOfIndex = new ArrayList<>();
 		for (int i = 0; i < listOfOrderStatus.size(); i++) {
-			if (listOfPharmacyName.get(i).getText().equals(orderStatus)) {
+			if (listOfOrderStatus.get(i).getText().equals(orderStatus)) {
 				listOfIndex.add(i);
 			}
 		}
@@ -1086,14 +1121,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		} else {
 			return false;
 		}
-	}	
-	
-	public void validateOrderStatusForHDDrug(String orderStatus) {
-		Assert.assertTrue("PROBLEM - "+orderStatus+ " Status not available on Current Medication", getOrderStatusIndexBasedOnStatusValue(orderStatus).size()>0);
 	}
-	
-	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus,String ballSize) {
-		Assert.assertTrue("PROBLEM - "+ballSize+" Harvey Ball not available for "+orderStatus+" order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus,ballSize));
+
+	public void validateOrderStatusForHDDrug(String orderStatus) {
+		Assert.assertTrue("PROBLEM - " + orderStatus + " Status not available on Current Medication",
+				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
+	}
+
+	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus, String ballSize) {
+		Assert.assertTrue("PROBLEM - " + ballSize + " Harvey Ball not available for " + orderStatus
+				+ " order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus, ballSize));
 	}
 
 	public void validateShippedOrderStatusForHDDrug(String orderStatus) {
@@ -1115,11 +1152,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			return true;
 		}
 	}
-	
+
 	public void validateHDDrug() {
-		Assert.assertTrue("PROBLEM - User DO NOT have Home delivery drug displayed on Current Medication", validateHDDrugDisplayedOnCurrentMedication());
+		Assert.assertTrue("PROBLEM - User DO NOT have Home delivery drug displayed on Current Medication",
+				validateHDDrugDisplayedOnCurrentMedication());
 	}
-	
+
 	public void validateOptumRxLandingPage() {
 		Set handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
@@ -1252,6 +1290,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void clickOnNextPageArrow() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView(true);",nextPageArrow);
 		nextPageArrow.click();
 	}
 
@@ -1281,6 +1321,4 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					false);
 		}
 	}
-
 }
-
