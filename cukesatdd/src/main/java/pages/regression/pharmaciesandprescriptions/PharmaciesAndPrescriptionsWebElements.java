@@ -231,6 +231,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> sixMedications;
 
+	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
+	protected List<WebElement> tenMedications;
+
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
 	protected WebElement findPrescriptionDesc;
 
@@ -361,6 +364,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
 	protected List<WebElement> OptumRx;
+
+	@FindBy(xpath = "//strong[@class='sc-LzLrQ hZvySE']")
+	protected List<WebElement> totalMedicationsInMyMed;
 
 	@FindBy(xpath = "//span[contains(text(),'OptumRx')]")
 	protected List<WebElement> Processing;
@@ -575,6 +581,27 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean sixActivePrescription() {
 
 		if (sixMedications.size() == 6) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean tenActivePrescription() {
+
+		if (tenMedications.size() == 10) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean moreThanTenActivePrescription() {
+
+		String numberTXT = totalMedicationsInMyMed.get(totalMedicationsInMyMed.size()-1).getText();
+		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+
+		if (number> 10) {
 			return true;
 		} else {
 			return false;

@@ -690,7 +690,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateActivePrescriptions() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				sixActivePrescription());
+				tenActivePrescription());
+	}
+
+	public void validateMoreThenTenActivePrescriptions() {
+
+		Assert.assertTrue("PROBLEM - unable to locate more than 10 Active Prescriptions  element",
+				moreThanTenActivePrescription());
 	}
 
 	public void validateAssociatedCallToAction() {

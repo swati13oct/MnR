@@ -2,6 +2,42 @@
 Feature: MVP - My Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to My Medications on P&P Page
 
+
+  @MyMedications @F448402 @US2568656
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member views Active Prescription Drugs
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
+    Then user validates first ten of his active prescriptions
+    And user validates medications will be displayed beginning with the ones that have an associated call to action
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+
+  @MyMedications @F448402 @US2568656
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member has more than 10 active prescriptions
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
+    When user has more than ten active prescriptions
+    Then user validates up to ten of his active prescriptions
+    And user advance and reverse through the pages
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+
+
+
   @MyMedications @F448402 @US2568667
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
     Given login with following details logins in the uhc rx portal
@@ -80,6 +116,61 @@ Feature: MVP - My Medications
       | FID     | planType | memberType             |
       | F448402 | MAPD     | AARP_Individual_PnP_rx |
 
+
+  @MyMedications @F448402 @US2568667
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
+    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active medications
+    When user have a home delivery medication eligible for refill
+    Then user validates the external link icon in the button
+
+    Examples:
+      | FID     | planType | memberType                          |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+
+  @MyMedications @F448402 @US2568667
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
+    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active medications
+    When user views a home delivery medication eligible for renewal
+    Then user validates the external link icon in the button
+
+    Examples:
+      | FID     | planType | memberType                          |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+
+
+  @MyMedications @F448402 @US2568667
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
+    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active medications
+    When user views an active medication currently in progress for home delivery
+    Then user views a Track Status call to action button on that medication's row
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MyMedications @F448402 @US2568667
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
+    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active medications
+    When user views an active medication home delivery order that has been delivered
+    Then user views a View Order call to action button on that medication's row
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+
   @MyMedications @F448402 @US2568665
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Shipped
     Given login with following details logins in the member portal and validate elements
@@ -87,7 +178,7 @@ Feature: MVP - My Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
-    Then user views the Medicine Cabinet on the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
     And user views a order having status of Shipped
     Then user views a 3/4 Harvey Ball on that medication row
@@ -103,7 +194,7 @@ Feature: MVP - My Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
-    Then user views the Medicine Cabinet on the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
     And user views a order having status of  Delivered
     Then user views a full Harvey Ball with a checkmark on that medication row
@@ -111,6 +202,41 @@ Feature: MVP - My Medications
     Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+
+  @MyMedications @F448402 @US2568665
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Request received
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user views the Medicine Cabinet on the My Medications page
+    When user views a home delivery drug order
+    And user views a status of Request received
+    Then user views one fourth Harvey Ball on that medication's row
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+
+  @MyMedications @F448402 @US2568665
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user views the Medicine Cabinet on the My Medications page
+    When user views a home delivery drug order
+    And user views a status of Processing
+    Then user views  a half Harvey Ball on that medication's row
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
 
   @MyMedications @F448402 @US2618939
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
