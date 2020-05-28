@@ -20,11 +20,13 @@ Feature: 1.20 Member Provider Search
 	    | 01    | MAPD     | GRP_ProviderSearch      |
 	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
 	    | 03    | MAPD     | AARP_IND_ProviderSearch |
+	    | 04    | PDP      | AARP_IND_ProviderSearch |
 
 	@providerSearch01b
     Examples: 
 	    | index | planType | memberType              | 
-	    | 04    | PDP      | AARP_IND_ProviderSearch |
         | 05    | MA       | UHC_IND_ProviderSearch  |
 	    | 06    | MA       | AARP_IND_ProviderSearch |
+	    | 07    | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | 08    | PCP      | PCP_IND_ProviderSearch  |
 

@@ -164,13 +164,30 @@ public class ProviderSearchWebElements  extends UhcDriver {
 	@FindBy(xpath="//header[contains(@class,'hide-mobile')]//a[@data-testid='nav-link-health-wellness']")
 	protected WebElement uhcProviderSearchHwLnk;
 	
-	@FindBy(xpath="//button[@id='dropdown-toggle-2']")
+	@FindBy(xpath="//button[contains(@id,'dropdown-toggle')]")
 	protected WebElement uhcProviderSearchAcctProfBtn;
 	
-	@FindBy(xpath="//ul[@id='dropdown-options-2']//a[@data-testid='TARGET_AWARE_ACCOUNT_SETTINGS']")
+	@FindBy(xpath="//ul[contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_ACCOUNT_SETTINGS']")
 	protected WebElement uhcProviderSearchAcctSettingsOpt;
 
 	@FindBy(xpath="//button[contains(@class,'dialog-btn')]")
 	protected WebElement uhcProviderSearchContBtn;
 
+	@FindBy(xpath="//h1[contains(text(),'Account Settings')]")
+	protected WebElement acctSettingPgHeader;
+	
+	@FindBy(xpath="//h1//span[contains(text(),'Health')]")
+	protected WebElement hwPgHeader;
+
+	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
+	protected WebElement pnpPgHeader;
+
+	@FindBy(xpath="//h1[contains(text(),'Payments')]")
+	protected WebElement paymentsPgHeader;
+
+	@FindBy(xpath="//h1[contains(text(),'Benefits')]")
+	protected WebElement benefitsPgHeader;
+
+	@FindBy(xpath="//h1//span[contains(text(),'Displaying claims')]")
+	protected WebElement claimsPgHeader;
 }

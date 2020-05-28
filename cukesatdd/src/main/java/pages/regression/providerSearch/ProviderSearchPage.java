@@ -49,6 +49,10 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 							driver.get("https://member.int.uhc.com/aarp/find-care");
 						} else if(memberType.toUpperCase().contains("UHC")) {
 							driver.get("https://member.int.uhc.com/medicare/find-care");
+						} else if(memberType.toUpperCase().contains("MEDICA")) {
+							driver.get("https://member.int.mymedicareaccount.uhc.com/medica/find-care");
+						} else if(memberType.toUpperCase().contains("PCP")) {
+							driver.get("https://member.int.mymedicareaccount.uhc.com/pcp/find-care");
 						} else
 							Assert.assertTrue("PROBLEM - please indicate AARP or UHC in your memberType input", false);
 					} else if (memberType.toUpperCase().contains("GRP")) {
@@ -68,12 +72,13 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
-		CommonUtility.waitForPageLoad(driver, uhcProviderSearchContBtn, 10);
-		if (noWaitValidate(uhcProviderSearchContBtn)) {
-			scrollElementToCenterScreen(uhcProviderSearchContBtn);
-			uhcProviderSearchContBtn.click();
-			CommonUtility.checkPageIsReady(driver);
-
+		if (memberType.toUpperCase().contains("IND")) {
+			CommonUtility.waitForPageLoad(driver, uhcProviderSearchContBtn, 15);
+			if (noWaitValidate(uhcProviderSearchContBtn)) {
+				scrollElementToCenterScreen(uhcProviderSearchContBtn);
+				uhcProviderSearchContBtn.click();
+				CommonUtility.checkPageIsReady(driver);
+			}
 		}
 		return driver;
 	}
@@ -110,12 +115,15 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 	public WebDriver navigateToAccountSettings() {
 		checkModelPopup(driver,1);
 		if (noWaitValidate(acctProfileBtn_closed)) {
+			scrollElementToCenterScreen(acctProfileBtn_closed);
 			acctProfileBtn_closed.click();
 			CommonUtility.waitForPageLoad(driver, acctSettingsLnk, 5);
 			acctSettingsLnk.click();
 		} else if (noWaitValidate(acctProfileBtn_expanded)) {
+			scrollElementToCenterScreen(acctProfileBtn_expanded);
 			acctSettingsLnk.click();
 		} else if (noWaitValidate(uhcProviderSearchAcctProfBtn)) {
+			scrollElementToCenterScreen(uhcProviderSearchAcctProfBtn);
 			uhcProviderSearchAcctProfBtn.click();
 			CommonUtility.waitForPageLoad(driver, uhcProviderSearchAcctSettingsOpt, 5);
 			uhcProviderSearchAcctSettingsOpt.click();
@@ -137,6 +145,9 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 		} else {
 			Assert.assertTrue("PROBLEM - unable to navigate to Account Settings page", false);
 		}
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, acctSettingPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Account Setting' page", noWaitValidate(acctSettingPgHeader));
 		return driver;
 	}
 
@@ -176,6 +187,8 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 			uhcProviderSearchClaimsLnk.click();
 		}
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
 		return driver;
 	}
 
@@ -212,6 +225,8 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page", noWaitValidate(benefitsPgHeader));
 		return driver;
 	}
 	
@@ -297,6 +312,8 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, paymentsPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Premium Payments' page", noWaitValidate(paymentsPgHeader));
 		return driver;
 	}
 
@@ -315,6 +332,9 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
 			}
 		}
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, pnpPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Pharmacies and Prescriptions' page", noWaitValidate(pnpPgHeader));
 		return driver;
 	}
 
@@ -336,6 +356,8 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, hwPgHeader, 10);
+		Assert.assertTrue("PROBLEM - unable to locate header text for 'Health and Wellness' page", noWaitValidate(hwPgHeader));
 		return driver;
 	}
 
