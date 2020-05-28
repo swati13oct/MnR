@@ -260,6 +260,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			if ((planType.toUpperCase().equals("MAPD") || planType.toUpperCase().equals("SSP"))
 					&& memberType.toUpperCase().contains("GROUP")) 
 			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
+			if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM"))
+			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
