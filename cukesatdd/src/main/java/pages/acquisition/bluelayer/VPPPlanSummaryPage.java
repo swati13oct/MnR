@@ -644,8 +644,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private List<WebElement> plansInPopup;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Will my doctors be covered?";
-	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "Continue my enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 
 	public WebElement getLoadingIndicator() {
 		return loadingIndicator;
