@@ -689,41 +689,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateActivePrescriptions() {
 
-		List<WebElement> sixMedications = SixMedications;
-
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
-				sixMedications.size() == 6);
+				sixActivePrescription());
 	}
 
 	public void validateAssociatedCallToAction() {
 
-		List<WebElement> associatedCallToAction = AssociatedCallToAction;
-
-		Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element",
-				pnpValidate(associatedCallToAction.get(AssociatedCallToAction.size() - 1)));
+		Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element", associatedCallToAction());
 	}
 
 	public void validateNumberInParenthesis() {
 
-		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ",
-				NumberInParenthesis.getText().matches("[a-zA-Z0-9]+"));
+		Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ", alphaNumeric());
 	}
 
 	public void validateCorrespondingNumberInParenthesis() {
 
-		String numberTXT = NumberInParenthesis.getText();
-		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
-		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medication");
-		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
-		Assert.assertEquals(
+		Assert.assertTrue(
 				"PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
-				number, number2);
+				corredpondingMedicationsNumbers());
 
 	}
 
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
-				pnpValidate(Disclaimer));
+				disclaimer());
 	}
 
 	// F392596
@@ -770,8 +760,26 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateOrderStatusForAssociatedCTA());
 	}
 
+	public void validateTrackStatusButton() {
+		Assert.assertTrue("PROBLEM - Track Status button for applicable Medication not available",
+				validateTrackStatusBtn());
+	}
+
+	public void validateDelivered() {
+		Assert.assertTrue("PROBLEM - Delivered for applicable Medication not available", validateDeliveredStatus());
+	}
+
+	public void validateViewOrderButton() {
+		Assert.assertTrue("PROBLEM - View Order button for applicable Medication not available", viewOrderButton());
+	}
+
 	public void validateHDAssociateOrderStatus() {
 		Assert.assertTrue("PROBLEM - Order Status for applicable Home Delivery Drug not available",
+				validateOrderStatusForHDDrug());
+	}
+
+	public void validateHDOrderStatusForInProg() {
+		Assert.assertTrue("PROBLEM - Order Status for in progress Home Delivery Drug not available",
 				validateOrderStatusForHDDrug());
 	}
 
@@ -848,8 +856,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateOptumRx() {
 		List<WebElement> optumRx = OptumRx;
-		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
-				optumRx.size() > 0);
+		Assert.assertTrue("PROBLEM - unable to locate Request received elements", optumRx.size() > 0);
 	}
 
 	public void validateProcessing() {
@@ -971,7 +978,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				listOfIndex.add(i);
 			}
 		}
-		System.out.println("List of Retail Pharmacy :"+listOfIndex);
+		System.out.println("List of Retail Pharmacy :" + listOfIndex);
 		return listOfIndex;
 	}
 
@@ -1005,15 +1012,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonColor, String expectedButtonValue) {
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		if (listOfIndex.size() > 0) {
-			int count=0;
+			int count = 0;
 			for (Integer val : listOfIndex) {
 				if (listOfCallToActionOnMedication.get(val).getText().equalsIgnoreCase(expectedButtonValue)
 						&& listOfCallToActionOnMedicationBtn.get(val).getTagName().equals("button")
-						&& listOfCallToActionOnMedicationBtn.get(val).getCssValue("background-color").equals("rgba(13, 136, 11, 1)")) {
-					count=count+1;
+						&& listOfCallToActionOnMedicationBtn.get(val).getCssValue("background-color")
+								.equals("rgba(13, 136, 11, 1)")) {
+					count = count + 1;
 				}
 			}
-			return count==listOfIndex.size();
+			return count == listOfIndex.size();
 		} else {
 			return false;
 		}
@@ -1029,11 +1037,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// Need to add the Regex for Number
 	public boolean validateContactPharmacyPopUpHavingNumber() {
-		if(pnpValidate(contactPharmacyPopUp)){
-		String contactNumber = contactPharmacyNumber.getText();
-		return !contactNumber.isEmpty();
-		}
-		else {
+		if (pnpValidate(contactPharmacyPopUp)) {
+			String contactNumber = contactPharmacyNumber.getText();
+			return !contactNumber.isEmpty();
+		} else {
 			Assert.assertTrue("PROBLEM - Contacr Pharmacy PopUp not available", false);
 		}
 		return false;
@@ -1049,7 +1056,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 							return false;
 						}
 					}
-				}else {
+				} else {
 					return false;
 				}
 				return true;
@@ -1082,7 +1089,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
-				System.out.println("Retail Pharmacy Name :"+listOfPharmacyName.get(val).getText());
+				System.out.println("Retail Pharmacy Name :" + listOfPharmacyName.get(val).getText());
 				if (listOfPharmacyName.get(val).getText().equals("OptumRx")) {
 					return false;
 				}
@@ -1123,9 +1130,61 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 	}
 
+	public boolean clickOnTrackOrderStatus(String orderStatus) {
+		return true;
+	}
+
+	public boolean clickOnHDDrugCTA(String orderStatus, String callToAction) {
+		List<Integer> listOfIndex = getOrderStatusIndexBasedOnStatusValue(orderStatus);
+		if (listOfIndex.size() != 0) {
+			for (Integer val : listOfIndex) {
+				if (listOfCallToActionOnMedication.get(val).getText().equals(callToAction)) {
+					listOfCallToActionOnMedication.get(val).click();
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean validateOderStatusPageURL() {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-status")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void validateOderStatusPage() {
+		Assert.assertTrue("PROBLEM - Order Status page is not displayed", validateOderStatusPageURL());
+	}
+
+	public void validateClickOnHDDrugCTA(String orderStatus, String callToAction) {
+		Assert.assertTrue("PROBLEM - " + orderStatus + " Call to action button is not available on Current Medication",
+				clickOnHDDrugCTA(orderStatus, callToAction));
+	}
+
+	public void validateClickOnTrackOrderStatus() {
+		List<String> list = Arrays.asList("Request Received", "Verifying with Doctor", "Order Verified", "Processing",
+				"Processed", "Shipped");
+		ArrayList<String> inprogressOrderStatus = new ArrayList<String>();
+		inprogressOrderStatus.addAll(list);
+		for (String status : inprogressOrderStatus) {
+			clickOnTrackOrderStatus(status);
+		}
+		// getListOfIndexForTrackCTA();
+		// Assert.assertTrue("PROBLEM - "+ callToAction +" call to action button is not
+		// available for In Progress Order on Current
+		// Medication",clickOnTrackOrderStatus()));
+	}
+
 	public void validateOrderStatusForHDDrug(String orderStatus) {
+
 		Assert.assertTrue("PROBLEM - " + orderStatus + " Status not available on Current Medication",
-				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
+				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() >= 0);
+
 	}
 
 	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus, String ballSize) {
@@ -1290,8 +1349,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void clickOnNextPageArrow() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-		js.executeScript("arguments[0].scrollIntoView(true);",nextPageArrow);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", nextPageArrow);
 		nextPageArrow.click();
 	}
 

@@ -1,12 +1,12 @@
 Feature: MVP - Current Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to Current Medications on P&P Page
 
-  @CurrentMedications @F392596 @US2301927 @tip
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medicine cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user validates first six of his active prescriptions
     And user validates medications will be displayed beginning with the ones that have an associated call to action
@@ -20,7 +20,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user valides View all medications link text
 
@@ -33,7 +33,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user clicks View all medications link
     Then user will be directed to My Medications page
@@ -47,7 +47,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     Then user validates a number in parentheses
     And user validates the number will correspond to the total number of active medications he has
@@ -61,7 +61,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     Then user validates the disclaimer Medication appearance subject to change
 
@@ -97,7 +97,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user clicks medication name of one of his active prescriptions listed on the Current Medications
     Then user validates the Drug Info overview page for that prescription/medication in the same browser tab
@@ -111,7 +111,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user clicks on the Learn More button on one of my active prescriptions listed under Current Medications
     Then validate user redirects to the Drug Info page for that prescription/medication in the same browser tab
@@ -125,7 +125,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug listed in his Current Medications
     Then user validates that home delivery drug is associated with a current order
@@ -139,7 +139,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug listed in his Current Medications
     Then user validates the status of Verifying with doctor or status of Order verified
@@ -154,7 +154,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Request received
@@ -169,7 +169,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Processing
@@ -214,7 +214,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views one of his active medications has a payment method hold on it
     Then user validates a red On Hold indicator
@@ -230,7 +230,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views one of his active medications has a address hold on it
     Then user validates a red On Hold indicator
@@ -246,7 +246,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views one of his active medications has  a price adjustment hold on it
     Then user validates a red On Hold indicator
@@ -262,7 +262,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views one of his active medications has a Call hold on it
     Then user validates a red On Hold indicator
@@ -278,7 +278,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views one of his active medications has an informational hold on it
     Then user validates a red On Hold indicator
@@ -288,53 +288,53 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views a Refill Medication call to action button on that medication's row
+    When user have a home delivery medication eligible for refill
     Then user validates the external link icon in the button
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                          |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views a Renew Medication call to action button on that medication's row
+    When user views a home delivery medication eligible for renewal
     Then user validates the external link icon in the button
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                          |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    When user views  an active medication currently in progress for home delivery
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    When user views an active medication currently in progress for home delivery
     Then user views a Track Status call to action button on that medication's row
 
     Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     When user views an active medication home delivery order that has been delivered
     Then user views a View Order call to action button on that medication's row
 
@@ -347,9 +347,9 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    When user views a Refill Medication call to action button on that medication's row
+    When user have a home delivery medication eligible for refill
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
 
@@ -362,9 +362,9 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    When user views a Renew Medication call to action button on that medication's row
+    When user views a home delivery medication eligible for renewal
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
 
@@ -377,7 +377,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery medication on hold
     When user clicks the Resolve Hold call to action button
@@ -392,11 +392,11 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    When user views  an active medication currently in progress for home delivery
+    When user views an active medication currently in progress for home delivery
     When user clicks the Track Status call to action button on that medication's row
-    Then user views the Home Delivery tab on the Drug Info page for that medication
+    Then user view the Order Status page for that medication
 
     Examples: 
       | FID     | planType | memberType           |
@@ -407,11 +407,11 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views an active medication home delivery order that has been delivered
     When user clicks the View order call to action button on that medication's row
-    Then user views the Home Delivery tab on the Drug Info page for that medication
+    Then user view the Order Status page for that medication
 
     Examples: 
       | FID     | planType | memberType           |
@@ -450,7 +450,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     And one of user active medications has a payment method hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -466,7 +466,7 @@ Feature: MVP - Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has an address hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -480,7 +480,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has a price adjustment hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -494,7 +494,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has a Call hold on it
     Then user will see a "Red" "On Hold" indicator
@@ -508,7 +508,7 @@ Feature: MVP - Current Medications
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has an informational hold on it
     Then user will NOT see a "Red" "On Hold" indicator

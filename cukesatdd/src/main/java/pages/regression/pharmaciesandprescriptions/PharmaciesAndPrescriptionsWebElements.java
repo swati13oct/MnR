@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import atdd.framework.UhcDriver;
 
 import java.util.ArrayList;
@@ -229,6 +228,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "(//h2[contains(text(),'Find')])[1]")
 	protected WebElement findPrescriptionTitle;
 
+	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
+	protected List<WebElement> sixMedications;
+
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
 	protected WebElement findPrescriptionDesc;
 
@@ -295,7 +297,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
 	protected List<WebElement> SixMedications;
 
-	@FindBy(xpath = "//div[@class='")
+	@FindBy(xpath = "//span[@data-test-component='text']")
 	protected List<WebElement> AssociatedCallToAction;
 
 	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
@@ -336,14 +338,23 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected WebElement PhoneNumber;
 
+	@FindBy(xpath = "//span[contains(text(),'Track Status')]")
+	protected List<WebElement> trackStatusButton;
+
+	@FindBy(xpath = "//span[contains(text(),'Delivered')]")
+	protected List<WebElement> delivered;
+
+	@FindBy(xpath = "//span[contains(text(),'VIEW ORDER')]")
+	protected List<WebElement> viewOrder;
+
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
-	@FindBy(xpath = "//span[contains(text(),'')]")
+	@FindBy(xpath = "//div[@class='sc-LzLvP sc-LzLwo iFciar']")
 	protected WebElement NumberInParenthesis;
 
-	@FindBy(xpath = "//span[contains(text(),'Medication appearance subject to change')]")
-	protected WebElement Disclaimer;
+	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
+	protected List<WebElement> Disclaimer;
 
 	@FindBy(xpath = "//span[contains(text(),'Request received')]")
 	protected List<WebElement> RequestReceived;
@@ -368,8 +379,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	// ************************Added By
 	// Naresh***********************************************************
-	//// a[@class='sc-fzXfNk coqaOW sc-LzLut ivhIFO']
-	// @FindBy(xpath="//a[@data-testid='medication-data-name']")
 
 	@FindBy(xpath = "//a[@class='sc-fzXfNk coqaOW sc-LzLut ivhIFO']")
 	protected List<WebElement> listOfDrugName;
@@ -414,6 +423,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Loading&ellipsis;']")
 	protected WebElement loading;
+
+	@FindBy(xpath = "//h2[@data-test-component='title' and text()='Contact Pharmacy']")
+	protected WebElement contactPharmacyPopUp;
 
 	public List<String> getDrugNameListValue() {
 		List<String> listOfDrug = new ArrayList<>();
@@ -504,7 +516,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected WebElement MedicationName_OnDrugInfoPage;
 
-	@FindBy(xpath = "//span[@data-test-component='text' and text()='>']")
+	@FindBy(xpath = "")
 	protected WebElement nextPageArrow;
 
 	@FindBy(xpath = "//span[text()='LEARN MORE']/parent::button")
@@ -560,6 +572,90 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		RefillMedications.click();
 	}
 
-	@FindBy(xpath = "//h2[@data-test-component='title' and text()='Contact Pharmacy']")
-	protected WebElement contactPharmacyPopUp;
+	public boolean sixActivePrescription() {
+
+		if (sixMedications.size() == 6) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean associatedCallToAction() {
+
+		if (AssociatedCallToAction.get(AssociatedCallToAction.size() - 1).isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateTrackStatusBtn() {
+
+		if (trackStatusButton.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateDeliveredStatus() {
+
+		if (delivered.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean viewOrderButton() {
+
+		if (viewOrder.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean alphaNumeric() {
+
+		boolean containsDigit = false;
+		String s = NumberInParenthesis.getText();
+		if (s != null && !s.isEmpty()) {
+			for (char c : s.toCharArray()) {
+				if (containsDigit = Character.isDigit(c)) {
+					break;
+				}
+			}
+
+		}
+		return containsDigit;
+
+	}
+
+	public boolean corredpondingMedicationsNumbers() {
+
+		String numberTXT = NumberInParenthesis.getText();
+		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medications");
+		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
+
+		if (number == number2) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean disclaimer() {
+
+		if (Disclaimer.get(Disclaimer.size() - 1).isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
