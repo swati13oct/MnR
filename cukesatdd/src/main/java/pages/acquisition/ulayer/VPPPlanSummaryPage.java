@@ -425,7 +425,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "sign-up-modal-header")
 		private WebElement createProfilePopup;
 		
-		@FindBy(xpath = "//div[contains(@class,'d-flex flex-column flex-lg-row align-items-lg-center')]/p")
+		@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
 		private List<WebElement> plansInPopup;
 		
 		@FindBy(xpath = "//div[@class='uhc-modal']")
