@@ -64,13 +64,20 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 	@FindBy(xpath = "//*[contains ( @id ,'error-dob' )]")
 	private WebElement DOBError;
 	
-	@FindBy(xpath = "//select[contains(@class, 'medicaredate_mm') and contains(@id, 'form-medicaredate_mm') and contains(@name, 'medicaredate_mm')]")
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]")
 	private WebElement PartBStartMonth;
 	
 	
-	@FindBy(xpath = "//select[contains(@class, 'medicaredate_yy') and contains(@id, 'form-medicaredate_yy') and contains(@name, 'medicaredate_yy')]")
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_yy')]")
 	private WebElement PartBStartYear;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_mm')]")
+	private WebElement PartAStartMonth;
 	
+	
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_yy')]")
+	private WebElement PartAStartYear;
+
 	@FindBy(xpath = "//*[contains ( @id ,'error-medicaredate' )]")
 	private WebElement PartBError;
 
@@ -337,4 +344,42 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 			return new DGR_ThankYouPage(driver);
 		}
 		return null;	}
+
+	public void validatePreEntryPageData(Map<String, String> PreEntryPageInfo) {
+		validateNew(DateOfBirthTxt);
+		
+		String DOB_Expected= PreEntryPageInfo.get("DOB");
+		String DOB_Formatted = (DOB_Expected.substring(6))+"-"+(DOB_Expected.substring(0,2))+"-"+(DOB_Expected.substring(3,5));
+		String part_A_Month_Expected = PreEntryPageInfo.get("part_A_Month_Entered");
+		String part_A_Year_Expected = PreEntryPageInfo.get("part_A_Year_Entered");
+		String part_B_Month_Expected = PreEntryPageInfo.get("part_A_Month_Entered");
+		String part_B_Year_Expected = PreEntryPageInfo.get("part_A_Year_Entered");
+		String start_Date_Expected = PreEntryPageInfo.get("startDateEntered");	
+		
+		String DOB_Displayed = DateOfBirthTxt.getAttribute("value");
+		String part_A_Month_Displaye = PartAStartMonth.getAttribute("value");
+		String part_A_Year_Displaye = PartAStartYear.getAttribute("value");
+		String part_B_Month_Displaye = PartBStartMonth.getAttribute("value");
+		String part_B_Year_Displaye = PartBStartYear.getAttribute("value");
+		String startDate_Displaye = PlanStartDate.getAttribute("value");
+		System.out.println("Expected info : "+PreEntryPageInfo.toString());
+		System.out.println("DOB Expected Formatted : "+DOB_Formatted);
+		System.out.println("DOB Displayed : "+DOB_Formatted);
+		System.out.println("part_A_Month_Displaye Displayed : "+part_A_Month_Displaye);
+		System.out.println("part_A_Year_Displaye Displayed : "+part_A_Year_Displaye);
+		System.out.println("part_B_Month_Displaye Displayed : "+part_B_Month_Displaye);
+		System.out.println("part_B_Year_Displaye Displayed : "+part_B_Year_Displaye);
+		System.out.println("startDate_Displaye Displayed : "+startDate_Displaye);
+
+		if(DOB_Displayed.contains(DOB_Formatted) && part_A_Month_Expected.contains(part_A_Month_Displaye)
+			&& part_A_Year_Expected.contains(part_A_Year_Displaye ) && part_B_Month_Expected.contains(part_B_Month_Displaye )
+					&&  part_B_Year_Expected.contains(part_B_Year_Displaye) &&  start_Date_Expected.contains(startDate_Displaye)) {
+			System.out.println("All fields displayed info matches Pre-Entry Page info");
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("All fields displayed info DOES NOT matches Pre-Entry Page info");
+		}
+
+	}
 }	
