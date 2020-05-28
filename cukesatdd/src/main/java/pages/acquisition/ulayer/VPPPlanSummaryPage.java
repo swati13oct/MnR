@@ -338,15 +338,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
-	@FindBy(xpath = "//button[contains(text(),'Continue Enrollment')]")
+	@FindBy(xpath = "//button[contains(text(),'Continue to enrollment')]")
 	private WebElement contEnrollmentBtn;
 	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Will my doctors covered?";
-	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="Continue my enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -751,9 +751,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateButton(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
 			validate(getStartedBtn);
-		} else if (BtnName.equalsIgnoreCase("Find My Doctors")) {
+		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
 			validate(findMyDoctorBtn);
-		} else if (BtnName.equalsIgnoreCase("Continue Enrollment")) {
+		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
 			validate(contEnrollmentBtn);
 		}
 	}
@@ -761,10 +761,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
 			getStartedBtn.click();
-		} else if (BtnName.equalsIgnoreCase("Find My Doctors")) {
+		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
 			waitTillElementClickableInTime(findMyDoctorBtn, 5);
 			findMyDoctorBtn.click();
-		} else if (BtnName.equalsIgnoreCase("Continue Enrollment")) {
+		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
 			waitTillElementClickableInTime(contEnrollmentBtn, 5);
 			contEnrollmentBtn.click();
 		}
