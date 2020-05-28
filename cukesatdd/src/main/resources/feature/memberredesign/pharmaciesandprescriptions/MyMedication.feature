@@ -1,3 +1,4 @@
+@F448402
 Feature: MVP - My Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to My Medications on P&P Page
 
@@ -6,7 +7,7 @@ Feature: MVP - My Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
     And one of user active medications has a payment method hold on it
@@ -23,7 +24,7 @@ Feature: MVP - My Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
     When one of user active medications has an address hold on it
@@ -38,7 +39,7 @@ Feature: MVP - My Medications
   @MyMedications @F448402 @US2568667
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
     When one of user active medications has a price adjustment hold on it
@@ -53,7 +54,7 @@ Feature: MVP - My Medications
   @MyMedications @F448402 @US2568667
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
     When one of user active medications has a Call hold on it
@@ -68,7 +69,7 @@ Feature: MVP - My Medications
   @MyMedications @F448402 @US2568667
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given I am an M&R member viewing Current Medications the Medicine Cabinet
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
     When one of user active medications has an informational hold on it
@@ -79,44 +80,12 @@ Feature: MVP - My Medications
       | FID     | planType | memberType             |
       | F448402 | MAPD     | AARP_Individual_PnP_rx |
 
-  @MyMedications @F448402 @US2618939
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    And user clicks View all medications link
-    Then user have active retail medications
-    And user will view active retail medications
-    And user will see a "Green" "Contact Pharmacy" button
-
-    Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
-
-  @MyMedications @F448402 @US2618939
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-    And user clicks View all medications link
-    Then user have active retail medications
-    When user select the green "Contact Pharmacy" button
-    Then user will view a popup with the phone number available to call
-
-    Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
-
   @MyMedications @F448402 @US2568665
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Shipped
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
@@ -132,9 +101,7 @@ Feature: MVP - My Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
@@ -145,19 +112,47 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
+  @MyMedications @F448402 @US2618939
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active retail medications
+    And user will view active retail medications
+    And user will see a "Green" "Contact Pharmacy" button
+
+    Examples: 
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MyMedications @F448402 @US2618939
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link
+    Then user have active retail medications
+    When user select the green "Contact Pharmacy" button
+    Then user will view a popup with the phone number available to call
+
+    Examples: 
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
   @MyMedications @F448402 @US2568656
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member selects the next page
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    And user clicks View all medications link to view the My Medications page
-    Then user views the Medicine Cabinet on the My Medications page
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
     When user select the next page arrow
     Then user will see remaining prescriptions on the My Medications page
-    
+
     Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
