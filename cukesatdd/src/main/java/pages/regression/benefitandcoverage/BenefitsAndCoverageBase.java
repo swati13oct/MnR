@@ -1047,7 +1047,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 				|| (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink")))
 		{
 		System.out.println("Now waiting for Benefits Information header to show up");
-		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
@@ -1067,7 +1067,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
 		{
 		System.out.println("Now waiting for Search for a drug header to show up");
-		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = searchForADrugHeaderOptumRx.getText();

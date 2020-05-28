@@ -381,7 +381,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (linktobetested.equalsIgnoreCase("drugCostSummaryButton"))
 		{
 		System.out.println("Now waiting for Benefits Information header to show up");
-		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
@@ -401,7 +401,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
 		{
 		System.out.println("Now waiting for Search for a drug header to show up");
-		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = searchForADrugHeaderOptumRx.getText();
@@ -421,7 +421,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (linktobetested.equalsIgnoreCase("orderPrescriptionsButton"))
 		{
 		System.out.println("Now waiting for Welcome, in header to show up");
-		CommonUtility.waitForPageLoad(driver, welcometextinheaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, welcometextinheaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = welcometextinheaderOptumRx.getText();
@@ -441,7 +441,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (linktobetested.equalsIgnoreCase("checkDelieryStatusButton"))
 		{
 		System.out.println("Now waiting for Order Status in header to show up");
-		CommonUtility.waitForPageLoad(driver, orderStatusTextInHeaderOptumRx, 20);
+		CommonUtility.waitForPageLoad(driver, orderStatusTextInHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = orderStatusTextInHeaderOptumRx.getText();
