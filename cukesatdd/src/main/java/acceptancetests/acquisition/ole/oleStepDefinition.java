@@ -1,7 +1,6 @@
 package acceptancetests.acquisition.ole;
 
-import gherkin.formatter.model.DataTableRow;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +11,17 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
@@ -35,18 +45,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.OLE_PageConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -263,21 +262,35 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
-		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-
+		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
-		String PlanPremium = "";
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String SiteName;
-		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		String PlanPremium = "";
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
-		WelcomePage welcomePage;
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-			//TFN = visitorProfilePage.GetTFNforPlanType();
-			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+		WelcomePage welcomePage;			
+			if(SiteName.contains("UHC_ACQ")){
+				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+				//TFN = planSummaryPage.GetTFNforPlanType();
+
+				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+
+			}
+			else{
+				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+				//TFN = planSummaryPage.GetTFNforPlanType();
+
+				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+
+			}
+			
 		//--------------------------------------------------------------------------------------------------------------------
 		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
@@ -2448,7 +2461,114 @@ public class oleStepDefinition {
 		} else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
+	/**
+	 * @param planName 
+	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in UHC VPP page are same
+	 */
+	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppproviders = planSummaryPage.getStringList();
+		
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
+		
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+		/*if(vppproviders.equals(pcpproviders))
+		{
+			System.out.println("List of providers in VPP AND OLE Page are equal");
+		}
+		else
+		{
+			System.out.println("List of providers in VPP AND OLE Page are not equal");
+		}
+		*/		
+		}
+	/**
+	 * @toDo: Select the provider in PCP and continue to OLE Flow
+	 */
+			
+	/**
+	 * @param planName 
+	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in AARP VPP page are same
+	 */
+	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed$")
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_AARP_VPP_displayed(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ArrayList<String> vppproviders = planSummaryPage.getStringList();
+		
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
+		
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+	}
 	
+	@Then("^the user select providers from the PCP page and continue to OLE Flow$")
+	public void the_user_select_providers_from_the_PCP_page_and_continue_to_OLE_Flow() throws Throwable {		
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		PrimaryCarePhysicianPage pcpproviderPage = pcpPage.navigate_PCPPage();
+		
+			}
+		
 } 
 
 

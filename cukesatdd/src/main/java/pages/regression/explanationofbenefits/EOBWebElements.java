@@ -339,6 +339,9 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(text(),'My Claims')]")
 	protected WebElement myClaimsSubTopMenu;
+
+	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(text(),'Claims Summary')]")
+	protected WebElement oldClaimsSubTopMenu;
 	
 	@FindBy(xpath="//h2[contains(text(),'Spending')]")
 	protected WebElement spendingCostSummaryPgHeader;
@@ -357,11 +360,14 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'If you are having')]")
 	protected WebElement contactusStmt1;
+	
+	@FindBy(xpath="//div[contains(@class,'contactus')]//p[contains(text(),'If you are having')]//a")
+	protected WebElement contactusStmtLnk;
 
 	@FindBy(xpath="//p[contains(text(),'In some instances')]")
 	protected WebElement contactusStmt2;
 	
-	@FindBy(xpath="//p//strong[contains(text(),'Is there a provider')]/../u/a")
+	@FindBy(xpath="//p//strong[contains(text(),'Is there a provider')]/../a")
 	protected WebElement contactusLnk;
 	
 	public EOBWebElements(WebDriver driver) {

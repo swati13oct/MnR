@@ -158,6 +158,7 @@ public class MemberAuthStepDefinition{
 			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
 					.get(0), profileAttributesRow.get(i).getCells().get(1));
 		}		
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
 
 		MemberAuthPage mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
 		
@@ -711,5 +712,17 @@ public class MemberAuthStepDefinition{
 		getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, paymentsHistoryPage);
 	
 	}
+	
+	@Then("^the user navigates to payments overview page$")
+	public void the_user_navigates_to_payments_overview_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigateDirectToPaymentHitorypage();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
 	
 }

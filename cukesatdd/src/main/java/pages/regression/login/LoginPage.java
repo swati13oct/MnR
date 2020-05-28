@@ -110,13 +110,10 @@ public class LoginPage extends UhcDriver {
 
 		
 		private boolean teamSpecialCase;
-		//tbd private boolean isMicroApp;
-		//tbd public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
 		public LoginPage(WebDriver driver, boolean input_teamSpecialCase) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 			teamSpecialCase=input_teamSpecialCase;
-			//tbd this.isMicroApp=isMicroApp;
 			openAndValidate();
 		}
 
@@ -133,20 +130,16 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				}  else if((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+				}  else if((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h")) ||(MRScenario.environment.contains("team-voc"))) {
 					System.out.println("Running on " +MRScenario.environment + " env, teamSpecialCase="+teamSpecialCase);
-					//tbd if (isMicroApp) { //note: microapp run
-					//tbd 	PAGE_URL=MRConstants.MICROAPP_URL;
-					//tbd 	if (teamSpecialCase) { //note: microapp run for PCP or MEDICA user
-					//tbd 		PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP;
-					//tbd 	}
-					//tbd } else { //note: non-microapp run
 						if (teamSpecialCase) {
 							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
 						} else {
 							PAGE_URL=MRConstants.OSE_NEW_URL;	
 						}
-					//tbd }
+						if (MRScenario.environment.contains("team-voc")) {
+							PAGE_URL=PAGE_URL.replace("www.", "");
+						}
 				} else if("team-c".equalsIgnoreCase(MRScenario.environment)) {
 					if (teamSpecialCase) {
 						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
@@ -290,13 +283,6 @@ public class LoginPage extends UhcDriver {
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
-				/* tbd 
-				//vvv note: temp-workaround for team-a env for now
-				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) {
-					return new AccountHomePage(driver);
-				}
-				//^^^ note: temp-workaround for team-a env for now
-				 */
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);

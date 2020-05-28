@@ -28,7 +28,7 @@ Feature: 1.04.2 To Test EOB for Members - Spending Cost Summary Suppression Logi
     Examples: 
       | index | UID       | planType  | memberType         | expectTab | note                                      | 
       | 21    | US2382272 | PDP       | LIS_EOB            | true      | PDP not blacklist LIS either 1,2,3,4      |
-      | 22    | US2382272 | PDP_SSUP  | LIS_COMBO_EOB      | true      | Group MA/MAPD/SSUP and PDP                |
+      | 22    | US2382272 | PDP_SSUP  | COMBO_EOB          | true      | Group MA/MAPD/SSUP and PDP                |
       | 23    | US2382272 | PDP_SHIP  | NON_LIS_COMBO_EOB  | true      | PDP is non list                           |
       | 24    | US2382272 | PDP_SSUP  | NON_LIS_COMBO_EOB  | true      | PDP LIS 0                                 |
       | 25    | US2382272 | MAPD      | COSMOS_EOB_R       | true      | medicaidDualStatusCode is not 01,02,04,08 |

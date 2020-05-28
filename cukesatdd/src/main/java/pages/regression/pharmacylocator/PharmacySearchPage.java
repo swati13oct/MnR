@@ -514,6 +514,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	//	moveMouseToElement(mailOrderFilter); //note: in case running on offline - scroll to this so show/hide map will be visible 
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
 				pharmacyValidate(map_showHideMapLnk));
+		scrollElementToCenterScreen(map_showHideMapLnk);
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
 				!pharmacyValidate(map_mapImg));
@@ -592,6 +593,17 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		}
 		return actualSegmentId;
 	}
+
+	public void scrollElementToCenterScreen(WebElement element) {
+		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
+		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+		System.out.println("TEST - move element to center view"); 
+		/* JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element); */
+	}
+
 }
 
 

@@ -118,7 +118,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
 	private WebElement reqACallPhoneNumber;
 
 	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
@@ -198,7 +198,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
 
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']/div[1]//b")
+	@FindBy(xpath="(//div[@class='message-block-header'])[2]//p")
 	private WebElement requestACallSuccessMessageHeader;
 
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
@@ -362,6 +362,15 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//a[starts-with(@id,'messages')]")
 	private WebElement Rallymessageslink;
+	
+	@FindBy(xpath ="//a[@class='ogn-genesys-chat-button']")
+	private WebElement chatLink; 
+	
+	@FindBy(xpath ="//span[@id='omni-chat-offline']")
+	private WebElement chatoffline;
+	
+	@FindBy(xpath ="//p[contains(text(),'Start a secure Chat session with an Advocate now.')]")
+	private WebElement chatMessage; 
 	
 
 	public JSONObject contactUsJson;
@@ -1187,6 +1196,46 @@ public void NavigateRallyandclickonmessagesLink() {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	}
-
-
+	
+	/**
+	 * Validate the go to CHAT with us for SHIP member 
+	 */
+	public void validateChatWithUs(){
+		try {
+			validateNew(chatMessage);
+			if (chatMessage.isDisplayed());
+			System.out.println("**Chat message seen is:->"+chatMessage);
+			if(
+				driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) {
+				System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+				System.out.println("** User landed on Contact us Page **");
+				Assert.assertTrue(driver.getTitle().contains("Help & Contact Us"));
+				return ;
+				} else {
+					Assert.fail("The element " + chatMessage.getText() + "is not found");
+				}
+		//	waitforElement(chatoffline);
+			//validateNew(chatLink);
+			//waitforElement(chatLink);
+			//Assert.assertTrue(validate(chatLink));
+			try {
+				chatLink.click();
+				System.out.println("** Chat link clicked **");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//chatLink.isDisplayed();
+			
+			//if(chatLink.isDisplayed());
+			
+			//chatLink.click();
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+

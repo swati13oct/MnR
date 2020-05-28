@@ -277,7 +277,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
-		System.out.println("***user navigates to Benefits coverage page***");
+		/*		System.out.println("***user navigates to Benefits coverage page***");
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
@@ -293,7 +293,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		{
 			System.out.println("Benefits and Coverage page object is Null ");
 		}
-
+*/
 	}
 
 

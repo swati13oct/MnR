@@ -36,6 +36,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.deeplinkPages.ClaimsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.aarpChatAgentLogin;
 import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
 import pages.regression.deeplinkPages.coverageandBenefitsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
@@ -855,9 +856,8 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h")) || MRScenario.environment.contains("team-voc")) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
-					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
 					loginPage = new LoginPage(wd);
 				}
@@ -1056,6 +1056,8 @@ public class HSIDStepDefinition {
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 		if (MRScenario.environment.equals("stage")) 
 			configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
+		if (MRScenario.environment.contains("team-voc")) 
+			configPgUrl=configPgUrl.replace("www.", "");
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
@@ -1096,6 +1098,7 @@ public class HSIDStepDefinition {
 	@Given("^member lands on the payment deeplink page$")
 	public void the_user_is_onPayments_deeplink_Page() throws InterruptedException{
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
 		paymentsDeeplinkLoginPage.navigateToLoginURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
@@ -1106,6 +1109,7 @@ public class HSIDStepDefinition {
 	@Given("^member lands on the claims deeplink page$")
 	public void the_user_is_Onclaims_deeplink_Page() throws InterruptedException{
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		ClaimsDeeplinkLoginPage claimsDeeplinkLoginPage = new ClaimsDeeplinkLoginPage(wd);
 		claimsDeeplinkLoginPage.navigateToLoginURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE,claimsDeeplinkLoginPage );	
@@ -1202,6 +1206,7 @@ public class HSIDStepDefinition {
 			@Given("^member lands on the eob deeplink page$")
 			public void the_user_is_on_eob_deeplink_Page() throws InterruptedException{
 				WebDriver wd = getLoginScenario().getWebDriver();
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 				eobDeeplinkLoginPage eobDeeplinkLoginPage = new eobDeeplinkLoginPage(wd);
 				eobDeeplinkLoginPage.navigateToLoginURL();
 				getLoginScenario().saveBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE,eobDeeplinkLoginPage );	
@@ -1255,6 +1260,7 @@ public class HSIDStepDefinition {
 				@Given("^member lands on the accountProfile deeplink page$")
 				public void the_user_is_on_accountProfile_deeplink_Page() throws InterruptedException{
 					WebDriver wd = getLoginScenario().getWebDriver();
+					getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 					accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = new accountsProfileDeeplinkLoginPage(wd);
 					accountsProfileDeeplinkLoginPage.navigateToLoginURL();
 					getLoginScenario().saveBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE,accountsProfileDeeplinkLoginPage );	
@@ -1309,6 +1315,7 @@ public class HSIDStepDefinition {
 					@Given("^member lands on the coverageandBenefits deeplink page$")
 					public void the_user_is_on_coverageandBenefits_deeplink_Page() throws InterruptedException{
 						WebDriver wd = getLoginScenario().getWebDriver();
+						getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 						coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = new coverageandBenefitsDeeplinkLoginPage(wd);
 						coverageandBenefitsDeeplinkLoginPage.navigateToLoginURL();
 						getLoginScenario().saveBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE,coverageandBenefitsDeeplinkLoginPage );	
@@ -1362,6 +1369,7 @@ public class HSIDStepDefinition {
 						@Given("^member lands on the healthwellness deeplink page$")
 						public void the_user_is_on_healthwellness_deeplink_Page() throws InterruptedException{
 							WebDriver wd = getLoginScenario().getWebDriver();
+							getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 							healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = new healthwellnessDeepLinkLoginPage(wd);
 							healthwellnessDeepLinkLoginPage.navigateToLoginURL();
 							getLoginScenario().saveBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE,healthwellnessDeepLinkLoginPage );	
@@ -1415,6 +1423,7 @@ public class HSIDStepDefinition {
 							@Given("^member lands on the myDocuments deeplink page$")
 							public void the_user_is_on_myDocuments_deeplink_Page() throws InterruptedException{
 								WebDriver wd = getLoginScenario().getWebDriver();
+								getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 								myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = new myDocumentsDeeplinkLoginPage(wd);
 								myDocumentsDeeplinkLoginPage.navigateToLoginURL();
 								getLoginScenario().saveBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE,myDocumentsDeeplinkLoginPage );	
@@ -1462,4 +1471,54 @@ public class HSIDStepDefinition {
 							     Thread.sleep(3000);
 							     myDocumentsDeeplinkLoginPage.validateMyDocumentsPage();
 							}
+							 
+							@And("^user stores test input for validations$")
+							public void storeTestInput(DataTable memberAttributes) {
+								List<DataTableRow> memberAttributesRow = memberAttributes
+										.getGherkinRows();
+								Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+								for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+									memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+											.get(0), memberAttributesRow.get(i).getCells().get(1));
+								}
+
+								String planType = memberAttributesMap.get("Plan Type");
+								String category = memberAttributesMap.get("Member Type");
+								String userName = memberAttributesMap.get("Username");
+
+								getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+								getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+								getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+
+							}
+
+							/** 
+								 * @todo :agent lands on login page 
+								 */
+								@Given("^agentlogin lands on page$") 
+								public void agentloginandsnpage() throws InterruptedException{
+									WebDriver wd = getLoginScenario().getWebDriver();
+									getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+									aarpChatAgentLogin aarpChatAgentLogin = new aarpChatAgentLogin(wd);
+									aarpChatAgentLogin.navigateToLoginURL();
+									aarpChatAgentLogin.validatePageElements();
+									getLoginScenario().saveBean(PageConstants.AARP_CHAT_AGENT_LOGIN,aarpChatAgentLogin );	
+								}
+								/** 
+								 * @todo :agent enters credentials 
+								 */
+								 @Given("^agent enters credentials$") 
+								 public void agententercredentials() throws InterruptedException{
+									 Thread.sleep(5000);
+									 String username = "AARPStage7";
+									aarpChatAgentLogin.enterusername(username);
+									 String password =  "AARPStage7";
+									aarpChatAgentLogin.enterpassword(password);	
+									 aarpChatAgentLogin.clickSubmit();
+									
+									 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
+								     Thread.sleep(3000);
+								     aarpChatAgentLogin.aarpchatagentreadystate();
+								}			 
 }

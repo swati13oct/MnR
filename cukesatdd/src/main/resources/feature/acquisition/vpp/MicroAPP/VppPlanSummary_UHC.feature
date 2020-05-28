@@ -1,5 +1,5 @@
-@vppPlanSummaryUHC 
-Feature: Vpp to plan Summary UHC Scenarios
+@vppPlanSummaryUHC
+Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
   @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
@@ -89,7 +89,39 @@ Feature: Vpp to plan Summary UHC Scenarios
       | MA Test Plans  | <MA_testPlans>  |
       | PDP Test Plans | <PDP_testPlans> |
       | SNP Test Plans | <SNP_testPlans> |
+    Then user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on UHC site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates ability to unsave a saved plan on UHC site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
+    Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on UHC site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -105,10 +137,10 @@ Feature: Vpp to plan Summary UHC Scenarios
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
-      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC04 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -366,3 +398,44 @@ Feature: Vpp to plan Summary UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
+
+  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    And the user validates plan summary for the below plan in UMS site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More UMS for Rocky Mountain plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |
+      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
+
+  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    And the user validates plan summary for the below plan in UMS site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More UMS for people Health plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |
+      | US2567133  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |
+      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |
+      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      
