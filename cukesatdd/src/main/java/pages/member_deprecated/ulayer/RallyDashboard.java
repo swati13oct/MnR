@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.dashboard_deprecated.formsandresources.FormsAndResourcesPage;
 import atdd.framework.UhcDriver;
+import pages.dashboard_deprecated.formsandresources.FormsAndResourcesPage;
 
 public class RallyDashboard extends UhcDriver{
 	

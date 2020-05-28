@@ -15,10 +15,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
 public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 

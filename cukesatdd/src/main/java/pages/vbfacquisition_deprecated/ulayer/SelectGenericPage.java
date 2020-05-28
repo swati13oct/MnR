@@ -15,10 +15,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.vbfacquisition_deprecated.dce.DceCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import acceptancetests.vbfacquisition_deprecated.dce.DceCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 

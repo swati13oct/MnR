@@ -7,10 +7,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.RequestAgentAppointmentPage;
-import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
-import pages.acquisition.bluelayer.RequestMailedInformationUHC;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -18,6 +14,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.RequestAgentAppointmentPage;
+import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
+import pages.acquisition.bluelayer.RequestMailedInformationUHC;
 
 /**
  *Functionality: Agent Flow

@@ -13,11 +13,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.dashboard_deprecated.member.blayer.PaymentHistoryPage;
 import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.dashboard_deprecated.member.blayer.PaymentHistoryPage;
 
 /**
  * @author pnampall

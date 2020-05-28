@@ -7,10 +7,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-
-import org.openqa.selenium.support.ui.Select;
 
 public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  {
 
