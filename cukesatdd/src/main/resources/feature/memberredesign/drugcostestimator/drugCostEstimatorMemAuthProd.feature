@@ -20,7 +20,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | TID   | username | password | MemUserName   | planType | memberType   |
       | 15326 | ashah120 | Mnrqa002 |  Pramila1946	| SHIP     | SHIP_DCE     |
       | 15337 | ashah120 | Mnrqa002 |  1GIRL4DEAN  	| MA       | MA_DCE       |
-     # | 15327 | ashah120 | Mnrqa002 |   			| SSUP     | SSUP_DCE     |
+      | 15327 | ashah120 | Mnrqa002 |   PTHUYNH50	| SSUP     | SSUP_DCE     |
    
    @drugCostEstimator2 @prod
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
