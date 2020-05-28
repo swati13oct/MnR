@@ -167,9 +167,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			} else {
 				expectedUrl="https://member.int.mymedicareaccount.uhc.com/PCP/find-care";
 				redirectUrl="https://member.int.mymedicareaccount.uhc.com/pcp/find-care";
-				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (MRScenario.environment.equalsIgnoreCase("offline")) {
 					expectedUrl="https://member.uat.mymedicareaccount.uhc.com/PCP/find-care";
 					redirectUrl="https://member.uat.mymedicareaccount.uhc.com/pcp/find-care";
+				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
+					redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("planType").toUpperCase().contains("MEDICA")) {
@@ -179,9 +182,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			} else {
 				expectedUrl="https://member.int.mymedicareaccount.uhc.com/Medica/find-care";
 				redirectUrl="https://member.int.mymedicareaccount.uhc.com/medica/find-care";
-				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (MRScenario.environment.equalsIgnoreCase("offline")) {
 					expectedUrl="https://member.uat.mymedicareaccount.uhc.com/Medica/find-care";
 					redirectUrl="https://member.uat.mymedicareaccount.uhc.com/medica/find-care";
+				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
+					redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
@@ -191,11 +197,16 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			} else {
 				expectedUrl="https://member.int.uhc.com/AARP/find-care";
 				redirectUrl="https://member.int.uhc.com/aarp/find-care";
-				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (MRScenario.environment.equalsIgnoreCase("offline")) {
 					expectedUrl="https://member.uat.uhc.com/AARP/find-care";
 					redirectUrl="https://member.uat.uhc.com/aarp/find-care";
 					if (testInputInfoMap.get("memberType").contains("GROUP"))
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
+				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					expectedUrl="https://member.uhc.com/AARP/find-care";
+					redirectUrl="https://member.uhc.com/aarp/find-care";
+					if (testInputInfoMap.get("memberType").contains("GROUP"))
+						redirectUrl="https://member.uhc.com/retiree/find-care";
 				}
 			}
 		} else {
@@ -207,11 +218,16 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				//note: if env is happy then will land on this,but most of the time is the other one
 				//redirectUrl="https://member.int.uhc.com/retiree/find-care"; 
 				redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
-				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (MRScenario.environment.equalsIgnoreCase("offline")) {
 					expectedUrl="https://member.uat.uhc.com/UHC/find-care";
 					redirectUrl="https://member.uat.uhc.com/uhc/find-care";
-					if (testInputInfoMap.get("memberType").contains("GROUP"))
+					if (testInputInfoMap.get("memberType").contains("GROUP")) 
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
+				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					expectedUrl="https://member.uhc.com/UHC/find-care";
+					redirectUrl="https://member.uhc.com/uhc/find-care";
+					if (testInputInfoMap.get("memberType").contains("GROUP"))
+						redirectUrl="https://member.uhc.com/retiree/find-care";
 				}
 			}
 		}

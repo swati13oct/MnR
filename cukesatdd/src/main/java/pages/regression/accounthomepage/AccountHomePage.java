@@ -465,7 +465,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
-	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
+	@FindBy(xpath="//div[contains(@class,'link-bar')]//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
 	
 	@FindBy(name="zipCode")
