@@ -325,42 +325,6 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                       | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | PDP     | AARP MedicareRx Walgreens (PDP) | 15 miles |
       
-     @vppNBADrugCostandEnroll
-    Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for PDP Plan when Drug cost exists And Enroll Plan
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
-      | Plan Type | <plantype> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started
-    And I have added a drug to my drug list from VPP
-      | Drug | <drug> |
-    And user selects drug details
-      | Drug      | <drug>      |
-      | Dosage    | <dosage>    |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-    When user successfully adds drug
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page
-    And the user selects the pharmacy tab information like miles, zipcode and pharmacy type
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy
-    And I navigate to step3 page and validate
-      | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    Then user clicks on Continue Enrollment button in AARP Site
-     
-      Examples:
-       | zipcode | isMultutiCounty | county         | plantype |drug    | dosage   | quantity | frequency     | branded | radius   |
-       |   19019 | No              | Iowa County    | PDP     |Lipitor | TAB 10MG |       30 | Every 1 month | yes     |15 miles |
-       
        @vppDCEFlowtoNextActionModalPDP
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when drug added from DCE
     Given the user is on the AARP medicare site landing page
