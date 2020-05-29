@@ -116,7 +116,15 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	
 	@FindBy(xpath= "//div[contains(@class, 'error errorheader is-invalid')]")
 	private WebElement topErrorMsg;
+	
+	@FindBy(xpath="//*[contains(@id, 'need-help-modal-tfn')]")
+	private WebElement tfnpopup;
+	
+	@FindBy(xpath="//button[contains(@class, 'close') and contains(@data-dismiss, 'modal')]")
+	private WebElement closebuttontfn;
 
+	
+	
 	public IsDecisionGuideStep1(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -132,6 +140,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		validate(HeaderNavigation);
 		validate(SiteLogo);
 		validate(DisclosureScrollBox);
+		validate(tfnpopup);
 
 		if(PageHeader.getText().contains("Medicare Supplement Insurance Plans"))
 			System.out.println("IS Decision Guide Page header is Displayed : "+PageHeader.getText());

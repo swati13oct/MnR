@@ -88,7 +88,54 @@ public class isDecisionGuideStepDefenitionUHC    {
 		plansummaryPage.MedSupFormValidation(dateOfBirth);
 		
 	}
-	 
+	@Then("^the user enters and  saves the entered information in Pre entry page for validation on IS forms on UMS site$")
+	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String dateOfBirth= memberAttributesMap.get("DOB");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Map<String, String> PreEntryPageInfo = new HashMap<String, String>();
+		PreEntryPageInfo = plansummaryPage.CapturePreEntryPageInfo(dateOfBirth);
+		String DOBEntered = PreEntryPageInfo.get("DOB");
+		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
+		String part_A_Year_Entered = PreEntryPageInfo.get("part_A_Year_Entered");
+		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
+		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
+		String start_Date_Entered = PreEntryPageInfo.get("startDateEntered");
+
+		getLoginScenario().saveBean(MedSuppCommonConstants.DOB, DOBEntered);
+		getLoginScenario().saveBean(MedSuppCommonConstants.PARTA_MONTH, part_A_Month_Entered);
+		getLoginScenario().saveBean(MedSuppCommonConstants.PARTA_YEAR, part_A_Year_Entered);
+		getLoginScenario().saveBean(MedSuppCommonConstants.PARTB_MONTH, part_B_Month_Entered);
+		getLoginScenario().saveBean(MedSuppCommonConstants.PARTB_YEAR, part_B_Year_Entered);
+		getLoginScenario().saveBean(MedSuppCommonConstants.START_DATE, start_Date_Entered);
+	}
+
+	@Then("^the user validates Decision Guide Step (\\d+) page info is same as the saved information from Pre-entry page on UMS site$")
+	public void the_user_validates_Decision_Guide_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page_on_UMS_site(int arg1) throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		String DOBEntered = (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
+		String part_A_Month_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_MONTH);
+		String part_A_Year_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_YEAR);
+		String part_B_Month_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTB_MONTH);
+		String part_B_Year_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTB_YEAR);
+		String start_Date_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.START_DATE);
+		Map<String, String> EnteredData = new HashMap<String, String>();
+
+		EnteredData.put("DOB",DOBEntered);
+		EnteredData.put("part_A_Month_Entered",part_A_Month_Entered);
+		EnteredData.put("part_A_Year_Entered",part_A_Year_Entered);
+		EnteredData.put("part_B_Month_Entered",part_B_Month_Entered);
+		EnteredData.put("part_B_Year_Entered",part_B_Year_Entered);
+		EnteredData.put("startDateEntered",start_Date_Entered);
+		DecisionGuideStep2Page.validatePreEntryPageData(EnteredData);
+
+	}
 	
 	@Then("^the user clicks on Request a Free Decision Guide on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site$")
 	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_UHC_site() throws Throwable {
