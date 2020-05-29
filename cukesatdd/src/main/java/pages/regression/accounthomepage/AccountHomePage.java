@@ -464,7 +464,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
-	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
+	@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
 	protected WebElement planDocResPgLink;
 	
 	@FindBy(name="zipCode")
@@ -482,15 +482,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
 	
-	private PageData myAccountHome;
 	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
 	private WebElement pharamciesAndPrescriptionsLink;
 	
 	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
 	private WebElement findAPharmacyLink;
-	
-	
-	
+
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
