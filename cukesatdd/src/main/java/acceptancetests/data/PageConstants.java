@@ -704,5 +704,12 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE="healthandwellnessdeeplinklogin";
 	public static final String STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE="myDocumentsdeeplinklogin";
 
+	/*
+	 * New DCE Redesign - Pages
+	 */
+	
+	public static final String DCE_Redesign_GetStarted="dceredesignGetStarted";
+	public static final String DCE_Redesign_BuildDrugList="dceredesignBuildDrugList";
+
 	
 }
