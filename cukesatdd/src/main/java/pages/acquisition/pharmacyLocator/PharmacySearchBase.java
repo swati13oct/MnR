@@ -139,7 +139,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); //note: let the page settle down
 		searchbtn.click();
-		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 90);
+		sleepBySec(50);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
