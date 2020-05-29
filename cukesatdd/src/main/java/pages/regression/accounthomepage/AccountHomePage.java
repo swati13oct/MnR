@@ -1741,6 +1741,22 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("Dashboard page cologo alt text condition is passed");
 				}
 				
+             else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("MCHCP"))
+					
+				{
+					System.out.println("Expected cologo's alt text on Dashboard page for MCHCP is - M&R - State of Missouri (MCHCP) ");
+					Assert.assertTrue(cologo_alt.contains("M&R - State of Missouri (MCHCP)"));
+					System.out.println("Dashboard page cologo alt text condition is passed");
+				}
+				
+                else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("UniversityOfKentucky"))
+					
+				{
+					System.out.println("Expected cologo's alt text on Dashboard page for UniversityOfKentucky is - M&R - University of Kentucky");
+					Assert.assertTrue(cologo_alt.contains("M&R - University of Kentucky"));
+					System.out.println("Dashboard page cologo alt text condition is passed");
+				}
+								
 				else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("UHC"))
 					
 				{
