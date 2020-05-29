@@ -1,11 +1,11 @@
 @myDocuments  @thePredators @E2E @feature-F368974 @F434260
-Feature: 1.06.7 Member My Documents Page
+Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
 
   #Background: If run on stage then feature security flag needs to be true
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPMyDocuments |
 
-  @memAuth_myDocuments01
+  @prod_myDocuments01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -61,7 +61,7 @@ Feature: 1.06.7 Member My Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     Examples: 
-    | TID   | username  | password  | MemUserName     | planType | memberType            | documentsExpectedInPast24Months  |             
-    | 10000 | qavgogine | qavgogine | q4_stac_003    | MAPD     | Individual_MyDocuments|           Y                      |
-    | 10001 | qavgogine | qavgogine | q4_TestData_001    | MAPD     | Group_MyDocuments     |           Y                      |
-    | 10002 | qavgogine | qavgogine | q3_sep_UAT4_AARP240    | COMBO    | FedAndShip_MyDocuments|           N                      |    
+    | TID   | username  | password  | MemUserName      | planType | memberType            | documentsExpectedInPast24Months  |             
+    | 10000 | ashah120  | Mnrqa002  | TEAKSAMPPALA1    | MAPD     | Individual_MyDocuments|           Y                      |
+    | 10001 | ashah120  | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | Group_MyDocuments     |           Y                      |
+    | 10002 | ashah120  | Mnrqa002 | memeterry29       | COMBO    | FedAndShip_MyDocuments|           Y                    |    

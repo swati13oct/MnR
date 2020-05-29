@@ -1,8 +1,8 @@
 @pharmaciesandprescriptions @Predators
-Feature: 1.18 Member Pharamcies And Prescriptions page
+Feature: 1.18 Member Pharamcies And Prescriptions page- Member Auth - PROD
 
 #----- being non regression section --------------------
-  @memAuth_pharmaciesandprescriptions01 @E2E @feature-F313410 @hasPnpLink
+ @prod_pharmaciesandprescriptions01 @E2E @feature-F313410 @hasPnpLink
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -40,47 +40,47 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
 
-    @memAuth_pharmaciesandprescriptions01a
+   @prod_pharmaciesandprescriptions01a
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | q2_apr_aarp0250    | MAPD     | AARP_Individual_PnP | yes        |
-	  | 313410 | qavgogine | qavgogine | q2_jun_uhc0009    | MAPD     | UHC_Individual_PnP  | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | DSOADY17          | MAPD     | AARP_Individual_PnP | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | TEAKSAMPPALA1    | MAPD     | UHC_Individual_PnP  | yes        |
 
-    @memAuth_pharmaciesandprescriptions01b
+   @prod_pharmaciesandprescriptions01b
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | q2_jun_aarp0076    | PDP      | Individual_PnP	    | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | LSLOMSKI777    | PDP      | Individual_PnP	    | yes        |
 
     #note: PEEHIP terminated plan with UHC on 12/31/2019, not valida case anymore
     #note: moving it to terminated case
     #@pharmaciesandprescriptions01b
     #Examples: 
 	#  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	#  | 313410 | qavgogine | qavgogine | testusername    | MAPD     | GROUP_PEEHIP_PnP    | yes        |
+	#  | 313410 | Mnrqa002 | Mnrqa002 | testusername    | MAPD     | GROUP_PEEHIP_PnP    | yes        |
 
-    @memAuth_pharmaciesandprescriptions01c
+   @prod_pharmaciesandprescriptions01c
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Individual_PnP	    | yes        |
-	  | 313410 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Individual_PnP	    | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM    | MEDICA   | Individual_PnP	    | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM    | PCP      | Individual_PnP	    | yes        |
 
-    @memAuth_pharmaciesandprescriptions01d
+   @prod_pharmaciesandprescriptions01d
     Examples: 
 	  | FID   | username  | password  | MemUserName      | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | q2_may_combo006    | MAPD     | COMBO_PnP	        | yes        |
-	 #| 313410 | qavgogine | qavgogine | testusername    | PDP      | COMBO_PnP	        | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | memeterry29    | MAPD     | COMBO_PnP	        | yes        |
 
-    @memAuth_pharmaciesandprescriptions01d
+
+   @prod_pharmaciesandprescriptions01d
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | q3_sep_UAT4_UHC116    | PDP      | COMBO_GROUP_PnP	    | yes        |
+	  | 313410 | ashah120 | Mnrqa002 | Norm749    | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################
   # note: For terminated user, the PnP link on dashboard body and top menu will not be visible
   # note: This test is applicable to test via rally login only, validation will be skipped if access through testharness
   # note:
-  @memAuth_pharmaciesandprescriptions02 @feature-F313410 @noPnpLink @NegativeScenario
+ @prod_pharmaciesandprescriptions02 @feature-F313410 @noPnpLink @NegativeScenario
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
    Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -108,10 +108,10 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
 
    Examples: 
       | FID    | username  | password  | MemUserName     | planType | memberType     | expectLink | 
-      | 313410 | qavgogine | qavgogine | q1_grp_apr031    | MAPD     | Terminated_PnP | no         |
-      | 313410 | qavgogine | qavgogine | q3_sep_UAT4_AARP010    | PDP      | PreEff_PnP     | no         |
-      | 313410 | qavgogine | qavgogine | q2_may_rally017    | MA       | Individual_PnP | no         |
-      | 313410 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | Individual_PnP | no         |
+      | 313410 | ashah120 | Mnrqa002 | erbenoit56         | MAPD     | Terminated_PnP | no         |
+      | 313410 | ashah120 | Mnrqa002 | Ralltj             | PDP      | PreEff_PnP     | no         |
+      | 313410 | ashah120 | Mnrqa002 | TOMIKOARMER2       | MA       | Individual_PnP | no         |
+      | 313410 | ashah120 | Mnrqa002 | lchafner@gmail.com | SHIP     | Individual_PnP | no         |
 
 
  

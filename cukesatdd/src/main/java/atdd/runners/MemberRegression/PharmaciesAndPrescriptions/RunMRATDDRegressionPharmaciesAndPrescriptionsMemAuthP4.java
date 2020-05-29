@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsP5.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmaciesAndPrescriptionsP5")
+jsonReport = "target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP4.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP4")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP5.json" }, tags = { "@pharmaciesandprescriptions02" })
-public class RunMRATDDRegressionPharmaciesAndPrescriptionsP5 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP4.json" }, tags = { "@memAuth_pharmaciesandprescriptions01d" })
+public class RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP4 {
 
 }
