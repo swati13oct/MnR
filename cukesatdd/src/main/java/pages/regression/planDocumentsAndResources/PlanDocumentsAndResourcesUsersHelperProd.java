@@ -950,9 +950,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-					targetTestDocList.add("Plan Guide");
-				}
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");
