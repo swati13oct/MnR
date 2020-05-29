@@ -437,8 +437,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 					testInputInfoMap.put("expectedUrl", "Disenrollment_Form_Group_MA.pdf");
 			} else if (planType.toUpperCase().equals("PDP")) {
 				testInputInfoMap.put("expectedUrl", "Disenrollment_Form_PDP.pdf");
-				if (memberType.toUpperCase().contains("GROUP"))			
-					testInputInfoMap.put("expectedUrl", "Disenrollment_Form_Group_PDP.pdf");
+				//tbd if (memberType.toUpperCase().contains("GROUP"))			
+				//tbd 	testInputInfoMap.put("expectedUrl", "Disenrollment_Form_Group_PDP.pdf");
 			} 
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
