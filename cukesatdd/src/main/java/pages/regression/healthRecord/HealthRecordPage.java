@@ -71,8 +71,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 			testharnessTblDceLnk.click();
 		} else if (noWaitValidate(drugLookup)) {
 			drugLookup.click();
-		} else if (noWaitValidate(section_pharmacySearchLink)) {
-			section_pharmacySearchLink.click();
+		} else if (noWaitValidate(section_drugLocator)) {
+			section_drugLocator.click();
 		} else {
 			//note: fix up the URL to get to the page...
 			navigateToBenefitsPage();
