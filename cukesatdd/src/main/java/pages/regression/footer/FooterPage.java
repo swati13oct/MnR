@@ -453,7 +453,8 @@ public class FooterPage extends UhcDriver {
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
-			accountprofile.click();
+			JavascriptExecutor ex=(JavascriptExecutor)driver;
+			ex.executeScript("arguments[0].click()", accountprofile);
 			footerCheckModelPopup(driver);
 			if (accountSettingOptionShip.isDisplayed()) {
 				System.out.println("Profile and Preferance link is displayed");

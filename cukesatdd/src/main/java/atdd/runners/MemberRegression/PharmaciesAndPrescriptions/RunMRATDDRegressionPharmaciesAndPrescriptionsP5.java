@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsP5.js
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmaciesAndPrescriptionsP5")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsP5.json" }, tags = { "@pharmaciesandprescriptions02" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsMemAuthP5.json" }, tags = { "@pharmaciesandprescriptions02" })
 public class RunMRATDDRegressionPharmaciesAndPrescriptionsP5 {
 
 }

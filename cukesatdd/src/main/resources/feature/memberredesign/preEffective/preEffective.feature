@@ -19,17 +19,6 @@ Feature: 1.15 Member pre-effective functionality
       | Member Type | <memberType> |
     And user click on the plan documents button
     And user is navigated to Forms and Resource page
-    #    And user clicks on claims tab from Forms and Resources page
-    #    And verify that subnavigation is supressed on the claims page
-    #    And verify that correct preeffective message is displayed on claims page
-    #    And verify segment ID on claims page
-    #      | Plan Type   | <planType>   |
-    #      | Member Type | <memberType> |
-    #      | Segment ID  | <segmentId>  |
-    #    And verify that correct phone number is displayed in technical support section of claims page
-    #      | Technical TFN | <technicalTFN> |
-    #    And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
-    #      | Member Type | <memberType> |
     And verify that payment tab is displayed to Preeffective member from secondary pages
       | Member Type | <memberType> |
     And user clicks on the Premium Payment tab from Forms and Resources Page
