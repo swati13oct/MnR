@@ -149,7 +149,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   @vPPMSSavedPlan @prodRegression
   Scenario Outline: Verify user is save medsupp plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+    When the user does plan search using the following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
