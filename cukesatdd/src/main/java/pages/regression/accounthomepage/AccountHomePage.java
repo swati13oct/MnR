@@ -1740,7 +1740,7 @@ public class AccountHomePage extends UhcDriver {
 					Assert.assertTrue(cologo_alt.contains("M&R - GA DCH"));
 					System.out.println("Dashboard page cologo alt text condition is passed");
 				}
-				
+				/*NCSHP cologo is not appearing on Dashboard in Offline PROD environment */
 				else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("NCSHP"))
 					
 				{
@@ -1748,7 +1748,7 @@ public class AccountHomePage extends UhcDriver {
 					Assert.assertTrue(cologo_alt.contains("M&R - NCSHP"));
 					System.out.println("Dashboard page cologo alt text condition is passed");
 				}
-				
+				/*MCHCP cologo is not appearing on Dashboard in Offline PROD environment */
              else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("MCHCP"))
 					
 				{
@@ -1757,6 +1757,7 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("Dashboard page cologo alt text condition is passed");
 				}
 				
+				/*UniversityOfKentucky cologo is not appearing on Dashboard in Offline PROD environment */
                 else if (cologoToBeDisplayedOnDashboard.equalsIgnoreCase("UniversityOfKentucky"))
 					
 				{
@@ -1805,8 +1806,15 @@ public class AccountHomePage extends UhcDriver {
 
 			    } 
 			catch (Exception e) {
-				System.out.println("can't locate cologo element. Exception e=" + e);
-				Assert.fail("can't locate cologo element.");
+				System.out.println("can't locate cologo element,  doing furthur validation");
+				if ((cologoToBeDisplayedOnDashboard.equalsIgnoreCase("NCSHP") || cologoToBeDisplayedOnDashboard.equalsIgnoreCase("MCHCP") || cologoToBeDisplayedOnDashboard.equalsIgnoreCase("UniversityOfKentucky"))  && MRScenario.environment.contains("offline"))
+				{
+					System.out.println("Skipping the validation of secondary logo on Dashboard for Offline PROD enviroment as Rally UAT envionment does not showing cologo");	
+				}
+				else
+				{
+					Assert.fail("can't locate cologo element and environment was not offline PROD, cologo should be visible");
+				}
 			}
 		} else {
 			System.out.println("no shadow-root element , not sure what's going on w/ the header on rally");

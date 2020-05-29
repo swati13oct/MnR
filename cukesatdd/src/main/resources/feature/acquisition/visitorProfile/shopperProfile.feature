@@ -132,12 +132,13 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | DELTON@OWEN.com | MAPD     | AARP Medicare Advantage Walgreens (PPO) | AARP Medicare Advantage Walgreens (PPO),UnitedHealthcare Medicare Advantage Plan 3 (HMO) |
 
   @searchProfileAndEnroll
-  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
+  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
-    Then I ask the shopper calling in to provide me with the Email Address and Search
-      | Email | <email> |
+    Then I ask the shopper calling in to provide me with the Name and Search
+      | First Name | <fname> |
+      | Last Name  | <lname> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -153,8 +154,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email            | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
-      | qavgogine | qavgogine | KARRY@MEMBER.COM | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
+      | username  | password  | fname | lname    | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
+      | qavgogine | qavgogine | karry | moustafa | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
@@ -215,9 +216,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
 
     Examples: 
-      | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames | providers             |
-      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No        | JENSON, PETER M       |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No        | PLASENCIA, M.D., LUIS |
+      | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames   | providers              |
+      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No          | JENSON, PETER M        |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No          | PLASENCIA, M.D., LUIS  |
+      | qavgogine | qavgogine | EBER@MEMBER.COM            | 9/15/1942  | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  | UnitedHealthcare Group Medicare Advantage (PPO)  | UnitedHealthcare Group Medicare Advantage (PPO)  | Atripla TAB | ISMAIL, M.D., MOHAMMED |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
