@@ -1,8 +1,7 @@
-@regressionMember
-Feature: S1.1 To test Member Auth SSO Micro App.
+Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
   @regressionMember
-  Scenario Outline: TC01_To test single signon using member auth - Search with Username
+  Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search with Username
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -22,7 +21,7 @@ Feature: S1.1 To test Member Auth SSO Micro App.
       | qavgogine | qavgogine | legacyid001                          | Scenario 7: Search using legacy username                        |
 
   @regressionMember
-  Scenario Outline: TC02_To test single signon using member auth - Search using memberid and dob
+  Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -39,3 +38,4 @@ Feature: S1.1 To test Member Auth SSO Micro App.
       | qavgogine | qavgogine | 928908861-1 |    02 |  28 | 1962 | Scenario 2b: Search using member id and DOB – Fedral Member - COSMOS |
       | qavgogine | qavgogine | 001893654-1 |    04 |  06 | 1940 | Scenario 2c: Search using member id and DOB – COMBO Member           |
       | qavgogine | qavgogine | 917514052-1 |    10 |  13 | 1931 | Scenario 2d: Search using legacy user member id and DOB              |
+   

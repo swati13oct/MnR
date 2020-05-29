@@ -608,6 +608,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 		private WebElement medSuppOleDobHeading;
 		
+		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
+		private WebElement rockyMountainLogo;
+		
+		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
+		private WebElement peoplesHealthLogo;
+		
+		@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
+		private WebElement peoplesHealthPlanName;
+		
+		
+		
+		
 		@FindBy(id="dupIconFlyOut")
 		private WebElement shoppingCartIcon;
 		
@@ -615,6 +627,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		private WebElement medSuppOleHospitalPartA;
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
+			
+		
+			
 		}
 
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3568,6 +3583,8 @@ catch (Exception e) {
 	
 	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
 	private WebElement comparePgnHeader;
+
+	private ArrayList<String> stringList;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3720,7 +3737,61 @@ catch (Exception e) {
 		}
 		return false;
 	}
+	/* ---------------------
+	 ArrayList<String> providersForCompare=new ArrayList<String>();
 	
+	if (providersForCompare > 4) {
+		System.out.println("There are more than 4 providers, only first 4 will be compared");
+		providersForCompare=4;
+	}
+	if(ProvidersCovered !=null){
+		for(int i = 0; i<providersForCompare; i++){
+			ProvidersCovered.get(i).click();
+			System.out.println("Plan added to compare : "+i);
+		}
+	}
+	return providersForCompare;
+	
+	--------------------------*/
+	
+	//public boolean providerinforetreive(String planName){	
+	
+	public ArrayList<String> providerinforetreive(String planName){
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+        ProviderSearchLink.click();
+        ArrayList<String> providerNames = new ArrayList<String>();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+		for(WebElement element:providers)
+		{
+			String providername = element.getText();
+			providerNames.add(providername);
+		}
+		
+		return providerNames;
+	}
+	//
+	public void setStringList(ArrayList<String> stringList) {
+		
+	    this.stringList = stringList;
+
+	}
+	
+	public ArrayList<String> getStringList() {
+	    return stringList;
+
+	}
+		
 	/**
 	 * Navigate to Visitor Profile Page
 	 * @return
@@ -3733,6 +3804,93 @@ catch (Exception e) {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+		}
+	
+	/**
+	 * Navigate to Rocky Mountain  Page
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	public void RockyLearnMoreButtonandValidate(String planName) throws InterruptedException {
+		WebElement learnMore = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		Thread.sleep(6000);
+		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
+		if (learnMore != null) {
+			validateNew(learnMore);
+			switchToNewTabNew(learnMore);
+		}
+		if (driver.getCurrentUrl().contains("rmhp.org")) {
+			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
+			validateNew(rockyMountainLogo);
+			System.out.println("Validated Rocky Mountian Logo");
+
+		}
 	}
 	
+	public void peopleLearnMoreButtonandValidate(String planName) throws InterruptedException {
+		WebElement learnMore = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		Thread.sleep(6000);
+		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
+		if (learnMore != null) {
+			validateNew(learnMore);
+			switchToNewTabNew(learnMore);
+		}
+		if (driver.getCurrentUrl().contains("peoples-health-choices-value-hmo")) {
+			System.out.println("We are in Peoples Health Page : " + driver.getCurrentUrl());
+			validateNew(peoplesHealthLogo);
+			System.out.println("Validated peoples Health Logo");
+			validateNew(peoplesHealthPlanName);
+			String planHeading = peoplesHealthPlanName.getText();
+			System.out.println("Plan Name form People Health : " + planHeading);
+			Assert.assertTrue("Validated Plan Name", planHeading.contains(planName));
+			System.out.println("Verified plan Name is Matching with selected plan");
+			
+		}else if (driver.getCurrentUrl().contains("peoples-health-choices-gold-hmo-pos")) {
+			System.out.println("We are in Peoples Health Page : " + driver.getCurrentUrl());
+			validateNew(peoplesHealthLogo);
+			System.out.println("Validated peoples-health-choices-gold-hmo-pos");
+			validateNew(peoplesHealthPlanName);
+			String planHeading = peoplesHealthPlanName.getText();
+			System.out.println("Plan Name form People Health : " + planHeading);
+			Assert.assertTrue("Validated Plan Name", planHeading.contains(planName));
+			System.out.println("Verified plan Name is Matching with selected plan");
+
+		}else if (driver.getCurrentUrl().contains("peoples-health-secure-health-hmo-d-snp")) {
+			System.out.println("We are in Peoples Health Page : " + driver.getCurrentUrl());
+			validateNew(peoplesHealthLogo);
+			System.out.println("Validated peoples-health-secure-health-hmo-d-snp");
+			validateNew(peoplesHealthPlanName);
+			String planHeading = peoplesHealthPlanName.getText();
+			System.out.println("Plan Name form People Health : " + planHeading);
+			Assert.assertTrue("Validated Plan Name", planHeading.contains(planName));
+			System.out.println("Verified plan Name is Matching with selected plan");
+
+		}else if (driver.getCurrentUrl().contains("peoples-health-choices-65-14-hmo")) {
+			System.out.println("We are in Peoples Health Page : " + driver.getCurrentUrl());
+			validateNew(peoplesHealthLogo);
+			System.out.println("Validated peoples-health-choices-65-14-hmo");
+			validateNew(peoplesHealthPlanName);
+			String planHeading = peoplesHealthPlanName.getText();
+			System.out.println("Plan Name form People Health : " + planHeading);
+			Assert.assertTrue("Validated Plan Name", planHeading.contains(planName));
+			System.out.println("Verified plan Name is Matching with selected plan");
+
+		} else if (driver.getCurrentUrl().contains("peoples-health-choices-65-14-hmo-for-northshore")) {
+			System.out.println("We are in Peoples Health Page : " + driver.getCurrentUrl());
+			validateNew(peoplesHealthLogo);
+			System.out.println("Validated peoples-health-choices-65-14-hmo-for-northshore");
+			validateNew(peoplesHealthPlanName);
+			String planHeading = peoplesHealthPlanName.getText();
+			System.out.println("Plan Name form People Health : " + planHeading);
+			Assert.assertTrue("Validated Plan Name", planHeading.contains(planName));
+			System.out.println("Verified plan Name is Matching with selected plan");
+
+		} 
+	}
 }
+
+

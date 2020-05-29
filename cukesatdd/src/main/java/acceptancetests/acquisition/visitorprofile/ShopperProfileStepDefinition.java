@@ -14,7 +14,8 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.shopperprofile.CreateProfile;
+import pages.acquisition.shopperprofile.MemberCreateProfile;
+import pages.acquisition.shopperprofile.NonMemberCreateProfile;
 import pages.acquisition.shopperprofile.ProfileSearch;
 import pages.acquisition.shopperprofile.ShopperProfileAgentLogin;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -83,8 +84,6 @@ public class ShopperProfileStepDefinition {
 			
 			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
 			
-			Thread.sleep(15000);
-			
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,11 +101,17 @@ public class ShopperProfileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plan = givenAttributesMap.get("Plan Name");
+		
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+		
 	    
 		VPPPlanSummaryPage vppPlanSumamry = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		vppPlanSumamry.validateAgentModeBanners(plan);
+		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")
@@ -202,17 +207,17 @@ public class ShopperProfileStepDefinition {
 		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 				.getBean(PageConstants.PROFILE_SEARCH);
 		
-		CreateProfile createProfile = profileSeacrh.clickOnCreateProfile();
+		MemberCreateProfile createProfile = profileSeacrh.clickOnCreateProfile();
 		
-		getLoginScenario().saveBean(PageConstants.CREATE_A_PROFILE,createProfile);
+		getLoginScenario().saveBean(PageConstants.MEMBER_CREATE_A_PROFILE,createProfile);
 	}
 	
 	@Then("^create a profile with the following details$")
 	public void create_a_profile_with_the_following_details(DataTable details){
 	    
 		try {
-			CreateProfile createProfile = (CreateProfile) getLoginScenario()
-					.getBean(PageConstants.CREATE_A_PROFILE);
+			MemberCreateProfile createProfile = (MemberCreateProfile) getLoginScenario()
+					.getBean(PageConstants.MEMBER_CREATE_A_PROFILE);
 			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
 			Thread.sleep(15000);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
@@ -221,6 +226,57 @@ public class ShopperProfileStepDefinition {
 		}
 	}
 	
+	@Then("^click on Create Profile button for NonMember$")
+	public void click_on_create_a_profile_non_member(){
+	    
+		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
+				.getBean(PageConstants.PROFILE_SEARCH);
+		
+		NonMemberCreateProfile createProfile = profileSeacrh.clickOnCreateProfileForNonMember();
+		
+		getLoginScenario().saveBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE,createProfile);
+	}
+	
+	@Then("^create a profile with the following details for NonMember$")
+	public void create_a_profile_with_the_following_details_for_NonMember(DataTable details){
+	    
+		try {
+			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
+					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
+			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^I land on the plan summary page of VPP for NonMember$")
+	public void i_land_on_the_plan_summary_page_of_VPP_for_NonMember(DataTable planName){
+		
+		List<DataTableRow> givenAttributesRow = planName.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String plan = givenAttributesMap.get("Plan Name");
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+	    
+		VPPPlanSummaryPage vppPlanSumamry = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		vppPlanSumamry.validateAgentModeBannersForNonMember(plan, drugs, providers);
+	}
+	
+	@Then("^I ask the shopper calling in to provide me with the Email Address for NonMember$")
+	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Email_Address_Non_Member(DataTable memberDetails){
+		
+		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
+				.getBean(PageConstants.PROFILE_SEARCH);
+		
+		profileSeacrh.searchProfileAndDeleteNonMember(memberDetails);
+		
+	}
 } 
-
-
