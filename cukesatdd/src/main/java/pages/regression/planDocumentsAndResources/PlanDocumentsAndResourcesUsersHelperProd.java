@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 
+import atdd.framework.MRScenario;
+
 /**
  * @Functionality : Plan Documents and Resources page - setup test data for testing
  * These are the places that need updating if adding/modify test users:
@@ -66,8 +68,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		} else if (planType.equals("SSP") && memberType.contains("COMBO_GROUP_EFF")) {
 			targetTestDocList=getExpectedDocList_SSP_COMBO_GROUP_EFF(memberType, section, subSection);
 		}
-				
-		
+
+
 		Assert.assertTrue("PROBLEM - need to code ATDD for planType='"+planType+"' and memebrType='"+memberType+"' for section '"+section+"' and sub-section'"+subSection+"'",targetTestDocList!=null);
 		System.out.println("TEST - AFTER - there are '"+targetTestDocList.size()+"' number of expected doc for section '"+section+"' - sub-section '"+subSection+"'");
 		for(String s: targetTestDocList)
@@ -302,10 +304,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Additional Drug Coverage");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+					targetTestDocList.add("Prior Authorization Criteria");
+					targetTestDocList.add("Step Therapy Criteria");
+					targetTestDocList.add("Formulary Additions");
+					targetTestDocList.add("Formulary Deletions");
+				}
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -320,7 +324,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Plan Guide");
+				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+					targetTestDocList.add("Plan Guide");
+				}
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
@@ -464,8 +470,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MA | memberType=IND_EFF
@@ -777,7 +783,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=SHIP | memberType=MULTI_IND_EFF
@@ -913,7 +919,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MA | memberType=GROUP_EFF
@@ -944,7 +950,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Plan Guide");
+				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+					targetTestDocList.add("Plan Guide");
+				}
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");
@@ -1268,7 +1276,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=PDP | memberType=COMBO_GROUP_EFF
@@ -1288,10 +1296,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+					targetTestDocList.add("Prior Authorization Criteria");
+					targetTestDocList.add("Step Therapy Criteria");
+					targetTestDocList.add("Formulary Additions");
+					targetTestDocList.add("Formulary Deletions");
+				}
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1306,7 +1316,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Plan Guide");
+				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+					targetTestDocList.add("Plan Guide");
+				}
 				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Additional Drug Coverage");
@@ -1439,7 +1451,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}	
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=SSP | memberType=COMBO_GROUP_EFF
@@ -1593,7 +1605,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}	
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MAPD | memberType=PEEHIP_GROUP_EFF
@@ -1765,7 +1777,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}		
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MEDICA | memberType=IND_EFF
@@ -2178,7 +2190,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MA | memberType=IND_TERM
@@ -2337,7 +2349,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MA | memberType=GROUP_TERM
@@ -2491,7 +2503,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MAPD | memberType=IND_TERM
@@ -2833,7 +2845,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=MAPD | memberType=IND_PREEFF
@@ -3166,7 +3178,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		Assert.assertTrue("PROBLEM - need to update ATDD code to support setup for section='"+section+"' | sub-section='"+subSection+"'", false);
 		return null;
 	}
-	
+
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
 	 * planTYpe=PDP | memberType=IND_PREEFF

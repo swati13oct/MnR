@@ -27,7 +27,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		String memberType=testInputInfoMap.get("memberType");
 		if (docName.equals("How to read your bill")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl","/content/dam/shared/documents/How_To_Read_Your_Bill.pdf");
 			testInputInfoMap.put("expectedUrl","/content/dam/UHCD/Individual/How_To_Read_Your_Bill.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
 				testInputInfoMap.put("expectedUrl","/Individual/How_To_Read_Your_Bill.pdf");
@@ -89,6 +88,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Prescription Drug Reimbursement Form")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Drug_Reimbursement_Form_MAPD.pdf");
+			if (MRScenario.environment.equalsIgnoreCase("offline"))
+				testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			if (planType.equals("PDP")) {
 				testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Drug_Reimbursement_Form_PDP.pdf");
 				if (MRScenario.environment.equalsIgnoreCase("offline"))			
@@ -97,7 +98,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			if (planType.equals("MAPD") && (memberType.contains("PREEFF") || memberType.contains("IND_EFF"))) { 
 				testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Drug_Reimbursement_Form_MAPD.pdf");
 				if (MRScenario.environment.equalsIgnoreCase("offline"))
-					testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Drug_Reimbursement_Form_MAPD.pdf");
+					testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			}
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -154,7 +155,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medication_Prior_Authorization_Request_Form.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Medication_Prior_Authorization_Request_Form.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Medication_Prior_Authorization_Request_Form.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -166,7 +167,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medicare_PartD_Coverage_Determination_Request_Form.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Medicare_PartD_Coverage_Determination_Request_Form.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Medicare_PartD_Coverage_Determination_Request_Form.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -177,10 +178,13 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Redetermination Request Form") || docName.equals("Redetermination Request Form (PDF")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Redetermination_Request_Form.pdf");
-			if (memberType.contains("AARP")) 
-				testInputInfoMap.put("expectedUrl", "/Individual/AARP_Redetermination_Request_Form.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))		
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Redetermination_Request_Form.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Redetermination_Request_Form.pdf");
+			if (memberType.contains("AARP")) {
+				testInputInfoMap.put("expectedUrl", "/Individual/AARP_Redetermination_Request_Form.pdf");
+				if (MRScenario.environment.equalsIgnoreCase("offline"))		
+					testInputInfoMap.put("expectedUrl", "/Individual/AARP_Redetermination_Request_Form.pdf");
+			}
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -216,7 +220,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 				if(planType.equalsIgnoreCase("MAPD") && memberType.contains("GROUP"))
 					testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Medicare_Appeals_Grievances_Form.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Medicare_Appeals_Grievances_Form.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -232,7 +236,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Commitment_to_Quality.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Commitment_to_Quality.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Commitment_to_Quality.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -273,10 +277,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Potential for Contract Termination")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
-			//tbd if (memberType.toUpperCase().contains("GROUP")) 
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
-			//tbd else if (planType.toUpperCase().equals("MA")) 
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/PotentialContractTermination.pdf");
 			if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
 					|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
 				testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf");
@@ -286,7 +286,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM"))
 			 	testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Potential_for_Contract_Termination.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
-				testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
+				testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf"); //note: MAPD IND & SSP
 				
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -333,7 +333,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		}
 		if (docName.equals("Declaration of Prior Prescription Drug Coverage Form")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Declaration_Prior_Drug_Coverage_Form.pdf");
 			testInputInfoMap.put("expectedUrl", "/content/dam/UHCD/Individual/Declaration_Prior_Drug_Coverage_Form.pdf");
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
 				testInputInfoMap.put("expectedUrl", "/Individual/Declaration_Prior_Drug_Coverage_Form.pdf");
@@ -367,13 +366,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Disenrollment Form (PDF)") || docName.equals("Disenrollment Form")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_MAPD.pdf");
-			//tbd if (planType.toUpperCase().equals("PCP") || planType.toUpperCase().equals("MEDICA"))
-			//tbd 	testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_MAPD.pdf");
-			//tbd if (planType.toUpperCase().equals("PDP"))
-			//tbd 	if (memberType.toUpperCase().contains("GROUP"))
-			//tbd 		testInputInfoMap.put("expectedUrl", "/Group/Disenrollment_Form_Group__PDP.pdf");
-			//tbd 	else
-			//tbd 		testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_PDP.pdf");
+			if (MRScenario.environment.equalsIgnoreCase("offline"))
+				testInputInfoMap.put("expectedUrl", "/Individual/Disenrollment_Form_MAPD.pdf");
 			if (planType.toUpperCase().equals("PDP")) {
 				testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Disenrollment_Form_PDP.pdf");
 				if (MRScenario.environment.equalsIgnoreCase("offline"))

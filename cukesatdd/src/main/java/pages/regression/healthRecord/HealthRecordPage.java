@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import pages.regression.accounthomepage.AccountHomePage;
 
 public class HealthRecordPage  extends HealthRecordBase {
 
@@ -49,8 +51,17 @@ public class HealthRecordPage  extends HealthRecordBase {
 			moveMouseToElement(section_pharmacySearchLink);
 			section_pharmacySearchLink.click();
 		} else {
-			Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", false);
+			//note: fix up the URL to get to the page...
+			navigateToBenefitsPage();
+			CommonUtility.checkPageIsReady(driver);
+			String[] tmp=driver.getCurrentUrl().split(".com/");
+			String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+			System.out.println("pharmacy locator pg URL="+plUrl);
+			driver.get(plUrl);
+			CommonUtility.checkPageIsReady(driver);
 		}
+		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
+		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField));
 		return driver;
 	}
 
@@ -63,8 +74,17 @@ public class HealthRecordPage  extends HealthRecordBase {
 		} else if (noWaitValidate(section_pharmacySearchLink)) {
 			section_pharmacySearchLink.click();
 		} else {
-			Assert.assertTrue("PROBLEM - unable to navigator to DCE page", false);
+			//note: fix up the URL to get to the page...
+			navigateToBenefitsPage();
+			CommonUtility.checkPageIsReady(driver);
+			String[] tmp=driver.getCurrentUrl().split(".com/");
+			String plUrl=tmp[0]+".com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+			System.out.println("pharmacy locator pg URL="+plUrl);
+			driver.get(plUrl);
+			CommonUtility.checkPageIsReady(driver);
 		}
+		CommonUtility.waitForPageLoad(driver, dcePgHeaderTxt, 10);
+		Assert.assertTrue("PROBLEM - unable to navigator to DCE page", noWaitValidate(dcePgHeaderTxt));
 		return driver;
 	}
 
