@@ -2502,7 +2502,6 @@ public class AccountHomePage extends UhcDriver {
 					drugLookup.click();
 					
 				} else {
-					
 					waitforElement(drugLookuplink);
 					drugLookuplink.click();
 				}
@@ -2518,6 +2517,23 @@ public class AccountHomePage extends UhcDriver {
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
+		} else if (driver.getCurrentUrl().contains("/dashboard")) {
+			if(validate(drugLookup)){
+				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+				waitforElement(drugLookup);
+				drugLookup.click();
+				
+			} else {
+				waitforElement(drugLookuplink);
+				drugLookuplink.click();
+			}
+			
+			try {
+					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+				} catch (Exception e) {
+					System.out.println("Exception e: " + e);
+				} 
 		} else {
 			System.out.println(
 					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
