@@ -249,10 +249,10 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 	public WebDriver backToOriginalLinkToPrepNextStep(String planType, String memberType, String originalUrl) {
 		driver.get(originalUrl);
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
-		handleComboTabIfComboUser(planType, memberType);
-		checkModelPopup(driver,5);
-
+		checkModelPopup(driver,1);
+		if (!originalUrl.contains("/dashboard")) //note: rally dashboard has no tab for combo
+			handleComboTabIfComboUser(planType, memberType);
+		checkModelPopup(driver,1);
 		return driver;
 	}
 

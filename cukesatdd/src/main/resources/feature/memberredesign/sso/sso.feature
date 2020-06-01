@@ -109,7 +109,7 @@ Feature: 1.13 Member Inbound and Outbound SSO functionality for M&R Member Porta
       | bswift        | NARDA     | HAGERTY    |    09101939 | 6RE3H79NH60 | https://stage-medicare.uhc.com/sso/inbound/bswift         | CenterPoint Energy      |          |
       | Bristol Myers | DIMITRIOS | FELLENBAUM |    08161935 | 5KP7H08MG55 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell | Bristol Myers           |          |
       | canopyhealth  | DSKFJ     | LDSKFJOWE  |    11111945 | 6MT8NY0CV01 | https://stage-medicare.uhc.com/sso/inbound/canopy         | Canopy Health           |          |
-      | MCHCP         | MARGERY   | HOLWAY     |    09091955 | 6MT8NY0CV01 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | MCHCP (State of MO) SSO | RC443160 |
+      | MCHCP         | MARGERY   | HOLWAY     |    09091955 |             | https://stage-medicare.uhc.com/sso/inbound/mchcp          | MCHCP (State of MO) SSO | RC443160 |
 
   @regressionMember
   Scenario Outline: Verify that member of <Test Scenario> is able to perfom Outbound SSO - University of Kentucky - Express Scripts SSO
