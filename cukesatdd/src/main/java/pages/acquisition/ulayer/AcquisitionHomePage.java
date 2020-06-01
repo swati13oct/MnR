@@ -536,6 +536,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
 		String testharurl = "content/"+testharnessurl+"testharness.html";
+		if(testharnessurl.contentEquals("dce")) {
+			testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		}
 		//String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
