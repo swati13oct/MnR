@@ -2542,8 +2542,15 @@ public class oleStepDefinition {
 		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
 		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ArrayList<String> vppproviders = planSummaryPage.getStringList();
 		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
 		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
@@ -2594,14 +2601,24 @@ public class oleStepDefinition {
 		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
 		
 		
-		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage1 = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ArrayList<String> vppmarketingBullets = planSummaryPage1.getStringList();
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
 		
 		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
 		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 		
-		if(vppmarketingBullets.size()<=9)
+		/*if(vppmarketingBullets.size()<=9)
 		{
 			Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 		}
@@ -2614,7 +2631,7 @@ public class oleStepDefinition {
 			    }
 			}
 		}
-	
+	*/
 	}
 	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
@@ -2633,9 +2650,26 @@ public class oleStepDefinition {
 		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
 		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
 		
-		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
 		
-		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage1 = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+		
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		
+		/*pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage1 = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		ArrayList<String> vppmarketingBullets = planSummaryPage1.getStringList();
 		
@@ -2655,7 +2689,7 @@ public class oleStepDefinition {
 			    }
 			}
 		}
-	
+	*/
 	}
 		
 } 
