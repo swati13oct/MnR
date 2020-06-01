@@ -18,22 +18,22 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class MemberCreateProfile extends UhcDriver {
 	
-	@FindBy(id = "email")
+	@FindBy(id = "member-email")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "firstName")
+	@FindBy(id = "member-firstName")
 	private WebElement firstName;
 	
-	@FindBy(id = "lastName")
+	@FindBy(id = "member-lastName")
 	private WebElement lastName;
 	
-	@FindBy(id = "mbi")
+	@FindBy(id = "member-mbi")
 	private WebElement mbi;
 	
-	@FindBy(id = "dob")
+	@FindBy(id = "member-dob")
 	private WebElement dob;
 	
-	@FindBy(xpath = "//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//app-tab[@tabtitle='Member']//button[contains(text(),'Profile')]")
 	private WebElement btnCreateProfile;
 	
 	@FindBy(xpath = "//h5")

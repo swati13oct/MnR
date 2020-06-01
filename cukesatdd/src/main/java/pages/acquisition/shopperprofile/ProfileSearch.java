@@ -112,7 +112,7 @@ public class ProfileSearch extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
-			deleteProfile.deleteAProfile(email, dob, mbi);
+			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
@@ -254,7 +254,7 @@ public class ProfileSearch extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
-			deleteProfile.deleteANonMemberProfile(emailID, dob, fname, lname);
+			deleteProfile.deleteAProfile(emailID);
 			backToProfileSearch.click();
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, emailID);

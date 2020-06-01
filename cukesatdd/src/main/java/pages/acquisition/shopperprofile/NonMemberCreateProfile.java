@@ -18,16 +18,16 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class NonMemberCreateProfile extends UhcDriver {
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='email']")
+	@FindBy(id = "non-member-email")
 	private WebElement visitorEmail;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='firstName']")
+	@FindBy(id = "non-member-firstName")
 	private WebElement firstName;
 	
-	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//input[@id='lastName']")
+	@FindBy(id="non-member-lastName")
 	private WebElement lastName;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='dob']")
+	@FindBy(id = "non-member-dob")
 	private WebElement dob;
 	
 	@FindBy(xpath = "//label[@for='male']")
@@ -36,7 +36,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	@FindBy(xpath = "//label[@for='female']")
 	private WebElement female;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='zipCode']")
+	@FindBy(id = "zipCode")
 	private WebElement zipCode;
 	
 	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//button[contains(text(),'Profile')]")
@@ -54,6 +54,11 @@ public class NonMemberCreateProfile extends UhcDriver {
 	@FindBy(css="p.success.text-success")
 	private WebElement successMessage;
 	
+	@FindBy(css="div.modal-footer>button:first-child")
+	private WebElement btnAgreeToConsent;
+	
+	@FindBy(css="div.modal-footer>button:last-child")
+	private WebElement btnNoToConsent;
 	
 	public NonMemberCreateProfile(WebDriver driver) {
 		super(driver);
@@ -93,6 +98,8 @@ public class NonMemberCreateProfile extends UhcDriver {
 		
 		String lname = givenAttributesMap.get("Last Name");
 		
+		String consent = givenAttributesMap.get("Consent");
+		
 		try {
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, emailID);
@@ -104,8 +111,14 @@ public class NonMemberCreateProfile extends UhcDriver {
 				female.click();
 			else
 				male.click();
-			termsCheck.click();
 			btnCreateProfile.click();
+			CommonUtility.waitForPageLoadNew(driver, btnAgreeToConsent, 15);
+			if(consent.equalsIgnoreCase("YES")) {
+				termsCheck.click();
+				btnAgreeToConsent.click();
+			}
+			else
+				btnNoToConsent.click();
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
 			switchToNewTab();
