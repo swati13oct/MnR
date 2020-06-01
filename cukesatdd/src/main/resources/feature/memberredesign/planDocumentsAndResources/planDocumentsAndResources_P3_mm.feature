@@ -47,7 +47,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
+      | 09-047 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
       | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
 
 	@active_mapd @devRegression

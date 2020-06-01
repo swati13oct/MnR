@@ -3097,6 +3097,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public VisitorProfilePage continueAsGuest(){
 		continueAsGuest.click();
 		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
@@ -3500,6 +3501,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		public VisitorProfilePage navigateToVisitorProfilePage() {
 			shoppingCartIcon.click();
 			if(driver.getCurrentUrl().contains("profile")) {
+				CommonUtility.checkPageIsReadyNew(driver);
 				return new VisitorProfilePage(driver);
 			}else {
 				System.out.println("Navigation to visitor profile is failed");

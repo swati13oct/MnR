@@ -58,7 +58,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
       | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
 
-  @regressionMemberPROD
+  @regressionMemberPROD2
   Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
