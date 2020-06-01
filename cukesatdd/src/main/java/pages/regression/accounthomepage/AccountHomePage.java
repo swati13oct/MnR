@@ -318,7 +318,6 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement findCareCost;
 	
 	
-	
 	/*
 	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
 	 * private WebElement
@@ -465,7 +464,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
-	@FindBy(xpath="//a[contains(@href,'documents/overview.html')]")
+	@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
 	protected WebElement planDocResPgLink;
 	
 	@FindBy(name="zipCode")
@@ -473,7 +472,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'ordermaterials')]")
 	protected WebElement desktopOrderPlanFromBenefitSubLink;
-	
+
 	@FindBy(xpath = "(//*[contains(@class,'btn btn-outline-primary')])[1]")
 	private WebElement homePageNotice;
 
@@ -483,6 +482,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
 	
+	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
+	private WebElement pharamciesAndPrescriptionsLink;
+	
+	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
+	private WebElement findAPharmacyLink;
+
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -1916,6 +1921,11 @@ public class AccountHomePage extends UhcDriver {
 						moveMouseToElement(section_pharmacySearchLink);
 						section_pharmacySearchLink.click();
 					}
+					else if(noWaitValidate(pharamciesAndPrescriptionsLink)){
+						pharamciesAndPrescriptionsLink.click();
+						CommonUtility.waitForPageLoad(driver, findAPharmacyLink, 5);
+					    findAPharmacyLink.click();
+					}
 					else 
 						Assert.assertTrue("PROBLEM - unable to locate pharmacy locator link on Rally Dashboard page", false);
 					System.out.println("Clicked pharmacy Search Link...");
@@ -2377,7 +2387,7 @@ public class AccountHomePage extends UhcDriver {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
 		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")
-				|| MRScenario.environment.contains("team-a") ) {
+				|| MRScenario.environment.contains("team-a") || MRScenario.environment.contains("offline")) {
 			if (MRScenario.isTestHarness.equals("YES")) {
 				Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on testharness page table", validate(eobTestharnessLink,0));
 				eobTestharnessLink.click();
@@ -3692,7 +3702,13 @@ public class AccountHomePage extends UhcDriver {
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
 				checkModelPopup(driver,5);
-			} else if (MRScenario.environment.contains("prod")) {
+			} 
+			else if (MRScenario.environment.contains("prod")) {
+				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
+				checkModelPopup(driver, 5);
+				planDocResPgLink.click();
+			}
+			else if (MRScenario.environment.contains("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
 				checkModelPopup(driver, 5);
 				planDocResPgLink.click();
