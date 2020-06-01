@@ -1,4 +1,4 @@
-@acq_ChatWindow_AARP
+@acq_ChatWindow_AARP @F412628
 Feature: 1.20 ACQ AARP- To test ChatWindow in AARP site
 
 @ChatWindowUlayer

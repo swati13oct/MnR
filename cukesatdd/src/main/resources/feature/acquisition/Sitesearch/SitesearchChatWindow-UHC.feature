@@ -1,4 +1,4 @@
-@acq_ChatWindow_UHC
+@acq_ChatWindow_UHC @F412628
 Feature: 1.20 ACQ UHC- To test ChatWindow in AARP site
 
 @ChatWindowBlayer
