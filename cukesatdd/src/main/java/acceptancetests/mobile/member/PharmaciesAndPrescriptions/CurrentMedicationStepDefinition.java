@@ -100,10 +100,7 @@ public class CurrentMedicationStepDefinition {
 	
 	
 	@When("^user navigates to the pharmacies and prescriptions page from dashboard or testharness page on Mobile$")
-	public void navigate_PnP_page(DataTable givenAttributes) throws InterruptedException { 
-		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);
-		String planType = givenAttributesMap.get("Plan Type");
-		String memberType = givenAttributesMap.get("Member Type");
+	public void navigate_PnP_page() { 
 		PharmaciesAndPrescriptionsPage pnpPg;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
@@ -120,17 +117,7 @@ public class CurrentMedicationStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", 
 				pnpPg != null);
 		
-		Thread.sleep(2000); //let page settle down before looking into the localStorage.consumerDetails
-		String userFirstName=pnpPg.getInfoInConsumerDetails(planType, memberType, "firstName");
-		String userLastName=pnpPg.getInfoInConsumerDetails(planType, memberType, "lastName");
-		String userPlanCategoryId=pnpPg.getInfoInConsumerDetails(planType, memberType, "planCategoryId");
-		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, planType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE, memberType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME, userFirstName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME, userLastName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID, userPlanCategoryId);
 	}
 
 	@Given("^user opens the page to validate on AARP Tablet$")

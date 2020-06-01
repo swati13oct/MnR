@@ -112,7 +112,6 @@ public class CallToActionStepDefinition {
 	
 	@When("^user navigates to the pharmacies and prescriptions page from testharness page$")
 	public void navigate_PnP_page() throws Throwable{
-		WebDriver wd = getLoginScenario().getWebDriver();
 		PharmaciesAndPrescriptionsPage pnpPg = new PharmaciesAndPrescriptionsPage(null);
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarness = (TestHarness) getLoginScenario()

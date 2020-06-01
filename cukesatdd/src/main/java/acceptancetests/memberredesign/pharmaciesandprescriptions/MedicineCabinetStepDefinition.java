@@ -46,13 +46,11 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views the Current Medications$")
 	public void user_views_the_Current_Medications() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateCurrentMedicationsHeader();
 		pnpPg.validateMyMedicationsHeader();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 	
 	@When("^user clicks on the Learn More button on one of my active prescriptions listed under Current Medications$")
@@ -104,9 +102,8 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user clicks View all medications link$")
+	@When("^user clicks View all medications link$|^user clicks View all medications link to view the My Medications page$")
 	public void user_clicks_View_all_medications_link() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnViewAllMedicationsLink();
@@ -114,7 +111,7 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user will be directed to My Medications page$")
+	@Then("^user will be directed to My Medications page$|^user views the Medicine Cabinet on the My Medications page$")
 	public void user_will_be_directed_to_My_Medications_page() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -281,12 +278,10 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user views a home delivery drug order$")
 	public void user_views_a_home_delivery_drug_order() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateOptumRx();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates the status of Verifying with doctor or status of Order verified$")
@@ -355,7 +350,7 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user views a (\\d+)/(\\d+) Harvey Ball on that medication's row$")
+	@Then("^user views a (?:\\d+)/(?:\\d+) Harvey Ball on that medication row$")
 	public void user_views_a_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -371,7 +366,7 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user views a full Harvey Ball with a checkmark on that medication's row$")
+	@Then("^user views a full Harvey Ball with a checkmark on that medication row$")
 	public void user_views_a_full_Harvey_Ball_with_a_checkmark_on_that_medication_s_row() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -406,6 +401,7 @@ public class MedicineCabinetStepDefinition {
 	@Then("^user validates the external link icon in the button$")
 	public void user_validates_the_external_link_icon_in_the_button() throws Throwable {
 
+
 	}
 
 	@When("^user views one of his active medications has a address hold on it$")
@@ -432,8 +428,12 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+<<<<<<< HEAD
 		pnpPg.validateRefillMedications();
 		//pnpPg.validateOrderStatusForHDDrug("refill");
+=======
+		pnpPg.validateOrderStatusForHDDrug("Refill");
+>>>>>>> branch 'Feature-F392596_MedicineCabinet' of https://github.optum.com/Consumer-Portals/MRATDD.git
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -551,9 +551,8 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_active_retail_medications() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateActiveRetailMedication();
+		Assert.assertTrue("Problem - User does not have active retail medications",pnpPg.getListOfIndexForRetailPharmacy().size()>0);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-		
 	}
 
 	@Then("^user will view active retail medications$")
@@ -671,6 +670,22 @@ public class MedicineCabinetStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		Assert.assertFalse("PROBLEM - External Link not available on Button for HD Medication ", pnpPg.validateExternalLinkOnButton(holdType));
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@When("^user select the next page arrow$")
+	public void user_select_the_next_page_arrow() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickOnNextPageArrow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user will see remaining prescriptions on the My Medications page$")
+	public void user_will_see_remaining_prescriptions_on_the_My_Medications_page() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRemainingPrescriptionsOnMyMedPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
