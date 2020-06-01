@@ -518,17 +518,38 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	
      	
     // ********************* Kiran ************************	
-     	@FindBy(xpath="")
+     	@FindBy(xpath="//h1[@class='sc-fzXfLV bhyuxg sc-LzLNv euLIZt']")
      	protected WebElement MedicationName_OnDrugInfoPage;
+     	
+     	@FindBy(xpath="//div[@class='sc-fzXfQZ cBFGtg']")
+     	protected List<WebElement> ListOfOnHoldOrderStatus;
      	
      	@FindBy(xpath="")
      	protected WebElement nextPageArrow;
+     	
+     	@FindBy(xpath="//div[@class='sc-LzLrs ieWmEy' and contains(text(),'My Medication')]")
+     	protected WebElement myMedicationsHeader;
 
      	@FindBy(xpath="//span[text()='LEARN MORE']/parent::button")
-     	protected List<WebElement> listOfLearnMore;// need to update by Kiran
+     	protected List<WebElement> listOfLearnMore;
      	
      	@FindBy(xpath="")
      	protected List<WebElement> listOfHDMedication;// need to update by Kiran
+     	
+     	@FindBy(xpath="//button[@data-testid='medication-action-refill']")
+     	protected List<WebElement> listOfRefillMedication;
+     	     	
+     	@FindBy(xpath="//button[@data-testid='medication-action-renew']")
+     	protected List<WebElement> listOfRenewMedication;
+     	
+     	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']")
+     	protected List<WebElement> listOfResolveHold;
+     	
+     	@FindBy(xpath="//button[@data-testid='medication-action-track']")
+     	protected List<WebElement> listOfTrackStatus;
+     	
+     	@FindBy(xpath="//button[@data-testid='medication-action-view-order']")
+     	protected List<WebElement> listOfViewOrder;
      	
      	List<Integer> listOfIndex = new ArrayList<>();
      	Random rand = new Random();
@@ -545,14 +566,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	}	
      	
      	public List<Integer> getListOfIndexForDrugName() {
+     		List<Integer> listOfIndex = new ArrayList<>();
      		for(int i=0; i<listOfDrugName.size();i++) {
      				listOfIndex.add(i);
      		}
      		return listOfIndex;
-     	}
-     	
+     	}  	
      	
      	public void  clickOnActiveMedicationDisplayedOnCurrentMedications() {
+     		List<Integer> listOfIndex = getListOfIndexForDrugName();
+     		Random rand = new Random();
      		rand_int = rand.nextInt(listOfIndex.size());
      		listOfDrugName.get(listOfIndex.get(rand_int)).click();
      		DrugName = listOfDrugName.get(listOfIndex.get(rand_int)).getText();
@@ -560,6 +583,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
        	}     	
      	
      	public List<Integer> getListOfIndexForLearnMore() {
+     		List<Integer> listOfIndex = new ArrayList<>();
      		for(int i=0; i<listOfLearnMore.size();i++) {
      				listOfIndex.add(i);
      		}
@@ -567,10 +591,91 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
      	}
      	
     	public void clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForLearnMore();
+     		Random rand = new Random();
     		rand_int = rand.nextInt(listOfIndex.size());
      		listOfLearnMore.get(listOfIndex.get(rand_int)).click();
      		//need to find the drug name 
      		//DrugNameLearnMore = listOfLearnMore.get(listOfIndex.get(rand_int));
+     	}
+    	
+    	public List<Integer> getListOfIndexForRefillMedication(){
+    		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfRefillMedication.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+    	}
+    	
+    	public void clickOnRefillMedicationCTAOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForRefillMedication();
+     		Random rand = new Random();
+    		rand_int = rand.nextInt(listOfIndex.size());
+    		listOfRefillMedication.get(listOfIndex.get(rand_int)).click();
+     	}
+    	
+    	public List<Integer> getListOfIndexForRenewMedication(){
+    		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfRenewMedication.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+    	}
+    	
+    	public void clickOnRenewMedicationCTAOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForRenewMedication();
+     		Random rand = new Random();
+    		rand_int = rand.nextInt(listOfIndex.size());
+    		listOfRenewMedication.get(listOfIndex.get(rand_int)).click();
+     		
+     	}
+    	
+    	public List<Integer> getListOfIndexForResolveHold(){
+    		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfResolveHold.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+    	}
+    	
+    	public void clickOnResolveHoldCTAOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForResolveHold();
+     		Random rand = new Random();
+    		rand_int = rand.nextInt(listOfIndex.size());
+    		listOfResolveHold.get(listOfIndex.get(rand_int)).click();
+     		
+     	}
+    	
+    	public List<Integer> getListOfIndexForTrackStatus(){
+    		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfTrackStatus.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+    	}    	
+    	
+    	public void clickOnTrackStatusCTAOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForTrackStatus();
+     		Random rand = new Random();
+    		rand_int = rand.nextInt(listOfIndex.size());
+    		listOfTrackStatus.get(listOfIndex.get(rand_int)).click();
+     		
+     	}
+    	
+    	public List<Integer> getListOfIndexForViewOrder(){
+    		List<Integer> listOfIndex = new ArrayList<>();
+     		for(int i=0; i<listOfViewOrder.size();i++) {
+     				listOfIndex.add(i);
+     		}
+     		return listOfIndex;
+    	}    	   	
+    	
+    	public void clickOnViewOrderCTAOnCurrentMedications() {
+    		List<Integer> listOfIndex = getListOfIndexForViewOrder();
+     		Random rand = new Random();
+    		rand_int = rand.nextInt(listOfIndex.size());
+    		listOfViewOrder.get(listOfIndex.get(rand_int)).click();
+     		
      	}
     	
     	public void clickRefillMedicationsCTA() {
@@ -579,7 +684,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
     	}
 
 	  public boolean sixActivePrescription() {
-
      		if(sixMedications.size()==6){
      			return true;
 			}else {
@@ -588,7 +692,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	   }
 
 	   public boolean associatedCallToAction() {
-
 		if(AssociatedCallToAction.get(AssociatedCallToAction.size() - 1).isDisplayed()){
 			return true;
 		}else {
@@ -597,7 +700,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	  }
 
 	 public boolean validateTrackStatusBtn() {
-
 		if(trackStatusButton.size()>=0){
 			return true;
 		}else {
@@ -606,7 +708,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean validateDeliveredStatus() {
-
 		if(delivered.size()>=0){
 			return true;
 		}else {
@@ -615,7 +716,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean viewOrderButton() {
-
 		if(viewOrder.size()>=0){
 			return true;
 		}else {
@@ -624,7 +724,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean alphaNumeric() {
-
 		boolean containsDigit = false;
 		String s = NumberInParenthesis.getText();
 		if (s != null && !s.isEmpty()) {
@@ -640,7 +739,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean corredpondingMedicationsNumbers() {
-
 		String numberTXT = NumberInParenthesis.getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medications");
@@ -658,7 +756,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean disclaimer() {
-
 		if(Disclaimer.get(Disclaimer.size() - 1).isDisplayed()){
 			return true;
 		}else {

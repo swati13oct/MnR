@@ -86,7 +86,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -100,7 +100,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user  selects Learn More button on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -113,7 +113,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Indiviual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran
+  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views order status on Medicine Cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -126,7 +126,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran
+  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify with doctor, Order Verified
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -320,7 +320,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -330,11 +330,12 @@ Feature: MVP - Current Medications
     When user have a home delivery medication eligible for refill
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
+    And user validates the external link icon in the button
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -344,11 +345,12 @@ Feature: MVP - Current Medications
     When user views a home delivery medication eligible for renewal
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
+    And user validates the external link icon in the button
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify  Resolve hold (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -362,7 +364,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Track status
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -377,7 +379,7 @@ Feature: MVP - Current Medications
 	  | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @DataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View order
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
