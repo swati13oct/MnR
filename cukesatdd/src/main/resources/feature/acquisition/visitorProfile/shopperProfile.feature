@@ -117,6 +117,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Then Navigate to Visitor Profile page on AARP site
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
+    And user delets all the added providers on visitor profile page of AARP site
     And the user clicks on the add plans button in the profile in agent mode in AARP site
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
@@ -163,7 +164,7 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | fname | lname    | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
-      | qavgogine | qavgogine | karry | moustafa | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
+      | qavgogine | qavgogine | KARRY | MOUSTAFA | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
