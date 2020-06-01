@@ -7,7 +7,7 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 
   #------------------------------------------
   @memAuth_planAndDocuments02 @planMaterials
-  Scenario Outline: To validate via member authorization access for  Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Plan Materials
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -35,30 +35,30 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 	  | Spanish Documents                  | <pm_es> | 
 	  | Chinese Documents                  | <pm_zh> | 
 
-	@memAuth_preeffective_ma_mapd
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 01-020 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
-      | 02-021 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
-      | 03-022 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+#	@memAuth_preeffective_ma_mapd
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+#      | 01-020 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+#      | 02-021 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
+#      | 03-022 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 
-	@memAuth_preeffective_pdp
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 04-023 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
-      | 05-024 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
+#	@memAuth_preeffective_pdp
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+#      | 04-023 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+#      | 05-024 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
 
-	@memAuth_terminated_ma_mapd
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 06-025 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | IND_TERM_PDnR         | true  | false | true  | true  | true  | false |
-      | 07-026 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_TERM_PDnR       | true  | false | true  | true  | false | false |
-      | 08-027 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
+#	@memAuth_terminated_ma_mapd
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+#      | 06-025 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | IND_TERM_PDnR         | true  | false | true  | true  | true  | false |
+#      | 07-026 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_TERM_PDnR       | true  | false | true  | true  | false | false |
+#      | 08-027 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
 
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | qavgogine | qavgogine | q2_may_rally017 | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+      | 09-028 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
       | 10-029 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
  
 	@memAuth_active_mapd
@@ -73,11 +73,11 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-032 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 
-	@memAuth_active_pcp_medica
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 14-033 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
-      | 15-034 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+#	@memAuth_active_pcp_medica
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+#      | 14-033 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+#      | 15-034 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@memAuth_active_pdp
 	Examples: 
