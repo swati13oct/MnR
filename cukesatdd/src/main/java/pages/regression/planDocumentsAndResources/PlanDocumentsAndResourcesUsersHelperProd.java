@@ -304,12 +304,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Additional Drug Coverage");
-				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
 					targetTestDocList.add("Prior Authorization Criteria");
 					targetTestDocList.add("Step Therapy Criteria");
 					targetTestDocList.add("Formulary Additions");
 					targetTestDocList.add("Formulary Deletions");
-				}
+					//tbd }
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -324,9 +324,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
 					targetTestDocList.add("Plan Guide");
-				}
+					//tbd }
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
@@ -1294,12 +1294,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
 					targetTestDocList.add("Prior Authorization Criteria");
 					targetTestDocList.add("Step Therapy Criteria");
 					targetTestDocList.add("Formulary Additions");
 					targetTestDocList.add("Formulary Deletions");
-				}
+					//tbd }
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1314,9 +1314,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
 					targetTestDocList.add("Plan Guide");
-				}
+					//tbd }
 				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Additional Drug Coverage");
