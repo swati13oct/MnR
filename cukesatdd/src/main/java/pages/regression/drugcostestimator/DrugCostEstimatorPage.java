@@ -521,6 +521,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		step2Pharmacy.click();
 	
 		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
+		checkModelPopup(driver,1);
 
 	}
 
@@ -528,7 +529,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click on to step 1 drug tab
 	 */
 	public void backwardToStep1() {
+		checkModelPopup(driver,1);
 		step1DrugTab.click();
+		checkModelPopup(driver,1);
 	}
 
 	public void validatePharmacyForm() {

@@ -1,5 +1,5 @@
 @healthAndWellness
-Feature: 1.09.1 Member Health and Wellness Page - Member Auth
+Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
 
   #----- beginning of test for non-regression------------------
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
@@ -22,23 +22,24 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @memAuth_healthAndWellness01a
+    @prod_healthAndWellness01a
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15340 | qavgogine | qavgogine | q1_feb_nice_019 | MAPD     | RewardsMember     | true      | true           |
-#      | 15341 | qavgogine | qavgogine | q2_may_rally002 | MA       | AARP_RewardsMember| true      | true           |
-#      | 15341 | qavgogine | qavgogine | q3_sep_UAT4_UHC085 | MA    | UHC_RewardsMember | true      | true           |
+      | 15340 | ashah120  | Mnrqa002  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
+      | 15341 | ashah120  | Mnrqa002  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | UHC_RewardsMember | true      | false          |
 
-    @memAuth_healthAndWellness01b
+    @prod_healthAndWellness01b
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15342 | qavgogine | qavgogine | q2_jun_aarp0179 | PDP      | RewardsMember     | false     | false          |
-#      | xxxxx | qavgogine | qavgogine | q1_feb_2020SHIP_003 | SHIP | RewardsMember     | false     | true           |
+      | 15342 | ashah120  | Mnrqa002  | nawal1215       | PDP      | RewardsMember     | false     | false          |
+      | xxxxx | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | RewardsMember     | false     | true           |
 
-    @memAuth_healthAndWellness01c
+    @prod_healthAndWellness01c
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | qavgogine | qavgogine | q2_june_combo0017 | FED_SHIP_COMBO | RewardsMember     | false    | false   |
-#      | 15343 | qavgogine | qavgogine | q3_sep_grp_005  | SHIP_FED_COMBO   | RewardsMember     | false    | true    |
+      | 15343 | ashah120  | Mnrqa002  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
+	#note: can't find a prod combo user w/ SHIP priority yet
+    # | 15343 | ashah120  | Mnrqa002  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
  
  
