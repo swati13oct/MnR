@@ -304,12 +304,10 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Additional Drug Coverage");
-				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-					targetTestDocList.add("Prior Authorization Criteria");
-					targetTestDocList.add("Step Therapy Criteria");
-					targetTestDocList.add("Formulary Additions");
-					targetTestDocList.add("Formulary Deletions");
-					//tbd }
+				targetTestDocList.add("Prior Authorization Criteria");
+				targetTestDocList.add("Step Therapy Criteria");
+				targetTestDocList.add("Formulary Additions");
+				targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -324,9 +322,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-					targetTestDocList.add("Plan Guide");
-					//tbd }
+				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
@@ -1294,12 +1290,10 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-					targetTestDocList.add("Prior Authorization Criteria");
-					targetTestDocList.add("Step Therapy Criteria");
-					targetTestDocList.add("Formulary Additions");
-					targetTestDocList.add("Formulary Deletions");
-					//tbd }
+				targetTestDocList.add("Prior Authorization Criteria");
+				targetTestDocList.add("Step Therapy Criteria");
+				targetTestDocList.add("Formulary Additions");
+				targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1314,9 +1308,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				//tbd if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-					targetTestDocList.add("Plan Guide");
-					//tbd }
+				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Additional Drug Coverage");
@@ -2470,7 +2462,6 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
-				//tbd targetTestDocList.add("Medical Reimbursement Form (PDF)"); 
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;

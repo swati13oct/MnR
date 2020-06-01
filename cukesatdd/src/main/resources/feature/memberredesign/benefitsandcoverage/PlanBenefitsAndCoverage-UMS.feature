@@ -706,7 +706,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
-      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | NoRider |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_regressionMember
