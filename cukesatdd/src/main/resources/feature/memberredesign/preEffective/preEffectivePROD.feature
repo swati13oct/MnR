@@ -32,11 +32,11 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate |
-      | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | FRANZEN6       | 06/01/2020    |
-      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | BUGME99        | 08/01/2020    |
-      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | dickersonsfarm | 07/01/2020    |
-      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | 55Elaine       | 06/01/2020    |
+      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
+      | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | Insaarp73  | 08/01/2020    |
+      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | BUGME99    | 08/01/2020    |
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | pd20glatmg | 08/01/2020    |
+      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | Ace1Avi2   | 08/01/2020    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -70,9 +70,9 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member          | planstartdate |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | josephwfletcher | 06/01/2020    |
-      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@02 | andybaum        | 06/01/2020    |
+      | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member  | planstartdate |
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | ppluta  | 08/01/2020    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@02 | LadyP69 | 07/01/2020    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -112,8 +112,8 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN SHIP | <technicalTFNSHIP> |
 
     Examples: 
-      | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
+      | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate | technicalTFNSHIP |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | karthom55 | 08/01/2020    | 1-866-254-3132   |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -148,5 +148,5 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | tomwindsor1955 | 06/01/2020    |
+      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member  | planstartdate |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | hlmason | 07/01/2020    |
