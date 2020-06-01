@@ -2468,7 +2468,6 @@ public class oleStepDefinition {
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
 	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
 		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
-
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2486,8 +2485,14 @@ public class oleStepDefinition {
 		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		ArrayList<String> vppproviders = planSummaryPage.getStringList();
-		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
 		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
@@ -2504,15 +2509,8 @@ public class oleStepDefinition {
 			    }
 			}
 		}
-		/*if(vppproviders.equals(pcpproviders))
-		{
-			System.out.println("List of providers in VPP AND OLE Page are equal");
-		}
-		else
-		{
-			System.out.println("List of providers in VPP AND OLE Page are not equal");
-		}
-		*/		
+		
+		
 		}
 	/**
 	 * @toDo: Select the provider in PCP and continue to OLE Flow
@@ -2618,20 +2616,7 @@ public class oleStepDefinition {
 		
 		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 		
-		/*if(vppmarketingBullets.size()<=9)
-		{
-			Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
-		}
-		else {
-			for(String bullets : marketingBullets){
-				if(vppmarketingBullets.contains(bullets)){
-			        continue;
-			    }else{
-			    	Assert.assertTrue("MarketingBullets does not match", false); 
-			    }
-			}
-		}
-	*/
+		
 	}
 	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
@@ -2652,7 +2637,7 @@ public class oleStepDefinition {
 		
 		
 		
-		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		ArrayList<String> vppmarketingBullets = null;
@@ -2669,27 +2654,6 @@ public class oleStepDefinition {
 		
 		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 		
-		/*pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage1 = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ArrayList<String> vppmarketingBullets = planSummaryPage1.getStringList();
-		
-		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
-		
-		
-		if(vppmarketingBullets.size()<=9)
-		{
-			Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
-		}
-		else {
-			for(String bullets : marketingBullets){
-				if(vppmarketingBullets.contains(bullets)){
-			        continue;
-			    }else{
-			    	Assert.assertTrue("MarketingBullets does not match", false); 
-			    }
-			}
-		}
-	*/
 	}
 		
 } 

@@ -3585,6 +3585,8 @@ catch (Exception e) {
 	private WebElement comparePgnHeader;
 
 	private ArrayList<String> stringList;
+
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3780,7 +3782,7 @@ catch (Exception e) {
 		
 		return providerNames;
 	}
-	//
+	/*
 	public void setStringList(ArrayList<String> stringList) {
 		
 	    this.stringList = stringList;
@@ -3791,7 +3793,18 @@ catch (Exception e) {
 	    return stringList;
 
 	}
+		*/
+	public void setMap(Map<String, ArrayList<String>> dataMap) {
 		
+	    this.dataMap = dataMap;
+
+	}
+	
+	public  Map<String, ArrayList<String>> getMap(){
+	    return dataMap;
+
+	}
+	
 	/**
 	 * Navigate to Visitor Profile Page
 	 * @return
