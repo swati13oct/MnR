@@ -306,6 +306,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
 	protected WebElement ViewAllMedications;
 
+	@FindBy(xpath = "//span[@data-test-total-medications='12']")
+	protected WebElement totalMedicationsInCurrenMedications;
+
+	//
+
 	@FindBy(xpath = "//h1[contains(text(),'My Medications')]")
 	protected WebElement MyMedicationsPageHeader;
 
@@ -748,7 +753,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean corredpondingMedicationsNumbers() {
 		String numberTXT = NumberInParenthesis.getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
-		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medications");
+		String totalNumber = totalMedicationsInCurrenMedications.getAttribute("data-test-total-medications");
 		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
 
 		if (number == number2) {
