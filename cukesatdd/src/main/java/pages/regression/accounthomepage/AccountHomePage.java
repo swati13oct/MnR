@@ -4208,4 +4208,36 @@ public class AccountHomePage extends UhcDriver {
 	    }
 			return null;		
 	}
+
+	public PaymentHistoryPage navigatePaymentHistoryPage1() {
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+       // clicking on make a payment tile on the dash board
+		waitforElement(makeapayment);
+		//System.out.println("payment link is displayed on the header");
+		makeapayment.click();
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
+				
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
 }
