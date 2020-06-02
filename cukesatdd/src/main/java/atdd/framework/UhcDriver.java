@@ -837,7 +837,8 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will perform vertical swipe on mobile screen for given %
 	 */
-	public void mobileswipe(String percentage,boolean swipeup) {
+	public boolean mobileswipe(String percentage,boolean swipeup) {
+		boolean swipeSuccess = true;
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
@@ -852,11 +853,19 @@ try {
 	    int startx = (int) size.width / 2;
 	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
 		threadsleep(500);
+		try {
 		if(swipeup)
 			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
 			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception occurred while Swiping");
+			swipeSuccess = false;
+		}
 		threadsleep(500);
+		return swipeSuccess;
 	}
 
 	public void mobileswipe(String percentage, int count,boolean swipeup) {

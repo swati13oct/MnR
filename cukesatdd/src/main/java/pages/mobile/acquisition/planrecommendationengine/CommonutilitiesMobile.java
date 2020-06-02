@@ -79,15 +79,16 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public String currentPageName, currrentPagePercentage, previousPageName, previousPagePercentage, nextPageName,
 			nextPagePercentage;
 
-	public void mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount,
+	public boolean mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount,
 			boolean swipeUp) {
+		boolean swipeScusses = true;
 		try {
 			validate(footerCallbannerSection, 30);
 			validate(element, 30);
 			int locationDifference = 100;
 			if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
-				mobileswipe(percentage, swipeUp);
+				swipeScusses = mobileswipe(percentage, swipeUp);
 				swipeCount--;
 				mobileFindElementBeforeCallBanner(element, percentage, swipeCount, swipeUp);
 			}
@@ -95,16 +96,18 @@ public class CommonutilitiesMobile extends UhcDriver {
 			e.printStackTrace();
 			System.out.println("Element not visible footer banner");
 		}
+		return swipeScusses;
 	}
 
-	public void mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
+	public boolean mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
+		boolean swipeScusses = true;
 		try {
 			validate(headerSection, 30);
 			validate(element, 30);
 			int locationDifference = 150;
 			if (element.getLocation().getY() - headerSection.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
-				mobileswipe(percentage, swipeUp);
+				swipeScusses = mobileswipe(percentage, swipeUp);
 				swipeCount--;
 				mobileFindElementAfterHeader(element, percentage, swipeCount, swipeUp);
 			}
@@ -112,6 +115,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 			e.printStackTrace();
 			System.out.println("Element not visible");
 		}
+		return swipeScusses;
 	}
 
 	public void mobileLocateElementClick(WebElement element) {
@@ -120,9 +124,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 		element.click();
 	}
 
-	public void mobileLocateElement(WebElement element) {
-		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
-		mobileFindElementAfterHeader(element, "50%", 4, false);
+	public boolean mobileLocateElement(WebElement element) {
+		boolean locateStatus=false;
+		boolean locateB=mobileFindElementBeforeCallBanner(element, "50%", 8, true);
+		boolean locateA=mobileFindElementAfterHeader(element, "50%", 4, false);
+		if (locateB && locateA)
+			locateStatus=true;
+		return locateStatus;
 	}
 	public void mobileLocateElement(WebElement element,String swipepercentage) {
 		mobileFindElementBeforeCallBanner(element, swipepercentage, 8, true);
