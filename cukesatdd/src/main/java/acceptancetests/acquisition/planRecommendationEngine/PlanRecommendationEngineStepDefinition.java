@@ -884,12 +884,9 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user selects Doctors in Doctors page and validate next page name$")
-	public void select_doctors_next_page_name(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
+	public void select_doctors_next_page_name() {
 		PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-		String status = "Positive_NextPageName";
-		planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
-				inputValues.get("Multi Doctor"), status);
+		planSelectorDoctorspage.navigateDoctorsmodalsession();
 	}
 	
 	@Then("^user validate UI and API recommendation rankings in results page$")

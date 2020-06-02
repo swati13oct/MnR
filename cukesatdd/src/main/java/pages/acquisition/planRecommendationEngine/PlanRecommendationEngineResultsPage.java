@@ -531,7 +531,6 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			flow = PlanRecommendationEngineStepDefinition.PREflow;
 			vppToPre();
 			validateDrugPage(flow);
-			startNowFullFlow(flow);
 		}
 		
 		public void DrugsDetailsVPPtoPRE() {
@@ -655,9 +654,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 				pageloadcomplete();
 			}
 		}
-		
-		ModelDrugsList = drug.drugnamesList();
 		DrugsList = drug.drugNames;
+		ModelDrugsList = drug.drugnamesList();
 		System.out.println("DrugsList Size is : "+DrugsList.size());
 		System.out.println("ModelDrugsList Size is : "+ModelDrugsList.size());
 		verifyConfirmationmodalResults(DrugsList.size(), DrugsList,ModelDrugsList);
@@ -665,9 +663,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public void startNowFullFlow(String plan) {
 		System.out.println("Validating Start Now Full flow in PRE");
-		int MAPD = 4;
+		int MAPD = 2;
 		int PDP = 2;
-		int None = 4;
+		int None = 2;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
