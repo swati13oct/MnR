@@ -693,7 +693,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(myMedicationsHeader));
 	}
 
-	public void validateActivePrescriptions() {
+	public void validateSixActivePrescriptions() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
 				sixActivePrescription());
