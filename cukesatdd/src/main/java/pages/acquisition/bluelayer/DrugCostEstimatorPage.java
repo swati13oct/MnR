@@ -2116,7 +2116,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
 		LocalStorage localStorage = webStorage.getLocalStorage();		
 
-		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
+		String DCE_uhcacquisition = localStorage.getItem("ucp_uhcacquisition");
 		System.out.println("UHC ACQ info from Local Storage");
 		System.out.println(DCE_uhcacquisition);
 		boolean validation_Flag=false;

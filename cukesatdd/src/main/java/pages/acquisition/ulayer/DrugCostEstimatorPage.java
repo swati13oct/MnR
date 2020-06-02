@@ -2060,7 +2060,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(DrugName3);
 		System.out.println(PharmacyName);
 	
-		String DCE_aarpacquisition = ReturnDriverStorage(driver, "localStorage","aarpacquisition" );
+		String DCE_aarpacquisition = ReturnDriverStorage(driver, "localStorage","ucp_aarpacquisition" );
 		System.out.println("AARP ACQ info from Local Storage");
 		System.out.println(DCE_aarpacquisition);
 		boolean validation_Flag=false;
