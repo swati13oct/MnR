@@ -1987,8 +1987,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
-		scrollToView(btnViewCost);
-		getBtnViewCost().click();
+		//scrollToView(btnViewCost);
+		jsClickNew(btnViewCost);
+		//getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}
 	
@@ -2128,7 +2129,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
-		String DCEDrugList = localStorage.getItem("drugList");
+		String DCEDrugList = localStorage.getItem("ucp_drugList");
 		System.out.println("UHC DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;

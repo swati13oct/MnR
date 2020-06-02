@@ -2072,7 +2072,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("AARP ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
-		String DCEDrugList = ReturnDriverStorage(driver, "localStorage","drugList" );
+		String DCEDrugList = ReturnDriverStorage(driver, "localStorage","ucp_drugList" );
 		System.out.println("AARP DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;
