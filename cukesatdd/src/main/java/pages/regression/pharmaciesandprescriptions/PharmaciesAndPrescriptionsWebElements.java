@@ -589,6 +589,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean tenActivePrescription() {
 
+		System.out.println(tenMedications.size()+"lllllllllllllllllllllllllllllllllllll");
+
 		if (tenMedications.size() == 10) {
 			return true;
 		} else {
