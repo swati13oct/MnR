@@ -291,7 +291,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OptumRxMedicineCabinetHeader;
 
 	// Medicine Cabinet
-	@FindBy(xpath = "//div[contains(text(),'Current Medications')]")
+	@FindBy(xpath = "//h2[contains(text(),'Current Medications')]")
 	protected WebElement CurrentMedicationsHeader;
 
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
@@ -299,6 +299,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[@data-test-component='text']")
 	protected List<WebElement> AssociatedCallToAction;
+
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
+	protected List<WebElement> halfHarveyBall;
 
 	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
 	protected WebElement ViewAllMedications;
@@ -350,7 +353,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
-	@FindBy(xpath = "//div[@class='sc-LzLvP sc-LzLwo iFciar']")
+	@FindBy(xpath = "//div[contains(text(),'My Medications')]")
 	protected WebElement NumberInParenthesis;
 
 	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
@@ -362,11 +365,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
 	protected List<WebElement> OptumRx;
 
-	@FindBy(xpath = "//span[contains(text(),'OptumRx')]")
+	@FindBy(xpath = "//span[contains(text(),'order processing')]")
 	protected List<WebElement> Processing;
 
-	@FindBy(xpath = "(//div[@class='sc-LzLtT hBUvHG'])[last()]")
-	protected WebElement HalfHarveyBall;
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
+	protected WebElement isHalfHarveyBall;
 
 	@FindBy(xpath = "")
 	protected WebElement oneFourthHarveyBall;
@@ -675,6 +678,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean sixActivePrescription() {
 		if (sixMedications.size() == 6) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isOrderProcessing() {
+		if (Processing.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isHalfHarveyBall() {
+		if (halfHarveyBall.size() >=0) {
 			return true;
 		} else {
 			return false;

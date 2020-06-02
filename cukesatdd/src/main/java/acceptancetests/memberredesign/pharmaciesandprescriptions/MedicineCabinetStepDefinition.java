@@ -338,8 +338,9 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDeliveredOrderStatusForHDDrug("Processing","50");
+		pnpPg.validateHalfHarveyBall();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 	}
 
 	@When("^user views a status of Shipped$")
@@ -428,12 +429,12 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-<<<<<<< HEAD
+
 		pnpPg.validateRefillMedications();
 		//pnpPg.validateOrderStatusForHDDrug("refill");
-=======
+
 		pnpPg.validateOrderStatusForHDDrug("Refill");
->>>>>>> branch 'Feature-F392596_MedicineCabinet' of https://github.optum.com/Consumer-Portals/MRATDD.git
+		//github.optum.com/Consumer-Portals/MRATDD.git
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
