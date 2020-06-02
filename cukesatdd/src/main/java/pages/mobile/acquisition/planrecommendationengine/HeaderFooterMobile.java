@@ -803,9 +803,10 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileswipe("90%", true);
-		mobileUtils.mobileLocateElement(headerGetaplanrecommendationLink);
+		mobileswipe("10%", false);
+		mobileswipe("50%", true);
 		validate(headerGetaplanrecommendationLink, 30);
+		mobileUtils.mobileLocateElement(headerDrugcostLink);
 		mobileactiontap(headerGetaplanrecommendationLink);
 		validate(landingpageHeader, 30);
 		//mobileUtils.waitTextPresent(landingpageHeader, "plan", 20);
