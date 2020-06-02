@@ -978,10 +978,15 @@ try {
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();
 		System.out.println("curHandle - "+curHandle);
+		try {
 		System.out.println(((IOSDriver) driver).getContextHandles());
 		((IOSDriver) driver).context("NATIVE_APP");
 		((IOSDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
 		threadsleep(500);
+		}
+		catch(Exception e){
+			System.out.println("Unable to Hide the IOS Keypad");
+		}
 		((IOSDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
 	}
