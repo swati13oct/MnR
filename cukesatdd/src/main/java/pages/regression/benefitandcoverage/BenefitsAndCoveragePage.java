@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -72,7 +73,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		checkModelPopup(driver, 3);
 		validateFieldsOnBenefitsAndCoveragePage();
 	}
 
@@ -2087,7 +2088,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
 
-		if (memberType.equalsIgnoreCase("Individual")) {
+		//tbd if (memberType.equalsIgnoreCase("Individual")) {
+		if (memberType.contains("Individual")) {
 			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
 			Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
 					getJmpLinkToPlanDocumentsAndResources().isDisplayed());
@@ -2194,7 +2196,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCNoDeductible() {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(!NoDeductible1Text.getText().contains("$")){
 				System.out.println("No $ Amount is displayed for Member with No Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
@@ -2217,7 +2219,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCSingleDeductible(String deductibleAmount1) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(Deductible1Text.getText().contains(deductibleAmount1)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" is displayed for Member with Single Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -2240,7 +2242,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnC_DualDeductible(String deductibleAmount1, String deductibleAmount2) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1) && validate(MedicalDeductibleCard2) ){
+		if(validate(MedicalDeductibleCard1,0) && validate(MedicalDeductibleCard2,0) ){
 			if(Deductible1Text.getText().contains(deductibleAmount1) && Deductible2Text.getText().contains(deductibleAmount2)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" AND "+deductibleAmount2+" is displayed for Member with Dual Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -3131,5 +3133,140 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(SearchProvider,0);
 		validateNew(StartSearch,0);
 	}
+
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 * @param flagNonCombo
+	 */
+	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		if (flagNonCombo)
+			goToSpecificComboTab(planType);
+		else {
+			try {
+				if (planType.equalsIgnoreCase("mapd")) {
+					if (noWaitValidate(comboTab_MAPD))
+						comboTab_MAPD.click();
+					else if (noWaitValidate(comboTab_MAPD_planDoc))
+						comboTab_MAPD_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ma")) {
+					if (noWaitValidate(comboTab_MA)) 
+						comboTab_MA.click();
+					else if (noWaitValidate(comboTab_MA_planDoc)) 
+						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					if (noWaitValidate(comboTab_SHIP)) 
+						comboTab_SHIP.click();
+					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+						comboTab_SHIP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					if (noWaitValidate(comboTab_PDP))
+						comboTab_PDP.click();
+					else if (noWaitValidate(comboTab_PDP_planDoc))
+						comboTab_PDP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ssp") || planType.equalsIgnoreCase("ssup")) {
+					if (noWaitValidate(comboTab_SSP)) 
+						comboTab_SSP.click();
+					else if (noWaitValidate(comboTab_SSP_planDoc))
+						comboTab_SSP_planDoc.click();
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		sleepBySec(2);
+	}
+
+	/**
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
+	 * @param planType
+	 */
+	public void goToSpecificComboTab(String planType) {
+		//TODO: need to enhance it to handle multi plans of the same plan type, e.g. multiple ship plans each w/ different ship plan category name
+		try {
+			if (planType.toLowerCase().contains("mapd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", noWaitValidate(comboTab_MAPD) || noWaitValidate(comboTab_MAPD_planDoc));
+				if (noWaitValidate(comboTab_MAPD)) 
+					comboTab_MAPD.click();
+				else if (noWaitValidate(comboTab_MAPD_planDoc)) 
+					comboTab_MAPD_planDoc.click();
+			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", noWaitValidate(comboTab_MA) || noWaitValidate(comboTab_MA_planDoc));
+				if (noWaitValidate(comboTab_MA)) 
+					comboTab_MA.click();
+				else if (noWaitValidate(comboTab_MA_planDoc)) 
+					comboTab_MA_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship_hip")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP_HIP)) 
+					comboTab_SHIP_HIP.click();
+				else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+					comboTab_SHIP_HIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+				else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+					comboTab_SHIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("pdp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", noWaitValidate(comboTab_PDP) || noWaitValidate(comboTab_PDP_planDoc));
+				if (noWaitValidate(comboTab_PDP)) 
+					comboTab_PDP.click();
+				else if (noWaitValidate(comboTab_PDP_planDoc)) 
+					comboTab_PDP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ssp") || planType.toLowerCase().contains("ssup")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", noWaitValidate(comboTab_SSP) || noWaitValidate(comboTab_SSP_planDoc));
+				if (noWaitValidate(comboTab_SSP))
+					comboTab_SSP.click();
+				else if (noWaitValidate(comboTab_SSP_planDoc))
+					comboTab_SSP_planDoc.click();
+			} else {
+				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
+	public boolean noWaitValidate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else
+				System.out.println("Element not found/not visible");
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+		}
+		return false;
+	}
+	
+	
+	public void navigateToSHIPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Plan Tab");
+		try {
+			ShipTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SHIP Plan Tab was not displayed");
+			Assert.fail("SHIP Plan Tab was not displayed");
+		}
+	}
+
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
+	}	
 }
 

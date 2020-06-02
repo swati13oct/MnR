@@ -1,5 +1,4 @@
-@regressionMember
-Feature: S1.1 To test Member Auth SSO Micro App.
+Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
   @regressionMemberPROD
   Scenario Outline: Scenario -<Scenario> - Test Case_To test single signon using member auth - Search with Username
@@ -40,3 +39,20 @@ Feature: S1.1 To test Member Auth SSO Micro App.
       | jkuma14  | Brock@02 | 970530542-1  |    01 |  28 | 1952 | Scenario 2b: Search using member id and DOB – Group MAPD Member-COSMOS     |
       | jkuma14  | Brock@02 | 063246454-11 |    07 |  07 | 1949 | Scenario 2c: Search using member id and DOB – COMBO Member (PDP + MedSupp) |
       | jkuma14  | Brock@02 | 307825058-11 |    10 |  20 | 1917 | Scenario 2d: Search using legacy user member id and DOB                    |
+
+  @memAuthProdOnetimeCreditCardPayment @CodeTransformers
+  Scenario Outline: Plan Type: <planType>, Member Type: <memberType> - Verify MakeOne time Payment submission for Credit card
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    And the user navigates to payments overview page
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "1.00" and selects credit card and click on Next button
+
+    Examples: 
+      | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      |
+      | F243897 | ashah120 | Mnrqa002 | DSOADY17    | MAPD     | Last 24 months | Last 18 months |

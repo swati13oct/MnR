@@ -22,7 +22,9 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
+
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	String page = CommonutilitiesMobile.locationPageName;
 	// Landing Page Elements
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -59,7 +61,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "nav>.breadcrumb")
 	private WebElement breadCrumb;
 
-	@FindBy(css = ".progress-bar-title>h1")
+	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
 
 	@FindBy(css = ".progress-bar-info>h2")
@@ -67,7 +69,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "div.progress-bar-value-background")
 	private WebElement progressbar;
-	
+
 	@FindBy(css = "div.progress-bar-info>p")
 	private WebElement pageProgressPercentage;
 
@@ -91,7 +93,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = ".container div>button[class*='primary button']")
 	private WebElement continueBtn;
-	
+
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 
@@ -116,14 +118,12 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
-		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 	}
 
 	public void landingpageElementsmobile() {
 		System.out.println("Validating Title: ");
-		String ExpectedTitle = "insurance plan";
+		String ExpectedTitle = "plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
 		System.out.println(ActualTitle.contains(ExpectedTitle));
@@ -132,26 +132,26 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		System.out.println("Validating Text: ");
 		validate(landingpageText, 30);
 		mobileswipe("70%", true);
-		String ExpectedText = "plan recommendation";
-		String ActualText = landingpageText.getText();
-		System.out.println(ActualText.contains(ExpectedText));
+		//String ExpectedText = "plan recommendation";
+		//String ActualText = landingpageText.getText();
+		//System.out.println(ActualText.contains(ExpectedText));
 		validate(getStartedBtn, 30);
 		validate(landingpageMainInner, 30);
 		System.out.println("Validating Title in Inner Section: ");
 		validate(landingpageInnerTitle, 30);
-		String ExpectedText1 = "How does this work?";
-		String ActualText1 = landingpageInnerTitle.getText();
-		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
+		//String ExpectedText1 = "How does this work?";
+		//String ActualText1 = landingpageInnerTitle.getText();
+		//System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
 		for (int i = 1; i <= 3; i++) {
-			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
-					.getText();
-			System.out.println(landingpageTracker);
-			String landingpageTextPoints = (driver.findElement(By.xpath(
-					"//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i + "]/span")))
-							.getText();
-			System.out.println(landingpageTextPoints);
+			//String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
+			//		.getText();
+			validate(driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")));
+			//System.out.println(landingpageTracker);
+			if(i<3)
+			validate(driver.findElement(By.xpath(
+					"//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i + "]/span")));
 		}
-		mobileUtils.mobileFindElementBeforeCallBanner(getStartedBtn1,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(getStartedBtn1, "50%", 5, true);
 		validate(landingpageImage, 30);
 		validate(landingpageLabel, 30);
 		waitTillElementClickableInTime(getStartedBtn1, 30);
@@ -163,7 +163,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		validate(pageStepsNumberName, 30);
 		validate(progressbar, 30);
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
+		mobileUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo, 30);
 		validate(pageRequiredInfoMark, 30);
 		validate(zipcodePageQuestion, 30);
@@ -174,29 +174,29 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
-		String page = "Location";
+		zipCode.clear();
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
+		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
-			hidekeypad();
 			validate(countyInfo, 20);
-			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()),"County Name Error");
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()),
+					"County Name Error");
 		} else {
-			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn, "50%", 5, true);
 			validate(multicountyText, 20);
 			validate(defaultmultioptioninnerText, 20);
 			validate(zipcodePageCountyQuestionMark, 20);
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
-			mobileSelectOption(multicounty,inputdata.get("County Name"));
+			mobileSelectOption(multicounty, inputdata.get("County Name"));
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
-		System.out.println("Validating "+page+" page Continue button functionality");
+		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 
 	public void zipcodescreenErrorValidationmobile(HashMap<String, String> inputdata) {
-		String page = "Location";
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
@@ -207,17 +207,36 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void navigatezipcodepagemobile() {
-		HeaderFooterMobile header = new HeaderFooterMobile(driver);
-		header.navigatePRELandingpageMobile();
-		mobileswipe("50%", true);
-		validate(getStartedBtn, 30);
-		getStartedBtn.click();
+		//driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
+		//pageloadcomplete();
+		///driver.navigate().refresh();
+		
+		pageloadcomplete();
+		mobileUtils.mobileLocateElementClick(getStartedBtn);
+		validate(zipCode,30);
 	}
 
 	public void validatecontains(String primarystring, String substring) {
 		if (!primarystring.matches(substring)) {
 			System.out.println("Expected string - " + substring + " is not available in - " + primarystring);
 			Assert.assertTrue(false);
+		}
+	}
+	
+	public void zipcodeInfoValidationmobile(HashMap<String, String> inputdata) {
+		System.out.println("Verify Zip Info");
+		validate(zipCode, 20);
+		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").equals(inputdata.get("Zip Code")),"Invalid Zip code");
+		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
+			validate(countyInfo, 20);
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()),
+					"County Name Error");
+		} else {
+			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn, "50%", 5, true);
+			validate(multicountySelect, 20);
+			Select multicounty = new Select(multicountySelect);
+			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(inputdata.get("County Name")),
+					"Invalid County Name");
 		}
 	}
 

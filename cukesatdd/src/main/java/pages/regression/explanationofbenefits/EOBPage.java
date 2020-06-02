@@ -205,6 +205,7 @@ public class EOBPage extends EOBBase{
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int beforeClicked_numTabs=beforeClicked_tabs.size();	
 
+			scrollElementToCenterScreen(rightRailLearnMoreLink);
 			rightRailLearnMoreLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
@@ -959,6 +960,7 @@ public class EOBPage extends EOBBase{
 	public void validateEobEntries (String planType, String memberId) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
+		scrollElementToCenterScreen(eobFirst);
 		eobFirst.click();
 		sleepBySec(5);
 
@@ -966,7 +968,8 @@ public class EOBPage extends EOBBase{
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
-		driver.switchTo().window(newTab.get(1));
+		//tbd driver.switchTo().window(newTab.get(1));
+		driver.switchTo().window(newTab.get(newTab.size()-1));
 		CommonUtility.checkPageIsReady(driver);
 
 		String pdfUrl = driver.getCurrentUrl();
@@ -1032,7 +1035,7 @@ public class EOBPage extends EOBBase{
 
 		//note: Switch back to original window
 		driver.close();
-		driver.switchTo().window(newTab.get(0));
+		driver.switchTo().window(newTab.get(newTab.size()-2));
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(5);
 	}
@@ -1114,6 +1117,7 @@ public class EOBPage extends EOBBase{
 			try {
 				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", eobValidate(eob));
+				scrollElementToCenterScreen(eob);
 				moveMouseToElement(eob);
 				eob.click();
 				CommonUtility.checkPageIsReady(driver);
@@ -1124,7 +1128,7 @@ public class EOBPage extends EOBBase{
 				System.out.println(newTab.size());
 				Assert.assertTrue("PROBLEM - clicked PDF but didn't open a new tab to load PDF", newTab.size()>1);
 				//note: Use the list of window handles to switch between windows
-				driver.switchTo().window(newTab.get(1));
+				driver.switchTo().window(newTab.get(newTab.size()-1));
 				CommonUtility.checkPageIsReady(driver);
 
 				//--------------------------------------
@@ -1138,7 +1142,7 @@ public class EOBPage extends EOBBase{
 				}
 				//--------------------------------------
 				driver.close();
-				driver.switchTo().window(newTab.get(0));
+				driver.switchTo().window(newTab.get(newTab.size()-2));
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
 			}

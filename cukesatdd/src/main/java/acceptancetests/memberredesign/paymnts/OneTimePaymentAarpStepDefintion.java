@@ -2254,6 +2254,21 @@ public class OneTimePaymentAarpStepDefintion {
 				 
 	}
 	
+	@And("^delete confirmation number GPS for recurring payment$")
+	public void DeleterecurringPaymentRecord(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******delete confirmation number GPS for recurring payment*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+	}
+	
 	@And("^the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecord(DataTable givenAttributes) throws InterruptedException{
 		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
