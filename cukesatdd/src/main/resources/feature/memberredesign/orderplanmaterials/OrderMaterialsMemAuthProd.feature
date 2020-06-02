@@ -54,7 +54,7 @@ Feature: 1.10.1 Member  order materials Page - PROD
     @memAuth_Individualb @ship
     Examples:
       | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15293 | ashah120  | Mnrqa002  | lchafner@gmail.com     | SHIP     | MEDSUPP_order         |
+      | 15293 | ashah120  | Mnrqa002  | lchafner@gmail.com     | SHIP     | MEDSUPP_order    |
 
     #-------------------
     @memAuth_GroupMemberOrderSelectionandConfirmation
@@ -72,7 +72,7 @@ Feature: 1.10.1 Member  order materials Page - PROD
     @memAuth_ValidateHeaderComboTabs @combo_ship_mapd
     Examples:
       | TID   | username  | password  | MemUserName     | planType | memberType              |
-      | 15281 | ashah120  | Mnrqa002 | skho@roadrunner.com     | MAPD	   | COMBO_order             |
+      | 15281 | ashah120  | Mnrqa002 | aliceb1105@aol.com    | MAPD	   | COMBO_order             |
       | 15281 | ashah120  | Mnrqa002 | Norm749    | MEDSUPP	 | COMBO_order           |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
