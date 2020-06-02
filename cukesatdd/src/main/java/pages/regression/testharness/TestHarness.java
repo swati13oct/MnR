@@ -7,6 +7,7 @@ import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -1172,22 +1173,53 @@ public class TestHarness extends UhcDriver {
         System.out.println("Actual logo's source on Test Harness page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
         System.out.println("logo's alt text on secondary page is   "+logo_alt);          
         Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test harness page main logo assert condition is passed");              
+        System.out.println("Test harness page main logo assert condition for image source is passed"); 
+        
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+		 
+       System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+       Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+       if (!ImagePresent)
+       {
+        System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+        Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+       }
+       else
+       {
+       	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+           System.out.println("naturalWidth is not zero , Logo image was displayed.");
+        }
+	          
 }
-
 
 
         public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
         
-        CommonUtility.waitForPageLoad(driver,cologoImage,15);
-        String cologo_src = cologoImage.getAttribute("src");
-        String cologo_alt = cologoImage.getAttribute("alt");
-        System.out.println("Actual logo's source on Test harness page is   " + cologo_src
-                                      + " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
-        System.out.println("logo's alt text on secondary page is   " + cologo_alt);
-        Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test Harness page co logo assert condition is passed");
-}
+        	 CommonUtility.waitForPageLoad(driver,cologoImage,15);
+             String cologo_src = cologoImage.getAttribute("src");
+             String cologo_alt = cologoImage.getAttribute("alt");
+             System.out.println("Actual cologo's source on Test harness page is   " + cologo_src
+                                           + " and Expected cologo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
+             System.out.println("cologo's alt text on secondary page is   " + cologo_alt);
+             Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+             System.out.println("Test Harness page co-logo assert condition for image source is passed");
+             System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+             
+             Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+             if (!ImagePresent)
+             {
+              System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+              System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+              Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+             }
+             else
+             {
+             	System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+                 System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+                 
+             }
+     }
     	/**
     	 * For iPerception Model
     	 * @param driver
@@ -1250,6 +1282,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
     		checkForIPerceptionModel(driver);
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
     		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -1588,9 +1621,9 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		   public void userdirectlyaccessesmyhcesso() {
-				// TODO Auto-generated method stub
 			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
 			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
+				 
 			   try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -1629,6 +1662,7 @@ public class TestHarness extends UhcDriver {
 			   try {
 				   System.out.println("Waiting for 5 seconds");
 					Thread.sleep(5000);
+					CommonUtility.checkPageIsReadyNew(driver);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

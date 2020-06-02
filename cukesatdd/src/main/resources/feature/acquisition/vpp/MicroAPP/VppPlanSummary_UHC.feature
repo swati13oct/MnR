@@ -1,5 +1,5 @@
 @vppPlanSummaryUHC
-Feature: Vpp to plan Summary UHC Scenarios
+Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
   @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site

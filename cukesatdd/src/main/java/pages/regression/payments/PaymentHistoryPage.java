@@ -401,6 +401,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "menubutton")
 	private WebElement menubutton;
 	
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
+	protected WebElement preEffectiveTechSupportNumber;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1641,30 +1644,29 @@ public class PaymentHistoryPage extends UhcDriver {
 		validateNew(oneTimePaymentBtn);
 	}
 
-			public PaymentHistoryPage navigateToSHIPTab() {
-			TestHarness.checkForIPerceptionModel(driver);
-			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
-			System.out.println("Now clicking on SHIP Tab");
-		
-			try {
-				ShipTab.click();
-			} catch (Exception e) {
-				System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
-				hipTab.click();
-				System.out.println("HIP plan Tab was clicked");
-			}
-			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
-			CommonUtility.checkPageIsReadyNew(driver);
-			
-			if (PayDate.getText().contains("Paid through Date")) {
-				System.out.println("ShipTab or hipTab with amount displayed");
-				return new PaymentHistoryPage(driver);
-			} else {
-				System.out.println("Ship/hip tab issue");
-				return null;
-			}
+	public PaymentHistoryPage navigateToSHIPTab() throws InterruptedException {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Tab");
+	
+		try {
+			ShipTab.click();
+		} catch (Exception e) {
+			System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
+			hipTab.click();
+			System.out.println("HIP plan Tab was clicked");
 		}
-
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+		CommonUtility.checkPageIsReadyNew(driver);
+		Thread.sleep(4000);
+		if (PayDate.getText().contains("Paid through Date")) {
+			System.out.println("ShipTab or hipTab with amount displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("Ship/hip tab issue");
+			return null;
+		}
+	}
 			public PaymentHistoryPage navigateToFedTab() {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, FedTab, 20);
@@ -1731,4 +1733,14 @@ public class PaymentHistoryPage extends UhcDriver {
 				}
 				return new PaymentHistoryPage(driver);
 			}
+			
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException {
+		System.out.println("Now checking for Tech Support Number for Pre-effective members");
+		System.out.println(
+				"The Tech Support phone number displayed on screen is " + preEffectiveTechSupportNumber.getText());
+		System.out.println("Expected Tech Support phone number from feature file is " + technicalPhNo);
+		Assert.assertEquals(preEffectiveTechSupportNumber.getText(), technicalPhNo);
+		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
+
 	}
+}

@@ -91,10 +91,17 @@ public class UpdateConfirmationPage extends UhcDriver {
 	}
 
 	public void validateStopRevurringVerificationforFed() {
-		validate(MakeOneTimePaymentLink);
+		if(ConfirmationNumber.isDisplayed()) {
+		validate(ConfirmationNumber);
 		validate(PaymentMethod);
 		UpdatePaymentsDataVerificationonConfirmationPage();
 		System.out.println("User has sucessfully canceled recurring payment for Federal");
+		Assert.assertTrue("User has sucessfully canceled recurring payment for Federal", true);
+		}
+		else {
+			System.out.println("User has not canceled recurring payment for Federal");
+			Assert.assertTrue("User has not canceled recurring payment for Federal", false);
+		}
 	}
 
 	@Override

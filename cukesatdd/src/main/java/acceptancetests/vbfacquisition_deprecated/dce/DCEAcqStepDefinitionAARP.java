@@ -160,8 +160,9 @@ public class DCEAcqStepDefinitionAARP {
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
+		dce.feebackpopupClose();
 	}
-	//@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
+	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();

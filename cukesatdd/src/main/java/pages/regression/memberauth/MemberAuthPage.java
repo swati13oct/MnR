@@ -196,7 +196,8 @@ public class MemberAuthPage extends UhcDriver {
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
-		waitforElement(MemberTableUserName);
+		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
+		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
@@ -316,11 +317,20 @@ public class MemberAuthPage extends UhcDriver {
 					|| MRScenario.environment.equalsIgnoreCase("prod")
 					|| MRScenario.environment.equalsIgnoreCase("team-h")) {
 				CommonUtility.checkPageIsReadyNew(driver);
+				try
+				{
+					System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
+					CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Catch block with no significance");
+				}
 				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 					System.out.println("COVID 19 Banner page has appeared");
 					try {
 						CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-						if (validate(homePageNotice, 0)) {
+						if (validate(homePageNotice, 10)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
 						} else if (validate(homePageNotice2, 0)) {

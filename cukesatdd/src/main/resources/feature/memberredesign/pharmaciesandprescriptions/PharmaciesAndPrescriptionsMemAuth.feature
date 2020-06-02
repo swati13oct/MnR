@@ -44,12 +44,12 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
 	  | 313410 | qavgogine | qavgogine | q2_apr_aarp0250    | MAPD     | AARP_Individual_PnP | yes        |
-	  | 313410 | qavgogine | qavgogine | testusername    | MAPD     | UHC_Individual_PnP  | yes        |
+	  | 313410 | qavgogine | qavgogine | q2_jun_uhc0009    | MAPD     | UHC_Individual_PnP  | yes        |
 
     @memAuth_pharmaciesandprescriptions01b
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | testusername    | PDP      | Individual_PnP	    | yes        |
+	  | 313410 | qavgogine | qavgogine | q2_jun_aarp0076    | PDP      | Individual_PnP	    | yes        |
 
     #note: PEEHIP terminated plan with UHC on 12/31/2019, not valida case anymore
     #note: moving it to terminated case
@@ -61,19 +61,19 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     @memAuth_pharmaciesandprescriptions01c
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | testusername    | MEDICA   | Individual_PnP	    | yes        |
-	  | 313410 | qavgogine | qavgogine | testusername    | PCP      | Individual_PnP	    | yes        |
+	  | 313410 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Individual_PnP	    | yes        |
+	  | 313410 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Individual_PnP	    | yes        |
 
     @memAuth_pharmaciesandprescriptions01d
     Examples: 
 	  | FID   | username  | password  | MemUserName      | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | testusername    | MAPD     | COMBO_PnP	        | yes        |
+	  | 313410 | qavgogine | qavgogine | q2_may_combo006    | MAPD     | COMBO_PnP	        | yes        |
 	 #| 313410 | qavgogine | qavgogine | testusername    | PDP      | COMBO_PnP	        | yes        |
 
     @memAuth_pharmaciesandprescriptions01d
     Examples: 
 	  | FID    | username  | password  | MemUserName     | planType | memberType          | expectLink |
-	  | 313410 | qavgogine | qavgogine | testusername    | PDP      | COMBO_GROUP_PnP	    | yes        |
+	  | 313410 | qavgogine | qavgogine | q3_sep_UAT4_UHC116    | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################
@@ -82,9 +82,18 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
   # note:
   @memAuth_pharmaciesandprescriptions02 @feature-F313410 @noPnpLink @NegativeScenario
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+   Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+       #-------------- navigate to the target test page for testing
     Then user should not see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -99,10 +108,10 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
 
    Examples: 
       | FID    | username  | password  | MemUserName     | planType | memberType     | expectLink | 
-      | 313410 | qavgogine | qavgogine | testusername    | MAPD     | Terminated_PnP | no         |
-      | 313410 | qavgogine | qavgogine | testusername    | PDP      | PreEff_PnP     | no         |
-      | 313410 | qavgogine | qavgogine | testusername    | MA       | Individual_PnP | no         |
-      | 313410 | qavgogine | qavgogine | testusername    | SHIP     | Individual_PnP | no         |
+      | 313410 | qavgogine | qavgogine | q1_grp_apr031    | MAPD     | Terminated_PnP | no         |
+      | 313410 | qavgogine | qavgogine | q3_sep_UAT4_AARP010    | PDP      | PreEff_PnP     | no         |
+      | 313410 | qavgogine | qavgogine | q2_may_rally017    | MA       | Individual_PnP | no         |
+      | 313410 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | Individual_PnP | no         |
 
 
  
