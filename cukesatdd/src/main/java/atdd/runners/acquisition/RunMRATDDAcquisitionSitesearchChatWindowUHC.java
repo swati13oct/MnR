@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionSitesearchChatWindowUHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionSitesearchChatWindowUHC")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },monochrome=true, features = { "src/main/resources/feature/acquisition/Sitesearch/SitesearchChatWindowUHC" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },monochrome=true, features = { "src/main/resources/feature/acquisition/Sitesearch" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionSitesearchChatWindowUHC.json" }, tags = { "@chatwindowonsitesearchBlayer" })
 
 
