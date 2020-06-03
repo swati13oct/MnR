@@ -80,7 +80,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
+		if (driver.getTitle().contains("Your Automatic Payment")) {
 			System.out.println("User is on Confirmation Page for Recurring");
 			return new RecurringConfirmationPage(driver);
 		} else {
