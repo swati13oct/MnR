@@ -148,7 +148,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")
