@@ -317,7 +317,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 	
-	@FindBy(xpath = "//input[@id='cancelPreChatForm']")
+	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
