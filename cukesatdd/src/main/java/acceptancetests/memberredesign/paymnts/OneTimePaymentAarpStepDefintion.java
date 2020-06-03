@@ -2402,4 +2402,12 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	@And("^the user clicks on cancel button in One time EFT or Recurring EFT$")
+	public void click_on_Cancel_btn() {		
+	PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+			.getBean(PageConstants.Payments_Form_Page);
+	         paymentsFormPage.clickonCancelButton1();
+	
+	}
+	
 }
