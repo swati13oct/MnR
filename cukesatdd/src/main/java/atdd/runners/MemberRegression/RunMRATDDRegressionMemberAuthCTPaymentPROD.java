@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionMemberAuthCTPayment.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberAuthCTPayment")
+jsonReport = "target/cucumber-RunMRATDDRegressionMemberAuthCTPaymentPROD.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberAuthCTPaymentPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/memberAuth/MemberAuthCTPayment.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuthCTPayment.json" }, tags = { "@p1" })
-public class RunMRATDDRegressionMemberAuthCTPayment {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuthCTPaymentPROD.json" }, tags = { "@regressionMemberPROD" })
+public class RunMRATDDRegressionMemberAuthCTPaymentPROD {
 
 }
