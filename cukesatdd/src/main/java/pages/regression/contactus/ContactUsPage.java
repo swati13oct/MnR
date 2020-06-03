@@ -860,7 +860,7 @@ public class ContactUsPage extends UhcDriver{
 					newemailId.sendKeys(newEmailId);
 					confirmemailId.sendKeys(newConfirmEmailId);
 					System.out.println("found cancel link");
-					emailUsContinueBtn.click();
+					cancelLink.click();
 					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly", getStartedButton.isDisplayed());
 
 				}
