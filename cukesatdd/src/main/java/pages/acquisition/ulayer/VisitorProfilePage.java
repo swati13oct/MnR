@@ -297,6 +297,10 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Validate Enroll plan is Clickable or not
+	 * @return
+	 */
 	public boolean validateEnrollInPlanIsClickable() {
 		boolean enrollInNotPossible = false;
 		try
@@ -313,6 +317,10 @@ public class VisitorProfilePage extends UhcDriver {
 	    }		
 	}
 	
+	/**
+	 * Validate the plan count on the shopping cart icon
+	 * @param plancount
+	 */
 	public void validatePlanCountOnCartIcon(String plancount) {
 		Assert.assertEquals(plancount, shoppingCartNumber.getText());
 		System.out.println("count mapped on Shopping cart icon with : " + plancount);
@@ -330,6 +338,11 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Select plans and compare
+	 * @param plans
+	 * @return
+	 */
 	public ComparePlansPage planCompare(String plans) {
 	
 		comparePlans.click();

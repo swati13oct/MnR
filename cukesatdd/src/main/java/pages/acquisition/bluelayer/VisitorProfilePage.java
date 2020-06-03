@@ -301,6 +301,11 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Select plans and compare
+	 * @param plans
+	 * @return
+	 */
 	public ComparePlansPageBlayer planCompare(String plans) {
 		
 		comparePlans.click();
