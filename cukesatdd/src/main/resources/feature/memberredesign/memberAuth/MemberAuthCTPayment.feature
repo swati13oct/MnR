@@ -77,6 +77,24 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
       | F243897 | ashah120 | Mnrqa002 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
+  @regressionMemberPROD @memAuthProdOneTimeEFTCancel @CodeTransformers
+  Scenario Outline: TID: <TID> -  Test Case 08 -Verify cancel EFT federal member
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    And the user navigates to payments overview page
+    And user clicks on Update Automatic payments on payment overview page
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
+    And the user clicks on cancel button in One time EFT or Recurring EFT
+
+    Examples: 
+      | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      |
+      | F243897 | ashah120 | Mnrqa002 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months |
+
   @regressionMemberPROD @regressionMemberPRODsigninSignout
   Scenario Outline: Scenario: <Scenario> - Verify sign in & sign out
     Given the user is on member auth login flow page
