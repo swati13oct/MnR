@@ -70,10 +70,6 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 						driver.get("https://"+envStr+"/aarp/find-care");
 					} else if(memberType.toUpperCase().contains("UHC")) {
 						driver.get("https://"+envStr+"/medicare/find-care");
-					} else if(memberType.toUpperCase().contains("MEDICA")) {
-						driver.get("https://"+envStr+"/medica/find-care");
-					} else if(memberType.toUpperCase().contains("PCP")) {
-						driver.get("https://"+envStr+"/pcp/find-care");
 					} else
 						Assert.assertTrue("PROBLEM - please indicate AARP or UHC in your memberType input", false);
 				} else if (memberType.toUpperCase().contains("GRP")) {
@@ -81,6 +77,11 @@ public class ProviderSearchPage  extends ProviderSearchBase {
 				} else {
 					Assert.assertTrue("PROBLEM - please indicate IND or GRP in your memberType input", false);
 				}
+			} else if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
+				if(memberType.toUpperCase().contains("MEDICA"))
+					driver.get("https://"+envStr+"/medica/find-care");
+				else if(memberType.toUpperCase().contains("PCP"))
+					driver.get("https://"+envStr+"/pcp/find-care");
 			} else {
 				Assert.assertTrue("PROBLEM - I haven't code this yet... planType='"+planType+"' | memberType='"+memberType+"'", false);
 			}
