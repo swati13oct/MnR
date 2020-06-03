@@ -4061,7 +4061,7 @@ public class AccountHomePage extends UhcDriver {
 	 public void checkuserlandsonhceestimatorpagePROD() {
 		 System.out.println("Current URL is :  "+driver.getCurrentUrl());
 		 System.out.println("Now checking for header element h1 of the page");
-		 
+		 CommonUtility.checkPageIsReadyNew(driver);
 			try {
 				String gethcePageText = hcePageText.getText();
 				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
