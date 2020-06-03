@@ -173,7 +173,7 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Processing
-    Then user views  a half Harvey Ball on that medication's row
+    Then user views a half Harvey Ball on that medication's row
 
     Examples: 
       | FID     | planType | memberType           |
@@ -202,7 +202,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
-    And user views a status of  Delivered
+    And user views a status of Delivered
     Then user views a full Harvey Ball with a checkmark on that medication row
 
     Examples: 
@@ -248,7 +248,7 @@ Feature: MVP - Current Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views one of his active medications has  a price adjustment hold on it
+    When user views one of his active medications has a price adjustment hold on it
     Then user validates a red On Hold indicator
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button

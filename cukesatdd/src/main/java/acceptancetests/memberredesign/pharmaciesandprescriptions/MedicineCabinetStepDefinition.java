@@ -333,7 +333,7 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views  a half Harvey Ball on that medication's row$")
+	@Then("^user views a half Harvey Ball on that medication's row$")
 	public void user_views_a_half_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -358,7 +358,7 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user views a status of  Delivered$")
+	@When("^user views a status of Delivered$")
 	public void user_views_a_status_of_Delivered() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -409,7 +409,7 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user views one of his active medications has  a price adjustment hold on it$")
+	@When("^user views one of his active medications has a price adjustment hold on it$")
 	public void user_views_one_of_his_active_medications_has_a_price_adjustment_hold_on_it() throws Throwable {
 
 	}
@@ -428,12 +428,8 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-<<<<<<< HEAD
 		pnpPg.validateRefillMedications();
 		//pnpPg.validateOrderStatusForHDDrug("refill");
-=======
-		pnpPg.validateOrderStatusForHDDrug("Refill");
->>>>>>> branch 'Feature-F392596_MedicineCabinet' of https://github.optum.com/Consumer-Portals/MRATDD.git
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
