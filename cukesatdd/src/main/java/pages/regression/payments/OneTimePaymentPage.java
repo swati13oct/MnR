@@ -159,7 +159,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
-	
+		
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -726,4 +726,63 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(lastNameField);
 		validate(continueButton);
 	}
+	/**
+	 * For iPerception Model
+	 * @param driver
+	 */
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
+	public ConfirmOneTimePaymentPage DoNotselectAgreeAndClickOnSubmitPaymentsforOneTime() {
+		checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		checkForIPerceptionModel(driver);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		checkForIPerceptionModel(driver);
+		validate(AuthorizeMonthlyPaymentstButton);
+		//AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Submit button on Review Payment page");
+		try {
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is  "+driver.getCurrentUrl());
+			} catch (InterruptedException e) {
+			System.out.println("Catch block URL is "+driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		String title = driver.getTitle();
+		System.out.println("Current title of the page is "+title);
+		
+		//if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		if (driver.getTitle().contains("Review Payment")) {
+			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+			System.out.println("Confirmation Page for one time payment was not displayed");
+			return null;
+		}
+	}
+
+
 }
