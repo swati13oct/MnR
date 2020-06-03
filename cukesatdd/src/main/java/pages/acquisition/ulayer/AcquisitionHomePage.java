@@ -373,7 +373,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 
-	@FindBy(xpath = "//input[@id='cancelPreChatForm']")
+	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
    	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
