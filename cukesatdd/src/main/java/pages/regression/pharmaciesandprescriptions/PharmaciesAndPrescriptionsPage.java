@@ -693,7 +693,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(myMedicationsHeader));
 	}
 
-	public void validateActivePrescriptions() {
+	public void validateSixActivePrescriptions() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
 				sixActivePrescription());
@@ -864,12 +864,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements", optumRx.size() > 0);
 	}
 
+
 	public void validateProcessing() {
 
-		List<WebElement> processing = Processing;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(processing.get(0)));
+				isOrderProcessing());
 	}
 
 	/*
@@ -904,7 +904,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateHalfHarveyBall() {
-		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", pnpValidate(HalfHarveyBall));
+		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", isHalfHarveyBall());
 	}
 
 	public void validateOneFourthHarveyBall() {

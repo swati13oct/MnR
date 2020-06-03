@@ -291,7 +291,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OptumRxMedicineCabinetHeader;
 
 	// Medicine Cabinet
-	@FindBy(xpath = "//div[contains(text(),'Current Medications')]")
+	@FindBy(xpath = "//h2[contains(text(),'Current Medications')]")
 	protected WebElement CurrentMedicationsHeader;
 
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
@@ -300,8 +300,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[@data-test-component='text']")
 	protected List<WebElement> AssociatedCallToAction;
 
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
+	protected List<WebElement> halfHarveyBall;
+
 	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
 	protected WebElement ViewAllMedications;
+
+	@FindBy(xpath = "//span[@data-test-total-medications='12']")
+	protected WebElement totalMedicationsInCurrenMedications;
+
+	//
 
 	@FindBy(xpath = "//h1[contains(text(),'My Medications')]")
 	protected WebElement MyMedicationsPageHeader;
@@ -350,7 +358,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
-	@FindBy(xpath = "//div[@class='sc-LzLvP sc-LzLwo iFciar']")
+	@FindBy(xpath = "//div[contains(text(),'My Medications')]")
 	protected WebElement NumberInParenthesis;
 
 	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
@@ -362,11 +370,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
 	protected List<WebElement> OptumRx;
 
-	@FindBy(xpath = "//span[contains(text(),'OptumRx')]")
+	@FindBy(xpath = "//span[contains(text(),'order processing')]")
 	protected List<WebElement> Processing;
 
-	@FindBy(xpath = "(//div[@class='sc-LzLtT hBUvHG'])[last()]")
-	protected WebElement HalfHarveyBall;
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
+	protected WebElement isHalfHarveyBall;
 
 	@FindBy(xpath = "")
 	protected WebElement oneFourthHarveyBall;
@@ -681,6 +689,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean isOrderProcessing() {
+		if (Processing.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isHalfHarveyBall() {
+		if (halfHarveyBall.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean associatedCallToAction() {
 		if (AssociatedCallToAction.get(AssociatedCallToAction.size() - 1).isDisplayed()) {
 			return true;
@@ -729,7 +753,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean corredpondingMedicationsNumbers() {
 		String numberTXT = NumberInParenthesis.getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
-		String totalNumber = ViewAllMedications.getAttribute("data-test-total-medications");
+		String totalNumber = totalMedicationsInCurrenMedications.getAttribute("data-test-total-medications");
 		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
 
 		if (number == number2) {

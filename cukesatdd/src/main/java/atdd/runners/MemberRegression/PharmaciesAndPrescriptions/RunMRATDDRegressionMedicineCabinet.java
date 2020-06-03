@@ -13,7 +13,7 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionM
 glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" },
 plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMedicineCabinet.json" },
-tags = { "@NoDataDependency" }, monochrome =true)
+tags = { "@F392596" }, monochrome =true)
 public class RunMRATDDRegressionMedicineCabinet {
 
 }
