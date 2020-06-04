@@ -42,7 +42,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -92,7 +92,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -106,7 +106,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user  selects Learn More button on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -120,7 +120,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType          |
       | F392596 | MAPD     | Rx_Indiviual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran
+  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views order status on Medicine Cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -134,7 +134,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran
+  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify with doctor, Order Verified
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -173,7 +173,7 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user views a home delivery drug order
     And user views a status of Processing
-    Then user views  a half Harvey Ball on that medication's row
+    Then user views a half Harvey Ball on that medication's row
 
     Examples: 
       | FID     | planType | memberType           |
@@ -202,7 +202,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug order
-    And user views a status of  Delivered
+    And user views a status of Delivered
     Then user views a full Harvey Ball with a checkmark on that medication row
 
     Examples: 
@@ -248,7 +248,7 @@ Feature: MVP - Current Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
-    When user views one of his active medications has  a price adjustment hold on it
+    When user views one of his active medications has a price adjustment hold on it
     Then user validates a red On Hold indicator
     Then user validates a green Resolve hold button on that medication's row
     And user validates the external link icon in the button
@@ -288,7 +288,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869 @tip
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -316,7 +316,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType                          |
       | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
 
-  @CurrentMedications @F392596 @US2508869 @tip
+  @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -342,7 +342,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -352,12 +352,12 @@ Feature: MVP - Current Medications
     When user have a home delivery medication eligible for refill
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-
+    And user validates the external link icon in the button
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -367,12 +367,12 @@ Feature: MVP - Current Medications
     When user views a home delivery medication eligible for renewal
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-
-    Examples: 
+    And user validates the external link icon in the button
+    Examples:
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify  Resolve hold (SSO)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -387,7 +387,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Track status
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -402,7 +402,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran
+  @MedicineCabinet @F392596 @US2508869 @Kiran @DataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View order
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

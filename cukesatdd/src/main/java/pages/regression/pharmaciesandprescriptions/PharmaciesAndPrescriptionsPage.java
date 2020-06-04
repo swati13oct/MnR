@@ -686,8 +686,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
 				pnpValidate(CurrentMedicationsHeader));
 	}
+	
+	public void validateMyMedicationsHeader(){
+		
+		Assert.assertTrue("PROBLEM - unable to locate My Medications Header element",
+				pnpValidate(myMedicationsHeader));
+	}
 
-	public void validateActivePrescriptions() {
+	public void validateSixActivePrescriptions() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
 				sixActivePrescription());
@@ -774,22 +780,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateHDAssociateOrderStatus() {
-		Assert.assertTrue("PROBLEM - Order Status for applicable Home Delivery Drug not available",
-				validateOrderStatusForHDDrug());
+		Assert.assertTrue("PROBLEM - Track Order Status for applicable Home Delivery Drug not available",
+				validateOrderStatusForTrackHDDrug());
 	}
 
 	public void validateHDOrderStatusForInProg() {
 		Assert.assertTrue("PROBLEM - Order Status for in progress Home Delivery Drug not available",
-				validateOrderStatusForHDDrug());
+				validateOrderStatusForTrackHDDrug());
 	}
-
-	List<String> listOfOrderStatusForHDMedicine = new ArrayList<>(Arrays.asList("Request Received",
-			"Verifying with Doctor", "Order Verified", "Processing", "Shipped", "Delivered"));
-
-	public boolean validateOrderStatusForHDDrug() {
+	
+	List<String> listOfOrderStatusForTrackHDMedicine = new ArrayList<>(Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Order Processing","Order Shipped","Order Delivered"));
+	
+	public boolean validateOrderStatusForTrackHDDrug() {
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
 		for (Integer val : listOfIndex) {
-			if (!listOfOrderStatusForHDMedicine.contains(listOfOrderStatus.get(val).getText())) {
+			if (!listOfOrderStatusForTrackHDMedicine.contains(listOfOrderStatus.get(val).getText())) {
 				return false;
 			}
 		}
@@ -859,12 +864,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements", optumRx.size() > 0);
 	}
 
+
 	public void validateProcessing() {
 
-		List<WebElement> processing = Processing;
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(processing.get(0)));
+				isOrderProcessing());
 	}
 
 	/*
@@ -899,7 +904,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateHalfHarveyBall() {
-		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", pnpValidate(HalfHarveyBall));
+		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", isHalfHarveyBall());
 	}
 
 	public void validateOneFourthHarveyBall() {
@@ -1175,24 +1180,17 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateClickOnTrackOrderStatus() {
-		List<String> list = Arrays.asList("Request Received", "Verifying with Doctor", "Order Verified", "Processing",
-				"Processed", "Shipped");
-		ArrayList<String> inprogressOrderStatus = new ArrayList<String>();
-		inprogressOrderStatus.addAll(list);
-		for (String status : inprogressOrderStatus) {
+		List<String> list = Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Order Processing","Order Processed","Order Shipped");
+		ArrayList<String> trackOrderStatus = new ArrayList<String>();
+		trackOrderStatus.addAll(list);
+		for(String status:trackOrderStatus) {
 			clickOnTrackOrderStatus(status);
 		}
-		// getListOfIndexForTrackCTA();
-		// Assert.assertTrue("PROBLEM - "+ callToAction +" call to action button is not
-		// available for In Progress Order on Current
-		// Medication",clickOnTrackOrderStatus()));
 	}
 
 	public void validateOrderStatusForHDDrug(String orderStatus) {
-
 		Assert.assertTrue("PROBLEM - " + orderStatus + " Status not available on Current Medication",
 				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() >= 0);
-
 	}
 
 	public void validateHarveyBallOrderStatusForHDDrug(String orderStatus, String ballSize) {
@@ -1268,7 +1266,6 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public boolean validateOnHoldIndicator(String holdColor, String holdIndicator, String holdType) {
 		List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
-
 		// Need to provide the hold color hash val
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {

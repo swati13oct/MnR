@@ -49,6 +49,7 @@ public class MedicineCabinetStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateCurrentMedicationsHeader();
+		pnpPg.validateMyMedicationsHeader();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
@@ -75,7 +76,7 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateActivePrescriptions();
+		pnpPg.validateSixActivePrescriptions();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -332,13 +333,14 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@Then("^user views  a half Harvey Ball on that medication's row$")
+	@Then("^user views a half Harvey Ball on that medication's row$")
 	public void user_views_a_half_Harvey_Ball_on_that_medication_s_row() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDeliveredOrderStatusForHDDrug("Processing","50");
+		pnpPg.validateHalfHarveyBall();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 	}
 
 	@When("^user views a status of Shipped$")
@@ -357,7 +359,7 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user views a status of  Delivered$")
+	@When("^user views a status of Delivered$")
 	public void user_views_a_status_of_Delivered() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -377,7 +379,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_active_medications() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateActivePrescriptions();
+		pnpPg.validateSixActivePrescriptions();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -408,7 +410,7 @@ public class MedicineCabinetStepDefinition {
 
 	}
 
-	@When("^user views one of his active medications has  a price adjustment hold on it$")
+	@When("^user views one of his active medications has a price adjustment hold on it$")
 	public void user_views_one_of_his_active_medications_has_a_price_adjustment_hold_on_it() throws Throwable {
 
 	}
@@ -427,7 +429,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_have_a_home_delivery_medication_eligible_for_refill() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOrderStatusForHDDrug("Refill");
+		pnpPg.validateRefillMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -436,7 +438,8 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_home_delivery_medication_eligible_for_renewal() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOrderStatusForHDDrug("renewal");
+		pnpPg.validateRenewMedications();
+		//pnpPg.validateOrderStatusForHDDrug("renewal");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -451,28 +454,22 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user views a Track Status call to action button on that medication's row$")
 	public void user_views_a_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateTrackStatusButton();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@When("^user views an active medication home delivery order that has been delivered$")
 	public void user_views_an_active_medication_home_delivery_order_that_has_been_delivered() throws Throwable {
-
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDelivered();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user views a View Order call to action button on that medication's row$")
 	public void user_views_a_View_Order_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateViewOrderButton();
@@ -484,7 +481,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_Refill_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateClickOnHDDrugCTA("refill","Refill Medication");
+		pnpPg.clickOnRefillMedicationCTAOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -500,7 +497,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_the_Renew_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateClickOnHDDrugCTA("renwal","Renew Medication");
+		pnpPg.clickOnRenewMedicationCTAOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -508,7 +505,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_home_delivery_medication_on_hold() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOrderStatusForHDDrug("on hold");
+		//
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
@@ -517,21 +514,16 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_the_Resolve_Hold_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateClickOnHDDrugCTA("on hold","Resolve Hold");
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	
+		pnpPg.clickOnResolveHoldCTAOnCurrentMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	
 	} 
 
 	@When("^user clicks the Track Status call to action button on that medication's row$")
 	public void user_clicks_the_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
-		/*PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		//pnpPg.
-		
-		
-		// -->
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);*/
-	
+		pnpPg.clickOnTrackStatusCTAOnCurrentMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	
 	}
 
 	@Then("^user view the Order Status page for that medication$")
@@ -544,7 +536,10 @@ public class MedicineCabinetStepDefinition {
 
 	@When("^user clicks the View order call to action button on that medication's row$")
 	public void user_clicks_the_View_order_call_to_action_button_on_that_medication_s_row() throws Throwable {
-
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickOnViewOrderCTAOnCurrentMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 	
