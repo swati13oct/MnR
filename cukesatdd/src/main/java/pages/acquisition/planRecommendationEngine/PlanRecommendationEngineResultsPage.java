@@ -519,18 +519,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
 			flow = PlanRecommendationEngineStepDefinition.PREflow;
 			DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+			boolean remove = true;
 			int count =DrugsInPRE.size();
 			drugsCoveredInVPP(count);
 			removeDrugs(count);
 			vppToPre();
-			validateDrugPage(flow);
+			validateDrugPage(flow, true);
 		}
 		
 		public void startnowtilldrugs() {
 			System.out.println("Navigating to PRE Using StartNow: ");
 			flow = PlanRecommendationEngineStepDefinition.PREflow;
 			vppToPre();
-			validateDrugPage(flow);
+			validateDrugPage(flow, false);
 		}
 		
 		public void DrugsDetailsVPPtoPRE() {
@@ -632,7 +633,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	}
 	
 
-	public void validateDrugPage(String plan) {
+	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
 		int MAPD = 7;
@@ -654,7 +655,11 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 				pageloadcomplete();
 			}
 		}
-		DrugsList = drug.drugNames;
+		if(removedrug==true) {
+			DrugsList = DrugsList;	
+		}else {
+			DrugsList = drug.drugNames;
+		}
 		ModelDrugsList = drug.drugnamesList();
 		System.out.println("DrugsList Size is : "+DrugsList.size());
 		System.out.println("ModelDrugsList Size is : "+ModelDrugsList.size());
@@ -663,9 +668,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public void startNowFullFlow(String plan) {
 		System.out.println("Validating Start Now Full flow in PRE");
-		int MAPD = 2;
+		int MAPD = 1;
 		int PDP = 2;
-		int None = 2;
+		int None = 1;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
@@ -700,6 +705,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public ArrayList<String> getProvidersVPP() {
 		threadsleep(5000);
+		pageloadcomplete();
 		providersInfoMA1stPlan.click();
 		vppProviderResults = new ArrayList<String>();
 		for(WebElement e:providersListMA1stPlan) {
