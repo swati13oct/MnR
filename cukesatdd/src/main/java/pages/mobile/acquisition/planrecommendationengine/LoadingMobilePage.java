@@ -35,12 +35,17 @@ public class LoadingMobilePage extends UhcDriver {
 	// Loading Page Element Verification Method
 	public void loadingresultspage() {
 		System.out.println("Validating Loading Page: ");
-		String currentPageUrl = driver.getCurrentUrl();
-		currentPageUrl.contains("/plan-recommendation-engine.html/");
+		// String currentPageUrl = driver.getCurrentUrl();
+		// currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(loadingText, 10);
-		//Assert.assertTrue(loadingText.getText().contains(""));
-		validate(loadingDesktopImage,3);
-		validate(loadingLoaderImage,3);
+		// Assert.assertTrue(loadingText.getText().contains(""));
+		// validate(loadingDesktopImage,3);
+		// validate(loadingLoaderImage,3);
+		try {
+			waitforElementNew(loadingDesktopImage, 3);
+			waitforElementNew(loadingLoaderImage, 3);
+		} catch (Exception e) {
+		}
 	}
 
 }

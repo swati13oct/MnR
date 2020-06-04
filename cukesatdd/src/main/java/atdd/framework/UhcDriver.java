@@ -3,10 +3,12 @@
  */
 package atdd.framework;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -842,16 +844,23 @@ try {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
-	    //Starting y location set to 80% of the height (near bottom)
-	    int starty = (int) (size.height * 0.80);
+	    //Starting y location set to 85% - 90% of the height (near bottom)
+		Random rand = new Random();
+		double start=0.85d,end=0.90d;
+		double val = start+(end-start)*rand.nextDouble();
+		//System.out.println(val);
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		String randomPercentage = numberFormat.format(val);
+		System.out.println("randomPercentage Swipe - "+randomPercentage);
+	    int starty = (int) (size.height * Double.parseDouble(randomPercentage));
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
 	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
 	    if(!swipeup)
-	    	endy = endy+(int) (size.height * 0.3); //To avoid address bar position
+	    	endy = endy+(int) (size.height * 0.1); //To avoid address bar position Increasing 0.1 to 0.3 will hit header logo
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
-	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
+	    System.out.println(size+" "+startx+" "+starty+" "+endy);
 		threadsleep(500);
 		try {
 		if(swipeup)
@@ -1054,8 +1063,8 @@ try {
 		// Starting x location set to % of the width (near left end)
 		percentage = "0.".concat(percentage.replace("%", ""));
 		int startx = (int) (size.width * Float.valueOf(1 - Float.valueOf(percentage)));
-		// Ending x location set to 80% of the width (near right end)
-		int endx = (int) (size.width * 0.80);
+		// Ending x location set to 90% of the width (near right end)
+		int endx = (int) (size.width * 0.90);
 		// Y position set to 30% of height Vertically
 		int starty = (int) (size.height * 0.3);
 		System.out.println(size + " " + startx + " " + endx + " " + starty);
