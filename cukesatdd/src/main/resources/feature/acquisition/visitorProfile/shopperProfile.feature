@@ -213,11 +213,12 @@ Feature: 1.08. ACQ- Shopper Profile
       | MBI   | <mbi>   |
     And click on Create Profile button
     Then create a profile with the following details
-      | Email      | <email> |
-      | DOB        | <dob>   |
-      | MBI        | <mbi>   |
-      | First Name | <fname> |
-      | Last Name  | <lname> |
+      | Email      | <email>   |
+      | DOB        | <dob>     |
+      | MBI        | <mbi>     |
+      | First Name | <fname>   |
+      | Last Name  | <lname>   |
+      | Zipcode    | <zipCode> |
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
@@ -227,10 +228,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                    | dob        | mbi           | fname   | lname      | enrolledplanName                                | planName                                                         | drugNames   | providers              |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)       | Medica HealthCare Plans MedicareMax (HMO)                        | No          | PLASENCIA, M.D., LUIS  |
-      | qavgogine | qavgogine | EBER@MEMBER.COM          | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  | UnitedHealthcare Group Medicare Advantage (PPO) | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Atripla TAB | ISMAIL, M.D., MOHAMMED |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
+      | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                                | planName                                                         | drugNames   | providers              |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |         | Medica HealthCare Plans MedicareMax (HMO)       | Medica HealthCare Plans MedicareMax (HMO)                        | No          | PLASENCIA, M.D., LUIS  |
+      | qavgogine | qavgogine | EBER@MEMBER.COM          | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  |         | UnitedHealthcare Group Medicare Advantage (PPO) | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Atripla TAB | ISMAIL, M.D., MOHAMMED |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
