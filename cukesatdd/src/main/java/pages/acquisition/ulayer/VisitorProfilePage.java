@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -76,6 +77,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement enrollBtn;
+	
+	@FindBy(css="div.print-back>a:first-child")
+	private WebElement backToPlans;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -359,6 +363,22 @@ public class VisitorProfilePage extends UhcDriver {
 			return new ComparePlansPage(driver);
 		} else {
 			Assert.fail("Navigation to Plan Compare page is failed");
+		}
+		return null;
+	}
+	
+	/**
+	 * Back to VPP
+	 */
+	public VPPPlanSummaryPage backToPlans() {
+		try {
+			backToPlans.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
+			return new VPPPlanSummaryPage(driver);
+			}
+		}catch (Exception e) {
+		e.printStackTrace();
 		}
 		return null;
 	}

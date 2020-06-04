@@ -339,8 +339,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Then the user signs in with optum Id credentials in UHC site
       | User Name | <userName> |
       | Password  | <password> |
-    And the user validates the plan year buttons are present or not and chooses the plan year in UHC
-      | Plan Year | <planYear> |
+    And user delets all the added providers on visitor profile page of UHC site
     And the user back to VPP plan summary page in ums
     When the user Click on Show Plans link
       | PlanType | <plantype> |
@@ -351,7 +350,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | PlanName | <planName> |
     Then Navigate to Visitor Profile page on UMS site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of UHC site
-      | PlanName | <planname> |
+      | PlanName | <planName> |
     And user delets all the added providers on visitor profile page of UHC site
 
     Examples: 
