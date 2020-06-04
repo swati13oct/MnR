@@ -275,6 +275,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user navigate to PRE using StartNow button and verify drugs details in PRE page
     Then user proceed page navigation till VPP page after Start Now button
       | Plan Type | <isCoverageOpt> |
+    And verify continue function on "Pharmacy" page
     And verify continue function on "Additional Services" page
     And verify continue function on "Cost Preferences" page
     Then user validate elements in loading results page
