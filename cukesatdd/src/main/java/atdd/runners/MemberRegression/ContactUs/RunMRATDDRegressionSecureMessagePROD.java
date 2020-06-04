@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionSecureMessagePROD.json",detaile
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSecureMessagePROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome=true,
 features = { "src/main/resources/feature/memberredesign/contactus/SecureMessageProd.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSecureMessagePROD.json" }, tags = { "@regressionMemberPROD" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSecureMessagePROD.json" }, tags = { "@regressionMemberPROD12" })
 public class RunMRATDDRegressionSecureMessagePROD {
 
 }
