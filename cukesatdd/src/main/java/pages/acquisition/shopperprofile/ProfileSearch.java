@@ -123,6 +123,10 @@ public class ProfileSearch extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Click on create profile button
+	 * @return
+	 */
 	public MemberCreateProfile clickOnCreateProfile() {
 			try {
 				btnCreateProfile.click();
@@ -138,9 +142,6 @@ public class ProfileSearch extends UhcDriver {
 				return null;
 			}
 	}
-	
-	
-	
 	/**
 	 * Validate error messages	
 	 * @param emptyFields
@@ -244,10 +245,6 @@ public class ProfileSearch extends UhcDriver {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String emailID = givenAttributesMap.get("Email");
-		String dob = givenAttributesMap.get("DOB");
-		String fname = givenAttributesMap.get("First Name");
-		String lname = givenAttributesMap.get("Last Name");
-		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, emailID);
 		btnSearchShopper.click();

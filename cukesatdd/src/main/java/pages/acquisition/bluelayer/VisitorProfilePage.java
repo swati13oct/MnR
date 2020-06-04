@@ -14,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.ComparePlansPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -124,6 +123,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan: listOfTestPlans) {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
@@ -132,6 +132,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedMsPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan: listOfTestPlans) {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
 			//Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::a[1]")).isDisplayed());
