@@ -11,12 +11,12 @@ Feature: 1.10.1 Member  order materials Page - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     When user navigates to order plan materials page
-      | Plan Type | <planType> |
+      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then user validates header section of page content on order materials page
     And user validates selection section of page content on order materials page
@@ -30,56 +30,56 @@ Feature: 1.10.1 Member  order materials Page - PROD
     #-------------------
     @memAuth_Individuala
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15288 | ashah120  | Mnrqa002 | skho@roadrunner.com| MAPD   | UHC_Individual_order  |
-      | 15288 | ashah120  | Mnrqa002 | TEAKSAMPPALA1    | MAPD     | AARP_Individual_order |
+      | TID   | username | password | MemUserName         | planType | memberType            |
+      | 15288 | ashah120 | Mnrqa002 | skho@roadrunner.com | MAPD     | UHC_Individual_order  |
+      | 15288 | ashah120 | Mnrqa002 | TEAKSAMPPALA1       | MAPD     | AARP_Individual_order |
 
     @memAuth_Individuala @ma
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15287 | ashah120  | Mnrqa002 | TOMIKOARMER2    | MA	   | AARP_Individual_order |
+      | TID   | username | password | MemUserName  | planType | memberType            |
+      | 15287 | ashah120 | Mnrqa002 | TOMIKOARMER2 | MA       | AARP_Individual_order |
 
     @memAuth_Individuala @pdp
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15292 | ashah120  | Mnrqa002 | LSLOMSKI777    | PDP      | AARP_Individual_order |
+      | TID   | username | password | MemUserName | planType | memberType            |
+      | 15292 | ashah120 | Mnrqa002 | LSLOMSKI777 | PDP      | AARP_Individual_order |
 
     #-------------------
     @memAuth_Individualb
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15286 | ashah120  | Mnrqa002 | marylamb823    | PCP      | Individual_order      |
-      | 15285 | ashah120  | Mnrqa002  | SUSICHAPMAN@GMAIL.COM     | MEDICA   | Individual_order      |
+      | TID   | username | password | MemUserName           | planType | memberType       |
+      | 15286 | ashah120 | Mnrqa002 | marylamb823           | PCP      | Individual_order |
+      | 15285 | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM | MEDICA   | Individual_order |
 
     @memAuth_Individualb @ship
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15293 | ashah120  | Mnrqa002  | lchafner@gmail.com     | SHIP     | MEDSUPP_order    |
+      | TID   | username | password | MemUserName        | planType | memberType    |
+      | 15293 | ashah120 | Mnrqa002 | lchafner@gmail.com | SHIP     | MEDSUPP_order |
 
     #-------------------
     @memAuth_GroupMemberOrderSelectionandConfirmation
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15289 | ashah120  | Mnrqa002  | WILLIAMGARRISON48    | MAPD     | UHC_Group_order       |
+      | TID   | username | password | MemUserName       | planType | memberType      |
+      | 15289 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | UHC_Group_order |
 
     @memAuth_GroupMemberOrderSelectionandConfirmation
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType            |
-      | 15289 | ashah120  | Mnrqa002  | TOMIKOARMER2    | MA       | UHC_Group_order       |
-      | 15290 | ashah120  | Mnrqa002 | KAYCEE0412    | PDP      | UHC_Group_order       |
+      | TID   | username | password | MemUserName  | planType | memberType      |
+      | 15289 | ashah120 | Mnrqa002 | TOMIKOARMER2 | MA       | UHC_Group_order |
+      | 15290 | ashah120 | Mnrqa002 | KAYCEE0412   | PDP      | UHC_Group_order |
 
     #-------------------
     @memAuth_ValidateHeaderComboTabs @combo_ship_mapd
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType              |
-      | 15281 | ashah120  | Mnrqa002 | aliceb1105@aol.com    | MAPD	   | COMBO_order             |
-      | 15281 | ashah120  | Mnrqa002 | Norm749    | MEDSUPP	 | COMBO_order           |
+      | TID   | username | password | MemUserName        | planType | memberType  |
+      #| 15281 | ashah120 | Mnrqa002 | aliceb1105@aol.com | MAPD     | COMBO_order |
+      | 15281 | ashah120 | Mnrqa002 | Norm749            | MEDSUPP  | COMBO_order |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @memAuth_ValidateHeaderComboTabs
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType              |
-      | 15291 | ashah120  | Mnrqa002 | Norm749    | PDP      | COMBO_order	         |
+      | TID   | username | password | MemUserName | planType | memberType  |
+      | 15291 | ashah120 | Mnrqa002 | Norm749     | PDP      | COMBO_order |
     # | 15291 | qavgogine | qavgogine | testusername    | SSUP     | COMBO_order	         |
 
     # note: only SHIP user with Medicare Select Plan will be able to order Medicare Select Hospital Directory
@@ -103,12 +103,12 @@ Feature: 1.10.1 Member  order materials Page - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     Then user should not see Order Materials Link for terminated member
     Then user validates header navigation is not available for Terminated member
 
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType              |
-      | 15284 | ashah120  | Mnrqa002 | erbenoit56    | MAPD      | AARP_Terminatedmember_order	         |
+      | TID   | username | password | MemUserName | planType | memberType                  |
+      | 15284 | ashah120 | Mnrqa002 | erbenoit56  | MAPD     | AARP_Terminatedmember_order |
