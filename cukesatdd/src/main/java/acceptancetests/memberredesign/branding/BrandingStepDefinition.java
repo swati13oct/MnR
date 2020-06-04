@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -149,7 +150,7 @@ public void userClicksOnBenefitAndCoveragePage(DataTable givenAttributes) throws
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
-	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)) || MRScenario.environment.equalsIgnoreCase("offline-stage"))
 	{
 		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -160,7 +161,7 @@ public void userClicksOnBenefitAndCoveragePage(DataTable givenAttributes) throws
 	
 	else 
     {
-		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage");
+		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage or offline stage or prod or offline");
 	}
 	
 	

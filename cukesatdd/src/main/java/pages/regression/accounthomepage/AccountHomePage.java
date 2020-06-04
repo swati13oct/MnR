@@ -1473,7 +1473,8 @@ public class AccountHomePage extends UhcDriver {
 					|| MRScenario.environmentMedicare.equals("team-e")) {
 				js.executeScript("arguments[0].click();", helpAndContactUslink);
 
-			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && !(MRScenario.environment.equalsIgnoreCase("PROD")|| 
+					MRScenario.environment.equalsIgnoreCase("offline"))) {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,-500)", "");
 				validateNew(contactUsPageLink);
@@ -4061,7 +4062,7 @@ public class AccountHomePage extends UhcDriver {
 	 public void checkuserlandsonhceestimatorpagePROD() {
 		 System.out.println("Current URL is :  "+driver.getCurrentUrl());
 		 System.out.println("Now checking for header element h1 of the page");
-		 
+		 CommonUtility.checkPageIsReadyNew(driver);
 			try {
 				String gethcePageText = hcePageText.getText();
 				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
@@ -4207,5 +4208,37 @@ public class AccountHomePage extends UhcDriver {
 		
 	    }
 			return null;		
+	}
+
+	public PaymentHistoryPage navigatePaymentHistoryPage1() {
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+       // clicking on make a payment tile on the dash board
+		waitforElement(makeapayment);
+		//System.out.println("payment link is displayed on the header");
+		makeapayment.click();
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
+				
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
 	}
 }

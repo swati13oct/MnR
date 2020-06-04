@@ -11,6 +11,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -822,6 +823,59 @@ public class ContactUsPage extends UhcDriver{
 		}
 
 	}
+	
+	/**
+	 * This method is used to validate secure email us widget section
+	 */
+	public void prodvalidateSecureEmailUsWidgetSection(DataTable givenAttributes) {
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String newEmailId = memberAttributesMap.get("New Email");
+		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
+		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
+
+		try {
+			Thread.sleep(8000);
+
+			if(validate(EmailForm)){
+				System.out.println("Get Started Button not visible, So using email Form Link!!!");
+				EmailForm.click();
+				Thread.sleep(2000);
+				waitforElement(cancelLink);
+				cancelLink1.click();
+				Thread.sleep(2000);}
+			else if(validate(goToInboxButton)){	
+				validateGoToInbox();
+			}
+			else{
+				if (getStartedButton.isDisplayed()) {
+					getStartedButton.click();
+					waitforElement(useDifferentEmailRadioButton);
+					useDifferentEmailRadioButton.click();
+					newemailId.sendKeys(newEmailId);
+					confirmemailId.sendKeys(newConfirmEmailId);
+					System.out.println("found cancel link");
+					cancelLink.click();
+					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly", getStartedButton.isDisplayed());
+
+				}
+				
+
+
+
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	/**
 	 * This method validates the Email Form widget for SHIP members 
@@ -983,10 +1037,10 @@ public class ContactUsPage extends UhcDriver{
 	public void clickOnSendMessage_SecureEmail() {
 		if(validate(sendAmessageButton)){
 			sendAmessageButton.click();
-			System.out.println("Send A Message button is clicked");  		 
+			System.out.println("Go to Inbox button is clicked");  		 
 		}
 		else{
-			Assert.assertTrue("Send A message Button not displayed", false);
+			Assert.assertTrue("Go To Inbox Button not displayed", false);
 		}
 		/*try {
 			Thread.sleep(20000);
@@ -1036,7 +1090,14 @@ public void NavigateRallyandclickonmessagesLink() {
 		try {
 			validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(EmailUsModalbtnContinue);
+				//switchToNewTabNew(EmailUsModalbtnContinue);
+				jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles)
+					 {
+						driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
 				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
@@ -1046,15 +1107,23 @@ public void NavigateRallyandclickonmessagesLink() {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully",true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
 	public void validateSSOInboxViaMessengerLink(){
 		try {
-			validateNew(messageslink);
+			validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(messageslink);
+				//switchToNewTabNew(EmailUsModalbtnContinue);
+				jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles)
+					 {
+						driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
 				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
@@ -1064,7 +1133,8 @@ public void NavigateRallyandclickonmessagesLink() {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully",true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
@@ -1199,8 +1269,21 @@ public void NavigateRallyandclickonmessagesLink() {
 	
 	/**
 	 * Validate the go to CHAT with us for SHIP member 
+	 * @throws InterruptedException 
 	 */
-	public void validateChatWithUs(){
+	public void validateChatWithUs() throws InterruptedException{
+		{ //waitForloader(driver,overlay, 20);
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				//iPerceptionAutoPopUp.click();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}
 		try {
 			validateNew(chatMessage);
 			if (chatMessage.isDisplayed());
@@ -1235,6 +1318,47 @@ public void NavigateRallyandclickonmessagesLink() {
 			e.printStackTrace();
 		}
 	}
+	
+	public void validateALLlabelAndLinks(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("PlanType");
+		System.out.println("Plan type is :"+planType);
+if (planType.equalsIgnoreCase("MAPD")) {
+	
+		validateWithValue("Text- help With This Website", helpWithThisWebsite);
+		validateWithValue("Text- Help With Your Plan ", HelpWithYourPlan);
+
+		validateWithValue("Text-Learn How to Use the Website ", LearnHowtoUsetheWebsite);
+		validateWithValue("Text- Plan Support", PlanSupport);
+
+		validateWithValue("Text-TechnicalSupport ", TechnicalSupport);
+		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+
+		String technicalSupportTFN= technicalSupportContactNumber.getText().replaceAll("[\r\n]+", " ");
+		if(technicalSupportTFN.contains("1-800-721-0627")) {
+			Assert.assertTrue("Correct Technical support contact number is displayng", technicalSupportTFN.contains("1-800-721-0627"));
+		}
+		else {
+			Assert.assertFalse("Correct technical support TFN not displaying", true);
+		}
+			
+		String helpWithYourPlanTFN= helpWithYourPlanContactNumber.getText().replaceAll("[\r\n]+", " ");;
+	
+		if(helpWithYourPlanTFN.contains("1-844-876-6177")) {
+			Assert.assertTrue("Correct Plan support contact number is displayng", helpWithYourPlanTFN.contains("1-844-876-6177"));
+		}
+		else {
+			Assert.assertFalse("Correct Plan support contact number is not displayng", true);
+		}
+		System.out.println("All the labels and links for individual federal mamber validated and passed");
+
+	}}
+	
+	
+	
 }
 
 

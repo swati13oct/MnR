@@ -51,7 +51,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	protected WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
+	@FindBy(xpath = "///button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
 	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")

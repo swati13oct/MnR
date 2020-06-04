@@ -209,10 +209,12 @@ public class ssoStepDefinition {
 		String dateOfBirth = memberAttributesMap.get("DOB");
 		String mbi = memberAttributesMap.get("MBI");
 		String uhcid = memberAttributesMap.get("UHC_ID");
-		String applandingurl = memberAttributesMap.get("APPLANDINGURL");
+		String applandingurlStage = memberAttributesMap.get("APPLANDINGURLSTAGE");
+		String applandingurlteamh = memberAttributesMap.get("APPLANDINGURLTEAHH");
+		String applandingurlofflinestage = memberAttributesMap.get("APPLANDINGURLOFFLINESTAGE");
 		System.out.println("Fetching values of various fields from Feature File");
 		System.out.println("firstName: " + firstName + "   lastName: " + lastName + "    dob: " + dateOfBirth
-				+ "    MBI: " + mbi + "    APPLANDINGURL: " + applandingurl);
+				+ "    MBI: " + mbi);
 		bswiftPage bswiftpage = (bswiftPage) getLoginScenario().getBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift);
 		Thread.sleep(2000);
 		System.out.println("Title of new page : " + bswiftpage.getTitle());
@@ -226,8 +228,22 @@ public class ssoStepDefinition {
 		System.out.println("Entered mbi as : " + mbi);
 		bswiftpage.enterDOB(dateOfBirth);
 		System.out.println("Entered dob as : " + dateOfBirth);
-		bswiftpage.enterapplandingURL(applandingurl);
-		System.out.println("Entered APPLANDINGURL as : " + applandingurl);
+		if(MRScenario.environment.equalsIgnoreCase("stage"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlStage);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlStage);
+		}
+		else if(MRScenario.environment.equalsIgnoreCase("team-h"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlteamh);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlteamh);
+		}
+		
+		else if(MRScenario.environment.equalsIgnoreCase("offline-stage"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlofflinestage);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlofflinestage);
+		}
 		bswiftpage.enterUHCID(uhcid);
 		System.out.println("Entered UHC_ID as : " + uhcid);
 
@@ -276,7 +292,7 @@ public class ssoStepDefinition {
 	@And("^user directly access the SSO link for myhce$")
 	public void userdirectlyaccessesmyhcesso() throws Throwable {
 
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out.println("Now directly accessing the SSO link for myhce");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.userdirectlyaccessesmyhcesso();
@@ -288,6 +304,10 @@ public class ssoStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			accountHomePage.userdirectlyaccessesmyhcessoPROD();
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		else 
+		{
+			System.out.println("Please check the environment passed, it is not covered in any condition");
 		}
 	}
 
@@ -305,7 +325,7 @@ public class ssoStepDefinition {
 
 		String zipCode = memberAttributesMap.get("Zip Code");
 
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.userEntersZipCode(zipCode);
 			testHarnessPage.clickContinueonZipEntryPage();
@@ -323,7 +343,7 @@ public class ssoStepDefinition {
 
 	@Then("^user lands on hceestimator landing page$")
 	public void userlandsonhceestimatorpage() throws Throwable {
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out.println("Now checking if user landed on myhce page");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.checkuserlandsonhceestimatorpage();
@@ -407,7 +427,7 @@ public class ssoStepDefinition {
 
 		else if ((MRScenario.environment.equalsIgnoreCase("team-h"))
 				|| (MRScenario.environment.equalsIgnoreCase("stage")
-						& "YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+						& "YES".equalsIgnoreCase(MRScenario.isTestHarness)) || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out
 					.println("Now clicking on pharmacies and prescriptions tab from Team-h or Stage test harness page");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
