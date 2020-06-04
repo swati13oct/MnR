@@ -293,7 +293,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Test Plans | <testPlans> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                             | testPlans                                                                 |
+      | zipcode | isMultiCounty | county          | plantype | planName                             | testPlans                                                                 |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @AddDrugsAuthenticated

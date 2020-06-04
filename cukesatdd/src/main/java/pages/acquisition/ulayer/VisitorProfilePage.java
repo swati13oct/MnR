@@ -143,12 +143,16 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedMsPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-			//Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::a[1]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(20000);
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
