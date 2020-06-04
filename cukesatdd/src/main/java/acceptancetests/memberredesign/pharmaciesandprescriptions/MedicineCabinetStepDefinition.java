@@ -401,7 +401,7 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user validates the external link icon in the button$")
 	public void user_validates_the_external_link_icon_in_the_button() throws Throwable {
-
+		
 
 	}
 

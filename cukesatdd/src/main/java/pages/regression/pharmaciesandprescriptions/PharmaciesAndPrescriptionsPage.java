@@ -1,11 +1,8 @@
 package pages.regression.pharmaciesandprescriptions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -16,18 +13,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.itextpdf.text.log.SysoCounter;
-
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.util.CommonUtility;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
@@ -613,7 +600,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F436319
 	public void validateNavigationToOptumRxDrugPricingPageOnNewTab() {
-		Set handles = driver.getWindowHandles();
+		Set<String> handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
 		String winHandle = (String) handles.iterator().next();
@@ -664,7 +651,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319
 	public void validateNavigationToOptumRxMedicineCabinetOnNewTab() {
 
-		Set handles = driver.getWindowHandles();
+		Set<String> handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
 		String winHandle = (String) handles.iterator().next();
@@ -1216,7 +1203,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOptumRxLandingPage() {
-		Set handles = driver.getWindowHandles();
+		Set<String> handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
 		String winHandle = (String) handles.iterator().next();
