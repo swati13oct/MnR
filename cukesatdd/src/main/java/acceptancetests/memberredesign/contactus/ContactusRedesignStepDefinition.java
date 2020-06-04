@@ -101,8 +101,7 @@ public class ContactusRedesignStepDefinition {
 	public void validates_contactUs_Redesign_Page() {
 		System.out.println("*****the user navigates to contact us page in UHC site*****");
 			ContactUsPage contactUsPage;
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && (MRScenario.environment.equalsIgnoreCase("stage")|| 
-				MRScenario.environment.equalsIgnoreCase("offline-stage") || MRScenario.environment.equalsIgnoreCase("team-h"))) {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
 		} else {
