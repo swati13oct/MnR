@@ -92,7 +92,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
+  @MedicineCabinet @F392596 @US2301929 @Kiran 
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
