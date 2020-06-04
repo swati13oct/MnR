@@ -1,13 +1,14 @@
 @PlanRecommandonationEngineMobile @PRERegressionSessionCookiesMobile @PRERegressionMobile
 Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities using mobile
 
-  @PRE @planrecommandonationmobile @providersessionVPPtoPRE @F358845 @F427538
+  @PRE @planrecommandonationmobile @providersessionVPPtoPRE @F358845 @F427538 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Providers session from VPP to PRE for MA plans in Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to vpp summary page mobile
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <County>        |
+   	And user verifies "VPP" page mobile
     When user adds Doctors in vpp summary page mobile
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |

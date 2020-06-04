@@ -45,7 +45,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
 	private WebElement planZipInfo;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']")
+	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
 	private WebElement planBasedInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-1']")
@@ -231,6 +231,9 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "a.back-to-plans")
 	private WebElement backtoPlans;
 	
+	@FindBy(css = "a#change-location")
+	private WebElement changeZIPVPP;
+	
 	public void resultsUI(String zip, String county, String R1, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		plansLoader();
@@ -241,6 +244,7 @@ public class ResultsMobilePage extends UhcDriver {
 		String recom1 = "#1 Recommendation";
 		String recom2 = "#2 Recommendation";
 		if (tie == false) {
+			Assert.assertTrue(planBasedInfo.getText().toUpperCase().contains("BASED"),"Text box is not availabe");
 			checkRecommendationCount(R1, recom1, R2, recom2);
 			validateRecommendations(R1, recom1, R2, recom2);
 			validateRecommendationPlan(R1);
@@ -863,6 +867,26 @@ public class ResultsMobilePage extends UhcDriver {
 		dcemobile.drugsHandlerWithdetails(drugDetails);
 		dcemobile.choosePharmacyandBacktoPlans();
 		getDrugsVPP();
+	}
+	
+	public void checkVPP(boolean isPREVPP) {
+		if (isPREVPP) {
+			try {
+				validate(changeZIPVPP, 20);
+				System.out.println(changeZIPVPP.getText());
+				Assert.assertTrue(false, "Not an Expected PRE->VPP page");
+			} catch (Exception e) {
+				System.out.println("PRE VPP page displayed");
+			}
+		} else {
+			try {
+				System.out.println(planBasedInfo.getText().toUpperCase().contains("BASED"));
+				Assert.assertTrue(false, "Not an Expected VPP page");
+			} catch (Exception e1) {
+				validate(changeZIPVPP, 30);
+				System.out.println(changeZIPVPP.getText());
+			}
+		}
 	}
 
 }

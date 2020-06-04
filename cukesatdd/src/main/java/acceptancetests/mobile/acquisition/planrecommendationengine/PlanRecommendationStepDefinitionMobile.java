@@ -596,6 +596,15 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.verifyExisitngVPPDruglist();
    	}
 	
+	@Then("^user verifies \"([^\"]*)\" page mobile$")
+	public void verify_vpp_summary_page_mobile(String VPP) {
+		ResultsMobilePage resultpage = new ResultsMobilePage(wd);
+		if (VPP.toUpperCase().contains("PRE"))
+			resultpage.checkVPP(true);
+		else
+			resultpage.checkVPP(false);
+	}
+	
 	public void readfeaturedataMobile(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
