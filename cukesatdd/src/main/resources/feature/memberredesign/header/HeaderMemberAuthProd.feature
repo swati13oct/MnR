@@ -27,7 +27,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
-    Then I should be able to see and use the Premium Payments tab Header
+    #Then I should be able to see and use the Premium Payments tab Header
     Then I should be able to see and use the pharmacies tab in the header
     Then I should be able to see and use the health and wellness tab in the header
     Then I should be able to see the help button Header
@@ -117,7 +117,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     @premiumPaymentFalse
     Examples:
       | TID       | username  | password  | MemUserName     | planType    | memberType                |
-      | US2037783 | qavgogine | qavgogine | Norm749    | PDP_SSP     | comboNoPremiumPayment     |
+      | US2037783 | ashah120 | Mnrqa002 | Norm749    | PDP_SSP     | comboNoPremiumPayment     |
 
 
 
@@ -140,7 +140,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
     Examples:
       | TID   | username  | password  | MemUserName     | planType | memberType | flow   |
-      | 15251 | qavgogine | qavgogine | Pramila1946    | SHIP     | Medsupp    | header |
+      | 15251 | ashah120 | Mnrqa002 | Pramila1946    | SHIP     | Medsupp    | header |
 
   @prodAuth_header06
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
@@ -166,7 +166,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
     Examples:
       | TID   | username  | password  | MemUserName     | memberType           |
-      | 15162 | qavgogine | qavgogine | erbenoit56    | Terminated_header    |
+      | 15162 | ashah120 | Mnrqa002 | erbenoit56    | Terminated_header    |
 
 ############End of non regression scenarios###################
 
