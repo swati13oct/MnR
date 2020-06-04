@@ -39,6 +39,9 @@ public class ReviewAutomaticPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
 	private WebElement OnlyOnePaymentRequestMessage;
+	
+	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
+	private WebElement CancelCheckBox;
 
 
 
@@ -77,7 +80,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
+		if (driver.getTitle().contains("Your Automatic Payment")) {
 			System.out.println("User is on Confirmation Page for Recurring");
 			return new RecurringConfirmationPage(driver);
 		} else {
@@ -182,6 +185,52 @@ public class ReviewAutomaticPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	public RecurringConfirmationPage selectAndClickCancelOnEFT() {
+		checkForIPerceptionModel(driver);
+		validate(EditPaymentInformation);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(CancelCheckBox);
+		CancelCheckBox.click();
+		System.out.println("Clicked on Cancel button");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("");
+			return null;
+		}
 	}
 
 

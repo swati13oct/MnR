@@ -161,6 +161,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user navigate to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		System.out.println("***The user navigates to Benefits and Coverage page***");
 		BenefitsAndCoveragePage benefitsCoveragePage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -172,6 +174,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			if (memberType.toUpperCase().contains("COMBO")) 
+				benefitsCoveragePage.goToSpecificComboTab(planType);
 		}
 		else
 
@@ -1976,7 +1980,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
 			planId=2;
-		if(planType.equalsIgnoreCase("MedSupp"))
+		if(planType.equalsIgnoreCase("MedSupp") || planType.equalsIgnoreCase("HIP"))
 			planId=3;
 		if(planType.equalsIgnoreCase("PDP"))
 			planId=4;

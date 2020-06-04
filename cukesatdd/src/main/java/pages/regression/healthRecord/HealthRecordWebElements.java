@@ -74,8 +74,15 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'pharmacy-locator')]")
 	protected WebElement section_pharmacySearchLink;
 
+	@FindBy(xpath="//input[@id='zipcodeTxt']")
+	protected WebElement pharmacySearchPgZipcodeField;
+
 	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'drug-lookup')]")
 	protected WebElement section_drugLocator;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Drug')]")
+	public WebElement dcePgHeaderTxt;
+
 	
 	@FindBy(xpath="//a[contains(@class,'btn') and contains(text(),'VIEW PLAN')]")
 	protected WebElement preeff_goToPlanDocBtn;

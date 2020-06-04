@@ -110,9 +110,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		return jmpLinkToadditionalBenefits;
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionPDP() {
 		return directorySection;
-	}
+	} */
 
 	public List<WebElement> getDirectorySectionSSUP() {
 		return directorySection;
@@ -138,20 +139,27 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		return jmpLinkToWaysToSaveMoneyPDP;
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySection(String memberType) {
 		return directorySection;
-	}
+	}*/
 
 	public List<WebElement> getDirectorySection(String planType, String memberType) {
+		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
+				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
+			return directorySection;
+		else if(planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
+			return directorySectionMedSupp;
+		else
+			return null;
+		/* tbd 
 		int planId=0;
-		/*     Menu                                                     
-		 * 1-MAPD
-		 * 2-MA
-		 * 3-MedSupp
-		 * 4-PDP
-		 * 5-SSUP
-		 *  
-		 */
+		//     Menu                                                     
+		// 1-MAPD
+		// 2-MA
+		// 3-MedSupp
+		// 4-PDP
+		// 5-SSUP
 		if(planType.equalsIgnoreCase("MAPD"))
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
@@ -184,15 +192,18 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			break;
 		}
 		return null;
+		*/
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionMA() {
 		return directorySection;
-	}
+	} */
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionMedSupp() {
 		return directorySectionMedSupp;
-	}
+	} */
 
 	public WebElement getTextdiscountservices() {
 		return textdiscountservices;
@@ -243,26 +254,25 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public WebElement getJmpLinkToOptionalServicesRiders(String planType) {
+		if(planType.equalsIgnoreCase("MAPD"))
+			return jmpLinkToOptionalServicesRiders;
+		else if(planType.equalsIgnoreCase("MA"))
+			return jmpLinkToOptionalServicesRidersMA;
+		else
+			return null;
+		/* tbd 
 		int planId=0;
-		/*     Menu                                                     
-		 * 1-MAPD
-		 * 2-MA
-		 * 3-MedSupp
-		 * 4-PDP
-		 * 5-SSUP
-		 *  
-		 */
+		//     Menu                                                     
+		// 1-MAPD
+		// 2-MA
+		// 3-MedSupp
+		// 4-PDP
+		// 5-SSUP
 
 		if(planType.equalsIgnoreCase("MAPD"))
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
 			planId=2;
-		/*                          if(planType.equalsIgnoreCase("MedSupp"))
-                                             planId=3;
-                              if(planType.equalsIgnoreCase("PDP"))
-                                             planId=4;
-                              if(planType.equalsIgnoreCase("SSUP"))
-                                             planId=5;*/
 
 		switch (planId) {
 
@@ -278,6 +288,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 
 		return null;
+		*/
 	}
 
 	public WebElement getJmpLinkToOptionalServicesRiders() {
@@ -487,7 +498,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 					getOptionalServicesRidersSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 
-		if (memberType.equalsIgnoreCase("Individual")) {
+		//tbd if (memberType.equalsIgnoreCase("Individual")) {
+		if (memberType.contains("Individual")) {
 			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 			clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
 			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),
@@ -896,7 +908,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage"))
 		{
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now waiting for Express Scripts logo to show up in Stage");
@@ -921,8 +933,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 		else
 		{
-			System.out.println("Either Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed, failing test script");
-			Assert.fail();
+			System.out.println("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
+			Assert.fail("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
 		}
 		
 	}

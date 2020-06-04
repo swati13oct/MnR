@@ -464,7 +464,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
-	@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
+	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
+	@FindBy(xpath="//div[contains(@class,'link-bar')]//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
 	
 	@FindBy(name="zipCode")
@@ -2501,7 +2502,6 @@ public class AccountHomePage extends UhcDriver {
 					drugLookup.click();
 					
 				} else {
-					
 					waitforElement(drugLookuplink);
 					drugLookuplink.click();
 				}
@@ -2517,6 +2517,23 @@ public class AccountHomePage extends UhcDriver {
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
+		} else if (driver.getCurrentUrl().contains("/dashboard")) {
+			if(validate(drugLookup)){
+				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+				waitforElement(drugLookup);
+				drugLookup.click();
+				
+			} else {
+				waitforElement(drugLookuplink);
+				drugLookuplink.click();
+			}
+			
+			try {
+					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+				} catch (Exception e) {
+					System.out.println("Exception e: " + e);
+				} 
 		} else {
 			System.out.println(
 					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
@@ -3668,7 +3685,10 @@ public class AccountHomePage extends UhcDriver {
 		
 	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(String memberType, String planType, int forceTimeoutInMin)
 				throws InterruptedException {
-		checkForIPerceptionModel(driver);
+		//tbd checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReady(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		checkModelPopup(driver, 5);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -3702,15 +3722,10 @@ public class AccountHomePage extends UhcDriver {
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
 				checkModelPopup(driver,5);
-			} 
-			else if (MRScenario.environment.contains("prod")) {
+			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
 				checkModelPopup(driver, 5);
-				planDocResPgLink.click();
-			}
-			else if (MRScenario.environment.contains("offline")) {
-				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
-				checkModelPopup(driver, 5);
+				scrollElementToCenterScreen(planDocResPgLink);
 				planDocResPgLink.click();
 			} else {
 				if (driver.getCurrentUrl().contains("mymedicareaccount"))
@@ -3737,6 +3752,7 @@ public class AccountHomePage extends UhcDriver {
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+		checkModelPopup(driver, 5);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new PlanDocumentsAndResourcesPage(driver);
@@ -4045,7 +4061,7 @@ public class AccountHomePage extends UhcDriver {
 	 public void checkuserlandsonhceestimatorpagePROD() {
 		 System.out.println("Current URL is :  "+driver.getCurrentUrl());
 		 System.out.println("Now checking for header element h1 of the page");
-		 
+		 CommonUtility.checkPageIsReadyNew(driver);
 			try {
 				String gethcePageText = hcePageText.getText();
 				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
@@ -4191,5 +4207,37 @@ public class AccountHomePage extends UhcDriver {
 		
 	    }
 			return null;		
+	}
+
+	public PaymentHistoryPage navigatePaymentHistoryPage1() {
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+       // clicking on make a payment tile on the dash board
+		waitforElement(makeapayment);
+		//System.out.println("payment link is displayed on the header");
+		makeapayment.click();
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
+				
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
 	}
 }

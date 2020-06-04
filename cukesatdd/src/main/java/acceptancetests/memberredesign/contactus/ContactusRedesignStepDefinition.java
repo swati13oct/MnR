@@ -201,6 +201,22 @@ public class ContactusRedesignStepDefinition {
 
 	}
 	
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^prod user validates cancel click on secure email widget in redesign contact us page$")
+	public void prod_user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.prodvalidateSecureEmailUsWidgetSection(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
 	@Then("^the user click on view questions button and validate the questions links$")
 	public void Click_on_view_questions_Link_and_validate_Links(DataTable givenAttributes)throws Exception {
 		List<DataTableRow> memberAttributesRow = givenAttributes
