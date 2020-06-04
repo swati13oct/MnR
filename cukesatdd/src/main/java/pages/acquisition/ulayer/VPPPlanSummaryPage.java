@@ -329,12 +329,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
-	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
+	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 	
-	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue to enrollment']")
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue to enrollment']")
+	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
 	private WebElement nextBestActionModalContinueEnrollmentBtn;
 	
 	@FindBy(xpath = "button[ng-click='getProviders()']")
