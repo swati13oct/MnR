@@ -277,13 +277,15 @@ public class VisitorProfilePage extends UhcDriver {
 	 * Delete all the providers from the profile
 	 */
 	public void deleteAllProviders() {
-		CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-		expandProviderBlock.click();
-		driver.findElement(By.xpath("//li[@class='provider']//button")).click();
-		/*for (WebElement drug: savedDrugs) {
-			drug.findElement(By.xpath("//button")).click();
-		}*/
-		Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
+			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
+			expandProviderBlock.click();
+			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
+			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		}else {
+			System.out.println("############No Providers##############");
+		}
 	}
 	
 	/**

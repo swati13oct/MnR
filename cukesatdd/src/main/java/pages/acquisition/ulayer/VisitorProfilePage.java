@@ -233,7 +233,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 * Delete all the providers from the profile
 	 */
 	public void deleteAllProviders() {
-		if(driver.findElements(By.cssSelector("div.no-providers")).size()>0) {
+		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
 			expandProviderBlock.click();
 			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
@@ -242,7 +242,6 @@ public class VisitorProfilePage extends UhcDriver {
 		}else {
 			System.out.println("############No Providers##############");
 		}
-		
 	}
 	
 	/**
