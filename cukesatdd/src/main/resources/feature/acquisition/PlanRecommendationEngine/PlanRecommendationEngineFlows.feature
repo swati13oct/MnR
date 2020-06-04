@@ -346,7 +346,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
       |   84315 | YES           | Davis County | None          | chronic      | regular | UHGNetwork |             |               | Yes            | Yes,Yes,Yes,Yes               | Lower                | SNP               | MA                |
 
-  #      |   00501 | NO            | Suffolk      | MAPD          | None         | withinUS,outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Lower                | MA                |                   |
   @PRE @planrecommendation @MAflowTie @F432670
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page

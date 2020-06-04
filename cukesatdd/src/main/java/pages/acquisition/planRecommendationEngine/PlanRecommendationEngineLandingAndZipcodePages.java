@@ -228,7 +228,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 /*		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));*/
 		validate(planSelectorPageTilte);
-		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 //		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
