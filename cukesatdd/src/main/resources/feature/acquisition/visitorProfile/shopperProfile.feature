@@ -227,9 +227,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames   | providers              |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No          | PLASENCIA, M.D., LUIS  |
-      | qavgogine | qavgogine | EBER@MEMBER.COM            | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  | UnitedHealthcare Group Medicare Advantage (PPO)  | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)  | Atripla TAB | ISMAIL, M.D., MOHAMMED |
+      | username  | password  | email                    | dob        | mbi           | fname   | lname      | enrolledplanName                                | planName                                                         | drugNames   | providers              |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)       | Medica HealthCare Plans MedicareMax (HMO)                        | No          | PLASENCIA, M.D., LUIS  |
+      | qavgogine | qavgogine | EBER@MEMBER.COM          | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  | UnitedHealthcare Group Medicare Advantage (PPO) | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Atripla TAB | ISMAIL, M.D., MOHAMMED |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
@@ -260,3 +261,4 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                 |
       | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |

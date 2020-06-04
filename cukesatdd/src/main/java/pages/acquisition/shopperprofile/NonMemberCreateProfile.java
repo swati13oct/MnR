@@ -117,12 +117,15 @@ public class NonMemberCreateProfile extends UhcDriver {
 				termsCheck.click();
 				btnAgreeToConsent.click();
 			}
-			else
+			else {
 				btnNoToConsent.click();
+				System.out.println("###############No Consent###############");
+			}
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
 			switchToNewTab();
 			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(5000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}else {
