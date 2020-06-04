@@ -21,7 +21,7 @@ Scenario Outline: TID: <TID> - Verify Secure Email Us Widget with Get Started bu
 
 
 #SecureMessageTestCase2
-@SecureMessage2 @regressionMemberPROD
+@SecureMessage2 @regressionMemberPROD12
 Scenario Outline: UID: <UID> - Verify Secure Email Us Message Page from contact us redesign page 
 		Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 

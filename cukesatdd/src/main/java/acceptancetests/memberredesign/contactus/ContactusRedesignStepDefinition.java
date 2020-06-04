@@ -99,6 +99,7 @@ public class ContactusRedesignStepDefinition {
 	 */
 	@When("^the user navigates to contact us page in UHC site$")
 	public void validates_contactUs_Redesign_Page() {
+		System.out.println("*****the user navigates to contact us page in UHC site*****");
 		/*ContactUsPage contactUsPage;
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		contactUsPage = accountHomePage.navigateToContactUsPageTemporarySolution();*/
@@ -206,7 +207,7 @@ public class ContactusRedesignStepDefinition {
 	 */
 	@Then("^prod user validates cancel click on secure email widget in redesign contact us page$")
 	public void prod_user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
-	{
+	{ System.out.println("*****prod user validates cancel click on secure email widget in redesign contact us page*****");
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
 		contactusPage.prodvalidateSecureEmailUsWidgetSection(givenAttributes);
