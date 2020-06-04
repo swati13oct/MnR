@@ -725,4 +725,28 @@ public class MemberAuthStepDefinition{
 		}
   	}
 	
+	@Then("^the user navigates to payments secondary page$")
+	public void the_user_navigates_to_payments_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigatePaymentHistoryPage1();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user clicks on signout and validates the signout is successfull$")
+	public void the_user_clicks_signout() throws Throwable {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ProfileandPreferencesPage ProfileandPreferencesPage = PaymentHistoryPage.navigatetoLogoutdropdownlink();
+		if(ProfileandPreferencesPage!=null){
+			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfileandPreferencesPage);
+		}else{
+			System.out.println("==================Profile Prefrence page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
 }

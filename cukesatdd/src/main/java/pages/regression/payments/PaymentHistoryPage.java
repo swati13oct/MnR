@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.footer.FooterPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
 import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.CommonConstants;
@@ -1742,5 +1743,36 @@ public class PaymentHistoryPage extends UhcDriver {
 		Assert.assertEquals(preEffectiveTechSupportNumber.getText(), technicalPhNo);
 		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
+	}
+	
+	@FindBy(xpath="//div[@class='login__container container']")
+	private  WebElement logincontainer;
+
+	public ProfileandPreferencesPage navigatetoLogoutdropdownlink() throws InterruptedException{	
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+//	waitforElement(logoutLink);
+    /*  validate(logoutLink);
+	if (validate(logoutLink)) {
+		System.out.println("logout link is displayed");
+		logoutLink.click();*/
+		/*navigating to signout */
+		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
+		//https://www.medicare.uhc.com/aarp/member/logout.html
+		 System.out.println("title is: "+driver.getTitle());
+		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
+		 validate(logincontainer);
+		 if (validate(logincontainer)) {
+				System.out.println("Sign in  link is displayed");}
+		 
+		return new ProfileandPreferencesPage(driver);
 	}
 }

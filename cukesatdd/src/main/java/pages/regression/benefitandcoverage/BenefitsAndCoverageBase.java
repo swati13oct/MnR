@@ -908,7 +908,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage"))
 		{
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now waiting for Express Scripts logo to show up in Stage");
@@ -933,8 +933,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 		else
 		{
-			System.out.println("Either Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed, failing test script");
-			Assert.fail();
+			System.out.println("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
+			Assert.fail("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
 		}
 		
 	}
