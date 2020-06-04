@@ -600,7 +600,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
 		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
+		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}
 	
 //ZipCode Function inside Shop for a Plan
