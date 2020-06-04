@@ -401,7 +401,12 @@ public class MedicineCabinetStepDefinition {
 
 	@Then("^user validates the external link icon in the button$")
 	public void user_validates_the_external_link_icon_in_the_button() throws Throwable {
-		
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateExternalLink();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 

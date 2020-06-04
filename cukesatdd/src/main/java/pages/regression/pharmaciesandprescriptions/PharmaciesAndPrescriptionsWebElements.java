@@ -231,6 +231,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> sixMedications;
 
+	@FindBy(xpath = "//*[@aria-label='external link']")
+	protected List<WebElement> externalLink;
+
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
 	protected WebElement findPrescriptionDesc;
 
@@ -687,6 +690,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean sixActivePrescription() {
 		if (sixMedications.size() == 6) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean externalLink() {
+		if (externalLink.size() > 3) {
 			return true;
 		} else {
 			return false;

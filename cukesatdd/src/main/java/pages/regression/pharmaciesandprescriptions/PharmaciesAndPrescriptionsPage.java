@@ -686,6 +686,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				sixActivePrescription());
 	}
 
+	public void validateExternalLink() {
+
+		Assert.assertTrue("PROBLEM - unable to locate external link element",
+				externalLink());
+	}
+
 	public void validateAssociatedCallToAction() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element", associatedCallToAction());
