@@ -2,7 +2,7 @@
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
   @regressionMemberPROD @memAuthProdOnetimeCreditCardPayment @CodeTransformers
-  Scenario Outline: Plan Type: <planType>, Member Type: <memberType> - To validate Credit Card Payments Flow
+  Scenario Outline: TID: <TID> -  Test Case 01- To validate Credit Card Payments Flow
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -25,7 +25,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | ashah120 | Mnrqa002 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
   @regressionMemberPROD @memAuthProdOneTimeEFT @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 08 -Verify EFT payment flow for federal member
+  Scenario Outline: TID: <TID> -  Test Case 02-Verify EFT payment flow for federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -51,7 +51,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | ashah120 | Mnrqa002 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD @memAuthProdOneTimeEFTSHIP @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 08 -Verify EFT payment SHIP member
+  Scenario Outline: TID: <TID> -  Test Case 03 -Verify EFT payment SHIP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -78,7 +78,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | ashah120 | Mnrqa002 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD @memAuthProdOneTimeEFTCancel @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 08 -Verify cancel EFT federal member
+  Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel EFT federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -96,7 +96,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | ashah120 | Mnrqa002 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months |
 
   @regressionMemberPROD @regressionMemberPRODsigninSignout
-  Scenario Outline: Scenario: <Scenario> - Verify sign in & sign out
+  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality of member sign in & sign out
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

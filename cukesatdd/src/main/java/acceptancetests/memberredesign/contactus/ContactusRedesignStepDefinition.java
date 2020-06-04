@@ -515,7 +515,7 @@ public class ContactusRedesignStepDefinition {
 	}
 	
 	@Then("^the user validates the CHAT section$")
-	public void validate_Chat_Section() {	
+	public void validate_Chat_Section() throws InterruptedException {	
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactusPage.validateChatWithUs();		
 	}

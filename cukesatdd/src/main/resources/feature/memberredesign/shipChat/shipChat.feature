@@ -1,4 +1,4 @@
-@shipChat @codeWarriors
+@regressionMember
 Feature: 1.16 Member Contact us Page
 
   @codeWarriors @US2483619 @shipChat
