@@ -895,4 +895,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
    	}
+	
+	@Then("^user verifies \"([^\"]*)\" page$")
+	public void verify_vpp_summary_page_mobile(String VPP) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		if (VPP.toUpperCase().contains("PRE"))
+			planSelectorResultspage.checkVPP(true);
+		else
+			planSelectorResultspage.checkVPP(false);
+	}
 }

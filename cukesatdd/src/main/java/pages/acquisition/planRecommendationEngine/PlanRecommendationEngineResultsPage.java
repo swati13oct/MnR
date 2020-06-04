@@ -80,11 +80,14 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']")
+	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
 	private WebElement planBasedInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-1']")
 	private WebElement MAPlanInfo;
+	
+	@FindBy(css = "a#change-location")
+	private WebElement changeZIPVPP;
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] span.ng-binding")
 	private WebElement MAPlanCount;
@@ -316,6 +319,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		String recom1 = "#1 Recommendation";
 		String recom2 = "#2 Recommendation";
 		if (tie == false) {
+			Assert.assertTrue(planBasedInfo.getText().toUpperCase().contains("BASED"),"Text box is not availabe");
 			checkRecommendationCount(R1, recom1, R2, recom2);
 			validateRecommendations(R1, recom1, R2, recom2);
 			validateRecommendationPlan(R1);
@@ -1102,6 +1106,26 @@ public String getplanId(WebElement plan) {
 	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 	System.out.println("UI Plan ID : "+planId);
 	return planId;
+}
+
+public void checkVPP(boolean isPREVPP) {
+	if (isPREVPP) {
+		try {
+			validate(changeZIPVPP, 20);
+			System.out.println(changeZIPVPP.getText());
+			Assert.assertTrue(false, "Not an Expected PRE->VPP page");
+		} catch (Exception e) {
+			System.out.println("PRE VPP page displayed");
+		}
+	} else {
+		try {
+			System.out.println(planBasedInfo.getText().toUpperCase().contains("BASED"));
+			Assert.assertTrue(false, "Not an Expected VPP page");
+		} catch (Exception e1) {
+			validate(changeZIPVPP, 30);
+			System.out.println(changeZIPVPP.getText());
+		}
+	}
 }
 	
 }

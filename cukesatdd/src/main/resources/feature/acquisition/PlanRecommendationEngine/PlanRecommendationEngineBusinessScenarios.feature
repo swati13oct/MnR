@@ -103,7 +103,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Higher               |--> MS Has #1Recommendation
   #      |   90210 | NO            | Los Angeles   | MA            | Medicaid,Nursing | withinUS | UHGNetwork |             |               | Yes,Yes,Yes,Yes               | Lower                |-->SNP Plans are having 0 plans
-  @PRE @APIRanking @PDDFlowRanking
+  @PRE @APIRanking @PDPFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -122,7 +122,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | County   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
-  @PRE @APIRanking @PDDFlowRanking
+  @PRE @APIRanking @PDPFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate PDP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

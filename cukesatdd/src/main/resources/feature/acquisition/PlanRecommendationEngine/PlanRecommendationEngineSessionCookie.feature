@@ -115,11 +115,12 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | drug    | dosage   | quantity | frequency     | branded |
       |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
 
-  @PRE @planrecommendation @providersessionVPPtoPRE @F358845 @F427538
+  @PRE @planrecommendation @providersessionVPPtoPRE @F358845 @F427538 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
+    And user verifies "VPP" page
     Then user adds Doctors in vpp summary page
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |

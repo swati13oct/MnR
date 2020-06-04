@@ -24,7 +24,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | 1stRecommendation | 2ndRecommendation |
       |   10003 | NO            | New York | PDP           | No             | PDP               |                   |
 
-  @PRE @planrecommendation @PDPFlow @PDPskipdrug @F358830
+  @PRE @planrecommendation @PDPFlow @PDPskipdrug @F358830 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> , <1stRecommendation> ,  <Rankingplan> , <2ndRecommendation> - To validate Loading page functions using skip drug option for PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -96,7 +96,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | 1stRecommendation | 2ndRecommendation |
       |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | PDP               | MA                |
 
-  @PRE @planrecommendation @MAFlow @F358830
+  @PRE @planrecommendation @MAFlow @F358830 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -130,7 +130,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10003 | NO            | New York       | MA            | None         | withinUS | Lookup          | john        | YES           | Yes,No,No,Yes                 | Lower                | MA                | MS                |
       |   25813 | NO            | Raleigh County | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | MS                |                   |
 
-  @PRE @planrecommendation @MAPDFlow @F358830
+  @PRE @planrecommendation @MAPDFlow @F358830 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with drug functions for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -312,7 +312,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | No            | No             | No,No,No,No                   | Higher               | MA                | MS                |
 
   @PRE @planrecommendation @DKFlow @DKzerodrug @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug Tie Scenarios in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> - To validate MAPD flow functions with zero drug Tie Scenarios in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
