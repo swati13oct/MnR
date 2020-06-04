@@ -1252,8 +1252,21 @@ public void NavigateRallyandclickonmessagesLink() {
 	
 	/**
 	 * Validate the go to CHAT with us for SHIP member 
+	 * @throws InterruptedException 
 	 */
-	public void validateChatWithUs(){
+	public void validateChatWithUs() throws InterruptedException{
+		{ //waitForloader(driver,overlay, 20);
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				//iPerceptionAutoPopUp.click();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}
 		try {
 			validateNew(chatMessage);
 			if (chatMessage.isDisplayed());
