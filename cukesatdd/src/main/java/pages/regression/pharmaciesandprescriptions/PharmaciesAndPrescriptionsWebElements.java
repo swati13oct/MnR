@@ -291,7 +291,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OptumRxMedicineCabinetHeader;
 
 	// Medicine Cabinet
-	@FindBy(xpath = "//div[contains(text(),'Current Medications')]")
+	@FindBy(xpath = "//h2[contains(text(),'Current Medications')]")
 	protected WebElement CurrentMedicationsHeader;
 
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
@@ -350,7 +350,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
-	@FindBy(xpath = "//div[@class='sc-LzLvP sc-LzLwo iFciar']")
+	@FindBy(xpath = "//div[@class='sc-LzLrs ieWmEy']")
 	protected WebElement NumberInParenthesis;
 
 	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
@@ -380,10 +380,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	// ************************Added By
 	// Naresh***********************************************************
 
-	@FindBy(xpath = "//a[@class='sc-fzXfNk coqaOW sc-LzLut ivhIFO']")
+	@FindBy(xpath = "//a[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfDrugName;
 
-	@FindBy(xpath = "//img[@class='sc-LzLtg ebebwo']")
+	@FindBy(xpath = "//img[@data-testid='medication-data-image']")
 	protected List<WebElement> listOfDrugImage;
 
 	@FindBy(xpath = "//div[@data-testid='medication-data-refills-left']")
@@ -398,7 +398,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfYouPaid;
 
-	@FindBy(xpath = "//div[@class='sc-LzLva ixvMMk']")
+	@FindBy(xpath = "//div[@data-testid='medication-data-pharmacy-name']")
 	protected List<WebElement> listOfPharmacyName;
 
 	@FindBy(xpath = "//span[@data-testid='medication-data-order-status']")
@@ -409,7 +409,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@class='sc-fzXfMB bzINfC sc-LzLvg iyuslm']//span[@class='sc-fzXfMC lesaNV' and not(text()='LEARN MORE')]")
 	protected List<WebElement> listOfCallToActionOnMedication;
 
-	@FindBy(xpath = "//button[@class='sc-fzXfMB bzINfC sc-LzLvg iyuslm']//span[@class='sc-fzXfMC lesaNV' and not(text()='LEARN MORE')]/ancestor::button")
+	////button[@data-testid='medication-action-track' or @data-testid='medication-action-contact-pharmacy']
+	////button[@class='sc-fzXfMB bzINfC sc-LzLvg iyuslm']//span[@class='sc-fzXfMC lesaNV' and not(text()='LEARN MORE')]/ancestor::button
+	
+	@FindBy(xpath = "//button[@data-testid='medication-action-track' or @data-testid='medication-action-contact-pharmacy']")
 	protected List<WebElement> listOfCallToActionOnMedicationBtn;
 
 	@FindBy(xpath = "//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]//button")
