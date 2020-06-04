@@ -2569,6 +2569,20 @@ public class oleStepDefinition {
 		
 			}
 		
-} 
+	@Then("^the User validates RadioButtons option in SEP Page$")
+	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {		
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		boolean Validation_Status = specialElectionPeriodPage.validate_SEP_RadioButton_options();
+		if(Validation_Status){
+			System.out.println("Radio Button Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Radio Button Options in OLE SEP PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+}
 
 

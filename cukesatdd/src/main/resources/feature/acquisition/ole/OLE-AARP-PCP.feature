@@ -65,9 +65,10 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user navigates to SEP Page
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
-    Then the user selects the following options for SEP Page
-      | Select Options | <selectoptions> |
-      | Option Data    | <optiondata>    |
+    Then the User validates RadioButtons option in SEP Page
+    #Then the user selects the following options for SEP Page
+     # | Select Options | <selectoptions> |
+     # | Option Data    | <optiondata>    |
    	#Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     #Then the user validates Proposed Effective Date is Displayed
