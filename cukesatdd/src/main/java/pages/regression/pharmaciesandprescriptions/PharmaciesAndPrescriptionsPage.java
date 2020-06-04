@@ -910,21 +910,29 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public List<String> getDrugNameListValue() {
 		List<String> listOfDrug = new ArrayList<>();
-		try {
-
+		int size=listOfDrugName.size();
+		int expectedSize=6;
+		String numberTXT = NumberInParenthesis.getText();
+		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+		if(number<6) {
+			expectedSize=number;
+		}
+		System.out.println("Expected Size"+expectedSize);
+		while(size!=expectedSize) {
+			size=listOfDrugName.size();
+		}
 			for (WebElement ele : listOfDrugName) {
+				waitforElementVisibilityInTime(ele, 50);
 				System.out.println("Value of Drug Name :" + ele.getText());
 				listOfDrug.add(ele.getText());
 			}
-		} catch (Exception e) {
-			System.out.println("Test" + e.getMessage());
-		}
 		return listOfDrug;
 	}
 
 	public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
 		if (listOfWebElement.size() > 0) {
 			for (WebElement ele : listOfWebElement) {
+				waitforElementVisibilityInTime(ele, 50);
 				System.out.println("Value of Element :" + ele.getText());
 				if (ele.getText().isEmpty()) {
 					return false;
