@@ -842,13 +842,13 @@ try {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
-	    //Starting y location set to 90% of the height (near bottom)
-	    int starty = (int) (size.height * 0.90);
+	    //Starting y location set to 80% of the height (near bottom)
+	    int starty = (int) (size.height * 0.80);
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
 	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
 	    if(!swipeup)
-	    	endy = endy+(int) (size.height * 0.2); //To avoid address bar position
+	    	endy = endy+(int) (size.height * 0.3); //To avoid address bar position
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
 	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
@@ -860,8 +860,8 @@ try {
 			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Exception occurred while Swiping");
+			//e.printStackTrace();
+			System.out.println("-------------- Exception occurred while Swiping --------------------");
 			swipeSuccess = false;
 		}
 		threadsleep(500);
@@ -1046,23 +1046,32 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will perform horizontal swipe on mobile screen
 	 */
-	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
+	public boolean mobileswipeHorizantal(String percentage, boolean swiperight) {
+		boolean swipeSuccess = true;
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
-		//Starting x location set to % of the width (near left end)
-	    percentage = "0.".concat(percentage.replace("%", ""));
-	    int startx = (int) (size.width * Float.valueOf(1-Float.valueOf(percentage)));
-		//Ending x location set to 90% of the width (near right end)
-	    int endx = (int) (size.width * 0.90);
-	    //Y position set to 30% of height Vertically
-	    int starty = (int) (size.height * 0.3);
-	    System.out.println(size+" "+startx+" "+endx+" "+starty);
+		// Starting x location set to % of the width (near left end)
+		percentage = "0.".concat(percentage.replace("%", ""));
+		int startx = (int) (size.width * Float.valueOf(1 - Float.valueOf(percentage)));
+		// Ending x location set to 80% of the width (near right end)
+		int endx = (int) (size.width * 0.80);
+		// Y position set to 30% of height Vertically
+		int starty = (int) (size.height * 0.3);
+		System.out.println(size + " " + startx + " " + endx + " " + starty);
 		threadsleep(500);
-		if(swiperight)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
-		else
-			mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+		try {
+			if (swiperight)
+				mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+			else
+				mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+		} catch (Exception e) {
+			//e.printStackTrace();
+			System.out.println("------------- Exception occurred while Horizantal Swiping -----------------------");
+			swipeSuccess = false;
+		}
+		threadsleep(500);
+		return swipeSuccess;
 	}
 
 	public void mobileswipeHorizantal(String percentage, int count,boolean swiperight) {

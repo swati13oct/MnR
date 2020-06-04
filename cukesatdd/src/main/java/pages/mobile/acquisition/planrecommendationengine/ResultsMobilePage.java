@@ -627,12 +627,17 @@ public class ResultsMobilePage extends UhcDriver {
 			planName = plan.getText().trim();
 			System.out.println(planName);
 			if (planName.isEmpty()) {
-				mobileswipeHorizantal("80%", 1, false);
-				i++;
+				boolean hswipe = mobileswipeHorizantal("80%", false);
+				if (hswipe) {
+					i++;
+				} else {
+					mobileswipeHorizantal("80%", false);
+					i++;
+				}
 			} else
 				break;
 		}
-		Assert.assertTrue(planName.length()>1, "--- Unable to get the Plan name ---");
+		Assert.assertTrue(planName.length() > 1, "--- Unable to get the Plan name ---");
 		return planName;
 	}
 
@@ -843,20 +848,25 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public String getplanId(WebElement plan) {
 		String planName = "";
-		String planId="";
+		String planId = "";
 		int i = 0;
 		while (i < 5) {
 			planName = plan.getText().trim();
 			planId = plan.getAttribute("id");
 			System.out.println(planName);
 			if (planName.isEmpty()) {
-				mobileswipeHorizantal("80%", 1, false);
-				i++;
+				boolean hswipe = mobileswipeHorizantal("80%", false);
+				if (hswipe) {
+					i++;
+				} else {
+					mobileswipeHorizantal("80%", false);
+					i++;
+				}
 			} else
 				break;
 		}
-		Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
-		System.out.println("UI Plan ID : "+planId);
+		Assert.assertTrue(planId.length() > 1, "--- Unable to get the Plan Id ---");
+		System.out.println("UI Plan ID : " + planId);
 		return planId;
 	}
 	

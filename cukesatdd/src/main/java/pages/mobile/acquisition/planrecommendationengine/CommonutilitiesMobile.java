@@ -79,8 +79,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public String currentPageName, currrentPagePercentage, previousPageName, previousPagePercentage, nextPageName,
 			nextPagePercentage;
 
-	public boolean mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount,
-			boolean swipeUp) {
+	public boolean mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
 		boolean swipeScusses = true;
 		try {
 			validate(footerCallbannerSection, 30);
@@ -89,7 +88,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 			if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
 				swipeScusses = mobileswipe(percentage, swipeUp);
-				swipeCount--;
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipe(percentage, swipeUp);
+					swipeCount--;
+				}
 				mobileFindElementBeforeCallBanner(element, percentage, swipeCount, swipeUp);
 			}
 		} catch (Exception e) {
@@ -108,7 +112,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 			if (element.getLocation().getY() - headerSection.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
 				swipeScusses = mobileswipe(percentage, swipeUp);
-				swipeCount--;
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipe(percentage, swipeUp);
+					swipeCount--;
+				}
 				mobileFindElementAfterHeader(element, percentage, swipeCount, swipeUp);
 			}
 		} catch (Exception e) {
