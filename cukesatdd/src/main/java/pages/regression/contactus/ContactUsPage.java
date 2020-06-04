@@ -822,6 +822,59 @@ public class ContactUsPage extends UhcDriver{
 		}
 
 	}
+	
+	/**
+	 * This method is used to validate secure email us widget section
+	 */
+	public void prodvalidateSecureEmailUsWidgetSection(DataTable givenAttributes) {
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String newEmailId = memberAttributesMap.get("New Email");
+		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
+		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
+
+		try {
+			Thread.sleep(8000);
+
+			if(validate(EmailForm)){
+				System.out.println("Get Started Button not visible, So using email Form Link!!!");
+				EmailForm.click();
+				Thread.sleep(2000);
+				waitforElement(cancelLink);
+				cancelLink1.click();
+				Thread.sleep(2000);}
+			else if(validate(goToInboxButton)){	
+				validateGoToInbox();
+			}
+			else{
+				if (getStartedButton.isDisplayed()) {
+					getStartedButton.click();
+					waitforElement(useDifferentEmailRadioButton);
+					useDifferentEmailRadioButton.click();
+					newemailId.sendKeys(newEmailId);
+					confirmemailId.sendKeys(newConfirmEmailId);
+					System.out.println("found cancel link");
+					emailUsContinueBtn.click();
+					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly", getStartedButton.isDisplayed());
+
+				}
+				
+
+
+
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	/**
 	 * This method validates the Email Form widget for SHIP members 
@@ -983,10 +1036,10 @@ public class ContactUsPage extends UhcDriver{
 	public void clickOnSendMessage_SecureEmail() {
 		if(validate(sendAmessageButton)){
 			sendAmessageButton.click();
-			System.out.println("Send A Message button is clicked");  		 
+			System.out.println("Go to Inbox button is clicked");  		 
 		}
 		else{
-			Assert.assertTrue("Send A message Button not displayed", false);
+			Assert.assertTrue("Go To Inbox Button not displayed", false);
 		}
 		/*try {
 			Thread.sleep(20000);
