@@ -2,7 +2,7 @@
 Feature: 1.16 Secure Messaging validation
 
 #SecureMessageTestCase1
-@SecureMessage1 @regressionMemberPROD12
+@SecureMessage1 @regressionMemberPROD
 Scenario Outline: TID: <TID> - Verify Secure Email Us Widget with Get Started button and cancel functionality 
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
