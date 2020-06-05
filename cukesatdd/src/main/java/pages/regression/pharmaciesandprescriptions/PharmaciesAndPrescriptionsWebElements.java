@@ -365,7 +365,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
 	protected List<WebElement> OptumRx;
 
-	@FindBy(xpath = "//strong[@class='sc-LzLrQ hZvySE']")
+	@FindBy(xpath = "//strong[@class='sc-LzLrT hZUOFf']")
 	protected List<WebElement> totalMedicationsInMyMed;
 
 	@FindBy(xpath = "//span[contains(text(),'OptumRx')]")
@@ -522,7 +522,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected WebElement MedicationName_OnDrugInfoPage;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//span[contains(text(),'?')]")
 	protected WebElement nextPageArrow;
 
 	@FindBy(xpath = "//span[text()='LEARN MORE']/parent::button")
