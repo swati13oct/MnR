@@ -378,11 +378,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate email plan list from vpp
+      | Recommendation | <primaryRecommendation> |
+      | EmailID        | <Email>                 |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder      |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | Email                  |
       |   32111 | No            | Marion   | MAPD          | Medicaid     | outsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
       |   10001 | No            | New York | MAPD          | None         | None      | UHGNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |

@@ -68,6 +68,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	private WebElement headerSigninLink;
 	
 	@FindBy(css = "#RegisterSignupSeperator")
+	private WebElement headerPipeline;
+	
+	@FindBy(xpath = "//*[@class='signup']/a[2]")
 	private WebElement headerRegisterLink;
 	
 	@FindBy(xpath = "//a[@id='dupIconFlyOut']//img[@dtmid='acq_visitor_profile']")
@@ -210,7 +213,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = "#_zbe2trg1n")
+	@FindBy(css = "#_phmhwb3qf")
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row2_4 > span")
@@ -362,7 +365,6 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 				validateLinks("medicare.uhc.com/aarp");
 			else
 				validateLinks("medicare.uhc.com");
-		browserBack();
 		backtoshopforaplan();
 		headerRegisterLink.click();
 		validateLinks("healthsafe-id.com/register/personalInfo");
@@ -559,7 +561,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/sitemap.html");
 		browserBack();
 		footerPrivacyPolicyLink.click();
-		validateLinks("/privacy_policy.html");
+		validateLinks("/privacy-policy.html");
 		browserBack();
 		footerTermsofUseLink.click();
 		validateLinks("/terms-of-use.html");
