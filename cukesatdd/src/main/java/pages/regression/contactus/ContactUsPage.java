@@ -1060,10 +1060,8 @@ public void clickonmessagesLink() {
 	try {
 		validateWithValue("Account/Profile drop down", accountprofiledrop);
 		accountprofiledrop.click();
-			/*
-			 * validateWithValue("Messages link under account Profile link", messageslink);
-			 * messageslink.click();
-			 */
+			  validateWithValue("Messages link under account Profile link", messageslink);
+			  messageslink.click();
 	} catch (Exception e) {
 		System.out.println("Messages link is not clicked under account profile link");
 	}
@@ -1114,10 +1112,10 @@ public void NavigateRallyandclickonmessagesLink() {
 
 	public void validateSSOInboxViaMessengerLink(){
 		try {
-			validateNew(EmailUsModalbtnContinue);
+			//validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
 				//switchToNewTabNew(EmailUsModalbtnContinue);
-				jsClickNew(EmailUsModalbtnContinue);
+			//	jsClickNew(EmailUsModalbtnContinue);
 				String mainwindow = driver.getWindowHandle();
 				Set<String> allWindowHandles = driver.getWindowHandles();
 				for (String currentWindowHandle : allWindowHandles)
