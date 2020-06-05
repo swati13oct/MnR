@@ -8,7 +8,7 @@ Feature: 1.16 Member Contact us Page
 
     Examples: 
       | username   | password   |
-      | AARPStage7 | AARPStage7 |
+      | AARPStage8 | AARPStage8 |
 
   @codeWarriors @US2483619 @shipChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
