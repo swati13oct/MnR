@@ -42,7 +42,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927 @tip
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -164,7 +164,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786 @tip
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
