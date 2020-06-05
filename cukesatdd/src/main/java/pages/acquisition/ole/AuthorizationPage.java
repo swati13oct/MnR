@@ -56,7 +56,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	//Relationship to the applicant listed Question
 	
-	@FindBy(xpath = "//*[contains(@id,'auhtorizedCheckI am the applicant listed on this enrollment application.')]")
+	@FindBy(xpath = "//*[contains(@id,'auhtorizedCheckI_am_the_applicant_listed_on_this_enrollment_application_')]")
 	//@FindBy(css = ".ng-untouched > .field > .field:nth-child(1)")
 	private WebElement ApplicantRadio;
 
