@@ -1,7 +1,7 @@
 @PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with API vs UI recommendation and Ranking using mobile
 # Mobile automation with minimal Business Scenarios
-  @PRE @Rankingmobile @PDPAPIUIRankig @APIRankingmobile @F358846
+  @PRE @Rankingmobile @PDPAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate API ranking with UI plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -23,7 +23,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
       |   10001 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            |
 
-  @PRE @Rankingmobile @MAPDAPIUIRankig @APIRankingmobile @F358846
+  @PRE @Rankingmobile @MAPDAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -57,7 +57,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO:Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO | Online            | No,Yes,Yes,No                 | Lower                |
 
-  @PRE @Rankingmobile @IDKAPIUIRankig @APIRankingmobile @F358846
+  @PRE @Rankingmobile @IDKAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -88,7 +88,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   33143 | NO            | Miami-Dade | None          | None         | None         | UHCNetwork       |             |               | No            | Yes,No,No,No                  | Lower                |
 
-  @PRE @Rankingmobile @MAAPIUIRankig @APIRankingmobile @F358846
+  @PRE @Rankingmobile @MAAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile

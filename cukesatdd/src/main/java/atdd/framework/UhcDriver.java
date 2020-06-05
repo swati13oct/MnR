@@ -5,6 +5,7 @@ package atdd.framework;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.regex.Pattern;
@@ -851,22 +853,23 @@ try {
 		//System.out.println(val);
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		String randomPercentage = numberFormat.format(val);
-		System.out.println("randomPercentage Swipe - "+randomPercentage);
+		//System.out.println("randomPercentage Swipe - "+randomPercentage);
 	    int starty = (int) (size.height * Double.parseDouble(randomPercentage));
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
 	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
 	    if(!swipeup)
-	    	endy = endy+(int) (size.height * 0.1); //To avoid address bar position Increasing 0.1 to 0.3 will hit header logo
+	    	endy = endy+(int) (size.height * 0.2); 
+	    //Above line is to avoid address bar position while swiping top to bottom.
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
-	    System.out.println(size+" "+startx+" "+starty+" "+endy);
+	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
 		threadsleep(500);
 		try {
 		if(swipeup)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
+			mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
-			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
+			mact.press(PointOption.point(startx, endy)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, starty)).release().perform();
 		}
 		catch(Exception e) {
 			//e.printStackTrace();
@@ -1071,9 +1074,12 @@ try {
 		threadsleep(500);
 		try {
 			if (swiperight)
-				mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+				//mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+				mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(endx, starty)).release().perform();
 			else
-				mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+				//mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+				mact.press(PointOption.point(endx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, starty)).release().perform();
+			
 		} catch (Exception e) {
 			//e.printStackTrace();
 			System.out.println("------------- Exception occurred while Horizantal Swiping -----------------------");

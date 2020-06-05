@@ -85,6 +85,16 @@ public class CommonutilitiesMobile extends UhcDriver {
 			validate(footerCallbannerSection, 30);
 			validate(element, 30);
 			int locationDifference = 100;
+			/*
+			System.out.println("Footer Size :"+footerCallbannerSection.getSize());
+			System.out.println("Footer Location :"+footerCallbannerSection.getLocation());
+			System.out.println("Footer X : "+footerCallbannerSection.getLocation().getX());
+			System.out.println("Footer Y : "+footerCallbannerSection.getLocation().getY());
+			System.out.println("Element Size :"+element.getSize());
+			System.out.println("Element Location :"+element.getLocation());
+			System.out.println("Element X : "+element.getLocation().getX());
+			System.out.println("Element Y : "+element.getLocation().getY());
+			*/		
 			if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
 				swipeScusses = mobileswipe(percentage, swipeUp);
@@ -109,6 +119,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 			validate(headerSection, 30);
 			validate(element, 30);
 			int locationDifference = 150;
+			/*
+			System.out.println("Header X : "+headerSection.getLocation().getX());
+			System.out.println("Header Y : "+headerSection.getLocation().getY());
+			System.out.println("Element X : "+element.getLocation().getX());
+			System.out.println("Element Y : "+element.getLocation().getY());
+			*/
 			if (element.getLocation().getY() - headerSection.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
 				swipeScusses = mobileswipe(percentage, swipeUp);
