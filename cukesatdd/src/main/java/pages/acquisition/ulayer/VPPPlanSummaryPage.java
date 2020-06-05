@@ -22,6 +22,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Strings;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -626,7 +628,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 		private WebElement findPlansButton;
 		
-		@FindBy(css = "div#CSRLoginAlert>span")
+		@FindBy(css = "div#CSRLoginAlert>div")
 		private WebElement agentModeBanner;
 		
 		@FindBy(css = "div#currPlansBanner>div>a")
@@ -3454,11 +3456,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
 		 * @param planName
 		 */
-		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName) {
+		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
 			//validatePlanSummary();
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
-			Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+			
+			if(Strings.isNullOrEmpty(enrolledPlanName))
+				System.out.println("#########Empty Profile#########");
+			else
+				Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
@@ -3515,9 +3521,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * Validate the Agent Mode Banners for Non Member
 		 * @param planName
 		 */
-		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers) {
+		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers,String fname, String lname) {
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 			
 			if(!providers.equalsIgnoreCase("no")) {
 				//Validate Providers
