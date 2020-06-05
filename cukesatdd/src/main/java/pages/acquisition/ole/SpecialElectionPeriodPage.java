@@ -141,7 +141,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
 	private WebElement pedHeader1;
 	
-	@FindBy(xpath = "//*[contains(text(),'changing my')]/parent::span/input")
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]")
 	private WebElement ChangingCurrentMedicareRadio;
 	
 	
