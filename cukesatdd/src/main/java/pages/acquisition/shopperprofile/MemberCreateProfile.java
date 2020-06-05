@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import com.google.common.base.Strings;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
@@ -18,22 +20,25 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class MemberCreateProfile extends UhcDriver {
 	
-	@FindBy(id = "email")
+	@FindBy(id = "member-email")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "firstName")
+	@FindBy(id = "member-firstName")
 	private WebElement firstName;
 	
-	@FindBy(id = "lastName")
+	@FindBy(id = "member-lastName")
 	private WebElement lastName;
 	
-	@FindBy(id = "mbi")
+	@FindBy(id = "member-mbi")
 	private WebElement mbi;
 	
-	@FindBy(id = "dob")
+	@FindBy(id = "member-zipCode")
+	private WebElement zipCode;
+	
+	@FindBy(id = "member-dob")
 	private WebElement dob;
 	
-	@FindBy(xpath = "//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//app-tab[@tabtitle='Member']//button[contains(text(),'Profile')]")
 	private WebElement btnCreateProfile;
 	
 	@FindBy(xpath = "//h5")
@@ -75,12 +80,17 @@ public class MemberCreateProfile extends UhcDriver {
 		
 		String lname = givenAttributesMap.get("Last Name");
 		
+		String zipcode = givenAttributesMap.get("Zipcode");
+		
 		try {
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, emailID);
 			sendkeys(firstName, fname);
 			sendkeys(lastName, lname);
-			sendkeys(mbi, MBI);
+			if(Strings.isNullOrEmpty(MBI))
+				sendkeys(zipCode, zipcode);
+			else
+				sendkeys(mbi, MBI);
 			sendkeys(dob, DOB);
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);

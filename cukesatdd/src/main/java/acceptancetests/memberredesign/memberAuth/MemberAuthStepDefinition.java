@@ -750,4 +750,17 @@ public class MemberAuthStepDefinition{
 		}
   	}
 	
+	@Then("^the user clicks on Contact & help us link & navigate to contact us page$")
+	public void clicks_onContactUs() throws InterruptedException {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ContactUsPage ContactUsPage = PaymentHistoryPage.NavigatetoContactuspage();
+		if(ContactUsPage!=null) {
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, ContactUsPage);
+			System.out.println("========================Contact us page displayed ====================== ");
+		}else{
+			System.out.println("==================Contact us page not displayed======================");
+			Assert.fail();
+		}
+		}
+	
 }

@@ -12,3 +12,12 @@ Feature: 1.16 Member Contact us Page
     Examples: 
       | TID       | plantype | memberType |
       | US2483619 | SHIP     | SHIPCHAT   |
+
+  @agentSigninforAARPCHAT @shipChat
+  Scenario Outline: Verify AARP chat agent login in.
+    Given agentlogin lands on page
+    And agent enters credentials
+
+    Examples: 
+      | username   | password   |
+      | AARPStage7 | AARPStage7 |

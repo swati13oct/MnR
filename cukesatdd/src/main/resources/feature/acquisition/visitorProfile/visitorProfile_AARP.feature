@@ -333,12 +333,10 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user signs in with optum Id credentials in AARP site
       | User Name | <userName> |
       | Password  | <password> |
-    And the user clicks on the add plans button in the profile in AARP site
+    And user delets all the added providers on visitor profile page of AARP site
+    And the user back to VPP plan summary page in AARP
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    Then user saves two plans as favorite on AARP site
-      | Plan Type  | <plantype>  |
-      | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
@@ -347,8 +345,6 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then Navigate to Visitor Profile page on AARP site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
-    And user delets the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
