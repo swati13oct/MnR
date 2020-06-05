@@ -176,6 +176,7 @@ public class MRScenario {
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE) ? "Yes"
 					: System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+			environmentMedicare = environment;
 		}
 
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER)

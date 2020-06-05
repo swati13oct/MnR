@@ -1473,7 +1473,8 @@ public class AccountHomePage extends UhcDriver {
 					|| MRScenario.environmentMedicare.equals("team-e")) {
 				js.executeScript("arguments[0].click();", helpAndContactUslink);
 
-			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && !(MRScenario.environment.equalsIgnoreCase("PROD")|| 
+					MRScenario.environment.equalsIgnoreCase("offline"))) {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,-500)", "");
 				validateNew(contactUsPageLink);

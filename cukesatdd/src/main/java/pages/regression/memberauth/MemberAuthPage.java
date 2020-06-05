@@ -315,7 +315,9 @@ public class MemberAuthPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod")
-					|| MRScenario.environment.equalsIgnoreCase("team-h")) {
+					|| MRScenario.environment.equalsIgnoreCase("team-h")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
+			{
 				CommonUtility.checkPageIsReadyNew(driver);
 				try
 				{

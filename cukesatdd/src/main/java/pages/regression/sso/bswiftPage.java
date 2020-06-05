@@ -138,8 +138,8 @@ public class bswiftPage extends UhcDriver {
 		       }
 	   
 	   /*This method will enter appLandingURL on SSO Test Harness page */
-	   public void enterapplandingURL(String applandingURL) {
-		   			sendkeys(appLandingURL, applandingURL);
+	   public void enterapplandingURL(String URL) {
+		   			sendkeys(appLandingURL, URL);
 	   }
 	   
 	   /*This method will click submit button on SSO test harness page */
