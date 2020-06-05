@@ -11,6 +11,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -860,7 +861,7 @@ public class ContactUsPage extends UhcDriver{
 					newemailId.sendKeys(newEmailId);
 					confirmemailId.sendKeys(newConfirmEmailId);
 					System.out.println("found cancel link");
-					emailUsContinueBtn.click();
+					cancelLink.click();
 					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly", getStartedButton.isDisplayed());
 
 				}
@@ -1059,10 +1060,8 @@ public void clickonmessagesLink() {
 	try {
 		validateWithValue("Account/Profile drop down", accountprofiledrop);
 		accountprofiledrop.click();
-			/*
-			 * validateWithValue("Messages link under account Profile link", messageslink);
-			 * messageslink.click();
-			 */
+			  validateWithValue("Messages link under account Profile link", messageslink);
+			  messageslink.click();
 	} catch (Exception e) {
 		System.out.println("Messages link is not clicked under account profile link");
 	}
@@ -1089,7 +1088,14 @@ public void NavigateRallyandclickonmessagesLink() {
 		try {
 			validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(EmailUsModalbtnContinue);
+				//switchToNewTabNew(EmailUsModalbtnContinue);
+				jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles)
+					 {
+						driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
 				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
@@ -1099,15 +1105,23 @@ public void NavigateRallyandclickonmessagesLink() {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully",true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
 	public void validateSSOInboxViaMessengerLink(){
 		try {
-			validateNew(messageslink);
+			//validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(messageslink);
+				//switchToNewTabNew(EmailUsModalbtnContinue);
+			//	jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles)
+					 {
+						driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
 				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
@@ -1117,7 +1131,8 @@ public void NavigateRallyandclickonmessagesLink() {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully",true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
@@ -1252,8 +1267,21 @@ public void NavigateRallyandclickonmessagesLink() {
 	
 	/**
 	 * Validate the go to CHAT with us for SHIP member 
+	 * @throws InterruptedException 
 	 */
-	public void validateChatWithUs(){
+	public void validateChatWithUs() throws InterruptedException{
+		{ //waitForloader(driver,overlay, 20);
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				//iPerceptionAutoPopUp.click();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}
 		try {
 			validateNew(chatMessage);
 			if (chatMessage.isDisplayed());
@@ -1288,6 +1316,47 @@ public void NavigateRallyandclickonmessagesLink() {
 			e.printStackTrace();
 		}
 	}
+	
+	public void validateALLlabelAndLinks(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("PlanType");
+		System.out.println("Plan type is :"+planType);
+if (planType.equalsIgnoreCase("MAPD")) {
+	
+		validateWithValue("Text- help With This Website", helpWithThisWebsite);
+		validateWithValue("Text- Help With Your Plan ", HelpWithYourPlan);
+
+		validateWithValue("Text-Learn How to Use the Website ", LearnHowtoUsetheWebsite);
+		validateWithValue("Text- Plan Support", PlanSupport);
+
+		validateWithValue("Text-TechnicalSupport ", TechnicalSupport);
+		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+
+		String technicalSupportTFN= technicalSupportContactNumber.getText().replaceAll("[\r\n]+", " ");
+		if(technicalSupportTFN.contains("1-800-721-0627")) {
+			Assert.assertTrue("Correct Technical support contact number is displayng", technicalSupportTFN.contains("1-800-721-0627"));
+		}
+		else {
+			Assert.assertFalse("Correct technical support TFN not displaying", true);
+		}
+			
+		String helpWithYourPlanTFN= helpWithYourPlanContactNumber.getText().replaceAll("[\r\n]+", " ");;
+	
+		if(helpWithYourPlanTFN.contains("1-844-876-6177")) {
+			Assert.assertTrue("Correct Plan support contact number is displayng", helpWithYourPlanTFN.contains("1-844-876-6177"));
+		}
+		else {
+			Assert.assertFalse("Correct Plan support contact number is not displayng", true);
+		}
+		System.out.println("All the labels and links for individual federal mamber validated and passed");
+
+	}}
+	
+	
+	
 }
 
 

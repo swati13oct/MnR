@@ -320,6 +320,7 @@ public class MemberAuthStepDefinition{
 		
 		if(accountHomePage!=null){
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
