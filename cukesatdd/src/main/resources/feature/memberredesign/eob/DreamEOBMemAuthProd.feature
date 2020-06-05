@@ -6,7 +6,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
   #    | Feature           | UCPEob |
 
 
-  @memAuth_dreamEob01 @E2E
+  @prod_dreamEob01 @E2E
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -72,37 +72,37 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
-    @memAuth_dreamEob01a
+    @prod_dreamEob01a
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 01    | ashah120  | Mnrqa002  | billrosner1             | MAPD     | COSMOS_DEOB       | 1 new both, 1 old C, 1 or 2 old D overlap | true|
       | 02    | ashah120  | Mnrqa002  | sandrakaye86            | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
 
-    @memAuth_dreamEob01b 
+    @prod_dreamEob01b 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
 #     | 03    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
       | 04    | ashah120  | Mnrqa002  | nawal1215               | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
-    @memAuth_dreamEob01c 
+    @prod_dreamEob01c 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 05    | ashah120  | Mnrqa002  | haradaty32              | MA       | COSMOS_EOB_R      | old C                             | true        |
       | 06    | ashah120  | Mnrqa002  | Dream_EOB_MA_009        | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
-    @memAuth_dreamEob01d 
+    @prod_dreamEob01d 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
 #     | 07    | ashah120  | Mnrqa002  | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
       | 08    | ashah120  | Mnrqa002  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
 
-    @memAuth_dreamEob01e
+    @prod_dreamEob01e
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 09    | ashah120  | Mnrqa002  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | old D                             | true        |
       | 10    | ashah120  | Mnrqa002  | PAULAROTH2              | PDP      | PDP_SHIP_COMBO_EOB| old D                             | true        |
 
-    @memAuth_dreamEob01f
+    @prod_dreamEob01f
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
 #     | 11    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
