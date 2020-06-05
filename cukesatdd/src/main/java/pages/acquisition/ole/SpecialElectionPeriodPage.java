@@ -145,6 +145,12 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]")
 	private WebElement ChangingNewMedicareRadio;
 	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]/parent::span/label")
+	private WebElement CurrentMedicare;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
+	private WebElement NewMedicare;
+	
 	public SpecialElectionPeriodPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -431,8 +437,10 @@ public boolean validate_SEP_RadioButton_options() {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Validation_Flag = ChangingCurrentMedicareRadio.getText().trim().equalsIgnoreCase("I'm changing my current Medicare plan");
-		Validation_Flag &= ChangingNewMedicareRadio.getText().trim().equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
+		
+		
+		Validation_Flag  = CurrentMedicare.getText().trim().equalsIgnoreCase("I'm changing my current Medicare plan");
+		Validation_Flag &= NewMedicare.getText().trim().equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
       //System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
       jsClickNew(ChangingNewMedicareRadio);
 	
