@@ -264,6 +264,11 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 
 public boolean validate_SEPoptions_for_planType(String planType) {
 	boolean Validation_Flag = true;
+	
+	//----updated for new Radio button login in SEP page 
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+	
 	System.out.println("PlanType : "+planType);
 	try {
 		Thread.sleep(3000);
