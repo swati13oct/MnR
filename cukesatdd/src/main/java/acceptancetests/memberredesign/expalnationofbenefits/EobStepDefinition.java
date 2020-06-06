@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -107,7 +106,6 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,memberType, dateRange, eobTypeData);
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT, searchResultMap.get(dateRange));
-
 		//note: store info to display at end of test
 		List<String> searchNote=(List<String>) getLoginScenario()
 				.getBean(EobCommonConstants.TEST_RESULT_NOTE);
@@ -206,8 +204,6 @@ public class EobStepDefinition {
 			}
 			System.out.println("--------------------------------...");
 			//note: merge the two into one
-			//tbd if (r_eobResponseObj.getNumEobs()>0) 
-			//tbd eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
 			
 			EobApiResponse UniqueEobResponseObj= new EobApiResponse();
 			UniqueEobResponseObj.setErrorCode(eobResponseObj.getErrorCode());
@@ -217,23 +213,6 @@ public class EobStepDefinition {
 			UniqueEobResponseObj.sortListOfEobLatestFirst();
 			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, UniqueEobResponseObj);
 			
-			/* tbd 
-			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
-
-			eobType="dream-r";
-			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
-
-			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", r_eobResponseObj!=null);
-
-			//note: merge the two into one
-			if (r_eobResponseObj.getNumEobs()>0) 
-			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
-			
-			eobResponseObj.sortListOfEob();
-			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
-			*/
 		} else {
 			eobType=eobTypeData;
 			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
@@ -384,7 +363,7 @@ public class EobStepDefinition {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch_dream();
 		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
 		eobPage.validateRightRail_DREAMEOB(planType, memberType, ui_eobResultCount);
 	}
@@ -471,7 +450,7 @@ public class EobStepDefinition {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch_dream();
 		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
 
 		if (ui_eobResultCount>0) {
