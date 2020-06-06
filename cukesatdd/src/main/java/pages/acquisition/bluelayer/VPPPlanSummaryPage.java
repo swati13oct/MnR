@@ -289,7 +289,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='responsiveplan']")
 	private List<WebElement> medSuppPlanList;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
@@ -958,8 +958,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
                             msPlansViewLink.click();
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
-            			sleepBySec(5);
-        	            CommonUtility.checkPageIsReady(driver);
+            			validateNew(snpPlansViewLink);
         	            snpPlansViewLink.click();
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             }

@@ -1298,9 +1298,9 @@ public class HSIDStepDefinition {
 								 @Given("^agent enters credentials$") 
 								 public void agententercredentials() throws InterruptedException{
 									 Thread.sleep(5000);
-									 String username = "AARPStage7";
+									 String username = "AARPStage8";
 									aarpChatAgentLogin.enterusername(username);
-									 String password =  "AARPStage7";
+									 String password =  "AARPStage8";
 									aarpChatAgentLogin.enterpassword(password);	
 									 aarpChatAgentLogin.clickSubmit();
 									

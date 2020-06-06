@@ -99,13 +99,10 @@ public class ContactusRedesignStepDefinition {
 	 */
 	@When("^the user navigates to contact us page in UHC site$")
 	public void validates_contactUs_Redesign_Page() {
-		/*ContactUsPage contactUsPage;
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		contactUsPage = accountHomePage.navigateToContactUsPageTemporarySolution();*/
-		
-		// Put the following code back when Rally  Dashboard Contact Us Footer link is working and take out the above code
-		ContactUsPage contactUsPage;
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+		System.out.println("*****the user navigates to contact us page in UHC site*****");
+			ContactUsPage contactUsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && !(MRScenario.environment.equalsIgnoreCase("PROD")|| 
+				MRScenario.environment.equalsIgnoreCase("offline"))) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
 		} else {
@@ -194,6 +191,22 @@ public class ContactusRedesignStepDefinition {
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
 		contactusPage.validateSecureEmailUsWidgetSection(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^prod user validates cancel click on secure email widget in redesign contact us page$")
+	public void prod_user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
+	{ System.out.println("*****prod user validates cancel click on secure email widget in redesign contact us page*****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.prodvalidateSecureEmailUsWidgetSection(givenAttributes);
 
 		if(contactusPage != null)				
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -502,9 +515,26 @@ public class ContactusRedesignStepDefinition {
 	}
 	
 	@Then("^the user validates the CHAT section$")
-	public void validate_Chat_Section() {	
+	public void validate_Chat_Section() throws InterruptedException {	
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactusPage.validateChatWithUs();		
+	}
+	
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^On contactUs page the user should see Help With This Website and Help With Your Plan sections$")
+	public void On_contactUs_page_the_user_should_see_Help_With_This_Website_and_Help_With_Your_Plan_sections(DataTable givenAttributes)
+	{
+		System.out.println("*****On contactUs page the user should see Help With This Website and Help With Your Plan sections****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateALLlabelAndLinks(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
 	}
 	
 	

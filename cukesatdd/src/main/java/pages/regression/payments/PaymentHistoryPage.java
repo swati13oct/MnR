@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
@@ -189,6 +190,12 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
+	
+	 @FindBy(xpath="//a[@id='contact-help']")
+	 WebElement contactus;
+	 
+	 @FindBy(xpath="//h1[@class='main-heading margin-none']")
+	 WebElement ContactUsHeading;
 
 	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
@@ -1775,4 +1782,49 @@ public class PaymentHistoryPage extends UhcDriver {
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
+	
+
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
+	public ContactUsPage NavigatetoContactuspage() throws InterruptedException {
+		checkForIPerceptionModel(driver);
+	       // clicking on contact us 
+		Thread.sleep(2000);
+			waitforElement(contactus);
+			contactus.click();			
+			System.out.println(driver.getTitle());
+			System.out.println(driver.getCurrentUrl());			
+			Assert.assertTrue(driver.getTitle().contains("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us"));		
+		
+			validate(ContactUsHeading);
+						
+			if (driver.getTitle().contains("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us")) {
+				System.out.println("Contact us Page is Displayed");
+				return new ContactUsPage(driver);
+			} else {
+				System.out.println("===========contact us page not Displayed=============");
+				return null;
+			}
+		}
 }

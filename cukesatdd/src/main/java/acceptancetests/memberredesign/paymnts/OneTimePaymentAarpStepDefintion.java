@@ -2410,4 +2410,25 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	}
 	
+	@Given("^user navigates to review your Automatic screen and selects agreements for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAgreeAndnoClickOnAuthorizeMonthyPaymentsforEFT();
+	
+}
+	@Given("^user navigates to review your Automatic screen and selects agreements for CC$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_CC()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndnoClickOnContinueforCC();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for CC");
+		}
+	}
+	
 }
