@@ -61,8 +61,8 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
     @headerRegression
     Examples:
-      | TID   | username | password  | MemUserName       | planType | memberType              |
-      | 15252 | ashah120 | Mnrqa002e | WILLIAMGARRISON48 | MAPD     | GroupLessSubsidy_header |
+      | TID   | username | password  | MemUserName         | planType | memberType              |
+      | 15252 | ashah120 | Mnrqa002e | skho@roadrunner.com | MAPD     | GroupLessSubsidy_header |
 
     @F287624 @US2037787 @US2037966
     Examples:
@@ -159,8 +159,8 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 	    #Then I should be able to see and use the Claims tab Header
 	     #And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
        #And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
-    And clicking on the Coverage & Benefits tab should allow me to see link of for the Forms & Resources tab on the second level navigation Header
-    Then I should be able to see the help button Header
+    #And clicking on the Coverage & Benefits tab should allow me to see link of for the Forms & Resources tab on the second level navigation Header
+    #Then I should be able to see the help button Header
     Then I should be able to see and use the Account/Profile dropdown and logout
 
     Examples:
