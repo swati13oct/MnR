@@ -1307,5 +1307,21 @@ public class HSIDStepDefinition {
 									 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
 								     Thread.sleep(3000);
 								     aarpChatAgentLogin.aarpchatagentreadystate();
-								}			 
+								}	
+								 /** 
+									 * @todo :agent enters credentials 
+									 */
+									 @Given("^agent enters credentials for federal$") 
+									 public void fedagententercredentials() throws InterruptedException{
+										 Thread.sleep(5000);
+										 String username = "MRagent8";
+										aarpChatAgentLogin.enterusername(username);
+										 String password =  "MRagent8";
+										aarpChatAgentLogin.enterpassword(password);	
+										 aarpChatAgentLogin.clickSubmit();
+										
+										 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
+									     Thread.sleep(3000);
+									     aarpChatAgentLogin.aarpchatagentreadystate();
+									}
 }

@@ -536,7 +536,14 @@ public class ContactusRedesignStepDefinition {
 					contactusPage);
 
 	}
-	
+	/***
+	 * 
+	 */
+	@Then("^the user validates the CHAT section for group member$")
+	public void validate_Chat_Section_group() throws InterruptedException {	
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.GroupvalidateChatWithUs();		
+	}
 	
 	
 }

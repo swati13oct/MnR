@@ -360,6 +360,9 @@ public class ContactUsPage extends UhcDriver {
 
 	@FindBy(xpath = "//span[@id='omni-chat-offline']")
 	private WebElement chatoffline;
+	
+	@FindBy(xpath = "//div[@class='otherPages OMNIChatGroup']//p[contains(text(),'Start a secure Chat session with a Customer Servic')]")
+	private WebElement chatMessageGroup;
 
 	@FindBy(xpath = "//p[contains(text(),'Start a secure Chat session with an Advocate now.')]")
 	private WebElement chatMessage;
@@ -1361,6 +1364,73 @@ public class ContactUsPage extends UhcDriver {
 			System.out.println("All the labels and links for individual federal mamber validated and passed");
 
 		}
+	}
+
+	/**
+	 * Validate the go to CHAT with us for Group member
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void GroupvalidateChatWithUs() throws InterruptedException {
+		{
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}		
+		 validateNew(chatMessageGroup); 
+		 if (chatMessageGroup.isDisplayed())
+		 {		  
+		  System.out.println("**Chat message seen is:->"+chatMessageGroup); 
+		 }
+		 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) 
+		 {
+		  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+		  System.out.println("** User landed on Contact us Page **");		  
+		  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+		  } 						 
+		try {
+			chatLink.getText();
+			chatLink.click();
+			System.out.println("*** Start a Chat link clicked ***");
+
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("*** Start a Chat link not clicked ***");
+			e1.printStackTrace();
+
+		}
+		try {
+			String mainwindow = driver.getWindowHandle();
+			Set<String> allWindowHandles = driver.getWindowHandles();
+			for (String currentWindowHandle : allWindowHandles) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, myself, 60);
+			validateNew(myself);
+		}
+			catch (Exception e) {
+			Assert.assertTrue("Chat windown not open", true);
+			System.err.println("Agent Chat window not loaded successfully");
+		}
+		try {
+			myself.click();
+			System.out.println("*** On Live chat member selected a option  to chat with Agent***");
+
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("*** On live Chat option not selected ***");
+			System.out.println("*** CHAT not live ***");
+			e1.printStackTrace();
+
+		}
+	
 	}
 
 }
