@@ -535,7 +535,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn,30);
 		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
 			validateNew(paymentHistoryApp);
-			validateNew(oneTimePaymentBtn);
+			//validateNew(oneTimePaymentBtn);
 		}
 	}
 
