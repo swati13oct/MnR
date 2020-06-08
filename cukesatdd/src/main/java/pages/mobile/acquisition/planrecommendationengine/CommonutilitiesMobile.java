@@ -143,18 +143,20 @@ public class CommonutilitiesMobile extends UhcDriver {
 		return swipeScusses;
 	}
 
+	// if swipe using longPress then 50% else 75%
+	String swipePercentage = "75%";
 	public void mobileLocateElementClick(WebElement element) {
-		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
-		mobileFindElementAfterHeader(element, "50%", 4, false);
+		mobileFindElementBeforeCallBanner(element, swipePercentage, 8, true);
+		mobileFindElementAfterHeader(element, swipePercentage, 4, false);
 		element.click();
 	}
 
 	public boolean mobileLocateElement(WebElement element) {
-		boolean locateStatus=false;
-		boolean locateB=mobileFindElementBeforeCallBanner(element, "50%", 8, true);
-		boolean locateA=mobileFindElementAfterHeader(element, "50%", 4, false);
+		boolean locateStatus = false;
+		boolean locateB = mobileFindElementBeforeCallBanner(element, swipePercentage, 8, true);
+		boolean locateA = mobileFindElementAfterHeader(element, swipePercentage, 4, false);
 		if (locateB && locateA)
-			locateStatus=true;
+			locateStatus = true;
 		return locateStatus;
 	}
 	public void mobileLocateElement(WebElement element,String swipepercentage) {
@@ -163,8 +165,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 	}
 
 	public void mobileLocateElementClick(WebElement element, int swipeup, int swipedown) {
-		mobileFindElementBeforeCallBanner(element, "50%", swipeup, true);
-		mobileFindElementAfterHeader(element, "50%", swipedown, false);
+		mobileFindElementBeforeCallBanner(element, swipePercentage, swipeup, true);
+		mobileFindElementAfterHeader(element, swipePercentage, swipedown, false);
 		element.click();
 	}
 
