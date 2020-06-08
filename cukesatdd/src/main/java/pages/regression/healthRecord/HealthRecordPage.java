@@ -398,7 +398,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 				healthRecordLink.click();
 				CommonUtility.checkPageIsReady(driver);
 				checkModelPopup(driver,1);
-				Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
+				if (MRScenario.environment.contains("stage"))
+					Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
 
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Health Record link on Rally Dashboard top menu", false);
@@ -424,7 +425,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 		testHarn_desktop_AcctProf_IHRLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
-		Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
+		if (MRScenario.environment.contains("stage"))
+			Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
 	}			
 
 }
