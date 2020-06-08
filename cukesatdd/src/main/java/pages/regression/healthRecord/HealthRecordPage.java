@@ -398,6 +398,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				healthRecordLink.click();
 				CommonUtility.checkPageIsReady(driver);
 				checkModelPopup(driver,1);
+				Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
 
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Health Record link on Rally Dashboard top menu", false);
@@ -420,46 +421,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 		//testHarn_AcctProfBtn.click();
 		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(testHarn_desktop_AcctProf_IHRLnk));
 
-		/* tbd
-		String winHandleBefore = driver.getWindowHandle();
-		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int beforeClicked_numTabs=beforeClicked_tabs.size();	
-		*/
 		testHarn_desktop_AcctProf_IHRLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
-		/* tbd 
-		CommonUtility.waitForPageLoad(driver, siteLeavingPopup, 5);
-		System.out.println("Proceed to validate the leaving site popup after clicking 'Health Record' link");
-		Assert.assertTrue("PROBLEM - unable to locate the site-leaving popup after clicking the 'Health Record' link", noWaitValidate(siteLeavingPopup));
-		Assert.assertTrue("PROBLEM - unable to locate the site-leaving popup PROCEED button after clicking the 'Health Record' link", noWaitValidate(siteLeavingPopup_proceedBtn));
-		Assert.assertTrue("PROBLEM - unable to locate the site-leaving popup CANCEL button after clicking the 'Health Record' link", noWaitValidate(siteLeavingPopup_cancelBtn));
-
-		System.out.println("Proceed to validate the Cancel button on leaving site popup after clicking 'Health Record' link");
-		siteLeavingPopup_cancelBtn.click();
-		CommonUtility.checkPageIsReady(driver);
-		Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking CANCEL button", !noWaitValidate(siteLeavingPopup));
-
-		CommonUtility.waitForPageLoad(driver, testHarn_AcctProfBtn, 5);
-		testHarn_AcctProfBtn.click();
-		testHarn_desktop_AcctProf_IHRLnk.click();
-		CommonUtility.waitForPageLoad(driver, siteLeavingPopup, 5);
-		System.out.println("Proceed to validate the Proceed button on leaving site popup after clicking 'Health Record' link");
-		siteLeavingPopup_proceedBtn.click();
-		CommonUtility.checkPageIsReady(driver);
-		Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking PROCEED button", !noWaitValidate(siteLeavingPopup));
-		checkModelPopup(driver,1);
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();
-		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'Health Record' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-		CommonUtility.checkPageIsReady(driver);
-
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		*/
+		Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
 	}			
-
-
 
 }
