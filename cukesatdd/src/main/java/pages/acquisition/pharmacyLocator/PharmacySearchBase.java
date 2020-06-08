@@ -53,7 +53,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		sendkeysNew(zipcodeField, zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		searchbtn.click();
+		//searchbtn.click();
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) { 
@@ -138,8 +138,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); //note: let the page settle down
-		//searchbtn.click();
-		//sleepBySec(50);
+		searchbtn.click();
+		sleepBySec(50);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
