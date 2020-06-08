@@ -149,10 +149,10 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   @vPPMSSavedPlan @prodRegression
   Scenario Outline: Verify user is save medsupp plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user does plan search using the following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user will proceed to next pages
@@ -264,7 +264,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   #| UID       | zipcode | isMultiCounty | county          | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
   #| US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
   @providerFlowUHC @prodVP
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
+  Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -293,7 +293,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Test Plans | <testPlans> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                             | testPlans                                                                 |
+      | zipcode | isMultiCounty | county          | plantype | planName                             | testPlans                                                                 |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @AddDrugsAuthenticated
@@ -333,14 +333,13 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Alabama | mnrqavd  | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
 
   @providerFlowUHCAuthenticated
-  Scenario Outline: Verify Provider Search functional flow for Visitor Profile page
+  Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
     Given the user is on the uhcmedicaresolutions site landing page
     And the user clicks on the shopping cart icon in UHC site
     Then the user signs in with optum Id credentials in UHC site
       | User Name | <userName> |
       | Password  | <password> |
-    And the user validates the plan year buttons are present or not and chooses the plan year in UHC
-      | Plan Year | <planYear> |
+    And user delets all the added providers on visitor profile page of UHC site
     And the user back to VPP plan summary page in ums
     When the user Click on Show Plans link
       | PlanType | <plantype> |
@@ -351,7 +350,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | PlanName | <planName> |
     Then Navigate to Visitor Profile page on UMS site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of UHC site
-      | PlanName | <planname> |
+      | PlanName | <planName> |
     And user delets all the added providers on visitor profile page of UHC site
 
     Examples: 

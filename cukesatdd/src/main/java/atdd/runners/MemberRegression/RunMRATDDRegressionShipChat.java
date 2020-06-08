@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionShipChat.json", detailedReport 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionShipChat")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/shipChat/shipChat.feature" }, plugin = {
-		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionShipChat.json" }, tags = {"@shipChat"})
+		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionShipChat.json" }, tags = {"@regressionMember"})
 public class RunMRATDDRegressionShipChat {
 
 	

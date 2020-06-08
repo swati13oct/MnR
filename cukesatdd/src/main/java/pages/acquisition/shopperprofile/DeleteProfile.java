@@ -1,7 +1,10 @@
 package pages.acquisition.shopperprofile;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,8 +14,8 @@ import atdd.framework.UhcDriver;
 
 public class DeleteProfile extends UhcDriver {
 	
-	@FindBy(id = "email")
-	private WebElement email;
+	@FindBy(id = "visitorsEmail")
+	private WebElement visitorEmail;
 	
 	@FindBy(id = "mbi")
 	private WebElement mbi;
@@ -20,7 +23,7 @@ public class DeleteProfile extends UhcDriver {
 	@FindBy(id = "dob")
 	private WebElement dob;
 	
-	@FindBy(xpath="//button")
+	@FindBy(xpath="//button[text()='Delete']")
 	private WebElement btnDelete;
 
 	@FindBy(xpath="//button/preceding-sibling::p")
@@ -28,9 +31,6 @@ public class DeleteProfile extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Non Member']")
 	private WebElement nonMemberTab;
-	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='email']")
-	private WebElement visitorEmail;
 	
 	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//input[@id='firstName']")
 	private WebElement firstName;
@@ -43,6 +43,15 @@ public class DeleteProfile extends UhcDriver {
 	
 	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//button")
 	private WebElement btnDeleteNonMember;
+	
+	@FindBy(xpath = "//button")
+	private WebElement btnSearchShopper;
+	
+	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
+	private List<WebElement> searchResults;
+	
+	@FindBy(css="p.failure.text-danger")
+	private WebElement messageNoUserFound;
 	
 	public static final String DELETE_PROFILE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/delete-profile";
 	
@@ -64,9 +73,7 @@ public class DeleteProfile extends UhcDriver {
 			start(DELETE_PROFILE_URL);
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, email, 15);
-		CommonUtility.waitForPageLoadNew(driver, mbi, 15);
-		CommonUtility.waitForPageLoadNew(driver, btnDelete, 15);
+		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 15);
 	}
 	
 	/**
@@ -75,14 +82,19 @@ public class DeleteProfile extends UhcDriver {
 	 * @param dateOfBirth
 	 * @param MBI
 	 */
-	public void deleteAProfile(String emailID, String dateOfBirth, String MBI) {
+	public void deleteAProfile(String emailID) {
 		try {
-			sendkeys(email, emailID);
-			sendkeys(mbi, MBI);
-			sendkeys(dob, dateOfBirth);
-			btnDelete.click();
-			CommonUtility.waitForPageLoadNew(driver, deletedMessage, 15);
-			System.out.println("##################"+deletedMessage.getText().trim()+"##################");
+			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
+			sendkeys(visitorEmail, emailID);
+			btnSearchShopper.click();
+			if(searchResults.size()>0) {
+				btnDelete.click();
+				CommonUtility.waitForPageLoadNew(driver, messageNoUserFound, 15);
+				System.out.println("##################"+"Deleted user "+emailID+" ##################");
+			}
+			else
+				System.out.println("##################"+messageNoUserFound.getText().trim()+"##################");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

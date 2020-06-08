@@ -197,7 +197,10 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath=".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li")
 	protected List<WebElement> listOfEobs;
-	
+
+	@FindBy(xpath=".//table//tbody//tr")
+	protected List<WebElement> listOfEobs_dream;
+
 	@FindBy(xpath="//div[contains(@class,'eobErrors')]//p[contains(text(),'no EOBs available')]")
 	protected WebElement noEobErr;
 	
