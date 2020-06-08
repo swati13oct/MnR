@@ -60,5 +60,39 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
+	@When("^user clicks on Next: Review Drug Costs button$")
+	public void user_clicks_on_Next_Review_Drug_Costs_button(){
+
+	}
+	
+	@Then("^load screen should be displayed$")
+	public void load_screen_should_be_displayed(){
+
+	}
+	
+	@Then("^user should be navigated to zipcode and plan year capture page$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page(){
+	    
+	}
+
+	@Then("^zipcode field should be visible$")
+	public void zipcode_field_should_be_visible() {
+	    
+	}
+
+	@Then("^County dropdown should be visible$")
+	public void county_dropdown_should_be_visible() {
+	    
+	}
+
+	@Then("^user verify plan year dropdown$")
+	public void user_verify_plan_year_dropdown() {
+	   
+	}
+
+	@Then("^Continue button should be displayed$")
+	public void continue_button_should_be_displayed() {
+	   
+	}
 
 }
