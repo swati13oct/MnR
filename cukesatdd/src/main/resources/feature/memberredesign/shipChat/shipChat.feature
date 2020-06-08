@@ -1,5 +1,14 @@
-@shipChat @codeWarriors
+@regressionMember
 Feature: 1.16 Member Contact us Page
+
+  @regressionMember @agentSigninforAARPCHAT @shipChat
+  Scenario Outline: Verify AARP chat agent login in.
+    Given agentlogin lands on page
+    And agent enters credentials
+
+    Examples: 
+      | username   | password   |
+      | AARPStage8 | AARPStage8 |
 
   @codeWarriors @US2483619 @shipChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page

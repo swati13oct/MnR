@@ -11,6 +11,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -36,27 +37,26 @@ import cucumber.api.DataTable;
  * @author bnaveen4
  *
  */
-public class ContactUsPage extends UhcDriver{
+public class ContactUsPage extends UhcDriver {
 
-
-	//DIANE
-	//@FindBy(xpath = "//a[contains@href,'1-800-721-0627')]")
-	//private WebElement staticTFN;
-	//@FindBy(xpath = "//a[contains@href, 'tel:1-800-721-0627']")
+	// DIANE
+	// @FindBy(xpath = "//a[contains@href,'1-800-721-0627')]")
+	// private WebElement staticTFN;
+	// @FindBy(xpath = "//a[contains@href, 'tel:1-800-721-0627']")
 
 	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
-	private WebElement staticTFN; 
+	private WebElement staticTFN;
 
 	@FindBy(xpath = "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[1]/div[1]/div/div[1]/div/ul/li[1]/a")
-	private WebElement contactUsLink2; 
+	private WebElement contactUsLink2;
 
 	@FindBy(xpath = "//*[@id='coveragebenefits_2']")
 	private WebElement benefitAndCovergae;
 
-	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
+	@FindBy(xpath = "//a[contains(@ng-href,'tel:')]")
 	private WebElement preEffectiveTechSupportNumber;
 
-	@FindBy(xpath=  ".//*[@id='cardslideID']//*[contains(@class,'btn btn--primary message-btn') and contains(@ng-click,'true')]")
+	@FindBy(xpath = ".//*[@id='cardslideID']//*[contains(@class,'btn btn--primary message-btn') and contains(@ng-click,'true')]")
 	private WebElement getStartedButton;
 
 	@FindBy(id = "message-cancel")
@@ -68,13 +68,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'EMAIL FORM')]")
 	private WebElement EmailForm;
 
-	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
+	@FindBy(xpath = "//*[@id='message-form']/fieldset/div[2]/div")
 	private WebElement useDifferentEmailRadioButton;
 
 	@FindBy(id = "message-emails")
 	private WebElement newemailId;
 
-	@FindBy(id = "message-email-confirms") 
+	@FindBy(id = "message-email-confirms")
 	private WebElement confirmemailId;
 
 	@FindBy(css = "a.goToInbox.btn.btn--primary.message-btn")
@@ -95,10 +95,8 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
 	private WebElement emailUsContinueBtn;
 
-
 	@FindBy(xpath = "//div[@id='messageModal']//span[contains(@class,'btn--primary')][text()='CONTINUE']")
 	private WebElement goToInboxCtnBtn;
-
 
 	@FindBy(id = "message-send")
 	private WebElement sendMessageBtn;
@@ -106,162 +104,154 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "//*[contains(@class,'modal-content')]")
 	private WebElement modalPopup;
 
-	@FindBy(id=  "confirmationWidget")
+	@FindBy(id = "confirmationWidget")
 	private WebElement emailConfirmationWidget;
 
 	@FindBy(id = "call-cancel")
 	private WebElement requestCall_Cancel;
 
-	@FindBy(id="call-question-about")
+	@FindBy(id = "call-question-about")
 	private WebElement callQuestionAbout;
 
-	@FindBy(xpath="//*[@id='call-number']")
+	@FindBy(xpath = "//*[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
 	private WebElement reqACallPhoneNumber;
 
 	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 
-	@FindBy(xpath="//h1[contains(text(),'Contact Us')]")
+	@FindBy(xpath = "//h1[contains(text(),'Contact Us')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
 	private WebElement headingContactUs;
 
-	@FindBy(xpath="//div[@class='deskHeaderContainer']")
+	@FindBy(xpath = "//div[@class='deskHeaderContainer']")
 	private WebElement topHeaderContactUs;
 
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary question-btn']")
+	private WebElement fillOutFormButton;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary question-btn']")
-	private WebElement fillOutFormButton;	
-
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
 	private WebElement memberAuth_fillOutFormButton;
 
-
-
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@name='question-submit']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@name='question-submit']")
 	private WebElement questionSubmit;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
 	private WebElement memberauth_questionSubmit;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='add-alt-email']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='add-alt-email']")
 	private WebElement addAlternativeEmail;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']")
 	private WebElement alternativeEmailAddress;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']")
 	private WebElement confirmEmailAddress;
 
-	@FindBy(xpath="//*[@id='add-alt-phone']")
+	@FindBy(xpath = "//*[@id='add-alt-phone']")
 	private WebElement addAlternativePhneNumberLink;
 
-	@FindBy(xpath="//*[@id='question-alt-phone']")	
+	@FindBy(xpath = "//*[@id='question-alt-phone']")
 	private WebElement alternativePhneNumber;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']")	
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']")
 	private WebElement confirmAlternativePhneNumber;
 
-
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")
 	private WebElement questionAboutDropDown;
 
-
-
-	@FindBy(xpath="//input[@id='question-alt-email']/following-sibling::span[not (contains(@class,'hide'))]")
+	@FindBy(xpath = "//input[@id='question-alt-email']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement alternativemessageEmailError;
 
-
-	@FindBy(xpath="//input[@id='question-alt-email-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
+	@FindBy(xpath = "//input[@id='question-alt-email-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmMsgEmailError;
 
-	@FindBy(xpath="//*[@id='alt-phone-wrapper']/div[1]/div/span[2]")
+	@FindBy(xpath = "//*[@id='alt-phone-wrapper']/div[1]/div/span[2]")
 	private WebElement invalidPhneErrorMsg;
 
-	@FindBy(xpath="//*[@id='alt-phone-wrapper']/div[1]/div/span[1]")
+	@FindBy(xpath = "//*[@id='alt-phone-wrapper']/div[1]/div/span[1]")
 	private WebElement invalidPhneErrorMsg1;
 
-	@FindBy(xpath="//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
+	@FindBy(xpath = "//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmPhneErrorMsg;
 
-
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
 
-	@FindBy(xpath="(//div[@class='message-block-header'])[2]//p")
+	@FindBy(xpath = "(//div[@class='message-block-header'])[2]//p")
 	private WebElement requestACallSuccessMessageHeader;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
 	private WebElement thankYouMessage;
 
-	@FindBy(css="h2.plan.margin-large>span")
+	@FindBy(css = "h2.plan.margin-large>span")
 	private WebElement pdpHeader;
 
-	@FindBy(css="div>div.alert-message")
-	private WebElement memberAuthMessage;	
+	@FindBy(css = "div>div.alert-message")
+	private WebElement memberAuthMessage;
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 
-	@FindBy(css="button[class='btn btn--primary question-btn']")
+	@FindBy(css = "button[class='btn btn--primary question-btn']")
 	private WebElement btn_EmailForm;
 
-	@FindBy(id="question-about-ship")
+	@FindBy(id = "question-about-ship")
 	private WebElement questionAboutDropdown_EmailForm;
 
-	@FindBy(id="question-message-ship")
+	@FindBy(id = "question-message-ship")
 	private WebElement questionMessage_EmailForm;
 
-	@FindBy(id="question-member-number")
+	@FindBy(id = "question-member-number")
 	private WebElement aarpMemberShipNumber;
 
-	@FindBy(id="question-first-name")
+	@FindBy(id = "question-first-name")
 	private WebElement firstName_EmailForm;
 
-	@FindBy(id="question-last-name")
+	@FindBy(id = "question-last-name")
 	private WebElement lastName_EmailForm;
 
-	@FindBy(id="question-email")
+	@FindBy(id = "question-email")
 	private WebElement email_EmailForm;
 
-	@FindBy(xpath="(//a[@ng-href='tel:1-800-721-0627']")
+	@FindBy(xpath = "(//a[@ng-href='tel:1-800-721-0627']")
 	private WebElement connectorModelTFN;
 
-	@FindBy(id="question-email-confirm")
+	@FindBy(id = "question-email-confirm")
 	private WebElement confirmEmail_EmailForm;
 
-	@FindBy(id="date-mm")
+	@FindBy(id = "date-mm")
 	private WebElement dateMM_EmailForm;
 
-	@FindBy(id="date-dd")
+	@FindBy(id = "date-dd")
 	private WebElement dateDD_EmailForm;
 
-	@FindBy(id="date-yyyy")
+	@FindBy(id = "date-yyyy")
 	private WebElement dateyyyy_EmailForm;
 
-	@FindBy(css=".question-submit>span")
+	@FindBy(css = ".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 
-	@FindBy(css="div[ng-show='showConfirmMessage'] div[class='message-block-body'] p")
+	@FindBy(css = "div[ng-show='showConfirmMessage'] div[class='message-block-body'] p")
 	private WebElement successMessage_EmailForm;
 
-	@FindBy(css="div[ng-show='showConfirmMessage'] strong")
+	@FindBy(css = "div[ng-show='showConfirmMessage'] strong")
 	private WebElement successHeader_EmailForm;
 
-	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
+	@FindBy(xpath = "//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
 	private WebElement commonQuestionViewQuestionsBtn;
 
-	@FindBy(xpath=  "(//p[contains(text(),'Help With This Website')])[2]")
+	@FindBy(xpath = "(//p[contains(text(),'Help With This Website')])[2]")
 	private WebElement helpWithThisWebsite;
 
 	@FindBy(xpath = "//p[contains(text(),'Help With Your Plan')]")
@@ -273,19 +263,19 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//h3[contains(text(),'Plan Support')]")
 	private WebElement PlanSupport;
 
-	@FindBy(xpath="//h3[contains(text(),'Technical Support')]")
+	@FindBy(xpath = "//h3[contains(text(),'Technical Support')]")
 	private WebElement TechnicalSupport;
 
 	@FindBy(xpath = "//a[contains(text(),'See how-to guides')]")
 	private WebElement Seehowtoguides;
 
-	@FindBy(xpath="(//div[@class='technical-tele ng-scope']//a)[1]")
+	@FindBy(xpath = "(//div[@class='technical-tele ng-scope']//a)[1]")
 	private WebElement technicalSupportContactNumber;
 
 	@FindBy(xpath = "//*[contains(@class,'medical-tele')]//a[contains(@class,'display-inline')]")
 	private WebElement helpWithYourPlanContactNumber;
 
-	@FindBy(xpath=  "//p[contains(text(),'Website Technical Support')]")
+	@FindBy(xpath = "//p[contains(text(),'Website Technical Support')]")
 	private WebElement WebsiteTechnicalSupport;
 
 	@FindBy(xpath = "//p[contains(text(),'General Questions')]")
@@ -294,34 +284,36 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//p[contains(text(),'Claims Questions')]")
 	private WebElement ClaimsQuestions;
 
+	@FindBy(xpath = "//label[contains(text(),'For myself')]")
+	private WebElement myself;
+
 	@FindBy(xpath = "//h3[contains(text(),'Call Us')]")
 	private WebElement callUs;
 
-	@FindBy(xpath="(//div[@class='claim-tele ng-scope']//a)[1]")
+	@FindBy(xpath = "(//div[@class='claim-tele ng-scope']//a)[1]")
 	private WebElement claimTelephonenumber;
 
 	@FindBy(xpath = "//b[contains(text(),'Need help navigating the website?')]")
 	private WebElement Need_helpNavigatingTheWebsite;
 
-
-	@FindBy(xpath="//h3//p[contains(text(),'Plan Support')]")
+	@FindBy(xpath = "//h3//p[contains(text(),'Plan Support')]")
 	private WebElement PlanSupportPCP;
 
 	@FindBy(xpath = "//p[contains(text(),'Help With This Website')]")
 	private WebElement HelpWithThisWebsitePCP;
 
-	//View question
+	// View question
 
 	@FindBy(xpath = "//span[contains(text(),'What browsers are required for this website?')]")
 	private WebElement browsersRequiredQuestion;
 
-	@FindBy(xpath="//span[contains(text(),'I see my plan information?')]")
+	@FindBy(xpath = "//span[contains(text(),'I see my plan information?')]")
 	private WebElement palnInformationQuestion;
 
 	@FindBy(xpath = "//span[contains(text(),'How do I add my spouse to my online account?')]")
 	private WebElement onlineAccountQuestion;
 
-	@FindBy(xpath=  "(//span[contains(text(),'Where can I find my plan name?')])[1]")
+	@FindBy(xpath = "(//span[contains(text(),'Where can I find my plan name?')])[1]")
 	private WebElement planNameQuestion;
 
 	@FindBy(xpath = "//span[contains(text(),'How do I find out if my drugs are covered?')]")
@@ -333,7 +325,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//span[contains(text(),'Where can I find forms or other plan materials?')]")
 	private WebElement planMaterialQuestion;
 
-	@FindBy(xpath="//span[contains(text(),'How do I make a payment, set up automatic payments and view payment history?')]")
+	@FindBy(xpath = "//span[contains(text(),'How do I make a payment, set up automatic payments and view payment history?')]")
 	private WebElement paymentHistoryQuestion;
 
 	@FindBy(xpath = "//span[contains(text(),'Where do I find information about plan changes for the upcoming year?')]")
@@ -342,36 +334,35 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "(//span[contains(text(),'How do I disenroll from my plan?')])[1]")
 	private WebElement disenrollplan;
 
-	@FindBy(xpath="//span[contains(text(),'Where do I find information about Renew Rewards?)]")
+	@FindBy(xpath = "//span[contains(text(),'Where do I find information about Renew Rewards?)]")
 	private WebElement renewRewardsQuestion;
 
 	@FindBy(xpath = "//span[contains(text(),'How do I add or remove a Rider from my plan coverage?')]")
 	private WebElement planCoverageQuestion;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Common Questions')]")
 	private WebElement CommonQuestionsHeader;
-	
+
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofiledrop;
-	
+
 	@FindBy(xpath = "//a[starts-with(@id,'messages')]")
 	private WebElement messageslink;
-	
+
 	@FindBy(id = "dropdown-toggle-2")
 	private WebElement Rallyaccountprofiledrop;
-	
+
 	@FindBy(xpath = "//a[starts-with(@id,'messages')]")
 	private WebElement Rallymessageslink;
-	
-	@FindBy(xpath ="//a[@class='ogn-genesys-chat-button']")
-	private WebElement chatLink; 
-	
-	@FindBy(xpath ="//span[@id='omni-chat-offline']")
+
+	@FindBy(xpath = "//a[@class='ogn-genesys-chat-button']")
+	private WebElement chatLink;
+
+	@FindBy(xpath = "//span[@id='omni-chat-offline']")
 	private WebElement chatoffline;
-	
-	@FindBy(xpath ="//p[contains(text(),'Start a secure Chat session with an Advocate now.')]")
-	private WebElement chatMessage; 
-	
+
+	@FindBy(xpath = "//p[contains(text(),'Start a secure Chat session with an Advocate now.')]")
+	private WebElement chatMessage;
 
 	public JSONObject contactUsJson;
 
@@ -417,45 +408,43 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	public void openAndValidate(String memberType) {
-		if (!memberType.contains("PreEff")) 
+		if (!memberType.contains("PreEff"))
 			validateNew(heading);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject contactUsExpectedJson = expectedDataMap
-				.get(CommonConstants.CONTACT_US);
-		contactUsExpectedJson = CommonUtility.mergeJson(
-				contactUsExpectedJson, globalExpectedJson);
+		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
+		JSONObject contactUsExpectedJson = expectedDataMap.get(CommonConstants.CONTACT_US);
+		contactUsExpectedJson = CommonUtility.mergeJson(contactUsExpectedJson, globalExpectedJson);
 		return contactUsExpectedJson;
 	}
 
 	/**
 	 * Validate Texas ERS plan name
 	 */
-	public void validatePlanName(){
+	public void validatePlanName() {
 		String planName = LoginCommonConstants.PLAN_NAME;
 		System.out.println(planName);
-		List<WebElement> planWebElement = driver.findElements(By.xpath("//*[text()='"+LoginCommonConstants.PLAN_NAME+"']"));
-		for(int i=0; i<planWebElement.size();i++){
-			if(planWebElement.get(i).getText().contains("HealthSelect Medicare Rx ")){
+		List<WebElement> planWebElement = driver
+				.findElements(By.xpath("//*[text()='" + LoginCommonConstants.PLAN_NAME + "']"));
+		for (int i = 0; i < planWebElement.size(); i++) {
+			if (planWebElement.get(i).getText().contains("HealthSelect Medicare Rx ")) {
 				System.out.println("----------Failed due to presence of HealthSelect Medicare Rx ------------");
 				Assert.fail();
-			}
-			else if(planWebElement.get(i).getText().equalsIgnoreCase(LoginCommonConstants.PLAN_NAME)){
-				System.out.println("----------Plan name displayed as expected="+planName);
-			} else{
+			} else if (planWebElement.get(i).getText().equalsIgnoreCase(LoginCommonConstants.PLAN_NAME)) {
+				System.out.println("----------Plan name displayed as expected=" + planName);
+			} else {
 				System.out.println("----------Failed because Plan NAme not present");
 				Assert.fail();
-			} 	  		 
+			}
 		}
 	}
+
 	/**
-	 * Validate the success message 
+	 * Validate the success message
 	 */
-	public void validateThankYouMessage(String expectedMessage){
+	public void validateThankYouMessage(String expectedMessage) {
 
 		Assert.assertEquals("Request Confirmed", requestReceivedMessageHeader.getText().trim());
 		Assert.assertEquals(expectedMessage, thankYouMessage.getText().trim());
@@ -463,36 +452,33 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	/**
-	 * DIANE
-	 * Validate the static TFN
+	 * DIANE Validate the static TFN
 	 *
 	 **/
-	public void validateTFN(String expectedTFN){
+	public void validateTFN(String expectedTFN) {
 
-		//ORIG
-		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+		// ORIG
+		// Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
 
-		//object
-		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+		// object
+		// Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
 
-		//object[]
-		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+		// object[]
+		// Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
 
+		if (staticTFN.getText().contains(expectedTFN)) {
+			System.out.println("Expected Static TFN is displayed" + staticTFN.getText());
+		}
 
-		if (staticTFN.getText().contains(expectedTFN))
-		{
-			System.out.println("Expected Static TFN is displayed" + staticTFN.getText());}
-
-		else 
+		else
 			Assert.fail("Expected TFN is not displayed");
-
 
 	}
 
 	/**
 	 * Validate the success message of Email Form
 	 */
-	public void validateEmailUsSuccessMessage(String expectedMessage){
+	public void validateEmailUsSuccessMessage(String expectedMessage) {
 
 		Assert.assertEquals("Thank you. We received your request.", successHeader_EmailForm.getText().trim());
 		Assert.assertEquals(expectedMessage, successMessage_EmailForm.getText().trim());
@@ -502,31 +488,36 @@ public class ContactUsPage extends UhcDriver{
 	/**
 	 * Validate the success message of Request a call widget
 	 */
-	public void validateRequestACallSuccessMessage(String expectedMessage,String phoneNumber){
+	public void validateRequestACallSuccessMessage(String expectedMessage, String phoneNumber) {
 
 		Assert.assertEquals("Your request has been received", requestACallSuccessMessageHeader.getText().trim());
-		//Assert.assertEquals(expectedMessage, reqConfirmationMessage.getText().trim());
-		Assert.assertEquals(phoneNumber,reqACallPhoneNumber.getText().trim());
+		// Assert.assertEquals(expectedMessage,
+		// reqConfirmationMessage.getText().trim());
+		Assert.assertEquals(phoneNumber, reqACallPhoneNumber.getText().trim());
 
 	}
 
 	/**
 	 * Validate the Filed validation error messages in Email a question
 	 */
-	public void validateFiledValidationErrorMessages(DataTable givenAttributes){
+	public void validateFiledValidationErrorMessages(DataTable givenAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		//		String inavlidPhoneErrorMessage = memberAttributesMap.get("inavlidPhoneErrorMessage");
-		//		String inavlidAConfirmPhoneErrorMessage = memberAttributesMap.get("inavlidAConfirmPhoneErrorMessage");
-		//		String inavlidEmailErrorMessage = memberAttributesMap.get("inavlidEmailErrorMessage");
-		//		String inavlidAConfirmEmailErrorMessage = memberAttributesMap.get("inavlidAConfirmEmailErrorMessage ");
+		// String inavlidPhoneErrorMessage =
+		// memberAttributesMap.get("inavlidPhoneErrorMessage");
+		// String inavlidAConfirmPhoneErrorMessage =
+		// memberAttributesMap.get("inavlidAConfirmPhoneErrorMessage");
+		// String inavlidEmailErrorMessage =
+		// memberAttributesMap.get("inavlidEmailErrorMessage");
+		// String inavlidAConfirmEmailErrorMessage =
+		// memberAttributesMap.get("inavlidAConfirmEmailErrorMessage ");
 		String inavlidPhoneErrorMessage = "Enter phone number like this: 111-111-1111.";
 		String inavlidAConfirmPhoneErrorMessage = "Your confirmation alternative phone number and alternative phone number do not match.";
 		String inavlidEmailErrorMessage = "Enter your email address like this: yourname@emailprovider.com.";
@@ -534,11 +525,12 @@ public class ContactUsPage extends UhcDriver{
 		String errorphonemessage = invalidPhneErrorMsg.getText().trim();
 		String errorphonemessage1 = invalidPhneErrorMsg1.getText().trim();
 
-		// error massage switches xpath according to data or emptyness in phone number input box
-		if(errorphonemessage.isEmpty()){
+		// error massage switches xpath according to data or emptyness in phone number
+		// input box
+		if (errorphonemessage.isEmpty()) {
 			System.out.println("error massage didnt show 1st xpath as all required fiel is empty");
 			Assert.assertEquals(inavlidPhoneErrorMessage, errorphonemessage1);
-		} else{
+		} else {
 			Assert.assertEquals(inavlidPhoneErrorMessage, errorphonemessage);
 		}
 		Assert.assertEquals(inavlidAConfirmPhoneErrorMessage, confirmPhneErrorMsg.getText().trim());
@@ -549,23 +541,21 @@ public class ContactUsPage extends UhcDriver{
 	/**
 	 * this method is used to validate the request to call widget
 	 */
-	public void validates_clickToCall_widget()
-	{
+	public void validates_clickToCall_widget() {
 		Assert.assertTrue("Request a call widget is displayed", requestACall.isDisplayed());
 	}
 
-
 	/**
-	 * this method is used to click on Request to call widget and validate for the confirmation message
+	 * this method is used to click on Request to call widget and validate for the
+	 * confirmation message
 	 */
-	public void reqACall(DataTable givenAttributes)
-	{	
+	public void reqACall(DataTable givenAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String phoneNumber = memberAttributesMap.get("Phone Number");
 		try {
@@ -583,16 +573,16 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	/**
-	 * this method is used to click on Request to call widget and validate the cancel link
+	 * this method is used to click on Request to call widget and validate the
+	 * cancel link
 	 */
-	public void reqACall_Cancel(DataTable givenAttributes)
-	{	
+	public void reqACall_Cancel(DataTable givenAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String phoneNumber = memberAttributesMap.get("Phone Number");
 		try {
@@ -616,8 +606,7 @@ public class ContactUsPage extends UhcDriver{
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : secureemailwidgetData.getExpectedData().keySet()) {
-			WebElement element = findElement(secureemailwidgetData.getExpectedData()
-					.get(key));
+			WebElement element = findElement(secureemailwidgetData.getExpectedData().get(key));
 			if (element != null) {
 				if (validate(element)) {
 					try {
@@ -637,22 +626,24 @@ public class ContactUsPage extends UhcDriver{
 	/**
 	 * this method is used to validate PDP header text
 	 */
-	public void PdpPageDisplay(){
-		if(pdpHeader.isDisplayed()){
+	public void PdpPageDisplay() {
+		if (pdpHeader.isDisplayed()) {
 			System.out.println("PDP page displayed");
 		}
 	}
+
 	/**
 	 * this method is used to get discalimer text of member auth
 	 */
-	public String getDisclaimerTextForMemberAuth(){
+	public String getDisclaimerTextForMemberAuth() {
 		return memberAuthMessage.getText().trim();
 	}
 
 	/**
-	 * this method is used to get the error message for member auth send us question functionality
+	 * this method is used to get the error message for member auth send us question
+	 * functionality
 	 */
-	public String getMemberAuthNotAuthorizedToSendUsQuestionMessage(){
+	public String getMemberAuthNotAuthorizedToSendUsQuestionMessage() {
 		try {
 			Thread.sleep(35000);
 			memberAuth_fillOutFormButton.click();
@@ -665,9 +656,10 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	/**
-	 * this method is used to get the error message for member auth request call functionality
+	 * this method is used to get the error message for member auth request call
+	 * functionality
 	 */
-	public String getMemberAuthNotAuthorizedToRequestACallMessage(){
+	public String getMemberAuthNotAuthorizedToRequestACallMessage() {
 		try {
 			Thread.sleep(15000);
 			memberAuth_fillOutFormButton.click();
@@ -679,19 +671,19 @@ public class ContactUsPage extends UhcDriver{
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
 	}
 
-
 	/**
-	 * This method validates the Email a Question widget for Group (CALPERS\GEORGIA-SHBP\TEXAS ERS) members 
+	 * This method validates the Email a Question widget for Group
+	 * (CALPERS\GEORGIA-SHBP\TEXAS ERS) members
 	 * 
 	 * @param givenAttributes
 	 */
-	public void validateEmailAQuestionWidget(DataTable givenAttributes){
+	public void validateEmailAQuestionWidget(DataTable givenAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String enquiryType = memberAttributesMap.get("Enquiry Type");
 		String alternativeEmailId = memberAttributesMap.get("Alternative Email");
@@ -715,23 +707,24 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("up to confirmed phone added");
 			questionSubmit.click();
 			Thread.sleep(5000);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	/**
-	 * This method fills invalid details in the Email a Question widget for Group (CALPERS\GEORGIA-SHBP\TEXAS ERS) members and validates error messages 
+	 * This method fills invalid details in the Email a Question widget for Group
+	 * (CALPERS\GEORGIA-SHBP\TEXAS ERS) members and validates error messages
 	 * 
 	 * @param givenAttributes
 	 */
-	public void fillInvalidDetailsInEmailAQuestionWidget(DataTable givenAttributes){
+	public void fillInvalidDetailsInEmailAQuestionWidget(DataTable givenAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String enquiryType = memberAttributesMap.get("Enquiry Type");
 		String alternativeEmailId = memberAttributesMap.get("Alternative Email");
@@ -752,21 +745,23 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("confirmed email address were typed!!!!!");
 			Thread.sleep(5000);
 			confirmEmailAddress.click();
-			//jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
-			//driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
+			// jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not
+			// (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
+			// driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not
+			// (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			addAlternativePhneNumberLink.click();
 			addAlternativePhneNumberLink.click();
-			//jsClick(addAlternativePhneNumberLink);
+			// jsClick(addAlternativePhneNumberLink);
 			Thread.sleep(5000);
-			//alternativePhneNumber.sendKeys("361361");
+			// alternativePhneNumber.sendKeys("361361");
 			alternativePhneNumber.sendKeys(alternativePhoneNumber);
 			System.out.println("alt phone number typed!!!!!!");
-			//confirmAlternativePhneNumber.sendKeys("362222");
+			// confirmAlternativePhneNumber.sendKeys("362222");
 			confirmAlternativePhneNumber.sendKeys(confirmAlternativePhoneNumber);
 			Thread.sleep(3000);
 			questionSubmit.click();
 			Thread.sleep(10000);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -777,32 +772,30 @@ public class ContactUsPage extends UhcDriver{
 	public void validateSecureEmailUsWidgetSection(DataTable givenAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String newEmailId = memberAttributesMap.get("New Email");
 		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
-		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
-
-
+		// the following 3 lines are added as a go around the contact us link from home
+		// page, as it was not working.
 
 		try {
 			Thread.sleep(8000);
 
-			if(validate(EmailForm)){
+			if (validate(EmailForm)) {
 				System.out.println("Get Started Button not visible, So using email Form Link!!!");
 				EmailForm.click();
 				Thread.sleep(2000);
 				waitforElement(cancelLink);
 				cancelLink1.click();
-				Thread.sleep(2000);}
-			else if(validate(goToInboxButton)){	
+				Thread.sleep(2000);
+			} else if (validate(goToInboxButton)) {
 				validateGoToInbox();
-			}
-			else{		
+			} else {
 				getStartedButton.click();
 				waitforElement(useDifferentEmailRadioButton);
 				useDifferentEmailRadioButton.click();
@@ -814,45 +807,43 @@ public class ContactUsPage extends UhcDriver{
 				validateNew(emailConfirmationWidget);
 				validateNew(sendMessageBtn);
 
-
-
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	/**
 	 * This method is used to validate secure email us widget section
 	 */
 	public void prodvalidateSecureEmailUsWidgetSection(DataTable givenAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String newEmailId = memberAttributesMap.get("New Email");
 		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
-		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
+		// the following 3 lines are added as a go around the contact us link from home
+		// page, as it was not working.
 
 		try {
 			Thread.sleep(8000);
 
-			if(validate(EmailForm)){
+			if (validate(EmailForm)) {
 				System.out.println("Get Started Button not visible, So using email Form Link!!!");
 				EmailForm.click();
 				Thread.sleep(2000);
 				waitforElement(cancelLink);
 				cancelLink1.click();
-				Thread.sleep(2000);}
-			else if(validate(goToInboxButton)){	
+				Thread.sleep(2000);
+			} else if (validate(goToInboxButton)) {
 				validateGoToInbox();
-			}
-			else{
+			} else {
 				if (getStartedButton.isDisplayed()) {
 					getStartedButton.click();
 					waitforElement(useDifferentEmailRadioButton);
@@ -860,13 +851,11 @@ public class ContactUsPage extends UhcDriver{
 					newemailId.sendKeys(newEmailId);
 					confirmemailId.sendKeys(newConfirmEmailId);
 					System.out.println("found cancel link");
-					emailUsContinueBtn.click();
-					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly", getStartedButton.isDisplayed());
+					cancelLink.click();
+					Assert.assertTrue("Post clicking on cancel button Get started button is displaying successfuly",
+							getStartedButton.isDisplayed());
 
 				}
-				
-
-
 
 			}
 		} catch (InterruptedException e) {
@@ -875,19 +864,18 @@ public class ContactUsPage extends UhcDriver{
 
 	}
 
-
 	/**
-	 * This method validates the Email Form widget for SHIP members 
+	 * This method validates the Email Form widget for SHIP members
 	 * 
 	 * @param givenAttributes
 	 */
-	public void validateEmailFormWidget(DataTable givenAttributes){
+	public void validateEmailFormWidget(DataTable givenAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String enquiryType = memberAttributesMap.get("Enquiry Type");
 
@@ -920,20 +908,21 @@ public class ContactUsPage extends UhcDriver{
 			Thread.sleep(2000);
 			btnSubmit_EmailForm.click();
 			Thread.sleep(8000);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	/**
-	 * Validate the go to inbox button for a member who has already opted out for secure email
+	 * Validate the go to inbox button for a member who has already opted out for
+	 * secure email
 	 */
-	public void validateGoToInbox(){
+	public void validateGoToInbox() {
 		try {
 			waitforElement(goToInboxButton);
 			Assert.assertTrue(validate(goToInboxButton));
 			goToInboxButton.click();
-			Assert.assertTrue(validateNew(goToInboxCtnBtn));			
+			Assert.assertTrue(validateNew(goToInboxCtnBtn));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -942,16 +931,16 @@ public class ContactUsPage extends UhcDriver{
 	/**
 	 * Validate the widgets which should not present for the terminated members
 	 */
-	public void validateWidgetsForTerminatedMembers(){
+	public void validateWidgetsForTerminatedMembers() {
 		/*
-		System.out.println("ready to assert check");
-		getStartedButton.click();
-		driver.navigate().back();
-		System.out.println("get started button recognized");
-		Assert.assertTrue(!validate(getStartedButton));
-		//Assert.assertTrue(!validate(fillOutFormButton)); // doesn't exist for these kind of users
-		Assert.assertTrue(!validate(requestCall));
-		//Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these kind of users
+		 * System.out.println("ready to assert check"); getStartedButton.click();
+		 * driver.navigate().back();
+		 * System.out.println("get started button recognized");
+		 * Assert.assertTrue(!validate(getStartedButton));
+		 * //Assert.assertTrue(!validate(fillOutFormButton)); // doesn't exist for these
+		 * kind of users Assert.assertTrue(!validate(requestCall));
+		 * //Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these
+		 * kind of users
 		 */
 		Assert.assertFalse(validate(getStartedButton));
 		Assert.assertFalse(validate(fillOutFormButton));
@@ -960,15 +949,14 @@ public class ContactUsPage extends UhcDriver{
 		Assert.assertFalse(validate(email_EmailForm));
 	}
 
-	public void feebackpopupClose() throws InterruptedException
-	{ //waitForloader(driver,overlay, 20);
+	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay, 20);
 		Thread.sleep(20000);
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);
 			iPerceptionclosebtn.click();
 			driver.switchTo().defaultContent();
-			//iPerceptionAutoPopUp.click();
+			// iPerceptionAutoPopUp.click();
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
@@ -977,12 +965,10 @@ public class ContactUsPage extends UhcDriver{
 	public void validateConnectroModelTFNNumber() {
 
 		String tfnNumber = connectorModelTFN.getText();
-		if(tfnNumber.contains("1-800-721-0627"))
-		{
-			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
-		}else
-		{
-			System.err.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+		if (tfnNumber.contains("1-800-721-0627")) {
+			System.out.println("Connector Model TFN dsiplayed    >" + connectorModelTFN.isDisplayed());
+		} else {
+			System.err.println("Connector Model TFN dsiplayed    >" + connectorModelTFN.isDisplayed());
 
 		}
 	}
@@ -990,34 +976,37 @@ public class ContactUsPage extends UhcDriver{
 	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) {
 
 		System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
-		System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+		System.out.println(
+				"The Tech Support phone number displayed on screen is " + preEffectiveTechSupportNumber.getText());
 		boolean TFNvalidation = true;
-		if(preEffectiveTechSupportNumber.getText().contains(technicalPhNo)){
+		if (preEffectiveTechSupportNumber.getText().contains(technicalPhNo)) {
 			TFNvalidation = true;
-		}
-		else
-			TFNvalidation=false;
+		} else
+			TFNvalidation = false;
 		Assert.assertTrue("Extected TFN is not dispalyed", TFNvalidation);
 		System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
 
 	}
 
 	/**
-	 * @author sdwaraka
-	 * Added for May2 2019 Release
-	 * Added to validate Secure email, send a message and Secure Message page as part of validation for F282564
+	 * @author sdwaraka Added for May2 2019 Release Added to validate Secure email,
+	 *         send a message and Secure Message page as part of validation for
+	 *         F282564
 	 */
 
-	//Secure Message access
+	// Secure Message access
 	@FindBy(xpath = "//a[contains(@class, 'goToInbox ')]")
 	private WebElement sendAmessageButton;
 
-	//Email Us modal
+	// Email Us modal
 	@FindBy(xpath = "//div[@id='messageModal']//div[contains(@class, 'modal-content')]")
 	private WebElement EmailUsModal;
 
-	/*	@FindBy(xpath = "//*[contains(@class, 'btn') and contains(text(), 'CONTINUE')]")
-	private WebElement EmailUsModal_ContinueBtn;*/
+	/*
+	 * @FindBy(xpath =
+	 * "//*[contains(@class, 'btn') and contains(text(), 'CONTINUE')]") private
+	 * WebElement EmailUsModal_ContinueBtn;
+	 */
 
 	@FindBy(xpath = "//div[@id='messageModal']//button/span[text()='CONTINUE']")
 	private WebElement EmailUsModalbtnContinue;
@@ -1031,105 +1020,111 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='list-folders']//a[contains(text(),'Inbox')]")
 	private WebElement messengerInbox;
 
-
-	//Click on Send a Message button on Secure Message widget on Contact Us Page
+	// Click on Send a Message button on Secure Message widget on Contact Us Page
 	public void clickOnSendMessage_SecureEmail() {
-		if(validate(sendAmessageButton)){
+		if (validate(sendAmessageButton)) {
 			sendAmessageButton.click();
-			System.out.println("Go to Inbox button is clicked");  		 
-		}
-		else{
+			System.out.println("Go to Inbox button is clicked");
+		} else {
 			Assert.assertTrue("Go To Inbox Button not displayed", false);
 		}
-		/*try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { Thread.sleep(20000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		waitforElementVisibilityInTime(EmailUsModalbtnContinue, 30);
-		if(validate(EmailUsModal) && validate(EmailUsModalbtnContinue)){
-			System.out.println("Email Us Moal and COntinue Button are displayed");  		 
-		}
-		else{
+		if (validate(EmailUsModal) && validate(EmailUsModalbtnContinue)) {
+			System.out.println("Email Us Moal and COntinue Button are displayed");
+		} else {
 			Assert.assertTrue("Email Us Moal and COntinue Button are not displayed", false);
 		}
 	}
-public void clickonmessagesLink() {
-	try {
-		validateWithValue("Account/Profile drop down", accountprofiledrop);
-		accountprofiledrop.click();
-			/*
-			 * validateWithValue("Messages link under account Profile link", messageslink);
-			 * messageslink.click();
-			 */
-	} catch (Exception e) {
-		System.out.println("Messages link is not clicked under account profile link");
-	}
-}
-public void NavigateRallyandclickonmessagesLink() {
-	
-	try {
-		driver.get("https://member.int.uhc.com/medicare/dashboard");
-		//CommonUtility.waitForPageLoadNew(driver, Rallyaccountprofiledrop, 60);
-		System.out.println("Rally dashboard page loaded successfully");
-		validateWithValue("Account/Profile drop down", Rallyaccountprofiledrop);
-		accountprofiledrop.click();
-			
-	} catch (Exception e) {
-		System.out.println("Messages link is not clicked under account profile link");
-	}
-}
 
+	public void clickonmessagesLink() {
+		try {
+			validateWithValue("Account/Profile drop down", accountprofiledrop);
+			accountprofiledrop.click();
+			validateWithValue("Messages link under account Profile link", messageslink);
+			messageslink.click();
+		} catch (Exception e) {
+			System.out.println("Messages link is not clicked under account profile link");
+		}
+	}
+
+	public void NavigateRallyandclickonmessagesLink() {
+
+		try {
+			driver.get("https://member.int.uhc.com/medicare/dashboard");
+			// CommonUtility.waitForPageLoadNew(driver, Rallyaccountprofiledrop, 60);
+			System.out.println("Rally dashboard page loaded successfully");
+			validateWithValue("Account/Profile drop down", Rallyaccountprofiledrop);
+			accountprofiledrop.click();
+
+		} catch (Exception e) {
+			System.out.println("Messages link is not clicked under account profile link");
+		}
+	}
 
 	/**
-	 * Validate the go to inbox button for a member who has already opted out for secure email and navigate to SSO inbox
+	 * Validate the go to inbox button for a member who has already opted out for
+	 * secure email and navigate to SSO inbox
 	 */
-	public void validateSSOInbox(){
+	public void validateSSOInbox() {
 		try {
 			validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(EmailUsModalbtnContinue);
+				// switchToNewTabNew(EmailUsModalbtnContinue);
+				jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
-				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
+				Assert.assertTrue(driver.getTitle().contains("Messenger"));
 				validateNew(messengerInbox);
-			}
-			else{
+			} else {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully", true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
-	public void validateSSOInboxViaMessengerLink(){
+	public void validateSSOInboxViaMessengerLink() {
 		try {
-			validateNew(messageslink);
+			// validateNew(EmailUsModalbtnContinue);
 			if (!((MRScenario.environment).toLowerCase().contains("team"))) {
-				switchToNewTabNew(messageslink);
+				// switchToNewTabNew(EmailUsModalbtnContinue);
+				// jsClickNew(EmailUsModalbtnContinue);
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
-				Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
+				Assert.assertTrue(driver.getTitle().contains("Messenger"));
 				validateNew(messengerInbox);
-			}
-			else{
+			} else {
 				System.out.println("Skipping Go To Inbox functionslity in Team environment");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Assert.assertTrue("Secure messaging page is not loaded successfully", true);
+			System.err.println("Secure messaging page is not loaded successfully");
 		}
 	}
 
-	
 	public void navigateToCommonQuestionsPg() {
-		Assert.assertTrue("PROBLEM - unable to locate the 'View Questions' button on the Contact Us page", validate(commonQuestionViewQuestionsBtn));
+		Assert.assertTrue("PROBLEM - unable to locate the 'View Questions' button on the Contact Us page",
+				validate(commonQuestionViewQuestionsBtn));
 		commonQuestionViewQuestionsBtn.click();
 		CommonUtility.checkPageIsReady(driver);
 	}
 
 	public void validatelabelAndLinks() {
-
 
 		validateWithValue("Text- help With This Website", helpWithThisWebsite);
 		validateWithValue("Text- Help With Your Plan ", HelpWithYourPlan);
@@ -1140,7 +1135,7 @@ public void NavigateRallyandclickonmessagesLink() {
 		validateWithValue("Text-TechnicalSupport ", TechnicalSupport);
 		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
 
-		JavascriptExecutor js=(JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", technicalSupportContactNumber);
 
 		validateWithValue("Text- technicalSupportContactNumber", technicalSupportContactNumber);
@@ -1148,19 +1143,24 @@ public void NavigateRallyandclickonmessagesLink() {
 
 		System.out.println("All the labels and links for individual federal mamber validated and passed");
 
-		/*Assert.assertFalse(validate(helpWithThisWebsite));
-		Assert.assertFalse(validate(HelpWithYourPlan));
-		Assert.assertFalse(validate(LearnHowtoUsetheWebsite));
-		Assert.assertFalse(validate(PlanSupport));
-		Assert.assertFalse(validate(TechnicalSupport));
-		Assert.assertFalse(validate(Seehowtoguides));
-		Assert.assertFalse(validate(technicalSupportContactNumber));
-		Assert.assertFalse(validate(helpWithYourPlanContactNumber));
-
-		System.out.println("All the labels and links for individual federal mamber validated and passed");*/
+		/*
+		 * Assert.assertFalse(validate(helpWithThisWebsite));
+		 * Assert.assertFalse(validate(HelpWithYourPlan));
+		 * Assert.assertFalse(validate(LearnHowtoUsetheWebsite));
+		 * Assert.assertFalse(validate(PlanSupport));
+		 * Assert.assertFalse(validate(TechnicalSupport));
+		 * Assert.assertFalse(validate(Seehowtoguides));
+		 * Assert.assertFalse(validate(technicalSupportContactNumber));
+		 * Assert.assertFalse(validate(helpWithYourPlanContactNumber));
+		 * 
+		 * System.out.
+		 * println("All the labels and links for individual federal mamber validated and passed"
+		 * );
+		 */
 	}
+
 	public void validateSHIPlabelAndLinks() {
-		
+
 		validateWithValue("Text-Website Technical Support ", WebsiteTechnicalSupport);
 		validateWithValue("Text-General Questions ", GeneralQuestions);
 		validateWithValue("Text-Claims Questions ", ClaimsQuestions);
@@ -1171,10 +1171,10 @@ public void NavigateRallyandclickonmessagesLink() {
 		validateWithValue("Text-technical Support ContactNumber ", technicalSupportContactNumber);
 		validateWithValue("Text-help With Your Plan ContactNumber", helpWithYourPlanContactNumber);
 
-		System.out.println("All the labels-WebsiteTechnicalSupport,GeneralQuestions,ClaimsQuestions,callUs,claimTelephonenumber,Need_helpNavigatingTheWebsite"
-				+ "Seehowtoguides,technicalSupportContactNumber,helpWithYourPlanContactNumber for SHIP member validated");
+		System.out.println(
+				"All the labels-WebsiteTechnicalSupport,GeneralQuestions,ClaimsQuestions,callUs,claimTelephonenumber,Need_helpNavigatingTheWebsite"
+						+ "Seehowtoguides,technicalSupportContactNumber,helpWithYourPlanContactNumber for SHIP member validated");
 	}
-
 
 	public void validatePCPMedicalabelAndLinks() {
 		try {
@@ -1189,24 +1189,21 @@ public void NavigateRallyandclickonmessagesLink() {
 			e.printStackTrace();
 		}
 
-
-
-
-
-		/*	Assert.assertFalse(validate(HelpWithThisWebsitePCP));
-				Assert.assertFalse(validate(PlanSupportPCP));
-				validateWithValue("Plan Support Text", PlanSupportPCP)
-				Assert.assertFalse(validate(technicalSupportContactNumber));
-				Assert.assertFalse(validate(helpWithYourPlanContactNumber));*/
-	} 
-
+		/*
+		 * Assert.assertFalse(validate(HelpWithThisWebsitePCP));
+		 * Assert.assertFalse(validate(PlanSupportPCP));
+		 * validateWithValue("Plan Support Text", PlanSupportPCP)
+		 * Assert.assertFalse(validate(technicalSupportContactNumber));
+		 * Assert.assertFalse(validate(helpWithYourPlanContactNumber));
+		 */
+	}
 
 	public void validateviewQuestions(String plantype) throws InterruptedException {
 		commonQuestionViewQuestionsBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		Thread.sleep(5000);
-		
-		if(plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("Medica")){
+
+		if (plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("Medica")) {
 			validateWithValue("What browsers are required for this website?", browsersRequiredQuestion);
 			validateWithValue("Why can’t I see my plan information?", palnInformationQuestion);
 			validateWithValue("How do I add my spouse to my online account?", onlineAccountQuestion);
@@ -1215,80 +1212,155 @@ public void NavigateRallyandclickonmessagesLink() {
 			validateWithValue("How do I find out if my drugs are covered?", drugCoveredQuestion);
 			validateWithValue("How do I find a provider?", findProviderQuestion);
 			validateWithValue("Where can I find forms or other plan materials?", planMaterialQuestion);
-			validateWithValue("How do I make a payment, set up automatic payments and view payment history?",paymentHistoryQuestion);
+			validateWithValue("How do I make a payment, set up automatic payments and view payment history?",
+					paymentHistoryQuestion);
 
-			validateWithValue("Where do I find information about plan changes for the upcoming year?", upcomngYearQuestion);
+			validateWithValue("Where do I find information about plan changes for the upcoming year?",
+					upcomngYearQuestion);
 			validateWithValue("How do I disenroll from my plan?", disenrollplan);
 
 			System.out.println("All the labels validated");
-		}else {
-			
+		} else {
+
 			validateWithValue("Common Questions Header", CommonQuestionsHeader);
 
 			System.out.println("View Queastions page opened successfully");
 		}
 
+	}
 
-	} 
 	public boolean validateWithValue(String value, WebElement element) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
 			if (element.isDisplayed()) {
-				System.out.println("Element " +value+ " found!!!!");
-				Assert.assertTrue("Element " +value+ " not found!!!!", true);
+				System.out.println("Element " + value + " found!!!!");
+				Assert.assertTrue("Element " + value + " not found!!!!", true);
 				return true;
 			} else {
-				System.out.println("Element " +value+ " not found/not visible");
-				Assert.fail("Element " +value+ " not found/not visible");
+				System.out.println("Element " + value + " not found/not visible");
+				Assert.fail("Element " + value + " not found/not visible");
 			}
 		} catch (Exception e) {
-			System.err.println("Exception: Element " +value+ "  not found/not visible");
-			Assert.fail("Element " +value+ " not found/not visible");
+			System.err.println("Exception: Element " + value + "  not found/not visible");
+			Assert.fail("Element " + value + " not found/not visible");
 		}
-		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		// note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return false;
 	}
-	
+
 	/**
-	 * Validate the go to CHAT with us for SHIP member 
+	 * Validate the go to CHAT with us for SHIP member
+	 * 
+	 * @throws InterruptedException
 	 */
-	public void validateChatWithUs(){
-		try {
-			validateNew(chatMessage);
-			if (chatMessage.isDisplayed());
-			System.out.println("**Chat message seen is:->"+chatMessage);
-			if(
-				driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) {
-				System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-				System.out.println("** User landed on Contact us Page **");
-				Assert.assertTrue(driver.getTitle().contains("Help & Contact Us"));
-				return ;
-				} else {
-					Assert.fail("The element " + chatMessage.getText() + "is not found");
-				}
-		//	waitforElement(chatoffline);
-			//validateNew(chatLink);
-			//waitforElement(chatLink);
-			//Assert.assertTrue(validate(chatLink));
-			try {
-				chatLink.click();
-				System.out.println("** Chat link clicked **");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public void validateChatWithUs() throws InterruptedException {
+		{ // waitForloader(driver,overlay, 20);
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				// iPerceptionAutoPopUp.click();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
 			}
-			//chatLink.isDisplayed();
-			
-			//if(chatLink.isDisplayed());
-			
-			//chatLink.click();
-				
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+
+		
+		 validateNew(chatMessage); 
+		 if (chatMessage.isDisplayed())
+		 {		  
+		  System.out.println("**Chat message seen is:->"+chatMessage); 
+		 }
+		 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) 
+		 {
+		  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+		  System.out.println("** User landed on Contact us Page **");		  
+		  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+		  } 
+		/*
+		 * else { Assert.fail("The element " + chatMessage.getText() +"is not found"); }
+		 */
+		 
+		 
+		try {
+			chatLink.getText();
+			chatLink.click();
+			System.out.println("*** Start a Chat link clicked ***");
+
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("*** Start a Chat link not clicked ***");
+			e1.printStackTrace();
+
+		}
+		try {
+			String mainwindow = driver.getWindowHandle();
+			Set<String> allWindowHandles = driver.getWindowHandles();
+			for (String currentWindowHandle : allWindowHandles) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, myself, 60);
+			validateNew(myself);
+		}
+			catch (Exception e) {
+			Assert.assertTrue("AARP chat windown not open", true);
+			System.err.println("Agent Chat window not loaded successfully");
+		}
+		try {
+			myself.click();
+			System.out.println("*** On Live chat member selected a option ***");
+
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("*** On live Chat option not selected ***");
+			e1.printStackTrace();
+
+		}
+	
+	}
+
+	public void validateALLlabelAndLinks(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("PlanType");
+		System.out.println("Plan type is :" + planType);
+		if (planType.equalsIgnoreCase("MAPD")) {
+
+			validateWithValue("Text- help With This Website", helpWithThisWebsite);
+			validateWithValue("Text- Help With Your Plan ", HelpWithYourPlan);
+
+			validateWithValue("Text-Learn How to Use the Website ", LearnHowtoUsetheWebsite);
+			validateWithValue("Text- Plan Support", PlanSupport);
+
+			validateWithValue("Text-TechnicalSupport ", TechnicalSupport);
+			validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+
+			String technicalSupportTFN = technicalSupportContactNumber.getText().replaceAll("[\r\n]+", " ");
+			if (technicalSupportTFN.contains("1-800-721-0627")) {
+				Assert.assertTrue("Correct Technical support contact number is displayng",
+						technicalSupportTFN.contains("1-800-721-0627"));
+			} else {
+				Assert.assertFalse("Correct technical support TFN not displaying", true);
+			}
+
+			String helpWithYourPlanTFN = helpWithYourPlanContactNumber.getText().replaceAll("[\r\n]+", " ");
+			;
+
+			if (helpWithYourPlanTFN.contains("1-844-876-6177")) {
+				Assert.assertTrue("Correct Plan support contact number is displayng",
+						helpWithYourPlanTFN.contains("1-844-876-6177"));
+			} else {
+				Assert.assertFalse("Correct Plan support contact number is not displayng", true);
+			}
+			System.out.println("All the labels and links for individual federal mamber validated and passed");
+
 		}
 	}
+
 }
-
-
-
