@@ -321,7 +321,9 @@ public class HealthRecordPage  extends HealthRecordBase {
 			try {
 				WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("button[id*=dropdown-toggle]"));
 				//WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
+				checkModelPopup(driver,1);
 				acctSettingMenuShadowRootBtn.click();
+				checkModelPopup(driver,1);
 			} catch (Exception e) {
 				if (noWaitValidate(sorryError)) {
 					//note: try one more time before giving up
