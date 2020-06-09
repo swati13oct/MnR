@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionPreferencesMemAuthP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesP2")
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesMemAuthP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesMemAuthP2.json" }, tags = { "@memAuth_CommunicationPreferences02" })
