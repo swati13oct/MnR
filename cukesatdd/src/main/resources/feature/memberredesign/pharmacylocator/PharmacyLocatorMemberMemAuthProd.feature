@@ -50,15 +50,29 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	And the user validates more information content based on plan type
 	And the user validates view search PDF link
 
-	
+	@prod_pharmacylocator1a
+	Examples: 
+	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+	  | 15273	| ashah120 | Mnrqa002 | DSOADY17             | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15296	| ashah120 | Mnrqa002 | WILLIAMGARRISON48    | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
+	  | 15279	| ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
+	  | 15280	| ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+
 	@prod_pharmacylocator1b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	 # | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
+
+	@prod_pharmacylocator1b
+	Examples: 
+	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+	  | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  #| 15274	| ashah120 | Mnrqa002 | lanecarolb    | MA       | TexasRx_Pharmacylocator	   | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
-	  | 15274	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | False                  | True             | True                 |
+	  | 15274	| ashah120 | Mnrqa002 | PAULAROTH2       | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
 	# | 15273	| Mnrqa002 | Mnrqa002 | testusername    | MAPD     | Peehip_Pharmacylocator  	   | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
+
+          
 
   @prod_pharmacylocator2 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator English page on member site
@@ -110,7 +124,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  #| 15274	| ashah120 | Mnrqa002 | lanecarolb    | MA       | TexasRx_Pharmacylocator	   | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
-	  | 15274	| ashah120 | Mnrqa002 | KAYCEE0412    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care                   | False                  | True             | True                 |
+	  | 15274	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care                   | False                  | True             | True                 |
 	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
 	# | 15273	| Mnrqa002 | Mnrqa002 | testusername    | MAPD     | Peehip_Pharmacylocator  	   | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 
@@ -165,7 +179,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | KAYCEE0412    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
   @prod_pharmacylocator4 @E2E @Chinese @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator Chinese page on member site
@@ -203,7 +217,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | KAYCEE0412   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
 
 
   @prod_pharmacylocator5 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -256,7 +270,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | KAYCEE0412    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
 
 
   @prod_pharmacylocator6 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -295,7 +309,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | KAYCEE0412    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
 
 
   @prod_pharmacylocator7 @NegativeScenario 
