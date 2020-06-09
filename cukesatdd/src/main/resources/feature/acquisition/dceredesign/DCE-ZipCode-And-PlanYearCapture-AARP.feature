@@ -103,11 +103,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | path                     | pageName                   |drugName|invalidzipcode| zipCode|
       | drug-cost-estimator.html | DCE Redesign - Get Started |Lipitor |12345         |90210   |
       
-    
-       Scenario Outline:  Test to verify the appropriate county when users have more than one counties 
-       
-        @DCE_ZipCodePlanYear_MultipleCounty_SelectAppropriate
-    
+    @DCE_ZipCodePlanYear_MultipleCounty_SelectAppropriate
+   Scenario Outline:  Test to verify the appropriate county when users have more than one counties   
     #Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
