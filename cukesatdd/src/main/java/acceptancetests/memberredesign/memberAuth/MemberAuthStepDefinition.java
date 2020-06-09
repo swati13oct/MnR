@@ -320,6 +320,7 @@ public class MemberAuthStepDefinition{
 		
 		if(accountHomePage!=null){
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
@@ -724,5 +725,42 @@ public class MemberAuthStepDefinition{
 			Assert.fail();
 		}
   	}
+	
+	@Then("^the user navigates to payments secondary page$")
+	public void the_user_navigates_to_payments_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigatePaymentHistoryPage1();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user clicks on signout and validates the signout is successfull$")
+	public void the_user_clicks_signout() throws Throwable {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ProfileandPreferencesPage ProfileandPreferencesPage = PaymentHistoryPage.navigatetoLogoutdropdownlink();
+		if(ProfileandPreferencesPage!=null){
+			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfileandPreferencesPage);
+		}else{
+			System.out.println("==================Profile Prefrence page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user clicks on Contact & help us link & navigate to contact us page$")
+	public void clicks_onContactUs() throws InterruptedException {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ContactUsPage ContactUsPage = PaymentHistoryPage.NavigatetoContactuspage();
+		if(ContactUsPage!=null) {
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, ContactUsPage);
+			System.out.println("========================Contact us page displayed ====================== ");
+		}else{
+			System.out.println("==================Contact us page not displayed======================");
+			Assert.fail();
+		}
+		}
 	
 }
