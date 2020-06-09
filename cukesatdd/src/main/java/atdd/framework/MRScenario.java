@@ -1038,12 +1038,13 @@ try {
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1440x900");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1024x768");
+				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("chrome")) {
 				System.out.println("Inside chrome");
@@ -1059,6 +1060,13 @@ try {
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
+				capabilities.setCapability("maxDuration", "3600");
+			}else if (browserName.equalsIgnoreCase("safari")) {
+				System.out.println("Inside safari");
+				capabilities = DesiredCapabilities.safari();
+				capabilities.setCapability("platform", "Mac 10.15");
+				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1920x1440");
 				capabilities.setCapability("maxDuration", "3600");
 			}
 			if (!(null == capabilities)) {

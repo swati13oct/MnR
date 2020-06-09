@@ -1836,12 +1836,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
+		String browser = MRScenario.browsername;
 		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
 			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
 		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
 			//startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
-			startNew(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}

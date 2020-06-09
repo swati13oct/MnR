@@ -472,11 +472,22 @@ try {
 	 * 
 	 * @param url
 	 */
-	public void startNew(String url) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get(url);
+	public void startNewPRE(String url, String browser) {
+		System.out.println("Browser Name: "+browser);
+		if(browser.equals("safari")) 
+			driver.get(url);
+		else {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(url);			
+			}
 	}
+	
+	public void startNew(String url) {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(url);
+			}
 
 	/***
 	 * the method waits for upto 30 sec till element gets visible before

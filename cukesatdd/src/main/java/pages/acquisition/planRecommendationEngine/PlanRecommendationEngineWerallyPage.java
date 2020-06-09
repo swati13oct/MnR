@@ -91,6 +91,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 		validate(searchBox, 30);
 		if (type.toUpperCase().contains("DOCTORS")) {
 			searchBox.sendKeys(searchParameter);
+			threadsleep(5000);
 			searchButton.click();
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
