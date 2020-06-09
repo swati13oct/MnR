@@ -270,7 +270,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | False             | True                 |
 
 
   @prod_pharmacylocator6 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -309,7 +309,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| ashah120 | Mnrqa002 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | False             | True                 |
+	  | 15295	| ashah120 | Mnrqa002 | PAULAROTH2   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
 
 
   @prod_pharmacylocator7 @NegativeScenario 
