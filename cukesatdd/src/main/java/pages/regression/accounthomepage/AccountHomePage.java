@@ -317,6 +317,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
 	
+	@FindBy(xpath = " //h1[@class='main-heading margin-none']")
+	private WebElement EOBHeading;
+	
+	@FindBy(xpath= "//nav[@id='sub-nav']//a[@class='ng-scope'][contains(text(),'Explanation of Benefits')]")
+	private WebElement EOBLINK;
 	
 	/*
 	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
@@ -488,6 +493,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
 	private WebElement findAPharmacyLink;
+	
+	@FindBy(xpath = "//span[contains(text(),'View Your Claims')]")
+	private WebElement claimsDashboardLink1;
 
 	private PageData myAccountHome;
 	
@@ -4241,4 +4249,54 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
+
+	public ClaimsSummaryPage navigateToClaimsSummaryPage1() {
+		
+		if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+			System.out.println("user is on '" + MRScenario.environment + "' login page");
+			if (driver.getCurrentUrl().contains("/dashboard")) {
+				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+				
+					if (validate(claimsDashboardLink1)) {						
+						System.out.println(" ********** Claims Tile Loacted on dashboard *******");
+						claimsDashboardLink1.click();
+					} else {
+						System.out.println("claims tile not located on the member auth dashboard");
+							}
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkForIPerceptionModel(driver);
+				try {
+					EOBLINK.click(); 					
+					System.out.println("*** EOB Link  clicked ***");
+					//agentstatusReady.click();
+					//System.out.println("*** agent status clicked ***");
+					// if status is ready then login as member 
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					System.out.println("*** EOB LINK not clicked ***");
+					e1.printStackTrace();
+				//	System.out.println("*** agent not 2 clicked ***");
+				}
+				
+				 if (EOBHeading.getText().contains("Explanation of Benefits")) {
+				  System.out.println("EOB page Loaded");
+				  return new
+				  ClaimsSummaryPage(driver); } 
+				 else 
+				 {					 
+				  System.out.println("EOB  page not Loaded");
+				  }		 
+				
+					return null;
+	}	
+			
+}
+		return null;
+	}
+
 }

@@ -536,8 +536,75 @@ public class ContactusRedesignStepDefinition {
 					contactusPage);
 
 	}
+	/***
+	 * 
+	 */
+	@Then("^the user validates the CHAT section for group member$")
+	public void validate_Chat_Section_group() throws InterruptedException {	
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.GroupvalidateChatWithUs();		
+	}
+	@Then("^validate contactUs page for combo plan member$")
+	public void validate_contactUs_page_for_combo_plan_member(DataTable givenAttributes) throws InterruptedException
+	{
+		System.out.println("*****On contactUs page the user should see Help With This Website and Help With Your Plan sections****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateCombolabelAndLinks(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
 	
+	@Then("^the pcp and Medica user validates the labels and contact numebers on the page$")
+	public void pcp_Medica_user_Validates_contactUS(DataTable givenAttributes)
+	{System.out.println("*****the pcp and Medica user validates the labels and contact numebers on the page****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validatePCPMedicalabelAndTFN(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
 	
+	@Then("^for Ship member validates labels and TFNs on the contactUS page$")
+	public void validates_labels_on_the_contactUS_page_for_SHIP_member(DataTable givenAttributes)
+	{ 
+		System.out.println("*****for Ship member validates labels and TFNs on the contactUS page*****");
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+	String callUsSHIP = memberAttributesMap.get("callUsSHIPTFN");
+	String generalQueSHIP = memberAttributesMap.get("generalQueTFN");
+	String claimQueSHIP =memberAttributesMap.get("claimQueTFN");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		
+		contactusPage.validateSHIPalllabelAndLinks(callUsSHIP,generalQueSHIP,claimQueSHIP);
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	@Then("^user click on EmailUs and fill all the detail and click on cancel button$")
+	public void user_fill_all_the_email_Form_details_and_cancel(DataTable givenAttributes)
+	{System.out.println("*****user click on EmailUs and fill all the detail and click on cancel button*****");
+				ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateEmailUsFormWidget(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
 	
 }
+
+
+
 

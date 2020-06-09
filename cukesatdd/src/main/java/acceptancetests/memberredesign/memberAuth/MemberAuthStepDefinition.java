@@ -762,5 +762,27 @@ public class MemberAuthStepDefinition{
 			Assert.fail();
 		}
 		}
-	
+	@Then("^the group user navigates to claims secondary page in Prod & clicks on the EOB LINK$")
+	public void the_user_navigates_to_claims_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ClaimsSummaryPage ClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage1();
+		if(ClaimsSummaryPage!=null){
+			getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE , ClaimsSummaryPage);
+		}else{
+			System.out.println("==================claims page not displayed======================");
+			Assert.fail();
+		}		
+  	}
+	@Then("^the group user clicks on Contact & help us link & navigate to contact us page on PROD$")
+	public void clicks_onContactUsGroup() throws InterruptedException {
+		ClaimsSummaryPage ClaimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		ContactUsPage ContactUsPage = ClaimsSummaryPage.NavigatetoContactuspage();
+		if(ContactUsPage!=null) {
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, ContactUsPage);
+			System.out.println("========================Contact us page displayed ====================== ");
+		}else{
+			System.out.println("==================Contact us page not displayed======================");
+			Assert.fail();
+		}
+		}
 }
