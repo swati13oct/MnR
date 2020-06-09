@@ -252,7 +252,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-			String exp_noZipTxt="A ZIP code is required to locate a pharmacy. Please enter a ZIP code.";
+			String exp_noZipTxt="ZIP Code – Please enter a ZIP code";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
 					pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
@@ -272,14 +272,14 @@ public class PharmacySearchPage extends PharmacySearchBase {
 							exp_zipFormatErrTxt.equals(act_zipFormatErrTxt));
 				}
 			} else { //note: if format is right then going to assume u r getting this error
-				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria may help you get a different result.";
+				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt=modifyZipErr.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 							+ "Expected='"+exp_noPlanForZipErrTxt+"' | Actual='"+act_noPlanForZipErrTxt+"'",
-							exp_noPlanForZipErrTxt.equals(act_noPlanForZipErrTxt));
+							act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt));
 				}
 			} //note: may need to code for a case when zip result in no result but don't know of a zip that has that behavior yet
 		}
