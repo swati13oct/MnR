@@ -88,15 +88,48 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     When user search and add a drug in Step 2
     |DrugName|<drugName>|
     And user clicks on Next: Review Drug Costs button
-    Then load screen should be displayed
+   # Then load screen should be displayed
     And user should be navigated to zipcode and plan year capture page
-    When user enters valid zipcode
-    And user selects county
+    When user enter invalid zipcode
+    |inValidzipCode|<invalidzipcode>|
+    When user enters valid zipcode and county
+    |ZipCode|<zipCode>|
     And user selects plan year
     And user clicks on continue button
     Then load screen should be displayed
     And user should be navigated to Review drug cost estimate page
 
     Examples: 
-      | path                     | pageName                   |drugName|
-      | drug-cost-estimator.html | DCE Redesign - Get Started |Lipitor|
+      | path                     | pageName                   |drugName|invalidzipcode| zipCode|
+      | drug-cost-estimator.html | DCE Redesign - Get Started |Lipitor |12345         |90210   |
+      
+    
+       Scenario Outline:  Test to verify the appropriate county when users have more than one counties 
+       
+        @DCE_ZipCodePlanYear_MultipleCounty_SelectAppropriate
+    
+    #Given the user is on AARP medicare acquisition site landing page
+    When the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validates Get Started Page
+    When the user clicks on Build Drug List to navigate to Step 2
+    Then user should be navigated to Build Drug list page
+    #Then the user clicks on Build Drug List to navigate to Step 2
+    When user search and add a drug in Step 2
+    |DrugName|<drugName>|
+    And user clicks on Next: Review Drug Costs button
+   # Then load screen should be displayed
+    And user should be navigated to zipcode and plan year capture page
+    When user enters valid zipcode
+    And user selects county
+    And user selects plan year
+    And user clicks on continue button
+    #Then load screen should be displayed
+    And user should be navigated to Review drug cost estimate page
+
+    Examples: 
+      | path                     | pageName                   |drugName| zipCode|countyName|
+      | drug-cost-estimator.html | DCE Redesign - Get Started |Lipitor | 80002  |Adam County|
+      
+      

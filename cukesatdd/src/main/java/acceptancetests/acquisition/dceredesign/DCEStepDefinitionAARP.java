@@ -79,11 +79,45 @@ public class DCEStepDefinitionAARP {
 	public void zipcode_field_should_be_visible() {
 	    
 	}
+	
+	@Then("^user enter invalid zipcode$")
+	public void user_enter_invalid_zipcode(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String invalidzipcode = memberAttributesMap.get("inValidzipCode");
+		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DCEgetStarted.validateZipCodeErrorMessage(invalidzipcode);
+	}
+	
+	@Then("^user enters valid zipcode and county$")
+	public void user_enter_valid_zipcode(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("ZipCode");
+		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DCEgetStarted.enterZipCodeandcounty(zipcode);
+	}
 
 	@Then("^County dropdown should be visible$")
 	public void county_dropdown_should_be_visible() {
+		
 	    
 	}
+	
+	@Then("^user select the county from drop down$")
+	public void user_should_be_selected_county() {
+	    
+	}
+	
+	
 
 	@Then("^user verify plan year dropdown$")
 	public void user_verify_plan_year_dropdown() {
