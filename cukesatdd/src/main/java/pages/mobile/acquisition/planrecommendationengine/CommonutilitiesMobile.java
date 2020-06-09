@@ -143,30 +143,32 @@ public class CommonutilitiesMobile extends UhcDriver {
 		return swipeScusses;
 	}
 
-	// if swipe using longPress then 50% else 75%
-	String swipePercentage = "75%";
+	String swipeDownPercentage = "60%";
+	// if swipe using longPress then 50% else 75% for swipe towards up
+	String swipeUpPercentage = "75%";
 	public void mobileLocateElementClick(WebElement element) {
-		mobileFindElementBeforeCallBanner(element, swipePercentage, 8, true);
-		mobileFindElementAfterHeader(element, swipePercentage, 4, false);
+		mobileFindElementBeforeCallBanner(element, swipeUpPercentage, 8, true);
+		mobileFindElementAfterHeader(element, swipeDownPercentage, 8, false);
 		element.click();
 	}
 
 	public boolean mobileLocateElement(WebElement element) {
 		boolean locateStatus = false;
-		boolean locateB = mobileFindElementBeforeCallBanner(element, swipePercentage, 8, true);
-		boolean locateA = mobileFindElementAfterHeader(element, swipePercentage, 4, false);
+		boolean locateB = mobileFindElementBeforeCallBanner(element, swipeUpPercentage, 8, true);
+		boolean locateA = mobileFindElementAfterHeader(element, swipeDownPercentage, 8, false);
 		if (locateB && locateA)
 			locateStatus = true;
 		return locateStatus;
 	}
+	
 	public void mobileLocateElement(WebElement element,String swipepercentage) {
 		mobileFindElementBeforeCallBanner(element, swipepercentage, 8, true);
-		mobileFindElementAfterHeader(element, swipepercentage, 4, false);
+		mobileFindElementAfterHeader(element, swipepercentage, 8, false);
 	}
 
 	public void mobileLocateElementClick(WebElement element, int swipeup, int swipedown) {
-		mobileFindElementBeforeCallBanner(element, swipePercentage, swipeup, true);
-		mobileFindElementAfterHeader(element, swipePercentage, swipedown, false);
+		mobileFindElementBeforeCallBanner(element, swipeUpPercentage, swipeup, true);
+		mobileFindElementAfterHeader(element, swipeDownPercentage, swipedown, false);
 		element.click();
 	}
 
@@ -458,5 +460,35 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public void waitTextPresent(WebElement element,String text,int timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+	}
+	
+	public boolean mobileFindElementHorizontal(WebElement element, String percentage, int swipeCount, boolean swipeRight) {
+		boolean swipeScusses = true;
+		try {
+			if (validate(element, 5)==false &&swipeCount > 0) {
+				swipeScusses = mobileswipeHorizantal(percentage, swipeRight);
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipeHorizantal(percentage, swipeRight);
+					swipeCount--;
+				}
+				mobileFindElementHorizontal(element, percentage, swipeCount, swipeRight);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element not visible");
+		}
+		return swipeScusses;
+	}
+
+	// if swipe using longPress then 50% else 75% for swipe towards right
+	String swipeRightPercentage = "75%";
+	public void mobileFindElementHorizontal(WebElement element) {
+		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
+	}
+	
+	public void mobileFindElementHorizontal(WebElement element,String swipeRightPercentage) {
+		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
 	}
 }

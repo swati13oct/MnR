@@ -867,9 +867,9 @@ try {
 		threadsleep(500);
 		try {
 		if(swipeup)
-			mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, endy)).release().perform();
+			mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
-			mact.press(PointOption.point(startx, endy)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, starty)).release().perform();
+			mact.press(PointOption.point(startx, endy)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(startx, starty)).release().perform();
 		}
 		catch(Exception e) {
 			//e.printStackTrace();
@@ -1065,21 +1065,33 @@ try {
 		Dimension size = mobiledriver.manage().window().getSize();
 		// Starting x location set to % of the width (near left end)
 		percentage = "0.".concat(percentage.replace("%", ""));
+		//System.out.println("percentage : "+percentage);
 		int startx = (int) (size.width * Float.valueOf(1 - Float.valueOf(percentage)));
-		// Ending x location set to 90% of the width (near right end)
-		int endx = (int) (size.width * 0.90);
-		// Y position set to 30% of height Vertically
-		int starty = (int) (size.height * 0.3);
-		System.out.println(size + " " + startx + " " + endx + " " + starty);
+		// Ending x location set to 90% - 95% of the width (near right end)
+		Random rand = new Random();
+		double start=0.90d,end=0.95d;
+		double val = start+(end-start)*rand.nextDouble();
+		System.out.println(val);
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		String randomPercentage = numberFormat.format(val);
+		//System.out.println("randomPercentage Swipe - "+randomPercentage);
+		int endx = (int) (size.width * Double.parseDouble(randomPercentage));
+		// Y position set to 50% of height Vertically
+		int starty = (int) (size.height/2);
+		//System.out.println(size + " " + startx + " " + endx + " " + starty);
 		threadsleep(500);
 		try {
-			if (swiperight)
+			if (swiperight) {
 				//mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
-				mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(endx, starty)).release().perform();
-			else
+				mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+				.moveTo(PointOption.point(endx, starty)).waitAction().release().perform();
+			}
+			else {
 				//mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
-				mact.press(PointOption.point(endx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(startx, starty)).release().perform();
-			
+				mact.press(PointOption.point(endx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+				.moveTo(PointOption.point(startx, starty)).release();
+				mobiledriver.performTouchAction(mact);
+			}
 		} catch (Exception e) {
 			//e.printStackTrace();
 			System.out.println("------------- Exception occurred while Horizantal Swiping -----------------------");
