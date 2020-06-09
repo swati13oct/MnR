@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AddDrugDetails;
@@ -60,26 +61,42 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
-	@When("^user clicks on Next: Review Drug Costs button$")
-	public void user_clicks_on_Next_Review_Drug_Costs_button(){
-
-	}
-	
 	@Then("^load screen should be displayed$")
 	public void load_screen_should_be_displayed(){
-
+		
 	}
 	
-	@Then("^user should be navigated to zipcode and plan year capture page$")
-	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page(){
-	    
+	@When("^the user clicks on Add drugs button$")
+	public void the_user_clicks_on_Add_drugs_button() {
+		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=DCEgetStarted.clickAddDrugsBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
-	@Then("^zipcode field should be visible$")
-	public void zipcode_field_should_be_visible() {
-	    
+	@Then("^plan year dropdown should be displayed during AEP$")
+	public void plan_year_dropdown_should_be_displayed_during_AEP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validatePlanYearDrpDownAEP();
 	}
 	
+	@Then("^plan year dropdown should not be displayed during Non AEP$")
+	public void plan_year_dropdown_should_not_be_displayed_during_NonAEP_period() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validatePlanYearDrpDownNonAEP();
+	}
+	
+	@Then("^user should be navigated to zipcode and plan year capture page for Non AEP$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_Non_AEP(){
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+	}
+	
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+	}
+
 	@Then("^user enter invalid zipcode$")
 	public void user_enter_invalid_zipcode(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -106,27 +123,20 @@ public class DCEStepDefinitionAARP {
 		DCEgetStarted.enterZipCodeandcounty(zipcode);
 	}
 
-	@Then("^County dropdown should be visible$")
-	public void county_dropdown_should_be_visible() {
-		
+	@When("^user selects plan year$")
+	public void user_selects_plan_year() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.selectPlanYear();
+	}
+
+	@When("^user clicks on continue button$")
+	public void user_clicks_on_continue_button(){
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.clickContinueBtn();
+	}
+
+	@Then("^user should be navigated to Review drug cost estimate page$")
+	public void user_should_be_navigated_to_Review_drug_cost_estimate_page() {
 	    
 	}
-	
-	@Then("^user select the county from drop down$")
-	public void user_should_be_selected_county() {
-	    
-	}
-	
-	
-
-	@Then("^user verify plan year dropdown$")
-	public void user_verify_plan_year_dropdown() {
-	   
-	}
-
-	@Then("^Continue button should be displayed$")
-	public void continue_button_should_be_displayed() {
-	   
-	}
-
 }

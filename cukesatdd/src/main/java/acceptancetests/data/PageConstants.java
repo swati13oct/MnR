@@ -721,6 +721,6 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	
 	public static final String DCE_Redesign_GetStarted="dceredesignGetStarted";
 	public static final String DCE_Redesign_BuildDrugList="dceredesignBuildDrugList";
-
+	public static final String DCE_Redesign_ZipCodePlanYearCapture="dceredesignZipCodePlanYearCapture";
 	
 }

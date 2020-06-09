@@ -98,4 +98,13 @@ public class GetStartedPage extends UhcDriver {
 		continueBtn.click();
 	}
 
+	public ZipCodePlanYearCapturePage clickAddDrugsBtn() {
+		AddMyDrugsBtn.click();
+		if(validateNew(zipCodeField)) {
+			Assert.assertTrue("Naviagted to ZipCode and Plan year capture Page", true);
+			return new ZipCodePlanYearCapturePage(driver);
+		}
+		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
+		return null;
+	}
 }

@@ -1,5 +1,6 @@
 package pages.acquisition.dceredesign;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import atdd.framework.UhcDriver;
 
 public class ZipCodePlanYearCapturePage extends UhcDriver {
 
-	@FindBy(xpath = "//input[@id='zip-acode']")
+	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
 	@FindBy(xpath = "//select[@id='county']")
@@ -46,5 +47,50 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	public void clickContinueBtn() {
 		continueBtn.click();
+	}
+	
+	public void selectPlanYear() {
+		Select planYear = new Select(planYearDropdown);
+		planYear.selectByIndex(1);
+	}
+	
+	public ZipCodePlanYearCapturePage validateZipCodePlanYearCapturePageNonAEP() {
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
+			Assert.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
+			return new ZipCodePlanYearCapturePage(driver);
+		}
+		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
+		return null;
+	}
+	
+	public ZipCodePlanYearCapturePage validateZipCodePlanYearCapturePageAEP() {
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(planYearDropdown)&&validateNew(continueBtn)) {
+			Assert.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
+			return new ZipCodePlanYearCapturePage(driver);
+		}
+		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
+		return null;
+	}
+	
+	public ZipCodePlanYearCapturePage validatePlanYearDrpDownNonAEP() {
+		try {
+		if(planYearDropdown.isDisplayed()) {
+			Assert.fail("Plan year dropdown should not be displayed during NonAEP");
+			return null;
+		}
+		}
+		catch(Exception e) {
+			Assert.assertTrue("Plan Year dropdoown should not be displayed", true);
+		}
+		return new ZipCodePlanYearCapturePage(driver);
+	}
+	
+	public ZipCodePlanYearCapturePage validatePlanYearDrpDownAEP() {
+		if(validateNew(planYearDropdown)) {
+			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
+			return new ZipCodePlanYearCapturePage(driver);
+		}
+		Assert.fail("Plan year dropdown not displayed during AEP");
+		return null;
 	}
 }
