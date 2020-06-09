@@ -50,23 +50,11 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	And the user validates more information content based on plan type
 	And the user validates view search PDF link
 
-	@prod_pharmacylocator1a
-	Examples: 
-	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ashah120 | Mnrqa002 | DSOADY17             | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15296	| ashah120 | Mnrqa002 | WILLIAMGARRISON48    | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
-	  | 15279	| ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
-	  | 15280	| ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
-
+	
 	@prod_pharmacylocator1b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15295	| ashah120 | Mnrqa002 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
-
-	@prod_pharmacylocator1b
-	Examples: 
-	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	 # | 15294	| ashah120 | Mnrqa002 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  #| 15274	| ashah120 | Mnrqa002 | lanecarolb    | MA       | TexasRx_Pharmacylocator	   | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| ashah120 | Mnrqa002 | KAYCEE0412    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | False                  | True             | True                 |
 	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
