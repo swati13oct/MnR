@@ -1,8 +1,8 @@
 @regressionMemberProd
-Feature: S1.1 To test Member Auth premium payment flows Micro App.
+Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
-  @regressionMemberPROD @regressionMemberPRODsigninSignout
-  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality of member sign in & sign out
+  @regressionMemberPROD @regressionMemberPRODChatSHIP
+  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality for SHIP member CHAT
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -19,7 +19,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | ashah120 | Mnrqa002 | Pramila1946 |
 
   @regressionMemberPROD @regressionMemberPRODGroupChat
-  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality of member sign in & sign out
+  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality For Group member CHAT
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
