@@ -34,10 +34,10 @@ Feature: 1.03.1 Member Preferences page - Member Auth
     Then the user validates the presence of Back links on Preferences page
 
      Examples: 
-      | TID   | username  | password  | MemUserName     | userSelection | planType                         |
-      | 15311 | qavgogine | qavgogine | testusername    | xxxxx         | MAPD_AARP_GOGreen_Profilepref    |
-      | 15312 | qavgogine | qavgogine | testusername    | xxxxx         | MA_AARP_GOGreen_Profilepref      |
-      | 15313 | qavgogine | qavgogine | testusername    | xxxxx         | PDP_AARP_GOGreen_Profilepref     |
+      | TID   | username  | password  | MemUserName              | userSelection    | planType                         |
+      | 15311 | qavgogine | qavgogine | q2_june_Cosmos_Seg140    | xxxxx            | MAPD_AARP_GOGreen_Profilepref    |
+      | 15312 | qavgogine | qavgogine | q3_sep_UAT4_AARP203      | xxxxx            | MA_AARP_GOGreen_Profilepref      |
+      | 15313 | qavgogine | qavgogine | q2_jun_aarp0179          | xxxxx            | PDP_AARP_GOGreen_Profilepref     |
      #note: need user data with segment id non-000 AND EPMP enabled for below case
      #| xxxxx | qavgogine | qavgogine | testusername    | xxxxx         | MA_001_AARP_GOGreen_Profilepref  |
       
@@ -52,13 +52,13 @@ Feature: 1.03.1 Member Preferences page - Member Auth
     Then the user validates the functionality of updating the email on the iframe
 
     Examples: 
-      | TID   | username  | password  | MemUserName     | userSelection | planType                        | 
-      | 15311 | qavgogine | qavgogine | testusername    | xxxxx         | MAPD_AARP_GOGreen_Profilepref   |
-      | 15312 | qavgogine | qavgogine | testusername    | xxxxx         | MA_AARP_GOGreen_Profilepref     | 
-      | 15313 | qavgogine | qavgogine | testusername    | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
-      | 15314 | qavgogine | qavgogine | testusername    | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
-      | 15315 | qavgogine | qavgogine | testusername    | xxxxx         | MA_UHC_GOGreen_Profilepref      |
-      | 15316 | qavgogine | qavgogine | testusername    | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
+      | TID   | username  | password  | MemUserName            | userSelection | planType                        | 
+      | 15311 | qavgogine | qavgogine | q2_june_Cosmos_Seg140  | xxxxx         | MAPD_AARP_GOGreen_Profilepref   |
+      | 15312 | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | xxxxx         | MA_AARP_GOGreen_Profilepref     | 
+      | 15313 | qavgogine | qavgogine | q2_jun_aarp0179        | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
+      | 15314 | qavgogine | qavgogine | q2_jun_uhc0006         | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
+      | 15315 | qavgogine | qavgogine | q2_jun_uhc0050         | xxxxx         | MA_UHC_GOGreen_Profilepref      |
+      | 15316 | qavgogine | qavgogine | q2_jun_grp0099         | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @memAuth_CommunicationPreferences03 @CommunicationPreferencesMicroApp03 @F220921
@@ -78,8 +78,8 @@ Feature: 1.03.1 Member Preferences page - Member Auth
     Then the user validates the presence of Back links on ship Preferences page 
 
     Examples: 
-      | TID    | username  | password  | MemUserName     | userSelection           | planType | memberType       |
-      | 15309  | qavgogine | qavgogine | testusername    | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref |
+      | TID    | username  | password  | MemUserName           | userSelection      | planType | memberType       |
+      | 15309  | qavgogine | qavgogine | q1_feb_ship_20_001    | xxxxx              | SHIP     | SHIP_ProfilePref |
 
   @memAuth_CommunicationPreferences04 @EPMPpreferencesForComboOnProfile
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
@@ -91,9 +91,9 @@ Feature: 1.03.1 Member Preferences page - Member Auth
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | TID   | username  | password  | MemUserName     | planType       | memberType              |
-   #  | 15310 | qavgogine | qavgogine | testusername    | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
-      | 15310 | qavgogine | qavgogine | testusername    | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
+      | TID   | username  | password  | MemUserName            | planType       | memberType              |
+   #  | 15310 | qavgogine | qavgogine | testusername           | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | qavgogine | qavgogine | q3_sep_Active_combo_005| Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @memAuth_CommunicationPreferences05 @NoEPMPpreferences
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
@@ -104,11 +104,11 @@ Feature: 1.03.1 Member Preferences page - Member Auth
       | Plan Type   | <planType>   |
 
     Examples: 
-      | TID   | username  | password  | MemUserName     | planType               |
-      | 15310 | qavgogine | qavgogine | testusername    | SSUP_ProfilePref       |
-      | 15376 | qavgogine | qavgogine | testusername    | Terminated_ProfilePref |
-      | 15308 || qavgogine | qavgogine | testusername     PCP_ProfilePref        |
-      | 15308 | qavgogine | qavgogine | testusername    | MEDICA_ProfilePref     |
+      | TID   | username  | password  | MemUserName         | planType               |
+      | 15310 | qavgogine | qavgogine | ssuponlymember01    | SSUP_ProfilePref       |
+      | 15376 | qavgogine | qavgogine | q2_jun_aarp0072     | Terminated_ProfilePref |
+      | 15308 || qavgogine | qavgogine | q2_jun_sofl0002    |PCP_ProfilePref        |
+      | 15308 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl019 | MEDICA_ProfilePref     |
       
   @memAuth_CommunicationPreferences06 @CommunicationPreferencesMicroApp06 @F276629
   Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP with plan <planName>
@@ -134,7 +134,7 @@ Feature: 1.03.1 Member Preferences page - Member Auth
     And the user validate the success message
 
     Examples: 
-      | FID    | username  | password  | MemUserName     | planType                 | memberType             | planName                      |
-      | 276629 | qavgogine | qavgogine | testusername    | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
-      | 276629 | qavgogine | qavgogine | testusername    | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
+      | FID    | username  | password  | MemUserName             | planType                 | memberType             | planName                      |
+      | 276629 | qavgogine | qavgogine | q1_feb_ship_20_001      | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
+      | 276629 | qavgogine | qavgogine | q3_sep_Active_combo_002 | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
       
