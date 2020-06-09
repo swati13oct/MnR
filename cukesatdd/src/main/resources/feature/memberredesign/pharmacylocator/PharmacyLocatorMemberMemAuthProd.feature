@@ -290,14 +290,14 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	When the user navigates to pharmacy search page
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
+  And the user enters following details for pharmacy search
+	  | Zip Code 	  | <zipcode>      |
+	  | Distance 	  | <distance>     |
 	And the user selects Pharmacy Types to Filter
 	  | Pharmacy Type | <pharmacyType> |
 	  | Language      | Spanish        |
 	Then the user validates the pharmacies available
 	  | Language      | Spanish        |
-	And the user enters following details for pharmacy search
-	  | Zip Code 	  | <zipcode>      |
-	  | Distance 	  | <distance>     |
     And the user validates pharmacy widgets
 	  | Language      | Spanish        |
 	  | Plan Type     | <planType>     |
