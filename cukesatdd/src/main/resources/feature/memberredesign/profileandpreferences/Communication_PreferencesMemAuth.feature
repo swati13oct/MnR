@@ -43,9 +43,18 @@ Feature: 1.03.1 Member Preferences page - Member Auth
       
   @memAuth_CommunicationPreferences02 @goGreen
   Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
-      | User Selection | <userSelection> |
+ Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     And the user clicks on edit preferences link
     Then the user changes the online preference and saves the change
@@ -63,10 +72,18 @@ Feature: 1.03.1 Member Preferences page - Member Auth
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @memAuth_CommunicationPreferences03 @CommunicationPreferencesMicroApp03 @F220921
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
-      | User Selection | <userSelection> |
+     Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section
     Then the user validates Communication Preferences section
@@ -83,10 +100,18 @@ Feature: 1.03.1 Member Preferences page - Member Auth
 
   @memAuth_CommunicationPreferences04 @EPMPpreferencesForComboOnProfile
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
-    #Removed from Regression as EPMP is still in the pipeline for development
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+ Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
@@ -97,8 +122,18 @@ Feature: 1.03.1 Member Preferences page - Member Auth
       
   @memAuth_CommunicationPreferences05 @NoEPMPpreferences
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     And the user validates that Communication Preferences section does not display
       | Plan Type   | <planType>   |
@@ -112,9 +147,18 @@ Feature: 1.03.1 Member Preferences page - Member Auth
       
   @memAuth_CommunicationPreferences06 @CommunicationPreferencesMicroApp06 @F276629
   Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP with plan <planName>
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+   Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
       | Plan Type   | <planType>   |
