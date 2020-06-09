@@ -277,6 +277,18 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 public boolean validate_SEPoptions_for_planType(String planType) {
 	
 	boolean Validation_Flag = true;
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
 	ChangingCurrentMedicareRadio.isDisplayed();
 	jsClickNew(ChangingCurrentMedicareRadio);
 	
