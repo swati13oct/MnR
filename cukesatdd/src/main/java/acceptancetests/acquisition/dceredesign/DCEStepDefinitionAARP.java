@@ -69,7 +69,7 @@ public class DCEStepDefinitionAARP {
 	@When("^the user clicks on Add drugs button$")
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		ZipCodePlanYearCapturePage zipCodePlanYearPage=DCEgetStarted.clickAddDrugsBtn();
+		BuildYourDrugList zipCodePlanYearPage=DCEgetStarted.clickAddsDrugs();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
@@ -106,8 +106,8 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String invalidzipcode = memberAttributesMap.get("inValidzipCode");
-		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		DCEgetStarted.validateZipCodeErrorMessage(invalidzipcode);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodeErrorMessage(invalidzipcode);
 	}
 	
 	@Then("^user enters valid zipcode and county$")
@@ -119,8 +119,8 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String zipcode = memberAttributesMap.get("ZipCode");
-		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		DCEgetStarted.enterZipCodeandcounty(zipcode);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 
 	@When("^user selects plan year$")
