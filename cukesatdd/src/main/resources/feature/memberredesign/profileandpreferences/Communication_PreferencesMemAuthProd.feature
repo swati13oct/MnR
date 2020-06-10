@@ -71,8 +71,8 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
     Then the user validates the presence of Back links on ship Preferences page 
 
     Examples: 
-      | TID    | username  | password  | MemUserName     | userSelection           | planType | memberType       |
-      | 15309  | ashah120 | Mnrqa002 | lchafner@gmail.com      | SHIP-lchafner@gmail.com   | SHIP     | SHIP_ProfilePref |
+      | TID    | username  | password  | MemUserName     | userSelection   | planType | memberType       |
+      | 15309  | ashah120 | Mnrqa002 | lloydkoby32      |  xxxxx           | SHIP     | SHIP_ProfilePref |
 
 
   @prod_CommunicationPreferences03 @NoEPMPpreferences
