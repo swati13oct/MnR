@@ -154,6 +154,16 @@ public class PrepareForNextYearStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
 	public void user_validatePrepareForNextYearPageContent(DataTable memberAttributes) throws InterruptedException {
+		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
+		if (!expComboTab) {
+			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			testNote.add("===================================================");
+			testNote.add("No tab show for this test setup, skipping Prepare For Next Year page validation...");
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			return;
+		}
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
@@ -261,14 +271,17 @@ public class PrepareForNextYearStepDefinition {
 
 	@Then("^the user navigate to Prepare For Next Year page via Prepare For Next Year tab$")
 	public void user_toPrepareForNextYearPg() throws InterruptedException {
+		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
+		if (!expComboTab) {
+			System.out.println("Don't expect tab to show for this test setup, skipping step...");
+			return;
+		}
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd); //note: at this point still on benefits page
 
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
-
 		prepareForNextYearPage=prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
 	}
