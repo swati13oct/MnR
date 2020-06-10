@@ -252,24 +252,24 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-			String exp_noZipTxt="ZIP Code – Please enter a ZIP code";
+			String exp_noZipTxt="Please enter a ZIP code";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
 					pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt=noZipcode.getText();
 				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
-						exp_noZipTxt.equals(act_noZipTxt));
+						act_noZipTxt.contains(exp_noZipTxt));
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
-				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this: 12345.";
+				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt=invalidZip.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 							+ "Expected='"+exp_zipFormatErrTxt+"' | Actual='"+act_zipFormatErrTxt+"'",
-							exp_zipFormatErrTxt.equals(act_zipFormatErrTxt));
+							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
 				}
 			} else { //note: if format is right then going to assume u r getting this error
 				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria";
@@ -441,6 +441,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
 			expUrl="health-plans/resources/mail-order-pharmacy.html";
+			scrollToView(widget_prefMailServPhar_learnMore);
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
