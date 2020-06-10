@@ -44,8 +44,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for Non AEP
-    When user clicks on continue button
-    Then error message should be displayed
+    #When user clicks on continue button
+    #Then error message should be displayed
     When user enter invalid zipcode
       | inValidzipCode | <invalidzipcode> |
     Then error message should be displayed
@@ -57,7 +57,6 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then error message should be displayed
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
     And user clicks on continue button
     Then load screen should be displayed
     And user should be navigated to Review drug cost estimate page
@@ -65,7 +64,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |
       | drug-cost-estimator.html | DCE Redesign - Get Started |          78452 |   90210 |            1234 |           00000 |
-
+ 
+ 
   @DCE_ZipCodePlanYear_SamChatCall_NonAEP
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on AARP site
     Given the user is on AARP medicare acquisition site landing page

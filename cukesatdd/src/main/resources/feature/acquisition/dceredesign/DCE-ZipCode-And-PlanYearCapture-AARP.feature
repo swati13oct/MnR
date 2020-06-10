@@ -45,14 +45,6 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for AEP
-    When user clicks on continue button
-    Then error message should be displayed
-    When user enter invalid zipcode
-      | inValidzipCode | <invalidzipcode> |
-    Then error message should be displayed
-    When user enter invalid zipcode
-      | inValidzipCode | <invalidzipcode1> |
-    Then error message should be displayed
     When user enter invalid zipcode
       | inValidzipCode | <invalidzipcode2> |
     Then error message should be displayed
