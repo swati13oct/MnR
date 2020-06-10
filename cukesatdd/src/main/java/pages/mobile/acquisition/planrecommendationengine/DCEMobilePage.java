@@ -155,9 +155,13 @@ public class DCEMobilePage extends UhcDriver {
 	}
 
     public void choosePharmacyandBacktoPlans() {
+    mobileUtils.mobileLocateElement(pickPharmacyButton);
 	mobileUtils.mobileLocateElementClick(pickPharmacyButton);
+	mobileUtils.mobileLocateElement(pharmacy1stSelectButton);
 	mobileUtils.mobileLocateElementClick(pharmacy1stSelectButton);
+	mobileUtils.mobileLocateElement(viewCostButton);
 	mobileUtils.mobileLocateElementClick(viewCostButton);
+	mobileUtils.mobileLocateElement(backtoPlansButton);
 	mobileUtils.mobileLocateElementClick(backtoPlansButton);
 }
 	

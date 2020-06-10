@@ -388,6 +388,7 @@ public class ResultsMobilePage extends UhcDriver {
 		mobileSelectOption(temp, "2021");
 		temp = new Select(MSPlanStartMonth);
 		mobileSelectOption(temp, "January 1, 2021");
+		mobileUtils.mobileLocateElement(MSViewPlanButton);
 		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
 	}
 
@@ -476,6 +477,7 @@ public class ResultsMobilePage extends UhcDriver {
 	public void addProviderVPP(String name, String multi) {
 		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
 		String curdriverhandle = driver.getWindowHandle();
+		mobileUtils.mobileLocateElement(enterProvidersInfoMA1stPlan);
 		mobileUtils.mobileLocateElementClick(enterProvidersInfoMA1stPlan);
 		if (multi.equalsIgnoreCase("Yes"))
 			count = 3;
@@ -533,6 +535,7 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void navigatePRE() {
+		mobileUtils.mobileLocateElement(startnowButton);
 		mobileUtils.mobileLocateElementClick(startnowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
@@ -544,6 +547,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Navigate from VPP to PRE using Startnow : ");
 		plansLoader();
 		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+		mobileUtils.mobileLocateElement(startnowButton);
 		mobileUtils.mobileLocateElementClick(startnowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
@@ -571,6 +575,7 @@ public class ResultsMobilePage extends UhcDriver {
 	public ArrayList<String> getDrugsVPP() {
 		threadsleep(5000);
 		validate(drugsInfoMA1stPlan, 60);
+		mobileUtils.mobileLocateElement(drugsInfoMA1stPlan);
 		mobileUtils.mobileLocateElementClick(drugsInfoMA1stPlan);
 		vppDrugsResults = new ArrayList<String>();
 		for (WebElement e : drugsListMA1stPlan) {
@@ -893,6 +898,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public void useraddDrugsVPP(String drugDetails) {
 		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		mobileUtils.mobileLocateElement(enterDrugsInfoMA1stPlan);
 		mobileUtils.mobileLocateElementClick(enterDrugsInfoMA1stPlan);
 		DCEMobilePage dcemobile = new DCEMobilePage(driver);
 		dcemobile.drugsHandlerWithdetails(drugDetails);
