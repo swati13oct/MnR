@@ -68,7 +68,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@class='signup']/a[1]")
 	private WebElement headerSigninLink;
 	
-	@FindBy(xpath = "//*[@class='signup']/a[2]")
+	@FindBy(css = "#RegisterSignupSeperator")
 	private WebElement headerRegisterLink;
 	
 	@FindBy(xpath = "//a[@id='dupIconFlyOut']//img[@dtmid='acq_visitor_profile']")
@@ -145,22 +145,25 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
     private WebElement headerAdvantageplanLink;
     
-    @FindBy(css = "#subnav_2 div[class$='content-2'] div:nth-of-type(1) a") 
+    @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
+	private WebElement headerDualSpecialLink;
+
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>a")
     private WebElement headerMedicaresupplementplanLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(2)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
     private WebElement headerPrescriptionLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(3)>a")
+    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
     private WebElement headerGetaPlanRecommendationLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(4)>a")
+    @FindBy(linkText = "Drug Cost Estimator")
     private WebElement headerDrugcostLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
+    @FindBy(linkText = "Pharmacy Search")
     private WebElement headerPharmacysearchLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(6)>a")
+    @FindBy(linkText = "Provider Search")
     private WebElement headerProvidersearchLink;
     
  //Learn about Medicare inner element
@@ -286,7 +289,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerSigninLink, 30);
 		Assert.assertTrue(headerSigninLink.getText().contains("Sign in"));
 		validate(headerRegisterLink, 30);
-		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
+//		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
 		validate(headerHeartNumberofPlan, 30);
 		validate(headerNavigationBar, 30);
 		validate(headerNavigationBarHomeTab, 30);
@@ -361,7 +364,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			else
 				validateLinks("medicare.uhc.com");
 		browserBack();
-		
+		backtoshopforaplan();
 		headerRegisterLink.click();
 		validateLinks("healthsafe-id.com/register/personalInfo");
 		
@@ -587,7 +590,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		 actions.moveToElement(headerGetaPlanRecommendationLink,20,0).click().perform();*/
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).click(headerGetaPlanRecommendationLink).build().perform();
 		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
+//		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
 	}
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	

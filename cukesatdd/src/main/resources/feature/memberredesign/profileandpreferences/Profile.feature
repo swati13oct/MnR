@@ -1,4 +1,4 @@
-@accountProfileProfile @thePredators 
+@accountProfileProfile @thePredators @F402311 
 Feature: 1.02 Member Profile page
 
   Background: If run on stage then feature security flag needs to be true
@@ -12,7 +12,8 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType>       |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
-	And the ship user validates the need help section
+    #note: moved to footer feature
+	#And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <memberType> |
@@ -108,7 +109,7 @@ Feature: 1.02 Member Profile page
     And the user validates the address section
       | Member Type | <memberType> |
 
-    @devRegression @mocked
+    @mocked
     Examples: 
       | TID   | userSelection                           | planType | memberType                      |
     #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
@@ -358,80 +359,7 @@ Feature: 1.02 Member Profile page
     | Unknown_26 | COMBO     | FedShip      |  NON LIS_ProfilePref      |
     | Unknown_27 | SSUPGroup |Group         |  NON LIS_ProfilePref      |
    
-  @accountProfile18
-  Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
-    Given I am a authenticated member on the member redesign site for Direct Login
-      | Member Type | <memberType> |
-    When the above plantype user logs in 
-      | friendname     | <friendname>  |
-      | favouritecolor | <favcolor>    |
-      | PhoneNumber    | <phonenumber> |
-   Then member should navigate to Home pag  
-   Then User should be able to validate Dashboard elemt    
- 
- 	@accountProfile18a
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       | MAIndividualCOSMOS_ProfilePref  | name1      | color1   | number1     |
-       | MAPDNICE_ProfilePref            | name1      | color1   | number1     |
-       | MANICE_ProfilePref              | name1      | color1   | number1     |
-       | MAPDCOSMOS_ProfilePref          | name1      | color1   | number1     |
-
- 	@accountProfile18b
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       | AARPPDP_ProfilePref             | name1      | color1   | number1     |
-       | ACTIVEPCP_ProfilePref           | name1      | color1   | number1     |
-       | ACTIVEMedica_ProfilePref        | name1      | color1   | number1     |
-       | GROUPMA_ProfilePref             | name1      | color1   | number1     |
-
- 	@accountProfile18c
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       | GROUPMAPD_ProfilePref           | name1      | color1   | number1     |
-       | GROUPDP_ProfilePref             | name1      | color1   | number1     |
-       |  GROUPSSUP_ProfilePref          | name1      | color1   | number1     |
-       |  GROUPDPSSUP_ProfilePref        | name1      | color1   | number1     |
-
- 	@accountProfile18d
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       |  PREACTIVEGRP_ProfilePref       | name1      | color1   | number1     |
-       | ACTIVEGOVTSHIPCOMBO_ProfilePref | name1      | color1   | number1     |
-       |  MULTIGOVPRETERM_ProfilePref    | name1      | color1   | number1     |
-       |  ACTIVEPRESHIP_ProfilePref      | name1      | color1   | number1     |
-
- 	@accountProfile018e
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       |  ACTIVESHIP_ProfilePref         | name1      | color1   | number1     |
-       |  PRESHIP_ProfilePref            | name1      | color1   | number1     |
-       |ACTIVETERMFEDSHIPCOMBO_ProfilePref | name1    | color1   | number1     |
-       |  MICROMULTIFEDSHIP_ProfilePref  | name1      | color1   | number1     |
-
- 	@accountProfile18f
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       | MULTIFEDACTIVE_ProfilePref      | name1      | color1   | number1     |         
-       | FEDSHIPPREEFFECTIVE_ProfilePref | name1      | color1   | number1     |    
-       |  MAPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |
-       |  MAPDPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |
-
- 	@accountProfile18g
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       | PDPPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |  
-       | GRPMAPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
-       | GRPMAPDPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
-       |  SSUPPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
-
- 	@accountProfile18h
-    Examples: 
-       | memberType          | friendname | favcolor | phonenumber |
-       |  GRPPDPPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
-       |  GRPDPSSUP_ProfilePref          | name1      | color1   | number1     |  
-       
-       
+        
        @accountProfile019  @ShipEndtoEnd @AP_Part1_Regression @codetransformers
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
@@ -439,7 +367,8 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType>       |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
-	And the ship user validates the need help section
+    #note: moved to footer feature
+	#And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <memberType> |

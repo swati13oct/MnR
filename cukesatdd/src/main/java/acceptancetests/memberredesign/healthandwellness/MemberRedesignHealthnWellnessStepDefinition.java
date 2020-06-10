@@ -21,6 +21,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.testharness.TestHarness;
 /**
@@ -85,6 +86,9 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			Assert.assertTrue("PROBLEM - unable to navigate to the Health and Wellness page", healthnWellnessPage!=null);
 			getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 		} else {
+			AccountHomePage accountHomePage=(AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			HealthAndWellnessPage healthnWellnessPage=accountHomePage.navigateDirectToHwPag();
+			/* tbd 
 			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
 			int index=healthnWellnessPage.validateHeaderOnDashborad();
@@ -96,6 +100,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			} else {
 				System.out.println("Located shadow root element with element index ="+index);
 			}
+			*/
 			healthnWellnessPage.clickHealthnWellnessTab();
 			getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 		} 

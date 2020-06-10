@@ -1,4 +1,4 @@
-@CommunicationPreferences @thePredators 
+@CommunicationPreferences @thePredators @F402311
 Feature: 1.03 Member Preferences page
 
   Background: If run on stage then feature security flag needs to be true

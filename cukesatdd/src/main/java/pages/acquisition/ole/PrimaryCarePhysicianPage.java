@@ -3,10 +3,12 @@
  */
 package pages.acquisition.ole;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -65,7 +67,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	//Rally - ProviderLookup
 	
-	@FindBy(xpath = "//a[contains(text(), 'Primary Care Physician')]")
+	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement SelectPCPLink;
 
 	@FindBy(xpath = "//span[@class='pcp']//button")
@@ -235,7 +237,12 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
-						
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						validateNew(filterBtn);
 			
 						if (AssinPCPLinks.size()>0){
@@ -330,5 +337,53 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			return null;
 		}
 	}
-
+	//
+	public ArrayList<String> pcpinforetreive(String plantype){
+	
+		WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+		String mPCPinfo=PCPSearchLink.getText();
+		System.out.println(mPCPinfo);
+		PCPSearchLink.click();
+        ArrayList<String> PCPproviderNames = new ArrayList<String>();
+		List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
+		for(WebElement element:pcpproviders)
+		{
+			String provider = element.getText();
+			PCPproviderNames.add(provider.trim());
+		}
+			
+		return PCPproviderNames;
+	}
+	
+	public PrimaryCarePhysicianPage navigate_PCPPage() {
+		boolean flag;
+		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
+		PCPSearchLink.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
+		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
+		Assert.assertTrue("PCP is not highlighted by blue colour", flag);
+		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText();
+		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider or PCP Full Name: ']//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
+		String PCPNumber= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
+		
+		System.out.println("PCP Name is Displayed"+actualProvider);
+		System.out.println("PCP Name is Displayed"+expectedProvider);
+		System.out.println("PCP Number is Displayed"+PCPNumber);
+		
+		//Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
+		Assert.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		
+		return null;
+			
+	}	
 }
+	

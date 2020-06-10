@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class UpdateRecurringPage extends UhcDriver {
@@ -24,7 +25,7 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(id = "optionsRadios30")
 	private WebElement CancelPaymentRadioBtn;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios30' and not(attribute::class)]")
+	@FindBy(xpath = "//label[@for='optionsRadios40' and not(attribute::class)]")
 	private WebElement CanceltRadioBtnShip;
 
 	@FindBy(xpath = "//button[@class='btn btn--primary payment-selection__btn']")
@@ -33,7 +34,7 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='Back To Overview']")
 	private WebElement BackToOverviewButton;
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(xpath = "//p[text()='Checking Account Information']")
@@ -52,7 +53,8 @@ public class UpdateRecurringPage extends UhcDriver {
 	}
 
 	public PaymentsFormPage selectCheckingAccountAndClickOnNext() {
-		System.out.println("User is on Update Automatic Recurring Page");
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("User is on Update Automatic Payments Page");
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account radio button");
 		NextButton.click();
@@ -63,7 +65,7 @@ public class UpdateRecurringPage extends UhcDriver {
 		} else
 			return null;
 	}
-
+	
 	public CreditCardUPGPage selectCCAndClickOnNext() {
 
 		System.out.println("User is on setup Automatic Recurring Page");

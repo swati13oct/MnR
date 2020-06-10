@@ -44,6 +44,7 @@ import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 
 /**
@@ -201,6 +202,8 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error validating plans in  VPP plan summary page",
 				plansummaryPage.validateVPPPlanSummaryPage());
+		String SiteName = "AARP_ACQ";
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 	}
 
 	/**
@@ -1133,13 +1136,48 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
 
 		//----- MA plan type ----------------------------
-		String planType="MA";
 		//plansummaryPage.viewPlanSummary(planType);
 		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		
+		
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Then("^user saves two ms plans as favorite on AARP site$")
+	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+		//----- MS plan type ----------------------------
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
+
 	}
 	
 	@Then("^user gets a create profile prompt on AARP site$")
@@ -1164,6 +1202,17 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	}
 
+	@And("^user click on Sign In from the Popup on AARP site$")
+	public void user_click_on_Sign_In_On_Popup_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
+	}
+	
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site$")
 	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1679,10 +1728,20 @@ public class VppStepDefinitionUpdatedAARP {
 
 	}
 	@Then("^user clicks on resume application button in the AARP site")
-	public void click_resume_application() throws Throwable{
+	public void click_resume_application(DataTable givenAttributes) throws Throwable{
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.ResumeApplicationButton();
+		plansummaryPage.ResumeApplicationButton(DateOfBirth);
 
 	}
 
@@ -1977,15 +2036,14 @@ public class VppStepDefinitionUpdatedAARP {
 	public void verify_Call_SAM_icon_is_visible_or_not() throws InterruptedException {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
+		 aquisitionhomepage.validateCallSam();
+		/*
+		 * if (Aquisitionhomepage != null) {
+		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * System.out.println("TFN Widget is Displayed"); } else{
+		 * Assert.fail("TFN Widget is NOT Displayed"); }
+		 */
 	}
 	
 	
@@ -2009,15 +2067,14 @@ public class VppStepDefinitionUpdatedAARP {
 	public void verify_Chat_SAM_icon_is_visible_or_not() throws InterruptedException {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateChatSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
+		aquisitionhomepage.validateChatSam();
+		/*
+		 * if (Aquisitionhomepage != null) {
+		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * System.out.println("Chat Widget is Displayed"); } else{
+		 * Assert.fail("Chat Widget is NOT Displayed"); }
+		 */
 	}
 	
 	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent$")
@@ -2513,7 +2570,7 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
 		if(isMultutiCounty.equalsIgnoreCase("YES")) {
-			vppTestHarnessPage.SelectCounty(CountyName);
+			vppTestHarnessPage.SelectCountyforplanDetails(CountyName);
 		}
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
 		if(vppPlanDetailsPage!=null){
@@ -2685,7 +2742,305 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
+	@Then("^Navigate to Visitor Profile page on AARP site$")
+	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 	
+	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	@Given("^the user is on VistorProfile TestHarness page for AARP$")
+	public void validateUserIsOnAARP_VPTestharnessPage_for_AARP(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage.GetVisitorProfileTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE,vpTestHarnessPage);
+	}
+	
+	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on AARP$")
+	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinGuestprofileLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user Enters Fields and selects helper mode for Save plans in Authenticated profile to VP with plans data on AARP$")
+	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP(
+			DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String uuid = inputAttributesMap.get("UUID");
+		String isguest = inputAttributesMap.get("IsGuest");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid, isguest);
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on AARP site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithDrugsandPharmacyinVisitorProfile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Providers in Visitor Profile on AARP site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithProvidersinVisitorProfile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_LaunchVPwithProvidersLink();
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects plan to compare from visitor Profile on AARP site$")
+	public void user_selectsplantoComparefromVisitorProfile_on_AARP(DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Plancompare = inputAttributesMap.get("Plan compare");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		ComparePlansPage planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
+
+		if (planComparePage != null) {
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		} else {
+			Assert.fail("Error Loading on Plan Compare page");
+		}
+
+	}
+
+	@Then("^verify plans added in plan compare on visitor Profile for AARP$")
+	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forAARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
+	}
+
+	@And("^user Enters plan info to land on plan details from visitor Profile on AARP site$")
+	public void user_EntersplaninfotolandonplandetailsfromvisitorProfileonAARPsite(DataTable inputAttributes)
+			throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String ContractNo = inputAttributesMap.get("Contract Number");
+		String PbpNo = inputAttributesMap.get("PBP Number");
+		String SegId = inputAttributesMap.get("Segment ID");
+		String CountyCD = inputAttributesMap.get("County code");
+		String product = inputAttributesMap.get("Product");
+		String year = inputAttributesMap.get("Plan Year");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		PlanDetailsPage vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode, ContractNo,
+				PbpNo, SegId, CountyCD, product, year);
+
+		if (vppPlanDetailsPage != null) {
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		} else {
+			Assert.fail("Error Loading on Plan Details Page page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch OLE for Guest profile on AARP$")
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_AARP(DataTable givenAttributes) throws Exception {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		String PlanName = memberAttributesMap.get("Plan Name");
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanType = memberAttributesMap.get("Plan Type");
+		
+		
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		WelcomePage welcomePage = vpTestHarnessPage.NavigateToOLEfromVP();
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		} else {
+			Assert.fail("Error Loading OLE Welcome page");
+		}
+	}
+	
+	@And("^user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site$")
+	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteDrugAndPharamacy();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	
+	@And("^user selects Delete Provider on the Authenticated profile on AARP site$")
+	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteProvider();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	
+	@Then("^the user enter the searchValue in the search text box and hits enter$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+			throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("search Value");
+		System.out.println("Search value" + InputValue);
+		Thread.sleep(3000);
+
+		aquisitionhomepage.enterSearchtextvalue(InputValue);
+
+	}
+	
+
+@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
+public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+	for (int i = 0; i < AttributesRow.size(); i++) {
+
+		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+	}
+	String InputValue = urlAttributesMap.get("NewSearchValue");
+	System.out.println("NewSearchValue" + InputValue);
+	Thread.sleep(3000);
+	
+	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+ 
+}
+
+	@Then("^the user should see fifteen results before pagination$")
+	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateFifteenResults();
+
+	}
+
+	@Then("^the user validates count of results aganist the total shown at top of the page$")
+	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCountResults();
+	}
+
+	@Then("^the user validates pagination and results displayed$")
+	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validatePaginationofSearchResults();
+	}
+
+	@Then("^the user validates Error message$")
+	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String error = urlAttributesMap.get("Error");
+		String newSearchValue=urlAttributesMap.get("NewSearchValue");
+		System.out.println("Error : " + error);
+		Thread.sleep(3000);
+		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+	}
+
+	@Then("^the user clear secondary search box and insert new search value$")
+	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("New Search Value");
+		System.out.println("New Search Value" + InputValue);
+		Thread.sleep(3000);
+		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+
+	}
 	
 	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
@@ -3067,4 +3422,66 @@ public class VppStepDefinitionUpdatedAARP {
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
 
+	@Then("^agent saves two plans as favorite on AARP site for user$")
+	public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Then("^user saves all plans as favorite on AARP site$")
+	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
 }

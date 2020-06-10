@@ -19,6 +19,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
 public class PlanRecommendationEngineDrugsPage extends UhcDriver {
@@ -35,16 +36,22 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Drug Costs";
+                String page = "Drug";
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
+                ArrayList<String> DrugsInDCE;
+                public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
+                public static ArrayList<String> drugNames = new ArrayList<String>();
+                public static ArrayList<String> drugNamesStartOver = new ArrayList<String>();
+                public static ArrayList<String> drugNamesinPRE = new ArrayList<String>();
+                
                 
                 @FindBy(id = "planSelectorTool")
                 private WebElement iframePst;
 
 // Drugs page Elements
 
-                @FindBy(xpath = "//*[@class='progress-bar-title']/h1")
+                @FindBy(css = "#progress-bar-title")
                 private WebElement planSelectorPageTilte;
 
                 @FindBy(xpath = "//*[@class='progress-bar-info']/h2")
@@ -113,7 +120,10 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
             	
             	@FindBy(css = "uhc-autocomplete uhc-menu-item")
             	private List<WebElement> drugsAutoList;
-                
+            	
+            	@FindBy(css = "uhc-list-item .list-item-content")
+            	private List<WebElement> drugNameList;
+                           
 // drugs Page Modal popup
             	
             	@FindBy(css = "#modal uhc-radio[class*='checked']")
@@ -146,6 +156,12 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
             	@FindBy(css = "#modal uhc-alert")
             	private WebElement modalError;
             	
+            	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
+            	private WebElement modalGenericSwitchLabel;
+
+            	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-container")
+            	private WebElement modalGenericSwitchRadio;
+            	
 //Generic modal
             	
             	@FindBy(css = "#modal uhc-alert")
@@ -170,6 +186,9 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
             	// Find drug element and lookup for name
             	@FindBy(css = ".list-item-content")
             	private WebElement drugName;
+            	
+            	@FindBy(css = "uhc-list uhc-list-item .list-item-content")
+            	private List<WebElement> drugsListNames;
 			          	
 
 //Drugs Page Element Verification Method 
@@ -179,22 +198,21 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 String currentPageUrl = driver.getCurrentUrl(); 
                                                 currentPageUrl.contains("/plan-recommendation-engine.html/");
                                                 validate(planSelectorPageTilte);
-                                                Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//                                                Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug Costs"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
-                                                Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//                                                Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(drugTitle);
-                                                Assert.assertTrue(drugTitle.getText().contains("prescription "));
+//                                                Assert.assertTrue(drugTitle.getText().contains("prescription "));
                                                 validate(yesOption, 30);
-                                                Assert.assertTrue(yesOption.getText().contains("Yes"));
+//                                                Assert.assertTrue(yesOption.getText().contains("Yes"));
                                                 validate(noOption, 30);
-                                                Assert.assertTrue(noOption.getText().contains("No"));
+//                                                Assert.assertTrue(noOption.getText().contains("No"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 //Drugs Search Page Element Verification Method
@@ -204,31 +222,29 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			currentPageUrl.contains("/plan-recommendation-engine.html/");
                             			validate(planSelectorPageTilte);
                             			validate(pageStepsNumberName, 30);
-                            			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
                             			validate(pageProgressPercentage, 30);
-                            			Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
                             			validate(progressbar);
                             			validate(drugsearchbuildpres);
                             			validate(drugsearchdescription);
-                            			Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
+//                            			Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
                             			validate(drugsearchBox);
                             			validate(drugsearchButton);
                             			validate(continueBtn);
                             			previousBtn.click();
-                            			Assert.assertTrue(yesOption.getText().contains("add"));
+//                            			Assert.assertTrue(yesOption.getText().contains("add"));
                             			continueBtn.click();
                             		}
                             	
 //Drugs Search Generic Element Verification Method
                             	public void genericElements() {
                             		validate(modalGenericDescription, 30);
-                            		Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
+//                            		Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
                             		validate(modalGenericDrug, 30);
-                            		Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
+//                            		Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
                             		validate(modalGenericKeep, 30);
-                            		Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
-                            		validate(modalGenericSwitch, 30);
-                            		Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
+//                            		Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
+                            		validate(modalGenericSwitchLabel, 30);
+//                            		Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
                             	}                            	
                                 
 // Selecting drug options in Drug Costs Page
@@ -252,7 +268,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 	drugpageOptions(drugsSelection);
                                 	continueBtn.click();
                             		System.out.println("Validating " + page + " page Continue button functionality");
-                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
                             	}
                                 
 //Drug option selects in Drug page
@@ -296,7 +312,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			}
                             		}
                             		validateResultsCount();
-                            		checkRemove(drugslist.length);
+//                            		checkRemove(drugslist.length);
                             		validateResultsCount();
                             		
                             	}
@@ -306,11 +322,44 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 public void continueNextpage() {
                             		validate(drugsearchBox,30);
                             		threadsleep(2000);
+                            		drugnamesList();
                             		continueBtn.click();
                             		System.out.println("Validating " + page + " page Continue button functionality");
                             		desktopCommonUtils.nextPageValidation(page.toUpperCase());
                             	}
                                 
+// Continue with ZeroDrug Function
+                                
+                                public void continueNextpageZeroDrug() {
+                            		validate(drugsearchBox,30);
+                            		threadsleep(2000);
+                            		continueBtn.click();
+                            		System.out.println("Validating " + page + " page Continue button functionality");
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+                            	}
+                                
+// Fetch the drug details and compare with DCE 
+                                
+                                public void comparingDrugwithDCE() {
+                            		System.out.println("Validating " + page + " page druglist with VPP drugs");
+                                	DrugsInDCE = ACQDrugCostEstimatorPage.DCEDrugsList;
+                            		threadsleep(2000);
+                            		drugnamesList();
+                            		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
+                            	}
+                                
+                                
+                                
+// Compare the drug details and compare with DCE 
+                                
+                                public void comparingDrugsStartOver() {
+                            		System.out.println("Validating " + page + " page druglist with VPP drugs");
+                            		threadsleep(2000);
+                            		drugNamesinPRE = drugNames;
+                            		drugnamesList();
+                            		drugNamesStartOver = drugNames;
+                            		verifyConfirmationmodalResults(drugNamesinPRE.size(), drugNamesinPRE, drugNamesStartOver);
+                            	}
 //Validating Result Count
                                 public void validateResultsCount() {
                             		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
@@ -336,12 +385,28 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		int beforeRemove = drugsList.size();
                             		WebElement remove = drugsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
                             		remove.click();
+                            		threadsleep(3000);
                             		int afterRemove = drugsList.size();
                             		if (beforeRemove == afterRemove) {
                             			System.out.println("Remove Results Count mismatch");
                             			Assert.assertTrue(false);
                             		}
                             	}
+                                
+//Drug name List
+                                
+                                public ArrayList<String> drugnamesList() {
+                                	int count = drugNameList.size();
+                                	drugNames = new ArrayList<String>();
+                                	for (int i = count-1; i >= 0; i--) {
+                    					threadsleep(1000);
+                    					drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() +" "
+                    							+drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText());
+                    					}
+                                	Collections.sort(drugNames);
+                        			System.out.println("Drugs Name list is : "+drugNames);
+                        			return drugNames;
+                                }
 //Canceling the Model in Drug Page                                
                                 
                                 public void drugspageCancel(String drugInfo) {
@@ -419,10 +484,12 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			drugsearchBox.sendKeys(drugName);
                             			if(searchButtonClick) {
                             			drugsearchButton.click();
+                            			threadsleep(6000);
                             			validate(modalSelcetedDrug,30);
                             			threadsleep(2000);
                             			Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),"Drug name is not Matched :"+drugName);
                             			//Select modal
+                            			threadsleep(2000);
                             			modalcontinue.click();
                             			threadsleep(2000);
                             			}
@@ -447,6 +514,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			}
                             			if (threeeMonthfrequency)
                             				freq.selectByVisibleText("Every 3 Months");
+                            			
+                            			threadsleep(4000);
                             			modalcontinue.click();
                             			
                             			if (GenericDrug) {
@@ -454,9 +523,10 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             				threadsleep(2000);
                             				//Generic modal
                             				if(switchGeneric) {
-                            					modalGenericSwitch.click();
+                            					clickSwitchdrug();
                             					drugName = modalGenericDrug.getText();
                             				}
+                            				threadsleep(2000);
                             				modalcontinue.click();
                             			}
                             			
@@ -464,6 +534,14 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		} catch (Exception e) {
                             			System.out.println("Unable to add drug");
                             		}
+                            	}
+                                
+// Clicking Switch Drug Model
+                                
+                                public void clickSwitchdrug() {
+                            		modalGenericSwitchLabel.click();
+                            		threadsleep(2000);
+                            		jsClickMobile(modalGenericSwitch);
                             	}
                                 
 //Validate Added Drug Name
@@ -573,7 +651,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		boolean available=false;
                             		for(WebElement drug:modalSelcetedDrugsList) {
                             			if(drug.getText().trim().equalsIgnoreCase(drugName)) {
-                            				drug.click();
+                            				drug.findElement(By.cssSelector("label")).click();
                             				available=true;
                             				break;
                             			}
@@ -584,9 +662,75 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		}
                             	}
                                 
+// Drug Not found Functionality
+                                
+                                public void drugNotFound(String searchText) {
+                            		validate(drugsearchBox, 30);
+                            		drugsearchBox.sendKeys(searchText);
+                            		drugsearchButton.click();
+                            		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("NO"),
+                            				"Expected Error Message not displayed");
+                            	}
+                                
+                                public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
+
+                            		if(drug.size()==drugListVPP.size() && count==drug.size()) {
+                            			String druglist =drug.toString();
+                            			String vppdruglist =drugListVPP.toString();
+                            			if(druglist.equalsIgnoreCase(vppdruglist)) {
+                            				System.out.println("Drug and Modal Result's Content matched");
+                            			}
+                            			else {
+                            				System.out.println("Drug and Modal Result's Content mismatch");
+                            				Assert.assertTrue(false);
+                            			}
+                            		}
+                            		else {
+                            			System.out.println("Drug and Modal Results Count mismatch");
+                            			Assert.assertTrue(false);
+                            		}
+                            	}
+                                
 
                 public void browserBack() {
 
                                 driver.navigate().back();
                 }
+                
+                static ArrayList<String> addedDrugNames = new ArrayList<String>();
+            	
+            	public void addDrugsPRE(String drugsDetails) {
+            		drugsInitiate("Yes");
+            		drugsHandlerWithdetails(drugsDetails);
+            	}
+            	
+            	public ArrayList<String> getDrugsdetails() {
+            		addedDrugNames = new ArrayList<String>();
+            		for(WebElement e:drugsListNames) {
+            			addedDrugNames.add(e.getText().replace("\n", " ").replace("  ", " ").trim());
+            		}	
+            		System.out.println(addedDrugNames);
+            		return addedDrugNames;
+            	}
+                
+                public void verifyExisitngPREDruglist() {
+            		drugsInitiate("Yes");
+            		//addedDrugNames - Static variable which stored drug info in first run
+            		ArrayList<String> existingDrugNames = addedDrugNames;
+            		getDrugsdetails();
+            		ResultsMobilePage res = new ResultsMobilePage(driver);
+            		res.containsname(existingDrugNames, addedDrugNames);
+            	}
+
+            	public void continueNextpageNameDrug() {
+            		clickDrugContinue();
+            		desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
+            	}
+            	
+            	public void clickDrugContinue() {
+            		validate(drugsearchBox, 30);
+            		threadsleep(2000);
+            		continueBtn.click();
+            		System.out.println("Validating " + page + " page Continue button functionality");
+            	}
 }

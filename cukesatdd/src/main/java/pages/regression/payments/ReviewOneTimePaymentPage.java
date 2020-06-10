@@ -36,6 +36,9 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "custom-page-title")
 	private WebElement confirmPageHeader;
+
+	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
+	private WebElement OnlyOnePaymentRequestMessage;
 	
 	public ReviewOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -75,6 +78,7 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			System.out.println("User is on Confirmation Page");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
+
 			System.out.println("User is not on Confirmation Page");
 			return null;
 		}
@@ -114,6 +118,39 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean validate_onlyOnePaymentRequest_Message() {
+
+		// TODO Auto-generated method stub
+		if(validate(OnlyOnePaymentRequestMessage)){
+			System.out.println("Only one payment request message displayed :  ===>  "+OnlyOnePaymentRequestMessage.getText());
+			return true;
+		}
+		return false;
+	}
+
+		public ConfirmOneTimePaymentPage DoNotselectAgreeAndClickOnMakePayment() {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();		
+		validate(ContinueButton);		
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getTitle().contains("One-Time Payment Information")) {
+			System.out.println("User is on Confirmation Page");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+
+			System.out.println("User is not on Confirmation Page");
+			return null;
+		}
 	}
 
 }

@@ -1105,10 +1105,13 @@ public class PlanDetailsPage extends UhcDriver {
 	 * @param monthlyPremium
 	 * @param yearlyPremium
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
+	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) throws Exception {
 		boolean bValidation = false;
+		validateNew(planCostsTab);
 		planCostsTab.click();
+		Thread.sleep(4000);
 		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
 			bValidation = true;
 		else

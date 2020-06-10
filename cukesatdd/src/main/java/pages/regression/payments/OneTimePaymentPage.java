@@ -14,7 +14,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.google.common.base.Strings;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.testharness.TestHarness;
 
 /**
  * @author pperugu
@@ -118,19 +120,16 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
 	private WebElement PaymentCancelModelPopup;
 
-	@FindBy(id = "form_routingNumber")
-	private WebElement Error1;
-
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
 
 	@FindBy(xpath = "//*[@class='page-header']//div[@class='row']//h1")
 	private WebElement PageHeader;
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//h2[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 	
-	@FindBy(xpath = "//button[text()='Edit Payment Information']")
+	@FindBy(xpath = "(//button[text()='Edit Payment Information'])[2]")
 	private WebElement EditPaymentInformation;
 	
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
@@ -139,10 +138,32 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "termsAgree")
 	private WebElement AgreeCheckBox;
 	
+	@FindBy(xpath = "/html/body/div[2]/div/main/div[2]/div[3]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[3]/div/p")
+	private WebElement moreThanonePaymentError;
+	
+	@FindBy(id = "memAuthPaymentSubmitError")
+	private WebElement csrUnauthorizedErrorMessage;
+	
+	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
+	private WebElement NextPaymentSummary;
+
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
+	private WebElement NextPaymentProcess;
+
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
+	private WebElement RemainingAmountSummary;
+	
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
+	private WebElement RemainingAmount;
+	
+	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
+	
+		
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	
@@ -502,42 +523,10 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 	}
 
-	public OneTimePaymentPage ErrorMessageValidation() {
-
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		}
-		System.out.println("Going to scroll down");
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,650)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		}
-		System.out.println("will click on Authorize button");
-		AuthorizeButton.click();
-		try {
-			Thread.sleep(2000);
-			jse.executeScript("window.scrollBy(0,650)", "");
-		} catch (Exception e) {
-		}
-		AuthorizeButton.click();
-		try {
-			Thread.sleep(2000);
-			jse.executeScript("window.scrollBy(0,650)", "");
-		} catch (Exception e) {
-		}
-		AuthorizeButton.click();
-		if (Error1.getText().contains("Please enter a valid Routing Number"))
-			return new OneTimePaymentPage(driver);
-		else
-			return null;
-
-	}
-
-	public void selectAndEnterAmount(String otherAmount) {
+	    public void selectAndEnterAmount(String otherAmount) {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
@@ -584,7 +573,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
@@ -597,30 +588,41 @@ public class OneTimePaymentPage extends UhcDriver {
 			System.out.println("Navigated to EFT form page");
 			return new PaymentsFormPage(driver);
 		} else {
-			System.out.println("Form Page is not displayed");
+			System.out.println("EFT Form Page is not displayed");
 			return null;
 		}
 	}
 	
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
-		validate(EditPaymentInformation);
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
+		TestHarness.checkForIPerceptionModel(driver);
 		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Authorize Monthly Payments button");
+		System.out.println("Clicked on Submit button on Review Payment page");
 		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.out.println(driver.getCurrentUrl());
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is  "+driver.getCurrentUrl());
+			} catch (InterruptedException e) {
+			System.out.println("Catch block URL is "+driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("One-Time Payment Submitted")) {
-			System.out.println("User is on Confirmation Page for One time payment");
+		CommonUtility.checkPageIsReadyNew(driver);
+		String title = driver.getTitle();
+		System.out.println("Current title of the page is "+title);
+				
+		//WARNING  Please add your condition if you have to , do not comment someone else code/////
+		if ((driver.getTitle().contains("Your One-Time Payment Is Being Processed")) || (driver.getTitle().contains("Your payment has been submitted"))  )
+		{
+			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
-			System.out.println("Confirmation Page for one time payment not displayed");
+			System.out.println("Confirmation Page for one time payment was not displayed");
 			return null;
 		}
 	}
@@ -634,22 +636,85 @@ public class OneTimePaymentPage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		jsClickNew(AgreeCheckBox);
 		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Contuine button");
+		System.out.println("Clicked on Authorize Payments button");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
-		}
+		}		
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
 			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
 			return null;
 		}
 	}
+	
+	public ConfirmOneTimePaymentPage errorForSecondPayment() {
+		String errorMessage= moreThanonePaymentError.getText();
+		if (errorMessage.contains("Only one payment request can be submitted per business day")) 
+		{
+			System.out.println("Error message displayed on the page is "+errorMessage);
+			System.out.println("Correct error message is displayed on the page, Test Passed");
+			
+		} else {
+			Assert.fail();
+			return null;
+		}
+		return new ConfirmOneTimePaymentPage(driver); 
+	}
 
+	public void validateErrorMessageUnauthorized() {
+		
+		System.out.println("Scrolling to Submit button to view the Error Message");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", AuthorizeMonthlyPaymentstButton); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String errorMessage= csrUnauthorizedErrorMessage.getText();
+		if (errorMessage.contains("You not authorised to submit the information and proceed to the next page")) 
+		{
+			System.out.println("Error message displayed on the page is "+errorMessage);
+			System.out.println("Correct error message is displayed on the page, Test Passed");
+			
+		} else {
+			Assert.fail();
+		}
+
+	}
+	
+	public OneTimePaymentPage BalanceSummaryValidation() {
+
+		
+		System.out.println("in new method for summary validation");
+		try {
+			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
+				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
+				return new OneTimePaymentPage(driver);
+			}
+		} catch (Exception e) {
+			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
+				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
+				return new OneTimePaymentPage(driver);
+			} else
+				return null;
+		}
+
+		return null;
+	}
+
+	
 	@Override
 	public void openAndValidate() {
 		validate(routingNumberField);
@@ -661,4 +726,63 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(lastNameField);
 		validate(continueButton);
 	}
+	/**
+	 * For iPerception Model
+	 * @param driver
+	 */
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
+	public ConfirmOneTimePaymentPage DoNotselectAgreeAndClickOnSubmitPaymentsforOneTime() {
+		checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		checkForIPerceptionModel(driver);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		checkForIPerceptionModel(driver);
+		validate(AuthorizeMonthlyPaymentstButton);
+		//AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Submit button on Review Payment page");
+		try {
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current URL is  "+driver.getCurrentUrl());
+			} catch (InterruptedException e) {
+			System.out.println("Catch block URL is "+driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		String title = driver.getTitle();
+		System.out.println("Current title of the page is "+title);
+		
+		//if (driver.getTitle().contains("Your One-Time Payment Is Being Processed")) {
+		if (driver.getTitle().contains("Review Payment")) {
+			System.out.println("Title of the page is "+title+", User is on Confirmation Page for One time payment");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+			System.out.println("Confirmation Page for one time payment was not displayed");
+			return null;
+		}
+	}
+
+
 }

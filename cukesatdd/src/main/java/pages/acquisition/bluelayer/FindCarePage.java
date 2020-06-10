@@ -55,6 +55,9 @@ public class FindCarePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@class,'cta-header-button')]//span[text()='Save']")
 	public WebElement SaveButton;
+	
+	@FindBy(xpath = "//*[contains(@class,'modal-btns')]//*[contains(text(),'Save')]")
+	public WebElement addressSaveButton; 
 
 	@FindBy(xpath = "//h1[@class='provider-name']")
 	public WebElement ProviderNameHeader;
@@ -76,6 +79,9 @@ public class FindCarePage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
 	public WebElement EditproviderlistLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	public WebElement addressCheckBox;
 
 	public ComparePlansPageBlayer getstarted() throws Exception {
 		validate(GetstartedButton);
@@ -89,7 +95,7 @@ public class FindCarePage extends UhcDriver {
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
 		FirstHospitalRecord.click();
-		waitforElement(Facilityicon);
+		validateNew(Facilityicon);
 		if (HospName.equals(PlanHeading.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
 		}
@@ -100,6 +106,10 @@ public class FindCarePage extends UhcDriver {
 			System.out.println("Provder Name is verified");
 		} else {
 			System.out.println("selected Provder Name is not matching");
+		}
+		if(validate(addressCheckBox)){
+			addressCheckBox.click();
+			addressSaveButton.click();
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);

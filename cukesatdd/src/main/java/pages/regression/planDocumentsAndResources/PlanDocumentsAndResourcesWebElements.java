@@ -1,6 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -127,6 +128,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	public PlanDocumentsAndResourcesWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -541,5 +543,8 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	
 	@FindBy(xpath="//h1[contains(text(),'Past Issues')]")
 	protected WebElement prevIssPgHeader;
+	
+	@FindBy(xpath="//div[contains(@class,'three-bounce')]")
+	protected WebElement spinLoader;
 	
 }

@@ -10,6 +10,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 
+import atdd.framework.MRScenario;
+
 public class PlanDocApiResponse {
 
 	protected boolean success;
@@ -179,7 +181,7 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("3")) {
-					if (!memberType.contains("PREEFF")) {
+					//tbd if (!memberType.contains("PREEFF")) {
 						String docCategory="Summary of Benefits";
 						//note: Conversation with Keri where Feb copy deck is not available yet
 						//note: since PDP GROUP is showing the doc in Membership Materials, then use it as expected behavior
@@ -197,7 +199,7 @@ public class PlanDocApiResponse {
 							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
-					}
+					//tbd }
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
 					docObjMap.put(docCategory, docObj);
@@ -405,10 +407,16 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
@@ -448,6 +456,42 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("7010")) {
 					String docCategory="Your Plan Getting Started";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("1042")) {
+					String docCategory="Plan Guide";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6016")) {
+					String docCategory="Plan Summary";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6017")) {
+					String docCategory="Plan Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
@@ -628,7 +672,16 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
-
+				} else if (docObj.getType().equals("1042")) {
+					String docCategory="Plan Guide";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
 				} else if (docObj.getType().equals("7025")) {
 					String docCategory="Vendor Information Sheet";
 					docObjMap.put(docCategory, docObj);
@@ -670,10 +723,16 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
@@ -713,6 +772,32 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("7010")) {
 					String docCategory="Your Plan Getting Started";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6016")) {
+					String docCategory="Plan Summary";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6017")) {
+					String docCategory="Plan Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);

@@ -43,14 +43,35 @@ public class medSuppOleStepDefinition {
 		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		MedSuppOLEPage medSuppOLEPage = plansummaryPage.fillDetails(zipCode,DateOfBirth);
+		 plansummaryPage.fillDetails(zipCode,DateOfBirth);
+		 MedSuppOLEPage medSuppOLEPage = plansummaryPage.clickOnStartApplication();
 		if (null != medSuppOLEPage) {
 
 			getLoginScenario().saveBean(PageConstants.MEDSUPP_OLE_PAGE, medSuppOLEPage);
 			System.out.println("OLE Welcome Page is Displayed");
 			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+		} 
+		else{
+		Assert.fail("Error in validating the OLE Welcome Page");
+		}
+	}
+	
+	@Then("^user fills out medsup form and proceeds to next page")
+	public void fillOutMedSuppForm(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipCode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.fillDetails(zipCode,DateOfBirth);
+		
 	}
 
 	@When("^user fill medsupp form details and proceed to next pages")

@@ -1,7 +1,7 @@
-@vppPlanSummaryAARP @vppPlanSummaryAARPRegression
-Feature: Vpp to plan Summary AARP Scenarios
+@vppPlanSummaryAARP
+Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
-  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01
+  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -45,7 +45,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | 15545 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |  |
       | 15546 |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  |
 
-  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01
+  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -72,7 +72,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |
 
-  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01
+  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -135,7 +135,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryAARP04 @vppPlanSummaryAARPRun01
+  @vppPlanSummaryAARP04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -161,8 +161,8 @@ Feature: Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01
-  Scenario Outline: Verify plan summary for SNP plan types in AARP site
+  @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  Scenario Outline: Verify plan summary for SNP plan ty pes in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -179,7 +179,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | zipcode | isMultiCounty | county             | plantype | planName                                       |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |
 
-  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -208,7 +208,7 @@ Feature: Vpp to plan Summary AARP Scenarios
   #Examples:
   #| zipcode | isMultutiCounty | plantype | planName                    |
   #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -238,7 +238,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             |
       | F322478 |   90210 | NO              | Los Angeles County |
 
-  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: To verify links displayed in the global footer of AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -260,7 +260,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryAARP11 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP11 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -282,7 +282,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | 1598166 | Ulayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Ulayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryAARP12 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP12 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -301,7 +301,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planname                                            |
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02
+  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
@@ -377,9 +377,9 @@ Feature: Vpp to plan Summary AARP Scenarios
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county        | plantype | address                    | city   | state   | firstName | lastName | emailAddress  |
-      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
-      | 15550 |   30606 | YES           | Clarke County | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE | GEORGIA | test      | test     | test@test.com |
+      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  |
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
+      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |
 
   @vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
   Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
@@ -416,3 +416,45 @@ Feature: Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
+
+  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More AARP for Rocky Mountain plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |
+      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
+
+  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
+      | Plan Name | <planName> |
+    Then the user clicks on Learn More AARP for people Health plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |
+      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |
+      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

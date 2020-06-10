@@ -4,19 +4,20 @@
 package pages.regression.login;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.footer.FooterPage;
 import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -54,22 +55,28 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='Finish']")
 	private WebElement doneButtonInIperceptionSmileySurvey;
 
-	@FindBy(id = "hsid-username")
+	@FindBy(xpath = "//*[contains(@id,'EMAIL')]")
 	private WebElement userNameField;
 
-	@FindBy(id = "hsid-password")
+	@FindBy(xpath = "//*[contains(@id,'PASSWORD')]")
 	private WebElement passwordField;
 
-	@FindBy(id = "hsid-submit")
-	private WebElement signInButton;
+	@FindBy(xpath = "//*[contains(@id,'submitBtn')]")
+	private WebElement hsidSignInButton;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
+	private WebElement mnrSignInButton;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDRegistration')]")
+	private WebElement registerNowButton;
 
-	@FindBy(id = "hsid-FUn")
+	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/username')]")
 	private WebElement usernamelink;
 
-	@FindBy(id = "hsid-FPwd")
+	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/password')]")
 	private WebElement passwordlink;
 
-	@FindBy(xpath = "//div[@id='hsid-commonError']/p/span[2]")
+	@FindBy(xpath = "//*[contains(@class,'strong success') and contains(text(),'Email confirmed')]")
 	private WebElement EmailConfirmedtext;
 
 	@FindBy(id = "username")
@@ -87,10 +94,30 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[1]")
 	private WebElement iPerceptionPopUp;
 
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
+
+	@FindBy(xpath="//button[@id='hsid-submit']")
+	protected WebElement oldSignInBtn;
+	
+	@FindBy(xpath="//input[@id='hsid-username']")
+	protected WebElement oldUsername;
+	
+	@FindBy(xpath="//input[@id='hsid-password']")
+	protected WebElement oldPassword;
+	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
 
+	boolean doOldSignin;
+	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
 		return loginScenario;
@@ -107,7 +134,11 @@ public class HSIDLoginPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(deepLinkUrl);
-		
+	}
+	
+	public void validateFooter() {
+		FooterPage footerPg=new FooterPage(driver);
+		footerPg.validateSignInPgFooter();
 	}
 
 	public void openAndValidate() {
@@ -138,11 +169,19 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
-		// validateNew(signInButton);
+		//validateNew(mnrSignInButton);
+		
+		/*
+		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+		 * CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
+		 * 
+		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
+		 */
+		//note: take out this when new sign-in is stable
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
 		else
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			doOldSignin=true;
 	}
 
 
@@ -150,30 +189,42 @@ public class HSIDLoginPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		startNew(deepLinkUrl);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
-		// validateNew(signInButton);
+		//validateNew(mnrSignInButton);
+		/*
+		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
+		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+		 */
+		if (validate(mnrSignInButton,0))
+			doOldSignin=false;
 		else
-			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			doOldSignin=true;
+
 	}
 
-	public void validateelements() {
+	public void validateHsidPageElements() {
 		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		validateNew(userNameField);
+		validateNew(passwordField);
+		validateNew(hsidSignInButton);
+		validateNew(usernamelink);
+		validateNew(passwordlink);
+		} catch(UnhandledAlertException ae) {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+
+			validateNew(userNameField);
+			validateNew(passwordField);
+			validateNew(hsidSignInButton);
+			validateNew(usernamelink);
+			validateNew(passwordlink);
 		}
-		validate(userNameField);
-		validate(passwordField);
-		validate(signInButton);
-		validate(usernamelink);
-		validate(passwordlink);
 	}
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
-		driver.get(REGIRATION_URL);
-	
+		//driver.get(REGIRATION_URL);
+		validateNew(registerNowButton);
+		registerNowButton.click();
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 
@@ -185,7 +236,7 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 		try {
 			Thread.sleep(40000);
 		} catch (InterruptedException e) {
@@ -206,27 +257,28 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @throws Exception 
 	 * @toDo : To login through hsid via entering security questions
 	 */
-	public Object doLoginWith(String username, String password) throws Exception {
+	public Object doLoginWith(String username, String password) {
 
-		System.out.println(driver.getCurrentUrl());
-		sendkeys(userNameField, username);
-		sendkeys(passwordField, password);
-		signInButton.click();
+		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
+			System.out.println(driver.getCurrentUrl());
+			sendkeys(oldUsername, username);
+			sendkeys(oldPassword, password);
+			oldSignInBtn.click();
+		} else {
+			System.out.println(driver.getCurrentUrl());
+			mnrSignInButton.click();
+			validateHsidPageElements();
+			sendkeys(userNameField, username);
+			sendkeys(passwordField, password);
+			hsidSignInButton.click();
+		}
 
 		//wait for some form of header to show
-
-		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
-			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page or banner page instead
 			emailAddressRequiredWorkaround(username);
 		}
-		/* tbd try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 
 		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
@@ -241,7 +293,7 @@ public class HSIDLoginPage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 			try {
@@ -257,23 +309,19 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
-		}
-		else if (currentUrl().contains("/dashboard")) {
+		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
-		}
-			else if (currentUrl().contains("testharness.html")) {
-				System.out.println(driver.getCurrentUrl());
-				System.out.println("First Post login current Url is-->"+currentUrl());
-				return new TestHarness(driver);
-		}
-		else {
+		} else if (currentUrl().contains("testharness.html")) {
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("First Post login current Url is-->"+currentUrl());
+			return new TestHarness(driver);
+		} else {
 			System.out.println("Security question page "
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		//tbd if (MRScenario.environmentMedicare.equals("team-e")
-		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
+
 		if (MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
@@ -291,14 +339,17 @@ public class HSIDLoginPage extends UhcDriver {
 		} else if (currentUrl().contains("testharness.html")) {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new TestHarness(driver);
-		}
-		else if (currentUrl().contains("gogreen-splash")) {
+		} else if (currentUrl().contains("gogreen-splash")) {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new GoGreenPage(driver);
 		}
-		if (driver.getCurrentUrl().contains("/my-documents/")){
+		if (driver.getCurrentUrl().contains("/my-documents/")) { //note: for deeplink validation
 			return new MyDocumentsPage(driver);
-     }
+		}
+		if (driver.getCurrentUrl().contains("/claims")) { //note: for deeplink validation
+			return new ClaimsSummaryPage(driver);
+		}
+
 		return null;
 	}
 
@@ -534,7 +585,7 @@ public class HSIDLoginPage extends UhcDriver {
         System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 		
 		try {
 			Thread.sleep(35000);
@@ -579,9 +630,22 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	//note: do not remove this wait time
 	public void waitToReachDashboard(String username) {
+		//note: need this to handle timing until the MEDICA/PCP extra alert goes away
+		CommonUtility.waitForPageLoad(driver, homePageNotice, 5);
 		int y=0;
 		while (y < 30) {
 			try {
+				if (noWaitValidate(homePageNotice,0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (noWaitValidate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (noWaitValidate(homePageNotice3,0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}
+
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
 				if (header.size() > 0) {
 					System.out.println("Located some sort of header, assume page is comming");
@@ -595,8 +659,14 @@ public class HSIDLoginPage extends UhcDriver {
 				y=y+1;
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
-				System.out.println("Exception: "+ae); 
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert error");
+				Alert alert = driver.switchTo().alert();
+				System.out.println("Alert text="+alert.getText());
+				if (alert.getText().contains("an error while processing your information")) {
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert message: "+alert.getText(), false);
+				} else {
+					alert.accept();
+				}
+				waitToReachDashboard(username);
 			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
@@ -641,16 +711,40 @@ public class HSIDLoginPage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("Unable to resolve no-email page encounter. "+e);
 			}
+		}
+			if (driver.getCurrentUrl().contains("bannerpopup.html"))
+			{
+				System.out.println("User landed on banner page and did not see security questions");
+				try {
+					if (noWaitValidate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else	if (noWaitValidate(homePageNotice2,0)) {
+						homePageNotice2.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice3,0)) {
+						homePageNotice3.click();
+						CommonUtility.checkPageIsReady(driver);
+					}	
+					
+			}
+				catch(Exception e)
+				{
+					System.out.println("User landed on banner page and could not proceed ahead");
+				}
+			}
 		}  
 
-	}
+	
 	
 	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
-
+		validateNew(mnrSignInButton);
+		mnrSignInButton.click();
+		validateNew(userNameField);
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		hsidSignInButton.click();
 
 		//wait for some form of header to show
 
@@ -736,10 +830,28 @@ public class HSIDLoginPage extends UhcDriver {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new GoGreenPage(driver);
 		}
-		if (driver.getCurrentUrl().contains("/my-documents/")){
+		if (driver.getCurrentUrl().contains("/my-documents/")) { //note: for deeplink validation
 			return new MyDocumentsPage(driver);
-     }
+		}
 		return null;
 	}
+
+	public boolean noWaitValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
 
 }

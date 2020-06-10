@@ -23,7 +23,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -31,6 +35,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Predicate;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -51,7 +56,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec=30;
+	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -110,7 +115,7 @@ public abstract class UhcDriver {
         }
 
 
-	public void sendkeys(WebElement element, String message) {
+	public static void sendkeys(WebElement element, String message) {
 		element.click();
 		element.clear();
 		element.sendKeys(message);
@@ -431,23 +436,18 @@ try {
             return jsonObject;
     }
 
-	/***
-	 * the method clicks on an element using javaScriptExecutor
-	 * 
-	 * @param element
-	 */
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("Element Clicked");
+		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
 	}
+	
+	public static String getidentifier(WebElement element) {
+	      String elementStr = element.toString();
+	      return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
 
-	/***
-	 * the method scrolls page upto element's location
-	 * 
-	 * @param element
-	 * @return
-	 */
+	      }
+
 	public boolean scrollToView(WebElement element) {
 		try {
 
@@ -493,16 +493,16 @@ try {
 	 * @param Element
 	 */
 	public void switchToNewTabNew(WebElement Element) {
-		String parentHandle = driver.getWindowHandle();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		Element.click();
+		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
 		for (int i = 0; i < initialCount + 1; i++) {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
-			if (!currentHandle.contentEquals(parentHandle))
+			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 				break;
 		}
 	}
@@ -728,7 +728,7 @@ try {
 		}
 	}
 	
-	public void checkModelPopup(WebDriver driver) {
+	public  void checkModelPopup(WebDriver driver) {
 		 checkModelPopup(driver,defaultTimeoutInSec);
 	}
 	
@@ -762,10 +762,14 @@ try {
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
-		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		//tbd String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/UCPUserManagement/time/getSystemTime";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		if (MRScenario.environment.contains("team-ci"))
-			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+			//urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/UCPUserManagement/time/getSystemTime";
+		if (MRScenario.environment.contains("team-voc"))
+			urlGetSysTime=urlGetSysTime.replace("www.", "");
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
@@ -825,10 +829,14 @@ try {
 	}
 
 	public void startNewMobile(String url) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will perform vertical swipe on mobile screen for given %
+	 */
 	public void mobileswipe(String percentage,boolean swipeup) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
@@ -848,6 +856,7 @@ try {
 			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
 			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
+		threadsleep(500);
 	}
 
 	public void mobileswipe(String percentage, int count,boolean swipeup) {
@@ -856,6 +865,10 @@ try {
 		}
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will hide mobile keypad
+	 */
 	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
 		try {
@@ -881,13 +894,13 @@ try {
 		threadsleep(1000);
 	}
 
-	public void mobileactiontab(WebElement element) {
+	public void mobileactiontap(WebElement element) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			Actions act = new Actions(driver); // Works only for Android driver
 			act.click(element).perform();
 		}
 		else
-			jsClickNew(element);
+			jsClickMobile(element);
 	}
 	
 	public void mobileactionsendkeys(WebElement element,String keys) {
@@ -932,6 +945,10 @@ try {
 		}
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will select option from dropdown based on visible text mobile
+	 */
 	public void mobileSelectOption(Select element,String option) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			element.selectByVisibleText(option);
@@ -978,9 +995,29 @@ try {
 		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will re-submit if form submission popup arises mobile 
+	 */	
 	public void fixFormResubmission(boolean positive) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
+	}
+	
+	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
+		String ReturnValue = "";
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
+			LocalStorage localStorage = webStorage.getLocalStorage();		
+			ReturnValue = localStorage.getItem(StorageKey);
+			System.out.println("Local Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		else if(StorageType.equalsIgnoreCase("session storage") || StorageType.equalsIgnoreCase("sessionstorage") ) {
+			SessionStorage sessionStorage = webStorage.getSessionStorage();
+			ReturnValue = sessionStorage.getItem(StorageKey);
+			System.out.println("Session Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		return ReturnValue;
 	}
 	
 	public void threadsleep(int sec) {
@@ -989,6 +1026,73 @@ try {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @author Murali - mmurugas
+	 * This method will perform horizontal swipe on mobile screen
+	 */
+	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
+		AppiumDriver mobiledriver = (AppiumDriver) driver;
+		TouchAction mact = new TouchAction(mobiledriver);
+		Dimension size = mobiledriver.manage().window().getSize();
+		//Starting x location set to % of the width (near left end)
+	    percentage = "0.".concat(percentage.replace("%", ""));
+	    int startx = (int) (size.width * Float.valueOf(1-Float.valueOf(percentage)));
+		//Ending x location set to 90% of the width (near right end)
+	    int endx = (int) (size.width * 0.90);
+	    //Y position set to 30% of height Vertically
+	    int starty = (int) (size.height * 0.3);
+	    System.out.println(size+" "+startx+" "+endx+" "+starty);
+		threadsleep(500);
+		if(swiperight)
+			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+		else
+			mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+	}
+
+	public void mobileswipeHorizantal(String percentage, int count,boolean swiperight) {
+		for (int i = 1; i <= count; i++) {
+			mobileswipeHorizantal(percentage,swiperight);
+		}
+	}
+	
+	public void waitforElementInvisibilityInTime(WebElement element, long timeout) {
+		System.out.println("Checking Element Invisibility");
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+	
+	public void mobileactiondragdrop(WebElement dragelement,WebElement dropelement,boolean swipeVertical) {
+			System.out.println("Drag Drop");	
+			AppiumDriver mobiledriver = (AppiumDriver) driver;
+			TouchAction mact = new TouchAction(mobiledriver);
+			int dragx = dragelement.getLocation().getX();
+			int dragy = dragelement.getLocation().getY();
+			int dropx =dropelement.getLocation().getX();
+			int dropy =dropelement.getLocation().getY();
+			System.out.println(dragx+","+dragy+","+dropx+","+dropy);
+			mact.longPress(PointOption.point(dragx, dragy)).moveTo(PointOption.point(dropx, dropy)).release().perform();
+			System.out.println("All");
+	}
+	
+	public void jsClickMobile(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", element);
+	}
+
+    public String returnDriverStorageJS(String StorageType, String StorageKey) {
+		String ReturnValue = "";
+		JavascriptExecutor js = ((JavascriptExecutor)driver);
+		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
+			ReturnValue = (String) js.executeScript(String.format("return window.localStorage.getItem('%s');", StorageKey));
+			System.out.println("Local Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		else if(StorageType.equalsIgnoreCase("session storage") || StorageType.equalsIgnoreCase("sessionstorage") ) {
+			ReturnValue = (String) js.executeScript(String.format("return window.sessionStorage.getItem('%s');", StorageKey));
+			System.out.println("Session Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		return ReturnValue;
 	}
 
 }

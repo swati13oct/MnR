@@ -1,5 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +11,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 	
 	public PlanDocumentsAndResourcesNH(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -64,7 +67,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 			String expContactUsTitle="Help & Contact Us";
-			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
+			String expContactUsUrl="contact-us-three";
 			System.out.println("New window URL = "+driver.getCurrentUrl()+" | New window title = "+driver.getTitle());
 			Assert.assertTrue("PROBLEM - not getting expected contact us URL. "
 					+ "Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", 

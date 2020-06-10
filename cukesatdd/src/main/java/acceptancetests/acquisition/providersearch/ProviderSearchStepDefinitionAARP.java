@@ -2,6 +2,7 @@ package acceptancetests.acquisition.providersearch;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import pages.acquisition.uhcretiree.DrugLookUpPage;
@@ -231,6 +233,41 @@ public class ProviderSearchStepDefinitionAARP {
 
 		}
 	}
+	
+	/**
+	 * @toDo: user Enters a zipcode
+	 */
+	@When("^the user enters the zipcode and counts the plan Ulayer$")
+	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String plancount = memberAttributesMap.get("Plancount");
+		
+
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode);
+			 int strplancount = Integer.parseInt(plancount);
+			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
+			 if(intPlanCounts!=strplancount){
+				Assert.fail("Plan count is not matching");
+			 }
+			
+
+		}
+	}
+	
+	
+	
 		
 	/**
 	 * @toDo:user user selects a provider
@@ -300,5 +337,45 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
+	
+	
+	@Then("^User store the information provided from rally to vpp page in Ulayer$")
+	public void user_store_the_information_provided_from_rally_to_vpp_page_in_Ulayer(DataTable givenAttributes) {
+	
+	List<DataTableRow> givenAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+
+	String planName = givenAttributesMap.get("PlanName");
+
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	plansummaryPage.setStringList(providers);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	
+	}
+		
+
+/**
+* @toDo:user user selects a Multiple providers
+*/
+@When("^user selects a multiple providers and retuns to VPP page in Ulayer$")
+public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_Ulayer() {
+{
+	ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+			.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+	VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
+	Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+}
+}
+
 
 }		

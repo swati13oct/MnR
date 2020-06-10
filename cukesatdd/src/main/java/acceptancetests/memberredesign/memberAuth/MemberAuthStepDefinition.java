@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -157,6 +158,7 @@ public class MemberAuthStepDefinition{
 			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
 					.get(0), profileAttributesRow.get(i).getCells().get(1));
 		}		
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
 
 		MemberAuthPage mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
 		
@@ -166,6 +168,34 @@ public class MemberAuthStepDefinition{
 			System.out.println("mauthPage is null");
 		}
 
+	}
+	
+	@And("^Member Enters the memberid and dob he wants to search$")
+	public void member_enters_memberidanddob_and_searches(DataTable givenAttributes) throws InterruptedException{
+
+
+		MemberAuthPage memberauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_Login);
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String memberid = memberAttributesMap.get("Member ID");
+		String month  = memberAttributesMap.get("Month");
+		String day = memberAttributesMap.get("Day");
+		String year  = memberAttributesMap.get("Year");
+	
+		MemberAuthPage mauthPage =  memberauth.enterMemberIDAndDob(memberid, month, day, year);
+		if(mauthPage!=null){
+			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
+		}
 	}
 	
 	@And("^User Clicks on the Pop up displayed$")
@@ -290,12 +320,28 @@ public class MemberAuthStepDefinition{
 		
 		if(accountHomePage!=null){
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
 			Assert.fail();
 		}
 	}
+	
+	@And("^memberauth user navigates to Payment Overview Page$")
+	public void memberauth_user_navigatesto_paymentoverview() throws InterruptedException{
+		AccountHomePage accountHomePage;
+		accountHomePage = (AccountHomePage) getLoginScenario()
+							.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+					PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+					if (paymentHistoryPage != null) {
+						getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+						System.out.println("User is on Payment overview screen");
+					}
+		
+	}
+	
+	
 	@Then ("^the user click on EOB link and navigates to EOB page$")
 	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -590,8 +636,9 @@ public class MemberAuthStepDefinition{
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType = memberAttributesMap.get("Plan Type");
 		eobPage.validatePlanNavTab(planType);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData); 
-		eobPage.validateEOBsDisplayed();
+		eobPage.selectEobType(planType, eobTypeData); 
+		eobPage.selectDateRange(planType, "", dateRange,eobTypeData); 
+		eobPage.validateEachEOBonUI();
 		BenefitsAndCoveragePage bncPage = eobPage.navigateToBncPage();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 	}
@@ -667,4 +714,75 @@ public class MemberAuthStepDefinition{
 	
 	}
 	
+	@Then("^the user navigates to payments overview page$")
+	public void the_user_navigates_to_payments_overview_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigateDirectToPaymentHitorypage();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user navigates to payments secondary page$")
+	public void the_user_navigates_to_payments_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage PaymentHistoryPage = accountHomePage.navigatePaymentHistoryPage1();
+		if(PaymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, PaymentHistoryPage);
+		}else{
+			System.out.println("==================Payment Overview page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user clicks on signout and validates the signout is successfull$")
+	public void the_user_clicks_signout() throws Throwable {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ProfileandPreferencesPage ProfileandPreferencesPage = PaymentHistoryPage.navigatetoLogoutdropdownlink();
+		if(ProfileandPreferencesPage!=null){
+			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfileandPreferencesPage);
+		}else{
+			System.out.println("==================Profile Prefrence page not displayed======================");
+			Assert.fail();
+		}
+  	}
+	
+	@Then("^the user clicks on Contact & help us link & navigate to contact us page$")
+	public void clicks_onContactUs() throws InterruptedException {
+		PaymentHistoryPage PaymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		ContactUsPage ContactUsPage = PaymentHistoryPage.NavigatetoContactuspage();
+		if(ContactUsPage!=null) {
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, ContactUsPage);
+			System.out.println("========================Contact us page displayed ====================== ");
+		}else{
+			System.out.println("==================Contact us page not displayed======================");
+			Assert.fail();
+		}
+		}
+	@Then("^the group user navigates to claims secondary page in Prod & clicks on the EOB LINK$")
+	public void the_user_navigates_to_claims_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ClaimsSummaryPage ClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage1();
+		if(ClaimsSummaryPage!=null){
+			getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE , ClaimsSummaryPage);
+		}else{
+			System.out.println("==================claims page not displayed======================");
+			Assert.fail();
+		}		
+  	}
+	@Then("^the group user clicks on Contact & help us link & navigate to contact us page on PROD$")
+	public void clicks_onContactUsGroup() throws InterruptedException {
+		ClaimsSummaryPage ClaimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		ContactUsPage ContactUsPage = ClaimsSummaryPage.NavigatetoContactuspage();
+		if(ContactUsPage!=null) {
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, ContactUsPage);
+			System.out.println("========================Contact us page displayed ====================== ");
+		}else{
+			System.out.println("==================Contact us page not displayed======================");
+			Assert.fail();
+		}
+		}
 }

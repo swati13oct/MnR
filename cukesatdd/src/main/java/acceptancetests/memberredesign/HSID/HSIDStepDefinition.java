@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,16 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.deeplinkPages.ClaimsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.aarpChatAgentLogin;
+import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
+import pages.regression.deeplinkPages.coverageandBenefitsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
+import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPage;
+import pages.regression.deeplinkPages.myDocumentsDeeplinkLoginPage;
+import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
@@ -55,219 +66,6 @@ public class HSIDStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	/* tbd 
-	@And("^login with following details logins in the member portal and validate elements$")
-	public void login_with_member(DataTable memberAttributes)
-			throws Exception {
-		boolean isMicroApp=false;
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String category = memberAttributesMap.get("Member Type");
-		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
-		String planType = memberAttributesMap.get("Plan Type");
-		String testDataType = memberAttributesMap.get("Claim System");
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE, planType);
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-		if (desiredAttributes.size() > 1) {
-			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
-					desiredAttributes.get(1));
-		}
-		// note: for the team-a env, it needs a different URL for PCP and Medica users
-		boolean teamSpecialCase=false;
-		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
-		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-			if (planType != null) {
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
-					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
-				}
-			}
-			if (category != null) {
-				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
-					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
-				} 
-			}
-		}
-		Map<String, String> loginCreds = loginScenario
-				.getUMSMemberWithDesiredAttributes(desiredAttributes);
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a " + desiredAttributes + " member");
-		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
-			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			
-			
-			
-
-		}
-
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
-			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-			loginPage.validateelements();
-
-			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
-				TestHarness testHarnessPage=null;
-				try {
-					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error");
-				}
-				if (testHarnessPage != null) {
-					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
-					return;
-				} else {
-					Assert.fail("Login not successful...");
-				}
-			}
-			AccountHomePage accountHomePage=null;
-			try {
-				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-			} catch (UnhandledAlertException ae) {
-				System.out.println("Exception: "+ae);
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error");
-			}
-			if (accountHomePage != null) {
-				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
-				Assert.assertTrue(true);
-			} else {
-				//tbd Assert.fail("***** Error in loading Redesign Account Landing Page *****");
-				// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
-				if ((testDataType==null) && (category==null) && (planType==null)) {
-					System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
-					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-				} else {
-					//System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
-					boolean hasSorryError=false;
-					boolean hasWentWrongError=false;
-					try { //check to see if it has sorry error
-						WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
-						if (sorry.isDisplayed()) {
-							hasSorryError=true;
-						}
-					} catch (Exception e) {}
-					try { //check to see if it has something went wrong eeror
-						WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
-						if (wentWrong.isDisplayed()) {
-							hasWentWrongError=true;
-						}
-					} catch (Exception e) {}
-					if (hasSorryError && isPotentialSorryWorkaroundCandidate(planType)) {
-						//note: has the potential for sorry workaround if getting sorry error
-						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
-						try {
-							boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
-							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
-						} catch (Exception e) {
-							System.out.println("Exception: "+e);
-							Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-						}
-					} else if(hasWentWrongError) {
-						Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
-					} else {
-						if (hasSorryError && !isPotentialSorryWorkaroundCandidate(planType)) {
-							System.out.println("not candidate for 'sorry' error work around");
-							Assert.fail("***** Error in loading Redesign Account Landing Page *-*-* Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
-						} else {
-							System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
-							Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
-						}
-					}
-				}
-			}
-		} else {
-			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
-				LoginPage loginPage=null;
-				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
-				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					loginPage = new LoginPage(wd, teamSpecialCase);
-					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
-				} 
-				
-				else {
-					loginPage = new LoginPage(wd);
-				}
-
-				//AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				//		.loginWithLegacy(userName, pwd);
-				//		if (accountHomePage != null) {
-				//	getLoginScenario()
-				//			.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-				//					accountHomePage);
-				TestHarness testHarnessPage=null;
-				try {
-					testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login");
-				}
-				if (testHarnessPage != null) {
-					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,testHarnessPage);
-				} else {
-					Assert.fail("Login not successful...");
-				}
-			} else {
-				LoginPage loginPage = new LoginPage(wd);
-				RallyDashboardPage rallyDashboard=null;
-				try {
-					rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login");
-				}
-				if (rallyDashboard != null) {
-					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
-				} else {
-					Assert.fail("Login not successful...");
-				}
-			}
-		} 
-
-		
-		 // AssistiveRegistrationPage assistiveregistration =
-		 // (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
-		 // (assistiveregistration != null) {
-		 // getLoginScenario().saveBean(PageConstantsMnR
-		 // .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
-		 // Assert.assertTrue(true); } else {
-		 // Assert.fail("***** Error in loading  Assistive Registration Page *****"
-		 // ); }
-		 
-
-	}*/
 
 	@And("^login with following details logins in the member portal and validate elements and route to assistive flow$")
 	public void login_with_memberassistive(DataTable memberAttributes)
@@ -315,7 +113,7 @@ public class HSIDStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
+		
 
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = (HsidRegistrationPersonalCreateAccount) loginPage
 				.doLoginWith2(userName, pwd);
@@ -711,12 +509,9 @@ public class HSIDStepDefinition {
 	//^^^ note: added for 'sorry' login error workaround	
 
 	//----------- updated to handle microapp
-	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
-	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
-		//tbd boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -731,6 +526,12 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
+
+		//note: use this to determine if need to validate footer on sign-in page
+		//note: after obtaining the value, remove it so it will not look for it on csv
+		String validateFooter = memberAttributesMap.get("Validate Footer");
+		memberAttributesMap.remove("Validate Footer");
+
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
@@ -774,18 +575,18 @@ public class HSIDStepDefinition {
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
 			if ((planType != null) && (category == null)) { //note: input has planType only
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("1 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType == null) && (category != null)) { //note: input has memberType only
-				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+				if (category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("2 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType != null) && (category != null)) { //note: input has both planType and memberType
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
-						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))
+						|| category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))
 						) {
 					teamSpecialCase=true;		
 					System.out.println("3 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
@@ -810,16 +611,16 @@ public class HSIDStepDefinition {
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-			loginPage.validateelements();
+		
+
+			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+				loginPage.validateFooter();
+				System.out.println("Finished validating sign-in page footer");
+			}
 
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage=null;
-				try {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
-				}
 				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
 				return;
@@ -827,9 +628,9 @@ public class HSIDStepDefinition {
 			AccountHomePage accountHomePage=null;
 			try {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-			} catch (UnhandledAlertException ae) {
+			} catch (Exception ae) {
 				System.out.println("Exception: "+ae);
-				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Exception", false);
 			}
 			
 			if (accountHomePage != null) {
@@ -842,17 +643,19 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h")) || MRScenario.environment.contains("team-voc")) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
-					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
 					loginPage = new LoginPage(wd);
 				}
+				if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+					loginPage.validateFooter();
+					System.out.println("Finished validating sign-in page footer");
+				}
+				
 				TestHarness testHarnessPage=null;
 				try {
 					if (testHarnessUseDropdown) {
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
 						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
 						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
@@ -980,9 +783,8 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		//tbd String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
-		loginPage.validateelements();
+		
 		try {
 			if (deepLinkUrl.contains("my-documents")) {
 				MyDocumentsPage	myDocumentsPage=null;
@@ -994,6 +796,11 @@ public class HSIDStepDefinition {
 				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			} else if (deepLinkUrl.contains("member/claims.html")) {
+				ClaimsSummaryPage claimsSummaryPage=null;
+				claimsSummaryPage =  (ClaimsSummaryPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", claimsSummaryPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE,claimsSummaryPage);
 			} else {
 				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
 			}
@@ -1025,6 +832,8 @@ public class HSIDStepDefinition {
 				&& !feature.equals("UCPMyDocuments")
 				&& !feature.equals("UCPHealthWellness")
 				&& !feature.equals("UCPBenefits")
+				&& !feature.equals("UCPEob")
+				&& !feature.equals("UCPOrderPlanMaterials")
 				) {
 			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
 		}
@@ -1032,6 +841,10 @@ public class HSIDStepDefinition {
 		System.out.println("feature="+feature);
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		if (MRScenario.environment.equals("stage")) 
+			configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
+		if (MRScenario.environment.contains("team-voc")) 
+			configPgUrl=configPgUrl.replace("www.", "");
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
@@ -1046,11 +859,11 @@ public class HSIDStepDefinition {
 				String value=e.getText();
 				if (value.equalsIgnoreCase("false")) {
 					if (MRScenario.environment.toLowerCase().contains("stage")) 
-						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+", stopping all tests now", false);
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now", false);
 					else
-						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"', not on stage, okay to move on...");
+						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", not on stage, okay to move on...");
 				} else {
-					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"', okay to move on...");
+					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", okay to move on...");
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
@@ -1058,7 +871,7 @@ public class HSIDStepDefinition {
 		} catch (Exception e) {
 			if (MRScenario.environment.toLowerCase().contains("stage")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now.", false);
 			} else {
 				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
 			}
@@ -1066,5 +879,449 @@ public class HSIDStepDefinition {
 		}
 		d.quit();
 	}
+/** 
+	 * @todo :member lands on payments deep link
+	 */
+	@Given("^member lands on the payment deeplink page$")
+	public void the_user_is_onPayments_deeplink_Page() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
+		paymentsDeeplinkLoginPage.navigateToLoginURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
+	}
+	/** 
+	 * @todo :member lands on claims deep link
+	 */
+	@Given("^member lands on the claims deeplink page$")
+	public void the_user_is_Onclaims_deeplink_Page() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		ClaimsDeeplinkLoginPage claimsDeeplinkLoginPage = new ClaimsDeeplinkLoginPage(wd);
+		claimsDeeplinkLoginPage.navigateToLoginURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE,claimsDeeplinkLoginPage );	
+	}
+	/** 
+	 * @todo :deep link login page elements validate  
+	 */
+	@And("^the payments deeplink page is displayed with all the fields$")
+	public void paymentdeeplink_pageis_displayed(){
+		PaymentsDeeplinkLoginPage PaymentsDeeplinkLoginPage = (PaymentsDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE);
+		PaymentsDeeplinkLoginPage.validatePageElements();
+	} 
+	/** 
+	 * @todo :on the payments deep link page member enters login credentials
+	 */
+	@Given("^on payment deeplink page I enter the member details and click continue$")
+	public void the_user_is_on_payments_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String username = memberAttributesMap.get("User Name");
+		String password  = memberAttributesMap.get("Password");
+		System.out.println("User name : "+username );
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = (PaymentsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE);
+		Thread.sleep(5000);
+		System.out.println("Title of new page : "+paymentsDeeplinkLoginPage.getTitle());
+		paymentsDeeplinkLoginPage.enterusername(username);
+		paymentsDeeplinkLoginPage.enterpassword(password);	
+		paymentsDeeplinkLoginPage.clickSubmit();
+	}
+	/** 
+	 * @todo :member lands on payments deep link page 
+	 */
+	 @Given("^user is navigated to the paymentDeeplink page$") 
+	 public void user_navigatedTo_payment_Deeplink_page() throws InterruptedException{
+		
+		 PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = (PaymentsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE);
+	     Thread.sleep(3000);
+    	 paymentsDeeplinkLoginPage.validatePaymentsPage();
+	}
+	 /** 
+		 * @todo :deep link login page elements validate  
+		 */
+		@And("^the calims deeplink page is displayed with all the fields$")
+		public void claimsdeeplink_pageis_displayed(){
+			ClaimsDeeplinkLoginPage claimsDeeplinkLoginPage = (ClaimsDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE);
+			claimsDeeplinkLoginPage.validatePageElements();
+		} 
+		/** 
+		 * @todo :on the claims deep link page member enters login credentials 
+		 */
+		@Given("^on claims deeplink page I enter the member details and click continue$")
+		public void the_user_is_on_claims_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+			/* Reading the given attribute from feature file */
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String username = memberAttributesMap.get("User Name");
+			String password  = memberAttributesMap.get("Password");
+			System.out.println("User name : "+username );
+			ClaimsDeeplinkLoginPage ClaimsDeeplinkLoginPage = (ClaimsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE);
+			Thread.sleep(5000);
+			System.out.println("Title of new page : "+ClaimsDeeplinkLoginPage.getTitle());
+			ClaimsDeeplinkLoginPage.enterusername(username);
+			ClaimsDeeplinkLoginPage.enterpassword(password);	
+			ClaimsDeeplinkLoginPage.clickSubmit();
+		}
+		/** 
+		 * @todo :member lands on claims deep link page 
+		 */
+		 @Given("^user is navigated to the claimsDeeplink page$") 
+		 public void user_navigatedTo_claims_Deeplink_page() throws InterruptedException{
+			
+			 ClaimsDeeplinkLoginPage ClaimsDeeplinkLoginPage = (ClaimsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_CLAIMS_DEEPLINK_lOGIN_PAGE);
+		     Thread.sleep(3000);
+		     ClaimsDeeplinkLoginPage.validateClaimsPage();
+		}
+		 /** 
+			 * @todo :member lands on eob deep link
+			 */
+			@Given("^member lands on the eob deeplink page$")
+			public void the_user_is_on_eob_deeplink_Page() throws InterruptedException{
+				WebDriver wd = getLoginScenario().getWebDriver();
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+				eobDeeplinkLoginPage eobDeeplinkLoginPage = new eobDeeplinkLoginPage(wd);
+				eobDeeplinkLoginPage.navigateToLoginURL();
+				getLoginScenario().saveBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE,eobDeeplinkLoginPage );	
+			}
+			/** 
+			 * @todo :deep link login page elements validate  
+			 */
+			@And("^the eob deeplink page is displayed with all the fields$")
+			public void eobdeeplink_pageis_displayed(){
+				eobDeeplinkLoginPage eobDeeplinkLoginPage = (eobDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE);
+				eobDeeplinkLoginPage.validatePageElements();
+			} 
+			/** 
+			 * @todo :on the eob deep link page member enters login credentials 
+			 */
+			@Given("^on eob deeplink page I enter the member details and click continue$")
+			public void the_user_is_on_eob_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+				/* Reading the given attribute from feature file */
+				List<DataTableRow> memberAttributesRow = givenAttributes
+						.getGherkinRows();
+				Map<String, String> memberAttributesMap = new HashMap<String, String>();
+				for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+					memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+							.get(0), memberAttributesRow.get(i).getCells().get(1));
+				}
+
+				String username = memberAttributesMap.get("User Name");
+				String password  = memberAttributesMap.get("Password");
+				System.out.println("User name : "+username );
+				eobDeeplinkLoginPage eobDeeplinkLoginPage = (eobDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE);
+				Thread.sleep(5000);
+				System.out.println("Title of new page : "+eobDeeplinkLoginPage.getTitle());
+				eobDeeplinkLoginPage.enterusername(username);
+				eobDeeplinkLoginPage.enterpassword(password);	
+				eobDeeplinkLoginPage.clickSubmit();
+			}
+			/** 
+			 * @todo :member lands on eob deep link page 
+			 */
+			 @Given("^user is navigated to the eobDeeplink page$") 
+			 public void user_navigatedTo_eob_Deeplink_page() throws InterruptedException{
+				
+				 eobDeeplinkLoginPage eobDeeplinkLoginPage = (eobDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_EOB_DEEPLINK_lOGIN_PAGE);
+			     Thread.sleep(3000);
+			     eobDeeplinkLoginPage.validateEobPage();
+			}
+			 /** 
+				 * @todo :member lands on accountProfile deep link
+				 */
+				@Given("^member lands on the accountProfile deeplink page$")
+				public void the_user_is_on_accountProfile_deeplink_Page() throws InterruptedException{
+					WebDriver wd = getLoginScenario().getWebDriver();
+					getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+					accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = new accountsProfileDeeplinkLoginPage(wd);
+					accountsProfileDeeplinkLoginPage.navigateToLoginURL();
+					getLoginScenario().saveBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE,accountsProfileDeeplinkLoginPage );	
+				}
+				/** 
+				 * @todo :deep link login page elements validate  
+				 */
+				@And("^the accountProfile deeplink page is displayed with all the fields$")
+				public void accountProfile_pageis_displayed(){
+					accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = (accountsProfileDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE);
+					accountsProfileDeeplinkLoginPage.validatePageElements();
+				}  
+				/** 
+				 * @todo :on the accountProfile deep link page member enters login credentials 
+				 */
+				@Given("^on accountProfile deeplink page I enter the member details and click continue$")
+				public void the_user_is_on_accountProfile_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+					/* Reading the given attribute from feature file */
+					List<DataTableRow> memberAttributesRow = givenAttributes
+							.getGherkinRows();
+					Map<String, String> memberAttributesMap = new HashMap<String, String>();
+					for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+						memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+								.get(0), memberAttributesRow.get(i).getCells().get(1));
+					}
+
+					String username = memberAttributesMap.get("User Name");
+					String password  = memberAttributesMap.get("Password");
+					System.out.println("User name : "+username );
+					accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = (accountsProfileDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE);
+					Thread.sleep(5000);
+					System.out.println("Title of new page : "+accountsProfileDeeplinkLoginPage.getTitle());
+					accountsProfileDeeplinkLoginPage.enterusername(username);
+					accountsProfileDeeplinkLoginPage.enterpassword(password);	
+					accountsProfileDeeplinkLoginPage.clickSubmit();
+				}
+				/** 
+				 * @todo :member lands on accountProfile deep link page 
+				 */
+				 @Given("^user is navigated to the accountProfile deep link page$") 
+				 public void user_navigatedTo_accountProfile_Deeplink_page() throws InterruptedException{
+					
+					 accountsProfileDeeplinkLoginPage accountsProfileDeeplinkLoginPage = (accountsProfileDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_AccountProfile_DEEPLINK_lOGIN_PAGE);
+				     Thread.sleep(3000);
+				     accountsProfileDeeplinkLoginPage.validateAccountProfilePage();
+				}
+				 
+				 /** 
+					 * @todo :member lands on coverageandBenefits deep link
+					 */
+					@Given("^member lands on the coverageandBenefits deeplink page$")
+					public void the_user_is_on_coverageandBenefits_deeplink_Page() throws InterruptedException{
+						WebDriver wd = getLoginScenario().getWebDriver();
+						getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+						coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = new coverageandBenefitsDeeplinkLoginPage(wd);
+						coverageandBenefitsDeeplinkLoginPage.navigateToLoginURL();
+						getLoginScenario().saveBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE,coverageandBenefitsDeeplinkLoginPage );	
+					}
+					/** 
+					 * @todo :deep link login page elements validate  
+					 */
+					@And("^the coverageandBenefits deeplink page is displayed with all the fields$")
+					public void coverageandBenefits_pageis_displayed(){
+						coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = (coverageandBenefitsDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE);
+						coverageandBenefitsDeeplinkLoginPage.validatePageElements();
+					}  
+					/** 
+					 * @todo :on the coverageandBenefits deep link page member enters login credentials 
+					 */
+					@Given("^on coverageandBenefits deeplink page I enter the member details and click continue$")
+					public void the_user_is_on_coverageandBenefits_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+						/* Reading the given attribute from feature file */
+						List<DataTableRow> memberAttributesRow = givenAttributes
+								.getGherkinRows();
+						Map<String, String> memberAttributesMap = new HashMap<String, String>();
+						for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+							memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+									.get(0), memberAttributesRow.get(i).getCells().get(1));
+						}
+
+						String username = memberAttributesMap.get("User Name");
+						String password  = memberAttributesMap.get("Password");
+						System.out.println("User name : "+username );
+						coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = (coverageandBenefitsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE);
+						Thread.sleep(5000);
+						System.out.println("Title of new page : "+coverageandBenefitsDeeplinkLoginPage.getTitle());
+						coverageandBenefitsDeeplinkLoginPage.enterusername(username);
+						coverageandBenefitsDeeplinkLoginPage.enterpassword(password);	
+						coverageandBenefitsDeeplinkLoginPage.clickSubmit();
+					}
+					/** 
+					 * @todo :member lands on coverageandBenefits deep link page 
+					 */
+					 @Given("^user is navigated to the coverageandBenefits deep link page$") 
+					 public void user_navigatedTo_coverageandBenefits_Deeplink_page() throws InterruptedException{
+						
+						 coverageandBenefitsDeeplinkLoginPage coverageandBenefitsDeeplinkLoginPage = (coverageandBenefitsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_CoverageBenefits_DEEPLINK_lOGIN_PAGE);
+					     Thread.sleep(3000);
+					     coverageandBenefitsDeeplinkLoginPage.validateCoverageBenefitPage();
+					}
+					 /** 
+						 * @todo :member lands on healthwellness deep link
+						 */
+						@Given("^member lands on the healthwellness deeplink page$")
+						public void the_user_is_on_healthwellness_deeplink_Page() throws InterruptedException{
+							WebDriver wd = getLoginScenario().getWebDriver();
+							getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+							healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = new healthwellnessDeepLinkLoginPage(wd);
+							healthwellnessDeepLinkLoginPage.navigateToLoginURL();
+							getLoginScenario().saveBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE,healthwellnessDeepLinkLoginPage );	
+						}
+						/** 
+						 * @todo :deep link login page elements validate  
+						 */
+						@And("^the healthwellness deeplink page is displayed with all the fields$")
+						public void healthwellness_pageis_displayed(){
+							healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = (healthwellnessDeepLinkLoginPage) loginScenario.getBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE);
+							healthwellnessDeepLinkLoginPage.validatePageElements();
+						}  
+						/** 
+						 * @todo :on the healthwellness deep link page member enters login credentials 
+						 */
+						@Given("^on healthwellness deeplink page I enter the member details and click continue$")
+						public void the_user_is_on_healthwellness_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+							/* Reading the given attribute from feature file */
+							List<DataTableRow> memberAttributesRow = givenAttributes
+									.getGherkinRows();
+							Map<String, String> memberAttributesMap = new HashMap<String, String>();
+							for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+								memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+										.get(0), memberAttributesRow.get(i).getCells().get(1));
+							}
+
+							String username = memberAttributesMap.get("User Name");
+							String password  = memberAttributesMap.get("Password");
+							System.out.println("User name : "+username );
+							healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = (healthwellnessDeepLinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE);
+							Thread.sleep(5000);
+							System.out.println("Title of new page : "+healthwellnessDeepLinkLoginPage.getTitle());
+							healthwellnessDeepLinkLoginPage.enterusername(username);
+							healthwellnessDeepLinkLoginPage.enterpassword(password);	
+							healthwellnessDeepLinkLoginPage.clickSubmit();
+						}
+						/** 
+						 * @todo :member lands on healthwellness deep link page 
+						 */
+						 @Given("^user is navigated to the healthwellness deep link page$") 
+						 public void user_navigatedTo_healthwellness_Deeplink_page() throws InterruptedException{
+							
+							 healthwellnessDeepLinkLoginPage healthwellnessDeepLinkLoginPage = (healthwellnessDeepLinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_HelthandWellness_DEEPLINK_lOGIN_PAGE);
+						     Thread.sleep(3000);
+						     healthwellnessDeepLinkLoginPage.validateHealthWellnessPage();
+						}
+						 /** 
+							 * @todo :member lands on myDocuments deep link
+							 */
+							@Given("^member lands on the myDocuments deeplink page$")
+							public void the_user_is_on_myDocuments_deeplink_Page() throws InterruptedException{
+								WebDriver wd = getLoginScenario().getWebDriver();
+								getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+								myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = new myDocumentsDeeplinkLoginPage(wd);
+								myDocumentsDeeplinkLoginPage.navigateToLoginURL();
+								getLoginScenario().saveBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE,myDocumentsDeeplinkLoginPage );	
+							}
+							/** 
+							 * @todo :deep link login page elements validate  
+							 */
+							@And("^the myDocuments deeplink page is displayed with all the fields$")
+							public void myDocuments_pageis_displayed(){
+								myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = (myDocumentsDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE);
+								myDocumentsDeeplinkLoginPage.validatePageElements();
+							}  
+							/** 
+							 * @todo :on the myDocuments deep link page member enters login credentials 
+							 */
+							@Given("^on myDocuments deeplink page I enter the member details and click continue$")
+							public void the_user_is_on_myDocuments_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+								/* Reading the given attribute from feature file */
+								List<DataTableRow> memberAttributesRow = givenAttributes
+										.getGherkinRows();
+								Map<String, String> memberAttributesMap = new HashMap<String, String>();
+								for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+									memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+											.get(0), memberAttributesRow.get(i).getCells().get(1));
+								}
+
+								String username = memberAttributesMap.get("User Name");
+								String password  = memberAttributesMap.get("Password");
+								System.out.println("User name : "+username );
+								myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = (myDocumentsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE);
+								Thread.sleep(5000);
+								System.out.println("Title of new page : "+myDocumentsDeeplinkLoginPage.getTitle());
+								myDocumentsDeeplinkLoginPage.enterusername(username);
+								myDocumentsDeeplinkLoginPage.enterpassword(password);	
+								myDocumentsDeeplinkLoginPage.clickSubmit();
+							}
+							/** 
+							 * @todo :member lands on myDocuments deep link page 
+							 */
+							 @Given("^user is navigated to the myDocuments deep link page$") 
+							 public void user_navigatedTo_myDocuments_Deeplink_page() throws InterruptedException{
+								
+								 myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = (myDocumentsDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_MyDocuments_DEEPLINK_lOGIN_PAGE);
+							     Thread.sleep(3000);
+							     myDocumentsDeeplinkLoginPage.validateMyDocumentsPage();
+							}
+							 
+							@And("^user stores test input for validations$")
+							public void storeTestInput(DataTable memberAttributes) {
+								List<DataTableRow> memberAttributesRow = memberAttributes
+										.getGherkinRows();
+								Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+								for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+									memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+											.get(0), memberAttributesRow.get(i).getCells().get(1));
+								}
+
+								String planType = memberAttributesMap.get("Plan Type");
+								String category = memberAttributesMap.get("Member Type");
+								String userName = memberAttributesMap.get("Username");
+
+								getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+								getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+								getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+
+							}
+
+							/** 
+								 * @todo :agent lands on login page 
+								 */
+								@Given("^agentlogin lands on page$") 
+								public void agentloginandsnpage() throws InterruptedException{
+									WebDriver wd = getLoginScenario().getWebDriver();
+									getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+									aarpChatAgentLogin aarpChatAgentLogin = new aarpChatAgentLogin(wd);
+									aarpChatAgentLogin.navigateToLoginURL();
+									aarpChatAgentLogin.validatePageElements();
+									getLoginScenario().saveBean(PageConstants.AARP_CHAT_AGENT_LOGIN,aarpChatAgentLogin );	
+								}
+								/** 
+								 * @todo :agent enters credentials 
+								 */
+								 @Given("^agent enters credentials$") 
+								 public void agententercredentials() throws InterruptedException{
+									 Thread.sleep(5000);
+									 String username = "AARPStage8";
+									aarpChatAgentLogin.enterusername(username);
+									 String password =  "AARPStage8";
+									aarpChatAgentLogin.enterpassword(password);	
+									 aarpChatAgentLogin.clickSubmit();
+									
+									 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
+								     Thread.sleep(3000);
+								     aarpChatAgentLogin.aarpchatagentreadystate();
+								}	
+								 /** 
+									 * @todo :agent enters credentials 
+									 */
+									 @Given("^agent enters credentials for federal$") 
+									 public void fedagententercredentials() throws InterruptedException{
+										 Thread.sleep(5000);
+										 String username = "MRagent8";
+										aarpChatAgentLogin.enterusername(username);
+										 String password =  "MRagent8";
+										aarpChatAgentLogin.enterpassword(password);	
+										 aarpChatAgentLogin.clickSubmit();
+										
+										 aarpChatAgentLogin aarpChatAgentLogin = (aarpChatAgentLogin) getLoginScenario().getBean(PageConstants.AARP_CHAT_AGENT_LOGIN);
+									     Thread.sleep(3000);
+									     aarpChatAgentLogin.aarpchatagentreadystate();
+									}
 }

@@ -1,6 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ public class PlanDocumentsAndResourcesANOC extends PlanDocumentsAndResourcesBase
 
 	public PlanDocumentsAndResourcesANOC(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 

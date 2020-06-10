@@ -26,8 +26,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.memberrdesignVBF.TestHarness;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -518,6 +520,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='myDocButtonText']")
 	public WebElement myDocumentsButton;
+	
+	@FindBy(xpath="//a[@id='premiumpayment_4']")
+	protected WebElement pymtTabTopMenu;
+	
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
+	protected WebElement preEffectiveTechSupportNumber;
+	
+	@FindBy(xpath = "(//*[@class='tabs-desktop']//a[contains(.,'Senior Supplement Plan')])[2]")
+	protected WebElement SSUPTab;
 
 	public WebElement getEobSectionall() {
 		return eobSectionall;
@@ -1710,7 +1721,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public ClaimsSummaryPage clickonClaimsTab() throws InterruptedException {
 		System.out.println("Now clicking on Claims Tab on Forms and Resources Page");
-		driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
+		//driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
+		driver.navigate().to("https://stage-medicare.uhc.com/medicare/member/claims/overview.html");
 		System.out.println("Now waiting for 10 seconds");
 		try {
 			Thread.sleep(10000);
@@ -2651,5 +2663,64 @@ System.out.println(memberType);
 			return false;
 		}
 		return true;
+	}
+	
+	public void verifyPaymentTabIsDisplayedForPreEffectiveMembers() {
+		
+		if(pymtTabTopMenu.isDisplayed())
+		{
+			System.out.println("Premium Payment tab was displayed on secondary page - Forms and Resources, Test Passed");
+		}
+		else
+		{
+			Assert.fail("Premium Payment tab was NOT displayed on secondary page - Forms and Resources, Test FAILED");
+		}
+	}
+	
+	public PaymentHistoryPage userClicksOnPremiumPaymentFromFormsAndResources() {
+
+		try {
+			System.out.println("Now clicking on Premium Payment tab");
+			pymtTabTopMenu.click();
+			System.out.println("Premium Payment tab has been clicked");
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+			System.out.println("Current URL is: " + driver.getCurrentUrl());
+			if (driver.getCurrentUrl().contains("payments")) {
+				System.out.println("payments text was returned in URL , returning PaymentHistoryPage");
+				return new PaymentHistoryPage(driver);
+			}
+		}
+
+		catch (Exception e) {
+			Assert.fail("Premium Payment tab was NOT loaded when clicked from Forms and Resources, Test FAILED");
+			return null;
+		}
+		return null;
+	}
+
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException
+
+	{
+		System.out.println("Now checking for Tech Support Number for Pre-effective members");
+		System.out.println(
+				"The Tech Support phone number displayed on screen is " + preEffectiveTechSupportNumber.getText());
+		System.out.println("Expected Tech Support phone number from feature file is " + technicalPhNo);
+		Assert.assertEquals(preEffectiveTechSupportNumber.getText(), technicalPhNo);
+		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
+
+	}
+
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
 	}
 }

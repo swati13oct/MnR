@@ -58,10 +58,26 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement footnotesContent;
 	
 	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public static WebElement headerSignInLink;
+	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public static WebElement headerRegisterLink;
+	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	public static WebElement signIn;
+
 	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_2")
+	 public static WebElement medicareSpecialNeedsPlansLink;
+	
+	//@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_4")
@@ -206,7 +222,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id="nav-zipcode")
 	public static WebElement zipcodeField;
 	
-	@FindBy(className="zip-button")
+	@FindBy(id="zipcodebtn")
 	public static WebElement findPlansButton;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")

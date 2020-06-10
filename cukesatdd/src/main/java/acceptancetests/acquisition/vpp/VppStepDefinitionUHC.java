@@ -34,6 +34,7 @@ import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
@@ -188,7 +189,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		//plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
@@ -709,6 +710,9 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error validating plans in  VPP plan summary page",
 				plansummaryPage.validateVPPPlanSummaryPage());
+		String SiteName = "UHG_ACQ";
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	
 	}
 
 	/**
@@ -1065,13 +1069,43 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+		String savePlanNames = memberAttributesMap.get("Test Plans");
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Then("^user saves two MS plans as favorite on UHC site$")
+	public void user_saves_two_MS_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+		// ----- MS plan type ----------------------------
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
 	}
 
 	@Then("^user gets a create profile prompt on UHC site$")
@@ -1094,6 +1128,20 @@ public class VppStepDefinitionUHC {
 
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 
+	}
+	
+	@And("^user validate pdf link on UHC Site$")
+	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("MS Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansPDFLinks(savePlanNames);
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site$")
@@ -1637,6 +1685,24 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.ResumeApplicationButton();
 
 	}
+	
+	@Then("^the user will proceed to next pages")
+	public void the_user_will_proceed_to_next_pages(DataTable givenAttributes)throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+
+	}
 
 	@Then("^the user enters data to resume the application")
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
@@ -1651,7 +1717,7 @@ public class VppStepDefinitionUHC {
 
 		String applicationType = memberAttributesMap.get("applicationType");
 		String DOB = memberAttributesMap.get("DOB");
-		String zipcode = memberAttributesMap.get("zipcode");
+		String zipcode = memberAttributesMap.get("Zipcode");
 
 		String ApplicationID = (String) getLoginScenario().getBean(VPPCommonConstants.RESUMEKEY);
 
@@ -2091,15 +2157,14 @@ public class VppStepDefinitionUHC {
 	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
+		 aquisitionhomepage.validateCallSam();
+		/*
+		 * if (Aquisitionhomepage != null) {
+		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * System.out.println("TFN Widget is Displayed"); } else{
+		 * Assert.fail("TFN Widget is NOT Displayed"); }
+		 */
 	}
 	
 	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
@@ -2121,15 +2186,14 @@ public class VppStepDefinitionUHC {
 	public void verify_Chat_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
+		aquisitionhomepage.validateCallSam();
+		/*
+		 * if (Aquisitionhomepage != null) {
+		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * System.out.println("TFN Widget is Displayed"); } else{
+		 * Assert.fail("TFN Widget is NOT Displayed"); }
+		 */
 	}
 	
 	
@@ -2434,7 +2498,7 @@ public class VppStepDefinitionUHC {
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
 		if(isMultutiCounty.equalsIgnoreCase("YES")) {
-			vppTestHarnessPage.SelectCounty(CountyName);
+			vppTestHarnessPage.SelectCountyforplanDetails(CountyName);
 		}
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
 		if(vppPlanDetailsPage!=null){
@@ -2600,5 +2664,341 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
+	}
+	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	@Given("^the user is on VistorProfile TestHarness page for UHC$")
+	public void validateUserIsOnAARP_VPTestharnessPage_for_UHC(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage.GetVisitorProfileTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE,vpTestHarnessPage);
+	}
+	
+	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on UHC$")
+	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinGuestprofileLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user Enters Fields and selects helper mode for Save plans in Authenticated profile to VP with plans data on UHC$")
+	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_UHC(
+			DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String uuid = inputAttributesMap.get("UUID");
+		String isguest = inputAttributesMap.get("IsGuest");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid, isguest);
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on UHC site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithDrugsandPharmacyinVisitorProfile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Providers in Visitor Profile on UHC site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithProvidersinVisitorProfile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_LaunchVPwithProvidersLink();
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+
+	@And("^user selects plan to compare from visitor Profile on UHC site$")
+	public void user_selectsplantoComparefromVisitorProfile_on_UHC(DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Plancompare = inputAttributesMap.get("Plan compare");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		ComparePlansPageBlayer planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
+
+		if (planComparePage != null) {
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		} else {
+			Assert.fail("Error Loading on Plan Compare page");
+		}
+
+	}
+
+	@Then("^verify plans added in plan compare on visitor Profile for UHC$")
+	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forUHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
+	}
+
+	@And("^user Enters plan info to land on plan details from visitor Profile on UHC site$")
+	public void user_EntersplaninfotolandonplandetailsfromvisitorProfileonUHCsite(DataTable inputAttributes)
+			throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String ContractNo = inputAttributesMap.get("Contract Number");
+		String PbpNo = inputAttributesMap.get("PBP Number");
+		String SegId = inputAttributesMap.get("Segment ID");
+		String CountyCD = inputAttributesMap.get("County code");
+		String product = inputAttributesMap.get("Product");
+		String year = inputAttributesMap.get("Plan Year");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		PlanDetailsPage vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode, ContractNo,
+				PbpNo, SegId, CountyCD, product, year);
+
+		if (vppPlanDetailsPage != null) {
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		} else {
+			Assert.fail("Error Loading on Plan Details Page page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch OLE for Guest profile on UHC$")
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_UHC(DataTable givenAttributes) throws Exception {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		String PlanName = memberAttributesMap.get("Plan Name");
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanType = memberAttributesMap.get("Plan Type");
+		
+		
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		WelcomePage welcomePage = vpTestHarnessPage.NavigateToOLEfromVP();
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		} else {
+			Assert.fail("Error Loading OLE Welcome page");
+		}
+	}
+	
+	@And("^user selects Delete Drug and Pharamcy on the Authenticated profile on UHC site$")
+	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_UHC()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteDrugAndPharamacy();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	
+	@And("^user selects Delete Provider on the Authenticated profile on UHC site$")
+	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteProvider();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	@Then("^the user enter the searchValue in the search text box and hits enter on UHC Site$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue) throws Throwable {
+	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> AttributesRow = inputvalue
+				.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap .put(AttributesRow.get(i).getCells()
+					.get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("search Value");
+		System.out.println("Search value"+InputValue );
+		Thread.sleep(3000);
+		
+		aquisitionhomepage.enterSearchtextvalue(InputValue);
+
+	}
+	
+	@Then("^the user should see fifteen results before pagination on UHC Site$")
+	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateFifteenResults();
+	   
+	}
+	
+
+@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
+public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateCountResults();
+}
+
+
+@Then("^the user validates pagination and results displayed on UHC Site$")
+public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE); 
+	aquisitionhomepage.validatePaginationofSearchResults();
+}
+
+
+@Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$")
+public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+	for (int i = 0; i < AttributesRow.size(); i++) {
+
+		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+	}
+	String InputValue = urlAttributesMap.get("NewSearchValue");
+	System.out.println("NewSearchValue" + InputValue);
+	Thread.sleep(3000);
+	
+	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+ 
+}
+
+@Then("^the user clear secondary search box and insert new search value on UHC Site$")
+public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+	for (int i = 0; i < AttributesRow.size(); i++) {
+
+		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+	}
+	String InputValue = urlAttributesMap.get("New Search Value");
+	System.out.println("New Search Value" + InputValue);
+	Thread.sleep(3000);
+	aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+
+}
+
+@Then("^the user validates Error message on UHC site$")
+public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+
+	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+	for (int i = 0; i < AttributesRow.size(); i++) {
+
+		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+	}
+	String error = urlAttributesMap.get("Error");
+	String newSearchValue=urlAttributesMap.get("NewSearchValue");
+	System.out.println("Error : " + error);
+	Thread.sleep(3000);
+	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+}
+
+	@Then("^user saves all plans as favorite on UHC site$")
+	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+	
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+	
+		default:
+			break;
+		}
+	}
+	
+	@Then("^Navigate to Visitor Profile page on UHC site$")
+	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 } 

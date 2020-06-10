@@ -40,6 +40,13 @@ public class UpdateReviewPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-12']//h1")
 	private WebElement ConfirmationPageHeading;
 
+	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
+	private WebElement OnlyOnePaymentRequestMessage;
+
+	@FindBy(id = "memAuthPaymentCancelSubmitError")
+	private WebElement csrUnauthorizedErrorMessage;
+
+
 	public UpdateReviewPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -128,7 +135,7 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Your Updated Payment Method")) {
+		if (driver.getCurrentUrl().contains("member/payments/recurring/setup-recurring/overview")) {
 			System.out.println("User is on Confirmation Page for Update Recurring for ship");
 			return new UpdateConfirmationPage(driver);
 		} else {
@@ -225,5 +232,40 @@ public class UpdateReviewPage extends UhcDriver {
 		}
 		return false;
 	}
+
+
+	public boolean validate_onlyOnePaymentRequest_Message() {
+
+		// TODO Auto-generated method stub
+		if(validate(OnlyOnePaymentRequestMessage)){
+			System.out.println("Only one payment request message displayed :  ===>  "+OnlyOnePaymentRequestMessage.getText());
+			return true;
+		}
+		return false;
+	}
+
+	public void validateErrorMessageUnauthorized() {
+		
+		System.out.println("Scrolling to Error Message");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", csrUnauthorizedErrorMessage); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String errorMessage= csrUnauthorizedErrorMessage.getText();
+		if (errorMessage.contains("You are not authorized to submit the information and proceed to the next page")) 
+		{
+			System.out.println("Error message displayed on the page is "+errorMessage);
+			System.out.println("Correct error message is displayed on the page, Test Passed");
+			
+		} else {
+			Assert.fail();
+		}
+
+	}
+
 
 }

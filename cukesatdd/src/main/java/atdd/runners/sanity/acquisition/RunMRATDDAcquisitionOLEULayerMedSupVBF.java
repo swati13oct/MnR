@@ -16,12 +16,12 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEULayerMedSupVBF.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEULayerMedSupVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
 features = { "src/main/resources/feature/acquisition/oleMedSup" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEULayerMedSupVBF.json" }, tags = { "@MedSuppOLEBLayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEULayerMedSupVBF.json" }, tags = { "@MedSuppOLEULayerSmoke" })
 public class RunMRATDDAcquisitionOLEULayerMedSupVBF {
 
 }

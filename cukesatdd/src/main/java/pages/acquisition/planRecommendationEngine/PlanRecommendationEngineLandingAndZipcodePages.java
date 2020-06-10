@@ -3,11 +3,14 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.util.HashMap;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
@@ -28,6 +31,10 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 
 	}
+	
+	String page = "Location";
+
+	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -66,6 +73,9 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(id = "zip-code")
 	private WebElement zipCode;
 	
+	@FindBy(css = "#MultipleCounty")
+	private WebElement multicountySelect;
+	
 	@FindBy(id = "zipInfo")
 	private WebElement countyInfo;
 
@@ -84,7 +94,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(id = "errorMessage")
 	private WebElement errorMessage;
 	
-	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
+	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
 	
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
@@ -93,10 +103,10 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(xpath = "//*[@class='all-fields-marked-wi']")
+	@FindBy(css = "div>.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 	
-	@FindBy(xpath = "//*[@class='all-fields-marked-wi']/sup")
+	@FindBy(css = ".all-fields-marked-wi>sup")
 	private WebElement pageRequiredInfoMark;
 	
 	@FindBy(css = ".row>div>div:nth-child(3)>label.primary-question-tex")
@@ -105,7 +115,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
 	private WebElement zipcodePageQuestionMark;
 	
-	@FindBy(xpath = "//*[@class='mt-3']/p")
+	@FindBy(css = "#referenceTxt")
 	private WebElement zipcodeTextLabel;
 	
 	@FindBy(xpath = "//*[@for='MultipleCounty']")
@@ -129,34 +139,42 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		System.out.println("Validating Title: ");
 		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-		String ExpectedTitle = "Get help finding an insurance plan";
+		String ExpectedTitle = "plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
 		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));
 		System.out.println("Validating Animation Images: ");
 		validate(landingpageAnimationImage, 30);
 		System.out.println("Validating Text: ");
-		validate(landingpageText, 30);
+/*		validate(landingpageText, 30);
 		String ExpectedText = " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. ";
 		String ActualText = landingpageText.getText();
-		System.out.println(ActualText.equalsIgnoreCase(ExpectedText));
+		System.out.println(ActualText.equalsIgnoreCase(ExpectedText));*/
 		validate(getStartedBtn, 30);
 		validate(landingpageMainInner, 30);
 		System.out.println("Validating Title in Inner Section: ");
 		validate(landingpageInnerTitle, 30);
-		String ExpectedText1 = "How does this work?";
+/*		String ExpectedText1 = "How does this work?";
 		String ActualText1 = landingpageInnerTitle.getText();
-		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
+		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));*/
 		for(int i=1; i<=3; i++) {
 			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" +i+ "]"))).getText();
 			System.out.println(landingpageTracker);
-			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +i+ "]/span"))).getText();
+		}
+		for(int j=1; j<=2; j++) {
+			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +j+ "]/span"))).getText();
 			System.out.println(landingpageTextPoints);
 		}
 		validate(landingpageImage, 30);
 		String landingpageLabelText = landingpageLabel.getText();
 		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));
 		waitTillElementClickableInTime(getStartedBtn1, 45);
+	}
+	
+	public void navigatezipcodepage() {
+		pageloadcomplete();
+		getStartedBtn.click();
+		validate(zipCode,30);
 	}
 	
 	
@@ -172,7 +190,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);
-		validate(countyInfo);
+		validate(countyInfo,30);
 		continueBtn.click();
 		validate(coverageTitle);
 		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
@@ -207,12 +225,12 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	public void zipcodePage() {
 		boolean hidden;
 		System.out.println("Validating ZipcodePage Elements");
-		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+/*		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));*/
 		validate(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
+//		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
@@ -233,11 +251,11 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 			waitforElementVisibilityInTime(zipcodeTextLabel, 45);
 			Assert.assertTrue(zipcodeTextLabel.getText().contains("Plans are specific to your area"));
 			validate(zipcodePageCountyQuestion);
-			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("County? *"));
+			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("County"));
 			validate(zipcodePageCountyQuestionMark);
 			Assert.assertTrue(zipcodePageCountyQuestionMark.getText().contains("*"));
 			waitforElementVisibilityInTime(PRECounty, 45);
-			Assert.assertTrue(PRECountyInnerText.getText().contains("Select County "));
+//			Assert.assertTrue(PRECountyInnerText.getText().contains("Select County "));
 	}
 
 //Error Scenario's	
@@ -251,17 +269,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		sendkeys(zipCode, zipcodeid);
 		waitforElementVisibilityInTime(continueBtn, 45);
 		continueBtn.click();
-		waitforElementVisibilityInTime(errorMessage, 45);
-		validate(errorMessage);
-		int size = zipcodeid.length();
-		System.out.println("ZipCode Size is :"+size);
-		if(size<5 && size!=0) {
-			Assert.assertTrue(errorMessage.getText().contains("Please"));
-		}else if(size==0)	{
-			Assert.assertTrue(errorMessage.getText().contains("Please"));
-		}else{
-			Assert.assertTrue(errorMessage.getText().contains("Please"));
-		}	
+		desktopCommonUtils.desktopErrorValidation(page);
 	}
 	
 //Error Scenario's for multiCounty	
@@ -276,12 +284,27 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
 		continueBtn.click();
-		validate(errorMessage);
-		Assert.assertTrue(errorMessage.getText().contains("Please"));
+		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
 	public void browserBack() {
 
 		driver.navigate().back();
+	}
+	
+	public void zipcodeInfoValidation(HashMap<String, String> inputdata) {
+		System.out.println("Verify Zip Info");
+		validate(zipCode, 20);
+		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").equals(inputdata.get("Zip Code")),"Invalid Zip code");
+		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
+			validate(countyInfo, 20);
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("CountyDropDown").toUpperCase()),
+					"County Name Error");
+		} else {
+			validate(multicountySelect, 20);
+			Select multicounty = new Select(multicountySelect);
+			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(inputdata.get("CountyDropDown")),
+					"Invalid County Name");
+		}
 	}
 }

@@ -3,6 +3,7 @@ package pages.regression.planDocumentsAndResources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 
 	public PlanDocumentsAndResourcesFnR(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -106,6 +108,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		}
 		//----------------------------------------------
 		Assert.assertTrue("PROBLEM - unable to locate sub-section '"+subSection_FnR+"' in '"+section+"' section", planDocValidate(subSectionElement));
+		scrollElementToCenterScreen(subSectionElement);
 		moveMouseToElement(subSectionElement);
 		subSectionElement.click();
 		System.out.println("TEST - clicked subsection to collapse it");
@@ -134,16 +137,24 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		Assert.assertTrue("PROBLEM - unable to locate document='"+docName+"' in '"+subSection+"' sub-section", planDocValidate(docElement));
 		section_note.add("    PASSED - located document '"+docName+"' in sub-section '"+subSection+"'");
 		String actualUrl=docElement.getAttribute("href");
-		Assert.assertTrue("PROBLEM - not getting expected href value for document='"+docName+"' in '"+subSection+"' sub-section.  "
-				+ "Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-		section_note.add("    PASSED - href attribute in link element validation");
+		//keep Assert.assertTrue("PROBLEM - not getting expected href value for document='"+docName+"' in '"+subSection+"' sub-section.  "
+		//keep 		+ "Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
+		//keep section_note.add("    PASSED - href attribute in link element validation");
 		List<String> linkValidate_note=validateLinkDest(testInputInfoMap, docElement);
 		section_note.addAll(linkValidate_note);
 		if (!switchTab) {
 			System.out.println("TEST - Prior link validation doesn't open new tab, so prep the page for next test for subsection='"+subSection+"' and doc='"+docName+"'");
 			prepFnrPg(testInputInfoMap, getSubSectionElement_FnR(subSection), docElement);
 		}
-		section_note.add("    PASSED - document '"+docName+"' in subsection '"+subSection+"' validation");
+		boolean finalCheck=true;
+		for (String s: linkValidate_note) {
+			if (s.contains("FAILED"))
+				finalCheck=false;
+		}
+		if (finalCheck)
+			section_note.add("    PASSED - document '"+docName+"' in subsection '"+subSection+"' validation");
+		else
+			section_note.add("    FAILED - document '"+docName+"' in subsection '"+subSection+"' validation");
 		return section_note;
 	}
 	

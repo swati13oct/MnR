@@ -37,6 +37,14 @@ public class ReviewAutomaticPage extends UhcDriver {
 	@FindBy(xpath = "//a[normalize-space(text())='Make a One-Time Payment']")
 	private WebElement MakeOneTimePaymentLink;
 
+	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
+	private WebElement OnlyOnePaymentRequestMessage;
+	
+	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
+	private WebElement CancelCheckBox;
+
+
+
 	public ReviewAutomaticPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -72,7 +80,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
+		if (driver.getTitle().contains("Your Automatic Payment")) {
 			System.out.println("User is on Confirmation Page for Recurring");
 			return new RecurringConfirmationPage(driver);
 		} else {
@@ -167,6 +175,112 @@ public class ReviewAutomaticPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean validate_onlyOnePaymentRequest_Message() {
+
+		// TODO Auto-generated method stub
+		if(validate(OnlyOnePaymentRequestMessage)){
+			System.out.println("Only one payment request message displayed :  ===>  "+OnlyOnePaymentRequestMessage.getText());
+			return true;
+		}
+		return false;
+	}
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	public RecurringConfirmationPage selectAndClickCancelOnEFT() {
+		checkForIPerceptionModel(driver);
+		validate(EditPaymentInformation);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(CancelCheckBox);
+		CancelCheckBox.click();
+		System.out.println("Clicked on Cancel button");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("");
+			return null;
+		}
+	}
+
+	public RecurringConfirmationPage selectAgreeAndnoClickOnAuthorizeMonthyPaymentsforEFT() {
+		checkForIPerceptionModel(driver);
+		validate(EditPaymentInformation);
+		System.out.println("User is on Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		validate(AuthorizeMonthlyPaymentstButton);
+		if (AuthorizeMonthlyPaymentstButton.isDisplayed()){
+		System.out.println("Authorise Monthly Payments button visible");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Your Automatic Payment")) {
+			System.out.println("User is on Review Page for set up Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("Review Page for Recurring not displayed");			
+		}
+	}
+		return null;
+}
+
+	public RecurringConfirmationPage selectAgreeAndnoClickOnContinueforCC() {
+		checkForIPerceptionModel(driver);
+		validate(ChangeCard);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		validate(AuthorizeMonthlyPaymentstButton);
+		if (AuthorizeMonthlyPaymentstButton.isDisplayed())
+		{
+			System.out.println("Authorise Monthly Payments button visible");
+			System.out.println(driver.getCurrentUrl());
+			System.out.println(driver.getTitle());
+			}
+	
+		if (driver.getTitle().contains("Your Automatic Payments")) {
+			System.out.println("User is on Review Page for set up Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("Review Page for Recurring not displayed");
+			return null;
+		}
 	}
 
 

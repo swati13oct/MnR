@@ -68,7 +68,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
 	public WebElement VerifyProviderCount;
 
-	@FindBy(xpath = "//a[text()='Edit provider list']")
+	@FindBy(xpath = "//a[contains(text(),'Edit') and contains(text(),'Provider')]")
 	public WebElement EditproviderlistLink;
 	
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
@@ -297,10 +297,8 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 	public void verifyProvidercount() {
-		validate(VerifyProviderCount);
-		System.out.println("Verified Provider Count Displayed");
-		validate(EditproviderlistLink);
-		System.out.println("Verified Edit Provider Link Displayed");
+		Assert.assertTrue("Verified Provider Count not Displayed",validate(VerifyProviderCount));
+		Assert.assertTrue("Verified Edit Provider Link not Displayed",validate(EditproviderlistLink));
 
 	}
 	
@@ -556,8 +554,7 @@ public class ComparePlansPage extends UhcDriver {
      }
 	
 	public void validatenewlyAddPlan() {
-   	 
-   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//a[@class='planNameVisibility']//h3"));	
+   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
 		int plansForCompare=allMAPlans.size();
 		if (plansForCompare == 3) {
 			Assert.assertTrue(true);
@@ -566,5 +563,22 @@ public class ComparePlansPage extends UhcDriver {
 		else Assert.assertTrue(false); 		
 	}
 		
+	public void validatePlansAddedonPlancompareforVisitorProfile() {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		int plansForCompare = allMAPlans.size();
+		if (plansForCompare == 2) {
+			Assert.assertTrue(true);
+			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
+		} else
+			Assert.assertTrue(false);
+	}
+	
+	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		String[] plan = plans.split(",");
+		for(int i=0;i<allMAPlans.size();i++) {
+			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
+		}
+	}
 }
 

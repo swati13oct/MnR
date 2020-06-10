@@ -99,13 +99,10 @@ public class ContactusRedesignStepDefinition {
 	 */
 	@When("^the user navigates to contact us page in UHC site$")
 	public void validates_contactUs_Redesign_Page() {
-		/*ContactUsPage contactUsPage;
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		contactUsPage = accountHomePage.navigateToContactUsPageTemporarySolution();*/
-		
-		// Put the following code back when Rally  Dashboard Contact Us Footer link is working and take out the above code
-		ContactUsPage contactUsPage;
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+		System.out.println("*****the user navigates to contact us page in UHC site*****");
+			ContactUsPage contactUsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && !(MRScenario.environment.equalsIgnoreCase("PROD")|| 
+				MRScenario.environment.equalsIgnoreCase("offline"))) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
 		} else {
@@ -143,10 +140,48 @@ public class ContactusRedesignStepDefinition {
 	}
 
 
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^user should see Help With This Website and Help With Your Plan sections$")
+	public void user_should_see_Help_With_This_Website_and_Help_With_Your_Plan_sections()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
+		contactusPage.validatelabelAndLinks();
 
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
 
+	}
+	
+	@Then("^validates labels on the contactUS page for SHIP member$")
+	public void validates_labels_on_the_contactUS_page_for_SHIP_member()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
+		contactusPage.validateSHIPlabelAndLinks();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	@Then("^the user validates the labels and contact numebers on the page$")
+	public void validates_labels_on_the_contactUS_page_for_PCP_Medica_member()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validatePCPMedicalabelAndLinks();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
 	/**
 	 *  @toDO : the user validates cancel link on secure email widget on contact us page
 	 */
@@ -163,6 +198,42 @@ public class ContactusRedesignStepDefinition {
 
 	}
 	
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^prod user validates cancel click on secure email widget in redesign contact us page$")
+	public void prod_user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
+	{ System.out.println("*****prod user validates cancel click on secure email widget in redesign contact us page*****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.prodvalidateSecureEmailUsWidgetSection(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	@Then("^the user click on view questions button and validate the questions links$")
+	public void Click_on_view_questions_Link_and_validate_Links(DataTable givenAttributes)throws Exception {
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("Plan type is - "+plantype);
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateviewQuestions(plantype);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+	}
 
 	/**
 	 *  @toDO : the user fills the fill out contact form and submit on contact us page
@@ -413,12 +484,127 @@ public class ContactusRedesignStepDefinition {
 		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactus.clickOnSendMessage_SecureEmail();
 	}
-
+	
+	@Then("^user click on account Profile dropdown and click the messages link$")
+	public void user_click_on_account_Profile_dropdown_and_click_the_messages_link() throws Throwable {
+		System.out.println("****user click on account Profile dropdown and click the messages link*****");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.clickonmessagesLink();
+	}
+	
+	@Then("^user navigate to rally dashboard page and click on account Profile dropdown$")
+	public void user_navigate_to_rally_dashboard_page_and_clickonaccount_Profile_dropdown() throws Throwable {
+		System.out.println("****user navigate to rally dashboard page and click on account Profile dropdown*****");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.NavigateRallyandclickonmessagesLink();
+	}
+	
+	
 	@Then("^the user validates that the SSO secure message Page opens in a new window$")
 	public void the_user_validates_that_the_SSO_secure_message_Page_opens_in_a_new_window() throws Throwable {
+		System.out.println("the user validates that the SSO secure message Page opens in a new window");
 		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactus.validateSSOInbox();
 	}
+	
+	@Then("^the user validates SSO secure message Page via messages link from secondry pages opens in a new window$")
+	public void the_user_validates_SSO_secure_message_Page_via_messages_link_from_secondry_pages_opens_in_a_new_window() throws Throwable {
+		System.out.println("the user validates that the SSO secure message Page opens in a new window");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.validateSSOInboxViaMessengerLink();
+	}
+	
+	@Then("^the user validates the CHAT section$")
+	public void validate_Chat_Section() throws InterruptedException {	
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.validateChatWithUs();		
+	}
+	
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^On contactUs page the user should see Help With This Website and Help With Your Plan sections$")
+	public void On_contactUs_page_the_user_should_see_Help_With_This_Website_and_Help_With_Your_Plan_sections(DataTable givenAttributes)
+	{
+		System.out.println("*****On contactUs page the user should see Help With This Website and Help With Your Plan sections****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
+		contactusPage.validateALLlabelAndLinks(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	/***
+	 * 
+	 */
+	@Then("^the user validates the CHAT section for group member$")
+	public void validate_Chat_Section_group() throws InterruptedException {	
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.GroupvalidateChatWithUs();		
+	}
+	@Then("^validate contactUs page for combo plan member$")
+	public void validate_contactUs_page_for_combo_plan_member(DataTable givenAttributes) throws InterruptedException
+	{
+		System.out.println("*****On contactUs page the user should see Help With This Website and Help With Your Plan sections****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateCombolabelAndLinks(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	@Then("^the pcp and Medica user validates the labels and contact numebers on the page$")
+	public void pcp_Medica_user_Validates_contactUS(DataTable givenAttributes)
+	{System.out.println("*****the pcp and Medica user validates the labels and contact numebers on the page****");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validatePCPMedicalabelAndTFN(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	@Then("^for Ship member validates labels and TFNs on the contactUS page$")
+	public void validates_labels_on_the_contactUS_page_for_SHIP_member(DataTable givenAttributes)
+	{ 
+		System.out.println("*****for Ship member validates labels and TFNs on the contactUS page*****");
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+	String callUsSHIP = memberAttributesMap.get("callUsSHIPTFN");
+	String generalQueSHIP = memberAttributesMap.get("generalQueTFN");
+	String claimQueSHIP =memberAttributesMap.get("claimQueTFN");
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		
+		contactusPage.validateSHIPalllabelAndLinks(callUsSHIP,generalQueSHIP,claimQueSHIP);
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	@Then("^user click on EmailUs and fill all the detail and click on cancel button$")
+	public void user_fill_all_the_email_Form_details_and_cancel(DataTable givenAttributes)
+	{System.out.println("*****user click on EmailUs and fill all the detail and click on cancel button*****");
+				ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateEmailUsFormWidget(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	
 }
+
+
+
 

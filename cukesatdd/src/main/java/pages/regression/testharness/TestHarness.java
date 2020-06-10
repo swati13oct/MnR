@@ -7,8 +7,10 @@ import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -103,7 +105,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	//tbd @FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//div[contains(@class,'header') and not(contains(@class,'hide'))]//h1")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -145,7 +148,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")
@@ -260,7 +263,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	/*
+		/*
 	 * @FindBy(
 	 * xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
 	 * private WebElement logOut;
@@ -279,6 +282,21 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Go to My Documents')]")
 	private WebElement testHarnessMyDocumentsLink;
 	
+	@FindBy(name="zipCode")
+	private WebElement zipCodeTextBox;
+	
+	@FindBy(xpath="//button[@name='Update']")
+	private WebElement continueButton;
+	
+	@FindBy(xpath="//h1")
+	private WebElement hcePageText;
+	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAPaymentButton;
+	
+	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
+	private WebElement TestHarnesspaymentsLink;
+		
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -336,10 +354,9 @@ public class TestHarness extends UhcDriver {
 	 */
 	public PaymentHistoryPage navigateToPaymentOverview() throws InterruptedException {
 		
-		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
-		if(validateNew(premPaymentsTab))
-			premPaymentsTab.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		premPaymentsTab.click();		
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
@@ -363,17 +380,45 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
-		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
-		if(validateNew(PaymentPageLink))
-			PaymentPageLink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		    CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("testharness")) {
+				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
+				TestHarness.checkForIPerceptionModel(driver);
+				TestHarness.checkForIPerceptionModel(driver);
+				TestHarnesspaymentsLink.click();
+				TestHarness.checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		if (MakeAPaymentButton.isDisplayed())
+		{
+		System.out.println("Make a payment button was displayed on Payments page");
+		return new PaymentHistoryPage(driver);
+		}
+		else
+		{
+			System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+			driver.navigate().refresh();
+			if (MakeAPaymentButton.isDisplayed())
+				
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				return new PaymentHistoryPage(driver);
+				}
+			else
+			{
+				System.out.println("Make a payment button was displayed on Payments page");
+				Assert.fail("Make a payment button was not displayed on Payments page");
+			}
+			
+		}
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
 		}
-		return null;
+		
+	    }
+			return null;
+			
 	}
-	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPageSkipBtnValidation() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
@@ -482,7 +527,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		validateNew(claimsTab);
+		validateNew(claimsTab,0);
 		claimsTab.click();
 		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
@@ -537,12 +582,20 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
+		TestHarness.checkForIPerceptionModel(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
 		validateNew(testHarnessContactUsPageLink);
+		TestHarness.checkForIPerceptionModel(driver);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
@@ -578,9 +631,11 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
+		checkModelPopup(driver,5);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
 			return new DrugCostEstimatorPage(driver);
@@ -616,14 +671,24 @@ public class TestHarness extends UhcDriver {
 	public pages.regression.explanationofbenefits.EOBPage navigateDirectToEOBPag() {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
-
-		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environment.equalsIgnoreCase("stage") 
+				|| MRScenario.environment.contains("team-a")) {
 
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
-//				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				jsClickNew(eobTestharnessLink);
+				try {
+					jsClickNew(eobTestharnessLink);
+				} catch (UnhandledAlertException ae) {
+					Alert alert = driver.switchTo().alert();
+					System.out.println("Alert text="+alert.getText());
+					if (alert.getText().contains("an error while processing your information")) {
+						Assert.assertTrue("***** getting unexpected alert error while accessing EOB page - Got Alert message: "+alert.getText(), false);
+					} else {
+						alert.accept();
+						CommonUtility.checkPageIsReady(driver);
+					}
+				}
+
 				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
-				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
@@ -897,11 +962,26 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public BenefitsAndCoveragePage validateBnCNavigation() {
-		validateNew(coverageBenefits);
+		validateNew(coverageBenefits,0);
 		coverageBenefits.click();
 
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+	}
+	
+	public FormsAndResourcesPage validateBnCNavigationForTerminated() {
+		validateNew(coverageBenefits);
+		coverageBenefits.click();
+
+		if (driver.getTitle().contains("Documents")) {
+			try {
+				return new FormsAndResourcesPage(driver);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -946,6 +1026,7 @@ public class TestHarness extends UhcDriver {
 		orderMaterials.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		checkModelPopup(driver,5);
 		if (heading.isDisplayed()) {
 			return new OrderMaterialsPage(driver);
 		}
@@ -961,6 +1042,7 @@ public class TestHarness extends UhcDriver {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(premiumPayment);
 		premiumPayment.click();
+		checkModelPopup(driver,5);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentHistoryPage(driver);
 		}
@@ -1063,8 +1145,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
+		Thread.sleep(5000);
+		checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
-		System.out.println("Now waiting for 20 seconds");
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
 	}
@@ -1090,22 +1173,53 @@ public class TestHarness extends UhcDriver {
         System.out.println("Actual logo's source on Test Harness page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
         System.out.println("logo's alt text on secondary page is   "+logo_alt);          
         Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test harness page main logo assert condition is passed");              
+        System.out.println("Test harness page main logo assert condition for image source is passed"); 
+        
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+		 
+       System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+       Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+       if (!ImagePresent)
+       {
+        System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+        Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+       }
+       else
+       {
+       	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+           System.out.println("naturalWidth is not zero , Logo image was displayed.");
+        }
+	          
 }
-
 
 
         public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
         
-        CommonUtility.waitForPageLoad(driver,cologoImage,15);
-        String cologo_src = cologoImage.getAttribute("src");
-        String cologo_alt = cologoImage.getAttribute("alt");
-        System.out.println("Actual logo's source on Test harness page is   " + cologo_src
-                                      + " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
-        System.out.println("logo's alt text on secondary page is   " + cologo_alt);
-        Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test Harness page co logo assert condition is passed");
-}
+        	 CommonUtility.waitForPageLoad(driver,cologoImage,15);
+             String cologo_src = cologoImage.getAttribute("src");
+             String cologo_alt = cologoImage.getAttribute("alt");
+             System.out.println("Actual cologo's source on Test harness page is   " + cologo_src
+                                           + " and Expected cologo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
+             System.out.println("cologo's alt text on secondary page is   " + cologo_alt);
+             Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+             System.out.println("Test Harness page co-logo assert condition for image source is passed");
+             System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+             
+             Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+             if (!ImagePresent)
+             {
+              System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+              System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+              Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+             }
+             else
+             {
+             	System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+                 System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+                 
+             }
+     }
     	/**
     	 * For iPerception Model
     	 * @param driver
@@ -1168,6 +1282,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
     		checkForIPerceptionModel(driver);
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
     		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -1384,16 +1499,16 @@ public class TestHarness extends UhcDriver {
     	}
 		public void validateFindCareCostTab(String memberType) {
 			if(memberType.equalsIgnoreCase("TERMINATED"))
-				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab));
+				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab,0));
 			else
-				validateNew(findCareCostTab);
+				validateNew(findCareCostTab,0);
 
 		}
 		public void clickOnPharmaciesNavTab() {
-			
-			validateNew(pharmaciesTab);
+			CommonUtility.waitForPageLoad(driver, pharmaciesTab, 10);
+			validateNew(pharmaciesTab,0);
 			pharmaciesTab.click();
-			validateNew(pharmaciesHeader);
+			validateNew(pharmaciesHeader,0);
 			
 		}
 		public ContactUsPage clickOnHelpLink() {
@@ -1402,9 +1517,9 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		public void clickLogout() {
-			if (logOut.isDisplayed()) {
+			if (validate(logOut,0)) {
 				logOut.click();
-				validateNew(usernameField);
+				validateNew(usernameField,0);
 				if (driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
 					Assert.assertTrue("user is logged out", true);
 
@@ -1412,22 +1527,54 @@ public class TestHarness extends UhcDriver {
 
 		}
 
-		public void validatePaymentsTabNotDisplayed() {
-			if(validate(premiumPayment))
-				Assert.fail("Payments tab not expected but still displayed");
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+		protected WebElement comboTab_MAPD;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 
+		protected WebElement comboTab_SHIP;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
+		protected WebElement comboTab_PDP;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
+		protected WebElement comboTab_SSP;
+
+		public void validatePaymentsTabNotDisplayed(String planType, String memberType) {
+			if(validate(premiumPayment,0)) {
+				if (memberType.toLowerCase().contains("combo")) {
+					//note: has payment tab, check payment page to see if the plan tab show up or not
+					premiumPayment.click();
+					CommonUtility.checkPageIsReady(driver);
+					WebElement targetTab=null;
+					if (planType.equalsIgnoreCase("MAPD"))
+						targetTab=comboTab_MAPD;
+					else if (planType.equalsIgnoreCase("PDP") || planType.toUpperCase().startsWith("PDP")) 
+						targetTab=comboTab_PDP;
+					else if (planType.equalsIgnoreCase("SHIP")) 
+						targetTab=comboTab_SHIP;
+					else if (planType.equalsIgnoreCase("SSP") || planType.equalsIgnoreCase("SSUP")) 
+						targetTab=comboTab_SSP;
+					else  
+						Assert.assertTrue("PROBLEM - ATDD hasn't code this condition yet", false);;
+					Assert.assertTrue("PROBLEM - planType '"+planType+"' tab should not show up on payment page if it has 100% subsidy", !validate(targetTab,0));
+				} else {
+					Assert.fail("Payments tab not expected but still displayed");
+				}
+			}
 		}
+
 		public void validatePharmaciesTabNotDisplayed() {
-			if(validate(pharmaciesTab))
+			if(validate(pharmaciesTab,0))
 				Assert.fail("Pharmacies Tab is not expected but still displayed");
 			
 		}
 		public void validateHealthAndWellnessTabNotDisplayed() {
-			if(validate(healthAndWellnessTab))
+			if(validate(healthAndWellnessTab,0))
 				Assert.fail("H&W Tab is not expected but still displayed");
 			
 		}
 		public void validateFindCareCostTabNotAvailable() {
-			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab));			
+			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab,0));			
 		}
 		
 		/***
@@ -1472,4 +1619,91 @@ public class TestHarness extends UhcDriver {
 			}
 			return null;
 		}
+		
+		   public void userdirectlyaccessesmyhcesso() {
+			   
+			   if (MRScenario.environment.equalsIgnoreCase("stage"))
+			   {
+			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
+			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
+			   }
+			   else if (MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			   {
+				   System.out.println("Accessing https://offline-stage-medicare.uhc.com/myhce");
+				   driver.navigate().to("https://offline-stage-medicare.uhc.com/myhce");
+			 }
+			   try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			   System.out.println("Current URL is :  "+driver.getCurrentUrl());
+			   
+			   }
+
+		 
+		   public void userEntersZipCode(String zipCode) {
+			   
+			   	try {
+			   		if (driver.getTitle().contains("Zip Code Entry Page"))
+			   				{
+			   			System.out.println("Zip code Page / zip entry text box field was displayed");
+			   			CommonUtility.waitForPageLoad(driver, zipCodeTextBox, 20);
+			   			System.out.println("Now entering Zip code fetched from feature file");
+			   			sendkeys(zipCodeTextBox, zipCode);
+			   			System.out.println("Zip code was enetered");
+			   				}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Zip code Page / zip entry text box field was not displayed, failing this test script");
+					Assert.fail("Zip code text box fiels was not displayed");
+				}
+			       }	
+		   
+	public void clickContinueonZipEntryPage() {
+				// TODO Auto-generated method stub
+			   System.out.println("Now clicking Continue button");
+			   continueButton.click();
+			   System.out.println("Continue button was clicked");
+			   try {
+				   System.out.println("Waiting for 5 seconds");
+					Thread.sleep(5000);
+					CommonUtility.checkPageIsReadyNew(driver);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		   
+		   
+		public void checkuserlandsonhceestimatorpage() {
+			 System.out.println("Current URL is :  "+driver.getCurrentUrl());
+			 System.out.println("Now checking for header element h1 of the page");
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				try {
+					String gethcePageText = hcePageText.getText();
+					System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
+			   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
+			   				{
+			   			System.out.println("myHealthcare Cost Estimator Text was displayed");
+			   			
+			   				}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("myHealthcare Cost Estimator Text was not displayed in h1 header of myhce page, failing this test script");
+					Assert.fail("myHealthcare Cost Estimator Text was not displayed");
+				}
+			
+			
+		}
+		   
 }

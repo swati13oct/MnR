@@ -488,10 +488,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
 	private WebElement phoneSectionArrowIframe;
 
-	@FindBy(xpath = "(//*[@class='phone ng-scope']/p/span[@class='ng-binding'])[1]")
+	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[1]/div/span[2]")
 	private WebElement updatedHomePhoneAfterSave;
 	
-	@FindBy(xpath = "//*[@class='phone ng-scope']/p/span[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
 	private WebElement updatedMobilePhoneAfterSave;
 
 	@FindBy(id = "main")
@@ -1528,7 +1528,7 @@ private WebElement editEmailAddressArrowbutton;
 		iframePhoneEdit.click();
 		
 		validateNew(iframeHomePhone);
-		validateNew(iframeAdditionalPhone);
+		//validateNew(iframeAdditionalPhone);
 		validateNew(iframeWorkPhone);
 		validateNew(iframeMobilePhone);
 		
@@ -1538,7 +1538,7 @@ private WebElement editEmailAddressArrowbutton;
 		CommonUtility.checkPageIsReady(driver);
 		
 		validateNew(iframeEditPhoneInputField_homePhone);
-		validateNew(iframeEditPhoneInputField_additionalPhone);
+		//validateNew(iframeEditPhoneInputField_additionalPhone);
 		validateNew(iframeEditPhoneInputField_workPhone);
 		validateNew(iframeEditPhoneInputField_mobilePhone);
 		
@@ -1569,10 +1569,10 @@ private WebElement editEmailAddressArrowbutton;
 		iframeEditPhoneInputField_homePhone.sendKeys(homePhone);
 		Thread.sleep(500);
 		
-		iframeEditPhoneInputField_additionalPhone.clear();
+		/*iframeEditPhoneInputField_additionalPhone.clear();
 		Thread.sleep(500);
 		iframeEditPhoneInputField_additionalPhone.sendKeys(additionalPhone);
-		Thread.sleep(500);
+		Thread.sleep(500);*/
 
 		iframeEditPhoneInputField_workPhone.clear();
 		Thread.sleep(500);
@@ -2020,7 +2020,7 @@ private WebElement editEmailAddressArrowbutton;
 			cs.enterValidSecurityAnswer();
 			System.out.println(driver.getCurrentUrl());
 			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReadyNew(driver); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2992,12 +2992,18 @@ private WebElement cancelButtonOnPhoneSavepre;
 			enrollmentOptions.click();
 			saveButtonInPhoneEdit.click();
 			BackArrowbutton.click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println(updatedHomePhoneAfterSave.getText() + updatedMobilePhoneAfterSave.getText());
 			if (updatedHomePhoneAfterSave.getText().contains("123-456-7890")
 					&& updatedMobilePhoneAfterSave.getText().contains("123-456-7890"))
 				Assert.assertTrue(true);
 			else {
-				Assert.fail("Not able to validate the Phone  update functionality for  member");
+				Assert.fail("Not able to validate the Phone update functionality for member");
 			}
 			
 		}

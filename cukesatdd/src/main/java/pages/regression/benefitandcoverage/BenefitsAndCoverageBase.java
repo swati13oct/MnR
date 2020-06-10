@@ -2,6 +2,7 @@ package pages.regression.benefitandcoverage;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -13,9 +14,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.payments.PaymentHistoryPage;
-
+import pages.regression.testharness.TestHarness;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 /**
  * @Functionality : To check Benefits and Coverage page
  */
@@ -39,6 +42,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		orderMaterialsTab.click();
 		validateNew(orderMaterialsHeader,0);	
 	}
+	
 	
 	public void sleepBySec(int sec) {
 		System.out.println("Sleeping for '"+sec+"' sec");
@@ -106,9 +110,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		return jmpLinkToadditionalBenefits;
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionPDP() {
 		return directorySection;
-	}
+	} */
 
 	public List<WebElement> getDirectorySectionSSUP() {
 		return directorySection;
@@ -134,20 +139,27 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		return jmpLinkToWaysToSaveMoneyPDP;
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySection(String memberType) {
 		return directorySection;
-	}
+	}*/
 
 	public List<WebElement> getDirectorySection(String planType, String memberType) {
+		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
+				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
+			return directorySection;
+		else if(planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
+			return directorySectionMedSupp;
+		else
+			return null;
+		/* tbd 
 		int planId=0;
-		/*     Menu                                                     
-		 * 1-MAPD
-		 * 2-MA
-		 * 3-MedSupp
-		 * 4-PDP
-		 * 5-SSUP
-		 *  
-		 */
+		//     Menu                                                     
+		// 1-MAPD
+		// 2-MA
+		// 3-MedSupp
+		// 4-PDP
+		// 5-SSUP
 		if(planType.equalsIgnoreCase("MAPD"))
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
@@ -180,15 +192,18 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			break;
 		}
 		return null;
+		*/
 	}
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionMA() {
 		return directorySection;
-	}
+	} */
 
+	/* tbd 
 	public List<WebElement> getDirectorySectionMedSupp() {
 		return directorySectionMedSupp;
-	}
+	} */
 
 	public WebElement getTextdiscountservices() {
 		return textdiscountservices;
@@ -239,26 +254,25 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public WebElement getJmpLinkToOptionalServicesRiders(String planType) {
+		if(planType.equalsIgnoreCase("MAPD"))
+			return jmpLinkToOptionalServicesRiders;
+		else if(planType.equalsIgnoreCase("MA"))
+			return jmpLinkToOptionalServicesRidersMA;
+		else
+			return null;
+		/* tbd 
 		int planId=0;
-		/*     Menu                                                     
-		 * 1-MAPD
-		 * 2-MA
-		 * 3-MedSupp
-		 * 4-PDP
-		 * 5-SSUP
-		 *  
-		 */
+		//     Menu                                                     
+		// 1-MAPD
+		// 2-MA
+		// 3-MedSupp
+		// 4-PDP
+		// 5-SSUP
 
 		if(planType.equalsIgnoreCase("MAPD"))
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
 			planId=2;
-		/*                          if(planType.equalsIgnoreCase("MedSupp"))
-                                             planId=3;
-                              if(planType.equalsIgnoreCase("PDP"))
-                                             planId=4;
-                              if(planType.equalsIgnoreCase("SSUP"))
-                                             planId=5;*/
 
 		switch (planId) {
 
@@ -274,6 +288,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 
 		return null;
+		*/
 	}
 
 	public WebElement getJmpLinkToOptionalServicesRiders() {
@@ -483,7 +498,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 					getOptionalServicesRidersSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 
-		if (memberType.equalsIgnoreCase("Individual")) {
+		//tbd if (memberType.equalsIgnoreCase("Individual")) {
+		if (memberType.contains("Individual")) {
 			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 			clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
 			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),
@@ -556,6 +572,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
 		System.out.println("Now clicking the View Plan Documents Button");
 		viewPlanDocumentsButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		return new FormsAndResourcesPage(driver);
 	}
 	
@@ -842,8 +859,231 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 
+	public void scrollToViewexpressScriptsLink() {
+		// TODO Auto-generated method stub
+		System.out.println("Scrolling to Access Your Drug Benefits Header for Express Scripts Link");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", accessYourDrugBenefitsHeader); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
+	public void clickExpressScriptsLink() {
+		// TODO Auto-generated method stub
+		System.out.println("Clicking on Express Scripts Link");
+		expressScriptsLink.click();   	
+		System.out.println("Now clicking on proceed button of site leaving popup");
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		proceedButtonExpressScriptsSSOSiteLeavingPopup.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//switching to Kentucky SSO window
+		
+		String mainwindow = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage"))
+		{
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Now waiting for Express Scripts logo to show up in Stage");
+		CommonUtility.waitForPageLoad(driver, ExpressScriptsLogo, 20);
+		if (driver.getCurrentUrl().contains("https://wwwuat.express-scripts.com/medco/consumer/SSO") && 
+				ExpressScriptsLogo.isDisplayed())
+		{
+			System.out.println("Express Scripts logo was displayed and SSO URL was correct in Stage");
+		}
+		
+		}
+		else if ((MRScenario.environment.equalsIgnoreCase("prod")) || (MRScenario.environment.equalsIgnoreCase("offline")))
+		{
+			System.out.println("Now waiting for Express Scripts logo to show up in PROD or Offline PROD");
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, ExpressScriptsLogoPROD, 20);
+			if (driver.getCurrentUrl().contains("https://www.express-scripts.com/frontend/consumer/#/") && 
+					ExpressScriptsLogoPROD.isDisplayed())
+			{
+				System.out.println("Express Scripts logo was displayed and SSO URL was correct in Offline PROD or PROD");
+			}
+		}
+		else
+		{
+			System.out.println("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
+			Assert.fail("Any of these -  Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed or environment passed is not considered, failing test script");
+		}
+		
+	}
 
+	public void scrollToOptumRxSSOLink(String optumrxssolink ) {
+		// TODO Auto-generated method stub
+		String linktobetested = optumrxssolink;
+		if (linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM"))
+		{
+		System.out.println("Scrolling to section containing VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", lisDrugCopayHeader); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{
+		System.out.println("Scrolling to LookUpDrugs Button Section");
+		JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+		jse3.executeScript("arguments[0].scrollIntoView()", LookUpDrugsButtonSection); 
+		try {
+			Thread.sleep(2000);
+		    } 
+		catch (InterruptedException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		}
+		
+		if (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink"))
+		{
+		System.out.println("Scrolling to section conytaining view Details At Optumrx Link");
+		JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+		jse4.executeScript("arguments[0].scrollIntoView()", viewDetailsAtOptumrxLinkSection); 
+		try {
+			Thread.sleep(2000);
+		    } 
+		catch (InterruptedException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		
+	}
+			
+	
+	
+	public void clicksToOptumRxSSOLink(String optumrxssolink ) {
+		// TODO Auto-generated method stub
+		
+		String linktobetested = optumrxssolink;
+		if (linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM"))
+		{	
+		System.out.println("Clicking on VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link");
+		TestHarness.checkForIPerceptionModel(driver);
+		viewYourCurrentPrescriptionDrugCostSummaryLink.click();   	
+		System.out.println("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link has been clicked");
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{	
+		System.out.println("Clicking on LookUpDrugs Button");
+		TestHarness.checkForIPerceptionModel(driver);
+		LookUpDrugsButton.click();   	
+		System.out.println("LookUpDrugs Button has been clicked");
+		}
+		
+		if (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink"))
+		{	
+		System.out.println("Clicking on View Details At Optumrx Link");
+		TestHarness.checkForIPerceptionModel(driver);
+		viewDetailsAtOptumrxLink.click();   	
+		System.out.println("View Details At Optumrx Link has been clicked");
+		}
+		
+		try {
+			System.out.println("Now waiting for 4 seconds");
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("switching to OptumRx  window");		
+		String mainwindow = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		try {
+			System.out.println("Now waiting for 20 seconds");
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		if ((linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM")) 
+				|| (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink")))
+		{
+		System.out.println("Now waiting for Benefits Information header to show up");
+		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 40);
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
+		System.out.println("Page title is:   "+driver.getTitle());
+		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
+		System.out.println("Header text of page is  "+getHeaderText);
+		if (driver.getCurrentUrl().contains("optumrx.com/secure/benefits-and-claims/benefits-information") 
+				&& BenefitsInformationHeaderOptumRx.getText().contains("Benefits Information"))
+		{
+			System.out.println("Benefit Information Header was displayed on page and OptumRx SSO URL was correct");
+		}
+		else
+		{
+			System.out.println("OptumRx SSO URL was incorrect or Benefit Information header was not displayed, failing test script");
+			Assert.fail();
+		}
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{
+		System.out.println("Now waiting for Search for a drug header to show up");
+		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 40);
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
+		System.out.println("Page title is:   "+driver.getTitle());
+		String getHeaderText = searchForADrugHeaderOptumRx.getText();
+		System.out.println("Header text of page is  "+getHeaderText);
+		if (driver.getCurrentUrl().contains("optumrx.com/secure/member-tools/drug-search") 
+				&& searchForADrugHeaderOptumRx.getText().contains("Search for a drug"))
+		{
+			System.out.println("Search for a drug header was displayed on page and OptumRx SSO URL was correct");
+		}
+		else
+		{
+			System.out.println("OptumRx SSO URL was incorrect or Drug pricing header was not displayed, failing test script");
+			Assert.fail();
+		}
+		}
+	}
 
 }
 
