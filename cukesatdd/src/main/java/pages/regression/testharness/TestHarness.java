@@ -1282,6 +1282,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
     		checkForIPerceptionModel(driver);
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
     		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -1620,9 +1621,17 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		   public void userdirectlyaccessesmyhcesso() {
+			   
+			   if (MRScenario.environment.equalsIgnoreCase("stage"))
+			   {
 			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
 			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
-				 
+			   }
+			   else if (MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			   {
+				   System.out.println("Accessing https://offline-stage-medicare.uhc.com/myhce");
+				   driver.navigate().to("https://offline-stage-medicare.uhc.com/myhce");
+			 }
 			   try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -1672,7 +1681,13 @@ public class TestHarness extends UhcDriver {
 		public void checkuserlandsonhceestimatorpage() {
 			 System.out.println("Current URL is :  "+driver.getCurrentUrl());
 			 System.out.println("Now checking for header element h1 of the page");
-			 
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				try {
 					String gethcePageText = hcePageText.getText();
 					System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");

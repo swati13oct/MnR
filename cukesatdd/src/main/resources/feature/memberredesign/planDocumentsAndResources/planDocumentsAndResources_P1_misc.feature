@@ -55,7 +55,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
       | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@active_mapd @devRegression

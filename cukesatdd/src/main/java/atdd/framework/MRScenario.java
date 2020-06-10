@@ -176,6 +176,7 @@ public class MRScenario {
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE) ? "Yes"
 					: System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+			environmentMedicare = environment;
 		}
 
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER)
@@ -1209,10 +1210,18 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "qawrite";  //gpsuat3UserName
-			String pwd = "testwrite$"; //gpsuat3UserPass
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))";  //gpsuat3Url
-			//String url = "jdbc:oracle:thin:@dbslt0058.uhc.com:1521:gpsts18svc.uhc.com";
+			String user = "qawrite";  
+			String pwd = "testwrite$"; 
+			
+			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
+			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
+			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established*********");
 			
