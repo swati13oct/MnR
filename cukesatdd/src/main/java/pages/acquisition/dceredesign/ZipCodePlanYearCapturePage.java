@@ -16,8 +16,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
-	@FindBy(xpath = "//input[@id='zip-code']")
-	public WebElement zipCodeField;
+
 	@FindBy(xpath = "//span[@id='zipError']")
 	public WebElement zipCodeErrorMsg;
 	
@@ -36,9 +35,6 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary']")
 	public WebElement continueBtn;
 
-	
-	
-	
 	public ZipCodePlanYearCapturePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -113,8 +109,8 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	public ZipCodePlanYearCapturePage validateZipCodeErrorMessage(String zipcode) {
 		String[] zip = zipcode.split(",");
 		for(String code: zip) {
-			validateNew(zipCodeField);
-			sendkeys(zipCodeField, zipcode);
+			validateNew(zipCodeTxtbox);
+			sendkeys(zipCodeTxtbox, zipcode);
 			validateNew(continueBtn);
 			continueBtn.click();
 			CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
@@ -128,8 +124,8 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		validateNew(zipCodeField);
-		sendkeys(zipCodeField, zipcode);
+		validateNew(zipCodeTxtbox);
+		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
 			if (countyDD.isDisplayed()) {
@@ -143,16 +139,4 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		validateNew(continueBtn);
 		continueBtn.click();
 	}
-
-	public ZipCodePlanYearCapturePage clickAddDrugsBtn() {
-		continueBtn.click();
-		if(validateNew(zipCodeField)) {
-			Assert.assertTrue("Naviagted to ZipCode and Plan year capture Page", true);
-			return new ZipCodePlanYearCapturePage(driver);
-		}
-		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
-		return null;
-	}
-	
-	
 }
