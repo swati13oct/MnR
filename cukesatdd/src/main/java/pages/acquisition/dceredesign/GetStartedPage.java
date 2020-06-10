@@ -28,20 +28,11 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 	
-	@FindBy(xpath = "//input[@id='zip-code']")
-	public WebElement zipCodeField;
-	
-	@FindBy(xpath = "//span[@id='zipError']")
-	public WebElement zipCodeErrorMsg;
+	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
+	public WebElement BuildDrugPage_verificationTxt;
 	
 	@FindBy(xpath = "//span[@class='uhc-button__text']")
 	public WebElement continueBtn;
-
-	@FindBy(xpath = "//select[@id='county']")
-	public WebElement countyDD;
-	
-	@FindBy(xpath = "//select[@id='county']/option")
-	public WebElement countyRows;
 	
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -58,8 +49,8 @@ public class GetStartedPage extends UhcDriver {
 	public BuildYourDrugList clickAddsDrugs() {
 		validateNew(AddMyDrugsBtn);
 		AddMyDrugsBtn.click();
-		CommonUtility.waitForPageLoad(driver,BuildDrugPage_EnterDrugNameTxt , 30);
-		if(validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+		CommonUtility.waitForPageLoad(driver,BuildDrugPage_verificationTxt , 30);
+		if(validateNew(BuildDrugPage_verificationTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugList(driver);
 		}
@@ -67,44 +58,5 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 	
-	public BuildYourDrugList validateZipCodeErrorMessage(String zipcode) {
-		validateNew(zipCodeField);
-		sendkeys(zipCodeField, zipcode);
-		validateNew(continueBtn);
-		continueBtn.click();
-		CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
-		if(validateNew(zipCodeErrorMsg)) {
-			System.out.println("Error message is Displaying");
-			return new BuildYourDrugList(driver);
-		}
-		Assert.fail("Error Message is not displaying for invalid zipcode");
-		return null;
-	}
 	
-	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		validateNew(zipCodeField);
-		sendkeys(zipCodeField, zipcode);
-		Thread.sleep(3000);
-		try {
-			if (countyDD.isDisplayed()) {
-				countyDD.click();
-				CommonUtility.waitForPageLoad(driver,countyRows , 30);
-				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		validateNew(continueBtn);
-		continueBtn.click();
-	}
-
-	public ZipCodePlanYearCapturePage clickAddDrugsBtn() {
-		AddMyDrugsBtn.click();
-		if(validateNew(zipCodeField)) {
-			Assert.assertTrue("Naviagted to ZipCode and Plan year capture Page", true);
-			return new ZipCodePlanYearCapturePage(driver);
-		}
-		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
-		return null;
-	}
 }

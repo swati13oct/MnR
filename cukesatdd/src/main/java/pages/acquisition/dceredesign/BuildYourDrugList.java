@@ -29,7 +29,7 @@ public class BuildYourDrugList extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override
