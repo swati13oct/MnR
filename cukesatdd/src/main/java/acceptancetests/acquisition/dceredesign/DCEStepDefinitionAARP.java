@@ -106,8 +106,9 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String invalidzipcode = memberAttributesMap.get("inValidzipCode");
+		System.out.println("zipcode"+invalidzipcode);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		zipCodePlanYearPage.validateZipCodeErrorMessage(invalidzipcode);
+		zipCodePlanYearPage.enterZipCode(invalidzipcode);
 	}
 	
 	@Then("^user enters valid zipcode and county$")
@@ -138,5 +139,11 @@ public class DCEStepDefinitionAARP {
 	@Then("^user should be navigated to Review drug cost estimate page$")
 	public void user_should_be_navigated_to_Review_drug_cost_estimate_page() {
 	    
+	}
+	
+	@Then("^error message should be displayed$")
+	public void error_message_should_be_displayed() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodeErrorMessage();
 	}
 }

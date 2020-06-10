@@ -20,9 +20,6 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//span[@id='zipError']")
 	public WebElement zipCodeErrorMsg;
 	
-	@FindBy(xpath = "//select[@id='county']")
-	public WebElement countyDD;
-	
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
@@ -47,6 +44,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 
 	public void enterZipCode(String zipcode) {
+		zipCodeTxtbox.clear();
 		zipCodeTxtbox.sendKeys(zipcode);
 	}
 
@@ -106,19 +104,19 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		return null;
 	}
 	
-	public ZipCodePlanYearCapturePage validateZipCodeErrorMessage(String zipcode) {
-		String[] zip = zipcode.split(",");
-		for(String code: zip) {
-			validateNew(zipCodeTxtbox);
-			sendkeys(zipCodeTxtbox, zipcode);
-			validateNew(continueBtn);
-			continueBtn.click();
+	public ZipCodePlanYearCapturePage validateZipCodeErrorMessage() {
+		//String[] zip = zipcode.split(",");
+		//for(String code: zip) {
+			//validateNew(zipCodeTxtbox);
+			//sendkeys(zipCodeTxtbox, zipcode);
+			//validateNew(continueBtn);
+			countyDropdown.click();
 			CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
 			if(validateNew(zipCodeErrorMsg)) {
 				System.out.println("Error message is Displaying");
 				return new ZipCodePlanYearCapturePage(driver);
 			}
-		}
+	//}
 		Assert.fail("Error Message is not displaying for invalid zipcode");
 		return null;
 	}
@@ -128,8 +126,8 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
-			if (countyDD.isDisplayed()) {
-				countyDD.click();
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
 				CommonUtility.waitForPageLoad(driver,countyRows , 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 			}
