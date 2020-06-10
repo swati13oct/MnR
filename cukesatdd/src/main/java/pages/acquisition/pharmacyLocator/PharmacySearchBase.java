@@ -80,8 +80,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 	
 	public void validateNoresultsZipcodeError(String zipcode) {
+		zipcodeField.clear();
 		zipcodeField.sendKeys(zipcode);
+		if(zipcode.length()!=5){
 		distanceOption_2miles.click();
+		}
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		//Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
