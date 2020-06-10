@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button 
-    Then user should be navigated to zipcode and plan year capture page for AEP
+    Then user should be navigated to zipcode and plan year capture page for Non AEP
     When user enters valid zipcode and county
     |ZipCode|<zipCode>|
     And user clicks on continue button
