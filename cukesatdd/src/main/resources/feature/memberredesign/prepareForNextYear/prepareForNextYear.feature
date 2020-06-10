@@ -7,7 +7,6 @@ Feature: 1.21 Member Prepare For Next Year
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
-      | Plan Start Type        | <planStartType>|
       | AEM Show Tab StartDate | 09/01/2020     |
       | AEM Show Tab EndDate   | 01/05/2021     |
       | AEM Toggle             | ON             |
@@ -21,6 +20,7 @@ Feature: 1.21 Member Prepare For Next Year
 	   #| 02    | F437767 | MA	     | GRP_OFFCYC_PreNexYr    | FALSE                                          |
 	    | 03    | F437767 | MAPD	 | GRP_OFFCYC_PreNexYr    | FALSE                                          |
 
+    # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prepareForNextYear01b @noTab
     Examples: 
 	    | index | FID     | planType | memberType             | note expectTab if date in range and toggle ON  | 

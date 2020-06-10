@@ -112,7 +112,7 @@ public class PrepareForNextYearStepDefinition {
 				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate)) 
 				&& (!aem_tabToggle))	
 			expPrepareForNextYearTab=false;
-		if (memberType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("COMBO") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
+		if (planType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("COMBO") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
 			expPrepareForNextYearTab=false;
 		if (memberType.toUpperCase().contains("GRP") && memberType.toUpperCase().contains("OFFCYC"))
 			expPrepareForNextYearTab=false;
@@ -215,37 +215,37 @@ public class PrepareForNextYearStepDefinition {
 			testNote=new ArrayList<String>();
 		testNote.add("===================================================");
 		if (currentDate.before(milestone1Date)) {
-			testNote.add("\tValidation for current date < milestone 1");
+			testNote.add("\tValidation for current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.printDate(milestone1Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateBeforeM1Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
-			testNote.add("\tValidation for milestone 1 <= current date < milestone 2");
+			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.printDate(milestone1Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.printDate(milestone2Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
-			testNote.add("\tValidation for milestone 2 <= current date < milestone 3");
+			testNote.add("\tValidation for milestone 2 '"+prepareForNextYearPage.printDate(milestone2Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.printDate(milestone3Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
-			testNote.add("\tValidation for milestone 3 <= current date < milestone 4");
+			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.printDate(milestone3Date)+"'<= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.printDate(milestone4Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
-			testNote.add("\tValidation for milestone 4 <= current date < milestone 5");
+			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.printDate(milestone4Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.printDate(milestone5Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
-			testNote.add("\tValidation for milestone 5 <= current date");
+			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.printDate(milestone5Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
@@ -258,91 +258,6 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
-
-	
-	
-	//-------------- this line below is for accessing AEM only
-	@Then("^the user validates Prepare For Next Year tab display behavior on Benefits page base on AEM current setting$")
-	public void user_toBenefits_validateTabBasedOnCurrentAemSetting(DataTable memberAttributes) throws InterruptedException {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
-
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planStartType=memberAttributesMap.get("Plan Start Type");
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PLAN_STARTDATE_TYPE, planStartType);	
-
-		HashMap<String,String> currentAemSettingMap=(HashMap<String,String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.CURRENT_AEM_SETTING);
-		boolean tmp_toggle=Boolean.parseBoolean(currentAemSettingMap.get("featureToggle"));
-		String tmp_startDate=currentAemSettingMap.get("startDate");
-		String tmp_startTime=currentAemSettingMap.get("startTime");
-		String tmp_endDate=currentAemSettingMap.get("endDate");
-		String tmp_endTime=currentAemSettingMap.get("endTime");
-		
-
-		Date tabStartDate=prepareForNextYearPage.convertStrToDate(tmp_startDate);
-		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab StartDate' to valid Date object for further processing", tabStartDate!=null);
-		Date tabEndDate=prepareForNextYearPage.convertStrToDate(tmp_endDate);
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabStartDate, tabStartDate);	
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabEndDate, tabEndDate);	
-
-		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab EndDate' to valid Date object for further processing", tabEndDate!=null);
-
-		boolean aem_tabToggle=tmp_toggle;
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TOGGLE, aem_tabToggle);	
-
-		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
-
-		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
-
-		//note: if tabStartDate<= currentDate <= tabEndDate && toggle=ON
-		boolean expPrepareForNextYearTab=false;
-		if ((tabStartDate.before(currentDate) || tabStartDate.equals(currentDate))
-				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate))		
-				&& (aem_tabToggle)
-				&& (planStartType.equalsIgnoreCase("oncycle") || planStartType.toLowerCase().contains("mix"))
-				&& (!memberType.toUpperCase().contains("PREEFF") && !memberType.toUpperCase().contains("TERM") && !memberType.toUpperCase().contains("COMBO"))
-				)
-			expPrepareForNextYearTab=true;
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);	
-
-		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
-		if (testNote==null)
-			testNote=new ArrayList<String>();
-		String targetPage="Coverage and Benefits";
-		testNote.add("===================================================");
-		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
-		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.printDate(tabStartDate));
-		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.printDate(tabEndDate));
-		testNote.add("\t  AEM toggle ="+aem_tabToggle);
-		testNote.add("\t  System Date ="+prepareForNextYearPage.printDate(currentDate));
-		testNote.add("\t  User plan start date type ="+planStartType);
-		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
-
-		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
-			expComboTab=true;
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
-
-		wd=prepareForNextYearPage.navigateToBenefitsPage(planType, memberType, expComboTab);
-
-		boolean hasPrepareForNextYearTab=prepareForNextYearPage.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
-		if (expPrepareForNextYearTab==hasPrepareForNextYearTab) {
-			testNote.add("\tPrepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
-		} else
-			testNote.add("\tPrepare For Next Year tab is NOT displaying on Benefits page sub navigation menu as expected. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-
-		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	}	
-
 
 	@Then("^the user navigate to Prepare For Next Year page via Prepare For Next Year tab$")
 	public void user_toPrepareForNextYearPg() throws InterruptedException {
@@ -358,6 +273,8 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
 	}
 
+	//----------------------------------------------------------
+	//note: begin - keep the following steps for AEM update attempts
 	@Given("^the user update AEM setting$")
 	public void user_updateAEM() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -436,6 +353,7 @@ public class PrepareForNextYearStepDefinition {
 		d.quit();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Given("^the user update AEM setting with current date in range and toggle off$")
 	public void user_updateAEM_currentDateInRangeToggleOff() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -543,6 +461,7 @@ public class PrepareForNextYearStepDefinition {
 		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
+	@SuppressWarnings("unchecked")
 	@When("^the user update AEM setting with current date in range and toggle on$")
 	public void user_updateAEM_currentDateInRangeToggleOn() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -635,9 +554,9 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
+	@SuppressWarnings("unchecked")
 	@When("^the user update AEM setting with current date before range and toggle on$")
 	public void user_updateAEM_currentDateBeforeRangeToggleOn() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -729,10 +648,9 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
-
+	@SuppressWarnings("unchecked")
 	@When("^the user update AEM setting with current date after range and toggle on$")
 	public void user_updateAEM_currentDateAfterRangeToggleOn() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -825,9 +743,9 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
+	@SuppressWarnings("unchecked")
 	@When("^the user rollback AEM setting$")
 	public void user_updateAEM_reset() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -912,9 +830,9 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Then("^TBD the user rollback AEM setting$")
 	public void tbd_user_rollBackDefaultAEM() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -984,45 +902,88 @@ public class PrepareForNextYearStepDefinition {
 			Assert.assertTrue("PROBLEM - got exception while activing page for rolling back AEM fields all together",false);
 		}
 
-		/* tbd 
-		Date currentDate=aemPage.getCurrentSystemDate();
-		String currentDate_aemStr=aemPage.convertDateToAemFieldFormat(currentDate);
-		System.out.println("TEST - 1 - Current Date (AEM format)="+currentDate_aemStr);
-
-		Date newStartDateOneDayAfterCurrentDate = DateUtils.addDays(currentDate,+1);
-		String newStartDateOneDayAfterCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newStartDateOneDayAfterCurrentDate);
-		System.out.println("TEST - 1 - New StartDate one day after current date (AEM format)="+newStartDateOneDayAfterCurrentDate_aemStr);
-
-		Date newEndDateOneDayAfterCurrentDate = DateUtils.addDays(currentDate,+5);
-		String newEndDateFiveDayAfterCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newEndDateOneDayAfterCurrentDate);
-		System.out.println("TEST - 1 - New EndDate five days after current date (AEM format)="+newEndDateFiveDayAfterCurrentDate_aemStr);
-
-		System.out.println("TEST - 1 - "+currentDate_aemStr+" < "+newStartDateOneDayAfterCurrentDate_aemStr+" < "+newEndDateFiveDayAfterCurrentDate_aemStr);
-
-		Date newStartDateFiveDayBeforeCurrentDate = DateUtils.addDays(currentDate,-5);
-		String newStartDateFiveDayBeforeCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newStartDateFiveDayBeforeCurrentDate);
-		System.out.println("TEST - 2 - New StartsDate five days before current date (AEM format)="+newStartDateFiveDayBeforeCurrentDate_aemStr);
-
-		Date newEndDateOneDayBeforeCurrentDate = DateUtils.addDays(currentDate,-1);
-		String newEndDateOneDayBeforeCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newEndDateOneDayBeforeCurrentDate);
-		System.out.println("TEST - 2 - New EndDate one day before current date (AEM format)="+newEndDateOneDayBeforeCurrentDate_aemStr);
-
-		System.out.println("TEST - 2 - "+newStartDateFiveDayBeforeCurrentDate_aemStr+" < "+newEndDateOneDayBeforeCurrentDate_aemStr+" < "+currentDate_aemStr);
-
-		Date newStartDateTwoDayBeforeCurrentDate = DateUtils.addDays(currentDate,-2);
-		String newStartDateTwoDayBeforeCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newStartDateTwoDayBeforeCurrentDate);
-		System.out.println("TEST - 3 - New StartsDate two days before current date (AEM format)="+newStartDateTwoDayBeforeCurrentDate_aemStr);
-
-		Date newEndDateTwoDayAfterCurrentDate = DateUtils.addDays(currentDate,-1);
-		String newEndDateTwoDayAfterCurrentDate_aemStr=aemPage.convertDateToAemFieldFormat(newEndDateTwoDayAfterCurrentDate);
-		System.out.println("TEST - 3 - New EndDate one day before current date (AEM format)="+newEndDateTwoDayAfterCurrentDate_aemStr);
-
-		System.out.println("TEST - 3 - "+newStartDateTwoDayBeforeCurrentDate_aemStr+" < "+currentDate_aemStr+" < "+newEndDateTwoDayAfterCurrentDate_aemStr);
-		*/
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
+
+	//-------------- this line below is for accessing AEM only
+	@Then("^the user validates Prepare For Next Year tab display behavior on Benefits page base on AEM current setting$")
+	public void user_toBenefits_validateTabBasedOnCurrentAemSetting(DataTable memberAttributes) throws InterruptedException {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		HashMap<String,String> currentAemSettingMap=(HashMap<String,String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.CURRENT_AEM_SETTING);
+		boolean tmp_toggle=Boolean.parseBoolean(currentAemSettingMap.get("featureToggle"));
+		String tmp_startDate=currentAemSettingMap.get("startDate");
+		String tmp_startTime=currentAemSettingMap.get("startTime");
+		String tmp_endDate=currentAemSettingMap.get("endDate");
+		String tmp_endTime=currentAemSettingMap.get("endTime");
+		
+
+		Date tabStartDate=prepareForNextYearPage.convertStrToDate(tmp_startDate);
+		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab StartDate' to valid Date object for further processing", tabStartDate!=null);
+		Date tabEndDate=prepareForNextYearPage.convertStrToDate(tmp_endDate);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabStartDate, tabStartDate);	
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabEndDate, tabEndDate);	
+
+		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab EndDate' to valid Date object for further processing", tabEndDate!=null);
+
+		boolean aem_tabToggle=tmp_toggle;
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TOGGLE, aem_tabToggle);	
+
+		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+
+		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
+
+		//note: if tabStartDate<= currentDate <= tabEndDate && toggle=ON
+		boolean expPrepareForNextYearTab=false;
+		if ((tabStartDate.before(currentDate) || tabStartDate.equals(currentDate))
+				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate))		
+				&& (aem_tabToggle)
+				&& (!memberType.toUpperCase().contains("PREEFF") && !memberType.toUpperCase().contains("TERM") && !memberType.toUpperCase().contains("COMBO"))
+				)
+			expPrepareForNextYearTab=true;
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);	
+
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String targetPage="Coverage and Benefits";
+		testNote.add("===================================================");
+		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
+		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.printDate(tabStartDate));
+		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.printDate(tabEndDate));
+		testNote.add("\t  AEM toggle ="+aem_tabToggle);
+		testNote.add("\t  System Date ="+prepareForNextYearPage.printDate(currentDate));
+		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
+
+		boolean expComboTab=false;
+		if (memberType.toLowerCase().contains("combo"))
+			expComboTab=true;
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
+
+		wd=prepareForNextYearPage.navigateToBenefitsPage(planType, memberType, expComboTab);
+
+		boolean hasPrepareForNextYearTab=prepareForNextYearPage.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
+		if (expPrepareForNextYearTab==hasPrepareForNextYearTab) {
+			testNote.add("\tPrepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
+		} else
+			testNote.add("\tPrepare For Next Year tab is NOT displaying on Benefits page sub navigation menu as expected. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}	
+	//note: end - keep the following steps for AEM update attempts
+	//----------------------------------------------------------
 
 }
 
