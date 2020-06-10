@@ -611,7 +611,7 @@ try {
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage"))
+		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat"))
 		domain = "ocp-elr-core-nonprod.optum.com";
@@ -1042,6 +1042,7 @@ try {
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");

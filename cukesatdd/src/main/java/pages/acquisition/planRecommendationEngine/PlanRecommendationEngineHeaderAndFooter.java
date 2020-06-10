@@ -305,7 +305,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //MouseOver on Shop of a Plan and Validating Inside Shop of a Plan
 		System.out.println("Validating Shop of a Plan Elements: ");
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		validate(headerShopForaPlanFindplansinyourarea, 30);
 		validate(headerShopForaPlanZipcodeBox, 30);
 		validate(headerShopForaPlanZipcodeButton, 30);
@@ -343,7 +343,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //MouseOver on Learn About Medicare and Validating Learn About Medicare
 		System.out.println("Validating Learn About Medicare Elements: ");
-		actions.moveToElement(headerNavigationBarLearnAboutMedicareTab).perform();
+		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
 		validate(headerEligibilityLink, 30);		
 		validate(headerCoverageLink, 30);
 		validate(headermedicarePrescriptionProviderLink, 30);
@@ -392,7 +392,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
 		backtoshopforaplan();
 		headerPrescriptionLink.click();
-		validateLinks("/health-plans/shop/prescription-drug-plans.html");
+		validateLinks("/health-plans/shop/prescription-drug-plans.html"); 
 		backtoshopforaplan();
 		headerGetaPlanRecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
@@ -414,7 +414,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		}
 		
 // Learn about medicare inner elements	
-		backtolearnmoremodicare();
+		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
 		headerEligibilityLink.click();
 		validateLinks("/medicare-education/medicare-eligibility.html");
 		backtolearnmoremodicare();
@@ -597,8 +597,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
-		headerShopLink.click();
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		actions.moveToElement(headerShopLink).click().build().perform();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
 		validate(landingpageHeader, 30);
@@ -608,8 +608,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //ZipCode Function inside Shop for a Plan
 	public void zipcodeFunctionInShopforaplan(String zipcode) throws InterruptedException {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
-		headerShopForaPlanZipcodeBox.click();
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		actions.moveToElement(headerShopForaPlanZipcodeBox).click().build().perform();
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
 		headerShopForaPlanZipcodeButton.click();
 		Thread.sleep(5000);
@@ -621,7 +621,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //Email Function inside Shop for a Plan	
 	public void emailFunctionInShopforaplan(String email) {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		headerShopForaPlanEmailBox.click();
 		headerShopForaPlanEmailBox.sendKeys(email);
 		headerShopForaPlanEmailButton.click();
@@ -677,6 +677,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	}
 	
 	public void validateLinks(String expURL) {
+		threadsleep(2000);
 		String curURL = driver.getCurrentUrl();
 		try {
 			Thread.sleep(1500);
@@ -699,14 +700,16 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 	public void backtoshopforaplan() {
 		browserBack();
+		threadsleep(2000);
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 	}
 	
 	public void backtolearnmoremodicare() {
 		browserBack();
+		threadsleep(2000);
 		validate(headerNavigationBarLearnAboutMedicareTab, 45);
-		actions.moveToElement(headerNavigationBarLearnAboutMedicareTab).perform();
+		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
 	}
 	
 	public void navigatesubLink(String subURL) {

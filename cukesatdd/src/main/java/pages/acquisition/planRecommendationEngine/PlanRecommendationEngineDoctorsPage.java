@@ -295,7 +295,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                         						System.out.println("werallyResults Content is : "+werallyResults);
                             		}
                         					threadsleep(5000);
-//                        					driver.switchTo().window(primaryWindow);
+                        					driver.switchTo().window(primaryWindow);
                             			}
                             		System.out.println(driver.getCurrentUrl());
                         			threadsleep(1000);

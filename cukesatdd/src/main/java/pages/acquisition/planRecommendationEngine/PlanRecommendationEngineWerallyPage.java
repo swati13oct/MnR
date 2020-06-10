@@ -91,25 +91,28 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 		validate(searchBox, 30);
 		if (type.toUpperCase().contains("DOCTORS")) {
 			searchBox.sendKeys(searchParameter);
-			threadsleep(5000);
+			threadsleep(2000);
 			searchButton.click();
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
-				for (int i = count-1; i >= 0; i--) {
-					threadsleep(1000);
+				for (int i = count; i > 0; i--) {
+					threadsleep(5000);
 					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
 					doctorsSPecialtyName.add(searchResults.get(i).findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
-					WebElement save = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
-					save.click();
-					threadsleep(1000);
-					if (i == 0) {
+					WebElement saveButton = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
+					WebElement doc =searchResults.get(i).findElement(By.cssSelector("h2"));
+					scrollToView(doc);
+					saveButton.click();
+					threadsleep(3000);
+					if (i == 1) {
 						validate(viewSavedbutton, 30);
 						viewSavedbutton.click();
 					}
 					else {
 						validate(saveModalClosebutton, 30);
-						saveModalClosebutton.click();}
-				}
+						saveModalClosebutton.click();
+						}
+				}	
 				checkProviderCoveragebutton.click();
 				try {
 			        WebDriverWait wait = new WebDriverWait(driver, 2);
