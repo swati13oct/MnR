@@ -487,7 +487,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
 	private WebElement findAPharmacyLink;
+	
 
+	@FindBy(id="premiumpayment_3")
+	private WebElement premiumPayments;
+	
+	
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -2169,7 +2174,21 @@ public class AccountHomePage extends UhcDriver {
 						TestHarness.checkForIPerceptionModel(driver);
 						PremiumPaymentsTab.click();
 						System.out.println("Premium PaymentsTabtab has been clicked");	
-						CommonUtility.checkPageIsReadyNew(driver);
+					
+				}
+					catch(Exception e)
+					{
+						System.out.println("Could not locate shadow root element for payments tab");
+						Assert.fail("Could not locate shadow root element for payments tab");
+					}
+				}
+					else
+					{
+						validateNew(premiumPayments);
+						premiumPayments.click();
+					}
+					
+			    CommonUtility.checkPageIsReadyNew(driver);
 				System.out.println("Current URL is : "+driver.getCurrentUrl());
 				if (driver.getCurrentUrl().contains("payments"))
 				{
@@ -2180,14 +2199,6 @@ public class AccountHomePage extends UhcDriver {
 				{
 					Assert.fail("Current URL doesn't contains payments text in it, payments page didn't appear , failed");
 				}
-				}
-					catch(Exception e)
-				{
-					System.out.println("Could not locate shadow root element for payments tab");
-					Assert.fail("Could not locate shadow root element for payments tab");
-				}
-			}
-				
 				CommonUtility.checkPageIsReadyNew(driver);
 				TestHarness.checkForIPerceptionModel(driver);
 				return new PaymentHistoryPage(driver);
