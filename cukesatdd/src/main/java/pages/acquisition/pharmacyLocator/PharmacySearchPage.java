@@ -119,7 +119,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public void validateNoresultsZipcodeError() {
 		zipcodeField.sendKeys("11111");
-		searchbtn.click();
+		distanceOption_2miles.click();
+		//searchbtn.click();
 		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
