@@ -1,4 +1,4 @@
-@PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile
+@PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile @PRESanityMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API vs UI for Recommendation and Ranking using mobile
 # Mobile automation with minimal Business Scenarios
   @PRE @Rankingmobile @PDPAPIUIRanking @APIRankingmobile @F358846
