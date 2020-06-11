@@ -2,8 +2,6 @@ package pages.dashboard_deprecated.formsandresources;
 
 import java.util.ArrayList;
 
-import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {

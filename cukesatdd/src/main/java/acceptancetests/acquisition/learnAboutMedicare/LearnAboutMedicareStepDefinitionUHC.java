@@ -11,13 +11,13 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import junit.framework.Assert;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.LearnAboutMedicareHomePage;
 import pages.acquisition.bluelayer.MedicareAdvantagePartCPlansPage;
 import pages.acquisition.bluelayer.MedicareEligibilityPage;
 import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import junit.framework.Assert;
 
 /**
  * Functionality: Medicare flow
