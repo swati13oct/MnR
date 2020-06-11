@@ -347,7 +347,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   84315 | YES           | Davis County | None          | chronic      | regular | UHGNetwork |             |               | Yes            | Yes,Yes,Yes,Yes               | Lower                | SNP               | MA                |
 
   @PRE @planrecommendation @MAflowTie @F432670
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> - To validate MA flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
