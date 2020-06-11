@@ -563,7 +563,7 @@ public class FooterPage extends UhcDriver {
 	}
 	
 	public void validateSignInPgFooter() {
-		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 5);
+		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 10);
 		Assert.assertTrue("PROBLEM - unable to locate footer section on sign-in page", footerValidate(unauthFooter_section));
 		
 		String testLinkName="ABOUT US";
