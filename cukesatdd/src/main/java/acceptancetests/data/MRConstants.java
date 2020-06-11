@@ -84,7 +84,7 @@ public class MRConstants {
 	
 	
 //public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
-	public static final String UHC_URL = "http://"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
+	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
 	
 	public static final String UHC_URL_OFFLINE = "https://offline.uhcmedicaresolutions.com";
 	
