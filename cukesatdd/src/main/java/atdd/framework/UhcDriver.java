@@ -1082,7 +1082,7 @@ try {
 		Random rand = new Random();
 		double start=0.90d,end=0.95d;
 		double val = start+(end-start)*rand.nextDouble();
-		System.out.println(val);
+		//System.out.println(val);
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		String randomPercentage = numberFormat.format(val);
 		//System.out.println("randomPercentage Swipe - "+randomPercentage);

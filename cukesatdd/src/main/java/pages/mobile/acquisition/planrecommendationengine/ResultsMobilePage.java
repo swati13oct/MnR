@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -646,21 +647,61 @@ public class ResultsMobilePage extends UhcDriver {
 	public String getplanName(WebElement plan) {
 		String planName = "";
 		int i = 0;
-		while (i < 5) {
-			planName = plan.getText().trim();
-			System.out.println(planName);
-			if (planName.isEmpty()) {
-				boolean hswipe = mobileswipeHorizantal("80%", false);
-				if (hswipe) {
+		int limit = 1;
+		while (i < limit) {
+			try {
+				planName = plan.getText().trim();
+				// String text = (String) js.executeScript("return arguments[0].text;", plan);
+				// String text = (String) js.executeScript("return arguments[0].innerHTML;",
+				// plan);
+				// String text = (String) js.executeScript("return arguments[0].value;", plan);
+				// String text = (String) js.executeScript("return arguments[0].innerText;",
+				// plan);
+				// String text = js.executeScript("return
+				// document.getElementById('favouriteplanSelectS5921393000').innerHTML").toString();
+				// System.out.println("JS Text : "+text);
+				if (planName.isEmpty()) {
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					planName = (String) js.executeScript("return arguments[0].innerText;", plan);
 					i++;
-				} else {
-					mobileswipeHorizantal("80%", false);
+					
+					/*if (!planName.trim().isEmpty())
+						break;
+					boolean hswipe = mobileswipeHorizantal("80%", false);
+					if (hswipe) {
+						i++;
+					} else {
+						mobileswipeHorizantal("80%", false);
+						i++;
+					}
+					*/
+				} else
+					break;
+			} catch (Exception e) {
+				if (planName.isEmpty()) {
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					planName = (String) js.executeScript("return arguments[0].innerText;", plan);
 					i++;
-				}
-			} else
-				break;
+					/*
+					if (!planName.isEmpty())
+						break;
+					boolean hswipe = mobileswipeHorizantal("80%", false);
+					if (hswipe) {
+						i++;
+					} else {
+						mobileswipeHorizantal("80%", false);
+						i++;
+					}
+					*/
+				} else
+					break;
+			}
 		}
-		Assert.assertTrue(planName.length() > 1, "--- Unable to get the Plan name ---");
+		if (planName.trim().length() < 1) {
+			planName = "Error";
+			Assert.assertTrue(false, "--- Unable to get the Plan name ---");
+		}
+		System.out.println(planName);
 		return planName;
 	}
 
@@ -873,21 +914,24 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public String getplanId(WebElement plan) {
-		String planName = "";
+		//String planName = "";
 		String planId = "";
 		int i = 0;
-		while (i < 5) {
-			planName = plan.getText().trim();
-			planId = plan.getAttribute("id");
-			System.out.println(planName);
-			if (planName.isEmpty()) {
+		int limit =1;
+		while (i < limit) {
+			//planName = plan.getText().trim();
+			planId = plan.getAttribute("id").trim();
+			//System.out.println(planName);
+			if (planId.isEmpty()) {
+				i++;
+				/*
 				boolean hswipe = mobileswipeHorizantal("80%", false);
 				if (hswipe) {
 					i++;
 				} else {
 					mobileswipeHorizantal("80%", false);
 					i++;
-				}
+				}*/
 			} else
 				break;
 		}

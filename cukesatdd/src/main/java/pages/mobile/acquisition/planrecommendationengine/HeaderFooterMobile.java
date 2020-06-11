@@ -799,6 +799,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 
 	public void navigatePRELandingpageMobile() {
+		String url = driver.getCurrentUrl();
 		validate(headerSectionmenu, 30);
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
@@ -807,11 +808,11 @@ public class HeaderFooterMobile extends UhcDriver {
 		hearderEmailtext.sendKeys("");
 		hidekeypad();
 		String link = headerGetaplanrecommendationLink.getAttribute("href").trim();
-		System.out.println("PRE link : "+link);
-		mobileactiontap(headerGetaplanrecommendationLink);
+		//System.out.println("PRE link : "+link);
+		//mobileactiontap(headerGetaplanrecommendationLink);
+		driver.navigate().to(url+"plan-recommendation-engine.html");//if navigation not working in App
 		pageloadcomplete();
 		validate(landingpageHeader, 30);
-		//mobileUtils.waitTextPresent(landingpageHeader, "plan", 20);
 	}
 
 	public void browserBack() {

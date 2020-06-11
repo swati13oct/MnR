@@ -71,7 +71,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
       |   94203 | NO            | Sacramento | MAPD          | None         | None         | AcceptsMedicare  |             |               | NO            | No,No,Yes,Yes                 | Lower                | MA                    | SecureHorizons Focus:Advantage Assure:SecureHorizons |
 
-  @PRE @Rankingmobile @PDPPlansRankingmobile1 @F358846
+  @PRE @Rankingmobile @PDPPlansRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -Rankings <RankingplansOrder>- To validate PDP ranking plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
