@@ -327,7 +327,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
-	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail')]//a")
+	@FindBy(xpath="//a[contains(text(),'Learn more about Preferred Mail Home Delivery through OptumRx')]")
 	protected WebElement widget_prefMailServPhar_learnMore;
 
 	@FindBy(xpath="//div[contains(@ng-show,'preferredretail') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Retail')]/../../../div[2]//a")
