@@ -802,15 +802,15 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
+     # | UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
     And the user clicks on More Information link
     And the user validates contactus section
 
     Examples: 
-      | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp|Identifier | count | rider   |
-      | 15245 |qavgogine| qavgogine|q4_aarp_dec002| MAPD | Individual_BnC  | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |IndEffectiveAARP |7|Rider |
+      | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp|Identifier | count | rider   |
+      | 15245 |qavgogine| qavgogine|q4_aarp_dec002| MAPD | Individual_BnC  | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |IndEffectiveAARP |7|Rider |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_memAuth
