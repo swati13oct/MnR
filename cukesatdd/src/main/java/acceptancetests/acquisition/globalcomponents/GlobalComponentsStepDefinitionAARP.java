@@ -385,5 +385,10 @@ public class GlobalComponentsStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-
+	@Then("^the user validates chat Icon$")
+	public void the_user_validates_chat_Icon() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatIcon();
+	}
 }
