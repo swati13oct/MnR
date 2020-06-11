@@ -147,7 +147,7 @@ public class PrepareForNextYearStepDefinition {
 		String targetPage="Coverage and Benefits";
 		testNote.add("===================================================");
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("\tThis session sauceLab session url: "+MRScenario.returnJobURL()+"\n");
+			testNote.add("\tThis sauceLab session url: "+MRScenario.returnJobURL()+"\n");
 
 		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
 		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate));
@@ -167,9 +167,12 @@ public class PrepareForNextYearStepDefinition {
 
 		boolean hasPrepareForNextYearTab=prepareForNextYearPage.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
 		if (expPrepareForNextYearTab==hasPrepareForNextYearTab) {
-			testNote.add("\tPrepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
+			if (expPrepareForNextYearTab)
+				testNote.add("\tPASSED - Prepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
+			else
+				testNote.add("\tPASSED - Prepare For Next Year tab IS NOT displaying on Benefits page sub navigation menu as expected");
 		} else
-			testNote.add("\tPrepare For Next Year tab is NOT displaying on Benefits page sub navigation menu as expected. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
+			testNote.add("\tFAILED - Prepare For Next Year tab display behavior is not as expected on Benefits page sub navigation menu. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
@@ -422,7 +425,7 @@ public class PrepareForNextYearStepDefinition {
 		String text="===================================================";
 		testNote.add(text);
 		System.out.println(text);
-		text="Test Setup - AEM start date '"+aemDate+"' < System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone1 date '"+m1Date+"'";
+		text="Test Setup - AEM start date '"+aemDate+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone1 date '"+m1Date+"'";
 		testNote.add(text);
 		System.out.println(text);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
@@ -897,7 +900,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		AemPage aemPage=new AemPage(d);
@@ -1005,7 +1008,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		AemPage aemPage=new AemPage(d);
@@ -1100,7 +1103,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		AemPage aemPage=new AemPage(d);
@@ -1194,7 +1197,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		AemPage aemPage=new AemPage(d);
@@ -1289,7 +1292,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		AemPage aemPage=new AemPage(d);
@@ -1377,7 +1380,7 @@ public class PrepareForNextYearStepDefinition {
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		if (MRScenario.returnJobURL()!=null)
-			testNote.add("This session sauceLab session url: "+MRScenario.returnJobURL());
+			testNote.add("This sauceLab session url: "+MRScenario.returnJobURL());
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
 		AemPage aemPage=new AemPage(d);
