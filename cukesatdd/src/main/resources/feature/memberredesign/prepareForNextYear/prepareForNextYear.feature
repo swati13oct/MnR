@@ -176,7 +176,8 @@ Feature: 1.21 Member Prepare For Next Year
       | Member Type | <memberType>       |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content	Then test setup rolls back system date to current date for clean up after test
+	Then the user validates Prepare For Next Year page content
+	Then test setup rolls back system date to current date for clean up after test
 
 	@prepareForNextYear03a @withSystemTimeChange
     Examples: 
