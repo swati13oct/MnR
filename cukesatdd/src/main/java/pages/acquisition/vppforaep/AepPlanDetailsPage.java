@@ -5,6 +5,7 @@ package pages.acquisition.vppforaep;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,8 +20,10 @@ import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -54,6 +57,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement downbackToPlanslink;
+	
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
+	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 
 	public AepPlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -61,6 +71,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 		openAndValidate();
 	}
 
+	public AepPlanDetailsPage(WebDriver driver, String site,String deeplinkUrl) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(site,deeplinkUrl);
+	}
+	
+	
 	public String getContent() {
 		return plandetails.getText();
 	}
@@ -75,6 +92,49 @@ public class AepPlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 		validate(backToAllPlans);
 		validate(plandetails);
+
+	}
+
+	//this method is used for direct deeplink to plan details page for plan validation
+	public void openAndValidate(String site, String deeplinkUrl) {
+		
+		String tempUrl = "";
+		if ("AARP".equalsIgnoreCase(site)) {
+			if (MRScenario.environment.equals("offline")) {
+				tempUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver,45);
+				
+			} else if (MRScenario.environment.equals("prod")) {
+				tempUrl=AARP_ACQISITION_PROD_PAGE_URL+deeplinkUrl;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver,45);
+				
+			} else {
+				tempUrl=AARP_ACQISITION_PAGE_URL;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver,20);
+				
+			}
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}else {
+			if (MRScenario.environment.equals("offline")) {
+				tempUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver);
+				
+			} else if (MRScenario.environment.equals("prod")) {
+				tempUrl=UMS_ACQISITION_PROD_PAGE_URL+deeplinkUrl;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver);
+				
+			} else {
+				tempUrl=UMS_ACQISITION_PAGE_URL;
+				driver.get(tempUrl+deeplinkUrl);
+				checkModelPopup(driver,20);
+			}
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
 
 	}
 
