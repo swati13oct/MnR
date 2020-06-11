@@ -289,7 +289,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='responsiveplan']")
 	private List<WebElement> medSuppPlanList;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
@@ -958,8 +958,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
                             msPlansViewLink.click();
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
-            			sleepBySec(5);
-        	            CommonUtility.checkPageIsReady(driver);
+            			validateNew(snpPlansViewLink);
         	            snpPlansViewLink.click();
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             }
@@ -3473,6 +3472,7 @@ catch (Exception e) {
 	public VisitorProfilePage continueAsGuest(){
 		continueAsGuest.click();
 		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
@@ -3782,7 +3782,7 @@ catch (Exception e) {
 		
 		return providerNames;
 	}
-	/*
+	//
 	public void setStringList(ArrayList<String> stringList) {
 		
 	    this.stringList = stringList;
@@ -3793,7 +3793,6 @@ catch (Exception e) {
 	    return stringList;
 
 	}
-		*/
 	public void setMap(Map<String, ArrayList<String>> dataMap) {
 		
 	    this.dataMap = dataMap;
@@ -3812,6 +3811,7 @@ catch (Exception e) {
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		shoppingCartIcon.click();
 		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
@@ -3917,6 +3917,78 @@ public ArrayList<String> validate_marketing_details(String planName) {
 			
 		return marketingBulletDetails;
 	
+	}
+	/**
+	 * Save all the plans specified to the plan type and plan names
+	 * @param savePlanNames
+	 * @param planType
+	 */
+	public void saveAllPlans(String savePlanNames, String planType){
+		String testPlanXpath="";
+		String initial_savePlanIconXpath = "";
+		String savedPlanIconXpath = "";
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+		
+		int savedPlanCount = 0;
+		
+		for (String plan: listOfTestPlans) {
+			
+			//Closing the create profile prompt after saving 2 plans
+			savedPlanCount++;
+			if(savedPlanCount==3) {
+				CommonUtility.waitForPageLoad(driver, btnClose, 20);
+				btnClose.click();
+			}
+			System.out.println("Proceed to locate plan="+plan);
+
+			if(planType.equalsIgnoreCase("MS")) {
+				 testPlanXpath="//h2[text()='"+plan+"']";
+			} else {
+			 testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			}
+			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+			
+			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
+			
+			if(planType.equalsIgnoreCase("MS")) {
+				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
+			}else {
+			initial_savePlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savePlanImgXpath;
+			}
+			
+			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
+		
+			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
+			if(planType.equalsIgnoreCase("MS")) {
+				savedPlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"+plan+"']";
+						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+					
+			}else {
+			savedPlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savedPlanImgXpath;
+			}
+			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
+			expMatch=0;
+			//----------------------------------------
+			System.out.println("Proceed to click to save plan");
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+
+		}
 	}
 }
 

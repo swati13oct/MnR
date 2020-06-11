@@ -303,6 +303,10 @@ public class MemberRedesignHeaderStepDefinition {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			accountHomePage.validateCoverageBenefitsL2Tabs();
 		}
+		//TODO changed 05/27/2020
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
 	
@@ -346,8 +350,13 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Forms_Resources_tab_and_I_should_be_directed_to_the_Forms_Resources_Page() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		bncPage.clickPlanDocsAndResourcesTab();
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+			bncPage.clickPlanDocsAndResourcesTab();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.clickOrderMaterials();
+		}
 	}
 
 	/**
@@ -361,8 +370,9 @@ public class MemberRedesignHeaderStepDefinition {
 
 		if(!memberType.equalsIgnoreCase("TERMINATED")){
 			bncPage.clickOrderMaterialsNavTab();
-		}else
+		}else {
 			bncPage.validateOrderPlanMaterialsSubNavNotDisplayed();
+		}
 
 	}
 

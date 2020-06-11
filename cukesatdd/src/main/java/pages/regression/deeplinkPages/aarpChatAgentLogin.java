@@ -11,9 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.login.ConfirmSecurityQuestion;
 
 /**
  * @author pminhas

@@ -1,10 +1,12 @@
 package pages.regression.explanationofbenefits;
 
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 public class EOBWebElements extends UhcDriver{
@@ -197,7 +199,10 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath=".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li")
 	protected List<WebElement> listOfEobs;
-	
+
+	@FindBy(xpath=".//table//tbody//tr")
+	protected List<WebElement> listOfEobs_dream;
+
 	@FindBy(xpath="//div[contains(@class,'eobErrors')]//p[contains(text(),'no EOBs available')]")
 	protected WebElement noEobErr;
 	

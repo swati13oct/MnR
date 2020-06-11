@@ -8,10 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
 
 /**
@@ -552,4 +554,57 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.checkPageIsReady(driver);
 		claimCheckModelPopup(driver);
 	}
+	
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
+	 @FindBy(xpath="//a[@id='contact-help']")
+	 WebElement contactus;
+	 
+	 @FindBy(xpath="//h1[@class='main-heading margin-none']")
+	 WebElement ContactUsHeading;
+
+		public ContactUsPage NavigatetoContactuspage() throws InterruptedException {
+		checkForIPerceptionModel(driver);
+	       // clicking on contact us 
+		Thread.sleep(2000);
+			waitforElement(contactus);
+			contactus.click();			
+			System.out.println(driver.getTitle());
+			System.out.println(driver.getCurrentUrl());			
+		//	Assert.assertTrue(driver.getTitle().contains("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us"));		
+			if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us") || driver.getTitle().equalsIgnoreCase("Help & Contact Us"));
+					{
+				System.out.println("Title matched");
+				Thread.sleep(8000);
+			}	
+			validate(ContactUsHeading);						
+			if (driver.getTitle().contains("Help & Contact Us")) {
+				System.out.println("Contact us Page is Displayed");
+				return new ContactUsPage(driver);
+			} else {
+				System.out.println("===========Contact us page not Displayed Heading & Title do not match=============");
+				return null;
+			}
+		}
 }

@@ -115,11 +115,12 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | drug    | dosage   | quantity | frequency     | branded |
       |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
 
-  @PRE @planrecommendation @providersessionVPPtoPRE @F358845 @F427538
+  @PRE @planrecommendation @providersessionVPPtoPRE @F358845 @F427538 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
+    And user verifies "VPP" page
     Then user adds Doctors in vpp summary page
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
@@ -275,6 +276,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user navigate to PRE using StartNow button and verify drugs details in PRE page
     Then user proceed page navigation till VPP page after Start Now button
       | Plan Type | <isCoverageOpt> |
+    And verify continue function on "Pharmacy" page
+    And verify continue function on "Additional Services" page
+    And verify continue function on "Cost Preferences" page
     Then user validate elements in loading results page
 
     Examples: 
@@ -310,18 +314,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
     When user navigates to Zip Code page from vpp plans
-    And clicks on get started button and runs questionnaire
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | CountyDropDown  | <county>        |
     And verify continue function on "Location" page
     And verify continue function on "Coverage" page
     And verify continue function on "Special" page
     And verify continue function on "Travel" page
     And user selects Doctors in Doctors page and validate next page name
-      | Doctors             | <doctors>        |
-      | Doctors Search Text | <DoctorsName1>   |
-      | Multi Doctor        | <isMultiDoctor1> |
+    Then user verifies existing PRE provider session using startnow
+      | Multi Doctor | <isMultiDoctor> |
     And user verifies exisitng PRE drug session using startnow
     And verify continue function on "Pharmacy" page
     And verify continue function on "Additional Services" page
@@ -330,8 +329,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user navigates to Zip Code page from vpp plans
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | Zipcode1 | isMultiCounty1 | county1  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | DoctorsName1 | isMultiDoctor1 | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York |    10001 | NO             | New York | MAPD          | None         | regular | Lookup  | john        | Yes           | robert       | No             | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York | MAPD          | None         | regular | Lookup  | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonation @EmailList @PDPEmailPlans @F452764
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -351,8 +350,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | EmailID        | <Email>                 |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | Email                  |
-      |   10003 | NO            | New York | PDP           | No             | julia_dowden@optum.com |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | primaryRecommendation | Email                  |
+      |   10003 | NO            | New York | PDP           | No             | PDP                   | julia_dowden@optum.com |
 
   @PRE @planrecommandonation @EmailList @F452764
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate Email plan list in PRE
@@ -379,11 +378,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate email plan list from vpp
+      | Recommendation | <primaryRecommendation> |
+      | EmailID        | <Email>                 |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder      |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | Email                  |
       |   32111 | No            | Marion   | MAPD          | Medicaid     | outsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
-      |   10001 | No            | New York | MAPD          | None         | None      | UHCNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |
+      |   10001 | No            | New York | MAPD          | None         | None      | UHGNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |

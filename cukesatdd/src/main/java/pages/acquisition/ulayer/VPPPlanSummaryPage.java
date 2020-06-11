@@ -23,6 +23,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Strings;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -61,7 +63,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -627,7 +629,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 		private WebElement findPlansButton;
 		
-		@FindBy(css = "div#CSRLoginAlert>span")
+		@FindBy(css = "div#CSRLoginAlert>div")
 		private WebElement agentModeBanner;
 		
 		@FindBy(css = "div#currPlansBanner>div>a")
@@ -758,12 +760,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			/*
+			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+			 * Auto-generated catch block e.printStackTrace(); }
+			 */
 			
 		}
 	}
@@ -3098,6 +3098,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public VisitorProfilePage continueAsGuest(){
 		continueAsGuest.click();
 		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
@@ -3468,11 +3469,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
 		 * @param planName
 		 */
-		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName) {
+		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
 			//validatePlanSummary();
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
-			Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+			
+			if(Strings.isNullOrEmpty(enrolledPlanName))
+				System.out.println("#########Empty Profile#########");
+			else
+				Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
@@ -3513,6 +3518,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		public VisitorProfilePage navigateToVisitorProfilePage() {
 			shoppingCartIcon.click();
 			if(driver.getCurrentUrl().contains("profile")) {
+				CommonUtility.checkPageIsReadyNew(driver);
 				return new VisitorProfilePage(driver);
 			}else {
 				System.out.println("Navigation to visitor profile is failed");
@@ -3528,9 +3534,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * Validate the Agent Mode Banners for Non Member
 		 * @param planName
 		 */
-		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers) {
+		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers,String fname, String lname) {
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 			
 			if(!providers.equalsIgnoreCase("no")) {
 				//Validate Providers

@@ -176,6 +176,7 @@ public class MRScenario {
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE) ? "Yes"
 					: System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+			environmentMedicare = environment;
 		}
 
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER)
@@ -611,7 +612,7 @@ try {
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage"))
+		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat"))
 		domain = "ocp-elr-core-nonprod.optum.com";
@@ -1038,12 +1039,14 @@ try {
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1440x900");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1024x768");
+				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("chrome")) {
 				System.out.println("Inside chrome");
@@ -1059,6 +1062,13 @@ try {
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
+				capabilities.setCapability("maxDuration", "3600");
+			}else if (browserName.equalsIgnoreCase("safari")) {
+				System.out.println("Inside safari");
+				capabilities = DesiredCapabilities.safari();
+				capabilities.setCapability("platform", "Mac 10.15");
+				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1920x1440");
 				capabilities.setCapability("maxDuration", "3600");
 			}
 			if (!(null == capabilities)) {
@@ -1084,7 +1094,6 @@ try {
 						+ System.getProperty("environment") + " environment";
 				capabilities.setCapability("name", jobName);
 				try {
-
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
@@ -1209,10 +1218,18 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "qawrite";  //gpsuat3UserName
-			String pwd = "testwrite$"; //gpsuat3UserPass
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))";  //gpsuat3Url
-			//String url = "jdbc:oracle:thin:@dbslt0058.uhc.com:1521:gpsts18svc.uhc.com";
+			String user = "qawrite";  
+			String pwd = "testwrite$"; 
+			
+			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
+			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
+			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established*********");
 			

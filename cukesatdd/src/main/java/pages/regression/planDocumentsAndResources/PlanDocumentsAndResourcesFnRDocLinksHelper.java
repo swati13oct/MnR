@@ -1,5 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +14,7 @@ public class PlanDocumentsAndResourcesFnRDocLinksHelper extends PlanDocumentsAnd
 
 	public PlanDocumentsAndResourcesFnRDocLinksHelper(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override

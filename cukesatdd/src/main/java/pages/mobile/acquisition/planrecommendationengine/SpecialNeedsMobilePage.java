@@ -158,6 +158,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				specialNeedspageFunctional(option);
 				specialNeedsOptionsMoreInfo(option);
 			}
+			mobileUtils.mobileLocateElement(continueBtn);
 			mobileUtils.mobileLocateElementClick(continueBtn);
 			System.out.println("Validating " + page + " page Continue button functionality");
 			mobileUtils.nextPageValidation(page.toUpperCase());
@@ -170,6 +171,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				for (String option : snpoptions) {
 					specialNeedspageFunctional(option);
 				}
+				mobileUtils.mobileLocateElement(continueBtn);
 				mobileUtils.mobileLocateElementClick(continueBtn);
 				mobileUtils.mobleErrorValidation(page);
 			}
