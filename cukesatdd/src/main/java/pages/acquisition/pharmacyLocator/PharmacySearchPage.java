@@ -435,7 +435,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
 			expUrl="health-plans/resources/mail-order-pharmacy.html";
-			scrollToView(widget_prefMailServPhar_learnMore);
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
