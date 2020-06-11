@@ -19,12 +19,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.vbfacquisition_deprecated.ole.WelcomePage;
-import pages.vbfacquisition_deprecated.ulayer.ComparePlansPage;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import pages.vbfacquisition_deprecated.ole.WelcomePage;
 
 /**
  * @author 

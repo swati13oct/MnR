@@ -1836,12 +1836,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
-		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
-			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
+		String browser = MRScenario.browsername;
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
 		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
-			//startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
-			startNew(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""));
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage")){
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("stage-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("stage")){
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}

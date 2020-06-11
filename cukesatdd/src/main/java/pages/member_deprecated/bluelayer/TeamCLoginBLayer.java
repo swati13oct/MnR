@@ -8,15 +8,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member_deprecated.ulayer.AccountHomePage;
-import pages.member_deprecated.ulayer.TerminatedHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.member_deprecated.ulayer.AccountHomePage;
+import pages.member_deprecated.ulayer.TerminatedHomePage;
 
 public class TeamCLoginBLayer extends UhcDriver {
 
