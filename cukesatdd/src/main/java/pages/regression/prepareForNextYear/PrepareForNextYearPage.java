@@ -30,12 +30,15 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 	}
 	
 	public PrepareForNextYearPage fromBenefitsPgNavigateToPrepareForNextYearPage(String planType, String memberType, boolean expComboTab) {
-		if (noWaitValidate(prepareForNextYearTab)) 
+		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the page...");
+		if (noWaitValidate(prepareForNextYearTab)) {
 			prepareForNextYearTab.click();
+		}
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
 		checkModelPopup(driver,1);
 		Assert.assertTrue("PROBLEM - unable to navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
+
 		if (expComboTab) 
 			handleComboTabIfComboUser(planType, memberType);
 		return new PrepareForNextYearPage(driver);
@@ -82,7 +85,6 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		targetItem="Time line '"+dateStr+"' - Line";
 		targetElement=tl_milestone1Line;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		System.out.println("TEST - targetElement.getAttribute('class')="+targetElement.getAttribute("class"));
 		if (expNoBlue_t1) {
 			targetItem=targetItem+" - no blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", !targetElement.getAttribute("class").contains("blue"));

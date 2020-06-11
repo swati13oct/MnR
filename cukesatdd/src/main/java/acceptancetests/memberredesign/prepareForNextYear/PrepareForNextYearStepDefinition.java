@@ -8,12 +8,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import java.util.HashMap;
-
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -62,42 +60,67 @@ public class PrepareForNextYearStepDefinition {
 		}
 	}
 
+	@cucumber.api.java.After
+	@SuppressWarnings("unchecked")
+	public void finalCheckSysDate(Scenario scenario) { 
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Date orig_currentDate=(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE);
+		Long orig_currentDate_millisec=(Long) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC);
+
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		if (orig_currentDate!=null) {
+			System.out.println("orig_currentDate != null, need to do a final check to make sure system date is back to original date");
+			if (!orig_currentDate.equals(currentDate)) {
+				String dateChangeUrl="http://ucp-user-management-team-atest.ocp-elr-core-nonprod.optum.com/UCPUserManagement/zadmin/time/joda?millis="+orig_currentDate_millisec;
+				System.out.println("TEST dateChangeUrl="+dateChangeUrl);
+				wd.get(dateChangeUrl);
+				CommonUtility.checkPageIsReady(wd);
+				prepareForNextYearPage.sleepBySec(2);
+				currentDate=prepareForNextYearPage.getCurrentSystemDate();
+				Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
+				Assert.assertTrue("PROBLEM - unable to rollback system date to original system date.  "
+						+ "current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
+						prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate).equals(prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
+			}
+			text="Test Clean up - Final Check - System Date is able to roll back to original ='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+prepareForNextYearPage.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
+			testNote.add(text);
+			System.out.println(text);
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+		} else {
+			System.out.println("TEST - orig_currentDate=null, assume no date changed involved, no need to do final check");
+		}
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year tab display behavior on Benefits page$")
-	public void user_toBenefits_validateTabBasedOnFeatureFileInput(DataTable memberAttributes) throws InterruptedException {
+	public void user_toBenefits_validateTabBasedOnFeatureFileInput() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 
-
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
 
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planStartType=memberAttributesMap.get("Plan Start Type");
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PLAN_STARTDATE_TYPE, planStartType);	
-
-		String tmp_start=memberAttributesMap.get("AEM Show Tab StartDate");
-		String tmp_end=memberAttributesMap.get("AEM Show Tab EndDate");
-
-		Assert.assertTrue("PROBLEM - AEM Show Tab StartDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_start));
-		Assert.assertTrue("PROBLEM - AEM Show Tab EndDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_end));
-
-		Date tabStartDate=prepareForNextYearPage.convertStrToDate(tmp_start);
-		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab StartDate' to valid Date object for further processing", tabStartDate!=null);
-		Date tabEndDate=prepareForNextYearPage.convertStrToDate(tmp_end);
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabStartDate, tabStartDate);	
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabEndDate, tabEndDate);	
-
-		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab EndDate' to valid Date object for further processing", tabEndDate!=null);
-
-		String tmp_toggle=memberAttributesMap.get("AEM Toggle");
-		Assert.assertTrue("PROBLEM - input 'Toggle' value should either be 'ON' or 'OFF' | Actual='"+tmp_toggle+"', please correct and retry",tmp_toggle.equalsIgnoreCase("ON") || tmp_toggle.equalsIgnoreCase("OFF"));
-		boolean aem_tabToggle=true;
-		if (tmp_toggle.equalsIgnoreCase("OFF"))
-			aem_tabToggle=false;
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TOGGLE, aem_tabToggle);	
+		Date tabStartDate =(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabStartDate);	
+		Date tabEndDate = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabEndDate);	
+		boolean aem_tabToggle = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TOGGLE);	
 
 		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
 
@@ -123,11 +146,14 @@ public class PrepareForNextYearStepDefinition {
 			testNote=new ArrayList<String>();
 		String targetPage="Coverage and Benefits";
 		testNote.add("===================================================");
+		if (MRScenario.returnJobURL()!=null)
+			testNote.add("\tThis session sauceLab session url: "+MRScenario.returnJobURL()+"\n");
+
 		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
-		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.printDate(tabStartDate));
-		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.printDate(tabEndDate));
+		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate));
+		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate));
 		testNote.add("\t  AEM toggle ="+aem_tabToggle);
-		testNote.add("\t  System Date ="+prepareForNextYearPage.printDate(currentDate));
+		testNote.add("\t  System Date ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate));
 		if (memberType.toUpperCase().contains("OFFCYC")) 
 			testNote.add("\t  User plan start date type = offcycle");
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
@@ -153,14 +179,13 @@ public class PrepareForNextYearStepDefinition {
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
-	public void user_validatePrepareForNextYearPageContent(DataTable memberAttributes) throws InterruptedException {
-		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
-		if (!expComboTab) {
+	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
+		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 			if (testNote==null)
 				testNote=new ArrayList<String>();
-			testNote.add("===================================================");
-			testNote.add("No tab show for this test setup, skipping Prepare For Next Year page validation...");
+			testNote.add("\tNo tab show for this test setup, skipping Prepare For Next Year page content validation...");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 			return;
 		}
@@ -173,6 +198,7 @@ public class PrepareForNextYearStepDefinition {
 
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
 
+		/* tbd 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String tmp_milestone1=memberAttributesMap.get("Milestone 1 Date");
 		String tmp_milestone2=memberAttributesMap.get("Milestone 2 Date");
@@ -205,15 +231,22 @@ public class PrepareForNextYearStepDefinition {
 		Date milestone5Date=prepareForNextYearPage.convertStrToDate(tmp_milestone5);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 5 Date' to valid Date object for further processing", milestone5Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE, milestone5Date);
+  */
+
+		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
+		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
+		Date milestone3Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE);
+		Date milestone4Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE);
+		Date milestone5Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE);
 
 		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
 
-		System.out.println("milestone1Date = "+prepareForNextYearPage.printDate(milestone1Date));
-		System.out.println("milestone2Date = "+prepareForNextYearPage.printDate(milestone2Date));
-		System.out.println("milestone3Date = "+prepareForNextYearPage.printDate(milestone3Date));
-		System.out.println("milestone4Date = "+prepareForNextYearPage.printDate(milestone4Date));
-		System.out.println("milestone5Date = "+prepareForNextYearPage.printDate(milestone5Date));
-		System.out.println("currentDate = "+prepareForNextYearPage.printDate(currentDate));
+		System.out.println("milestone1Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date));
+		System.out.println("milestone2Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date));
+		System.out.println("milestone3Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date));
+		System.out.println("milestone4Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date));
+		System.out.println("milestone5Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date));
+		System.out.println("currentDate = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate));
 		
 		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
@@ -223,39 +256,39 @@ public class PrepareForNextYearStepDefinition {
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
-		testNote.add("===================================================");
+		testNote.add("\t=================");
 		if (currentDate.before(milestone1Date)) {
-			testNote.add("\tValidation for current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.printDate(milestone1Date)+"'");
+			testNote.add("\tValidation for current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateBeforeM1Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
-			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.printDate(milestone1Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.printDate(milestone2Date)+"'");
+			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
-			testNote.add("\tValidation for milestone 2 '"+prepareForNextYearPage.printDate(milestone2Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.printDate(milestone3Date)+"'");
+			testNote.add("\tValidation for milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
-			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.printDate(milestone3Date)+"'<= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.printDate(milestone4Date)+"'");
+			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
-			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.printDate(milestone4Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.printDate(milestone5Date)+"'");
+			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
-			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.printDate(milestone5Date)+"' <= current date '"+prepareForNextYearPage.printDate(currentDate)+"'");
+			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
 			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content();
 			testNote.addAll(sectionNote);
 			testNote.add("\tPASSED - page content validation");
@@ -269,25 +302,503 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 
+	@SuppressWarnings("unchecked")
 	@Then("^the user navigate to Prepare For Next Year page via Prepare For Next Year tab$")
 	public void user_toPrepareForNextYearPg() throws InterruptedException {
-		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
-		if (!expComboTab) {
-			System.out.println("Don't expect tab to show for this test setup, skipping step...");
+		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		if (!expPrepareForNextYearTab) {
+			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			testNote.add("\tNo tab show for this test setup, skipping navigation to Prepare For Next Year page step...");
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 			return;
 		}
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd); //note: at this point still on benefits page
-
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		prepareForNextYearPage=prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
+		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
+
+		prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
 	}
 
-	//----------------------------------------------------------
-	//note: begin - keep the following steps for AEM update attempts
+	//---------------------------------------------------
+	//----- begin - test setup for date changing on test environment
+	//---------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Then("^test setup stores original system date for roll back later$")
+	public void storeOriginalSysDate() {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		
+		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE, currentDate);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC, prepareForNextYearPage.convertDateToUctMillisecondsStr(currentDate));
+
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - Store original current system date for roll back later.  Original current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | milliseconds='"+prepareForNextYearPage.convertDateToUctMillisecondsStr(currentDate)+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to before AEM start date$")
+	public void setupSysDateBeforeAemStartDate(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+		Date tabStartDate =(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabStartDate);	
+		
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String aemDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < AEM start date '"+aemDate+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after AEM start date before milestone1 date$")
+	public void setupSysDateAfterOrEqualAemBeforeM1(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		Date tabStartDate =(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabStartDate);	
+		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
+		
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String aemDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate);
+		String m1Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - AEM start date '"+aemDate+"' < System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone1 date '"+m1Date+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal milestone1 date and before milestone2$")
+	public void setupSysDateAfterOrEqualM1BeforeM2(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
+		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String m1Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date);
+		String m2Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - milestone1 date '"+m1Date+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone2 date '"+m2Date+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal milestone2 date and before milestone3$")
+	public void setupSysDateAfterOrEqualM2BeforeM3(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
+		Date milestone3Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE);
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String m2Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date);
+		String m3Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - milestone2 date '"+m2Date+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone3 date '"+m3Date+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal milestone3 date and before milestone4$")
+	public void setupSysDateAfterOrEqualM3BeforeM4(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+		Date milestone3Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE);
+		Date milestone4Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE);
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String m3Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date);
+		String m4Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - milestone3 date '"+m3Date+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone4 date '"+m4Date+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal milestone4 date and before milestone5$")
+	public void setupSysDateAfterOrEqualM4BeforeM5(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+		Date milestone4Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE);
+		Date milestone5Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE);
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String m4Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date);
+		String m5Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - milestone4 date '"+m4Date+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < milestone5 date '"+m5Date+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal milestone5 and before AEM end date$")
+	public void setupSysDateAfterOrEqualM5BeforeAemEndDate(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		Date milestone5Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE);
+		Date tabEndDate = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabEndDate);	
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String aem=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate);
+		String m5Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - milestone5 date '"+m5Date+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'  < AEM end date '"+aem+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^test setup changes system date to after or equal AEM end date$")
+	public void setupSysDateAfterOrEqualAemEndDate(DataTable memberAttributes) {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		Date tabEndDate = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabEndDate);	
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String testSystemDateStr=memberAttributesMap.get("Test System Date");
+		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+
+		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		String aem=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - AEM end date '"+aem+"' <= System date '"+sysDate+"' or millsec '"+sysDate_ms+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		changeSystemDate(testSystemDate);
+	}
+
+	
+	public void changeSystemDate(Date testSystemDate) {
+		/* tbd 
+		//note: reset the page back to landing page to prep for next date range testing
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String homeUrl = (String) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_HOME_URL);
+		wd.get(homeUrl);
+		wd.navigate().refresh();
+		CommonUtility.checkPageIsReady(wd);
+		*/
+		//note: change system date
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(d);
+
+		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", testSystemDate!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_SYSTEM_DATE, testSystemDate);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_SYSTEM_DATE_MILLISEC, prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
+		
+		String dateChangeUrl="http://ucp-user-management-team-atest.ocp-elr-core-nonprod.optum.com/UCPUserManagement/zadmin/time/joda?millis="+prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate);
+		System.out.println("TEST dateChangeUrl="+dateChangeUrl);
+		d.get(dateChangeUrl);
+		CommonUtility.checkPageIsReady(d);
+		prepareForNextYearPage.sleepBySec(2);
+		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
+		Assert.assertTrue("PROBLEM - unable to setup system date to the test setup date.  "
+				+ "system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | test setup date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate)+"'", 
+				prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate).equals(prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate)));
+		d.quit();
+		
+
+	}
+	
+	@Then("^test setup stores AEM and timeline milestones info$")
+	public void storeAemAndMilestonesInfo(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String tmp_start=memberAttributesMap.get("AEM Show Tab StartDate");
+		String tmp_end=memberAttributesMap.get("AEM Show Tab EndDate");
+
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+		//----- note: AEM -----------------------------------------
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		Assert.assertTrue("PROBLEM - AEM Show Tab StartDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_start));
+		Assert.assertTrue("PROBLEM - AEM Show Tab EndDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_end));
+
+		Date tabStartDate=prepareForNextYearPage.convertStrToDate(tmp_start);
+		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab StartDate' to valid Date object for further processing", tabStartDate!=null);
+		Date tabEndDate=prepareForNextYearPage.convertStrToDate(tmp_end);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabStartDate, tabStartDate);	
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabEndDate, tabEndDate);	
+
+		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab EndDate' to valid Date object for further processing", tabEndDate!=null);
+
+		String tmp_toggle=memberAttributesMap.get("AEM Toggle");
+		Assert.assertTrue("PROBLEM - input 'Toggle' value should either be 'ON' or 'OFF' | Actual='"+tmp_toggle+"', please correct and retry",tmp_toggle.equalsIgnoreCase("ON") || tmp_toggle.equalsIgnoreCase("OFF"));
+		boolean aem_tabToggle=true;
+		if (tmp_toggle.equalsIgnoreCase("OFF"))
+			aem_tabToggle=false;
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TOGGLE, aem_tabToggle);	
+
+		//----- note: milestones -----------------------------------------
+		String tmp_milestone1=memberAttributesMap.get("Milestone 1 Date");
+		String tmp_milestone2=memberAttributesMap.get("Milestone 2 Date");
+		String tmp_milestone3=memberAttributesMap.get("Milestone 3 Date");
+		String tmp_milestone4=memberAttributesMap.get("Milestone 4 Date");
+		String tmp_milestone5=memberAttributesMap.get("Milestone 5 Date");
+
+		Assert.assertTrue("PROBLEM - 'Milestone 1 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone1));
+		Assert.assertTrue("PROBLEM - 'Milestone 2 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone2));
+		Assert.assertTrue("PROBLEM - 'Milestone 3 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone3));
+		Assert.assertTrue("PROBLEM - 'Milestone 4 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone4));
+		Assert.assertTrue("PROBLEM - 'Milestone 5 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone5));
+
+		Date milestone1Date=prepareForNextYearPage.convertStrToDate(tmp_milestone1);
+		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 1 Date' to valid Date object for further processing", milestone1Date!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE, milestone1Date);
+		
+		Date milestone2Date=prepareForNextYearPage.convertStrToDate(tmp_milestone2);
+		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 2 Date' to valid Date object for further processing", milestone2Date!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE, milestone2Date);
+
+		Date milestone3Date=prepareForNextYearPage.convertStrToDate(tmp_milestone3);
+		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 3 Date' to valid Date object for further processing", milestone3Date!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE, milestone3Date);
+
+		Date milestone4Date=prepareForNextYearPage.convertStrToDate(tmp_milestone4);
+		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 4 Date' to valid Date object for further processing", milestone4Date!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE, milestone4Date);
+
+		Date milestone5Date=prepareForNextYearPage.convertStrToDate(tmp_milestone5);
+		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 5 Date' to valid Date object for further processing", milestone5Date!=null);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE, milestone5Date);
+		
+		
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Then("^test setup rolls back system date to current date for clean up after test$")
+	public void setupSysDateRollbackOrigDate() {
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
+			return;
+		}		
+
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(d);
+
+		Date orig_currentDate=(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE);
+		Long orig_currentDate_millisec=(Long) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC);
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		String text="===================================================";
+		testNote.add(text);
+		System.out.println(text);
+		text="Test Setup - Rollback System date to original '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+prepareForNextYearPage.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
+		testNote.add(text);
+		System.out.println(text);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+		
+		String dateChangeUrl="http://ucp-user-management-team-atest.ocp-elr-core-nonprod.optum.com/UCPUserManagement/zadmin/time/joda?millis="+orig_currentDate_millisec;
+		System.out.println("TEST dateChangeUrl="+dateChangeUrl);
+		d.get(dateChangeUrl);
+		CommonUtility.checkPageIsReady(d);
+		prepareForNextYearPage.sleepBySec(2);
+		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
+		Assert.assertTrue("PROBLEM - unable to rollback system date to original system date.  "
+				+ "current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
+				prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate).equals(prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
+		d.quit();
+	}	
+	
+	//---------------------------------------------------
+	//----- end - test setup for date changing on test environment
+	//---------------------------------------------------
+	
+	//---------------------------------------------------
+	//----- begin - keep the following steps for AEM update attempts
+	//---------------------------------------------------
 	@Given("^the user update AEM setting$")
 	public void user_updateAEM() {
 		if (!MRScenario.environment.contains("team-a")) {
@@ -471,7 +982,6 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		d.quit();
-		//tbd getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_PAGE, aemPage);	
 	}
 
 	@SuppressWarnings("unchecked")
@@ -971,10 +1481,10 @@ public class PrepareForNextYearStepDefinition {
 		String targetPage="Coverage and Benefits";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
-		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.printDate(tabStartDate));
-		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.printDate(tabEndDate));
+		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate));
+		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate));
 		testNote.add("\t  AEM toggle ="+aem_tabToggle);
-		testNote.add("\t  System Date ="+prepareForNextYearPage.printDate(currentDate));
+		testNote.add("\t  System Date ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate));
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
 
 		boolean expComboTab=false;
@@ -990,13 +1500,14 @@ public class PrepareForNextYearStepDefinition {
 		} else
 			testNote.add("\tPrepare For Next Year tab is NOT displaying on Benefits page sub navigation menu as expected. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);
 		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
-	//note: end - keep the following steps for AEM update attempts
-	//----------------------------------------------------------
+	//---------------------------------------------------
+	//----- end - keep the following steps for AEM update attempts
+	//---------------------------------------------------
 
 }
 

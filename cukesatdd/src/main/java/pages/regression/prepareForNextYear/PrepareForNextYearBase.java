@@ -369,12 +369,15 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 	}
 	
-	public String printDate(Date d) {
+	public String convertDateToStrFormat_MMDDYYYY(Date d) {
 		String pattern = "MM/dd/yyyy";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return simpleDateFormat.format(d);
 	}
 	
+	public Long convertDateToUctMillisecondsStr(Date inputDate) {
+		return inputDate.getTime();
+	}
 	
 }

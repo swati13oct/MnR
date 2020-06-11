@@ -2,6 +2,11 @@ package acceptancetests.memberredesign.prepareForNextYear;
 
 public class PrepareForNextYearCommonConstants {
 
+	public static final String ORIG_HOME_URL="orig_home_url";
+	public static final String ORIG_CURRENT_SYSTEM_DATE="orig_current_system_date";
+	public static final String ORIG_CURRENT_SYSTEM_DATE_MILLISEC="orig_current_system_date_millisec";
+	public static final String TEST_SYSTEM_DATE="test_system_date";
+	public static final String TEST_SYSTEM_DATE_MILLISEC="test_system_date_millisec";
 	public static final String MILESTONE1_DATE="milestone1_date";
 	public static final String MILESTONE2_DATE="milestone2_date";
 	public static final String MILESTONE3_DATE="milestone3_date";
