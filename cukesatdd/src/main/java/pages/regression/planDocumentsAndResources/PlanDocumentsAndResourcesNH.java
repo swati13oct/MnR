@@ -1,5 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 	
 	public PlanDocumentsAndResourcesNH(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override

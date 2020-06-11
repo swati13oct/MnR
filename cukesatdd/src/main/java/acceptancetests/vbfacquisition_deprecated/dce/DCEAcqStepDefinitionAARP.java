@@ -1,5 +1,7 @@
 package acceptancetests.vbfacquisition_deprecated.dce;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +11,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.vbfacquisition_deprecated.ulayer.AcquisitionHomePage;
+import pages.vbfacquisition_deprecated.ulayer.DrugCostEstimatorPage;
+import pages.vbfacquisition_deprecated.ulayer.PlanDetailsPage;
+import pages.vbfacquisition_deprecated.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -17,11 +23,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.vbfacquisition_deprecated.ulayer.AcquisitionHomePage;
-import pages.vbfacquisition_deprecated.ulayer.DrugCostEstimatorPage;
-import pages.vbfacquisition_deprecated.ulayer.PlanDetailsPage;
-import pages.vbfacquisition_deprecated.ulayer.VPPPlanSummaryPage;
 
 /**
  *Functionality:DCE Acquisition
@@ -159,6 +160,7 @@ public class DCEAcqStepDefinitionAARP {
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
+		dce.feebackpopupClose();
 	}
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {

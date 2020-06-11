@@ -19,6 +19,7 @@ import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -195,7 +196,7 @@ public class VisitorProfileStepDefinition_UHC {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String savedPlanNames = givenAttributesMap.get("testPlans");
+		String savedPlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
@@ -262,6 +263,52 @@ public class VisitorProfileStepDefinition_UHC {
 	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_UHC_site() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deleteAllProviders();
+	}
+	
+	@And("^the user back to VPP plan summary page in ums$")
+	public void the_user_back_to_VPP_plan_summary_page_in_ums() {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
+	
+	@And("^user selects four plans to compare from visitor Profile on UHC site$")
+	public void user_clicks_compare_plans_from_visitor_Profile_on_AARP_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String comparePlans = givenAttributesMap.get("Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		
+		ComparePlansPageBlayer planComparePage = visitorProfile.planCompare(comparePlans);
+		if (planComparePage != null) {
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		} else {
+			Assert.fail("Error Loading on Plan Compare page");
+		}
+	}
+	
+	@And("^verify the plans on plan compare page on UHC site$")
+	public void verify_the_plans_on_plan_compare_page_on_AARP_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String comparePlans = givenAttributesMap.get("Test Plans");
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile(comparePlans);
 	}
 } 
 

@@ -1,17 +1,18 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import acceptancetests.util.CommonUtility;
 
 public class PlanDocumentsAndResourcesEOB extends PlanDocumentsAndResourcesBase  {
 
 	public PlanDocumentsAndResourcesEOB(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -26,7 +27,8 @@ public class PlanDocumentsAndResourcesEOB extends PlanDocumentsAndResourcesBase 
 		String planType=testInputInfoMap.get("planType");
 		String section="Explanation of Benefits";
 		String item="SEARCH DRUG EOB HISTORY";
-		String expectedUrl="/content/medicare/member/eob.html";
+		//tbd String expectedUrl="/content/medicare/member/eob.html";
+		String expectedUrl="/member/eob.html";
 		WebElement lnkElement=searchDrugEobHistoryLink_EOB;
 		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
@@ -57,8 +59,9 @@ public class PlanDocumentsAndResourcesEOB extends PlanDocumentsAndResourcesBase 
 		WebElement lnkElement=searchMedicalEobHistoryLink_EOB;
 		if (planType.equals("MA") || planType.equals("PDP") || planType.equals("SHIP")) 
 			lnkElement=searchEobHistoryLink_EOB;
-		String expectedUrl="/content/medicare/member/eob.html";
-
+		//tbd String expectedUrl="/content/medicare/member/eob.html";
+		String expectedUrl="/member/eob.html";
+		
 		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", "none");

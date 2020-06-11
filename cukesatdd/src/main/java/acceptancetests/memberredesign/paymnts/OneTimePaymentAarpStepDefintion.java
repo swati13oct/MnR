@@ -2350,5 +2350,85 @@ public class OneTimePaymentAarpStepDefintion {
 
 
 	}
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on cancel Button for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_cancel_Button_for_EFT()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAndClickCancelOnEFT();
+	
+}
+	@Then("^user navigates to payment overview screen$")
+	public void user_navigates_to_payment_overview_screen()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.DoNotselectAgreeAndClickOnMakePayment();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on Review One time payments page");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewOneTimePaymentsPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
+		}
+	}
+	@Given("^user navigates to Review Your One-Time Payment Information$")
+	public void user_navigates_to_Review_Your_One_Time_Payment_Information()
+			throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage
+				.DoNotselectAgreeAndClickOnSubmitPaymentsforOneTime();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on One time confirmation page for Checking account");
+		}
+	}
+	
+	@And("^the user clicks on cancel button in One time EFT or Recurring EFT$")
+	public void click_on_Cancel_btn() {		
+	PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+			.getBean(PageConstants.Payments_Form_Page);
+	         paymentsFormPage.clickonCancelButton1();
+	
+	}
+	
+	@Given("^user navigates to review your Automatic screen and selects agreements for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAgreeAndnoClickOnAuthorizeMonthyPaymentsforEFT();
+	
+}
+	@Given("^user navigates to review your Automatic screen and selects agreements for CC$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_CC()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndnoClickOnContinueforCC();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for CC");
+		}
+	}
 	
 }
