@@ -103,6 +103,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
+	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
+	protected WebElement heathRecordPgHeaderText;
+
 	//--------------------------
 	@FindBy(xpath="//p[contains(@class,'siteleaving')]")
 	protected WebElement siteLeavingPopup;

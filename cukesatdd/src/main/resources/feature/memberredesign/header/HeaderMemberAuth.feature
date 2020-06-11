@@ -27,7 +27,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
-    Then I should be able to see and use the Premium Payments tab Header
+    #Then I should be able to see and use the Premium Payments tab Header
     Then I should be able to see and use the pharmacies tab in the header
     Then I should be able to see and use the health and wellness tab in the header
     Then I should be able to see the help button Header

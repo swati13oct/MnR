@@ -16,7 +16,7 @@ Feature: 1.19 Member Individual Health Record
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
 	Then the user navigates to Payments page and validate Health Record link display behavior
-	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
+	#Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
 	Then the user navigates to Account Settings page and validate Health Record link display behavior
 	Then the user navigates to Contact Us page and validate Health Record link display behavior

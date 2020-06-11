@@ -25,7 +25,7 @@ Feature: 1.19.1 Member Individual Health Record - Member Auth
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
 	Then the user navigates to Payments page and validate Health Record link display behavior
-	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
+	#Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
 	Then the user navigates to Account Settings page and validate Health Record link display behavior
 	Then the user navigates to Contact Us page and validate Health Record link display behavior
@@ -36,7 +36,7 @@ Feature: 1.19.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | qavgogine | qavgogine | q1_feb_ship_20_001      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
-	    | 02    | F424804 | qavgogine | qavgogine | q2_jun_uhc0050          | MA                       | EXCLUDE_IHR        | false       |
+	    | 02    | F424804 | qavgogine | qavgogine | q2_may_rally032         | MA                       | EXCLUDE_IHR        | false       |
 
     @memAuth_no_ihr_b
     Examples: 

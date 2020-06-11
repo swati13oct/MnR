@@ -19,8 +19,8 @@ jsonReport = "target/cucumber-RunMRATDDRegressionInboundSSO.json",detailedReport
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionInboundSSO")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 
-features = { "src/main/resources/feature/memberredesign/sso" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionInboundSSO.json" }, tags = { "@regressionMemberInboundSSO" })
+features = { "src/main/resources/feature/memberredesign/sso/InboundSSO.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionInboundSSO.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionInboundSSO {
 
 }

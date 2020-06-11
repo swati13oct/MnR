@@ -14,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.ComparePlansPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -124,6 +123,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan: listOfTestPlans) {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
@@ -131,11 +131,16 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedMsPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-			//Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::a[1]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(20000);
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -276,13 +281,15 @@ public class VisitorProfilePage extends UhcDriver {
 	 * Delete all the providers from the profile
 	 */
 	public void deleteAllProviders() {
-		CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-		expandProviderBlock.click();
-		driver.findElement(By.xpath("//li[@class='provider']//button")).click();
-		/*for (WebElement drug: savedDrugs) {
-			drug.findElement(By.xpath("//button")).click();
-		}*/
-		Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
+			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
+			expandProviderBlock.click();
+			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
+			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		}else {
+			System.out.println("############No Providers##############");
+		}
 	}
 	
 	/**
@@ -301,6 +308,11 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Select plans and compare
+	 * @param plans
+	 * @return
+	 */
 	public ComparePlansPageBlayer planCompare(String plans) {
 		
 		comparePlans.click();
