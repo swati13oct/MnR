@@ -602,6 +602,19 @@ public class ContactusRedesignStepDefinition {
 					contactusPage);
 	}
 
+
+	@Then("^Verify and navigate the see how to guide link on the contactUs page$")
+	public void validate_see_how_to_guide()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateSeeHowTGuideLink();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
 	
 }
 
