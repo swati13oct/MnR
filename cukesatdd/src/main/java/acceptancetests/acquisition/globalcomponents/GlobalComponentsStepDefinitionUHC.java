@@ -389,5 +389,10 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-
+	@Then("^the user validates chat Icon on UHC site$")
+	public void the_user_validates_chat_Icon_UHC() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatIcon();
+	}
 }
