@@ -406,7 +406,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
 	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")
+	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a |//*[@id='communicationAddress']/div[2]/a")
 	private WebElement editPreferencesLink;
 
 
