@@ -5,8 +5,6 @@ package pages.redesign_deprecated;
 
 import java.util.NoSuchElementException;
 
-import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author sdwaraka

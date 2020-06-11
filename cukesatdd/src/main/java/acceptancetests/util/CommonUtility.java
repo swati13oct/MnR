@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -28,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 
 /**
  * @author pjaising

@@ -17,9 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 public class DreamEOBPage extends UhcDriver{
 
