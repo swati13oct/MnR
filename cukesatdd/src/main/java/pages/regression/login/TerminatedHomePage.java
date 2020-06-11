@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.regression.claims.ClaimsBase;
 import acceptancetests.util.CommonUtility;
+import pages.regression.claims.ClaimsBase;
 
 /**
  * @author pjaising

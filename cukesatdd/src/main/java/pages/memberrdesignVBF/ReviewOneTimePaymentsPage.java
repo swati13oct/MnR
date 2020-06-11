@@ -3,8 +3,6 @@
  */
 package pages.memberrdesignVBF;
 
-import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
-
 import java.util.List;
 
 import org.openqa.selenium.By;

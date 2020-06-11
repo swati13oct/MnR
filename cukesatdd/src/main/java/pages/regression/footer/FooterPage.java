@@ -453,7 +453,8 @@ public class FooterPage extends UhcDriver {
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
-			accountprofile.click();
+			JavascriptExecutor ex=(JavascriptExecutor)driver;
+			ex.executeScript("arguments[0].click()", accountprofile);
 			footerCheckModelPopup(driver);
 			if (accountSettingOptionShip.isDisplayed()) {
 				System.out.println("Profile and Preferance link is displayed");
@@ -562,7 +563,7 @@ public class FooterPage extends UhcDriver {
 	}
 	
 	public void validateSignInPgFooter() {
-		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 5);
+		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 10);
 		Assert.assertTrue("PROBLEM - unable to locate footer section on sign-in page", footerValidate(unauthFooter_section));
 		
 		String testLinkName="ABOUT US";

@@ -7,43 +7,34 @@
  */
 package acceptancetests.memberredesign.sso;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
-import com.mysql.jdbc.Driver;
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.member_deprecated.bluelayer.ProfilePageHsid;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
-import pages.regression.sso.bswiftPage;
 import pages.regression.sso.CQLoginPage;
+import pages.regression.sso.bswiftPage;
 import pages.regression.sso.ssoTestHarnessPage;
 import pages.regression.testharness.TestHarness;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.GlobalTearDown;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 
 //import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
@@ -170,7 +161,7 @@ public class ssoStepDefinition {
 	 */
 	@Given("^User lands on the ping federate SSO test harness page$")
 	public void the_user_is_pingFederate_Testharness_Page() throws InterruptedException {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		// adding to get screenshots
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -208,10 +199,13 @@ public class ssoStepDefinition {
 		String lastName = memberAttributesMap.get("Last Name");
 		String dateOfBirth = memberAttributesMap.get("DOB");
 		String mbi = memberAttributesMap.get("MBI");
-		String applandingurl = memberAttributesMap.get("APPLANDINGURL");
+		String uhcid = memberAttributesMap.get("UHC_ID");
+		String applandingurlStage = memberAttributesMap.get("APPLANDINGURLSTAGE");
+		String applandingurlteamh = memberAttributesMap.get("APPLANDINGURLTEAHH");
+		String applandingurlofflinestage = memberAttributesMap.get("APPLANDINGURLOFFLINESTAGE");
 		System.out.println("Fetching values of various fields from Feature File");
 		System.out.println("firstName: " + firstName + "   lastName: " + lastName + "    dob: " + dateOfBirth
-				+ "    MBI: " + mbi + "    APPLANDINGURL: " + applandingurl);
+				+ "    MBI: " + mbi);
 		bswiftPage bswiftpage = (bswiftPage) getLoginScenario().getBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift);
 		Thread.sleep(2000);
 		System.out.println("Title of new page : " + bswiftpage.getTitle());
@@ -225,8 +219,24 @@ public class ssoStepDefinition {
 		System.out.println("Entered mbi as : " + mbi);
 		bswiftpage.enterDOB(dateOfBirth);
 		System.out.println("Entered dob as : " + dateOfBirth);
-		bswiftpage.enterapplandingURL(applandingurl);
-		System.out.println("Entered APPLANDINGURL as : " + applandingurl);
+		if(MRScenario.environment.equalsIgnoreCase("stage"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlStage);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlStage);
+		}
+		else if(MRScenario.environment.equalsIgnoreCase("team-h"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlteamh);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlteamh);
+		}
+		
+		else if(MRScenario.environment.equalsIgnoreCase("offline-stage"))
+		{	
+		bswiftpage.enterapplandingURL(applandingurlofflinestage);
+		System.out.println("Entered APPLANDINGURL as : " + applandingurlofflinestage);
+		}
+		bswiftpage.enterUHCID(uhcid);
+		System.out.println("Entered UHC_ID as : " + uhcid);
 
 	}
 
@@ -273,7 +283,7 @@ public class ssoStepDefinition {
 	@And("^user directly access the SSO link for myhce$")
 	public void userdirectlyaccessesmyhcesso() throws Throwable {
 
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out.println("Now directly accessing the SSO link for myhce");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.userdirectlyaccessesmyhcesso();
@@ -285,6 +295,10 @@ public class ssoStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			accountHomePage.userdirectlyaccessesmyhcessoPROD();
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		else 
+		{
+			System.out.println("Please check the environment passed, it is not covered in any condition");
 		}
 	}
 
@@ -302,7 +316,7 @@ public class ssoStepDefinition {
 
 		String zipCode = memberAttributesMap.get("Zip Code");
 
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.userEntersZipCode(zipCode);
 			testHarnessPage.clickContinueonZipEntryPage();
@@ -320,7 +334,7 @@ public class ssoStepDefinition {
 
 	@Then("^user lands on hceestimator landing page$")
 	public void userlandsonhceestimatorpage() throws Throwable {
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out.println("Now checking if user landed on myhce page");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarnessPage.checkuserlandsonhceestimatorpage();
@@ -404,7 +418,7 @@ public class ssoStepDefinition {
 
 		else if ((MRScenario.environment.equalsIgnoreCase("team-h"))
 				|| (MRScenario.environment.equalsIgnoreCase("stage")
-						& "YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+						& "YES".equalsIgnoreCase(MRScenario.isTestHarness)) || MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			System.out
 					.println("Now clicking on pharmacies and prescriptions tab from Team-h or Stage test harness page");
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);

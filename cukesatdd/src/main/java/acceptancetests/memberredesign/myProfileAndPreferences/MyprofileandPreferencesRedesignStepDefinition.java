@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.myProfileAndPreferences;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member_deprecated.redesign.NewLoginPage;
-import pages.redesign_deprecated.CommunicationPreferences;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -19,6 +15,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member_deprecated.redesign.NewLoginPage;
+import pages.redesign_deprecated.CommunicationPreferences;
 
 public class MyprofileandPreferencesRedesignStepDefinition {
 	/**

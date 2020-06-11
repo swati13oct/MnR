@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 /**
@@ -763,43 +764,53 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	//backtotop
 	//*[@id="backToTopContainer"]/a/span/p
-	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[1]")
+	//tbd@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[1]")
+	@FindBy(xpath = "//div[contains(@class,'backToTop') and not(contains(@style,'none'))]//a/span/p[contains(text(),'Back To Top')]")
 	protected WebElement linkBackToTop;
 
 	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[2]")
 	protected WebElement linkBackToTop_copy;
 
 	//MAPD_UHC jump links
-
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[1]/a[contains(text(),'Medical Copays or Coinsurance')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[1]/a[contains(text(),'Medical Copays or Coinsurance')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[1]/a[contains(text(),'Medical Copays or Coinsurance')]")
 	protected WebElement jmpLinkToMedicalCopaysOrCoinsurance;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[2]/a[contains(text(),'Out-of-Pocket Maximum')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[2]/a[contains(text(),'Out-of-Pocket Maximum')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[2]/a[contains(text(),'Out-of-Pocket Maximum')]")
 	protected WebElement jmpLinkToOutofPocketMaximum;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[3]/a[contains(text(),'Primary Care Provider')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[3]/a[contains(text(),'Primary Care Provider')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[3]/a[contains(text(),'Primary Care Provider')]")
 	protected WebElement jmpLinkToPrimaryCareProvider;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[5]/a[contains(text(),'Drug Copays & Discounts')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[5]/a[contains(text(),'Drug Copays & Discounts')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[5]/a[contains(text(),'Drug Copays & Discounts')]")
 	protected WebElement jmpLinkToDrugCopaysAndDiscounts;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[6]/a[contains(text(),'Drug Coverage')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[6]/a[contains(text(),'Drug Coverage')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[6]/a[contains(text(),'Drug Coverage')]")
 	protected WebElement jmpLinkToDrugCoverage;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[7]/a[contains(text(),'Plan Documents and Resources')]")
+	//tbd @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[7]/a[contains(text(),'Plan Documents and Resources')]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/li[7]/a[contains(text(),'Plan Materials')]")
 	protected WebElement jmpLinkToPlanDocumentsAndResources;
 
 	// MA user
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//*/div[6]//*/ul/li[4]/a")
+	//tbd @FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//*/div[6]//*/ul/li[4]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/div[6]//*/ul/li[4]/a")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesMA;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[1]/a")
+	//tbd @FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[1]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[1]/a")
 	protected WebElement jmpLinkToMedicalCopaysOrCoinsuranceMA;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[6]//*/ul/li[2]/a")
+	//tbd @FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[6]//*/ul/li[2]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[2]//*/div[2]/div/div[2]/div/div[6]//*/ul/li[2]/a")
 	protected WebElement jmpLinkToOutofPocketMaximumMA;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[3]/a")
+	//tbd @FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[3]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[3]/a")
 	protected WebElement jmpLinkToPrimaryCareProviderMA;
 
 	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[4]")
@@ -814,7 +825,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[3]")
 	protected WebElement jmpLinkToPrimaryCareProviderMAGroup;
 
-	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']//*/li[4]/a)[1]")
+	@FindBy(xpath = "(//*[@id='benefits-quickLinksParsys']//*/li[4]/a)[1]")
 	protected WebElement jmpLinkToOptionalServicesRiders;
 
 	@FindBy(xpath = "(//*[contains(text(),'Out-of-Pocket Maximum')])[2]")
@@ -829,40 +840,40 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	protected WebElement PlanDocumentsAndResourcesSectionHeader;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@class='jumplinks']//li")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
 	protected List<WebElement> directorySection;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[2]//*/div[2]/div/div[2]/div/div[1]//*//ul/li")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li")
 	protected List<WebElement> directorySectionMedSupp;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*/ul/li")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[2]//*/div[2]/div/div[2]/div/div[4]//*/ul/li[not(contains(@style,'none'))]")
 	protected List<WebElement> directorySectionPDP;
 
 	@FindBy(xpath = "//*[@id='avail-riders']//*/h2")
 	protected WebElement OptionalServicesRidersSectionHeader;            
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]//*/div[6]//*/ul/li[5]/a")
+	@FindBy(xpath = "(//*[@id='benefits-quickLinksParsys']//*/li[5]/a)[1]")
 	protected WebElement jmpLinkToOptionalServicesRidersMA;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*/ul/li[1]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li[1]")
 	protected WebElement jmpLinkToBenefitSummaryMedSupp;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*/ul/li[2]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li[2]")
 	protected WebElement jmpLinkToDiscountsAndServicesMedSupp;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*//ul/li[3]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li[3]")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesMedSupp;
 
 	@FindBy(xpath = "//*[@id='benefitsSummary']/div[1]//*/section/div[1]/div/h2")
 	protected WebElement benefitsSummarySectionHeader;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[4]//*//ul/li[1]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul/li[1]")
 	protected WebElement jmpLinkToDrugCopaysAndDiscountsPDP;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*/ul/li[2]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul/li[2]")
 	protected WebElement jmpLinkToDrugCoveragePDP;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*//ul/li[3]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul/li[3]")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesPDP;
 
 	@FindBy(xpath = "//*[@class='jumplinks']//li[1]")
@@ -871,40 +882,40 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@class='jumplinks']//li[2]")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesPDPUHC;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//*/div[4]//*/ul/li[4]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul/li[4]")
 	protected WebElement jmpLinkToWaysToSaveMoneyPDP;
 
 	@FindBy(xpath = "//*[@id=\"waystosave\"]//*/h2")
 	protected WebElement waysToSaveMoneySectionHeader;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[8]//*/ul/li[4]/a")
+	@FindBy(xpath = "//*[@id='benefits-benefits-quickLinksParsys']/div[2]//*/div[2]//*/div[8]//*/ul/li[4]/a")
 	protected WebElement jmpLinkToadditionalBenefits;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[2]//div[2]/div/div[8]//ul/li[6]/a")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[2]//div[2]/div/div[8]//ul/li[6]/a")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesMAPDGroup;
 
 	@FindBy(xpath = "//*[@id='ancillary']/div/div/div/div/div/div[1]/div/h4")
 	protected WebElement additionalBenefitsSectionHeader;
 
-	@FindBy(xpath = "//*[@id='primary-care-provider-atdd']")
+	@FindBy(xpath = "//*[(@id='primary-care-provider-atdd') or (@id='individualPcpHeaderText')]")
 	protected WebElement primaryCareProviderSectionHeaderGroup;
 
 	@FindBy(xpath = "//*[contains(@id,'ordermaterials')]")
 	protected WebElement orderMaterialsTab;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/*//div/div[8]/div/div/div/div/ul/li")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/*//div/div[8]/div/div/div/div/ul/li")
 	protected List<WebElement> directorySectionMAPDGroup;
 
-	@FindBy(xpath = "//*[@class='jumplinks']//li[1]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/div[2]//*/ul/li[1]/a")
 	protected WebElement jmpLinkToMedicalCopaysOrCoinsuranceSSUP;
 
-	@FindBy(xpath = "//*[@class='jumplinks']//li[2]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/div[2]//*/ul/li[2]/a")
 	protected WebElement jmpLinkToOutofPocketMaximumSSUP;
 
-	@FindBy(xpath = "//*[@class='jumplinks']//li[3]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/div[2]//*/ul/li[3]/a")
 	protected WebElement jmpLinkToPrimaryCareProviderSSUP;
 
-	@FindBy(xpath = "//*[@class='jumplinks']//li[4]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*/div[2]//*/ul/li[4]/a")
 	protected WebElement jmpLinkToPlanDocumentsAndResourcesSSUP;
 
 	@FindBy(xpath = "(//*[@class='PlanPdf section'])[2]//span[@class='document-list-new margin-none']//li[@class=' clearfix']//span[@class='ng-binding ng-scope'][2]")
@@ -1051,7 +1062,43 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(linkText = "VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM")
 	protected WebElement viewYourCurrentPrescriptionDrugCostSummaryLink;
-	
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[not(contains(text(),'Supplement')) and not(contains(text(),'Prescription')) and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MA;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[not(contains(text(),'Supplement')) and not(contains(text(),'Prescription')) and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MA_planDoc;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Prescription') and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MAPD_planDoc;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 
+	protected WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Supplement')]") 
+	protected WebElement comboTab_SHIP_planDoc;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Hospital Indemnity')]") 
+	protected WebElement comboTab_SHIP_HIP;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Hospital Indemnity')]") 
+	protected WebElement comboTab_SHIP_HIP_planDoc;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 
+	protected WebElement comboTab_PDP;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 
+	protected WebElement comboTab_PDP_planDoc;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
+	protected WebElement comboTab_SSP;
+
+	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Senior Supplement Plan')]")
+	protected WebElement comboTab_SSP_planDoc;
+
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Medicare Supplement Insurance Plan')]")
 	protected WebElement ShipTab;
 	

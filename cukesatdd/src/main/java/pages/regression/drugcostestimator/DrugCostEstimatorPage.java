@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -18,16 +17,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.util.CommonUtility;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -517,10 +515,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void navigateToStep2() throws InterruptedException {
 		
 		Thread.sleep(5000);
+		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
 		step2Pharmacy.click();
 	
 		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
+		checkModelPopup(driver,1);
 
 	}
 
@@ -528,7 +528,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click on to step 1 drug tab
 	 */
 	public void backwardToStep1() {
+		checkModelPopup(driver,1);
 		step1DrugTab.click();
+		checkModelPopup(driver,1);
 	}
 
 	public void validatePharmacyForm() {

@@ -8,15 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import junit.framework.Assert;
-import pages.acquisition.bluelayer.CostBasicsPage;
-import pages.acquisition.bluelayer.CoverageChoicesPage;
-import pages.acquisition.bluelayer.EnrollmentBasicsPage;
-import pages.acquisition.bluelayer.MedicareAdvantagePartCPlansPage;
-import pages.acquisition.bluelayer.MedicareEligibilityPage;
-import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
-import pages.acquisition.bluelayer.PrescriptionsProvidersBenefitsPage;
 
 @SuppressWarnings({ "deprecation" })
 public class LearnAboutMedicareHomePage extends GlobalWebElements {

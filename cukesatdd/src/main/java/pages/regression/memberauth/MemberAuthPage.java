@@ -315,7 +315,9 @@ public class MemberAuthPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod")
-					|| MRScenario.environment.equalsIgnoreCase("team-h")) {
+					|| MRScenario.environment.equalsIgnoreCase("team-h")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
+			{
 				CommonUtility.checkPageIsReadyNew(driver);
 				try
 				{
@@ -330,7 +332,7 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("COVID 19 Banner page has appeared");
 					try {
 						CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-						if (validate(homePageNotice, 0)) {
+						if (validate(homePageNotice, 10)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
 						} else if (validate(homePageNotice2, 0)) {

@@ -84,6 +84,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
 		if (!prefValidate(paperlessOptionActive)) {
+		waitTillElementClickableInTime(paperlessOptionInactive, 2);
 			paperlessOptionInactive.click();
 			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
 		}
@@ -95,12 +96,12 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 				System.out.println("agree button verified and clicked");
 			}
 			savePrefButton.click();
-			System.out.println("paperless button clicked and saved");
+			System.out.println(">>>>>>>paperless button clicked and saved<<<<<<<<<<");
 			return true;
 		} else if (prefValidate(mailButton) && !(mailButton.isSelected())) {
 			mailButton.click();
 			savePrefButton.click();
-			System.out.println("mail button clicked and saved");
+			System.out.println(">>>>>>>>>>>mail button clicked and saved<<<<<<<<<<<<");
 			return true;
 		} else
 			return false;

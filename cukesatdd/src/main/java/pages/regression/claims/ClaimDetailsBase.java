@@ -1,11 +1,13 @@
 package pages.regression.claims;
 import java.util.Arrays;
 import java.util.HashMap;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 
 /** Functionality : this page validates Claims Details Page. */

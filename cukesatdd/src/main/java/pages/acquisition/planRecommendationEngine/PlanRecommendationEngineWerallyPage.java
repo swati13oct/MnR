@@ -77,21 +77,33 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
-
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
-		validate(welcomeTilte, 30);
-		getStarted.click();
+		ArrayList<String> doctorsSPecialtyName = new ArrayList<String>();
+		try {
+			validate(welcomeTilte, 30);
+			getStarted.click();
+		} catch (Exception e) {
+			System.out.println("No Get Started button available in werally");
+		}
 		validate(searchBox, 30);
-		if (type.toUpperCase().contains("DOCTOR")) {
+		if (type.toUpperCase().contains("DOCTORS")) {
 			searchBox.sendKeys(searchParameter);
+			threadsleep(2000);
 			searchButton.click();
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
-				for (int i = count; i > 0  ; i--) {
-					searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button")).click();
-					doctorsName.add(driver.findElement(By.cssSelector(".provider-name")).getText().trim());
+				for (int i = count; i > 0; i--) {
+					threadsleep(5000);
+					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+					doctorsSPecialtyName.add(searchResults.get(i).findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
+					WebElement saveButton = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
+					WebElement doc =searchResults.get(i).findElement(By.cssSelector("h2"));
+					scrollToView(doc);
+					saveButton.click();
+					threadsleep(3000);
 					if (i == 1) {
 						validate(viewSavedbutton, 30);
 						viewSavedbutton.click();
@@ -99,8 +111,8 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 					else {
 						validate(saveModalClosebutton, 30);
 						saveModalClosebutton.click();
-					}
-				}
+						}
+				}	
 				checkProviderCoveragebutton.click();
 				try {
 			        WebDriverWait wait = new WebDriverWait(driver, 2);
@@ -120,6 +132,9 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				Assert.assertTrue(false);
 			}
 			Collections.sort(doctorsName);
+			Collections.sort(doctorsSPecialtyName);
+			System.out.println("Specialty Name Size is : "+doctorsSPecialtyName.size());
+			System.out.println("Specialty Name in werally Content is : "+doctorsSPecialtyName);
 		}
 		return doctorsName;
 	}

@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -77,6 +78,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement enrollBtn;
 	
+	@FindBy(css="div.print-back>a:first-child")
+	private WebElement backToPlans;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -130,6 +134,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan: listOfTestPlans) {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
@@ -138,11 +143,16 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedMsPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-			//Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::a[1]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(20000);
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -231,11 +241,15 @@ public class VisitorProfilePage extends UhcDriver {
 	 * Delete all the providers from the profile
 	 */
 	public void deleteAllProviders() {
-		CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-		expandProviderBlock.click();
-		driver.findElement(By.xpath("//li[@class='provider']//button")).click();
-		waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
-		Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
+			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
+			expandProviderBlock.click();
+			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
+			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
+		}else {
+			System.out.println("############No Providers##############");
+		}
 	}
 	
 	/**
@@ -292,6 +306,10 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Validate Enroll plan is Clickable or not
+	 * @return
+	 */
 	public boolean validateEnrollInPlanIsClickable() {
 		boolean enrollInNotPossible = false;
 		try
@@ -308,6 +326,10 @@ public class VisitorProfilePage extends UhcDriver {
 	    }		
 	}
 	
+	/**
+	 * Validate the plan count on the shopping cart icon
+	 * @param plancount
+	 */
 	public void validatePlanCountOnCartIcon(String plancount) {
 		Assert.assertEquals(plancount, shoppingCartNumber.getText());
 		System.out.println("count mapped on Shopping cart icon with : " + plancount);
@@ -325,6 +347,11 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Select plans and compare
+	 * @param plans
+	 * @return
+	 */
 	public ComparePlansPage planCompare(String plans) {
 	
 		comparePlans.click();
@@ -340,6 +367,22 @@ public class VisitorProfilePage extends UhcDriver {
 			return new ComparePlansPage(driver);
 		} else {
 			Assert.fail("Navigation to Plan Compare page is failed");
+		}
+		return null;
+	}
+	
+	/**
+	 * Back to VPP
+	 */
+	public VPPPlanSummaryPage backToPlans() {
+		try {
+			backToPlans.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
+			return new VPPPlanSummaryPage(driver);
+			}
+		}catch (Exception e) {
+		e.printStackTrace();
 		}
 		return null;
 	}

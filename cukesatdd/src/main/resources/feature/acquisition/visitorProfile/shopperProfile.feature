@@ -16,10 +16,12 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                  | enrolledplanName                                     | planName                                             | drugNames | providers             |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
+      | username  | password  | email                  | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames | providers             |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -35,6 +37,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
 
     Examples: 
       | username  | password  | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames | providers             |
@@ -53,6 +57,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -63,8 +69,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                     | plantype | enrolledplanName                  | planName                                | drugNames | providers                 | testPlans                                                                    |
-      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | ALLA, M.D., SREENIVASA R. | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
+      | username  | password  | email                     | fname  | lname    | plantype | enrolledplanName                  | planName                                | drugNames | providers                 | testPlans                                                                    |
+      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | ALLA, M.D., SREENIVASA R. | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
 
   @searchProfileAndAddDrugs
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
@@ -111,6 +117,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Then Navigate to Visitor Profile page on AARP site
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
+    And user delets all the added providers on visitor profile page of AARP site
     And the user clicks on the add plans button in the profile in agent mode in AARP site
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
@@ -132,18 +139,21 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | DELTON@OWEN.com | MAPD     | AARP Medicare Advantage Walgreens (PPO) | AARP Medicare Advantage Walgreens (PPO),UnitedHealthcare Medicare Advantage Plan 3 (HMO) |
 
   @searchProfileAndEnroll
-  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
+  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
-    Then I ask the shopper calling in to provide me with the Email Address and Search
-      | Email | <email> |
+    Then I ask the shopper calling in to provide me with the Name and Search
+      | First Name | <fname> |
+      | Last Name  | <lname> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -153,8 +163,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email            | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
-      | qavgogine | qavgogine | KARRY@MEMBER.COM | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
+      | username  | password  | fname | lname    | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
+      | qavgogine | qavgogine | KARRY | MOUSTAFA | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
@@ -203,21 +213,25 @@ Feature: 1.08. ACQ- Shopper Profile
       | MBI   | <mbi>   |
     And click on Create Profile button
     Then create a profile with the following details
-      | Email      | <email> |
-      | DOB        | <dob>   |
-      | MBI        | <mbi>   |
-      | First Name | <fname> |
-      | Last Name  | <lname> |
+      | Email      | <email>   |
+      | DOB        | <dob>     |
+      | MBI        | <mbi>     |
+      | First Name | <fname>   |
+      | Last Name  | <lname>   |
+      | Zipcode    | <zipCode> |
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                      | dob        | mbi           | fname   | lname      | enrolledplanName                                 | planName                                         | drugNames | providers             |
-      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA  | MASONE     | UnitedHealthcare Medicare Advantage Assure (HMO) | UnitedHealthcare Medicare Advantage Assure (HMO) | No        | JENSON, PETER M       |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM   | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER | Medica HealthCare Plans MedicareMax (HMO)        | Medica HealthCare Plans MedicareMax (HMO)        | No        | PLASENCIA, M.D., LUIS |
+      | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                                | planName                                                         | drugNames   | providers              |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |         | Medica HealthCare Plans MedicareMax (HMO)       | Medica HealthCare Plans MedicareMax (HMO)                        | No          | PLASENCIA, M.D., LUIS  |
+      | qavgogine | qavgogine | EBER@MEMBER.COM          | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  |         | UnitedHealthcare Group Medicare Advantage (PPO) | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Atripla TAB | ISMAIL, M.D., MOHAMMED |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
@@ -237,11 +251,15 @@ Feature: 1.08. ACQ- Shopper Profile
       | First Name | <fname>   |
       | Last Name  | <lname>   |
       | Zipcode    | <zipCode> |
+      | Consent    | <consent> |
     Then I land on the plan summary page of VPP for NonMember
-      | Plan Name | <planName>  |
-      | Drugs     | <drugNames> |
-      | Providers | <providers> |
+      | Plan Name  | <planName>  |
+      | Drugs      | <drugNames> |
+      | Providers  | <providers> |
+      | First Name | <fname>     |
+      | Last Name  | <lname>     |
 
     Examples: 
-      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                    | providers                                 |
-      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
+      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                 |
+      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |

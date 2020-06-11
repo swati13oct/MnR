@@ -31,9 +31,6 @@ public class WerallyMobilePage extends UhcDriver {
 
 	String page = "Werally";
 
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst;
-
 	// Werally page Elements
 
 	// --- From here Common for all page starts ---
@@ -81,20 +78,27 @@ public class WerallyMobilePage extends UhcDriver {
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
-		validate(welcomeTilte, 30);
-		getStarted.click();
+		try {
+			validate(welcomeTilte, 30);
+			getStarted.click();
+		} catch (Exception e) {
+			System.out.println("No Get Started button available in werally");
+		}
 		validate(searchBox, 30);
 		if (type.toUpperCase().contains("DOCTOR")) {
-			searchBox.sendKeys(searchParameter);
+			//searchBox.sendKeys(searchParameter);
+			mobileactionsendkeys(searchBox, searchParameter);
 			hidekeypad();
-			mobileswipe("70%",1,false);
-			searchButton.click();
+			mobileswipe("50%",false);
+			//searchButton.click();
+			mobileactiontap(searchButton);
 			pageloadcomplete();
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
 				for (int i = count-1; i >= 0; i--) {
 					threadsleep(1000);
-					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim()+" "
+					+searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']")).getText().trim());
 					WebElement save = searchResults.get(i).findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
 					save.click();
 					threadsleep(1000);

@@ -2961,4 +2961,44 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 	Thread.sleep(3000);
 	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
 }
+
+	@Then("^user saves all plans as favorite on UHC site$")
+	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+	
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+	
+		default:
+			break;
+		}
+	}
+	
+	@Then("^Navigate to Visitor Profile page on UHC site$")
+	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 } 

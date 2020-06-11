@@ -7,14 +7,12 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
@@ -314,6 +312,18 @@ public class VisitorProfileStepDefinition_AARP {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlansAddedonPlancompareforVisitorProfile(comparePlans);
 	}
+	
+	@And("^the user back to VPP plan summary page in AARP$")
+	public void the_user_back_to_VPP_plan_summary_page_in_aarp() {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
 } 
+
 
 

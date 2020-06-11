@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
 import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.claims.ClaimsSummaryPage;
@@ -205,6 +207,7 @@ public class EOBPage extends EOBBase{
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int beforeClicked_numTabs=beforeClicked_tabs.size();	
 
+			scrollElementToCenterScreen(rightRailLearnMoreLink);
 			rightRailLearnMoreLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
@@ -959,6 +962,7 @@ public class EOBPage extends EOBBase{
 	public void validateEobEntries (String planType, String memberId) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
+		scrollElementToCenterScreen(eobFirst);
 		eobFirst.click();
 		sleepBySec(5);
 
@@ -966,7 +970,8 @@ public class EOBPage extends EOBBase{
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
-		driver.switchTo().window(newTab.get(1));
+		//tbd driver.switchTo().window(newTab.get(1));
+		driver.switchTo().window(newTab.get(newTab.size()-1));
 		CommonUtility.checkPageIsReady(driver);
 
 		String pdfUrl = driver.getCurrentUrl();
@@ -1032,7 +1037,7 @@ public class EOBPage extends EOBBase{
 
 		//note: Switch back to original window
 		driver.close();
-		driver.switchTo().window(newTab.get(0));
+		driver.switchTo().window(newTab.get(newTab.size()-2));
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(5);
 	}
@@ -1106,14 +1111,18 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
-		for (int i = 1; i <= eobCount; i++) {
-			System.out.println("----- Proceed to validate each EOB PDF content...");//lyc
+		int max=eobCount;
+		if (eobCount>=10) //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
+			max=10;
+		for (int i = 1; i <= max; i++) {
+			System.out.println("----- Proceed to validate each EOB PDF content on the first page if more than 10 eobs...");
 
 			//String targetEobXpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]']["+i+"]//td[3]";
 			String targetEobXpath="//tr[contains(@ng-repeat,'eobData in pagedListItems')]["+i+"]//td[3]//a";
 			try {
 				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", eobValidate(eob));
+				scrollElementToCenterScreen(eob);
 				moveMouseToElement(eob);
 				eob.click();
 				CommonUtility.checkPageIsReady(driver);
@@ -1124,7 +1133,7 @@ public class EOBPage extends EOBBase{
 				System.out.println(newTab.size());
 				Assert.assertTrue("PROBLEM - clicked PDF but didn't open a new tab to load PDF", newTab.size()>1);
 				//note: Use the list of window handles to switch between windows
-				driver.switchTo().window(newTab.get(1));
+				driver.switchTo().window(newTab.get(newTab.size()-1));
 				CommonUtility.checkPageIsReady(driver);
 
 				//--------------------------------------
@@ -1138,7 +1147,7 @@ public class EOBPage extends EOBBase{
 				}
 				//--------------------------------------
 				driver.close();
-				driver.switchTo().window(newTab.get(0));
+				driver.switchTo().window(newTab.get(newTab.size()-2));
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
 			}
@@ -1171,8 +1180,24 @@ public class EOBPage extends EOBBase{
 		sleepBySec(5); //note: wait for page to settle before storing the count just in case
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
 		int eobCountInt = Integer.parseInt(eobCount.getText());
+		//System.out.println("EOB Count is: "+eobCount.getText());
+		//System.out.println("listOfEobs size: "+listOfEobs.size());
+		//if(eobCountInt == listOfEobs.size()){
+		//	System.out.println("Validated EOBs are displayed");
+		//}else
+		//	System.out.println("No EOBs are displayed");
+		return eobCountInt;
+	}
+	
+	public int getNumEobAfterSearch_dream(){
+		sleepBySec(5); //note: wait for page to settle before storing the count just in case
+		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
+		int eobCountInt = Integer.parseInt(eobCount.getText());
 		System.out.println("EOB Count is: "+eobCount.getText());
-		if(eobCountInt == listOfEobs.size()){
+		System.out.println("listOfEobs size: "+listOfEobs_dream.size());
+		if (eobCountInt>10 && listOfEobs_dream.size()==10)
+			
+		if ((eobCountInt>10 && listOfEobs_dream.size()==10) || (eobCountInt<=10 && eobCountInt == listOfEobs_dream.size())){
 			System.out.println("Validated EOBs are displayed");
 		}else
 			System.out.println("No EOBs are displayed");

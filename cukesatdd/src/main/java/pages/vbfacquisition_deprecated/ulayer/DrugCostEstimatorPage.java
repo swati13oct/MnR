@@ -396,8 +396,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='prescriptiondrug']")
 	public WebElement prescDrugTab;
-
 	
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
+
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
+
 	@Override
 	public void openAndValidate() {
 
@@ -1784,6 +1789,44 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 	public void clicksOnReturnLink(){
 		returnLink.click();	
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean dceValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ 
+		if (dceValidate(iPerceptionframe,0)) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
 	}
 
 }
