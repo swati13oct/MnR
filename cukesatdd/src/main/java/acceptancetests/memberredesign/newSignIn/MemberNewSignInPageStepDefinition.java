@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.newSignIn;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
-import pages.dashboard_deprecated.member.ulayer.NewMemebrRegistrationPage;
-import pages.dashboard_deprecated.member.ulayer.UsernamePasswordAssistancePage;
-import pages.member_deprecated.ulayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -22,6 +16,11 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
+import pages.dashboard_deprecated.member.ulayer.NewMemebrRegistrationPage;
+import pages.dashboard_deprecated.member.ulayer.UsernamePasswordAssistancePage;
+import pages.member_deprecated.ulayer.LoginPage;
 
 
 public class MemberNewSignInPageStepDefinition {

@@ -1,12 +1,9 @@
 package pages.vbfacquisition_deprecated.bluelayer;
 
-/*@author pagarwa5*/
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
@@ -17,11 +14,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+/*@author pagarwa5*/
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
 
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.vbfacquisition_deprecated.ulayer.MaViewPlansAndPricingPage;

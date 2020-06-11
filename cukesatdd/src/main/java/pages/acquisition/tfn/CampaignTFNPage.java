@@ -22,8 +22,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
 
 
 

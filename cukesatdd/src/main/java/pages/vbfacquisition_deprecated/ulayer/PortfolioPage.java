@@ -20,9 +20,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.vbfacquisition_deprecated.bluelayer.ZipcodeLookupPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.vbfacquisition_deprecated.bluelayer.ZipcodeLookupPage;
 
 /**
  * @author pperugu

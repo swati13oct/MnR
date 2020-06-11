@@ -89,7 +89,7 @@ public class WerallyMobilePage extends UhcDriver {
 			//searchBox.sendKeys(searchParameter);
 			mobileactionsendkeys(searchBox, searchParameter);
 			hidekeypad();
-			mobileswipe("70%",1,false);
+			mobileswipe("50%",false);
 			//searchButton.click();
 			mobileactiontap(searchButton);
 			pageloadcomplete();

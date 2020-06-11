@@ -1,16 +1,13 @@
 package acceptancetests.acquisition.communityMeeting;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.RequestHelpAndInformationPage;
 
 /**
  *Functionality:Attend Community Meeting

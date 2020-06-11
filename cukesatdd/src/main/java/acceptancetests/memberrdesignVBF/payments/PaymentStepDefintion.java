@@ -7,16 +7,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.memberrdesignVBF.OneTimePaymentsPage;
-import pages.memberrdesignVBF.PaymentsOverview;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.ReviewCAOneTimePaymentsPage;
-import pages.memberrdesignVBF.ReviewOneTimePaymentsPage;
-import pages.memberrdesignVBF.TestHarness;
-
-import pages.memberrdesignVBF.PaymentFormPage;
-import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
-import pages.memberrdesignVBF.CreditCardUPGPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -25,6 +15,15 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
+import pages.memberrdesignVBF.CreditCardUPGPage;
+import pages.memberrdesignVBF.OneTimePaymentsPage;
+import pages.memberrdesignVBF.PaymentFormPage;
+import pages.memberrdesignVBF.PaymentsOverview;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.ReviewCAOneTimePaymentsPage;
+import pages.memberrdesignVBF.ReviewOneTimePaymentsPage;
+import pages.memberrdesignVBF.TestHarness;
 
 /**
  * @author pperugu
