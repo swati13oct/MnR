@@ -81,6 +81,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
+		sleepBySec(8);
+		
 		zipcodeField.sendKeys(zipcode);
 		//if(zipcode.length()!=5){
 		distanceOption_15miles.click();
