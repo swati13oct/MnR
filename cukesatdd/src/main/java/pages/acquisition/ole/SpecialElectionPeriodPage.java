@@ -138,6 +138,14 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
 	private WebElement pedHeader;
 	
+	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
+	private WebElement pedHeader1;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]")
+	private WebElement ChangingCurrentMedicareRadio;
+	
+	
+	
 	
 	public SpecialElectionPeriodPage(WebDriver driver) {
 		super(driver);
@@ -264,6 +272,11 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 
 public boolean validate_SEPoptions_for_planType(String planType) {
 	boolean Validation_Flag = true;
+	
+	//----updated for new Radio button login in SEP page 
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+	
 	System.out.println("PlanType : "+planType);
 	try {
 		Thread.sleep(3000);

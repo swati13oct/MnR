@@ -3585,6 +3585,8 @@ catch (Exception e) {
 	private WebElement comparePgnHeader;
 
 	private ArrayList<String> stringList;
+
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3791,7 +3793,17 @@ catch (Exception e) {
 	    return stringList;
 
 	}
+	public void setMap(Map<String, ArrayList<String>> dataMap) {
 		
+	    this.dataMap = dataMap;
+
+	}
+	
+	public  Map<String, ArrayList<String>> getMap(){
+	    return dataMap;
+
+	}
+	
 	/**
 	 * Navigate to Visitor Profile Page
 	 * @return
@@ -3892,6 +3904,20 @@ catch (Exception e) {
 
 		} 
 	}
+public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+        List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+	
+	}
 	/**
 	 * Save all the plans specified to the plan type and plan names
 	 * @param savePlanNames
@@ -3965,5 +3991,6 @@ catch (Exception e) {
 		}
 	}
 }
+
 
 
