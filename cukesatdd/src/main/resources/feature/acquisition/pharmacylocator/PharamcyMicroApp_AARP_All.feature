@@ -61,7 +61,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @pharmacylocatorulayer01b
     Examples: 
       | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-   #   | 15583 | pharmacysearch | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15583 | pharmacysearch | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   #| 15583 | pharmacysearch | Ulayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
   #| 15583 | pharmacysearch | Ulayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
@@ -105,7 +105,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @pharmacylocatorulayer02b
     Examples: 
       | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-    #| 15583 | pharmacysearch | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15583 | pharmacysearch | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   #| 15583 | pharmacysearch | Ulayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
   #| 15583 | pharmacysearch | Ulayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
