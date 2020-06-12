@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -67,6 +68,12 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
 	private WebElement People;
 	
+	@FindBy(xpath="//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	private WebElement Places;
+	
+	@FindBy(xpath="//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	private WebElement Hospitals;
+
 	@FindBy(xpath="//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
 	private WebElement Primary;
 	
@@ -194,6 +201,40 @@ public class ProviderSearchPage extends UhcDriver {
 
 	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
+	Checkcoverage.click();
+	/*validateNew(Checkcoverage);
+	jsClickNew(Checkcoverage);*/
+	waitForCountDecrement(2);
+	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+	return new VPPPlanSummaryPage(driver);
+	}
+	
+	public VPPPlanSummaryPage selectsHospitals() {
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+	GetStarted.click();
+
+	CommonUtility.waitForPageLoadNew(driver, Places, 30);
+	Places.click();
+	
+	CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
+	Hospitals.click();
+
+	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+	
+	jsClickNew(SaveBtn);
+	if(validate(selectLocationOption)){
+		selectLocationOption.click();
+		validateNew(saveBtn2);
+		saveBtn2.click();
+	}
+	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+	jsClickNew(Viewsavebtn);
+	validateNew(providerNameText);
+	String providerSaved = providerNameText.getText().trim();
+	System.out.println("Hospital Name is : " + providerSaved);
+	MRConstants.PROV_NAME=providerSaved;
 	Checkcoverage.click();
 	/*validateNew(Checkcoverage);
 	jsClickNew(Checkcoverage);*/
