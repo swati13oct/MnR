@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -3270,6 +3271,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement comparePgnHeader;
 
 	private ArrayList<String> stringList;
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3441,7 +3443,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return providerNames;
 		}
 		//
-		public void setStringList(ArrayList<String> stringList) {
+/*		public void setStringList(ArrayList<String> stringList) {
 			
 		    this.stringList = stringList;
 
@@ -3450,8 +3452,19 @@ for (int i = 0; i < initialCount + 1; i++) {
 		public ArrayList<String> getStringList() {
 		    return stringList;
 
+		}*/
+		
+		public void setMap(Map<String, ArrayList<String>> dataMap) {
+			
+		    this.dataMap = dataMap;
+
 		}
 		
+		public  Map<String, ArrayList<String>> getMap(){
+		    return dataMap;
+
+		}
+
 	
 		/**
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
@@ -3711,4 +3724,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 	}
+
+
+	public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+		
+	}
+
 }

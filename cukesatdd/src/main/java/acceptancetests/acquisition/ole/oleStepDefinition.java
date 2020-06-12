@@ -443,7 +443,7 @@ public class oleStepDefinition {
 			Assert.fail();
 		}
 	}
-
+	
 	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
@@ -2468,7 +2468,6 @@ public class oleStepDefinition {
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
 	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
 		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
-
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2486,8 +2485,14 @@ public class oleStepDefinition {
 		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		ArrayList<String> vppproviders = planSummaryPage.getStringList();
-		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
 		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
@@ -2504,15 +2509,8 @@ public class oleStepDefinition {
 			    }
 			}
 		}
-		/*if(vppproviders.equals(pcpproviders))
-		{
-			System.out.println("List of providers in VPP AND OLE Page are equal");
-		}
-		else
-		{
-			System.out.println("List of providers in VPP AND OLE Page are not equal");
-		}
-		*/		
+		
+		
 		}
 	/**
 	 * @toDo: Select the provider in PCP and continue to OLE Flow
@@ -2542,8 +2540,15 @@ public class oleStepDefinition {
 		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
 		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ArrayList<String> vppproviders = planSummaryPage.getStringList();
 		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
 		System.out.println("List of providers in VPP page is: "+ vppproviders);
 		System.out.println("List of providers in PCP page is: "+ pcpproviders);
 		
@@ -2568,6 +2573,88 @@ public class oleStepDefinition {
 		PrimaryCarePhysicianPage pcpproviderPage = pcpPage.navigate_PCPPage();
 		
 			}
+	/**
+	 
+	 * To Validate the OLE WELCOME Page Marketing bullets 
+	 * @param planAttributes
+	 * @throws Throwable
+	 */
+	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
+	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		//String plantype = givenAttributesMap.get("Plan Type");
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
+		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
+		
+		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
+		
+		
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		
+		
+	}
+	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
+	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		//String plantype = givenAttributesMap.get("Plan Type");
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
+		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
+		
+		
+		
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		
+	}
 		
 	@Then("^the User validates RadioButtons option in SEP Page$")
 	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {		

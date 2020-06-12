@@ -20,6 +20,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
    	Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
 		Then the user validates the Plan details on OLE
+		Then the User Validates Marketing Bullets for Welcome OLE
+   		| PlanName | <planName> |
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
    	Then the user validates Leave OLE modal for Welcome OLE
@@ -90,8 +92,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user clicks on Submit Enrollment to complete enrollment
 # 	Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    
     Examples: 
       | TID   | PlanType | zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       | 15513 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
-
- 
+    

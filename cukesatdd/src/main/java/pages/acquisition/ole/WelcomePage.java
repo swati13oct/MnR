@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -158,6 +160,7 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
+
 
 	public boolean ValidateTFN(String TFN) {
 		
@@ -319,6 +322,21 @@ public class WelcomePage extends UhcDriver{
 	    {
 	        return enrollInNotPossible;
 	    }		
+	}
+	
+public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> marketingBullets = driver.findElements(By.xpath("//*[@id='ole-form-content']//*[@class='bullet-div']//*[@id='bullets-sub-header']//following-sibling::div//ul[@class='marketing-bullets']//li"));
+		
+		for(WebElement element:marketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+	
 	}
 	
 public MedicareInformationPage navigate_to_medicare_info_page() {
