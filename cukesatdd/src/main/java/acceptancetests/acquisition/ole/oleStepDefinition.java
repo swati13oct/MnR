@@ -2656,6 +2656,83 @@ public class oleStepDefinition {
 		
 	}
 		
-} 
+	@Then("^the User validates RadioButtons option in SEP Page$")
+	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {		
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		boolean Validation_Status = specialElectionPeriodPage.validate_SEP_RadioButton_options();
+		if(Validation_Status){
+			System.out.println("Radio Button Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Radio Button Options in OLE SEP PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	@Then("^the user navigates to Medicare Information Page for DSNP$")
+	public void the_user_navigates_to_Medicare_Information_Page_for_DSNP() throws Throwable {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+			MedicareInformationPage medicalInformationPage = welcomePage.navigate_to_medicare_info_page();
+			if (medicalInformationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+						medicalInformationPage);
+				System.out.println("OLE medical Information Page is Displayed");
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("OLE Medical Information Page is NOT Displayed");
+		//}
+	}
+	@Then("^the user enters following required Medicare Informations for DSNP$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_pages_DSNP(DataTable planAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String CardType = MedicareDetailsMap.get("Card Type");
+		
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n)+"C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details_dsnp(MedicareDetailsMap);
+		if (isInformationFilled) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
+			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+	
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Medicare Info data entry failed");
+	}
+}
 
 
