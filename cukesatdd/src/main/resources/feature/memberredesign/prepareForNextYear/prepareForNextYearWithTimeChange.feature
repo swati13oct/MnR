@@ -106,8 +106,13 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 	Then the user validates Prepare For Next Year page content
 	Then test setup rolls back system date to current date for clean up after test
 
+    @prepareForNextYear03_ind
     Examples: 
 	    | index | FID     | planType | memberType         |
 	    | 12    | F437767 | MAPD	 | IND_PFNY           |
+
+    @prepareForNextYear03_grp
+    Examples: 
+	    | index | FID     | planType | memberType         |
 	    | 13    | F437767 | MAPD	 | GRP_PFNY           |
 
