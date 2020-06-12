@@ -327,6 +327,28 @@ public class PrepareForNextYearStepDefinition {
 		prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^the user validate bookmark behavior if tab hasn't met the condition to be displayed$")
+	public void validateBookmark() {
+		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		if (!expPrepareForNextYearTab) {
+			testNote.add("\tValidate bookmark behavior when tab hasn't met the condition to be displayed...");
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+			PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+			prepareForNextYearPage.validateBookmarkError();
+			
+		} else {
+			testNote.add("\tPrepare For Next Year tab is showing, skip bookmark error validation when tab hasn't met the condition to be displayed...");
+			
+		}
+	}
 
 	//---------------------------------------------------
 	//----- begin - test setup for date changing on test environment

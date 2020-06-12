@@ -64,6 +64,7 @@ Feature: 1.21 Member Prepare For Next Year
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
+    Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
@@ -71,8 +72,8 @@ Feature: 1.21 Member Prepare For Next Year
     Examples: 
 	    | index | FID     | planType | memberType             | note expectTab if date in range and toggle ON  | 
 	    | 11    | F437767 | PDP	     | IND_PreNexYr           | TRUE                                           |
-#	    | 12    | F437767 | MAPD	 | IND_PreNexYr           | TRUE                                           |
-#	    | 13    | F437767 | MA	     | IND_PreNexYr           | TRUE                                           |
+	    | 12    | F437767 | MAPD	 | IND_PreNexYr           | TRUE                                           |
+	    | 13    | F437767 | MA	     | IND_PreNexYr           | TRUE                                           |
 
 	@prepareForNextYear02b @hasTab
     Examples: 

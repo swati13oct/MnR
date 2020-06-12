@@ -509,4 +509,19 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		
 		return sectionNote1;
 	}
+	
+	public void validateBookmarkError() {
+		String tmpUrl=driver.getCurrentUrl();
+		String tmp[]=tmpUrl.split("/benefits");
+		String bookmark=tmp[0]+"/planfornextyear/overview.html";
+		driver.get(bookmark);
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,1);
+		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
+		String actMsg=bookmarkErrMsg.getText();;
+		String expMsg="Your requested cannot be processed .Please try later";
+		Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
+		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
+		
+	}
 }

@@ -305,6 +305,13 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'next-year-section')]//div[@class='step-section'][4]//p[@class='review-section-text']")
 	protected WebElement enrollInPlan_text;
 	
+	@FindBy(xpath="//div[@id='error_block']//p")
+	protected WebElement bookmarkErrMsg;
+	
+	@FindBy(xpath="//div[@id='error_block']//a[contains(text(),'Home Page')]")
+	protected WebElement bookmarkErrPgGoBackHome;
+	
+	
 	//@FindBy(xpath="")
 	//protected WebElement xyz;
 	
