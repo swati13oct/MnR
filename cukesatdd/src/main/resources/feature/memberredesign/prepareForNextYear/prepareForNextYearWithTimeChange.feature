@@ -14,8 +14,8 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
       | Member Type | <memberType>       |
       | Speed Up    | true               |
 	Then test setup stores original system date for roll back later
-      | EndOfTestRollBackTime  | true           |
 	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | true           |
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |

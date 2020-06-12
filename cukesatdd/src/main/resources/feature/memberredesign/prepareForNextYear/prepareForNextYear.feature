@@ -12,6 +12,7 @@ Feature: 1.21 Member Prepare For Next Year
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
@@ -63,6 +64,7 @@ Feature: 1.21 Member Prepare For Next Year
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |

@@ -8,10 +8,20 @@ Feature: 1.21.1 Member Prepare For Next Year - Member Auth
   #-------------------------------------------------
   @memAuth_prepareForNextYear01 @noTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
@@ -59,10 +69,20 @@ Feature: 1.21.1 Member Prepare For Next Year - Member Auth
   #-------------------------------------------------
   @memAuth_prepareForNextYear02 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |

@@ -319,17 +319,12 @@ public class PrepareForNextYearStepDefinition {
 	//---------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Then("^test setup stores original system date for roll back later$")
-	public void storeOriginalSysDate(DataTable memberAttributes) {
+	public void storeOriginalSysDate() {
 		if (!MRScenario.environment.contains("team-a")) {
 			Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
 			return;
 		}		
 
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String rollbackStr=memberAttributesMap.get("EndOfTestRollBackTime");
-		Assert.assertTrue("PROBLEM - input 'EndOfTestRollBackTime' value should either be 'true' or 'false' | Actual='"+rollbackStr+"', please correct and retry",rollbackStr.equalsIgnoreCase("true") || rollbackStr.equalsIgnoreCase("false"));
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME, Boolean.parseBoolean(rollbackStr));
-		
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
@@ -678,6 +673,10 @@ public class PrepareForNextYearStepDefinition {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String tmp_start=memberAttributesMap.get("AEM Show Tab StartDate");
 		String tmp_end=memberAttributesMap.get("AEM Show Tab EndDate");
+
+		String rollbackStr=memberAttributesMap.get("EndOfTestRollBackTime");
+		Assert.assertTrue("PROBLEM - input 'EndOfTestRollBackTime' value should either be 'true' or 'false' | Actual='"+rollbackStr+"', please correct and retry",rollbackStr.equalsIgnoreCase("true") || rollbackStr.equalsIgnoreCase("false"));
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME, Boolean.parseBoolean(rollbackStr));
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  

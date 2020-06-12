@@ -21,6 +21,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
@@ -308,23 +309,28 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	}
 	
 	public Date getCurrentSystemDate() {
-		String dateTimeStr=getMemTestEnvSysTime();
-		String[] tmp=dateTimeStr.split(" ");
-		String month=tmp[1];
-		String day=tmp[2];
-		String year=tmp[5];
-		String s=month+" "+day+","+year;		
-		DateFormat df = new SimpleDateFormat("MMM dd,yyyy"); 
-		df.setTimeZone(TimeZone.getTimeZone("UTC"));
-		Date targetDate;
-		try {
-			targetDate = df.parse(s);
-		    String newDateString = df.format(targetDate);
-		    System.out.println("currentSystemDate="+newDateString);
-		    return targetDate;
-		} catch (java.text.ParseException e) {
-		    e.printStackTrace();
-		    return null;
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//note: offline-prod and online-prod should always have current date anyway...
+			return new Date();
+		} else {
+			String dateTimeStr=getMemTestEnvSysTime();
+			String[] tmp=dateTimeStr.split(" ");
+			String month=tmp[1];
+			String day=tmp[2];
+			String year=tmp[5];
+			String s=month+" "+day+","+year;		
+			DateFormat df = new SimpleDateFormat("MMM dd,yyyy"); 
+			df.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date targetDate;
+			try {
+				targetDate = df.parse(s);
+			    String newDateString = df.format(targetDate);
+			    System.out.println("currentSystemDate="+newDateString);
+			    return targetDate;
+			} catch (java.text.ParseException e) {
+			    e.printStackTrace();
+			    return null;
+			}
 		}
 	}
 
