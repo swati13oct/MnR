@@ -20,15 +20,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
-import pages.dashboard_deprecated.member.blayer.DrugCostEstimatorPage;
-import pages.member_deprecated.ulayer.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
+import pages.dashboard_deprecated.member.blayer.DrugCostEstimatorPage;
+import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	

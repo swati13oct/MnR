@@ -226,12 +226,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				*/
+			
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getMemTestEnvSysTime();
+				//String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
-						+ "please check user data input or env to see if everything is ok. "
-						+ "Current system time is '"+currentSysTime+"'", 
+						+ "please check user data input or env to see if everything is ok. ", 
 						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			/* tbd } else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "

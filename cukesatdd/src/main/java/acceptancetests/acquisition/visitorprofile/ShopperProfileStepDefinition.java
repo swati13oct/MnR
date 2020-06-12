@@ -106,12 +106,14 @@ public class ShopperProfileStepDefinition {
 		
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
+		String fname = givenAttributesMap.get("First Name");
+		String lname = givenAttributesMap.get("Last Name");
 		
 	    
 		VPPPlanSummaryPage vppPlanSumamry = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan);
+		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan,fname,lname);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")
@@ -263,11 +265,13 @@ public class ShopperProfileStepDefinition {
 		String plan = givenAttributesMap.get("Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
+		String fname = givenAttributesMap.get("First Name");
+		String lname = givenAttributesMap.get("Last Name");
 	    
 		VPPPlanSummaryPage vppPlanSumamry = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		vppPlanSumamry.validateAgentModeBannersForNonMember(plan, drugs, providers);
+		vppPlanSumamry.validateAgentModeBannersForNonMember(plan, drugs, providers,fname,lname);
 	}
 	
 	@Then("^I ask the shopper calling in to provide me with the Email Address for NonMember$")

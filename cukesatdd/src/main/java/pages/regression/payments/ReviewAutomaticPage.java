@@ -233,5 +233,55 @@ public class ReviewAutomaticPage extends UhcDriver {
 		}
 	}
 
+	public RecurringConfirmationPage selectAgreeAndnoClickOnAuthorizeMonthyPaymentsforEFT() {
+		checkForIPerceptionModel(driver);
+		validate(EditPaymentInformation);
+		System.out.println("User is on Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		validate(AuthorizeMonthlyPaymentstButton);
+		if (AuthorizeMonthlyPaymentstButton.isDisplayed()){
+		System.out.println("Authorise Monthly Payments button visible");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Your Automatic Payment")) {
+			System.out.println("User is on Review Page for set up Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("Review Page for Recurring not displayed");			
+		}
+	}
+		return null;
+}
+
+	public RecurringConfirmationPage selectAgreeAndnoClickOnContinueforCC() {
+		checkForIPerceptionModel(driver);
+		validate(ChangeCard);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		validate(AuthorizeMonthlyPaymentstButton);
+		if (AuthorizeMonthlyPaymentstButton.isDisplayed())
+		{
+			System.out.println("Authorise Monthly Payments button visible");
+			System.out.println(driver.getCurrentUrl());
+			System.out.println(driver.getTitle());
+			}
+	
+		if (driver.getTitle().contains("Your Automatic Payments")) {
+			System.out.println("User is on Review Page for set up Recurring");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("Review Page for Recurring not displayed");
+			return null;
+		}
+	}
+
 
 }
