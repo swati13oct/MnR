@@ -365,35 +365,46 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	/** Verify error messages in pharmacy page */
-	public PharmacySearchPage validateErrorMessages(String inputZip) {
+	public PharmacySearchPage validateErrorMessages(String inputZip,String language) {
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-			String exp_noZipTxt="Please enter a ZIP code";
+	
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
-			String act_noZipTxt=noZipcode.getText();
-			Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "
-					+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
-					act_noZipTxt.contains(exp_noZipTxt));
+		
+			if(language.equalsIgnoreCase("English")){
+						String exp_noZipTxt="Please enter a ZIP code";
+				  	String act_noZipTxt=noZipcode.getText();
+						Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "
+								+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
+								act_noZipTxt.contains(exp_noZipTxt));
+				}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
-				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this";
+				
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(invalidZip));
-				String act_zipFormatErrTxt=invalidZip.getText();
-				Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
-						+ "Expected='"+exp_zipFormatErrTxt+"' | Actual='"+act_zipFormatErrTxt+"'",
-						act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
+				if(language.equalsIgnoreCase("English")){
+					
+				  String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this";
+					String act_zipFormatErrTxt=invalidZip.getText();
+					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
+							+ "Expected='"+exp_zipFormatErrTxt+"' | Actual='"+act_zipFormatErrTxt+"'",
+							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
+				}
 			} else { //note: if format is right then going to assume u r getting this error
-				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria";
-	
-				Assert.assertTrue("PROBLEM - not seeing zip format error element",
+					Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(modifyZipErr));
+				
+				if(language.equalsIgnoreCase("English")){
+				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria";
+			
 				String act_noPlanForZipErrTxt=modifyZipErr.getText();
 				Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 						+ "Expected='"+exp_noPlanForZipErrTxt+"' | Actual='"+act_noPlanForZipErrTxt+"'",
 						act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt));
+					}
 			} //note: may need to code for a case when zip result in no result but don't know of a zip that has that behavior yet
 		}
 		return new PharmacySearchPage(driver);
