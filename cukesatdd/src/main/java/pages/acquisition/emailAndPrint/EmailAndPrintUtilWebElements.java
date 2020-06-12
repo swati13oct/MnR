@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 public class EmailAndPrintUtilWebElements extends UhcDriver {
@@ -51,7 +52,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	protected WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "///button[contains(@type,'submit') and contains(text(), 'Send')]")
+	@FindBy(xpath = "//button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
 	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")

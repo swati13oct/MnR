@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.UhcDriver;
 import pages.vbfacquisition_deprecated.bluelayer.VPPPlanSummaryPage;
 import pages.vbfacquisition_deprecated.ole.WelcomePage;
-import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
 
 	

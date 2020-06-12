@@ -1,28 +1,14 @@
 package acceptancetests.acquisition.providersearch;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-import pages.acquisition.uhcretiree.DrugLookUpPage;
-import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -31,6 +17,12 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 
 
 /**
@@ -356,10 +348,32 @@ public class ProviderSearchStepDefinitionAARP {
 	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	
-	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	/*ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 	plansummaryPage.setStringList(providers);
 	Assert.assertFalse("Providers not added",providers.isEmpty());
 	
+	//Adding Line for Marketing bullet points
+	VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
+	plansummaryPage1.setStringList(vppmarketingBullets);
+	Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+	// Line End for Marketing bullet points
+	*/
+	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	System.out.println("List of Providers in OLE page is: " + providers);
+	ArrayList<String> vppmarketingBullets =plansummaryPage.validate_marketing_details(planName);
+	Assert.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    map.put("Provider", providers);
+    map.put("MarketingBullet", vppmarketingBullets);
+    plansummaryPage.setMap(map);
+    
+
+
 	}
 		
 

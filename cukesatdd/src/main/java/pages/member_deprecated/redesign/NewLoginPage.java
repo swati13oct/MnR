@@ -15,14 +15,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
 import pages.dashboard_deprecated.eob.EOBPage;
 import pages.member_deprecated.bluelayer.DashboardPage;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.member_deprecated.ulayer.UNPWAssistancePage;
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising

@@ -3,8 +3,6 @@
  */
 package pages.vbfacquisition_deprecated.ole;
 
-import static org.junit.Assert.fail;
-
 import java.util.Map;
 
 import org.openqa.selenium.JavascriptExecutor;

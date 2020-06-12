@@ -386,6 +386,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath ="//button[contains(text(),'CANCEL')]")
 	private WebElement cancelEmailUs; 
 	
+	@FindBy(xpath ="//h1[contains(text(),'Learn how to use your member site')]")
+	private WebElement learnHowToUsePageHeader;
+	
 		public JSONObject contactUsJson;
 	
 		private JSONObject secureemailwidgetDataJson;
@@ -1632,6 +1635,33 @@ public class ContactUsPage extends UhcDriver{
 			ex.printStackTrace();
 		}
 	}
+	
+	public void validateSeeHowTGuideLink() {
+		
+		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+		
+		if (Seehowtoguides.isDisplayed()) {
+			
+			Seehowtoguides.click();
+			
+			CommonUtility.waitForPageLoadNew(driver, learnHowToUsePageHeader, CommonConstants.TIMEOUT_60);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			validateWithValue("Learn how to use your member site", learnHowToUsePageHeader);
+			Assert.assertTrue("See how to guide link is navigated to the respective page sussessfully", true);
+		}
+		else {
+			System.err.println("See how to guide link is not navigated to the respective page sussessfully");
+			Assert.fail("See how to guide link is not navigated to the respective page sussessfully");
+		}
+		
+		
+	}
+	
 	
 }
 
