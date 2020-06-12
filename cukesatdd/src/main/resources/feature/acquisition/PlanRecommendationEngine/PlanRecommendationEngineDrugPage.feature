@@ -76,7 +76,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               |                |
 
   @PRE @planrecommendation @drugpage @drugpageadddrug @manualSuggestion @F374225
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with manual search in Plan Recommendation Engine
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName>, <isMultiDoctor>, <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with manual search in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -102,7 +102,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                              |
 
   @PRE @planrecommendation @drugpage @autoSuggestion @drugpageadddrug @F374225
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug page function with manual search in Plan Recommendation Engine
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName>, <isMultiDoctor>, <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with auto search in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
