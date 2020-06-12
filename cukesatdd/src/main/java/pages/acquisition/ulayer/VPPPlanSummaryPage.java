@@ -134,10 +134,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	private WebElement snpPlansCount;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement viewPlans;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
@@ -866,6 +866,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 
+	}
+	
+	public void verifyproviderName(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
+		ProviderSearchLink.click();
+		WebElement ProviderName = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
+		String mproviderName=ProviderName.getText().trim();
+		Assert.assertEquals(mproviderName,MRConstants.PROV_NAME);
+		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
 
@@ -2279,18 +2291,19 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Plan Selector Tool Section is present");    
 	}
 
-	public void validatePlanSelectorPageInRightRail() {
+	public void validatePlanSelectorPageInRightRail() throws Exception  {
 		validateNew(StartPlanSelector);
 		StartPlanSelector.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("medicare-plans")) {
-			WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
 			validateNew(PlanSelector);
 			System.out.println("Plan Selector Tool Page is displayed");
 			Assert.assertTrue(true);
 			driver.navigate().back();
 			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(10000);
 			if(driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");
 				Assert.assertTrue(true);                    	  
