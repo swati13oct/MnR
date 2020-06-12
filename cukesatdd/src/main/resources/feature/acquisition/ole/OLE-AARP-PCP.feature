@@ -1,4 +1,4 @@
-@fastandfurious @OLE @MA_OLE_AARP_PCP @prodRegression @F401735 @F427603
+@fastandfurious @OLE @MA_OLE_AARP_PCP @prodRegression @F401735 @F427594
 Feature: 2.05.1.ACQ-OLE MA UMS
  
   @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
@@ -15,7 +15,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | PlanName | <planName> |  
    	When user selects a multiple providers and retuns to VPP page in Ulayer
     Then User store the information provided from rally to vpp page in Ulayer 
-    	| PlanName | <planName> | 
+    | PlanName | <planName> | 
     And the user validates the available plans for selected plan types in the AARP site 
    	Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -67,9 +67,10 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user navigates to SEP Page
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
-    Then the user selects the following options for SEP Page
-      | Select Options | <selectoptions> |
-      | Option Data    | <optiondata>    |
+    Then the User validates RadioButtons option in SEP Page
+    #Then the user selects the following options for SEP Page
+     # | Select Options | <selectoptions> |
+     # | Option Data    | <optiondata>    |
    	#Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     #Then the user validates Proposed Effective Date is Displayed
