@@ -150,6 +150,27 @@ public class ProviderSearchStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
+	
+	/**
+	 * @toDo:Verify provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify provider name is displayed on Plan Summary page ums$")
+	public void verify_provider_covered_ums(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyproviderName(planName);
+	}
 
 	/**
 	 * @toDo:user user selects a provider
@@ -160,6 +181,17 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
+	
+	@When("^user selects a Hospitals and retuns to VPP page in ums$")
+	public void user_selects_Hospitals_and_return_vpp_page_ums() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
 			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
