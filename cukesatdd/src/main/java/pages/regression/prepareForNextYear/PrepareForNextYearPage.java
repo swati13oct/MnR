@@ -30,7 +30,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 	}
 	
 	public PrepareForNextYearPage fromBenefitsPgNavigateToPrepareForNextYearPage(String planType, String memberType, boolean expComboTab) {
-		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the page...");
+		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the PrepareForNextYear page...");
 		if (noWaitValidate(prepareForNextYearTab)) {
 			prepareForNextYearTab.click();
 		}
@@ -44,10 +44,6 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		return new PrepareForNextYearPage(driver);
 	}
 	
-	public void validatePrepareForNextYearPageContent() {
-		
-	}
-
 	public WebDriver navigateToBenefitsPage(String planType, String memberType, boolean expComboTab) {
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
@@ -73,12 +69,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		String targetItem="Time line section";
 		WebElement targetElement=tl_section;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line box header";
 		targetElement=tl_sectionHeader;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		//note: milestone1 - Sept 15 ----------------------------------
 		String dateStr="September 15";
@@ -92,7 +88,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
 		}
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t1) {
@@ -103,12 +99,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetElement=tl_milestone1Dot_blue;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone1Date;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 
 		targetItem="Time line '"+dateStr+"' - Text";
@@ -118,7 +114,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		String targetExpText="Your Annual Notice of Changes and plan documents for next year will start to be available.";
 		Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
 				+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		//note: milestone2 - Oct 1 ----------------------------------
 		dateStr="October 1";
@@ -132,7 +128,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
 		}
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t2) {
@@ -143,12 +139,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetElement=tl_milestone2Dot_blue;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone2Date;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone2Text;
@@ -157,7 +153,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		//targetExpText="You'll be able to compare next year's plan with your current plan to find out how your coverage may change.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
 		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		
 		//note: milestone3 - Oct 15 ----------------------------------
@@ -172,7 +168,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
 		}
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t3) {
@@ -183,12 +179,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetElement=tl_milestone3Dot_blue;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone3Date;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone3Text;
@@ -197,7 +193,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		//targetExpText="If your needs have changed and you want a different plan for next year, you can switch to a new plan.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
 		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		
 		//note: milestone4 - Dec 7 ----------------------------------
@@ -212,7 +208,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
 		}
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t4) {
@@ -223,12 +219,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetElement=tl_milestone4Dot_blue;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone4Date;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone4Text;
@@ -237,7 +233,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		//targetExpText="This is the last day you can join a new plan for next year.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
 		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 	
 		
 		//note: milestone5 - Jan 1 ----------------------------------
@@ -252,7 +248,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
 		}
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t5) {
@@ -263,12 +259,12 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 			targetElement=tl_milestone5Dot_blue;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone5Date;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone5Text;
@@ -277,7 +273,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		//targetExpText="Your 2021 plan coverage starts today.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
 		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		return note;
 	}
 	
@@ -286,105 +282,105 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 		String targetItem="Get Ready for next year's plan section";
 		WebElement targetElement=getReadySection;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Get Ready for next year's plan section header";
 		targetElement=getReadySection_header;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem="Get Ready for next year's plan section text";
 		targetElement=getReadySection_text;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		//---------------------------------------------
 		String section="Review plan changes";
 		targetItem=section+" - section";
 		targetElement=reviewPlanChanges;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - Circle";
 		targetElement=reviewPlanChanges_circle;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - header";
 		targetElement=reviewPlanChanges_header;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - text";
 		targetElement=reviewPlanChanges_text;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		//---------------------------------------------
 		section="Review plan materials";
 		targetItem=section+" - section";
 		targetElement=reviewPlanMaterials;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - Circle";
 		targetElement=reviewPlanMaterials_circle;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - header";
 		targetElement=reviewPlanMaterials_header;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - text";
 		targetElement=reviewPlanMaterials_text;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		   
 		//---------------------------------------------
 		section="Compare plans online";
 		targetItem=section+" - section";
 		targetElement=comparePlanOnline;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - Circle";
 		targetElement=comparePlanOnline_circle;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - header";
 		targetElement=comparePlanOnline_header;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - text";
 		targetElement=comparePlanOnline_text;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		   
 		//---------------------------------------------
 		section="Enroll in the plan that works for you";
 		targetItem=section+" - section";
 		targetElement=enrollInPlan;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - Circle";
 		targetElement=enrollInPlan_circle;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - header";
 		targetElement=enrollInPlan_header;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 
 		targetItem=section+" - text";
 		targetElement=enrollInPlan_text;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.add("\t  PASSED - validation for "+targetItem);
 		return note;
 	}
 

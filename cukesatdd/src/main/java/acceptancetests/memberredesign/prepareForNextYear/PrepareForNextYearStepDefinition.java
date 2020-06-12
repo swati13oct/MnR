@@ -195,6 +195,7 @@ public class PrepareForNextYearStepDefinition {
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 			return;
 		}
+		//note: if able to get to this point means the page should exist
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
@@ -218,51 +219,39 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
 
-		//note: if tabStartDate<= currentDate <= tabEndDate && toggle=ON
 
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		testNote.add("\t=================");
+		prepareForNextYearPage.hasPrepareForNextYearTabDisplay(true);
+		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
+
+		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\tValidation for current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateBeforeM1Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			sectionNote=prepareForNextYearPage.validateBeforeM1Content();
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content();
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
-			testNote.add("\tValidation for milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			testNote.add("\t  Validation for milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content();
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
 			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content();
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
 			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content();
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
 			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			List<String> sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content();
-			testNote.addAll(sectionNote);
-			testNote.add("\tPASSED - page content validation");
-			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content();
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
+		testNote.addAll(sectionNote);
+		testNote.add("\t  PASSED - page content validation");
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
