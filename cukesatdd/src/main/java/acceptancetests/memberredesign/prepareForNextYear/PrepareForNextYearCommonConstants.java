@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.prepareForNextYear;
 
 public class PrepareForNextYearCommonConstants {
 
+	public static final String END_OF_TEST_ROLL_BACK_TIME="end_of_test_roll_back_time";
 	public static final String ORIG_HOME_URL="orig_home_url";
 	public static final String ORIG_CURRENT_SYSTEM_DATE="orig_current_system_date";
 	public static final String ORIG_CURRENT_SYSTEM_DATE_MILLISEC="orig_current_system_date_millisec";

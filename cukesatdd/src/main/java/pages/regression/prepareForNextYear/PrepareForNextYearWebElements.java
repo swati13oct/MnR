@@ -290,11 +290,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(@class,'next-year-section')]//div[@class='step-section'][3]//p[@class='review-section-text']")
 	protected WebElement comparePlanOnline_text;
-	
 
 	@FindBy(xpath="//div[contains(@class,'next-year-section')]//div[@class='step-section'][4]")
 	protected WebElement enrollInPlan;
-	
 	
 	@FindBy(xpath="//div[contains(@class,'next-year-section')]//div[@class='step-section'][4]//i[contains(@class,'circle')]")
 	protected WebElement enrollInPlan_circle;
@@ -310,9 +308,5 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	@FindBy(xpath="//div[@id='error_block']//a[contains(text(),'Home Page')]")
 	protected WebElement bookmarkErrPgGoBackHome;
-	
-	
-	//@FindBy(xpath="")
-	//protected WebElement xyz;
 	
 }

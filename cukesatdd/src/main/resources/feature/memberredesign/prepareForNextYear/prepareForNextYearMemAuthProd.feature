@@ -1,12 +1,12 @@
 @prepareForNextYear
-Feature: 1.21 Member Prepare For Next Year
+Feature: 1.21.2 Member Prepare For Next Year - PROD
 
   #-------------------------------------------------
   # note: for cases below -
   # note: UserType and memberType that would NOT expect to see tab even if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear01 @noTab @regressionMember
+  @prod_prepareForNextYear01 @noTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -24,32 +24,32 @@ Feature: 1.21 Member Prepare For Next Year
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA offcycle user available at the moment
-    @prepareForNextYear01a @devRegression
+    @prod_prepareForNextYear01a
     Examples: 
-	    | index | FID     | planType | memberType          |
-	   #| 01    | F437767 | PDP	     | GRP_OFFCYC_PFNY     |
-	   #| 02    | F437767 | MA	     | GRP_OFFCYC_PFNY     |
-	    | 03    | F437767 | MAPD	 | GRP_OFFCYC_PFNY     |
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
+	   #| 01    | F437767 | ashah120  | Mnrqa002  |  testUserName     | PDP	     | GRP_OFFCYC_PFNY     |
+	   #| 02    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
+#TBD	    | 03    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
-    @prepareForNextYear01b
+    @prod_prepareForNextYear01b
     Examples: 
-	    | index | FID     | planType | memberType          |
-	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
-	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
-	    | 06    | F437767 | SHIP	 | IND_PFNY            |
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
+#	    | 04    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MA	     | IND_PREEFF_PFNY     |
+#	    | 05    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MA	     | IND_TERM_PFNY       |
+	    | 06    | F437767 | ashah120  | Mnrqa002  |  Pramila1946      | SHIP	 | IND_PFNY            |
 			
-	@prepareForNextYear01c
+	@prod_prepareForNextYear01c
     Examples: 
-	    | index | FID     | planType | memberType          |
-	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
+	    | 07    | F437767 | ashah120  | Mnrqa002  |  phleauxdailles43 | SHIP	 | COMBO_SHIP_MA_PFNY  |
+	    | 08    | F437767 | ashah120  | Mnrqa002  |  phleauxdailles43 | MA	     | COMBO_SHIP_MA_PFNY  |
 			
-	@prepareForNextYear01d
+	@prod_prepareForNextYear01d @noTab
     Examples: 
-	    | index | FID     | planType | memberType          |
-	    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
+	    | 09    | F437767 | ashah120  | Mnrqa002  |  PAULAROTH2       | PDP	     | COMBO_PDP_SHIP_PFNY |
+	    | 10    | F437767 | ashah120  | Mnrqa002  |  PAULAROTH2       | SHIP	 | COMBO_PDP_SHIP_PFNY |
 			
 
   #-------------------------------------------------
@@ -57,7 +57,7 @@ Feature: 1.21 Member Prepare For Next Year
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear02 @hasTab @regressionMember
+  @prod_prepareForNextYear02 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -76,23 +76,23 @@ Feature: 1.21 Member Prepare For Next Year
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
-	@prepareForNextYear02a @devRegression
+	@prod_prepareForNextYear02a
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 11    | F437767 | PDP	     | IND_PFNY   |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   |
-	    | 13    | F437767 | MA	     | IND_PFNY   |
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType |
+	    | 11    | F437767 | ashah120  | Mnrqa002  | nawal1215                 | PDP	     | IND_PFNY   |
+	    | 12    | F437767 | ashah120  | Mnrqa002  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   |
+	    | 13    | F437767 | ashah120  | Mnrqa002  | haradaty32                | MA	     | IND_PFNY   |
 
-	@prepareForNextYear02b
+	@prod_prepareForNextYear02b
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 14    | F437767 | PDP	     | GRP_PFNY   |
-	    | 15    | F437767 | MAPD	 | GRP_PFNY   |
-	    | 16    | F437767 | MA	     | GRP_PFNY   |
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType |
+	    | 14    | F437767 | ashah120  | Mnrqa002  | 7547MCGEE                 | PDP	     | GRP_PFNY   |
+	    | 15    | F437767 | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net | MAPD     | GRP_PFNY   |
+	    | 16    | F437767 | ashah120  | Mnrqa002  | 1GIRL4DEAN                | MA	     | GRP_PFNY   |
 
-	@prepareForNextYear02c
+	@prod_prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   |
-	    | 18    | F437767 | PCP	     | IND_PFNY   |
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType | 
+	    | 17    | F437767 | ashah120  | Mnrqa002  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   |
+	    | 18    | F437767 | ashah120  | Mnrqa002  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   |
 	    
