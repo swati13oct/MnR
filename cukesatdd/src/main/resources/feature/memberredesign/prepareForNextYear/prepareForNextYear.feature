@@ -6,6 +6,7 @@ Feature: 1.21 Member Prepare For Next Year
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
 	Then test setup stores AEM and timeline milestones info
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
@@ -52,6 +53,7 @@ Feature: 1.21 Member Prepare For Next Year
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
 	Then test setup stores AEM and timeline milestones info
       | AEM Show Tab StartDate | 06/01/2020     |
       | AEM Show Tab EndDate   | 01/02/2021     |
@@ -69,8 +71,8 @@ Feature: 1.21 Member Prepare For Next Year
     Examples: 
 	    | index | FID     | planType | memberType             | note expectTab if date in range and toggle ON  | 
 	    | 11    | F437767 | PDP	     | IND_PreNexYr           | TRUE                                           |
-	    | 12    | F437767 | MAPD	 | IND_PreNexYr           | TRUE                                           |
-	    | 13    | F437767 | MA	     | IND_PreNexYr           | TRUE                                           |
+#	    | 12    | F437767 | MAPD	 | IND_PreNexYr           | TRUE                                           |
+#	    | 13    | F437767 | MA	     | IND_PreNexYr           | TRUE                                           |
 
 	@prepareForNextYear02b @hasTab
     Examples: 
@@ -95,6 +97,7 @@ Feature: 1.21 Member Prepare For Next Year
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
 	Then test setup stores original system date for roll back later
 	Then test setup stores AEM and timeline milestones info
       | AEM Show Tab StartDate | 06/01/2020     |
@@ -111,6 +114,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -120,6 +124,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -129,6 +134,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -138,6 +144,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -147,6 +154,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -156,6 +164,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -165,6 +174,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
@@ -174,6 +184,7 @@ Feature: 1.21 Member Prepare For Next Year
 	When login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
+      | Speed Up    | true               |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
