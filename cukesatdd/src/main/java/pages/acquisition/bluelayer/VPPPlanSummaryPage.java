@@ -2573,17 +2573,18 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     	System.out.println("Plan Selector Tool Section is present");    
   }
   
-  public void validatePlanSelectorPageInRightRail() {
+  public void validatePlanSelectorPageInRightRail() throws Exception {
 	  validateNew(StartPlanSelector);
 	  StartPlanSelector.click();
 	  CommonUtility.checkPageIsReadyNew(driver);
-	  if (driver.getCurrentUrl().contains("medicare-plans")) {
-		    WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+	  if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
 			validateNew(PlanSelector);
           System.out.println("Plan Selector Tool Page is displayed");
           Assert.assertTrue(true);
           driver.navigate().back();
+          Thread.sleep(10000);
           CommonUtility.checkPageIsReadyNew(driver);
           if(driver.getCurrentUrl().contains("plan-summary")) {
        	   System.out.println("Back on VPP Plan Summary Page");
