@@ -84,6 +84,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		String language = inputAttributesMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+				getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE,language);
 		pharmacySearchPage.searchesPharmacy(language);
 	}
 
@@ -209,7 +210,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String inputZip=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
-		pharmacySearchPage = pharmacySearchPage.validateErrorMessages(inputZip);
+		String language=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.LANGUAGE);
+		pharmacySearchPage = pharmacySearchPage.validateErrorMessages(inputZip,language);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 
