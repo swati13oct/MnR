@@ -107,10 +107,12 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	public ZipCodePlanYearCapturePage validateZipCodeErrorMessage() {
 		//String[] zip = zipcode.split(",");
 		//for(String code: zip) {
-			//validateNew(zipCodeTxtbox);
+			validateNew(zipCodeTxtbox);
 			//sendkeys(zipCodeTxtbox, zipcode);
-			//validateNew(continueBtn);
-			countyDropdown.click();
+		    validateNew(continueBtn);
+		    
+		    continueBtn.click();
+			//countyDropdown.click();
 			CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
 			if(validateNew(zipCodeErrorMsg)) {
 				System.out.println("Error message is Displaying");
