@@ -813,8 +813,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
-
-		getLnkBackToAllPlans().click();
+		validateNew(getLnkBackToAllPlans());
+		jsClickNew(getLnkBackToAllPlans());
+		//getLnkBackToAllPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);

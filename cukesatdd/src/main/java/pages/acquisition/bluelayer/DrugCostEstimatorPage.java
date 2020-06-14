@@ -1988,7 +1988,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
 		scrollToView(btnViewCost);
-		getBtnViewCost().click();
+		jsClickNew(getBtnViewCost());
+		//getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}
 	
