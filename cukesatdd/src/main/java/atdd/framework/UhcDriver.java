@@ -3,10 +3,13 @@
  */
 package atdd.framework;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -45,6 +48,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.regex.Pattern;
@@ -468,11 +472,22 @@ try {
 	 * 
 	 * @param url
 	 */
-	public void startNew(String url) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get(url);
+	public void startNewPRE(String url, String browser) {
+		System.out.println("Browser Name: "+browser);
+		if(browser.equals("safari")) 
+			driver.get(url);
+		else {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(url);			
+			}
 	}
+	
+	public void startNew(String url) {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(url);
+			}
 
 	/***
 	 * the method waits for upto 30 sec till element gets visible before
@@ -837,26 +852,43 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will perform vertical swipe on mobile screen for given %
 	 */
-	public void mobileswipe(String percentage,boolean swipeup) {
+	public boolean mobileswipe(String percentage,boolean swipeup) {
+		boolean swipeSuccess = true;
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
-	    //Starting y location set to 90% of the height (near bottom)
-	    int starty = (int) (size.height * 0.90);
+	    //Starting y location set to 85% - 90% of the height (near bottom)
+		Random rand = new Random();
+		double start=0.85d,end=0.90d;
+		double val = start+(end-start)*rand.nextDouble();
+		//System.out.println(val);
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		String randomPercentage = numberFormat.format(val);
+		//System.out.println("randomPercentage Swipe - "+randomPercentage);
+	    int starty = (int) (size.height * Double.parseDouble(randomPercentage));
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
 	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
 	    if(!swipeup)
-	    	endy = endy+(int) (size.height * 0.2); //To avoid address bar position
+	    	endy = endy+(int) (size.height * 0.2); 
+	    //Above line is to avoid address bar position while swiping top to bottom.
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
 	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
 		threadsleep(500);
+		try {
 		if(swipeup)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
+			mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
-			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
+			mact.press(PointOption.point(startx, endy)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(startx, starty)).release().perform();
+		}
+		catch(Exception e) {
+			//e.printStackTrace();
+			System.out.println("-------------- Exception occurred while Swiping --------------------");
+			swipeSuccess = false;
+		}
 		threadsleep(500);
+		return swipeSuccess;
 	}
 
 	public void mobileswipe(String percentage, int count,boolean swipeup) {
@@ -969,10 +1001,15 @@ try {
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();
 		System.out.println("curHandle - "+curHandle);
+		try {
 		System.out.println(((IOSDriver) driver).getContextHandles());
 		((IOSDriver) driver).context("NATIVE_APP");
 		((IOSDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
 		threadsleep(500);
+		}
+		catch(Exception e){
+			System.out.println("Unable to Hide the IOS Keypad");
+		}
 		((IOSDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
 	}
@@ -1032,23 +1069,47 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will perform horizontal swipe on mobile screen
 	 */
-	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
+	public boolean mobileswipeHorizantal(String percentage, boolean swiperight) {
+		boolean swipeSuccess = true;
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
-		//Starting x location set to % of the width (near left end)
-	    percentage = "0.".concat(percentage.replace("%", ""));
-	    int startx = (int) (size.width * Float.valueOf(1-Float.valueOf(percentage)));
-		//Ending x location set to 90% of the width (near right end)
-	    int endx = (int) (size.width * 0.90);
-	    //Y position set to 30% of height Vertically
-	    int starty = (int) (size.height * 0.3);
-	    System.out.println(size+" "+startx+" "+endx+" "+starty);
+		// Starting x location set to % of the width (near left end)
+		percentage = "0.".concat(percentage.replace("%", ""));
+		//System.out.println("percentage : "+percentage);
+		int startx = (int) (size.width * Float.valueOf(1 - Float.valueOf(percentage)));
+		// Ending x location set to 90% - 95% of the width (near right end)
+		Random rand = new Random();
+		double start=0.90d,end=0.95d;
+		double val = start+(end-start)*rand.nextDouble();
+		//System.out.println(val);
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		String randomPercentage = numberFormat.format(val);
+		//System.out.println("randomPercentage Swipe - "+randomPercentage);
+		int endx = (int) (size.width * Double.parseDouble(randomPercentage));
+		// Y position set to 50% of height Vertically
+		int starty = (int) (size.height/2);
+		//System.out.println(size + " " + startx + " " + endx + " " + starty);
 		threadsleep(500);
-		if(swiperight)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
-		else
-			mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+		try {
+			if (swiperight) {
+				//mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+				mact.press(PointOption.point(startx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+				.moveTo(PointOption.point(endx, starty)).waitAction().release().perform();
+			}
+			else {
+				//mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+				mact.press(PointOption.point(endx, starty)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+				.moveTo(PointOption.point(startx, starty)).release();
+				mobiledriver.performTouchAction(mact);
+			}
+		} catch (Exception e) {
+			//e.printStackTrace();
+			System.out.println("------------- Exception occurred while Horizantal Swiping -----------------------");
+			swipeSuccess = false;
+		}
+		threadsleep(500);
+		return swipeSuccess;
 	}
 
 	public void mobileswipeHorizantal(String percentage, int count,boolean swiperight) {

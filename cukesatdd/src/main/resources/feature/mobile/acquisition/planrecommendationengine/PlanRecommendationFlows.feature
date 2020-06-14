@@ -47,7 +47,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | County      | isCoverageOpt | DrugSelection | 1stRecommendation | 2ndRecommendation |
       |   35034 | YES           | Bibb County | PDP           | Yes           | PDP               | MA                |
 
-  @PRE @planrecommandonationmobile @PDPmobile @PDPdrugmobile @F358830
+  @PRE @planrecommandonationmobile @PDPmobile @PDPdrugmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate PDP flow with drug functions for PDP plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -73,7 +73,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | 1stRecommendation | 2ndRecommendation |
       |   10001 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | PDP               | MA                |
 
-  @PRE @planrecommandonationmobile @MAmobile @F358830
+  @PRE @planrecommandonationmobile @MAmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -107,7 +107,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10003 | NO            | New York       | MA            | None         | WithinUS     | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                | MA                | MS                |
       |   25813 | NO            | Raleigh County | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | MS                |                   |
 
-  @PRE @planrecommandonationmobile @MAPDmobile @MAPDdrugmobile @F358830
+  @PRE @planrecommandonationmobile @MAPDmobile @MAPDdrugmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD flow with drug functions for MA plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -215,7 +215,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
       |   55001 | NO            | Washington | MAPD          | Nursing      | Regular      | AcceptsMedicare  |             |               | Yes           | Yes,No,No,Yes                 | Higher               | SNP               | MS                |
 
-  @PRE @planrecommandonationmobile @DKmobile @DKdrugmobile @F358830
+  @PRE @planrecommandonationmobile @DKmobile @DKdrugmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont Know flow with drug and DSNP functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile

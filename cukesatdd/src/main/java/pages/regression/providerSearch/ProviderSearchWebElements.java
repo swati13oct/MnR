@@ -179,7 +179,7 @@ public class ProviderSearchWebElements  extends UhcDriver {
 	@FindBy(xpath="//h1//span[contains(text(),'Health')]")
 	protected WebElement hwPgHeader;
 
-	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
+	@FindBy(xpath="//h1")
 	protected WebElement pnpPgHeader;
 
 	@FindBy(xpath="//h1[contains(text(),'Payments')]")

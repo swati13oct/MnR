@@ -17,6 +17,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,12 +26,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBaseHelper  {
 

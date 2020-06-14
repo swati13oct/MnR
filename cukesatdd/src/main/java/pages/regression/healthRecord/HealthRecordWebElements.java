@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 public class HealthRecordWebElements  extends UhcDriver {
@@ -102,6 +103,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
+
+	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
+	protected WebElement heathRecordPgHeaderText;
 
 	//--------------------------
 	@FindBy(xpath="//p[contains(@class,'siteleaving')]")

@@ -1,20 +1,19 @@
 package acceptancetests.memberredesign.groupretiree;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
-import pages.acquisition.uhcretiree.GroupHomePage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.uhcretiree.GroupHomePage;
+import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 
 public class GroupRetireeCustomAndNonCustomStepDefinition {
 	

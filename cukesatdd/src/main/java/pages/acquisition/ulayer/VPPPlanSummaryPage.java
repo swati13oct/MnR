@@ -23,6 +23,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Strings;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -76,7 +78,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
 	private WebElement msPlansNumber;
 
-	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
+	//@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
+	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed ng-scope']")
 	private WebElement msPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
@@ -131,10 +134,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	private WebElement snpPlansCount;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement viewPlans;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
@@ -430,7 +433,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 		private WebElement cancelButtonPopUp;
 
 		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
@@ -627,7 +630,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 		private WebElement findPlansButton;
 		
-		@FindBy(css = "div#CSRLoginAlert>span")
+		@FindBy(css = "div#CSRLoginAlert>div")
 		private WebElement agentModeBanner;
 		
 		@FindBy(css = "div#currPlansBanner>div>a")
@@ -863,6 +866,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 
+	}
+	
+	public void verifyproviderName(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
+		ProviderSearchLink.click();
+		WebElement ProviderName = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
+		String mproviderName=ProviderName.getText().trim();
+		Assert.assertEquals(mproviderName,MRConstants.PROV_NAME);
+		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
 
@@ -2277,18 +2292,19 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Plan Selector Tool Section is present");    
 	}
 
-	public void validatePlanSelectorPageInRightRail() {
+	public void validatePlanSelectorPageInRightRail() throws Exception  {
 		validateNew(StartPlanSelector);
 		StartPlanSelector.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("medicare-plans")) {
-			WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
 			validateNew(PlanSelector);
 			System.out.println("Plan Selector Tool Page is displayed");
 			Assert.assertTrue(true);
 			driver.navigate().back();
 			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(10000);
 			if(driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");
 				Assert.assertTrue(true);                    	  
@@ -3382,6 +3398,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement comparePgnHeader;
 
 	private ArrayList<String> stringList;
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3553,7 +3570,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return providerNames;
 		}
 		//
-		public void setStringList(ArrayList<String> stringList) {
+/*		public void setStringList(ArrayList<String> stringList) {
 			
 		    this.stringList = stringList;
 
@@ -3562,18 +3579,33 @@ for (int i = 0; i < initialCount + 1; i++) {
 		public ArrayList<String> getStringList() {
 		    return stringList;
 
+		}*/
+		
+		public void setMap(Map<String, ArrayList<String>> dataMap) {
+			
+		    this.dataMap = dataMap;
+
 		}
 		
+		public  Map<String, ArrayList<String>> getMap(){
+		    return dataMap;
+
+		}
+
 	
 		/**
 		 * Validate the Agent Mode Banners and Enrolled Plan overlay
 		 * @param planName
 		 */
-		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName) {
+		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
 			//validatePlanSummary();
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
-			Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+			
+			if(Strings.isNullOrEmpty(enrolledPlanName))
+				System.out.println("#########Empty Profile#########");
+			else
+				Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
@@ -3630,9 +3662,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * Validate the Agent Mode Banners for Non Member
 		 * @param planName
 		 */
-		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers) {
+		public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers,String fname, String lname) {
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
+			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 			
 			if(!providers.equalsIgnoreCase("no")) {
 				//Validate Providers
@@ -3819,4 +3851,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 	}
+
+
+	public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+		
+	}
+
 }

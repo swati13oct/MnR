@@ -22,8 +22,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
 
 
 
@@ -53,7 +51,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href, 'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')][1]")
 	public WebElement AARPSearchLinkfromGoogle;
 	
-	@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
+	//@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
+	@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")	
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
@@ -71,7 +70,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'search-button')]")
 	public WebElement YahooSearchBttn;
 
-	@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
+	//@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")
 	public WebElement YahooSearchResult;
 
 	@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")

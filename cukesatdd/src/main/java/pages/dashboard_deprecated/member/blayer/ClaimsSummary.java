@@ -1,7 +1,5 @@
 package pages.dashboard_deprecated.member.blayer;
 
-import junit.framework.Assert;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 public class ClaimsSummary extends UhcDriver{
 
