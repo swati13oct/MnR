@@ -1627,6 +1627,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		NextYearRadio.click();
 		System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
+
 		SelectYearGoBtn.click();*/
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
@@ -2929,7 +2930,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
-		MaleGender.click();
+		jsClickNew(MaleGender);
 		Thread.sleep(2000);
 		part_A_monthDrpDwn.click();
 		Thread.sleep(2000);
@@ -2949,7 +2950,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
-		startDrpDwn.click();
+		startDrpDwn.click();	
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
@@ -2957,6 +2958,119 @@ for (int i = 0; i < initialCount + 1; i++) {
 		ViewPlanMedSupPage.click();
 	}
 	
+	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth){
+		
+		validateNew(DOB,30);
+		System.out.println("MedSup page form is displayed");
+		jsClickNew(DOB);
+		DOB.sendKeys(DateOfBirth);
+		System.out.println("Date of birth is entered");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(MaleGender);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		part_A_monthDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Part_A_monthDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		System.out.println("Effective date- month value selected");
+		part_A_yearDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		Part_A_yearDrpDwnOption.click();
+		System.out.println("Effective date- year value selected");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		part_B_monthDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Part_B_monthDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		part_B_yearDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		Part_B_yearDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		startDrpDwn.click();	
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		startDrpDwnOption.click();
+		System.out.println("Plan to start date selected");
+
+		validateNew(DOB,30);
+		Map<String, String> EnteredData = new HashMap<String, String>();
+		String DOBEntered = DOB.getAttribute("value");
+		System.out.println("Enetered DOB"+DOBEntered);
+		EnteredData.put("DOB",DOBEntered);
+		String part_A_Month_Entered = part_A_monthDrpDwn.getAttribute("value");
+		EnteredData.put("part_A_Month_Entered",part_A_Month_Entered);
+		String part_A_Year_Entered = part_A_yearDrpDwn.getAttribute("value");
+		EnteredData.put("part_A_Year_Entered",part_A_Year_Entered);
+		String part_B_Month_Entered = part_B_monthDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Month_Entered",part_B_Month_Entered);
+		String part_B_Year_Entered = part_B_yearDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Year_Entered",part_B_Year_Entered);
+		String startDateEntered = startDrpDwn.getAttribute("value");
+		EnteredData.put("startDateEntered",startDateEntered);
+		System.out.println("Enetered Info"+EnteredData.toString());
+		System.out.println("Expected info"+EnteredData.toString());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ViewPlanMedSupPage.click();
+		return EnteredData;
+		
+	}
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		
 		
