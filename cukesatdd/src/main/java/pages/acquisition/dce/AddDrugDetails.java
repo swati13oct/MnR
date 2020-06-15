@@ -18,7 +18,8 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 public class AddDrugDetails extends UhcDriver {
-
+ 
+	
 	private PageData adddrugdetails;
 
 	public JSONObject adddrugdetailsJson;
@@ -103,7 +104,7 @@ public class AddDrugDetails extends UhcDriver {
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
 		waitforElement(continueButton);
 		continueButton.click();
-		//continueButton.click();
+		//continueButtons.click();
 		Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
 		}

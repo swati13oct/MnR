@@ -303,6 +303,9 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
+	
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,' Medicare Advantage Plan')]") 
+	protected WebElement comboTab_MA;
 
 
 	public FooterPage (WebDriver driver) {
@@ -825,10 +828,15 @@ public class FooterPage extends UhcDriver {
 					footerValidate(comboTab_PDP));
 			targetTab=comboTab_PDP;
 		} else if (planType.equalsIgnoreCase("SSUP")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", 
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SSUP", 
 					footerValidate(comboTab_SSUP));
 			targetTab=comboTab_SSUP;
-		} else {
+		} 
+		else if (planType.equalsIgnoreCase("MA")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", 
+					footerValidate(comboTab_MA));
+			targetTab=comboTab_MA;
+		}else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover "
 					+ "planType '"+planType+"' for combo testing", false);
 		}

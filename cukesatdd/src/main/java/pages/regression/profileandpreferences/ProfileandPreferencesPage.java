@@ -406,7 +406,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
 	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")
+	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a |//*[@id='communicationAddress']/div[2]/a")
 	private WebElement editPreferencesLink;
 
 
@@ -422,7 +422,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
-	@FindBy(xpath = "//h4[@class='margin-small match-height atdd-profile-communicationpreference']")
+	@FindBy(xpath = "//h2[@class='margin-small match-height atdd-profile-communicationpreference'] |//h4[@class='margin-small match-height atdd-profile-communicationpreference']")
 	private WebElement communicationPreferences;
 
 	@FindBy(xpath = "//a[@class='link link--icon-left link--icon-circled atdd-page-header atdd-banklink-prefernce']")
