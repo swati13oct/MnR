@@ -1,5 +1,5 @@
 @fastandfurious @IS_DecisionGuide_AARP
-Feature: Med Supp Plans (IS) Decision Guide flow in AARP site
+Feature: 1.14 Med Supp Plans (IS) Decision Guide flow in AARP site
 
   @IS_DecisionGuide_AARP
   Scenario Outline: UID: <UID> - To Test IS Decision Guide E2E on AARP site
