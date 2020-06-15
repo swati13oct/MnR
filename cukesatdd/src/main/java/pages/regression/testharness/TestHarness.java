@@ -378,9 +378,7 @@ public class TestHarness extends UhcDriver {
 			if (driver.getCurrentUrl().contains("testharness")) {
 				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 				TestHarness.checkForIPerceptionModel(driver);
-				TestHarness.checkForIPerceptionModel(driver);
 				TestHarnesspaymentsLink.click();
-				TestHarness.checkForIPerceptionModel(driver);
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
