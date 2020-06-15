@@ -229,10 +229,10 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
-	@FindBy(xpath="//a[contains(text(),'learn more')]")
+	@FindBy(xpath="//a[contains(@href,'mail-benefit-pdd.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_pdp;
 
-	@FindBy(xpath="//a[contains(text(),'learn more')]")
+	@FindBy(xpath="//a[contains(@href,'mail-benefit-mapd.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_mapd;
 
 	@FindBy(xpath="//a[contains(@ng-click,'backtoPrevious')]")
