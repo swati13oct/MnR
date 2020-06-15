@@ -101,7 +101,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
 	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//button[text()='Cancel']//following-sibling::button")

@@ -159,6 +159,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
+			Thread.sleep(20000);
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
