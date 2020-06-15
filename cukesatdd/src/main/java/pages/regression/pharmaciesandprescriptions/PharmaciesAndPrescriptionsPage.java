@@ -846,15 +846,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateRequestReceived() {
 
-		List<WebElement> requestReceived = RequestReceived;
+
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
 
-				pnpValidate(requestReceived.get(0)));
+				isRequestReceived());
 	}
 
 	public void validateOptumRx() {
-		List<WebElement> optumRx = OptumRx;
-		Assert.assertTrue("PROBLEM - unable to locate Request received elements", optumRx.size() > 0);
+
+		Assert.assertTrue("PROBLEM - unable to locate Request received elements",isOptumRX() );
 	}
 
 
@@ -877,6 +877,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F392596 Meidine Cabinet// when user click on learn more button on current
 	// medication on PNP page.
+
+
 	public void validateDrugInfopage() {
 		PharmaciesAndPrescriptionsBase pnpBase = new PharmaciesAndPrescriptionsBase(driver);
 		String drugName = pnpBase.getDrugNameLearnMore();
@@ -902,7 +904,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
-				pnpValidate(oneFourthHarveyBall));
+				isOneFourthHarveyBall() );
 	}
 
 	public void validateRefillMedications() {
@@ -911,7 +913,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateRenewMedications() {
-		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element", pnpValidate(RenewMedications));
+		Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element", pnpValidate(RenewMedications));
 	}
 
 	public List<String> getDrugNameListValue() {

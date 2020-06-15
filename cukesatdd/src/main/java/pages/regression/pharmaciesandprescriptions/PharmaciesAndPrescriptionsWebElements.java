@@ -352,7 +352,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Track Status')]")
 	protected List<WebElement> trackStatusButton;
 
-	@FindBy(xpath = "//span[contains(text(),'Delivered')]")
+	@FindBy(xpath = "//span[contains(text(),'delivered')]")
 	protected List<WebElement> delivered;
 
 	@FindBy(xpath = "//span[contains(text(),'VIEW ORDER')]")
@@ -371,16 +371,21 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected List<WebElement> RequestReceived;
 
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
-	protected List<WebElement> OptumRx;
+	protected List<WebElement> optumRx;
 
 	@FindBy(xpath = "//span[contains(text(),'order processing')]")
 	protected List<WebElement> Processing;
 
+	@FindBy(xpath = "//span[contains(text(),'request received')]")
+	protected List<WebElement> requestReceived;
+
+
+
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected WebElement isHalfHarveyBall;
 
-	@FindBy(xpath = "")
-	protected WebElement oneFourthHarveyBall;
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-25']")
+	protected List<WebElement> oneFourthHarveyBall;
 
 	@FindBy(xpath = "//span[contains(text(),'Refill')]")
 	protected WebElement RefillMedications;
@@ -712,6 +717,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean isOptumRX() {
+		if (optumRx.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isRequestReceived() {
+		if (requestReceived.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean isHalfHarveyBall() {
 		if (halfHarveyBall.size() >=0) {
 			return true;
@@ -720,6 +741,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean isOneFourthHarveyBall() {
+		if (oneFourthHarveyBall.size() >=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public boolean associatedCallToAction() {
 		if (AssociatedCallToAction.get(AssociatedCallToAction.size() - 1).isDisplayed()) {
 			return true;
