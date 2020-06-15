@@ -422,7 +422,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
-	@FindBy(xpath = "//h2[@class='margin-small match-height atdd-profile-communicationpreference']")
+	@FindBy(xpath = "//h2[@class='margin-small match-height atdd-profile-communicationpreference'] |//h4[@class='margin-small match-height atdd-profile-communicationpreference']")
 	private WebElement communicationPreferences;
 
 	@FindBy(xpath = "//a[@class='link link--icon-left link--icon-circled atdd-page-header atdd-banklink-prefernce']")
