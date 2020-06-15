@@ -1,5 +1,5 @@
 @fastandfurious @IS_DecisionGuide_UHC
-Feature: Med Supp Plans (IS) Decision Guide flow in UHC site
+Feature: 2.14 Med Supp Plans (IS) Decision Guide flow in UHC site
 
 @IS_DecisionGuide_UHC
   Scenario Outline: UID: <UID> - To Test IS Decision Guide E2E on UHC site
