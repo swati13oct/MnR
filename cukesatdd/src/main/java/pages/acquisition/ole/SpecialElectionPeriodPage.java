@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -138,6 +139,22 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
 	private WebElement pedHeader;
 	
+
+	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
+	private WebElement pedHeader1;
+		
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]")
+	private WebElement ChangingCurrentMedicareRadio;
+	
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]")
+	private WebElement ChangingNewMedicareRadio;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]/parent::span/label")
+	private WebElement CurrentMedicare;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
+	private WebElement NewMedicare;
 	
 	public SpecialElectionPeriodPage(WebDriver driver) {
 		super(driver);
@@ -263,13 +280,32 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 }
 
 public boolean validate_SEPoptions_for_planType(String planType) {
+	
 	boolean Validation_Flag = true;
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+	
 	System.out.println("PlanType : "+planType);
 	try {
 		Thread.sleep(3000);
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
+	//validateNew(ChangingCurrentMedicareRadio);
+	//jsClickNew(ChangingCurrentMedicareRadio);
+	//ChangingCurrentMedicareRadio.click();
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
 				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(Disaster) /*&& validate(DualSEP)*/ /*&& validate(ChangeDual)*/
@@ -409,5 +445,27 @@ public ProposedEffectiveDatePage navigate_to_Proposed_Effective_Date_Page() {
 	}
 	return null;
 }
-
+public boolean validate_SEP_RadioButton_options() {
+		
+		boolean Validation_Flag = true;
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		Validation_Flag  = CurrentMedicare.getText().trim().equalsIgnoreCase("I'm changing my current Medicare plan");
+		Validation_Flag &= NewMedicare.getText().trim().equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
+      //System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
+      jsClickNew(ChangingNewMedicareRadio);
+	
+      	CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
+		//validateNew(NextBtn);
+		//jsClickNew(NextBtn);
+		
+		return Validation_Flag;
+}	
+	
 }

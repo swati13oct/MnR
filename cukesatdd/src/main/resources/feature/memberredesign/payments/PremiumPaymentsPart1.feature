@@ -20,7 +20,25 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
       | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2024 |
       | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2024 |
-
+      
+ #Test Case 00 
+ ##Below test case is for updating stop date of recurring payment(referenceNumber is of immediate last successful recurring transaction)
+  @regressionMember
+  Scenario Outline: Test Case - Update stop date of recurring payment
+  Given Update stop date of recurring payment
+       | referenceNumber  | <referenceNumber> |
+       | householdID   | <householdID> |
+    Examples: 
+      | TestCase | householdID  | referenceNumber|
+      | TC2-P1   | 30019596303  |  112255071     |
+      | TC2-P1   | 480005321748 | 1616219       |
+      | TC3-P1   | 3777000      |  526688       |
+      | TC3-P1   | 480005321748 |  1616219      |
+      |  C4-P1   | 110029408511 | 128692048     |
+	  |	TC4-P2   | 960035191996 | 136754782     |
+	  |	TC5-P1   | 920035201792 |  137394841    |
+	  |	TC5-P2   | 940021790794 |  137221436    |
+      
   #Test Case 01
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
@@ -66,10 +84,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
     And delete confirmation number GPS for recurring payment
       | Payment Type | <paymentType> |
-      | householdID |<householdID>|
 
     Examples: 
-      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | | householdID |<householdID>|
+      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
       | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 30019596303 |
       | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |   480005321748 |
 
@@ -91,9 +108,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
     And delete confirmation number GPS for recurring payment
       | Payment Type | <paymentType> |
-		| householdID |<householdID>|
+		
     Examples: 
-      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType | | householdID |
+      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |  householdID |
       | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 3777000 |
       | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  480005321748 |
 
@@ -118,7 +135,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
-      | householdID |<householdID>|
 
     Examples: 
       | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
@@ -143,7 +159,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
-   | householdID | <householdID>|
     Examples: 
       | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear | paymentType | householdID |
       | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 920035201792 |
