@@ -105,11 +105,16 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() {
-		addPlans.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("zipcode"))	{
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver,page);
+		try {
+			addPlans.click();
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if(driver.getCurrentUrl().contains("zipcode"))	{
+				String page = "health-plans";
+				return new AcquisitionHomePage(driver,page);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
