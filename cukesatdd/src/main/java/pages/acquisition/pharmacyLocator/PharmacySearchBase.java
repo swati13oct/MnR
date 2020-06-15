@@ -52,9 +52,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String initialZipVal=zipcodeField.getAttribute("value");
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		sendkeysNew(zipcodeField, zipcode);
-		validateNew(searchbtn);
-		jsClickNew(searchbtn);
-		System.out.println("############ clicked on Search ########");
+		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 		//searchbtn.click();
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
