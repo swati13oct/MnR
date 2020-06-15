@@ -2234,7 +2234,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the error is displayed on review payment page for second payment$")
 	public void error_displayed_second_payment() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
