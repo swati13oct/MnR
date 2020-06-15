@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;import cucumber.api.DataTable;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimsSummaryPage;

@@ -1,33 +1,21 @@
 package acceptancetests.acquisition.tfn;
 
-/**
- * @author sdwaraka
- */
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.GlobalWebElements;
-import pages.acquisition.ulayer.UlayerTFNPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.tfn.CampaignTFNPage;
 
 public class CampaignTFNStepDefinitionUHC {
 

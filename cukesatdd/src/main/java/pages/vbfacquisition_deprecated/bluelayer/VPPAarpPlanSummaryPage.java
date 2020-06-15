@@ -12,6 +12,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.UhcDriver;
 import pages.vbfacquisition_deprecated.ulayer.GetStartedPage;
 import pages.vbfacquisition_deprecated.ulayer.IntroductionInformationPage;
 import pages.vbfacquisition_deprecated.ulayer.ManageDrugPage;
@@ -20,11 +25,6 @@ import pages.vbfacquisition_deprecated.ulayer.PlanDetailsPage;
 import pages.vbfacquisition_deprecated.ulayer.PlanInformationPage;
 import pages.vbfacquisition_deprecated.ulayer.ProviderSearchPage;
 import pages.vbfacquisition_deprecated.ulayer.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 
 public class VPPAarpPlanSummaryPage extends UhcDriver {
 

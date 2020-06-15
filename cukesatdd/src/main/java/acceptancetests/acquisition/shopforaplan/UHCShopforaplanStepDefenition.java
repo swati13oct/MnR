@@ -3,6 +3,7 @@ package acceptancetests.acquisition.shopforaplan;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,8 +19,6 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.EnrollmentBasicsPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.ShopforaplanUHClayer;
-import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import pages.acquisition.ulayer.RequestMailedInformation;
 
 
 public class UHCShopforaplanStepDefenition {

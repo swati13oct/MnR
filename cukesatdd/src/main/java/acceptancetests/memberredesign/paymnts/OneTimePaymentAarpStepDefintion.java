@@ -2234,7 +2234,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the error is displayed on review payment page for second payment$")
 	public void error_displayed_second_payment() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
@@ -2429,6 +2429,23 @@ public class OneTimePaymentAarpStepDefintion {
 			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
 			System.out.println("User is on recurring confirmation page for CC");
 		}
+	}
+	
+	@Given("^Update stop date of recurring payment$")
+	public void updateStopDateInGPSdb(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Update stop date of recurring payment*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+	
+		
+		ConfirmOneTimePaymentPage.updateStopDateInGPSdb(paymentTypeMap);
+
+		
 	}
 	
 }
