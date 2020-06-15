@@ -111,10 +111,15 @@ public class VppPlanValidationStepDefinition {
 			try {
 				 Iterator<Row> rowIterator = sheet.iterator();
 				 AepPlanDetailsPage planDetailsPage = null;
+				 String currentCellValue = "";
+				 String currentColName = "";
+				 
+				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
-					 	int cellIndex = 0;
+					 	int cellIndex = 0;System.out.println("INSIDE Row");
+					 	
 		                Row row = sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
 		                Row resultsRow = ResultsSheet.createRow(rowIndex);
@@ -122,29 +127,50 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
-		                    Cell cell = cellIterator.next();
+		                	 boolean valueMatches = true;
+				             Cell cell = cellIterator.next();
+				             currentCellValue = cell.getStringCellValue();
+			                 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+			               //  System.out.println("INSIDE Cell");
+			                 Cell newCell = resultsRow.createCell(cellIndex);
+							 newCell.setCellValue(cell.getStringCellValue());
+							 
+							 if(rowIndex!=0) { //skip the header row
+								 if(cellIndex==0) { 
+								  
+								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+								  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+								 }
+								 if(!(currentCellValue.contains("NA")||currentCellValue.contains("N/A")||currentCellValue.equalsIgnoreCase("No coverage")))
+									  valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+								 else
+									 System.out.println("NA value for "+currentColName+ " for value "+ currentCellValue);
+								 //else here we can add logic to check that the columnname value is not there in the hashmap for negative testing
+								 
+								 	
+								 if(!(currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("plan id")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
+								 		if(!valueMatches) {
+					                    //	System.out.println("value didn't match - setting color to Red");
+					                    	CellStyle style = ResultWorkbook.createCellStyle();
+					            			style.setFillForegroundColor(IndexedColors.RED.getIndex());
+					            		    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					            		    newCell.setCellStyle(style);
+								 		}else {
+					                    	//System.out.println("value matched - setting color to Green");
+					                    	CellStyle style = ResultWorkbook.createCellStyle();
+					            			style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+					            		    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					            		    newCell.setCellStyle(style);
+									  }
+								 }
+							 }
+	
+							  
 		                    
-		                    //starting from row 2 and cell 1, gets the deeplink value from the cell and navigates to that url
-		                    if(rowIndex !=0 && cellIndex==0) {
-		                    	String deeplinkUrl = cell.getStringCellValue();
-		                    	planDetailsPage = new AepPlanDetailsPage(wd,siteType,deeplinkUrl);    
-		                    }
-		                    
-		                    if(sheet.getRow(0).getCell(cellIndex).getStringCellValue().equalsIgnoreCase("Monthly Premium")) {
-		                    	
-		                    }
-		                    
-		                    Cell newCell = resultsRow.createCell(cellIndex);
-		                    newCell.setCellValue(cell.getStringCellValue());
-		                    if(newCell.getStringCellValue().equalsIgnoreCase("$46")) {
-		                    	System.out.println("inside cell");
-		                    	CellStyle style = ResultWorkbook.createCellStyle();
-		            			style.setFillForegroundColor(IndexedColors.RED.getIndex());
-		            		    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		            		    newCell.setCellStyle(style);
-		                    }
-		                    cellIndex++;
-		                }
+							 
+							 
+							  cellIndex++;
+		                 }
 		            }
 			
 					File OutputFile = new File(OutputFilePath);

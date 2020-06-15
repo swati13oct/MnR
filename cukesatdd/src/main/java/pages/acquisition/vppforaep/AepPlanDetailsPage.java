@@ -4,6 +4,7 @@
 package pages.acquisition.vppforaep;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -50,6 +51,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 	private WebElement PremiumForPlan;
+	
+	@FindBy(xpath="//div[contains(@class,'plan-detail-tabs')]//a")
+	protected List<WebElement> listOfTabHeaders;
+	
+	@FindBy(xpath="//div[contains(@id,'detail') and contains(@class,'active')]//h3")
+	protected List<WebElement> listOfSectionHeaderForActiveTab;
 
 
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
@@ -299,6 +306,132 @@ public class AepPlanDetailsPage extends UhcDriver {
 			validation_Flag = false;
 		}
 		return validation_Flag;
+	}
+	
+	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
+		
+		for(String key : benefitsMap.keySet()) {
+			if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
+				if(benefitsMap.get(key).equalsIgnoreCase(benefitValue) || benefitsMap.get(key).contains(benefitValue)) {
+					//System.out.println("Values Matched : Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
+					return true;
+				}//else
+					//System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
+			}
+		}
+		
+		return false;
+	}
+	
+	public HashMap<String, String> collectInfoVppPlanDetailPg() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println("Proceed to collect the info on vpp detail page =====");
+
+		HashMap<String, String> result=new HashMap<String, String>();
+
+		String key="Total Tabs";
+		String value = "";
+		result.put(key, String.valueOf(listOfTabHeaders.size()));
+	//	System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+				
+		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
+			listOfTabHeaders.get(tab).click();
+			CommonUtility.checkPageIsReady(driver);
+			int tabIndex=(tab+1);
+
+			//note: store section table
+			int numSectionTable=listOfSectionHeaderForActiveTab.size();
+			result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
+			
+			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
+			
+				String rowXpath="";
+				if(tab==0)
+					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr";
+				else
+					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
+
+				List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
+				int numRows=listOfRowsPerTable.size();
+
+				result.put("Total Rows For T"+tabIndex+"S"+sectionIndex,String.valueOf(numRows));
+
+				if (numRows==0) { //note: no table so check for box
+					
+					String boxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]";
+					List<WebElement> listOfBoxes=driver.findElements(By.xpath(boxXpath));
+					result.put("Total Boxs For T"+tabIndex+"S"+sectionIndex, String.valueOf(listOfBoxes.size()));
+					
+					for(int boxIndex=1; boxIndex<=listOfBoxes.size(); boxIndex++) { //note: loop through each box
+						String eachBoxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]["+boxIndex+"]";
+						key="rider box";
+						WebElement e=driver.findElement(By.xpath(eachBoxXpath));
+						value=e.getText();
+						result.put(key, value);
+						System.out.println("TEST - key="+key+" | value="+result.get(key));
+					}
+
+					//note: assume this is the optional service tab
+					//note: after going through all the box should be no more section, don't iterate the rest of the section counts
+					break;
+				} else {
+					
+					for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
+						String cellsPerRowXpath="";
+						
+						if(tab==0)
+							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+						else
+							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+
+						
+						List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
+						result.put("Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex,String.valueOf(listOfCellsPerRow.size()));
+						
+						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
+							String eachCellXpath = "";
+							
+							if(tab==0)
+								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+							else
+								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+
+							
+							WebElement e=driver.findElement(By.xpath(eachCellXpath));
+							
+							if(listOfCellsPerRow.size()==2) {
+								if(cellIndex==1) {
+									key=e.getAttribute("innerText");System.out.println("key :"+ key);
+								}else {
+								   value=e.getAttribute("innerText");System.out.println("value :"+ value);
+								}
+							}else {
+								
+								if(cellIndex==1)
+									key=e.getAttribute("innerText");
+								else {
+								   value= value+e.getAttribute("innerText");
+								   if(cellIndex==3)
+									   value = value+"/"+e.getAttribute("innerText");
+								}
+							
+							}
+							result.put(key, value);
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Finished collecting the info on vpp detail page =====");
+		
+		  for(String keyValue : result.keySet()) {
+		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+		  System.out.println(
+		  "_________________________________________________________________________________________________"
+		  ); }
+		 
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return result;
 	}
 	
 }
