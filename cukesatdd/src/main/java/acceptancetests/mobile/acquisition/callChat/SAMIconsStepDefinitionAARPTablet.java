@@ -15,7 +15,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 
 public class SAMIconsStepDefinitionAARPTablet {

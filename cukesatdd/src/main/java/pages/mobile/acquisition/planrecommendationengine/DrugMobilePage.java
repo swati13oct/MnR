@@ -646,4 +646,12 @@ public class DrugMobilePage extends UhcDriver {
 		clickDrugContinue();
 		mobileUtils.nextPageNameValidation(page.toUpperCase());
 	}
+	
+	public void verifyExisitngVPPDruglist() {
+		drugsInitiate("Yes");
+		ArrayList<String> existingDrugNames = ResultsMobilePage.vppDrugsResults;
+		getDrugsdetails();
+		ResultsMobilePage res = new ResultsMobilePage(driver);
+		res.containsname(existingDrugNames, addedDrugNames);
+	}
 }

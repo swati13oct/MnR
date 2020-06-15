@@ -23,14 +23,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.vbfacquisition_deprecated.ole.WelcomePage;
-import pages.vbfacquisition_deprecated.uhcretiree.Rallytool_Page;
-import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.vbfacquisition_deprecated.ole.WelcomePage;
+import pages.vbfacquisition_deprecated.uhcretiree.Rallytool_Page;
+import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
 
 /**
  * @author pagarwa5

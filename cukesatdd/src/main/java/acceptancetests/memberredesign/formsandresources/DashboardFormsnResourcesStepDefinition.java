@@ -1,11 +1,6 @@
 
 package acceptancetests.memberredesign.formsandresources;
 
-import gherkin.formatter.model.DataTableRow;
-
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -22,23 +17,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.regression.login.HSIDLoginPage;
-import pages.regression.memberauth.MemberAuthPage;
-import pages.regression.testharness.TestHarness;
-import pages.member_deprecated.redesign.TestHarnessPage;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.formsandresources.FormsAndResourcesPage;
-import pages.regression.testharness.TestHarness;
-import atdd.framework.*;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
+import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.memberauth.MemberAuthPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * @Functionality : Forms and resources page navigation from dashboard and

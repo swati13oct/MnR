@@ -7,7 +7,6 @@ import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -18,32 +17,27 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.benefitandcoverage.*;
-import pages.regression.formsandresources.*;
-import pages.regression.claims.*;
-import pages.regression.contactus.ContactUsPage;
-import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
-
-import pages.regression.healthandwellness.*;
-import pages.regression.myDocumentsPage.MyDocumentsPage;
-import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
-import pages.regression.pharmacylocator.*;
-import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
-import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
-import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.contactus.ContactUsPage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
 public class TestHarness extends UhcDriver {
@@ -148,7 +142,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")

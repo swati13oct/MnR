@@ -957,7 +957,7 @@ public class VppPlanSummaryStepDefinitionAARP {
   }
   
   @Then("^the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site$")
-  public void user_validate_planSelectorPage_inaarpSite(){
+  public void user_validate_planSelectorPage_inaarpSite() throws Exception{
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	  plansummaryPage.validatePlanSelectorPageInRightRail();

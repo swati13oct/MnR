@@ -7,9 +7,9 @@ import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.memberrdesignVBF.HealthAndWellness;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
-import pages.memberrdesignVBF.HealthAndWellness;
 
 public class MemberHealthnWellnessStepDefinition {
 

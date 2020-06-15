@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 
 /**

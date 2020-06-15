@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -962,7 +961,7 @@ public class VppPlanSummaryStepDefinitionUHC {
   }
   
   @Then("^the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site$")
-  public void user_validate_planSelectorPage_inaarpSite(){
+  public void user_validate_planSelectorPage_inaarpSite() throws Exception{
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	  plansummaryPage.validatePlanSelectorPageInRightRail();

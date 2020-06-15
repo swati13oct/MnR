@@ -1,7 +1,5 @@
 package acceptancetests.vbfacquisition_deprecated.acqseo;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,6 +22,7 @@ import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
+import gherkin.formatter.model.DataTableRow;
 
 /**
  *Functionality: Acquisition SEO for AARP

@@ -1,33 +1,8 @@
 package acceptancetests.vbfacquisition_deprecated.pharmacylocator;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.Deprecated_PharmacyResultPage;
-import pages.acquisition.ulayer.Deprecated_PharmacySearchPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  *Functionality:PharmacyLocator

@@ -4,19 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AboutUsPage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AgentsAndBrokersPage;
-import pages.acquisition.bluelayer.ContactUsUmsPage;
-import pages.acquisition.bluelayer.DisclaimersPage;
-import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
-import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.bluelayer.TermsOfUseUmsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -26,6 +17,14 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AboutUsPage;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.AgentsAndBrokersPage;
+import pages.acquisition.bluelayer.ContactUsUmsPage;
+import pages.acquisition.bluelayer.DisclaimersPage;
+import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
+import pages.acquisition.bluelayer.SiteMapUMSPage;
+import pages.acquisition.bluelayer.TermsOfUseUmsPage;
 
 /**
  * Functionality: Global Header Footer
@@ -390,5 +389,10 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-
+	@Then("^the user validates chat Icon on UHC site$")
+	public void the_user_validates_chat_Icon_UHC() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatIcon();
+	}
 }

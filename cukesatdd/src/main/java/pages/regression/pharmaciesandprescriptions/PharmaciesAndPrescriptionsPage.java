@@ -1,28 +1,16 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.util.CommonUtility;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.testharness.TestHarness;
 
 /**

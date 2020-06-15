@@ -16,12 +16,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.dashboard_deprecated.member.blayer.AddDrugDetails;
-import pages.dashboard_deprecated.member.blayer.AddNewDrugModal;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard_deprecated.member.blayer.AddDrugDetails;
+import pages.dashboard_deprecated.member.blayer.AddNewDrugModal;
 
 /**
  * Functionality: Covers all elements and methods for Drug cost estimator Page
