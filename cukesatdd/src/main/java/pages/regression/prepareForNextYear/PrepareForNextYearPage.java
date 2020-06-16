@@ -45,6 +45,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 	}
 	
 	public WebDriver navigateToBenefitsPage(String planType, String memberType, boolean expComboTab) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
 		} else 	if (noWaitValidate(shadowRootHeader)) {
