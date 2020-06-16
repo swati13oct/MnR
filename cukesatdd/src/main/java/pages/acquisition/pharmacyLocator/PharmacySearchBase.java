@@ -51,7 +51,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		sleepBySec(3);
 		String initialZipVal=zipcodeField.getAttribute("value");
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		sendkeysNew(zipcodeField, zipcode);
+		validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 		//searchbtn.click();
 		if (matcher.matches()) {
@@ -77,6 +77,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
 		}
 		return testNote;
+	}
+	
+	public void validateNoresultsZipcodeError(String zipcode) {
+		zipcodeField.clear();
+		sleepBySec(8);
+		
+		zipcodeField.sendKeys(zipcode);
+		//if(zipcode.length()!=5){
+		distanceOption_15miles.click();
+		//}
+		//searchbtn.click();
+		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		//Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**

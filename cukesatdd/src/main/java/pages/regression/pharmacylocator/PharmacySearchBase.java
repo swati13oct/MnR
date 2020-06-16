@@ -410,6 +410,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.waitForPageLoad(driver, zipcodeField, 60);
 		moveMouseToElement(inputInstruction);
+		zipcodeField.clear();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 		sendkeys(zipcodeField, zipcode);
 
 		Select select = new Select(distanceDropDownField);           
