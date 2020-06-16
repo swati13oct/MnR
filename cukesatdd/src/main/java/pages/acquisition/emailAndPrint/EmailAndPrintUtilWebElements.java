@@ -25,16 +25,16 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
 	protected WebElement firstSaveHeartOnActiveSummaryPlanPage;
 	
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
 	protected WebElement summary_maPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
 	protected WebElement summary_maEmailOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
 	protected WebElement summary_pdpPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
 	protected WebElement summary_pdpEmailOption;
 
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
