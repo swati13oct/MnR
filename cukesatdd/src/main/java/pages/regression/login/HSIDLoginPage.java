@@ -309,6 +309,7 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
+			goGreenSplashPageWorkaround();
 		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -671,6 +672,20 @@ public class HSIDLoginPage extends UhcDriver {
 				//e.printStackTrace();
 			}
 		} 
+	}
+	
+	public void goGreenSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+			System.out.println("User encounted gogreen-splash page, handle it...");
+			WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+			try {
+				System.out.println("'Go To Homepage' button showed up, click it");
+				goToHomepage.isDisplayed();
+				goToHomepage.click();
+			} catch (Exception e1) {
+				System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+			}
+		}
 	}
 	
 	public void emailAddressRequiredWorkaround(String username) {
