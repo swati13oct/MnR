@@ -687,6 +687,7 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 			}
 		}
+		checkModelPopup(driver, 1);
 	}
 	
 	public void emailAddressRequiredWorkaround(String username) {
