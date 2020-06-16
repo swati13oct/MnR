@@ -22,8 +22,8 @@ Feature: 1.21.2 Member Prepare For Next Year - PROD
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/01/2020     |
-      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
@@ -83,8 +83,8 @@ Feature: 1.21.2 Member Prepare For Next Year - PROD
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/01/2020     |
-      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |

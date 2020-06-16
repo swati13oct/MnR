@@ -16,8 +16,8 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 	Then test setup stores original system date for roll back later
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | true           |
-      | AEM Show Tab StartDate | 06/01/2020     |
-      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
@@ -85,15 +85,17 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
     #----- case - milestone 5 <= system date < AEM end date
-	Then test setup changes system date to after or equal milestone5 and before AEM end date
-	  | Test System Date | 01/02/2021 |
-	When login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
-      | Speed Up    | true               |
-    Then the user validates Prepare For Next Year tab display behavior on Benefits page
-	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+    #----- note: on page is to display from 9/1-12/31 and milestone 5 is 1/1 
+    #----- note: with AEM end date set to 12/31 will not run into this case normally
+	#Then test setup changes system date to after or equal milestone5 and before AEM end date
+	#  | Test System Date | 01/02/2021 |
+	#When login with following details logins in the member portal and validate elements
+    #  | Plan Type   | <planType>         |
+    #  | Member Type | <memberType>       |
+    #  | Speed Up    | true               |
+    #Then the user validates Prepare For Next Year tab display behavior on Benefits page
+	#Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	#Then the user validates Prepare For Next Year page content
     #----- case - AEM end date <= system date
 	Then test setup changes system date to after or equal AEM end date
 	  | Test System Date | 01/07/2021 |
