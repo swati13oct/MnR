@@ -677,12 +677,13 @@ public class HSIDLoginPage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("login/no-email.html")) {
 			System.out.println("User encounted no-email page, will enter email address to proceed");
 			try {
+				/* note: instead of entering email, click Go to Homepage directly
 				String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
-				WebElement newEmail=driver.findElement(By.xpath("//input[@ng-model='newEmail']")); 
+				WebElement newEmail=driver.findElement(By.xpath("//input[(@ng-model='newEmail') or (@ng-model='inputEmail')]")); 
 				newEmail.sendKeys(workAroundEmail);
-				WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
-				confirmEmail.sendKeys(workAroundEmail);
-				WebElement continueButton=driver.findElement(By.xpath("//button//span[contains(text(),'Continue')]")); 
+				//WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
+				//confirmEmail.sendKeys(workAroundEmail);
+				WebElement continueButton=driver.findElement(By.xpath("//button[contains(@ng-click,'continueNoEmail')]")); 
 				continueButton.click();
 
 				System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
@@ -691,7 +692,8 @@ public class HSIDLoginPage extends UhcDriver {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				WebElement goToHomepage=driver.findElement(By.xpath("//button[@ng-click='goToHomePage()']"));
+				*/
+				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
 					System.out.println("'Go To Homepage' button showed up, click it");
 					goToHomepage.isDisplayed();
