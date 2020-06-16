@@ -679,9 +679,10 @@ public class HSIDLoginPage extends UhcDriver {
 			System.out.println("User encounted gogreen-splash page, handle it...");
 			WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 			try {
-				System.out.println("'Go To Homepage' button showed up, click it");
-				goToHomepage.isDisplayed();
-				goToHomepage.click();
+				if (validate(goToHomepage,0)) {
+					System.out.println("'Go To Homepage' button showed up, click it");
+					goToHomepage.click();
+				}
 			} catch (Exception e1) {
 				System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 			}
