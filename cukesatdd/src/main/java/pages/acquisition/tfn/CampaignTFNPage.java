@@ -74,7 +74,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//h3//a[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")
 	public WebElement YahooSearchResult;
 
-	@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
+	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='sb_form_q']")
@@ -86,7 +87,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')]")
 	public WebElement AARPSearchLinkfromBing;
 
-	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
+	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
+	@FindBy(xpath = "//h2//a[contains(text(),'Medicare Advantage (Part C)')]")
 	public WebElement UHCSearchLinkfromBing;
 
 
@@ -466,7 +468,8 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement maPlansViewLink;
 
 	//@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed ng-scope']")
+	//@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed ng-scope']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[contains(@ng-click,'viewSnp')]//*[contains(@aria-label,'Medicare Special')]")
 	private WebElement snpPlansViewLink;
 
 	//@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
