@@ -195,7 +195,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		sendkeys(zipCode, zipcode);
 		waitforElementVisibilityInTime(countyInfo, 45);
 		jsClickNew(continueBtn);
-		validate(coverageTitle);
+		waitforElementVisibilityInTime(coverageTitle, 30);
 //		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 	
 	}
@@ -217,7 +217,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		waitforElementVisibilityInTime(PRECounty, 45);
 		selectFromDropDownByText(driver, PRECounty, County);
 		jsClickNew(continueBtn);
-		validate(coverageTitle);
+		waitforElementVisibilityInTime(coverageTitle, 30);
 /*		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 		waitforElementVisibilityInTime(previousBtn, 45);
 		previousBtn.click();
