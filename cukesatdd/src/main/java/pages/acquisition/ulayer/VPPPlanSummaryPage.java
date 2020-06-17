@@ -330,7 +330,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement getStartedBtn;
 
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue to enrollment']")
