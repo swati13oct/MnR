@@ -415,8 +415,8 @@ public class MemberAuthPage extends UhcDriver {
 	}
 
 	public void goGreenSplashPageWorkaround() {
-		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-			if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				System.out.println("User encounted gogreen-splash page, handle it...");
 				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
@@ -427,41 +427,37 @@ public class MemberAuthPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
+				checkModelPopup(driver, 1);
+				Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-			checkModelPopup(driver, 1);
-			Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
-		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
-					+ "please either use another test user or manually handle the splash page properly.  "
-					+ "Env='"+MRScenario.environment+"'", false);
 		}
 	}
 	
 	public void emailAddressRequiredWorkaround() {
-		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-			if (driver.getCurrentUrl().contains("login/no-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				System.out.println("User encounted no-email page, handle it...");
+				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
-					try {
-						System.out.println("'Go To Homepage' button showed up, click it");
-						goToHomepage.isDisplayed();
-						goToHomepage.click();
-					} catch (Exception e1) {
-						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
-					}
-					CommonUtility.checkPageIsReady(driver);
-					Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
-				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter. "+e);
+					System.out.println("'Go To Homepage' button showed up, click it");
+					goToHomepage.isDisplayed();
+					goToHomepage.click();
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
+				CommonUtility.checkPageIsReady(driver);
+				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
-					+ "please either use another test user or manually handle the splash page properly.  "
-					+ "Env='"+MRScenario.environment+"'", false);
 		}
 	}  
 
-	
+
 }

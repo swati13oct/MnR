@@ -675,8 +675,8 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 	
 	public void goGreenSplashPageWorkaround() {
-		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-			if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				System.out.println("User encounted gogreen-splash page, handle it...");
 				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
@@ -687,18 +687,18 @@ public class HSIDLoginPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-			checkModelPopup(driver, 1);
-		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
-					+ "please either use another test user or manually handle the splash page properly.  "
-					+ "Env='"+MRScenario.environment+"'", false);
 		}
 	}
 	
 	public void emailAddressRequiredWorkaround(String username) {
-		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-			if (driver.getCurrentUrl().contains("login/no-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
 				try {
 					/* note: instead of entering email, click Go to Homepage directly
@@ -737,32 +737,32 @@ public class HSIDLoginPage extends UhcDriver {
 				} catch (Exception e) {
 					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-			if (driver.getCurrentUrl().contains("bannerpopup.html"))
-			{
-				System.out.println("User landed on banner page and did not see security questions");
-				try {
-					if (noWaitValidate(homePageNotice,0)) {
-						homePageNotice.click();
-						CommonUtility.checkPageIsReady(driver);
-					} else	if (noWaitValidate(homePageNotice2,0)) {
-						homePageNotice2.click();
-						CommonUtility.checkPageIsReady(driver);
-					} else if (noWaitValidate(homePageNotice3,0)) {
-						homePageNotice3.click();
-						CommonUtility.checkPageIsReady(driver);
-					}	
+		}
+		if (driver.getCurrentUrl().contains("bannerpopup.html"))
+		{
+			System.out.println("User landed on banner page and did not see security questions");
+			try {
+				if (noWaitValidate(homePageNotice,0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (noWaitValidate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (noWaitValidate(homePageNotice3,0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}	
 
-				}
-				catch(Exception e)
-				{
-					System.out.println("User landed on banner page and could not proceed ahead");
-				}
 			}
-		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
-					+ "please either use another test user or manually handle the splash page properly.  "
-					+ "Env='"+MRScenario.environment+"'", false);
+			catch(Exception e)
+			{
+				System.out.println("User landed on banner page and could not proceed ahead");
+			}
 		}
 	}  
 
