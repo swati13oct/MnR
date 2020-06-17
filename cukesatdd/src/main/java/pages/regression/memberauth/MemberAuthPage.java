@@ -6,6 +6,7 @@ import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -328,6 +329,10 @@ public class MemberAuthPage extends UhcDriver {
 				{
 					System.out.println("Catch block with no significance");
 				}
+				goGreenSplashPageWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
+				emailAddressRequiredWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 					System.out.println("COVID 19 Banner page has appeared");
 					try {
@@ -409,4 +414,54 @@ public class MemberAuthPage extends UhcDriver {
 		return null;
 	}
 
+	public void goGreenSplashPageWorkaround() {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+			if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+				System.out.println("User encounted gogreen-splash page, handle it...");
+				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+				try {
+					if (validate(goToHomepage,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goToHomepage.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+			}
+			checkModelPopup(driver, 1);
+			Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+		} else {
+			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+					+ "please either use another test user or manually handle the splash page properly.  "
+					+ "Env='"+MRScenario.environment+"'", false);
+		}
+	}
+	
+	public void emailAddressRequiredWorkaround() {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+			if (driver.getCurrentUrl().contains("login/no-email.html")) {
+				System.out.println("User encounted no-email page, handle it...");
+				try {
+					WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+					try {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goToHomepage.isDisplayed();
+						goToHomepage.click();
+					} catch (Exception e1) {
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+					}
+					CommonUtility.checkPageIsReady(driver);
+					Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+				} catch (Exception e) {
+					System.out.println("Unable to resolve no-email page encounter. "+e);
+				}
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+					+ "please either use another test user or manually handle the splash page properly.  "
+					+ "Env='"+MRScenario.environment+"'", false);
+		}
+	}  
+
+	
 }
