@@ -241,7 +241,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID   | username  | password  | MemUserName        | planType | memberType       |
       | xxxxx | qavgogine | qavgogine | q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref |
 
-  @accountProfile10 @EPMPProfilePageContactusGroup
+  @memAuth_accountProfile10
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -288,7 +288,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID       | username  | password  | MemUserName     | planType | memberType  |
       | Unknown_5 | qavgogine | qavgogine | q2_may_rally019 | MAPD     | EPMPEnabled |
 
-  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_MemAuth
+  @memAuth_accountProfile12
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -309,7 +309,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID       | username  | password  | MemUserName             | planType       | memberType              |
       | Unknown_6 | qavgogine | qavgogine | q3_sep_Active_combo_005 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
 
-  @accountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers @AP_Part3_MemAuth
+  @memAuth_accountProfile13
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile and preferences for a Federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -323,27 +323,27 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Plan Type   | <planType>    |
       | Member Type | <memberType>  |
     Then the user navigates to Profile and Preferences page
-#    Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
-    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    Then the email address section should be verified
-#    Then the Phone Numbers section should be validated & all links clicked
+    #Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
+    #Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    #Then the email address section should be verified
+    #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
     And the user verifies the Temporary Address Link on the Account settings page
     Then the user validates Communication Preferences section
-#    And the user validates sign up today link
-#    Then the user validates the presence of Back to Profile and Preferences links
+    #And the user validates sign up today link
+    #Then the user validates the presence of Back to Profile and Preferences links
     And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples:
       | TID        | username  | password  | MemUserName            | planType | memberType         |
       | Unknown_7  | qavgogine | qavgogine | indiPDPtestreg         | PDP      | PDP_AARPIndividual |
-      | Unknown_8  | qavgogine | qavgogine | q3_sep_UAT4_Group120   | GrpPDP   | PDP_Group          |
+      | Unknown_8  | qavgogine | qavgogine | indiPDPtestreg   | GrpPDP   | PDP_Group          |
       | Unknown_9  | qavgogine | qavgogine | prema02                | MA       | MA_UHCIndividual   |
       | Unknown_10 | qavgogine | qavgogine | GroupMAPreeffective002 | MA       | MA_UHCGroup        |
       | Unknown_11 | qavgogine | qavgogine | q3_sep_UAT4_Group028   | MAPD     | MAPD_Group         |
 
-  @accountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_MemAuth
+  @memAuth_accountProfile14
   Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -358,8 +358,8 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Member Type | <memberType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    Then the email address section should be verified
-#    Then the Phone Numbers section should be validated & all links clicked
+    #Then the email address section should be verified
+    #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
     And the user verifies the Temporary Address Link on the Account settings page
     Then the user validates that  Communication Preferences section doesn't come for PCP medica member
@@ -370,7 +370,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID        | username  | password  | MemUserName     | planType | memberType |
       | Unknown_13 | qavgogine | qavgogine | q2_jun_sofl0002 | MA       | PCP        |
 
-  @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_MemAuth
+  @memAuth_accountProfile15
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -385,9 +385,9 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Member Type | <memberType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    And I validate the healthsafe ID links
-    Then the email address section should be verified
-    Then the Phone Numbers section should be validated & all links clicked
+    #And I validate the healthsafe ID links
+    #Then the email address section should be verified
+    #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
     And the user verifies the Temporary Address Link on the Account settings page
     Then the user validates that  Communication Preferences section doesn't come for terminated members
@@ -396,7 +396,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
 
     Examples:
       | TID        | username  | password  | MemUserName     | planType | memberType        |
-      | Unknown_15 | qavgogine | qavgogine | q2_may_rally019 | MAPD     | Terminated_AccPro |
+      | Unknown_15 | qavgogine | qavgogine | q2_may_rally029 | MAPD     | Terminated_AccPro |
 
   @accountProfile16 @AP_Part5_MemAuth
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
@@ -524,7 +524,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | GRPDPSSUP_ProfilePref         | name1      | color1   | number1     |
 
 
-  @memAuth_accountProfile019  @ShipEndtoEnd @AP_Part1_MemAuth @codetransformers
+  @memAuth_accountProfile019
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
