@@ -690,7 +690,9 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			checkModelPopup(driver, 1);
 		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, please either use another test user or manually handle the splash page properly.  Env='"+MRScenario.environment+"'", false);
+			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+					+ "please either use another test user or manually handle the splash page properly.  "
+					+ "Env='"+MRScenario.environment+"'", false);
 		}
 	}
 	
@@ -758,7 +760,9 @@ public class HSIDLoginPage extends UhcDriver {
 				}
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, please either use another test user or manually handle the splash page properly.  Env='"+MRScenario.environment+"'", false);
+			Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+					+ "please either use another test user or manually handle the splash page properly.  "
+					+ "Env='"+MRScenario.environment+"'", false);
 		}
 	}  
 
