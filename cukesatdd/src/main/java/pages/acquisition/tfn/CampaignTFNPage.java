@@ -75,7 +75,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement YahooSearchResult;
 
 	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
-	@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='sb_form_q']")
@@ -88,7 +88,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement AARPSearchLinkfromBing;
 
 	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
-	@FindBy(xpath = "//h2//a[contains(text(),'Medicare Advantage (Part C)')]")
+	@FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
 	public WebElement UHCSearchLinkfromBing;
 
 
