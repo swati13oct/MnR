@@ -234,6 +234,9 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "a#change-location")
 	private WebElement changeZIPVPP;
+	
+	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
+	public WebElement footerBackToTopLink;
 
 	public void resultsUI(String zip, String county, String R1, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
@@ -795,6 +798,7 @@ public class ResultsMobilePage extends UhcDriver {
 			// backtoPlans.click();
 			driver.navigate().refresh();
 			plansLoader();
+			backtoTop();
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
@@ -805,6 +809,7 @@ public class ResultsMobilePage extends UhcDriver {
 		// backtoPlans.click();
 		driver.navigate().refresh();
 		plansLoader();
+		backtoTop();
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
@@ -967,6 +972,22 @@ public class ResultsMobilePage extends UhcDriver {
 				validate(changeZIPVPP, 30);
 				System.out.println(changeZIPVPP.getText());
 			}
+		}
+	}
+
+	public void backtoTop() {
+		boolean checkElemPosition = mobileUtils.mobileCheckElementBeforeCallBanner(footerBackToTopLink);
+		// System.out.println(checkElemPosition);
+		// checkElemPosition =
+		// mobileUtils.mobileCheckElementBeforeCallBanner(MAViewPlansLink);
+		// System.out.println(checkElemPosition);
+		if (!checkElemPosition)
+			mobileUtils.mobileLocateElement(footerBackToTopLink);
+		try {
+			footerBackToTopLink.click();
+			threadsleep(2000);
+		} catch (Exception e) {
+
 		}
 	}
 
