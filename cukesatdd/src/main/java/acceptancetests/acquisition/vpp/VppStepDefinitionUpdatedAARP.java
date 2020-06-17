@@ -3373,4 +3373,10 @@ public class VppStepDefinitionUpdatedAARP {
 	// note: end- added for deeplink validaton
 	// --------------------------------------------
 
+	@When("^wait for the VPP summary page to load$")
+	public void wait_for_the_VPP_summary_page_to_load() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.waitForPlanSummaryPageLoad();
+	}
 }

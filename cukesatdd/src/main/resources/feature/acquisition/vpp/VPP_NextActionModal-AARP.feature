@@ -92,7 +92,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county         | plantype | drug    | dosage   | quantity | frequency     | branded |planName                                 |radius  |
       |  19019 | No               | Iowa County     | MAPD     | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan|15 miles|
         
-   @vppNBAMAPDToPDP 
+   @vppNBAMAPDToPDP
    Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when user adds Drug cost from MAPD page
    Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -121,6 +121,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And I navigate to step3 page and validate
       | Drug | <drug> |
     And the user clicks on return link to navigate to plan summary
+     And wait for the VPP summary page to load
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype1> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site

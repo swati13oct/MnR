@@ -1091,4 +1091,11 @@ public class VppPlanSummaryStepDefinitionUHC {
 		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
 		
 	}
+	
+	@When("^wait for VPP summary page to load$")
+	public void wait_for_VPP_summary_page_to_load(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.waitForPlanSummaryPageLoad();
+	}
 } 

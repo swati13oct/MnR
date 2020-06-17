@@ -4134,4 +4134,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("NBA modal not found");
 		}
 	}
+	
+	public void waitForPlanSummaryPageLoad() {
+		CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
+	}
 }

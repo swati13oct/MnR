@@ -3608,4 +3608,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("NBA modal not found");
 			}
 		}
+		
+		public void waitForPlanSummaryPageLoad() {
+			CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
+		}
 }

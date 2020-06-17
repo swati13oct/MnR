@@ -254,6 +254,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | Radius  | <radius>  |
     And I select the first pharmacy on there
     And I navigate to step3 page and click on Back to Plans button
+    And wait for VPP summary page to load
     And user views plans of the below plan type in UMS site
       | Plan Type | <plantype1> |
       Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site
@@ -262,7 +263,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |   19019 | No              | Iowa County    | MAPD     |PDP|Lipitor | TAB 10MG |       30 | Every 1 month | yes     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
       
       
-      @vppNextActionModalRegressionMAAddProvider
+      @vppNextActionModalRegressionMAAddProvider 
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Provider Search on VPP summary page for MAPD Plan when user adds Drug cost from PDP page
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
