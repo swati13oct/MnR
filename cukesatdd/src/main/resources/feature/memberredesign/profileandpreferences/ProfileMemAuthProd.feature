@@ -5,31 +5,7 @@ Feature: 1.02.1 Member Profile page - Prod
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPProfileAndPreferences |
 
-  @prod_accountProfile10
-  Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
-    #Removed from Regression as EPMP is still in the pipeline for development
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    And user stores test input for validations
-      | Username    | <MemUserName> |
-      | Plan Type   | <planType>    |
-      | Member Type | <memberType>  |
-    When the user navigates to Profile and Preferences page
-    And I should see the EPMP i frame on profile page
-    And I should not be able to edit the Phone numbers section for specific group members
-      | Group Plan Name | <GroupPlanName> |
-
-    Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType  |
-      | xxxxx | qavgogine | qavgogine | q2_may_rally029 | MAPD     | EPMPEnabled |
-
-
-  @prod_accountProfile12
+    @prod_accountProfile12
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -66,7 +42,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | Member Type | <memberType>  |
     Then the user navigates to Profile and Preferences page
     #Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
-    #Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
     #Then the email address section should be verified
     #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
