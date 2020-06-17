@@ -231,7 +231,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> sixMedications;
 
-	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
+	@FindBy(xpath = "//a[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> tenMedications;
 
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
@@ -365,8 +365,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'OptumRx')]")
 	protected List<WebElement> OptumRx;
 
-	@FindBy(xpath = "//strong[@class='sc-LzLrT hZUOFf']")
-	protected List<WebElement> totalMedicationsInMyMed;
+	@FindBy(xpath = "//span[@tabindex='-1']")
+	protected WebElement totalMedicationsInMyMed;
 
 	@FindBy(xpath = "//span[contains(text(),'OptumRx')]")
 	protected List<WebElement> Processing;
@@ -600,7 +600,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean moreThanTenActivePrescription() {
 
-		String numberTXT = totalMedicationsInMyMed.get(totalMedicationsInMyMed.size()-1).getText();
+//		String numberTXT = totalMedicationsInMyMed.get(totalMedicationsInMyMed.size()-1).getText();
+//		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+
+		String numberTXT=totalMedicationsInMyMed.getAttribute("data-test-total-medications");
+		System.out.println(numberTXT+"9999999999999999999999");
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 
 		if (number> 10) {

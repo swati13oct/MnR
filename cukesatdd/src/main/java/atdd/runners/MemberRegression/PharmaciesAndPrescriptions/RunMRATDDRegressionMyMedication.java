@@ -11,7 +11,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionMyMedication.json",detailedRepo
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMyMedication")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMyMedication.json" }, tags = { "@F448402" }, monochrome =true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMyMedication.json" }, tags = { "@yusup" }, monochrome =true)
 public class RunMRATDDRegressionMyMedication {
 
 }

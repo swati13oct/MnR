@@ -3,7 +3,7 @@ Feature: MVP - My Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to My Medications on P&P Page
 
 
-  @MyMedications @F448402 @US2568656 @tip
+  @MyMedications @F448402 @US2568656
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member views Active Prescription Drugs
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -19,7 +19,7 @@ Feature: MVP - My Medications
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
 
-  @MyMedications @F448402 @US2568656
+  @MyMedications @F448402 @US2568656 @yusup
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member has more than 10 active prescriptions
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
