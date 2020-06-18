@@ -23,5 +23,5 @@ Feature: Plan Recommendation Engine flow - Verify header and footer page in plan
       | Search Key | <SearchKey> |
 
     Examples: 
-      | Zipcode | EMail          | SearchKey                |
-      |   90201 | abc@domain.com | plan for recommandations |
+      | Zipcode | EMail          | SearchKey                  |
+      |   90201 | abc@domain.com | Plan Recommendation Engine |

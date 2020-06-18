@@ -305,6 +305,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //MouseOver on Shop of a Plan and Validating Inside Shop of a Plan
 		System.out.println("Validating Shop of a Plan Elements: ");
+		threadsleep(2000);
 		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		validate(headerShopForaPlanFindplansinyourarea, 30);
 		validate(headerShopForaPlanZipcodeBox, 30);
@@ -342,7 +343,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
 
 //MouseOver on Learn About Medicare and Validating Learn About Medicare
+		driver.navigate().refresh();
 		System.out.println("Validating Learn About Medicare Elements: ");
+		threadsleep(2000);
+		validate(headerNavigationBarLearnAboutMedicareTab, 45);
 		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
 		validate(headerEligibilityLink, 30);		
 		validate(headerCoverageLink, 30);
@@ -362,7 +366,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			String curURL = driver.getCurrentUrl();			
 			headerSigninLink.click();
 			if (curURL.contains("aarpmedicare"))
-				validateLinks("medicare.uhc.com/aarp");
+				validateLinks("medicare.uhc.com");
 			else
 				validateLinks("medicare.uhc.com");
 		backtoshopforaplan();
@@ -396,7 +400,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		backtoshopforaplan();
 		headerGetaPlanRecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
-		backtoshopforaplan();
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		headerDrugcostLink.click();
 		validateLinks("health-plans/estimate-drug-costs.html");
 		backtoshopforaplan();
@@ -546,7 +551,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 		footerHomeLink.click();
 		if (driver.getCurrentUrl().contains("aarpmedicare")) {
-			validateLinks("aarpmedicareplans.ocp-elr-core-nonprod.optum.com");
+			validateLinks("aarpmedicareplans");
 		}else if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 			validateLinks("uhcmedicaresolutions");
 		}
@@ -609,7 +614,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void zipcodeFunctionInShopforaplan(String zipcode) throws InterruptedException {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		actions.moveToElement(headerShopForaPlanZipcodeBox).click().build().perform();
+//		actions.moveToElement(headerShopForaPlanZipcodeBox).click();
+		headerShopForaPlanZipcodeBox.click();
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
 		headerShopForaPlanZipcodeButton.click();
 		Thread.sleep(5000);
@@ -647,9 +653,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		System.out.println("Actual Page is :"+actualpageurl);
 		headerNavigationBarEnterSearchTab.click();
 		headerNavigationBarEnterSearchTab.sendKeys(SearchKey);
+		threadsleep(2000);
 		headerNavigationBarSearchIconTab.click();
 		String expectedpageurl = driver.getCurrentUrl();
-		String ExpectedPage = "search-medicare.html?";
+		String ExpectedPage = "site-search.html?";
 		Boolean url = ((actualpageurl.equals(expectedpageurl)));
 		if(url!=true) {
 			Assert.assertTrue(expectedpageurl.contains(ExpectedPage));
