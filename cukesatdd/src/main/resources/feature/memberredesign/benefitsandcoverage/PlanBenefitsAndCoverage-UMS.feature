@@ -642,7 +642,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
 #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
- @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember
+ @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -696,7 +696,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
+      #| UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
     #note: moved to footer feature
@@ -705,8 +705,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
-      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_regressionMember

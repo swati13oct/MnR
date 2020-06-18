@@ -1865,7 +1865,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.MEMBERTYPE);
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String planType = (String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		planBenefitsCoverage.validateWaysToSaveSection(planType, memberType);
 
