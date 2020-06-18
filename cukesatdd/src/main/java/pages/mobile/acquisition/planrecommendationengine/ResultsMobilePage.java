@@ -983,8 +983,9 @@ public class ResultsMobilePage extends UhcDriver {
 		// System.out.println(checkElemPosition);
 		if (!checkElemPosition)
 			mobileUtils.mobileLocateElement(footerBackToTopLink);
-		try {
-			footerBackToTopLink.click();
+		try {//This single JSclick line is enough instead of this method
+			jsClickMobile(footerBackToTopLink);
+			//footerBackToTopLink.click();
 			threadsleep(2000);
 		} catch (Exception e) {
 
