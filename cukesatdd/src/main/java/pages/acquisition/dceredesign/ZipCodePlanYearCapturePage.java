@@ -146,9 +146,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	
 	public void verifyReviewDrugCostPageDisplayed() {
 			CommonUtility.waitForPageLoad(driver,reviewDrugCostPageHeading , 30);
-			System.out.println("wait completed");
 		if(validateNew(reviewDrugCostPageHeading)) {
-			System.out.println("after wait completed");
 			Assert.assertTrue("Review drug cost page not displayed", true);
 		}
 		else {
