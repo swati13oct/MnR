@@ -309,6 +309,7 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
+			goGreenSplashPageWorkaround();
 		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -673,67 +674,97 @@ public class HSIDLoginPage extends UhcDriver {
 		} 
 	}
 	
-	public void emailAddressRequiredWorkaround(String username) {
-		if (driver.getCurrentUrl().contains("login/no-email.html")) {
-			System.out.println("User encounted no-email page, will enter email address to proceed");
-			try {
-				String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
-				WebElement newEmail=driver.findElement(By.xpath("//input[@ng-model='newEmail']")); 
-				newEmail.sendKeys(workAroundEmail);
-				WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
-				confirmEmail.sendKeys(workAroundEmail);
-				WebElement continueButton=driver.findElement(By.xpath("//button//span[contains(text(),'Continue')]")); 
-				continueButton.click();
-
-				System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
+	public void goGreenSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				System.out.println("User encounted gogreen-splash page, handle it...");
+				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					Thread.sleep(5000); //note: need the wait
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				WebElement goToHomepage=driver.findElement(By.xpath("//button[@ng-click='goToHomePage()']"));
-				try {
-					System.out.println("'Go To Homepage' button showed up, click it");
-					goToHomepage.isDisplayed();
-					goToHomepage.click();
+					if (validate(goToHomepage,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goToHomepage.click();
+					}
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
-
-				//note: do not remove wait, need to give it enough time for the dashboard or error page to load
-				System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
-				CommonUtility.checkPageIsReadyNew(driver);
-				waitToReachDashboard(username);  //note: after page is completed state, still need this wait for the page to finish loading
-
-				if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
-				}
-			} catch (Exception e) {
-				System.out.println("Unable to resolve no-email page encounter. "+e);
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
 		}
-			if (driver.getCurrentUrl().contains("bannerpopup.html"))
-			{
-				System.out.println("User landed on banner page and did not see security questions");
+	}
+	
+	public void emailAddressRequiredWorkaround(String username) {
+		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				System.out.println("User encounted no-email page, will enter email address to proceed");
 				try {
-					if (noWaitValidate(homePageNotice,0)) {
-						homePageNotice.click();
-						CommonUtility.checkPageIsReady(driver);
-					} else	if (noWaitValidate(homePageNotice2,0)) {
-						homePageNotice2.click();
-						CommonUtility.checkPageIsReady(driver);
-					} else if (noWaitValidate(homePageNotice3,0)) {
-						homePageNotice3.click();
-						CommonUtility.checkPageIsReady(driver);
-					}	
-					
-			}
-				catch(Exception e)
-				{
-					System.out.println("User landed on banner page and could not proceed ahead");
+					/* note: instead of entering email, click Go to Homepage directly
+					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
+					WebElement newEmail=driver.findElement(By.xpath("//input[(@ng-model='newEmail') or (@ng-model='inputEmail')]")); 
+					newEmail.sendKeys(workAroundEmail);
+					//WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
+					//confirmEmail.sendKeys(workAroundEmail);
+					WebElement continueButton=driver.findElement(By.xpath("//button[contains(@ng-click,'continueNoEmail')]")); 
+					continueButton.click();
+
+					System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
+					try {
+						Thread.sleep(5000); //note: need the wait
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					 */
+					WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+					try {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goToHomepage.isDisplayed();
+						goToHomepage.click();
+					} catch (Exception e1) {
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+					}
+
+					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+					CommonUtility.checkPageIsReadyNew(driver);
+					waitToReachDashboard(username);  //note: after page is completed state, still need this wait for the page to finish loading
+
+					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+					}
+				} catch (Exception e) {
+					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-		}  
+		}
+		if (driver.getCurrentUrl().contains("bannerpopup.html"))
+		{
+			System.out.println("User landed on banner page and did not see security questions");
+			try {
+				if (noWaitValidate(homePageNotice,0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (noWaitValidate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (noWaitValidate(homePageNotice3,0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}	
+
+			}
+			catch(Exception e)
+			{
+				System.out.println("User landed on banner page and could not proceed ahead");
+			}
+		}
+	}  
 
 	
 	

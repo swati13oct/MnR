@@ -1,5 +1,9 @@
 package pages.regression.payments;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,11 +56,42 @@ public class UpdateRecurringPage extends UhcDriver {
 		openAndValidate();
 	}
 
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	
 	public PaymentsFormPage selectCheckingAccountAndClickOnNext() {
+		checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("User is on Update Automatic Payments Page");
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account radio button");
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].scrollIntoView()", NextButton);
+		jse.executeScript("window.scrollBy(0,-50)", "");
 		NextButton.click();
 		System.out.println("clicked on Next button");
 		if (validate(CheckingAccountInformationHeader)) {

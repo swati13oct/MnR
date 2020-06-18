@@ -219,9 +219,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!memberType.contains("AARP")) {
+				//if (!memberType.contains("AARP")) {
 					targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
-				}
+				//}
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
