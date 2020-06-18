@@ -1506,6 +1506,8 @@ public class ContactUsPage extends UhcDriver{
 		validateWithValue("Text-Claims Questions ", ClaimsQuestions);
 		validateWithValue("Text-call Us ", callUs);
 		validateWithValue("Text-claim Telephonenumber ", claimTelephonenumber);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].scrollIntoView(true);", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text- Need_help Navigating The Website", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text-See how to guides ", Seehowtoguides);
 		validateWithValue("Text-technical Support ContactNumber ", technicalSupportContactNumber);
