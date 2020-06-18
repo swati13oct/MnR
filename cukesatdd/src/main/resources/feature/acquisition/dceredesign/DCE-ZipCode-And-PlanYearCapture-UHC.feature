@@ -9,7 +9,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP
+    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
     And plan year dropdown should be displayed during AEP
 
     Examples: 
@@ -24,8 +24,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enters valid zipcode and county
+    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
     And user selects plan year
     And user clicks on continue button
@@ -44,11 +44,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP
+    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    When user clicks on continue button
+    Then error message should be displayed
     When user enter invalid zipcode
       | inValidzipCode | <invalidzipcode2> |
     Then error message should be displayed
-    When user enters valid zipcode and county
+    When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
     And user selects plan year
     And user clicks on continue button
@@ -66,12 +68,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates Get Started Page
-    And the user validates whether call icon is visible on AARP
-    And the user validates whether chat icon is visible on AARP
+    And the user validates whether call icon is visible on UHC
+    #And the user validates whether chat icon is visible on UHC
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP
-    Then the user validates whether call icon is visible on AARP
-    Then the user validates whether chat icon is visible on AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    Then the user validates whether call icon is visible on UHC
+    #Then the user validates whether chat icon is visible on UHC
 
     Examples: 
       | path                     | pageName                   |

@@ -26,7 +26,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
     Then the user validates Get Started Page for UHC
     When the user clicks on Add drugs button on UHC
     Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
-    When user enters valid zipcode and county
+    When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
     And user clicks on continue button
     Then load screen should be displayed
@@ -46,8 +46,8 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
     Then the user validates Get Started Page for UHC
     When the user clicks on Add drugs button on UHC
     Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
-    #When user clicks on continue button
-    #Then error message should be displayed
+    When user clicks on continue button
+    Then error message should be displayed
     When user enter invalid zipcode
       | inValidzipCode | <invalidzipcode> |
     Then error message should be displayed
@@ -57,7 +57,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
     When user enter invalid zipcode
       | inValidzipCode | <invalidzipcode2> |
     Then error message should be displayed
-    When user enters valid zipcode and county
+    When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
     And user clicks on continue button
     Then load screen should be displayed
@@ -75,12 +75,12 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates Get Started Page for UHC
-    And the user validates whether call icon is visible on AARP
-    And the user validates whether chat icon is visible on AARP
+    And the user validates whether call icon is visible on UHC
+    And the user validates whether chat icon is visible on UHC
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for Non AEP
-    Then the user validates whether call icon is visible on AARP
-    Then the user validates whether chat icon is visible on AARP
+    Then the user validates whether call icon is visible on UHC
+    Then the user validates whether chat icon is visible on UHC
 
     Examples: 
       | path                     | pageName                   |
