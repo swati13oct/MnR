@@ -54,12 +54,15 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
-	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
-	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1) throws Throwable {
-		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-		
-	}
+	/*
+	 * @Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
+	 * public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1)
+	 * throws Throwable { GetStartedPage DCEgetStarted =(GetStartedPage)
+	 * getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+	 * BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+	 * 
+	 * }
+	 */
 
 	@Then("^load screen should be displayed in AARP$")
 	public void load_screen_should_be_displayed_in_AARP(){
@@ -73,8 +76,8 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
-	@Then("^plan year dropdown should be displayed during AEP$")
-	public void plan_year_dropdown_should_be_displayed_during_AEP() {
+	@Then("^plan year dropdown should be displayed during AEP in AARP$")
+	public void plan_year_dropdown_should_be_displayed_during_AEP_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validatePlanYearDrpDownAEP();
 	}
@@ -111,8 +114,8 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.enterZipCode(invalidzipcode);
 	}
 	
-	@Then("^user enters valid zipcode and county$")
-	public void user_enter_valid_zipcode(DataTable givenAttributes) throws Throwable {
+	@Then("^user enters valid zipcode and county in AARP$")
+	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -124,8 +127,8 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 
-	@When("^user selects plan year$")
-	public void user_selects_plan_year() {
+	@When("^user selects plan year in AARP$")
+	public void user_selects_plan_year_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.selectPlanYear();
 	}
@@ -136,9 +139,10 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.clickContinueBtn();
 	}
 
-	@Then("^user should be navigated to Review drug cost estimate page$")
-	public void user_should_be_navigated_to_Review_drug_cost_estimate_page() {
-	    
+	@Then("^user should be navigated to Review drug cost estimate page in AARP$")
+	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_in_AARP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
 	
 	@Then("^error message should be displayed in AARP$")

@@ -10,7 +10,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for AEP
-    And plan year dropdown should be displayed during AEP
+    And plan year dropdown should be displayed during AEP in AARP
 
     Examples: 
       | path                     | pageName                   |
@@ -25,7 +25,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enters valid zipcode and county
+    When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
     And user selects plan year
     And user clicks on continue button
@@ -48,12 +48,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     When user enter invalid zipcode in AARP
       | inValidzipCode | <invalidzipcode2> |
     Then error message should be displayed in AARP
-    When user enters valid zipcode and county
+    When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
-    And user selects plan year
+    And user selects plan year in AARP
     And user clicks on continue button in AARP
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
+    And user should be navigated to Review drug cost estimate page in AARP
 
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |

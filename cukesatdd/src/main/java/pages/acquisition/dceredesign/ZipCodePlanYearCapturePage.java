@@ -31,6 +31,9 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary']")
 	public WebElement continueBtn;
+	
+	@FindBy(xpath = "//*[@class='row mb-20']//div[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
 
 	public ZipCodePlanYearCapturePage(WebDriver driver) {
 		super(driver);
@@ -138,5 +141,17 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		}
 		validateNew(continueBtn);
 		continueBtn.click();
+	}
+	
+	public ZipCodePlanYearCapturePage verifyReviewDrugCostPageDisplayed() {
+		try {
+		if(reviewDrugCostPageHeading.isDisplayed());
+		Assert.assertTrue("Review drug cost page not displayed", true);
+		return new ZipCodePlanYearCapturePage(driver);
+		}
+		catch(Exception e) {
+			Assert.assertTrue("Review drug cost page not displayed", false);
+		}
+		return null;
 	}
 }
