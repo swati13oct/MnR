@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionContactUsPROD.json",detailedRep
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionContactUsPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome=true,
 features = { "src/main/resources/feature/memberredesign/contactus/ContactUsPROD.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionContactUsPROD.json" }, tags = { "@regressionMemberPROD1" })
-public class RunMRATDDRegressionContactUsPROD {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionContactUsPROD.json" }, tags = { "@regressionMemberPROD3" })
+public class RunMRATDDRegressionContactUsPRODpart3 {
 
 }
