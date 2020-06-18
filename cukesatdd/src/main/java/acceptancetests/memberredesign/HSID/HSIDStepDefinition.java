@@ -526,11 +526,13 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
-
+			
 		//note: use this to determine if need to validate footer on sign-in page
 		//note: after obtaining the value, remove it so it will not look for it on csv
 		String validateFooter = memberAttributesMap.get("Validate Footer");
 		memberAttributesMap.remove("Validate Footer");
+		String speedup = memberAttributesMap.get("Speed Up");
+		memberAttributesMap.remove("Speed Up");
 
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
@@ -607,6 +609,9 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
+		if (speedup!=null && speedup.equalsIgnoreCase("true"))
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
@@ -749,6 +754,9 @@ public class HSIDStepDefinition {
 		String deepLinkUrl = memberAttributesMap.get("Deeplink");
 		getLoginScenario().saveBean(LoginCommonConstants.DEEPLINK,deepLinkUrl);
 
+		String speedup = memberAttributesMap.get("Speed Up");
+		memberAttributesMap.remove("Speed Up");
+
 	    //----- note: these parameters won't be in csv, take them out of memberAttributesMap before searching csv
 	 	memberAttributesMap.remove("User Selection");
 	 	memberAttributesMap.remove("Deeplink");
@@ -782,6 +790,8 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
+		if (speedup!=null && speedup.equalsIgnoreCase("true"))
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
 		
