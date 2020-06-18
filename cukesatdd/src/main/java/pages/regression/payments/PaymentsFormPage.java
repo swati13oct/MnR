@@ -198,7 +198,6 @@ public class PaymentsFormPage extends UhcDriver {
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -269,13 +268,21 @@ public class PaymentsFormPage extends UhcDriver {
 
 	}
 
-	public PaymentHistoryPage clickonCancelButton() {		
+	public PaymentHistoryPage clickonCancelButton() {
+		checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.waitForPageLoad(driver, cancelButton, 20);
 		System.out.println("Clicking on cancel button of Update Checking Account or One Time Payment EFT form");
 		System.out.println("Scrolling to Cancel Button");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-		jse2.executeScript("arguments[0].scrollIntoView()", cancelButton); 
+		jse2.executeScript("arguments[0].scrollIntoView()", cancelButton);
+		jse2.executeScript("window.scrollBy(0,-50)", "");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

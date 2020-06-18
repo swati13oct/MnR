@@ -386,6 +386,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath ="//button[contains(text(),'CANCEL')]")
 	private WebElement cancelEmailUs; 
 	
+	@FindBy(xpath ="//h1[contains(text(),'Learn how to use your member site')]")
+	private WebElement learnHowToUsePageHeader;
+	
 		public JSONObject contactUsJson;
 	
 		private JSONObject secureemailwidgetDataJson;
@@ -1503,6 +1506,8 @@ public class ContactUsPage extends UhcDriver{
 		validateWithValue("Text-Claims Questions ", ClaimsQuestions);
 		validateWithValue("Text-call Us ", callUs);
 		validateWithValue("Text-claim Telephonenumber ", claimTelephonenumber);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].scrollIntoView(true);", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text- Need_help Navigating The Website", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text-See how to guides ", Seehowtoguides);
 		validateWithValue("Text-technical Support ContactNumber ", technicalSupportContactNumber);
@@ -1632,6 +1637,33 @@ public class ContactUsPage extends UhcDriver{
 			ex.printStackTrace();
 		}
 	}
+	
+	public void validateSeeHowTGuideLink() {
+		
+		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+		
+		if (Seehowtoguides.isDisplayed()) {
+			
+			Seehowtoguides.click();
+			
+			CommonUtility.waitForPageLoadNew(driver, learnHowToUsePageHeader, CommonConstants.TIMEOUT_60);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			validateWithValue("Learn how to use your member site", learnHowToUsePageHeader);
+			Assert.assertTrue("See how to guide link is navigated to the respective page sussessfully", true);
+		}
+		else {
+			System.err.println("See how to guide link is not navigated to the respective page sussessfully");
+			Assert.fail("See how to guide link is not navigated to the respective page sussessfully");
+		}
+		
+		
+	}
+	
 	
 }
 

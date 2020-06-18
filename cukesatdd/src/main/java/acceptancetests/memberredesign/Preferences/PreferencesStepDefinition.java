@@ -3,10 +3,10 @@ package acceptancetests.memberredesign.Preferences;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.regression.profileandpreferences.CommunicationPreferencePage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -14,6 +14,8 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.profileandpreferences.CommunicationPreferencePage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 /** Functionality: Profile And Preferences page */
 public class PreferencesStepDefinition {

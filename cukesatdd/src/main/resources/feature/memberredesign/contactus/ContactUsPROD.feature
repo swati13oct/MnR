@@ -2,7 +2,7 @@
 Feature: 1.16 Prod Member Contact us Page 
 
 #TestCaseIndi1
-@regressionMemberPROD
+@regressionMemberPROD1
 Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for individual member on contactUs page 
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -23,7 +23,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase2  | jkuma14  | Brock@02 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCaseCombo2	
-@regressionMemberPROD
+@regressionMemberPROD1
 Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for combo member on contactUs page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -42,7 +42,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase4  | jkuma14  | Brock@02 | OLGITA@68         | ComboPdpSHIP  |				
 
 #TestCasePCP3
- @regressionMemberPROD
+ @regressionMemberPROD2
   Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for PCP member on contactUs page
  Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -63,7 +63,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase3  | jkuma14  | Brock@02 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
 
 #TestCaseSHIP4
-  @regressionMemberPROD
+  @regressionMemberPROD2
    Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify SHIP Email Us Widget Confirm Request in contact us redesign page
    Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -96,7 +96,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	  
 
 #TestCaseClickTOCallCancel5
-@regressionMemberPROD
+@regressionMemberPROD2
  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify clickToCall Widget Expansion -Drop-Down, Text Box and Button UI- and click on cancel on contactUS redesign page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -112,10 +112,59 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
     Examples: 
       | TID   | planType | username | password | member         | phoneNumber |
       | 15224 | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |  9999999999 |
-      
 
+#TestCaseClickTOCallCancel6
+@regressionMemberPROD3
+ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify View qquestion button and common questions on the contactUS redesign page
+   Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    And the user click on view questions button and validate the questions links
+   | Plan Type   | <plantype>   |
+    
+     Examples: 
+      | TID       | planType | username | password | member         |
+      | 152201    | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |
+      | US2438941 | PHIP     | jkuma14  | Brock@02 | Pramila1946  |
+      | 152255    | PCP     | jkuma14  | Brock@02 | marylamb823       |
+      
+#TestCaseClickTOCallCancel7
+@regressionMemberPROD2
+  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify terminated members view on contact us redesign page
+     Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then user should only see the Technical Support and Plan Support components
+
+    Examples: 
+     | TID   | planType | username | password | member         | 
+     | 15224 | MA     |  jkuma14 | Brock@02 | BEVERLY_BOB5 |
       
       
-      
+#TestCaseClickTOCallCancel8
+@regressionMemberPROD3
+  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify the See how to guide link on the contactUs page
+    Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then Verify and navigate the see how to guide link on the contactUs page
+     Examples: 
+      | TID       | planType | username | password | member         |
+      | 152201    | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |
       
       

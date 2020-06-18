@@ -5,6 +5,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +37,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -116,10 +118,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
 	List<WebElement> pdpPlans;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement viewPlans;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
@@ -277,7 +279,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//a[@class='trigger-closed'][text()='View Plans']")
+	//@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//a[@class='trigger-closed'][text()='View Plans']")
+	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed ng-scope']")
 	private WebElement msPlansViewLink;
 
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
@@ -493,7 +496,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
 
-		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
+		@FindBy(xpath = "//select[@id='msVppdpsd']//option[3]")
 		private WebElement startDrpDwnOption;
 		
 		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
@@ -532,7 +535,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 		private WebElement cancelButtonPopUp;
 
 		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
@@ -952,7 +955,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
                            maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
-            			driver.navigate().refresh();
+            			//driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
                             sleepBySec(2);
                             msPlansViewLink.click();
@@ -1322,6 +1325,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+	
+	public void verifyproviderName(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
+		ProviderSearchLink.click();
+		WebElement ProviderName = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
+		String mproviderName=ProviderName.getText().trim();
+		Assert.assertEquals(mproviderName,MRConstants.PROV_NAME);
+		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
 	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage() {
@@ -2572,17 +2587,18 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     	System.out.println("Plan Selector Tool Section is present");    
   }
   
-  public void validatePlanSelectorPageInRightRail() {
+  public void validatePlanSelectorPageInRightRail() throws Exception {
 	  validateNew(StartPlanSelector);
 	  StartPlanSelector.click();
 	  CommonUtility.checkPageIsReadyNew(driver);
-	  if (driver.getCurrentUrl().contains("medicare-plans")) {
-		    WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+	  if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
 			validateNew(PlanSelector);
           System.out.println("Plan Selector Tool Page is displayed");
           Assert.assertTrue(true);
           driver.navigate().back();
+          Thread.sleep(10000);
           CommonUtility.checkPageIsReadyNew(driver);
           if(driver.getCurrentUrl().contains("plan-summary")) {
        	   System.out.println("Back on VPP Plan Summary Page");
@@ -3285,21 +3301,18 @@ public void closeOriginalTabAndOpenNewTab() {
 }
 //^^^ note: added for US1598162	
 
-public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
-	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+	
+	validateNew(DOB,30);
 	System.out.println("MedSup page form is displayed");
-	medSupZipcode.sendKeys(zipcode);
-	Thread.sleep(2000);
-	validateNew(DOB);
-	DOB.click();
-	Thread.sleep(2000);
+	jsClickNew(DOB);
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
+	Thread.sleep(2000);
 	jsClickNew(MaleGender);
 	Thread.sleep(2000);
-	jsClickNew(monthDrpDwn_PartA);
-	validateNew(monthDrpDwnOption);
+	monthDrpDwn_PartA.click();
+	Thread.sleep(2000);
 	monthDrpDwnOption.click();
 	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
@@ -3315,14 +3328,126 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	yearBDrpDwn.click();
 	Thread.sleep(2000);
 	yearBDrpDwnOption.click();
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	startDrpDwn.click();
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	startDrpDwnOption.click();
-	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
+	Thread.sleep(4000);
 	ViewPlanMedSupPage.click();
-	
+}
+public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth){
+
+	validateNew(DOB,30);
+	System.out.println("MedSup page form is displayed");
+	jsClickNew(DOB);
+	DOB.sendKeys(DateOfBirth);
+	System.out.println("Date of birth is entered");
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	jsClickNew(MaleGender);
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	monthDrpDwn_PartA.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	monthDrpDwnOption.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		System.out.println("Effective date- month value selected");
+	yearDrpDwn_PartA.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		yearDrpDwnOption.click();
+	System.out.println("Effective date- year value selected");
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	monthBDrpDwn.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	monthBDrpDwnOption.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	yearBDrpDwn.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	yearBDrpDwnOption.click();
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	startDrpDwn.click();	
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	startDrpDwnOption.click();
+	System.out.println("Plan to start date selected");
+
+	validateNew(DOB,30);
+	Map<String, String> EnteredData = new HashMap<String, String>();
+	String DOBEntered = DOB.getAttribute("value");
+	System.out.println("Enetered DOB"+DOBEntered);
+	EnteredData.put("DOB",DOBEntered);
+	String part_A_Month_Entered = monthDrpDwn_PartA.getAttribute("value");
+	EnteredData.put("part_A_Month_Entered",part_A_Month_Entered);
+	String part_A_Year_Entered = yearDrpDwn_PartA.getAttribute("value");
+	EnteredData.put("part_A_Year_Entered",part_A_Year_Entered);
+	String part_B_Month_Entered = monthBDrpDwn.getAttribute("value");
+	EnteredData.put("part_B_Month_Entered",part_B_Month_Entered);
+	String part_B_Year_Entered = yearBDrpDwn.getAttribute("value");
+	EnteredData.put("part_B_Year_Entered",part_B_Year_Entered);
+	String startDateEntered = startDrpDwn.getAttribute("value");
+	EnteredData.put("startDateEntered",startDateEntered);
+	System.out.println("Enetered Info"+EnteredData.toString());
+	System.out.println("Expected info"+EnteredData.toString());
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}		
+	ViewPlanMedSupPage.click();
+	return EnteredData;
+
 }
 
 public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
@@ -3455,6 +3580,20 @@ catch (Exception e) {
 	Assert.assertFalse("Application has not been retrived successfully", false);
 }
 }
+//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
+	//a[contains(@class, 'EBRC')]
+	
+	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	private WebElement DecisionGuideLink;
+	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
+		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
+		DecisionGuideLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("medicare-information.html"))
+			return new IsDecisionGuideStep1(driver);
+		else
+			return null;
+	}
 
 	/**
 	 * Validate Create Profile Prompt
@@ -3585,6 +3724,8 @@ catch (Exception e) {
 	private WebElement comparePgnHeader;
 
 	private ArrayList<String> stringList;
+
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3791,7 +3932,17 @@ catch (Exception e) {
 	    return stringList;
 
 	}
+	public void setMap(Map<String, ArrayList<String>> dataMap) {
 		
+	    this.dataMap = dataMap;
+
+	}
+	
+	public  Map<String, ArrayList<String>> getMap(){
+	    return dataMap;
+
+	}
+	
 	/**
 	 * Navigate to Visitor Profile Page
 	 * @return
@@ -3892,6 +4043,20 @@ catch (Exception e) {
 
 		} 
 	}
+public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+        List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+	
+	}
 	/**
 	 * Save all the plans specified to the plan type and plan names
 	 * @param savePlanNames
@@ -3965,5 +4130,6 @@ catch (Exception e) {
 		}
 	}
 }
+
 
 

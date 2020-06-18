@@ -1,10 +1,12 @@
 package pages.regression.formsandresources;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,23 +22,21 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.memberrdesignVBF.TestHarness;
-import pages.regression.claims.ClaimsSummaryPage;
-import pages.regression.myDocumentsPage.MyDocumentsPage;
-import pages.regression.payments.PaymentHistoryPage;
+
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.TestHarness;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.payments.PaymentHistoryPage;
 
 
 @SuppressWarnings("deprecation")
