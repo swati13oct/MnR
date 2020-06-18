@@ -70,7 +70,7 @@ public class RecurringConfirmationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(MakeOneTimePaymentLink);
+		validate(PaymentMethod);
 	}
 	
 	public void deletePaymetnRecordFromGPS(Map<String, String> paymentTypeMap) {
