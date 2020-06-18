@@ -684,7 +684,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200 or 206. Actual value="+statusValue, statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
