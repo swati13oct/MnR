@@ -16,26 +16,26 @@ Examples:
 |health-plans/estimate-drug-costs.html|
 |health-plans/aarp-pharmacy.html|
 
-@header_2 @samChatCall_1
+@header_2 @samChatCall_1 
 Examples: 
 | pagename |
 |terms-of-use.html|
 |profile.html|
 |browser-update-page.html|
 
-@healthplans_1 @samChatCall_1
+@healthplans_1 @samChatCall_1 @samChatRegression
 Examples:
 | pagename |
 |health-plans.html| 
 |health-plans/shop.html|
 
-@healthplans_2 @samChatCall_1
+@healthplans_2 @samChatCall_1 
 Examples:
 | pagename |
 |health-plans/shop/renew-active.html|
 |health-plans/shop/medicare-advantage-plans.html|
 
-@healthplansma_1 @samChatCall_1
+@healthplansma_1 @samChatCall_1 @samChatRegression
 Examples:
 | pagename |
 |health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html|
@@ -44,7 +44,7 @@ Examples:
 |health-plans/enroll/ma-enrollment.html|
 
 
-@healthplansma_2 @samChatCall_2
+@healthplansma_2 @samChatCall_2 @samChatRegression
 Examples:
 | pagename |
 |health-plans/resources/ma-resources-materials.html|

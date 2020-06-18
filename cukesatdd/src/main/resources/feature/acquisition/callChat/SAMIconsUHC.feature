@@ -14,10 +14,9 @@ Examples:
 | pagename |
 |/|
 |plan-recommendation-engine.html|
-#|medicare-plans.html|
 |health-plans/estimate-drug-costs.html|
 
-@headerUHC_2 @samChatCall_1
+@headerUHC_2 @samChatCall_1 
 Examples: 
 | pagename |
 |health-plans/aarp-pharmacy.html|
@@ -25,33 +24,33 @@ Examples:
 |profile.html|
 |browser-update-page.html|
 
-@healthplansUHC_1 @samChatCall_1
+@healthplansUHC_1 @samChatCall_1 @samChatRegression
 Examples:
 | pagename |
 |health-plans.html| 
 |health-plans/shop.html|
 
-@healthplansUHC_2 @samChatCall_1
+@healthplansUHC_2 @samChatCall_1 
 Examples:
 | pagename |
 |health-plans/shop/renew-active.html|
 |health-plans/shop/medicare-advantage-plans.html|
 
-@healthplansmaUHC_1 @samChatCall_1
+@healthplansmaUHC_1 @samChatCall_1 @samChatRegression
 Examples:
 | pagename |
 |health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html|
 |health-plans/shop/estimate/ma-costs.html|
 |health-plans/shop/compare/compare-ma.html|
 
-@healthplansmaUHC_2 @samChatCall_2
+@healthplansmaUHC_2 @samChatCall_2 @samChatRegression
 Examples:
 | pagename |
 |health-plans/enroll/ma-enrollment.html|
 |health-plans/resources/ma-resources-materials.html|
 |health-plans/resources/ma-resources-materials/ma-information-forms.html|
 
-@healthplansmaUHC_3 @samChatCall_2
+@healthplansmaUHC_3 @samChatCall_2 @samChatRegression
 Examples:
 | pagename |
 |health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html|
@@ -59,7 +58,7 @@ Examples:
 |health-plans/shop/medicare-advantage-plans/wellness-discounts.html|
 |health-plans/shop/medicare-advantage-plans|health-care-management.html|
 
-@healthplanspdpUHC_1 @samChatCall_2
+@healthplanspdpUHC_1 @samChatCall_2 @samChatRegression
 Examples:
 | pagename |
 |health-plans/shop/prescription-drug-plans.html|
