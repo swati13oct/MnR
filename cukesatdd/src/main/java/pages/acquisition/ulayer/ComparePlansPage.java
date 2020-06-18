@@ -113,12 +113,21 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplan;
-
+	
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
+	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//a[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")
+	private WebElement Newremove4thplan;
+	
+	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//div[contains(@ng-if,'planName')]")
+	private WebElement Newremove4thplanName;
+	
 	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
 	private WebElement add3Plan;
+	
+	@FindBy(xpath="//button[@id='addanotherplanbutton']")
+	private WebElement addPlanButton;
 	
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
@@ -507,7 +516,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
-		validateNew(removeLink);
+		//validateNew(removeLink);
 		//validateNew(viewDetailslink);
 		//validateNew(savePlanIcon);
 		System.out.println("Validated all links plan compare");
@@ -519,6 +528,15 @@ public class ComparePlansPage extends UhcDriver {
 		String PlanName=remove4thplanName.getText();
 		System.out.println("4th plan name is : " + PlanName );
 		remove4thplan.click();
+		System.out.println("Clicked on Remove Link on plan Compare page");
+
+	}
+	
+	public void clickOnNewRemoveLink(){
+		validateNew(Newremove4thplan);
+		String PlanName=Newremove4thplanName.getText();
+		System.out.println("3rd plan name is : " + PlanName );
+		Newremove4thplan.click();
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
 	}
@@ -546,6 +564,21 @@ public class ComparePlansPage extends UhcDriver {
  		return null;
      }
 	
+	public VPPPlanSummaryPage clickOnNewAddIcon(){
+    	 
+    	 validateNew(addPlanButton);
+    	 addPlanButton.click();
+ 		try {
+ 			Thread.sleep(4000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		if(currentUrl().contains("#/plan-summary"))
+ 			return new VPPPlanSummaryPage(driver);
+ 		return null;
+     }
+	
 	public void validatenewlyAddPlan() {
    	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
 		int plansForCompare=allMAPlans.size();
@@ -556,6 +589,15 @@ public class ComparePlansPage extends UhcDriver {
 		else Assert.assertTrue(false); 		
 	}
 		
+	public void validatenewlyAddPlanonNewPlanComapre() {
+	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//th[@ng-repeat='plan in count']//div[contains(@ng-if,'planName')]"));	
+			int plansForCompare=allMAPlans.size();
+			if (plansForCompare == 3) {
+				Assert.assertTrue(true);
+				System.out.println("Verified Three plans Added on plan compare");
+			}
+			else Assert.assertTrue(false); 		
+		}
 	public void validatePlansAddedonPlancompareforVisitorProfile() {
 		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
 		int plansForCompare = allMAPlans.size();

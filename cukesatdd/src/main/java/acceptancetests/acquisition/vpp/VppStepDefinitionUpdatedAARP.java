@@ -2208,6 +2208,12 @@ public class VppStepDefinitionUpdatedAARP {
 		planComparePage.clickOnRemoveLink();
 	}
 
+	@Then("^remove one plan from new plan compare page for AARP$")
+	public void remove_one_plan_from_new_plan_compare_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewRemoveLink();
+	}
 	@Then("^click on back to plans on plan compare page for AARP$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_AARP() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
@@ -2254,6 +2260,14 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnAddIcon();
 	}
+	
+	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for AARP$")
+	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewAddIcon();
+	}
+
 
 	@Then("^check one plan and add it to plancompare for AARP")
 	public void check_one_plan_and_add_it_to_plancompare_for_AARP() throws Throwable {
@@ -2273,6 +2287,13 @@ public class VppStepDefinitionUpdatedAARP {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatenewlyAddPlan();
+	}
+	
+	@Then("^Verify newly added plan displayed on new plan compare page for AARP$")
+	public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatenewlyAddPlanonNewPlanComapre();
 	}
 
 	@Then("^verify plan compare checkbox is not visible on plan summary on AARP$")
