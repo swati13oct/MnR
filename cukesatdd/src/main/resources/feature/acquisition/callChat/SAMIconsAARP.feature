@@ -12,7 +12,7 @@ Then the user validates whether chat icon is visible on AARP
 Examples: 
 | pagename |
 |/|
-|medicare-plans.html|
+|plan-recommendation-engine.html|
 |health-plans/estimate-drug-costs.html|
 |health-plans/aarp-pharmacy.html|
 
