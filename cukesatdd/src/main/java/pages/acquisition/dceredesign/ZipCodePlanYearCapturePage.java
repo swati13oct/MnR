@@ -26,7 +26,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='county']")
 	public WebElement countyDropdown;
 
-	@FindBy(xpath = "//select[@id='plan-year']")
+	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary']")
@@ -63,6 +63,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public void selectPlanYear() {
+		planYearDropdown.click();
 		Select planYear = new Select(planYearDropdown);
 		planYear.selectByIndex(1);
 	}
@@ -140,18 +141,18 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
-		continueBtn.click();
+		//continueBtn.click();
 	}
 	
-	public ZipCodePlanYearCapturePage verifyReviewDrugCostPageDisplayed() {
-		try {
-		if(reviewDrugCostPageHeading.isDisplayed());
-		Assert.assertTrue("Review drug cost page not displayed", true);
-		return new ZipCodePlanYearCapturePage(driver);
+	public void verifyReviewDrugCostPageDisplayed() {
+			CommonUtility.waitForPageLoad(driver,reviewDrugCostPageHeading , 30);
+			System.out.println("wait completed");
+		if(validateNew(reviewDrugCostPageHeading)) {
+			System.out.println("after wait completed");
+			Assert.assertTrue("Review drug cost page not displayed", true);
 		}
-		catch(Exception e) {
-			Assert.assertTrue("Review drug cost page not displayed", false);
+		else {
+		Assert.assertTrue("Review drug cost page not displayed", false);
 		}
-		return null;
 	}
 }
