@@ -5,7 +5,7 @@ Feature: 1.02.1 Member Profile page - Prod
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPProfileAndPreferences |
 
-    @prod_accountProfile01
+  @prod_accountProfile01
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -28,7 +28,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
 
   @prod_accountProfile02
-  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile and preferences for a Federal member
+  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -38,18 +38,15 @@ Feature: 1.02.1 Member Profile page - Prod
     And user clicks on member to select
     And user stores test input for validations
       | Username    | <MemUserName> |
-      | Plan Type   | <planType>    |
+      #| Plan Type   | <planType>    |
       | Member Type | <memberType>  |
-    Then the user navigates to Profile and Preferences page
-    #Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
+    #-------------- navigate to the target test page for testing
+    When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    #Then the email address section should be verified
-    #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
-    And the user verifies the Temporary Address Link on the Account settings page
-    Then the user validates Communication Preferences section
-    #And the user validates sign up today link
-    #Then the user validates the presence of Back to Profile and Preferences links
+    #Then the user validates the Phone section with iframe
+      #| Plan Type | <planType> |
+    Then the user validate the temporary address section for  member
     And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
 
@@ -59,7 +56,6 @@ Feature: 1.02.1 Member Profile page - Prod
       | Unknown_8  | ashah120 | Mnrqa002 | KAYCEE0412        | GrpPDP   | PDP_Group          |
       | Unknown_9  | ashah120 | Mnrqa002 | TOMIKOARMER2      | MA       | MA_UHCIndividual   |
       | Unknown_11 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
-
 
   @prod_accountProfile03
   Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members

@@ -53,23 +53,23 @@ Feature: 1.02.1 Member Profile page - Member Auth
     And user clicks on member to select
     And user stores test input for validations
       | Username    | <MemUserName> |
-      | Plan Type   | <planType>    |
+      #| Plan Type   | <planType>    |
       | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
     Then the user validates permanent address section
-#    Then the user validates the Phone section with iframe
-      | Plan Type | <planType> |
+    #Then the user validates the Phone section with iframe
+     # | Plan Type | <planType> |
     Then the user validate the temporary address section for  member
     And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples:
-      | TID     | username  | password  | MemUserName         | planType | memberType                     |
-      | 15083_1 | qavgogine | qavgogine | q2_jun_grp0099      | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
-      | 15083_2 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | MA_AARP_GOGreen_Profilepref    |
-      | 15083_3 | qavgogine | qavgogine | q2_jun_aarp0179     | PDP      | PDP_AARP_GOGreen_Profilepref   |
+      | TID     | username  | password  | MemUserName         |  memberType                     |
+      | 15083_1 | qavgogine | qavgogine | q2_jun_grp0099      | MAPD_GROUP_GOGreen_Profilepref |
+      | 15083_2 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA_AARP_GOGreen_Profilepref    |
+      | 15083_3 | qavgogine | qavgogine | q2_jun_aarp0179     | PDP_AARP_GOGreen_Profilepref   |
 
   @memAuth_accountProfile04 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
