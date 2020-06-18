@@ -319,7 +319,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//tbd if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
 			//tbd  		|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
 			//tbd 	testInputInfoMap.put("expectedUrl", "PotentialContractTermination_UHC.pdf");
-			if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
 				if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
 				  		|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
 				 	testInputInfoMap.put("expectedUrl", "PotentialContractTermination_UHC.pdf");
