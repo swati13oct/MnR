@@ -11,4 +11,4 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
     Examples: 
       | excelPath                   | workSheet | site |
-      | PlanBenefits_Validation_Data | PlanBenefits  | AARP |
+      | PlanBenefits_Validation_Data | Sheet1  | AARP |

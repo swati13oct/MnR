@@ -15,13 +15,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
+
+import org.apache.poi.hssf.record.cf.PatternFormatting;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+
+
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -104,10 +112,17 @@ public class VppPlanValidationStepDefinition {
 			int lastRow = sheet.getLastRowNum();
 			Workbook ResultWorkbook = new HSSFWorkbook();
 			Sheet ResultsSheet = ResultWorkbook.createSheet("PlanBenefitsResults");
+			
+			CellStyle stylePassed = ResultWorkbook.createCellStyle();
+			stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+			stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			
+			CellStyle styleFailed = ResultWorkbook.createCellStyle();
+			styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
+			styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			  
 		//Setting First Row for Results excel
-		
-		
-		
+
 			try {
 				 Iterator<Row> rowIterator = sheet.iterator();
 				 AepPlanDetailsPage planDetailsPage = null;
@@ -120,55 +135,44 @@ public class VppPlanValidationStepDefinition {
 		            {
 					 	int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
-		                Row row = sheet.getRow(rowIndex);
+					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
-		                Row resultsRow = ResultsSheet.createRow(rowIndex);
+		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 		                
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
 		                	 boolean valueMatches = true;
-				             Cell cell = cellIterator.next();
+		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             currentCellValue = cell.getStringCellValue();
 			                 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
-			               //  System.out.println("INSIDE Cell");
-			                 Cell newCell = resultsRow.createCell(cellIndex);
+			           
+			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 							 newCell.setCellValue(cell.getStringCellValue());
-							 
+							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 								  
 								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 								  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
-								 }
-								 if(!(currentCellValue.contains("NA")||currentCellValue.contains("N/A")||currentCellValue.equalsIgnoreCase("No coverage")))
-									  valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
-								 else
-									 System.out.println("NA value for "+currentColName+ " for value "+ currentCellValue);
-								 //else here we can add logic to check that the columnname value is not there in the hashmap for negative testing
 								 
-								 	
-								 if(!(currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("plan id")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
-								 		if(!valueMatches) {
-					                    //	System.out.println("value didn't match - setting color to Red");
-					                    	CellStyle style = ResultWorkbook.createCellStyle();
-					            			style.setFillForegroundColor(IndexedColors.RED.getIndex());
-					            		    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-					            		    newCell.setCellStyle(style);
+								 }
+								  valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+								 
+								
+								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("plan id")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 		System.out.println(currentColName + " : "+ valueMatches);
+									 	if(!valueMatches) {
+					                    
+									 		newCell.setCellStyle(styleFailed);
 								 		}else {
-					                    	//System.out.println("value matched - setting color to Green");
-					                    	CellStyle style = ResultWorkbook.createCellStyle();
-					            			style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
-					            		    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-					            		    newCell.setCellStyle(style);
+					                    					
+								 			newCell.setCellStyle(stylePassed);
+								 
 									  }
 								 }
-							 }
-	
-							  
-		                    
-							 
-							 
+							 } 
+
 							  cellIndex++;
 		                 }
 		            }
