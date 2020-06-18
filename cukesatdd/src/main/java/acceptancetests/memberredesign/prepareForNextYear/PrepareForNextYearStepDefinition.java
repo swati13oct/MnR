@@ -63,8 +63,6 @@ public class PrepareForNextYearStepDefinition {
 	@SuppressWarnings("unchecked")
 	public void finalCheckSysDate(Scenario scenario) { 
 		if (!MRScenario.environment.contains("team-a")) {
-			System.out.println("will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now");
-			//Assert.assertTrue("PROBLEM - will only work with system time change on team env.  You are trying to run this on env='"+MRScenario.environment+"', aborting test now", false);
 			return;
 		}		
 
