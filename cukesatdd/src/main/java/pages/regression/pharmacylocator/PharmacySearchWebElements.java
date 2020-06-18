@@ -22,7 +22,7 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//a[@dtmid='Dtmid MapDirections']")
 	protected List<WebElement> getDirectionLnk;
 
-	@FindBy(xpath="//a[contains(@href,'contact-us.html')]")
+	@FindBy(xpath="//a[contains(@href,'/member/contact-us/overview.html')][contains(text(), 'contact UnitedHealthcare')]")
 	protected WebElement contactUnitedHealthCare;
 
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
@@ -246,6 +246,10 @@ public class PharmacySearchWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//h2[@class='atdd-need-help']")
 	protected WebElement needHelpHeader;
+	
+	@FindBy(xpath="//h1[contains(text(),'Help & Contact Us')]")
+	protected WebElement contactUsHeader;
+	
 
 	@FindBy(xpath="//body")
 	protected WebElement timeJson;

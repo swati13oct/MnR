@@ -139,10 +139,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Thread.sleep(5000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
 				String currentURL=driver.getCurrentUrl();
-				String expectedURL="contact-us.html";
+				String expectedURL="contact-us";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
 						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
+				Assert.assertTrue("PROBLEM - unable to find Contact Us Header on Contact us Page. ",
+						pharmacyValidate(contactUsHeader));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);

@@ -5,7 +5,7 @@ Feature: 1.02.1 Member Profile page - Prod
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPProfileAndPreferences |
 
-    @prod_accountProfile12
+    @prod_accountProfile01
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -27,7 +27,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | Unknown_6 | ashah120 | Mnrqa002 | memeterry29 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
 
 
-  @prod_accountProfile13
+  @prod_accountProfile02
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile and preferences for a Federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -58,11 +58,10 @@ Feature: 1.02.1 Member Profile page - Prod
       | Unknown_7  | ashah120 | Mnrqa002 | LSLOMSKI777       | PDP      | PDP_AARPIndividual |
       | Unknown_8  | ashah120 | Mnrqa002 | KAYCEE0412        | GrpPDP   | PDP_Group          |
       | Unknown_9  | ashah120 | Mnrqa002 | TOMIKOARMER2      | MA       | MA_UHCIndividual   |
-      | Unknown_10 | ashah120 | Mnrqa002 | TOMIKOARMER2      | MA       | MA_UHCGroup        |
       | Unknown_11 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
 
 
-  @prod_accountProfile14
+  @prod_accountProfile03
   Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -89,7 +88,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | TID        | username | password | MemUserName | planType | memberType |
       | Unknown_13 | ashah120 | Mnrqa002 | marylamb823 | MA       | PCP        |
 
-  @prod_accountProfile15
+  @prod_accountProfile04
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -117,7 +116,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | TID        | username | password | MemUserName | planType | memberType        |
       | Unknown_15 | ashah120 | Mnrqa002 | erbenoit56  | MAPD     | Terminated_AccPro |
 
-  @prod_accountProfile019
+  @prod_accountProfile05
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

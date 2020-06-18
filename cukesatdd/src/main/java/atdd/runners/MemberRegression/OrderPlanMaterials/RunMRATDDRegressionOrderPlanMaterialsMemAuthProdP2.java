@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-        jsonReport = "target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProd.json",detailedReport = true, detailedAggregatedReport = true,
-        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsMemAuthProd")
+        jsonReport = "target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2.json",detailedReport = true, detailedAggregatedReport = true,
+        overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
         features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProd.json" }, tags = { "@prod_orderPlanMaterials02"})
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2.json" }, tags = { "@prod_orderPlanMaterials02"})
 public class RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2 {
 //,@regression_06_06_18
 }

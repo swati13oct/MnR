@@ -32,17 +32,18 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
    # Then the user validates the Save Preferences Button
     Then the user validates the Note Section on Preferences Page
 #    Then the user validates the presence of Back links on Preferences page
-
+   @prod_CommunicationPreferences1a
      Examples: 
-      | TID   | username  | password  | MemUserName     | userSelection | planType                         |
+      | TID   | username  | password  | MemUserName     | userSelection | planType                   |
       | 15311 | ashah120 | Mnrqa002 | DSOADY17    | xxxxx         | MAPD_AARP_GOGreen_Profilepref    |
-      | 15312 | ashah120 | Mnrqa002 | TOMIKOARMER2    | xxxxx         | MA_AARP_GOGreen_Profilepref      |
-      | 15313 | ashah120 | Mnrqa002 | LSLOMSKI777    | xxxxx         | PDP_AARP_GOGreen_Profilepref     |
-     #note: need user data with segment id non-000 AND EPMP enabled for below case
-     #| xxxxx | Mnrqa002 | Mnrqa002 | testusername    | xxxxx         | MA_001_AARP_GOGreen_Profilepref  |
-       | 15314 | ashah120 | Mnrqa002 | TEAKSAMPPALA1    | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
-     # | 15315 | ashah120 | Mnrqa002 | testusername    | xxxxx         | MA_UHC_GOGreen_Profilepref      |
-      | 15316 | ashah120 | Mnrqa002 | WILLIAMGARRISON48    | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
+      | 15312 | ashah120 | Mnrqa002 | TOMIKOARMER2    | xxxxx         | MA_AARP_GOGreen_Profilepref  |
+      
+    @prod_CommunicationPreferences1b
+        Examples: 
+      | TID   | username | password  | MemUserName      | userSelection | planType                        |
+      | 15313 | ashah120 | Mnrqa002 | LSLOMSKI777       | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
+      | 15314 | ashah120 | Mnrqa002 | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
+      | 15316 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
 
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
