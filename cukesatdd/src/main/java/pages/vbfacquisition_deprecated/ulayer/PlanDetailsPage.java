@@ -16,11 +16,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import pages.vbfacquisition_deprecated.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.vbfacquisition_deprecated.ole.WelcomePage;
 
 /**
  * @author gumeshna

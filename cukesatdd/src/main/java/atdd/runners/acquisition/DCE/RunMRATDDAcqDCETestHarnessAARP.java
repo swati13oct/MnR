@@ -1,8 +1,7 @@
 package atdd.runners.acquisition.DCE;
 
 
-import org.junit.runner.RunWith;		
-
+import org.junit.runner.RunWith;
 
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;

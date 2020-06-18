@@ -80,11 +80,14 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']")
+	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
 	private WebElement planBasedInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-1']")
 	private WebElement MAPlanInfo;
+	
+	@FindBy(css = "a#change-location")
+	private WebElement changeZIPVPP;
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] span.ng-binding")
 	private WebElement MAPlanCount;
@@ -316,6 +319,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		String recom1 = "#1 Recommendation";
 		String recom2 = "#2 Recommendation";
 		if (tie == false) {
+			Assert.assertTrue(planBasedInfo.getText().toUpperCase().contains("BASED"),"Text box is not availabe");
 			checkRecommendationCount(R1, recom1, R2, recom2);
 			validateRecommendations(R1, recom1, R2, recom2);
 			validateRecommendationPlan(R1);
@@ -519,19 +523,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
 			flow = PlanRecommendationEngineStepDefinition.PREflow;
 			DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+			boolean remove = true;
 			int count =DrugsInPRE.size();
 			drugsCoveredInVPP(count);
 			removeDrugs(count);
 			vppToPre();
-			validateDrugPage(flow);
+			validateDrugPage(flow, true);
 		}
 		
 		public void startnowtilldrugs() {
 			System.out.println("Navigating to PRE Using StartNow: ");
 			flow = PlanRecommendationEngineStepDefinition.PREflow;
 			vppToPre();
-			validateDrugPage(flow);
-			startNowFullFlow(flow);
+			validateDrugPage(flow, false);
 		}
 		
 		public void DrugsDetailsVPPtoPRE() {
@@ -633,7 +637,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	}
 	
 
-	public void validateDrugPage(String plan) {
+	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
 		int MAPD = 7;
@@ -655,9 +659,12 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 				pageloadcomplete();
 			}
 		}
-		
+		if(removedrug==true) {
+			DrugsList = DrugsList;	
+		}else {
+			DrugsList = drug.drugNames;
+		}
 		ModelDrugsList = drug.drugnamesList();
-		DrugsList = drug.drugNames;
 		System.out.println("DrugsList Size is : "+DrugsList.size());
 		System.out.println("ModelDrugsList Size is : "+ModelDrugsList.size());
 		verifyConfirmationmodalResults(DrugsList.size(), DrugsList,ModelDrugsList);
@@ -665,9 +672,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public void startNowFullFlow(String plan) {
 		System.out.println("Validating Start Now Full flow in PRE");
-		int MAPD = 4;
+		int MAPD = 1;
 		int PDP = 2;
-		int None = 4;
+		int None = 1;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
@@ -702,6 +709,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public ArrayList<String> getProvidersVPP() {
 		threadsleep(5000);
+		pageloadcomplete();
 		providersInfoMA1stPlan.click();
 		vppProviderResults = new ArrayList<String>();
 		for(WebElement e:providersListMA1stPlan) {
@@ -985,7 +993,7 @@ public List<String> getAPIPlansRanking(String rankingJSON, String givenPlanType)
 
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
-	JSONArray jarray= new JSONArray();;
+	JSONArray jarray = new JSONArray();;
 	try {
 		jarray = (JSONArray) parser.parse(rankingJSON);
 	} catch (ParseException e) {
@@ -1007,10 +1015,9 @@ public List<String> getAPIPlansRanking(String rankingJSON, String givenPlanType)
 			System.out.println("priority : " + priority);
 			jarray = (JSONArray) jsonObj.get("planResponses");
 			System.out.println("Total Plans : " + jarray.size());
-			if(jarray.size()==0)
+			if (jarray.size() == 0)
 				break;
-			int j = 0;
-			while (j < jarray.size()) {
+			for (int j = 0; j < jarray.size(); j++) {
 				System.out.println(jarray.get(j));
 				jsonObj = (JSONObject) jarray.get(j);
 				String apiRank = (String) jsonObj.get("rank");
@@ -1020,12 +1027,27 @@ public List<String> getAPIPlansRanking(String rankingJSON, String givenPlanType)
 					String planID = (String) jsonObj.get("planId");
 					System.out.println(planID);
 					rankingOrder.add((String) jsonObj.get("planId"));
-					j++;
+				}
+				else {
+					System.out.println("JSON Ranking Order changed finding accurate Rank...");
+					for (int k = 0; k < jarray.size(); k++) {
+						//System.out.println(jarray.get(k));
+						jsonObj = (JSONObject) jarray.get(k);
+						apiRank = (String) jsonObj.get("rank");
+						//System.out.println("Rank : " + apiRank);
+						if (Integer.parseInt(apiRank) == j + 1) {
+							String planID = (String) jsonObj.get("planId");
+							System.out.println(planID);
+							rankingOrder.add((String) jsonObj.get("planId"));
+							break;
+						}
+					}
 				}
 			}
 			break;
 		}
 	}
+	Assert.assertTrue(rankingOrder.size()==jarray.size(), "API ranking count is not in sync with plans count");
 	return rankingOrder;
 }
 
@@ -1084,6 +1106,26 @@ public String getplanId(WebElement plan) {
 	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 	System.out.println("UI Plan ID : "+planId);
 	return planId;
+}
+
+public void checkVPP(boolean isPREVPP) {
+	if (isPREVPP) {
+		try {
+			validate(changeZIPVPP, 20);
+			System.out.println(changeZIPVPP.getText());
+			Assert.assertTrue(false, "Not an Expected PRE->VPP page");
+		} catch (Exception e) {
+			System.out.println("PRE VPP page displayed");
+		}
+	} else {
+		try {
+			System.out.println(planBasedInfo.getText().toUpperCase().contains("BASED"));
+			Assert.assertTrue(false, "Not an Expected VPP page");
+		} catch (Exception e1) {
+			validate(changeZIPVPP, 30);
+			System.out.println(changeZIPVPP.getText());
+		}
+	}
 }
 	
 }
