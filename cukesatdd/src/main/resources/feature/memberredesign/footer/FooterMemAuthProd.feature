@@ -138,7 +138,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
-    Then user validates Need Help section content for payment page
+    #Then user validates Need Help section content for payment page
     #Then the user navigates to claims page
     #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
