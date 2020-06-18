@@ -2,7 +2,7 @@
 Feature: 1.16 Prod Member Contact us Page 
 
 #TestCaseIndi1
-@regressionMemberPROD
+@regressionMemberPROD1
 Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for individual member on contactUs page 
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -23,7 +23,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase2  | jkuma14  | Brock@02 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCaseCombo2	
-@regressionMemberPROD
+@regressionMemberPROD1
 Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for combo member on contactUs page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -42,7 +42,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase4  | jkuma14  | Brock@02 | OLGITA@68         | ComboPdpSHIP  |				
 
 #TestCasePCP3
- @regressionMemberPROD
+ @regressionMemberPROD2
   Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for PCP member on contactUs page
  Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -63,7 +63,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	| TestCase3  | jkuma14  | Brock@02 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
 
 #TestCaseSHIP4
-  @regressionMemberPROD
+  @regressionMemberPROD2
    Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify SHIP Email Us Widget Confirm Request in contact us redesign page
    Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -96,7 +96,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
 	  
 
 #TestCaseClickTOCallCancel5
-@regressionMemberPROD
+@regressionMemberPROD2
  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify clickToCall Widget Expansion -Drop-Down, Text Box and Button UI- and click on cancel on contactUS redesign page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -114,7 +114,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
       | 15224 | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |  9999999999 |
 
 #TestCaseClickTOCallCancel6
-@regressionMemberPROD
+@regressionMemberPROD3
  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify View qquestion button and common questions on the contactUS redesign page
    Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -134,7 +134,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
       | 152255    | PCP     | jkuma14  | Brock@02 | marylamb823       |
       
 #TestCaseClickTOCallCancel7
-@regressionMemberPROD
+@regressionMemberPROD2
   Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify terminated members view on contact us redesign page
      Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
@@ -152,7 +152,7 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
       
       
 #TestCaseClickTOCallCancel8
-@regressionMemberPROD
+@regressionMemberPROD3
   Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify the See how to guide link on the contactUs page
     Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
