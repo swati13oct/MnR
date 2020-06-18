@@ -61,8 +61,8 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
-	@Then("^load screen should be displayed$")
-	public void load_screen_should_be_displayed(){
+	@Then("^load screen should be displayed in AARP$")
+	public void load_screen_should_be_displayed_in_AARP(){
 		
 	}
 	
@@ -91,14 +91,14 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 	}
 	
-	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
-	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP() {
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP in AARP$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 	}
 
-	@Then("^user enter invalid zipcode$")
-	public void user_enter_invalid_zipcode(DataTable givenAttributes) throws Throwable {
+	@Then("^user enter invalid zipcode in AARP$")
+	public void user_enter_invalid_zipcode_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -130,8 +130,8 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.selectPlanYear();
 	}
 
-	@When("^user clicks on continue button$")
-	public void user_clicks_on_continue_button(){
+	@When("^user clicks on continue button in AARP$")
+	public void user_clicks_on_continue_button_in_AARP(){
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickContinueBtn();
 	}
@@ -141,8 +141,8 @@ public class DCEStepDefinitionAARP {
 	    
 	}
 	
-	@Then("^error message should be displayed$")
-	public void error_message_should_be_displayed() {
+	@Then("^error message should be displayed in AARP$")
+	public void error_message_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
 	}

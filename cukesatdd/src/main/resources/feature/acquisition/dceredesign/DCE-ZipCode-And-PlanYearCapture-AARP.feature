@@ -29,7 +29,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | ZipCode | <zipCode> |
     And user selects plan year
     And user clicks on continue button
-    Then load screen should be displayed
+    #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
 
     Examples: 
@@ -45,14 +45,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enter invalid zipcode
+    When user enter invalid zipcode in AARP
       | inValidzipCode | <invalidzipcode2> |
-    Then error message should be displayed
+    Then error message should be displayed in AARP
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user selects plan year
-    And user clicks on continue button
-    Then load screen should be displayed
+    And user clicks on continue button in AARP
+    #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
 
     Examples: 
@@ -69,7 +69,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     And the user validates whether call icon is visible on AARP
     And the user validates whether chat icon is visible on AARP
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP
+    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     Then the user validates whether call icon is visible on AARP
     Then the user validates whether chat icon is visible on AARP
 
