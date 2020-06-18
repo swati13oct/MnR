@@ -2083,7 +2083,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
 				getJmpLinkToPrimaryCareProvider().isDisplayed());
 		if (rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+			Assert.assertTrue("jmpLinkToOptionalServices(Riders) isn't displayed",
 					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
