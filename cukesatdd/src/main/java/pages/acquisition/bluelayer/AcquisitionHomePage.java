@@ -1849,6 +1849,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
 		}else if(MRScenario.environment.equalsIgnoreCase("stage")){
 			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")){
+			startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod")){
+			startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("prod-aarp")){
+			startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("prod")){
+			startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html/"), browser);
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
