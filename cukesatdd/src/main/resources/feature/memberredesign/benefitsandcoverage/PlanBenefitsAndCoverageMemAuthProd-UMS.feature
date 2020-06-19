@@ -343,7 +343,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15098 | ashah120|Mnrqa002|Julieaerni41 |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
-  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @prod_BnC_Part4
+  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @prod_BnC_Part4 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -694,7 +694,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates contactus section
 
     Examples: 
-      | TID|username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | | UpdatedLanguage | DisplayFlag |
+      | TID|username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | UpdatedLanguage | DisplayFlag |
      |15246|ashah120| Mnrqa002|bcatal01 |MAPD | Group_BnC | NON LIS | ENGLISH| Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary | Tier 2  | true |
       
  #TC24_Group NON LIS_PDP
@@ -965,7 +965,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
       | 15377 |ashah120| Mnrqa002|CORCORAN@8 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
       
-   @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @prod_BnC_Part8 
+   @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @prod_BnC_Part8
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
