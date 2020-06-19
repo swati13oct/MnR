@@ -445,7 +445,7 @@ public class MemberAuthPage extends UhcDriver {
 	}
 	
 	public void emailAddressRequiredWorkaround() {
-		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
 				System.out.println("User encounted email splash page, handle it...");
