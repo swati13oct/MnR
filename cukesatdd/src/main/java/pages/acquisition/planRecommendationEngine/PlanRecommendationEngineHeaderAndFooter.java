@@ -603,7 +603,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		actions.moveToElement(headerShopLink).click().build().perform();
+		headerShopLink.click();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
 		validate(landingpageHeader, 30);
