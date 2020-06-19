@@ -109,6 +109,12 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='proceed-link']")
 	protected WebElement proceedLink;
 
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement goGreenGoToHomepageBtn;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement emailGoToHomepageBtn;
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -417,12 +423,13 @@ public class MemberAuthPage extends UhcDriver {
 	public void goGreenSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
-				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					if (validate(goToHomepage,0)) {
+					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
-						goToHomepage.click();
+						goGreenGoToHomepageBtn.click();
 					}
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
@@ -438,14 +445,19 @@ public class MemberAuthPage extends UhcDriver {
 	}
 	
 	public void emailAddressRequiredWorkaround() {
-		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-				System.out.println("User encounted no-email page, handle it...");
-				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted email splash page, handle it...");
+				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					System.out.println("'Go To Homepage' button showed up, click it");
-					goToHomepage.isDisplayed();
-					goToHomepage.click();
+					//tbd System.out.println("'Go To Homepage' button showed up, click it");
+					//tbd goToHomepage.isDisplayed();
+					//tbd goToHomepage.click();
+					if (validate(emailGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						emailGoToHomepageBtn.click();
+					}
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}

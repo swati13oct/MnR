@@ -111,6 +111,13 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	@FindBy(xpath="//input[@id='hsid-password']")
 	protected WebElement oldPassword;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement goGreenGoToHomepageBtn;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement emailGoToHomepageBtn;
+
 	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
@@ -673,16 +680,17 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 		} 
 	}
-	
+
 	public void goGreenSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
-				WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					if (validate(goToHomepage,0)) {
+					//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
-						goToHomepage.click();
+						goGreenGoToHomepageBtn.click();
 					}
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
@@ -697,9 +705,10 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 	
 	public void emailAddressRequiredWorkaround(String username) {
-		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
-				System.out.println("User encounted no-email page, will enter email address to proceed");
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted email splash page, handle it");
 				try {
 					/* note: instead of entering email, click Go to Homepage directly
 					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
@@ -717,11 +726,13 @@ public class HSIDLoginPage extends UhcDriver {
 						e.printStackTrace();
 					}
 					 */
-					WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 					try {
-						System.out.println("'Go To Homepage' button showed up, click it");
-						goToHomepage.isDisplayed();
-						goToHomepage.click();
+						//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+						if (validate(emailGoToHomepageBtn,0)) {
+							System.out.println("'Go To Homepage' button showed up, click it");
+							//goToHomepage.isDisplayed();
+							emailGoToHomepageBtn.click();
+						}
 					} catch (Exception e1) {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
