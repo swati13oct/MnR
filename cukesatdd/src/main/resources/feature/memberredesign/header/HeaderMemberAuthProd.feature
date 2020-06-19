@@ -1,5 +1,5 @@
 @header @thePredators @member_redesign
-Feature: 1.08.1 Member Header/Navigation validation - Member Auth
+Feature: 1.08.1 Member Header/Navigation validation - PROD
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
   @prod_header01
