@@ -1,4 +1,4 @@
-@regressionMemberProd
+@regressionMemberPROD
 Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
   @regressionMemberPROD @regressionMemberPRODChatSHIP

@@ -31,7 +31,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
     Then the user validates the I have read checkbox and check it
    # Then the user validates the Save Preferences Button
     Then the user validates the Note Section on Preferences Page
-    Then the user validates the presence of Back links on Preferences page
+#    Then the user validates the presence of Back links on Preferences page
 
      Examples: 
       | TID   | username  | password  | MemUserName     | userSelection | planType                         |
@@ -96,7 +96,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
     Examples: 
       | TID   | username  | password  | MemUserName     | planType               |
       #| 15310 | ashah120 | Mnrqa002 | testusername    | SSUP_ProfilePref       |
-      | 15376 | ashah120 | Mnrqa002 | erbenoit56    | Terminated_ProfilePref |
-      | 15308 | ashah120 | Mnrqa002 | marylamb823     PCP_ProfilePref        |
+#      | 15376 | ashah120 | Mnrqa002 | erbenoit56    | Terminated_ProfilePref |
+      | 15308 | ashah120 | Mnrqa002 | marylamb823    | PCP_ProfilePref        |
       | 15308 | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM     | MEDICA_ProfilePref     |
       

@@ -20,7 +20,7 @@ q2_jun_aarp0024/Password@1,MAPD,Individualwithoutpharmacy_DCE,,
 q2_jun_aarp0179/Password@1,PDP,IndAARPPDP_Pharmacylocator,,
 q4_grp_dec0075/Password@1,MAPD,GroupMAPD_Pharmacylocator,,
 q2_oct_uhc0001/Password@1,MAPD,Medica_Pharmacylocator,,
-q3_sep_aarp00982/Password@4,MAPD,PCP_Pharmacylocator,,
+q3_Sep_UAT4_Sofl022/Password@4,MAPD,PCP_Pharmacylocator,,
 q3_sep_UAT4_Group130/Password@1,MA,TexasRx_Pharmacylocator,,
 q1_apr_uhc002/Password@1,MAPD,IndMAPDUHC_Pharmacylocator,,
 q2_apr_aarp0250/Password@1,MAPD,IndAARPMAPD_Pharmacylocator,,
@@ -158,7 +158,7 @@ q2_jun_grp0372/Password@1,MAPDGroup_BnC,SingleDeductible,,
 q2_jun_grp0434/Password@1,MAPD,Group_BnC,GrpEffectiveUHC,NoRider
 q3_sept_UAT4_AARP_001/Password@1,MAPD,Individual_BnC,,
 EPMP_Enabled_087/Password@1,MAPD,Individual_BnC,NON LIS,
-q4_aarp_dec002/Password@1,MAPD,Individual_BnC,LIS 1,
+q3_sep_UAT4_UHC092/Password@1,MAPD,Individual_BnC,LIS 1,
 q2_jun_aarp0007/Password@1,MAPD,Individual_BnC,IndEffectiveAARP,NoRider
 q2_jun_aarp0054/Password@1,MAPD,Individual_BnC,IndEffectiveAARP,Rider
 q2_jun_uhc0001/Password@1,MAPD,Individual_BnC,IndEffectiveUHC,NoRider
@@ -200,15 +200,15 @@ q3_sep_UAT4_UHC017/Password@1,MAPD,MakeOneTimeCCTotal_Payments,,
 userpayment0011/Password@1,PDP,MakeOneTimeCCOther_Payments,,
 mapdSetupReccuring/Password@1,MAPD,SetupRecEFT_Payments,,
 paymentAtdduser001/Password@1,PDP,SetupRecCC_Payments,,
-q3_sep_UAT4_UHC051/Password@1,MAPD,UpdateRecurrEFT_Payments,,
+q3_sep_UAT4_MAPD_002/Password@1,MAPD,UpdateRecurrEFT_Payments,,
 q3_sep_UAT4_AARP112/Password@1,PDP,UpdateRecurrCC_Payments,,
 q2_june_rto0002/Password@2,MAPD,UpdateRecurrStop_Payments,,
 q1_feb_2020SHIP_007/Password@1,SHIP,SHIPUpdate_Payments,,
 q3_sep_UAT4_AARP168/Password@1,PDP,ComboMakeOneTimeCCTotal_Payments,,
 q3_sep_UAT4_AARP168/Password@1,PDP,ComboMakeOneTimeCCOther_Payments,,
-q3_sep_UAT4_AARP240/Password@2,PDP,ComboSetupRecEFT_Payments,,
-q3_sep_UAT4_AARP240/Password@2,PDP,ComboStepuRecCC_Payments,,
-q3_sep_UAT4_AARP113/Password@1,PDP,ComboUpdateRecurrEFT_Payments,,
+comboPaymentAtdd001/Password@1,PDP,ComboSetupRecEFT_Payments,,
+comboPaymentAtdd001/Password@1,PDP,ComboStepuRecCC_Payments,,
+Auto20200507115828_5/Password@1,PDP,ComboUpdateRecurrEFT_Payments,,
 q3_sep_UAT4_AARP116/Password@1,PDP,ComboUpdateRecurrCC_Payments,,
 q3_sep_Active_combo_006/Password@1,PDP,ComboUpdateStopRec_Payments,,
 q1_feb_SHIP_20_010/Password@1,SHIP,SHIPSetup_Payments,,
@@ -354,7 +354,7 @@ q3_sep_UAT4_Group316/Password@1,GROUPDP,,,
 groupSSUP001/Password@1,GROUPSSUP,,,
 groupPdpSSUP/Password@1,GROUPDPSSUP,,,
 grpPRePDPGrpActiveSSUP001/Password@1,PREACTIVEGRP,,,
-q3_sep_UAT4_AARP240/Password@2,ACTIVEGOVTSHIPCOMBO,,,
+ComboAtdd001/Password@1,ACTIVEGOVTSHIPCOMBO,,,
 multiGovPre_Term0214/Password@1,MULTIGOVPRETERM,,,
 ShipOnlyPreMicro1/Password@1,ACTIVEPRESHIP,,,
 activeshipmember_001/Password@1,ACTIVESHIP,,,
@@ -408,7 +408,7 @@ q3_sep_UAT4_Group316/Password@1,GROUPDP_ProfilePref,,,
 groupSSUP001/Password@1,GROUPSSUP_ProfilePref,,,
 groupPdpSSUP/Password@1,GROUPDPSSUP_ProfilePref,,,
 grpPRePDPGrpActiveSSUP001/Password@1,PREACTIVEGRP_ProfilePref,,,
-q3_sep_UAT4_AARP240/Password@2,ACTIVEGOVTSHIPCOMBO_ProfilePref,,,
+ComboAtdd001/Password@1,ACTIVEGOVTSHIPCOMBO_ProfilePref,,,
 multiGovPre_Term0214/Password@1,MULTIGOVPRETERM_ProfilePref,,,
 ShipOnlyPreMicro1/Password@1,ACTIVEPRESHIP_ProfilePref,,,
 activeshipmember_001/Password@1,ACTIVESHIP_ProfilePref,,,
@@ -446,12 +446,12 @@ q2_jun_grp0255/Password@1,PDP,COMBO_GROUP_EFF_PDnR,,
 q2_jun_grp0255/Password@1,SSP,COMBO_GROUP_EFF_PDnR,,
 q1_feb_ship_20_001/Password@1,SHIP,IND_EFF_PDnR,,
 q1_feb_2020SHIP_001/Password@1,SHIP,MULTI_IND_EFF_PDnR,,
-q3_sep_UAT4_AARP240/Password@2,COMBO,FedAndShip_MyDocuments,,
+ComboAtdd001/Password@1,COMBO,FedAndShip_MyDocuments,,
 q4_TestData_001/Password@1,MAPD,Group_MyDocuments,,
 q1_feb_2020SHIP_019/Password@1,SHIP,Medsupp,header,
 mapdtest1/Password@1,GrpMAPD,preeffectiveIndMAPD001,NON LIS,
 PHIP01/Password@1,PHIP,SHIP_EOB,,
-q3_sep_UAT4_AARP240/Password@2,PDP,COMBO_EOB,,
+ComboAtdd001/Password@1,PDP,COMBO_EOB,,
 q3_Sep_UAT4_Sofl019/Password@1,MEDICA,IND_header,,
 q2_jun_sofl0002/Password@1,PCP,IND_header,,
 q2_jun_grp0019/Password@1,MAPD,GROUP_header,,
@@ -466,7 +466,7 @@ q3_sep_Active_combo_002/Password@1,SHIP_HIP_FED,COMBO_EOB,,
 ssuponlymember02/Password@1,SSUP,SSUP_ONLY_EOB,,
 q1_feb_2020SHIP_004/Password@1,SHIP,MULTI_SHIP_EOB,,
 q2_jun_aarp0179/Password@1,PDP,LIS_EOB,,
-q3_sep_UAT4_AARP240/Password@2,PDP_SHIP,NON_LIS_COMBO_EOB,,
+ComboAtdd001/Password@1,PDP_SHIP,NON_LIS_COMBO_EOB,,
 q2_june_combo0017/Password@1,PDP_SSUP,NON_LIS_COMBO_EOB,,
 q2_jun_grp0255/Password@1,PDP_SSUP,COMBO_EOB,,
 q3_sep_Active_combo_009/Password@1,SHIP_MA,COMBO_EOB,,
@@ -488,7 +488,7 @@ q2_DreamEOB_0003/Password@1,MAPD,ES_D_NICE_EOB,,
 q2_jun_aarp0071/Password@1,MAPD,IndividualAarpPayments,,
 q3_sep_pre-effective_combo_015/Password@1,COMBO,COMBOAARPPayments2,,
 q1_mar_2020SHIP_013/Password@1,SHIP,SHIPCHAT,,
-q2_may_rally032/Password@4,MA,EXCLUDE_IHR,,
+q2_may_rally032/Password@1,MA,EXCLUDE_IHR,,
 q3_sep_UAT4_AARP203/Password@1,MA,IHR,,
 q3_sep_UAT4_Group029/Password@4,MAPD,GROUP_IHR,,
 q1_feb_ship_20_001/Password@1,SHIP_MEDICARE SUPPLEMENT,NO_IHR,,
@@ -514,3 +514,21 @@ q3_sep_UAT4_AARP203/Password@1,MA,AARP_IND_ProviderSearch,,
 q3_sep_UAT4_Group029/Password@4,MAPD,GRP_ProviderSearch,,
 q3_Sep_UAT4_Sofl020/Password@1,MEDICA,MEDICA_IND_ProviderSearch,,
 q3_Sep_UAT4_Sofl022/Password@1,PCP,PCP_IND_ProviderSearch,,
+q3_sep_UAT4_Group175/Password@1,PDP,GRP_OFFCYC_PFNY
+q3_sep_UAT4_AARP238/Password@1,PDP,IND_PFNY
+q3_sep_UAT4_Group316/Password@1,PDP,GRP_PFNY
+q2_apr_aarp0250/Password@1,MAPD,IND_PFNY
+q3_sep_UAT4_Group074/Password@1,MAPD,GRP_PFNY
+q3_sep_UAT4_Group324/Password@1,MAPD,GRP_OFFCYC_PFNY
+q2_jun_grp0428/Password@1,MA,GRP_PFNY
+q3_sep_UAT4_AARP203/Password@1,MA,IND_PFNY
+q4_grp_dec0115/Password@1,MA,GRP_OFFCYC_PFNY
+q3_Sep_UAT4_Sofl020/Password@1,MEDICA,IND_PFNY
+q3_Sep_UAT4_Sofl022/Password@1,PCP,IND_PFNY
+preeffectiveFEDMA_001/Password@1,MA,IND_PREEFF_PFNY
+q2_june_Cosmos_Seg056/Password@1,MA,IND_TERM_PFNY
+q1_feb_ship_20_001/Password@1,SHIP,IND_PFNY
+Dream_EOB_MA_002/Password@1,SHIP,COMBO_SHIP_MA_PFNY
+Dream_EOB_MA_002/Password@1,MA,COMBO_SHIP_MA_PFNY
+q3_sep_Active_combo_005/Password@1,PDP,COMBO_PDP_SHIP_PFNY
+q3_sep_Active_combo_005/Password@1,SHIP,COMBO_PDP_SHIP_PFNY
