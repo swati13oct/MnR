@@ -91,7 +91,7 @@ public class DCEStepDefinitionUHC {
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 	}
 	
-	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP in UHC$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
@@ -111,7 +111,7 @@ public class DCEStepDefinitionUHC {
 		zipCodePlanYearPage.enterZipCode(invalidzipcode);
 	}
 	
-	@Then("^user enters valid zipcode and county$")
+	@Then("^user enters valid zipcode and county in UHC$")
 	public void user_enter_valid_zipcode(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
