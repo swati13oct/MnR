@@ -866,5 +866,20 @@ public class HeaderFooterMobile extends UhcDriver {
 		threadsleep(1000);
 		pageloadcomplete();
 	}
+	
+	public void navigatePRELandingpageMenuMobile() {
+		validate(headerSectionmenu, 30);
+		headerSectionmenu.click();
+		validate(shopforaplanLink, 30);
+		shopforaplanLink.click();
+		validate(headerGetaplanrecommendationLink, 30);
+		hearderEmailtext.sendKeys("");
+		hidekeypad();
+		String link = headerGetaplanrecommendationLink.getAttribute("href").trim();
+		System.out.println("PRE link : "+link);
+		mobileactiontap(headerGetaplanrecommendationLink);
+		pageloadcomplete();
+		validate(landingpageHeader, 30);
+	}
 
 }
