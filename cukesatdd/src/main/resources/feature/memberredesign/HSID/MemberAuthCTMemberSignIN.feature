@@ -19,4 +19,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | ashah120 | Mnrqa002 | Pramila1946           | Scenario 2a: Search using username – SHIP Member                |
       | ashah120 | Mnrqa002 | marylamb823           | Scenario 3: Search using username – PCP Plan Member             |
       | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM | Scenario 4: Search using username – Medica Plan Member          |
-      | ashah120 | Mnrqa002 | 2nancyreeves          | Scenario 4: Search using username – Group Plan Member           |
+  
