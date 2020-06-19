@@ -325,12 +325,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
-
-  
-   	@FindBy(xpath ="//*[@id='agent-name']")
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	private WebElement samChatOptions;
+	
+	@FindBy(xpath ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn phone')]")
+	private WebElement samChatConnect;
+   	
+	@FindBy(xpath ="//*[@id='agent-name']")
    	private WebElement ChatSamHead;
    	
-   	@FindBy(xpath ="//*[contains(@id,'sp-close-frame'])")
+   	@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -1682,7 +1687,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				validateNew(chatsam);
 				jsClickNew(chatsam);
 				System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-				validateandcloseChat();
+				//validateandcloseChat();
 		/*			chatsamtooltip.click();
 				driver.switchTo().activeElement();
 				System.out.println(ChatSamHead.getText());
@@ -1690,8 +1695,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				validateNew(chatsam);		*/
 				//return null;
 			}
-		
-		
+			
+			public void validateChatpopupconnect() throws InterruptedException {
+
+				try {
+				driver.switchTo().frame("sp-chat-iframe");
+				validateNew(samChatFirstNameField);				
+				samChatFirstNameField.sendKeys("tester");				
+				
+				validateNew(samChatLastNameField);
+				samChatLastNameField.sendKeys("test");		
+				
+				validateNew(samChatZipField);
+				samChatZipField.sendKeys("90210");
+			
+				validateNew(samChatEmailField);
+				samChatEmailField.sendKeys("test123@test.com");
+				
+				 validateNew(samChatOptions); 
+				 samChatOptions.click();
+				  
+				 validateNew(samChatConnect); 
+				 samChatConnect.click();
+				
+				//validateHumanifyChatFunctionality();
+				 
+				 driver.switchTo().defaultContent();
+				System.out.println("Page Title---"+driver.getTitle());
+				
+				}catch(Exception e) {
+				
+				System.out.println("Failed Due To-------"+e.getMessage());
+				}
+	
+		//validateNew(ChatSamTFNClose); 
+		// jsClickNew(ChatSamTFNClose);
+	
+		}
 		
 		public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
 			//checkModelPopup(driver);
