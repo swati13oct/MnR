@@ -73,7 +73,7 @@ public class SAMIconsStepDefinitionUHC {
 	}
 
 	@Then("^the user validates whether chat Agent is Available on UHC")
-	public void the_user_validates_whether_chat_Agent_is_visible_on_AARP() throws Throwable {
+	public void the_user_validates_whether_chat_Agent_is_visible_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
