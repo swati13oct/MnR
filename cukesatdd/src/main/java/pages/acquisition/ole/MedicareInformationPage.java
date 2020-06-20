@@ -192,6 +192,21 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "hasLongTermCareFacilityYes")
 	private WebElement LongTerm_Question_Yes;
 	
+	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
+	private WebElement LongTermQuestionFlagYes;
+	
+	@FindBy(xpath= "//*[contains(@id,'hasHealthInsuranceNo')]")
+	private WebElement LongTermQuestionFlagNo;
+	
+	@FindBy(xpath= "//*[contains(@id,'healthInsuranceName0')]")
+	private WebElement HealthInsuranceName;
+	
+	@FindBy(xpath= "//*[contains(@id,'groupNumber0')]")
+	private WebElement GroupNumber;
+	
+	@FindBy(xpath= "//*[contains(@id,'memberidNumber0')]")
+	private WebElement MemberNumber;
+	
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 	
@@ -880,4 +895,44 @@ return randomNumber;
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
 		return false;
 	}	
+
+public MedicareInformationPage answer_following_questionsLongTerm() {
+	
+	boolean Validation_Flag = true;
+	try
+	{
+
+	if(LongTermQuestionFlagNo.isDisplayed()) {
+		jsClickNew(LongTermQuestionFlagNo);
+		if(!validate(HealthInsuranceName) && validate(GroupNumber)){
+			System.out.println("LongTermQuestion Options is yes : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("LongTermQuestion Options  :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	LongTermQuestionFlagYes.isDisplayed();
+	jsClickNew(LongTermQuestionFlagYes);
+	
+	validateNew(HealthInsuranceName);
+	HealthInsuranceName.sendKeys("Test123");
+	validateNew(GroupNumber);
+	GroupNumber.sendKeys("21611136");
+	validateNew(MemberNumber);
+	MemberNumber.sendKeys("C123456A");
+	
+	}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+	}
+	return null;
+
+	}
 }

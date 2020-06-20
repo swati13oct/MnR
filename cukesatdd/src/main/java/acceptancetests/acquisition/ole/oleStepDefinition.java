@@ -2733,6 +2733,10 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Medicare Info data entry failed");
 	}
+
+@Then("^the user validates the long term questions in Medicare Information Page$")
+public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page() throws Throwable {
+	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+	MedicareInformationPage medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm();
 }
-
-
+}
