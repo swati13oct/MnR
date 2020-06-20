@@ -99,7 +99,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | 
       #| health-plans/estimate-drug-costs.html!/drug-cost-estimator |
       #| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | 
-      | medicare-plans.html                                        | 
+      #| medicare-plans.html                                        | 
       | profile/guest                                              | 
       | about-us.html                 |
       | sitemap.html                  | 
