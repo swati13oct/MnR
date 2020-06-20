@@ -98,7 +98,7 @@ Feature: 2.05.1.ACQ-OLE MA AMS
    
 
 
-@F346375
+@MA_OLE_AARP_LT
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
       Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
