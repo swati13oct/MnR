@@ -264,7 +264,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID   | username  | password  | MemUserName     | planType | memberType  |
       | xxxxx | qavgogine | qavgogine | q2_may_rally029 | MAPD     | EPMPEnabled |
 
-  @accountProfile11
+  @memAuth_accountProfile11
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -398,7 +398,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID        | username  | password  | MemUserName     | planType | memberType        |
       | Unknown_15 | qavgogine | qavgogine | q2_may_rally029 | MAPD     | Terminated_AccPro |
 
-  @accountProfile16
+  @memAuth_accountProfile16
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -419,7 +419,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID        | username  | password  | MemUserName    | planType | memberType |
       | Unknown_16 | qavgogine | qavgogine | q2_jun_uhc0032 | GOVT     | AP_ADDRESS |
 
-  @accountProfile17
+  @memAuth_accountProfile17
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -450,7 +450,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Unknown_26 | COMBO     | FedShip    | NON LIS_ProfilePref |
       | Unknown_27 | SSUPGroup | Group      | NON LIS_ProfilePref |
 
-  @accountProfile18
+  @memAuth_accountProfile18
   Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
