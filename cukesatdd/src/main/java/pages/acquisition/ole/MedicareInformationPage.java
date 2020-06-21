@@ -199,13 +199,13 @@ public class MedicareInformationPage extends UhcDriver{
 	private WebElement LongTermQuestionFlagNo;
 	
 	@FindBy(xpath= "//*[contains(@id,'healthInsuranceName0')]")
-	private WebElement HealthInsuranceName;
+	private WebElement healthInsuranceNameField;
 	
 	@FindBy(xpath= "//*[contains(@id,'groupNumber0')]")
-	private WebElement GroupNumber;
+	private WebElement groupNumberField;
 	
 	@FindBy(xpath= "//*[contains(@id,'memberidNumber0')]")
-	private WebElement MemberNumber;
+	private WebElement memberNumberField;
 	
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
@@ -895,7 +895,7 @@ return randomNumber;
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
 		return false;
 	}	
-
+/*
 public MedicareInformationPage answer_following_questionsLongTerm() {
 	
 	boolean Validation_Flag = true;
@@ -933,6 +933,49 @@ public MedicareInformationPage answer_following_questionsLongTerm() {
 		System.out.println("SEP options selected :  Next button is enabled");
 	}
 	return null;
+
+	}
+*/
+
+public boolean  answer_following_questionsLongTerm(Map<String, String> memberDetailsMap) throws InterruptedException {
+	
+	boolean Validation_Flag = true;
+	
+	try
+	{
+
+	if(LongTermQuestionFlagNo.isDisplayed()) {
+		jsClickNew(LongTermQuestionFlagNo);
+		if(!validate(healthInsuranceNameField) && validate(groupNumberField)){
+			System.out.println("LongTermQuestion Options is yes : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("LongTermQuestion Options  :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	LongTermQuestionFlagYes.isDisplayed();
+	jsClickNew(LongTermQuestionFlagYes);	
+	
+	String HealthInsuranceName = memberDetailsMap.get("Health Insurance Name");
+	String GroupNumber = memberDetailsMap.get("Group Number");
+	String MemberNumber = memberDetailsMap.get("Member Number");
+	
+	sendkeysNew(healthInsuranceNameField, HealthInsuranceName);
+	sendkeysNew(groupNumberField, GroupNumber);
+	sendkeysNew(memberNumberField, MemberNumber);
+	
+	}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+	}
+	return true;
 
 	}
 }
