@@ -31,17 +31,17 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TestCase | householdID  | referenceNumber|
       | TC2-P1   | 30019596303  |  112255071     |
-      | TC2-P1   | 480005321748 | 1616219       |
+      | TC2-P1   | 31476200 | 132357419       |
       | TC3-P1   | 3777000      |  526688       |
-      | TC3-P1   | 480005321748 |  1616219      |
-      |  C4-P1   | 110029408511 | 128692048     |
-	  |	TC4-P2   | 960035191996 | 136754782     |
+      | TC3-P1   | 31476200 |  132357419      |
+      |  C4-P1   | 70018905807 | 111146330     |
+	  |	TC4-P2   | 380023506638 | 118539181     |
 	  |	TC5-P1   | 920035201792 |  137394841    |
 	  |	TC5-P2   | 940021790794 |  137221436    |
       
   #Test Case 01
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
+  Scenario Outline: TID: <memberType> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -65,7 +65,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
 
   #Test Case 02
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 02 - Verify Setup Recurring for Checking Account
+  Scenario Outline: TID: <memberType> - Test Case 02 - Verify Setup Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -88,11 +88,11 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
       | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 30019596303 |
-      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |   480005321748 |
+      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |   31476200 |
 
   #Test Case 03
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 03 - Verify Setup Recurring for CC
+  Scenario Outline: TID: <memberType> - Test Case 03 - Verify Setup Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -112,11 +112,11 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |  householdID |
       | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 3777000 |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  480005321748 |
+      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  31476200 |
 
   #Test Case 04
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 04 - Verify Update Recurring for Checking Account
+  Scenario Outline: TID: <memberType> - Test Case 04 - Verify Update Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -138,12 +138,12 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
 
     Examples: 
       | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
-      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 110029408511 |
-      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 960035191996 |
+      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 70018905807 |
+      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 380023506638 |
 
   #Test Case 05
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 05 - Verify Update Recurring for CC
+  Scenario Outline: TID: <memberType> - Test Case 05 - Verify Update Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -166,7 +166,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
 
   #Test Case 06
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 06 -Verify Stop Recurring payment flow for Federal memeber
+  Scenario Outline: TID: <memberType> - Test Case 06 -Verify Stop Recurring payment flow for Federal memeber
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
