@@ -5,7 +5,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPProfileAndPreferences |
 
-  @memAuth_accountProfile01 @accountProfileMicroApp01 @ShipEndtoEnd @AP_Part1_MemAuth
+  @memAuth_accountProfile01
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -42,7 +42,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID   | username  | password  | MemUserName        | planType | memberType       |
       | 15103 | qavgogine | qavgogine | q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref |
 
-  @memAuth_accountProfile02 @MAPDandMAEndToEnd @AP_Part1_MemAuth
+  @memAuth_accountProfile02
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -71,7 +71,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | 15083_2 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA_AARP_GOGreen_Profilepref    |
       | 15083_3 | qavgogine | qavgogine | q2_jun_aarp0179     | PDP_AARP_GOGreen_Profilepref   |
 
-  @memAuth_accountProfile04 @US957739 @regressionMember
+  @memAuth_accountProfile04
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -96,7 +96,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
     # | 00000   | MA       | NOKIA      |
     # | 00000   | MAPD     | NOKIA      |
 
-  @memAuth_accountProfile05 @accountProfileMicroApp05 @regressionPCPMedica @regressionMember @AP_Part2_MemAuth
+  @memAuth_accountProfile05
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -135,7 +135,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
 
     #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
 
-  @memAuth_accountProfile06 @regressionAccountProf&Pref @AP_Part2_MemAuth @regressionMember
+  @memAuth_accountProfile06
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -173,7 +173,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | 15083 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020 | MAPD_AARPIndividual | AARP_ProfilePref |
 
   #-----------------------  Below All tests are EPMP ( Non regression) tests ---------------------------------------------------
-  @memAuth_accountProfile07 @EPMPProfilePage
+  @memAuth_accountProfile07
   Scenario Outline: TID: <TID> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -195,7 +195,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID  | username  | password  | MemUserName | planType | memberType  |
       | xxxx | qavgogine | qavgogine | q4_dec_001  | MAPD     | EPMPEnabled |
 
-  @memAuth_accountProfile08 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_MemAuth
+  @memAuth_accountProfile08
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -218,7 +218,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID       | username  | password  | MemUserName | planType | memberType  |
       | Unknown_4 | qavgogine | qavgogine | q4_dec_001  | MAPD     | EPMPEnabled |
 
-  @memAuth_accountProfile09 @accountProfileMicroApp09 @EMPMprofilePageForShip @regressionMember
+  @memAuth_accountProfile09
   Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for SHIP members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -264,7 +264,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID   | username  | password  | MemUserName     | planType | memberType  |
       | xxxxx | qavgogine | qavgogine | q2_may_rally029 | MAPD     | EPMPEnabled |
 
-  @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_MemAuth
+  @accountProfile11
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given the user is on member auth login flow page
@@ -398,7 +398,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID        | username  | password  | MemUserName     | planType | memberType        |
       | Unknown_15 | qavgogine | qavgogine | q2_may_rally029 | MAPD     | Terminated_AccPro |
 
-  @accountProfile16 @AP_Part5_MemAuth
+  @accountProfile16
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -419,7 +419,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | TID        | username  | password  | MemUserName    | planType | memberType |
       | Unknown_16 | qavgogine | qavgogine | q2_jun_uhc0032 | GOVT     | AP_ADDRESS |
 
-  @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_MemAuth
+  @accountProfile17
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
