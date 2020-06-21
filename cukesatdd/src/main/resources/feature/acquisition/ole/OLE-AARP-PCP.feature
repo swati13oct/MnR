@@ -154,6 +154,9 @@ Feature: 2.05.1.ACQ-OLE MA AMS
      # | PDP Question      | <pdpFlag>      |
       #| LongTerm Question | <longTermFlag> |
     Then the user validates the long term questions in Medicare Information Page
+    	| Health Insurance Name| <healthinsurancename>  |
+    |   Group Number			 | <groupnumber>          |
+    | Member Number        | <membernumber>         |
    Then the user navigates to SEP Page
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
@@ -162,15 +165,11 @@ Feature: 2.05.1.ACQ-OLE MA AMS
      # | Select Options | <selectoptions> |
      # | Option Data    | <optiondata>    |
    	#Then the user navigates to Coverage and Health Information Page
-    Then the user navigates to Proposed Effective Date Page
-    #Then the user validates Proposed Effective Date is Displayed
-		Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
- 		#Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed
-      | PlanName  | <planName> |
-      | Plan Type | <plantype> |
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
-    Then the user select providers from the PCP page and continue to OLE Flow
+     Then the user navigates to Proposed Effective Date Page
+    Then the user validates Proposed Effective Date is Displayed
+    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+    Then the user validates PCP page for MA and MAPD PFFS plans
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -180,10 +179,10 @@ Feature: 2.05.1.ACQ-OLE MA AMS
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-# 	Then the user validates Plan and Member Details on Confirmation Page
-#   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    # Then the user validates Plan and Member Details on Confirmation Page
+    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     
     Examples: 
-      | TID   | PlanType | zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | 15513 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
+      | TID   | PlanType | zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|
+      | 15513 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |tester             |1562759    | CA12345     |
    
