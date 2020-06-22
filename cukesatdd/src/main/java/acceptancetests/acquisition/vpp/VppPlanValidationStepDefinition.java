@@ -101,8 +101,8 @@ public class VppPlanValidationStepDefinition {
 			String DateCreated = dateFormat.format(RunDate);
 			String parentDirectory = null;
 			parentDirectory = new java.io.File(".").getCanonicalPath();
-			String InputFilePath = parentDirectory+"/src/main/resources/database/"+ExcelName+".xls";
-			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+SheetName+"_"+DateCreated+".xls";
+			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+SheetName+"_"+DateCreated+".xls";
 			
 		//Reading Excel.xls file
 			File InputFile = new File(InputFilePath);
@@ -131,7 +131,7 @@ public class VppPlanValidationStepDefinition {
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=1; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=5; rowIndex++)
 		            {
 					 	int cellIndex = 0;System.out.println("INSIDE Row");
 					 	

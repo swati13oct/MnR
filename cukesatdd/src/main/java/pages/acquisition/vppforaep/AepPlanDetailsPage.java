@@ -128,7 +128,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			} else {
 				tempUrl=AARP_ACQISITION_PAGE_URL;
 				driver.get(tempUrl+deeplinkUrl);
-				checkModelPopup(driver,20);
+				checkModelPopup(driver,10);
 				
 			}
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
@@ -382,13 +382,21 @@ public class AepPlanDetailsPage extends UhcDriver {
 			}else if(key.equalsIgnoreCase(columnName)) {
 
 		
-				 if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
+				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
 						
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
 						
 						if(columnName.equalsIgnoreCase("Medical Benefits"))
 							benefitValueUI = benefitValueUI.replace("footnote2", "");
+						//the following code is used to remove the footnote values from the benefit value string. 
+						if(benefitValueUI.contains("1/"))
+							benefitValueUI = benefitValueUI.replaceAll("1/", "");
+						else if(benefitValueUI.contains("2/"))
+							benefitValueUI = benefitValueUI.replaceAll("2/", "");
+						else
+							benefitValueUI = benefitValueUI.replaceAll("/", "");
+						
 						
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
@@ -398,7 +406,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 							break;
 						}
 					
-					}
+				/*	}
 					else if(benefitValueUI.equalsIgnoreCase(benefitValue) || benefitValueUI.contains(benefitValue)) {
 					//System.out.println("Values Matched : Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
 						flag= true;break;
@@ -406,7 +414,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = false;
 						System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
 						break;
-					}	
+					}	*/
 			
 				}
 			}
@@ -498,25 +506,29 @@ public class AepPlanDetailsPage extends UhcDriver {
 							if(listOfCellsPerRow.size()==2) {
 									if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Dental") ) {
 										highOptionDentalCheckbox.click();
-										key=e.getAttribute("innerText");
+										key=e.getText();
 										WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
-										value = g.getAttribute("innerText");
+										value = g.getText();
 										optionalDentalCheckbox.click();
 										
 									}else if(cellIndex==1) {
-										key=e.getAttribute("innerText");//System.out.println("key :"+ key);
+										key=e.getText();//System.out.println("key :"+ key);
 									}else {
-										value = value + e.getAttribute("innerText");//System.out.println("after :"+ value);
+										value = value + e.getText();//System.out.println("after :"+ value);
 										}
-							}else {
-								
+							}else if(listOfCellsPerRow.size()==3){
 								if(cellIndex==1)
-									key=e.getAttribute("innerText");
+									key=e.getText();
+								else if(cellIndex==3)
+								   value= value+"/"+e.getText();
+								else 
+									 value= value+e.getText();
+							}else {
+								if(cellIndex==1)
+									key=e.getText();
 								else {
-								   value= value+e.getAttribute("innerText");
-									/*
-									 * if(cellIndex==3) value = value+"/"+e.getAttribute("innerText");
-									 */
+								   value= value+e.getText();
+								
 								}
 							
 							}
