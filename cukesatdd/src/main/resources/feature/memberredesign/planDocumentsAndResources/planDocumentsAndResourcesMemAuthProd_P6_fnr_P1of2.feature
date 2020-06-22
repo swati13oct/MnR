@@ -71,7 +71,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_1of2 @prod_active_ma_1of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   |
 
 	@prod_active_mapd_ind_1of2 @prod_active_mapd_1of2
 	Examples: 
@@ -81,7 +81,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_mapd_grp_1of2 @prod_active_mapd_1of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-      | 12-107 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net | MAPD | GROUP_EFF_PDnR  | true   | false    | false   | true   | true   |	  
+      | 12-107 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65 | MAPD | GROUP_EFF_PDnR  | true   | false    | false   | true   | true   |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | false    | false   | true   | true   |
 
@@ -113,6 +113,6 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ship_1of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  |
+      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651     | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  |
 #     | 19-120 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | true   | false    | false   | false  | false  |
     

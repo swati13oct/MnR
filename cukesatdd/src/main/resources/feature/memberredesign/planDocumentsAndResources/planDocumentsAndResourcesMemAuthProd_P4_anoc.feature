@@ -62,7 +62,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 09-066 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
-      | 10-067 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 10-067 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 
 	@prod_active_mapd
 	Examples: 
@@ -72,7 +72,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net    | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-070 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 
@@ -96,7 +96,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_ship
     Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 19-076 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 19-076 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
 #      | 20-118 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 

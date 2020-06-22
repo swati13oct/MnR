@@ -212,7 +212,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			uhcProviderSearchClaimsLnk.click();
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
 		return driver;
 	}
