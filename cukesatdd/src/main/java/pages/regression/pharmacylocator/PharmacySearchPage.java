@@ -371,10 +371,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-String exp_noZipTxt="ZIP Code â€“ Please enter a ZIP code";			Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
+           		
+             Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
 		
 			if(language.equalsIgnoreCase("English")){
-						String exp_noZipTxt="Please enter a ZIP code";
+						String exp_noZipTxt="ZIP Code – Please enter a ZIP code";
 				  	String act_noZipTxt=noZipcode.getText();
 						Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "
 								+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
