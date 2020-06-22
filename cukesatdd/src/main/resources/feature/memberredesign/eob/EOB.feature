@@ -162,12 +162,20 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
-      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
     @SHIP_EOBs @SHIP_EOBs2
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+
+    @SHIP_EOBs @SHIP_EOBs3
+    Examples: 
+      | index | planType                 | memberType         | eobType | flagZeroEob |
       | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+
+    @SHIP_EOBs @SHIP_EOBs4
+    Examples: 
+      | index | planType                 | memberType         | eobType | flagZeroEob |
       | 14    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
 
 
