@@ -427,14 +427,14 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Copay Category | <copayCategory> |
     Then I validate that login is successfull
 
-    @accountProfile17a
+    @memAuth_accountProfile17a
     Examples:
       | TID        | planType | memberType | copayCategory       |
       | Unknown_17 | MA       | Individual | NON LIS_ProfilePref |
       | Unknown_18 | PDP      | Individual | NON LIS_ProfilePref |
       | Unknown_19 | MAPD     | Individual | NON LIS_ProfilePref |
 
-    @accountProfile17b
+    @memAuth_accountProfile17b
     Examples:
       | TID        | planType  | memberType | copayCategory       |
       | Unknown_20 | PCP       | Individual | NON LIS_ProfilePref |
@@ -442,7 +442,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | Unknown_22 | MAGroup   | Group      | NON LIS_ProfilePref |
       | Unknown_23 | MAPDGroup | Group      | NON LIS_ProfilePref |
 
-    @accountProfile17c
+    @memAuth_accountProfile17c
     Examples:
       | TID        | planType  | memberType | copayCategory       |
       | Unknown_24 | PDPGroup  | Group      | NON LIS_ProfilePref |
@@ -461,7 +461,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
     Then member should navigate to Home pag
     Then User should be able to validate Dashboard elemt
 
-    @accountProfile18a
+    @memAuth_accountProfile18a
     Examples:
       | memberType                     | friendname | favcolor | phonenumber |
       | MAIndividualCOSMOS_ProfilePref | name1      | color1   | number1     |
@@ -469,7 +469,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | MANICE_ProfilePref             | name1      | color1   | number1     |
       | MAPDCOSMOS_ProfilePref         | name1      | color1   | number1     |
 
-    @accountProfile18b
+    @memAuth_accountProfile18b
     Examples:
       | memberType               | friendname | favcolor | phonenumber |
       | AARPPDP_ProfilePref      | name1      | color1   | number1     |
@@ -477,7 +477,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | ACTIVEMedica_ProfilePref | name1      | color1   | number1     |
       | GROUPMA_ProfilePref      | name1      | color1   | number1     |
 
-    @accountProfile18c
+    @memAuth_accountProfile18c
     Examples:
       | memberType              | friendname | favcolor | phonenumber |
       | GROUPMAPD_ProfilePref   | name1      | color1   | number1     |
@@ -485,7 +485,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | GROUPSSUP_ProfilePref   | name1      | color1   | number1     |
       | GROUPDPSSUP_ProfilePref | name1      | color1   | number1     |
 
-    @accountProfile18d
+    @memAuth_accountProfile18d
     Examples:
       | memberType                      | friendname | favcolor | phonenumber |
       | PREACTIVEGRP_ProfilePref        | name1      | color1   | number1     |
@@ -501,7 +501,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | ACTIVETERMFEDSHIPCOMBO_ProfilePref | name1      | color1   | number1     |
       | MICROMULTIFEDSHIP_ProfilePref      | name1      | color1   | number1     |
 
-    @accountProfile18f
+    @memAuth_accountProfile18f
     Examples:
       | memberType                      | friendname | favcolor | phonenumber |
       | MULTIFEDACTIVE_ProfilePref      | name1      | color1   | number1     |
@@ -509,7 +509,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | MAPREFFECTIVE_ProfilePref       | name1      | color1   | number1     |
       | MAPDPREFFECTIVE_ProfilePref     | name1      | color1   | number1     |
 
-    @accountProfile18g
+    @memAuth_accountProfile18g
     Examples:
       | memberType                     | friendname | favcolor | phonenumber |
       | PDPPREFFECTIVE_ProfilePref     | name1      | color1   | number1     |
@@ -517,7 +517,7 @@ Feature: 1.02.1 Member Profile page - Member Auth
       | GRPMAPDPREFFECTIVE_ProfilePref | name1      | color1   | number1     |
       | SSUPPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |
 
-    @accountProfile18h
+    @memAuth_accountProfile18h
     Examples:
       | memberType                    | friendname | favcolor | phonenumber |
       | GRPPDPPREFFECTIVE_ProfilePref | name1      | color1   | number1     |
