@@ -1155,7 +1155,6 @@ try {
 	 * This method will invoke the Appium driver for Mobile automation
 	 */	
 	public AppiumDriver getMobileDriver() {
-		DesiredCapabilities capabilities = new DesiredCapabilities();
 		if (props == null) {
 			TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
 			mobileDeviceName = System.getenv("DEVICE_NAME");
@@ -1166,6 +1165,7 @@ try {
 		}
 		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
+		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
