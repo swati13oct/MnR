@@ -1163,7 +1163,6 @@ try {
 			mobileDeviceName = System.getenv("DEVICE_NAME");
 			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
 			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
-			System.out.println(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 			if(System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
 				sauceLabsMobileTunnelIdentifier=System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 		}
