@@ -946,6 +946,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(20000);
 		
 		waitforElement(SetUpAutomaticPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Automatic Button");
 		try {

@@ -1625,7 +1625,7 @@ public class TestHarness extends UhcDriver {
 				   driver.navigate().to("https://offline-stage-medicare.uhc.com/myhce");
 			 }
 			   try {
-				Thread.sleep(10000);
+				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1650,7 +1650,7 @@ public class TestHarness extends UhcDriver {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("Zip code Page / zip entry text box field was not displayed, failing this test script");
-					Assert.fail("Zip code text box fiels was not displayed");
+					Assert.fail("Zip code text box field was not displayed");
 				}
 			       }	
 		   
@@ -1675,12 +1675,21 @@ public class TestHarness extends UhcDriver {
 			 System.out.println("Now checking for header element h1 of the page");
 			 CommonUtility.checkPageIsReadyNew(driver);
 			 try {
-				Thread.sleep(4000);
+				Thread.sleep(8000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 				try {
+					waitforElement(hcePageText); 
+					if(hcePageText.isDisplayed())
+					{
+						System.out.println("Element for header h1 was displayed on page");
+					}
+					else
+					{
+						Assert.fail("Element for heaer h1 was NOT displayed on page");
+					}		
 					String gethcePageText = hcePageText.getText();
 					System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
 			   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
