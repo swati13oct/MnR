@@ -286,8 +286,8 @@ public class DrugMobilePage extends UhcDriver {
 	// Drugs Search Page Element Verification Method
 	public void drugsSearchpageElements() {
 		System.out.println("Drugs Search Validating Page: ");
-		String currentPageUrl = driver.getCurrentUrl();
-		currentPageUrl.contains("/plan-recommendation-engine.html/");
+		//String currentPageUrl = driver.getCurrentUrl();
+		//currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
 		//Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
@@ -476,6 +476,7 @@ public class DrugMobilePage extends UhcDriver {
 
 		// Drug details modal cancel
 		drugsearchBox.clear();
+		hidekeypad();
 		mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
 		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
@@ -495,6 +496,7 @@ public class DrugMobilePage extends UhcDriver {
 		// Generic modal back
 		if (generic) {
 			drugsearchBox.clear();
+			hidekeypad();
 			mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
 			hidekeypad();
 			mobileUtils.mobileLocateElementClick(drugsearchButton);

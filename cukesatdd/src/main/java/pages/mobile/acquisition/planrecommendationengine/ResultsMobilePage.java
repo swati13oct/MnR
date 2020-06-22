@@ -266,6 +266,7 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void validateRecommendations(String R1, String rcom1, String R2, String rcom2) {
+		threadsleep(5000);
 		System.out.println("Validating Recommendations in Results Page");
 		if (R1.equalsIgnoreCase("MA")) {
 			Assert.assertTrue(planBasedInfo.getText().contains("Medicare Advantage"));

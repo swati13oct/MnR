@@ -490,12 +490,13 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 5, true);
+		//mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 5, true);
 		validate(hearderEmailtext, 30);
-		hearderEmailtext.click();
+		//hearderEmailtext.click();
+		hearderEmailtext.sendKeys("");
 		hearderEmailtext.sendKeys(email);
 		hidekeypad();
-		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 1, true);
+		//mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 1, true);
 		headerEmailsubmitButton.click();
 		validate(headerShopForaPlanThankYou, 30);
 		mobileswipe("90%", 2, false);
@@ -522,8 +523,8 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
-		mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
-		mobileactiontap(footerBackToTopLink);
+		//mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
+		jsClickMobile(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
