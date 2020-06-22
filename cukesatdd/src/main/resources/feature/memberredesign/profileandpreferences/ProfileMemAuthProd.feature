@@ -70,6 +70,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | Username    | <MemUserName> |
       | Plan Type   | <planType>    |
       | Member Type | <memberType>  |
+      #-------------- navigate to the target test page for testing
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
     #Then the email address section should be verified
@@ -103,7 +104,7 @@ Feature: 1.02.1 Member Profile page - Prod
     #Then the email address section should be verified
     #Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
-    And the user verifies the Temporary Address Link on the Account settings page
+    Then the user validate the temporary address section for  member
     Then the user validates that  Communication Preferences section doesn't come for terminated members
     And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
