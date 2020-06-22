@@ -869,19 +869,19 @@ public class HSIDStepDefinition {
 				String value=e.getText();
 				if (value.equalsIgnoreCase("false")) {
 					if (MRScenario.environment.toLowerCase().contains("stage")) 
-						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now", false);
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 					else
 						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", not on stage, okay to move on...");
 				} else {
 					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", okay to move on...");
 				}
 			} else {
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			}
 		} catch (Exception e) {
 			if (MRScenario.environment.toLowerCase().contains("stage")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now.", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			} else {
 				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
 			}
