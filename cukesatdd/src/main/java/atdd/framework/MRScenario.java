@@ -1171,7 +1171,9 @@ try {
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); 
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		// Offline prod and prod env. should not use tunnels
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
