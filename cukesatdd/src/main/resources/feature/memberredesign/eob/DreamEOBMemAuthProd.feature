@@ -82,7 +82,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
 #     | 03    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
-      | 04    | ashah120  | Mnrqa002  | nawal1215               | PDP      | PDP_RX_DEOB       | true        |  
+      | 04    | ashah120  | Mnrqa002  | JAN06ARY               | PDP      | PDP_RX_DEOB       | true        |  
 
     @prod_dreamEob01c 
     Examples: 
@@ -100,7 +100,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
       | 09    | ashah120  | Mnrqa002  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
-      | 10    | ashah120  | Mnrqa002  | PAULAROTH2              | PDP      | PDP_SHIP_COMBO_EOB| true        |
+      | 10    | ashah120  | Mnrqa002  | Norm749              | PDP      | PDP_SHIP_COMBO_EOB| true        |
 
     @prod_dreamEob01f
     Examples: 
