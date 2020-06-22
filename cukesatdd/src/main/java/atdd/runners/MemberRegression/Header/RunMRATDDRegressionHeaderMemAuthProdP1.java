@@ -19,7 +19,7 @@ import cucumber.api.CucumberOptions;
         overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeaderMemAuthProdP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
         features = { "src/main/resources/feature/memberredesign/header" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeaderMemAuthProdP1.json" }, tags = { "@prod_header01, @prod_header02" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeaderMemAuthProdP1.json" }, tags = { "@prod_header01" })
 public class RunMRATDDRegressionHeaderMemAuthProdP1 {
 
 }

@@ -19,7 +19,7 @@ import cucumber.api.CucumberOptions;
         overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
         features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2.json" }, tags = { "@prod_orderPlanMaterials02"})
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2.json" }, tags = { "@prod_orderPlanMaterials1b"})
 public class RunMRATDDRegressionOrderPlanMaterialsMemAuthProdP2 {
 //,@regression_06_06_18
 }

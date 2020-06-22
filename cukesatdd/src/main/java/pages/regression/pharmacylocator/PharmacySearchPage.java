@@ -149,7 +149,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
-				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens â€“ Preferred Retail Pharmacy' widget", 
+				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
 						!pharmacyValidate(widget_walgreens));
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
 				if (memberType.toUpperCase().contains("GROUP")) 
@@ -339,6 +339,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		moveMouseToElement(testTooltip);  //note: move mouse over to target element
+		
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
 				pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) { //note: only validate the text for english case
@@ -370,7 +371,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-			String exp_noZipTxt="Please enter ZIP code.";
+			String exp_noZipTxt="ZIP Code – Please enter a ZIP code";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
 			String act_noZipTxt=noZipcode.getText();
 			Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "
