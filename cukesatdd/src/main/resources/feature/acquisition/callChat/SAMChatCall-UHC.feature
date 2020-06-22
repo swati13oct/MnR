@@ -107,7 +107,7 @@ Examples:
       | sitemap.html                  | 
       | terms-of-use.html             | 
       | disclaimer.html               | 
-      | health-insurance-brokers.html |
+     # | health-insurance-brokers.html |
       | contact-us.html               | 
       | privacy-policy.html           |
 

@@ -105,7 +105,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       | sitemap.html                  | 
       | terms-of-use.html             | 
       | disclaimer.html               | 
-      | health-insurance-brokers.html |
+     # | health-insurance-brokers.html |
       | contact-us.html               | 
       | privacy-policy.html           |
 

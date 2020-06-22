@@ -336,7 +336,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[@id='agent-name']")
    	private WebElement ChatSamHead;
    	
-   	@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
+   	//@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
+   	@FindBy(xpath =" //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -1719,10 +1720,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				 //validateNew(samChatConnect); 
 				// samChatConnect.click();
 				 
-				
-				
-				//validateHumanifyChatFunctionality();
-				 
 				 driver.switchTo().defaultContent();
 				System.out.println("Page Title---"+driver.getTitle());
 				
@@ -1730,12 +1727,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				
 				System.out.println("Failed Due To-------"+e.getMessage());
 				}
-	
+
 				//validateNew(ChatSamTFNClose); 
 				//jsClickNew(ChatSamTFNClose);
-				
-		//validateNew(ChatSamTFNClose); 
-		// jsClickNew(ChatSamTFNClose);
+				//ChatSamTFNClose.click();
 	
 		}
 		
