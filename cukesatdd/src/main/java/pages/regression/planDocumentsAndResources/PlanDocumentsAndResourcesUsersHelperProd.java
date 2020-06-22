@@ -415,7 +415,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				if (!memberType.toUpperCase().contains("NICE")) {
+					targetTestDocList.add("Medical Reimbursement Form (Online)");
+				}
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
@@ -1039,7 +1041,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				if (!memberType.toUpperCase().contains("NICE")) {
+					targetTestDocList.add("Medical Reimbursement Form (Online)");
+				}
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}
