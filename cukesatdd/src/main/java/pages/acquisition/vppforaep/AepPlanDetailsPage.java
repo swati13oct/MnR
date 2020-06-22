@@ -64,13 +64,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Platinum Dental')]/ancestor::label")
 	private WebElement platinumDentalCheckbox;
 	
-	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Platinum Dental')]/ancestor::label")
+	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'High Option Dental')]/ancestor::label")
 	private WebElement highOptionDentalCheckbox;
 	
-	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Platinum Dental')]/ancestor::label")
+	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Optional Dental')]/ancestor::label")
 	private WebElement optionalDentalCheckbox;
 	
-	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Platinum Dental')]/ancestor::label")
+	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
 	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
@@ -332,24 +332,30 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag= false;break;
 					}
 			
-			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
-				if(columnName.equalsIgnoreCase("Optional Dental"))
-					System.out.println("");
-				columnName = columnName.replace("PS","");
+			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
+					
+					columnName = columnName.replace("PS","");
+					benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
+					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+					if(key.contains("Optional Rider")&& key.contains(columnName)) {
+					
+						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+							flag = true;break;
+						}else {
+							flag = false;
+							System.out.println("Values did not match for col:PS "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							break;
+						}
+				
+					}
+					columnName = columnName+"PS";
+			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")) {
+			
+				
 				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
 				
-				if((key.contains(columnName)&& key.contains("Optional Rider"))) {
-					
-					if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
-						flag = true;break;
-					}else {
-						flag = false;
-						System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-						break;
-					}
-				
-				}else if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
+				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
 					key = key.replace("Footnotes2", "").replaceAll("\\s+", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
@@ -358,7 +364,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = true;break;
 					}else {
 						flag = false;
-						System.out.println("Values did not match for col: "+columnName+"\n"+benefitValue+"\n"+key);
+						System.out.println("Values did not match for col:2 "+columnName+"\n"+benefitValue+"\n"+key);
 						break;
 					}
 				
@@ -369,7 +375,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = true;break;
 					}else {
 						flag = false;
-						System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+						System.out.println("Values did not match for col:3 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 						break;
 					}
 				}
@@ -388,7 +394,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							break;
 						}
 					
@@ -398,7 +404,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag= true;break;
 					}else {
 						flag = false;
-						System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
+						System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
 						break;
 					}	
 			
@@ -508,8 +514,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 									key=e.getAttribute("innerText");
 								else {
 								   value= value+e.getAttribute("innerText");
-								   if(cellIndex==3)
-									   value = value+"/"+e.getAttribute("innerText");
+									/*
+									 * if(cellIndex==3) value = value+"/"+e.getAttribute("innerText");
+									 */
 								}
 							
 							}

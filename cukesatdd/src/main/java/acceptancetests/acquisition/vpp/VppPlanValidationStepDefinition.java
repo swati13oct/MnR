@@ -131,7 +131,7 @@ public class VppPlanValidationStepDefinition {
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=1; rowIndex++)
 		            {
 					 	int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
@@ -152,15 +152,15 @@ public class VppPlanValidationStepDefinition {
 							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
-								  
+								  System.out.println("Validating Plan "+rowIndex+" ************************************************************");
 								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
-								  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+								 benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
 								 
 								 }
 								  valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 								 
 								
-								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("plan id")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 								 		System.out.println(currentColName + " : "+ valueMatches);
 									 	if(!valueMatches) {
 					                    
