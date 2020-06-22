@@ -68,7 +68,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_3of7 @prod_active_ma_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | GROUP_EFF_PDnR        | true   | true   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
 
 	@prod_active_mapd_ind_3of7 @prod_active_mapd_3of7
 	Examples: 
@@ -78,7 +78,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_mapd_grp_3of7 @prod_active_mapd_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 12-107 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65 | MAPD | GROUP_EFF_PDnR  | true   | true   |
+      | 12-107 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | true   |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
 

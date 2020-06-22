@@ -65,7 +65,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 09-009 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
-      | 10-010 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1     | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+      | 10-010 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1     | MA       | NICE_GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@prod_active_mapd
 	Examples: 
@@ -75,7 +75,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 12-012 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
+      | 12-012 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-013 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 

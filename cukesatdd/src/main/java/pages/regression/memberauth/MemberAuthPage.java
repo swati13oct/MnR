@@ -362,7 +362,7 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("COVID 19 Banner page did not appear");
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 20);
+				CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
 				// waitforElement(SuperUser_DashboardBanner);
 				if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
 					System.out.println("CSR Dashboard Page is displayed for the Member");
