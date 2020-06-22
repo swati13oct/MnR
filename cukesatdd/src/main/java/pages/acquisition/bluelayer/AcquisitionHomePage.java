@@ -1838,8 +1838,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 validateNew(samChatOptions); 
 		 samChatOptions.click();
 		  
-		 validateNew(samChatConnect); 
-		 samChatConnect.click();
+		 //validateNew(samChatConnect); 
+		 //samChatConnect.click();
 		
 		//validateHumanifyChatFunctionality();
 		 
