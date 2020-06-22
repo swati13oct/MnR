@@ -2127,7 +2127,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
 		WebElement PlanSelectorLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
+				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
 		WebElement DCELink = driver.findElement(
 				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
 		WebElement PharmacySearchLink = driver.findElement(
