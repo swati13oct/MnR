@@ -893,7 +893,7 @@ public class AccountHomePage extends UhcDriver {
 						System.out.println("located shadow-root element, attempt to process further...");
 						WebElement root1 = expandRootElement(shadowRootHeader);
 						try {
-							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
+							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2,#dropdown-toggle-4"));
 							acctSettingMenuShadowRootBtn.click();
 						} catch (Exception e) {
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
