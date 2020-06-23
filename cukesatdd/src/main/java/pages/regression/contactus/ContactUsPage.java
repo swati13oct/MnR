@@ -611,17 +611,22 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String phoneNumber = memberAttributesMap.get("Phone Number");
 			try {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView(true);", requestACall);
+
 				requestACall.click();
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				new Select(callQuestionAbout);
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				requestACallPhoneNumber.sendKeys(phoneNumber);
 				requestCall_Cancel.click();
-				Thread.sleep(5000);
+				waitforElement(requestACall);
+				Assert.assertTrue("Request a Call button is displaying", requestACall.isDisplayed());
 			} catch (Exception e) {
-				e.printStackTrace();
+				Assert.fail("Request a Call button is not displaying");
+				System.err.println("Request a Call button is not displaying");
 			}
-			waitforElement(requestACall);
+			
 		}
 	
 		public JSONObject getsecurewidget() {
@@ -809,9 +814,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -819,8 +826,12 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					getStartedButton.click();
 					waitforElement(useDifferentEmailRadioButton);
 					useDifferentEmailRadioButton.click();
@@ -857,9 +868,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -867,9 +880,13 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
 					if (getStartedButton.isDisplayed()) {
+						JavascriptExecutor jse = (JavascriptExecutor) driver;
+						jse.executeScript("window.scrollBy(0,550)", "");
 						getStartedButton.click();
 						waitforElement(useDifferentEmailRadioButton);
 						useDifferentEmailRadioButton.click();
@@ -884,7 +901,7 @@ public class ContactUsPage extends UhcDriver{
 	
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Assert.fail("Secure messaging is failing");
 			}
 	
 		}
@@ -945,6 +962,8 @@ public class ContactUsPage extends UhcDriver{
 		public void validateGoToInbox() {
 			try {
 				waitforElement(goToInboxButton);
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView(true);", goToInboxButton);
 				Assert.assertTrue(validate(goToInboxButton));
 				goToInboxButton.click();
 				Assert.assertTrue(validateNew(goToInboxCtnBtn));
@@ -1096,6 +1115,8 @@ public class ContactUsPage extends UhcDriver{
 		 */
 		public void validateSSOInbox() {
 			try {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,550)", "");
 				validateNew(EmailUsModalbtnContinue);
 				if (!((MRScenario.environment).toLowerCase().contains("team"))) {
 					// switchToNewTabNew(EmailUsModalbtnContinue);
@@ -1569,6 +1590,7 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			validateWithValue("Help With This Website Text", HelpWithThisWebsitePCP);
 			validateWithValue("Plan Support Text", PlanSupportPCP);
+			
 			if(technicalSupportContactNumber.getText().replaceAll("[\r\n]+", " ").contains(techSupportTFN)
 					&& helpWithYourPlanContactNumber.getText().replaceAll("[\r\n]+", " ").contains(planSupportTFN)) {
 				Assert.assertTrue("Correct Plan support contact number is displayng",true);

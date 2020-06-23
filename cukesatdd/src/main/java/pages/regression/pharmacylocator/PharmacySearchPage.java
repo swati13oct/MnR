@@ -111,7 +111,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	 *   Preferred Retail Pharmacy Network
 	 *     Only display the Preferred Retail Pharmacy Network tile for plans that have a Preferred Retail Pharmacy benefit. 
 	 *     Do not display for the AARP MedicareRx Walgreens plan
-	 *   Walgreens – Preferred Retail Pharmacy
+	 *   Walgreens â€“ Preferred Retail Pharmacy
 	 *     Only display the Walgreens tile for AARP MedicareRx Walgreens plan members
 	 *   Preferred Mail Service Pharmacy
 	 *     Only display the Preferred Mail Service Pharmacy tile for plans that have a Preferred Mail Service Pharmacy benefit. 
@@ -149,7 +149,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
-				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
+				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
 						!pharmacyValidate(widget_walgreens));
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
 				if (memberType.toUpperCase().contains("GROUP")) 
@@ -339,6 +339,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		moveMouseToElement(testTooltip);  //note: move mouse over to target element
+		
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
 				pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) { //note: only validate the text for english case
@@ -370,8 +371,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-	
-			Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
+           		
+             Assert.assertTrue("PROBLEM - not seeing no zip error element",pharmacyValidate(noZipcode));
 		
 			if(language.equalsIgnoreCase("English")){
 						String exp_noZipTxt="Please enter a ZIP code";

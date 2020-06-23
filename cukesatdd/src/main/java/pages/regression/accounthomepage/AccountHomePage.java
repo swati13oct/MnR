@@ -893,7 +893,7 @@ public class AccountHomePage extends UhcDriver {
 						System.out.println("located shadow-root element, attempt to process further...");
 						WebElement root1 = expandRootElement(shadowRootHeader);
 						try {
-							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
+							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2,#dropdown-toggle-4"));
 							acctSettingMenuShadowRootBtn.click();
 						} catch (Exception e) {
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
@@ -4080,9 +4080,21 @@ public class AccountHomePage extends UhcDriver {
 		 System.out.println("Now checking for header element h1 of the page");
 		 CommonUtility.checkPageIsReadyNew(driver);
 			try {
+				System.out.println("Waiting for 4 seconds");
+				Thread.sleep(4000);
+				System.out.println("Waiting for h1 element to be displayed on page");
+				waitforElement(hcePageText); 
+				if(hcePageText.isDisplayed())
+				{
+					System.out.println("Element for header h1 was displayed on page");
+				}
+				else
+				{
+					Assert.fail("Element for heaer h1 was NOT displayed on page");
+				}				
 				String gethcePageText = hcePageText.getText();
 				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
-		   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
+				if (gethcePageText.contains("myHealthcare Cost Estimator"))
 		   				{
 		   			System.out.println("myHealthcare Cost Estimator Text was displayed");
 		   			
