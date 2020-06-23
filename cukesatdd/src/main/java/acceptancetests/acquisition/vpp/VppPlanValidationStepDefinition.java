@@ -77,7 +77,7 @@ public class VppPlanValidationStepDefinition {
 	}
 
 	@Then("^the user navigates to plan details and compares benefits value from excel to UI and reports into excel$")
-	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
+	public void exceldataValidation_planDetails(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -140,23 +140,30 @@ public class VppPlanValidationStepDefinition {
 		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 		                
 		                //creating a new webdriver to open up a new sauce session since we don't want to run more than an hour in one session
-		                if(rowIndex==20 || rowIndex==40)
-		                	wd = getLoginScenario().getWebDriverNew();
+				/*
+				 * if(rowIndex==20 || rowIndex==40) wd = getLoginScenario().getWebDriverNew();
+				 */
 		                
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
 		                	 boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
-				             currentCellValue = cell.getStringCellValue();
-			                 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
-			           
+				             
+		                	 try {
+		                		 currentCellValue = cell.getStringCellValue();
+		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+		                	 }catch (Exception e) {
+		                		 System.out.println("Error getting value for "+SheetName+ " Row "+rowIndex +" Cell "+cell);
+		                		 System.out.println(e);
+		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 							 newCell.setCellValue(cell.getStringCellValue());
 							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
-								  System.out.println("Validating Plan "+rowIndex+" ************************************************************");
+									 
+								  System.out.println("Validating Sheet "+SheetName+ " Plan "+rowIndex+" ************************************************************");
 								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 								 benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
 								 
