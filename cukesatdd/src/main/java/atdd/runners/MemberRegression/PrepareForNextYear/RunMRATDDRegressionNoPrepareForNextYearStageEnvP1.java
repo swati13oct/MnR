@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionNoPrepareForNextYearStageEnvP1.
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoPrepareForNextYearStageEnvP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoPrepareForNextYearStageEnvP1.json" }, tags = { "stageEnv","@prepareForNextYear01a" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoPrepareForNextYearStageEnvP1.json" }, tags = { "@stageEnv","@prepareForNextYear01a" })
 public class RunMRATDDRegressionNoPrepareForNextYearStageEnvP1 {
 
 }

@@ -28,7 +28,7 @@ Feature: 1.21 Member Prepare For Next Year
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA offcycle user available at the moment
-    @prepareForNextYear01a @devRegression @teamEnv
+    @prepareForNextYear01a @devRegression
     Examples: 
 	    | index | FID     | planType | memberType          |
 	   #| 01    | F437767 | PDP	     | GRP_OFFCYC_PFNY     |
@@ -61,7 +61,7 @@ Feature: 1.21 Member Prepare For Next Year
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear02 @hasTab @regressionMember
+  @prepareForNextYear02 @hasTab @regressionMember @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -128,7 +128,7 @@ Feature: 1.21 Member Prepare For Next Year
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA offcycle user available at the moment
-    @prepareForNextYear01a @devRegression @stageEnv
+    @prepareForNextYear01a @devRegression
     Examples: 
 	    | index | FID     | planType | memberType          |
 	   #| 01    | F437767 | PDP	     | GRP_OFFCYC_PFNY     |
@@ -161,7 +161,7 @@ Feature: 1.21 Member Prepare For Next Year
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear02 @hasTab @regressionMember
+  @prepareForNextYear02 @hasTab @regressionMember @stageEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
