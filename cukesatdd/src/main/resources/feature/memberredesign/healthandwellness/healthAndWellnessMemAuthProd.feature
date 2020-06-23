@@ -27,7 +27,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | ashah120  | Mnrqa002  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
       | 15341 | ashah120  | Mnrqa002  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | ashah120  | Mnrqa002  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | false          |
+      | 15341 | ashah120  | Mnrqa002  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | true           |
 
     @prod_healthAndWellness01b
     Examples: 
