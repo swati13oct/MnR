@@ -7,7 +7,7 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
   # caution: should run it on team env only not as to impact other teams	
   # caution: examples in this scenario must be run sequential, no parallel    
   #------------------------------------------------------------------------------------------	    
-  @prepareForNextYear03 @withSystemTimeChange
+  @prepareForNextYear03 @withSystemTimeChange @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page display behavior throughout different milestones
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |

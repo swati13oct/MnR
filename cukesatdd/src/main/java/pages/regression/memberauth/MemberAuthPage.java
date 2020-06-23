@@ -115,6 +115,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement emailGoToHomepageBtn;
 	
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement paymentGoToHomepageBtn;
+
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -443,7 +446,29 @@ public class MemberAuthPage extends UhcDriver {
 			}
 		}
 	}
-	
+
+	public void paymentSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/payment-two-offerings.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, paymentGoToHomepageBtn, 5);
+				System.out.println("User encounted playment splash page, handle it...");
+				try {
+					if (validate(paymentGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						paymentGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+
 	public void emailAddressRequiredWorkaround() {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
