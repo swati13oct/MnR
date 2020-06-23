@@ -87,9 +87,9 @@ public class VppPlanValidationStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String ExcelName = givenAttributesMap.get("ExcelFile");
-		String SheetName = givenAttributesMap.get("WorkSheetName");
+		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
-		System.out.println("Set of TFNs from Sheet : "+SheetName);
+		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
 		
@@ -102,13 +102,13 @@ public class VppPlanValidationStepDefinition {
 			String parentDirectory = null;
 			parentDirectory = new java.io.File(".").getCanonicalPath();
 			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+SheetName+"_"+DateCreated+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+DateCreated+".xls";
 			
 		//Reading Excel.xls file
 			File InputFile = new File(InputFilePath);
 			FileInputStream inputStream = new FileInputStream(InputFile);
 			Workbook workbook = new HSSFWorkbook(inputStream);
-			Sheet sheet = workbook.getSheet(SheetName);
+			Sheet sheet = workbook.getSheet(sheetName);
 			int lastRow = sheet.getLastRowNum();
 			Workbook ResultWorkbook = new HSSFWorkbook();
 			Sheet ResultsSheet = ResultWorkbook.createSheet("PlanBenefitsResults");
@@ -154,7 +154,7 @@ public class VppPlanValidationStepDefinition {
 		                		 currentCellValue = cell.getStringCellValue();
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
 		                	 }catch (Exception e) {
-		                		 System.out.println("Error getting value for "+SheetName+ " Row "+rowIndex +" Cell "+cell);
+		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
@@ -163,9 +163,13 @@ public class VppPlanValidationStepDefinition {
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 									 
-								  System.out.println("Validating Sheet "+SheetName+ " Plan "+rowIndex+" ************************************************************");
+								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
-								 benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+								  if(sheetName.contains("PDP")) {
+									  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
+								  }
+									  
+								  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName);              //  stores all the table info into hashmap
 								 
 								 }
 								  valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value

@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.dce.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -53,8 +55,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(@id,'detail') and contains(@class,'active')]//h3")
 	protected List<WebElement> listOfSectionHeaderForActiveTab;
-
-
+	
+	@FindBy(xpath = "//*[contains(@id,'estimateYourDrugsLink')]")
+	private WebElement estimateDrugBtn;
+	
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement topbackToPlanslink;
 
@@ -423,7 +427,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 	}
 	
-	public HashMap<String, String> collectInfoVppPlanDetailPg() {
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
@@ -446,7 +450,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
 			
 				String rowXpath="";
-				if(tab==0)
+				if(sheetName.contains("PDP") && tab==0) {
+					rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr";
+				}else if(tab==0)
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr";
 				else
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
@@ -480,7 +486,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 					for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
 						String cellsPerRowXpath="";
 						value = "";
-						if(tab==0)
+						
+						if(sheetName.contains("PDP") && tab==0) {
+							rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+						}else if(tab==0)
 							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						else
 							cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
@@ -491,7 +500,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
 							String eachCellXpath = "";
 							
-							if(tab==0)
+							if(sheetName.contains("PDP") && tab==0) {
+								rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+							}else if(tab==0)
 								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 							else
 								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
@@ -550,6 +561,16 @@ public class AepPlanDetailsPage extends UhcDriver {
 		 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
+	}
+	
+	public void navigateToDCEandAddDrug(String drugName) throws InterruptedException {
+		
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+	
+		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
+		dcePage.addDrug(drugName);
+		dcePage.clickOnReturnLink();
 	}
 	
 }
