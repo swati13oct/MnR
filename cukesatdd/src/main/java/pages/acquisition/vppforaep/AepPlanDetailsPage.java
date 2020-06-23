@@ -352,13 +352,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")) {
 			
 				
-				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
-				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\u2022", "");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\u2022", "");
 				
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
-					key = key.replace("Footnotes2", "").replaceAll("\\s+", "");
-					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+					key = key.replace("Footnotes2", "").replaceAll("\\s+", "").replaceAll("-", "");
+					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "");
 					
 					if(key.contains(benefitValue)) {
 						flag = true;break;
