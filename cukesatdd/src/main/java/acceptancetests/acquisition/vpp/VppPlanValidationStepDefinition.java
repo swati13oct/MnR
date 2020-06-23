@@ -139,6 +139,10 @@ public class VppPlanValidationStepDefinition {
 		                Iterator<Cell> cellIterator = row.cellIterator();
 		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 		                
+		                //creating a new webdriver to open up a new sauce session since we don't want to run more than an hour in one session
+		                if(rowIndex==20 || rowIndex==40)
+		                	wd = getLoginScenario().getWebDriverNew();
+		                
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
