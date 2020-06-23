@@ -548,7 +548,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag(String Plantype) {
 
-		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.contains("prod")) {
 			checkModelPopup(driver,5);
 			if (noWaitValidate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
