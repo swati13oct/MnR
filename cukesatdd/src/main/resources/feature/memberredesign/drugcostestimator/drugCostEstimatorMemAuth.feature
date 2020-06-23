@@ -1,7 +1,7 @@
  
 Feature: 1.07.1 Member DCE Page - Member Auth
 
-  @Member_dce_not  @offlineProdTest 
+  @drugCostEstimator1 @Member_dce_not @NegativeScenario  @Dce_memAuth 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.2 To Verify MR portal members DCE should not come for AARP federal members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -22,7 +22,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | 15337 | qavgogine | qavgogine | q2_may_rally017    | MA       | MA_DCE       |
       | 15327 | qavgogine | qavgogine | q2_may_combo006    | SSUP     | SSUP_DCE     |
    
-   @offlineProdTest
+   @drugCostEstimator2  @Dce_memAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -43,7 +43,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | TID   | username  | password  | MemUserName         | planType | memberType |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | qavgogine | qavgogine | q3_sep_UAT4_AARP209 | MAPD     |MAPD_DCE    |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
   
-   @offlineProdTest
+   @drugCostEstimator3 @Dce_memAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -68,7 +68,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | TID   | username  | password  | MemUserName     | planType | memberType | zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | qavgogine | qavgogine | q2_jun_aarp0135 | MAPD     | MAPD_DCE   | 06450   | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
-   @offlineProdTest
+   @drugCostEstimator4 @Dce_memAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -92,7 +92,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
       | TID   | username  | password  | MemUserName     | planType |memberType | drug1  | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   |quantity2 | frequency2     |
       | 15325 | qavgogine | qavgogine | q2_jun_aarp0135 | MAPD     | MAPD_DCE  | Lipitor| Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |    100 | Every 3 months |
 
-   @Member_DCE_sso 
+  @drugCostEstimator6  @Dce_memAuth @Member_DCE_sso 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -104,13 +104,14 @@ Feature: 1.07.1 Member DCE Page - Member Auth
     And user stores test input for validations
         | Plan Type   | <planType>   |
         | Member Type | <memberType> |
+    When I navigate to drug look up page
     Then  I click on drug lookup tile which takes me to optum rx sso landing page
 
     Examples: 
       | TID   | username  | password  | MemUserName   | planType | memberType |
       | 15338 | qavgogine | qavgogine | q2_jun_grp0022| PDP      | PDP_GROUP_DCE |      
       
-  @formualrypdflink @offlineProdTest
+  @formualrypdflink @Dce_memAuth
   Scenario Outline:  DCE Tool to search a plan for a drug that requires Prior Authorization or Step Therapy on the 2020 formulary
   Given the user is on member auth login flow page
     When the member is able to login with correct username and password
