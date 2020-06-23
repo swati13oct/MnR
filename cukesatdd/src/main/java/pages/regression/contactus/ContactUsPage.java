@@ -814,9 +814,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -824,12 +826,12 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					js.executeScript("arguments[0].scrollIntoView(true);", goToInboxButton);
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					js.executeScript("arguments[0].scrollIntoView(true);", getStartedButton);
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					getStartedButton.click();
 					waitforElement(useDifferentEmailRadioButton);
 					useDifferentEmailRadioButton.click();
@@ -866,9 +868,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -876,9 +880,13 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
 					if (getStartedButton.isDisplayed()) {
+						JavascriptExecutor jse = (JavascriptExecutor) driver;
+						jse.executeScript("window.scrollBy(0,550)", "");
 						getStartedButton.click();
 						waitforElement(useDifferentEmailRadioButton);
 						useDifferentEmailRadioButton.click();
@@ -893,7 +901,7 @@ public class ContactUsPage extends UhcDriver{
 	
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Assert.fail("Secure messaging is failing");
 			}
 	
 		}
@@ -1107,6 +1115,8 @@ public class ContactUsPage extends UhcDriver{
 		 */
 		public void validateSSOInbox() {
 			try {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,550)", "");
 				validateNew(EmailUsModalbtnContinue);
 				if (!((MRScenario.environment).toLowerCase().contains("team"))) {
 					// switchToNewTabNew(EmailUsModalbtnContinue);

@@ -92,7 +92,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
 
     Examples: 
       | UID   | plantype | username | password | member        | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | callUsSHIPTFN     | generalQueTFN    | claimQueTFN |
-      | 15380 | PHIP     | jkuma14  | Brock@02 | Pramila1946  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
+      | 15380 | PHIP     | jkuma14  | Brock@02 | vernajohnson19651  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
 	  
 
 #TestCaseClickTOCallCancel5
@@ -130,7 +130,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
      Examples: 
       | UID       | planType | username | password | member         |
       | 152201    | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |
-      | US2438941 | PHIP     | jkuma14  | Brock@02 | Pramila1946  |
+      | US2438941 | PHIP     | jkuma14  | Brock@02 | vernajohnson19651  |
       | 152255    | PCP     | jkuma14  | Brock@02 | marylamb823       |
       
 #TestCaseClickTOCallCancel7
