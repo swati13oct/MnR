@@ -247,7 +247,7 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//h2[@class='atdd-need-help']")
 	protected WebElement needHelpHeader;
 	
-	@FindBy(xpath="//h1[contains(text(),'Help & Contact Us')]")
+	@FindBy(xpath="//h1[contains(text(),'Help & Contact Us')]|//h1/span[contains(text(),'Contact UnitedHealthcare')]")
 	protected WebElement contactUsHeader;
 	
 
