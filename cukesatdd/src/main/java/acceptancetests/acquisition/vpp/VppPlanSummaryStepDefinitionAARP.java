@@ -974,7 +974,7 @@ public class VppPlanSummaryStepDefinitionAARP {
   }
   
   @Then("^the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site$")
-  public void user_validate_planSelectorPage_inaarpSite(){
+  public void user_validate_planSelectorPage_inaarpSite() throws Exception{
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	  plansummaryPage.validatePlanSelectorPageInRightRail();
@@ -1015,6 +1015,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			
 	}
 	
+<<<<<<< HEAD
 	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site$")
 	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans_in_aarp_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1030,6 +1031,44 @@ public class VppPlanSummaryStepDefinitionAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+=======
+	@Then("^the user clicks on Learn More AARP for Rocky Mountain plans$")
+	public void the_user_clicks_on_Learn_More_for_AARP_for_Rocky_Mountain_plans(DataTable planAttributes)
+			throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
+	}
+	
+	@Then("^the user clicks on Learn More AARP for people Health plans$")
+	public void the_user_clicks_on_Learn_More_for_AARP_for_people_Health_plans(DataTable planAttributes)
+			throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
+>>>>>>> develop
 	}
 }
 		

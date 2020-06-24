@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.vbfacquisition_deprecated.uhcretiree.Rallytool_Page;
 import acceptancetests.data.MRConstants;
+import pages.vbfacquisition_deprecated.uhcretiree.Rallytool_Page;
 
 /**
  * @author rkodumur

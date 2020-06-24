@@ -27,12 +27,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
-
-import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -40,6 +34,9 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 public class PlanDetailsPage extends UhcDriver {

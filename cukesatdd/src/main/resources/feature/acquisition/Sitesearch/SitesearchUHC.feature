@@ -1,5 +1,5 @@
 @SiteSearchResultsUHC @F294024
-Feature:2.14-Acq-To verify Sitesearch results in UMS site
+Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
 @SiteSearchUHC  @SiteSearchRegressionUHC
  Scenario Outline: Verify search results in UHC site
@@ -43,8 +43,8 @@ Feature:2.14-Acq-To verify Sitesearch results in UMS site
    | 15652 |   19019 | No  | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO)       |Medicare    |pharmacy|
 
     
- @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC
- Scenario Outline: Verify search results in UHC site
+ @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
+ Scenario Outline: Verify search results in UHC site for Error
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>|

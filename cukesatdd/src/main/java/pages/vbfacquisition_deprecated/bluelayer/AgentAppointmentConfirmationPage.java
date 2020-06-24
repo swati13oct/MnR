@@ -10,10 +10,10 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import acceptancetests.vbfacquisition_deprecated.agentflow.RequestAgentAppointmentConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import acceptancetests.vbfacquisition_deprecated.agentflow.RequestAgentAppointmentConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 

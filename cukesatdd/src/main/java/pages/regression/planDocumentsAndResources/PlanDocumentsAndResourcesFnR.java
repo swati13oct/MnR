@@ -3,16 +3,19 @@ package pages.regression.planDocumentsAndResources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import acceptancetests.util.CommonUtility;
 
 public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDocLinksHelper  {
 
 	public PlanDocumentsAndResourcesFnR(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -106,6 +109,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		}
 		//----------------------------------------------
 		Assert.assertTrue("PROBLEM - unable to locate sub-section '"+subSection_FnR+"' in '"+section+"' section", planDocValidate(subSectionElement));
+		scrollElementToCenterScreen(subSectionElement);
 		moveMouseToElement(subSectionElement);
 		subSectionElement.click();
 		System.out.println("TEST - clicked subsection to collapse it");

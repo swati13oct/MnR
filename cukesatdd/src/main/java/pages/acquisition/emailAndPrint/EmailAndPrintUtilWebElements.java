@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 public class EmailAndPrintUtilWebElements extends UhcDriver {
@@ -24,16 +25,16 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
 	protected WebElement firstSaveHeartOnActiveSummaryPlanPage;
 	
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
 	protected WebElement summary_maPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
 	protected WebElement summary_maEmailOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
 	protected WebElement summary_pdpPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
 	protected WebElement summary_pdpEmailOption;
 
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
@@ -51,7 +52,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	protected WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
+	@FindBy(xpath = "//button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
 	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")

@@ -25,7 +25,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.footer.FooterPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
 import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.CommonConstants;
@@ -188,6 +190,12 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
+	
+	 @FindBy(xpath="//a[@id='contact-help']")
+	 WebElement contactus;
+	 
+	 @FindBy(xpath="//h1[@class='main-heading margin-none']")
+	 WebElement ContactUsHeading;
 
 	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
@@ -260,7 +268,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']")
 	private WebElement unpaidRadio;
 
-	@FindBy(xpath = "//*[@id='paymentTable']")
+	@FindBy(xpath = "//*[@id='paymentTable' or @id='paymentTable1']")
 	private WebElement paymentTable;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
@@ -400,6 +408,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(id = "menubutton")
 	private WebElement menubutton;
+	
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
+	protected WebElement preEffectiveTechSupportNumber;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -935,6 +946,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(20000);
 		
 		waitforElement(SetUpAutomaticPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Automatic Button");
 		try {
@@ -978,6 +990,14 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPaymentforShip() throws Exception {
+		checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Thread.sleep(20000);
 		waitforElement(EditRecurringPaymentsButton);
 		EditRecurringPaymentsButton.click();
@@ -1641,30 +1661,29 @@ public class PaymentHistoryPage extends UhcDriver {
 		validateNew(oneTimePaymentBtn);
 	}
 
-			public PaymentHistoryPage navigateToSHIPTab() {
-			TestHarness.checkForIPerceptionModel(driver);
-			CommonUtility.waitForPageLoad(driver, ShipTab, 20);
-			System.out.println("Now clicking on SHIP Tab");
-		
-			try {
-				ShipTab.click();
-			} catch (Exception e) {
-				System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
-				hipTab.click();
-				System.out.println("HIP plan Tab was clicked");
-			}
-			CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
-			CommonUtility.checkPageIsReadyNew(driver);
-			
-			if (PayDate.getText().contains("Paid through Date")) {
-				System.out.println("ShipTab or hipTab with amount displayed");
-				return new PaymentHistoryPage(driver);
-			} else {
-				System.out.println("Ship/hip tab issue");
-				return null;
-			}
+	public PaymentHistoryPage navigateToSHIPTab() throws InterruptedException {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Tab");
+	
+		try {
+			ShipTab.click();
+		} catch (Exception e) {
+			System.out.println("SHIP Tab was not displayed, trying if HIP Plan tab is dislayed");
+			hipTab.click();
+			System.out.println("HIP plan Tab was clicked");
 		}
-
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+		CommonUtility.checkPageIsReadyNew(driver);
+		Thread.sleep(4000);
+		if (PayDate.getText().contains("Paid through Date")) {
+			System.out.println("ShipTab or hipTab with amount displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("Ship/hip tab issue");
+			return null;
+		}
+	}
 			public PaymentHistoryPage navigateToFedTab() {
 			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, FedTab, 20);
@@ -1683,12 +1702,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 		
 			public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+				checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				CommonUtility.waitForPageLoad(driver, menubutton, 20);
 				CommonUtility.waitForPageLoad(driver, paymentTable, 20);
 								
 				System.out.println("Now Scrolling to daterange dropdown");				
 				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
-				jse3.executeScript("arguments[0].scrollIntoView()", menubutton); 
+				jse3.executeScript("arguments[0].scrollIntoView()", menubutton);
+				jse3.executeScript("window.scrollBy(0,-50)", "");
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -1731,4 +1759,90 @@ public class PaymentHistoryPage extends UhcDriver {
 				}
 				return new PaymentHistoryPage(driver);
 			}
+			
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException {
+		System.out.println("Now checking for Tech Support Number for Pre-effective members");
+		System.out.println(
+				"The Tech Support phone number displayed on screen is " + preEffectiveTechSupportNumber.getText());
+		System.out.println("Expected Tech Support phone number from feature file is " + technicalPhNo);
+		Assert.assertEquals(preEffectiveTechSupportNumber.getText(), technicalPhNo);
+		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
+
 	}
+	
+	@FindBy(xpath="//div[@class='login__container container']")
+	private  WebElement logincontainer;
+
+	public ProfileandPreferencesPage navigatetoLogoutdropdownlink() throws InterruptedException{	
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+//	waitforElement(logoutLink);
+    /*  validate(logoutLink);
+	if (validate(logoutLink)) {
+		System.out.println("logout link is displayed");
+		logoutLink.click();*/
+		/*navigating to signout */
+		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
+		//https://www.medicare.uhc.com/aarp/member/logout.html
+		 System.out.println("title is: "+driver.getTitle());
+		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
+		 validate(logincontainer);
+		 if (validate(logincontainer)) {
+				System.out.println("Sign in  link is displayed");}
+		 
+		return new ProfileandPreferencesPage(driver);
+	}
+	
+
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
+	public ContactUsPage NavigatetoContactuspage() throws InterruptedException {
+		checkForIPerceptionModel(driver);
+	       // clicking on contact us 
+		Thread.sleep(2000);
+			waitforElement(contactus);
+			contactus.click();			
+			System.out.println(driver.getTitle());
+			System.out.println(driver.getCurrentUrl());			
+			Assert.assertTrue(driver.getTitle().contains("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us"));		
+		
+			validate(ContactUsHeading);
+						
+			if (driver.getTitle().contains("AARP Medicare Plans from UnitedHealthCare - Help & Contact Us")) {
+				System.out.println("Contact us Page is Displayed");
+				return new ContactUsPage(driver);
+			} else {
+				System.out.println("===========contact us page not Displayed=============");
+				return null;
+			}
+		}
+}

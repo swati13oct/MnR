@@ -26,7 +26,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -1993,7 +1992,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
 		scrollToView(btnViewCost);
-		getBtnViewCost().click();
+		jsClickNew(getBtnViewCost());
+		//getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}
 	

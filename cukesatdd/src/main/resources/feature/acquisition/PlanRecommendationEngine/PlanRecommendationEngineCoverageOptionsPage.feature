@@ -14,7 +14,7 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
       | Zipcode | isMultiCounty |
       |   90201 | NO            |
 
-  @PRE @planrecommendation @coveragepage @coveragepageoptionselection @regression @F372736
+  @PRE @planrecommendation @coveragepage @coveragepageoptionselection @F372736
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Selecting coverage options using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -29,9 +29,9 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
       |   90201 | NO            | MAPD          |
       |   10001 | NO            | MA            |
       |   12345 | NO            | PDP           |
-      |   90210 | NO            | NA            |
+      |   90210 | NO            | None          |
 
-  @PRE @planrecommendation @coveragepage @coveragepageerrorScenario @regression @F372736
+  @PRE @planrecommendation @coveragepage @coveragepageerrorScenario @F372736
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate error Scenario of coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

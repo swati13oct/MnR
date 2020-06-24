@@ -2234,7 +2234,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the error is displayed on review payment page for second payment$")
 	public void error_displayed_second_payment() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
@@ -2252,6 +2252,21 @@ public class OneTimePaymentAarpStepDefintion {
 		    paymentHistoryPage.navigateToFedTab();
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 				 
+	}
+	
+	@And("^delete confirmation number GPS for recurring payment$")
+	public void DeleterecurringPaymentRecord(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******delete confirmation number GPS for recurring payment*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
 	}
 	
 	@And("^the user delete recurring payment record from GPS so that he can run recurring payment again$")
@@ -2289,6 +2304,146 @@ public class OneTimePaymentAarpStepDefintion {
 		String confirmationnumberfromPageConstant = (String)getLoginScenario().getBean(PageConstants.CONFIRMATION_NUMBER);
 		System.out.println("Value of confirmation number from Page Constants is "+confirmationnumberfromPageConstant);
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPSforexception(paymentTypeMap,confirmationnumberfromPageConstant);
+
+		
+	}
+	
+	@When("^user SHIP selects other amount and enters \"([^\"]*)\" and selects Checking Account and click on Next button$")
+	public void user_selects_other_amount_and(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+		PaymentsFormPage paymentsFormPage = oneTimePaymentPage.clickOnContuineButton();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on One time EFT Payment Form Page");
+
+		}
+}
+	
+	@Given("^user SHIP Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA$")
+	public void SHIP_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button_for_Make_one_time_CA(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		OneTimePaymentPage oneTimePaymentPage = paymentsFormPage.EnterFiledsOnSetupEFTforShip(memberAttributesMap); 
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, oneTimePaymentPage);
+			System.out.println("User is on Review payment page for Checking account");
+		}
+
+	}
+	@Then("^SHIP User navigates to payment confirmation page and verifies ConfirmationNo for One time$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_SHIP() throws Throwable {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+				confirmOneTimePaymentPage.OneTimeEFTverificationSHIP();		
+		getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);		
+		getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+
+
+	}
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on cancel Button for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_cancel_Button_for_EFT()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAndClickCancelOnEFT();
+	
+}
+	@Then("^user navigates to payment overview screen$")
+	public void user_navigates_to_payment_overview_screen()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.DoNotselectAgreeAndClickOnMakePayment();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on Review One time payments page");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewOneTimePaymentsPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
+		}
+	}
+	@Given("^user navigates to Review Your One-Time Payment Information$")
+	public void user_navigates_to_Review_Your_One_Time_Payment_Information()
+			throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage
+				.DoNotselectAgreeAndClickOnSubmitPaymentsforOneTime();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on One time confirmation page for Checking account");
+		}
+	}
+	
+	@And("^the user clicks on cancel button in One time EFT or Recurring EFT$")
+	public void click_on_Cancel_btn() {		
+	PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+			.getBean(PageConstants.Payments_Form_Page);
+	         paymentsFormPage.clickonCancelButton1();
+	
+	}
+	
+	@Given("^user navigates to review your Automatic screen and selects agreements for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAgreeAndnoClickOnAuthorizeMonthyPaymentsforEFT();
+	
+}
+	@Given("^user navigates to review your Automatic screen and selects agreements for CC$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_CC()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndnoClickOnContinueforCC();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for CC");
+		}
+	}
+	
+	@Given("^Update stop date of recurring payment$")
+	public void updateStopDateInGPSdb(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Update stop date of recurring payment*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+	
+		
+		ConfirmOneTimePaymentPage.updateStopDateInGPSdb(paymentTypeMap);
 
 		
 	}

@@ -1,28 +1,21 @@
 package pages.acquisition.ulayer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.interactions.Actions;
+import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
 	
@@ -554,7 +547,7 @@ public class ComparePlansPage extends UhcDriver {
      }
 	
 	public void validatenewlyAddPlan() {
-   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//a[@class='planNameVisibility']//h3"));	
+   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
 		int plansForCompare=allMAPlans.size();
 		if (plansForCompare == 3) {
 			Assert.assertTrue(true);
@@ -571,6 +564,14 @@ public class ComparePlansPage extends UhcDriver {
 			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
 		} else
 			Assert.assertTrue(false);
+	}
+	
+	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		String[] plan = plans.split(",");
+		for(int i=0;i<allMAPlans.size();i++) {
+			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
+		}
 	}
 }
 

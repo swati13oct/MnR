@@ -3379,4 +3379,202 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.waitForPlanSummaryPageLoad();
 	}
+<<<<<<< HEAD
+=======
+	
+	@When("^the user validate thank you message in plan compare for selected plan in AARP site$")
+	public void user_validate_thank_you_message_in_plan_compare_for_selected_plan() {
+
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+		
+		//note: if email is successfully sent, deepLink info should be available, save it for later use
+		String deepLink=comparePlansPage.getEmailDeepLink();
+		getLoginScenario().saveBean(PageConstants.COMPARE_PAGE_DEEPLINK,deepLink);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user loads page using email deeplink for plan and validate vpp summary page content on AARP site$")
+	public void validate_deeplink() {
+		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String deepLinkStringId="";
+		String infoMapStringId="";
+		deepLinkStringId=PageConstants.SUMMARY_PAGE_DEEPLINK;
+		infoMapStringId=PageConstants.SUMMARY_PAGE_INFO;
+		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
+		HashMap<String, Integer> origPage=(HashMap<String, Integer>) getLoginScenario().getBean(infoMapStringId);
+
+		//note: use new driver to achieve clear cache
+		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
+		newTestDriver.get(deepLink);
+		CommonUtility.checkPageIsReady(newTestDriver);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(newTestDriver);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
+		CommonUtility.checkPageIsReady(newTestDriver);
+		List<String> noteList=plansummaryPage.validatePlanSummaryEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user loads page using email deeplink and validate vpp detail page content on AAPR site$")
+	public void validate_detail_page_deeplink() throws InterruptedException {
+		String deepLinkStringId=PageConstants.DETAIL_PAGE_DEEPLINK;
+		String infoMapStringId=PageConstants.DETAIL_PAGE_INFO;
+		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
+		HashMap<String, String> origPage=(HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
+
+		//note: use new driver to achieve clear cache
+		//keep WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
+		//keep newTestDriver.get(deepLink);
+		//keep CommonUtility.checkPageIsReady(newTestDriver);
+		Thread.sleep(1000);
+		//keep PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(newTestDriver);
+
+		PlanDetailsPage tmpPg=(PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(tmpPg.driver);
+		//keep email_vppPlanDetailsPage.handlePlanYearSelectionPopup(planType);
+		//keep CommonUtility.checkPageIsReady(newTestDriver);
+		
+		
+		EmailAndPrintUtil util = new EmailAndPrintUtil(tmpPg.driver);
+		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		//keepList<String> noteList=email_vppPlanDetailsPage.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
+	}
+	
+	
+	@SuppressWarnings({ "unchecked", "static-access" })
+	@Then("^user loads page using email deeplink and validate vpp compare page content on AARP site$")
+	public void validate_compare_page_deeplink() {
+		String deepLinkStringId=PageConstants.COMPARE_PAGE_DEEPLINK;
+		String infoMapStringId=PageConstants.COMPARE_PAGE_INFO;
+		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
+		HashMap<String, String> origPage=(HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
+
+		//note: use new driver to achieve clear cache
+		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
+		newTestDriver.get(deepLink);
+		CommonUtility.checkPageIsReady(newTestDriver);
+		ComparePlansPage comparePlansPage = new ComparePlansPage(newTestDriver);
+		comparePlansPage.handlePlanYearSelectionPopup(planType);
+		CommonUtility.checkPageIsReady(newTestDriver);
+		comparePlansPage.checkModelPopup(newTestDriver);
+
+		//note: temperary bypass for now until the flash issue is resolved
+		List<String> noteList=new ArrayList<String>();
+		noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink page content flashing");
+		//note: do not remove the comment line below
+		//List<String> noteList=comparePlansPage.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
+	}
+	
+	@SuppressWarnings("unchecked")   
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(VPPCommonConstants.TEST_RESULT_NOTE)) {   
+			List<String> testNote=(List<String>) getLoginScenario()
+			.getBean(VPPCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
+	
+	@And("^the user views the plans of the below plan type$")
+	public void user_performs_planSearch(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		String site = givenAttributesMap.get("Site");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
+		if (site.equalsIgnoreCase("ulayer")) {
+			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.viewPlanSummary(plantype);
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+		} else {
+			System.out.println("boo");
+			System.exit(0);
+		}
+	}
+	*/
+	
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
+
+	@Then("^agent saves two plans as favorite on AARP site for user$")
+	public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Then("^user saves all plans as favorite on AARP site$")
+	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+>>>>>>> develop
 }

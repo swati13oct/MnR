@@ -316,6 +316,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam = "Call a Licensed Insurance Agent";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
+	
+	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
+	private WebElement ChatCancelBtn;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
 	private WebElement chatsamtooltip;
@@ -1849,15 +1852,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
-		if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")) {
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
-			// startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc",
-			// "digital-uatv2"));
-		} else {
-			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
-			// startNew(AARP_ACQISITION_PAGE_URL);
+		String browser = MRScenario.browsername;
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
+		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage")){
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("stage-aarp")){
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("stage")){
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
 		}
-		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
@@ -2131,7 +2140,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
 		WebElement PlanSelectorLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
+				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
 		WebElement DCELink = driver.findElement(
 				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
 		WebElement PharmacySearchLink = driver.findElement(
@@ -2440,4 +2449,33 @@ public void validateResultSummaryPage() {
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
+<<<<<<< HEAD
 }
+=======
+
+	public void validateChatIcon() throws InterruptedException {
+		boolean present;
+		CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+		if (chatsam.isDisplayed()) {
+			System.out.println("@@@@ Chat Icon window opened successfully@@@");
+			jsClickNew(chatsam);
+			Thread.sleep(5000);
+			//driver.switchTo().frame("sp-chat-iframe");
+			validate(ChatCancelBtn, 10);
+			present = true;
+			CommonUtility.waitForPageLoadNewForClick(driver, ChatCancelBtn, 30);
+			jsClickNew(ChatCancelBtn);
+			//ChatCancelBtn.click();
+			//driver.switchTo().defaultContent();
+			CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+			System.out.println("@@@@ Chat Icon is displayed Successfully@@@");
+		}
+
+		else {
+			System.out.println("@@@@@@@@@ No Chat Window  @@@@@@@@@");
+			//assertTrue("Chat Icon not displayed on " + pageName + "", false);
+		}
+	}
+	
+}
+>>>>>>> develop

@@ -21,17 +21,15 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Multi Doctor        | <isMultiDoctor> |
     And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validate elements in cost preferences page
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
+      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  |
 
-  @PRE @planrecommendation @costpreferencespage @costpreferencespageselection @regression @F374228
+  @PRE @planrecommendation @costpreferencespage @costpreferencespageselection @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -51,19 +49,17 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Multi Doctor        | <isMultiDoctor> |
     And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  | Higher               |
-      |   90201 | NO            |        | MA            | Medicaid          | another         | outnetwork |             |               | No             | Retail         | Yes,No,Yes,Yes                | Lower                |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Higher               |
+      |   90201 | NO            |        | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,Yes,Yes                | Lower                |
 
-  @PRE @planrecommendation @costpreferencespage @costpreferenceserror @regression @F374228
+  @PRE @planrecommendation @costpreferencespage @costpreferenceserror @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Error Function in Cost Preferences using Single County in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -83,13 +79,11 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Multi Doctor        | <isMultiDoctor> |
     And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validates cost preferences error function in cost preferences page
       | Preference Option | <costPreferenceOption> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  |                      |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  |                      |

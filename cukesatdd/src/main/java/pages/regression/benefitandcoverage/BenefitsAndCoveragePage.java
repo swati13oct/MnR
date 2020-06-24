@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -72,7 +73,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		checkModelPopup(driver, 3);
 		validateFieldsOnBenefitsAndCoveragePage();
 	}
 
@@ -1251,23 +1252,54 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
+		System.out.println("Actual logo's source on Secondary page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);          
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page main logo assert condition is passed");              
-	}
+		System.out.println("Secondary page main logo assert condition for image source is passed");  
+		
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+			        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+			        if (!ImagePresent)
+			        {
+			         System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			         System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+			         Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+			        }
+			        else
+			        {
+			        	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			            System.out.println("naturalWidth is not zero , Logo image was displayed.");
+			         }
 
+	}
+	
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
+		System.out.println("Actual cologo's source on secondary page is   " + cologo_src
 				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page co logo assert condition is passed");
+		System.out.println("Secondary page co logo assert condition for image source is passed");
+		System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+		System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+        if (!ImagePresent)
+        {
+         System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+         System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+         Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+        }
+        else
+        {
+        	System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+            System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+            
+        }
 	}
-
+	
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {
 		validateWithValue("Paln name", planName2);
@@ -2051,12 +2083,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
 				getJmpLinkToPrimaryCareProvider().isDisplayed());
 		if (rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+			Assert.assertTrue("jmpLinkToOptionalServices(Riders) isn't displayed",
 					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
 
-		if (memberType.equalsIgnoreCase("Individual")) {
+		//tbd if (memberType.equalsIgnoreCase("Individual")) {
+		if (memberType.contains("Individual")) {
 			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
 			Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
 					getJmpLinkToPlanDocumentsAndResources().isDisplayed());
@@ -2163,7 +2196,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCNoDeductible() {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(!NoDeductible1Text.getText().contains("$")){
 				System.out.println("No $ Amount is displayed for Member with No Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
@@ -2186,7 +2219,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCSingleDeductible(String deductibleAmount1) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(Deductible1Text.getText().contains(deductibleAmount1)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" is displayed for Member with Single Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -2209,7 +2242,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnC_DualDeductible(String deductibleAmount1, String deductibleAmount2) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1) && validate(MedicalDeductibleCard2) ){
+		if(validate(MedicalDeductibleCard1,0) && validate(MedicalDeductibleCard2,0) ){
 			if(Deductible1Text.getText().contains(deductibleAmount1) && Deductible2Text.getText().contains(deductibleAmount2)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" AND "+deductibleAmount2+" is displayed for Member with Dual Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -3100,5 +3133,140 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(SearchProvider,0);
 		validateNew(StartSearch,0);
 	}
+
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 * @param flagNonCombo
+	 */
+	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		if (flagNonCombo)
+			goToSpecificComboTab(planType);
+		else {
+			try {
+				if (planType.equalsIgnoreCase("mapd")) {
+					if (noWaitValidate(comboTab_MAPD))
+						comboTab_MAPD.click();
+					else if (noWaitValidate(comboTab_MAPD_planDoc))
+						comboTab_MAPD_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ma")) {
+					if (noWaitValidate(comboTab_MA)) 
+						comboTab_MA.click();
+					else if (noWaitValidate(comboTab_MA_planDoc)) 
+						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					if (noWaitValidate(comboTab_SHIP)) 
+						comboTab_SHIP.click();
+					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+						comboTab_SHIP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					if (noWaitValidate(comboTab_PDP))
+						comboTab_PDP.click();
+					else if (noWaitValidate(comboTab_PDP_planDoc))
+						comboTab_PDP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ssp") || planType.equalsIgnoreCase("ssup")) {
+					if (noWaitValidate(comboTab_SSP)) 
+						comboTab_SSP.click();
+					else if (noWaitValidate(comboTab_SSP_planDoc))
+						comboTab_SSP_planDoc.click();
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		sleepBySec(2);
+	}
+
+	/**
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
+	 * @param planType
+	 */
+	public void goToSpecificComboTab(String planType) {
+		//TODO: need to enhance it to handle multi plans of the same plan type, e.g. multiple ship plans each w/ different ship plan category name
+		try {
+			if (planType.toLowerCase().contains("mapd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", noWaitValidate(comboTab_MAPD) || noWaitValidate(comboTab_MAPD_planDoc));
+				if (noWaitValidate(comboTab_MAPD)) 
+					comboTab_MAPD.click();
+				else if (noWaitValidate(comboTab_MAPD_planDoc)) 
+					comboTab_MAPD_planDoc.click();
+			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", noWaitValidate(comboTab_MA) || noWaitValidate(comboTab_MA_planDoc));
+				if (noWaitValidate(comboTab_MA)) 
+					comboTab_MA.click();
+				else if (noWaitValidate(comboTab_MA_planDoc)) 
+					comboTab_MA_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship_hip")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP_HIP)) 
+					comboTab_SHIP_HIP.click();
+				else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+					comboTab_SHIP_HIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+				else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+					comboTab_SHIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("pdp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", noWaitValidate(comboTab_PDP) || noWaitValidate(comboTab_PDP_planDoc));
+				if (noWaitValidate(comboTab_PDP)) 
+					comboTab_PDP.click();
+				else if (noWaitValidate(comboTab_PDP_planDoc)) 
+					comboTab_PDP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ssp") || planType.toLowerCase().contains("ssup")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", noWaitValidate(comboTab_SSP) || noWaitValidate(comboTab_SSP_planDoc));
+				if (noWaitValidate(comboTab_SSP))
+					comboTab_SSP.click();
+				else if (noWaitValidate(comboTab_SSP_planDoc))
+					comboTab_SSP_planDoc.click();
+			} else {
+				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
+	public boolean noWaitValidate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else
+				System.out.println("Element not found/not visible");
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+		}
+		return false;
+	}
+	
+	
+	public void navigateToSHIPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Plan Tab");
+		try {
+			ShipTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SHIP Plan Tab was not displayed");
+			Assert.fail("SHIP Plan Tab was not displayed");
+		}
+	}
+
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
+	}	
 }
 

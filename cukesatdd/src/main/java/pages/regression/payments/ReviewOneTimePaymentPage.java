@@ -130,4 +130,27 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 		return false;
 	}
 
+		public ConfirmOneTimePaymentPage DoNotselectAgreeAndClickOnMakePayment() {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();		
+		validate(ContinueButton);		
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getTitle().contains("One-Time Payment Information")) {
+			System.out.println("User is on Confirmation Page");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+
+			System.out.println("User is not on Confirmation Page");
+			return null;
+		}
+	}
+
 }

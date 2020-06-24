@@ -219,9 +219,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!memberType.contains("AARP")) {
+				//if (!memberType.contains("AARP")) {
 					targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
-				}
+				//}
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
@@ -318,7 +318,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
@@ -412,6 +412,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -596,7 +597,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				//targetTestDocList.add("Medical Reimbursement Form (Online)"); //note: this one is for COSMOS only
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}
@@ -940,7 +941,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");
@@ -1302,8 +1303,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
-				targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Plan Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
@@ -2874,7 +2875,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos Alternativos");
 				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport");
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
@@ -3354,7 +3355,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				//targetTestDocList.add("Moving to your new plan");
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");

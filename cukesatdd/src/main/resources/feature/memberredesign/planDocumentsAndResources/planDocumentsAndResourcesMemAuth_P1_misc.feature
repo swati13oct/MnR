@@ -1,5 +1,5 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
-Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp
+Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
   #   Given feature security flag must set to true when testing on stage env
@@ -7,7 +7,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 
   #------------------------------------------
   @memAuth_planAndDocuments01 @header @myDocuments @eob @renewMagazine @adobe @needHelp
-  Scenario Outline: To validate via member authorization access for Plan Documents and Resources page
+  Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp 
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -41,30 +41,30 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
     #note: moved to footer feature
 	#Then user validate Need Help section
 
-	@memAuth_preeffective_ma_mapd
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 01-001 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
-      | 02-002 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
-      | 03-003 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+#	@memAuth_preeffective_ma_mapd
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+#      | 01-001 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+#      | 02-002 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
+#      | 03-003 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
-	@memAuth_preeffective_pdp
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 04-004 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
-      | 05-005 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
+#	@memAuth_preeffective_pdp
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+#      | 04-004 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+#      | 05-005 | xxxxx       | qavgogine | qavgogine | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
 
-	@memAuth_terminated_ma_mapd
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 06-006 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | IND_TERM_PDnR         | true  | true   | true  | false | false |
-      | 07-007 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
-      | 08-008 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
+#	@memAuth_terminated_ma_mapd
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+#      | 06-006 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | IND_TERM_PDnR         | true  | true   | true  | false | false |
+#      | 07-007 | xxxxx       | qavgogine | qavgogine | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
+#      | 08-008 | xxxxx       | qavgogine | qavgogine | testusername    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | qavgogine | qavgogine | q2_may_rally017    | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
       | 10-010 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@memAuth_active_mapd
@@ -76,14 +76,14 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 12-012 | 15303       | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
-     ### note: PEEHIP group terminated as of 12/31/2019
-     #| 13-013 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
+#     ### note: PEEHIP group terminated as of 12/31/2019
+#     #| 13-013 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
-	@memAuth_active_pcp_medica      
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 14-014 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
-      | 15-015 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
+#	@memAuth_active_pcp_medica      
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+#      | 14-014 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
+#      | 15-015 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
 
 	@memAuth_active_pdp
 	Examples: 

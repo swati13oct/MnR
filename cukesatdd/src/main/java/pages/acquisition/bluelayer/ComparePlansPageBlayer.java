@@ -4,18 +4,18 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.openqa.selenium.interactions.Actions;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ole.WelcomePage;
-import atdd.framework.UhcDriver;
+
 import acceptancetests.util.CommonUtility;
+import atdd.framework.UhcDriver;
+import pages.acquisition.ole.WelcomePage;
 
 public class ComparePlansPageBlayer extends UhcDriver {
 
@@ -531,6 +531,13 @@ public class ComparePlansPageBlayer extends UhcDriver {
 			Assert.assertTrue(false);
 	}
  	
+ 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		String[] plan = plans.split(",");
+		for(int i=0;i<allMAPlans.size();i++) {
+			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
+		}
+	}
      
 }
 

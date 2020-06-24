@@ -1,5 +1,6 @@
 package pages.regression.payments;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -197,7 +198,6 @@ public class PaymentsFormPage extends UhcDriver {
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -249,10 +249,14 @@ public class PaymentsFormPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Review Your Recurring Payments Information")) {
+		
+		//WARNING  Please add your condition if you have to , do not comment someone else code/////
+		if ((driver.getTitle().contains("Review Your Recurring Payments Information")) || (driver.getCurrentUrl().contains("payments/onetime"))) 
+		{
 			System.out.println("User is on Review Your Recurring Payments Information Page");
 			return new OneTimePaymentPage(driver);
-		} else {
+		} 
+		else {
 			System.out.println("Review Your Recurring Payments Information not displayed");
 			return null;
 		}
@@ -264,13 +268,21 @@ public class PaymentsFormPage extends UhcDriver {
 
 	}
 
-	public PaymentHistoryPage clickonCancelButton() {		
+	public PaymentHistoryPage clickonCancelButton() {
+		checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.waitForPageLoad(driver, cancelButton, 20);
 		System.out.println("Clicking on cancel button of Update Checking Account or One Time Payment EFT form");
 		System.out.println("Scrolling to Cancel Button");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-		jse2.executeScript("arguments[0].scrollIntoView()", cancelButton); 
+		jse2.executeScript("arguments[0].scrollIntoView()", cancelButton);
+		jse2.executeScript("window.scrollBy(0,-50)", "");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -353,4 +365,63 @@ public class PaymentsFormPage extends UhcDriver {
 			return null;
 		}
 	}
+	/**
+	 * For iPerception Model
+	 * @param driver
+	 */
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	public PaymentHistoryPage clickonCancelButton1() {	
+		checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(cancelButton);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, cancelButtonOnModal, 20);
+		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form or One Time Payment EFT form");
+		cancelButtonOnModal.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			System.out.println("Waiting for 10 seconds to go back to Payment Overview page");
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (driver.getCurrentUrl().contains("payments/overview.html"))
+				{
+			System.out.println("User is on Payment Overview Page after clicking cancel");
+			return new PaymentHistoryPage(driver);
+				}
+		else {
+			System.out.println("Payment Overview Page was not displayed on clicking cancel");
+			Assert.fail("Payment Overview Page was not displayed on clicking cancel");
+		}
+		return null;
+	}
+	
 }

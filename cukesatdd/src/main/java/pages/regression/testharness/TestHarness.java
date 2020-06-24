@@ -17,32 +17,27 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.benefitandcoverage.*;
-import pages.regression.formsandresources.*;
-import pages.regression.claims.*;
-import pages.regression.contactus.ContactUsPage;
-import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
-
-import pages.regression.healthandwellness.*;
-import pages.regression.myDocumentsPage.MyDocumentsPage;
-import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
-import pages.regression.pharmacylocator.*;
-import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
-import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
-import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.contactus.ContactUsPage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
 public class TestHarness extends UhcDriver {
@@ -147,7 +142,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")
@@ -383,9 +378,7 @@ public class TestHarness extends UhcDriver {
 			if (driver.getCurrentUrl().contains("testharness")) {
 				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 				TestHarness.checkForIPerceptionModel(driver);
-				TestHarness.checkForIPerceptionModel(driver);
 				TestHarnesspaymentsLink.click();
-				TestHarness.checkForIPerceptionModel(driver);
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
@@ -1172,22 +1165,53 @@ public class TestHarness extends UhcDriver {
         System.out.println("Actual logo's source on Test Harness page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
         System.out.println("logo's alt text on secondary page is   "+logo_alt);          
         Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test harness page main logo assert condition is passed");              
+        System.out.println("Test harness page main logo assert condition for image source is passed"); 
+        
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+		 
+       System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+       Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+       if (!ImagePresent)
+       {
+        System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+        Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+       }
+       else
+       {
+       	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+           System.out.println("naturalWidth is not zero , Logo image was displayed.");
+        }
+	          
 }
-
 
 
         public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
         
-        CommonUtility.waitForPageLoad(driver,cologoImage,15);
-        String cologo_src = cologoImage.getAttribute("src");
-        String cologo_alt = cologoImage.getAttribute("alt");
-        System.out.println("Actual logo's source on Test harness page is   " + cologo_src
-                                      + " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
-        System.out.println("logo's alt text on secondary page is   " + cologo_alt);
-        Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-        System.out.println("Test Harness page co logo assert condition is passed");
-}
+        	 CommonUtility.waitForPageLoad(driver,cologoImage,15);
+             String cologo_src = cologoImage.getAttribute("src");
+             String cologo_alt = cologoImage.getAttribute("alt");
+             System.out.println("Actual cologo's source on Test harness page is   " + cologo_src
+                                           + " and Expected cologo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
+             System.out.println("cologo's alt text on secondary page is   " + cologo_alt);
+             Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+             System.out.println("Test Harness page co-logo assert condition for image source is passed");
+             System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+             
+             Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+             if (!ImagePresent)
+             {
+              System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+              System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+              Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+             }
+             else
+             {
+             	System.out.println("naturalWidth of cologo is "+cologoImage.getAttribute("naturalWidth"));
+                 System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+                 
+             }
+     }
     	/**
     	 * For iPerception Model
     	 * @param driver
@@ -1250,6 +1274,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
     		checkForIPerceptionModel(driver);
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
     		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -1588,11 +1613,19 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		   public void userdirectlyaccessesmyhcesso() {
-				// TODO Auto-generated method stub
+			   
+			   if (MRScenario.environment.equalsIgnoreCase("stage"))
+			   {
 			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
 			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
+			   }
+			   else if (MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			   {
+				   System.out.println("Accessing https://offline-stage-medicare.uhc.com/myhce");
+				   driver.navigate().to("https://offline-stage-medicare.uhc.com/myhce");
+			 }
 			   try {
-				Thread.sleep(10000);
+				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1617,7 +1650,7 @@ public class TestHarness extends UhcDriver {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("Zip code Page / zip entry text box field was not displayed, failing this test script");
-					Assert.fail("Zip code text box fiels was not displayed");
+					Assert.fail("Zip code text box field was not displayed");
 				}
 			       }	
 		   
@@ -1629,6 +1662,7 @@ public class TestHarness extends UhcDriver {
 			   try {
 				   System.out.println("Waiting for 5 seconds");
 					Thread.sleep(5000);
+					CommonUtility.checkPageIsReadyNew(driver);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1639,8 +1673,23 @@ public class TestHarness extends UhcDriver {
 		public void checkuserlandsonhceestimatorpage() {
 			 System.out.println("Current URL is :  "+driver.getCurrentUrl());
 			 System.out.println("Now checking for header element h1 of the page");
-			 
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 try {
+				Thread.sleep(8000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				try {
+					waitforElement(hcePageText); 
+					if(hcePageText.isDisplayed())
+					{
+						System.out.println("Element for header h1 was displayed on page");
+					}
+					else
+					{
+						Assert.fail("Element for heaer h1 was NOT displayed on page");
+					}		
 					String gethcePageText = hcePageText.getText();
 					System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
 			   		if (gethcePageText.contains("myHealthcare Cost Estimator"))

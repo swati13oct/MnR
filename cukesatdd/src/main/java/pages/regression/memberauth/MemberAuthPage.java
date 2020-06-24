@@ -6,6 +6,7 @@ import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -108,6 +109,12 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='proceed-link']")
 	protected WebElement proceedLink;
 
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement goGreenGoToHomepageBtn;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement emailGoToHomepageBtn;
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -196,7 +203,8 @@ public class MemberAuthPage extends UhcDriver {
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
-		waitforElement(MemberTableUserName);
+		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
+		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
@@ -314,13 +322,28 @@ public class MemberAuthPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod")
-					|| MRScenario.environment.equalsIgnoreCase("team-h")) {
+					|| MRScenario.environment.equalsIgnoreCase("team-h")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
+			{
+				CommonUtility.checkPageIsReadyNew(driver);
+				try
+				{
+					System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
+					CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Catch block with no significance");
+				}
+				goGreenSplashPageWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
+				emailAddressRequiredWorkaround();
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 					System.out.println("COVID 19 Banner page has appeared");
 					try {
 						CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-						if (validate(homePageNotice, 0)) {
+						if (validate(homePageNotice, 10)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
 						} else if (validate(homePageNotice2, 0)) {
@@ -396,5 +419,57 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("Member UserName Not found");
 		return null;
 	}
+
+	public void goGreenSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
+				System.out.println("User encounted gogreen-splash page, handle it...");
+				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+				try {
+					if (validate(goGreenGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goGreenGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+				Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+	
+	public void emailAddressRequiredWorkaround() {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted email splash page, handle it...");
+				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
+				try {
+					//tbd System.out.println("'Go To Homepage' button showed up, click it");
+					//tbd goToHomepage.isDisplayed();
+					//tbd goToHomepage.click();
+					if (validate(emailGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						emailGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+				CommonUtility.checkPageIsReady(driver);
+				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}  
+
 
 }
