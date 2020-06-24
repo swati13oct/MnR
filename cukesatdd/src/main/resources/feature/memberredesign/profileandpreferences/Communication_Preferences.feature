@@ -72,8 +72,7 @@ Feature: 1.03 Member Preferences page
       | 15311 | xxxxx         | MAPD_AARP_GOGreen_Profilepref    | 000       |
       | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref      | 000       |
       | 15313 | xxxxx         | PDP_AARP_GOGreen_Profilepref     | 000       |
-     #note: need user data with segment id non-000 AND EPMP enabled for below case
-     #| xxxxx | xxxxx         | MA_001_AARP_GOGreen_Profilepref  | 001       |
+
       
   @CommunicationPreferences02 @goGreen @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
@@ -97,6 +96,7 @@ Feature: 1.03 Member Preferences page
       | 15314 | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
       | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
       | 15316 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
+      | 15317 | xxxxx         | PDP_GROUP_GOGreen_Profilepref  |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @CommunicationPreferences03 @CommunicationPreferencesMicroApp03 @F220921 @regressionMember

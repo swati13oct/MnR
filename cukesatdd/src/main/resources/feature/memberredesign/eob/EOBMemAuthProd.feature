@@ -61,12 +61,24 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #  | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @prod_SHIP_EOBs
+    @prod_SHIP_EOBs @prod_SHIP_EOBs1
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | ashah120  | Mnrqa002  | Pauline3707             | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+
+    @prod_SHIP_EOBs @prod_SHIP_EOBs2
+    Examples: 
+      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
       | 12    | ashah120  | Mnrqa002  | PAULAROTH2              | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+
+    @prod_SHIP_EOBs @prod_SHIP_EOBs3
+    Examples: 
+      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
       | 13    | ashah120  | Mnrqa002  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+
+    @prod_SHIP_EOBs @prod_SHIP_EOBs4
+    Examples: 
+      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
       | 14    | ashah120  | Mnrqa002  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
 
 

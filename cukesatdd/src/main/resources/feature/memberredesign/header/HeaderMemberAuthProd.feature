@@ -1,5 +1,5 @@
 @header @thePredators @member_redesign
-Feature: 1.08.1 Member Header/Navigation validation - Member Auth
+Feature: 1.08.1 Member Header/Navigation validation - PROD
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
   @prod_header01
@@ -67,7 +67,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     @F287624 @US2037787 @US2037966
     Examples:
       | TID       | username | password | MemUserName | planType | memberType                   |
-      | US2037787 | ashah120 | Mnrqa002 | memeterry29 | PDP_SSP  | comboAllNot100Subsidy_header |
+      | US2037787 | ashah120 | Mnrqa002 | Norm749 | PDP_SSP  | comboAllNot100Subsidy_header |
 	    # disable for now without suitable user - covered by comboAll100Subsidy_header case where SHIP payment tab is showing
 	    #  | US2037966 | qavgogine | qavgogine | testusername    | PDP_SSP     | comboSomeHas100Subsidy_header |
 
@@ -139,7 +139,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType | flow   |
-      | 15251 | ashah120 | Mnrqa002 | Pramila1946 | SHIP     | Medsupp    | header |
+      | 15251 | ashah120 | Mnrqa002 | kataz2525 | SHIP     | Medsupp    | header |
 
   @prodAuth_header06
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user

@@ -2,7 +2,7 @@
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
   @regressionMemberPROD @regressionMemberPRODsigninSignout
-  Scenario Outline: Scenario: <Scenario> - Verify member auth functionality of member sign in & sign out
+  Scenario Outline: <Scenario> - Verify member auth functionality of member sign in & sign out
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -141,7 +141,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
       | F243897 | ashah120 | Mnrqa002 | norm749     | PDP      | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
-  @regressionMemberPROD @memAuthProdSetUpRecurringCC @CodeTransformers @p1
+  @regressionMemberPROD @memAuthProdSetUpRecurringCC @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 06- Verify Setup Recurring for CC federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -163,3 +163,23 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
       | F243897 | ashah120 | Mnrqa002 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+
+
+  @regressionMemberPROD @memAuthProdSetUpRecurringEFT @CodeTransformers
+  Scenario Outline: UID: <UID> -plan: <planType> - Test Case 07 - Verify Payment Hisory Section and Cancel for Fed Recurring EFT
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    And the user navigates to payments overview page
+    Then User Scrolls down and validate that Payment History Section and scrolls up
+    And user clicks on Update Automatic payments on payment overview page for Ship
+    And user selects checking Account on Update Automatic recurring payments page and Click on Next
+    And the user clicks on cancel button in One time EFT or Recurring EFT flow
+
+    Examples: 
+      | UID     | username | password | memUserName       | planType |
+      | F243897 | ashah120 | Mnrqa002 | vernajohnson19651 | SHIP     |

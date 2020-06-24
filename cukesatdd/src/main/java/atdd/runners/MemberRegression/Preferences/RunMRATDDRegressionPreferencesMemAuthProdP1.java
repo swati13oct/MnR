@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPreferencesMemAuthProdP1.json",
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesMemAuthProdP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesMemAuthProdP1.json" }, tags = {"@prod_CommunicationPreferences01" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesMemAuthProdP1.json" }, tags = {"@prod_CommunicationPreferences1a" })
 public class RunMRATDDRegressionPreferencesMemAuthProdP1 {
 
 }
