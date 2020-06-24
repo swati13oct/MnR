@@ -118,7 +118,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement emailGoToHomepageBtn;
 
-	
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement paymentGoToHomepageBtn;
+
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
@@ -693,7 +696,30 @@ public class HSIDLoginPage extends UhcDriver {
 						goGreenGoToHomepageBtn.click();
 					}
 				} catch (Exception e1) {
-					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+	
+	
+	public void paymentSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/payment-two-offerings.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, paymentGoToHomepageBtn, 5);
+				System.out.println("User encounted playment splash page, handle it...");
+				try {
+					if (validate(paymentGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						paymentGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
 				checkModelPopup(driver, 1);
 			} else {
