@@ -64,4 +64,4 @@ Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
     | TID   | username  | password  | MemUserName      | planType | memberType            | documentsExpectedInPast24Months  |             
     | 10000 | ashah120  | Mnrqa002  | TEAKSAMPPALA1    | MAPD     | Individual_MyDocuments|           Y                      |
     | 10001 | ashah120  | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | Group_MyDocuments     |           Y                      |
-    | 10002 | ashah120  | Mnrqa002 | memeterry29       | COMBO    | FedAndShip_MyDocuments|           Y                    |    
+    | 10002 | ashah120  | Mnrqa002 | rldf1942       | COMBO    | FedAndShip_MyDocuments|           Y                    |
