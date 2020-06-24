@@ -24,7 +24,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID       | username | password | MemUserName | planType       | memberType              |
-      | Unknown_6 | ashah120 | Mnrqa002 | memeterry29 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
+      | Unknown_6 | ashah120 | Mnrqa002 | LUISGARCIA2054 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
 
 
   @prod_accountProfile02
@@ -53,7 +53,7 @@ Feature: 1.02.1 Member Profile page - Prod
     Examples:
       | TID        | username | password | MemUserName       | planType | memberType         |
       | Unknown_7  | ashah120 | Mnrqa002 | LSLOMSKI777       | PDP      | PDP_AARPIndividual |
-      | Unknown_8  | ashah120 | Mnrqa002 | KAYCEE0412        | GrpPDP   | PDP_Group          |
+      | Unknown_8  | ashah120 | Mnrqa002 | LAMBS1972        | GrpPDP   | PDP_Group          |
       | Unknown_9  | ashah120 | Mnrqa002 | TOMIKOARMER2      | MA       | MA_UHCIndividual   |
       | Unknown_11 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
 
@@ -147,5 +147,5 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType       |
-      | 15103 | ashah120 | Mnrqa002 | Pramila1946 | SHIP     | SHIP_ProfilePref |
+      | 15103 | ashah120 | Mnrqa002 |kataz2525 | SHIP     | SHIP_ProfilePref |
 
