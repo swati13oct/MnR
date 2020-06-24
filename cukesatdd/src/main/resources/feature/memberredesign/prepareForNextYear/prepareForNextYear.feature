@@ -16,8 +16,8 @@ Feature: 1.21 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
-      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
@@ -68,14 +68,30 @@ Feature: 1.21 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
-      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info  
+      | Annual Notice of Changes English       | <an_us> | 
+      | Annual Notice of Changes Spanish       | <an_es> |
+      | Annual Notice of Changes Chinese       | <an_zh> |
+      | Evidence of Coverage English           | <ev_us> |
+      | Evidence of Coverage Spanish           | <ev_es> |
+      | Evidence of Coverage Chinese           | <ev_zh> |
+      | Provider Directory English             | <pr_us> |
+      | Provider Directory Spanish             | <pr_es> |
+      | Provider Directory Chinese             | <pr_zh> |
+      | Vendor Information Sheet English       | <ve_us> |
+      | Vendor Information Sheet Spanish       | <ve_es> |
+      | Vendor Information Sheet Chinese       | <ve_zh> |
+      | Pharmacy Directory Information English | <ph_us> |
+      | Pharmacy Directory Information Spanish | <ph_es> |
+      | Pharmacy Directory Information Chinese | <ph_zh> |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
@@ -83,23 +99,30 @@ Feature: 1.21 Member Prepare For Next Year
 
 	@prepareForNextYear02a @devRegression
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 11    | F437767 | PDP	     | IND_PFNY   |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   |
-	    | 13    | F437767 | MA	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 12    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02b
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 14    | F437767 | PDP	     | GRP_PFNY   |
-	    | 15    | F437767 | MAPD	 | GRP_PFNY   |
-	    | 16    | F437767 | MA	     | GRP_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 14    | F437767 | PDP	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |  
+	    | 15    | F437767 | MAPD	 | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 16    | F437767 | MA	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   |
-	    | 18    | F437767 | PCP	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | false | false  | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+
+	@prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+	    | 19    | F437767 | MAPD	 | IND_ES_PreNexYr| false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 20    | F437767 | MAPD	 | IND_ZH_PreNexYr| false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| false  | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false |
 	    
 ##### end - cases for team env #################################################################
 
@@ -176,6 +199,22 @@ Feature: 1.21 Member Prepare For Next Year
       | Milestone 3 Date       | 10/15/2020     |
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info  
+      | Annual Notice of Changes English       | <an_us> | 
+      | Annual Notice of Changes Spanish       | <an_es> |
+      | Annual Notice of Changes Chinese       | <an_zh> |
+      | Evidence of Coverage English           | <ev_us> |
+      | Evidence of Coverage Spanish           | <ev_es> |
+      | Evidence of Coverage Chinese           | <ev_zh> |
+      | Provider Directory English             | <pr_us> |
+      | Provider Directory Spanish             | <pr_es> |
+      | Provider Directory Chinese             | <pr_zh> |
+      | Vendor Information Sheet English       | <ve_us> |
+      | Vendor Information Sheet Spanish       | <ve_es> |
+      | Vendor Information Sheet Chinese       | <ve_zh> |
+      | Pharmacy Directory Information English | <ph_us> |
+      | Pharmacy Directory Information Spanish | <ph_es> |
+      | Pharmacy Directory Information Chinese | <ph_zh> |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
@@ -183,23 +222,23 @@ Feature: 1.21 Member Prepare For Next Year
 
 	@prepareForNextYear02a @devRegression
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 11    | F437767 | PDP	     | IND_PFNY   |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   |
-	    | 13    | F437767 | MA	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 12    | F437767 | MAPD	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02b
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 14    | F437767 | PDP	     | GRP_PFNY   |
-	    | 15    | F437767 | MAPD	 | GRP_PFNY   |
-	    | 16    | F437767 | MA	     | GRP_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 14    | F437767 | PDP	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 15    | F437767 | MAPD	 | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 16    | F437767 | MA	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   |
-	    | 18    | F437767 | PCP	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 	    
 ##### end - cases for stage env #################################################################
 
