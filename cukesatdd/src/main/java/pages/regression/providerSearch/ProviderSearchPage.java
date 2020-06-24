@@ -196,6 +196,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 
 	public WebDriver navigateToClaimsPage() {
 		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver, 1);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
@@ -399,104 +400,5 @@ public class ProviderSearchPage extends ProviderSearchBase {
 				noWaitValidate(hwPgHeader));
 		return driver;
 	}
-
-	/*
-	 * tbd public boolean isHeathRecordLnkOnAcctProfDropdownOption(String
-	 * planType, String memberType, boolean expComboTab, String targetPage) {
-	 * //tbd String stageUrl="https://ihr.int.werally.in"; String
-	 * stageUrl="ihr.int.werally.in"; checkModelPopup(driver,1); if
-	 * (expComboTab) { if (targetPage.equalsIgnoreCase("payments"))
-	 * handlePaymentComboTabIfComboUser(planType, memberType); else
-	 * handleComboTabIfComboUser(planType, memberType); }
-	 * checkModelPopup(driver,1); CommonUtility.waitForPageLoad(driver,
-	 * shadowRootHeader, 5); sleepBySec(2); if
-	 * (noWaitValidate(shadowRootHeader)) { System.out.
-	 * println("located shadow-root element, attempt to process further...");
-	 * WebElement root1 = expandRootElement(shadowRootHeader); try { WebElement
-	 * acctSettingMenuShadowRootBtn =
-	 * root1.findElement(By.cssSelector("button[id*=dropdown-toggle]"));
-	 * //WebElement acctSettingMenuShadowRootBtn =
-	 * root1.findElement(By.cssSelector("#dropdown-toggle-2"));
-	 * acctSettingMenuShadowRootBtn.click(); } catch (Exception e) { if
-	 * (noWaitValidate(sorryError)) { //note: try one more time before giving up
-	 * System.out.println("try one more time before giving up");
-	 * driver.navigate().back(); CommonUtility.checkForVariable(driver);
-	 * checkModelPopup(driver,1); try { WebElement acctSettingMenuShadowRootBtn
-	 * = root1.findElement(By.cssSelector("button[id*=dropdown-toggle]"));
-	 * acctSettingMenuShadowRootBtn.click(); } catch (Exception e1) { if
-	 * (noWaitValidate(sorryError)) Assert.
-	 * assertTrue("PROBLEM - got 'Sorry. It's not you. It's us' error, unable to locate Account Profile button on Rally Dashboard top menu"
-	 * , false); else Assert.
-	 * assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu"
-	 * , false); } } else Assert.
-	 * assertTrue("PROBLEM - unable to locate Account Profile button on top menu"
-	 * , false); } try { WebElement healthRecordLink =
-	 * root1.findElement(By.cssSelector(
-	 * "a[data-testid*=TARGET_AWARE_HEALTH_RECORD]")); if
-	 * (noWaitValidate(healthRecordLink)) { String expUrl=stageUrl; String
-	 * actUrl=healthRecordLink.getAttribute("href"); Assert.
-	 * assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"
-	 * +expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl)); return
-	 * true; } else return false; } catch (Exception e) { System.out.
-	 * println("unable to locate Account Profile link on Rally Dashboard top menu"
-	 * ); return false; } } else if (noWaitValidate(testHarn_AcctProfBtn)) {
-	 * checkModelPopup(driver,1); Assert.
-	 * assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu"
-	 * , noWaitValidate(testHarn_AcctProfBtn)); JavascriptExecutor jse =
-	 * (JavascriptExecutor) driver; jse.executeScript("window.scrollBy(0,50)",
-	 * ""); scrollToView(testHarn_AcctProfBtn);
-	 * jsClickNew(testHarn_AcctProfBtn);
-	 * 
-	 * //note: don't know why .click() doesn't work
-	 * //testHarn_AcctProfBtn.click(); checkModelPopup(driver,1); if
-	 * (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) { String
-	 * expUrl=stageUrl; String
-	 * actUrl=testHarn_desktop_AcctProf_IHRLnk.getAttribute("href"); Assert.
-	 * assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"
-	 * +expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl)); return
-	 * true; } else return false; } else {
-	 * System.out.println("unable to locate Account Profile from top menu");
-	 * return false; } }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * public void navigateFromDashboardToHeathRecordPageAndThenCloseTab() {
-	 * checkModelPopup(driver,1); if (noWaitValidate(shadowRootHeader)) {
-	 * System.out.
-	 * println("located shadow-root element, attempt to process further...");
-	 * WebElement root1 = expandRootElement(shadowRootHeader); try { WebElement
-	 * acctSettingMenuShadowRootBtn =
-	 * root1.findElement(By.cssSelector("#dropdown-toggle-2"));
-	 * acctSettingMenuShadowRootBtn.click(); } catch (Exception e) {
-	 * e.printStackTrace(); } try { WebElement healthRecordLink =
-	 * root1.findElement(By.cssSelector(
-	 * "a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
-	 * 
-	 * healthRecordLink.click(); CommonUtility.checkPageIsReady(driver);
-	 * checkModelPopup(driver,1);
-	 * 
-	 * } catch (Exception e) { Assert.
-	 * assertTrue("PROBLEM - unable to locate Account Profile link on Rally Dashboard top menu"
-	 * , false); } } else {
-	 * Assert.assertTrue("PROBLEM - unable to locate Rally Dashboard top menu",
-	 * false); } }
-	 * 
-	 * public void navigateFromTestHarnessToHeathRecordPageAndThenCloseTab() {
-	 * checkModelPopup(driver,1); if
-	 * (!noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) { Assert.
-	 * assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu"
-	 * , noWaitValidate(testHarn_AcctProfBtn)); JavascriptExecutor jse =
-	 * (JavascriptExecutor) driver; jse.executeScript("window.scrollBy(0,50)",
-	 * ""); scrollToView(testHarn_AcctProfBtn);
-	 * jsClickNew(testHarn_AcctProfBtn); }
-	 * 
-	 * //testHarn_AcctProfBtn.click(); Assert.
-	 * assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options"
-	 * , noWaitValidate(testHarn_desktop_AcctProf_IHRLnk));
-	 * 
-	 * testHarn_desktop_AcctProf_IHRLnk.click();
-	 * CommonUtility.checkPageIsReady(driver); checkModelPopup(driver,1); }
-	 */
 
 }
