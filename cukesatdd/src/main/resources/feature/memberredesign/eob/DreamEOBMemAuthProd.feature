@@ -76,33 +76,45 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
       | 01    | ashah120  | Mnrqa002  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
-      | 02    | ashah120  | Mnrqa002  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
 
-    @prod_dreamEob01b 
+    @prod_dreamEob01b
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 03    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
-      | 04    | ashah120  | Mnrqa002  | nawal1215               | PDP      | PDP_RX_DEOB       | true        |  
+      | 02    | ashah120  | Mnrqa002  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
 
     @prod_dreamEob01c 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 05    | ashah120  | Mnrqa002  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
-      | 06    | ashah120  | Mnrqa002  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+#     | 03    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
+      | 04    | ashah120  | Mnrqa002  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
 
     @prod_dreamEob01d 
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 05    | ashah120  | Mnrqa002  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
+
+    @prod_dreamEob01e 
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 06    | ashah120  | Mnrqa002  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+
+    @prod_dreamEob01f 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
 #     | 07    | ashah120  | Mnrqa002  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
       | 08    | ashah120  | Mnrqa002  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
-    @prod_dreamEob01e
+    @prod_dreamEob01g
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
       | 09    | ashah120  | Mnrqa002  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
-      | 10    | ashah120  | Mnrqa002  | PAULAROTH2              | PDP      | PDP_SHIP_COMBO_EOB| true        |
 
-    @prod_dreamEob01f
+    @prod_dreamEob01h
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 10    | ashah120  | Mnrqa002  | Norm749                 | PDP      | PDP_SHIP_COMBO_EOB| true        |
+
+    @prod_dreamEob01i
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
 #     | 11    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |

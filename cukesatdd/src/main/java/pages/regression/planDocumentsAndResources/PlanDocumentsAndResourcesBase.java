@@ -215,6 +215,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					}
 					if (testInputInfoMap.get("docName").equals("SEARCH MEDICAL EOB HISTORY") || testInputInfoMap.get("docName").equals("SEARCH DRUG EOB HISTORY"))
 						CommonUtility.waitForPageLoad(driver, eobPgHeader, 5);
+					sleepBySec(1);
 					String actUrl=driver.getCurrentUrl();
 					if (actUrl.contains("internal-error?errorUID"))
 						section_note.add("    BYPASSED - element link in href attribute vs actual link URL after clicked validation - destination url got internal-error");
