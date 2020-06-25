@@ -490,7 +490,7 @@ public class IsInsuranceAgentStep1 extends UhcDriver{
 	@FindBy(xpath = "//a[contains(@role, 'tab') and contains(@id, 'step-2')]")
 	private WebElement Step2Tab;
 
-	public IsInsuranceAgentStep2 NavigateNext_DGRStep2() {
+	public IsInsuranceAgentStep1 NavigateNext_DGRStep1() {
 		if(!validate(topErrorMsg) && validate(NextBtn)){
 			NextBtn.click();
 			
@@ -503,7 +503,7 @@ public class IsInsuranceAgentStep1 extends UhcDriver{
 		}
 		if(Step2Tab.isEnabled()){
 			System.out.println("Next Button Clicked : Step 2 Displayed");
-			return new IsInsuranceAgentStep2(driver);
+			return new IsInsuranceAgentStep1(driver);
 		}
 		return null;
 	}

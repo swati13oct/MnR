@@ -16,6 +16,7 @@ import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep1;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep2;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -141,11 +142,11 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	@Then("^the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site$")
 	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_UHC_site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		IsInsuranceAgentStep1 InsuranceAgentStep1Page = plansummaryPage.clickOnRequestInsuranceAgent();
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page = plansummaryPage.clickOnRequestInsuranceAgent();
 
-		if (InsuranceAgentStep1Page != null) {
+		if (InsuranceAgentStep2Page != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 1 Page");
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,InsuranceAgentStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE1,InsuranceAgentStep2Page);
 		} else {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
 		}
@@ -272,13 +273,13 @@ public class isInsuranceAgentStepDefenitionUHC    {
 
 	@Then("^the user clicks Submit to submit Decision Guide on UMS site$")
 	public void the_user_clicks_Submit_to_submit_Decision_Guide_on_UMS_site() throws Throwable {
-		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		DGR_ThankYouPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_DGRthankYouPage();
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page =(IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE1);
+		pages.acquisition.isinsuranceagent.DGR_ThankYouPage dgrThankYouPage = InsuranceAgentStep2Page.NavigateNext_DGRthankYouPage();
 		if (dgrThankYouPage != null) {
-			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			System.out.println("Successfully navigated to IS Insurance Agent Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			Assert.assertTrue("PROBLEM - Is IS Insurance Agent Page is null", false);
 		}
 
 	}

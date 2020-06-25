@@ -15,6 +15,8 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep1;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep2;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -137,13 +139,13 @@ public class isInsuranceAgentStepDefenition    {
 	}
 	
 	@Then("^the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on AARP site$")
-	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_AARP_site() throws Throwable {
+	public void the_user_clicks_on_Request_a_Free_Insurance_Agent_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_AARP_site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		IsDecisionGuideStep1 DecisionGuideStep1Page = plansummaryPage.clickOnRequestADecisionGuide();
+		IsInsuranceAgentStep1 InsuranceAgentStep1Page = plansummaryPage.clickOnRequestInsuranceAgent();
 
-		if (DecisionGuideStep1Page != null) {
+		if (InsuranceAgentStep1Page != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 1 Page");
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE1,InsuranceAgentStep1Page);
 		} else {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
 		}
