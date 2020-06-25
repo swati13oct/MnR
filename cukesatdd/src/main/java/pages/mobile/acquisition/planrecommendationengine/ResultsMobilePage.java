@@ -384,15 +384,15 @@ public class ResultsMobilePage extends UhcDriver {
 		threadsleep(8000);
 		mobileUtils.mobileLocateElementClick(MSPlanGender);
 		Select temp = new Select(MSPlanPartAMonth);
-		mobileSelectOption(temp, "January 1");
+		mobileSelectOption(MSPlanPartAMonth, "January 1",true);
 		temp = new Select(MSPlanPartAYear);
-		mobileSelectOption(temp, "2021");
+		mobileSelectOption(MSPlanPartAYear, "2021",true);
 		temp = new Select(MSPlanPartBMonth);
-		mobileSelectOption(temp, "January 1");
+		mobileSelectOption(MSPlanPartBMonth, "January 1",true);
 		temp = new Select(MSPlanPartBYear);
-		mobileSelectOption(temp, "2021");
+		mobileSelectOption(MSPlanPartBYear, "2021",true);
 		temp = new Select(MSPlanStartMonth);
-		mobileSelectOption(temp, "January 1, 2021");
+		mobileSelectOption(MSPlanStartMonth, "January 1, 2021",true);
 		mobileUtils.mobileLocateElement(MSViewPlanButton);
 		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
 	}

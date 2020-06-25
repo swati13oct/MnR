@@ -344,10 +344,10 @@ public class DrugMobilePage extends UhcDriver {
 			Select freq = new Select(modalFrequencySelect);
 
 			if (!dosage.isEmpty())
-				mobileSelectOption(dos, dosage);
+				mobileSelectOption(modalDosageSelect, dosage,true);
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
-				mobileSelectOption(pack, packageName);
+				mobileSelectOption(modalPackageSelect, packageName,true);
 				packageName = pack.getFirstSelectedOption().getText().trim();
 			}
 			if (!count.isEmpty()) {
@@ -357,7 +357,7 @@ public class DrugMobilePage extends UhcDriver {
 				threadsleep(2000);
 			}
 			if (threeeMonthfrequency)
-				mobileSelectOption(freq, "Every 3 Months");
+				mobileSelectOption(modalFrequencySelect, "Every 3 Months",true);
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
