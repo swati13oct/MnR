@@ -2449,9 +2449,7 @@ public void validateResultSummaryPage() {
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
-<<<<<<< HEAD
-}
-=======
+
 
 	public void validateChatIcon() throws InterruptedException {
 		boolean present;
@@ -2478,4 +2476,3 @@ public void validateResultSummaryPage() {
 	}
 	
 }
->>>>>>> develop

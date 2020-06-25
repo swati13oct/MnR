@@ -373,18 +373,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 
-<<<<<<< HEAD
-   	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
-   	private WebElement advancedBtn;
-
-   	@FindBy(xpath = "//a[@id='proceed-link']")
-   	private WebElement proceedLink;
- 		
-=======
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
    	
->>>>>>> develop
+	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	private WebElement advancedBtn;
+
+	@FindBy(xpath = "//a[@id='proceed-link']")
+	private WebElement proceedLink;
+
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;

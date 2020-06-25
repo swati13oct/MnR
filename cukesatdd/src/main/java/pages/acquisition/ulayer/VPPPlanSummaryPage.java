@@ -2,11 +2,9 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-<<<<<<< HEAD
-import java.util.Collections;
-=======
+
 import java.util.HashMap;
->>>>>>> develop
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
