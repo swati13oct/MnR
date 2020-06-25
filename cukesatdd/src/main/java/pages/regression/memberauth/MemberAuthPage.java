@@ -423,6 +423,25 @@ public class MemberAuthPage extends UhcDriver {
 		return null;
 	}
 
+	public void splashPgWorkaroundForProd() {
+		String workaroundUrl="https://member.uat.uhc.com/aarp/dashboard"; //offline-prod, rally will take care of redirecting afterward
+		if (MRScenario.environment.equalsIgnoreCase("prod")) 
+			workaroundUrl="https://member.uhc.com/aarp/dashboard"; //online-prod, rally will take care of redirecting afterward
+		CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
+		System.out.println("User encounteredd gogreen-splash page, handle it...");
+		try {
+			if (validate(goGreenGoToHomepageBtn,0)) {
+				System.out.println("Skipping the splash page by directly navigating to the Rally dashboard home page");
+				driver.navigate().to(workaroundUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		} catch (Exception e1) {
+			System.out.println("did not encounter 'Go To Homepage' button on the splash page, some error on the page"+e1);
+		}
+		checkModelPopup(driver, 1);
+		Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+	}
+	
 	public void goGreenSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
@@ -439,8 +458,10 @@ public class MemberAuthPage extends UhcDriver {
 				}
 				checkModelPopup(driver, 1);
 				Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
 			} else {
-				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
@@ -461,8 +482,10 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
 				checkModelPopup(driver, 1);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
 			} else {
-				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
@@ -488,8 +511,10 @@ public class MemberAuthPage extends UhcDriver {
 				}
 				CommonUtility.checkPageIsReady(driver);
 				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
 			} else {
-				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
