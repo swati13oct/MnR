@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanDocumentsUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, monochrome = true,
 features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json" }, tags = { "@PlanDocs_ExcelValidation" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json" }, tags = { "@Plan_ExcelValidation" })
 public class RunMRATDDAcquisitionPlanDocumentsUlayer { 
 //@PlanDocs_PDF_URLvalidation,@PlanDocs_PDF_URLvalidation,@PlanDocs_PDF_Textvalidation,
-}
+} 

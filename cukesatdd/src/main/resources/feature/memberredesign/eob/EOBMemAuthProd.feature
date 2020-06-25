@@ -64,12 +64,12 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SHIP_EOBs @prod_SHIP_EOBs1
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | ashah120  | Mnrqa002  | Pauline3707             | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 11    | ashah120  | Mnrqa002  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY | MULTI_SHIP_EOB     | Medical | false       | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs2
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | ashah120  | Mnrqa002  | PAULAROTH2              | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | 12    | ashah120  | Mnrqa002  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs3
     Examples: 
@@ -149,4 +149,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | ashah120  | Mnrqa002  | CAROLEE1948              | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | ashah120  | Mnrqa002  | JSENFYFDRE#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 

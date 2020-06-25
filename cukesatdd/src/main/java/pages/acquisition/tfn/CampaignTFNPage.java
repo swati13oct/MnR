@@ -55,7 +55,9 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")	
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
-	@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
+	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
+	@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)')]")
+	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')])[2]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
@@ -353,7 +355,8 @@ public class CampaignTFNPage extends UhcDriver {
 		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);
-		UHCSearchLinkfromGoogle.click();
+		//UHCSearchLinkfromGoogle.click();
+		jsClickNew(UHCSearchLinkfromGoogle);
 		System.out.println("Google Results - UHC Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}

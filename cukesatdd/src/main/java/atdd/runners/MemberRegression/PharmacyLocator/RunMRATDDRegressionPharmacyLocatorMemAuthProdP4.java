@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPharmacyLocatorMemAuthProdP4.js
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmacyLocatorMemAuthProdP4")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmacylocator" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmacyLocatorMemAuthProdP4.json" }, tags = { "@prod_pharmacylocator3,@prod_pharmacylocator4" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmacyLocatorMemAuthProdP4.json" }, tags = { "@prod_pharmacylocator1d" })
 public class RunMRATDDRegressionPharmacyLocatorMemAuthProdP4 {
 
 }

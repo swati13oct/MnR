@@ -284,6 +284,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		CommonUtility.waitForPageLoad(driver, shadowRootElement, 5);;
 		hwCheckModelPopup(driver);
 		if (hwValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
