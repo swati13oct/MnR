@@ -386,4 +386,14 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return inputDate.getTime();
 	}
 	
+	public void sleepByMillSec(int millsec) {
+		System.out.println("Sleeping for '"+millsec+"' sec");
+		try {
+			Thread.sleep(millsec);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
 }

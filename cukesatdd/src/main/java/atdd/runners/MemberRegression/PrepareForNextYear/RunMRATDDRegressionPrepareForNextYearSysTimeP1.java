@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPrepareForNextYearSysTimeP1.jso
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPrepareForNextYearSysTimeP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPrepareForNextYearSysTimeP1.json" }, tags = { "@prepareForNextYear03" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPrepareForNextYearSysTimeP1.json" }, tags = { "@teamEnv","@prepareForNextYear03" })
 public class RunMRATDDRegressionPrepareForNextYearSysTimeP1 {
 
 }
