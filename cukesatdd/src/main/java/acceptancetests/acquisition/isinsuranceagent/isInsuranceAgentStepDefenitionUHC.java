@@ -12,9 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
-import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
-import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep2;
 import pages.acquisition.ole.AuthorizationPage;
@@ -74,8 +71,8 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	
 		
-	@Then("^the user enters valid information for the pre entry form on UMS site$")
-	public void the_user_enters_valid_information_for_the_pre_entry_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
+	@Then("^the user enters valid information for the pre entry form on UMS site for Insurance Agent$")
+	public void the_user_enters_valid_information_for_the_pre_entry_form_on_UMS_site_Insurance_Agent(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -90,8 +87,8 @@ public class isInsuranceAgentStepDefenitionUHC    {
 		plansummaryPage.MedSupFormValidation(dateOfBirth);
 		
 	}
-	@Then("^the user enters and  saves the entered information in Pre entry page for validation on IS forms on UMS site$")
-	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
+	@Then("^the user enters and  saves the entered information in Pre entry page for validation on IS Insurance Agent forms on UMS site $")
+	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_Insurance_Agent_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -118,9 +115,9 @@ public class isInsuranceAgentStepDefenitionUHC    {
 		getLoginScenario().saveBean(MedSuppCommonConstants.START_DATE, start_Date_Entered);
 	}
 
-	@Then("^the user validates Decision Guide Step (\\d+) page info is same as the saved information from Pre-entry page on UMS site$")
-	public void the_user_validates_Decision_Guide_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page_on_UMS_site(int arg1) throws Throwable {
-		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+	@Then("^the user validates Insurance Agent Step (\\d+) page info is same as the saved information from Pre-entry page on UMS site for Insurance Agent$")
+	public void the_user_validates_Insurance_Agent_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page_on_UMS_site_for_Insurance_Agent(int arg1) throws Throwable {
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page = (IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
 		String DOBEntered = (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
 		String part_A_Month_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_MONTH);
 		String part_A_Year_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_YEAR);
@@ -135,61 +132,61 @@ public class isInsuranceAgentStepDefenitionUHC    {
 		EnteredData.put("part_B_Month_Entered",part_B_Month_Entered);
 		EnteredData.put("part_B_Year_Entered",part_B_Year_Entered);
 		EnteredData.put("startDateEntered",start_Date_Entered);
-		DecisionGuideStep2Page.validatePreEntryPageData(EnteredData);
+		InsuranceAgentStep2Page.validatePreEntryPageData(EnteredData);
 
 	}
 	
 	@Then("^the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site$")
-	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_UHC_site() throws Throwable {
+	public void the_user_clicks_on_Request_a_Free_Insurance_Agent_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_UHC_site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		IsInsuranceAgentStep2 InsuranceAgentStep2Page = plansummaryPage.clickOnRequestInsuranceAgent();
 
 		if (InsuranceAgentStep2Page != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 1 Page");
-			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE1,InsuranceAgentStep2Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2,InsuranceAgentStep2Page);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
+			Assert.assertTrue("PROBLEM - Is Insurance Agent Step 1 Page is null", false);
 		}
 	}
 
 
-	@Then("^the user validates all the required fields for blank validation on Step(\\d+) on UMS site$")
+	@Then("^the user validates all the required fields for blank validation on Step(\\d+) on UMS site for Insurance Agent$")
 	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Step(int arg1) throws Throwable {
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		boolean Validation_Flag = DecisionGuideStep1Page.blankFieldValidation();
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page =(IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
+		boolean Validation_Flag = InsuranceAgentStep2Page.blankFieldValidation();
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Blank Field Error Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2,InsuranceAgentStep2Page);
 
 	}
 
-	@Then("^the user validated all fields for invalid validation on Step(\\d+) on UMS site$")
+	@Then("^the user validated all fields for invalid validation on Step(\\d+) on UMS site for Insurance Agent$")
 	public void the_user_validated_all_fields_for_invalid_validation_on_Step(int arg1) throws Throwable {
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		boolean Validation_Flag = DecisionGuideStep1Page.invalidFieldValidation();
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page =(IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
+		boolean Validation_Flag = InsuranceAgentStep2Page.invalidFieldValidation();
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,InsuranceAgentStep2Page);
 
 	}
 
-	@Then("^the user validated invalid address error message for next button on Step(\\d+) on UMS site$")
+	@Then("^the user validated invalid address error message for next button on Step(\\d+) on UMS site for Insurance Agent$")
 	public void the_user_validated_invalid_address_error_message_for_next_button_on_Step(int arg1) throws Throwable {
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		boolean Validation_Flag = DecisionGuideStep1Page.NextBtn_invalidAddressValidation();
+		IsInsuranceAgentStep1  InsuranceAgentStep2Page =(IsInsuranceAgentStep1) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
+		boolean Validation_Flag =  InsuranceAgentStep2Page.NextBtn_invalidAddressValidation();
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Address Error Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2, InsuranceAgentStep2Page);
 	}
 
-	@Then("^the user enters valid information for the following fields on UMS site$")
-	public void the_user_enters_valid_information_for_the_following_fields_on_UMS_site(DataTable givenAttributes) throws Throwable {
+	@Then("^the user enters valid information for the following fields on UMS site for Insurance Agent$")
+	public void the_user_enters_valid_information_for_the_following_fields_on_UMS_site_for_Insurance_Agent(DataTable givenAttributes) throws Throwable {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -199,93 +196,39 @@ public class isInsuranceAgentStepDefenitionUHC    {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		DecisionGuideStep1Page.enterUserInfoStep1(memberAttributesMap);
-		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page = (IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
+		InsuranceAgentStep2Page.enterUserInfoStep2(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2,InsuranceAgentStep2Page);
 
 	}
 
-	@Then("^the user validates address autocomplete on Step(\\d+) on UMS site$")
+	@Then("^the user validates address autocomplete on Step(\\d+) on UMS site for Insurance Agent$")
 	public void the_user_validates_address_autocomplete_on_Step(int arg1) throws Throwable {
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		boolean Validation_Flag = DecisionGuideStep1Page.Validate_addressAutoComplete();
+		IsInsuranceAgentStep1 InsuranceAgentStep1Page = (IsInsuranceAgentStep1) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
+		boolean Validation_Flag = InsuranceAgentStep1Page.Validate_addressAutoComplete();
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Address Aut Complete Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2,InsuranceAgentStep1Page);
 	}
 
-	@Then("^user clicks Next to Navigate to Second Step on UMS site$")
-	public void user_clicks_Next_to_Navigate_to_Second_Step_on_UMS_site() throws Throwable {
-		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
-		IsDecisionGuideStep2 DecisionGuideStep2Page = DecisionGuideStep1Page.NavigateNext_DGRStep2();
-		if (DecisionGuideStep2Page != null) {
-			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
-		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
-		}
-
-	}
 	
-	@Then("^the user validates all the required fields for blank validation on Second Step on UMS site$")
-	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Second_Step_on_UMS_site() throws Throwable {
-		IsDecisionGuideStep2 DecisionGuideStep2Page  =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		boolean Validation_Flag = DecisionGuideStep2Page.blankFieldValidation();
-		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
-		}
-		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
-
-	}
-
-	@Then("^the user validated all fields for invalid validation on Second Step on UMS site$")
-	public void the_user_validated_all_fields_for_invalid_validation_on_Second_Step_on_UMS_site() throws Throwable {
-		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		boolean Validation_Flag = DecisionGuideStep2Page.invalidFieldValidation();
-		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
-		}
-		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
-
-	}
-
-
-	@Then("^the user provides all valid information for Second Step on UMS site$")
-	public void the_user_provides_all_valid_information_for_Second_Step_on_UMS_site(DataTable givenAttributes) throws Throwable {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		DecisionGuideStep2Page.enterUserInfoStep2(memberAttributesMap);
-		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
-
-	}
-
-	@Then("^the user clicks Submit to submit Decision Guide on UMS site$")
-	public void the_user_clicks_Submit_to_submit_Decision_Guide_on_UMS_site() throws Throwable {
-		IsInsuranceAgentStep2 InsuranceAgentStep2Page =(IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE1);
+	@Then("^the user clicks Submit to submit Insurance Agent on UMS site for Insurance Agent$")
+	public void the_user_clicks_Submit_to_submit_Insurance_Agent_on_UMS_site() throws Throwable {
+		IsInsuranceAgentStep2 InsuranceAgentStep2Page =(IsInsuranceAgentStep2) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE2);
 		pages.acquisition.isinsuranceagent.DGR_ThankYouPage dgrThankYouPage = InsuranceAgentStep2Page.NavigateNext_DGRthankYouPage();
 		if (dgrThankYouPage != null) {
 			System.out.println("Successfully navigated to IS Insurance Agent Page");
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE2,dgrThankYouPage);
 		} else {
 			Assert.assertTrue("PROBLEM - Is IS Insurance Agent Page is null", false);
 		}
 
 	}
 
-	@Then("^the user validates Thank You Page on UMS site$")
-	public void the_user_validates_Thank_You_Page_on_UMS_site() throws Throwable {
+	@Then("^the user validates Thank You Page on UMS site for Insurance Agent$")
+	public void the_user_validates_Thank_You_Page_on_UMS_site_for_Insurance_Agent() throws Throwable {
 		
 	}
 

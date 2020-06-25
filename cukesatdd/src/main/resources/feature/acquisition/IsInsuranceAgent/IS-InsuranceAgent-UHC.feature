@@ -10,19 +10,21 @@ Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
       | Is Multi County | <isMultutiCounty> |
     And the user views plans of the below plan type in UMS site
       | Plan Type       | <plantype>        |
-    #Then the user enters valid information for the pre entry form on UMS site  	
+    #Then the user enters valid information for the pre entry form on UMS site for Insurance Agent	
       #| DOB							|	<DOB>							|
-    Then the user enters and  saves the entered information in Pre entry page for validation on IS forms on UMS site  	
+    Then the user enters and  saves the entered information in Pre entry page for validation on IS Insurance Agent forms on UMS site	
       | DOB							|	<dob>							|
-    Then the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC siteMS site
-    Then the user enters valid information for the following fields on UMS site
+    Then the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site
+    #Then the user validates all the required fields for blank validation on Step1 on UMS site for Insurance Agent
+    #Then the user validated all fields for invalid validation on Step1 on UMS site for Insurance Agent
+    Then the user enters valid information for the following fields on UMS site for Insurance Agent
       | FirstName          | <firstname>          |
       | LastName           | <lastname>           |
       | DistributionMethod | <distributionmethod> |
       | Email              | <email>              |
-    Then the user validates address autocomplete on Step1 on UMS site
-    Then the user clicks Submit to submit Decision Guide on UMS site
-    Then the user validates Thank You Page on UMS site
+    Then the user validates address autocomplete on Step1 on UMS site for Insurance Agent
+    Then the user clicks Submit to submit Insurance Agent on UMS site
+    Then the user validates Thank You Page on UMS site for Insurance Agent
 
     Examples: 
       | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender| 
