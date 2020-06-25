@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
@@ -265,6 +266,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 //Header Element Verification Method 
 	
+	String Browsername = MRScenario.browsername;
+	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
+	
 	public void headerElements() {
 		System.out.println("Validating Header Elements: ");
 		String actualpageurl = driver.getCurrentUrl();
@@ -306,7 +310,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //MouseOver on Shop of a Plan and Validating Inside Shop of a Plan
 		System.out.println("Validating Shop of a Plan Elements: ");
 		threadsleep(2000);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		validate(headerShopForaPlanFindplansinyourarea, 30);
 		validate(headerShopForaPlanZipcodeBox, 30);
 		validate(headerShopForaPlanZipcodeButton, 30);
@@ -347,7 +352,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		System.out.println("Validating Learn About Medicare Elements: ");
 		threadsleep(2000);
 		validate(headerNavigationBarLearnAboutMedicareTab, 45);
-		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 		validate(headerEligibilityLink, 30);		
 		validate(headerCoverageLink, 30);
 		validate(headermedicarePrescriptionProviderLink, 30);
@@ -401,7 +407,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		headerGetaPlanRecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerDrugcostLink.click();
 		validateLinks("health-plans/estimate-drug-costs.html");
 		backtoshopforaplan();
@@ -419,7 +426,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		}
 		
 // Learn about medicare inner elements	
-		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 		headerEligibilityLink.click();
 		validateLinks("/medicare-education/medicare-eligibility.html");
 		backtolearnmoremodicare();
@@ -602,7 +610,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerShopLink.click();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
@@ -613,8 +622,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //ZipCode Function inside Shop for a Plan
 	public void zipcodeFunctionInShopforaplan(String zipcode) throws InterruptedException {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 //		actions.moveToElement(headerShopForaPlanZipcodeBox).click();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerShopForaPlanZipcodeBox.click();
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
 		headerShopForaPlanZipcodeButton.click();
@@ -627,7 +637,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //Email Function inside Shop for a Plan	
 	public void emailFunctionInShopforaplan(String email) {
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerShopForaPlanEmailBox.click();
 		headerShopForaPlanEmailBox.sendKeys(email);
 		headerShopForaPlanEmailButton.click();
@@ -709,14 +720,16 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		browserBack();
 		threadsleep(2000);
 		validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 	}
 	
 	public void backtolearnmoremodicare() {
 		browserBack();
 		threadsleep(2000);
 		validate(headerNavigationBarLearnAboutMedicareTab, 45);
-		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+//		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 	}
 	
 	public void navigatesubLink(String subURL) {

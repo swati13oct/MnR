@@ -108,7 +108,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						else
 							scrollToView(serachResultsCount);
 					}
-					saveButton.click();
+					jsClickNew(saveButton);
 					threadsleep(3000);
 					if (i == 0) {
 						validate(viewSavedbutton, 30);
