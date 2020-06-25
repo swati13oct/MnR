@@ -288,7 +288,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			
 			driver.switchTo().window(tabs2.get(0));
 		}
-		else if(tabs2.size()==(3))
+		else if(tabs2.size()==(3))  
 		{
 			driver.switchTo().window(tabs2.get(1));
 		}
