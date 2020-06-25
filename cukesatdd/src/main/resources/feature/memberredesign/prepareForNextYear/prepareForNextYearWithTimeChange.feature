@@ -129,8 +129,8 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
 	    | 12    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
-    @prepareForNextYear03_grp
-    Examples: 
-	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	    | 13    | F437767 | MAPD	 | GRP_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
+    #@prepareForNextYear03_grp
+    #Examples: 
+	#    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 13    | F437767 | MAPD	 | GRP_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
