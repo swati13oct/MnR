@@ -407,7 +407,7 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 						note.add("\t  PASSED - validation for "+targetItem);
 						
 						targetItem=section+" - gray 'Open Annual Notice of Changes (PDF)'";
-						targetElement=ind_reviewPlanChanges_docSection_preGrayAnoc;
+						targetElement=ind_reviewPlanChanges_docSection_preGrayAnoc_us;
 						Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 						note.add("\t  PASSED - validation for "+targetItem);
 
@@ -472,7 +472,6 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 
 							List<String> subSectionNote=validatePdf(targetItem, targetElement);
 							note.addAll(subSectionNote);
-
 							note.add("\t  PASSED - validation for "+targetItem);
 
 							targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
@@ -481,11 +480,22 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 							note.add("\t  PASSED - validation for "+targetItem);
 
 						} else {
-							ind_reviewPlanChanges_docSection_langDropdown.click();
-							targetItem="Spanish language dropdown option'";
-							targetElement=ind_lang_spanish;
-							Assert.assertTrue("PROBLEM - user input doesn't expect Spanish doc, should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-							note.add("\t  PASSED - validation for NO "+targetItem);
+							//keep - activate later when code is ready
+							//ind_reviewPlanChanges_docSection_langDropdown.click();
+							//targetItem="Spanish language dropdown option'";
+							//targetElement=ind_lang_spanish;
+							//Assert.assertTrue("PROBLEM - user input doesn't expect Spanish doc, should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+							//note.add("\t  PASSED - validation for NO "+targetItem);
+
+							//note: for now it will display, it will change later
+							select = new Select(ind_reviewPlanChanges_docSection_langDropdown);           
+							select.selectByValue("es");
+
+							targetElement=ind_reviewPlanChanges_docSection_preGrayAnoc_es;
+							CommonUtility.waitForPageLoad(driver, targetElement, 10);
+							Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+
+							note.add("\t  PASSED - validation for "+targetItem);
 						}
 						
 						//note: if there is chinese doc
@@ -504,11 +514,20 @@ public class PrepareForNextYearPage  extends PrepareForNextYearBase {
 
 							note.add("\t  PASSED - validation for "+targetItem);
 						} else {
-							ind_reviewPlanChanges_docSection_langDropdown.click();
-							targetItem="Chinese language dropdown option'";
-							targetElement=ind_lang_chinese;
-							Assert.assertTrue("PROBLEM - user input doesn't expect Chinese doc, should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-							note.add("\t  PASSED - validation for NO "+targetItem);
+							//keep - activate later when code is ready
+							//ind_reviewPlanChanges_docSection_langDropdown.click();
+							//targetItem="Chinese language dropdown option'";
+							//targetElement=ind_lang_chinese;
+							//Assert.assertTrue("PROBLEM - user input doesn't expect Chinese doc, should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+							//note.add("\t  PASSED - validation for NO "+targetItem);
+							select = new Select(ind_reviewPlanChanges_docSection_langDropdown);           
+							select.selectByValue("zh");
+
+							targetElement=ind_reviewPlanChanges_docSection_preGrayAnoc_zh;
+							CommonUtility.waitForPageLoad(driver, targetElement, 10);
+							Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+
+							note.add("\t  PASSED - validation for "+targetItem);
 						}
 						
 						
