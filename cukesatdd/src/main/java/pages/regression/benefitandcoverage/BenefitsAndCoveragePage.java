@@ -284,7 +284,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		LookUpDrugsButton.click();
 		sleepBySec(40);
 		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs2.get(0));
+		if(tabs2.size() == (2)) {
+			
+			driver.switchTo().window(tabs2.get(0));
+		}
+		else if(tabs2.size()==(3))  
+		{
+			driver.switchTo().window(tabs2.get(1));
+		}
+		
 
 	}
 
