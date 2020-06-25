@@ -67,9 +67,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors  | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup   | Fonseca, Mario J |               | No             | Yes,No,No,No                  | Higher               |
-      |   55419 | No            | Hennepin   | MAPD          | None         | None   | withinUS |                  |               | No             | Yes,No,No,No                  | Higher               |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Fonseca, Mario J |               | No             | Yes,No,No,No                  | Higher               |
+      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
