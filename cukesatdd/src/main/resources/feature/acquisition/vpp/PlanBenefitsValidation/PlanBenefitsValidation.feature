@@ -12,59 +12,69 @@ Feature: ACQ-Plan benefits validation
 			@planDetailsBenefitsAARP01
     	Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet1  | AARP |
+      | Plan Details Benefits_Data | Sheet1  | AARP |
       
       @planDetailsBenefitsAARP02
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet2  | AARP |
+      | Plan Details Benefits_Data | Sheet2  | AARP |
       
       @planDetailsBenefitsAARP03
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet3  | AARP |
+      | Plan Details Benefits_Data | Sheet3  | AARP |
       
       @planDetailsBenefitsAARP04
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet4  | AARP |
+      | Plan Details Benefits_Data | Sheet4  | AARP |
       
       @planDetailsBenefitsAARP05
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet5  | AARP |
+      | Plan Details Benefits_Data | Sheet5  | AARP |
       
       @planDetailsBenefitsAARP06
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet6  | AARP |
+      | Plan Details Benefits_Data | Sheet6  | AARP |
       
       @planDetailsBenefitsAARP07
     	Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet7  | AARP |
+      | Plan Details Benefits_Data | Sheet7  | AARP |
       
       @planDetailsBenefitsAARP08
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet8  | AARP |
+      | Plan Details Benefits_Data | Sheet8  | AARP |
       
       @planDetailsBenefitsAARP09
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet9  | AARP |
+      | Plan Details Benefits_Data | Sheet9  | AARP |
       
       @planDetailsBenefitsAARP10
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet10  | AARP |
+      | Plan Details Benefits_Data | Sheet10  | AARP |
       
       @planDetailsBenefitsAARP11
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet11 | AARP |
+      | Plan Details Benefits_Data | Sheet11 | AARP |
       
       @planDetailsBenefitsAARP12
       Examples: 
       | excelPath                | workSheet | site |
-      | MA_SNP_Plan Details_Data | Sheet12  | AARP |
+      | Plan Details Benefits_Data | Sheet12  | AARP |
+      
+      @planDetailsBenefitsPDPAARP01
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | PDPSheet1  | AARP |
+      
+       @planDetailsBenefitsPDPAARP02
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | PDPSheet2  | AARP |

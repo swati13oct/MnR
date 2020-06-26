@@ -361,7 +361,16 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
-					key = key.replace("Footnotes2", "").replaceAll("\\s+", "").replaceAll("-", "");
+					key = key.replaceAll("\\s+", "").replaceAll("-", "");
+					
+					if(key.contains("footnote2") && key.contains("footnote1")) {
+						key = key.replace("footnote2", "");
+						key = key.replace("footnote1", "");
+					}else if(key.contains("footnote1")) {
+						key = key.replace("footnote1", "");
+					}else if(key.contains("footnote2"))
+						key = key.replace("footnote2", "");
+						
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "");
 					
 					if(key.contains(benefitValue)) {
@@ -388,13 +397,18 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
 						
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "");
 						
-						if(columnName.equalsIgnoreCase("Medical Benefits"))
-							benefitValueUI = benefitValueUI.replace("footnote2", "");
 						//the following code is used to remove the footnote values from the benefit value string. 
-						if(benefitValueUI.contains("1/"))
+						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
+							benefitValueUI = benefitValueUI.replace("footnote2", "");
+							benefitValueUI = benefitValueUI.replace("footnote1", "");
+						}else if(benefitValueUI.contains("footnote2"))
+							benefitValueUI = benefitValueUI.replace("footnote2", "");
+						else if(benefitValueUI.contains("footnote1"))
+							benefitValueUI = benefitValueUI.replace("footnote1", "");
+						else if(benefitValueUI.contains("1/"))
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
@@ -427,7 +441,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 	}
 	
-	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName) {
+	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
@@ -450,10 +464,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
 			
 				String rowXpath="";
-				if(sheetName.contains("PDP") && tab==0) {
-					rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr";
-				}else if(tab==0)
-					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr";
+				if(tab==0)
+					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr";
 				else
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
 
@@ -487,10 +499,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						String cellsPerRowXpath="";
 						value = "";
 						
-						if(sheetName.contains("PDP") && tab==0) {
-							rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
-						}else if(tab==0)
-							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+						if(tab==0)
+							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						else
 							cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						
@@ -500,10 +510,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
 							String eachCellXpath = "";
 							
-							if(sheetName.contains("PDP") && tab==0) {
-								rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
-							}else if(tab==0)
-								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+							if(tab==0)
+								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 							else
 								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 			

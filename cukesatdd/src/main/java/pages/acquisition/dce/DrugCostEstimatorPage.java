@@ -291,6 +291,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Drugs')]")
 	public WebElement drugsLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugModal')]")
+	public WebElement drugModalPopup;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -409,7 +412,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		waitforElementNew(addDrug,20);
 		addDrug.click();
 
-if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
+		if (validateNew(drugModalPopup)) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;
@@ -940,7 +943,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		AddDrugDetails addDrugDetails = addNewDrugModal.clickonSearchButton(drug);
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
 		savingsOppurtunity.savedrugbutton();
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 
 	}
 
