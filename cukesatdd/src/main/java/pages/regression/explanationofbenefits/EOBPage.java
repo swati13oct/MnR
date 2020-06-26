@@ -1113,6 +1113,8 @@ public class EOBPage extends EOBBase{
 		String targetUuid=getUuid();
 		Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
 		int max=eobCount;
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+			max=3; //note: only validate the first 3 eobs on offline-prod and online-prod env to speed up the test run duration
 		if (eobCount>=10) //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
 		for (int i = 1; i <= max; i++) {

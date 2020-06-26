@@ -86,7 +86,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		System.out.println("Proceed to expand the section");
 		sleepBySec(1);
 		subSectionElement.click();
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(1);
 		section_note.add("  PASSED - subsection '"+subSection_FnR+"' section element validation");
 		return section_note;
@@ -113,7 +113,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		moveMouseToElement(subSectionElement);
 		subSectionElement.click();
 		System.out.println("TEST - clicked subsection to collapse it");
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		return;
 	}
 
@@ -172,11 +172,11 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 				moveMouseToElement(subSectionElement); 
 				subSectionElement.click();
 				CommonUtility.waitForPageLoad(driver, docElement, 5);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 			scrollElementToCenterScreen(docElement);
 			moveMouseToElement(docElement); 
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
 	
