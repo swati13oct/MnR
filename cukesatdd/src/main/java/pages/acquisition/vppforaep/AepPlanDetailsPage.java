@@ -363,15 +363,23 @@ public class AepPlanDetailsPage extends UhcDriver {
 					key = key.replace("\n", "");
 					key = key.replaceAll("\\s+", "").replaceAll("-", "");
 					
-					if(key.contains("footnote2") && key.contains("footnote1")) {
-						key = key.replace("footnote2", "");
-						key = key.replace("footnote1", "");
-					}else if(key.contains("footnote1")) {
-						key = key.replace("footnote1", "");
-					}else if(key.contains("footnote2"))
-						key = key.replace("footnote2", "");
+					//removing footnote values from the string
+					if(key.contains("Footnotes2") && key.contains("Footnotes1")) {
+						key = key.replace("Footnotes2", "");
+						key = key.replace("Footnotes1", "");
+					}else if(key.contains("Footnotes1")) {
+						key = key.replace("Footnotes1", "");
+					}else if(key.contains("Footnotes2"))
+						key = key.replace("Footnotes2", "");
+					
+					//removing footnote values from the string
+					if(key.contains(".2"))
+						key = key.replace(".2", "");
+					else if(key.contains(".1"))
+						key = key.replace(".1", "");
 						
-					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "");
+					key = key.replaceAll(".", "");
+					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "").replaceAll(".", "");
 					
 					if(key.contains(benefitValue)) {
 						flag = true;break;
@@ -397,8 +405,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
 						
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "");
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "").replaceAll(".", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "").replaceAll(".", "");
 						
 						//the following code is used to remove the footnote values from the benefit value string. 
 						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {

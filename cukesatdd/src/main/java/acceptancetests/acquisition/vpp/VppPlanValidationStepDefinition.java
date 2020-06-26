@@ -161,7 +161,7 @@ public class VppPlanValidationStepDefinition {
 								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 								  if(sheetName.contains("PDP")) {
-									  if(row.getCell(6).getStringCellValue()!=null)
+									  if(!row.getCell(6).getStringCellValue().contains("NA"))
 										  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
 								  }
 									  
