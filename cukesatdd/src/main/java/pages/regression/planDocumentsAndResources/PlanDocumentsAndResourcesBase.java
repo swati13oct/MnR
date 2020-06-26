@@ -159,7 +159,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			CommonUtility.checkPageIsReadyNew(driver);
-			sleepBySec(5);
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+				CommonUtility.checkPageIsReadyNew(driver); //note: let the page settle before validating content, assume prod env would be faster...
+			else 
+				sleepBySec(5); //note: let the page settle before validating content
 
 			if (checkDestUrl) {
 				String actUrl=driver.getCurrentUrl();
@@ -190,9 +193,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				scrollElementToCenterScreen(targetLinkElement);
 				sleepBySec(1);
 				targetLinkElement.click(); //note: if redirect then need to wait a little for the page to settle before checking destination link
-				CommonUtility.checkPageIsReadyNew(driver);
-				
-				sleepBySec(5);
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					CommonUtility.checkPageIsReadyNew(driver);
+				else 
+					sleepBySec(5);
 				if (!redirectUrl.equals("none")) {
 					System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 					CommonUtility.checkPageIsReadyNew(driver);
@@ -207,7 +211,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							CommonUtility.waitForPageLoad(driver, orderPlanPgHeader, 5);
 					if (testInputInfoMap.get("docName").equals("SEARCH DOCUMENTS")) {
 						CommonUtility.waitForPageLoad(driver, myDocumentsPgHeader, 5);
-						sleepBySec(5);
+						if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+							CommonUtility.checkPageIsReadyNew(driver);
+						else 
+							sleepBySec(5);
 						if (MRScenario.environment.contains("team-atest")) {
 							System.out.println("Check if Alert popup present...if yes, handle it...");
 							isAlertPresent();
