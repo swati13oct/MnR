@@ -287,8 +287,8 @@ public class MedicareInformationPage extends UhcDriver{
 		//String FirstName = MedicareDetailsMap.get("First Name");
 		//String LastName = MedicareDetailsMap.get("Last Name");
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
-		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
-		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+	//	String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+	//	String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		String emailConfirmation = MedicareDetailsMap.get("Email Confirmation");
@@ -364,7 +364,7 @@ public class MedicareInformationPage extends UhcDriver{
 			}*/
 		}
 		
-		sendkeysNew(partAStartDateField, PartAeffectiveDate);
+		//sendkeysNew(partAStartDateField, PartAeffectiveDate);
 		/*if(validate(partAStartDateField)){
 			partAStartDateField.sendKeys(PartAeffectiveDate);
 			System.out.println("Part A Effective Date entered : "+PartAeffectiveDate);
@@ -374,7 +374,7 @@ public class MedicareInformationPage extends UhcDriver{
 			return null;
 		}*/
 		
-		sendkeysNew(partBStartDateField, PartBeffectiveDate);
+		//sendkeysNew(partBStartDateField, PartBeffectiveDate);
 		
 		/*if(validate(partBStartDateField)){
 			partBStartDateField.sendKeys(PartBeffectiveDate);

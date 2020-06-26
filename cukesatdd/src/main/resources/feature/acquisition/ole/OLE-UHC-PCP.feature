@@ -44,7 +44,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user validates the Member details dynamic display in Personal Information Page
     #New Changes 
     Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
+    #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information    
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
