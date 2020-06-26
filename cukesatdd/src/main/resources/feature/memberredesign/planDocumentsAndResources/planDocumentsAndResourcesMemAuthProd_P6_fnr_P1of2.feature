@@ -71,7 +71,8 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_1of2 @prod_active_ma_1of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | false    | false   | true   | true   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   |
+#      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | false    | false   | true   | true   |
 
 	@prod_active_mapd_ind_1of2 @prod_active_mapd_1of2
 	Examples: 

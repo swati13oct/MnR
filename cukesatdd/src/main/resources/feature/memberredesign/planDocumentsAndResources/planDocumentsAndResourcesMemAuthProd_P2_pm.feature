@@ -59,7 +59,8 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 09-028 | 15129       | ashah120  | Mnrqa002  | ERNIE2450 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
-      | 10-029 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+      | 10-029 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+#      | 10-029 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
  
 	@prod_active_mapd
 	Examples: 

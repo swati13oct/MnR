@@ -68,7 +68,8 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_7of7 @prod_active_ma_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | true   |
+#      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
 
 	@prod_active_mapd_ind_7of7 @prod_active_mapd_7of7
 	Examples: 

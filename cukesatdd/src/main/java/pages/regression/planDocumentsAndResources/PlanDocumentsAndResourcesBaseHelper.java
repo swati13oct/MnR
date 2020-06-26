@@ -122,20 +122,14 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	 */
 	public void goBackToPriorPgViaBack(String planType, String memberType, String origUrlBeforeClick) {
 		driver.navigate().back();
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-			CommonUtility.checkPageIsReadyNew(driver);
-		else 
-			sleepBySec(5);
+		sleepBySec(5);
 		isAlertPresent();
 		CommonUtility.checkPageIsReady(driver);
 		String expUrl="/member/documents/overview.html";
 		String actUrl=driver.getCurrentUrl();
 		if (!actUrl.contains(expUrl)) { //note: give it one more try before giving up
 			driver.get(origUrlBeforeClick);
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				CommonUtility.checkPageIsReadyNew(driver);
-			else 
-				sleepBySec(5);
+			sleepBySec(5);
 			isAlertPresent();
 			actUrl=driver.getCurrentUrl();
 		}
@@ -177,20 +171,14 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public void refreshPage(String planType, String memberType, String origUrlBeforeClick) {
 		driver.navigate().refresh();
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-			CommonUtility.checkPageIsReadyNew(driver);
-		else 
-			sleepBySec(5);
+		sleepBySec(5);
 		isAlertPresent();
 		CommonUtility.checkPageIsReady(driver);
 		String expUrl="/member/documents/overview.html";
 		String actUrl=driver.getCurrentUrl();
 		if (!actUrl.contains(expUrl)) { //note: give it one more try before giving up
 			driver.get(origUrlBeforeClick);
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				CommonUtility.checkPageIsReadyNew(driver);
-			else 
-				sleepBySec(5);
+			sleepBySec(5);
 			isAlertPresent();
 			actUrl=driver.getCurrentUrl();
 		}
