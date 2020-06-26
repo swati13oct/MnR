@@ -324,7 +324,7 @@ public class MemberAuthStepDefinition{
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
-			Assert.fail();
+			Assert.fail("Unable to land on dashboard after clicking on member");
 		}
 	}
 	

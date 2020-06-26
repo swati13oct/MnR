@@ -1022,7 +1022,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			if (actUrl.contains(".pdf")) {
 				try {
 					URL TestURL = new URL(driver.getCurrentUrl());
-					sleepBySec(5); //note: let the page settle before validating content
+					if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+						CommonUtility.checkPageIsReadyNew(driver); //note: let the page settle before validating content, assume prod env would be faster...
+					else 
+						sleepBySec(5); //note: let the page settle before validating content
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
