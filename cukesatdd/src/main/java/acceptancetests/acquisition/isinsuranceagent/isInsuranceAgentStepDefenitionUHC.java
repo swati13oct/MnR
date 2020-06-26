@@ -69,7 +69,7 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	 */ 
 	
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
-	
+	/*
 		
 	@Then("^the user enters valid information for the pre entry form on UMS site for Insurance Agent$")
 	public void the_user_enters_valid_information_for_the_pre_entry_form_on_UMS_site_Insurance_Agent(DataTable givenAttributes) throws Throwable {
@@ -231,7 +231,7 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	public void the_user_validates_Thank_You_Page_on_UMS_site_for_Insurance_Agent() throws Throwable {
 		
 	}
-
+*/
 } 
 
 

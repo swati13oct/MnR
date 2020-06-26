@@ -74,7 +74,7 @@ public class isInsuranceAgentStepDefenition    {
 	
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	
-		
+	/*	
 	@Then("^the user enters valid information for the pre entry form on AARP site$")
 	public void the_user_enters_valid_information_for_the_pre_entry_form_on_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -287,7 +287,7 @@ public class isInsuranceAgentStepDefenition    {
 	public void the_user_validates_Thank_You_Page_on_AARP_site() throws Throwable {
 		
 	}
-
+*/
 } 
 
 
