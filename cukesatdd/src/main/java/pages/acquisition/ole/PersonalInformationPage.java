@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -117,6 +118,8 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
+
+	private WebElement specialElectionPage;
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -299,19 +302,67 @@ public class PersonalInformationPage extends UhcDriver{
 		return null;
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page() {
+	public SpecialElectionPeriodPage navigate_to_SEP_page(String arg2, Map<String, String> MedicareDetailsMap) {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
 			System.out.println("OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 		}
+		*/
+		if(arg2.equalsIgnoreCase("Valid")) {
+			if(validateNew(specialElectionPage=driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+			//System.out.println("OLE SEP Page is Displayed");
+			Assert.assertTrue(validateNew(specialElectionPage), "OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+			
+			}
+
+			else {
+				
+				enterConfirmEligibilityPageData(MedicareDetailsMap);
+			
+				}		
+			}
 		return null;
+	}	
+
+
+
+	public ConfirmYourEligibilityPage enterConfirmEligibilityPageData(Map<String, String> MedicareDetailsMap) {
+		
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+			return new ConfirmYourEligibilityPage(driver);	
+			
+			/* String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+			String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+			
+			 WebElement partAStartDateField = driver.findElement(By.xpath("//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]"));
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			WebElement partBStartDateField = driver.findElement(By.xpath("//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]"));
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);			 
+	
+		*/
+		}
+			validateNew(NextBtn);
+			jsClickNew(NextBtn);	
+			//if(arg2.equalsIgnoreCase("Valid")) {
+				if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+				System.out.println("OLE SEP Page is Displayed");
+				}
+				else {
+					System.out.println("OLE SEP Page is not Displayed");
+				}
+	
+			return null ;
+			
 	}
+
 
 	public boolean validate_member_details(Map<String, String> memberDetailsMap){
 		String FirstName = memberDetailsMap.get("First Name");
