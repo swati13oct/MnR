@@ -191,6 +191,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			checkModelPopup(driver,1);
 			jumpLinkElement.click();
 			CommonUtility.waitForPageLoad(driver, sectionElement, 5);
 			Assert.assertTrue("PROBLEM - unable to locate section for '"+item+"' after clicking jumplink", planDocValidate(sectionElement));
