@@ -198,7 +198,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//keep 	if (MRScenario.environment.equalsIgnoreCase("offline"))		
 			//keep 		testInputInfoMap.put("expectedUrl", "/Individual/AARP_Redetermination_Request_Form.pdf");
 			//keep }
-			testInputInfoMap.put("expectedUrl", "Redetermination_Request_Form.pdf");
+			//tbd testInputInfoMap.put("expectedUrl", "Redetermination_Request_Form.pdf");
+			testInputInfoMap.put("expectedUrl", "Redetermination_Request_Form");
 			//tbd if (MRScenario.environment.equalsIgnoreCase("prod")) {
 			//tbd 	if (memberType.contains("AARP")) {
 			//tbd 		testInputInfoMap.put("expectedUrl", "AARP_Redetermination_Request_Form.pdf");
