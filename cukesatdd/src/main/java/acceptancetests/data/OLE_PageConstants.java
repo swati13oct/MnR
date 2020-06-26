@@ -11,6 +11,7 @@ package acceptancetests.data;
  */
 public class OLE_PageConstants {
 	
+	
 	public static final String OLE_WELCOME_PAGE = "olewelcomepage";
 	public static final String OLE_MEDICARE_INFO_PAGE = "olemedicareinfopage";
 	public static final String OLE_AUTHORIZATION_PAGE = "oleauthorizationpage";

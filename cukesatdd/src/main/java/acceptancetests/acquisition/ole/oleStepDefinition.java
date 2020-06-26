@@ -1441,16 +1441,6 @@ public class oleStepDefinition {
 
 	@Then("^the user navigates to SEP Page$")
 	public void the_user_navigates_to_SEP_Page(DataTable Medicareoptions, String arg1) throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
-		 */
 		/*	
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(arg1, null);
@@ -2010,6 +2000,7 @@ public class oleStepDefinition {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assert.assertTrue(true); } else{
 		 */
+		
 			List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 			Map<String, String> RiderFlagMap = new HashMap<String, String>();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {

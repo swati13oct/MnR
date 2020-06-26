@@ -316,7 +316,6 @@ public class PersonalInformationPage extends UhcDriver{
 		*/
 		if(arg2.equalsIgnoreCase("Valid")) {
 			if(validateNew(specialElectionPage=driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			//System.out.println("OLE SEP Page is Displayed");
 			Assert.assertTrue(validateNew(specialElectionPage), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
