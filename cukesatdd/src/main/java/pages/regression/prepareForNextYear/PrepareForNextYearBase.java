@@ -1,10 +1,18 @@
 package pages.regression.prepareForNextYear;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,6 +28,8 @@ import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -394,6 +404,141 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			e.printStackTrace();
 		}
 	}
+
+	public void validateBookmarkError() {
+		String tmpUrl=driver.getCurrentUrl();
+		String tmp[]=tmpUrl.split("/benefits");
+		String bookmark=tmp[0]+"/planfornextyear/overview.html";
+		driver.get(bookmark);
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,1);
+		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
+		String actMsg=bookmarkErrMsg.getText();;
+		String expMsg="Your requested cannot be processed .Please try later";
+		Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
+		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
+
+	}
+
+	public List<String> validatePdf(String targetDocName, WebElement pdfLink) {
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		note.add("\tValidation for PDF ='"+targetDocName+"'");
+		String winHandleBefore = driver.getWindowHandle();
+
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int beforeClicked_numTabs=beforeClicked_tabs.size();	
+		CommonUtility.waitForPageLoad(driver, pdfLink, 5);
+		sleepByMillSec(300);
+		scrollElementToCenterScreen(pdfLink);
+		pdfLink.click();
+		CommonUtility.checkPageIsReady(driver);
+
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		CommonUtility.checkPageIsReady(driver);
+		sleepBySec(5);
+
+		String actUrl=driver.getCurrentUrl();
+		String expUrl=".pdf";
+		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+
+		if (!MRScenario.environment.contains("team-a")) {
+			try {
+				URL TestURL = new URL(driver.getCurrentUrl());
+				sleepBySec(5); //note: let the page settle before validating content
+				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+				PDDocument document = PDDocument.load(TestFile);
+				String PDFText = new PDFTextStripper().getText(document);
+				System.out.println("PDF text : "+PDFText);
+				if(PDFText!=null && !PDFText.equals("")){
+					note.add("PASSED - validated pdf content is not null");
+				} else {
+					note.add("* FAILED - unable to validate pdf content - content either null or empty");
+					Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty - doc name="+targetDocName, false);
+				}
+			} catch (MalformedURLException e) {
+				note.add("* FAILED - unable to validate pdf content - MalformedURLException");
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException - doc name="+targetDocName, false);
+			} catch (IOException e) {
+				note.add("* FAILED - unable to validate pdf content - IOException");
+				e.printStackTrace();
+				//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
+			}
+		} else {
+			note.add("\tOn lower env, skip validating PDF content");
+		}
+
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+
+		note.add("\tPASSED - validating PDF content");
+		return note;
+
+	}
+
+	public List<String> validateHaveItem(String targetItem, WebElement targetElement) {
+		List<String> note=new ArrayList<String>();
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		note.add("\tPASSED - validation for HAVING "+targetItem);
+		return note;
+	}
+
+	public List<String> validateDontHaveItem(String targetItem, WebElement targetElement) {
+		List<String> note=new ArrayList<String>();
+		Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+		note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		return note;
+	}
+	 
+	public List<String> validateLanguageDropdown(String section, WebElement langDropdown, WebElement engOption, WebElement esOption, WebElement zhOption) {
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		note.add("\tValidate language dropdown...");
+		String targetItem=section+" - language dropdown and options";
+		WebElement targetElement=langDropdown;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+
+		Select select = new Select(langDropdown);           
+		String actualSelectedLang = select.getFirstSelectedOption().getText();
+		String expectedSelectedLang="ENGLISH";
+		Assert.assertTrue("PROBLEM - default selected language option is not as expected. "
+				+ "Expected='"+expectedSelectedLang+"' | Actual='"+actualSelectedLang+"'", 
+				actualSelectedLang.equals(actualSelectedLang));
+
+		targetItem=section+" - language dropdown English option";
+		targetElement=langDropdown;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+
+		targetItem=section+" - language dropdown Spanish option";
+		targetElement=engOption;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+
+		targetItem=section+" - language dropdown Chinese option";
+		targetElement=zhOption;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		return note;
+	}
+	
+	public void validateReturnToPrevPgLnk() {
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+		Assert.assertTrue("PROBLEM - unable to locate the 'RETURN TO PREVIOUS PAGE' link on 'Prepare For Next Year' page'", noWaitValidate(returnToPrevPgLnk));
+		returnToPrevPgLnk.click();
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeaderText, 10);
+		Assert.assertTrue("PROBLEM - unable to navigate back to benefits page by clicking 'RETURN TO PREVIOUS PAGE' link",noWaitValidate(benefitsPgHeaderText));
+		if (noWaitValidate(prepareForNextYearTab)) {
+			prepareForNextYearTab.click();
+		}
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
+		checkModelPopup(driver,1);
+		Assert.assertTrue("PROBLEM - unable to navigate again to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
+	}
+
 
 	
 }

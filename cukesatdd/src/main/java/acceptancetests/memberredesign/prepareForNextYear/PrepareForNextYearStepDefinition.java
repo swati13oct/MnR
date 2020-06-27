@@ -73,7 +73,7 @@ public class PrepareForNextYearStepDefinition {
 			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
-			PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+			PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 			Date orig_currentDate=(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE);
 			Long orig_currentDate_millisec=(Long) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC);
@@ -84,7 +84,7 @@ public class PrepareForNextYearStepDefinition {
 			String text="===================================================";
 			testNote.add(text);
 			System.out.println(text);
-			Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+			Date currentDate=pfnyPg.getCurrentSystemDate();
 			if (orig_currentDate!=null) {
 				System.out.println("orig_currentDate != null, need to do a final check to make sure system date is back to original date");
 				if (!orig_currentDate.equals(currentDate)) {
@@ -92,14 +92,14 @@ public class PrepareForNextYearStepDefinition {
 					System.out.println("TEST dateChangeUrl="+dateChangeUrl);
 					wd.get(dateChangeUrl);
 					CommonUtility.checkPageIsReady(wd);
-					prepareForNextYearPage.sleepBySec(2);
-					currentDate=prepareForNextYearPage.getCurrentSystemDate();
+					pfnyPg.sleepBySec(2);
+					currentDate=pfnyPg.getCurrentSystemDate();
 					Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
 					Assert.assertTrue("PROBLEM - unable to rollback system date to original system date.  "
-							+ "current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
-							prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate).equals(prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
+							+ "current system date='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
+							pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate).equals(pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
 				}
-				text="Test Clean up - Final Check - System Date is able to roll back to original ='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+prepareForNextYearPage.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
+				text="Test Clean up - Final Check - System Date is able to roll back to original ='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+pfnyPg.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
 				testNote.add(text);
 				System.out.println(text);
 				getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
@@ -121,13 +121,13 @@ public class PrepareForNextYearStepDefinition {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Date tabStartDate =(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabStartDate);	
 		Date tabEndDate = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TabEndDate);	
 		boolean aem_tabToggle = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.AEM_TOGGLE);	
 
-		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Date currentDate=pfnyPg.getCurrentSystemDate();
 
 		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
@@ -155,10 +155,10 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\tThis sauceLab session url: "+MRScenario.returnJobURL()+"\n");
 
 		testNote.add("\tValidation for Prepare For Next Year tab on page '"+targetPage+"'");
-		testNote.add("\t  AEM tab startDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate));
-		testNote.add("\t  AEM tab endDate ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate));
+		testNote.add("\t  AEM tab startDate ="+pfnyPg.convertDateToStrFormat_MMDDYYYY(tabStartDate));
+		testNote.add("\t  AEM tab endDate ="+pfnyPg.convertDateToStrFormat_MMDDYYYY(tabEndDate));
 		testNote.add("\t  AEM toggle ="+aem_tabToggle);
-		testNote.add("\t  System Date ="+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate));
+		testNote.add("\t  System Date ="+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate));
 		if (memberType.toUpperCase().contains("OFFCYC")) 
 			testNote.add("\t  User plan start date type = offcycle");
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
@@ -168,9 +168,9 @@ public class PrepareForNextYearStepDefinition {
 			expComboTab=true;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 
-		wd=prepareForNextYearPage.navigateToBenefitsPage(planType, memberType, expComboTab);
+		wd=pfnyPg.navigateToBenefitsPage(planType, memberType, expComboTab);
 
-		boolean hasPrepareForNextYearTab=prepareForNextYearPage.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
+		boolean hasPrepareForNextYearTab=pfnyPg.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
 		if (expPrepareForNextYearTab==hasPrepareForNextYearTab) {
 			if (expPrepareForNextYearTab)
 				testNote.add("\tPASSED - Prepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
@@ -296,8 +296,8 @@ public class PrepareForNextYearStepDefinition {
 	
 
 	@SuppressWarnings("unchecked")
-	@Then("^the user validates Prepare For Next Year page content$")
-	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
+	@Then("^the user validates Prepare For Next Year page content for individual$")
+	public void user_validatePrepareForNextYearPageContent_individual() throws InterruptedException {
 
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
 		if (!expPrepareForNextYearTab) {
@@ -312,7 +312,7 @@ public class PrepareForNextYearStepDefinition {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -320,7 +320,7 @@ public class PrepareForNextYearStepDefinition {
 			if (testNote==null)
 				testNote=new ArrayList<String>();
 			testNote.add("\t=================");
-			prepareForNextYearPage.validateReturnToPrevPgLnk();
+			pfnyPg.validateReturnToPrevPgLnk();
 			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
 		}
 		
@@ -331,14 +331,14 @@ public class PrepareForNextYearStepDefinition {
 		Date milestone4Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE);
 		Date milestone5Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE);
 
-		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Date currentDate=pfnyPg.getCurrentSystemDate();
 
-		System.out.println("milestone1Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date));
-		System.out.println("milestone2Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date));
-		System.out.println("milestone3Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date));
-		System.out.println("milestone4Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date));
-		System.out.println("milestone5Date = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date));
-		System.out.println("currentDate = "+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate));
+		System.out.println("milestone1Date = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date));
+		System.out.println("milestone2Date = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date));
+		System.out.println("milestone3Date = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date));
+		System.out.println("milestone4Date = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date));
+		System.out.println("milestone5Date = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date));
+		System.out.println("currentDate = "+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate));
 		
 		Assert.assertTrue("PROBLEM - unable to convert Current System Date Time: '"+currentDate+"' to valid Date object for further processing", currentDate!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
@@ -347,36 +347,37 @@ public class PrepareForNextYearStepDefinition {
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		testNote.add("\t=================");
-		prepareForNextYearPage.hasPrepareForNextYearTabDisplay(true);
+		pfnyPg.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
 
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
 
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
-			testNote.add("\tValidation for current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=prepareForNextYearPage.validateBeforeM1Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
-			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
-			testNote.add("\t  Validation for milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\t  Validation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
-			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
+			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
-			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\tValidation for milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
+			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
-			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content(memberType, currentDate, docDisplayMap);
+			testNote.add("\tValidation for milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
+			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
 		testNote.addAll(sectionNote);
-		testNote.add("\t  PASSED - page content validation");
+		testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
@@ -398,13 +399,13 @@ public class PrepareForNextYearStepDefinition {
 		}
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd); //note: at this point still on benefits page
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd); //note: at this point still on benefits page
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 
-		prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
+		pfnyPg.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, pfnyPg);	
 	}
 	
 	
@@ -422,8 +423,8 @@ public class PrepareForNextYearStepDefinition {
 			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
-			PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
-			prepareForNextYearPage.validateBookmarkError();
+			PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+			pfnyPg.validateBookmarkError();
 			
 		} else {
 			testNote.add("\tPrepare For Next Year tab is showing, skip bookmark error validation when tab hasn't met the condition to be displayed...");
@@ -444,12 +445,12 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 		
-		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		Date currentDate=pfnyPg.getCurrentSystemDate();
 		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE, currentDate);
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC, prepareForNextYearPage.convertDateToUctMillisecondsStr(currentDate));
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC, pfnyPg.convertDateToUctMillisecondsStr(currentDate));
 
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -457,7 +458,7 @@ public class PrepareForNextYearStepDefinition {
 		String text="===================================================";
 		testNote.add(text);
 		System.out.println(text);
-		text="Test Setup - Store original current system date for roll back later.  Original current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | milliseconds='"+prepareForNextYearPage.convertDateToUctMillisecondsStr(currentDate)+"'";
+		text="Test Setup - Store original current system date for roll back later.  Original current system date='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | milliseconds='"+pfnyPg.convertDateToUctMillisecondsStr(currentDate)+"'";
 		testNote.add(text);
 		System.out.println(text);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
@@ -474,15 +475,15 @@ public class PrepareForNextYearStepDefinition {
 		
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String aemDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String aemDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(tabStartDate);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -511,16 +512,16 @@ public class PrepareForNextYearStepDefinition {
 		
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String aemDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabStartDate);
-		String m1Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String aemDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(tabStartDate);
+		String m1Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -549,16 +550,16 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String m1Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date);
-		String m2Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String m1Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date);
+		String m2Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -586,16 +587,16 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String m2Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date);
-		String m3Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String m2Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date);
+		String m3Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -623,16 +624,16 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String m3Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date);
-		String m4Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String m3Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date);
+		String m4Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -660,16 +661,16 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String m4Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date);
-		String m5Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String m4Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date);
+		String m5Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -698,16 +699,16 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String aem=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate);
-		String m5Date=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String aem=pfnyPg.convertDateToStrFormat_MMDDYYYY(tabEndDate);
+		String m5Date=pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -735,15 +736,15 @@ public class PrepareForNextYearStepDefinition {
 
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String testSystemDateStr=memberAttributesMap.get("Test System Date");
-		Date testSystemDate=prepareForNextYearPage.convertStrToDate(testSystemDateStr);
+		Date testSystemDate=pfnyPg.convertStrToDate(testSystemDateStr);
 
-		String sysDate=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(testSystemDate);
-		String sysDate_ms=String.valueOf(prepareForNextYearPage.convertDateToUctMillisecondsStr(testSystemDate));
-		String aem=prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(tabEndDate);
+		String sysDate=pfnyPg.convertDateToStrFormat_MMDDYYYY(testSystemDate);
+		String sysDate_ms=String.valueOf(pfnyPg.convertDateToUctMillisecondsStr(testSystemDate));
+		String aem=pfnyPg.convertDateToStrFormat_MMDDYYYY(tabEndDate);
 		
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
@@ -799,13 +800,13 @@ public class PrepareForNextYearStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 		//----- note: AEM -----------------------------------------
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
-		Assert.assertTrue("PROBLEM - AEM Show Tab StartDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_start));
-		Assert.assertTrue("PROBLEM - AEM Show Tab EndDate is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_end));
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+		Assert.assertTrue("PROBLEM - AEM Show Tab StartDate is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_start));
+		Assert.assertTrue("PROBLEM - AEM Show Tab EndDate is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_end));
 
-		Date tabStartDate=prepareForNextYearPage.convertStrToDate(tmp_start);
+		Date tabStartDate=pfnyPg.convertStrToDate(tmp_start);
 		Assert.assertTrue("PROBLEM - unable to convert 'AEM Show Tab StartDate' to valid Date object for further processing", tabStartDate!=null);
-		Date tabEndDate=prepareForNextYearPage.convertStrToDate(tmp_end);
+		Date tabEndDate=pfnyPg.convertStrToDate(tmp_end);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabStartDate, tabStartDate);	
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.AEM_TabEndDate, tabEndDate);	
 
@@ -825,29 +826,29 @@ public class PrepareForNextYearStepDefinition {
 		String tmp_milestone4=memberAttributesMap.get("Milestone 4 Date");
 		String tmp_milestone5=memberAttributesMap.get("Milestone 5 Date");
 
-		Assert.assertTrue("PROBLEM - 'Milestone 1 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone1));
-		Assert.assertTrue("PROBLEM - 'Milestone 2 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone2));
-		Assert.assertTrue("PROBLEM - 'Milestone 3 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone3));
-		Assert.assertTrue("PROBLEM - 'Milestone 4 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone4));
-		Assert.assertTrue("PROBLEM - 'Milestone 5 Date' is not format as expected. Expected format 'MM/dd/yyyy'", prepareForNextYearPage.validateJavaDate(tmp_milestone5));
+		Assert.assertTrue("PROBLEM - 'Milestone 1 Date' is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_milestone1));
+		Assert.assertTrue("PROBLEM - 'Milestone 2 Date' is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_milestone2));
+		Assert.assertTrue("PROBLEM - 'Milestone 3 Date' is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_milestone3));
+		Assert.assertTrue("PROBLEM - 'Milestone 4 Date' is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_milestone4));
+		Assert.assertTrue("PROBLEM - 'Milestone 5 Date' is not format as expected. Expected format 'MM/dd/yyyy'", pfnyPg.validateJavaDate(tmp_milestone5));
 
-		Date milestone1Date=prepareForNextYearPage.convertStrToDate(tmp_milestone1);
+		Date milestone1Date=pfnyPg.convertStrToDate(tmp_milestone1);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 1 Date' to valid Date object for further processing", milestone1Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE, milestone1Date);
 		
-		Date milestone2Date=prepareForNextYearPage.convertStrToDate(tmp_milestone2);
+		Date milestone2Date=pfnyPg.convertStrToDate(tmp_milestone2);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 2 Date' to valid Date object for further processing", milestone2Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE, milestone2Date);
 
-		Date milestone3Date=prepareForNextYearPage.convertStrToDate(tmp_milestone3);
+		Date milestone3Date=pfnyPg.convertStrToDate(tmp_milestone3);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 3 Date' to valid Date object for further processing", milestone3Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE, milestone3Date);
 
-		Date milestone4Date=prepareForNextYearPage.convertStrToDate(tmp_milestone4);
+		Date milestone4Date=pfnyPg.convertStrToDate(tmp_milestone4);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 4 Date' to valid Date object for further processing", milestone4Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE4_DATE, milestone4Date);
 
-		Date milestone5Date=prepareForNextYearPage.convertStrToDate(tmp_milestone5);
+		Date milestone5Date=pfnyPg.convertStrToDate(tmp_milestone5);
 		Assert.assertTrue("PROBLEM - unable to convert 'Milestone 5 Date' to valid Date object for further processing", milestone5Date!=null);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.MILESTONE5_DATE, milestone5Date);
 		
@@ -865,7 +866,7 @@ public class PrepareForNextYearStepDefinition {
 
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
-		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(d);
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(d);
 
 		Date orig_currentDate=(Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE);
 		Long orig_currentDate_millisec=(Long) getLoginScenario().getBean(PrepareForNextYearCommonConstants.ORIG_CURRENT_SYSTEM_DATE_MILLISEC);
@@ -876,7 +877,7 @@ public class PrepareForNextYearStepDefinition {
 		String text="===================================================";
 		testNote.add(text);
 		System.out.println(text);
-		text="Test Setup - Rollback System date to original '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+prepareForNextYearPage.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
+		text="Test Setup - Rollback System date to original '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"' or millsec '"+pfnyPg.convertDateToUctMillisecondsStr(orig_currentDate)+"'";
 		testNote.add(text);
 		System.out.println(text);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
@@ -885,12 +886,12 @@ public class PrepareForNextYearStepDefinition {
 		System.out.println("TEST dateChangeUrl="+dateChangeUrl);
 		d.get(dateChangeUrl);
 		CommonUtility.checkPageIsReady(d);
-		prepareForNextYearPage.sleepBySec(2);
-		Date currentDate=prepareForNextYearPage.getCurrentSystemDate();
+		pfnyPg.sleepBySec(2);
+		Date currentDate=pfnyPg.getCurrentSystemDate();
 		Assert.assertTrue("PROBLEM - unable to convert 'Test System Date' to valid Date object for further processing", currentDate!=null);
 		Assert.assertTrue("PROBLEM - unable to rollback system date to original system date.  "
-				+ "current system date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
-				prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate).equals(prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
+				+ "current system date='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' | attemp to rollback to original date='"+pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)+"'", 
+				pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate).equals(pfnyPg.convertDateToStrFormat_MMDDYYYY(orig_currentDate)));
 		d.quit();
 	}	
 	
