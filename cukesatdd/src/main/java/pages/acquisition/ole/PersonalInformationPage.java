@@ -118,8 +118,16 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
+	
+	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
+	private WebElement partAStartDateField;
 
+	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
+	private WebElement partBStartDateField;
+	
 	private WebElement specialElectionPage;
+	
+	 
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -302,7 +310,7 @@ public class PersonalInformationPage extends UhcDriver{
 		return null;
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page(String arg2, Map<String, String> MedicareDetailsMap) {
+	public SpecialElectionPeriodPage navigate_to_SEP_page(String arg2, Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -334,20 +342,19 @@ public class PersonalInformationPage extends UhcDriver{
 
 	public ConfirmYourEligibilityPage enterConfirmEligibilityPageData(Map<String, String> MedicareDetailsMap) {
 		
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+		
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
-			return new ConfirmYourEligibilityPage(driver);	
-			
-			/* String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
-			String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-			
-			 WebElement partAStartDateField = driver.findElement(By.xpath("//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]"));
+		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			WebElement partBStartDateField = driver.findElement(By.xpath("//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]"));
-			sendkeysNew(partBStartDateField, PartBeffectiveDate);			 
-	
-		*/
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);	 
+			return new ConfirmYourEligibilityPage(driver);	
 		}
+
+		
+		else{
 			validateNew(NextBtn);
 			jsClickNew(NextBtn);	
 			//if(arg2.equalsIgnoreCase("Valid")) {
@@ -359,7 +366,7 @@ public class PersonalInformationPage extends UhcDriver{
 				}
 	
 			return null ;
-			
+		}
 	}
 
 
