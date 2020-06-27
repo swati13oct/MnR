@@ -131,6 +131,30 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
+	
+	@FindBy(xpath="//div[text()='Your Doctors']")
+	private WebElement yourDoctorsBanner;
+	
+	@FindBy(xpath="//a[text()='Edit Doctors']")
+	private WebElement editDoctorsLink;
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
+	private WebElement providerSumamryHeader;
+	
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
+	private WebElement providerSumamryHeaderCount;
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//th//div[contains(@class,'provider-name')]")
+	private WebElement FirstProviderName;
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
+	private WebElement viewlocationsLink;
+	
+	
+	
+	
+	
+	
+
+	
+	
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -614,6 +638,58 @@ public class ComparePlansPage extends UhcDriver {
 		for(int i=0;i<allMAPlans.size();i++) {
 			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
 		}
+	}
+	
+	public void validateDoctors() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourDoctorsBanner);
+		validateNew(editDoctorsLink);
+		validateNew(providerSumamryHeader);
+		validateNew(providerSumamryHeaderCount);
+		validateNew(FirstProviderName);
+		validateNew(viewlocationsLink);
+	}	
+	
+	public FindCarePage clickonEditYourDoctors() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDoctorsLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+		jsClickNew(editDoctorsLink);
+
+		Thread.sleep(25000);
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("Find Care")) {
+					System.out.println("We are on Find Care winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(FindCareLink);
+					break;
+				}
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
 	}
 }
 

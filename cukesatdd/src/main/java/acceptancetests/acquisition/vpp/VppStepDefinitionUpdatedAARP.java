@@ -3355,4 +3355,39 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 	}
 	
+	
+	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page AARP$")
+	public void verify_doctors_covered_ulayer() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateDoctors();
+	}	
+	
+	@And("^click on Edit your doctors link and Navigate to Rally page for AARP$")
+	public void clickONEdityourdocits_AARP() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}	
+	
+	@And("^user selects a provider from medical group and retuns to plan compare page in AARP$")
+	public void selectsproviderfrommedicalGroupforAARP() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.providerfromMedicalGroup();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 }
