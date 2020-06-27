@@ -29,7 +29,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | ashah120   | Mnrqa002  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
-      | xxxxx | ashah120   | Mnrqa002  | 1GIRL4DEAN   | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
+      | xxxxx | ashah120   | Mnrqa002  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
     @prod_rallyClaims01b
     Examples: 
@@ -45,7 +45,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | xxxxx | ashah120   | Mnrqa002  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
-      | 15236 | ashah120   | Mnrqa002  | Pramila1946  | SHIP     | Individual          | COMPASS_CLAIMS  | 
+      | 15236 | ashah120   | Mnrqa002  | vernajohnson19651  | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
     @prod_rallyClaims01e
     Examples: 

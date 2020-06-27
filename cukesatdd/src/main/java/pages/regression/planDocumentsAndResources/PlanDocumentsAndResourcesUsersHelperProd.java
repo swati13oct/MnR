@@ -223,9 +223,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
-				if (!memberType.contains("AARP")) {
+				//if (!memberType.contains("AARP")) {
 					targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
-				}
+				//}
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
@@ -415,7 +415,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				if (!memberType.toUpperCase().contains("NICE")) {
+					targetTestDocList.add("Medical Reimbursement Form (Online)");
+				}
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
@@ -771,7 +773,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Privacy Authorization form");
 				targetTestDocList.add("Alternate Payer Authorization form");
 				targetTestDocList.add("Third Party Designee form");
-				targetTestDocList.add("Part A Deductible Hospital Waiver list");
+				//targetTestDocList.add("Part A Deductible Hospital Waiver list");
 				targetTestDocList.add("How to File a Claim");
 				return targetTestDocList;
 			}
@@ -1039,7 +1041,9 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medical Reimbursement Form (Online)");
+				if (!memberType.toUpperCase().contains("NICE")) {
+					targetTestDocList.add("Medical Reimbursement Form (Online)");
+				}
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}

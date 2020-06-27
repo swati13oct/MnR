@@ -17,7 +17,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
       | jkuma14  | Brock@02 | marylamb823                          | Scenario 3: Search using username – PCP Plan Member                             |
       | jkuma14  | Brock@02 | SUSICHAPMAN@GMAIL.COM                | Scenario 4: Search using username – Medica Plan Member                          |
       | jkuma14  | Brock@02 | erbenoit56                           | Scenario 5: Search using username – Terminated<12                               |
-      | jkuma14  | Brock@02 | Ralltj                               | Scenario 6: Search using username – Pre-effective                               |
+      | jkuma14  | Brock@02 | Insaarp73                            | Scenario 6: Search using username – Pre-effective                               |
       | jkuma14  | Brock@02 | 6b8691ed-7b30-4673-9dd6-54a8acc66129 | Scenario 7: Search using username – UUID                                        |
       | jkuma14  | Brock@02 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
 

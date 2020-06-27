@@ -379,6 +379,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
 	private WebElement costText;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
+	private WebElement enrollInPlanBtn;
 
 	@Override
 	public void openAndValidate() {
@@ -402,8 +405,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(addDrug);
+		//Thread.sleep(10000);
+		waitforElementNew(addDrug,20);
 		addDrug.click();
 
 if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
@@ -1696,19 +1699,9 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	}
 	
 	public PlanDetailsPage clickOnReturnLink() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		waitTillElementClickableInTime(returnLink,10);
 		returnLink.click();	
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		validateNew(enrollInPlanBtn);
 		if(currentUrl().contains("#/details")){
 			return new PlanDetailsPage(driver);
 		}

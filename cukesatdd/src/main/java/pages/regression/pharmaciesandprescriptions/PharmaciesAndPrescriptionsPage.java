@@ -328,10 +328,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		if (linktobetested.equalsIgnoreCase("checkDelieryStatusButton"))
 		{	
-		System.out.println("Clicking on check Deliery Status Button");
+		System.out.println("Clicking on check Delivery Status Button");
 		TestHarness.checkForIPerceptionModel(driver);
 		checkDelieryStatusButton.click();   	
-		System.out.println("check Deliery Status Button has been clicked");
+		System.out.println("check Delivery Status Button has been clicked");
 		}
 		
 		if (linktobetested.equalsIgnoreCase("drugCostSummaryButton"))
@@ -408,20 +408,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		if (linktobetested.equalsIgnoreCase("orderPrescriptionsButton"))
 		{
-		System.out.println("Now waiting for Welcome, in header to show up");
+		System.out.println("Now waiting for My Prescriptions in header to show up");
 		CommonUtility.waitForPageLoad(driver, welcometextinheaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
 		String getHeaderText = welcometextinheaderOptumRx.getText();
 		System.out.println("Header text of page is  "+getHeaderText);
-		if (driver.getCurrentUrl().contains("optumrx.com/secure/my-medicine-cabinet") 
-				&& welcometextinheaderOptumRx.getText().contains("Welcome,"))
+		if (driver.getCurrentUrl().contains("optumrx.com/secure/my-prescriptions") 
+				&& welcometextinheaderOptumRx.getText().contains("My Prescriptions"))
 		{
-			System.out.println("Welcome, text in Header was displayed on page and OptumRx SSO URL was correct");
+			System.out.println("My Prescriptions text in Header was displayed on page and OptumRx SSO URL was correct");
 		}
 		else
 		{
-			System.out.println("OptumRx SSO URL was incorrect or Welcome, text in header was not displayed, failing test script");
+			System.out.println("OptumRx SSO URL was incorrect or My Prescriptions text in header was not displayed, failing test script");
 			Assert.fail();
 		}
 		}
