@@ -244,7 +244,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//keep 	if(planType.equalsIgnoreCase("MAPD") && memberType.contains("GROUP"))
 			//keep 		testInputInfoMap.put("expectedUrl", "/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			//keep }
-			testInputInfoMap.put("expectedUrl", "Medicare_Appeals_Grievances_Form.pdf");
+			testInputInfoMap.put("expectedUrl", "Medicare_Appeals_Grievances_Form");
+			//tbd testInputInfoMap.put("expectedUrl", "Medicare_Appeals_Grievances_Form.pdf");
 			//tbd if (MRScenario.environment.equalsIgnoreCase("prod"))
 			//tbd 	if(planType.equalsIgnoreCase("MAPD") && memberType.contains("GROUP"))
 			//tbd 		testInputInfoMap.put("expectedUrl", "/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
