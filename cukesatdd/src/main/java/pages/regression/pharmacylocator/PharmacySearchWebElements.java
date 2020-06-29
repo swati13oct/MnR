@@ -22,7 +22,7 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//a[@dtmid='Dtmid MapDirections']")
 	protected List<WebElement> getDirectionLnk;
 
-	@FindBy(xpath="//a[contains(@href,'contact-us.html')]")
+	@FindBy(xpath="//a[contains(@href,'/member/contact-us/overview.html')][contains(text(), 'contact UnitedHealthcare')]|//a[contains(@href,'contact-us.html')][contains(text(), 'UnitedHealthcare')]")
 	protected WebElement contactUnitedHealthCare;
 
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
@@ -226,13 +226,13 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens')]/../../..//div[contains(@ng-show,'evaluateAEM_Segments') and not(contains(@class,'ng-hide'))]//a[contains(@href,'sso')]")
 	protected WebElement widget_walgreens_estYurDrugCosts_grp;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]")
+	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'mail-benefit-pdp.html')]")
+	@FindBy(xpath="//a[contains(@href,'mail-benefit-pdp.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_pdp;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'mail-benefit-mapd.html')]")
+	@FindBy(xpath="//a[contains(@href,'mail-benefit-mapd.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_mapd;
 
 	@FindBy(xpath="//a[contains(@ng-click,'backtoPrevious')]")
@@ -246,6 +246,10 @@ public class PharmacySearchWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//h2[@class='atdd-need-help']")
 	protected WebElement needHelpHeader;
+	
+	@FindBy(xpath="//h1[contains(text(),'Help & Contact Us')]|//h1/span[contains(text(),'Contact UnitedHealthcare')]")
+	protected WebElement contactUsHeader;
+	
 
 	@FindBy(xpath="//body")
 	protected WebElement timeJson;

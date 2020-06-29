@@ -1644,7 +1644,7 @@ public class VppStepDefinitionUHC {
 		String zipcode = memberAttributesMap.get("Zipcode");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth,zipcode);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
 		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
@@ -1695,7 +1695,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
@@ -1714,7 +1714,7 @@ public class VppStepDefinitionUHC {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
 
 	}
 

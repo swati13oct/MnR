@@ -149,10 +149,12 @@ public class PersonalInformationPage extends UhcDriver{
 		sendkeysNew(lastNameField, LastName);
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
-			GenderSelectMale.click();
+			//GenderSelectMale.click();
+			jsClickNew(GenderSelectMale);
 		}
 		else{
-			GenderSelectFemale.click();
+			//GenderSelectFemale.click();
+			jsClickNew(GenderSelectFemale);
 		}	
 		sendkeys(PermanentAdd_Street,Perm_Street);
 		sendkeys(PermanentAdd_City,Perm_city);

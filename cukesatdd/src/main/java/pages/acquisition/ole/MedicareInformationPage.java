@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -92,6 +93,9 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	@FindBy(id = "SSN")
 	private WebElement SSNField;
+	
+	@FindBy(id = "SSN2")
+	private WebElement SSNNumberField;
 	
 	@FindBy(id = "goGreenYes")
 	private WebElement goGreenYesBtn;
@@ -845,4 +849,35 @@ strNum = strNum.concat(Long.toString(randomNumber));
 randomNumber=Long.parseLong(strNum);
 return randomNumber;
 }
+
+	public boolean enter_required_Medicare_details_dsnp(Map<String, String> MedicareDetailsMap){
+	
+
+		String FirstName =MedicareDetailsMap.get("First Name");
+		String LastName = MedicareDetailsMap.get("Last Name");
+		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String SSNnumber = MedicareDetailsMap.get("SSN Number");
+	
+	
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
+		sendkeysNew(claimNumberField, MedicareNumber);
+		sendkeysNew(SSNNumberField, SSNnumber);
+		sendkeysNew(partAStartDateField, PartAeffectiveDate);
+		sendkeysNew(partBStartDateField, PartBeffectiveDate);
+	
+		System.out.println("All Medicare Details are entered");
+	
+		if(NextBtn.isEnabled()){
+		System.out.println("Next Button is enabled to navigate to Next Page");
+		return true;
+		}
+		else
+			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
+		return false;
+	}	
 }

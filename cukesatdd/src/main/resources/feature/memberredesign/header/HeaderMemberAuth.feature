@@ -27,7 +27,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
-    Then I should be able to see and use the Premium Payments tab Header
+    #Then I should be able to see and use the Premium Payments tab Header
     Then I should be able to see and use the pharmacies tab in the header
     Then I should be able to see and use the health and wellness tab in the header
     Then I should be able to see the help button Header
@@ -83,7 +83,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
   # note: Since SHIP member cannot be given any subsidy on premium, only Group plan will be applicable for 100 subsidy.
   # note: You will still see Payments option in Header for this combo member, because of SHIP plan.
   # note: Under premium payments tab, you will see premium payment option for SHIP member but not Group Member.
-  @memAuth_header03 @premiumpaymentsheader_100%subisdy 
+  @memAuth_header03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
 	   Given the user is on member auth login flow page
     When the member is able to login with correct username and password

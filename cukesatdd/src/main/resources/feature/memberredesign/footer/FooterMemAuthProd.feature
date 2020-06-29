@@ -11,9 +11,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
@@ -36,10 +36,10 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     And the user validates the footer section in Pharmacies and Prescriptions page
 
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType                 |
-      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com | MAPD     | IndMAPDUHC_footer          |
-      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM    | MEDICA   | Ind_footer                 |
-      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM    | PCP      | Ind_footer                 |
+      | TID   | username | password | MemUserName          | planType | memberType        |
+      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
@@ -51,9 +51,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
@@ -76,8 +76,8 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     And the user validates the footer section in Pharmacies and Prescriptions page
 
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType             |
-      | 15347 | ashah120 | Mnrqa002 | lloydkoby32    | SHIP     | IND_footer             |
+      | TID   | username | password | MemUserName | planType | memberType |
+      | 15347 | ashah120 | Mnrqa002 | rldf1942 | SHIP     | IND_footer |
 
   @prod_footer03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
@@ -92,33 +92,33 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
-    Then user validates Need Help section content for EOB page
+    #Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
-    Then user validates Need Help section content for payment page
+    #Then user validates Need Help section content for payment page
     #Then the user navigates to claims page
     #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
-    Then user validates Need Help section content for account setting page
+    #Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
-    Then user validates Need Help section content for benefits page
+    #Then user validates Need Help section content for benefits page
     Then the user navigates to the Order Plan Materials page
-    Then user validates Need Help section content for order plan materials page
+    #Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page
-    Then user validates Need Help section content for health and wellness page
+    #Then user validates Need Help section content for health and wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType                 |
-      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com    | MAPD     | IndMAPDUHC_footer          |
-      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM    | MEDICA   | Ind_footer                 |
-      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM    | PCP      | Ind_footer                 |
+      | TID   | username | password | MemUserName          | planType | memberType        |
+      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer04
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
@@ -130,30 +130,30 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
-    Then user validates Need Help section content for EOB page
+    #Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
-    Then user validates Need Help section content for payment page
+    #Then user validates Need Help section content for payment page
     #Then the user navigates to claims page
     #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
-    Then user validates Need Help section content for account setting page
+    #Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
-    Then user validates Need Help section content for benefits page
+    #Then user validates Need Help section content for benefits page
     Then the user navigates to the Order Plan Materials page
-    Then user validates Need Help section content for order plan materials page
+    #Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page
-    Then user validates Need Help section content for health and wellness page
-    Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then user validates Need Help section content for health and wellness page
+    #Then the user navigates to the Pharmacies and Prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples:
-      | TID   | username  | password  | MemUserName     | planType | memberType             |
-      | 15347 | ashah120 | Mnrqa002 | lloydkoby32    | SHIP     | IND_footer             |
+      | TID   | username | password | MemUserName      | planType | memberType            |
+      #| 15347 | ashah120 | Mnrqa002 | rldf1942      | SHIP     | IND_footer            |
       #note: combo user with SHIP priority
-      | xxxxx | ashah120 | Mnrqa002 | phleauxdailles43    | MA     | SHIP_FED_COMBO_footer  |
+      #| xxxxx | ashah120 | Mnrqa002 | LUISGARCIA2054  | MA       | SHIP_FED_COMBO_footer |

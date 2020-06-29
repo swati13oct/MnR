@@ -16,8 +16,6 @@ import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.HealthAndWellness;
-import pages.regression.accounthomepage.AccountHomePage;
 
 public class TestHarness extends UhcDriver {
 

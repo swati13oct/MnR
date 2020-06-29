@@ -35,7 +35,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
-  @addDrugsDCE1 @prodRegression
+  @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -93,7 +93,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
 
-  @addPlansVPP @prodRegression
+  @addPlansVPP 
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -235,7 +235,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | UID       | zipcode | isMultiCounty | county          | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       | US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
 
-  @vpMSSavePlan @prodRegression
+  @vpMSSavePlan 
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -351,7 +351,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | testPlans                                                                 |
       |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP @prodRegression
+  @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
  		Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

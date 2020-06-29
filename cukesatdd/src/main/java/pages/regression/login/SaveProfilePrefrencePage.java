@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 import pages.regression.accounthomepage.AccountHomePage;
 
 public class SaveProfilePrefrencePage extends UhcDriver {

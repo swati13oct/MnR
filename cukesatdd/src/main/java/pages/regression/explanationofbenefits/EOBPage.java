@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
 import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.claims.ClaimsSummaryPage;
@@ -934,8 +936,9 @@ public class EOBPage extends EOBBase{
 
 			//note - validate the pagination
 			System.out.println(i % 10);
-			if (i % 10 == 0 && i != 0) {
-				if(i==(ui_eobCountInt-1)) {
+			System.out.println("ui_eobCountInt="+ui_eobCountInt);
+			if (i % 10 == 0 && i != 0 && i>=10) {
+				if(i==(ui_eobCountInt)) {
 					System.out.println("At last EOB for Member - No Next Page arrow");
 					break;
 				}

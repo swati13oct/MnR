@@ -10,6 +10,7 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -133,6 +134,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate FindCare link on top menu", false);
 			}
 		}
+		sleepBySec(1);
 		return driver;
 	}
 
