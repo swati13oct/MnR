@@ -282,7 +282,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Step Therapy for Part B Drugs");
-				//targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Member rights and responsibilities");
 				//targetTestDocList.add("Potential for Contract Termination");
 				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				//targetTestDocList.add("Prescription Drug Transition Process");
@@ -299,7 +299,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("Commitment to quality");
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//targetTestDocList.add("Step Therapy for Part B Drugs");
-				targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
 				targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				targetTestDocList.add("Prescription Drug Transition Process");

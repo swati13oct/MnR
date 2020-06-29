@@ -53,19 +53,23 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #      | 07-045 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
 #      | 08-046 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
-	@prod_active_ma
+	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 09-047 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
+
+	@prod_active_ma @prod_active_ma_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 10-048 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
 #      | 10-048 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | false | false | 
 
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 11-049 | 15108       | ashah120  | Mnrqa002  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
 
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 12-050 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | false | false |
@@ -78,10 +82,14 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #      | 14-052 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
 #      | 15-053 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
-	@prod_active_pdp
+	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 16-054 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+
+	@prod_active_pdp @prod_active_pdp_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 17-055 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
 
 	@prod_active_ssup
