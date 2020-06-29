@@ -310,7 +310,7 @@ public class PersonalInformationPage extends UhcDriver{
 		return null;
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page(String arg2, Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public SpecialElectionPeriodPage navigate_to_SEP_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -322,7 +322,8 @@ public class PersonalInformationPage extends UhcDriver{
 			return new SpecialElectionPeriodPage(driver);
 		}
 		*/
-		if(arg2.equalsIgnoreCase("Valid")) {
+		String inputdatatype = MedicareDetailsMap.get("Input Data");
+		if(inputdatatype.equalsIgnoreCase("Valid")) {
 			if(validateNew(specialElectionPage=driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
 			Assert.assertTrue(validateNew(specialElectionPage), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
@@ -331,7 +332,18 @@ public class PersonalInformationPage extends UhcDriver{
 
 			else {
 				
-				enterConfirmEligibilityPageData(MedicareDetailsMap);
+				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageData(MedicareDetailsMap);
+				if(confirmYourEligibilityPage!=null) {
+					
+					
+					 validateNew(NextBtn); jsClickNew(NextBtn);
+					
+					 if(validateNew(driver.findElement(By.
+					  xpath("//h1[contains(text(),'Special Election')]")))){
+					  System.out.println("OLE SEP Page is Displayed"); } else {
+					  System.out.println("OLE SEP Page is not Displayed"); }
+					 return new SpecialElectionPeriodPage(driver);	
+				}
 			
 				}		
 			}
@@ -350,23 +362,9 @@ public class PersonalInformationPage extends UhcDriver{
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
 			sendkeysNew(partBStartDateField, PartBeffectiveDate);	 
-			return new ConfirmYourEligibilityPage(driver);	
 		}
-
 		
-		else{
-			validateNew(NextBtn);
-			jsClickNew(NextBtn);	
-			//if(arg2.equalsIgnoreCase("Valid")) {
-				if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-				System.out.println("OLE SEP Page is Displayed");
-				}
-				else {
-					System.out.println("OLE SEP Page is not Displayed");
-				}
-	
-			return null ;
-		}
+		return new ConfirmYourEligibilityPage(driver);
 	}
 
 

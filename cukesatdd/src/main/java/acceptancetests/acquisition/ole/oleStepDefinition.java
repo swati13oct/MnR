@@ -1440,7 +1440,7 @@ public class oleStepDefinition {
 
 
 	@Then("^the user navigates to SEP Page$")
-	public void the_user_navigates_to_SEP_Page(DataTable Medicareoptions, String arg1) throws Throwable {
+	public void the_user_navigates_to_SEP_Page(DataTable Medicareoptions) throws Throwable {
 		/*	
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(arg1, null);
@@ -1465,18 +1465,18 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPage confirmYourEligibilityPage = personalInformationPage.navigate_to_SEP_page(arg1, MedicareDetailsMap);
-		if (confirmYourEligibilityPage != null) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRM_YOUR_ELIGIBILITY_PAGE,
-					confirmYourEligibilityPage);
-			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(MedicareDetailsMap);
+		if (specialElectionPeriodPage != null  && MedicareDetailsMap.get("Input Data").equalsIgnoreCase("Invalid")) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
+			System.out.println("specialElection Period Page is displayed and Next Button is enabled");
 			
 		getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 		getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
 			Assert.assertTrue(true);
 		}
 		else
-			Assert.fail("Medicare Info data entry failed");
+			Assert.fail("specialElectionPeriod Page Info data entry failed");
 		}
 	
 	
