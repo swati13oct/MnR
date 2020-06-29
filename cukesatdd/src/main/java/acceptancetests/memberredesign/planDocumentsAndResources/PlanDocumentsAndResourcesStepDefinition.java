@@ -14,9 +14,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import atdd.framework.*;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import cucumber.api.DataTable;
@@ -94,6 +98,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 	@And("^user navigates to plan documents and resources page validation$")
 	public void navigateToPlanAndResourcePageForSegementId(DataTable memberAttributes) throws InterruptedException {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//note: control the default test setup if no input specified
 		this.validateApi=false;
 		this.skipLnkDestCheck=false; 
