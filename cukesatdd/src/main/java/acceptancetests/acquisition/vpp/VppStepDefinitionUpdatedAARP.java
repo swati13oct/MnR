@@ -1046,6 +1046,24 @@ public class VppStepDefinitionUpdatedAARP {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in AARP$")
+	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_AARP() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCare();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
 
 	@Then("^Verify provider is count is updated on plan compare page in AARP$")
 	public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
@@ -3361,7 +3379,25 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateDoctors();
-	}	
+	}
+	
+	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page AARP$")
+	public void verify_Add_doctors_covered_ulayer() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAddDoctors();
+	}
+	
+	@And("^click on Add your doctors link and Navigate to Rally page for AARP$")
+	public void clickOnAddyourdocits_AARP() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 	
 	@And("^click on Edit your doctors link and Navigate to Rally page for AARP$")
 	public void clickONEdityourdocits_AARP() throws Exception {

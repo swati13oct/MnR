@@ -136,13 +136,35 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
-     Then verify plan compare page is loaded on AARP
-     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
-     And click on Edit your doctors link and Navigate to Rally page for AARP
-     When user selects a provider from medical group and retuns to plan compare page in AARP
-     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
-      
-    
+    Then verify plan compare page is loaded on AARP
+    Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
+    And click on Edit your doctors link and Navigate to Rally page for AARP
+    When user selects a provider from medical group and retuns to plan compare page in AARP
+    Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planname                                            |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+
+  @vppPlanCompareAARP09 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+  Scenario Outline: valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then verify Add doctors is loaded with doctor summary on Plan Compare page AARP
+    And click on Add your doctors link and Navigate to Rally page for AARP
+    And I click on Get Started on and Add PrimaryCare PCP from find care page in AARP
+    Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
+    And click on Edit your doctors link and Navigate to Rally page for AARP
+    When user selects a provider from medical group and retuns to plan compare page in AARP
+    Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
+
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                            |
       |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |

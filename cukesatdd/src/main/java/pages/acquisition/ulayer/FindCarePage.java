@@ -42,13 +42,22 @@ public class FindCarePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Medical Groups')]")
 	public WebElement MedicalGroupsButton;
+	
+	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Primary Care')]")
+	public WebElement PrimaryCareButton;
 
 	@FindBy(xpath = "//h1[text()='Which type of place?']")
 	public WebElement Whichtypeofplace;
 	
 	@FindBy(xpath = "//h1[text()='Who are you looking for?']")
 	public WebElement Whoareyoulookingfor;
-
+	
+	@FindBy(xpath = "//h1[text()='Which type of primary care provider (PCP)?']")
+	public WebElement Whichtypeofprimarycareprovider;
+	
+	@FindBy(xpath = "//button[text()='All Primary Care Providers']")
+	public WebElement AllPrimaryCareProviders;
+	
 	@FindBy(xpath = "//h1//span[text()='Results for ']")
 	public WebElement ResultsHeader;
 
@@ -60,6 +69,9 @@ public class FindCarePage extends UhcDriver {
 	
 	@FindBy(xpath = "//Img[@alt='Medical group icon']")
 	public WebElement Medicalgroupicon;
+	
+	@FindBy(xpath = "//Img[@alt='Provider icon']")
+	public WebElement Providericon;
 
 	@FindBy(xpath = "//h1[@class='heading']")
 	public WebElement PlanHeading;
@@ -171,6 +183,71 @@ public class FindCarePage extends UhcDriver {
 		String HospName = FirstHospitalRecord.getText();
 		FirstHospitalRecord.click();
 		validate(Medicalgroupicon);
+		if (HospName.equals(PlanHeading.getText())) {
+			System.out.println("Provder Name is verified :: " + HospName);
+		}
+		SaveButton.click();
+		waitforElement(ProviderNameHeader);
+		String ProvName = ProviderNameHeader.getText();
+		if (HospName.equals(ProvName)) {
+			System.out.println("Provder Name is verified");
+		} else {
+			System.out.println("selected Provder Name is not matching");
+		}
+		
+		if(validate(addressCheckBox)){
+			addressCheckBox.click();
+			addressSaveButton.click();
+		}
+		String GreatText = GreatHeaderText.getText();
+		System.out.println("Text is :: " + GreatText);
+		ViewSavedButton.click();
+		waitforElement(SavedHeader);
+		if (HospName.equals(SavedProviderName.getText())) {
+			System.out.println("Provder Name is verified :: " + HospName);
+		}
+		String ParentWindow = driver.getTitle();
+		CheckProviderCoverageButton.click();
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("Compare Medicare Plans")) {
+					System.out.println("We are on Compare Medicare Plans winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(editDoctorsLink);
+					break;
+				}
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+
+	}
+	
+	public ComparePlansPage providerfromPrimaryCare() throws Exception {
+		validate(GetstartedButton);
+		GetstartedButton.click();
+		System.out.println("in find care page");
+		validate(LocationLink);
+		validate(ChangeLocationButton);
+		PeopleButton.click();
+		waitforElement(Whoareyoulookingfor);
+		PrimaryCareButton.click();
+		waitforElement(Whichtypeofprimarycareprovider);
+		AllPrimaryCareProviders.click();
+		waitforElement(ResultsHeader);
+		String HospName = FirstHospitalRecord.getText();
+		FirstHospitalRecord.click();
+		validate(Providericon);
 		if (HospName.equals(PlanHeading.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
 		}
