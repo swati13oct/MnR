@@ -374,7 +374,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
-					key = key.replaceAll("\\s+", "").replaceAll("-", "");
+					key = key.replaceAll("\\s+", "");
 					
 					//removing footnote values from the string
 					if(key.contains("Footnotes2") && key.contains("Footnotes1")) {
@@ -387,11 +387,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 					
 					//removing footnote values from the string
 					if(key.contains(".2"))
-						key = key.replace(".2", "");
+						key = key.replace(".2", ".");
 					else if(key.contains(".1"))
-						key = key.replace(".1", "");
+						key = key.replace(".1", ".");
 						
-					key = key.replaceAll(".", "");
+					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					
 					if(key.contains(benefitValue)) {
@@ -415,9 +415,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				}
 			}else if(key.equalsIgnoreCase(columnName)) {
 
-		
-				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
-						
+
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
 						
@@ -436,6 +434,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else
 							benefitValueUI = benefitValueUI.replaceAll("/", "");
 						
+						if(key.contains("Preferred Retail Pharmacy Network") || key.contains("Preferred Mail Home Delivery through OptumRx")) {
+							if(benefitValueUI.contains("1."))
+								benefitValueUI = benefitValueUI.replace("1.", ".");
+							else if(benefitValueUI.contains(".2"))
+								benefitValueUI = benefitValueUI.replace(".2", ".");
+						
+						}
 						
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
