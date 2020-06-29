@@ -69,8 +69,8 @@ public class DCEStepDefinitionUHC {
 	@When("^the user clicks on Add drugs button on UHC$")
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		ZipCodePlanYearCapturePage zipCodePlanYearPage=DCEgetStarted.clickAddDrugsBtn();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+		DCEgetStarted.clickAddDrugsBtn();
+		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP$")

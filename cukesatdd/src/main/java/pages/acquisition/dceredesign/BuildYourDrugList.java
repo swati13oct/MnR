@@ -23,7 +23,18 @@ public class BuildYourDrugList extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
 	public WebElement EnterDrugNameTxt;
+	
+	@FindBy(xpath = "//button[@id='search']")
+	public WebElement searchBtn;
 
+	@FindBy(xpath = "(//button[text()='Select'])[1]")
+	public WebElement selectBtn;
+	
+	@FindBy(xpath = "//button//span[contains(text(),'Add to  drug List')]")
+	public WebElement addToDrugList;
+	
+	@FindBy(xpath = "(//button//span[contains(text(),'Next:Review Drug Costs')])[1]")
+	public WebElement reviewDrugCost;
 	
 	public BuildYourDrugList(WebDriver driver) {
 		super(driver);
@@ -37,5 +48,15 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(EnterDrugNameTxt);
 	}
 
-
+	public void addDrugs(String drugName) {
+		EnterDrugNameTxt.sendKeys(drugName);
+		searchBtn.click();
+		selectBtn.click();
+		addToDrugList.click();
+		//reviewDrugCost.click();
+	}
+	
+	public void clickReviewDrugCostBtn() {
+		reviewDrugCost.click();
+	}
 }

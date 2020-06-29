@@ -54,16 +54,17 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-	public ZipCodePlanYearCapturePage clickAddDrugsBtn() {
+	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
 		AddMyDrugsBtn.click();
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30);
-		if (validateNew(BuildDrugPage_verificationTxt)) {
-			Assert.assertTrue("Naviagted to Build Drug List Page", true);
-			return new ZipCodePlanYearCapturePage(driver);
-		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
-		return null;
+		//return new ZipCodePlanYearCapturePage(driver);
+		/*
+		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
+		 * (validateNew(BuildDrugPage_verificationTxt)) {
+		 * Assert.assertTrue("Naviagted to Build Drug List Page", true); return new
+		 * ZipCodePlanYearCapturePage(driver); }
+		 * Assert.fail("Did not Navigate to Build Drug List Page"); return null;
+		 */
 	}
 
 }

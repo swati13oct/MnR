@@ -14,7 +14,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
 
     Examples: 
       | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
+      | /health-plans/estimate-drug-costs.html | DCE Redesign - Get Started |
 
   @DCE_ZipCodePlanYear_ValidateContinueBtn_NonAEP
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
@@ -33,7 +33,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
 
     Examples: 
       | path                     | pageName                   | zipCode |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |   90210 |
+      | /health-plans/estimate-drug-costs.html | DCE Redesign - Get Started |   90210 |
 
   @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_NonAEP
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
@@ -63,7 +63,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
 
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |          78452 |   90210 |            1234 |           00000 |
+      | /health-plans/estimate-drug-costs.html | DCE Redesign - Get Started |          78452 |   90210 |            1234 |           00000 |
  
  
   @DCE_ZipCodePlanYear_SamChatCall_NonAEP
@@ -82,4 +82,4 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
 
     Examples: 
       | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
+      | /health-plans/estimate-drug-costs.html | DCE Redesign - Get Started |
