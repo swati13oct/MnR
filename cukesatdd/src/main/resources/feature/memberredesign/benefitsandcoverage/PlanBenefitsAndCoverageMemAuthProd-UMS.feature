@@ -216,7 +216,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       |15094|ashah120|Mnrqa002|whwhitlow1151| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 6 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
-  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Nonlis
+  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Pcp_Medica_Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -343,7 +343,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15098 | ashah120|Mnrqa002|Julieaerni41 |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
-  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Nonlis
+  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Pcp_Medica_Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -460,7 +460,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15238 |ashah120| Mnrqa002| dhcbhansen7 |MAPD| Group_BnC_Ancillary | NON LIS    |
  
  #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
-  @memAuth_benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @prod_BnC_Part5  
+  @memAuth_benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @AncillaryBenefit_Negative 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -500,7 +500,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15238 | ashah120| Mnrqa002|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
       
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
-  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @prod_BnC_Part5
+  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @SavePdpWidget
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -965,7 +965,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
       | 15377 |ashah120| Mnrqa002|CORCORAN@8 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
       
-   @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @prod_BnC_Part8
+   @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -986,7 +986,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | TID   |username |password  |MemUserName| planType | memberType   |
       | 15367 |ashah120| Mnrqa002| MHAB57 | MAPD     | Hartford_BnC |   
       
-  @benefitsAndCoverage31 @TownOfGreenwichprescriptionDrugBenefit @prod_BnC_Part8
+  @benefitsAndCoverage31 @TownOfGreenwichprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
