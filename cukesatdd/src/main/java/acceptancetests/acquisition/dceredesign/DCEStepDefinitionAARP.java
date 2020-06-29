@@ -191,4 +191,9 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
 	}
+	
+	@When("^user verify the drug summary page$")
+	public void user_verify_the_drug_summary_page(DataTable arg1) {
+	    
+	}
 }
