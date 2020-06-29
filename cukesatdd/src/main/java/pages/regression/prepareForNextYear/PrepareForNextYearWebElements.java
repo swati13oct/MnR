@@ -299,7 +299,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//div[@data-ng-if='displayanaoc']//div[contains(@class,'review-section-inner') and contains(text(),'Open Annual Notice of Changes')]")
-	protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc;
+	protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_us;
 	
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//div[@data-ng-if='displayanaoc']//div[contains(@class,'review-section-inner') and contains(text(),'Open Annual Notice of Changes')]//span[contains(text(),'Available by 9/30')]")
 	protected WebElement ind_reviewPlanChanges_docSection_preBlueBySept30;
@@ -317,13 +317,19 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//a[contains(text(),'Annual Notice of Changes')]")
 	protected WebElement ind_reviewPlanChanges_docSection_activeAnoc_us;
 	
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//span[contains(text(),'Aviso')]")
+	protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_es;
+
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//a[contains(text(),'Aviso')]")
 	protected WebElement ind_reviewPlanChanges_docSection_activeAnoc_es;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//a[contains(text(),'Aviso')]")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//span[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_zh;
+
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
 	protected WebElement ind_reviewPlanChanges_docSection_activeAnoc_zh;
 	
-	@FindBy(xpath="//*[contains(text(),'Coming soon')]")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//span[contains(text(),'Soon')]")
 	protected WebElement comingSoonText;
 
 	//note: group
