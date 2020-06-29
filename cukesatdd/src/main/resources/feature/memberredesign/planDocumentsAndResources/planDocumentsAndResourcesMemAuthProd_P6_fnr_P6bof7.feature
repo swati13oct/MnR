@@ -60,7 +60,7 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
 #      | 07-101 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | true   | true   |
 
-@abc	@prod_active_ma_ind_6bof7 @prod_active_ma_6bof7
+	@prod_active_ma_ind_6bof7 @prod_active_ma_6bof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
       | 09-104 | 15129       | ashah120  | Mnrqa002  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
