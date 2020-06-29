@@ -122,7 +122,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
 
   @vppPlanCompareAARP08 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
-  Scenario Outline: valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -143,18 +143,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planname                                            |
-      |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareAARP09 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
-  Scenario Outline: valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
-      | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Add doctors is loaded with doctor summary on Plan Compare page AARP
@@ -166,8 +164,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planname                                            |
-      |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareAARP10 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
@@ -191,8 +189,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultiCounty | county          | plantype | planname                             |
-      |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
+      | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareAARP11 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
@@ -215,5 +213,5 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultiCounty | county          | plantype | planname                             |
-      |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
+      | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
