@@ -59,6 +59,19 @@ public class AepPlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'estimateYourDrugsLink')]")
 	private WebElement estimateDrugBtn;
 	
+	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	private WebElement editDrugListLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugcontainer_0')]")
+	private WebElement drugBox;
+	
+	@FindBy(xpath = "//*[contains(@class,'delete-drug')]")
+	private WebElement deleteDrugLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'cta-button delete-drug-confirm')]")
+	private WebElement confirmDeleteDrug;
+	
+	
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement topbackToPlanslink;
 
@@ -379,7 +392,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						key = key.replace(".1", "");
 						
 					key = key.replaceAll(".", "");
-					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "").replaceAll(".", "");
+					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					
 					if(key.contains(benefitValue)) {
 						flag = true;break;
@@ -405,8 +418,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
 						
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "").replaceAll(".", "");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","").replaceAll(",", "").replaceAll(".", "");
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
 						
 						//the following code is used to remove the footnote values from the benefit value string. 
 						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
@@ -586,6 +599,17 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
 		dcePage.addDrug(drugName);
+		dcePage.clickOnReturnLink();
+	}
+
+	public void editDrugListAndRemoveDrug() {
+		validateNew(editDrugListLink);
+		editDrugListLink.click();
+		validateNew(deleteDrugLink);
+		deleteDrugLink.click();
+		validateNew(confirmDeleteDrug);
+		confirmDeleteDrug.click();
+		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
 		dcePage.clickOnReturnLink();
 	}
 	
