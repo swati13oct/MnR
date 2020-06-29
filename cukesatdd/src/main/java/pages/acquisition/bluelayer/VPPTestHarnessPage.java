@@ -13,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class VPPTestHarnessPage extends UhcDriver {
 

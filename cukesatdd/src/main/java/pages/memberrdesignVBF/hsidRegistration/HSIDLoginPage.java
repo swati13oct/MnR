@@ -4,17 +4,13 @@
 package pages.memberrdesignVBF.hsidRegistration;
 
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.memberrdesignVBF.hsidRegistration.HsidRegistrationPersonalInformationPage;
-import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.RallyDashboardPage;
 
 /**
  * @author pjaising

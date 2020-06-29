@@ -17,6 +17,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,12 +26,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBaseHelper  {
 
@@ -215,6 +215,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					}
 					if (testInputInfoMap.get("docName").equals("SEARCH MEDICAL EOB HISTORY") || testInputInfoMap.get("docName").equals("SEARCH DRUG EOB HISTORY"))
 						CommonUtility.waitForPageLoad(driver, eobPgHeader, 5);
+					sleepBySec(1);
 					String actUrl=driver.getCurrentUrl();
 					if (actUrl.contains("internal-error?errorUID"))
 						section_note.add("    BYPASSED - element link in href attribute vs actual link URL after clicked validation - destination url got internal-error");
@@ -684,7 +685,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200 or 206. Actual value="+statusValue, statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);

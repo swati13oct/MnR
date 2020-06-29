@@ -1,6 +1,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;

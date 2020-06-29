@@ -3,21 +3,13 @@
  */
 package pages.acquisition.ole;
 
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author sdwaraka

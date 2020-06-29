@@ -6,7 +6,6 @@ package pages.regression.login;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,20 +15,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.SecurityQuestionsPage;
-import pages.regression.testharness.*;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.footer.FooterPage;
-import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.login.ConfirmSecurityQuestion;
-import pages.regression.login.TerminatedHomePage;
-
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.SecurityQuestionsPage;
+import pages.regression.footer.FooterPage;
+import pages.regression.testharness.TestHarness;
 
 public class LoginPage extends UhcDriver {
 	

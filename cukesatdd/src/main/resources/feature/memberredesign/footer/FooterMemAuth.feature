@@ -11,9 +11,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
@@ -35,12 +35,12 @@ Feature: 1.05.1 Member Footer validation - Member Auth
     Then the user navigates to the Pharmacies and Prescriptions page
     And the user validates the footer section in Pharmacies and Prescriptions page
 
-    Examples: 
-     | TID   | username  | password  | MemUserName     | planType | memberType                 |
-     | 15347 | qavgogine | qavgogine | q2_apr_aarp0250 | MAPD     | IndMAPDUHC_footer          |
-     | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Ind_footer                 |
-     | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Ind_footer                 |
-      
+    Examples:
+      | TID   | username  | password  | MemUserName         | planType | memberType        |
+      | 15347 | qavgogine | qavgogine | q2_apr_aarp0250     | MAPD     | IndMAPDUHC_footer |
+      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020 | MEDICA   | Ind_footer        |
+      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022 | PCP      | Ind_footer        |
+
   @memAuth_footer02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
     Given the user is on member auth login flow page
@@ -51,9 +51,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
@@ -75,9 +75,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth
     Then the user navigates to the Pharmacies and Prescriptions page
     And the user validates the footer section in Pharmacies and Prescriptions page
 
-    Examples: 
-      | TID   | username  | password  | MemUserName     | planType | memberType             |
-      | 15347 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_footer             |
+    Examples:
+      | TID   | username  | password  | MemUserName        | planType | memberType |
+      | 15347 | qavgogine | qavgogine | q1_feb_ship_20_001 | SHIP     | IND_footer |
 
   @memAuth_footer03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
@@ -92,9 +92,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
@@ -114,12 +114,12 @@ Feature: 1.05.1 Member Footer validation - Member Auth
     Then the user navigates to the Pharmacies and Prescriptions page
     Then user validates Need Help section content for pharmacies and prescriptions page
 
-    Examples: 
-     | TID   | username  | password  | MemUserName     | planType | memberType                 |
-     | 15347 | qavgogine | qavgogine | q2_apr_aarp0250    | MAPD     | IndMAPDUHC_footer          |
-     | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | Ind_footer                 |
-     | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP      | Ind_footer                 |
-      
+    Examples:
+      | TID   | username  | password  | MemUserName         | planType | memberType        |
+      | 15347 | qavgogine | qavgogine | q2_apr_aarp0250     | MAPD     | IndMAPDUHC_footer |
+      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020 | MEDICA   | Ind_footer        |
+      | 15347 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022 | PCP      | Ind_footer        |
+
   @memAuth_footer04
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
     Given the user is on member auth login flow page
@@ -130,9 +130,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
@@ -149,11 +149,11 @@ Feature: 1.05.1 Member Footer validation - Member Auth
     Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page
     Then user validates Need Help section content for health and wellness page
-    Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then the user navigates to the Pharmacies and Prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
-    Examples: 
-      | TID   | username  | password  | MemUserName     | planType | memberType             |
-      | 15347 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_footer             |
+    Examples:
+      | TID   | username  | password  | MemUserName        | planType | memberType            |
+      | 15347 | qavgogine | qavgogine | q1_feb_ship_20_001 | SHIP     | IND_footer            |
       #note: combo user with SHIP priority
-	  | xxxxx | qavgogine | qavgogine | q2_jun_uhc0009    | MAPD     | SHIP_FED_COMBO_footer  |
+      | xxxxx | qavgogine | qavgogine | q2_jun_uhc0009     | MAPD     | SHIP_FED_COMBO_footer |

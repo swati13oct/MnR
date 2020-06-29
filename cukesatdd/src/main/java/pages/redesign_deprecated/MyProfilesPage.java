@@ -8,8 +8,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
-
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 public class MyProfilesPage extends UhcDriver{
 	
