@@ -73,7 +73,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName | userSelection | planType | memberType       |
-      | 15309 | ashah120 | Mnrqa002 | lloydkoby32 | xxxxx         | SHIP     | SHIP_ProfilePref |
+      | 15309 | ashah120 | Mnrqa002 | kataz2525 | xxxxx         | SHIP     | SHIP_ProfilePref |
 
 
   @prod_CommunicationPreferences03

@@ -54,7 +54,7 @@ Feature: 1.10.1 Member  order materials Page - PROD
      @prod_orderPlanMaterials1c @ship
     Examples:
       | TID   | username | password | MemUserName        | planType | memberType    |
-      | 15293 | ashah120 | Mnrqa002 | lchafner@gmail.com | SHIP     | MEDSUPP_order |
+      | 15293 | ashah120 | Mnrqa002 | rldf1942 | SHIP     | MEDSUPP_order |
 
     #-------------------
        @prod_orderPlanMaterials1c
@@ -66,7 +66,7 @@ Feature: 1.10.1 Member  order materials Page - PROD
     Examples:
       | TID   | username | password | MemUserName  | planType | memberType      |
       | 15289 | ashah120 | Mnrqa002 | TOMIKOARMER2 | MA       | UHC_Group_order |
-      | 15290 | ashah120 | Mnrqa002 | KAYCEE0412   | PDP      | UHC_Group_order |
+      | 15290 | ashah120 | Mnrqa002 | Norm749   | PDP      | UHC_Group_order |
 
     #-------------------
       @prod_orderPlanMaterials1d

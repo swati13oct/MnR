@@ -57,7 +57,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 09-047 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
-      | 10-048 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
+      | 10-048 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | false | false | 
 
 	@prod_active_mapd
 	Examples: 
@@ -67,7 +67,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 12-050 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
+      | 12-050 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | false | false |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-051 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
@@ -91,7 +91,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 19-057 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+      | 19-057 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
 #      | 20-117 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 

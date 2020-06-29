@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPrepareForNextYearDev.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPrepareForNextYearDev")
+jsonReport = "target/cucumber-RunMRATDDRegressionNoPrepareForNextYearStageEnvP2.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoPrepareForNextYearStageEnvP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPrepareForNextYearDev.json" }, tags = { "@teamEnv","@devRegression" })
-public class RunMRATDDRegressionPrepareForNextYearDev {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoPrepareForNextYearStageEnvP2.json" }, tags = { "@stageEnv","@prepareForNextYear01b" })
+public class RunMRATDDRegressionNoPrepareForNextYearStageEnvP2 {
 
 }
