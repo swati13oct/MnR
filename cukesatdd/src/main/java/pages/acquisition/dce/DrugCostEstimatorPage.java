@@ -383,8 +383,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
 	private WebElement costText;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
-	private WebElement enrollInPlanBtn;
+	@FindBy(xpath = "//*[contains(@id, 'backToPlanSummaryTop')]")
+	private WebElement backToPlanLink;
 
 	@Override
 	public void openAndValidate() {
@@ -1704,7 +1704,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	public PlanDetailsPage clickOnReturnLink() {
 		waitTillElementClickableInTime(returnLink,10);
 		returnLink.click();	
-		validateNew(enrollInPlanBtn);
+		validate(backToPlanLink);
 		if(currentUrl().contains("#/details")){
 			return new PlanDetailsPage(driver);
 		}
