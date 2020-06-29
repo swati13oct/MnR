@@ -216,7 +216,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       |15094|ashah120|Mnrqa002|whwhitlow1151| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 6 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
-  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @prod_BnC_Part3
+  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -343,7 +343,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15098 | ashah120|Mnrqa002|Julieaerni41 |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
-  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @prod_BnC_Part4 
+  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -819,7 +819,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15245 |ashah120| Mnrqa002|JamesRShuler1| MAPD| Individual_BnC | LIS 1| ENGLISH | Summary of Benefits | Evidence of Coverage |Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019| Not Available| Extra Help Level : 1 |IndEffectiveAARP |7|Rider |     
       
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
-  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @prod_BnC_Part7
+  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis  @Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -896,7 +896,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15378 |ashah120| Mnrqa002|K7BY@YAHOO.COM| MAPD| Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
       
  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @memAuth_benefitsAndCoverage15 @CMFedPDPNonLis @prod_BnC_Part8
+  @memAuth_benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
