@@ -3381,6 +3381,13 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		planComparePage.validateDoctors();
 	}
 	
+	@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page AARP$")
+	public void verify_Hospital_covered_ulayer() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateEditHospitals();
+	}
+	
 	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page AARP$")
 	public void verify_Add_doctors_covered_ulayer() {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
@@ -3388,11 +3395,29 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		planComparePage.validateAddDoctors();
 	}
 	
+	@Then("^verify Add Hospitals is loaded without summary on Plan Compare page AARP$")
+	public void verify_Add_Hospitals_covered_ulayer() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAddHospitals();
+	}
+	
 	@And("^click on Add your doctors link and Navigate to Rally page for AARP$")
 	public void clickOnAddyourdocits_AARP() throws Exception {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
 		FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@And("^click on Add your Hospitals link and Navigate to Rally page for AARP$")
+	public void clickOnAddyourHospitals_AARP() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
 		if (findCarePage != null) {
 			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 		} else
@@ -3410,6 +3435,17 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			Assert.fail("Error in loading the compare plans page");
 	}	
 	
+	@And("^click on Edit your Hospitals link and Navigate to Rally page for AARP$")
+	public void clickONEdityourHospitals_AARP() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}	
+	
 	@And("^user selects a provider from medical group and retuns to plan compare page in AARP$")
 	public void selectsproviderfrommedicalGroupforAARP() throws Exception {
 		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
@@ -3420,6 +3456,23 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			e.printStackTrace();
 		}
 		ComparePlansPage planComparePage = findCarePage.providerfromMedicalGroup();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@And("^user selects a Hospitals from Clinical and retuns to plan compare page in AARP$")
+	public void selectsproviderfromPrimaryCareClinicforAARP() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();

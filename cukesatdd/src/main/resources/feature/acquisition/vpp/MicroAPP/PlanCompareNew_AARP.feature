@@ -108,9 +108,9 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for AARP
@@ -118,16 +118,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then Verify newly added plan displayed on new plan compare page for AARP
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | count |
-      | 00010 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
+      | TID   | zipcode | isMultiCounty | county             | plantype | count |
+      | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
 
   @vppPlanCompareAARP08 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
@@ -143,16 +143,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planname                                            |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareAARP09 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
@@ -166,5 +166,54 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planname                                            |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+
+  @vppPlanCompareAARP10 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+  Scenario Outline: valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    When the user Click on Is my Provider covered link Ulayer
+      | PlanName | <planname> |
+    When user selects a Hospitals and retuns to VPP page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+    And click on Edit your Hospitals link and Navigate to Rally page for AARP
+    When user selects a Hospitals from Clinical and retuns to plan compare page in AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+
+    Examples: 
+      | zipcode | isMultiCounty | county          | plantype | planname                             |
+      |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+
+  @vppPlanCompareAARP11 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+  Scenario Outline: valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then verify Add Hospitals is loaded without summary on Plan Compare page AARP
+    And click on Add your Hospitals link and Navigate to Rally page for AARP
+    And I click on Get Started on and Add PrimaryCare PCP from find care page in AARP
+    Then verify plan compare page is loaded on AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+    And click on Edit your Hospitals link and Navigate to Rally page for AARP
+    When user selects a Hospitals from Clinical and retuns to plan compare page in AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+
+    Examples: 
+      | zipcode | isMultiCounty | county          | plantype | planname                             |
+      |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
