@@ -1,5 +1,5 @@
 @providerSearch
-Feature: 1.20.2 Member Provider Search - Member Auth - PROD
+Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 
   @prod_providerSearch01
   Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table

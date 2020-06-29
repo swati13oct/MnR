@@ -53,7 +53,9 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 			return authorizationFormsAndInfo_sectionAF_FnR;
 		if (section_FnR.equals("Medication Authorization Forms") || section_FnR.equals("Medication Authorization forms")) 
 			return medicationAuthForm_sectionMA_FnR;
-		if (section_FnR.equals("Other Resources")) 
+		if (section_FnR.equals("Other Resources") 
+				|| section_FnR.equals("Other Resources Part1of2") 
+				|| section_FnR.equals("Other Resources Part2of2")) 
 			return otherResources_orSection_fnr;
 		if (section_FnR.equals("Disenrollment")) 
 			return disenrollmentInfo_sectionDI_FnR;

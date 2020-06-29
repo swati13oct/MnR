@@ -1,5 +1,5 @@
 @prepareForNextYear
-Feature: 1.21 Member Prepare For Next Year
+Feature: 1.25 Member Prepare For Next Year
 
 ##### note: team and stage may have different AEM date setup, separate the scenarios
 

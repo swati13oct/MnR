@@ -1,5 +1,5 @@
 @prepareForNextYear
-Feature: 1.21 Member Prepare For Next Year - With system time change test step
+Feature: 1.25 Member Prepare For Next Year - With system time change test step
 
   #------------------------------------------------------------------------------------------	    
   # caution: aggressive scenario

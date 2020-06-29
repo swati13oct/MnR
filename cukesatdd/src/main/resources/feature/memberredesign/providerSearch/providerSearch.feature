@@ -1,5 +1,5 @@
 @providerSearch
-Feature: 1.20 Member Provider Search
+Feature: 1.23 Member Provider Search
 
   @providerSearch01 @regressionMember
   Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
