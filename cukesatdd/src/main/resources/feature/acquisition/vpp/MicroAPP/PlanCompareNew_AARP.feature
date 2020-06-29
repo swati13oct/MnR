@@ -168,7 +168,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareAARP10 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
-  Scenario Outline: valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -193,7 +193,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareAARP11 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
-  Scenario Outline: valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -205,7 +205,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify plan compare page is loaded on AARP
     Then verify Add Hospitals is loaded without summary on Plan Compare page AARP
     And click on Add your Hospitals link and Navigate to Rally page for AARP
-    And I click on Get Started on and Add PrimaryCare PCP from find care page in AARP
+    And I click on Get Started on and Add Places from Hospitals find care page in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
     And click on Edit your Hospitals link and Navigate to Rally page for AARP

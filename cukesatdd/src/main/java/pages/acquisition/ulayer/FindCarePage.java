@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -112,6 +113,9 @@ public class FindCarePage extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
+	
+	@FindBy(xpath="//a[text()='Edit Hospitals']")
+	private WebElement editHospitalsLink;
 	
 	@FindBy(xpath = "//*[contains(@class,'modal-btns')]//*[contains(text(),'Save')]")
 	public WebElement addressSaveButton; 
@@ -292,7 +296,7 @@ public class FindCarePage extends UhcDriver {
 					System.out.println("We are on Compare Medicare Plans winodow opened");
 					driver.manage().window().maximize();
 					Thread.sleep(3000);
-					waitforElement(editDoctorsLink);
+					waitforElement(editHospitalsLink);
 					break;
 				}
 			} else {
@@ -357,7 +361,77 @@ public class FindCarePage extends UhcDriver {
 					System.out.println("We are on Compare Medicare Plans winodow opened");
 					driver.manage().window().maximize();
 					Thread.sleep(3000);
-					waitforElement(editDoctorsLink);
+					waitforElement(editHospitalsLink);
+					break;
+				}
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+
+	}
+	
+	public ComparePlansPage placesfromHospital() throws Exception {
+		
+		CommonUtility.waitForPageLoadNew(driver, GetstartedButton, 45);
+		GetstartedButton.click();
+		System.out.println("in find care page");
+		validate(LocationLink);
+		validate(ChangeLocationButton);
+		PlacesButton.click();
+		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
+		HospitalsButton.click();
+		waitforElement(ResultsHeader);
+		String HospName = FirstHospitalRecord.getText();
+		FirstHospitalRecord.click();
+		validate(Facilityicon);
+		if (HospName.equals(PlanHeading.getText())) {
+			System.out.println("Provder Name is verified :: " + HospName);
+		}
+		CommonUtility.waitForPageLoadNew(driver, SaveButton, 45);
+		jsClickNew(SaveButton);
+		waitforElement(ProviderNameHeader);
+		String ProvName = ProviderNameHeader.getText();
+		if (HospName.equals(ProvName)) {
+			System.out.println("Provder Name is verified");
+		} else {
+			System.out.println("selected Provder Name is not matching");
+		}
+		
+		if(validate(addressCheckBox)){
+			addressCheckBox.click();
+			validateNew(addressSaveButton);
+			addressSaveButton.click();
+		}
+		CommonUtility.waitForPageLoadNew(driver, ViewSavedButton, 30);
+		String GreatText = GreatHeaderText.getText();
+		System.out.println("Text is :: " + GreatText);
+		ViewSavedButton.click();
+		waitforElement(SavedHeader);
+		if (HospName.equals(SavedProviderName.getText())) {
+			System.out.println("Provder Name is verified :: " + HospName);
+		}
+		String providerSaved = SavedProviderName.getText().trim();
+		System.out.println("Hospital Name is : " + providerSaved);
+		MRConstants.PROV_NAME=providerSaved;
+		String ParentWindow = driver.getTitle();
+		CheckProviderCoverageButton.click();
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("Compare Medicare Plans")) {
+					System.out.println("We are on Compare Medicare Plans winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(editHospitalsLink);
 					break;
 				}
 			} else {
