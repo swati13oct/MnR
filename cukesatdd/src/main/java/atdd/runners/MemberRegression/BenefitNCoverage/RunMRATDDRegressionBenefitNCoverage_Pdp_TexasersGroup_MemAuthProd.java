@@ -20,6 +20,6 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionB
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_Pdp_TexasersGroup_MemAuthProd.json" }, tags = { "@Pdp_TexasersGroup" })
-public class RunMRATDDRegressionBenefitNCoverage_Pdp_TexasersGroup_MemAuthProd {
-
+public class RunMRATDDRegressionBenefitNCoverage_Pdp_TexasersGroup_MemAuthProd { 
+	             
 }
