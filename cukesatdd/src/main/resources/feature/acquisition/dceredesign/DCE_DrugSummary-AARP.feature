@@ -20,7 +20,6 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
-    | ZipCode | <zipCode> |
 
     Examples: 
       | path                     | pageName                   |drugName|zipCode |

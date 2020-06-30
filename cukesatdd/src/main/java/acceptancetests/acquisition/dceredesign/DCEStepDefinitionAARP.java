@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -193,7 +194,9 @@ public class DCEStepDefinitionAARP {
 	}
 	
 	@When("^user verify the drug summary page$")
-	public void user_verify_the_drug_summary_page(DataTable arg1) {
-	    
+	public void user_verify_the_drug_summary_page() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 }
