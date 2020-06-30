@@ -71,8 +71,8 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
 	private WebElement saveModalClosebutton;
-
-	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
+	
+	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>check-provider-coverage button")
 	private WebElement viewSavedbutton;
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
@@ -119,7 +119,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						saveModalClosebutton.click();
 						}
 				}	
-				checkProviderCoveragebutton.click();
+//				checkProviderCoveragebutton.click();
 				try {
 			        WebDriverWait wait = new WebDriverWait(driver, 2);
 			        if(wait.until(ExpectedConditions.alertIsPresent())==null) {
