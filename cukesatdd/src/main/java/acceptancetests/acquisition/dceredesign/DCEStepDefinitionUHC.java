@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -67,10 +68,24 @@ public class DCEStepDefinitionUHC {
 	}
 	
 	@When("^the user clicks on Add drugs button on UHC$")
-	public void the_user_clicks_on_Add_drugs_button() {
+	public void the_user_clicks_on_Add_drugs_button_UHC() {
 		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEgetStarted.clickAddDrugsBtn();
 		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+	@When("^adds drugs in drug list page on UHC$")
+	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		System.out.println("zipcode" + drugName);
+		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		buildDrugList.addDrugs(drugName);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP$")
@@ -90,12 +105,6 @@ public class DCEStepDefinitionUHC {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 	}
-	
-	@Then("^user should be navigated to zipcode and plan year capture page for AEP in UHC$")
-	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP() {
-		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
-	}
 
 	@Then("^user enter invalid zipcode$")
 	public void user_enter_invalid_zipcode(DataTable givenAttributes) throws Throwable {
@@ -111,8 +120,8 @@ public class DCEStepDefinitionUHC {
 		zipCodePlanYearPage.enterZipCode(invalidzipcode);
 	}
 	
-	@Then("^user enters valid zipcode and county in UHC$")
-	public void user_enter_valid_zipcode(DataTable givenAttributes) throws Throwable {
+	@Then("^user enters valid zipcode and county on UHC$")
+	public void user_enter_valid_zipcode_UHC(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -124,26 +133,57 @@ public class DCEStepDefinitionUHC {
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 
-	@When("^user selects plan year$")
-	public void user_selects_plan_year() {
+	@When("^user selects plan year on UHC$")
+	public void user_selects_plan_year_UHC() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.selectPlanYear();
 	}
 
-	@When("^user clicks on continue button$")
-	public void user_clicks_on_continue_button(){
+	@When("^user clicks on continue button on UHC$")
+	public void user_clicks_on_continue_button_UHC(){
 		ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickContinueBtn();
 	}
 
-	@Then("^user should be navigated to Review drug cost estimate page$")
-	public void user_should_be_navigated_to_Review_drug_cost_estimate_page() {
-	    
+	@Then("^user should be navigated to Review drug cost estimate page on UHC$")
+	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_on_UHC() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
-	
-	@Then("^error message should be displayed$")
-	public void error_message_should_be_displayed() {
+	@When("^user verify the drug summary page on UHC$")
+	public void user_verify_the_drug_summary_page_uhc() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	@Then("^error message should be displayed on UHC$")
+	public void error_message_should_be_displayed_UHC() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage =(ZipCodePlanYearCapturePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
+	}
+	@When("^clicks on Review drug cost button on UHC$")
+	public void clicks_on_Review_drug_cost_button_UHC() {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugList.clickReviewDrugCostBtn();
+	}
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP on UHC")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_UHC() {
+		/*
+		 * ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage)
+		 * getLoginScenario()
+		 * .getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		 */
+		
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+	
+	@Then("^load screen should be displayed on UHC$")
+	public void load_screen_should_be_displayed_on_uhc() {
+
 	}
 }
