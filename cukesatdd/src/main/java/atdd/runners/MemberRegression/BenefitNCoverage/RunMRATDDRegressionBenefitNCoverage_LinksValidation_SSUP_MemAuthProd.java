@@ -21,5 +21,5 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionB
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_LinksValidation_SSUP_MemAuthProd.json" }, tags = {"@Links_Validation_SSUP"})
 public class RunMRATDDRegressionBenefitNCoverage_LinksValidation_SSUP_MemAuthProd {
-
+                               
 }
