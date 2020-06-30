@@ -70,18 +70,22 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	private WebElement doctorsSavebutton;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
-	private WebElement saveModalClosebutton;
+	private WebElement saveModalCloseContinueSearchbutton;
 	
-	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>check-provider-coverage button")
+	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
 	
+	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
+	private WebElement finishReturnButton;
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
 		ArrayList<String> doctorsSPecialtyName = new ArrayList<String>();
+		boolean newRally=false;
 		try {
 			validate(welcomeTilte, 30);
 			getStarted.click();
@@ -110,16 +114,21 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 					}
 					jsClickNew(saveButton);
 					threadsleep(3000);
+					String text = saveModalCloseContinueSearchbutton.getText();
+					if(text.toUpperCase().contains("CONTINUE"))
+						newRally=true;
 					if (i == 0) {
-						validate(viewSavedbutton, 30);
-						viewSavedbutton.click();
+						if(newRally)
+							finishReturnButton.click();
+						else
+							viewSavedbutton.click();
 					}
 					else {
-						validate(saveModalClosebutton, 30);
-						saveModalClosebutton.click();
-						}
+						saveModalCloseContinueSearchbutton.click();
+					}
 				}	
-//				checkProviderCoveragebutton.click();
+				if(!newRally)
+					checkProviderCoveragebutton.click();
 				try {
 			        WebDriverWait wait = new WebDriverWait(driver, 2);
 			        if(wait.until(ExpectedConditions.alertIsPresent())==null) {
