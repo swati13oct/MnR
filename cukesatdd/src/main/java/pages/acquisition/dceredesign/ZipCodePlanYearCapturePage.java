@@ -34,6 +34,9 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='row mb-20']//div[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
+	
+	@FindBy(xpath = "//*[@class='uhc-spinner']")
+	public WebElement loadScreenSpinner;
 
 	public ZipCodePlanYearCapturePage(WebDriver driver) {
 		super(driver);
@@ -151,6 +154,16 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		}
 		else {
 		Assert.assertTrue("Review drug cost page not displayed", false);
+		}
+	}
+	
+	public void verifyLoadScreen() {
+		CommonUtility.waitForPageLoad(driver,loadScreenSpinner , 10);
+		if(validateNew(loadScreenSpinner)) {
+			Assert.assertTrue("Load screen page not displayed", true);
+		}
+		else {
+		Assert.assertTrue("Load screen page not displayed", false);
 		}
 	}
 }

@@ -65,11 +65,6 @@ public class DCEStepDefinitionAARP {
 	 * }
 	 */
 
-	@Then("^load screen should be displayed in AARP$")
-	public void load_screen_should_be_displayed_in_AARP() {
-
-	}
-
 	@When("^the user clicks on Add drugs button$")
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
@@ -154,6 +149,7 @@ public class DCEStepDefinitionAARP {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickContinueBtn();
+		zipCodePlanYearPage.verifyLoadScreen();
 	}
 
 	@Then("^user should be navigated to Review drug cost estimate page in AARP$")
@@ -190,5 +186,13 @@ public class DCEStepDefinitionAARP {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
+	}
+	
+
+	@Then("^load screen should be displayed in AARP$")
+	public void load_screen_should_be_displayed_in_AARP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		//zipCodePlanYearPage.verifyLoadScreen();
 	}
 }
