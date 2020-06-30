@@ -68,7 +68,7 @@ public class WerallyMobilePage extends UhcDriver {
 	private WebElement saveModelDoctorName;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
-	private WebElement saveModalClosebutton;
+	private WebElement saveModalCloseContinueSearchbutton;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
@@ -79,9 +79,13 @@ public class WerallyMobilePage extends UhcDriver {
 	@FindBy(css = "span.location")
 	private WebElement location;
 	
+	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
+	private WebElement finishReturnButton;
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
+		boolean newRally=false;
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			try {
 				validate(welcomeTilte, 30);
@@ -107,13 +111,22 @@ public class WerallyMobilePage extends UhcDriver {
 								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
 						save.click();
 						threadsleep(1000);
-						if (i == 0)
-							viewSavedbutton.click();
-						else
-							saveModalClosebutton.click();
+						String text = saveModalCloseContinueSearchbutton.getText();
+						if(text.toUpperCase().contains("CONTINUE"))
+							newRally=true;
+						if (i == 0) {
+							if(newRally)
+								finishReturnButton.click();
+							else
+								viewSavedbutton.click();
+						}
+						else {
+							saveModalCloseContinueSearchbutton.click();
+						}
 					}
 					threadsleep(1000);
-					checkProviderCoveragebutton.click();
+					if(!newRally)
+						checkProviderCoveragebutton.click();
 				} else {
 					System.out.println("Required search Results is not Returned");
 					Assert.assertTrue(false);
@@ -175,13 +188,22 @@ public class WerallyMobilePage extends UhcDriver {
 								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
 						jsClickMobile(save);
 						threadsleep(1000);
-						if (i == 0)
-							jsClickMobile(viewSavedbutton);
-						else
-							jsClickMobile(saveModalClosebutton);
+						String text = saveModalCloseContinueSearchbutton.getText();
+						if(text.toUpperCase().contains("CONTINUE"))
+							newRally=true;
+						if (i == 0) {
+							if(newRally)
+								jsClickMobile(finishReturnButton);
+							else
+								jsClickMobile(viewSavedbutton);
+						}
+						else {
+							jsClickMobile(saveModalCloseContinueSearchbutton);
+						}
 					}
 					threadsleep(1000);
-					jsClickMobile(checkProviderCoveragebutton);
+					if(!newRally)
+						jsClickMobile(checkProviderCoveragebutton);
 				} else {
 					System.out.println("Required search Results is not Returned");
 					Assert.assertTrue(false);
