@@ -78,7 +78,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user clicks on Submit Enrollment to complete enrollment
+    Then the user clicks on Submit Enrollment to complete enrollment
 
     #    Then the user validates Plan and Member Details on Confirmation Page
     #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
@@ -161,12 +161,12 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user clicks on Submit Enrollment to complete enrollment
+    Then the user clicks on Submit Enrollment to complete enrollment
     #Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | PlanType | zipcode | isMultutiCounty | county       | plantype | planName                                               | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType|
       | 15515 | MA-MBI   |   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | RABI      | MCCOURT | 9P25X00HX59  | false   |  07012008 |  07012008 |      431665465 | true     | 07261953 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CO           |      80002 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |Valid|
-			 | 15515 | MA-MBI   |   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CO           |      80002 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |InValid|
+			 | 15516 | MA-MBI   |   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CO           |      80002 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |InValid|
 			
