@@ -35,12 +35,12 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
+    #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information    
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
+     # | PartA Date         | <partadate>         |
+      #| PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
@@ -56,6 +56,9 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to SEP Page
+     	|	Input Data					 | <inputdataType>   |
+    	| PartA Date         | <partadate>         |
+   		| PartB Date         | <partbdate>         |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
@@ -74,13 +77,15 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
-    Then the user clicks on Submit Enrollment to complete enrollment
+    #Then the user clicks on Submit Enrollment to complete enrollment
 
     Examples: 
-      | TID   | PlanType | zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
-      | 15516 | PDP-MBI  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |
-      | 15517 | PDP-MBI  |   80210 | NO              | Denver County      | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CO           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |
-
+      | TID   | PlanType | zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen | inputdataType|
+      | 15516 | PDP-MBI  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   11012002 |  01012006 |                | false    | 04261944 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |Valid |
+      | 15517 | PDP-MBI  |   80210 | NO              | Denver County      | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   11012002 |  01012006 |                | false    | 04261944 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CO           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |Valid |
+	  	| 15516 | PDP-MBI  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |InValid |
+      | 15517 | PDP-MBI  |   80210 | NO              | Denver County      | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CO           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |InValid |
+	
     @prodRegression
     Examples: 
       | TID   | PlanType | zipcode | isMultutiCounty | county       | plantype | planName                        | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
