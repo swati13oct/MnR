@@ -3303,4 +3303,43 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 	}
 	
+	//New plan compare related
+	
+	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in AARP$")
+	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_AARP() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCare();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+		@Then("^remove one plan from new plan compare page for AARP$")
+	public void remove_one_plan_from_new_plan_compare_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewRemoveLink();
+	}
+	
+	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for AARP$")
+	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewAddIcon();
+	}
+	
+	@Then("^Verify newly added plan displayed on new plan compare page for AARP$")
+	public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatenewlyAddPlanonNewPlanComapre();
+	}
 }
