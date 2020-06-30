@@ -108,7 +108,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName      | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 19-019 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651| SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 19-019 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946| SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
 #      | 20-115 | 15119,15304 | ashah120  | Mnrqa002  | testusername    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 

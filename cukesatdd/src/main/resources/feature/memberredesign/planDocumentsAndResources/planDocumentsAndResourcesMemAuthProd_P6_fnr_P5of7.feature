@@ -111,5 +111,5 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ship_5of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651     | SHIP     | IND_EFF_PDnR          | true   | false   |
+      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false   |
 #     | 19-120 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_0   | SHIP | MULTI_IND_EFF_PDnR    | true   | false   |

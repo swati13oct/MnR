@@ -32,8 +32,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.checkPageIsReadyNew(driver);
-		openAndValidate();
+		//CommonUtility.checkPageIsReadyNew(driver);
+		//openAndValidate();
 	
 	}
 
@@ -474,7 +474,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
 	
-		
+	@FindBy(xpath="//*[@id='drugcostestimatorDetails']/preceding::h1")
+    private WebElement drugCostEstimatorPageHeaderText;
+	
+	@FindBy(id="atddBackToPlans")
+    private WebElement backToPlansBtn;
+			
 	public WebElement getImgLoadingIndicator() {
 		return imgLoadingIndicator;
 	}
@@ -2143,4 +2148,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
 	}
 	
+	public DrugCostEstimatorPage validateDCEPageDisplayed() {
+		waitforElementNew(drugCostEstimatorPageHeaderText,15);
+		Assert.assertTrue("DCE page is not loaded", drugCostEstimatorPageHeaderText.getText().equals("Drug Cost Estimator"));
+		return null;
+	}
+	
+	public void clickBackToPlansBtn() {
+		backToPlansBtn.click();
+	}
 }

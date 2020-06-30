@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.providersearch;
 
 import gherkin.formatter.model.DataTableRow;
@@ -401,4 +402,10 @@ public class ProviderSearchStepDefinitionUHC {
 		    plansummaryPage.setMap(map);
 		}
 		
+		@Then("^user should be redirected to Provider search Rally page in UMS site$")
+		public void user_should_be_redirected_to_Provider_search_Rally_page() throws Throwable {
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			providerSearchPage.verifyProviderSearchRallyPageDisplayed();
+		}
 }
