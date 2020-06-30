@@ -37,21 +37,21 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | Date Range | Last 90 Days |
     Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6 months ----  
     And the user selects the desired date range
       | Date Range | Last 6 months |
     Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12 months ----  
     And the user selects the desired date range
       | Date Range | Last 12 months |
     Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 18 months ----  
     And the user selects the desired date range
@@ -65,7 +65,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | Date Range | Custom Search |
     Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates the right rail section content
     Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
