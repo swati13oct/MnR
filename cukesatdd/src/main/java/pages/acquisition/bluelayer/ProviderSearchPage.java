@@ -59,13 +59,18 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="(//*[@ng-if='::hideInputs !== true'])[1]")
 	private WebElement selectLocationOptionClick;
 	
-	
+	@FindBy(xpath="//button[text()='Continue Searching']")
+	private WebElement continueSearching;
 	
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
-	private WebElement Checkcoverage;
+	//@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+	//private WebElement Finish;
+	
+
+	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
+	private WebElement Finish;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
 	private WebElement People;
@@ -202,9 +207,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
-	validateNew(Checkcoverage);
-	Checkcoverage.click();
-	//jsClickNew(Checkcoverage);
+	validateNew(Finish);
+	Finish.click();
+	//jsClickNew(Finish);
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -236,9 +241,9 @@ public class ProviderSearchPage extends UhcDriver {
 	String providerSaved = providerNameText.getText().trim();
 	System.out.println("Hospital Name is : " + providerSaved);
 	MRConstants.PROV_NAME=providerSaved;
-	Checkcoverage.click();
-	/*validateNew(Checkcoverage);
-	jsClickNew(Checkcoverage);*/
+	Finish.click();
+	/*validateNew(Finish);
+	jsClickNew(Finish);*/
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -274,9 +279,10 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 				
 			}
-			
-			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			jsClickNew(BtnClose);
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			continueSearching.click();
+			//CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
+			//jsClickNew(BtnClose);
 			
 			//counter++;
 //			if(counter==2)
@@ -289,10 +295,9 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
 		jsClickNew(Savedproviders);
-		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		Checkcoverage.click();
-		//jsClickNew(Checkcoverage);
+		validateNew(Finish);
+		Finish.click();
+		
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -383,9 +388,9 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 
 		jsClickNew(Viewsavebtn);
 
-		validateNew(Checkcoverage);
-		Checkcoverage.click();
-		//jsClickNew(Checkcoverage);
+		validateNew(Finish);
+		Finish.click();
+		//jsClickNew(Finish);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -417,8 +422,8 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 
 		jsClickNew(Viewsavebtn);
 		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		jsClickNew(Checkcoverage);
+		validateNew(Finish);
+		jsClickNew(Finish);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

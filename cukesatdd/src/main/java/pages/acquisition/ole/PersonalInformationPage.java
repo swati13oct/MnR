@@ -329,14 +329,16 @@ public class PersonalInformationPage extends UhcDriver{
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
+		}else if((inputdatatype.equalsIgnoreCase("Invalid")))
 
-			else {
+			 {
 				
 				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageData(MedicareDetailsMap);
 				if(confirmYourEligibilityPage!=null) {
 					
 					
-					 validateNew(NextBtn); jsClickNew(NextBtn);
+					 validateNew(NextBtn); 
+					 jsClickNew(NextBtn);
 					
 					 if(validateNew(driver.findElement(By.
 					  xpath("//h1[contains(text(),'Special Election')]")))){
@@ -344,9 +346,7 @@ public class PersonalInformationPage extends UhcDriver{
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}
-			
-				}		
-			}
+			 }
 		return null;
 	}	
 

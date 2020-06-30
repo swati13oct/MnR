@@ -1466,17 +1466,17 @@ public class oleStepDefinition {
 		}
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(MedicareDetailsMap);
-		if (specialElectionPeriodPage != null  && MedicareDetailsMap.get("Input Data").equalsIgnoreCase("Invalid")) {
+		if (specialElectionPeriodPage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
-			System.out.println("specialElection Period Page is displayed and Next Button is enabled");
+			System.out.println("OLE SEP Page is Displayed");
 			
 		getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 		getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
 			Assert.assertTrue(true);
 		}
 		else
-			Assert.fail("specialElectionPeriod Page Info data entry failed");
+			Assert.fail("OLE SEP Page is NOT Displayed");
 		}
 	
 	

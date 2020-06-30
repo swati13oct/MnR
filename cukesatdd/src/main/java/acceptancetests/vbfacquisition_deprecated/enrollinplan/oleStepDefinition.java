@@ -1094,7 +1094,7 @@ public class oleStepDefinition {
 	}
 
 
-	@Then("^the user navigates to SEP Page$")
+	/*@Then("^the user navigates to SEP Page$")
 	public void the_user_navigates_to_SEP_Page() throws Throwable {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
 		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
@@ -1118,7 +1118,7 @@ public class oleStepDefinition {
 				Assert.fail("OLE SEP Page is NOT Displayed");
 		}
 	}
-
+*/
 	@Then("^the user validates the Plan details in SEP Page OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_SEP_Page_OLE_Right_Rail() throws Throwable {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
