@@ -459,7 +459,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchRangeGreaterThanEighteenMonths() {
@@ -476,7 +476,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchFutureDate() {
@@ -493,7 +493,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchBlankDate() {
@@ -502,7 +502,7 @@ public class EOBPage extends EOBBase{
 		dateRangeOptions.selectByVisibleText("Custom Search");
 
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	/**
@@ -971,7 +971,6 @@ public class EOBPage extends EOBBase{
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
-		//tbd driver.switchTo().window(newTab.get(1));
 		driver.switchTo().window(newTab.get(newTab.size()-1));
 		CommonUtility.checkPageIsReady(driver);
 
