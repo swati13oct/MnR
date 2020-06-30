@@ -153,18 +153,15 @@ public class VppStepDefinitionUpdatedAARP {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
@@ -173,10 +170,8 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
-
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
@@ -817,47 +812,38 @@ public class VppStepDefinitionUpdatedAARP {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.OurPlansPDPLanding();
 		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading OLE Welcome page");
 		}
 	}
-
 	@Then("^the user validates the following Plan details for the plan$")
 	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-
 		String benefitType = memberAttributesMap.get("Benefit Type");
 		String expectedText = memberAttributesMap.get("Expected Text");
 		System.out.println("Validating the following Additional benefits : "+benefitType);
-
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
-
 	}	*/
 	@Then ("^User validates the VPP promowidjet for specifc plans$")
 	public void User_validates_the_promo_widjet(DataTable givenAttributes)
@@ -1046,24 +1032,6 @@ public class VppStepDefinitionUpdatedAARP {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
-	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in AARP$")
-	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_AARP() throws Exception {
-		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCare();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
 
 	@Then("^Verify provider is count is updated on plan compare page in AARP$")
 	public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
@@ -2226,12 +2194,6 @@ public class VppStepDefinitionUpdatedAARP {
 		planComparePage.clickOnRemoveLink();
 	}
 
-	@Then("^remove one plan from new plan compare page for AARP$")
-	public void remove_one_plan_from_new_plan_compare_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnNewRemoveLink();
-	}
 	@Then("^click on back to plans on plan compare page for AARP$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_AARP() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
@@ -2278,14 +2240,6 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnAddIcon();
 	}
-	
-	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for AARP$")
-	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnNewAddIcon();
-	}
-
 
 	@Then("^check one plan and add it to plancompare for AARP")
 	public void check_one_plan_and_add_it_to_plancompare_for_AARP() throws Throwable {
@@ -2305,13 +2259,6 @@ public class VppStepDefinitionUpdatedAARP {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatenewlyAddPlan();
-	}
-	
-	@Then("^Verify newly added plan displayed on new plan compare page for AARP$")
-	public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validatenewlyAddPlanonNewPlanComapre();
 	}
 
 	@Then("^verify plan compare checkbox is not visible on plan summary on AARP$")
@@ -3079,7 +3026,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.savedHeartFirstPlan();
 	}
-
 	@Then("^user validates print option for selected plan on AARP site$")
 	public void user_validates_print_option_for_plan_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -3102,16 +3048,13 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
-
 	}
-
 	@Then("^user validates email functionality with invalid and valid email address for selected plan on AARP site$")
 	public void user_validates_email_functionality_on_for_selected_plan_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		plansummaryPage.validateEmailOption(planType);
-
 		//note: collect page data for email deeplink validation
 		HashMap<String, Integer> vppSummaryPgInfo=plansummaryPage.collectInfoVppPlanSummaryPg();
 		
@@ -3123,7 +3066,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page in AARP site$")
 	public void user_validates_the_functionality_of_email_and_print_buttons_on_the_plan_Details_Page() {
-
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
@@ -3132,7 +3074,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		//keep String deepLink=vppPlanDetailsPage.getEmailDeepLink();
 		//keep System.out.println("TEST - email deepLink="+deepLink);
 		//keep getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK,deepLink);
-
 	}
 	
 	@Then("^the user view plan details of the first plan in the given plan type and perform validation in AARP site$")
@@ -3146,7 +3087,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
-
 		//note: collect page data for email deeplink validation
 		EmailAndPrintUtil util=new EmailAndPrintUtil(vppPlanDetailsPage.driver);
 		//keep HashMap<String, String> infoMap=vppPlanDetailsPage.collectInfoVppPlanDetailPg(plantype, "original");
@@ -3158,9 +3098,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	public void I_all_plans_to_compare(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
 		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
 		int plansForCompare=0;
 		if (plantype.equalsIgnoreCase("MA")) {
 			plansForCompare=plansummaryPage.checkAllMAPlans();
@@ -3181,7 +3119,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	
 	@When("^the user validate thank you message in plan compare for selected plan in AARP site$")
 	public void user_validate_thank_you_message_in_plan_compare_for_selected_plan() {
-
 		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingthankyoumessage();
@@ -3201,7 +3138,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		infoMapStringId=PageConstants.SUMMARY_PAGE_INFO;
 		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
 		HashMap<String, Integer> origPage=(HashMap<String, Integer>) getLoginScenario().getBean(infoMapStringId);
-
 		//note: use new driver to achieve clear cache
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
@@ -3221,14 +3157,12 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
 		HashMap<String, String> origPage=(HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
-
 		//note: use new driver to achieve clear cache
 		//keep WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		//keep newTestDriver.get(deepLink);
 		//keep CommonUtility.checkPageIsReady(newTestDriver);
 		Thread.sleep(1000);
 		//keep PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(newTestDriver);
-
 		PlanDetailsPage tmpPg=(PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(tmpPg.driver);
 		//keep email_vppPlanDetailsPage.handlePlanYearSelectionPopup(planType);
@@ -3250,7 +3184,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String deepLink=(String) getLoginScenario().getBean(deepLinkStringId);
 		HashMap<String, String> origPage=(HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
-
 		//note: use new driver to achieve clear cache
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
@@ -3259,7 +3192,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		comparePlansPage.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
 		comparePlansPage.checkModelPopup(newTestDriver);
-
 		//note: temperary bypass for now until the flash issue is resolved
 		List<String> noteList=new ArrayList<String>();
 		noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink page content flashing");
@@ -3286,11 +3218,9 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-
 		String plantype = givenAttributesMap.get("Plan Type");
 		String site = givenAttributesMap.get("Site");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
@@ -3373,127 +3303,4 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 	}
 	
-	
-	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page AARP$")
-	public void verify_doctors_covered_ulayer() {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateDoctors();
-	}
-	
-	@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page AARP$")
-	public void verify_Hospital_covered_ulayer() {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateEditHospitals();
-	}
-	
-	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page AARP$")
-	public void verify_Add_doctors_covered_ulayer() {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateAddDoctors();
-	}
-	
-	@Then("^verify Add Hospitals is loaded without summary on Plan Compare page AARP$")
-	public void verify_Add_Hospitals_covered_ulayer() {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateAddHospitals();
-	}
-	
-	@And("^click on Add your doctors link and Navigate to Rally page for AARP$")
-	public void clickOnAddyourdocits_AARP() throws Exception {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-		FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-	
-	@And("^click on Add your Hospitals link and Navigate to Rally page for AARP$")
-	public void clickOnAddyourHospitals_AARP() throws Exception {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-		FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-	
-	@And("^click on Edit your doctors link and Navigate to Rally page for AARP$")
-	public void clickONEdityourdocits_AARP() throws Exception {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-		FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}	
-	
-	@And("^click on Edit your Hospitals link and Navigate to Rally page for AARP$")
-	public void clickONEdityourHospitals_AARP() throws Exception {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-		FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}	
-	
-	@And("^user selects a provider from medical group and retuns to plan compare page in AARP$")
-	public void selectsproviderfrommedicalGroupforAARP() throws Exception {
-		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ComparePlansPage planComparePage = findCarePage.providerfromMedicalGroup();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-	
-	@And("^user selects a Hospitals from Clinical and retuns to plan compare page in AARP$")
-	public void selectsproviderfromPrimaryCareClinicforAARP() throws Exception {
-		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-	
-	@And("^I click on Get Started on and Add Places from Hospitals find care page in AARP$")
-	public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_AARP() throws Exception {
-		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ComparePlansPage planComparePage = findCarePage.placesfromHospital();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
 }
