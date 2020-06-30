@@ -1115,11 +1115,12 @@ public class EOBPage extends EOBBase{
 		int max=eobCount;
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
-			if (eobCount>=3 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
-				max=3; //note: only validate the first 3 eobs on offline-prod and online-prod env to speed up the test run duration
+			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
+				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
 		}
+		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
-			System.out.println("----- Proceed to validate each EOB PDF content on the first page if more than 10 eobs...");
+			System.out.println("----- Proceed to validate EOB PDF content - on the first page only if more than 10 eobs...");
 
 			//String targetEobXpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]']["+i+"]//td[3]";
 			String targetEobXpath="//tr[contains(@ng-repeat,'eobData in pagedListItems')]["+i+"]//td[3]//a";
