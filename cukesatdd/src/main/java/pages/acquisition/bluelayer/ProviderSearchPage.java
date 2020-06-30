@@ -3,6 +3,7 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -438,4 +440,17 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 	    return topicDropDownValues.size();
 	}
 	
+	public void verifyProviderSearchRallyPageDisplayed() {
+		/*
+		 * CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		 * int initialCount = driver.getWindowHandles().size(); ArrayList<String> tabs =
+		 * new ArrayList<String>(driver.getWindowHandles()); String currentHandle =
+		 * null; for (int i = 0; i < initialCount + 1; i++) {
+		 * driver.switchTo().window(tabs.get(i)); currentHandle =
+		 * driver.getWindowHandle(); if
+		 * (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)
+		 * ) break; }
+		 */
+		Assert.assertTrue(driver.getCurrentUrl().contains("werally"),"Provider Search Rally Page is not displayed");
+	}
 }
