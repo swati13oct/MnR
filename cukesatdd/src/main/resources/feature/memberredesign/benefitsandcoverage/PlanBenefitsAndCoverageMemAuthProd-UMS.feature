@@ -95,8 +95,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | TID   |username  | password  | MemUserName | planType | memberType |
       | 15088 |ashah120 | Mnrqa002 |jan06450 | MAPD   | memberWithoutProviderTiering_BnC |
       
-       #TC07_Copay_Coinsurance_in_DrugCostsTable
-  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @prod_BnC_Part2
+       #TC07_Copay_Coinsurance_in_DrugCostsTable 
+  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @prod_BnC_Part2     
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the copay coinsurance in drugcosts table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -114,10 +114,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     
     @devRegression
     Examples: 
-      | TID   |username  | password  | MemUserName  |  planType | memberType     | copayCategory |
-      | 15090 |ashah120 | Mnrqa002 |JUDYSTOKES7@GMAIL.COM| MAPD     | Individual_BnC | NON LIS       |
+      | TID   |username  | password  | MemUserName  |  planType | memberType     | copayCategory     |
+      | 15090 |ashah120 | Mnrqa002 |JUDYSTOKES7@GMAIL.COM| MAPD     | Individual_BnC | NON LIS          |
       
-   #TC08_BenefitsFor_ComboMembers
+   #TC08_BenefitsFor_ComboMembers                                          
   @benefitsAndCoverage12 @BenefitsForCombo @regression @combo_Benefits
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member
     Given the user is on member auth login flow page
