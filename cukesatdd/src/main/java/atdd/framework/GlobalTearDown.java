@@ -82,10 +82,10 @@ public class GlobalTearDown {
 					e.printStackTrace();
 				}
 			 //mrScen.DriverQuit();
-			if(wd.getClass().toString().toUpperCase().contains("ANDROID")||wd.getClass().toString().toUpperCase().contains("IOS")) {
+		//	if(wd.getClass().toString().toUpperCase().contains("ANDROID")||wd.getClass().toString().toUpperCase().contains("IOS")) {
 				wd.quit();
 				System.out.println("---- Mobile Script Execution Completed ----");
-			}
+		//	}
 		}
 
 	}
