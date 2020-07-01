@@ -42,7 +42,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
 
-  @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP 
+  @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP @F443609
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
