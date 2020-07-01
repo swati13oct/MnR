@@ -7,14 +7,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
-    And plan year dropdown should be displayed during AEP
+    Then the user validates Get Started Page for UHC
+    When the user clicks on Add drugs button on UHC
+    And adds drugs in drug list page on UHC
+    | DrugName | <drugName> |
+    And clicks on Review drug cost button on UHC
+    Then user should be navigated to zipcode and plan year capture page for AEP on UHC
+    And plan year dropdown should be displayed during AEP on UHC
 
     Examples: 
-      | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
+      | path                     | pageName                   |drugName|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|
 
   @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP_UHC
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
@@ -22,19 +25,22 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    Then the user validates Get Started Page for UHC
+    When the user clicks on Add drugs button on UHC
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+     And clicks on Review drug cost button on UHC
+    Then user should be navigated to zipcode and plan year capture page for AEP on UHC
     When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
-    And user selects plan year
-    And user clicks on continue button
-    Then load screen should be displayed
-    And user should be navigated to Review drug cost estimate page
-
-    Examples: 
-      | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
+    And user selects plan year on UHC
+    And user clicks on continue button on UHC
+    #Then load screen should be displayed on UHC
+    And user should be navigated to Review drug cost estimate page on UHC
+ 
+  Examples: 
+      | path                     | pageName                   |drugName|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|
 
   @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP_UHC
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
@@ -44,22 +50,26 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
-    When user clicks on continue button
-    Then error message should be displayed
-    When user enter invalid zipcode
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+     And clicks on Review drug cost button on UHC
+    #Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    #When user clicks on continue button
+    #Then error message should be displayed
+    When user enter invalid zipcode on UHC
       | inValidzipCode | <invalidzipcode2> |
-    Then error message should be displayed
+    Then error message should be displayed on UHC
     When user enters valid zipcode and county in UHC
       | ZipCode | <zipCode> |
     And user selects plan year
-    And user clicks on continue button
-    Then load screen should be displayed
+    And user clicks on continue button on UHC
+    #Then load screen should be displayed on UHC
     And user should be navigated to Review drug cost estimate page
 
     Examples: 
-      | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |          78452 |   90210 |            1234 |           00000 |
+      | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |          78452 |   90210 |            1234 |00000 |lipitor|
+
 
   @DCE_ZipCodePlanYear_SamChatCall_AEP_UHC
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on AARP site
@@ -69,12 +79,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | PagePath | <path>     |
     Then the user validates Get Started Page
     And the user validates whether call icon is visible on UHC
-    #And the user validates whether chat icon is visible on UHC
+    And the user validates whether chat icon is visible on UHC
     When the user clicks on Add drugs button
-    Then user should be navigated to zipcode and plan year capture page for AEP in UHC
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+     And clicks on Review drug cost button on UHC
+    #Then user should be navigated to zipcode and plan year capture page for AEP in UHC
     Then the user validates whether call icon is visible on UHC
-    #Then the user validates whether chat icon is visible on UHC
+    Then the user validates whether chat icon is visible on UHC
 
     Examples: 
-      | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
+      | path                                             | pageName                   | drugName |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |

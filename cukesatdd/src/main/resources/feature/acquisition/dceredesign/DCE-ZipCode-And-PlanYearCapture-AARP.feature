@@ -19,7 +19,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | path                     | pageName                   |drugName|
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|
 
-  @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP
+  @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP @F443609
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
@@ -33,16 +33,16 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
-    And user selects plan year
-    And user clicks on continue button
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
+    And user selects plan year in AARP
+    And user clicks on continue button in AARP
+    Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
 
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
 
-  @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP 
+  @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP @F443609
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
@@ -61,8 +61,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | ZipCode | <zipCode> |
     And user selects plan year in AARP
     And user clicks on continue button in AARP
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
+    Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
 
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|

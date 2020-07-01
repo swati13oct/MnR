@@ -66,17 +66,13 @@ public class DCEStepDefinitionAARP {
 	 * }
 	 */
 
-	@Then("^load screen should be displayed in AARP$")
-	public void load_screen_should_be_displayed_in_AARP() {
-
-	}
-
 	@When("^the user clicks on Add drugs button$")
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEgetStarted.clickAddDrugsBtn();
-		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
+		// zipCodePlanYearPage);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP in AARP$")
@@ -108,7 +104,7 @@ public class DCEStepDefinitionAARP {
 		 * .getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		 */
-		
+
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
@@ -155,6 +151,7 @@ public class DCEStepDefinitionAARP {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickContinueBtn();
+		zipCodePlanYearPage.verifyLoadScreen();
 	}
 
 	@Then("^user should be navigated to Review drug cost estimate page in AARP$")
@@ -192,7 +189,14 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
 	}
-	
+
+	@Then("^load screen should be displayed in AARP$")
+	public void load_screen_should_be_displayed_in_AARP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		// zipCodePlanYearPage.verifyLoadScreen();
+	}
+
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

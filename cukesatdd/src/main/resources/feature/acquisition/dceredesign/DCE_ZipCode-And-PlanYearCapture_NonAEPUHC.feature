@@ -3,19 +3,22 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
 
   @DCE_ZipCodePlanYear_NonAEPUHC
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for Non AEP
-    Given the user is on the uhcmedicaresolutions site landing page
+      Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates Get Started Page for UHC
     When the user clicks on Add drugs button on UHC
-    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
-    And plan year dropdown should not be displayed during Non AEP in UHC
-
+    And adds drugs in drug list page on UHC
+    | DrugName | <drugName> |
+    And clicks on Review drug cost button on UHC
+   Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
+   Then plan year dropdown should not be displayed during Non AEP in UHC
+   
     Examples: 
-      | path                     | pageName                   |
-      | drug-cost-estimator.html | DCE Redesign - Get Started |
-
+      | path                     | pageName                                |drugname|
+      | /health-plans/estimate-drug-costs.html | DCE Redesign - Get Started |lipitor|
+      
   @DCE_ZipCodePlanYear_ValidateContinueBtn_NonAEPUHC
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
      Given the user is on the uhcmedicaresolutions site landing page
