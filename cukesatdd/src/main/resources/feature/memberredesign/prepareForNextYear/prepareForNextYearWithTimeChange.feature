@@ -7,7 +7,7 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
   # caution: should run it on team env only not as to impact other teams	
   # caution: examples in this scenario must be run sequential, no parallel    
   #------------------------------------------------------------------------------------------	    
-  @prepareForNextYear03 @withSystemTimeChange
+  @prepareForNextYear03 @withSystemTimeChange @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page display behavior throughout different milestones
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -16,14 +16,30 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 	Then test setup stores original system date for roll back later
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | true           |
-      | AEM Show Tab StartDate | 06/14/2020     |
-      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info  
+      | Annual Notice of Changes English       | <an_us> | 
+      | Annual Notice of Changes Spanish       | <an_es> |
+      | Annual Notice of Changes Chinese       | <an_zh> |
+      | Evidence of Coverage English           | <ev_us> |
+      | Evidence of Coverage Spanish           | <ev_es> |
+      | Evidence of Coverage Chinese           | <ev_zh> |
+      | Provider Directory English             | <pr_us> |
+      | Provider Directory Spanish             | <pr_es> |
+      | Provider Directory Chinese             | <pr_zh> |
+      | Vendor Information Sheet English       | <ve_us> |
+      | Vendor Information Sheet Spanish       | <ve_es> |
+      | Vendor Information Sheet Chinese       | <ve_zh> |
+      | Pharmacy Directory Information English | <ph_us> |
+      | Pharmacy Directory Information Spanish | <ph_es> |
+      | Pharmacy Directory Information Chinese | <ph_zh> |
     #----- case - system date < AEM start date
 	Then test setup changes system date to before AEM start date
 	  | Test System Date | 05/15/2020 |
@@ -110,11 +126,11 @@ Feature: 1.21 Member Prepare For Next Year - With system time change test step
 
     @prepareForNextYear03_ind
     Examples: 
-	    | index | FID     | planType | memberType         |
-	    | 12    | F437767 | MAPD	 | IND_PFNY           |
+	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 12    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
-    @prepareForNextYear03_grp
-    Examples: 
-	    | index | FID     | planType | memberType         |
-	    | 13    | F437767 | MAPD	 | GRP_PFNY           |
+    #@prepareForNextYear03_grp
+    #Examples: 
+	#    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 13    | F437767 | MAPD	 | GRP_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
