@@ -322,14 +322,14 @@ public class PersonalInformationPage extends UhcDriver{
 			return new SpecialElectionPeriodPage(driver);
 		}
 		*/
-		String inputdatatype = MedicareDetailsMap.get("Input Data");
-		if(inputdatatype.equalsIgnoreCase("Valid")) {
-			if(validateNew(specialElectionPage=driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			Assert.assertTrue(validateNew(specialElectionPage), "OLE SEP Page is Displayed");
+		
+		Thread.sleep(3000);
+			if(driver.getCurrentUrl().contains("special")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
-		}else if((inputdatatype.equalsIgnoreCase("Invalid")))
+		else if(driver.getCurrentUrl().contains("eligibility"))
 
 			 {
 				
@@ -340,8 +340,7 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(validateNew(driver.findElement(By.
-					  xpath("//h1[contains(text(),'Special Election')]")))){
+					 if(driver.getCurrentUrl().contains("special")){
 					  System.out.println("OLE SEP Page is Displayed"); } else {
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
