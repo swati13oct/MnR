@@ -678,8 +678,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String IS_DECISION_GUIDE_PAGE1 = "isDecisionGuideStep1Page"; 
 	public static final String IS_DECISION_GUIDE_PAGE2 = "isDecisionGuideStep2Page"; 
-	public static final String IS_INSURANCE_AGENT_PAGE1 = "isInsuranceAgentStep1Page"; 
-	public static final String IS_INSURANCE_AGENT_PAGE2 = "isInsuranceAgentStep2Page";
+	public static final String IS_INSURANCE_AGENT_PAGE = "isInsuranceAgentStep1Page"; 
+	
 	
 	
 	public static final String STAGE_SSO_TESTHANESS_URL_bswift = "cqloginpage";

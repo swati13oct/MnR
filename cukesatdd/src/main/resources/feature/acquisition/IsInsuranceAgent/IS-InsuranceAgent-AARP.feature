@@ -10,17 +10,20 @@ Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> | 
-    Then the user enters and  saves the entered information in Pre-entry page for validation on IS forms
+    Then the user enters and  saves the entered information in Pre-entry page for validation on Licensed InsuranceAgent forms
       | DOB							|	<dob>								|
     Then the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on AARP site
-    Then the user enters valid information for the following fields on AARP site
+    Then the user enters valid information on Licensed Insurance Agentfor the following fields on AARP site
       | FirstName          | <firstname>          |
       | LastName           | <lastname>           |
       | DistributionMethod | <distributionmethod> |
       | Email              | <email>              |
-    Then the user validates address autocomplete on Step1 on AARP site
-    Then the user clicks Submit to submit Decision Guide on AARP site
-    Then the user validates Thank You Page on AARP site
+    Then the user validates address autocomplete on Licensed Agent on AARP site
+    Then the user provides DOB and Phone Number on AARP site
+    | DOB        | <dob>        |
+     | PhNo       | <phNo>       |
+    Then the user clicks Submit to submit Licensed Insurance Agent on AARP site
+    Then the user validates Thank You Page on Licensed Insurance Agent AARP site
 
     Examples: 
       | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender| 

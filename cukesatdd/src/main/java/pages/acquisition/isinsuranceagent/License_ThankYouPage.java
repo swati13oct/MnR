@@ -15,7 +15,7 @@ import atdd.framework.UhcDriver;
  *@author sai
  *
  */
-public class DGR_ThankYouPage extends UhcDriver{
+public class License_ThankYouPage extends UhcDriver{
 
 
 	//Global Elements
@@ -57,7 +57,7 @@ public class DGR_ThankYouPage extends UhcDriver{
 	private WebElement FindPlanBtn;
 
 
-	public DGR_ThankYouPage(WebDriver driver) {
+	public License_ThankYouPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();

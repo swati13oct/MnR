@@ -12,8 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep1;
-import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep2;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -69,7 +68,7 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	 */ 
 	
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
-	/*
+	
 		
 	@Then("^the user enters valid information for the pre entry form on UMS site for Insurance Agent$")
 	public void the_user_enters_valid_information_for_the_pre_entry_form_on_UMS_site_Insurance_Agent(DataTable givenAttributes) throws Throwable {
@@ -87,6 +86,8 @@ public class isInsuranceAgentStepDefenitionUHC    {
 		plansummaryPage.MedSupFormValidation(dateOfBirth);
 		
 	}
+	
+	/*
 	@Then("^the user enters and  saves the entered information in Pre entry page for validation on IS Insurance Agent forms on UMS site $")
 	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_Insurance_Agent_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

@@ -39,8 +39,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
-import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep1;
-import pages.acquisition.isinsuranceagent.IsInsuranceAgentStep2;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -4403,12 +4402,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
 	private WebElement InsuranceAgentLink;
-	public IsInsuranceAgentStep2 clickOnRequestInsuranceAgent() {
+	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
 		InsuranceAgentLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("agent-appointment.html"))
-			return new IsInsuranceAgentStep2(driver);
+			return new IsInsuranceAgent(driver);
 		else
 			return null;
 	}

@@ -18,11 +18,12 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
+
 /**
  *@author sdwaraka
  *
  */
-public class IsInsuranceAgentStep1 extends UhcDriver{
+public class IsInsuranceAgent extends UhcDriver{
 
 
 	//Global Elements
@@ -122,7 +123,7 @@ public class IsInsuranceAgentStep1 extends UhcDriver{
 
 	
 	
-	public IsInsuranceAgentStep1(WebDriver driver) {
+	public IsInsuranceAgent(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -490,7 +491,7 @@ public class IsInsuranceAgentStep1 extends UhcDriver{
 	@FindBy(xpath = "//a[contains(@role, 'tab') and contains(@id, 'step-2')]")
 	private WebElement Step2Tab;
 
-	public IsInsuranceAgentStep1 NavigateNext_DGRStep1() {
+	public IsInsuranceAgent NavigateNext_DGRStep1() {
 		if(!validate(topErrorMsg) && validate(NextBtn)){
 			NextBtn.click();
 			
@@ -503,7 +504,56 @@ public class IsInsuranceAgentStep1 extends UhcDriver{
 		}
 		if(Step2Tab.isEnabled()){
 			System.out.println("Next Button Clicked : Step 2 Displayed");
-			return new IsInsuranceAgentStep1(driver);
+			return new IsInsuranceAgent(driver);
+		}
+		return null;
+	}
+	
+	@FindBy(xpath = "//input[contains(@class, 'dob')]")
+	private WebElement DateOfBirthTxt;
+	@FindBy(xpath ="//*[@name='phone']")
+	private WebElement PhNo;
+	
+	public void enterUserInfoStep2(Map<String, String> memberAttributesMap) throws InterruptedException {
+		String DOB = memberAttributesMap.get("DOB");
+		String partBmonth = memberAttributesMap.get("partBmonth");
+		String partByear = memberAttributesMap.get("partByear");
+		String aarpNo = memberAttributesMap.get("aarpNo");
+		String phNo = memberAttributesMap.get("phNo");
+		String mobileFlag = memberAttributesMap.get("mobileFlag");
+
+		//DateOfBirthTxt.clear();
+		Thread.sleep(2000);
+       validateNew(DateOfBirthTxt);
+		
+		if(validateNew(DateOfBirthTxt)&& DateOfBirthTxt.isDisplayed())
+			DateOfBirthTxt.sendKeys(DOB);
+		PhNo.sendKeys(phNo);
+	}
+
+	@FindBy(xpath = "//button[contains(@type, 'submit') and contains(text(), 'Submit')]")
+	private WebElement SubmitBtn;
+	
+	@FindBy(xpath = "//*[contains(@id, 'thankyou')]")
+	private WebElement ThankYouPageHeader;
+
+	@FindBy(xpath = "//*[contains(@id, 'findplansbtn')]")
+	private WebElement FindPlanBtn;
+	
+	public License_ThankYouPage NavigateNext_LIAthankYouPage() {
+		if( validate(SubmitBtn)){
+			SubmitBtn.click();
+			
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(FindPlanBtn) && validate(ThankYouPageHeader)){
+			System.out.println("Submit Button Clicked : DGR Thank You Page is Displayed");
+			return new License_ThankYouPage(driver);
 		}
 		return null;
 	}
