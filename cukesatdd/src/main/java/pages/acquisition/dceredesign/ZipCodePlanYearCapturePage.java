@@ -34,16 +34,10 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='row mb-20']//div[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
-	
-	/*
-	 * @FindBy(xpath =
-	 * "//*[@class='uhc-spinner']//*[@class='uhc-spinner__inner-circle']") public
-	 * WebElement loadScreenSpinner;
-	 */
-	
+
 	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
 	public WebElement loadScreenSpinner;
-
+	
 	public ZipCodePlanYearCapturePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -161,16 +155,17 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		else {
 		Assert.assertTrue("Review drug cost page not displayed", false);
 		}
-	}
-	
-	public void verifyLoadScreen() {
-		waitforElementVisibilityInTime(loadScreenSpinner , 30);
 		
-		if(driver.findElement(By.cssSelector("#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")).isDisplayed()) {
-			Assert.assertTrue("Load screen page not displayed", true);
-		}
-		else {
-		Assert.assertTrue("Load screen page not displayed", false);
-		}
+	}
+		public void verifyLoadScreen() {
+				waitforElementVisibilityInTime(loadScreenSpinner , 30);
+				
+				if(driver.findElement(By.cssSelector("#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")).isDisplayed()) {
+					Assert.assertTrue("Load screen page not displayed", true);
+				}
+				else {
+				Assert.assertTrue("Load screen page not displayed", false);
+				}
+
 	}
 }
