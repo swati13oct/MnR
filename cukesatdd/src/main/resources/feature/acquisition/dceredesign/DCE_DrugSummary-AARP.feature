@@ -15,10 +15,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
-    And user selects plan year
-    And user clicks on continue button
+    And user selects plan year in AARP
+    And user clicks on continue button in AARP
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
+    And user should be navigated to Review drug cost estimate page in AARP
     And user verify the drug summary page
 
     Examples: 
@@ -40,10 +40,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
-    And user selects plan year
-    And user clicks on continue button
+    And user selects plan year in AARP
+    And user clicks on continue button in AARP
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
+    And user should be navigated to Review drug cost estimate page in AARP
     Then the user validates whether call icon is visible on AARP
     Then the user validates whether chat icon is visible on AARP
     
