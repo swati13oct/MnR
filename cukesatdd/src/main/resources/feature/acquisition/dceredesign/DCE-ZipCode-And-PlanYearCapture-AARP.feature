@@ -66,7 +66,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
 
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |          78452 |   90210 |            1234 |00000 |lipitor|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |          78452 |   90210|            1234 |00000 |lipitor|
 
   @DCE_ZipCodePlanYear_SamChatCall_AEP
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on AARP site
