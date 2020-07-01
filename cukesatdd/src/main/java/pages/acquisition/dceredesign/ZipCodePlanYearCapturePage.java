@@ -158,7 +158,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public void verifyLoadScreen() {
-		CommonUtility.waitForPageLoad(driver,loadScreenSpinner , 10);
+		waitforElementVisibilityInTime(loadScreenSpinner , 10);
 		if(validateNew(loadScreenSpinner)) {
 			Assert.assertTrue("Load screen page not displayed", true);
 		}
