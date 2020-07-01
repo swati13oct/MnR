@@ -388,6 +388,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 	
+	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	private WebElement advancedBtn;
+
+	@FindBy(xpath = "//a[@id='proceed-link']")
+	private WebElement proceedLink;
+
+	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -530,7 +537,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-
+		
+		try {
+		if (advancedBtn.isDisplayed()) {
+		advancedBtn.click();
+		proceedLink.click();
+		}
+		} catch (Exception e) {
+		System.out.println("Advanced button not displayed");
+		}
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 20);
 		// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 
