@@ -83,6 +83,9 @@ Feature: 1.25 Member Prepare For Next Year
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |
@@ -99,32 +102,33 @@ Feature: 1.25 Member Prepare For Next Year
 
 	@prepareForNextYear02a @devRegression
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
-	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | false | false | false | false | false | false | false | false | false | false | false |
-	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 12    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+        | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| false  | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	# ignore group cases for now until code is ready
 	#@prepareForNextYear02b
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	#    | 14    | F437767 | PDP	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |  
-	#    | 15    | F437767 | MAPD	 | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 16    | F437767 | MA	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |  
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | false | false  | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | false | false  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
     #tbd clean up later, these are invalid, user must have english to be able to have spanish or chinese
 	#tbd @prepareForNextYear02d
     #tbd Examples: 
-	#tbd     | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
-	#tbd     | 19    | F437767 | MAPD	 | IND_ES_PreNexYr| false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#tbd     | 20    | F437767 | MAPD	 | IND_ZH_PreNexYr| false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false |
-	#tbd     | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| false  | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false |
+	#tbd     | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+	#tbd     | 19    | F437767 | MAPD	 | IND_ES_PreNexYr| false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#tbd     | 20    | F437767 | MAPD	 | IND_ZH_PreNexYr| false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#tbd     | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| false  | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 	    
 ##### end - cases for team env #################################################################
 
@@ -224,24 +228,24 @@ Feature: 1.25 Member Prepare For Next Year
 
 	@prepareForNextYear02a @devRegression
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 13    | F437767 | MA	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 12    | F437767 | MAPD	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	# ignore group cases for now until code is ready
 	#@prepareForNextYear02b
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	#    | 14    | F437767 | PDP	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 15    | F437767 | MAPD	 | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 16    | F437767 | MA	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 18    | F437767 | PCP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 	    
 ##### end - cases for stage env #################################################################
 

@@ -24,7 +24,8 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 	
 	
-	public List<String> validateReviewPlanChangesSection_grp(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
+	//tbd public List<String> validateReviewPlanChangesSection_grp(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateReviewPlanChangesSection_grp(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		String section="Review plan changes";
 		String targetItem=section+" - section";
@@ -46,7 +47,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		section=section+" - document ";
 		targetItem=section+" section";
 		targetElement=grp_reviewPlanChanges_docSection;
-		if (showSectionDoc_f1) {
+		//tbd if (showSectionDoc_f1) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			targetItem=section+" - language dropdown";
@@ -61,9 +62,9 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			targetElement=grp_reviewPlanChanges_docSection_langDropdown;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		} else {
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}
+			//tbd } else {
+			//tbd 	note.addAll(validateDontHaveItem(targetItem, targetElement));
+			//tbd }
 		return note;
 	}
 	

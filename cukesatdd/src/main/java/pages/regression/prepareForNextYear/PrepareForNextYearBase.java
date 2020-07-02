@@ -7,6 +7,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -414,7 +415,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,1);
 		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
 		String actMsg=bookmarkErrMsg.getText();;
-		String expMsg="Your requested cannot be processed .Please try later";
+		String expMsg="Your request can not be Processed at this time. Please try again later";
 		Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
 		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
 
@@ -422,14 +423,13 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 	public List<String> validatePdf(String targetDocName, WebElement pdfLink) {
 		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
 		note.add("\tValidation for PDF ='"+targetDocName+"'");
 		String winHandleBefore = driver.getWindowHandle();
 
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int beforeClicked_numTabs=beforeClicked_tabs.size();	
 		CommonUtility.waitForPageLoad(driver, pdfLink, 5);
-		sleepByMillSec(300);
+		//tbd sleepByMillSec(300);
 		scrollElementToCenterScreen(pdfLink);
 		pdfLink.click();
 		CommonUtility.checkPageIsReady(driver);
@@ -439,7 +439,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(5);
+		sleepBySec(1);
 
 		String actUrl=driver.getCurrentUrl();
 		String expUrl=".pdf";
@@ -496,7 +496,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	 
 	public List<String> validateLanguageDropdown(String section, WebElement langDropdown, WebElement engOption, WebElement esOption, WebElement zhOption) {
 		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
 		note.add("\tValidate language dropdown...");
 		String targetItem=section+" - language dropdown and options";
 		WebElement targetElement=langDropdown;
@@ -539,6 +538,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		Assert.assertTrue("PROBLEM - unable to navigate again to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 	}
 
+	public int getCurrentYear() {
+		return Calendar.getInstance().get(Calendar.YEAR);
+	}
 
 	
 }

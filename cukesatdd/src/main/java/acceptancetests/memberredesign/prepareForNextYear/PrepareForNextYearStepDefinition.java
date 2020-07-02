@@ -231,6 +231,27 @@ public class PrepareForNextYearStepDefinition {
 		docDisplayMap.put(inputField, display);
 
 		//----------------------------------
+		docName="Comprehensive Formulary";
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+		
+
+		//----------------------------------
 		docName="Provider Directory";
 		inputField=docName+" English";
 		tmp=memberAttributesMap.get(inputField);
