@@ -78,3 +78,75 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Summary Benefits_Data | PDPSheet2  | AARP |
+      
+# Below are examples for UHC plan Summary benefits
+
+      @planSummaryBenefitsUHC01
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet1  | UHC |
+      
+      @planSummaryBenefitsUHC02
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2  | UHC |
+      
+      @planSummaryBenefitsUHC03
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet3  | UHC |
+      
+      @planSummaryBenefitsUHC04
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet4  | UHC |
+      
+      @planSummaryBenefitsUHC05
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet5  | UHC |
+      
+      @planSummaryBenefitsUHC06
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet6  | UHC |
+      
+      @planSummaryBenefitsUHC07
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet7  | UHC |
+      
+      @planSummaryBenefitsUHC08
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet8  | UHC |
+      
+      @planSummaryBenefitsUHC09
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet9  | UHC |
+      
+      @planSummaryBenefitsUHC10
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet10  | UHC |
+      
+      @planSummaryBenefitsUHC11
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet11 | UHC |
+      
+      @planSummaryBenefitsUHC12
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet12  | UHC |
+      
+      @planSummaryBenefitsPDPUHC01
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | PDPSheet1  | UHC |
+      
+       @planSummaryBenefitsPDPUHC02
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | PDPSheet2  | UHC |

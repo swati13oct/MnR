@@ -213,21 +213,40 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return validation_Flag;
 	}
 
-	public HashMap<String, String> collectInfoVppPlanSummaryPg() {
+	public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		System.out.println("Proceed to collect the plan counts on vpp summary page");
-
-		String allPlans = (vppTopHeader.getText().substring(10, 12).trim());
-		String maPlans = (maPlansCount.getText());
-			
-		String pdpPlans = (pdpPlansCount.getText());
-		String snpPlans =(snpPlansCount.getText());
+		System.out.println("Proceed to collect the plan benefits info on vpp summary page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
-		String planCard = "//*[contains(text(), '\"+planName+\"')]/ancestor::*[contains(@class,'module-plan-overview module')]";
+		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
 		
+		String rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
+		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
 		
-		System.out.println("collected result="+result);
+		String key = "";
+		
+		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
+			String cellsXpath="";
+			String value = "";
+			
+			 cellsXpath = rowXpath+"["+rowIndex+"]";
+			
+			 
+			 WebElement e=driver.findElement(By.xpath(cellsXpath));
+			 String rowText = e.getText();
+			 String [] parts = rowText.split(":");
+			 
+			 key = parts[0];
+			 value = parts[1];
+			 
+			 result.put(key, value);
+			 
+		}
+		
+		for(String keyValue : result.keySet()) {
+			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+			  System.out.println("_________________________________________________________________________________________________"); 
+		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
 	}
@@ -240,44 +259,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				
-				if(key.equalsIgnoreCase(columnName)) {
-						flag= false;break;
-					}
+				//if(key.contains(columnName)) {
+						flag= true;break;
+				//	}
 			
-			}else if(key.equalsIgnoreCase(columnName)) {
+			}else if(key.contains(columnName)) {
 
 
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
 						//the following code is used to remove the footnote values from the benefit value string. 
-						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
-							benefitValueUI = benefitValueUI.replace("footnote2", "");
-							benefitValueUI = benefitValueUI.replace("footnote1", "");
-						}else if(benefitValueUI.contains("footnote2"))
-							benefitValueUI = benefitValueUI.replace("footnote2", "");
-						else if(benefitValueUI.contains("footnote1"))
-							benefitValueUI = benefitValueUI.replace("footnote1", "");
-						else if(benefitValueUI.contains("1/"))
-							benefitValueUI = benefitValueUI.replaceAll("1/", "");
-						else if(benefitValueUI.contains("2/"))
-							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-						else
-							benefitValueUI = benefitValueUI.replaceAll("/", "");
-						
-						if(key.contains("Preferred Retail Pharmacy Network") || key.contains("Preferred Mail Home Delivery through OptumRx")) {
-							if(benefitValueUI.contains("1."))
-								benefitValueUI = benefitValueUI.replace("1.", ".");
-							else if(benefitValueUI.contains(".2"))
-								benefitValueUI = benefitValueUI.replace(".2", ".");
-						
-						}
 						
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							break;
 						}
 					
@@ -291,7 +289,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	public boolean checkForMultiCountyPopup(String countyName) {
 		boolean flag = false;
 		if(validate(countyModal)) {
-			driver.findElement(By.xpath("//div[@id='selectCounty']//*[contains(text(),'" + countyName + "']")).click();
+			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
 			validateNew(vppTopHeader);
 			flag = true;
 		}

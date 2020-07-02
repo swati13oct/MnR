@@ -394,8 +394,7 @@ public class VppPlanValidationStepDefinition {
 		//Setting First Row for Results excel
 
 			try {
-				 Iterator<Row> rowIterator = sheet.iterator();
-				 VppCommonPage vppCommonPage = null;
+			
 				 AepVppPlanSummaryPage planSummaryPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
@@ -431,9 +430,10 @@ public class VppPlanValidationStepDefinition {
 									 
 									  String countyName = row.getCell(4).getStringCellValue();
 									  String planType = row.getCell(1).getStringCellValue();
+									  String planName = row.getCell(3).getStringCellValue();
 									  
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
-									  vppCommonPage = new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 									  boolean popupFound =  planSummaryPage.checkForMultiCountyPopup(countyName);
 									  
@@ -444,12 +444,12 @@ public class VppPlanValidationStepDefinition {
 									  if(sheetName.contains("PDP")) {
 									
 									  }else {
-										  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg();   
+										  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);   
 										  
 									  }//  stores all the table info into hashmap
 								  		
 								 }
-								//  valueMatches = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+								  valueMatches = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 								 
 								
 								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
