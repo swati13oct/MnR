@@ -197,12 +197,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public void navigateToStep3() {
-
 		if (!(loadingBlock.isEmpty())) {
 			waitforElementDisapper(By.className("loading-dialog"), 60);
 		}
+		scrollToView(step3);
 		validateNew(step3);
-		jsClickNew(step3);
+		step3.click();
 	}
 	
 	public boolean validateDrugOnStep3(String drug) {

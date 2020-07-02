@@ -173,7 +173,12 @@ public class WerallyMobilePage extends UhcDriver {
 				//mobileswipe("50%",3, false);
 				*/
 				//Alternative :)
-				driver.navigate().to("https://connect.int.werally.in/searchResults/"+zip+"/page-1?term="+searchParameter);
+				String stgRally = "connect.int.werally.in";
+				String prdRally = "connect.werally.com";
+				if(driver.getCurrentUrl().contains(stgRally))
+					driver.navigate().to("https://"+stgRally+"/searchResults/"+zip+"/page-1?term="+searchParameter);
+				else
+					driver.navigate().to("https://"+prdRally+"/searchResults/"+zip+"/page-1?term="+searchParameter);
 				
 				pageloadcomplete();
 				System.out.println("We Rally Result URL : "+driver.getCurrentUrl());
