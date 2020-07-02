@@ -121,5 +121,9 @@ public class DCEStepDefinitionAARP {
 	}
 
 
+	@Then("^the user clicks on Add Drug$")
+	public void the_user_clicks_on_Add_Drug() throws Throwable {
+	}
+
 
 }
