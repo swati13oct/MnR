@@ -29,7 +29,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
-	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary']")
+	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary continue-btn']")
 	public WebElement continueBtn;
 	
 	@FindBy(xpath = "//*[@class='row mb-20']//div[contains(text(),'Your estimated')]")
@@ -72,6 +72,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public ZipCodePlanYearCapturePage validateZipCodePlanYearCapturePageNonAEP() {
+		CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
 		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
 			Assert.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 			return new ZipCodePlanYearCapturePage(driver);

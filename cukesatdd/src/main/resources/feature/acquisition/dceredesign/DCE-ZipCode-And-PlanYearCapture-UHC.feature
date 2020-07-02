@@ -33,7 +33,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
     Then user should be navigated to zipcode and plan year capture page for AEP on UHC
     When user enters valid zipcode and county on UHC
       | ZipCode | <zipCode> |
-    And user selects plan year on UHC
+    #And user selects plan year on UHC
     And user clicks on continue button on UHC
     Then load screen should be displayed on UHC
     And user should be navigated to Review drug cost estimate page on UHC
@@ -70,7 +70,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
 
 
   @DCE_ZipCodePlanYear_SamChatCall_AEP_UHC
-  Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on AARP site
+  Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on UHC site
      Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
