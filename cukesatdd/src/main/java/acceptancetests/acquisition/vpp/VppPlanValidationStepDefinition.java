@@ -401,7 +401,7 @@ public class VppPlanValidationStepDefinition {
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=5; rowIndex++)
 		            {
 					 	int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
@@ -435,18 +435,12 @@ public class VppPlanValidationStepDefinition {
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
-									  boolean popupFound =  planSummaryPage.checkForMultiCountyPopup(countyName);
+									  planSummaryPage.checkForMultiCountyPopup(countyName);
 									  
-									  if(popupFound) {
-										  planSummaryPage.viewPlanSummary(planType);
-									  }
-									  
-									  if(sheetName.contains("PDP")) {
-									
-									  }else {
-										  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);   
+									 
+									  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);   
 										  
-									  }//  stores all the table info into hashmap
+									  //  stores all the table info into hashmap
 								  		
 								 }
 								  valueMatches = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
