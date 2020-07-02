@@ -146,7 +146,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT "+targetLang+" EXPECT '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnChgSec_docSec_langDropdown.click();
+				//tbd ind_revPlnChgSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -186,7 +186,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnChgSec_docSec_langDropdown.click();
+				//tbd ind_revPlnChgSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -358,7 +358,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnMatlsSec_docSec_langDropdown.click();
+				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -398,7 +398,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnMatlsSec_docSec_langDropdown.click();
+				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -504,7 +504,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			ind_revPlnMatlsSec_docSec_langDropdown.click();
+			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Spanish language dropdown option'";
 			targetElement=ind_revPlnChgSec_lang_es_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -542,7 +542,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			ind_revPlnMatlsSec_docSec_langDropdown.click();
+			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Chinese language dropdown option'";
 			targetElement=ind_revPlnChgSec_lang_zh_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -588,9 +588,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			showSection=true;
 		}
 
+		targetItem=section+subSection+" - Provider Directory link";
+		targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk;
 		if (showSection) {
-			targetItem=section+subSection+" - Provider Directory link";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//TODO - validate link destination
@@ -651,7 +651,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnMatlsSec_docSec_langDropdown.click();
+				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -689,7 +689,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnMatlsSec_docSec_langDropdown.click();
+				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -751,7 +751,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				ind_revPlnMatlsSec_docSec_langDropdown.click();
+				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -899,7 +899,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			ind_revPlnMatlsSec_docSec_langDropdown.click();
+			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Spanish language dropdown option'";
 			targetElement=ind_revPlnMatlsSec_lang_es_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -937,7 +937,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			ind_revPlnMatlsSec_docSec_langDropdown.click();
+			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Chinese language dropdown option'";
 			targetElement=ind_revPlnMatlsSec_lang_zh_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -1119,17 +1119,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_enrolPlnSec_choYurPlnSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String showDocDateStr="10/15/"+String.valueOf(getCurrentYear());
+		//---------------------------
+		String showDocDateStr="12/07/"+String.valueOf(getCurrentYear());
 		Date showDocDate=convertStrToDate(showDocDateStr);
 		boolean showSection=false;
-		if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
+		if (currentDate.before(showDocDate) ) {
 			showSection=true;
 		}
 
 		targetItem=section+subSection+" - Stay in Current Plan link";
 		targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk;
 		if (showSection) {
-			//---------------------------
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//TODO - validate link destination
@@ -1164,8 +1164,18 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//TODO - validate link destination
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+			note.add("PASSED - validation for NOT HAVING "+targetItem);
+		}	
 
-			/* TODO
+		showDocDateStr="12/07/"+String.valueOf(getCurrentYear());
+		showDocDate=convertStrToDate(showDocDateStr);
+		showSection=false;
+		if (currentDate.after(showDocDate) ) {
+			showSection=true;
+		}
+		if (showSection) {
 			//---------------------------
 			targetItem=section+subSection+" - Stay in current plan";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_text;
@@ -1174,7 +1184,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+subSection+" - Stay in current plan - Plan Name";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_planName;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-			*/
 
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
