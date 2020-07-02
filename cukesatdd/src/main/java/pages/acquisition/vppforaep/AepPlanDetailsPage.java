@@ -374,7 +374,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
-					key = key.replaceAll("\\s+", "").replaceAll("*", "");
+					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
 					
 					//removing footnote values from the string
 					if(key.contains("Footnotes2") && key.contains("Footnotes1")) {
