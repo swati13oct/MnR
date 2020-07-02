@@ -56,7 +56,6 @@ Feature: 2.05.1.ACQ-OLE Piedmont UMS
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to SEP Page
-    Then the user navigates to SEP Page
     	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |

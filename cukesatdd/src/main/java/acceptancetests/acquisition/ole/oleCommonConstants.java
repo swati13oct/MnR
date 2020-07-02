@@ -40,5 +40,8 @@ public class oleCommonConstants {
 	public static final String MAILING_STATE = "mailingstate"; 
 	public static final String MAILING_ZIP = "mailingzip";
 	public static final String EMAIL = "emailaddress";
+	public static final String HEALTH_INSURANCE_NAME = "healthinsurancename";
+	public static final String GROUP_NUMBER = "groupnumber";
+	public static final String MEMBER_NUMBER = "membernumber";
 
 }

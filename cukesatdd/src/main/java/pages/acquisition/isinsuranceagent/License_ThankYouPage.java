@@ -37,7 +37,7 @@ public class License_ThankYouPage extends UhcDriver{
 
 	//Header
 
-	@FindBy(xpath = "//*[contains(@id, 'ebrcheader')]")
+	@FindBy(xpath = "//*[contains(@id, 'agentheader')]")
 	private WebElement PageHeader;
 
 	@FindBy(xpath = "//a[contains(@role, 'tab') and contains(text(), 'Step 1')]")

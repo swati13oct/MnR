@@ -45,7 +45,7 @@ public class IsInsuranceAgent extends UhcDriver{
 
 	//Header
 
-	@FindBy(xpath = "//*[contains(@id, 'ebrcheader')]")
+	@FindBy(xpath = "//*[contains(@id, 'agentheader')]")
 	private WebElement PageHeader;
 
 	//Form Elements
@@ -141,7 +141,7 @@ public class IsInsuranceAgent extends UhcDriver{
 		validate(tfnpopup);
 
 		if(PageHeader.getText().contains("Medicare Supplement Insurance Plans"))
-			System.out.println("IS Decision Guide Page header is Displayed : "+PageHeader.getText());
+			System.out.println("IS Licensed Insurance Agent Page header is Displayed : "+PageHeader.getText());
 	}
 
 	public boolean blankFieldValidation() {

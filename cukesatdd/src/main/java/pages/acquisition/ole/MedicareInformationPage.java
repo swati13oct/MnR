@@ -195,6 +195,22 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 	
+	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
+	private WebElement LongTermQuestionFlagYes;
+	
+	@FindBy(xpath= "//*[contains(@id,'hasHealthInsuranceNo')]")
+	private WebElement LongTermQuestionFlagNo;
+	
+	@FindBy(xpath= "//*[contains(@id,'healthInsuranceName0')]")
+	private WebElement healthInsuranceNameField;
+	
+	@FindBy(xpath= "//*[contains(@id,'groupNumber0')]")
+	private WebElement groupNumberField;
+	
+	@FindBy(xpath= "//*[contains(@id,'memberidNumber0')]")
+	private WebElement memberNumberField;
+	
+	
 	//=============================================================================	
 	
 		// Diabetes questions
@@ -880,4 +896,46 @@ return randomNumber;
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
 		return false;
 	}	
+	
+	public boolean  answer_following_questionsLongTerm(Map<String, String> memberDetailsMap) throws InterruptedException {
+		
+		boolean Validation_Flag = true;
+		
+		try
+		{
+
+		if(LongTermQuestionFlagNo.isDisplayed()) {
+			jsClickNew(LongTermQuestionFlagNo);
+			if(!validate(healthInsuranceNameField) && validate(groupNumberField)){
+				System.out.println("LongTermQuestion Options is yes : Validation Passed");	
+				Validation_Flag = true;	
+			}
+			else {
+				System.out.println("LongTermQuestion Options  :Validation Failed");
+				Validation_Flag = false;
+			}
+		}
+		
+		LongTermQuestionFlagYes.isDisplayed();
+		jsClickNew(LongTermQuestionFlagYes);	
+		
+		String HealthInsuranceName = memberDetailsMap.get("Health Insurance Name");
+		String GroupNumber = memberDetailsMap.get("Group Number");
+		String MemberNumber = memberDetailsMap.get("Member Number");
+		
+		sendkeysNew(healthInsuranceNameField, HealthInsuranceName);
+		sendkeysNew(groupNumberField, GroupNumber);
+		sendkeysNew(memberNumberField, MemberNumber);
+		
+		}catch(Exception e) {
+			
+			System.out.println("Failed Due To-------"+e.getMessage());
+			}
+
+		if(NextBtn.isEnabled()){
+			System.out.println("SEP options selected :  Next button is enabled");
+		}
+		return true;
+
+		}
 }
