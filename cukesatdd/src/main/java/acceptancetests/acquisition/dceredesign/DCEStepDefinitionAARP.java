@@ -94,7 +94,7 @@ public class DCEStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		String DrugName = memberAttributesMap.get("DrugName");	
+		String DrugName = memberAttributesMap.get("BrandDrugName");	
 		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		TellUsAboutDrug tellUsAboutDrug = DCEbuildDrugList.SelectDrugfromList(DrugName);		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_TellUsAboutDrug, tellUsAboutDrug);
@@ -108,8 +108,9 @@ public class DCEStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		String genericDrugName = memberAttributesMap.get("GenericName");	
-		String BrandDrugName = memberAttributesMap.get("DrugName");	
+		String genericDrugName = memberAttributesMap.get("GenericName");
+		String BrandDrugName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.BRAND_DRUG1);
+		//String BrandDrugName = memberAttributesMap.get("BrandDrugName");	
 
 		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario().getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		tellUsAboutDrug.validateBrandDrugPage(BrandDrugName, genericDrugName);
