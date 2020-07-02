@@ -1,4 +1,5 @@
 package pages.acquisition.dceredesign;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -21,10 +22,34 @@ public class BuildYourDrugList extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement EnterDrugNameTxt;
-
 	
+	@FindBy(xpath = "//button[(@id= 'search')]")
+	public WebElement SearchBtn;
+
+	@FindBy(xpath = "//button[(@id= 'previousButton')]")
+	public WebElement PreviousBtn;
+
+	@FindBy(xpath = "//*[(@id= 'drugError')]")
+	public WebElement BlankDrugError;
+	
+	@FindBy(xpath = "//*[(@id= 'err_2') or contains(@class, 'errtext')]")
+	public WebElement NoDrugError;
+	
+	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
+	public WebElement AutoCompleteList;
+
+	@FindBy(xpath = "//uhc-menu-item")
+	public List <WebElement> AutoCompleteitems;
+
+	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	public WebElement TellUsABoutHeader;
+	
+	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	public WebElement TellUsABoutCloseBtn;
+	
+	//uhc-menu-item	
 	public BuildYourDrugList(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -35,6 +60,59 @@ public class BuildYourDrugList extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
+
+	public void validateNoDrug_ErrorMsg() {
+		validateNew(SearchBtn);
+		jsClickNew(SearchBtn);
+		if(validateNew(BlankDrugError) && BlankDrugError.getText().contains("enter at least 4 characters ")) {
+			System.out.println("Error Message displayed for Blank Drug search : "+BlankDrugError.getText());
+		}
+		else
+			Assert.fail("Error Message displayed for Blank Drug search : "+BlankDrugError.getText());
+	}
+
+	public void validateDrugNotFound_ErrorMsg() {
+		validateNew(EnterDrugNameTxt);
+		EnterDrugNameTxt.sendKeys("india");
+		validateNew(SearchBtn);
+		jsClickNew(SearchBtn);
+		if(validateNew(NoDrugError) && NoDrugError.getText().contains("No drugs were found ")) {
+			System.out.println("Error Message displayed for No Drug Found : "+NoDrugError.getText());
+		}
+		else
+			Assert.fail("Error Message displayed for No Drug Found : "+NoDrugError.getText());		
+	}
+
+	public void ValidateDrugAutocomplete(String partialDrug) {
+		validateNew(EnterDrugNameTxt);
+		EnterDrugNameTxt.clear();
+		EnterDrugNameTxt.sendKeys(partialDrug);
+		validateNew(AutoCompleteList);
+		System.out.println("Drug Auto complete lis COunt : "+AutoCompleteitems.size());
+		if(validateNew(AutoCompleteList) && AutoCompleteitems.size()==5) {
+			System.out.println("Drug Autocomplete Validated - 5 drugs displayed for autocomplete");
+		}
+		else
+			Assert.fail("Drug Autocomplete NOT Validated");		
+
+	}
+
+	public TellUsAboutDrug SelectDrugfromList(String drugName) {
+		validateNew(AutoCompleteList);
+		WebElement Drug = driver.findElement(By.xpath("//uhc-menu-item[@id='"+drugName+"']"));
+		jsClickNew(Drug);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
+		{
+			return new TellUsAboutDrug(driver);
+		}
+		else {
+			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}
 	}
 
 

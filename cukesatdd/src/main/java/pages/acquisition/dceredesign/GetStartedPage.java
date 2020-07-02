@@ -25,7 +25,7 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(),'Add My Drug')]")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
 	public GetStartedPage(WebDriver driver) {
