@@ -376,6 +376,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
    	
+	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	private WebElement advancedBtn;
+
+	@FindBy(xpath = "//a[@id='proceed-link']")
+	private WebElement proceedLink;
+
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -459,6 +465,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		    return testSiteUrl;
 	  }
 	
+	
 	@Override
 	public void openAndValidate() {
 
@@ -472,14 +479,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
-		}else {
+		}
+		else {
 			start(AARP_ACQISITION_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PAGE_URL;
 			checkModelPopup(driver,30);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		
+		try {
+			if (advancedBtn.isDisplayed()) {
+			advancedBtn.click();
+			proceedLink.click();
+			}
+			} catch (Exception e) {
+			System.out.println("Advanced button not displayed");
+			}
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -1337,6 +1352,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(getStarted);
 		getStarted.click();
 
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+	
+	public DrugCostEstimatorPage navigateToDCEToolFromVPP() throws InterruptedException {
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
