@@ -284,7 +284,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		LookUpDrugsButton.click();
 		sleepBySec(40);
 		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs2.get(0));
+		if(tabs2.size() == (2)) {
+			
+			driver.switchTo().window(tabs2.get(0));
+		}
+		else if(tabs2.size()==(3))  
+		{
+			driver.switchTo().window(tabs2.get(1));
+		}
+		
 
 	}
 
@@ -2083,7 +2091,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
 				getJmpLinkToPrimaryCareProvider().isDisplayed());
 		if (rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+			Assert.assertTrue("jmpLinkToOptionalServices(Riders) isn't displayed",
 					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());

@@ -134,6 +134,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate FindCare link on top menu", false);
 			}
 		}
+		sleepBySec(1);
 		return driver;
 	}
 

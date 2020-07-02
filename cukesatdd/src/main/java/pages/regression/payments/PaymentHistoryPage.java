@@ -268,7 +268,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']")
 	private WebElement unpaidRadio;
 
-	@FindBy(xpath = "//*[@id='paymentTable']")
+	@FindBy(xpath = "//*[@id='paymentTable' or @id='paymentTable1']")
 	private WebElement paymentTable;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
@@ -946,6 +946,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(20000);
 		
 		waitforElement(SetUpAutomaticPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Automatic Button");
 		try {
@@ -989,6 +990,14 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPaymentforShip() throws Exception {
+		checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Thread.sleep(20000);
 		waitforElement(EditRecurringPaymentsButton);
 		EditRecurringPaymentsButton.click();
@@ -1693,12 +1702,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 		
 			public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+				checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				CommonUtility.waitForPageLoad(driver, menubutton, 20);
 				CommonUtility.waitForPageLoad(driver, paymentTable, 20);
 								
 				System.out.println("Now Scrolling to daterange dropdown");				
 				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
-				jse3.executeScript("arguments[0].scrollIntoView()", menubutton); 
+				jse3.executeScript("arguments[0].scrollIntoView()", menubutton);
+				jse3.executeScript("window.scrollBy(0,-50)", "");
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {

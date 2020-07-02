@@ -936,8 +936,9 @@ public class EOBPage extends EOBBase{
 
 			//note - validate the pagination
 			System.out.println(i % 10);
-			if (i % 10 == 0 && i != 0) {
-				if(i==(ui_eobCountInt-1)) {
+			System.out.println("ui_eobCountInt="+ui_eobCountInt);
+			if (i % 10 == 0 && i != 0 && i>=10) {
+				if(i==(ui_eobCountInt)) {
 					System.out.println("At last EOB for Member - No Next Page arrow");
 					break;
 				}

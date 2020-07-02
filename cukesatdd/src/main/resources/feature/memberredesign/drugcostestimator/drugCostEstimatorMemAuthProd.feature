@@ -18,8 +18,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
 
     Examples: 
       | TID   | username | password | MemUserName   | planType | memberType   |
-      | 15326 | ashah120 | Mnrqa002 |  Pramila1946	| SHIP     | SHIP_DCE     |
-      | 15337 | ashah120 | Mnrqa002 |  1GIRL4DEAN  	| MA       | MA_DCE       |
+      | 15326 | ashah120 | Mnrqa002 |  vernajohnson19651	| SHIP     | SHIP_DCE     |
+      | 15337 | ashah120 | Mnrqa002 |  BNCSAUVE2  	| MA       | MA_DCE       |
       | 15327 | ashah120 | Mnrqa002 |   PTHUYNH50	| SSUP     | SSUP_DCE     |
    
    @drugCostEstimator2 @prod
@@ -68,7 +68,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
       | 15325 | ashah120 | Mnrqa002 | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
 
-   @Member_DCE_sso 
+  @drugCostEstimator6  @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

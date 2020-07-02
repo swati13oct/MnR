@@ -373,8 +373,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 
+	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
+	private WebElement ChatCancelBtn;
    	
-   	
+	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	private WebElement advancedBtn;
+
+	@FindBy(xpath = "//a[@id='proceed-link']")
+	private WebElement proceedLink;
+
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -458,6 +465,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		    return testSiteUrl;
 	  }
 	
+	
 	@Override
 	public void openAndValidate() {
 
@@ -471,14 +479,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
-		}else {
+		}
+		else {
 			start(AARP_ACQISITION_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PAGE_URL;
 			checkModelPopup(driver,30);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		
+		try {
+			if (advancedBtn.isDisplayed()) {
+			advancedBtn.click();
+			proceedLink.click();
+			}
+			} catch (Exception e) {
+			System.out.println("Advanced button not displayed");
+			}
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -1337,6 +1353,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new DrugCostEstimatorPage(driver);
 		return null;
 	}
+	
+	public DrugCostEstimatorPage navigateToDCEToolFromVPP() throws InterruptedException {
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
 
 	public VPPPlanSummaryPage ZipcodeSearch(String zipcode) {
 		try {
@@ -1930,7 +1952,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
-			WebElement PlanSelectorLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
+			WebElement PlanSelectorLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
 			WebElement DCELink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
 			WebElement PharmacySearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
@@ -2243,7 +2265,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 		}
 	}
+	
+	public void validateChatIcon() throws InterruptedException {
+		boolean present;
+		CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+		if (chatsam.isDisplayed()) {
+			System.out.println("@@@@ Chat Icon window opened successfully@@@");
+			jsClickNew(chatsam);
+			Thread.sleep(5000);
+			//driver.switchTo().frame("sp-chat-iframe");
+			validate(ChatCancelBtn, 10);
+			present = true;
+			CommonUtility.waitForPageLoadNewForClick(driver, ChatCancelBtn, 30);
+			jsClickNew(ChatCancelBtn);
+			//ChatCancelBtn.click();
+			//driver.switchTo().defaultContent();
+			CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+			System.out.println("@@@@ Chat Icon is displayed Successfully@@@");
+		}
 
+		else {
+			System.out.println("@@@@@@@@@ No Chat Window  @@@@@@@@@");
+			//assertTrue("Chat Icon not displayed on " + pageName + "", false);
+		}
+	}
 	}
 
 	 

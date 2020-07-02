@@ -3,6 +3,7 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,11 +12,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
 
 /**
  * @author pperugu
@@ -81,6 +85,12 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
+	@FindBy(xpath="//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	private WebElement Places;
+	
+	@FindBy(xpath="//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	private WebElement Hospitals;
+	
 	@FindBy(id="location")
 	private WebElement zipCodeTextfield;
 	
@@ -93,7 +103,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
 	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//button[text()='Cancel']//following-sibling::button")
@@ -197,6 +207,40 @@ public class ProviderSearchPage extends UhcDriver {
 	validateNew(Checkcoverage);
 	Checkcoverage.click();
 	//jsClickNew(Checkcoverage);
+	waitForCountDecrement(2);
+	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+	return new VPPPlanSummaryPage(driver);
+	}
+	
+	public VPPPlanSummaryPage selectsHospitals() {
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+	GetStarted.click();
+
+	CommonUtility.waitForPageLoadNew(driver, Places, 30);
+	Places.click();
+	
+	CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
+	Hospitals.click();
+
+	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+	
+	jsClickNew(SaveBtn);
+	if(validate(selectLocationOption)){
+		selectLocationOption.click();
+		validateNew(saveBtn2);
+		saveBtn2.click();
+	}
+	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+	jsClickNew(Viewsavebtn);
+	validateNew(providerNameText);
+	String providerSaved = providerNameText.getText().trim();
+	System.out.println("Hospital Name is : " + providerSaved);
+	MRConstants.PROV_NAME=providerSaved;
+	Checkcoverage.click();
+	/*validateNew(Checkcoverage);
+	jsClickNew(Checkcoverage);*/
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -396,4 +440,17 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 	    return topicDropDownValues.size();
 	}
 	
+	public void verifyProviderSearchRallyPageDisplayed() {
+		/*
+		 * CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		 * int initialCount = driver.getWindowHandles().size(); ArrayList<String> tabs =
+		 * new ArrayList<String>(driver.getWindowHandles()); String currentHandle =
+		 * null; for (int i = 0; i < initialCount + 1; i++) {
+		 * driver.switchTo().window(tabs.get(i)); currentHandle =
+		 * driver.getWindowHandle(); if
+		 * (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)
+		 * ) break; }
+		 */
+		Assert.assertTrue(driver.getCurrentUrl().contains("werally"),"Provider Search Rally Page is not displayed");
+	}
 }
