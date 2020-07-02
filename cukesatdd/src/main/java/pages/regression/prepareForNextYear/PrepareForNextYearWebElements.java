@@ -304,20 +304,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//i[contains(@class,'checkmarkSection')]")
 	protected WebElement ind_revPlnChgSec_docSec_checkMark;
 	
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//a[contains(text(),'Compare your current plan')]")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preCompareYourCurrentPlanLnk;
-	
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//div[@class='orText']")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preOrTextForAnoc;
-	
-	
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//div[@data-ng-if='displayanaoc']//div[contains(@class,'review-section-inner') and contains(text(),'Open Annual Notice of Changes')]")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_us;
-	
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocavailable')]//div[@data-ng-if='displayanaoc']//div[contains(@class,'review-section-inner') and contains(text(),'Open Annual Notice of Changes')]//span[contains(text(),'Available by 9/30')]")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preBlueBySept30;
-	
-	
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Compare your current plan')]")
 	protected WebElement ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
 
@@ -336,27 +322,17 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]/../i")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_en_arrow;
 
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//span[contains(text(),'Aviso')]")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_es;
-
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_es;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]/../i")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_es_arrow;
 
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@class,'anocdocument')]//span[contains(@ng-if,'zh') and contains(text(),'PDF')]")
-	//tbd protected WebElement ind_reviewPlanChanges_docSection_preGrayAnoc_zh;
-
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_zh;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_zh_arrow;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//span[contains(text(),'Soon')]")
-	//tbd protected WebElement comingSoonText;
-
 
 	// individual - reivew plan materials
 
@@ -646,11 +622,27 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_seleNewPln_compNewPlnsLnk;
 	
 	//note: Enroll in the plan that works for you - Choose your plan - You will stay in your current plan
-	@FindBy(xpath="//div[contains(@class,'Enrollplan')]//div[contains(@class,'currentplan')]//p[contains(text(),'You will stay in')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan')]//div[contains(@class,'currentplan') and not(contains(@class,'ng-hide'))]//p[contains(text(),'You will stay in')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_text;
 
-	@FindBy(xpath="//div[contains(@class,'Enrollplan')]//div[contains(@class,'currentplan')]//p[contains(text(),'You will stay in')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan')]//div[contains(@class,'currentplan') and not(contains(@class,'ng-hide'))]//p[contains(text(),'You will stay in')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_planName;
+	
+	//note: aarp acq site zipcode input box
+	@FindBy(xpath="//input[@id='cta-zipcode']")
+	protected WebElement zipCodeField_acq;
+	
+	//note: provider search page
+	@FindBy(xpath="//h1[contains(text(),'What')]")
+	protected WebElement providerSearchHeaderTxt;
+	
+	//note: Drug Search page
+	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	protected WebElement dceHeader;
+	
+	//note: Pharmacy Locator page
+	@FindBy(xpath = "//h1[contains(@id, 'pharmacylocatorheader')]")
+	protected WebElement pharmacyHeader;
 	
 	
 	/* TODO

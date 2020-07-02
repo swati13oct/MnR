@@ -429,7 +429,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int beforeClicked_numTabs=beforeClicked_tabs.size();	
 		CommonUtility.waitForPageLoad(driver, pdfLink, 5);
-		//tbd sleepByMillSec(300);
 		scrollElementToCenterScreen(pdfLink);
 		pdfLink.click();
 		CommonUtility.checkPageIsReady(driver);
@@ -493,6 +492,20 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		return note;
 	}
+	
+	public List<String> validatePdfLinkTxt(String docName, WebElement targetElement) {
+		List<String> note=new ArrayList<String>();
+		String lnkTxt=targetElement.getText();
+		String startTxt="Open";
+		Assert.assertTrue("PROBLEM - unable to locate the word '"+startTxt+"' in front of PDF name '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.startsWith(startTxt));
+		note.add("\tPASSED - validation for PDF link text starts with '"+startTxt+"'");
+
+		String endTxt="PDF";
+		Assert.assertTrue("PROBLEM - unable to locate the word '"+endTxt+"' for PDF link '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.contains(endTxt));
+		note.add("\tPASSED - validation for PDF link text ends with '"+endTxt+"'");
+		return note;
+	}
+	
 	 
 	public List<String> validateLanguageDropdown(String section, WebElement langDropdown, WebElement engOption, WebElement esOption, WebElement zhOption) {
 		List<String> note=new ArrayList<String>();
@@ -541,6 +554,84 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
+	
+	public List<String> validateLnkBehavior(String planType, String memberType, String targetItem, WebElement targetElement, String expUrl, WebElement expElement) {
+		List<String> note=new ArrayList<String>();
+		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
+		if (targetItem.contains("Search For Providers link")) {
+			String actHrefUrl=targetElement.getAttribute("ng-click");
+			String[] tmpLnk=expUrl.split("\\|");
+			boolean found=false;
+			for (String u: tmpLnk) {
+				if (actHrefUrl.contains(u)) {
+					found=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+actHrefUrl+"'", found);
+			note.add("\tPASSED - validation for link element href value for "+targetItem);
+			if (MRScenario.environment.contains("team-a")) { 
+				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
+				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
+			} else {
+				String winHandleBefore = driver.getWindowHandle();
+
+				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				int beforeClicked_numTabs=beforeClicked_tabs.size();	
+				CommonUtility.waitForPageLoad(driver, expElement, 5);
+				targetElement.click();
+				CommonUtility.checkPageIsReady(driver);
+
+				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				int afterClicked_numTabs=afterClicked_tabs.size();
+				Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+				CommonUtility.checkPageIsReady(driver);
+
+				String currentUrl=driver.getCurrentUrl();
+				boolean found2=false;
+				for (String u: tmpLnk) {
+					if (currentUrl.contains(u)) {
+						found2=true;
+						break;
+					}
+				}
+				Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+currentUrl+"'", found2);
+				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+				note.add("\tPASSED - validation for link target page loading for "+targetItem);
+
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
+
+			}
+		} else {
+			String actHrefUrl=targetElement.getAttribute("href");
+			Assert.assertTrue("PROBLEM - link '"+targetItem+"' element href value is not as expected.  Expected to contain='"+expUrl+"' | Actual='"+actHrefUrl+"'", actHrefUrl.contains(expUrl));
+			note.add("\tPASSED - validation for link element href value for "+targetItem);
+
+			if (MRScenario.environment.contains("team-a")) { 
+				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
+				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
+			} else {
+				String originalUrl=driver.getCurrentUrl();
+				
+				targetElement.click();
+				CommonUtility.waitForPageLoad(driver, expElement, 10);
+				String currentUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected to land on='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+				note.add("\tPASSED - validation for link destination after click for "+targetItem);
+				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+				note.add("\tPASSED - validation for link target page loading for "+targetItem);
+				
+				backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			}
+		}
+		
+		return note;
+
+	}
+
+
 
 	
 }

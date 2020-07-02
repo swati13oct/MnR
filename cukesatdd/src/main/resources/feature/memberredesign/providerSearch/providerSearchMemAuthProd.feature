@@ -17,11 +17,11 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
     #-------------- navigate to the target test page for testing
     Then the user navigates to Provider Search page
 	Then the user navigates to Claims page from Provider Search page
-#	Then the user navigates to Benefits page from Provider Search page
-#	Then the user navigates to Payments page from Provider Search page
-#	Then the user navigates to Pharmacies and Prescriptions page from Provider Search page
-#	Then the user navigates to Health and Wellness page from Provider Search page
-#	Then the user navigates to Account Settings page from Provider Search page
+	Then the user navigates to Benefits page from Provider Search page
+	Then the user navigates to Payments page from Provider Search page
+	Then the user navigates to Pharmacies and Prescriptions page from Provider Search page
+	Then the user navigates to Health and Wellness page from Provider Search page
+	Then the user navigates to Account Settings page from Provider Search page
 	
 	@prod_providerSearch01a
     Examples: 

@@ -38,10 +38,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 	}
 
-	//tbd public List<String> validateReviewPlanChangesSection_ind(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewPlanChangesSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
+		note.add("\t==============================================================");
 		String section="Review plan changes";
 		note.add("\tValidate for section: "+section);
 		String targetItem=section+" - section";
@@ -60,6 +59,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=indrevPlnChgSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		//-------------------------------------
 		section=section+" - document ";
 		targetItem=section+" section";
 		targetElement=ind_revPlnChgSec_docSec;
@@ -70,7 +70,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
 			showSection=true;
 		}
-		//tbd if (showSectionDoc_f1) {
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
@@ -87,11 +86,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			String expUrl="https://www.aarpmedicareplans.com/";
+			WebElement expElement=zipCodeField_acq;
+			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+
 			targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
 			targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//TODO - click the Compare Your Current Plan link
 
 			String docName="Annual Notice of Changes";
 			note.add("\t=================");
@@ -109,7 +110,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				targetElement=ind_revPlnChgSec_docSec_anoc_en;
 				note.addAll(validateHaveItem(targetItem, targetElement));
-
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
+				
 				note.addAll(validatePdf(targetItem, targetElement));
 
 				targetItem=section+" - Arrow after '"+docName+" (PDF)'";
@@ -136,6 +138,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnChgSec_docSec_anoc_es;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -146,7 +149,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT "+targetLang+" EXPECT '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnChgSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -176,6 +178,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnChgSec_docSec_anoc_zh;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -186,7 +189,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnChgSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -198,16 +200,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
 				targetElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
-
-		//tbd } else {
-		//tbd 	note.addAll(validateDontHaveItem(targetItem, targetElement));
-		//tbd }	
 
 		Select select = new Select(ind_revPlnChgSec_docSec_langDropdown);           
 		select.selectByValue("en_us");
@@ -215,11 +212,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return note;
 	}
 
-
-	//tbd public List<String> validateReviewPlanMaterialsSection_ind(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewPlanMaterialsSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
+		note.add("\t==============================================================");
 		String section="Review Plan Materials";
 		note.add("\tValidate for section: "+section);
 		String targetItem=section+" - section";
@@ -249,7 +244,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetItem=section+" section";
 		targetElement=ind_revPlnMatlsSec_docSec;
 		if (showSection) {
-			//tbd if (showSectionDoc_f1) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			note.addAll(validateLanguageDropdown(section, ind_revPlnMatlsSec_docSec_langDropdown, ind_revPlnMatlsSec_lang_en, ind_revPlnMatlsSec_lang_es, ind_revPlnMatlsSec_lang_zh));
@@ -269,21 +263,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 				note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
 			}
-			//tbd } else {
-			//tbd 	Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-			//tbd 	note.add("PASSED - validation for "+targetItem);
-			//tbd }		
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("PASSED - validation for NOT HAVING "+targetItem);
 		}	
-
-
-
 		return note;
 	}
 
-	//tbd public List<String> validateReviewYourBenefitsPlans(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewYourBenefitsPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -320,6 +306,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -349,6 +336,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -358,7 +346,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -388,6 +375,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -398,7 +386,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -420,14 +407,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("PASSED - validation for NOT HAVING "+targetItem);
 		}	
-
-
 		return note;
-
 	}
 
-
-	//tbd public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -448,6 +430,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		String expUrl="member/drug-lookup/overview.html";
+		WebElement expElement=dceHeader;
+		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+		
 		targetItem=section+subSection+" - arrow after Drug Search link";
 		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
 		note.addAll(validateHaveItem(targetItem, targetElement));
@@ -463,10 +449,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_en;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
-			targetItem=section+" - OR before '"+docName+"' link'";
+			targetItem=section+" - 'OR' text before '"+docName+"' link'";
 			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_en_OR;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -493,6 +480,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_es;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
@@ -504,7 +492,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Spanish language dropdown option'";
 			targetElement=ind_revPlnChgSec_lang_es_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -531,6 +518,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
@@ -542,7 +530,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Chinese language dropdown option'";
 			targetElement=ind_revPlnChgSec_lang_zh_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -563,8 +550,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return note;
 	}
 
-
-	//tbd public List<String> validateReviewProviderInfo(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewProviderInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -588,14 +573,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			showSection=true;
 		}
 
-		targetItem=section+subSection+" - Provider Directory link";
+		targetItem=section+subSection+" - Search For Providers link";
 		targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk;
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//TODO - validate link destination
+			String expUrl="member.mymedicareaccount.com|member.uhc.com|connect.werally.com";
+			WebElement expElement=providerSearchHeaderTxt;
+			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-			targetItem=section+subSection+" - arrow after Drug Search link";
+			targetItem=section+subSection+" - arrow after Search For Providers link";
 			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
@@ -610,10 +597,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
-				targetItem=section+" - OR before '"+docName+"' link'";
+				targetItem=section+" - 'OR' text before '"+docName+"' link'";
 				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_OR;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
@@ -640,6 +628,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -651,7 +640,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -678,6 +666,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -689,7 +678,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_zh_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -704,7 +692,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
 			}
 
-
 			targetLang="English";
 			docName="Vendor Information Sheet";
 			if (docDisplayMap.get(docName+" "+targetLang)) {
@@ -715,6 +702,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -740,6 +728,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -751,7 +740,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
-				//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 				targetItem="Spanish language dropdown option'";
 				targetElement=ind_revPlnChgSec_lang_es_ava;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -778,6 +766,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
 				CommonUtility.waitForPageLoad(driver, targetElement, 10);
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 				note.addAll(validatePdf(targetItem, targetElement));
 
@@ -818,8 +807,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return note;
 	}
 
-
-	//tbd public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -840,7 +827,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		//TODO - validate link destination
+		String expUrl="member/pharmacy-locator/overview.html";
+		WebElement expElement=pharmacyHeader;
+		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+
 
 		targetItem=section+subSection+" - arrow after Drug Search link";
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk_arrow;
@@ -857,10 +847,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
-			targetItem=section+" - OR before '"+docName+"' link'";
+			targetItem=section+" - 'OR' text before '"+docName+"' link'";
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_OR;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -888,6 +879,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_es;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
@@ -899,7 +891,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Spanish language dropdown option'";
 			targetElement=ind_revPlnMatlsSec_lang_es_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -926,6 +917,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
@@ -937,7 +929,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
-			//tbd ind_revPlnMatlsSec_docSec_langDropdown.click();
 			targetItem="Chinese language dropdown option'";
 			targetElement=ind_revPlnMatlsSec_lang_zh_ava;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
@@ -956,11 +947,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 
-
-	//tbd public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
+		note.add("\t==============================================================");
 		String section="Compare plans online";
 		note.add("\tValidate for section: "+section);
 		String targetItem=section+" - section";
@@ -990,27 +979,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetItem=section+" section";
 		targetElement=ind_compPlnsSec_lrnOthPlnSec;
 		if (showSection) {
-			//tbd if (showSectionDoc_f1) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Learn about other plan choices' section");
 			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, docDisplayMap));
-			//tbd note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-			//tbd } else {
-			//tbd 	Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-			//tbd 	note.add("PASSED - validation for "+targetItem);
-			//tbd }		
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("PASSED - validation for NOT HAVING "+targetItem);
 		}		
-
-
-
 		return note;
 	}
 
-	//tbd public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -1041,7 +1020,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-		targetItem=section+subSection+" - OR before Compare New Plans Link";
+		targetItem=section+subSection+" - 'OR' text before Compare New Plans Link";
 		targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
@@ -1058,13 +1037,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return note;
 	}
 
-
-
-
-	//tbd public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
-		note.add("=============================================");
+		note.add("\t==============================================================");
 		String section="Enroll in the plan that works for you";
 
 		note.add("\tValidate for section: "+section);
@@ -1087,20 +1062,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		section=section+" - document ";
 		targetItem=section+" section";
 		targetElement=ind_enrolPlnSec_choYurPlnSec;
-		//tbd if (showSectionDoc_f1) {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Choose your plan");
-		//tbd note.addAll(validateChoosePlan(section, planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
 		note.addAll(validateChoosePlan(section, planType, memberType, currentDate, docDisplayMap));
-		//tbd } else {
-		//tbd 	Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-		//tbd 	note.add("PASSED - validation for "+targetItem);
-		//tbd }		
 		return note;
 	}
 
-	//tbd public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -1139,21 +1107,34 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-			targetItem=section+subSection+" - Stay in Current Plan - OR before Compare New Plans Link";
-			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			Assert.assertTrue("PROBLEM - unable to locate '"+targetItem+"'.  Actual line of text='"+targetElement.getText()+"'", targetElement.getText().contains(" or "));
+			//---------------------------
+			showDocDateStr="10/15/"+String.valueOf(getCurrentYear());
+			showDocDate=convertStrToDate(showDocDateStr);
+			boolean showSection2=false;
+			if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
+				showSection2=true;
+			}
 
 			targetItem=section+subSection+" - Stay in Current Plan - Compare New Plans Link";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
-			note.addAll(validateHaveItem(targetItem, targetElement));
+			if (showSection2) {
+				note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//TODO - validate link destination
+				//TODO - validate link destination
 
-			targetItem=section+subSection+" - Stay in Current Plan  - Compare New Plans Link Arrow";
-			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
+				targetItem=section+subSection+" - Stay in Current Plan - 'OR' text before Compare New Plans Link";
+				targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+				Assert.assertTrue("PROBLEM - unable to locate '"+targetItem+"'.  Actual line of text='"+targetElement.getText()+"'", targetElement.getText().contains(" or "));
 
+				targetItem=section+subSection+" - Stay in Current Plan  - Compare New Plans Link Arrow";
+				targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+			} else {
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+				note.add("PASSED - validation for NOT HAVING "+targetItem);
+			}	
+			
 			//---------------------------
 			targetItem=section+subSection+" - Selected New Plan";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_seleNewPln_text;
@@ -1175,10 +1156,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		if (currentDate.after(showDocDate) ) {
 			showSection=true;
 		}
+		targetItem=section+subSection+" - Stay in current plan";
+		targetElement=ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_text;
 		if (showSection) {
 			//---------------------------
-			targetItem=section+subSection+" - Stay in current plan";
-			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_text;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			targetItem=section+subSection+" - Stay in current plan - Plan Name";
@@ -1187,11 +1168,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
-
-
-
 		return note;
 	}
 
