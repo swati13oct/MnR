@@ -287,7 +287,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
-			if (subSection.equals("Other Resources Part1of2")) {
+			if (subSection.equals("Other Resources Part2of2")) {
 				targetTestDocList = new ArrayList<String>();
 				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
 				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
