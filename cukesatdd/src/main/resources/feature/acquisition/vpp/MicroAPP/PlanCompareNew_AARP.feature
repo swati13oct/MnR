@@ -70,8 +70,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     And user verifies home link of agents&brokers page ulayer
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             |
-      | 00007 |   90210 | No            | Los Angeles County |
+      | TCID  | zipcode | isMultiCounty | county             | plantype |
+      | 00007 |   90210 | No            | Los Angeles County | MAPD     |
 
   @vppPlanCompareAARP05 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
@@ -84,8 +84,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then the user clicks on back on all plan linnk in Plan Compare page
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             |
-      | 00008 |   90210 | No            | Los Angeles County |
+      | TCID  | zipcode | isMultiCounty | county             | plantype |
+      | 00008 |   90210 | No            | Los Angeles County | MAPD     |
 
   @vppPlanCompareAARP06 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
