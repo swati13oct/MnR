@@ -21,12 +21,15 @@ public class BuildYourDrugList extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement EnterDrugNameTxt;
 	
 	@FindBy(xpath = "//button[@id='search']")
 	public WebElement searchBtn;
 
+	@FindBy(xpath = "//*[@id='Lipitor']/div")
+	public WebElement selectdrug;
+	
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
 	public WebElement selectBtn;
 	
@@ -50,8 +53,9 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public void addDrugs(String drugName) {
 		EnterDrugNameTxt.sendKeys(drugName);
+		selectdrug.click();
 		searchBtn.click();
-		selectBtn.click();
+		//selectBtn.click();
 		addToDrugList.click();
 		//reviewDrugCost.click();
 	}
