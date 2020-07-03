@@ -3,9 +3,12 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +21,8 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCommonutility extends UhcDriver {
+	
+	Actions actions = new Actions(driver);
 
 	public PlanRecommendationEngineCommonutility(WebDriver driver) {
 		super(driver);
@@ -300,5 +305,14 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				System.out.println("Unable to validate Continue button functionality on Next page");
 			}
 		}
+	}
+	
+	public void MouseOver(WebElement element, String browser) {
+		System.out.println("Browser Name: "+browser);
+		if(browser.equals("chrome") || browser.equals("IE") || browser.equals("edge")) 
+			actions.clickAndHold(element).build().perform();
+		else {
+			actions.moveToElement(element).click().build().perform();
+			}
 	}
 }
