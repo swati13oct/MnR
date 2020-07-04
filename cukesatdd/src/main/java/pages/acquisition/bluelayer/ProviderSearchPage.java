@@ -123,6 +123,9 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
 	private WebElement providerNameText;
 	
+	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+	private WebElement Checkcoverage;
+	
 	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
 	private WebElement nextYrTile;
 	
@@ -281,10 +284,12 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 				
 			}
+			/*New Changes
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
 			continueSearching.click();
-			//CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			//jsClickNew(BtnClose);
+			*/
+			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
+			jsClickNew(BtnClose);
 			
 			//counter++;
 //			if(counter==2)
@@ -296,10 +301,13 @@ public class ProviderSearchPage extends UhcDriver {
 			
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
+		/*
+		 * jsClickNew(Savedproviders); validateNew(Finish); Finish.click();
+		 */
 		jsClickNew(Savedproviders);
-		validateNew(Finish);
-		Finish.click();
-		
+		validateNew(providerNameText);
+		validateNew(Checkcoverage);
+		Checkcoverage.click();
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

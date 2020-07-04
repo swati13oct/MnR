@@ -1,6 +1,6 @@
 Feature: 2.05.1.ACQ-OLE MA UMS
 
-  @MA_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer @fastandfurious @OLE @MA_OLE_UHC_PCP @prodRegression @F401735 @F427594
+  @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer @fastandfurious @OLE @MA_OLE_UHC_PCP @prodRegression @F401735 @F427594
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

@@ -407,10 +407,14 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 
 			}
+			/*New Changes
+			 * 
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
 			continueSearching.click();
-			//CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			//jsClickNew(BtnClose);
+			
+			*/
+			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
+			jsClickNew(BtnClose);
 
 			// counter++;
 //			if(counter==2)
@@ -422,20 +426,25 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
-		/*
-		 * jsClickNew(Savedproviders); validateNew(providerNameText);
-		 * validateNew(Checkcoverage); Checkcoverage.click(); //
-		 * jsClickNew(Checkcoverage); waitForCountDecrement(2);
-		 * driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		 */
-		
+		 jsClickNew(Savedproviders); 
+		 validateNew(providerNameText);
+		 validateNew(Checkcoverage); 
+		 Checkcoverage.click(); 
+		 jsClickNew(Checkcoverage); 
+		 waitForCountDecrement(2);
+		 driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		 
+		/*New Changes
+		 * 
 		jsClickNew(Savedproviders);
 		validateNew(Finish);
 		Finish.click();
 		
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-
+		return new VPPPlanSummaryPage(driver);
+		
+		 */
 		return new VPPPlanSummaryPage(driver);
 	}
 
