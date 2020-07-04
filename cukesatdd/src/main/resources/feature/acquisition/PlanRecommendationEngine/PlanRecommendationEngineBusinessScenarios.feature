@@ -32,13 +32,13 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds    | travel    | doctors | DoctorsName                | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | travel   | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       #      |   90210 | NO            | Los Angeles | MAPD          | Nursing         | withinUS  | Lookup  | George Mordechai Delshad | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
-      |   32115 | NO            | Volusia  | MAPD          | Chronic,Nursing | withinUS  | Lookup  | David B. Auerbach          | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | No,No,Yes,No                  | Lower                |
-      #      |   15537 | NO            | Bedford     | MAPD          | None            | withinUS  | Lookup  | George Mordechai Delshad | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | Yes,Yes,Yes,Yes               | Lower                |
-#      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Lower                |
-#      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Higher               |
+      |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | withinUS | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | No,No,Yes,No                  | Lower                |
 
+  #      |   15537 | NO            | Bedford     | MAPD          | None            | withinUS  | Lookup  | George Mordechai Delshad | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | Yes,Yes,Yes,Yes               | Lower                |
+  #      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Lower                |
+  #      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Higher               |
   @PRE @planrecommandonation @APIRanking @MAPDFlowRanking @SanityTest
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
@@ -67,8 +67,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | Fonseca, Mario J |               | No             | Yes,No,No,No                  | Higher               |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Fonseca, Mario J |               | No             | Yes,No,No,No                  | Higher               |
+      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE

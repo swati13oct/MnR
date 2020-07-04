@@ -220,7 +220,6 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
 		headerAndFooter.breadCrumbs();
-		planSelectorhomepage.landingpage();
 }
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
