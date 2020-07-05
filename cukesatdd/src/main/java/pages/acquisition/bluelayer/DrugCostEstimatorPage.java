@@ -26,7 +26,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.ComparePlansPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -2041,9 +2040,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
-		return new ComparePlansPage(driver);
+		return new ComparePlansPageBlayer(driver);
 
 	}
+	
 	
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());

@@ -455,7 +455,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare() throws Throwable {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		ComparePlansPage planComparePage = dce.clickBtnBackToPlancomparenew();
+		ComparePlansPage planComparePage = dce.clickBtnBackTonewPlancomparenew();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}

@@ -1982,16 +1982,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 	
-	public ComparePlansPage clickBtnBackToPlancompare() throws InterruptedException {
-		validateNew(getBtnBackToPlans());
-		getBtnBackToPlans().click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, VerifyEstimatedDrugCost, 60);
-		return new ComparePlansPage(driver);
-
-	}
-	
-	public ComparePlansPage clickBtnBackToPlancomparenew() throws InterruptedException {
+	public ComparePlansPage clickBtnBackTonewPlancomparenew() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);

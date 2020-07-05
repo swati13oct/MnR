@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.SavingsOppurtunity;
 import pages.acquisition.bluelayer.AddDrugDetails;
