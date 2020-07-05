@@ -142,7 +142,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
       | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareUHC09 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
@@ -163,7 +163,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareUHC10 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
@@ -191,7 +191,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
       | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareUHC11 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
@@ -215,7 +215,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareUHC12 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
@@ -229,6 +229,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Plan Type | <plantype> |
     And user access DCE tool on UMS site
       | Plan Type | <plantype> |
+      | PlanName   | <planName>  |
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |

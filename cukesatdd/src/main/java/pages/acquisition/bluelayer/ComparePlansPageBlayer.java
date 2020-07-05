@@ -284,7 +284,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
    	
    	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
    		WebElement enrollForPlan = null;
-   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']"));
+   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
    		if(enrollForPlan!=null){
    			//validateNew(enrollForPlan);
    			enrollForPlan.click();
