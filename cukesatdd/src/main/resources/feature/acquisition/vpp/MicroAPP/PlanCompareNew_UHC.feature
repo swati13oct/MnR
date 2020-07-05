@@ -121,7 +121,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
 
   @vppPlanCompareUHC08 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -146,7 +146,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareUHC09 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -167,7 +167,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanCompareUHC10 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -195,7 +195,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareUHC11 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -219,7 +219,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @vppPlanCompareUHC12 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
