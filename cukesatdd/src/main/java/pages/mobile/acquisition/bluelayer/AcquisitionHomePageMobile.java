@@ -17,6 +17,10 @@ import atdd.framework.MRScenario;
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 
 	String CallSam = "Call a Licensed Insurance Agent";
 	String ChatSam = "Chat with a Licensed Insurance Agent";
@@ -75,6 +79,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			startNewMobile(UMS_ACQISITION_PAGE_URL);
+		}else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+			startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+		}else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}

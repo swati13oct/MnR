@@ -304,9 +304,11 @@ public class MemberRedesignHeaderStepDefinition {
 			accountHomePage.validateCoverageBenefitsL2Tabs();
 		}
 		//TODO changed 05/27/2020
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		if("NO".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		}
 	}
 	
 	

@@ -68,7 +68,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_2of7 @prod_active_ma_2of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_ppi |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | false   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | false   |
 
 	@prod_active_mapd_ind_2of7 @prod_active_mapd_2of7
 	Examples: 
@@ -78,7 +78,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_mapd_grp_2of7 @prod_active_mapd_2of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_ppi |
-      | 12-107 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net | MAPD | GROUP_EFF_PDnR  | true   | false   |
+      | 12-107 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | false   |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | false   |
 
@@ -110,6 +110,6 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ship_2of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  |
+      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651     | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  |
 #     | 19-120 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | true   | false    | false   | false  | false  |
     

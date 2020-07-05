@@ -83,7 +83,7 @@ Feature: 1.08.1 Member Header/Navigation validation - Member Auth
   # note: Since SHIP member cannot be given any subsidy on premium, only Group plan will be applicable for 100 subsidy.
   # note: You will still see Payments option in Header for this combo member, because of SHIP plan.
   # note: Under premium payments tab, you will see premium payment option for SHIP member but not Group Member.
-  @memAuth_header03 @premiumpaymentsheader_100%subisdy 
+  @memAuth_header03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
 	   Given the user is on member auth login flow page
     When the member is able to login with correct username and password

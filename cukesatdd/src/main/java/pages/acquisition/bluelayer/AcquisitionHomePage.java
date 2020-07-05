@@ -394,6 +394,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 	
+	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+   	private WebElement advancedBtn;
+
+   	@FindBy(xpath = "//a[@id='proceed-link']")
+   	private WebElement proceedLink;
+	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -536,7 +542,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-
+		try {
+			if (advancedBtn.isDisplayed()) {
+			advancedBtn.click();
+			proceedLink.click();
+			}
+			} catch (Exception e) {
+			System.out.println("Advanced button not displayed");
+			}
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 20);
 		// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 
@@ -1884,17 +1897,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void openPRE() {
 		String browser = MRScenario.browsername;
 		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
 		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/").replace("www.", ""), browser);
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
 		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 		}else if(MRScenario.environment.equalsIgnoreCase("stage-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 		}else if(MRScenario.environment.equalsIgnoreCase("stage")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html/"), browser);
+			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")){
+			startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod")){
+			startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("prod-aarp")){
+			startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
+		}else if(MRScenario.environment.equalsIgnoreCase("prod")){
+			startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);																											  
 		}
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
@@ -2479,6 +2500,7 @@ public void validateResultSummaryPage() {
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
+
 
 	public void validateChatIcon() throws InterruptedException {
 		boolean present;

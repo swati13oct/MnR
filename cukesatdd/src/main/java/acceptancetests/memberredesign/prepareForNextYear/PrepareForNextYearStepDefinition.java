@@ -184,10 +184,121 @@ public class PrepareForNextYearStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
+	
+
+	@Then("^test setup stores documents expectation info$")
+	public void storeDocInfo(DataTable memberAttributes) {
+		HashMap<String, Boolean> docDisplayMap=new HashMap<String, Boolean>();
+		//----------------------------------
+		String docName="Annual Notice of Changes";
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String inputField=docName+" English";
+		String tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+	
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		//----------------------------------
+		docName="Evidence of Coverage";
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+	
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		//----------------------------------
+		docName="Provider Directory";
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+		
+		//----------------------------------
+		docName="Vendor Information Sheet";
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+		
+		//----------------------------------
+		docName="Pharmacy Directory Information";
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Spanish";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		inputField=docName+" Chinese";
+		tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		display=Boolean.valueOf(tmp);
+		docDisplayMap.put(inputField, display);
+
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP, docDisplayMap);
+	}
+
+	
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
 	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
+
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -203,6 +314,17 @@ public class PrepareForNextYearStepDefinition {
 
 		PrepareForNextYearPage prepareForNextYearPage = new PrepareForNextYearPage(wd);
 
+		//note: validate Return to previous page link
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (MRScenario.environment.contains("team-a")) {
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			testNote.add("\t=================");
+			prepareForNextYearPage.validateReturnToPrevPgLnk();
+			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
+		}
+		
+		//note: validate timeline and Find update section content
 		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
 		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
 		Date milestone3Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE3_DATE);
@@ -222,32 +344,34 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
 
 
-		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		testNote.add("\t=================");
 		prepareForNextYearPage.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
+
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\tValidation for current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=prepareForNextYearPage.validateBeforeM1Content();
+			sectionNote=prepareForNextYearPage.validateBeforeM1Content(memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content();
+			sectionNote=prepareForNextYearPage.validateAfterOrEqualM1BeforeM2Content(memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
 			testNote.add("\t  Validation for milestone 2 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content();
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM2BeforeM3Content(memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
 			testNote.add("\tValidation for milestone 3 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content();
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM3BeforeM4Content(memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
 			testNote.add("\tValidation for milestone 4 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content();
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM4BeforeM5Content(memberType, currentDate, docDisplayMap);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
 			testNote.add("\tValidation for milestone 5 '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+prepareForNextYearPage.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content();
+			sectionNote=prepareForNextYearPage.validateAfterOrEqalM5Content(memberType, currentDate, docDisplayMap);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
@@ -282,6 +406,8 @@ public class PrepareForNextYearStepDefinition {
 		prepareForNextYearPage.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, prepareForNextYearPage);	
 	}
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	@Then("^the user validate bookmark behavior if tab hasn't met the condition to be displayed$")
