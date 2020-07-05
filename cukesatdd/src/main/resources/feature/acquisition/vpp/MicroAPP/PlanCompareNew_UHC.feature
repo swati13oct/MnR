@@ -120,12 +120,12 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | count |
       | 00010 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
 
-@vppPlanCompareAARP08 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+  @vppPlanCompareUHC08 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
-     Given the user is on the uhcmedicaresolutions site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
@@ -145,12 +145,12 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
       | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-      @vppPlanCompareAARP09 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+  @vppPlanCompareUHC09 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
@@ -165,14 +165,13 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
-      
-      
-      @vppPlanCompareAARP10 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+
+  @vppPlanCompareUHC10 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
@@ -194,14 +193,13 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
       | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
-      
-      
-      @vppPlanCompareAARP11 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+
+  @vppPlanCompareUHC11 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
@@ -219,19 +217,19 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
-      
-    @vppPlanCompareAARP12New @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
+
+  @vppPlanCompareUHC12 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
-     Given the user is on the uhcmedicaresolutions site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-     When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-   And user access DCE tool on UMS site
+    And user access DCE tool on UMS site
       | Plan Type | <plantype> |
-     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
     And selects drug details in ums site
@@ -242,27 +240,27 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Is Branded Drug | <branded>   |
       | Drug            | <drugName1> |
     And I navigate to step2 page
-    When the user selects the pharmacy type and distance in AARP site
+    When the user selects the pharmacy type and distance in UMS site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in AARP site
+    Then the user selects a pharmacy from the list of pharmacies in UMS site
       | Pharmacy Name | <pharmacyName> |
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate the drug info
       | Drug | <drugName1> |
-    Then I switch to generic drug and validate
-    And the user clicks on return link to navigate to plan summary
-    And I select "<plantype>" plans to compare and click on compare plan link in AARP
-    Then verify plan compare page is loaded on AARP
-    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
-    And click on Edit Drug link on plan compare for AARP site
-    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+    Then I switch to generic drug and validate on ums site
+    And the user clicks on return link to navigate to plan summary in UHC
+    And I select "<plantype>" plans to compare and click on compare plan link in UHC
+    Then verify plan compare page is loaded on UHC
+    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
+    And click on Edit Drug link on plan compare for UHC site
+    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name2 | <drugName2> |
     And selects drug details for other drugs in ums site
       | Drug Name2 | <drugName2> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name3 | <drugName3> |
     And selects drug details in ums site
@@ -271,22 +269,20 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Frequency  | <frequency> |
     When user successfully adds drug in the ums site
       | Drug Name3 | <drugName3> |
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
-    When the user selects the pharmacy type and distance in AARP site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+    When the user selects the pharmacy type and distance in UMS site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in AARP site
+    Then the user selects a pharmacy from the list of pharmacies in UMS site
       | Pharmacy Name | <pharmacyName> |
-    Then the user validates the added drugs on See your Estimated Costs page in AARP site
+    Then the user validates the added drugs on See your Estimated Costs page in UMS site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <drugName3>    |
-    And the user clicks on Back to Plans button in AARP site and Navigates to Plan Compare
-    Then verify plan compare page is loaded on AARP
-    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
+    And the user clicks on Back to Plans button in UHC site and Navigates to new Plan Compare
+    Then verify plan compare page is loaded on UHC
+    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultutiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultutiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |
       | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no              |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |
-    
-      

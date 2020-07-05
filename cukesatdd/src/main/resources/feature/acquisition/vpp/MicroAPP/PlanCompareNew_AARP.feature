@@ -1,7 +1,7 @@
-@vppPlanCompareUHCNew
-Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
+@vppPlanCompareAARPNew
+Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
 
-  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP01 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -19,7 +19,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00003 |   90265 | YES           | Ventura County   | MAPD     |
       | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |
 
-  @vppPlanCompareUHC02 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP02 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: UID: <UID> - Plan Type: <plantype> - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -35,7 +35,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype |
       | 00005 |   90210 | NO            | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC03 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP03 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -50,7 +50,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county         | plantype |
       | 00006 |   35616 | NO            | Colbert County | MAPD     |
 
-  @vppPlanCompareUHC04 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP04 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -73,7 +73,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype |
       | 00007 |   90210 | No            | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC05 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP05 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -87,7 +87,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype |
       | 00008 |   90210 | No            | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC06 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP06 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -104,7 +104,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype |
       | 00009 |   90210 | NO            | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC07 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP07 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -121,7 +121,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | count |
       | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
 
-  @vppPlanCompareUHC08 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP08 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -146,7 +146,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
       | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @vppPlanCompareUHC09 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP09 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -167,7 +167,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @vppPlanCompareUHC10 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP10 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -192,7 +192,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
       | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
-  @vppPlanCompareUHC11 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP11 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -216,7 +216,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
-  @vppPlanCompareUHC12 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
+  @vppPlanCompareAARP12 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -258,7 +258,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Drug Name2 | <drugName2> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name3 | <drugName3> |
     And selects drug details in ums site
@@ -267,19 +267,19 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Frequency  | <frequency> |
     When user successfully adds drug in the ums site
       | Drug Name3 | <drugName3> |
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    When the user selects the pharmacy type and distance in UMS site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in UMS site
+    Then the user selects a pharmacy from the list of pharmacies in AARP site
       | Pharmacy Name | <pharmacyName> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <drugName3>    |
-    And the user clicks on Back to Plans button in UHC site and Navigates to Plan Compare
-    Then verify plan compare page is loaded on UHC
-    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
+    And the user clicks on Back to Plans button in AARP site and Navigates to new Plan Compare
+    Then verify plan compare page is loaded on AARP
+    Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
 
     Examples: 
       | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |

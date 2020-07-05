@@ -26,6 +26,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.ComparePlansPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -467,6 +468,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
+	
+	@FindBy(xpath = "(//p[text()='Drug Costs from Formulary']//ancestor::th/parent::tr//td[1]//span[@class='ng-scope'])[2]")
+	public WebElement planCompareVerifyEstimatedDrugCostValue;
 	
 	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
@@ -2031,6 +2035,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return new ComparePlansPageBlayer(driver);
 		
 	}	
+	
+	public ComparePlansPageBlayer clickBtnBackToPlancomparenew() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
+		return new ComparePlansPage(driver);
+
+	}
+	
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
