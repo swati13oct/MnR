@@ -174,6 +174,26 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
 	private WebElement viewlocationsLink;	
 	
+	@FindBy(xpath="//div[text()='Your Drugs']")
+	private WebElement yourDrugsBanner;
+	
+	@FindBy(xpath="//a[text()='Add Drugs']")
+	private WebElement addDrugsLink;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Edit Drugs']")
+	private WebElement editDrugsLink;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']")
+	private WebElement DrugSummaryHeader;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
+	private WebElement DrugSummaryCoverageHeader;
+
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
+	private WebElement DrugName;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
+	private WebElement DrugCoverageText;	
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -699,6 +719,20 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Verified Add Hospitals Section");
 	}
 	
+	public void validateEditDrugs() {
+		validateNew(backToAllPlansLink);			
+		validateNew(yourDrugsBanner);
+		validateNew(editDrugsLink);
+		validateNew(DrugSummaryHeader);
+		validateNew(DrugSummaryCoverageHeader);
+		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
+		validateNew(DrugName);
+		System.out.println("Added Drug Name : " + DrugName.getText());
+		validateNew(DrugCoverageText);
+		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
+		System.out.println("Verified Edit Drugs Section header and Summary section");
+		
+	}	
 	public FindCarePage clickonEditYourDoctors() throws InterruptedException {
 
 		try {
@@ -725,28 +759,6 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
 	}
-
-		/*jsClickNew(editDoctorsLink);
-		Thread.sleep(25000);
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Find Care")) {
-					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(FindCareLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -781,28 +793,6 @@ public class ComparePlansPage extends UhcDriver {
 		driver.switchTo().window(ParentWindow);
 	}
 		
-		/*jsClickNew(editHospitalsLink);
-
-		Thread.sleep(25000);
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Find Care")) {
-					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(FindCareLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -836,28 +826,6 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
 	}
-		/*jsClickNew(addDoctorsLink);
-
-		Thread.sleep(25000);
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Find Care")) {
-					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(FindCareLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -891,33 +859,30 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
 	}
-		
-		/*jsClickNew(addHospitalsLink);
-
-		Thread.sleep(25000);
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Find Care")) {
-					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(FindCareLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+	
+	public DrugCostEstimatorPage clickonEdityourDrugs() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDrugsLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+		jsClickNew(editDrugsLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new DrugCostEstimatorPage(driver);
 		} else
 			return null;
 	}

@@ -3467,4 +3467,29 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP$")
+	public void verify_Edit_your_Drugswithsummary_covered_ulayer() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateEditDrugs();
+	}
+	
+	@And("^click on Edit Drug link on plan compare for AARP site$")
+	public void clickonEditDruglinkonplancompareforAARPsite() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
+		if (drugCostEstimatorPage != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 }
