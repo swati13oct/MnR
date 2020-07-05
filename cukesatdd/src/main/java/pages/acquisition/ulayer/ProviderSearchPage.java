@@ -430,7 +430,7 @@ public class ProviderSearchPage extends UhcDriver {
 		 validateNew(providerNameText);
 		 validateNew(Checkcoverage); 
 		 Checkcoverage.click(); 
-		 jsClickNew(Checkcoverage); 
+		// jsClickNew(Checkcoverage); 
 		 waitForCountDecrement(2);
 		 driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		 
