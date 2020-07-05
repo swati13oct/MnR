@@ -282,6 +282,22 @@ public class ComparePlansPageBlayer extends UhcDriver {
    		return null;
    	  	}
    	
+   	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
+   		WebElement enrollForPlan = null;
+   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']"));
+   		if(enrollForPlan!=null){
+   			//validateNew(enrollForPlan);
+   			enrollForPlan.click();
+   		}
+   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+   		System.out.println(driver.getCurrentUrl());
+   		if(driver.getCurrentUrl().contains("welcome"))
+   		{
+   			System.out.println("OLE Welcome Page is Displayed");
+   			return new WelcomePage(driver);
+   		}
+   		return null;
+   	  	}
    	
 	public void validateprintandemail() {
 		// TODO Auto-generated method stub
@@ -612,6 +628,22 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  	public ComparePlansPageBlayer navigateToPlanDetail() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View details')])[1]"));
+				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
+				PlanDetailsLink.click();
+				System.out.println("View Plan Details Link is clicked");
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("#/details")) 
+		{	
+			return new ComparePlansPageBlayer(driver);
+		}
+		return null;
+	}
+ 	
+ 	public ComparePlansPageBlayer navigateToPlanDetailfromplanCompare() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View Plan Details')])[1]"));
 				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
 				PlanDetailsLink.click();
 				System.out.println("View Plan Details Link is clicked");

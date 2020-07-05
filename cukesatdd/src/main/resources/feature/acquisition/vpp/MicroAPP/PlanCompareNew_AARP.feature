@@ -135,7 +135,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
-    And I select "<plantype>" plans to compare and click on compare plan link in UHC
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
     And click on Edit your doctors link and Navigate to Rally page for AARP
@@ -216,7 +216,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
-  @vppPlanCompareAARP12 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP12New @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -237,15 +237,14 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     When user successfully adds drug
       | Is Branded Drug | <branded>   |
       | Drug            | <drugName1> |
-    And I navigate to step2 page
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
     When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
     Then the user selects a pharmacy from the list of pharmacies in AARP site
       | Pharmacy Name | <pharmacyName> |
-    And I navigate to step3 page and validate
-      | Drug | <drugName1> |
-    Then I switch to generic drug and validate
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
+      | Drug Name1 | <drugName1> |
     And the user clicks on return link to navigate to plan summary
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
@@ -282,5 +281,33 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |
-      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
+      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+  @vppPlanCompareAARP13 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
+  Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on new Plan Compare
+
+    Examples: 
+      | TCID  | zipcode | isMultiCounty | county             | plantype |
+      | 00010 |   90210 | No            | Los Angeles County | MAPD     |
+
+  @vppPlanCompareAARP14 @vppPlanCompareAARPRun02
+  Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to Plan Detail
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then the user clicks on Plan details link in new Plan Compare page for AARP
+
+    Examples: 
+      | TCID  | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | planName                                       | pdfType               | docCode                 |
+      | 00011 |   90210 | No            | Los Angeles County |              80002 | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |

@@ -2097,11 +2097,34 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	  }
   
+	@Then("^the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on new Plan Compare")
+	  public void user_clicks_enrollInPlan_newPlanCompare_AARP() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+	   if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	  }
 	
 	@Then("^the user clicks on Plan details linnk in Plan Compare page")
 	  public void user_clicks_planDetails_PlanCompare_AARP() throws InterruptedException{
 		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
 		  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetails();
+			if (vppPlanDetailsPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in Loading the Plan Details Page");
+		
+	  }
+	
+	@Then("^the user clicks on Plan details link in new Plan Compare page for AARP")
+	  public void user_clicks_planDetails_newPlanCompare_AARP() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
 			if (vppPlanDetailsPage != null) {
 					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 					Assert.assertTrue(true);

@@ -2047,6 +2047,13 @@ public class VppStepDefinitionUHC {
 		planComparePage.clickOnRemoveLink();
 	}
 	
+	@Then("^remove one plan from new plan compare page for UHC$")
+	public void remove_one_plan_new_from_plan_compare_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewRemoveLink();
+	}
+	
 	@Then("^click on back to plans on plan compare page for UHC$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
 		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
@@ -2090,6 +2097,13 @@ public class VppStepDefinitionUHC {
 		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnAddIcon();		
+	}
+	
+	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$")
+	public void click_on_Add_Icon_onnewPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewAddIcon();		
 	}
 	
 	@Then("^check one plan and add it to plancompare for UHC$")
@@ -2141,10 +2155,34 @@ public class VppStepDefinitionUHC {
 		}
 	  }
 	
+	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare")
+	  public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException{
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
+	   if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	  }
+	
 	@Then("^the user clicks on Plan details link in Plan Compare page on UHC")
 	  public void user_clicks_planDetails_PlanCompare_UHC() throws InterruptedException{
 		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
 		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetail();
+			if (vppPlanDetailsPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in Loading the Plan Details Page");
+		
+	  }
+	
+	@Then("^the user clicks on Plan details link in new Plan Compare page on UHC")
+	  public void user_clicks_planDetails_newPlanCompare_UHC() throws InterruptedException{
+		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetailfromplanCompare();
 			if (vppPlanDetailsPage != null) {
 					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 					Assert.assertTrue(true);
