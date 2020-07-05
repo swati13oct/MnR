@@ -361,7 +361,7 @@ public class FindCarePage extends UhcDriver {
 					System.out.println("We are on Compare Medicare Plans winodow opened");
 					driver.manage().window().maximize();
 					Thread.sleep(3000);
-					waitforElement(editHospitalsLink);
+					waitforElement(editDoctorsLink);
 					break;
 				}
 			} else {

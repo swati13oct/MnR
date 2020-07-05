@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
@@ -710,8 +711,22 @@ public class ComparePlansPage extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
-		jsClickNew(editDoctorsLink);
+		
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editDoctorsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
 
+		/*jsClickNew(editDoctorsLink);
 		Thread.sleep(25000);
 		Set<String> handles1 = driver.getWindowHandles();
 		for (String windowHandle : handles1) {
@@ -731,7 +746,7 @@ public class ComparePlansPage extends UhcDriver {
 				driver.switchTo().window(ParentWindow);
 			}
 
-		}
+		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -752,7 +767,21 @@ public class ComparePlansPage extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
-		jsClickNew(editHospitalsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editHospitalsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		
+		/*jsClickNew(editHospitalsLink);
 
 		Thread.sleep(25000);
 		Set<String> handles1 = driver.getWindowHandles();
@@ -773,7 +802,7 @@ public class ComparePlansPage extends UhcDriver {
 				driver.switchTo().window(ParentWindow);
 			}
 
-		}
+		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -794,7 +823,20 @@ public class ComparePlansPage extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
-		jsClickNew(addDoctorsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(addDoctorsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		/*jsClickNew(addDoctorsLink);
 
 		Thread.sleep(25000);
 		Set<String> handles1 = driver.getWindowHandles();
@@ -815,7 +857,7 @@ public class ComparePlansPage extends UhcDriver {
 				driver.switchTo().window(ParentWindow);
 			}
 
-		}
+		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -836,7 +878,21 @@ public class ComparePlansPage extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
-		jsClickNew(addHospitalsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(addHospitalsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		
+		/*jsClickNew(addHospitalsLink);
 
 		Thread.sleep(25000);
 		Set<String> handles1 = driver.getWindowHandles();
@@ -857,7 +913,7 @@ public class ComparePlansPage extends UhcDriver {
 				driver.switchTo().window(ParentWindow);
 			}
 
-		}
+		}*/
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
