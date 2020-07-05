@@ -249,7 +249,7 @@ public class MRScenario {
 			} else if ((environment.contains("team-a")
 					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t"))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers")))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
@@ -614,7 +614,7 @@ try {
 		}else{
 		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else 
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
@@ -1055,7 +1055,7 @@ try {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("recordMp4", true);
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "7200");
 			} else if (browserName.equalsIgnoreCase("edge")) {
 				System.out.println("Inside Edge");
 				capabilities = DesiredCapabilities.edge();
@@ -1160,6 +1160,8 @@ try {
 			mobileDeviceName = System.getenv("DEVICE_NAME");
 			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
 			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
+			if(System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
+				sauceLabsMobileTunnelIdentifier=System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 		}
 		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
@@ -1171,7 +1173,10 @@ try {
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); 
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		// Offline prod and prod env. should not use tunnels
+		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
