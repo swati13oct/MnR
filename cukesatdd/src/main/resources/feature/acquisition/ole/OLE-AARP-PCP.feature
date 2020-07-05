@@ -1,4 +1,4 @@
-Feature: 2.05.1.ACQ-OLE MA UMS
+Feature: 2.05.1.ACQ-OLE PCP AARP
  
   @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer @fastandfurious @OLE @MA_OLE_AARP_PCP @prodRegression @F401735 @F427594
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
