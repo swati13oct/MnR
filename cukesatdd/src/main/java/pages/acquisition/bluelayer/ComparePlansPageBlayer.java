@@ -11,8 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
@@ -79,6 +82,12 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
+	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//a[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")
+	private WebElement Newremove4thplan;
+	
+	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//div[contains(@ng-if,'planName')]")
+	private WebElement Newremove4thplanName;
+	
 	@FindBy(xpath="//*[@class='view-more-link']")
 	private WebElement viewDetailslink;
 	
@@ -90,6 +99,9 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
 	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
 	private WebElement add3Plan;
+	
+	@FindBy(xpath="//button[@id='addanotherplanbutton']")
+	private WebElement addPlanButton;
 	
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
@@ -132,7 +144,67 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 	
+   	@FindBy(xpath="//div[text()='Your Hospitals']")
+	private WebElement yourHospitalsBanner;
 	
+	@FindBy(xpath="//a[text()='Add Hospitals']")
+	private WebElement addHospitalsLink;
+	
+	@FindBy(xpath="//a[text()='Edit Hospitals']")
+	private WebElement editHospitalsLink;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']")
+	private WebElement HospitalSummaryHeader;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
+	private WebElement HospitalSummaryCoverageHeader;
+
+	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'provider-name')]")
+	private WebElement HospitalProviderName;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
+	private WebElement HospitalProviderCoverageText;	
+	
+	@FindBy(xpath="//div[text()='Your Doctors']")
+	private WebElement yourDoctorsBanner;
+	
+	@FindBy(xpath="//a[text()='Add Doctors']")
+	private WebElement addDoctorsLink;
+	
+	@FindBy(xpath="//a[text()='Edit Doctors']")
+	private WebElement editDoctorsLink;
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
+	private WebElement providerSumamryHeader;
+	
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
+	private WebElement providerSumamryHeaderCount;
+	
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//th//div[contains(@class,'provider-name')]")
+	private WebElement FirstProviderName;
+	
+	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
+	private WebElement viewlocationsLink;	
+	
+	@FindBy(xpath="//div[text()='Your Drugs']")
+	private WebElement yourDrugsBanner;
+	
+	@FindBy(xpath="//a[text()='Add Drugs']")
+	private WebElement addDrugsLink;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Edit Drugs']")
+	private WebElement editDrugsLink;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']")
+	private WebElement DrugSummaryHeader;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
+	private WebElement DrugSummaryCoverageHeader;
+
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
+	private WebElement DrugName;
+	
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
+	private WebElement DrugCoverageText;	
 	
 		
 	public ComparePlansPageBlayer(WebDriver driver) {
@@ -212,6 +284,22 @@ public class ComparePlansPageBlayer extends UhcDriver {
    		return null;
    	  	}
    	
+   	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
+   		WebElement enrollForPlan = null;
+   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
+   		if(enrollForPlan!=null){
+   			//validateNew(enrollForPlan);
+   			enrollForPlan.click();
+   		}
+   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+   		System.out.println(driver.getCurrentUrl());
+   		if(driver.getCurrentUrl().contains("welcome"))
+   		{
+   			System.out.println("OLE Welcome Page is Displayed");
+   			return new WelcomePage(driver);
+   		}
+   		return null;
+   	  	}
    	
 	public void validateprintandemail() {
 		// TODO Auto-generated method stub
@@ -366,6 +454,15 @@ public class ComparePlansPageBlayer extends UhcDriver {
 
 	}
 	
+	public void clickOnNewRemoveLink(){
+		validateNew(Newremove4thplan);
+		String PlanName=Newremove4thplanName.getText();
+		System.out.println("3rd plan name is : " + PlanName );
+		Newremove4thplan.click();
+		System.out.println("Clicked on Remove Link on plan Compare page");
+
+	}
+	
 	public void clickOnBacktoPlans(){
 		validateNew(backToAllPlansLink);
 		backToAllPlansLink.click();
@@ -399,6 +496,21 @@ public class ComparePlansPageBlayer extends UhcDriver {
  		return null;
      }
      
+public VPPPlanSummaryPage clickOnNewAddIcon(){
+    	 
+    	 validateNew(addPlanButton);
+    	 addPlanButton.click();
+ 		try {
+ 			Thread.sleep(4000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		if(currentUrl().contains("#/plan-summary"))
+ 			return new VPPPlanSummaryPage(driver);
+ 		return null;
+     }
+     
      public void validatenewlyAddPlan() {
     	 
     	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
@@ -409,6 +521,16 @@ public class ComparePlansPageBlayer extends UhcDriver {
  		}
  		else Assert.assertTrue(false); 		
  	}
+     
+     public void validatenewlyAddPlanonNewPlanComapre() {
+	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//th[@ng-repeat='plan in count']//div[contains(@ng-if,'planName')]"));	
+			int plansForCompare=allMAPlans.size();
+			if (plansForCompare == 3) {
+				Assert.assertTrue(true);
+				System.out.println("Verified Three plans Added on plan compare");
+			}
+			else Assert.assertTrue(false); 		
+		}
      
      public ComparePlansPageBlayer validateCallSam() throws InterruptedException {
          boolean present;
@@ -521,6 +643,22 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		return null;
 	}
  	
+ 	public ComparePlansPageBlayer navigateToPlanDetailfromplanCompare() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View Plan Details')])[1]"));
+				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
+				PlanDetailsLink.click();
+				System.out.println("View Plan Details Link is clicked");
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("#/details")) 
+		{	
+			return new ComparePlansPageBlayer(driver);
+		}
+		return null;
+	}
+ 	
  	public void validatePlansAddedonPlancompareforVisitorProfile() {
 		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
 		int plansForCompare = allMAPlans.size();
@@ -531,12 +669,258 @@ public class ComparePlansPageBlayer extends UhcDriver {
 			Assert.assertTrue(false);
 	}
  	
+ 	public void validateDoctors() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourDoctorsBanner);
+		validateNew(editDoctorsLink);
+		validateNew(providerSumamryHeader);
+		validateNew(providerSumamryHeaderCount);
+		validateNew(FirstProviderName);
+		validateNew(viewlocationsLink);
+		System.out.println("Verified Edit Doctors Section");
+	}
+ 	
+ 	public void validateEditHospitals() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourHospitalsBanner);
+		validateNew(editHospitalsLink);
+		validateNew(HospitalSummaryHeader);
+		validateNew(HospitalSummaryCoverageHeader);
+		System.out.println("Coverage Header for plan 1 : " + HospitalSummaryCoverageHeader.getText());
+		validateNew(HospitalProviderName);
+		System.out.println("Added Hospital Name : " + HospitalProviderName.getText());
+		validateNew(HospitalProviderCoverageText);
+		System.out.println("Covered or not covered text for plan 1 : " + HospitalProviderCoverageText.getText());
+		System.out.println("Verified Edit Hospitals Section header and Summary section");
+		
+	}
+ 	
+ 	public void validateAddDoctors() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourDoctorsBanner);
+		validateNew(addDoctorsLink);
+		System.out.println("Verified Add Doctors Section");
+	}
+ 	
+ 	public void validateAddHospitals() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourHospitalsBanner);
+		validateNew(addHospitalsLink);
+		System.out.println("Verified Add Hospitals Section");
+	}
+ 	
+ 	public void validateEditDrugs() {
+		validateNew(backToAllPlansLink);			
+		validateNew(yourDrugsBanner);
+		validateNew(editDrugsLink);
+		validateNew(DrugSummaryHeader);
+		validateNew(DrugSummaryCoverageHeader);
+		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
+		validateNew(DrugName);
+		System.out.println("Added Drug Name : " + DrugName.getText());
+		validateNew(DrugCoverageText);
+		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
+		System.out.println("Verified Edit Drugs Section header and Summary section");
+		
+	}	
+ 	
+ 	public FindCarePage clickonAddYourDoctors() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(addDoctorsLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(addDoctorsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+ 	
  	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
 		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
 		String[] plan = plans.split(",");
 		for(int i=0;i<allMAPlans.size();i++) {
 			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
 		}
+	}
+ 	
+ 	public FindCarePage clickonAddYourHospitals() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(addHospitalsLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(addHospitalsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+ 	
+ 	public FindCarePage clickonEditYourDoctors() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDoctorsLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+		
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editDoctorsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+ 	
+ 	public FindCarePage clickonEditYourHosptials() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editHospitalsLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
+		
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editHospitalsLink);
+		
+		if (driver.getCurrentUrl().contains("werally")) {
+			System.out.println("We are on Find Care winodow opened");
+			driver.manage().window().maximize();
+			Thread.sleep(3000);
+			waitforElement(FindCareLink);
+		} else {
+		System.out.println("Not found Expected window");
+		driver.switchTo().window(ParentWindow);
+	}
+		
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+ 	
+ 	public DrugCostEstimatorPage clickonEdityourDrugs() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDrugsLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+		jsClickNew(editDrugsLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new DrugCostEstimatorPage(driver);
+		} else
+			return null;
+	}
+ 	
+ 	public void validateViewMoreplansComparePage() {
+		validateNew(backToAllPlansLink);
+		
+		WebElement viewMore = driver.findElement(By.xpath("//span[text()='Scroll Plans Right']/ancestor::button"));
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
+		for(int i=0;viewMore.isEnabled();){
+			viewMore.click();
+			System.out.println("Clicked no. of times : " + i);
+			i++;	
+		}
+		WebElement RightButtonDisabled = 
+			    wait.until(ExpectedConditions
+			                   .visibilityOfElementLocated(
+			                        By.xpath("//span[text()='Scroll Plans Right']/ancestor::button[attribute::disabled]")));
+		validateNew(RightButtonDisabled);
+		System.out.println("Validated Right arrow is Disabled");
+		
+	}
+	
+	public void validateViewlessplansComparePage() {
+		validateNew(backToAllPlansLink);		
+		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Scroll Plans Left']/ancestor::button"));
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		for(int i=0;viewLess.isEnabled();){
+			viewLess.click();
+			System.out.println("Clicked no. of times : " + i);
+			i++;	
+		}
+		WebElement LeftButtonDisabled = 
+			    wait.until(ExpectedConditions
+			                   .visibilityOfElementLocated(
+			                        By.xpath("//span[text()='Scroll Plans Left']/ancestor::button[attribute::disabled]")));
+		validateNew(LeftButtonDisabled);
+		System.out.println("Validated Left arrow is Disabled");
 	}
      
 }
