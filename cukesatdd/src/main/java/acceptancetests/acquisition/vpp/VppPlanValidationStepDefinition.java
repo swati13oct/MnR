@@ -94,7 +94,7 @@ public class VppPlanValidationStepDefinition {
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
-		
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			
 		
 		//Getting Date
@@ -104,7 +104,7 @@ public class VppPlanValidationStepDefinition {
 			String parentDirectory = null;
 			parentDirectory = new java.io.File(".").getCanonicalPath();
 			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+DateCreated+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 			
 		//Reading Excel.xls file
 			File InputFile = new File(InputFilePath);
@@ -229,7 +229,7 @@ public class VppPlanValidationStepDefinition {
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
-		
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			
 		
 		//Getting Date
@@ -239,7 +239,7 @@ public class VppPlanValidationStepDefinition {
 			String parentDirectory = null;
 			parentDirectory = new java.io.File(".").getCanonicalPath();
 			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+DateCreated+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 			
 		//Reading Excel.xls file
 			File InputFile = new File(InputFilePath);
@@ -362,7 +362,7 @@ public class VppPlanValidationStepDefinition {
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
-		
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			
 		
 		//Getting Date
@@ -372,7 +372,7 @@ public class VppPlanValidationStepDefinition {
 			String parentDirectory = null;
 			parentDirectory = new java.io.File(".").getCanonicalPath();
 			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+DateCreated+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 			
 		//Reading Excel.xls file
 			File InputFile = new File(InputFilePath);
@@ -400,8 +400,9 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=5; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
 					 	int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
@@ -429,7 +430,7 @@ public class VppPlanValidationStepDefinition {
 								 if(cellIndex==0) { 
 									 
 									  String countyName = row.getCell(4).getStringCellValue();
-									  String planType = row.getCell(1).getStringCellValue();
+									 
 									  String planName = row.getCell(3).getStringCellValue();
 									  
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");

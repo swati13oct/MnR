@@ -219,8 +219,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
+		String rowXpath = "";
+		if(planName.contains("PDP"))
+			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
+		else
+			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
 		
-		String rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
 		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
 		
 		String key = "";
@@ -234,10 +238,16 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			 
 			 WebElement e=driver.findElement(By.xpath(cellsXpath));
 			 String rowText = e.getText();
+			 if(e.getText().contains("Tier 1"))
+				 System.out.println("Text: "+e.getText());
 			 String [] parts = rowText.split(":");
-			 
 			 key = parts[0];
-			 value = parts[1];
+			 for (int i = 1; i < parts.length; i++) {
+				 value = value + parts[i];
+				 
+			 }
+			 
+			 
 			 
 			 result.put(key, value);
 			 
@@ -288,9 +298,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	public boolean checkForMultiCountyPopup(String countyName) {
 		boolean flag = false;
-		if(validate(countyModal)) {
+		if(validate(countyModal,20)) {
 			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
-			validateNew(vppTopHeader);
+			validateNew(vppTopHeader,20);
 			flag = true;
 		}
 		
