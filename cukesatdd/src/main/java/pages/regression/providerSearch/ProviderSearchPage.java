@@ -370,7 +370,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 						.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
@@ -401,7 +401,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, hwPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, hwPgHeader, 30);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Health and Wellness' page",
 				noWaitValidate(hwPgHeader));
 		return driver;
