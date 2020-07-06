@@ -197,15 +197,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	public WebDriver navigateToClaimsPage() {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver, 1);
-		if (!noWaitValidate(claimsTopMenuLnk) && !noWaitValidate(shadowRootHeader) && !noWaitValidate(uhcProviderSearchClaimsLnk)) {
-			sleepBySec(2);
-		}
-		if (!noWaitValidate(claimsTopMenuLnk) && !noWaitValidate(shadowRootHeader) && !noWaitValidate(uhcProviderSearchClaimsLnk)) {
-			driver.navigate().refresh();
-			CommonUtility.checkPageIsReady(driver);
-			sleepBySec(2);
-		}
-		Assert.assertTrue("PROBLEM - unable to locate claims tab menu option on Provider Search page", noWaitValidate(claimsTopMenuLnk) || !noWaitValidate(shadowRootHeader) || noWaitValidate(uhcProviderSearchClaimsLnk));
+		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
