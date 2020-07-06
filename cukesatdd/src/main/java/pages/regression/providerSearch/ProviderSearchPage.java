@@ -396,7 +396,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, hwPgHeader, 90);
+		CommonUtility.waitForPageLoad(driver, hwPgHeader, 120);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Health and Wellness' page",
 				noWaitValidate(hwPgHeader));
 		return driver;
