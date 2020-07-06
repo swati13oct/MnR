@@ -114,7 +114,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify plan compare page is loaded on UHC
     Then Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC
     And check one plan and add it to plancompare for UHC
-    Then Verify newly added plan displayed on plan compare page for UHC
+    Then Verify newly added plan displayed on new plan compare page for UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | count |
@@ -180,9 +180,6 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     When user selects a provider and retuns to VPP page in ums
     Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
-    When user selects a Hospitals and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planname> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
@@ -201,8 +198,6 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then verify Add Hospitals is loaded without summary on Plan Compare page UHC
