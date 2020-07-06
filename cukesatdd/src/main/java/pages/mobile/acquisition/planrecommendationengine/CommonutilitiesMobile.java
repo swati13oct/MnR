@@ -491,4 +491,24 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public void mobileFindElementHorizontal(WebElement element,String swipeRightPercentage) {
 		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
 	}
+	
+	public boolean mobileCheckElementBeforeCallBanner(WebElement element) {
+		boolean status = true;
+		try {
+			validate(footerCallbannerSection, 30);
+			validate(element, 30);
+			int locationDifference = 30;
+			int footerY = footerCallbannerSection.getLocation().getY();
+			int elementY =element.getLocation().getY();
+			//System.out.println("Footer Y: "+footerY+"Element Y :"+elementY);
+			if (footerY - elementY < locationDifference) {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element/Footer banner not visible");
+		}
+		return status;
+	}
+
 }

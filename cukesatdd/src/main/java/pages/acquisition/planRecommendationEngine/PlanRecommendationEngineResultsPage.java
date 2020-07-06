@@ -621,7 +621,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			WebElement drugSummary = MA1stPlanList.get(0).findElement(By.cssSelector("a.add-drug"));
 			validate(drugSummary,20);
 			Assert.assertTrue(drugSummary.getText().contains("Enter drug information"), "Enter drug information link is not available");
-			drugSummary.click();
+			jsClickNew(drugSummary);
 			pageloadcomplete();
 			Assert.assertTrue(driver.getCurrentUrl().contains("drug-cost-estimator"),
 					"Page is not navigated to DCE");
