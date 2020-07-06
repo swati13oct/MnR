@@ -224,7 +224,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Plan Type | <plantype> |
     And user access DCE tool on UMS site
       | Plan Type | <plantype> |
-      | PlanName   | <planName>  |
+      | PlanName  | <planName> |
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
@@ -243,7 +243,6 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Pharmacy Name | <pharmacyName> |
     And I navigate to step3 page and validate the drug info
       | Drug | <drugName1> |
-    Then I switch to generic drug and validate on ums site
     And the user clicks on return link to navigate to plan summary in UHC
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
@@ -272,9 +271,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then the user selects a pharmacy from the list of pharmacies in UMS site
       | Pharmacy Name | <pharmacyName> |
     Then the user validates the added drugs on See your Estimated Costs page in UMS site
-      | Drug Name1 | <genericName1> |
-      | Drug Name2 | <drugName2>    |
-      | Drug Name3 | <drugName3>    |
+      | Drug Name2 | <drugName2> |
+      | Drug Name3 | <drugName3> |
     And the user clicks on Back to Plans button in UHC site and Navigates to new Plan Compare
     Then verify plan compare page is loaded on UHC
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
@@ -295,10 +293,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
-      | 00012 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
+      | 00016 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
 
   @vppPlanCompareUHC14 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: 4TID> -  Navigation for plan comapre to Plan Detail
+  Scenario Outline: TID: <TID> -  Navigation for plan comapre to Plan Detail
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -309,4 +307,20 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count | pdfType               | docCode                 |
-      | 00013 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | 00017 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+
+  @vppPlanCompareUHC15 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
+  Scenario Outline: TID: <TID> -  Validation for Selecting more than 4 plans for plan comapre from VPP
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    Then verify plan compare page is loaded on UHC
+    Then Click on view more plans for right navigaton on UHC
+    Then Click on view less plans for left navigaton on UHC
+
+    Examples: 
+      | TID   | zipcode | isMultiCounty | county          | plantype | count |
+      | 00018 |   10010 | No            | New York County | MAPD     |     9 |

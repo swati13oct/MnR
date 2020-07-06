@@ -3213,4 +3213,18 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			} else
 				Assert.fail("Error in loading the compare plans page");
 		}
+		
+		@Then("^Click on view more plans for right navigaton on UHC$")
+		public void ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewMoreplansComparePage();
+		}
+		
+		@Then("^Click on view less plans for left navigaton on UHC$")
+		public void ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewlessplansComparePage();
+		}
 } 

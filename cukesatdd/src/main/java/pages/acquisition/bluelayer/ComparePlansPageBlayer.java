@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
@@ -882,6 +884,43 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
 			return new DrugCostEstimatorPage(driver);
 		} else
 			return null;
+	}
+ 	
+ 	public void validateViewMoreplansComparePage() {
+		validateNew(backToAllPlansLink);
+		
+		WebElement viewMore = driver.findElement(By.xpath("//span[text()='Scroll Plans Right']/ancestor::button"));
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
+		for(int i=0;viewMore.isEnabled();){
+			viewMore.click();
+			System.out.println("Clicked no. of times : " + i);
+			i++;	
+		}
+		WebElement RightButtonDisabled = 
+			    wait.until(ExpectedConditions
+			                   .visibilityOfElementLocated(
+			                        By.xpath("//span[text()='Scroll Plans Right']/ancestor::button[attribute::disabled]")));
+		validateNew(RightButtonDisabled);
+		System.out.println("Validated Right arrow is Disabled");
+		
+	}
+	
+	public void validateViewlessplansComparePage() {
+		validateNew(backToAllPlansLink);		
+		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Scroll Plans Left']/ancestor::button"));
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		for(int i=0;viewLess.isEnabled();){
+			viewLess.click();
+			System.out.println("Clicked no. of times : " + i);
+			i++;	
+		}
+		WebElement LeftButtonDisabled = 
+			    wait.until(ExpectedConditions
+			                   .visibilityOfElementLocated(
+			                        By.xpath("//span[text()='Scroll Plans Left']/ancestor::button[attribute::disabled]")));
+		validateNew(LeftButtonDisabled);
+		System.out.println("Validated Left arrow is Disabled");
 	}
      
 }

@@ -3515,4 +3515,18 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	@Then("^Click on view more plans for right navigaton on AARP$")
+	public void ClickonviewmoreplansforrightnavigatononAARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewMoreplansComparePage();
+	}
+	
+	@Then("^Click on view less plans for left navigaton on AARP$")
+	public void ClickonviewlessplansforrightnavigatononAARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewlessplansComparePage();
+	}
 }
