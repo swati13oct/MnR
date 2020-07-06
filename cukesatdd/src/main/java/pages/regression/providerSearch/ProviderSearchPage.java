@@ -197,6 +197,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	public WebDriver navigateToClaimsPage() {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver, 1);
+		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
@@ -213,13 +214,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			uhcProviderSearchClaimsLnk.click();
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
-		if (!noWaitValidate(claimsPgHeader)) {
-			//note: retry before giving up
-			driver.navigate().refresh();
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
-		}
+		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
 		return driver;
 	}
@@ -370,7 +365,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 						.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
@@ -401,7 +396,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, hwPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, hwPgHeader, 120);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Health and Wellness' page",
 				noWaitValidate(hwPgHeader));
 		return driver;

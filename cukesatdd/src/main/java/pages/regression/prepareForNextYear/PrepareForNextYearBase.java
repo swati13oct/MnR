@@ -631,6 +631,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 	}
 
+	public String validateAdobePdfDocText() {
+		System.out.println("Validate PDF Doc text section exists");
+		Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",noWaitValidate(adobePdfDocText));
+
+		System.out.println("Validate PDF Doc text section exists");
+		Assert.assertTrue("PROBLEM - unable to locate the Adobe link",noWaitValidate(adobeLink));
+
+		return "PASSED Adobe PDF doc text validation";
+	}
+
 
 
 	
