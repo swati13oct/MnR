@@ -118,9 +118,11 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement emailGoToHomepageBtn;
 
-
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement paymentGoToHomepageBtn;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement anocGoToHomepageBtn;
 
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
@@ -690,7 +692,6 @@ public class HSIDLoginPage extends UhcDriver {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
 				try {
-					//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
 						goGreenGoToHomepageBtn.click();
@@ -729,6 +730,29 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 		}
 	}
+
+	public void anocSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/anoc.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 5);
+				System.out.println("User encounted anoc splash page, handle it...");
+				try {
+					if (validate(anocGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						anocGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+	
 	
 	public void emailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {

@@ -200,6 +200,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 		jsClickNew(Viewsavebtn);
 		validateNew(providerNameText);
+		String providerSaved = providerNameText.getText().trim();
+		System.out.println("Hospital Name is : " + providerSaved);
+		MRConstants.PROV_NAME=providerSaved;
 		Checkcoverage.click();
 		/*
 		 * validateNew(Checkcoverage); jsClickNew(Checkcoverage);

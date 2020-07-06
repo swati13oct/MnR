@@ -1,5 +1,5 @@
 @healthRecord
-Feature: 1.19 Member Individual Health Record
+Feature: 1.24 Member Individual Health Record
 
   @healthRecord01 @regressionMember @US2471601 @F424804
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table

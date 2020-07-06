@@ -61,18 +61,23 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 #      | 07-007 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
 #      | 08-008 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
-	@prod_active_ma
+	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 09-009 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
-      | 10-010 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1     | MA       | NICE_GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
-	@prod_active_mapd
+	@prod_active_ma @prod_active_ma_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+      | 10-010 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN     | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+#      | 10-010 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1     | MA       | NICE_GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+
+	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 11-011 | 15108       | ashah120  | Mnrqa002  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true   | true  | true  | true  |	
 
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 12-012 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
@@ -85,10 +90,14 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 #      | 14-014 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
 #      | 15-015 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
 
-	@prod_active_pdp
+	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 16-016 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true   | false | true  | true  |
+
+	@prod_active_pdp @prod_active_pdp_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 17-017 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true   | false | true  | false |
 
 	@prod_active_ssup
@@ -99,7 +108,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName      | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 19-019 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651| SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 19-019 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946| SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
 #      | 20-115 | 15119,15304 | ashah120  | Mnrqa002  | testusername    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 
