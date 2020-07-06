@@ -214,6 +214,12 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
+		if (!noWaitValidate(claimsPgHeader)) {
+			//note: retry before giving up
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
+		}
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
 		return driver;
 	}
