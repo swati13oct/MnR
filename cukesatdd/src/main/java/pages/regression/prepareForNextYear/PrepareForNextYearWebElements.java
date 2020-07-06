@@ -173,6 +173,13 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@class='loading-block' and contains(@style,'none')]")
 	protected WebElement noLoadingSpinner;
 	
+	@FindBy(xpath="//section[contains(@class,'disclaimer')]//strong[contains(text(),'This page contains PDF documents')]")
+	protected WebElement adobePdfDocText;
+
+	@FindBy(xpath="//section[contains(@class,'disclaimer')]//strong[contains(text(),'This page contains PDF documents')]/../a")
+	protected WebElement adobeLink;
+
+	
 	//note: milestone1 -------------------------------------
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']")
 	protected WebElement tl_milestone1Date;
@@ -504,10 +511,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//div[contains(@class,'review-section')]//h4[contains(text(),'Review pharmacy information')]/../div/p[contains(text(),'Review the')]")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_text;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//div[contains(@class,'pharmacy') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//div[contains(@class,'harmacy') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//div[contains(@class,'pharmacy') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//div[contains(@class,'harmacy') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]/../i")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk_arrow;
 
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewpharmacy_MAPD_PDP')]//a[contains(text(),'Pharmacy Directory Information')]/../span[contains(text(),'or')]")
