@@ -85,7 +85,7 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 			} catch (UnhandledAlertException ua) {
 				System.out.println("Got Alert error, let's try again");
 				driver.get(origUrl);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				sleepBySec(10);
 				validateLinkDest(testInputInfoMap, lnkElement);
 			}

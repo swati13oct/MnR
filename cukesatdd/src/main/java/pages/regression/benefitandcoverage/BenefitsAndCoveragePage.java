@@ -1097,7 +1097,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+					//System.out.println("PDF text : "+PDFText);
 					Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
 				} catch (MalformedURLException e) {
 					e.printStackTrace();

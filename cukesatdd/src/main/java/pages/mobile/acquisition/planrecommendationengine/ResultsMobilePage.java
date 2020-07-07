@@ -234,6 +234,9 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "a#change-location")
 	private WebElement changeZIPVPP;
+	
+	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
+	public WebElement footerBackToTopLink;
 
 	public void resultsUI(String zip, String county, String R1, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
@@ -263,6 +266,7 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void validateRecommendations(String R1, String rcom1, String R2, String rcom2) {
+		threadsleep(5000);
 		System.out.println("Validating Recommendations in Results Page");
 		if (R1.equalsIgnoreCase("MA")) {
 			Assert.assertTrue(planBasedInfo.getText().contains("Medicare Advantage"));
@@ -380,15 +384,15 @@ public class ResultsMobilePage extends UhcDriver {
 		threadsleep(8000);
 		mobileUtils.mobileLocateElementClick(MSPlanGender);
 		Select temp = new Select(MSPlanPartAMonth);
-		mobileSelectOption(temp, "January 1");
+		mobileSelectOption(MSPlanPartAMonth, "January 1",true);
 		temp = new Select(MSPlanPartAYear);
-		mobileSelectOption(temp, "2021");
+		mobileSelectOption(MSPlanPartAYear, "2021",true);
 		temp = new Select(MSPlanPartBMonth);
-		mobileSelectOption(temp, "January 1");
+		mobileSelectOption(MSPlanPartBMonth, "January 1",true);
 		temp = new Select(MSPlanPartBYear);
-		mobileSelectOption(temp, "2021");
+		mobileSelectOption(MSPlanPartBYear, "2021",true);
 		temp = new Select(MSPlanStartMonth);
-		mobileSelectOption(temp, "January 1, 2021");
+		mobileSelectOption(MSPlanStartMonth, "January 1, 2021",true);
 		mobileUtils.mobileLocateElement(MSViewPlanButton);
 		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
 	}
@@ -795,6 +799,7 @@ public class ResultsMobilePage extends UhcDriver {
 			// backtoPlans.click();
 			driver.navigate().refresh();
 			plansLoader();
+			backtoTop();
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
@@ -805,6 +810,7 @@ public class ResultsMobilePage extends UhcDriver {
 		// backtoPlans.click();
 		driver.navigate().refresh();
 		plansLoader();
+		backtoTop();
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
@@ -967,6 +973,23 @@ public class ResultsMobilePage extends UhcDriver {
 				validate(changeZIPVPP, 30);
 				System.out.println(changeZIPVPP.getText());
 			}
+		}
+	}
+
+	public void backtoTop() {
+		boolean checkElemPosition = mobileUtils.mobileCheckElementBeforeCallBanner(footerBackToTopLink);
+		// System.out.println(checkElemPosition);
+		// checkElemPosition =
+		// mobileUtils.mobileCheckElementBeforeCallBanner(MAViewPlansLink);
+		// System.out.println(checkElemPosition);
+		if (!checkElemPosition)
+			mobileUtils.mobileLocateElement(footerBackToTopLink);
+		try {//This single JSclick line is enough instead of this method
+			jsClickMobile(footerBackToTopLink);
+			//footerBackToTopLink.click();
+			threadsleep(2000);
+		} catch (Exception e) {
+
 		}
 	}
 

@@ -55,18 +55,23 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 #      | 07-026 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_TERM_PDnR       | true  | false | true  | true  | false | false |
 #      | 08-027 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
 
-	@prod_active_ma
+	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 09-028 | 15129       | ashah120  | Mnrqa002  | ERNIE2450 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
-      | 10-029 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+
+	@prod_active_ma @prod_active_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+      | 10-029 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+#      | 10-029 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
  
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 11-030 | 15108       | ashah120  | Mnrqa002  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 12-031 | 15303       | ashah120  | Mnrqa002  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
@@ -79,10 +84,14 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 #      | 14-033 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 #      | 15-034 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
-	@prod_active_pdp
+	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 16-035 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
+
+	@prod_active_pdp @prod_active_pdp_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 17-036 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
 
 	@prod_active_ssup
@@ -93,7 +102,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 19-038 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+      | 19-038 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
 #      | 20-116 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR   | true  | true  | true  | true  | false | false |  
 
 
