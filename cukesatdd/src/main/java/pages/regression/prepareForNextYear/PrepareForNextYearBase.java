@@ -414,9 +414,10 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
 		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
-		String actMsg=bookmarkErrMsg.getText();;
-		String expMsg="Your request can not be Processed at this time. Please try again later";
-		Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
+		//note: re-enable when the error msg is settle
+		//String actMsg=bookmarkErrMsg.getText();;
+		//String expMsg="Your request can not be Processed at this time. Please try again later";
+		//Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
 		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
 
 	}
