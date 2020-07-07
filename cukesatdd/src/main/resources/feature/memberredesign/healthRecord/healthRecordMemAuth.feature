@@ -44,34 +44,43 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
 	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	    | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 
+    @memAuth_no_ihr_c
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | 05    | F424804 | qavgogine | qavgogine | q2_jun_grp0154          | MA       | BOA12322_GROUP_IHR | false      |
+	    | 06    | F424804 | qavgogine | qavgogine | q2_jun_grp0155          | MA       | BOA12323_GROUP_IHR | false      |
+	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_GROUP_IHR | false      |
+
     @memAuth_ihr_a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 05    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP203     | MA       | IHR                | true       |
-	    | 06    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | GROUP_IHR          | true       |
-	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
+	    | 08    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP203     | MA       | IHR                | true       |
+	    | 09    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
 
     @memAuth_ihr_b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 08    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
-	    | 09    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_012   | MAPD     | TERM_IHR           | true       |
+	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
+	    | 12    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_012   | MAPD     | TERM_IHR           | true       |
 
     @memAuth_ihr_c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_grp0255          | SSP      | COMBO_PDP_SSP_IHR  | true       |
-	    | 11    | F424804 | qavgogine | qavgogine | q2_jun_grp0255          | PDP      | COMBO_PDP_SSP_IHR  | true       |
+	    | 13    | F424804 | qavgogine | qavgogine | q2_jun_grp0255          | SSP      | COMBO_PDP_SSP_IHR  | true       |
+	    | 14    | F424804 | qavgogine | qavgogine | q2_jun_grp0255          | PDP      | COMBO_PDP_SSP_IHR  | true       |
 
     @memAuth_ihr_d
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 12    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	    | 13    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
+	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
+	    | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
 
     @memAuth_ihr_e
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 14    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020     | MEDICA   | IHR                | true       |
-	    | 15    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022     | PCP      | IHR                | true       |
+	    | 17    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020     | MEDICA   | IHR                | true       |
+	    | 18    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022     | PCP      | IHR                | true       |
+
+
 	    
