@@ -53,44 +53,44 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       | medicare-education/medicare-costs.html                | 
       | medicare-education/enrollment-and-changing-plans.html | 
       | medicare-education/medicare-faq.html                  | 
-      | health-plans/shop.html          | 
-      | health-plans/shop/connect       | 
-      | health-plans/shop/compare.html  | 
-      | health-plans/shop/estimate.html | 
-      | health-plans/shop/switch.html   |  
-      | health-plans/shop/medicare-advantage-plans.html  | 
-      | health-plans/shop/medicare-supplement-plans.html | 
-      | health-plans/shop/prescription-drug-plans.html   | 
-      | health-plans/shop/dual-special-needs-plans.html  |
-      | health-plans/shop/compare/compare-pdp.html | 
-      | health-plans/shop/compare/compare-ma.html  |
-      | health-plans/shop/estimate/ma-costs.html   | 
-      | health-plans/shop/estimate/pdp-costs.html  | 
-      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html     | 
-      | health-plans/shop/medicare-advantage-plans/health-care-management.html | 
-      | health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html       | 
-      | health-plans/shop/renew-active.html                                    | 
-      | health-plans/enroll.html                | 
-      | health-plans/enroll/ma-enrollment.html  |
-      | health-plans/enroll/pdp-enrollment.html | 
-      | health-plans/resources.html                                       |
-      | health-plans/resources/medication-therapy-management-program.html | 
-      | health-plans/resources/how-to-appoint-a-representative.html       | 
-      | health-plans/resources/prescription-drug-costs-help.html          | 
-      | health-plans/resources/healthcare-fraud.html                      | 
-      | health-plans/resources/how-to-pay-your-premium.html               |  
-      | health-plans/resources/pdp-resources-materials.html                                            | 
-      | health-plans/resources/pdp-resources-materials/pdp-information-forms.html                      | 
-      | health-plans/resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html |          
-      | health-plans/resources/mail-order-pharmacy.html                                                | 
-      | health-plans/resources/prescription-drug-appeals.html                                          | 
-      | health-plans/resources/prescription-drug-transition.html                                       |
-      | health-plans/resources/ma-resources-materials.html                                               | 
-      | health-plans/resources/ma-resources-materials/ma-information-forms.html                          | 
-      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html            |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |
+      | shop.html          | 
+      | shop/connect       | 
+      | shop/compare.html  | 
+      | shop/estimate.html | 
+      | shop/switch.html   |  
+      | shop/medicare-advantage-plans.html  | 
+      | shop/medicare-supplement-plans.html | 
+      | shop/prescription-drug-plans.html   | 
+      | shop/dual-special-needs-plans.html  |
+      | shop/compare/compare-pdp.html | 
+      | shop/compare/compare-ma.html  |
+      | shop/estimate/ma-costs.html   | 
+      | shop/estimate/pdp-costs.html  | 
+      | shop/medicare-advantage-plans/wellness-discounts.html     | 
+      | shop/medicare-advantage-plans/health-care-management.html | 
+      | shop/medicare-advantage-plans/ma-plan-benefits.html       | 
+      | shop/renew-active.html                                    | 
+      | enroll.html                | 
+      | enroll/ma-enrollment.html  |
+      | enroll/pdp-enrollment.html | 
+      | resources.html                                       |
+      | resources/medication-therapy-management-program.html | 
+      | resources/how-to-appoint-a-representative.html       | 
+      | resources/prescription-drug-costs-help.html          | 
+      | resources/healthcare-fraud.html                      | 
+      | resources/how-to-pay-your-premium.html               |  
+      | resources/pdp-resources-materials.html                                            | 
+      | resources/pdp-resources-materials/pdp-information-forms.html                      | 
+      | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html |          
+      | resources/mail-order-pharmacy.html                                                | 
+      | resources/prescription-drug-appeals.html                                          | 
+      | resources/prescription-drug-transition.html                                       |
+      | resources/ma-resources-materials.html                                               | 
+      | resources/ma-resources-materials/ma-information-forms.html                          | 
+      | resources/ma-resources-materials/ma-information-forms/member-rights.html            |
+      | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
-      | health-plans/resources/disenrollment-information.html                                            | 
+      | resources/disenrollment-information.html                                            | 
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |                              
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | 
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | 
