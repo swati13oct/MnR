@@ -305,7 +305,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage) {
-		//tbd String stageUrl="https://ihr.int.werally.in";
 		String stageUrl="ihr.int.werally.in";
 		checkModelPopup(driver,1);
 		if (expComboTab) {

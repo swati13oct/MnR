@@ -338,6 +338,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1021,6 +1022,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1427,6 +1429,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2757,7 +2760,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
-				//tbd targetTestDocList.add("Medical Reimbursement Form (PDF)"); 
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
@@ -3442,6 +3444,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Plan Guide");
 				targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits"); 
@@ -3803,6 +3806,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {

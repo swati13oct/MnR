@@ -198,13 +198,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//keep 	if (MRScenario.environment.equalsIgnoreCase("offline"))		
 			//keep 		testInputInfoMap.put("expectedUrl", "/Individual/AARP_Redetermination_Request_Form.pdf");
 			//keep }
-			//tbd testInputInfoMap.put("expectedUrl", "Redetermination_Request_Form.pdf");
 			testInputInfoMap.put("expectedUrl", "Redetermination_Request_Form");
-			//tbd if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			//tbd 	if (memberType.contains("AARP")) {
-			//tbd 		testInputInfoMap.put("expectedUrl", "AARP_Redetermination_Request_Form.pdf");
-			//tbd 	}
-			//tbd }
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -245,10 +239,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//keep 		testInputInfoMap.put("expectedUrl", "/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			//keep }
 			testInputInfoMap.put("expectedUrl", "Medicare_Appeals_Grievances_Form");
-			//tbd testInputInfoMap.put("expectedUrl", "Medicare_Appeals_Grievances_Form.pdf");
-			//tbd if (MRScenario.environment.equalsIgnoreCase("prod"))
-			//tbd 	if(planType.equalsIgnoreCase("MAPD") && memberType.contains("GROUP"))
-			//tbd 		testInputInfoMap.put("expectedUrl", "/Group/Medicare_Appeals_Grievances_Form_PO_Box_30883.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -320,14 +310,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			//keep 	testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination.pdf"); //note: MAPD IND & SSP
 			
 			testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf"); //note: MAPD IND & SSP
-			//tbd if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
-			//tbd  		|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
-			//tbd 	testInputInfoMap.put("expectedUrl", "PotentialContractTermination_UHC.pdf");
-			//tbd if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			//tbd 	if ((planType.equalsIgnoreCase("MAPD") && !memberType.toUpperCase().contains("TERM"))
-			//tbd 	  		|| planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) 
-			//tbd 	 	testInputInfoMap.put("expectedUrl", "PotentialContractTermination_UHC.pdf");
-			//tbd }
 			if (memberType.toUpperCase().contains("GROUP")
 					&& ((planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("TERM"))
 							||	planType.toUpperCase().equals("MAPD") 
@@ -446,8 +428,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 					testInputInfoMap.put("expectedUrl", "Disenrollment_Form_Group_MA.pdf");
 			} else if (planType.toUpperCase().equals("PDP")) {
 				testInputInfoMap.put("expectedUrl", "Disenrollment_Form_PDP.pdf");
-				//tbd if (memberType.toUpperCase().contains("GROUP"))			
-				//tbd 	testInputInfoMap.put("expectedUrl", "Disenrollment_Form_Group_PDP.pdf");
 			} 
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -508,7 +488,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 
 		if (docName.equals("Electronic Funds Transfer (EFT) form")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/dam/UCP/SHIP/eft_content.pdf");
 			testInputInfoMap.put("expectedUrl", "eft_content.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -520,7 +499,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		
 		if (docName.equals("Privacy Authorization form")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/dam/UCP/SHIP/privacy_authorization.pdf");
 			testInputInfoMap.put("expectedUrl", "privacy_authorization.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -532,7 +510,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 
 		if (docName.equals("Alternate Payer Authorization form")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/dam/UCP/SHIP/Alternate_Payer_Authorization.pdf");
 			testInputInfoMap.put("expectedUrl", "Alternate_Payer_Authorization.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -544,7 +521,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		
 		if (docName.equals("Third Party Designee form")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/dam/UCP/SHIP/LA26838ST_ThirdPartyDesignee.pdf");
 			testInputInfoMap.put("expectedUrl", "LA26838ST_ThirdPartyDesignee.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -580,7 +556,6 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 
 		if (docName.equals("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies")) {
 			testInputInfoMap.put("docName", docName);
-			//tbd testInputInfoMap.put("expectedUrl", "/content/medicare/member/documents/appeals-mapd-pdp.html");
 			testInputInfoMap.put("expectedUrl", "appeals-mapd-pdp.html");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");

@@ -592,12 +592,18 @@ public class PlanDocApiResponse {
 					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
 							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
 							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
 							memMatl_zh_curYr_docList.add(docObjMap);
 					}
@@ -879,12 +885,18 @@ public class PlanDocApiResponse {
 					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
 							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
 							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
+						if (MRScenario.environment.contains("stage") && !isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
 							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}

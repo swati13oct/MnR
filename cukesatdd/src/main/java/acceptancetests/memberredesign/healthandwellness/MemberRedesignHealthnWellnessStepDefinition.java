@@ -2,23 +2,17 @@ package acceptancetests.memberredesign.healthandwellness;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -63,16 +57,6 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	/**
 	 * Clicks on Health and Wellness Tab
 	 */
-	/* tbd @When("^then click the health and wellness tab HW$")
-	public void then_click_the_health_and_wellness_tab() { 
-		// Express the Regexp above with the code you wish you had
-		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.clickHealthnWellnessTab();
-	} */
-	
-	/**
-	 * TODO Clicks on Health and Wellness Tab
-	 */
 	@When("^I navigate to the Health and Wellness page$")
 	public void navigateToHwPg() { 
 		if (MRScenario.environment.contains("team-a")) {
@@ -88,19 +72,6 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		} else {
 			AccountHomePage accountHomePage=(AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			HealthAndWellnessPage healthnWellnessPage=accountHomePage.navigateDirectToHwPag();
-			/* tbd 
-			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-			HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
-			int index=healthnWellnessPage.validateHeaderOnDashborad();
-			Assert.assertTrue("PROBLEM - unable to locate Health and Wellness option on dashboard", index!=-1);
-			if (index==1) {
-				System.out.println("located element: xpath=//header[@class='hide-mobile']//*[@id='sticky-nav']");
-			} else if (index==2) {
-				System.out.println("located element: xpath menuL1");
-			} else {
-				System.out.println("Located shadow root element with element index ="+index);
-			}
-			*/
 			healthnWellnessPage.clickHealthnWellnessTab();
 			getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 		} 
@@ -162,7 +133,6 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	
 	@And("^I should see RENEW ACTIVE tile if available and be able to click it$")
 	public void getRenewActiveValidation(DataTable memberAttributes) {
-		//tbd String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
