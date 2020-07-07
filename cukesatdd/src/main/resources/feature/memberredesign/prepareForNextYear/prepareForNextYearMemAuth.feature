@@ -1,5 +1,5 @@
 @prepareForNextYear
-Feature: 1.21.1 Member Prepare For Next Year - Member Auth
+Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 
   #-------------------------------------------------
   # note: for cases below -

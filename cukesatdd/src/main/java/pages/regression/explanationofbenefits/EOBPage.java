@@ -459,7 +459,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchRangeGreaterThanEighteenMonths() {
@@ -476,7 +476,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchFutureDate() {
@@ -493,7 +493,7 @@ public class EOBPage extends EOBBase{
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	public void doInvalidCustomSearchBlankDate() {
@@ -502,7 +502,7 @@ public class EOBPage extends EOBBase{
 		dateRangeOptions.selectByVisibleText("Custom Search");
 
 		customSearchBtn.click();
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(false);
 	}
 
 	/**
@@ -971,7 +971,6 @@ public class EOBPage extends EOBBase{
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
-		//tbd driver.switchTo().window(newTab.get(1));
 		driver.switchTo().window(newTab.get(newTab.size()-1));
 		CommonUtility.checkPageIsReady(driver);
 
@@ -1113,10 +1112,14 @@ public class EOBPage extends EOBBase{
 		String targetUuid=getUuid();
 		Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
 		int max=eobCount;
-		if (eobCount>=10) //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
+		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
+			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
+				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+		}
+		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
-			System.out.println("----- Proceed to validate each EOB PDF content on the first page if more than 10 eobs...");
+			System.out.println("----- Proceed to validate EOB PDF content - on the first page only if more than 10 eobs...");
 
 			//String targetEobXpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]']["+i+"]//td[3]";
 			String targetEobXpath="//tr[contains(@ng-repeat,'eobData in pagedListItems')]["+i+"]//td[3]//a";

@@ -1,7 +1,7 @@
 @drugCostEstimator @regressionMember
 Feature: 1.07 Member DCE Page
 
-  @drugCostEstimator1 @Member_dce_not @NegativeScenario
+  @drugCostEstimator1 @Member_dce_not @NegativeScenario @dce_p1
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.2 To Verify MR portal members DCE should not come for AARP federal members
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -18,7 +18,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType | memberType   |
       | 15327 | SSUP     | SSUP_DCE     |
 
-  @drugCostEstimator2
+  @drugCostEstimator2 @dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
     Given login with following details logins in the member portal and validate elements
          | Plan Type   | <planType>   |
@@ -37,7 +37,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType       | memberType |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | MAPD|MAPD_DCE |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
-  @drugCostEstimator3
+  @drugCostEstimator3 @dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -61,7 +61,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType       | memberType |zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | MAPD|MAPD_DCE |   06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
-  @drugCostEstimator4
+  @drugCostEstimator4 @dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -110,7 +110,7 @@ Feature: 1.07 Member DCE Page
   #| TID   | planType                |
   #| 15337 | IndividualDCEmember_DCE |
 
-  @drugCostEstimator6 @Member_DCE_sso
+  @drugCostEstimator6 @Member_DCE_sso @dce_p3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -122,7 +122,7 @@ Feature: 1.07 Member DCE Page
       # | 15329   | MAPD|MAPD_GROUP_DCE  |
       | 15338 | PDP|PDP_GROUP_DCE |
 
-  @drugCostEstimator7 @switch_to_generic_case_1
+  @drugCostEstimator7 @switch_to_generic_case_1 @dce_p3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that  pharmacy is selected and it suggests the user with an appropriate save money message.
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -146,7 +146,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType                       |memberType | drug    | dosage           | quantity | frequency     |
       | 15325 | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
-  @drugCostEstimator8 @switch_to_generic_case_2
+  @drugCostEstimator8 @switch_to_generic_case_2 @dce_p3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is not selected and it suggests the user with an appropriate save money message and cost savings are also updated
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -169,7 +169,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType                       | memberType |drug    | dosage           | quantity | frequency     |
       | 15325 | MAPD|MAPD_DCE| Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
-  @vbfGate @MemberVBF
+  @vbfGate @MemberVBF @dce_p4
   Scenario Outline: plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -194,7 +194,7 @@ Feature: 1.07 Member DCE Page
       | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
       
       
-  @formualrypdflink
+  @formualrypdflink @dce_p4
   Scenario Outline:  DCE Tool to search a plan for a drug that requires Prior Authorization or Step Therapy on the 2020 formulary
   Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
