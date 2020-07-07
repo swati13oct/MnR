@@ -151,20 +151,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		//---------------------------------------------
-		/* tbd 
-		if (memberType.contains("IND")) {
-			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-		} else {
-			note.addAll(pnfyGroup.validateReviewPlanChangesSection_grp(planType, memberType, currentDate, showSectionDoc_f1, showSectionDoc_f2, showSectionDoc_f3, showSectionDoc_f4, docDisplayMap));
-		} */
 		if (memberType.contains("IND")) {
 			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap));
 			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap));
-			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap));
-			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap));
+			//TODO note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap));
+			//TODO note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap));
 		} else {
 			note.addAll(pnfyGroup.validateReviewPlanChangesSection_grp(planType, memberType, currentDate, docDisplayMap));
 		}
@@ -183,11 +174,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -205,11 +191,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -226,11 +207,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd 	boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -247,11 +223,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd 	boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -268,11 +239,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -289,11 +255,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		sectionNote1.addAll(s1);
 
 		if (MRScenario.environment.contains("team-a")) {
-			//tbd boolean f1=true;
-			//tbd boolean f2=true;
-			//tbd boolean f3=true;
-			//tbd boolean f4=true;
-			//tbd List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, f1, f2, f3, f4, docDisplayMap);
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
