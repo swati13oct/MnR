@@ -31,6 +31,9 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |
