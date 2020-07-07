@@ -198,21 +198,40 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver, 1);
 		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
-		if (noWaitValidate(claimsTopMenuLnk)) {
-			claimsTopMenuLnk.click();
-		} else if (noWaitValidate(shadowRootHeader)) {
-			System.out.println("located shadow-root element, attempt to process further...");
-			WebElement root1 = expandRootElement(shadowRootHeader);
-			try {
-				WebElement claimsTopMenuShadowRootLink = root1
-						.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
-				claimsTopMenuShadowRootLink.click();
-			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
+		int max=1;
+		int count=max;
+		boolean foundMenuOption=false;
+		while (count>0) {
+			if (noWaitValidate(claimsTopMenuLnk)) {
+				claimsTopMenuLnk.click();
+				foundMenuOption=true;
+				break;
+			} else if (noWaitValidate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					WebElement claimsTopMenuShadowRootLink = root1
+							.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
+					claimsTopMenuShadowRootLink.click();
+				} catch (Exception e) {
+					Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
+				}
+				foundMenuOption=true;
+				break;
+			} else if (noWaitValidate(uhcProviderSearchClaimsLnk)) {
+				uhcProviderSearchClaimsLnk.click();
+				foundMenuOption=true;
+				break;
+			} else {
+				//note: can't find the claims menu option
+				count=count-1;
+				driver.navigate().refresh();
+				CommonUtility.checkPageIsReady(driver);
+				checkModelPopup(driver, 1);
+				CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
 			}
-		} else if (noWaitValidate(uhcProviderSearchClaimsLnk)) {
-			uhcProviderSearchClaimsLnk.click();
 		}
+		Assert.assertTrue("PROBLEM - unable to locate claims menu option",foundMenuOption);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
