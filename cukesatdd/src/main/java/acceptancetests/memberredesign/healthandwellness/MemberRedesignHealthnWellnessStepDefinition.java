@@ -49,6 +49,8 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
 		healthnWellnessPage.validateHeaderOnDashborad();
 
 		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
