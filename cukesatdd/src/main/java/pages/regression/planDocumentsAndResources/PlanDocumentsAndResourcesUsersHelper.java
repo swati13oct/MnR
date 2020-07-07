@@ -3251,7 +3251,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("UnitedHealth Passport Program");
+				//targetTestDocList.add("UnitedHealth Passport Program");
 				//targetTestDocList.add("Health & Wellness Products Catalog");
 				return targetTestDocList;
 			} 
@@ -3262,7 +3262,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos Alternativos");
 				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport"); 
+				//targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
