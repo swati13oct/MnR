@@ -586,5 +586,16 @@ public class DCEVPPAcqStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
+	@Then("^I navigate to step3 page and validate$")
+	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   if(dce.validateDrugOnStep3(drug))
+		   Assert.assertTrue(true);
+	   else
+		   Assert.fail("Error:the drug did not display on step 3 page"); 
+	}
 
 }

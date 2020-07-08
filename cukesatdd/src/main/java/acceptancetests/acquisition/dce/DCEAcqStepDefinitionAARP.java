@@ -253,17 +253,6 @@ public class DCEAcqStepDefinitionAARP {
 	/**
 	 * @toDo:
 	 */
-	@Then("^I navigate to step3 page and validate$")
-	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToStep3();
-	   if(dce.validateDrugOnStep3(drug))
-		   Assert.assertTrue(true);
-	   else
-		   Assert.fail("Error:the drug did not display on step 3 page"); 
-	}
 	
 	/**
 	 * @toDo:
@@ -330,6 +319,20 @@ public class DCEAcqStepDefinitionAARP {
 	public void clickOnReturnLink(){
 		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dcePage.clickReturnToSummaryLink();
+	}
+	
+	@And("^Click on Find my area button in AARP$")
+	public void click_on_find_my_area_button_in_aarp() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickonFinfAreaBtn();
+	}	
+	
+	@And("^user verify the NBA modal to add providers on the VPP summary page in AARP site$")
+	public void user_verify_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_AARP_site() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.validateButton("Find My Doctors");
 	}
 	
 	@Then("^I should be directed to the VPP Plan Summary Page Ulayer and I should see the Plan Count Overlay populated appropriately$")
@@ -447,16 +450,7 @@ public class DCEAcqStepDefinitionAARP {
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
-	
-	
-	@Then("^the user validates Local Storage for Zip, added drugs and Pharmacy details$")
-	public void the_user_validates_the_added_drugs_on_See_your_Estimated_Costs_page_in_AARP_site(DataTable DCEAttributes) throws Throwable {
-		Map<String, String> DCEAttributesMap=parseInputArguments(DCEAttributes);
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.validateLocalStorage(DCEAttributesMap);
-	}
-	
+
 	@When("^I have added a drug to my drug list from VPP$")
 	public void I_have_added_a_drug_to_my_drug_list_from_vpp(DataTable data) throws InterruptedException {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()

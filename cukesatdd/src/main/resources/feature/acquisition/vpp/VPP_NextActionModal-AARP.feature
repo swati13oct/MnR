@@ -2,7 +2,7 @@
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
 #**************************************************************MAPD*************************************************************************
-  @vppNextActionModalRegression_1 @prodRegressionMAPD
+  @vppNextActionModalRegression_1 
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -12,7 +12,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    Then user Verify Next Best Action Modal for Get Started
+    Then user should be able to see the NBA modal to add drugs on the VPP summary page in AARP site
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype |
       |   19019 | No              | Iowa County    | MAPD     | 
@@ -42,10 +42,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And the user selects the pharmacy tab information like miles, zipcode and pharmacy type
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
-    And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I select the first pharmacy  
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+    And Click on Find my area button in AARP
     Then user verify the NBA modal to add providers on the VPP summary page in AARP site
     When user clicks on Find My Doctor button in AARP Site
     And user should be redirected to Provider search Rally page in AARP site
@@ -80,10 +81,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
     #Then user verify the NBA modal to add providers on the VPP summary page in AARP site
+    And Click on Find my area button in AARP
     When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
@@ -118,9 +120,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+   And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+     And Click on Find my area button in AARP
      And wait for the VPP summary page to load
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype1> |
@@ -161,10 +164,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Plan Name | <planName> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
+    Then user verify NBA modal to add providers on the VPP summary page in AARP site
     Then user validates drug added on prescription drug benefits tab in AARP
       | Drug | <drug> |
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-
+    
     Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                            | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
@@ -216,10 +219,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
     #Then user verify NBA modal to add providers on the VPP summary page in AARP site
+     And Click on Find my area button in AARP
     When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
@@ -258,10 +262,11 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
     #Then user verify NBA modal to add providers on the VPP summary page in AARP site
+     And Click on Find my area button in AARP
     When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
@@ -317,9 +322,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-   And I navigate to step3 page and validate
+   And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+     And Click on Find my area button in AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     
       Examples: 
@@ -386,9 +392,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+     And Click on Find my area button in AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
    Then user clicks on Continue Enrollment button in AARP Site
    Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
@@ -424,9 +431,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+   And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+     And Click on Find my area button in AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
@@ -462,9 +470,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
     And I select the first pharmacy
-    And I navigate to step3 page and validate
+    And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary
+    #And the user clicks on return link to navigate to plan summary
+     And Click on Find my area button in AARP
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype1> |
     Then user verify the NBA modal to add providers on the VPP summary page in AARP site

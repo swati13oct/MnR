@@ -214,7 +214,6 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.handlePlanYearSelectionPopup(plantype);
 	}
 
-
 	/**
 	 * @toDo:user views the plans of the below plan type and select current year for AEP
 	 */
@@ -916,6 +915,48 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 	}
+	
+	//steps added for NBA
+	
+	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
+	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.validateButton("Get Started");
+		vppplansummarypage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
+	
+	@And("^user verify NBA modal to add providers on the VPP summary page in AARP site$")
+	public void user_verify_and_click_on_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForProviderSearch();
+	}
+	
+	@When("^user clicks on Find My Doctor button in AARP Site$")
+	public void user_clicks_on_Find_My_Doctor_button_in_aarp_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage)plansummaryPage.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+	
+	@Then("^user should be redirected to Provider search Rally page in AARP site$")
+	public void user_should_be_redirected_to_Provider_search_Rally_page() throws Throwable {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
+	}
+	
+	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page_in_UMS_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+	}
+
 
 	@Then("^the user Click on Look up your Provider button$")
 	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {

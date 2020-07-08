@@ -195,6 +195,7 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(Viewsavebtn);
 		validateNew(providerNameText);
 		Checkcoverage.click();
+		
 		/*
 		 * validateNew(Checkcoverage); jsClickNew(Checkcoverage);
 		 */

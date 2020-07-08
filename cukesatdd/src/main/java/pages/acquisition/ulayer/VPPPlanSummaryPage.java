@@ -331,6 +331,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
 
+	@FindBy(xpath = "//*[@ng-click='acqDrugInfo.OnSearchPlansWithDCE()']")
+	private WebElement findAreaBtn;
+	
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
@@ -349,6 +352,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
+	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
 	
@@ -698,6 +702,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		private WebElement peoplesHealthPlanName;
 		
 		
+		
+		private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+		
+		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
@@ -782,6 +790,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validate(contEnrollmentBtn);
 		}
 	}
+	
+	public void clickonFinfAreaBtn() {
+		validate(findAreaBtn);
+		findAreaBtn.click();
+	}
 
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
@@ -795,6 +808,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 	
+	public void verifyNextBestActionModalForDrugCost() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue(
+						"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
+								+ "\n Actual message" + nextBestActionModalMsg.getText(),
+						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	
 	public void verifyNextBestActionModalForProviderSearch() {
 		try {
 			if(nextBestActionModal.isDisplayed()) {
@@ -805,6 +832,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("NBA modal not found");
 		}
 	}
+	
+	
 	
 	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
 		nextBestActionModalFindMyDoctorsBtn.click();
