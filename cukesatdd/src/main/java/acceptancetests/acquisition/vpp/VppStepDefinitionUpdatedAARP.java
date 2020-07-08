@@ -3559,4 +3559,11 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateViewlessplansComparePage();
 	}
+	
+	@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page for AARP$")
+	public void removeoneplanfrom_compare_plan_link_in_AARP(String Counter) throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		planComparePage.CounterNewRemoveLink(Counter);
+	}
 }
