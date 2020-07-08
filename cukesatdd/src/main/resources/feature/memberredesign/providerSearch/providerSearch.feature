@@ -32,7 +32,7 @@ Feature: 1.23 Member Provider Search
         | 05    | MA       | UHC_IND_ProviderSearch  |
 	    | 06    | MA       | AARP_IND_ProviderSearch |
 
-	@providerSearch01
+	@providerSearch01d
     Examples: 
 	    | index | planType | memberType              | 
 	    | 07    | MEDICA   | MEDICA_IND_ProviderSearch |

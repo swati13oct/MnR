@@ -342,6 +342,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1028,6 +1029,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1436,6 +1438,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -3460,6 +3463,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria"); 
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -3810,6 +3814,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
