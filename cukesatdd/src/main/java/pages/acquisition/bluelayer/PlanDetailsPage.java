@@ -243,7 +243,7 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planNameValue;
 	
 	@FindBy(xpath = "//*[@id='drugBenefits']/h3")
-	private WebElement prescDrugHeading
+	private WebElement prescDrugHeading;
 	
 	
 	
