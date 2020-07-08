@@ -370,7 +370,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user clicks on Change Zip code link in UMS site
     Then user clicks on Select by Address and Enter fileds in UMS Site

@@ -4091,7 +4091,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void searchPlansCounty(String countyName, String ismultiCounty) {
 		findPlansButton.click();
-		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+		System.out.println("County should be selected : " + countyName + "==ismultiCounty=="+ismultiCounty);
 
 		if (ismultiCounty.contains("YES") && validate(countyModal)) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -4100,6 +4100,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 
 		} else {
+			CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
 			System.out.println("No County to be selected ");
 		}
 	}
