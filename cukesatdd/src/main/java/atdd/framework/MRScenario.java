@@ -1055,7 +1055,7 @@ try {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("recordMp4", true);
-				capabilities.setCapability("maxDuration", "7200");
+				capabilities.setCapability("maxDuration", "9000");
 			} else if (browserName.equalsIgnoreCase("edge")) {
 				System.out.println("Inside Edge");
 				capabilities = DesiredCapabilities.edge();
