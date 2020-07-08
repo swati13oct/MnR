@@ -8,13 +8,17 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.explanationofbenefits.Eob;
 import pages.regression.explanationofbenefits.EobApiResponse;
 import pages.regression.testharness.TestHarness;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -499,6 +503,9 @@ public class EobStepDefinition {
 	
 	@Then("^the user navigates to EOB page$")
 	public void user_views_EOBpagehsid() throws InterruptedException {   
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		System.out.println("****the user navigates to EOB page****");

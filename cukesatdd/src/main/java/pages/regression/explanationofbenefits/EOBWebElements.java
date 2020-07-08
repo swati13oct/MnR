@@ -122,7 +122,6 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
 	protected WebElement eobHeader;
 	
-	//tbd @FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/h2[contains(text(),'Explanation of Benefits (EOB) Search')]")
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/h2[not(contains(@class,'ng-hide')) and contains(text(),'Explanation of Benefits (EOB) Search')]")
 	protected WebElement eobSubSectionHeader;
 	

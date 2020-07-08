@@ -121,13 +121,13 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			sleepByMillSec(300);
 			scrollElementToCenterScreen(targetLinkElement);
 			targetLinkElement.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Clicked the doc link...");
 			sleepBySec(3);
 			if (!redirectUrl.equals("none")) {
 				System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 				sleepBySec(3);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 			//note: for these doc, popup will show when clicking this link, validate the proceed and cancel button
 			if (targetDocName.toUpperCase().contains("HEALTH PRODUCTS BENEFIT") 
@@ -142,7 +142,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 				System.out.println("Proceed to validate the Cancel button on leaving site popup after clicking "+targetDocName+" link");
 				siteLeavingPopup_cancelBtn.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking CANCEL button", !planDocValidate(siteLeavingPopup));
 
 				CommonUtility.waitForPageLoad(driver, targetLinkElement, 5);
@@ -150,7 +150,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				CommonUtility.waitForPageLoad(driver, siteLeavingPopup, 5);
 				System.out.println("Proceed to validate the Proceed button on leaving site popup after clicking "+targetDocName+" link");
 				siteLeavingPopup_proceedBtn.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking PROCEED button", !planDocValidate(siteLeavingPopup));
 			}
 
@@ -158,8 +158,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-			CommonUtility.checkPageIsReady(driver);
-			sleepBySec(5);
+			CommonUtility.checkPageIsReadyNew(driver);
+			sleepBySec(5); //note: let the page settle before validating content
 
 			if (checkDestUrl) {
 				String actUrl=driver.getCurrentUrl();
@@ -190,12 +190,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				scrollElementToCenterScreen(targetLinkElement);
 				sleepBySec(1);
 				targetLinkElement.click(); //note: if redirect then need to wait a little for the page to settle before checking destination link
-				CommonUtility.checkPageIsReady(driver);
-				
 				sleepBySec(5);
 				if (!redirectUrl.equals("none")) {
 					System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
-					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.checkPageIsReadyNew(driver);
 				}
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 				int afterClicked_numTabs=afterClicked_tabs.size();			
@@ -1014,7 +1012,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public List<String> validateSubPageContent(HashMap<String, String> testInputInfoMap, List<String> section_note, String actUrl, String targetDocName) {
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		String planType=testInputInfoMap.get("planType");
 		sleepBySec(3); //note: let the page settle before validating content
 		waitForDocPageToLoad();
@@ -1126,7 +1124,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+					//System.out.println("PDF text : "+PDFText);
 					if(PDFText!=null && !PDFText.equals(""))
 						section_note.add("    PASSED - validated pdf content is not null or empty");
 					else {

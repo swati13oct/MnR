@@ -2410,7 +2410,7 @@ public class AccountHomePage extends UhcDriver {
 				Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on testharness page table", validate(eobTestharnessLink,0));
 				eobTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				checkModelPopup(driver,5);
+				checkModelPopup(driver,1);
 				if (noWaitValidate(shadowRootHeader)) {
 					System.out.println("located shadow-root element, attempt to process further...");
 					WebElement root1 = expandRootElement(shadowRootHeader);
@@ -2433,8 +2433,8 @@ public class AccountHomePage extends UhcDriver {
 					Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on the Rally Dashboard page body", noWaitValidate(EOB_Dashboard));
 					EOB_Dashboard.click();
 				}
-				CommonUtility.checkPageIsReady(driver);
-				checkModelPopup(driver,5);
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver,1);
 			}
 		} else {
 			System.out.println(
