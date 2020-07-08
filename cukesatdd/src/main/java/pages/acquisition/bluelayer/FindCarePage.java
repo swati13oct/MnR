@@ -100,7 +100,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//header[@class='txtCenter step-header']")
 	public WebElement GreatHeaderText;
 
-	@FindBy(xpath = "//a[contains(text(),'View Saved')]")
+	@FindBy(xpath = "//button[@data-test-id='button-close']]")
 	public WebElement ViewSavedButton;
 
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Saved')]")
@@ -109,7 +109,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h2[@class='provider-name']//a")
 	public WebElement SavedProviderName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Check Provider Coverage')])[1]")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	public WebElement CheckProviderCoverageButton;
 
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
