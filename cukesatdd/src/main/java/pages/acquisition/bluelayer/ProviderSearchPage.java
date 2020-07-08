@@ -284,13 +284,14 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 				
 			}
-			/*New Changes
+		
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
 			continueSearching.click();
-			*/
+			
+			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
 			jsClickNew(BtnClose);
-			
+			*/
 			//counter++;
 //			if(counter==2)
 //			{
@@ -301,13 +302,14 @@ public class ProviderSearchPage extends UhcDriver {
 			
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
-		/*
-		 * jsClickNew(Savedproviders); validateNew(Finish); Finish.click();
+		 jsClickNew(Savedproviders); 
+		 validateNew(Finish); 
+		 Finish.click();
+		 
+		/*Old Changes
+		 * jsClickNew(Savedproviders); validateNew(providerNameText);
+		 * validateNew(Checkcoverage); Checkcoverage.click();
 		 */
-		jsClickNew(Savedproviders);
-		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		Checkcoverage.click();
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

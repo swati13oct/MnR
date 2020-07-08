@@ -411,13 +411,13 @@ public class ProviderSearchPage extends UhcDriver {
 
 			}
 			/*New Changes
-			 * 
+			 */
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
 			continueSearching.click();
 			
-			*/
+			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			jsClickNew(BtnClose);
+			jsClickNew(BtnClose);*/
 
 			// counter++;
 //			if(counter==2)
@@ -428,27 +428,25 @@ public class ProviderSearchPage extends UhcDriver {
 		}
 
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
-
+		/*Old Changes
+		 * 
 		 jsClickNew(Savedproviders); 
 		 validateNew(providerNameText);
 		 validateNew(Checkcoverage); 
 		 Checkcoverage.click(); 
-		// jsClickNew(Checkcoverage); 
+		//jsClickNew(Checkcoverage); 
 		 waitForCountDecrement(2);
 		 driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		 return new VPPPlanSummaryPage(driver);
+		*/
 		 
-		/*New Changes
-		 * 
 		jsClickNew(Savedproviders);
 		validateNew(Finish);
-		Finish.click();
-		
+		Finish.click();	
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new VPPPlanSummaryPage(driver);
 		
-		 */
-		return new VPPPlanSummaryPage(driver);
 	}
 
 	public void verifyProviderSearchRallyPageDisplayed() {
