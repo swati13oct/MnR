@@ -142,8 +142,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button in UMS site
-    When user selects a provider and retuns to VPP plan details page in blayer
-    Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
+    #When user selects a provider and retuns to VPP plan details page in blayer
+    #Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               |
