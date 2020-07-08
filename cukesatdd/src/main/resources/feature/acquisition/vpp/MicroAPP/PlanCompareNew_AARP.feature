@@ -35,7 +35,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype |
       | 00005 |   90210 | NO            | Los Angeles County | MAPD     |
 
-  @vppPlanCompareAARP03 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP03 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -326,3 +326,18 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Examples: 
       | TCID  | zipcode | isMultiCounty | county          | plantype | count |
       | 00018 |   10010 | No            | New York County | MAPD     |     9 |
+
+  @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
+  Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for remove icon should be disabled when only one plan on plan compare
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then remove one plan from "<count>" new plan compare and verify remove icon is disabled page for AARP
+
+    Examples: 
+      | TCID  | zipcode | isMultiCounty | county          | plantype | count |
+      | 00018 |   10010 | No            | New York County | MAPD     |     1 |

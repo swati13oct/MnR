@@ -61,12 +61,16 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="(//*[@ng-if='::hideInputs !== true'])[1]")
 	private WebElement selectLocationOptionClick;
 	
+	@FindBy(xpath="//span[text()='Edit Saved']")
+	private WebElement EditSavedButton;
 	
+	@FindBy(xpath="//span[text()='View Saved Providers']")
+	private WebElement ViewSavedProvidersLink;
 	
-	@FindBy(xpath="//a[contains(text(),'View Saved')]")
+	@FindBy(xpath="//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+	@FindBy(xpath="(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -203,6 +207,9 @@ public class ProviderSearchPage extends UhcDriver {
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
+	if(validate(EditSavedButton)){
+		ViewSavedProvidersLink.click();
+	}
 	validateNew(providerNameText);
 	validateNew(Checkcoverage);
 	Checkcoverage.click();
@@ -234,6 +241,9 @@ public class ProviderSearchPage extends UhcDriver {
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
+	if(validate(EditSavedButton)){
+		ViewSavedProvidersLink.click();
+	}
 	validateNew(providerNameText);
 	String providerSaved = providerNameText.getText().trim();
 	System.out.println("Hospital Name is : " + providerSaved);
@@ -349,6 +359,9 @@ public void selectsProviderFromGlobaHeader() {
 		
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 		Viewsavebtn.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		validateNew(providerNameText);
 		validateNew(PrintEmailBtn);
 		
@@ -384,6 +397,9 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 
 		validateNew(Checkcoverage);
 		Checkcoverage.click();
@@ -418,6 +434,9 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		validateNew(providerNameText);
 		validateNew(Checkcoverage);
 		jsClickNew(Checkcoverage);

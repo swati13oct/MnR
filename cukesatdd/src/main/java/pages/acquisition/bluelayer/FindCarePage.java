@@ -123,6 +123,12 @@ public class FindCarePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	public WebElement addressCheckBox;
+	
+	@FindBy(xpath="//span[text()='Edit Saved']")
+	private WebElement EditSavedButton;
+	
+	@FindBy(xpath="//span[text()='View Saved Providers']")
+	private WebElement ViewSavedProvidersLink;
 
 	public ComparePlansPageBlayer getstarted() throws Exception {
 		validate(GetstartedButton);
@@ -155,6 +161,9 @@ public class FindCarePage extends UhcDriver {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		ViewSavedButton.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		waitforElement(SavedHeader);
 		if (HospName.equals(SavedProviderName.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
@@ -220,6 +229,9 @@ public class FindCarePage extends UhcDriver {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		ViewSavedButton.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		waitforElement(SavedHeader);
 		if (HospName.equals(SavedProviderName.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
@@ -281,6 +293,9 @@ public class FindCarePage extends UhcDriver {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		ViewSavedButton.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		waitforElement(SavedHeader);
 		if (HospName.equals(SavedProviderName.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
@@ -345,6 +360,9 @@ public class FindCarePage extends UhcDriver {
 		System.out.println("Text is :: " + GreatText);
 		validate(ViewSavedButton);
 		ViewSavedButton.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		waitforElement(SavedHeader);
 		if (HospName.equals(SavedProviderName.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
@@ -412,6 +430,9 @@ public class FindCarePage extends UhcDriver {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		ViewSavedButton.click();
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		waitforElement(SavedHeader);
 		if (HospName.equals(SavedProviderName.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
