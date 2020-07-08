@@ -454,17 +454,17 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				String PDFText = new PDFTextStripper().getText(document);
 				System.out.println("PDF text : "+PDFText);
 				if(PDFText!=null && !PDFText.equals("")){
-					note.add("PASSED - validated pdf content is not null");
+					note.add("\tPASSED - validated pdf content is not null");
 				} else {
-					note.add("* FAILED - unable to validate pdf content - content either null or empty");
+					note.add("\t* FAILED - unable to validate pdf content - content either null or empty");
 					Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty - doc name="+targetDocName, false);
 				}
 			} catch (MalformedURLException e) {
-				note.add("* FAILED - unable to validate pdf content - MalformedURLException");
+				note.add("\t* FAILED - unable to validate pdf content - MalformedURLException");
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException - doc name="+targetDocName, false);
 			} catch (IOException e) {
-				note.add("* FAILED - unable to validate pdf content - IOException");
+				note.add("\t* FAILED - unable to validate pdf content - IOException");
 				e.printStackTrace();
 				//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
