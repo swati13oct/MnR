@@ -698,6 +698,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
 		private WebElement peoplesHealthPlanName;
 		
+		//@FindBy(xpath = "//*[contains(@class,'cta-button action_optum')]")
+		@FindBy(xpath = "//*[@id='ole-form-controls']//*[@class='cta-button action_optum_sign_in']")
+		private WebElement signIn;
+		
+		@FindBy(css="div.signupCTA.signupContainer a")
+		private WebElement signOut;
+		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -4072,6 +4079,38 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return new IsInsuranceAgent(driver);
 		else
 			return null;
+	}
+	
+	public void signIn(String username,String password) {
+		try {
+			Assert.assertTrue("Sign in Link is not displayed", validate(signIn));
+			
+			//jsClickNew(signIn);
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+		
 	}
 
 }
