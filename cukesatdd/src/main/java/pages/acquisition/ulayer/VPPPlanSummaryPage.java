@@ -910,6 +910,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
+		
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, vppTop, 10);
 
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
