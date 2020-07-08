@@ -2,7 +2,7 @@
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
 #**************************************************************MAPD*************************************************************************
-  @vppNextActionModalRegression_1 
+  @vppNextActionModalRegression_12
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

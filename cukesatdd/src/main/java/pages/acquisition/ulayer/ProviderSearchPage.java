@@ -58,7 +58,7 @@ public class ProviderSearchPage extends UhcDriver {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
 	private List<WebElement> MulitpleSaveBtns;
 
-	@FindBy(xpath = "//a[contains(text(),'View Saved')]")
+	@FindBy(xpath = "//button[contains(text(),'Finish & Return')]")
 	private WebElement Viewsavebtn;
 
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
