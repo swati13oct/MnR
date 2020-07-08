@@ -79,7 +79,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'active')]//div[@class='enroll-details']//a[contains(@dtmname,'View More Details')]")
 	protected List<WebElement> planSummary_listOfViewPlanDetailsButtons;
 	
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
 	protected WebElement vppTop;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
