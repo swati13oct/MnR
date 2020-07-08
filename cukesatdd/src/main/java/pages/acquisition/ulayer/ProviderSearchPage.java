@@ -61,6 +61,9 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 	
+	@FindBy(xpath = "//*[text()='View Saved']")
+	private WebElement ViewsaveProviderbtn;
+	
 	@FindBy(xpath="//span[text()='Edit Saved']")
 	private WebElement EditSavedButton;
 	
@@ -284,7 +287,7 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(continueButton);
 		continueButton.click();
 
-		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li/h2/button[contains(@class,'link')]"));
+		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
 
 		return topicDropDownValues.size();
 	}
@@ -312,8 +315,8 @@ public class ProviderSearchPage extends UhcDriver {
 			saveBtn2.click();
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-		Viewsavebtn.click();
+		CommonUtility.waitForPageLoadNew(driver, ViewsaveProviderbtn, 30);
+		ViewsaveProviderbtn.click();
 		if(validate(EditSavedButton)){
 			ViewSavedProvidersLink.click();
 		}
