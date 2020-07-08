@@ -66,7 +66,6 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 		String section="My Documents";
 		String item="SEARCH DOCUMENTS";
 		WebElement lnkElement=myDocumentLink_MD;
-		//tbd String expectedUrl="/content/medicare/member/my-documents/overview.html";
 		String expectedUrl="/member/my-documents/overview.html";
 		
 		testInputInfoMap.put("docName", item);

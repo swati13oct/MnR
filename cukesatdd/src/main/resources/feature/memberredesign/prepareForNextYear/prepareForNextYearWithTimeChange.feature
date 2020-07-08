@@ -31,6 +31,9 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |
@@ -127,7 +130,7 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
     @prepareForNextYear03_ind
     Examples: 
 	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	    | 12    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | 11    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 
     #@prepareForNextYear03_grp
     #Examples: 

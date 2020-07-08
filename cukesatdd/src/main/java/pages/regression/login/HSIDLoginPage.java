@@ -777,7 +777,6 @@ public class HSIDLoginPage extends UhcDriver {
 					}
 					 */
 					try {
-						//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 						if (validate(emailGoToHomepageBtn,0)) {
 							System.out.println("'Go To Homepage' button showed up, click it");
 							//goToHomepage.isDisplayed();
@@ -840,18 +839,11 @@ public class HSIDLoginPage extends UhcDriver {
 
 		//wait for some form of header to show
 
-		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
 		}
-		/* tbd try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 
 		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
@@ -897,8 +889,6 @@ public class HSIDLoginPage extends UhcDriver {
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		//tbd if (MRScenario.environmentMedicare.equals("team-e")
-		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
 		if (MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();

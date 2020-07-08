@@ -28,10 +28,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
-		//tbd checkModelPopup(driver,5);
 		claimCheckModelPopup(driver);
-		//if(!pgHeader.getText().contains("Claims Summary"))
-		//	Assert.fail("Claims Summary header not found. Page loading issue");
 	}
 
 	ClaimsSummaryValidateHeader validateHeader=new ClaimsSummaryValidateHeader(driver);
@@ -204,7 +201,6 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		claimCheckModelPopup(driver);
-		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -221,7 +217,6 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		claimCheckModelPopup(driver);
-		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
@@ -361,36 +356,26 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickPrintBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			//tbd if (getOnlyTestUiFlag()) {
-			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
-			//tbd return true;
-				//tbd } else {
-				String winHandleBefore = driver.getWindowHandle();
-				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int beforeClicked_numTabs=beforeClicked_tabs.size();					
-				claimsSummPrntBtn.click();
-				try {
-					Thread.sleep(2000); //note: need this sleep otherwise the drive will be NPE when check page is ready
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				//note: need to dynamically determine the number of tabs because if offline prod env will have extra tab
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			String winHandleBefore = driver.getWindowHandle();
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int beforeClicked_numTabs=beforeClicked_tabs.size();					
+			claimsSummPrntBtn.click();
+			try {
+				Thread.sleep(2000); //note: need this sleep otherwise the drive will be NPE when check page is ready
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			//note: need to dynamically determine the number of tabs because if offline prod env will have extra tab
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();					
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 
-				/* tbd
-				CommonUtility.checkPageIsReady(driver);
-				System.out.println("New window for print = "+driver.getTitle());
-				String expPrintPageTitle="Print: My Claims Details";
-				Assert.assertTrue("PROBLEM - print page title is not as expected.", driver.getTitle().contains(expPrintPageTitle)); */
-				Assert.assertTrue("PROBLEM - print page popup is showing as expected.", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			Assert.assertTrue("PROBLEM - print page popup is showing as expected.", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				System.out.println("Main window = "+driver.getTitle());	
-				return true;
-				//tbd }
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			System.out.println("Main window = "+driver.getTitle());	
+			return true;
 		} else
 			return false;
 	}
@@ -402,17 +387,12 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickDnldBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			//tbd if (getOnlyTestUiFlag()) {
-			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
-			//tbd 	return true;
-			//tbd } else {
-				try {
-					claimsSummDnldBtn.click();
-				} catch(Exception e) {
-					Assert.assertTrue("PROBLEM - encounted exception when attempting to click donwload button", false);
-				}
-				return true;
-				//tbd }
+			try {
+				claimsSummDnldBtn.click();
+			} catch(Exception e) {
+				Assert.assertTrue("PROBLEM - encounted exception when attempting to click donwload button", false);
+			}
+			return true;
 		} else
 			return false;
 	}
@@ -436,64 +416,56 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				System.out.println("PROBLEM - non SHIP user should have 'DownloadMyData' button");
 				return false;
 			}
-			//tbd if (getOnlyTestUiFlag()) {
-			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
-			//tbd 	return true;
-			//tbd } else {
-				System.out.println("Blue Button-DownLoad my Data Button is displayed");
-				//WebDriverWait wait2 = new WebDriverWait(driver, 10);
-				//wait2.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='downloadHypLinkAtdd']")));
-				//dnldMyDataBtn.click();
-				
-				WebElement ele = driver.findElement(By.xpath(".//*[@id='downloadHypLinkAtdd']"));
-				JavascriptExecutor executor = (JavascriptExecutor)driver;
-				executor.executeScript("arguments[0].click();", ele);
-				CommonUtility.waitForPageLoad(driver, dnldPopup_cancelBtn, 5);
+			System.out.println("Blue Button-DownLoad my Data Button is displayed");
 
-				//note: validate cancel button function
-				if (!claimsValidate(dnldPopup_cancelBtn)) {
-					System.out.println("PROBLEM - not getting expected cancelButtonDownloadPopUp");
-					return false;
-				}
-				System.out.println("Cancel Button is displayed");
-				dnldPopup_cancelBtn.click();
-				CommonUtility.checkPageIsReady(driver);
-				if (!driver.getTitle().contains("Claims")) {
-					System.out.println("PROBLEM - Cancel button on DownloadPopUp is not working");
-					return false;
-				}
-				System.out.println("Cancel button functionality is working as expected");
+			WebElement ele = driver.findElement(By.xpath(".//*[@id='downloadHypLinkAtdd']"));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", ele);
+			CommonUtility.waitForPageLoad(driver, dnldPopup_cancelBtn, 5);
 
-				//note: validate proceed button function
-				dnldMyDataBtn.click();
-				waitforElement(dnldPopup_leavingSite);
-				if (!claimsValidate(dnldPopup_leavingSite)) {
-					System.out.println("PROBLEM - not getting expected leavingsitepopup");
-					return false;
-				}
-				System.out.println("Proceed button is displayed");
-				String winHandleBefore = driver.getWindowHandle();
-				dnldPopup_proceedBtn.click();
+			//note: validate cancel button function
+			if (!claimsValidate(dnldPopup_cancelBtn)) {
+				System.out.println("PROBLEM - not getting expected cancelButtonDownloadPopUp");
+				return false;
+			}
+			System.out.println("Cancel Button is displayed");
+			dnldPopup_cancelBtn.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (!driver.getTitle().contains("Claims")) {
+				System.out.println("PROBLEM - Cancel button on DownloadPopUp is not working");
+				return false;
+			}
+			System.out.println("Cancel button functionality is working as expected");
 
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				try {
-					Thread.sleep(2000); //note: need this for the page to load before it can check page ready
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				CommonUtility.checkPageIsReady(driver);
-				String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
-				if (!driver.getCurrentUrl().contains(expectedURL)) {
-					System.out.println("PROBLEM - process button is not functioning as expected");
-					return false;
-				}
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				System.out.println("Main window = "+driver.getTitle());	
-				return true;			
-				//tbd }
+			//note: validate proceed button function
+			dnldMyDataBtn.click();
+			waitforElement(dnldPopup_leavingSite);
+			if (!claimsValidate(dnldPopup_leavingSite)) {
+				System.out.println("PROBLEM - not getting expected leavingsitepopup");
+				return false;
+			}
+			System.out.println("Proceed button is displayed");
+			String winHandleBefore = driver.getWindowHandle();
+			dnldPopup_proceedBtn.click();
+
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();					
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			try {
+				Thread.sleep(2000); //note: need this for the page to load before it can check page ready
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			CommonUtility.checkPageIsReady(driver);
+			String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
+			if (!driver.getCurrentUrl().contains(expectedURL)) {
+				System.out.println("PROBLEM - process button is not functioning as expected");
+				return false;
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			System.out.println("Main window = "+driver.getTitle());	
+			return true;			
 		}
 	}
 
