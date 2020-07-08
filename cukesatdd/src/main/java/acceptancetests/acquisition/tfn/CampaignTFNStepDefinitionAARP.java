@@ -48,14 +48,14 @@ public class CampaignTFNStepDefinitionAARP {
 	}
 
 	
-	  WebDriver driver;
-	 /* 
-	 * @Given("^the user Starts WebDriver$") public void Start_WebDriver() { driver
-	 * = getLoginScenario().getWebDriverNew();
-	 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-	 * 
-	 * }
-	 */
+	WebDriver driver;
+	@Given("^the user Starts WebDriver$")
+	public void Start_WebDriver() {
+		driver = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+
+	}
+	 
 	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
 	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
