@@ -70,6 +70,9 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 
+	@FindBy(xpath = "//*[text()='View Saved']")
+	private WebElement ViewsaveProviderbtn;
+	
 	@FindBy(xpath="(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 	
@@ -357,8 +360,9 @@ public void selectsProviderFromGlobaHeader() {
 			saveBtn2.click();
 		}
 		
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-		Viewsavebtn.click();
+		CommonUtility.waitForPageLoadNew(driver, ViewsaveProviderbtn, 30);
+		ViewsaveProviderbtn.click();
+		
 		if(validate(EditSavedButton)){
 			ViewSavedProvidersLink.click();
 		}
@@ -454,7 +458,7 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		validateNew(continueButton);
 		continueButton.click();
 		
-	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li/h2/button[contains(@class,'link')]"));
+	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
 	   
 	    return topicDropDownValues.size();
 	}
