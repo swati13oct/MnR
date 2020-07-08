@@ -35,7 +35,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
       | 00005 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
 
-  @vppPlanCompareUHC03 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
+  @vppPlanCompareUHC03 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
