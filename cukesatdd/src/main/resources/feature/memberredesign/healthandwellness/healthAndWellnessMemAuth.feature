@@ -26,7 +26,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | qavgogine | qavgogine | q1_feb_nice_019 | MAPD     | RewardsMember     | true      | true           |
-      | 15341 | qavgogine | qavgogine | q2_may_rally002 | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | AARP_RewardsMember| true      | true           |
       | 15341 | qavgogine | qavgogine | q3_sep_UAT4_UHC085 | MA    | UHC_RewardsMember | true      | true           |
 
     @memAuth_healthAndWellness01b

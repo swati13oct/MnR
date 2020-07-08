@@ -130,7 +130,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	}
 	
 	
-	//tbd public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		if (memberType.contains("GRP")) {
