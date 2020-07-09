@@ -64,8 +64,8 @@ public class isInsuranceAgentStepDefenition    {
 		return loginScenario;
 	}
 	
-	@Then("^the user enters and  saves the entered information in Pre-entry page for validation on Licensed InsuranceAgent forms$")
-	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_Licensed_Insurance_Agent_forms(DataTable givenAttributes) throws Throwable {
+	@Then("^the user enters and  saves the entered information in Pre-entry page for validation on Licensed InsuranceAgent forms for AARP$")
+	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_Licensed_Insurance_Agent_forms_for_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -149,8 +149,8 @@ public class isInsuranceAgentStepDefenition    {
 
 	}
 
-	@Then("^the user clicks Submit to submit Licensed Insurance Agent on AARP site$")
-	public void the_user_clicks_Submit_to_submit_Licensed_Insurance_on_AARP_site() throws Throwable {
+	@Then("^the user clicks Submit to submit Licensed Insurance Agent on AARP site and validates Thank You Page$")
+	public void the_user_clicks_Submit_to_submit_Licensed_Insurance_on_AARP_site_and_validates_Thank_You_Page() throws Throwable {
 		IsInsuranceAgent LicenseInsuranceAgentPage =(IsInsuranceAgent) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE);
 		License_ThankYouPage dgrThankYouPage = LicenseInsuranceAgentPage.NavigateNext_LIAthankYouPage();
 		if(dgrThankYouPage != null) {
@@ -161,11 +161,7 @@ public class isInsuranceAgentStepDefenition    {
 		}
 
 	}
-
-	@Then("^the user validates Thank You Page on Licensed Insurance Agent AARP site$")
-	public void the_user_validates_Thank_You_Page_on_Licensed_Agent_AARP_site() throws Throwable {
-		
-	}
+	
 } 
 
 

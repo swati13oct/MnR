@@ -519,7 +519,7 @@ public class IsInsuranceAgent extends UhcDriver{
 		String partBmonth = memberAttributesMap.get("partBmonth");
 		String partByear = memberAttributesMap.get("partByear");
 		String aarpNo = memberAttributesMap.get("aarpNo");
-		String phNo = memberAttributesMap.get("phNo");
+		String phNo = memberAttributesMap.get("PhNo");
 		String mobileFlag = memberAttributesMap.get("mobileFlag");
 
 		//DateOfBirthTxt.clear();
@@ -528,10 +528,16 @@ public class IsInsuranceAgent extends UhcDriver{
 		
 		if(validateNew(DateOfBirthTxt)&& DateOfBirthTxt.isDisplayed())
 			DateOfBirthTxt.sendKeys(DOB);
+		
+		if(validateNew(PhNo)){
+		String selectAll = Keys.chord(Keys.CONTROL, "a");
+		PhNo.sendKeys(selectAll);
+		PhNo.sendKeys(Keys.BACK_SPACE);
 		PhNo.sendKeys(phNo);
+		}
 	}
 
-	@FindBy(xpath = "//button[contains(@type, 'submit') and contains(text(), 'Submit')]")
+	@FindBy(id = "agent-submit-button")
 	private WebElement SubmitBtn;
 	
 	@FindBy(xpath = "//*[contains(@id, 'thankyou')]")

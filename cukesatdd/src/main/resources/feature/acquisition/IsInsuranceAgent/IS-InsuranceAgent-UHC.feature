@@ -10,7 +10,7 @@ Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
       | Is Multi County | <isMultutiCounty> |
     And the user views plans of the below plan type in UMS site
       | Plan Type       | <plantype>        |
-     Then the user enters and  saves the entered information in Pre entry page for validation on IS Insurance Agent forms on UMS site	
+     Then the user enters and  saves the entered information in Pre entry page for validation on IS Insurance Agent forms on UHC site	
       | DOB							|	<dob>							|
     Then the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site
     Then the user enters valid information for the following fields on UMS site for Insurance Agent
@@ -20,10 +20,10 @@ Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
       | Email              | <email>              |
     Then the user validates address autocomplete on Licensed Agent on UHC site
      Then the user provides DOB and Phone Number on uhc site
-    | DOB        | <dob>        |
+     | DOB        | <dob>        |
      | PhNo       | <phNo>       |
-  Then the user clicks Submit to submit Licensed Insurance Agent on UHC site
-    Then the user validates Thank You Page on Licensed Insurance Agent UHC site
+  Then the user clicks Submit to submit Licensed Insurance Agent on UHC site and validates Thank You Page
+    #Then the user validates Thank You Page on Licensed Insurance Agent UHC site
 
     Examples: 
       | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender| 
