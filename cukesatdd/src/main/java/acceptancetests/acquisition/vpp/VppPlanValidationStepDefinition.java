@@ -133,6 +133,7 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {

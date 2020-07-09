@@ -418,6 +418,24 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
+			}else if(columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network Value")){
+				
+				counter++;
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+				
+				
+					if(key.equalsIgnoreCase(columnName)) {
+						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+								flag = true;break;
+							}else {
+								flag = false;
+								System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								break;
+							}
+					}
+				
+			
 			}else if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
 						
 						counter++;
@@ -440,6 +458,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("/", "");
 						
 						
+						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
 						if(key.contains("Preferred Retail Pharmacy Network") || key.contains("Preferred Mail Home Delivery through OptumRx")) {
 							if(benefitValueUI.contains("1."))
 								benefitValueUI = benefitValueUI.replace("1.", ".");
@@ -448,16 +467,20 @@ public class AepPlanDetailsPage extends UhcDriver {
 						
 						}
 						
+						//the following code will help remove footnote values from the end of the string if any. this is different from above
 						if(benefitValueUI.endsWith("1"))
 							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
 						else if(benefitValueUI.endsWith("2"))
 							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
+						else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
+							benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 						
-						if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						
+						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							break;
 						}
 			
