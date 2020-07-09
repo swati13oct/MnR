@@ -1745,10 +1745,30 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
-		System.out.println("***the user clicks on resume application button***");
+		String FirstName = memberAttributesMap.get("Firstname");
+		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.ResumeApplicationButton(DateOfBirth);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		System.out.println("***the user clicks on resume application button***");
+		VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage1.ResumeApplicationButton(DateOfBirth);
 
+	}
+	
+	@And("^the user signs in with optum Id credentials to resume application in AARP site$")
+	public void the_user_signs_in_with_optum_Id_credentials_resume_application_in_AARP_site(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.signIn(username, password);
 	}
 
 	@Then("^user enters data to resume the application in the AARP site")
@@ -3558,5 +3578,12 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateViewlessplansComparePage();
+	}
+	
+	@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page for AARP$")
+	public void removeoneplanfrom_compare_plan_link_in_AARP(String Counter) throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		planComparePage.CounterNewRemoveLink(Counter);
 	}
 }

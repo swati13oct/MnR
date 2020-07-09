@@ -15,7 +15,12 @@ Given the user is on AARP medicare acquisition site landing page
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
      Then user clicks on resume application button in the AARP site
-    		 | DOB           | <DOB>         |
+    		| DOB           | <DOB>         |
+    		| Firstname     | <Firstname>   |
+       | Lastname      | <Lastname>    |
+    	Then the user signs in with optum Id credentials to resume application in AARP site
+      | User Name | <userName> |
+      | Password  | <password> |	
      Then user enters data to resume the application in the AARP site
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
@@ -24,11 +29,11 @@ Given the user is on AARP medicare acquisition site landing page
       Then user validates the resume application processed in the AARP site
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
-      
+    
       
        Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
+      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |userName | password  |
+      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd  | Password@1 | 
      
   
 @UHC_Retrive_App_AARP @oleMedSupUlayer

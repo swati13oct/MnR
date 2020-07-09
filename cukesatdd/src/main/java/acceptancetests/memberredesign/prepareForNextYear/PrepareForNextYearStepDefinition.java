@@ -117,6 +117,7 @@ public class PrepareForNextYearStepDefinition {
 	public void user_toBenefits_validateTabBasedOnFeatureFileInput() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
@@ -345,6 +346,10 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
 		}
 		
+		pfnyPg.validateAdobePdfDocText();
+		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+		
 		//note: validate timeline and Find update section content
 		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
 		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
@@ -398,11 +403,11 @@ public class PrepareForNextYearStepDefinition {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
 		testNote.addAll(sectionNote);
+
+		testNote.add("\t=================");
 		testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 

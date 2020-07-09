@@ -90,7 +90,7 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-    Then the user validates the Plan and Member details on Review and Submit Page
+   # Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
 # 	Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.

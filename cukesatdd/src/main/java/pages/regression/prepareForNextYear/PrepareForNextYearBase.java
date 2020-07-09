@@ -414,9 +414,10 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
 		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
-		String actMsg=bookmarkErrMsg.getText();;
-		String expMsg="Your request can not be Processed at this time. Please try again later";
-		Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
+		//note: re-enable when the error msg is settle
+		//String actMsg=bookmarkErrMsg.getText();;
+		//String expMsg="Your request can not be Processed at this time. Please try again later";
+		//Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
 		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
 
 	}
@@ -453,17 +454,17 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				String PDFText = new PDFTextStripper().getText(document);
 				System.out.println("PDF text : "+PDFText);
 				if(PDFText!=null && !PDFText.equals("")){
-					note.add("PASSED - validated pdf content is not null");
+					note.add("\tPASSED - validated pdf content is not null");
 				} else {
-					note.add("* FAILED - unable to validate pdf content - content either null or empty");
+					note.add("\t* FAILED - unable to validate pdf content - content either null or empty");
 					Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty - doc name="+targetDocName, false);
 				}
 			} catch (MalformedURLException e) {
-				note.add("* FAILED - unable to validate pdf content - MalformedURLException");
+				note.add("\t* FAILED - unable to validate pdf content - MalformedURLException");
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException - doc name="+targetDocName, false);
 			} catch (IOException e) {
-				note.add("* FAILED - unable to validate pdf content - IOException");
+				note.add("\t* FAILED - unable to validate pdf content - IOException");
 				e.printStackTrace();
 				//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
@@ -629,6 +630,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		
 		return note;
 
+	}
+
+	public String validateAdobePdfDocText() {
+		System.out.println("Validate PDF Doc text section exists");
+		Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",noWaitValidate(adobePdfDocText));
+
+		System.out.println("Validate PDF Doc text section exists");
+		Assert.assertTrue("PROBLEM - unable to locate the Adobe link",noWaitValidate(adobeLink));
+
+		return "PASSED Adobe PDF doc text validation";
 	}
 
 

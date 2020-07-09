@@ -1567,15 +1567,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickonViewPlans() {
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (validateNew(viewPlans)) {
+		if(validate(viewPlans)){
 			viewPlans.click();
-		}
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
 
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void clickOnPDPPlans() {

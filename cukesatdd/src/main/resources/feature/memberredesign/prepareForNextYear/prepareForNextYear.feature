@@ -109,6 +109,7 @@ Feature: 1.25 Member Prepare For Next Year
 
 	@prepareForNextYear02a
     Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
 	    | 12    | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 
@@ -174,18 +175,19 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
 	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 06    | F437767 | SHIP	 | IND_PFNY            |
-			
+
+#note: re-enable when user is available			
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
-	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+#	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
+#	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
 			
 	@prepareForNextYear01d
     Examples: 
 	    | index | FID     | planType | memberType          |
-	    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
+#	    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
+#	    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
 			
 
   #-------------------------------------------------
@@ -215,6 +217,9 @@ Feature: 1.25 Member Prepare For Next Year
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |

@@ -63,12 +63,20 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="//button[text()='Continue Searching']")
 	private WebElement continueSearching;
+	@FindBy(xpath="//span[text()='Edit Saved']")
+	private WebElement EditSavedButton;
 	
-	@FindBy(xpath="//a[contains(text(),'View Saved')]")
+	@FindBy(xpath="//span[text()='View Saved Providers']")
+	private WebElement ViewSavedProvidersLink;
+	
+	@FindBy(xpath="//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 
-	//@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
-	//private WebElement Finish;
+	@FindBy(xpath = "//*[text()='View Saved']")
+	private WebElement ViewsaveProviderbtn;
+	
+	@FindBy(xpath="(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	private WebElement Checkcoverage1;
 	
 
 	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
@@ -211,6 +219,9 @@ public class ProviderSearchPage extends UhcDriver {
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
+	if(validate(EditSavedButton)){
+		ViewSavedProvidersLink.click();
+	}
 	validateNew(providerNameText);
 	validateNew(Finish);
 	Finish.click();
@@ -242,6 +253,9 @@ public class ProviderSearchPage extends UhcDriver {
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
+	if(validate(EditSavedButton)){
+		ViewSavedProvidersLink.click();
+	}
 	validateNew(providerNameText);
 	String providerSaved = providerNameText.getText().trim();
 	System.out.println("Hospital Name is : " + providerSaved);
@@ -284,13 +298,14 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 				
 			}
-			/*New Changes
+		
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
 			continueSearching.click();
-			*/
+			
+			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
 			jsClickNew(BtnClose);
-			
+			*/
 			//counter++;
 //			if(counter==2)
 //			{
@@ -301,13 +316,14 @@ public class ProviderSearchPage extends UhcDriver {
 			
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
-		/*
-		 * jsClickNew(Savedproviders); validateNew(Finish); Finish.click();
+		 jsClickNew(Savedproviders); 
+		 validateNew(Finish); 
+		 Finish.click();
+		 
+		/*Old Changes
+		 * jsClickNew(Savedproviders); validateNew(providerNameText);
+		 * validateNew(Checkcoverage); Checkcoverage.click();
 		 */
-		jsClickNew(Savedproviders);
-		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		Checkcoverage.click();
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -360,8 +376,12 @@ public void selectsProviderFromGlobaHeader() {
 			saveBtn2.click();
 		}
 		
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-		Viewsavebtn.click();
+		CommonUtility.waitForPageLoadNew(driver, ViewsaveProviderbtn, 30);
+		ViewsaveProviderbtn.click();
+		
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		validateNew(providerNameText);
 		validateNew(PrintEmailBtn);
 		
@@ -397,6 +417,9 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 
 		validateNew(Finish);
 		Finish.click();
@@ -431,6 +454,9 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
+		if(validate(EditSavedButton)){
+			ViewSavedProvidersLink.click();
+		}
 		validateNew(providerNameText);
 		validateNew(Finish);
 		jsClickNew(Finish);
@@ -448,7 +474,7 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		validateNew(continueButton);
 		continueButton.click();
 		
-	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li/h2/button[contains(@class,'link')]"));
+	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
 	   
 	    return topicDropDownValues.size();
 	}
