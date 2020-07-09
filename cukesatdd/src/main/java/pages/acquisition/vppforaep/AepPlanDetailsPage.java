@@ -413,8 +413,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
-			}else if(key.equalsIgnoreCase(columnName)) {
-
+			}else if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
+						
 
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");

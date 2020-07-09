@@ -153,7 +153,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | health-plans/estimate-drug-costs.html!/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
       | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
       | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | profile/guest                                              | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
+      | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
 
     @FooterLinks_GlobalCompsAARP
     Examples: 
