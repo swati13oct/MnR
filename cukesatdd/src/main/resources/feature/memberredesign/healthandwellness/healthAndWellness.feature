@@ -62,8 +62,7 @@ Feature: 1.09 Member Health and Wellness Page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Deeplink     | https://stage-myuhcmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
-     #| Deeplink     | https://stage-myaarpmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
+      | Deeplink     | https://stage-myaarpmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
     And I navigate to the Health and Wellness page from Rally
     And I should see the H&W Generic dashboard
     And I should see GET REWARD tile if available and be able to click it
