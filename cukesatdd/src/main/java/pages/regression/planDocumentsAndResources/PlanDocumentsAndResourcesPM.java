@@ -187,7 +187,6 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 
 		item="My Documents link";
 		lnkElment=footer_fnr_myDocument_PM;
-		//tbd expectedUrl="/content/medicare/member/my-documents/overview.html";
 		expectedUrl="/member/my-documents/overview.html";
 		Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
 		actualUrl=lnkElment.getAttribute("href");

@@ -29,7 +29,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
-	//tbd @FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
 	@FindBy(xpath  = "//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 
@@ -242,7 +241,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.out.println("Not the usual dashboard header, not testharness header, last attempt to see if it's in shadow-root");
 			//last try to see if it's shadowroot element
 			//cssPath="#sticky-main-nav > div > div > div > a[href*='health-and-wellness.html']";
-			//tbd locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
 			for (int i=1; i<=7; i++) {
 				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
 				if (!locateElementWithinShadowRoot(shadowRootHeader, cssPath).equals("notFound")) {
@@ -294,7 +292,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 				Assert.assertTrue("Dashboard header is not displayed", hwValidate(element));
 				System.out.println("element is located, click it...");
 				element.click();
-				//tbd waitforElement(titleText);
 				WebDriverWait wait = new WebDriverWait(driver, 60);
 				wait.until(ExpectedConditions.visibilityOf(titleText));
 				hwCheckModelPopup(driver);

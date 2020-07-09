@@ -356,7 +356,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	public List<String> doNoteAndText(List<HashMap<String, Document>> inputList, List<String> noteList) {
 		String docs="";
 		for (HashMap<String, Document> item: inputList) {
-			//tbd noteList=doNoteAndText("    "+item.keySet(), noteList);
 			docs=docs+" "+item.keySet();
 		}
 		noteList=doNoteAndText("    "+docs, noteList);

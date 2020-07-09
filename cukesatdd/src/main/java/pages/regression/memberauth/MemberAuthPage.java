@@ -236,12 +236,6 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("Switched to new tab");
 			Thread.sleep(10000);
 
-			/*
-			 * tbd waitforElement(PremiumPayment);
-			 * if(PremiumPayment.isEnabled()) { PremiumPayment.click(); return
-			 * new AccountHomePage(driver); }else {
-			 * System.out.println("Payment Link not displayed"); }
-			 */
 			waitforElement(paymentsLink);
 			if (validate(paymentsLink)) {
 				System.out.println("payment link is displayed on the header");
@@ -450,7 +444,6 @@ public class MemberAuthPage extends UhcDriver {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
-				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
 					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
@@ -525,11 +518,7 @@ public class MemberAuthPage extends UhcDriver {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
 				System.out.println("User encounted email splash page, handle it...");
-				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					//tbd System.out.println("'Go To Homepage' button showed up, click it");
-					//tbd goToHomepage.isDisplayed();
-					//tbd goToHomepage.click();
 					if (validate(emailGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
 						emailGoToHomepageBtn.click();

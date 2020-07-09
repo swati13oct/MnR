@@ -265,7 +265,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
 		return note;
 	}
@@ -405,7 +405,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
 		return note;
 	}
@@ -800,7 +800,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
 
 
@@ -985,7 +985,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, docDisplayMap));
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}		
 		return note;
 	}
@@ -1132,7 +1132,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				note.addAll(validateHaveItem(targetItem, targetElement));
 			} else {
 				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-				note.add("PASSED - validation for NOT HAVING "+targetItem);
+				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}	
 			
 			//---------------------------
@@ -1147,7 +1147,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			//TODO - validate link destination
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("PASSED - validation for NOT HAVING "+targetItem);
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
 
 		showDocDateStr="12/07/"+String.valueOf(getCurrentYear());
