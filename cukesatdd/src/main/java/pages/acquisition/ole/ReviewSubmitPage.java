@@ -210,7 +210,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 		if (StringUtils.isEmpty(PartAeffectiveDate)) {
 			System.out.println("PartAeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else {
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::*"))!=null) {
+			
 			String PartADisplayed = PartADisplay.getText().replaceAll("-", "");
 			if (PartADisplayed.contains(PartAeffectiveDate)) {
 				flag = (!flag) ? false : true;
@@ -218,9 +219,12 @@ public class ReviewSubmitPage extends UhcDriver{
 			} else
 				flag = false;
 		}
+		else {
+			System.out.println("PartAeffectiveDate is not present for User");
+		}
 		if (StringUtils.isEmpty(PartBeffectiveDate)) {
 			System.out.println("PartBeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else {
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*"))!=null) {
 			String PartBDisplayed = PartBDisplay.getText().replaceAll("-", "");
 			if (PartBDisplayed.contains(PartBeffectiveDate)) {
 				flag = (!flag) ? false : true;
@@ -228,6 +232,10 @@ public class ReviewSubmitPage extends UhcDriver{
 			} else
 				flag = false;
 		}
+		else {
+			System.out.println("PartBeffectiveDate is not present for User");
+		}
+		
 		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
 		if(DOBDisplayed.contains(DOB)){
 			flag = (!flag)?false:true;
