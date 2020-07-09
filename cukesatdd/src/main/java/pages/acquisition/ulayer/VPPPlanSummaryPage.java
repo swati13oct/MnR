@@ -22,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -482,7 +483,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//input[@id='applicationId'])[1]")
 		private WebElement applicationID;
 
-		@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+		//@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//button[contains(text(),'Submit')]")
 		private WebElement resumeApplicationBtn;
 
 		@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
@@ -4083,10 +4085,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void signIn(String username,String password) {
 		try {
-			Assert.assertTrue("Sign in Link is not displayed", validate(signIn));
-			
-			//jsClickNew(signIn);
-			signIn.click();
+			//if(waitForJStoLoad()){
+				//Assert.assertTrue("Sign in Link is not displayed", validateNew(signIn));
+			//}
+				//Thread.sleep(6000);	
+			validateNew(signIn);
+			jsClickNew(signIn);
+			//signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
@@ -4105,12 +4110,34 @@ for (int i = 0; i < initialCount + 1; i++) {
 				securityAnswer.sendKeys("number1");
 			}
 			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 		
 	}
+	
+	/*
+	 * public boolean waitForJStoLoad () {
+	 * 
+	 * WebDriverWait wait = new WebDriverWait(driver, 30); JavascriptExecutor js =
+	 * (JavascriptExecutor) driver; // wait for jQuery to load
+	 * ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+	 * 
+	 * @Override public Boolean apply(WebDriver driver) { try { return
+	 * ((Long)js.executeScript("return jQuery.active") == 0); } catch (Exception e)
+	 * { return true; } } };
+	 * 
+	 * // wait for Javascript to load ExpectedCondition<Boolean> jsLoad = new
+	 * ExpectedCondition<Boolean>() {
+	 * 
+	 * @Override public Boolean apply(WebDriver driver) { return
+	 * js.executeScript("return document.readyState")
+	 * .toString().equals("complete"); } };
+	 * 
+	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
+	 */
+	
 
 }

@@ -1695,6 +1695,22 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.ResumeApplicationButton();
 
 	}
+	
+	@And("^the user signs in with optum Id credentials to resume application in UHC site$")
+	public void the_user_signs_in_with_optum_Id_credentials_resume_application_in_AARP_site(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.signIn(username, password);
+	}
 
 	@Then("^the user will navigate to locate resume application button")
 	public void click_resume_application_3(DataTable givenAttributes)throws Throwable {
@@ -3256,4 +3272,6 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewlessplansComparePage();
 		}
+		
+		
 } 

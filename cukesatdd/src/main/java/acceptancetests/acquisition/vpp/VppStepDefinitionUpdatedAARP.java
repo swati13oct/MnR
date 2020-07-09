@@ -1747,8 +1747,8 @@ public class VppStepDefinitionUpdatedAARP {
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		//VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.MedSupFormValidation(DateOfBirth);
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage1.ResumeApplicationButton(DateOfBirth);

@@ -17,6 +17,11 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
        | Zipcode       | <zipcode>     | 
      Then the user navigates to next page to locate resume application button
    	 	| DOB               | <DOB>         |
+   	 	#| Firstname     | <Firstname>   |
+       #| Lastname      | <Lastname>    |
+       Then the user signs in with optum Id credentials to resume application in UHC site
+      | User Name | <userName> |
+      | Password  | <password> |	
      Then the user enters data to resume the application
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
@@ -28,8 +33,8 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
       
        Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |
+      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |userName | password  |
+      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd  | Password@1 | 
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer

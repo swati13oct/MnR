@@ -552,7 +552,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//input[@id='applicationId'])[1]")
 	private WebElement applicationID;
 
-	@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+	//@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement resumeApplicationBtn;
 
 	@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
@@ -657,6 +658,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
 	private List<WebElement> plansInPopup;
+	
+	@FindBy(xpath = "//*[@id='ole-form-controls']//*[@class='cta-button action_optum_sign_in']")
+	private WebElement signIn;
+	
+	@FindBy(css="div.signupCTA.signupContainer a")
+	private WebElement signOut;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
@@ -4565,5 +4572,40 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void waitForPlanSummaryPageLoad() {
 		CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
+	}
+	
+	public void signIn(String username,String password) {
+		try {
+			//if(waitForJStoLoad()){
+				//Assert.assertTrue("Sign in Link is not displayed", validateNew(signIn));
+			//}
+				//Thread.sleep(6000);	
+			validateNew(signIn);
+			jsClickNew(signIn);
+			//signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+		
 	}
 }
