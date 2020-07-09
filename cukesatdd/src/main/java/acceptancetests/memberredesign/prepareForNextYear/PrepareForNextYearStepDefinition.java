@@ -370,8 +370,6 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
 
 
-		if (testNote==null)
-			testNote=new ArrayList<String>();
 		testNote.add("\t=================");
 		pfnyPg.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");

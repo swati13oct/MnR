@@ -131,7 +131,7 @@ Feature: 1.25 Member Prepare For Next Year
     Examples: 
 	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
         | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
-        | 20    | F437767 | MAPD	 | IND_ACTnTERM_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    
 ##### end - cases for team env #################################################################
 
