@@ -3589,13 +3589,20 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 
 		public void checkOneCheckboxVerifyAutoSelection(String Status) {
+			System.out.println("Status==="+Status);
+			
 			WebElement Checkbox = driver.findElement(By
 					.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			
+				System.out.println("Checkbox for first box==="+Checkbox);
+				
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].click();", Checkbox);
 			System.out.println("checked One plan for plan compare");
+			
 			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
+			
 			if (Status.contains("true")) {
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is checked");
