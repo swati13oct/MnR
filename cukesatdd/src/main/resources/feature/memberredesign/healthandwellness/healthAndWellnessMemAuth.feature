@@ -33,7 +33,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | qavgogine | qavgogine | q2_jun_aarp0179 | PDP      | RewardsMember     | false     | false          |
-      | xxxxx | qavgogine | qavgogine | q1_feb_2020SHIP_003 | SHIP | RewardsMember     | false     | true           |
+      | xxxxx | qavgogine | qavgogine | PaidInFullShip0011 | SHIP | RewardsMember     | false     | false           |
 
     @memAuth_healthAndWellness01c
     Examples: 

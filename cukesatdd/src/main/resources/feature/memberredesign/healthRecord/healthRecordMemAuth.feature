@@ -36,7 +36,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     @memAuth_no_ihr_a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
-	    | 01    | F424804 | qavgogine | qavgogine | q1_feb_ship_20_001      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+	    | 01    | F424804 | qavgogine | qavgogine | PaidInFullShip0011      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
 	    | 02    | F424804 | qavgogine | qavgogine | q2_may_rally032         | MA                       | EXCLUDE_IHR        | false       |
 
     @memAuth_no_ihr_b

@@ -96,7 +96,7 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	@memAuth_active_ship
     Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 19-076 | 15119,15304 | qavgogine | qavgogine | q1_feb_ship_20_001    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
-      | 20-118 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
+      | 19-076 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 20-118 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_002    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 
