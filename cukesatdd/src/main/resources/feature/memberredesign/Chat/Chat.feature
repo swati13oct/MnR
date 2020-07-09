@@ -31,7 +31,7 @@ Feature: 1.16 Member Contact us Page CHAT
       | TID       | plantype | memberType |
       | US2483619 | SHIP     | SHIPCHAT   |
 
-  @regressionMember @CT @GroupFedChat @p1
+  @regressionMember @CT @GroupFedChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
