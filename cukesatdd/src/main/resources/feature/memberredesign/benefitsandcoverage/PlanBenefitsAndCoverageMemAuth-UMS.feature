@@ -1078,7 +1078,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates Drug coverage header and text under the section
     And the user validates copay and CoInsurance section
     Then the Village user validates text in table
-    Then user validates the Optum Rx link in Benefits and Coverage pageNON LIS       
+    Then user validates the Optum Rx link in Benefits and Coverage page       
     
        Examples: 
       | TID   |username |password  |MemUserName| planType | memberType| copayCategory | name                | memberid     | effectivedate | monthlypremium |

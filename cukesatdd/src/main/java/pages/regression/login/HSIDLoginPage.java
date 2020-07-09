@@ -118,9 +118,11 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement emailGoToHomepageBtn;
 
-
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement paymentGoToHomepageBtn;
+
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement anocGoToHomepageBtn;
 
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
@@ -690,7 +692,6 @@ public class HSIDLoginPage extends UhcDriver {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
 				try {
-					//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
 						goGreenGoToHomepageBtn.click();
@@ -729,6 +730,29 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 		}
 	}
+
+	public void anocSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/anoc.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 5);
+				System.out.println("User encounted anoc splash page, handle it...");
+				try {
+					if (validate(anocGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						anocGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+	
 	
 	public void emailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
@@ -753,7 +777,6 @@ public class HSIDLoginPage extends UhcDriver {
 					}
 					 */
 					try {
-						//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 						if (validate(emailGoToHomepageBtn,0)) {
 							System.out.println("'Go To Homepage' button showed up, click it");
 							//goToHomepage.isDisplayed();
@@ -816,18 +839,11 @@ public class HSIDLoginPage extends UhcDriver {
 
 		//wait for some form of header to show
 
-		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
 		}
-		/* tbd try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 
 		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
@@ -873,8 +889,6 @@ public class HSIDLoginPage extends UhcDriver {
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		//tbd if (MRScenario.environmentMedicare.equals("team-e")
-		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
 		if (MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
