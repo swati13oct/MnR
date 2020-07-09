@@ -71,7 +71,7 @@ public class IsInsuranceAgent extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, '-form-error-email')]")
 	private WebElement EmailError;
 
-	@FindBy(xpath = "//label[contains(@for, 'fulfillment-email')]")
+	@FindBy(xpath = "//input[contains(@id,'form-email')]")
 	private WebElement EmailOptionSelection;
 
 
