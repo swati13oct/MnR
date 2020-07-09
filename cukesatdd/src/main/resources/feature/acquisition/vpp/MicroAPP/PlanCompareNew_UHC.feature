@@ -131,15 +131,15 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planName> |
-    And I select "<plantype>" plans to compare and click on compare plan link in UHC
-    Then verify plan compare page is loaded on UHC
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
-    And click on Edit your doctors link and Navigate to Rally page for UHC
-    When user selects a provider from medical group and retuns to plan compare page in UHC
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
+    #When user selects a provider and retuns to VPP page in ums
+    #Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+    #  | PlanName | <planName> |
+    #And I select "<plantype>" plans to compare and click on compare plan link in UHC
+    #Then verify plan compare page is loaded on UHC
+    #Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
+    #And click on Edit your doctors link and Navigate to Rally page for UHC
+    #When user selects a provider from medical group and retuns to plan compare page in UHC
+    #Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
@@ -156,11 +156,11 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify plan compare page is loaded on UHC
     Then verify Add doctors is loaded with doctor summary on Plan Compare page UHC
     And click on Add your doctors link and Navigate to Rally page for UHC
-    And I click on Get Started on and Add PrimaryCare PCP from find care page in UHC
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
-    And click on Edit your doctors link and Navigate to Rally page for UHC
-    When user selects a provider from medical group and retuns to plan compare page in UHC
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
+    #And I click on Get Started on and Add PrimaryCare PCP from find care page in UHC
+    #Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
+    #And click on Edit your doctors link and Navigate to Rally page for UHC
+    #When user selects a provider from medical group and retuns to plan compare page in UHC
+    #Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
@@ -177,15 +177,15 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planName> |
-    And I select "<plantype>" plans to compare and click on compare plan link in UHC
-    Then verify plan compare page is loaded on UHC
-    Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
-    And click on Edit your Hospitals link and Navigate to Rally page for UHC
-    When user selects a Hospitals from Clinical and retuns to plan compare page in UHC
-    Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
+    #When user selects a provider and retuns to VPP page in ums
+    #Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+    #  | PlanName | <planName> |
+    #And I select "<plantype>" plans to compare and click on compare plan link in UHC
+    #Then verify plan compare page is loaded on UHC
+    #Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
+    #And click on Edit your Hospitals link and Navigate to Rally page for UHC
+    #When user selects a Hospitals from Clinical and retuns to plan compare page in UHC
+    #Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
@@ -202,12 +202,12 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify plan compare page is loaded on UHC
     Then verify Add Hospitals is loaded without summary on Plan Compare page UHC
     And click on Add your Hospitals link and Navigate to Rally page for UHC
-    And I click on Get Started on and Add Places from Hospitals find care page in UHC
-    Then verify plan compare page is loaded on UHC
-    Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
-    And click on Edit your Hospitals link and Navigate to Rally page for UHC
-    When user selects a Hospitals from Clinical and retuns to plan compare page in UHC
-    Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
+    #And I click on Get Started on and Add Places from Hospitals find care page in UHC
+    #Then verify plan compare page is loaded on UHC
+    #Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
+    #And click on Edit your Hospitals link and Navigate to Rally page for UHC
+    #When user selects a Hospitals from Clinical and retuns to plan compare page in UHC
+    #Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
