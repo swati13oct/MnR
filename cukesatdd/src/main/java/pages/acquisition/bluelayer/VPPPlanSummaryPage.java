@@ -4053,8 +4053,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals(Status, CheckStatus.trim());
 			System.out.println("Verified checkbox is checked");
-			String text = multipleCompareText.getText();
-			System.out.println(text);
+		//	String text = multipleCompareText.getText();
+			//System.out.println(text);
 		} else {
 			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
