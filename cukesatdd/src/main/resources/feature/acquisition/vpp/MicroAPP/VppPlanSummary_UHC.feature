@@ -279,8 +279,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-   #When user selects a provider and retuns to VPP page in ums
-    #Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+   When user selects a provider and retuns to VPP page in ums
+   Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
 
     Examples: 
