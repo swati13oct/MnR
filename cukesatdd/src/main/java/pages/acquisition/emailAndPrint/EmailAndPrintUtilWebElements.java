@@ -79,7 +79,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'active')]//div[@class='enroll-details']//a[contains(@dtmname,'View More Details')]")
 	protected List<WebElement> planSummary_listOfViewPlanDetailsButtons;
 	
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
 	protected WebElement vppTop;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
@@ -94,7 +94,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	protected WebElement snpPlansCount;
 
-	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//div[contains(@class,'zipcodePrint')]")
 	protected WebElement cmpPgHeader;
 
 	@FindBy(xpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']")
