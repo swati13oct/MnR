@@ -262,20 +262,20 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 	
 	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
-		boolean flag = true;
+		boolean flag = true; int counter =0;
 		
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
 		
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
-				
+				counter++;
 				//if(key.contains(columnName)) {
 						flag= true;break;
 				//	}
 			
 			}else if(key.contains(columnName)) {
 
-
+						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
@@ -291,6 +291,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					
 				}
 			}
+		
+		if(counter == 0)
+			flag = false;
 		
 		return flag;
 		
