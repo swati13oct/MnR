@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.Collections;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -1741,7 +1740,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		// driver.navigate().refresh();
-		CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
