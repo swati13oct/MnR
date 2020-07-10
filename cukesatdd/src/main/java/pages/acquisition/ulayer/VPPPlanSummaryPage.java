@@ -911,14 +911,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
 		
-		CommonUtility.checkPageIsReady(driver);
+		System.out.println("page is loaded");
 		CommonUtility.waitForPageLoad(driver, vppTop, 10);
-
+		System.out.println("validated vppTop");
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		//switchToNewTabNew(ProviderSearchLink);
+	
+		System.out.println("checkPageIsReady=====");
+		CommonUtility.checkPageIsReady(driver);
+		
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ProviderSearchLink.click();
