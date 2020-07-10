@@ -1170,7 +1170,7 @@ public void validatePlanNamesSummaryAndDetails() {
 	System.out.println(maPlanCount);
 	validate(MA1stPlanName, 60);
 	verifyPlanNames(MAPlansName, maPlanCount);
-	verifyviewplanDetails(MAPlansName, maPlanCount);
+/*	verifyviewplanDetails(MAPlansName, maPlanCount);
 	verifyEnrollDetails(MAPlansName, maPlanCount);
 	plansLoader();
 	PDPViewPlansLink.click();
@@ -1178,13 +1178,13 @@ public void validatePlanNamesSummaryAndDetails() {
 	System.out.println(pdpPlanCount);
 	validate(PDP1stPlanName, 60);
 	verifyviewplanDetails(PDPPlansName, pdpPlanCount);
-	verifyEnrollDetails(PDPPlansName, pdpPlanCount);
+	verifyEnrollDetails(PDPPlansName, pdpPlanCount);*/
 	plansLoader();
 	SNPViewPlansLink.click();
 	int snpPlanCount = Integer.parseInt(SNPPlanCount.getText());
 	System.out.println(snpPlanCount);
 	validate(SNP1stPlanName, 60);
-	verifyPlanNames(SNPPlansName, snpPlanCount);
+//	verifyPlanNames(SNPPlansName, snpPlanCount);
 	verifyviewplanDetails(SNPPlansName, snpPlanCount);
 	verifyEnrollDetails(SNPPlansName, snpPlanCount);
 	}
