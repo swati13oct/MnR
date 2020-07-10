@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@PlanRecommendationEngine @PRERegression2
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with recommendation
 
   @PRE @planrecommendation @PDPFlow @PDPskipdrug @PDPTie @F358830 @F432670
