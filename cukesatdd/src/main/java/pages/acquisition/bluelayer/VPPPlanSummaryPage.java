@@ -3772,6 +3772,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void EnterDataForResumeApp(String ApplicationID, String DOB, String zipcode) throws InterruptedException {
+		Thread.sleep(3000);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 60);
 		validateNew(resumeApplicationBtn);
 

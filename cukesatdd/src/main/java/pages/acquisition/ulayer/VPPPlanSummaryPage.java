@@ -3253,6 +3253,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
+		Thread.sleep(3000);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
 		validateNew(resumeApplicationBtn);
 		waitTillElementClickableInTime(applicationID, 30);
