@@ -543,7 +543,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
 
-	@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+	//@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+	@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 	private WebElement resumeApplication;
 
 	@FindBy(xpath = "(//input[@id='DOB'])[1]")
@@ -552,8 +553,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//input[@id='applicationId'])[1]")
 	private WebElement applicationID;
 
-	//@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
-	@FindBy(xpath = "//button[contains(text(),'Submit')]")
+	@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+	//@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement resumeApplicationBtn;
 
 	@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
@@ -3765,7 +3766,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void ResumeApplicationButton() throws InterruptedException {
 		Thread.sleep(5000);
-		Start_ApplicationBtn.click();
+		//Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");

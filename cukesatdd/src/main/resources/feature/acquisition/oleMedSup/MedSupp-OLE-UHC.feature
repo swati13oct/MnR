@@ -24,7 +24,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       | Password  | <password> |	
      Then the user enters data to resume the application
        | applicationType           | <applicationType>|
-       | ApplicationID |<ApplicationID>|
+      | ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
        | Zipcode       | <zipcode>     |   
       Then The user validates the resume application processed

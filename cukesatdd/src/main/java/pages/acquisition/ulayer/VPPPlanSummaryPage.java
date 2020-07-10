@@ -473,7 +473,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+		//@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 		private WebElement resumeApplication;
 
 
@@ -483,8 +484,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//input[@id='applicationId'])[1]")
 		private WebElement applicationID;
 
-		//@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
-		@FindBy(xpath = "//button[contains(text(),'Submit')]")
+		@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+		//@FindBy(xpath = "//button[contains(text(),'Submit')]")
 		private WebElement resumeApplicationBtn;
 
 		@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
@@ -3236,8 +3237,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		//String DateOfBirth ="11/13/1940";
 		//MedSupFormValidation(DateOfBirth);
-		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
-		jsClickNew(Start_ApplicationBtn);
+		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
+		//jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3250,7 +3251,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		ResumeDOB.sendKeys(DOB);
 		ResumeZipCode.sendKeys(zipcode);
 		resumeApplicationBtn.click();
-
+		jsClickNew(resumeApplicationBtn);
 		System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");
 	}
 

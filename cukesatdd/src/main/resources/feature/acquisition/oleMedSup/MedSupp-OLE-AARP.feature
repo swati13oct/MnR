@@ -17,15 +17,15 @@ Given the user is on AARP medicare acquisition site landing page
      Then user clicks on resume application button in the AARP site
     		| DOB           | <DOB>         |
     		| Firstname     | <Firstname>   |
-       | Lastname      | <Lastname>    |
-    	Then the user signs in with optum Id credentials to resume application in AARP site
+       | Lastname      | <Lastname>    |     
+       Then the user signs in with optum Id credentials to resume application in AARP site
       | User Name | <userName> |
-      | Password  | <password> |	
+      | Password  | <password> | 
      Then user enters data to resume the application in the AARP site
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
-       | zipcode       | <zipcode>     |     
+      | zipcode       | <zipcode>     |    
       Then user validates the resume application processed in the AARP site
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
