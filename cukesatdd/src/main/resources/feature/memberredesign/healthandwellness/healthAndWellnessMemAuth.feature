@@ -26,8 +26,8 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | qavgogine | qavgogine | q1_feb_nice_019 | MAPD     | RewardsMember     | true      | true           |
-      | 15341 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | qavgogine | qavgogine | q1_uhc_ma001 | MA    | UHC_RewardsMember | true      | true           |
+      | 15341 | qavgogine | qavgogine | q3_sep_UAT4_AARP203 | MA   | AARP_RewardsMember| true      | true           |
+      | 15341 | qavgogine | qavgogine | q1_uhc_ma001 | MA    | UHC_RewardsMember       | true      | true           |
 
     @memAuth_healthAndWellness01b
     Examples: 
@@ -38,7 +38,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     @memAuth_healthAndWellness01c
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | qavgogine | qavgogine | q2_june_combo0017 | FED_SHIP_COMBO | RewardsMember     | false    | false   |
-      | 15343 | qavgogine | qavgogine | Dream_EOB_MA_002  | SHIP_FED_COMBO   | RewardsMember   | false    | true    |
+      | 15343 | qavgogine | qavgogine | PerfDreamEOB_026| FED_SHIP_COMBO | RewardsMember | true    | true           |
+      | 15343 | qavgogine | qavgogine | Dream_EOB_MA_002| SHIP_FED_COMBO | RewardsMember | false   | true           |
  
  

@@ -94,7 +94,8 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 07    | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
-      | 08    | qavgogine | qavgogine | Dream_EOB_MA_002        | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+     #| 08    | qavgogine | qavgogine | Dream_EOB_MA_002        | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+      | 08    | qavgogine | qavgogine | Dream_EOB_MA_002        | MA       | COMBO_SHIP_MA_CSOSMOS_DEOB | NA                       | false       | 
 
     @memAuth_dreamEob01e
     Examples: 
