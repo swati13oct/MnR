@@ -134,7 +134,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
-     | PlanName | <planname> |
+      | PlanName | <planname> |
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
@@ -186,7 +186,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
     And click on Edit your Hospitals link and Navigate to Rally page for AARP
     When user selects a Hospitals from Clinical and retuns to plan compare page in AARP
-   Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
@@ -210,7 +210,7 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
     And click on Edit your Hospitals link and Navigate to Rally page for AARP
     When user selects a Hospitals from Clinical and retuns to plan compare page in AARP
- Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
+    Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
