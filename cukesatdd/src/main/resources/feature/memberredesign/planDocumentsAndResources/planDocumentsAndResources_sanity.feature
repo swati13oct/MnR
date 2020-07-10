@@ -46,8 +46,4 @@ Feature: 1.06.7 Member Plans and Documents - Sanity
 	@active_ship @sanity @devRegression
 	Examples: 
       | index | TID         | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd | fnr_sd | md_sd | eob_sd | rm_sd |
-      | S-02  | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | false | false | false | true   | false | true   | false |
-
-
-
-    
+      | S-02  | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | false | false | false | true   | false | true   | false |   
