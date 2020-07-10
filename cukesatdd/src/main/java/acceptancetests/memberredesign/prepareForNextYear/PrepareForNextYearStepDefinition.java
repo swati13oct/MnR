@@ -70,7 +70,7 @@ public class PrepareForNextYearStepDefinition {
 		if (getLoginScenario().getBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME) != null)
 			needRollBackTime=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME);
 		if (needRollBackTime) {
-			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			WebDriver wd = getLoginScenario().getWebDriverNew();
 			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 			PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
@@ -106,6 +106,7 @@ public class PrepareForNextYearStepDefinition {
 			} else {
 				System.out.println("TEST - orig_currentDate=null, assume no date changed involved, no need to do final check");
 			}
+			wd.quit();
 		} else {
 			System.out.println("TEST - skip final system date check");
 		}

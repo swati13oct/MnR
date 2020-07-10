@@ -503,7 +503,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Your Privacy is Important");
+			testInputInfoMap.put("headerText","You have the right to privacy");
+			//tbd testInputInfoMap.put("headerText","Your Privacy is Important");
 			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
 			return testInputInfoMap; 
 		}	
