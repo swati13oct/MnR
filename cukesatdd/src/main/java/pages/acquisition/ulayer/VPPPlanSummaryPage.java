@@ -2755,12 +2755,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+					
+		}else{
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		}
-		sleepBySec(2);
-		if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+		  sleepBySec(2);
+		
 			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
 	}
 
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName, String isMultiCounty) {
