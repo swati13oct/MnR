@@ -1851,7 +1851,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ZipCodeTxtBx.sendKeys(zipcode);
 		validate(FIndPlansButton);
 		FIndPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+			CommonUtility.checkPageIsReadyNew(driver);
 		if (countyModal.isDisplayed()) {
 			return new MultiCountyModalPage(driver);
 		}
@@ -3605,15 +3606,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 			js.executeScript("arguments[0].click();", Checkbox);
 			System.out.println("checked One plan for plan compare");
 			
-			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
+			
 			
 			if (Status.contains("true")) {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is checked");
 				String text = multipleCompareText.getText();
 				System.out.println(text);
 			} else {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is un checked");
 			}

@@ -4048,14 +4048,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", Checkbox);
 		System.out.println("checked One plan for plan compare");
-		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		
 		if (Status.contains("true")) {
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals(Status, CheckStatus.trim());
 			System.out.println("Verified checkbox is checked");
 			String text = multipleCompareText.getText();
 			System.out.println(text);
 		} else {
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals(Status, CheckStatus.trim());
 			System.out.println("Verified checkbox is un checked");
 		}
