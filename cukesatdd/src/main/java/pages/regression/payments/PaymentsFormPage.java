@@ -85,6 +85,14 @@ public class PaymentsFormPage extends UhcDriver {
 	}
 
 	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) throws Exception {
+checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
