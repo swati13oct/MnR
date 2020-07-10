@@ -1741,7 +1741,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		// driver.navigate().refresh();
-		Thread.sleep(6000);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
