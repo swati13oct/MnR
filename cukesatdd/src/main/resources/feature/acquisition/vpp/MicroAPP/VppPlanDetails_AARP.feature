@@ -145,8 +145,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then the user navigates to the plan Details page
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button
-    #When user selects a provider and retuns to VPP plan details page in ulayer
-    #Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
+    When user selects a provider and retuns to VPP plan details page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
       | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               |
