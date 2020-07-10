@@ -4,6 +4,7 @@
 package pages.acquisition.vppforaep;
 
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -496,7 +497,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 	}
 	
 	public HashMap<String, String> collectInfoVppPlanDetailPg() {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
 		HashMap<String, String> result=new HashMap<String, String>();
@@ -508,9 +508,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
 			listOfTabHeaders.get(tab).click();
-			CommonUtility.checkPageIsReady(driver);
 			int tabIndex=(tab+1);
+			CommonUtility.checkPageIsReady(driver);
 
+			//System.out.println("Before Tab: "+tabIndex+" "+new Timestamp(System.currentTimeMillis()));
 			//note: store section table
 			int numSectionTable=listOfSectionHeaderForActiveTab.size();
 			//result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
@@ -613,15 +614,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 		}
 		System.out.println("Finished collecting the info on vpp detail page =====");
 		
-		
 		  for(String keyValue : result.keySet()) {
 		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
 		  System.out.println(
 		  "_________________________________________________________________________________________________"
 		  ); }
-		 
-		 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+
 		return result;
 	}
 	
