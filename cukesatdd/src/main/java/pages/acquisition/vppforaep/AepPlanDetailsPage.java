@@ -7,7 +7,7 @@ package pages.acquisition.vppforaep;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +58,19 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'estimateYourDrugsLink')]")
 	private WebElement estimateDrugBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	private WebElement editDrugListLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugcontainer_0')]")
+	private WebElement drugBox;
+	
+	@FindBy(xpath = "//*[contains(@class,'delete-drug')]")
+	private WebElement deleteDrugLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'cta-button delete-drug-confirm')]")
+	private WebElement confirmDeleteDrug;
+	
 	
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement topbackToPlanslink;
@@ -321,19 +334,23 @@ public class AepPlanDetailsPage extends UhcDriver {
 	}
 	
 	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
-		boolean flag = true;
+		boolean flag = true; int counter =0;
 		
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
 		
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
-				if(columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
+				counter++;
+				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
-					if(key.contains(columnName)) 
-						flag = false;break;
+					if(key.contains(columnName)) { 
+						flag = false;
+						break;
+					}
 				
 				}else if(key.equalsIgnoreCase(columnName)) {
-						flag= false;break;
+						flag= false;
+						 break;
 					}
 			
 			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
@@ -342,9 +359,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
 					if(key.contains("Optional Rider")&& key.contains(columnName)) {
-					
+						counter++;
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
-							flag = true;break;
+							flag = true;
+							 break;
 						}else {
 							flag = false;
 							System.out.println("Values did not match for col:PS "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
@@ -361,8 +379,25 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
 					key = key.replace("\n", "");
-					key = key.replace("Footnotes2", "").replaceAll("\\s+", "").replaceAll("-", "");
-					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-", "");
+					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
+					counter++;
+					//removing footnote values from the string
+					if(key.contains("Footnotes2") && key.contains("Footnotes1")) {
+						key = key.replace("Footnotes2", "");
+						key = key.replace("Footnotes1", "");
+					}else if(key.contains("Footnotes1")) {
+						key = key.replace("Footnotes1", "");
+					}else if(key.contains("Footnotes2"))
+						key = key.replace("Footnotes2", "");
+					
+					//removing footnote values from the string
+					if(key.contains(".2"))
+						key = key.replace(".2", ".");
+					else if(key.contains(".1"))
+						key = key.replace(".1", ".");
+						
+					//key = key.replaceAll(".", "");
+					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					
 					if(key.contains(benefitValue)) {
 						flag = true;break;
@@ -374,7 +409,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				
 				}else if(key.contains(columnName)) {
-					
+					counter++;
 					if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -383,51 +418,84 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
-			}else if(key.equalsIgnoreCase(columnName)) {
-
-		
-				// if(columnName.equalsIgnoreCase("Skilled nursing facility")||columnName.equalsIgnoreCase("inpatient Hospital care")||columnName.equalsIgnoreCase("plan premium") || columnName.equalsIgnoreCase("Medical Benefits")) { //Plan premium logic
+			}else if(columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network Value")){
+				
+				counter++;
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+				
+				
+					if(key.equalsIgnoreCase(columnName)) {
+						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+								flag = true;break;
+							}else {
+								flag = false;
+								System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								break;
+							}
+					}
+				
+			
+			}else if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
 						
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("-","");
+						counter++;
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
 						
-						if(columnName.equalsIgnoreCase("Medical Benefits"))
-							benefitValueUI = benefitValueUI.replace("footnote2", "");
 						//the following code is used to remove the footnote values from the benefit value string. 
-						if(benefitValueUI.contains("1/"))
+						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
+							benefitValueUI = benefitValueUI.replace("footnote2", "");
+							benefitValueUI = benefitValueUI.replace("footnote1", "");
+						}else if(benefitValueUI.contains("footnote2"))
+							benefitValueUI = benefitValueUI.replace("footnote2", "");
+						else if(benefitValueUI.contains("footnote1"))
+							benefitValueUI = benefitValueUI.replace("footnote1", "");
+						else if(benefitValueUI.contains("1/"))
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-						else
+						else if(benefitValueUI.contains("/") && !benefitValueUI.contains("Ismydoctor"))
 							benefitValueUI = benefitValueUI.replaceAll("/", "");
 						
 						
-						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
+						if(key.contains("Preferred Retail Pharmacy Network") || key.contains("Preferred Mail Home Delivery through OptumRx")) {
+							if(benefitValueUI.contains("1."))
+								benefitValueUI = benefitValueUI.replace("1.", ".");
+							else if(benefitValueUI.contains(".2"))
+								benefitValueUI = benefitValueUI.replace(".2", ".");
+						
+						}
+						
+						//the following code will help remove footnote values from the end of the string if any. this is different from above
+						if(benefitValueUI.endsWith("1"))
+							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
+						else if(benefitValueUI.endsWith("2"))
+							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
+						else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
+							benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
+						
+						
+						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							break;
 						}
-					
-				/*	}
-					else if(benefitValueUI.equalsIgnoreCase(benefitValue) || benefitValueUI.contains(benefitValue)) {
-					//System.out.println("Values Matched : Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
-						flag= true;break;
-					}else {
-						flag = false;
-						System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitsMap.get(key));
-						break;
-					}	*/
 			
 				}
 			}
 		
-		return flag;
+
+			if(counter == 0)
+				flag = false;
+		
+			return flag;
 		
 	}
 	
-	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName) {
+	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
@@ -450,10 +518,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
 			
 				String rowXpath="";
-				if(sheetName.contains("PDP") && tab==0) {
-					rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr";
-				}else if(tab==0)
-					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr";
+				if(tab==0)
+					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr";
 				else
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
 
@@ -487,10 +553,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						String cellsPerRowXpath="";
 						value = "";
 						
-						if(sheetName.contains("PDP") && tab==0) {
-							rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
-						}else if(tab==0)
-							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+						if(tab==0)
+							 cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						else
 							cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						
@@ -500,10 +564,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
 							String eachCellXpath = "";
 							
-							if(sheetName.contains("PDP") && tab==0) {
-								rowXpath = "(//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]//table)["+sectionIndex+"]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
-							}else if(tab==0)
-								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+							if(tab==0)
+								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 							else
 								eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 			
@@ -570,6 +632,17 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
 		dcePage.addDrug(drugName);
+		dcePage.clickOnReturnLink();
+	}
+
+	public void editDrugListAndRemoveDrug() {
+		validateNew(editDrugListLink);
+		editDrugListLink.click();
+		validateNew(deleteDrugLink);
+		deleteDrugLink.click();
+		validateNew(confirmDeleteDrug);
+		confirmDeleteDrug.click();
+		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
 		dcePage.clickOnReturnLink();
 	}
 	
