@@ -27,6 +27,7 @@ Feature: To test Campaign TFN in all flows on AARP site
 
    @Scenario_2_CampaignTraffic @tfn_Campaign_Traffic
   Scenario Outline: 1.0 Verify TFN for different plan types through Campaign Traffic
+   Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -55,6 +56,7 @@ Feature: To test Campaign TFN in all flows on AARP site
    
      @Scenario_5_Portfolio_CampaignTraffic_MedEd @tfn_Campaign_Traffic_MedEd
   Scenario Outline: 1.0 Verify TFN in MedEd Pages and VPP
+   Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -94,7 +96,8 @@ Feature: To test Campaign TFN in all flows on AARP site
    
     Examples: 
   | site    | pscCode  | campaignUrl                                                                                                                                                                               | campaignTFN                       |  maUrl                                    |   maTFN                                                       | pdpTFN                      | agentApptUrl                                                     | agentApptTFN   |
-  | ulayer  |  8003093 | /health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=5K5#/plan-summary  | //*[contains(@class,'tel right')] | /health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   | //a[contains(@class,'tel')] | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |
+ # | ulayer  |  8003093 | /health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=5K5#/plan-summary  | //*[contains(@class,'tel right')] | /health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   | //a[contains(@class,'tel')] | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |
+ 	| ulayer  |  8003093 | /health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=5K5#/plan-summary  | //*[contains(@class,'tel right')] | enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   | //a[contains(@class,'tel')] | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |
  
  
    @Scenario_1_2_DirectTraffic @tfn_Direct_Traffic
