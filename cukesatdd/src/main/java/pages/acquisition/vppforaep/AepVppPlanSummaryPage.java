@@ -266,7 +266,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
-		
+			key = key.toLowerCase();
+			columnName = columnName.toLowerCase();
+			
+			
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
 				//if(key.contains(columnName)) {
@@ -274,7 +277,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				//	}
 			
 			}else if(key.contains(columnName)) {
-
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
