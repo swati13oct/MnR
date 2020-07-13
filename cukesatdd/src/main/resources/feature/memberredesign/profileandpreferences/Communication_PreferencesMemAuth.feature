@@ -41,7 +41,7 @@ Feature: 1.03.1 Member Preferences page - Member Auth
      #note: need user data with segment id non-000 AND EPMP enabled for below case
      #| xxxxx | qavgogine | qavgogine | testusername    | xxxxx         | MA_001_AARP_GOGreen_Profilepref  |
       | 15314 | qavgogine | qavgogine | q2_jun_uhc0006        | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
-      | 15315 | qavgogine | qavgogine | q2_jun_uhc0050        | xxxxx         | MA_UHC_GOGreen_Profilepref     |
+     # | 15315 | qavgogine | qavgogine | q2_jun_uhc0050        | xxxxx         | MA_UHC_GOGreen_Profilepref     |
       | 15316 | qavgogine | qavgogine | q2_jun_grp0099        | xxxxx         | MAPD_GROUP_GOGreen_Profilepref |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
