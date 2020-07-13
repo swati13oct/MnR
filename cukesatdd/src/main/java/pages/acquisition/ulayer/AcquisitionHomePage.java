@@ -179,10 +179,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement MALandingHeading;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
-	private WebElement findPlansBtn;
+	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
-	private WebElement viewPlansButton;
+	private WebElement findPlansBtn;
 	
 	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
 	public WebElement btnGO;
