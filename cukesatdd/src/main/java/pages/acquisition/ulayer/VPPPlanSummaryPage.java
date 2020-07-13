@@ -3892,8 +3892,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("#########"+existingProviders.getText().trim()+"#########");
 				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
 			}
-			validatePlanSummary();
-			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
 			//Validate Drugs

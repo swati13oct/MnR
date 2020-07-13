@@ -295,14 +295,6 @@ Feature: 1.08. ACQ- Shopper Profile
       | First Name | <fname> |
       | Last Name  | <lname> |
     And click on Create Profile button for NonMember
-    Then I land on the plan compare page for NonMember
-      | Plan Name  | <planName>  |
-      | Drugs      | <drugNames> |
-      | Providers  | <providers> |
-      | First Name | <fname>     |
-      | Last Name  | <lname>     |
-      | DOB        | <dob>       |
-      | MBI        | <mbi>       |
     Then create a profile with the following details for NonMember
       | Email      | <email>   |
       | DOB        | <dob>     |
@@ -311,6 +303,15 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name  | <lname>   |
       | Zipcode    | <zipCode> |
       | Consent    | <consent> |
+    Then I land on the plan compare page for NonMember
+      | Plan Name  | <planName>  |
+      | Drugs      | <drugNames> |
+      | Providers  | <providers> |
+      | First Name | <fname>     |
+      | Last Name  | <lname>     |
+      | DOB        | <dob>       |
+      | MBI        | <mbi>       |
+    Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP for NonMember
       | Plan Name  | <planName>  |
       | Drugs      | <drugNames> |
@@ -320,5 +321,5 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                 |
-      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
+      #| qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
       | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |
