@@ -12,5 +12,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down UI plancompare page
 
     Examples: 
-      | User      | Pass      | Email            |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM |
+      | User      | Pass      | Email              |
+      | qavgogine | qavgogine | MARDI@MEMBER.COM   |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM  |
+      | qavgogine | qavgogine | xamegy@getnada.com |
