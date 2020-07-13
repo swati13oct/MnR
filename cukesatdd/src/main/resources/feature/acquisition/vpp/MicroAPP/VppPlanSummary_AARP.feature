@@ -293,7 +293,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page in ulayer
+   When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
 
