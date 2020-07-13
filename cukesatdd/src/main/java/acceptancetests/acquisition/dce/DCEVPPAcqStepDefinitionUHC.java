@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.SavingsOppurtunity;
 import pages.acquisition.bluelayer.AddDrugDetails;
@@ -397,6 +396,19 @@ public class DCEVPPAcqStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 	}
+	
+	@Then("^the user clicks on Back to Plans button in UHC site and Navigates to new Plan Compare$")
+	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		ComparePlansPageBlayer planComparePage = dce.clickBtnBackToPlancomparenew();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+	}
+	
+	
+	
 
 	@Then("^the user validates the added drugs on See your Estimated Costs page in UMS site$")
 	public void the_user_validates_the_added_drugs_on_See_your_Estimated_Costs_page_in_UMS_site(DataTable data)
