@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_Pdp_NonlisMemAuthProd.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_Pdp_NonlisMemAuthProd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
