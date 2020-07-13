@@ -2528,4 +2528,12 @@ public void validateResultSummaryPage() {
 		}
 	}
 	
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}
+	}
+
 }
