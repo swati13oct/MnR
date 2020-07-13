@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -15,9 +17,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Strings;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import cucumber.api.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
@@ -197,6 +203,21 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement DrugCoverageText;	
 		
+	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[1]")
+	private WebElement memberName;
+	
+	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[2]")
+	private WebElement memberMBI;
+	
+	@FindBy(xpath="//div[contains(text(),'Current')]/following::div[contains(text(),'DOB')]")
+	private WebElement memberDOB;
+	
+	@FindBy(css = "div#CSRLoginAlert>div")
+	private WebElement agentModeBanner;
+	
+	@FindBy(xpath="//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
+	private WebElement enrolledPlanName;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -975,6 +996,102 @@ public class ComparePlansPage extends UhcDriver {
 			                        By.xpath("//span[text()='Scroll Plans Left']/ancestor::button[attribute::disabled]")));
 		validateNew(LeftButtonDisabled);
 		System.out.println("Validated Left arrow is Disabled");
+	}
+	
+	/**
+	 * Validate the Agent Mode Banners and Enrolled Plan overlay
+	 * @param planName
+	 */
+	public void validateAgentModeBanners(DataTable userData) {
+
+		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String plan = givenAttributesMap.get("Plan Name");
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+		String fname = givenAttributesMap.get("First Name");
+		String lname = givenAttributesMap.get("Last Name");
+		String dob = givenAttributesMap.get("DOB");
+		String mbi = givenAttributesMap.get("MBI");
+		
+		
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		
+		if(Strings.isNullOrEmpty(enrolledPlan))
+			System.out.println("#########Empty Profile#########");
+		else {
+			Assert.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
+			Assert.assertEquals("(#"+mbi+")", memberMBI.getText().trim());
+			Assert.assertEquals(fname+" "+lname, memberName.getText().trim().toUpperCase());
+			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
+			
+		}
+		
+		/*//Validate Providers
+		if(!providers.equalsIgnoreCase("no")) {
+			for(int i=0;i<providersList.size();i++) {
+				Assert.assertTrue(providers.contains(providersList.get(i).getText().trim()));
+				System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+existingProviders.getText().trim()+"#########");
+			Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+		}
+		
+		validatePlanSummary();
+		//Validate Plan Name
+		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+		
+		if(!drugNames.equalsIgnoreCase("no")) {
+			
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			//Validate Drugs
+			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
+			
+			for(int i=0;i<drugList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+prescriptions.getText().trim()+"#########");
+			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
+		}*/
+		
+	}
+	
+	/**
+	 * Validate the Agent Mode Banners and Enrolled Plan overlay
+	 * @param planName
+	 */
+	public void validateAgentModeBannersForNonMember(DataTable userData) {
+
+		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String plan = givenAttributesMap.get("Plan Name");
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+		String fname = givenAttributesMap.get("First Name");
+		String lname = givenAttributesMap.get("Last Name");
+		String dob = givenAttributesMap.get("DOB");
+		String mbi = givenAttributesMap.get("MBI");
+		
+		
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 	}
 }
 

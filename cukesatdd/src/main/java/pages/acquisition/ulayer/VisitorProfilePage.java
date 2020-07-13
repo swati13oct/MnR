@@ -106,7 +106,7 @@ public class VisitorProfilePage extends UhcDriver {
 		addPlans.click();
 		Thread.sleep(10000);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("zipcode")){
+		if(driver.getCurrentUrl().contains("health-plans.html")){
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver,page);
 		}
