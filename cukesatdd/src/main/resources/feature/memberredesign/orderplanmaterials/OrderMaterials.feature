@@ -90,49 +90,49 @@ Feature: 1.10 Member  order materials Page
     
     #-------------------
     @Individuala
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
       | 15288 | MAPD     | AARP_Individual_order | 000       |
 
     @Individuala @ma @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15287 | MA	     | AARP_Individual_order | 000       |
 
     @Individuala @pdp @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15292 | PDP      | AARP_Individual_order | 000       |
 
     #-------------------
     @Individualb
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15286 | PCP      | Individual_order      | 000       |
       | 15285 | MEDICA   | Individual_order      | 000       |
 
     @Individualb @ship @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15293 | SHIP     | MEDSUPP_order         | 000       |
 
     #-------------------
     @GroupMemberOrderSelectionandConfirmation @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId | 
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15289 | MAPD     | UHC_Group_order       | 000       |
 
-    @GroupMemberOrderSelectionandConfirmation 
-    Examples: 
-      | TID   | planType | memberType            | segmentId | 
+    @GroupMemberOrderSelectionandConfirmation
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15289 | MA       | UHC_Group_order       | 000       |
       | 15290 | PDP      | UHC_Group_order       | 000       |
 
     #-------------------
     @ValidateHeaderComboTabs @combo_ship_mapd @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId | 
+    Examples:
+      | TID   | planType | memberType            | segmentId |
       | 15281 | MAPD	 | COMBO_order           | 000       |
       | 15281 | MEDSUPP	 | COMBO_order           | 000       |
 
