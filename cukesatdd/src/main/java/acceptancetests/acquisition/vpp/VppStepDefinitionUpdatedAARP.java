@@ -2139,7 +2139,7 @@ public class VppStepDefinitionUpdatedAARP {
 		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
 		  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
 			if (plansummaryPage != null) {
-					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plansummaryPage);
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 					Assert.assertTrue(true);
 				} 
 			else
