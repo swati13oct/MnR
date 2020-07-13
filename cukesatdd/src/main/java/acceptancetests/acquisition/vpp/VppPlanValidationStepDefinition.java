@@ -391,7 +391,7 @@ public class VppPlanValidationStepDefinition {
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+				 for(int rowIndex=30; rowIndex<=30; rowIndex++)
 		            {
 					 	int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
