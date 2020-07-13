@@ -305,7 +305,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		if(validate(countyModal,20)) {
 			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
-			validateNew(zipcodeChangeLink,10);
+			validateNew(zipcodeChangeLink,20);
 			flag = true;
 		}
 		
