@@ -278,7 +278,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the guest profile in UHC site
+    And the user back to VPP plan summary page in ums
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums

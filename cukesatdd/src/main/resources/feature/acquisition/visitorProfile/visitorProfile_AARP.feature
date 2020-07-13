@@ -238,7 +238,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
   @vpMSSavePlan
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -274,7 +274,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then user click on continue as guest button on AARP site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the profile in AARP site
+    And the user back to VPP plan summary page in AARP
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
