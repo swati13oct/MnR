@@ -274,6 +274,40 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				//targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form (Online)");
@@ -308,6 +342,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -451,8 +486,42 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				targetTestDocList.add("Seasonal flu shot information");
-				//targetTestDocList.add("Emergency Room Copayment Waiver Request");
-				//targetTestDocList.add("Naturopathy Provider Directory");
+				//keep targetTestDocList.add("Emergency Room Copayment Waiver Request");
+				//keep targetTestDocList.add("Naturopathy Provider Directory");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Seasonal flu shot information");
+				////keep targetTestDocList.add("Emergency Room Copayment Waiver Request");
+				////keep targetTestDocList.add("Naturopathy Provider Directory");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Seasonal flu shot information");
+				//keep targetTestDocList.add("Emergency Room Copayment Waiver Request");
+				//keep targetTestDocList.add("Naturopathy Provider Directory");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
@@ -626,6 +695,32 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
@@ -934,6 +1029,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1063,6 +1159,30 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
@@ -1259,6 +1379,26 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment rights and responsibilities"); 
@@ -1298,6 +1438,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1427,6 +1568,24 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				return targetTestDocList;
@@ -1581,6 +1740,30 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Appeals and Grievances – Senior Supplement Plans");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Appeals and Grievances – Senior Supplement Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Appeals and Grievances – Senior Supplement Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
@@ -1751,6 +1934,36 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
 				targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				targetTestDocList.add("Prescription Drug Transition Process");
@@ -1963,6 +2176,38 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form (Online)");
@@ -2167,7 +2412,38 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				targetTestDocList.add("Seasonal flu shot information");
-
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
@@ -2333,6 +2609,32 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form (Online)");
@@ -2481,7 +2783,33 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
-				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				////keep targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
 				targetTestDocList.add("Seasonal flu shot information");
@@ -2665,6 +2993,40 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form (Online)");
@@ -2818,6 +3180,32 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
@@ -3006,6 +3394,40 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Prescription drug coverage determinations and appeals");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form (Online)");
@@ -3041,6 +3463,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Step Therapy Criteria"); 
 				targetTestDocList.add("Formulary Additions");
 				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -3152,6 +3575,30 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
 				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				targetTestDocList.add("Member rights and responsibilities");
+				targetTestDocList.add("Potential for Contract Termination");
+				targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
+				targetTestDocList.add("Commitment to quality");
+				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
+				//targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
@@ -3318,6 +3765,26 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
 				return targetTestDocList;
 			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				//targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				targetTestDocList.add("Declaration of Prior Prescription Drug Coverage Form");
+				return targetTestDocList;
+			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment rights and responsibilities");
@@ -3347,6 +3814,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -3475,6 +3943,24 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
+				targetTestDocList.add("Prescription Drug Transition Process");
+				targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part1of2")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
+				//targetTestDocList.add("Prescription Drug Transition Process");
+				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
+				return targetTestDocList;
+			}
+			if (subSection.equals("Other Resources Part2of2")) {
+				targetTestDocList = new ArrayList<String>();
+				//targetTestDocList.add("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				return targetTestDocList;

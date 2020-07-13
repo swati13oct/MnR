@@ -37,7 +37,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2019 |
 
-  @addDrugsDCE 
+  @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -94,7 +94,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              | plantype | planYear |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |     2020 |
 
-  @addPlansVPP 
+  @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -278,7 +278,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the guest profile in UHC site
+    And the user back to VPP plan summary page in ums
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
@@ -294,7 +294,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
     Examples: 
       | zipcode | isMultiCounty | county          | plantype | planName                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      |   10001 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @AddDrugsAuthenticated
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
@@ -330,7 +330,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
     Examples: 
       | state   | userName | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
-      | Alabama | mnrqavd  | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
+      | Alabama | mnrqavd  | Password@3 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
 
   @providerFlowUHCAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -355,11 +355,11 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      |   10001 | NO              | New York County | mnrqavd  | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-   @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC
+  @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
- 		Given the user is on the uhcmedicaresolutions site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -378,4 +378,3 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                                                                                                                                                                                        |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
-   

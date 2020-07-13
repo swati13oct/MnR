@@ -1,5 +1,5 @@
 @providerSearch
-Feature: 1.20.1 Member Provider Search - Member Auth
+Feature: 1.23.1 Member Provider Search - Member Auth
 
   @memAuth_providerSearch01
   Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
@@ -28,14 +28,22 @@ Feature: 1.20.1 Member Provider Search - Member Auth
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 01    | qavgogine | qavgogine | q3_sep_UAT4_Group029 | MAPD     | GRP_ProviderSearch      |
 	    | 02    | qavgogine | qavgogine | q3_sep_UAT4_UHC044   | MAPD     | UHC_IND_ProviderSearch  |
-	    | 03    | qavgogine | qavgogine | q3_sep_UAT4_MAPD_009 | MAPD     | AARP_IND_ProviderSearch |
-	    | 04    | qavgogine | qavgogine | q2_jun_aarp0179      | PDP      | AARP_IND_ProviderSearch |
 
 	@memAuth_providerSearch01b
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
+	    | 03    | qavgogine | qavgogine | q3_sep_UAT4_MAPD_009 | MAPD     | AARP_IND_ProviderSearch |
+	    | 04    | qavgogine | qavgogine | q2_jun_aarp0179      | PDP      | AARP_IND_ProviderSearch |
+
+	@memAuth_providerSearch01c
+    Examples: 
+	    | index | username  | password  | MemUserName          | planType | memberType              | 
         | 05    | qavgogine | qavgogine | q1_uhc_ma001         | MA       | UHC_IND_ProviderSearch  |
 	    | 06    | qavgogine | qavgogine | q3_sep_UAT4_AARP203  | MA       | AARP_IND_ProviderSearch |
+
+	@memAuth_providerSearch01d
+    Examples: 
+	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 07    | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020  | MEDICA   | MEDICA_IND_ProviderSearch |
 	    | 08    | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022  | PCP      | PCP_IND_ProviderSearch  |
 

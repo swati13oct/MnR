@@ -19,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class ProfileSearch extends UhcDriver {
@@ -186,7 +187,7 @@ public class ProfileSearch extends UhcDriver {
 	 * Cloak In the Searched Profile
 	 * @return
 	 */
-	public VPPPlanSummaryPage doCloakIn() {
+	public ComparePlansPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
@@ -197,8 +198,8 @@ public class ProfileSearch extends UhcDriver {
 			driver.switchTo().window(tabs.get(0)).close();
 			driver.switchTo().window(tabs.get(1));
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+				return new ComparePlansPage(driver);
 			}else {
 				System.out.println("Plan Summary page is not loaded");
 				return null;
