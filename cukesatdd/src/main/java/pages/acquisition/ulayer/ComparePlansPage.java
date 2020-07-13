@@ -218,6 +218,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
 	
+	@FindBy(xpath="//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
+	private WebElement nonMemberName;
+	
+	@FindBy(xpath="//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
+	private WebElement nonMemberDOB;
+	
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1024,8 +1031,17 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 		
-		if(Strings.isNullOrEmpty(enrolledPlan))
+		if(Strings.isNullOrEmpty(enrolledPlan)) {
 			System.out.println("#########Empty Profile#########");
+			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
+			Assert.assertEquals(fname+" "+lname, memberName.getText().trim().toUpperCase());
+		}
+		
+		else if(enrolledPlan.contains("Group") || enrolledPlan.contains("D-SNP")) {
+			Assert.assertEquals("(#"+mbi+")", memberMBI.getText().trim());
+			Assert.assertEquals(fname+" "+lname, memberName.getText().trim().toUpperCase());
+			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
+		}
 		else {
 			Assert.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
 			Assert.assertEquals("(#"+mbi+")", memberMBI.getText().trim());
