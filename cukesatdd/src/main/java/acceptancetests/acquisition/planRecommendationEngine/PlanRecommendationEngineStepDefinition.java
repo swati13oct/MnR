@@ -903,4 +903,10 @@ public class PlanRecommendationEngineStepDefinition {
 		else
 			planSelectorResultspage.checkVPP(false);
 	}
+	
+	@Then("^user validate Plan Names in VPP Summary and Details in results page$")
+   	public void verify_Plan_names_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
+	}
 }

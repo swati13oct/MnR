@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression @SanityTest1
+@PlanRecommendationEngine @PRERegression @PRERegression2
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with recommendation
 
   @PRE @planrecommendation @PDPFlow @PDPskipdrug @PDPTie @F358830 @F432670
@@ -159,14 +159,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
-      | Zip Code           | <Zipcode>           |
-      | County Name        | <county>            |
-      | 1st Recommendation | <1stRecommendation> |
-      | 2nd Recommendation | <2ndRecommendation> |
+     | Zip Code           | <Zipcode>           |
+     | County Name        | <county>            |
+     | 1st Recommendation | <1stRecommendation> |
+     | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York | MAPD          | None         | regular | Lookup  | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | MS                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | MS                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDskipdrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug for MS plans in PRE

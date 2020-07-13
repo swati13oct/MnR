@@ -113,7 +113,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsName | isMultiDoctor |
       |   10001 | NO            | New York    | None          | None         | OutsideUS    |             |               |
-      |   35034 | YES           | Bibb County | None          | None         | Regular      | robert      | NO            |
+      |   35034 | YES           | Bibb County | None          | None         | Regular      | patil       | NO            |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @editprovider @F427538
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DoctorsName: <DoctorsName> -MultipleDoctors: <isMultiDoctor> - To validate Doctors page fucntions with lookup in Plan Recommendation Engine Mobile
