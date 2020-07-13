@@ -60,9 +60,7 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="(//*[@ng-if='::hideInputs !== true'])[1]")
 	private WebElement selectLocationOptionClick;
-	
-	@FindBy(xpath="//button[text()='Continue Searching']")
-	private WebElement continueSearching;
+
 	@FindBy(xpath="//span[text()='Edit Saved']")
 	private WebElement EditSavedButton;
 	
@@ -77,10 +75,6 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage1;
-	
-
-	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
-	private WebElement Finish;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
 	private WebElement People;
@@ -139,6 +133,12 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
 	private WebElement currentYrTile;
+	
+	@FindBy(xpath="//button[text()='Continue Searching']")
+	private WebElement continueSearching;
+	
+	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
+	private WebElement Finish;
 	
 	
 	public ProviderSearchPage(WebDriver driver) {
