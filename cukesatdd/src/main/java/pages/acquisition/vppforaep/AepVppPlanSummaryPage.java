@@ -39,8 +39,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
 	private WebElement NextYearLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
-	private WebElement vppTopHeader;
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 	
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
@@ -305,7 +305,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		if(validate(countyModal,20)) {
 			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
-			validateNew(vppTopHeader,20);
+			validateNew(zipcodeChangeLink,10);
 			flag = true;
 		}
 		
