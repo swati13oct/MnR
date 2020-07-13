@@ -228,7 +228,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@class,'proactive-offer__close')]")
 	public static List<WebElement> proactiveChatExistBtn;
 
+	
 	@FindBy(xpath = "//div[@class='overview-main']/span/h2")
+	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
 	@FindBy(id = "cobrowse-disclaimer")
@@ -2526,4 +2528,12 @@ public void validateResultSummaryPage() {
 		}
 	}
 	
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}
+	}
+
 }

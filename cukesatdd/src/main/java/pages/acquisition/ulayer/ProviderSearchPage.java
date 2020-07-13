@@ -129,6 +129,12 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
 	private WebElement currentYrTile;
+	
+	@FindBy(xpath="//button[text()='Continue Searching']")
+	private WebElement continueSearching;
+	
+	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
+	private WebElement Finish;
 
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -428,9 +434,14 @@ public class ProviderSearchPage extends UhcDriver {
 				jsClickNew(NewsaveBtn2);
 
 			}
-
+			/*New Changes
+			 */
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			continueSearching.click();
+			
+			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			jsClickNew(BtnClose);
+			jsClickNew(BtnClose);*/
 
 			// counter++;
 //			if(counter==2)
@@ -441,15 +452,23 @@ public class ProviderSearchPage extends UhcDriver {
 		}
 
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
-
+		/*Old Changes
+		 * 
+		 jsClickNew(Savedproviders); 
+		 validateNew(providerNameText);
+		 validateNew(Checkcoverage); 
+		 Checkcoverage.click(); 
+		//jsClickNew(Checkcoverage); 
+		 waitForCountDecrement(2);
+		 driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		 return new VPPPlanSummaryPage(driver);
+		*/
+		 
 		jsClickNew(Savedproviders);
-		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		Checkcoverage.click();
-		// jsClickNew(Checkcoverage);
+		validateNew(Finish);
+		Finish.click();	
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-
 		return new VPPPlanSummaryPage(driver);
 	}
 
