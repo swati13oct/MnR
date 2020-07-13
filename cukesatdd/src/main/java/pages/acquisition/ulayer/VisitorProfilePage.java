@@ -355,12 +355,12 @@ public class VisitorProfilePage extends UhcDriver {
 	public ComparePlansPage planCompare(String plans) {
 	
 		comparePlans.click();
-		CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
+		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
 		String[] plan = plans.split(",");
 		for(int i=0;i<4;i++) {
 			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
 		}
-		comparePlansOnPopup.click();
+		comparePlansOnPopup.click();*/
 		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");
