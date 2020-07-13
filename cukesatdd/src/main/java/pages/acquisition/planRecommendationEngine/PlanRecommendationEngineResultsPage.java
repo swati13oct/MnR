@@ -1248,7 +1248,7 @@ public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
 		if(i>=1) {
 			if(actualplanName.contains("PDP"))
 				PDPViewPlansLink.click();
-			else if (actualplanName.contains("SNP"))
+			else if ((actualplanName.contains("SNP")) || (actualplanName.contains("Medicare Advantage")))
 				break;
 		}
 		scrollToView(plansName.get(i));
