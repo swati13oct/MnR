@@ -60,6 +60,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
+	
+	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
+	private WebElement findPlansBtn;
 
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
@@ -2528,4 +2531,12 @@ public void validateResultSummaryPage() {
 		}
 	}
 	
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}
+	}
+
 }
