@@ -237,9 +237,9 @@ public class ShopperProfileStepDefinition {
 		try {
 			MemberCreateProfile createProfile = (MemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
 			Thread.sleep(15000);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -262,8 +262,8 @@ public class ShopperProfileStepDefinition {
 		try {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -301,7 +301,7 @@ public class ShopperProfileStepDefinition {
 		
 	}
 	
-	@Then("^I land on the plan compare page for Non Member$")
+	@Then("^I land on the plan compare page for NonMember$")
 	public void i_land_on_the_plan_compare_page_For_Non_Member(DataTable userData){
 		
 		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();

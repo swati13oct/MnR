@@ -111,9 +111,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then the user clicks on back on all plan linnk in Plan Compare page
-    And user access DCE tool on aarp site
+    And I access the DCE tool on aarp site
       | Plan Type | <plantype> |
-      | PlanName  | <plan>     |
     And I have added a drug to my drug list
       | Drug | <drug> |
     And user selects drug details

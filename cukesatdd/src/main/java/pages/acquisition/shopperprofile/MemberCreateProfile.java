@@ -16,6 +16,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class MemberCreateProfile extends UhcDriver {
@@ -61,7 +62,7 @@ public class MemberCreateProfile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 15);
 	}
 	
-	public VPPPlanSummaryPage createProfile(DataTable details) {
+	public ComparePlansPage createProfile(DataTable details) {
 		
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -96,10 +97,10 @@ public class MemberCreateProfile extends UhcDriver {
 			waitforElementNew(successMessage);
 			switchToNewTab();
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {
