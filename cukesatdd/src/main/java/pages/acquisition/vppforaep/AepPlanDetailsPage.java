@@ -343,7 +343,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 
-			 
 			key = key.toLowerCase();
 			columnName = columnName.toLowerCase();
 			
@@ -393,7 +392,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 					}
 					columnName = columnName+"PS";
-			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")) {
+			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")||columnName.equalsIgnoreCase("Estimated annual total")) {
 			
 				
 				benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
