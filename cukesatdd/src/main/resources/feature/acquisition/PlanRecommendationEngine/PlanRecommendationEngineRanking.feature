@@ -1,7 +1,7 @@
-@PlanRecommendationEngine @PRERegression @PRERegression1
+@PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking
 
-  @PRE @Ranking @MAPlansRanking @F358846
+  @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -38,7 +38,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   94203 | NO            | Sacramento | MAPD          | None         | withinUS  | UHGNetwork |                       |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Online         | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
       |   94203 | NO            | Sacramento | MAPD          | None         | outsideUS | Lookup     | Robert Deloy Jamieson | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | MA                    | SecureHorizons:SecureHorizons Focus:Advantage Assure |
 
-  @PRE @Ranking @MAPlansRanking @F358846
+  @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -71,7 +71,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
       |   94203 | NO            | Sacramento | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | MA                    | SecureHorizons Focus:Advantage Assure:SecureHorizons |
 
-  @PRE @Ranking @PDPPlansRanking @F358846
+  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -92,7 +92,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | primaryRecommendation | RankingplansOrder              |
       |   35034 | Yes           | Bibb County | PDP           | Yes            | PDP                   | Walgreens:Preferred:Saver Plus |
 
-  @PRE @Ranking @PDPPlansRanking @F358846
+  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression6
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption>, <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -117,7 +117,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                                               | Retail         | PDP                   | Saver Plus:Walgreens:Preferred |
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,1,NO,NO | Online         | PDP                   | Preferred:Walgreens:Saver Plus |
 
-  @PRE @planrecommandonation @SNPPlansRanking @F358846
+  @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate SNP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

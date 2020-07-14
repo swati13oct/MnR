@@ -116,6 +116,7 @@ public class MRScenario {
 	public static String desktopBrowserName;
 	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
+	public static String runnerFiles = "";
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -190,6 +191,7 @@ public class MRScenario {
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
+		runnerFiles = System.getenv("RUNNER_NAME");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -1248,6 +1250,10 @@ try {
 
 		return con;
 
+	}
+
+	public static Map<String, String> getProps() {
+		return props;
 	}
 
 }
