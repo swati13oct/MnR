@@ -84,11 +84,9 @@ public class GlobalTearDown {
 					e.printStackTrace();
 				}
 			 //mrScen.DriverQuit();
-		//	if(wd.getClass().toString().toUpperCase().contains("ANDROID")||wd.getClass().toString().toUpperCase().contains("IOS")) {
-
-				wd.quit();
+				//wd.quit();
 				System.out.println("---- Script Execution Completed ----");
-		//	}
+			
 		}
 		} catch (WebDriverException e) {
 			Assert.assertTrue("Got WebDriverException exception: "+e, false);
