@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition;
+package atdd.runners.mobile.acquisition.PRE;
 
 import org.junit.runner.RunWith;
 
@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/"}, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPRERegressionMobile.json" }, 
 tags = {"@PRERegressionMobile"})
-public class RunMRATDDAcquisitionPRERegressionMobile {
+public class RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileBlayer {
 
 }
 

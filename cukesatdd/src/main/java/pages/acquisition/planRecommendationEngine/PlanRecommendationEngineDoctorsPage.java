@@ -293,6 +293,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                         						System.out.println(driver.getCurrentUrl());
                         						if(env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("prod-aarp") || env.equalsIgnoreCase("offline-prod") || env.equalsIgnoreCase("offline-prod-aarp"))
                                         			Assert.assertTrue(driver.getCurrentUrl().contains("werally.com") , "Connected to Incorrect Rally");
+                        						else
+                        							Assert.assertTrue(driver.getCurrentUrl().contains("werally.in") , "Connected to Incorrect Rally");
                         						werallyResults = werally.werallySearch(type,search,count);
                         						System.out.println("werallyResults Size is : "+werallyResults.size());
                         						System.out.println("werallyResults Content is : "+werallyResults);

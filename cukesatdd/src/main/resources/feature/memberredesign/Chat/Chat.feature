@@ -8,7 +8,7 @@ Feature: 1.16 Member Contact us Page CHAT
 
     Examples: 
       | username   | password   |
-      | AARPStage8 | AARPStage8 |
+      | AARPStage1 | AARPStage1 |
 
   @regressionMember @agentSigninforGroupCHAT @GroupFedChat
   Scenario Outline: Verify AARP chat agent login in.
