@@ -2733,6 +2733,35 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Medicare Info data entry failed");
 	}
+
+/*@Then("^the user validates the long term questions in Medicare Information Page$")
+public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page() throws Throwable {
+	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+	MedicareInformationPage medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm();
 }
+*/
 
-
+@Then("^the user validates the long term questions in Medicare Information Page$")
+public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
+		
+	List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm(MemberDetailsMap);
+		if (medicareInfoPageLongTerm) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Other Insurance Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE_NAME, MemberDetailsMap.get("Health Insurance Name"));
+			getLoginScenario().saveBean(oleCommonConstants.GROUP_NUMBER, MemberDetailsMap.get("Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.MEMBER_NUMBER, MemberDetailsMap.get("Member Number"));
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+}

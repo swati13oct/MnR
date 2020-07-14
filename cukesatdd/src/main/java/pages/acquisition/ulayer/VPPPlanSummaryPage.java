@@ -90,7 +90,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
+	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -849,8 +851,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
+			sleepBySec(8);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
@@ -910,12 +912,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
-
+		
+		System.out.println("page is loaded");
+		CommonUtility.waitForPageLoad(driver, vppTop, 10);
+		System.out.println("validated vppTop");
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		//switchToNewTabNew(ProviderSearchLink);
+	
+		System.out.println("checkPageIsReady=====");
+		CommonUtility.checkPageIsReady(driver);
+		
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ProviderSearchLink.click();
@@ -1844,7 +1853,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ZipCodeTxtBx.sendKeys(zipcode);
 		validate(FIndPlansButton);
 		FIndPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+			CommonUtility.checkPageIsReadyNew(driver);
 		if (countyModal.isDisplayed()) {
 			return new MultiCountyModalPage(driver);
 		}
@@ -2748,12 +2758,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+					
+		}else{
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		}
-		sleepBySec(2);
-		if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+		  sleepBySec(2);
+		
 			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
 	}
 
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName, String isMultiCounty) {
@@ -3586,19 +3597,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 
 		public void checkOneCheckboxVerifyAutoSelection(String Status) {
+			System.out.println("Status==="+Status);
+			
 			WebElement Checkbox = driver.findElement(By
 					.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			
+				System.out.println("Checkbox for first box==="+Checkbox);
+				
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].click();", Checkbox);
 			System.out.println("checked One plan for plan compare");
-			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			
+			
+			
 			if (Status.contains("true")) {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is checked");
 				String text = multipleCompareText.getText();
 				System.out.println(text);
 			} else {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is un checked");
 			}
