@@ -64,29 +64,74 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	public void openPRE() {
-		if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
-			// startNewMobile(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp",
-			// "digital-uatv2").replace("www.", ""));
-			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2"));
-		} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
-			// startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
-			startNewMobile(UMS_ACQISITION_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
-			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage"));
-		} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-			startNewMobile(UMS_ACQISITION_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
-			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
-		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			startNewMobile(UMS_ACQISITION_PAGE_URL);
-		}else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
-			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
-			startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
-		}else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
-			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+				startNewMobile(
+						AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace("www.", ""));
+				// startNewMobile(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp",
+				// "digital-uatv2"));
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
+				// startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
+				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
+				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
+			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+			}
+		} else { // For jenkins job
+			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+					|| MRScenario.environment.equalsIgnoreCase("stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+						else
+							startNewMobile(AARP_ACQISITION_PAGE_URL);
+					}
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
+						else
+							startNewMobile(UMS_ACQISITION_PAGE_URL);
+					}
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("offline")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+				}
+			}
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}

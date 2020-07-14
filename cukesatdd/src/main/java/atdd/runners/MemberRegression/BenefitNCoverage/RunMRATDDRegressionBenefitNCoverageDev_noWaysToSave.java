@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverageDev.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverageDev")
+jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverageDev_noWaysToSave.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverageDev_noWaysToSave")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverageDev.json" }, tags = { "@devRegression" })
-public class RunMRATDDRegressionBenefitNCoverageDev {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverageDev_noWaysToSave.json" }, tags = { "@noWaystoSave","@devRegression" })
+public class RunMRATDDRegressionBenefitNCoverageDev_noWaysToSave {
 
 }

@@ -60,6 +60,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
+	
+	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
+	private WebElement findPlansBtn;
 
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
@@ -228,7 +231,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@class,'proactive-offer__close')]")
 	public static List<WebElement> proactiveChatExistBtn;
 
-	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	
+	@FindBy(xpath = "//div[@class='overview-main']/span/h2")
+	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
 	@FindBy(id = "cobrowse-disclaimer")
@@ -346,6 +351,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	private WebElement samChatOptions;
+	
+	@FindBy(xpath ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn phone')]")
+	private WebElement samChatConnect;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1817,7 +1828,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(chatsam);
 		jsClickNew(chatsam);
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
-		validateandcloseChat();
+		//validateandcloseChat();
 		/*
 		 * chatsamtooltip.click(); driver.switchTo().activeElement();
 		 * System.out.println(ChatSamHead.getText()); ChatSamTFNClose.click();
@@ -1825,6 +1836,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 */
 		// return null;
 	}
+	
+	public void validateChatpopupconnect() throws InterruptedException {
+
+		try {
+		driver.switchTo().frame("sp-chat-iframe");
+		validateNew(samChatFirstNameField);				
+		samChatFirstNameField.sendKeys("tester");				
+		
+		validateNew(samChatLastNameField);
+		samChatLastNameField.sendKeys("test");		
+		
+		validateNew(samChatZipField);
+		samChatZipField.sendKeys("90210");
+	
+		validateNew(samChatEmailField);
+		samChatEmailField.sendKeys("test123@test.com");
+		
+		 validateNew(samChatOptions); 
+		 samChatOptions.click();
+		  
+		 //validateNew(samChatConnect); 
+		 //samChatConnect.click();
+		
+		//validateHumanifyChatFunctionality();
+		 
+		 driver.switchTo().defaultContent();
+		System.out.println("Page Title---"+driver.getTitle());
+		
+		}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+//validateNew(ChatSamTFNClose); 
+// jsClickNew(ChatSamTFNClose);
+
+}
 
 	public AcquisitionHomePage verifyChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
@@ -1837,7 +1885,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty) {
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		viewPlansButton.click();
+		findPlansBtn.click();
 
 		if (isMultiCounty.equalsIgnoreCase("YES")) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -1853,28 +1901,94 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void openPRE() {
 		String browser = MRScenario.browsername;
-		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
-		} else if(MRScenario.environment.equalsIgnoreCase("digital-uatv2")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("offline-stage")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("stage-aarp")){
-			startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("stage")){
-			startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")){
-			startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("offline-prod")){
-			startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("prod-aarp")){
-			startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);
-		}else if(MRScenario.environment.equalsIgnoreCase("prod")){
-			startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"), browser);																											  
+		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
+						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html")
+						.replace("www.", ""), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
+						".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
+						".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+				startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+				startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+						browser);
+			}
+		} else { // For jenkins job
+			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+					|| MRScenario.environment.equalsIgnoreCase("stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+									.replace("www.", ""), browser);
+						else
+							startNewPRE(
+									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									browser);
+					}
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+									.replace("www.", ""), browser);
+						else
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									browser);
+					}
+
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("offline")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+								".com/plan-recommendation-engine.html"), browser);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewPRE(
+								UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								browser);
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewPRE(
+								AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								browser);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewPRE(
+								UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								browser);
+				}
+			}
 		}
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
+
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
@@ -2483,4 +2597,12 @@ public void validateResultSummaryPage() {
 		}
 	}
 	
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}
+	}
+
 }

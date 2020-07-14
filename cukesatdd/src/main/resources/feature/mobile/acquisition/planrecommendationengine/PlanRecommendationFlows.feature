@@ -178,7 +178,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   35034 | YES           | Bibb County | MAPD          | None         | OutsideUS    | lookup           | robert      | NO            | No            | No,No,No,Yes                  | Higher               | MS                | MA                |
+      |   35034 | YES           | Bibb County | MAPD          | None         | OutsideUS    | lookup           | patil       | NO            | No            | No,No,No,Yes                  | Higher               | MS                | MA                |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD zero drug flow functions for ISNP plans in PRE Mobile

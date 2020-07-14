@@ -179,6 +179,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 	
+	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
+	private WebElement findPlansBtn;
+	
 	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
 	public WebElement btnGO;
 
@@ -275,7 +278,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -328,12 +332,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
-
-  
-   	@FindBy(xpath ="//*[@id='agent-name']")
+	
+	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	private WebElement samChatOptions;
+	
+	//@FindBy(xpath ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn phone')]")
+	@FindBy(xpath ="//*[contains(@id,'offline-form')]//*[contains(@class,'servicepatternBtn phone')]")
+	private WebElement samChatConnect;
+   	
+	@FindBy(xpath ="//*[@id='agent-name']")
    	private WebElement ChatSamHead;
    	
-   	@FindBy(xpath ="//*[contains(@id,'sp-close-frame'])")
+   	//@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
+   	@FindBy(xpath =" //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -1087,7 +1098,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty){
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		viewPlansButton.click();
+		findPlansBtn.click();
 		
 		if(isMultiCounty.equalsIgnoreCase("YES")){
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -1706,7 +1717,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				validateNew(chatsam);
 				jsClickNew(chatsam);
 				System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-				validateandcloseChat();
+				//validateandcloseChat();
 		/*			chatsamtooltip.click();
 				driver.switchTo().activeElement();
 				System.out.println(ChatSamHead.getText());
@@ -1714,8 +1725,42 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				validateNew(chatsam);		*/
 				//return null;
 			}
-		
-		
+			
+			public void validateChatpopupconnect() throws InterruptedException {
+
+				try {
+				driver.switchTo().frame("sp-chat-iframe");
+				validateNew(samChatFirstNameField);				
+				samChatFirstNameField.sendKeys("tester");				
+				
+				validateNew(samChatLastNameField);
+				samChatLastNameField.sendKeys("test");		
+				
+				validateNew(samChatZipField);
+				samChatZipField.sendKeys("90210");
+			
+				validateNew(samChatEmailField);
+				samChatEmailField.sendKeys("test123@test.com");
+				
+				 validateNew(samChatOptions); 
+				 samChatOptions.click();
+				  
+				 //validateNew(samChatConnect); 
+				// samChatConnect.click();
+				 
+				 driver.switchTo().defaultContent();
+				System.out.println("Page Title---"+driver.getTitle());
+				
+				}catch(Exception e) {
+				
+				System.out.println("Failed Due To-------"+e.getMessage());
+				}
+
+				//validateNew(ChatSamTFNClose); 
+				//jsClickNew(ChatSamTFNClose);
+				//ChatSamTFNClose.click();
+	
+		}
 		
 		public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
 			//checkModelPopup(driver);
