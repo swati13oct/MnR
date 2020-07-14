@@ -88,7 +88,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public void addDrugs(String drugName) {
 		EnterDrugNameTxt.sendKeys(drugName);
 		selectdrug.click();
-		searchBtn.click();
+		SearchBtn.click();
 		//selectBtn.click();
 		addToDrugList.click();
 		//reviewDrugCost.click();
