@@ -33,6 +33,8 @@ public class BuildYourDrugList extends UhcDriver {
 
 	@FindBy(xpath = "//*[(@id= 'drugError')]")
 	public WebElement BlankDrugError;
+	@FindBy(xpath = "//*[@id='Lipitor']/div")
+	public WebElement selectdrug;
 	
 	@FindBy(xpath = "//*[(@id= 'err_2') or contains(@class, 'errtext')]")
 	public WebElement NoDrugError;
@@ -50,11 +52,20 @@ public class BuildYourDrugList extends UhcDriver {
 	public WebElement TellUsABoutCloseBtn;
 	
 	//uhc-menu-item	
+	@FindBy(xpath = "(//button[text()='Select'])[1]")
+	public WebElement selectBtn;
+	
+	@FindBy(xpath = "//button//span[contains(text(),'Add to  drug List')]")
+	public WebElement addToDrugList;
+	
+	@FindBy(xpath = "(//button//span[contains(text(),'Next:Review Drug Costs')])[1]")
+	public WebElement reviewDrugCost;
+	
 	public BuildYourDrugList(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override
@@ -74,6 +85,18 @@ public class BuildYourDrugList extends UhcDriver {
 			Assert.fail("Error Message displayed for Blank Drug search : "+BlankDrugError.getText());
 	}
 
+	public void addDrugs(String drugName) {
+		EnterDrugNameTxt.sendKeys(drugName);
+		selectdrug.click();
+		searchBtn.click();
+		//selectBtn.click();
+		addToDrugList.click();
+		//reviewDrugCost.click();
+	}
+	
+	public void clickReviewDrugCostBtn() {
+		reviewDrugCost.click();
+	}
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
 		EnterDrugNameTxt.sendKeys("india");
