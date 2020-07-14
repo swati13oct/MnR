@@ -323,9 +323,13 @@ System.out.println("TEST 1");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
-			paymentSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
 			goGreenSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
 			anocSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
+			paymentSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
