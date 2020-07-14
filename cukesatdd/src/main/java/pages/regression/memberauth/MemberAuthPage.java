@@ -335,9 +335,13 @@ public class MemberAuthPage extends UhcDriver {
 				{
 					System.out.println("Catch block with no significance");
 				}
+				emailAddressRequiredWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
 				goGreenSplashPageWorkaround();
 				CommonUtility.checkPageIsReadyNew(driver);
-				emailAddressRequiredWorkaround();
+				anocSplashPageWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
+				paymentSplashPageWorkaround();
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 					System.out.println("COVID 19 Banner page has appeared");

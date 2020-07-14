@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition;
+package atdd.runners.mobile.acquisition.PRE;
 
 import org.junit.runner.RunWith;
 
@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 				"html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobile.json" }, 
 				tags = {})
-public class RunMRATDDAcquisitionPlanRecommendationEngineMobile {
+public class RunMRATDDAcquisitionPlanRecommendationEngineMobileBlayer {
 
 }
 

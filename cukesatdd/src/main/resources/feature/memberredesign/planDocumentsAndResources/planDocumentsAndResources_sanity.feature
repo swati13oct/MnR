@@ -38,16 +38,12 @@ Feature: 1.06.7 Member Plans and Documents - Sanity
 	Then user sanity validate Renew Magazine section
 	  | Section Display                    | <rm_sd> | 
 
-	@active_mapd
+	@active_mapd @sanity @devRegression
 	Examples: 
       | index | TID         | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd | fnr_sd | md_sd | eob_sd | rm_sd |
       | S-01  | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | true  | true   | true  |	
 
-	@active_ship
+	@active_ship @sanity @devRegression
 	Examples: 
       | index | TID         | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd | fnr_sd | md_sd | eob_sd | rm_sd |
-      | S-02  | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | false | false | false | true   | false | true   | false |
-
-
-
-    
+      | S-02  | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | false | false | false | true   | false | true   | false |   

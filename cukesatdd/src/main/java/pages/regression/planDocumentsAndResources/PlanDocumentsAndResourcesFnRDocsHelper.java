@@ -503,8 +503,12 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Your Privacy is Important");
-			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
+			testInputInfoMap.put("headerText","You have the right to privacy");
+			testInputInfoMap.put("sampleBodyText","What you need to do");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				testInputInfoMap.put("headerText","Your Privacy is Important");
+				testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
+			}
 			return testInputInfoMap; 
 		}	
 
@@ -588,6 +592,18 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("sampleBodyText","To opt out of the prescription drug coverage");
 			return testInputInfoMap; 
 		}			
+
+		if (docName.equals("Medicare Part D Claim Form")) {
+			testInputInfoMap.put("docName", docName);
+			testInputInfoMap.put("expectedUrl", "Medicare-Part-D-Claim-Form.pdf");
+			testInputInfoMap.put("redirectUrl", "none");
+			testInputInfoMap.put("checkDestUrl", "true");
+			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","TBD"); 
+			testInputInfoMap.put("sampleBodyText","TBD");
+			return testInputInfoMap; 
+		}
+
 		
 		Assert.assertTrue("PROBLEM - need to update ATDD to handle docName='"+docName+"'", false);
 		return testInputInfoMap;

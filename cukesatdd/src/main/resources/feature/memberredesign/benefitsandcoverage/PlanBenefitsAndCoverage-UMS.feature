@@ -419,11 +419,19 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
   
-  @devRegression
+  @devRegression @WaystoSave_walgreens
     Examples: 
       | TID   | planType | memberType             |
       | 15242 | PDP      | Wallgreens_BnC         |
+
+  @devRegression @WaystoSave_mailOrder
+    Examples: 
+      | TID   | planType | memberType             |
       | 15243 | PDP      | MailOrderPharamacy_BnC |
+
+  @devRegression @noWaystoSave
+    Examples: 
+      | TID   | planType | memberType             |
       | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
   #TC20_Rider for Fed MA,MAPD plans only  
