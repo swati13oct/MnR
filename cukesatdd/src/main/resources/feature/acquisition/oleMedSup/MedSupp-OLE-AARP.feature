@@ -33,7 +33,7 @@ Given the user is on AARP medicare acquisition site landing page
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |userName | password  |
-      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd  | Password@1 | 
+      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID2  | TiggerTigger1 | 
      
   
 @UHC_Retrive_App_AARP @oleMedSupUlayer

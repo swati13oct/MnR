@@ -34,7 +34,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |userName | password  |
-      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd  | Password@1 | 
+      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID2  | TiggerTigger1 | 
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
