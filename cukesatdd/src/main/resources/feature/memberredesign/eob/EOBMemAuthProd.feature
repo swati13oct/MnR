@@ -31,28 +31,28 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
       | Date Range | Last 3-6 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
       | Date Range | Last 6-12 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12- months ----  
     And the user selects the desired date range
       | Date Range | Last 12-18 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same

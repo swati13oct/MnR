@@ -5,6 +5,7 @@ package pages.regression.login;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -82,6 +83,9 @@ public class LoginPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='proceed-link']")
 	protected WebElement proceedLink;	
+	
+	@FindBy(xpath="//div[@class='authQuestionTitle' and contains(text(),'logged out of your account')]")
+	protected WebElement loggedOutMsg;
 	    
 	    MRScenario loginScenario;
 		
@@ -246,6 +250,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					Assert.assertTrue("PROBLEM - got 'You have successfully logged out' message while attempting to land on testharness page", !validate(loggedOutMsg,0));
 					if (noWaitValidate(homePageNotice,0)) {
 						homePageNotice.click();
 						CommonUtility.checkPageIsReady(driver);
@@ -432,6 +437,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					Assert.assertTrue("PROBLEM - got 'You have successfully logged out' message while attempting to land on testharness page", !validate(loggedOutMsg,0));
 					if (MRScenario.environment.contains("team-a")) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(5000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");

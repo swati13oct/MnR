@@ -8,6 +8,9 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import pages.regression.accounthomepage.AccountHomePage;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -1685,6 +1688,158 @@ public class ContactUsPage extends UhcDriver{
 		
 		
 	}
+
+	/**
+	 * Validate the go to CHAT with us for SHIP member on PROD
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void validateChatWithUsOnPRODForSHIP() throws InterruptedException {
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+
+		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
+			validateNew(chatoffline);
+			Assert.assertTrue(chatoffline.isDisplayed());
+			System.out.println("Chat is currently offline");
+		} else {
+			 validateNew(chatMessage); 
+			 if (chatMessage.isDisplayed())
+			 {		  
+			  System.out.println("**Chat message seen is:->"+chatMessage); 
+			 }
+			 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) 
+			 {
+			  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+			  System.out.println("** User landed on Contact us Page **");		  
+			  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+			  } 
+			 
+			 try {
+				chatLink.getText();
+				chatLink.click();
+				System.out.println("*** Start a Chat link clicked ***");
+			 } catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** Start a Chat link not clicked ***");
+				e1.printStackTrace();
+			 }
+			 try {
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, myself, 60);
+				validateNew(myself);
+			 }	catch (Exception e) {
+				Assert.assertTrue("AARP chat windown not open", true);
+				System.err.println("Agent Chat window not loaded successfully");
+			 }
+			 try {
+				myself.click();
+				System.out.println("*** On Live chat member selected a option ***");
+			 } catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** On live Chat option not selected ***");
+				e1.printStackTrace();
+			 }
+		}
+	}
+	
+	public Boolean isChatWithUsTimeOn(String startTime, String endTime) {
+    	Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String systemTime= sdf.format(cal.getTime());
+        System.out.println("The current system time is - "+systemTime);
+             
+        LocalTime target = LocalTime.parse(systemTime) ;
+        Boolean result = ( 
+          target.isAfter( LocalTime.parse( startTime ) ) 
+          && 
+          target.isBefore( LocalTime.parse( endTime ) ) ) ; 
+        System.out.println("Chat with Us option available = "+result);
+		return result;
+    }
+	/**
+	 * Validate the go to CHAT with us for Group member on PROD
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void GroupvalidateChatWithUsOnPROD() throws InterruptedException {
+		{
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}
+		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
+			validateNew(chatoffline);
+			Assert.assertTrue(chatoffline.isDisplayed());
+			System.out.println("Chat is currently offline");
+		} else {
+			 validateNew(chatMessageGroup); 
+			 if (chatMessageGroup.isDisplayed())
+			 {		  
+			  System.out.println("**Chat message seen is:->"+chatMessageGroup); 
+			 }
+			 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-two")) 
+			 {
+			  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+			  System.out.println("** User landed on Contact us Page **");		  
+			  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+			  } 						 
+			try {
+				chatLink.getText();
+				chatLink.click();
+				System.out.println("*** Start a Chat link clicked ***");
+	
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** Start a Chat link not clicked ***");
+				e1.printStackTrace();
+	
+			}
+			try {
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, myself, 60);
+				validateNew(myself);
+			}
+				catch (Exception e) {
+				Assert.assertTrue("Chat windown not open", true);
+				System.err.println("Agent Chat window not loaded successfully");
+			}
+			try {
+				myself.click();
+				System.out.println("*** On Live chat member selected a option  to chat with Agent***");
+	
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** On live Chat option not selected ***");
+				System.out.println("*** CHAT not live ***");
+				e1.printStackTrace();
+	
+			}
+		}
+	}
+	
 	
 	
 }

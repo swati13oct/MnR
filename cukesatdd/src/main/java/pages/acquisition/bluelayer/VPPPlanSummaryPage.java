@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.Collections;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -297,7 +296,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
+	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//input[contains(@id,'compare-plan-')]/following-sibling::label")
@@ -981,8 +982,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
+			sleepBySec(9);
 //							jsClickNew(maPlansViewLink);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1566,15 +1567,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickonViewPlans() {
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (validateNew(viewPlans)) {
+		if(validate(viewPlans)){
 			viewPlans.click();
-		}
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
 
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void clickOnPDPPlans() {
@@ -1741,7 +1750,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		// driver.navigate().refresh();
-		Thread.sleep(6000);
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
@@ -4048,14 +4057,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", Checkbox);
 		System.out.println("checked One plan for plan compare");
-		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		
 		if (Status.contains("true")) {
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals(Status, CheckStatus.trim());
 			System.out.println("Verified checkbox is checked");
-			String text = multipleCompareText.getText();
-			System.out.println(text);
+		//	String text = multipleCompareText.getText();
+			//System.out.println(text);
 		} else {
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals(Status, CheckStatus.trim());
 			System.out.println("Verified checkbox is un checked");
 		}
@@ -4091,7 +4103,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void searchPlansCounty(String countyName, String ismultiCounty) {
 		findPlansButton.click();
-		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+		System.out.println("County should be selected : " + countyName + "==ismultiCounty=="+ismultiCounty);
 
 		if (ismultiCounty.contains("YES") && validate(countyModal)) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -4100,6 +4112,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 
 		} else {
+			CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
 			System.out.println("No County to be selected ");
 		}
 	}

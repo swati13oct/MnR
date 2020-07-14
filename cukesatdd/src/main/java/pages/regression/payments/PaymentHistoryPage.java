@@ -216,13 +216,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
 	private WebElement SetUpAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//a[text()='Set Up Recurring Payments']")
+	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpRecurringPaymentsButtonShip;
 
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//a[text()='Edit Recurring Payments']")
+	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Edit Recurring Payments')]")
 	private WebElement EditRecurringPaymentsButton;
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")

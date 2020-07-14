@@ -27,7 +27,6 @@ public class PlanDocumentsAndResourcesEOB extends PlanDocumentsAndResourcesBase 
 		String planType=testInputInfoMap.get("planType");
 		String section="Explanation of Benefits";
 		String item="SEARCH DRUG EOB HISTORY";
-		//tbd String expectedUrl="/content/medicare/member/eob.html";
 		String expectedUrl="/member/eob.html";
 		WebElement lnkElement=searchDrugEobHistoryLink_EOB;
 		testInputInfoMap.put("docName", item);
@@ -59,7 +58,6 @@ public class PlanDocumentsAndResourcesEOB extends PlanDocumentsAndResourcesBase 
 		WebElement lnkElement=searchMedicalEobHistoryLink_EOB;
 		if (planType.equals("MA") || planType.equals("PDP") || planType.equals("SHIP")) 
 			lnkElement=searchEobHistoryLink_EOB;
-		//tbd String expectedUrl="/content/medicare/member/eob.html";
 		String expectedUrl="/member/eob.html";
 		
 		testInputInfoMap.put("docName", item);

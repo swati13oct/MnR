@@ -216,8 +216,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		
-		
 	}
 
 
@@ -325,6 +323,10 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	public void backToTopOfPage(String planType, String memberType) {
 		//moveMouseToElement(pageHeader);
 		checkModelPopup(driver, 5);
+		if (!planDocValidate(backToTopLink)) {
+			String origUrlBeforeClick=driver.getCurrentUrl();
+			refreshPage(planType, memberType, origUrlBeforeClick);
+		}
 		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
 		if (memberType.toLowerCase().contains("combo")) { 
 			System.out.println("This test is for combo plans, select the tab accordingly");
@@ -354,7 +356,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	public List<String> doNoteAndText(List<HashMap<String, Document>> inputList, List<String> noteList) {
 		String docs="";
 		for (HashMap<String, Document> item: inputList) {
-			//tbd noteList=doNoteAndText("    "+item.keySet(), noteList);
 			docs=docs+" "+item.keySet();
 		}
 		noteList=doNoteAndText("    "+docs, noteList);
