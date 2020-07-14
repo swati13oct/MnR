@@ -94,7 +94,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	protected WebElement snpPlansCount;
 
-	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//*[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
 	protected WebElement cmpPgHeader;
 
 	@FindBy(xpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']")
@@ -121,7 +121,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='printdetails']")
 	protected WebElement validatePrintButtonOnPlanDetails;
 
-	@FindBy(xpath=".//*[@id='printComparison']")
+	@FindBy(xpath=".//*[contains(@id,'printComparison')Entered ]")
 	protected WebElement compare_validateprintbutton;
 
 	@FindBy(xpath=".//*[@id='emailComparison']")
