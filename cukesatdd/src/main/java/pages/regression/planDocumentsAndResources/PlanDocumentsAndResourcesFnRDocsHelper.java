@@ -503,11 +503,11 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","You have the right to privacy");
-			testInputInfoMap.put("sampleBodyText","What you need to do");
+			testInputInfoMap.put("headerText","Your Privacy is Important");
+			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
 			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-				testInputInfoMap.put("headerText","Your Privacy is Important");
-				testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
+				testInputInfoMap.put("headerText","You have the right to privacy");
+				testInputInfoMap.put("sampleBodyText","What you need to do");
 			}
 			return testInputInfoMap; 
 		}	
