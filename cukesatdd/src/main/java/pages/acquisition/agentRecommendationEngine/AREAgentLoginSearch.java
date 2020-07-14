@@ -52,10 +52,8 @@ public class AREAgentLoginSearch extends UhcDriver {
 		System.out.println("Login into Agent: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		System.out.println("Current URL : " + currentPageUrl);
-		if (currentPageUrl.contains("stage")) {
-			System.out.println("Login not required in Stage");
-		} else {
-			validate(username);
+		if (validate(username,10)) {
+			System.out.println("Loging In...");
 			username.sendKeys(user);
 			password.sendKeys(pass);
 			loginBtn.click();

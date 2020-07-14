@@ -26,7 +26,7 @@ import cucumber.api.CucumberOptions;
 		features = { "src/main/resources/feature/acquisition/agentRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json" }, 
 		tags = {})
-public class RunMRATDDAcquisitionAgentRecommendationEngine {
+public class RunMRATDDAcquisitionAgentRecommendationEngineUlayer {
 
 }
 
