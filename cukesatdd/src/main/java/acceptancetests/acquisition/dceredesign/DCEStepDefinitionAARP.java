@@ -121,8 +121,11 @@ public class DCEStepDefinitionAARP {
 	}
 
 
-	@Then("^the user clicks on Add Drug$")
+	@Then("^the user clicks on Add Drug to Land on Zip Entry Page$")
 	public void the_user_clicks_on_Add_Drug() throws Throwable {
+		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario().getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
+		tellUsAboutDrug.navigateToZipEntryPage();
+
 	}
 
 

@@ -60,5 +60,10 @@ public class TellUsAboutDrug extends UhcDriver {
 		
 	}
 
+	public void navigateToZipEntryPage() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
