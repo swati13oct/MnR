@@ -110,7 +110,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
-		String plan2=tmp[2];
 		String targetTabXpath="";
 		if (targetPlanType.equalsIgnoreCase(plan1)) {
 			targetTabXpath=paymentTabListXpath+"[1]//a";
@@ -138,7 +137,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
-		String plan2=tmp[2];
 		String targetTabXpath="";
 		if (targetPlanType.equalsIgnoreCase(plan1)) {
 			targetTabXpath=paymentTabListXpath+"[1]//a";
@@ -359,7 +357,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		Date targetDate;
 		try {
 			targetDate = df.parse(strDate);
-		    String newDateString = df.format(targetDate);
+		    //String newDateString = df.format(targetDate);
 		    //System.out.println(newDateString);
 		    return targetDate;
 		} catch (java.text.ParseException e) {
@@ -409,7 +407,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public void validateBookmarkError() {
 		String tmpUrl=driver.getCurrentUrl();
 		String tmp[]=tmpUrl.split("/benefits");
-		String bookmark=tmp[0]+"/planfornextyear/overview.html";
+		String bookmark=tmp[0]+"/preparefornextyear/overview.html";
 		driver.get(bookmark);
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
@@ -497,9 +495,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public List<String> validatePdfLinkTxt(String docName, WebElement targetElement) {
 		List<String> note=new ArrayList<String>();
 		String lnkTxt=targetElement.getText();
-		String startTxt="Open";
-		Assert.assertTrue("PROBLEM - unable to locate the word '"+startTxt+"' in front of PDF name '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.startsWith(startTxt));
-		note.add("\tPASSED - validation for PDF link text starts with '"+startTxt+"'");
 
 		String endTxt="PDF";
 		Assert.assertTrue("PROBLEM - unable to locate the word '"+endTxt+"' for PDF link '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.contains(endTxt));

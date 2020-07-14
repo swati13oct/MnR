@@ -71,7 +71,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       
       | TID   | username  | password  | MemUserName      | planType  | memberType     | copayCategory |
-      | 15087 | ashah120 | Mnrqa002 | DOUAIRE92@GMAIL.COM | MAPD      | Individual_BnC |  NON LIS      |
+      | 15087 | ashah120 | Mnrqa002 | JUDYSTOKES7@GMAIL.COM | MAPD      | Individual_BnC |  NON LIS      |
 
 
    #TC05_Primarycareprovider_specialist_withoutprovidertiering
@@ -112,7 +112,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then The user navigate to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
     
-    @devRegression
     Examples: 
       | TID   |username  | password  | MemUserName  |  planType | memberType     | copayCategory     |
       | 15090 |ashah120 | Mnrqa002 |JUDYSTOKES7@GMAIL.COM| MAPD     | Individual_BnC | NON LIS          |
@@ -157,7 +156,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
 
-    @devRegression
     Examples: 
       | TID   |username  | password  | MemUserName | planType | memberType    |
       | 15093 |ashah120 | Mnrqa002|HARRELLM2000| PDP      | TEXASERSGroup_BnC |
@@ -213,7 +211,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable |numberOfBenefitCards|Identifier| count| rider   |
-      |15094|ashah120|Mnrqa002|whwhitlow1151| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 6 |EffectiveShipMedSupp|3| NoRider |
+      |15094|ashah120|Mnrqa002|Gcdurant3| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
   @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Medica_Nonlis
@@ -377,7 +375,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples:  
       | TID   |username |password|MemUserName| planType | memberType|Identifier| count | rider  |
-      | 15098 | ashah120|Mnrqa002|Julieaerni41 |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
+      | 15098 | ashah120|Mnrqa002|1sirsteven@gmail.com |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
   @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Pcp_Medica_Nonlis
@@ -491,7 +489,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then the user validates the Dental section
     Then the user validates chiropractic section
     Then user validates and clicks on Learn More button under Exclusive hearing section
-    @devRegression
+
     Examples:  
       | TID   |username |password  |MemUserName |  planType | memberType| copayCategory |
       | 15238 |ashah120| Mnrqa002| dhcbhansen7 |MAPD| Group_BnC_Ancillary | NON LIS    |
@@ -533,7 +531,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
-     | 15239 | ashah120| Mnrqa002|DOUGAROO41|PDP  | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
+     | 15239 | ashah120| Mnrqa002|BIGDADDY0808|PDP  | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
       | 15238 | ashah120| Mnrqa002|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
       
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -555,7 +553,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
   
     Examples: 
       | TID   |username |password|MemUserName       | planType | memberType  |
-      | 15242 |ashah120| Mnrqa002| KESSEKS@GMAIL.COM|PDP       | Wallgreens_BnC  |
+      | 15242 |ashah120| Mnrqa002| bluefury1502@gmail.com|PDP       | Wallgreens_BnC  |
       | 15243 |ashah120| Mnrqa002|BHTRUE1           |PDP       | MailOrderPharamacy_BnC |
       
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -620,7 +618,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | TID   |username |password  |MemUserName| planType| memberType| copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
-      | 15248 |ashah120|  Mnrqa002|JSPAGANOIS@GMAIL.COM|PDP | PDPLIS_Bnc | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | 15248 |ashah120|  Mnrqa002|Melw4344|PDP | PDPLIS_Bnc | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
             
    #TC25_Group members_MAPD_LIS(3,4)
   @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 
@@ -700,7 +698,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user clicks on More Information link
     And the user validates contactus section
     
-    @devRegression
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType| copayCategory | SummaryofBenefits | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 15369 | ashah120| Mnrqa002|lilliebell|PDP | Group_BnC | LIS 1 | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary |
@@ -947,7 +944,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user clicks on More Information link
     And the user validates contactus section
     
-   @devRegression
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealth Passport Program | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | UnitedHealth Passport ProgramSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | UnitedHealth Passport ProgramChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 15378 |ashah120| Mnrqa002|K7BY@YAHOO.COM| MAPD| Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
@@ -1020,7 +1016,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-      | 15377 |ashah120| Mnrqa002|CORCORAN@8 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
+      | 15377 |ashah120| Mnrqa002|cmc29501 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
       
    @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
@@ -1115,7 +1111,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
-      | 15244 |ashah120| Mnrqa002|SAMPOTTS1018| PDP | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
+      | 15244 |ashah120| Mnrqa002|jfesig1@comcast.net| PDP | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
          
  #TC22_NON LIS Ind Village_member_ Drug Cost table
   @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage  @prod_BnC_Part8

@@ -12,7 +12,7 @@ Feature: To test member Signin from various Deeplinks
 
     Examples: 
       | username            | password   |
-      | q3_sep_UAT4_AARP008 | Password@1 |
+      | q2_jun_aarp0126     | Password@1 |
 
   @claimsDeeplink @CodeTransformers @deepLink @regressionMember
   Scenario Outline: Verify Member lands on the claims page after signing in from claims deeplink.

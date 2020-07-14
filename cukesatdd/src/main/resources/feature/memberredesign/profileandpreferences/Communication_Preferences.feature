@@ -94,7 +94,7 @@ Feature: 1.03 Member Preferences page
       | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref     | 
       | 15313 | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
       | 15314 | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
-      | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
+     # | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
       | 15316 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
       | 15317 | xxxxx         | PDP_GROUP_GOGreen_Profilepref  |
 

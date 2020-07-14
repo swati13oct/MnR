@@ -379,7 +379,11 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Prescription Mail Order Form') and contains(text(),'Preferred Mail Service Pharmacy through OptumRx')]")
 	protected WebElement presMailOrderForm_link_RF_FnR;
 	//- href="/content/dam/UCP/Individual/OptumRx_Home_Delivery_Form.pdf"
-	
+
+	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Medicare Part D Claim Form')]")
+	protected WebElement medicarePartDClaimForm_link_RF_FnR;
+	//- href="/content/dam/shared/documents/Medicare-Part-D-Claim-Form.pdf" 
+
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms')]")
 	protected WebElement authorizationFormsAndInfo_sectionAF_FnR;
 	

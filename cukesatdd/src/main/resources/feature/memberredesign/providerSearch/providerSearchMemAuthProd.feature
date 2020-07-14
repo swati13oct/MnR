@@ -41,7 +41,7 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
         | 05    | ashah120  | Mnrqa002  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
 	    | 06    | ashah120  | Mnrqa002  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
 
-	@prod_providerSearch01c
+	@prod_providerSearch01d
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 07    | ashah120  | Mnrqa002  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
