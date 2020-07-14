@@ -38,7 +38,7 @@ Feature: 1.09 Member Health and Wellness Page
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15343 | FED_SHIP_COMBO    | RewardsMember     | true     | true   |
-      | 15343 | SHIP_FED_COMBO    | RewardsMember     | false    | true   |
+      | 15343 | SHIP_FED_COMBO    | RewardsMember     | true     | true   |
  
   @healthAndWellness02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated UHC member on the new Member site, I want to validate health and wellness page content via UHC deeplink
