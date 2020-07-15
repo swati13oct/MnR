@@ -94,6 +94,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateHeaderSectionContent(String planType) {
+		checkModelPopup(driver,2);
+		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -1217,11 +1219,21 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateComboTab(String memberType) {
-		if (memberType.contains("MULTI_SHIP")) {
+		if (memberType.contains("MULTI_SHIP") && !memberType.contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
 			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
 			//should not see tabs
+		} else if (memberType.contains("COMBO_MULTI_SHIP")) {
+			//note: one of the tab should be for 'SUPPLEMENTAL INSURANCE PLANS' 
+			boolean found=false;
+			for (WebElement e: comboTabList) {
+				if (e.getText().equals("SUPPLEMENTAL INSURANCE PLANS")) {
+					found=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have a tab with text 'SUPPLEMENTAL INSURANCE PLANS'",found);
 		} else 
 			if (memberType.contains("COMBO")) {
 				if (memberType.contains("SSP")) {
