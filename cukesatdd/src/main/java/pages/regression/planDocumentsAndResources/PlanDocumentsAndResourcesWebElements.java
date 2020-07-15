@@ -101,12 +101,14 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
 	protected WebElement comboTab_MAPD;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
-	
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Supplement')]") 
 	protected WebElement comboTab_SHIP;
+
 	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
 	protected WebElement comboTab_PDP;
 
