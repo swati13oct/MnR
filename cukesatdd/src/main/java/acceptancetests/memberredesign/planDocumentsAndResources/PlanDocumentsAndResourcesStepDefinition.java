@@ -137,6 +137,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
 		if (memberType.toUpperCase().contains("COMBO")) 
 			planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
+		else
+			planDocumentsAndResourcesPage.goToSpecificComboTab(planType, false);
 		int currentYear=0;
 		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			currentYear = Calendar.getInstance().get(Calendar.YEAR);
