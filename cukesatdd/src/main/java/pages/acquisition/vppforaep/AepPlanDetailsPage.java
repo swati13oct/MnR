@@ -403,13 +403,15 @@ public class AepPlanDetailsPage extends UhcDriver {
 					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
 					counter++;
 					//removing footnote values from the string
-					if(key.contains("footnotes2") && key.contains("footnotes1")) {
-						key = key.replace("footnotes2", "");
-						key = key.replace("footnotes1", "");
-					}else if(key.contains("footnotes1")) {
-						key = key.replace("footnotes1", "");
-					}else if(key.contains("footnotes2"))
-						key = key.replace("footnotes2", "");
+					if(key.contains("footnote2") && key.contains("footnote1")&&key.contains("footnotes")) {
+						key = key.replace("footnote2", "");
+						key = key.replace("footnote1", "");
+						key = key.replace("footnotes", "");
+					}else if(key.contains("footnote1")) {
+						key = key.replace("footnote1", "");
+					}else if(key.contains("footnote2"))
+						key = key.replace("footnote2", "");
+					
 					
 					//removing footnote values from the string
 					if(key.contains(".2"))
@@ -443,7 +445,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				counter++;
 				if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
-					if(benefitValueUI.contains("1."))
+					if(benefitValueUI.contains("footnote1"))
+						benefitValueUI = benefitValueUI.replace("footnote1", "");
+					else if(benefitValueUI.contains("1."))
 						benefitValueUI = benefitValueUI.replace("1.", ".");
 				}
 					if(key.equalsIgnoreCase(columnName)) {
