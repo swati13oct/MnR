@@ -267,8 +267,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
 			key = key.toLowerCase();
+			key = key.replace(",", "");
 			columnName = columnName.toLowerCase();
-			
+			if(columnName.contains("tier"))
+				System.out.println();
 			
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
