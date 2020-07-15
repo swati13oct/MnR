@@ -61,7 +61,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="(//*[@ng-if='::hideInputs !== true'])[1]")
 	private WebElement selectLocationOptionClick;
 	
-	@FindBy(xpath="//span[text()='Edit Saved']")
+	@FindBy(xpath="//span[text()='Update This Provider']")
 	private WebElement EditSavedButton;
 	
 	@FindBy(xpath="//span[text()='View Saved Providers']")

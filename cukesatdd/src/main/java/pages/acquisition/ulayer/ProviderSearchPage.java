@@ -67,8 +67,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='View Saved']")
 	private WebElement ViewsaveProviderbtn;
 	
-	@FindBy(xpath="//*[contains(@text(),'View Saved')]")
-	private WebElement EditSavedButton;
+	@FindBy(xpath="//span[text()='Update This Provider']")
+    private WebElement EditSavedButton;
 	
 	@FindBy(xpath="//span[text()='View Saved Providers']")
 	private WebElement ViewSavedProvidersLink;
