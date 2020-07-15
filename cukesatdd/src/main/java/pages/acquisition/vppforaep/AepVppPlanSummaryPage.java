@@ -4,6 +4,7 @@
 package pages.acquisition.vppforaep;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +39,35 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
 	private WebElement NextYearLink;
 
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 	
+	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
+	private WebElement maPlansCount;
+
+	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[2]//span[@class='ng-binding']")
+	private WebElement msPlansCount;
+
+	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[3]//span[@class='ng-binding']")
+	private WebElement pdpPlansCount;
+
+	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
+	private WebElement snpPlansCount;
+	
+	@FindBy(xpath = "//*[contains(@class,'popup-modal active')]")
+	private WebElement countyModal;
+	
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
+	private WebElement pdpPlansViewLink;
+	
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+	private WebElement maPlansViewLink;
+
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
+	private WebElement snpPlansViewLink;
+	
+	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
+	private WebElement planListContainer;
 	
 	public AepVppPlanSummaryPage(WebDriver driver) {
 		super(driver);
@@ -58,6 +87,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	public void openAndValidate() {
 		validate(CurrentYearLink);
 	}
+	
+	
 
 	public boolean Validate_preAEP_NextYearPlanSummary(String planName) {
 		List <WebElement> EnrollBtns = driver.findElements(By.xpath("//*[contains(text(), 'Enroll in plan')]"));
@@ -182,6 +213,125 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return validation_Flag;
 	}
 
+	public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println("Proceed to collect the plan benefits info on vpp summary page");
+
+		HashMap<String, String> result=new HashMap<String, String>();
+		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
+		String rowXpath = "";
+		if(planName.contains("PDP"))
+			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
+		else
+			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
+		
+		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
+		
+		String key = "";
+		
+		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
+			String cellsXpath="";
+			String value = "";
+			
+			 cellsXpath = rowXpath+"["+rowIndex+"]";
+			
+			 
+			 WebElement e=driver.findElement(By.xpath(cellsXpath));
+			 String rowText = e.getText();
+			 if(e.getText().contains("Tier 1"))
+				 System.out.println("Text: "+e.getText());
+			 String [] parts = rowText.split(":");
+			 key = parts[0];
+			 for (int i = 1; i < parts.length; i++) {
+				 value = value + parts[i];
+				 
+			 }
+			 
+			 
+			 
+			 result.put(key, value);
+			 
+		}
+		
+		for(String keyValue : result.keySet()) {
+			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+			  System.out.println("_________________________________________________________________________________________________"); 
+		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return result;
+	}
+	
+	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
+		boolean flag = true; int counter =0;
+		
+		for(String key : benefitsMap.keySet()) {
+			String benefitValueUI = benefitsMap.get(key);
+			key = key.toLowerCase();
+			columnName = columnName.toLowerCase();
+			
+			
+			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+				counter++;
+				//if(key.contains(columnName)) {
+						flag= true;break;
+				//	}
+			
+			}else if(key.contains(columnName)) {
+						counter++;
+						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
+						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
+						
+						//the following code is used to remove the footnote values from the benefit value string. 
+						
+						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+							flag = true;break;
+						}else {
+							flag = false;
+							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							break;
+						}
+					
+				}
+			}
+		
+		if(counter == 0)
+			flag = false;
+		
+		return flag;
+		
+	}
+	
+	public boolean checkForMultiCountyPopup(String countyName) {
+		boolean flag = false;
+		if(validate(countyModal,20)) {
+			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
+			validateNew(zipcodeChangeLink,20);
+			flag = true;
+		}
+		
+		return flag;
+	}
+
+	public void viewPlanSummary(String planType) {
+		//driver.findElement(By.className("uhc-modal__close")).click();
+		if (planType.equalsIgnoreCase("PDP")) {
+			validateNew(pdpPlansViewLink, 30);
+			pdpPlansViewLink.click();
+			System.out.println("PDP Plan Type Clicked");
+			validateNew(planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			validateNew(maPlansViewLink, 30);
+			//sleepBySec(2);
+			maPlansViewLink.click();
+			validateNew(planListContainer, 30);
+		}  else if (planType.equalsIgnoreCase("SNP")) {
+			//sleepBySec(5);
+			validateNew(snpPlansViewLink, 30);
+			snpPlansViewLink.click();
+			validateNew(planListContainer, 30);
+			
+		}
+	}
 }
 
 	

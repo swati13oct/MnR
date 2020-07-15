@@ -118,6 +118,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement paymentGoToHomepageBtn;
 
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement anocGoToHomepageBtn;
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -233,12 +236,6 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("Switched to new tab");
 			Thread.sleep(10000);
 
-			/*
-			 * tbd waitforElement(PremiumPayment);
-			 * if(PremiumPayment.isEnabled()) { PremiumPayment.click(); return
-			 * new AccountHomePage(driver); }else {
-			 * System.out.println("Payment Link not displayed"); }
-			 */
 			waitforElement(paymentsLink);
 			if (validate(paymentsLink)) {
 				System.out.println("payment link is displayed on the header");
@@ -338,9 +335,13 @@ public class MemberAuthPage extends UhcDriver {
 				{
 					System.out.println("Catch block with no significance");
 				}
+				emailAddressRequiredWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
 				goGreenSplashPageWorkaround();
 				CommonUtility.checkPageIsReadyNew(driver);
-				emailAddressRequiredWorkaround();
+				anocSplashPageWorkaround();
+				CommonUtility.checkPageIsReadyNew(driver);
+				paymentSplashPageWorkaround();
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 					System.out.println("COVID 19 Banner page has appeared");
@@ -447,7 +448,6 @@ public class MemberAuthPage extends UhcDriver {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
-				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
 					if (validate(goGreenGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
@@ -472,7 +472,7 @@ public class MemberAuthPage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("login/payment-two-offerings.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, paymentGoToHomepageBtn, 5);
-				System.out.println("User encounted playment splash page, handle it...");
+				System.out.println("User encounted payment splash page, handle it...");
 				try {
 					if (validate(paymentGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
@@ -492,16 +492,37 @@ public class MemberAuthPage extends UhcDriver {
 		}
 	}
 
+	public void anocSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/anoc.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 5);
+				System.out.println("User encounted anoc splash page, handle it...");
+				try {
+					if (validate(anocGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						anocGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				checkModelPopup(driver, 1);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+	}
+	
+	
 	public void emailAddressRequiredWorkaround() {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
 				System.out.println("User encounted email splash page, handle it...");
-				//tbd WebElement goToHomepage=driver.findElement(By.xpath("//header//button[contains(@ng-click,'goToHomePage()')]"));
 				try {
-					//tbd System.out.println("'Go To Homepage' button showed up, click it");
-					//tbd goToHomepage.isDisplayed();
-					//tbd goToHomepage.click();
 					if (validate(emailGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
 						emailGoToHomepageBtn.click();

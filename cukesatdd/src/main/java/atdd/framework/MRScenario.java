@@ -116,6 +116,7 @@ public class MRScenario {
 	public static String desktopBrowserName;
 	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
+	public static String runnerFiles = "";
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -190,6 +191,7 @@ public class MRScenario {
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
+		runnerFiles = System.getenv("RUNNER_NAME");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -1055,7 +1057,7 @@ try {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("recordMp4", true);
-				capabilities.setCapability("maxDuration", "7200");
+				capabilities.setCapability("maxDuration", "10000");
 			} else if (browserName.equalsIgnoreCase("edge")) {
 				System.out.println("Inside Edge");
 				capabilities = DesiredCapabilities.edge();
@@ -1160,6 +1162,8 @@ try {
 			mobileDeviceName = System.getenv("DEVICE_NAME");
 			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
 			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
+			if(System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
+				sauceLabsMobileTunnelIdentifier=System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 		}
 		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
@@ -1171,7 +1175,10 @@ try {
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); 
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		// Offline prod and prod env. should not use tunnels
+		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1243,6 +1250,10 @@ try {
 
 		return con;
 
+	}
+
+	public static Map<String, String> getProps() {
+		return props;
 	}
 
 }

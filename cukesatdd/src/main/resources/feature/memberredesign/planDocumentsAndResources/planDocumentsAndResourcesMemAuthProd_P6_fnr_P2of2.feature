@@ -70,7 +70,8 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_grp_2of2 @prod_active_ma_2of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | false   | true   | true   |
+      | 10-105 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | false   | true   | true   |
+#      | 10-105 | 15130       | ashah120  | Mnrqa002  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | false   | true   | true   |
 
 	@prod_active_mapd_ind_2of2 @prod_active_mapd_2of2
 	Examples: 
@@ -112,5 +113,5 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ship_2of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | vernajohnson19651     | SHIP     | IND_EFF_PDnR          | true   | false   | false  | false  |
+      | 19-114 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false   | false  | false  |
 #     | 19-120 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_0   | SHIP | MULTI_IND_EFF_PDnR    | true   | false   | false  | false  |    

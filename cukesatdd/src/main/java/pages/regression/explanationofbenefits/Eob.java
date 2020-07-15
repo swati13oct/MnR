@@ -34,7 +34,6 @@ public class Eob implements Comparable<Eob>{
 	}
 	
 	public void printDetail() {
-		//tbd SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		String eobDateStr= sdf.format(eobDate);
 
 		System.out.print("EOB API detail");
@@ -47,7 +46,6 @@ public class Eob implements Comparable<Eob>{
 	}
 
 	public void printDetail(Eob inputEob) {
-		//tbd sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String eobDateStr= sdf.format(eobDate);
 
 		System.out.print("EOB API detail");
@@ -81,8 +79,6 @@ public class Eob implements Comparable<Eob>{
 	
 	public void setEobDate(String eobDate) {
 		try {
-			//tbd SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-			//tbd sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 			this.eobDate  = sdf.parse(eobDate);
 		} catch (ParseException e) {
 			e.printStackTrace();

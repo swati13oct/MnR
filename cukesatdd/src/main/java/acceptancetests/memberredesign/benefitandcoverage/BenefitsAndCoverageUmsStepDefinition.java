@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -109,6 +110,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user navigates to Benefits and Coverage page$")
     public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
            //Sardar Start
            BenefitsAndCoveragePage benefitsCoveragePage;

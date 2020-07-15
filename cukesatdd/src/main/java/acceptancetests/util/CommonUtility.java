@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -435,7 +436,7 @@ public class CommonUtility {
 	 * @return
 	 */
 	public static boolean checkPageIsReadyNew(WebDriver driver) {
-
+		try {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		for (int counter = 0; counter <= 23; counter++) {
@@ -451,6 +452,10 @@ public class CommonUtility {
 			}			
 		}
 		Assert.fail("TimeOut!!! Page not loaded");
+		} catch (WebDriverException e) {
+			Assert.assertTrue("PROBLEM - got webdriver exception: "+e, false);
+			return false;
+		}
 		return false;
 	}
 }
