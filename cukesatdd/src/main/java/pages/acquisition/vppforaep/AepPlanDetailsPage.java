@@ -4,6 +4,7 @@
 package pages.acquisition.vppforaep;
 
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -338,6 +339,28 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
+			
+			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
+			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
+
+			key = key.toLowerCase();
+			columnName = columnName.toLowerCase();
+			
+			if(benefitValueUI.endsWith("footnote2"))
+				benefitValueUI = benefitValueUI.replace("footnote2", "");
+			else if(benefitValueUI.endsWith("footnote1"))
+				benefitValueUI = benefitValueUI.replace("footnote1", "");
+			else if(benefitValueUI.endsWith("1"))
+				benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
+			else if(benefitValueUI.endsWith("2"))
+				benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
+			else if(benefitValueUI.contains("out-of-networkbenefits"))
+				benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+			
+			if(key.endsWith("1"))
+				key = 	StringUtils.trimTrailingCharacter(key, '1');
+			else if(key.endsWith("2"))
+				key = 	StringUtils.trimTrailingCharacter(key, '2');
 		
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
@@ -355,10 +378,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 			
 			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					
-					columnName = columnName.replace("PS","");
-					benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
-					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
-					if(key.contains("Optional Rider")&& key.contains(columnName)) {
+					columnName = columnName.replace("ps","");
+					if(key.contains("optional rider")&& key.contains(columnName)) {
 						counter++;
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;
@@ -371,24 +392,24 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 					}
 					columnName = columnName+"PS";
-			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")) {
+			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")||columnName.equalsIgnoreCase("Estimated annual total")) {
 			
 				
-				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\u2022", "");
-				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\u2022", "");
+				benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
+				benefitValue = benefitValue.replaceAll("\\u2022", "");
 				
-				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("Footnotes")) { 
+				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("footnotes")) { 
 					key = key.replace("\n", "");
 					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
 					counter++;
 					//removing footnote values from the string
-					if(key.contains("Footnotes2") && key.contains("Footnotes1")) {
-						key = key.replace("Footnotes2", "");
-						key = key.replace("Footnotes1", "");
-					}else if(key.contains("Footnotes1")) {
-						key = key.replace("Footnotes1", "");
-					}else if(key.contains("Footnotes2"))
-						key = key.replace("Footnotes2", "");
+					if(key.contains("footnotes2") && key.contains("footnotes1")) {
+						key = key.replace("footnotes2", "");
+						key = key.replace("footnotes1", "");
+					}else if(key.contains("footnotes1")) {
+						key = key.replace("footnotes1", "");
+					}else if(key.contains("footnotes2"))
+						key = key.replace("footnotes2", "");
 					
 					//removing footnote values from the string
 					if(key.contains(".2"))
@@ -398,7 +419,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
-					
+					benefitValue = benefitValue.toLowerCase();
 					if(key.contains(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -418,13 +439,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
-			}else if(columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network Value")){
+			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
 				
 				counter++;
-				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
-				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
-				
-				
+				if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
+					if(benefitValueUI.contains("1."))
+						benefitValueUI = benefitValueUI.replace("1.", ".");
+				}
 					if(key.equalsIgnoreCase(columnName)) {
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 								flag = true;break;
@@ -439,9 +460,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 			}else if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
 						
 						counter++;
-						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
-						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-","").replaceAll(".", "");
-						
 						//the following code is used to remove the footnote values from the benefit value string. 
 						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
 							benefitValueUI = benefitValueUI.replace("footnote2", "");
@@ -459,23 +477,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 						
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
-						if(key.contains("Preferred Retail Pharmacy Network") || key.contains("Preferred Mail Home Delivery through OptumRx")) {
-							if(benefitValueUI.contains("1."))
-								benefitValueUI = benefitValueUI.replace("1.", ".");
-							else if(benefitValueUI.contains(".2"))
+						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
+							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
 						
 						}
-						
-						//the following code will help remove footnote values from the end of the string if any. this is different from above
-						if(benefitValueUI.endsWith("1"))
-							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
-						else if(benefitValueUI.endsWith("2"))
-							benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-						else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
-							benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
-						
-						
+								
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
@@ -496,7 +503,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 	}
 	
 	public HashMap<String, String> collectInfoVppPlanDetailPg() {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
 		HashMap<String, String> result=new HashMap<String, String>();
@@ -508,9 +514,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
 			listOfTabHeaders.get(tab).click();
-			CommonUtility.checkPageIsReady(driver);
 			int tabIndex=(tab+1);
+			CommonUtility.checkPageIsReady(driver);
 
+			//System.out.println("Before Tab: "+tabIndex+" "+new Timestamp(System.currentTimeMillis()));
 			//note: store section table
 			int numSectionTable=listOfSectionHeaderForActiveTab.size();
 			//result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
@@ -613,15 +620,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 		}
 		System.out.println("Finished collecting the info on vpp detail page =====");
 		
-		
 		  for(String keyValue : result.keySet()) {
 		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
 		  System.out.println(
 		  "_________________________________________________________________________________________________"
 		  ); }
-		 
-		 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+
 		return result;
 	}
 	

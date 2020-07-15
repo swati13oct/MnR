@@ -453,7 +453,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
-			targetItem=section+" - 'OR' text before '"+docName+"' link'";
+			targetItem=section+" - 'or open' text before '"+docName+"' link'";
 			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_en_OR;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -587,221 +587,227 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-			String docName="Provider Directory";
-			String targetLang="English";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("en_us");
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		}	
+			
 
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
+		String docName="Provider Directory";
+		String targetLang="English";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("en_us");
 
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - 'OR' text before '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_OR;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				Assert.assertTrue("SHOULD land on SAR page", false);
-			}
-
-			//note: if there is spanish doc
-			note.add("\t=================");
-			targetLang="Spanish";
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
 			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("es");
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
+			note.addAll(validatePdf(targetItem, targetElement));
 
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
+			targetItem=section+" - 'or open' text before '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_OR;
+			if (showSection) {
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
 			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem="Spanish language dropdown option'";
-				targetElement=ind_revPlnChgSec_lang_es_ava;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+			}	
 
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			}
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			Assert.assertTrue("SHOULD land on SAR page", false);
+		}
 
-			//note: if there is chinese doc
-			note.add("\t=================");
-			targetLang="Chinese";
+		//note: if there is spanish doc
+		note.add("\t=================");
+		targetLang="Spanish";
+		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("es");
+
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
+
+			note.addAll(validatePdf(targetItem, targetElement));
+
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			//note: no doc then no dropdown
+			targetItem="Spanish language dropdown option'";
+			targetElement=ind_revPlnChgSec_lang_es_ava;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}
+
+		//note: if there is chinese doc
+		note.add("\t=================");
+		targetLang="Chinese";
+		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT '"+docName+"' document to display");
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("zh");
+
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
+
+			note.addAll(validatePdf(targetItem, targetElement));
+
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			//note: no doc then no dropdown
+			targetItem="Chinese language dropdown option'";
+			targetElement=ind_revPlnChgSec_lang_zh_ava;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+			targetItem=section+" - Arrow after Comprehensive Formulary link'";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}
+
+		targetLang="English";
+		docName="Vendor Information Sheet";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("en_us");
+
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
 			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT '"+docName+"' document to display");
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("zh");
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
+			note.addAll(validatePdf(targetItem, targetElement));
 
-				note.addAll(validatePdf(targetItem, targetElement));
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			Assert.assertTrue("SHOULD land on SAR page", false);
+		}
 
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem="Chinese language dropdown option'";
-				targetElement=ind_revPlnChgSec_lang_zh_ava;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
+		//note: if there is spanish doc
+		note.add("\t=================");
+		targetLang="Spanish";
+		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("es");
 
-				targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
-				targetItem=section+" - Arrow after Comprehensive Formulary link'";
-				targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			}
+			note.addAll(validatePdf(targetItem, targetElement));
 
-			targetLang="English";
-			docName="Vendor Information Sheet";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("en_us");
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			//note: no doc then no dropdown
+			targetItem="Spanish language dropdown option'";
+			targetElement=ind_revPlnChgSec_lang_es_ava;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
-				note.addAll(validatePdf(targetItem, targetElement));
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}
 
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				Assert.assertTrue("SHOULD land on SAR page", false);
-			}
+		//note: if there is chinese doc
+		note.add("\t=================");
+		targetLang="Chinese";
+		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT '"+docName+"' document to display");
+			Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
+			select.selectByValue("zh");
 
-			//note: if there is spanish doc
-			note.add("\t=================");
-			targetLang="Spanish";
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("es");
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			note.addAll(validatePdfLinkTxt(docName, targetElement));
 
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
+			note.addAll(validatePdf(targetItem, targetElement));
 
-				note.addAll(validatePdf(targetItem, targetElement));
+			targetItem=section+" - Arrow after '"+docName+"' link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem="Spanish language dropdown option'";
-				targetElement=ind_revPlnChgSec_lang_es_ava;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			}
-
-			//note: if there is chinese doc
-			note.add("\t=================");
-			targetLang="Chinese";
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT '"+docName+"' document to display");
-				Select select = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-				select.selectByValue("zh");
-
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				/* TODO
+		} else {
+			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+			/* TODO
 				//note: no doc then no dropdown
 				ind_reviewPlanChanges_docSection_langDropdown.click();
 				targetItem="Chinese language dropdown option'";
 				targetElement=ind_reviewPlanMaterials_lang_chinese;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
-				 */
+			 */
 
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
-				targetItem=section+" - Arrow after Comprehensive Formulary link'";
-				targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			}		
+			targetItem=section+" - Arrow after Comprehensive Formulary link'";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
+			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}		
 
-			Select select = new Select(ind_revPlnChgSec_docSec_langDropdown);           
-			select.selectByValue("en_us");
-
-		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
-		}	
+		Select select = new Select(ind_revPlnChgSec_docSec_langDropdown);           
+		select.selectByValue("en_us");
 
 
 		return note;
@@ -851,7 +857,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 			note.addAll(validatePdf(targetItem, targetElement));
 
-			targetItem=section+" - 'OR' text before '"+docName+"' link'";
+			targetItem=section+" - 'or open' text before '"+docName+"' link'";
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_OR;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -1020,7 +1026,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-		targetItem=section+subSection+" - 'OR' text before Compare New Plans Link";
+		targetItem=section+subSection+" - 'or open' text before Compare New Plans Link";
 		targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
@@ -1122,7 +1128,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 				//TODO - validate link destination
 
-				targetItem=section+subSection+" - Stay in Current Plan - 'OR' text before Compare New Plans Link";
+				targetItem=section+subSection+" - Stay in Current Plan - 'or open' text before Compare New Plans Link";
 				targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
 				note.addAll(validateHaveItem(targetItem, targetElement));
 				Assert.assertTrue("PROBLEM - unable to locate '"+targetItem+"'.  Actual line of text='"+targetElement.getText()+"'", targetElement.getText().contains(" or "));

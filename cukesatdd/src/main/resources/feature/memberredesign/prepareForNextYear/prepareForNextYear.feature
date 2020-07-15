@@ -42,20 +42,20 @@ Feature: 1.25 Member Prepare For Next Year
 	    | index | FID     | planType | memberType          |
 	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
 	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
-	#    | 06    | F437767 | SHIP	 | IND_PFNY            |
+	    | 06    | F437767 | SHIP	 | IND_PFNY            |
 	
 	#note: activate when combo user is available		
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
-	#    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	#    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
+	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
 			
 	@prepareForNextYear01d
     Examples: 
 	    | index | FID     | planType | memberType          |
-	#    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
-	#    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
+	    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
+	    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
 			
 
   #-------------------------------------------------
@@ -130,9 +130,8 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear02d
     Examples: 
 	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
-	#tbd   | 19    | F437767 | MAPD	 | IND_ES_PreNexYr| false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#tbd   | 20    | F437767 | MAPD	 | IND_ZH_PreNexYr| false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-       | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
+        | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
+        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    
 ##### end - cases for team env #################################################################
 
@@ -149,9 +148,9 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
-      | AEM Toggle             | OFF            |
+      | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
@@ -202,9 +201,9 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
-      | AEM Toggle             | OFF            |
+      | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
@@ -254,6 +253,12 @@ Feature: 1.25 Member Prepare For Next Year
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
 	    | 17    | F437767 | MEDICA	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 	    | 18    | F437767 | PCP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+
+    #@prepareForNextYear02d
+    #Examples: 
+	#    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+    #    | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
+    #    | 20    | F437767 | MAPD	 | IND_ACTnTERM_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    
 ##### end - cases for stage env #################################################################
 

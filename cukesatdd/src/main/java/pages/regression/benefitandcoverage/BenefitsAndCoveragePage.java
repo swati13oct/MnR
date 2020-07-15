@@ -669,6 +669,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				System.out.println(">>>>>>>>>>Office Visits value is not displaying<<<<<<<<<<<<<<<<<<<<");
 				Assert.fail();
 			}
+			
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-900)", "");
+			System.out.println(">>>>>scrolled up for verifying jump link section and checks respective sections<<<<<<<<<<<<<");
 		}
 	}
 
@@ -877,7 +881,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,3000)", "");
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {

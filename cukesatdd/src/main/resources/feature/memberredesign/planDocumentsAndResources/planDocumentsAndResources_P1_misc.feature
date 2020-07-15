@@ -87,10 +87,14 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 18-018 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | false  | false | false | false |
 
-	@active_ship @devRegression
+	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+
+	@active_ship @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 20-115 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 

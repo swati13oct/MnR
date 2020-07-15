@@ -39,8 +39,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
 	private WebElement NextYearLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
-	private WebElement vppTopHeader;
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 	
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
@@ -262,20 +262,22 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 	
 	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
-		boolean flag = true;
+		boolean flag = true; int counter =0;
 		
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
-		
+			key = key.toLowerCase();
+			columnName = columnName.toLowerCase();
+			
+			
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
-				
+				counter++;
 				//if(key.contains(columnName)) {
 						flag= true;break;
 				//	}
 			
 			}else if(key.contains(columnName)) {
-
-
+						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
@@ -292,6 +294,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				}
 			}
 		
+		if(counter == 0)
+			flag = false;
+		
 		return flag;
 		
 	}
@@ -300,7 +305,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		if(validate(countyModal,20)) {
 			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
-			validateNew(vppTopHeader,20);
+			validateNew(zipcodeChangeLink,20);
 			flag = true;
 		}
 		
