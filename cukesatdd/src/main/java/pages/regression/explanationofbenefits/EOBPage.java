@@ -234,6 +234,7 @@ public class EOBPage extends EOBBase{
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -1116,8 +1117,10 @@ public class EOBPage extends EOBBase{
 		int max=eobCount;
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
-			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
-				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+		}
+		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) { 
+			System.out.println("TEST - limit the amount of EOB detail validation to speed up the run on offline/online-prod");
+			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
 		}
 		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
