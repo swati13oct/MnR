@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionContactUsPart3.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionContactUsPart3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome=true,
-features = { "src/main/resources/feature/memberredesign/contactu/ContactUsStage/ContactUsStagePart3.features" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/contactus/ContactUsStage/ContactUsStagePart3.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionContactUsPart3.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionContactUsPart3 {
 
