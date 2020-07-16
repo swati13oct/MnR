@@ -42,7 +42,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927 @tip
+  @CurrentMedications @F392596 @US2301927
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -162,7 +162,7 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx_request_received |
 
   @CurrentMedications @F392596 @US2508786
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
@@ -300,7 +300,7 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType                          |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
@@ -314,7 +314,7 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType                          |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_renewal |
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
@@ -340,7 +340,7 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx-delivered |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
