@@ -355,7 +355,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			
 			//removing all the footnote words from the string as they represent footnote
-			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium"))) {
+			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider"))) {
 				if(benefitValueUI.endsWith("footnote2"))
 					benefitValueUI = benefitValueUI.replace("footnote2", "");
 				else if(benefitValueUI.endsWith("footnote1"))
@@ -413,14 +413,15 @@ public class AepPlanDetailsPage extends UhcDriver {
 					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
 					counter++;
 					//removing footnote values from the string
-					if(key.contains("footnote2") && key.contains("footnote1")&&key.contains("footnotes")) {
-						key = key.replace("footnote2", "");
-						key = key.replace("footnote1", "");
-						key = key.replace("footnotes", "");
-					}else if(key.contains("footnote1")) {
-						key = key.replace("footnote1", "");
-					}else if(key.contains("footnote2"))
-						key = key.replace("footnote2", "");
+					
+					if(key.contains("footnote1") || key.contains("footnotes1")) {
+						key = key.replaceAll("footnote1", "");
+						key = key.replaceAll("footnotes1", "");
+					}else if(key.contains("footnote2")||key.contains("footnotes2")) {
+						key = key.replaceAll("footnote2", "");
+						key = key.replaceAll("footnotes2", "");
+					}else if(key.contains("footnotes"))
+						key = key.replaceAll("footnotes", "");
 					
 					
 					//removing footnote values from the string
@@ -428,6 +429,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 						key = key.replace(".2", ".");
 					else if(key.contains(".1"))
 						key = key.replace(".1", ".");
+					else if(key.contains(".3"))
+						key = key.replace(".3", ".");
 						
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
@@ -442,7 +445,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					}
 				
 				
-				}else if(key.contains(columnName)) {
+				}else if(key.contains(columnName)&& !key.contains("optional rider")) {
 					counter++;
 					if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 						flag = true;break;
