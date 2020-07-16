@@ -3744,7 +3744,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * @param planName
 		 */
 		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
-			//validatePlanSummary();
+
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+			System.out.println("Scrolled...");
+			waitforElementNew(agentModeBanner);
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 			
@@ -3764,7 +3768,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
 			}
 			
-			validatePlanSummary();
 			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
@@ -3901,8 +3904,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("#########"+existingProviders.getText().trim()+"#########");
 				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
 			}
-			validatePlanSummary();
-			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
 			//Validate Drugs

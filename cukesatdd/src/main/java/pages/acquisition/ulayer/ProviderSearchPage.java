@@ -47,8 +47,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
-	private WebElement SaveBtn;
+	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	private WebElement selectProviderBtn;
 
 	@FindBys(value = {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
@@ -61,10 +61,13 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 	
+	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	private WebElement finishReturnBtn;
+	
 	@FindBy(xpath = "//*[text()='View Saved']")
 	private WebElement ViewsaveProviderbtn;
 	
-	@FindBy(xpath="//span[text()='Edit Saved']")
+	@FindBy(xpath="//*[contains(@text(),'View Saved')]")
 	private WebElement EditSavedButton;
 	
 	@FindBy(xpath="//span[text()='View Saved Providers']")
@@ -121,7 +124,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Close')]")
 	private WebElement BtnClose;
 
-	@FindBy(xpath = "//*[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]")
+	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
@@ -197,25 +200,28 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-		jsClickNew(SaveBtn);
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption)) {
+		if (validate(selectLocationOption,10)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-		jsClickNew(Viewsavebtn);
-		if(validate(EditSavedButton)){
-			ViewSavedProvidersLink.click();
-		}
+		
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Hospital Name is : " + providerSaved);
 		MRConstants.PROV_NAME=providerSaved;
-		Checkcoverage.click();
+		
+		validateNew(finishReturnBtn, 10);
+
+		finishReturnBtn.click();
+		/*
+		 * if(validate(EditSavedButton)){ ViewSavedProvidersLink.click(); }
+		 */
+		
+		//Checkcoverage.click();
 		/*
 		 * validateNew(Checkcoverage); jsClickNew(Checkcoverage);
 		 */
@@ -235,9 +241,9 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
 		Hospitals.click();
 
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
 
-		jsClickNew(SaveBtn);
+		jsClickNew(selectProviderBtn);
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);
@@ -312,8 +318,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		PrimaryCarePhysician.click();
 
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-		SaveBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		selectProviderBtn.click();
 
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
@@ -346,8 +352,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-		SaveBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		selectProviderBtn.click();
 
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
@@ -384,8 +390,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		jsClickNew(Physician);
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-		jsClickNew(SaveBtn);
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();

@@ -18,6 +18,7 @@ import pages.acquisition.shopperprofile.MemberCreateProfile;
 import pages.acquisition.shopperprofile.NonMemberCreateProfile;
 import pages.acquisition.shopperprofile.ProfileSearch;
 import pages.acquisition.shopperprofile.ShopperProfileAgentLogin;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 /**
  * @author bnaveen4
@@ -82,9 +83,9 @@ public class ShopperProfileStepDefinition {
 			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 					.getBean(PageConstants.PROFILE_SEARCH);
 			
-			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
+			ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
 			
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,6 +115,22 @@ public class ShopperProfileStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan,fname,lname);
+	}
+	
+	@Then("^I land on the plan compare page$")
+	public void i_land_on_the_plan_compare_page(DataTable userData){
+		
+		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		comparePlansPage.validateAgentModeBanners(userData);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")
@@ -220,9 +237,9 @@ public class ShopperProfileStepDefinition {
 		try {
 			MemberCreateProfile createProfile = (MemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
 			Thread.sleep(15000);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -245,8 +262,8 @@ public class ShopperProfileStepDefinition {
 		try {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -282,5 +299,21 @@ public class ShopperProfileStepDefinition {
 		
 		profileSeacrh.searchProfileAndDeleteNonMember(memberDetails);
 		
+	}
+	
+	@Then("^I land on the plan compare page for NonMember$")
+	public void i_land_on_the_plan_compare_page_For_Non_Member(DataTable userData){
+		
+		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		comparePlansPage.validateAgentModeBannersForNonMember(userData);
 	}
 } 

@@ -53,6 +53,9 @@ public class PlanDocumentsAndResourcesFnRDocLinksHelper extends PlanDocumentsAnd
 		if (itemName.equals("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")) {
 			return presMailOrderForm_link_RF_FnR;  
 		}
+		if (itemName.equals("Medicare Part D Claim Form")) {
+			return medicarePartDClaimForm_link_RF_FnR;
+		}
 		//--- AF_FnR
 		if (itemName.equals("How to appoint a representative")) {
 			return howToAppointRepresentative_link_AF_FnR;

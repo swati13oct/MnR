@@ -5,16 +5,16 @@ Feature: 1.16 Member Contact us Page CHAT
   Scenario Outline: Verify AARP chat agent login in.
     Given agentlogin lands on page
     And agent enters credentials
-
+	  | <username> | <password> |
     Examples: 
       | username   | password   |
-      | AARPStage8 | AARPStage8 |
+      | AARPStage1 | AARPStage1 |
 
   @regressionMember @agentSigninforGroupCHAT @GroupFedChat
   Scenario Outline: Verify AARP chat agent login in.
     Given agentlogin lands on page
     And agent enters credentials for federal
-
+	  | <username> | <password> |
     Examples: 
       | username | password |
       | MRagent8 | MRagent8 |
