@@ -54,8 +54,8 @@ public class DCEStepDefinitionUHC {
 		
 	}
 	
-	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
-	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1) throws Throwable {
+	@Then("^the user clicks on Build Drug List to navigate to Step on UHC (\\d+)$")
+	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step_UHC(int arg1) throws Throwable {
 		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		

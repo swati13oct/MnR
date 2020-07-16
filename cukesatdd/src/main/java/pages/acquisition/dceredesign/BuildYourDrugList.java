@@ -38,6 +38,10 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	@FindBy(xpath = "//*[(@id= 'err_2') or contains(@class, 'errtext')]")
 	public WebElement NoDrugError;
+
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(@class, 'backarrow')]")
+	public WebElement DrugSearchBackClick;
+
 	
 	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
 	public WebElement AutoCompleteList;
@@ -61,6 +65,10 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "(//button//span[contains(text(),'Next:Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 	
+	@FindBy(xpath = "//input[@id='zip-code']")
+	public WebElement zipCodeTxtbox;
+
+
 	public BuildYourDrugList(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -110,6 +118,9 @@ public class BuildYourDrugList extends UhcDriver {
 	}
 
 	public void ValidateDrugAutocomplete(String partialDrug) {
+		
+		jsClickNew(DrugSearchBackClick);
+		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
 		validateNew(EnterDrugNameTxt);
 		EnterDrugNameTxt.clear();
 		EnterDrugNameTxt.sendKeys(partialDrug);
@@ -138,5 +149,19 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 
+	public ZipCodePlanYearCapturePage navigateToZipEntryPage() {
+		validateNew(reviewDrugCost);
+		jsClickNew(reviewDrugCost);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
+		if(validateNew(zipCodeTxtbox))
+		{
+			return new ZipCodePlanYearCapturePage(driver);
+		}
+		else {
+			Assert.fail("Zip Code Entry Page is NOT Displayed");
+			return null;
+		}		
+		
+	}
 
 }

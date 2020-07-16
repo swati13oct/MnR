@@ -33,7 +33,18 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@for,'radio-2-input')]//div[contains(@class,'label')]")
 	public WebElement GenericDrugRadio;
 	
-	
+	@FindBy(xpath = "//input[@id= 'drugquantity']")
+	public WebElement DrugQuantityTxtBx;
+
+	@FindBy(xpath = "//button[@type= 'submit' and contains(@dtmname, 'add to drug list')]")
+	public WebElement AddDrugBtn;
+
+	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
+	public WebElement BlankQuantityError;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
 	public TellUsAboutDrug(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -60,9 +71,39 @@ public class TellUsAboutDrug extends UhcDriver {
 		
 	}
 
-	public void navigateToZipEntryPage() {
-		// TODO Auto-generated method stub
-		
+	public void ValidateBlankQuantityError() {
+		validateNew(DrugQuantityTxtBx);
+		String Quantity = DrugQuantityTxtBx.getText();
+		DrugQuantityTxtBx.clear();
+		jsClickNew(DrugQuantityTxtBx);
+		if(DrugQuantityTxtBx.getText().isEmpty()) {
+			validateNew(AddDrugBtn);
+			jsClickNew(AddDrugBtn);
+			if(validateNew(BlankQuantityError) && BlankQuantityError.getText().contains("enter a valid quantity between 1 and 999")) {
+				System.out.println("Error Message displayed for Blank Quantity search : "+BlankQuantityError.getText());
+				DrugQuantityTxtBx.sendKeys(Quantity);
+			}
+			else
+				Assert.fail("Error Message displayed for Blank Quantity search : "+BlankQuantityError.getText());
+
+		}
+		else {
+			Assert.fail("Drug Quantity Text Box NOT Cleared : "+DrugQuantityTxtBx.getText());
+
+		}
+						
+	}
+
+	public BuildYourDrugList ClickAddDrug() {
+		validateNew(AddDrugBtn);
+		jsClickNew(AddDrugBtn);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 
 

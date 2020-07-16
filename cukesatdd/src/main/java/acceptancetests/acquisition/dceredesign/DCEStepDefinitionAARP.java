@@ -55,31 +55,33 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
 	}
+	
+	@Then("^the user clicks on Build Drug List to navigate to Build Drug List Page$")
+	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Build_DrugList() throws Throwable {
+		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
+	}
+	 
 
 	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
 	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1) throws Throwable {
-		GetStartedPage DCEgetStarted =(GetStartedPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_GetStarted);
+		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
-		
+
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
+	
 	@Then("^the user validates error message for blank search$")
 	public void the_user_validates_error_message_for_blank_search() throws Throwable {
 		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEbuildDrugList.validateNoDrug_ErrorMsg();
 	}
-	/*
-	 * @Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
-	 * public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1)
-	 * throws Throwable { GetStartedPage DCEgetStarted =(GetStartedPage)
-	 * getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-	 * BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-	 * 
-	 * }
-	 */
 
 	@When("^the user clicks on Add drugs button$")
 	public void the_user_clicks_on_Add_drugs_button() {
@@ -169,6 +171,8 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_TellUsAboutDrug, tellUsAboutDrug);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.BRAND_DRUG1, DrugName);
 	}
+	
+	
 	@Then("^the user validates Tell Us About Drug - Brand page for the Drug$")
 	public void the_user_validates_Tell_Us_About_Drug_Brand_page_for_the_Drug(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -187,14 +191,34 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user selects following Drug Details$")
 	public void the_user_selects_following_Drug_Details() throws Throwable {
+		
 	}
 
 
-	@Then("^the user clicks on Add Drug to Land on Zip Entry Page$")
-	public void the_user_clicks_on_Add_Drug() throws Throwable {
+	@Then("^the user validates Blank Drug Quantity error message$")
+	public void the_user_validates_Blank_Quantity_error_message() throws Throwable {
 		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario().getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
-		tellUsAboutDrug.navigateToZipEntryPage();
+		tellUsAboutDrug.ValidateBlankQuantityError();
 
+	}
+
+	@Then("^the user clicks on Add Drug to add drug to drug list$")
+	public void the_user_clicks_on_Add_Drug_to_add_drug_to_drug_list() throws Throwable {
+		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario().getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
+		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
+	}
+
+	@Then("^the user does drug search and selects drug for following drug$")
+	public void the_user_does_drug_search_and_selects_drug_for_following_drug(DataTable arg1) throws Throwable {
+
+	}
+
+
+	@Then("^the user clicks on Review Drug Costs to Land on Zip Entry Page$")
+	public void the_user_clicks_on_Add_Drug() throws Throwable {
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 	@Then("^user enters valid zipcode and county in AARP$")
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
