@@ -261,11 +261,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return result;
 	}
 	
-	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
+	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
-		
+		String tmpUIString1 = "",tmpUIString2="";
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
+			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase();
 			key = key.replace(",", "");
 			columnName = columnName.toLowerCase();
@@ -290,6 +292,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						}else {
 							flag = false;
 							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							tmpUIString2 = tmpUIString1;
 							break;
 						}
 					
@@ -299,7 +302,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		if(counter == 0)
 			flag = false;
 		
-		return flag;
+		comparedResult.put(flag, tmpUIString2);
+		return comparedResult;
 		
 	}
 	

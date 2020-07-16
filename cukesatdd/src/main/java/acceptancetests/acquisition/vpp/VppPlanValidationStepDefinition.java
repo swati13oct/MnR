@@ -128,6 +128,7 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
+		                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 		                	 boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
@@ -140,11 +141,6 @@ public class VppPlanValidationStepDefinition {
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 							 
-			                 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
-			                	 newCell.setCellValue(failureCounter);
-			                 else
-			                	 newCell.setCellValue(cell.getStringCellValue());
-							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 									 
@@ -166,17 +162,26 @@ public class VppPlanValidationStepDefinition {
 
 								 if(!(currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 
-								      valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
-									 
+								      resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+								      if(resultMap.containsKey(false))
+											 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
 									 	if(valueMatches) {					                    
 									 		newCell.setCellStyle(stylePassed);
 								 		}else {		
 								 			newCell.setCellStyle(styleFailed);
-									 		failureCounter++;
-								 											 
-									  }
-								 }			 
+									 		failureCounter++;										 
+								 		}
+								 }
+								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
+				                	 newCell.setCellValue(failureCounter);
+								 else {
+				                	 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
+				                		 newCell.setCellValue(cell.getStringCellValue()); 
+				                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+				                		 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));	 
+				                	 }
+				              }
 							 } 
 							  cellIndex++;						  
 		                 }
@@ -263,6 +268,7 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 		                	 boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
@@ -292,20 +298,14 @@ public class VppPlanValidationStepDefinition {
 									  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
 								 
 								 }
-								 
-	
+
 								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
-								 	
 
-								      valueMatches = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
-
-
-									 System.out.println(currentColName + " : "+ valueMatches);
-									 	if(!valueMatches) {
-					                    
+									 resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									  System.out.println(currentColName + " : "+ valueMatches);
+									 	if(!valueMatches) { 
 									 		newCell.setCellStyle(styleFailed);
-								 		}else {
-					                    					
+								 		}else {				
 								 			newCell.setCellStyle(stylePassed);
 								 
 									  }
@@ -402,7 +402,8 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
-		                	 boolean valueMatches = true;
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
+		                	boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
 		                	 try {
@@ -413,10 +414,7 @@ public class VppPlanValidationStepDefinition {
 		                		 System.out.println(e);
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
-			                 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
-			                	 newCell.setCellValue(failureCounter);
-			                 else
-			                	 newCell.setCellValue(cell.getStringCellValue());
+			                 
 							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
@@ -434,15 +432,28 @@ public class VppPlanValidationStepDefinition {
 
 								 if(!(currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 									 
-									 valueMatches = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 if(resultMap.containsKey(false))
+										 valueMatches = false;
 									 System.out.println(currentColName + " : "+ valueMatches);
-									 if(valueMatches) {
+									 if(valueMatches) 
 										 newCell.setCellStyle(stylePassed);	
-								 	  }else {
-								 			newCell.setCellStyle(styleFailed);				
-								 			failureCounter++;
-									  }
-								 }
+									 else {
+										 newCell.setCellStyle(styleFailed);				
+									 	  failureCounter++;
+									 }
+										 
+								 } 
+	
+								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
+					                	 newCell.setCellValue(failureCounter);
+					             else {
+					                	 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
+					                		 newCell.setCellValue(cell.getStringCellValue()); 
+					                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+					                		 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));	 
+					                	 }
+					              }
 							 } 
 
 							  cellIndex++;
