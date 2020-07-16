@@ -45,7 +45,7 @@ Feature: 1.24 Member Individual Health Record
     @no_ihr_d
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
-	    | 07    | F424804 | MA       | BOA12324_GROUP_IHR | false      |
+	    | 07    | F424804 | MA       | BOA12324_TERM_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @ihr_a @devRegression

@@ -285,7 +285,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1")
 	private WebElement hcePageText;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
 	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
