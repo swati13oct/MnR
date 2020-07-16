@@ -201,6 +201,9 @@ public class EOBBase extends EOBWebElements{
 				if (planType.equalsIgnoreCase("mapd")) {
 					if (eobValidate(comboTab_MAPD))
 						comboTab_MAPD.click();
+				} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+					if (eobValidate(comboTab_MA))
+						comboTab_MA.click();
 				} else if (planType.equalsIgnoreCase("ship") || planType.toLowerCase().contains("ship")) {
 					if (eobValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();
