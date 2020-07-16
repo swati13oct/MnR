@@ -128,12 +128,10 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		String paymentTabListXpath="//div[contains(@class,'tabs')]//li";
 		String[] tmp=memberType.split("_");
 		//note: assumption - combo of 2 plans only with format of COMBO_<plan1>_<plan2>_<featureIdentifier>
-		System.out.println("TEST 1 - memberType='"+memberType+"' | length='"+tmp.length+"'");
 		Assert.assertTrue("PROBLEM - haven't code to handle this memberType format yet", tmp.length<=4);
 		String targetPlanType=planType;
 		if (planType.toUpperCase().contains("SHIP_")) {
 			String[] tmp2=planType.split("_");
-			System.out.println("TEST 2- planType='"+planType+"' | length='"+tmp2.length+"'");
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
