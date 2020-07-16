@@ -604,7 +604,7 @@ public class MedicineCabinetStepDefinition {
 	public void one_of_user_active_medications_has_a_Call_hold_on_it() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		holdType="PATIENT QUESTION HOLD";
+		holdType="PATIENT QUESTION HOLD";		
 		//holdType="Call Hold";
 		pnpPg.validateCallHoldForHDMedication(holdType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
@@ -614,7 +614,8 @@ public class MedicineCabinetStepDefinition {
 	public void one_of_user_active_medications_has_a_price_adjustment_hold_on_it()  {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		holdType="PATIENT QUESTION HOLD";
+		holdType="COPAY HOLD";
+		//holdType="PATIENT QUESTION HOLD";
 		//holdType="Price Adjustment Hold";
 		pnpPg.validatePriceAdjsutmentHoldForHDMedication(holdType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
@@ -624,7 +625,8 @@ public class MedicineCabinetStepDefinition {
 	public void one_of_user_active_medications_has_a_address_hold_on_it()  {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		holdType="Address Hold";
+		holdType="PATIENT QUESTION HOLD";
+		//holdType="Address Hold";
 		pnpPg.validateAddressHoldForHDMedication(holdType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}

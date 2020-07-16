@@ -515,3 +515,7 @@ aabf1d03-cf7b-4a09-a264-99ee85baa156/Password@1,SHIP_MEDICARE SUPPLEMENT,COMBO_S
 6e3e99b2-1f94-4241-a773-1f6d4ec63e74/Password@1,MAPD,ES_D_NICE_EOBB,,
 b85a103c-3541-4f7a-aceb-c7e0f77c7436/Password@1,SHIP,SHIPCHAT,,
 3a7ebcb2-fee3-41f4-8128-d3da3dbcd8cd/Password@1,MAPD,Rx_Individual_PnP_rx,,
+c04b9e29-c131-4e9b-889d-3d92e10c6507/Password@1,MAPD,Rx_Grp_PnP_rx_Call,,
+571fdb64-b3b9-4222-8936-f54a64aa24f5/Password@1,MAPD,Rx_Group_PnP_Shipped,,
+571fdb64-b3b9-4222-8936-f54a64aa24f5/Password@1,MAPD,Rx_Group_PnP_Delivered,,
+571fdb64-b3b9-4222-8936-f54a64aa24f5/Password@1,MAPD,Rx_Group_PnP_rx,,

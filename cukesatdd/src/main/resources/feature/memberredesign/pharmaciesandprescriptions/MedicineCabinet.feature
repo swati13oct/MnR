@@ -69,9 +69,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301928 @Naresh
+  @CurrentMedications @F392596 @US2301928 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medication information on medicine cabinet
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -89,8 +89,8 @@ Feature: MVP - Current Medications
     And user validates a button "Contact Pharmacy" to contact my retail pharmacy
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Group_PnP_MedInfo |
+      | FID     | planType | memberType      |
+      | F392596 | MAPD     | Rx_Group_PnP_rx |
 
   @MedicineCabinet @F392596 @US2301929 @Kiran
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
@@ -161,7 +161,7 @@ Feature: MVP - Current Medications
     Then user views one fourth Harvey Ball on that medication's row
 
     Examples: 
-      | FID     | planType | memberType           |
+      | FID     | planType | memberType                            |
       | F392596 | MAPD     | Rx_Individual_PnP_rx_request_received |
 
   @CurrentMedications @F392596 @US2508786
@@ -179,9 +179,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedication @F392596 @US2508786 @Naresh
+  @CurrentMedication @F392596 @US2508786 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Shipped
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -194,9 +194,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Group_PnP_Shipped |
 
-  @CurrentMedication @F392596 @US2508786 @Naresh
+  @CurrentMedication @F392596 @US2508786 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Delivered
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -206,8 +206,8 @@ Feature: MVP - Current Medications
     Then user views a full Harvey Ball with a checkmark on that medication row
 
     Examples: 
-      | FID     | planType | memberType                  |
-      | F392596 | MAPD     | Rx_Individual_PnP_Delivered |
+      | FID     | planType | memberType             |
+      | F392596 | MAPD     | Rx_Group_PnP_Delivered |
 
   @MedicineCabinet @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
@@ -299,7 +299,7 @@ Feature: MVP - Current Medications
     Then user validates the external link icon in the button
 
     Examples: 
-      | FID     | planType | memberType                          |
+      | FID     | planType | memberType                  |
       | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @CurrentMedications @F392596 @US2508869
@@ -313,7 +313,7 @@ Feature: MVP - Current Medications
     Then user validates the external link icon in the button
 
     Examples: 
-      | FID     | planType | memberType                          |
+      | FID     | planType | memberType                   |
       | F392596 | PDP      | Rx_Individual_PnP_rx_renewal |
 
   @CurrentMedications @F392596 @US2508869
@@ -339,7 +339,7 @@ Feature: MVP - Current Medications
     Then user views a View Order call to action button on that medication's row
 
     Examples: 
-      | FID     | planType | memberType           |
+      | FID     | planType | memberType                     |
       | F392596 | MAPD     | Rx_Individual_PnP_rx-delivered |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
@@ -419,9 +419,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2618672 @Naresh
+  @CurrentMedications @F392596 @US2618672 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -430,12 +430,12 @@ Feature: MVP - Current Medications
     And user will see a "Green" "Contact Pharmacy" button
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType      |
+      | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @CurrentMedications @F392596 @US2618672 @Naresh
+  @CurrentMedications @F392596 @US2618672 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -444,12 +444,12 @@ Feature: MVP - Current Medications
     Then user will view a popup with the phone number available to call
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType      |
+      | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869 @Naresh
+  @CurrentMedications @F392596 @US2508869 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -463,9 +463,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869 @Naresh
+  @CurrentMedications @F392596 @US2508869 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on verify address hold
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -479,9 +479,8 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-#Given login with following details logins in the uhc rx portal
-
-  @CurrentMedications @F392596 @US2508869 @Testing @MemberVBF
+  #Given login with following details logins in the uhc rx portal
+  @CurrentMedications @F392596 @US2508869 @Testing @MemberVBF @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -497,9 +496,9 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869 @Naresh
+  @CurrentMedications @F392596 @US2508869 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -510,12 +509,12 @@ Feature: MVP - Current Medications
     And the button will include the external link icon
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType         |
+      | F436319 | MAPD     | Rx_Grp_PnP_rx_Call |
 
-  @CurrentMedications @F392596 @US2508869 @Naresh
+  @CurrentMedications @F392596 @US2508869 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page

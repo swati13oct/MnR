@@ -846,7 +846,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//*[text()='Important']/..")
 	protected List<WebElement> listOfHoldWarningSymbol;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']//*[@aria-label='external link']")
+	//button[@data-testid='medication-action-resolve-hold']//*[@aria-label='external link']
+	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']//*[3]")
 	protected List<WebElement> listOfExternalLinkOnResolveHldBtn;
 	
 	@FindBy(xpath="//div[contains(@data-testid,'medication-status-percent')]//*[@id='WhiteCheck_svg__a']")
