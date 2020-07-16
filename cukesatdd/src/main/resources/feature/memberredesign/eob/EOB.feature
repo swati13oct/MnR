@@ -161,7 +161,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     @SHIP_EOBs @SHIP_EOBs1
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB     | Medical | true        | 
 
     @SHIP_EOBs @SHIP_EOBs2
     Examples: 

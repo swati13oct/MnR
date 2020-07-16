@@ -599,8 +599,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","TBD"); 
-			testInputInfoMap.put("sampleBodyText","TBD");
+			testInputInfoMap.put("headerText","MEDICARE PART D CLAIM FORM"); 
+			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement");
 			return testInputInfoMap; 
 		}
 
