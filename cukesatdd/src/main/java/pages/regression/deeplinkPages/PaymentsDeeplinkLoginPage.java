@@ -223,7 +223,9 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 					}
 					checkForIPerceptionModel(driver);
 					CommonUtility.checkPageIsReadyNew(driver);	
-					validateNew(textonpage);
+					//validateNew(textonpage);
+					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+					System.out.println("*** Page URL ***" + driver.getTitle());
 					if (driver.getCurrentUrl().contains("payments/overview.html?deeplink=true")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on Payments deeplink Page **");

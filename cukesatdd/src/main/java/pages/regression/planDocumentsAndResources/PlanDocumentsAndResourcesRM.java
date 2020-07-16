@@ -56,8 +56,8 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		testInputInfoMap.put("switchTab", "true");
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
-			String actualUrl=lnkElment.getAttribute("href");			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-
+			String actualUrl=lnkElment.getAttribute("href");			
+			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 			validateLinkDest(testInputInfoMap, lnkElment);
 		} else {
 			Assert.assertTrue("PROBLEM - should not see '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElment));
