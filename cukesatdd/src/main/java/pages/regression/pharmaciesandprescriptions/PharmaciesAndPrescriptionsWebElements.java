@@ -397,7 +397,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//img[@data-testid='medication-data-image']")
 	protected List<WebElement> listOfDrugImage;
 
-	@FindBy(xpath = "//div[@data-testid='medication-data-refills-left']")
+	@FindBy(xpath = "//a[@data-testid='medication-data-name']/..//span")
 	protected List<WebElement> listOfMedicineStrength;
 
 	@FindBy(xpath = "//div[@data-testid='medication-data-refills-left']")
@@ -422,14 +422,29 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	////button[@data-testid='medication-action-track' or @data-testid='medication-action-contact-pharmacy']
 	////button[@class='sc-fzXfMB bzINfC sc-LzLvg iyuslm']//span[@class='sc-fzXfMC lesaNV' and not(text()='LEARN MORE')]/ancestor::button
-	
-	@FindBy(xpath = "//button[@data-testid='medication-action-track' or @data-testid='medication-action-contact-pharmacy']")
+	//button[@aria-label='Track prescription status' or @data-testid='medication-action-contact-pharmacy']
+	//button[@data-testid='medication-action-track' or @data-testid='medication-action-contact-pharmacy']
+	//button[contains(@data-testid,'medication-action')]
+	//button[@aria-label='Track prescription status' or @data-testid='medication-action-contact-pharmacy' or @data-testid='medication-action-resolve-hold']
+	@FindBy(xpath = "//button[contains(@data-testid,'medication-action')]/span[1]")
 	protected List<WebElement> listOfCallToActionOnMedicationBtn;
+	
+	@FindBy(xpath = "//button[contains(@data-testid,'medication-action')]")
+	protected List<WebElement> listOfCallToActionOnMedicationButton;
+	
+	@FindBy(xpath = "//button[@aria-label='Track prescription status']")
+	protected List<WebElement> listOfCallToActionForHDDrug;
+	
+	@FindBy(xpath = "//button[@data-testid='medication-action-contact-pharmacy']")
+	protected List<WebElement> listOfCallToActionForRetailDrug;
 
 	@FindBy(xpath = "//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]//button")
 	protected List<WebElement> listOfTrackCallToAction;
+	
+	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
+	protected List<WebElement> listForResolveHoldCallToActn;
 
-	@FindBy(xpath = "//p[@class='sc-LzLus iuZmbF']")
+	@FindBy(xpath = "//p[@data-testid='pharmacy-phone-number']")
 	protected WebElement contactPharmacyNumber;
 
 	@FindBy(xpath = "//div[contains(@data-testid,'medication-status-percent')]")
@@ -440,6 +455,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//h2[@data-test-component='title' and text()='Contact Pharmacy']")
 	protected WebElement contactPharmacyPopUp;
+	
+	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]/span[1]")
+	protected List<WebElement> listOfCallToActnForActiveMedication;
 
 	public List<String> getDrugNameListValue() {
 		List<String> listOfDrug = new ArrayList<>();
@@ -776,4 +794,40 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 			return false;
 		}
 	}
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']")
+	protected List<WebElement> listOfResolveHoldBtn;
+	
+	@FindBy(xpath="//div[text()=' On Hold: Action Required']/..//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfHDMedicationHavingHold;
+	
+	@FindBy(xpath="//div[text()=' On Hold: Action Required']")
+	protected List<WebElement> listOfOnHoldMsg;
+	
+	@FindBy(xpath="//*[text()='Important']/..")
+	protected List<WebElement> listOfHoldWarningSymbol;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']//*[@aria-label='external link']")
+	protected List<WebElement> listOfExternalLinkOnResolveHldBtn;
+	
+	@FindBy(xpath="//div[contains(@data-testid,'medication-status-percent')]//*[@id='WhiteCheck_svg__a']")
+	protected List<WebElement> listOfCheckMarkOnFullHarveyBall;
+	
+	@FindBy(xpath="(//div[@class=\"sc-LzLrp iewWRX\"]//div//strong)[1]")
+	protected WebElement drugsAvailableOnMyMedication;
+	
+	@FindBy(xpath="(//div[@class=\"sc-LzLrp iewWRX\"]//div//strong)[2]")
+	protected WebElement totaldrugsAvailableOnMyMedication;
+	
+	//(////div[@class='sc-LzLrp iewWRX']//div//strong)[2]
+	
+	
+	//rgb(172, 43, 0)
+	
+	@FindBy(xpath="//div[@data-test-is-informational-hold='true']/ancestor::div[1]/..//a")
+	protected List<WebElement> listOfmedicationHavingInformationalHold;
+	
+	
+	
+	
 }

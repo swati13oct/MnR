@@ -69,7 +69,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301928
+  @CurrentMedications @F392596 @US2301928 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medication information on medicine cabinet
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -90,9 +90,9 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | MAPD     | Rx_Group_PnP_MedInfo |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran 
+  @MedicineCabinet @F392596 @US2301929 @Kiran
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -179,7 +179,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedication @F392596 @US2508786
+  @CurrentMedication @F392596 @US2508786 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Shipped
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -192,9 +192,9 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F392596 | MAPD     | Rx_Group_PnP_Shipped |
 
-  @CurrentMedication @F392596 @US2508786
+  @CurrentMedication @F392596 @US2508786 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Delivered
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -206,8 +206,8 @@ Feature: MVP - Current Medications
     Then user views a full Harvey Ball with a checkmark on that medication row
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F392596 | MAPD     | Rx_Individual_PnP_Delivered |
 
   @MedicineCabinet @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
@@ -353,9 +353,10 @@ Feature: MVP - Current Medications
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
     And user validates the external link icon in the button
+
     Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
+      | FID     | planType | memberType                  |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
@@ -368,9 +369,10 @@ Feature: MVP - Current Medications
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
     And user validates the external link icon in the button
-    Examples:
-      | FID     | planType | memberType           |
-      | F392596 | PDP     | Rx_Individual_PnP_rx_refill |
+
+    Examples: 
+      | FID     | planType | memberType                  |
+      | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify  Resolve hold (SSO)
@@ -417,7 +419,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2618672
+  @CurrentMedications @F392596 @US2618672 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -428,10 +430,10 @@ Feature: MVP - Current Medications
     And user will see a "Green" "Contact Pharmacy" button
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2618672
+  @CurrentMedications @F392596 @US2618672 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Contact Pharmacy Call To Action For Retail Medications
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -442,10 +444,10 @@ Feature: MVP - Current Medications
     Then user will view a popup with the phone number available to call
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
     Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
@@ -458,12 +460,12 @@ Feature: MVP - Current Medications
     And the button will include the external link icon
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on verify address hold
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the uhc rx portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -474,12 +476,16 @@ Feature: MVP - Current Medications
     And the button will include the external link icon
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+#Given login with following details logins in the uhc rx portal
+
+  @CurrentMedications @F392596 @US2508869 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
     When one of user active medications has a price adjustment hold on it
@@ -488,32 +494,36 @@ Feature: MVP - Current Medications
     And the button will include the external link icon
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+  @CurrentMedications @F392596 @US2508869 @Naresh
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
-    When one of user active medications has a Call hold on it
+    And one of user active medications has a Call hold on it
     Then user will see a "Red" "On Hold" indicator
     And user will see a "Green" "Resolve hold" button on that medication row
     And the button will include the external link icon
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Naresh
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the uhc rx portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user have active medications
-    When one of user active medications has an informational hold on it
+    When one of user active medications has an informational hold on it
     Then user will NOT see a "Red" "On Hold" indicator
     And user will NOT see a "Green" "Resolve hold" button on that medication row
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
