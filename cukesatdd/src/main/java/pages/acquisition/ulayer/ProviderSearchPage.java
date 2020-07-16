@@ -353,7 +353,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
-		selectProviderBtn.click();
+		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
@@ -361,17 +361,15 @@ public class ProviderSearchPage extends UhcDriver {
 			saveBtn2.click();
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		validateNew(providerNameText);
+		String providerSaved = providerNameText.getText().trim();
+		System.out.println("Hospital Name is : " + providerSaved);
+		MRConstants.PROV_NAME=providerSaved;
+		
+		validateNew(finishReturnBtn, 10);
 
-		jsClickNew(Viewsavebtn);
-		if(validate(EditSavedButton)){
-			ViewSavedProvidersLink.click();
-		}
-
-		validateNew(Checkcoverage);
-
-		Checkcoverage.click();
-		waitForCountDecrement(2);
+		finishReturnBtn.click();
+	
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 		return new PlanDetailsPage(driver);
