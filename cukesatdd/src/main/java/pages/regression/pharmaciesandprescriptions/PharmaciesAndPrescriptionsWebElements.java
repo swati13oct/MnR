@@ -466,6 +466,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]/span[1]")
 	protected List<WebElement> listOfCallToActnForActiveMedication;
+	
+	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]")
+	protected List<WebElement> listOfCTAWithoutSpanTag;
 
 	public List<String> getDrugNameListValue() {
 		List<String> listOfDrug = new ArrayList<>();

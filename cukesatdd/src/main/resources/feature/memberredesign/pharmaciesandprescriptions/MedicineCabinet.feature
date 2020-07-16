@@ -69,6 +69,8 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
+#And user validates information on remaining refills
+
   @CurrentMedications @F392596 @US2301928 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medication information on medicine cabinet
     Given login with following details logins in the member portal and validate elements
@@ -85,7 +87,6 @@ Feature: MVP - Current Medications
     And user validates the day supply of the medication
     And user validates the order status if applicable
     And user validates any relevant calls to action to manage the medication
-    And user validates information on remaining refills
     And user validates a button "Contact Pharmacy" to contact my retail pharmacy
 
     Examples: 
@@ -208,85 +209,6 @@ Feature: MVP - Current Medications
     Examples: 
       | FID     | planType | memberType             |
       | F392596 | MAPD     | Rx_Group_PnP_Delivered |
-
-  @MedicineCabinet @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on payment method hold
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views active medications
-    When user views one of his active medications has a payment method hold on it
-    Then user validates a red On Hold indicator
-    Then user validates a green Resolve hold button on that medication's row
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
-
-  @MedicineCabinet @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on verify address hold
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views active medications
-    When user views one of his active medications has a address hold on it
-    Then user validates a red On Hold indicator
-    Then user validates a green Resolve hold button on that medication's row
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
-
-  @MedicineCabinet @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on Price Adjustment hold
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views active medications
-    When user views one of his active medications has a price adjustment hold on it
-    Then user validates a red On Hold indicator
-    Then user validates a green Resolve hold button on that medication's row
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
-
-  @MedicineCabinet @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on CALL hold
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views active medications
-    When user views one of his active medications has a Call hold on it
-    Then user validates a red On Hold indicator
-    Then user validates a green Resolve hold button on that medication's row
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
-
-  @MedicineCabinet @F392596 @US2508869
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views active medications
-    When user views one of his active medications has an informational hold on it
-    Then user validates a red On Hold indicator
-    Then user validates a green Resolve hold button on that medication's row
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
   @CurrentMedications @F392596 @US2508869
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill

@@ -1070,7 +1070,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<String> listOfCallToActionForHDMedicine = Arrays.asList(listOfCallToActionForHDMed);
 		if (listOfIndex.size() > 0) {
 			for (Integer val : listOfIndex) {
-				if (!listOfCallToActionForHDMedicine.contains(listOfCallToActionOnMedicationBtn.get(val).getText())) {
+				if (!listOfCallToActionForHDMedicine.contains(listOfCallToActnForActiveMedication.get(val).getText())) {
 					return false;
 				}
 			}
@@ -1085,9 +1085,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (listOfIndex.size() > 0) {
 			int count = 0;
 			for (Integer val : listOfIndex) {
-				if (listOfCallToActionOnMedicationButton.get(val).getText().equalsIgnoreCase(expectedButtonValue)
-						&& listOfCallToActionOnMedicationButton.get(val).getTagName().equals("button")
-						&& listOfCallToActionOnMedicationButton.get(val).getCssValue("background-color")
+				if (listOfCTAWithoutSpanTag.get(val).getText().equalsIgnoreCase(expectedButtonValue)
+						&& listOfCTAWithoutSpanTag.get(val).getTagName().equals("button")
+						&& listOfCTAWithoutSpanTag.get(val).getCssValue("background-color")
 								.equals("rgba(13, 136, 11, 1)")) {
 					count = count + 1;
 				}
@@ -1103,7 +1103,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Random rand = new Random();
 		int rand_int = rand.nextInt(listOfIndex.size());
 		System.out.println(listOfIndex.get(rand_int));
-		listOfCallToActionOnMedicationBtn.get(listOfIndex.get(rand_int)).click();
+		listOfCTAWithoutSpanTag.get(listOfIndex.get(rand_int)).click();
 	}
 
 	public boolean validateContactPharmacyPopUpHavingNumber() {
@@ -1146,9 +1146,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public List<Integer> getListOfIndexForTrackCTA() {
 		List<Integer> listOfIndex = new ArrayList<>();
-		for (int i = 0; i < listOfCallToActionOnMedicationBtn.size(); i++) {
-			System.out.println(listOfCallToActionOnMedicationBtn.get(i).getText());
-			if (listOfCallToActionOnMedicationBtn.get(i).getText().equalsIgnoreCase("Track Status")) {
+		for (int i = 0; i < listOfCallToActnForActiveMedication.size(); i++) {
+			System.out.println(listOfCallToActnForActiveMedication.get(i).getText());
+			if (listOfCallToActnForActiveMedication.get(i).getText().equalsIgnoreCase("Track Status")) {
 				listOfIndex.add(i);
 			}
 		}
