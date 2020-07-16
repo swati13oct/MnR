@@ -1122,7 +1122,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public boolean validateOrderStatusForAssociatedCTA() {
-		List<Integer> listOfIndex = getListOfIndexForTrackCTA();
+		List<Integer> listOfIndex = getListOfIndexForTrackAndViewOrderCTA();
 		try {
 			if (listOfIndex.size() > 0) {
 				if (listOfIndex.size() == listOfOrderStatus.size()) {
@@ -1149,6 +1149,19 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		for (int i = 0; i < listOfCallToActnForActiveMedication.size(); i++) {
 			System.out.println(listOfCallToActnForActiveMedication.get(i).getText());
 			if (listOfCallToActnForActiveMedication.get(i).getText().equalsIgnoreCase("Track Status")) {
+				listOfIndex.add(i);
+			}
+		}
+		System.out.println("List of Index For Track Status " + listOfIndex);
+		return listOfIndex;
+	}
+	
+	public List<Integer> getListOfIndexForTrackAndViewOrderCTA() {
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfCallToActnForActiveMedication.size(); i++) {
+			String status=listOfCallToActnForActiveMedication.get(i).getText();
+			System.out.println(status);
+			if (status.equalsIgnoreCase("Track Status") || status.equalsIgnoreCase("View Order")) {
 				listOfIndex.add(i);
 			}
 		}
