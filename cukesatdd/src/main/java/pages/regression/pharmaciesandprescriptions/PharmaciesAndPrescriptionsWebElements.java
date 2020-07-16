@@ -228,7 +228,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "(//h2[contains(text(),'Find')])[1]")
 	protected WebElement findPrescriptionTitle;
 
-	@FindBy(xpath = "//span[contains(text(),'LEARN MORE')]")
+	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
 	protected List<WebElement> sixMedications;
 
 	@FindBy(xpath = "//*[@aria-label='external link']")
@@ -309,7 +309,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
 	protected WebElement ViewAllMedications;
 
-	@FindBy(xpath = "//span[@data-test-total-medications='12']")
+	@FindBy(xpath = "//span[@data-test-total-medications='9']")
 	protected WebElement totalMedicationsInCurrenMedications;
 
 	//

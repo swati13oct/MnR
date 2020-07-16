@@ -262,7 +262,7 @@ Feature: MVP - Current Medications
 
     Examples: 
       | FID     | planType | memberType                     |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx-delivered |
+      | F392596 | MAPD     | Rx_Group_PnP_Delivered |
 
   @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)

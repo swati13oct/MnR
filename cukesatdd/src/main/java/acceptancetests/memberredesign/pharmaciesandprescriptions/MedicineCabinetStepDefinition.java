@@ -375,14 +375,14 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user views active medications$")
-	public void user_views_active_medications() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateSixActivePrescriptions();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-	}
+//	@Then("^user views active medications$")
+//	public void user_views_active_medications() throws Throwable {
+//		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+//				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+//		pnpPg.validateSixActivePrescriptions();
+//		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+//
+//	}
 
 	@When("^user views one of his active medications has a payment method hold on it$")
 	public void user_views_one_of_his_active_medications_has_a_payment_method_hold_on_it() throws Throwable {
