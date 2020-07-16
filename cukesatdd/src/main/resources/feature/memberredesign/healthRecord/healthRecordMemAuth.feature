@@ -54,7 +54,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     @memAuth_no_ihr_d
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_GROUP_IHR | false      |
+	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_TERM_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @memAuth_ihr_a

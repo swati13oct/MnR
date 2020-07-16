@@ -270,7 +270,6 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @toDo : To login through hsid via entering security questions
 	 */
 	public Object doLoginWith(String username, String password) {
-System.out.println("TEST 1");
 		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
 			System.out.println(driver.getCurrentUrl());
 			sendkeys(oldUsername, username);
@@ -284,7 +283,6 @@ System.out.println("TEST 1");
 			sendkeys(passwordField, password);
 			hsidSignInButton.click();
 		}
-		System.out.println("TEST 2");
 
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
@@ -292,7 +290,6 @@ System.out.println("TEST 1");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page or banner page instead
 			emailAddressRequiredWorkaround(username);
 		}
-		System.out.println("TEST 3");
 
 		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
@@ -342,14 +339,12 @@ System.out.println("TEST 1");
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		System.out.println("TEST 4");
 
 		if (MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
-		System.out.println("TEST 5");
 
 		if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
