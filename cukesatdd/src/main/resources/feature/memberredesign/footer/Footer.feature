@@ -12,9 +12,9 @@ Feature: 1.05 Member Footer validation
       | Validate Footer | yes      |
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
-    Then the user navigates to payment history page
-    Then the user navigates to the footer section
-    And the user validates the footer section in payments page
+    #Then the user navigates to payment history page
+    #Then the user navigates to the footer section
+    #And the user validates the footer section in payments page
     #Then the user navigates to claims page
     #And the user validates the footer section in claims page
     Then the user navigates to profile and pref page
@@ -48,9 +48,9 @@ Feature: 1.05 Member Footer validation
       | Validate Footer | yes      |
     Then the user navigates to EOB page
     And the user validates the footer section in EOB page
-    Then the user navigates to payment history page
-    Then the user navigates to the footer section
-    And the user validates the footer section in payments page
+    #Then the user navigates to payment history page
+    #Then the user navigates to the footer section
+    #And the user validates the footer section in payments page
     #Then the user navigates to claims page
     #And the user validates the footer section in claims page
     Then the user navigates to profile and pref page for Ship member
@@ -80,9 +80,9 @@ Feature: 1.05 Member Footer validation
       | Member Type | <memberType> |
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
-    Then the user navigates to payment history page
-    Then the user navigates to the footer section
-    Then user validates Need Help section content for payment page
+    #Then the user navigates to payment history page
+    #Then the user navigates to the footer section
+    #Then user validates Need Help section content for payment page
     #Then the user navigates to claims page
     #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
@@ -110,9 +110,9 @@ Feature: 1.05 Member Footer validation
       | Validate Footer | yes      |
     Then the user navigates to EOB page
     Then user validates Need Help section content for EOB page
-    Then the user navigates to payment history page
-    Then the user navigates to the footer section
-    Then user validates Need Help section content for payment page
+    #Then the user navigates to payment history page
+    #Then the user navigates to the footer section
+    #Then user validates Need Help section content for payment page
     #Then the user navigates to claims page
     #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
