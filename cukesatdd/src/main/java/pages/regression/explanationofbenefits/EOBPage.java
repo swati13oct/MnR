@@ -219,7 +219,8 @@ public class EOBPage extends EOBBase{
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
 
-			String expUrl="How_to_read_Medical_EOB.pdf";
+			//tbd String expUrl="How_to_read_Medical_EOB.pdf";
+			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 			//TODO - validate PDF content when code deploy onto stage
