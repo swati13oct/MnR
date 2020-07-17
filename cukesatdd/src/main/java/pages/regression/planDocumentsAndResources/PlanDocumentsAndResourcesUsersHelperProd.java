@@ -240,6 +240,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -455,6 +457,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				}
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -1354,6 +1358,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -1547,6 +1553,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -2143,6 +2151,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -2381,6 +2391,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -2959,6 +2971,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -3360,6 +3374,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -3739,6 +3755,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -3922,6 +3940,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Prescription Drug Reimbursement Form");
+				if (MRScenario.environment.equalsIgnoreCase("offline")) 
+					targetTestDocList.add("Medicare Part D Claim Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
