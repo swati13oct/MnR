@@ -198,7 +198,8 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		//tbd if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		if (planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreLink));
 		} else {

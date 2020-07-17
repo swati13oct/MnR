@@ -52,7 +52,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_prepareForNextYear01c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 07    | F437767 | ashah120  | Mnrqa002  | phleauxdailles43  | SHIP	 | COMBO_SHIP_MA_PFNY  |
+	    | 07    | F437767 | ashah120  | Mnrqa002  | phleauxdailles43  | SHIP_HIP | COMBO_SHIP_MA_PFNY  |
 	    | 08    | F437767 | ashah120  | Mnrqa002  | phleauxdailles43  | MA	     | COMBO_SHIP_MA_PFNY  |
 			
 	@prod_prepareForNextYear01d @noTab
@@ -94,14 +94,14 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+	Then the user validates Prepare For Next Year page content for individual
 
-@abc	@prod_prepareForNextYear02a
+	@prod_prepareForNextYear02a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType |
 	    | 11    | F437767 | ashah120  | Mnrqa002  | nawal1215                 | PDP	     | IND_PFNY   |
-#	    | 12    | F437767 | ashah120  | Mnrqa002  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   |
-#	    | 13    | F437767 | ashah120  | Mnrqa002  | haradaty32                | MA	     | IND_PFNY   |
+	    | 12    | F437767 | ashah120  | Mnrqa002  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   |
+	    | 13    | F437767 | ashah120  | Mnrqa002  | haradaty32                | MA	     | IND_PFNY   |
 
 	@prod_prepareForNextYear02b
     Examples: 
