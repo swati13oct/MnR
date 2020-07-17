@@ -364,8 +364,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
 				else if(benefitValueUI.endsWith("2"))
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-				else if(benefitValueUI.contains("out-of-networkbenefits"))
-					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+				else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
+					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 			}
 			//removing footnote values from the end of the key values if any
 			

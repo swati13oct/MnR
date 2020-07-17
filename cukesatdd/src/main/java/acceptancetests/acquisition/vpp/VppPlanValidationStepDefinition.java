@@ -140,7 +140,9 @@ public class VppPlanValidationStepDefinition {
 		                		 System.out.println(e);
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
-							 
+							 if(rowIndex==0) {
+								 newCell.setCellValue(cell.getStringCellValue()); 
+							 }
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 									 
@@ -414,7 +416,9 @@ public class VppPlanValidationStepDefinition {
 		                		 System.out.println(e);
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
-			                 
+			                 if(rowIndex==0) {
+								 newCell.setCellValue(cell.getStringCellValue()); 
+			                 }
 							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
