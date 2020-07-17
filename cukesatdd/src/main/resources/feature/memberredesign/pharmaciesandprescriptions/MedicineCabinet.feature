@@ -1,7 +1,7 @@
 Feature: MVP - Current Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to Current Medications on P&P Page
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views medicine cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -15,7 +15,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views all medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -28,7 +28,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views all active medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -42,7 +42,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -56,7 +56,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2301927
+  @CurrentMedications @F392596 @US2301927 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication image disclaimer
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -150,7 +150,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify request received
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -165,7 +165,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType                            |
       | F392596 | MAPD     | Rx_Individual_PnP_rx_request_received |
 
-  @CurrentMedications @F392596 @US2508786
+  @CurrentMedications @F392596 @US2508786 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -210,7 +210,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType             |
       | F392596 | MAPD     | Rx_Group_PnP_Delivered |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -224,7 +224,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType                  |
       | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -238,7 +238,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType                   |
       | F392596 | PDP      | Rx_Individual_PnP_rx_renewal |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -251,7 +251,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @CurrentMedications @F392596 @US2508869
+  @CurrentMedications @F392596 @US2508869 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
