@@ -138,7 +138,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
 			return directorySection;
-		else if(planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
+		else if(planType.equalsIgnoreCase("ship")||planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
 			return directorySectionMedSupp;
 		else
 			return null;
