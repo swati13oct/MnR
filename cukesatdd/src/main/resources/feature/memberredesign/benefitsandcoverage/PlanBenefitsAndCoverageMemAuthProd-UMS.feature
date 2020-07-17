@@ -210,8 +210,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validate vas tiles on vas page
 
     Examples: 
-      |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable |numberOfBenefitCards|Identifier| count| rider   |
-      |15094|ashah120|Mnrqa002|Gcdurant3| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
+      |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   |
+      |15094|ashah120|Mnrqa002|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
   @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Medica_Nonlis
