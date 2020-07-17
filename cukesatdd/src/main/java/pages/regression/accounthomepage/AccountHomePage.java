@@ -491,7 +491,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
 	private WebElement pharamciesAndPrescriptionsLink;
 	
-	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
+	@FindBy(xpath="//div[2]/h2[contains(text(),'Pharmacy Locator')]")
 	private WebElement findAPharmacyLink;
 	@FindBy(xpath = "//span[contains(text(),'View Your Claims')]")
 	private WebElement claimsDashboardLink1;
