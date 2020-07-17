@@ -72,12 +72,12 @@ Feature: 1.08 Member Header/Navigation validation
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
 	      | Member Type | <memberType> |
-	    #Then I should not be able to see the Premium Payments tab Header
+	    Then I should not be able to see the Premium Payments tab Header
 	 
 	 	@headerRegression
 	    Examples: 
 	      | TID       | planType    | memberType                | 
-	      | 15253     | MAPD        | IndividualGroup_header    | 
+	      | 15253     | MAPD        | IndividualGroup_header    |
 
         #note: in this case at the time of test, this PDP SHIP combo user has 100 percent subsidy on PDP
         #note: user will see payment tab because of ship plan 

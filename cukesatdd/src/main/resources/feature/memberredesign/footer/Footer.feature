@@ -94,7 +94,7 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to the Health and Wellness page
     Then user validates Need Help section content for health and wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples: 
      | TID   | planType | memberType                 |
