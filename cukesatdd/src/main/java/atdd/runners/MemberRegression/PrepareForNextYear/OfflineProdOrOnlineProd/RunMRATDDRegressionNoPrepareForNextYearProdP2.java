@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.PrepareForNextYear;
+package atdd.runners.MemberRegression.PrepareForNextYear.OfflineProdOrOnlineProd;
 
 
 import org.junit.runner.RunWith;
