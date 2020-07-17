@@ -94,6 +94,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateHeaderSectionContent(String planType) {
+		checkModelPopup(driver,2);
+		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -232,6 +234,7 @@ public class EOBPage extends EOBBase{
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -455,6 +458,7 @@ public class EOBPage extends EOBBase{
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
+		sleepBySec(1);
 		sendkeys(fromTxtField,fromDate);
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -645,7 +649,7 @@ public class EOBPage extends EOBBase{
 	 * this method is to validate the site leaving popup on the eob page
 	 */
 	public void validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 
@@ -1114,8 +1118,10 @@ public class EOBPage extends EOBBase{
 		int max=eobCount;
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
-			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
-				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+		}
+		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) { 
+			System.out.println("TEST - limit the amount of EOB detail validation to speed up the run on offline/online-prod");
+			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
 		}
 		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
@@ -1217,11 +1223,21 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateComboTab(String memberType) {
-		if (memberType.contains("MULTI_SHIP")) {
+		if (memberType.contains("MULTI_SHIP") && !memberType.contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
 			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
 			//should not see tabs
+		} else if (memberType.contains("COMBO_MULTI_SHIP")) {
+			//note: one of the tab should be for 'SUPPLEMENTAL INSURANCE PLANS' 
+			boolean found=false;
+			for (WebElement e: comboTabList) {
+				if (e.getText().equals("SUPPLEMENTAL INSURANCE PLANS")) {
+					found=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have a tab with text 'SUPPLEMENTAL INSURANCE PLANS'",found);
 		} else 
 			if (memberType.contains("COMBO")) {
 				if (memberType.contains("SSP")) {

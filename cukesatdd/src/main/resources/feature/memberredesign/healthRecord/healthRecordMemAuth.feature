@@ -43,7 +43,8 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
-	    | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
+	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
+	    | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR | false      |
 
     @memAuth_no_ihr_c
     Examples: 
@@ -54,7 +55,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     @memAuth_no_ihr_d
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_GROUP_IHR | false      |
+	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_TERM_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @memAuth_ihr_a
@@ -84,7 +85,8 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	    | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
+	 #  | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
+	    | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | MA       | COMBO_SHIP_MA_IHR  | true       |
 
     @memAuth_ihr_f
     Examples: 

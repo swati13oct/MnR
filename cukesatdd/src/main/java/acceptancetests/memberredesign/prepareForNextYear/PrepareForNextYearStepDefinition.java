@@ -381,21 +381,27 @@ public class PrepareForNextYearStepDefinition {
 
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
+			System.out.println("TEST - 1");
 			testNote.add("\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
 			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
+			System.out.println("TEST - 2");
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
 			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
+			System.out.println("TEST - 3");
 			testNote.add("\t  Validation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
 			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
+			System.out.println("TEST - 4");
 			testNote.add("\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
 			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
+			System.out.println("TEST - 5");
 			testNote.add("\tValidation for milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
 			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
+			System.out.println("TEST - 6");
 			testNote.add("\tValidation for milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
 			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap);
 		} else {
