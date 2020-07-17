@@ -1092,6 +1092,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='tabs-desktop']//a[contains(.,'Senior Supplement Plan')]")
 	protected WebElement SSUPTab;
+
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

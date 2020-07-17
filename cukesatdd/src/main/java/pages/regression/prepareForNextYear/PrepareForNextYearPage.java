@@ -151,6 +151,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 		//---------------------------------------------
 		if (memberType.contains("IND")) {
+			System.out.println("Proceed to validate section content for individual user...");
+
 			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap));
 			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap));
 			//TODO note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap));
@@ -189,7 +191,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		List<String> s1=pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 		sectionNote1.addAll(s1);
 
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -205,7 +207,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		List<String> s1=pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 		sectionNote1.addAll(s1);
 
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -221,7 +223,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		List<String> s1=pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 		sectionNote1.addAll(s1);
 
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -237,7 +239,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		List<String> s1=pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 		sectionNote1.addAll(s1);
 
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}
@@ -253,7 +255,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		List<String> s1=pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 		sectionNote1.addAll(s1);
 
-		if (MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap);
 			sectionNote1.addAll(s2);
 		}

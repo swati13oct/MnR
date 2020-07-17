@@ -458,6 +458,7 @@ public class EOBPage extends EOBBase{
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
+		sleepBySec(1);
 		sendkeys(fromTxtField,fromDate);
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -648,7 +649,7 @@ public class EOBPage extends EOBBase{
 	 * this method is to validate the site leaving popup on the eob page
 	 */
 	public void validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 

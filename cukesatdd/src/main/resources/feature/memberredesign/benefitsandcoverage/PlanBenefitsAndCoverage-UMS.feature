@@ -85,7 +85,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | SHIP_HIP    | ComboFEDShip_BnC |
+      | 15091 | SHIP_HIP | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
   #Peehip members are discontinued from PROD. None of the available members are Active .Terminated members dont have the BNC page display.
@@ -160,9 +160,11 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
 
+    ### note: number of benefits tile may change if swap user
+
     Examples: 
       | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards | Identifier           | count | rider   |
-      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                   | EffectiveShipMedSupp |     3 | NoRider |
+      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  | Plan Benefits Table |  6                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember
