@@ -34,7 +34,7 @@ Feature: 1.15 Member pre-effective functionality
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate |
       | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | weberjo01 | 09/01/2020    |
-  #    | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | BUGME99   | 08/01/2020    |
+      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | BUGME99   | 08/01/2020    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
