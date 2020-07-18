@@ -445,7 +445,7 @@ public class MemberAuthPage extends UhcDriver {
 	} */
 	
 	public void splashPgWorkaroundForProd() {
-		Assert.assertTrue("PROBLEM - this workaround is for offline-prod or online-prod only",
+		Assert.assertTrue("PROBLEM - this workaround is for offline-prod or online-prod only.  current env='"+MRScenario.environment+"'",
 				MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"));
 
 		String currentUrl=driver.getCurrentUrl();
