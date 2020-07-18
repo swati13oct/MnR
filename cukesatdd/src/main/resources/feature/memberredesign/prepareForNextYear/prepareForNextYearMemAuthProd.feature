@@ -22,7 +22,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab StartDate | 09/01/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -45,21 +45,21 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     @prod_prepareForNextYear01b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-#	    | 04    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MA	     | IND_PREEFF_PFNY     |
-#	    | 05    | F437767 | ashah120  | Mnrqa002  |  testUserName     | MA	     | IND_TERM_PFNY       |
-	    | 06    | F437767 | ashah120  | Mnrqa002  |  Pramila1946      | SHIP	 | IND_PFNY            |
+#	    | 04    | F437767 | ashah120  | Mnrqa002  | testUserName      | MA	     | IND_PREEFF_PFNY     |
+#	    | 05    | F437767 | ashah120  | Mnrqa002  | testUserName      | MA	     | IND_TERM_PFNY       |
+	    | 06    | F437767 | ashah120  | Mnrqa002  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
 	@prod_prepareForNextYear01c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 07    | F437767 | ashah120  | Mnrqa002  |  phleauxdailles43 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | ashah120  | Mnrqa002  |  phleauxdailles43 | MA	     | COMBO_SHIP_MA_PFNY  |
+	    | 07    | F437767 | ashah120  | Mnrqa002  | phleauxdailles43  | SHIP_HIP | COMBO_SHIP_MA_PFNY  |
+	    | 08    | F437767 | ashah120  | Mnrqa002  | phleauxdailles43  | MA	     | COMBO_SHIP_MA_PFNY  |
 			
 	@prod_prepareForNextYear01d @noTab
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 09    | F437767 | ashah120  | Mnrqa002  |  PAULAROTH2       | PDP	     | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | ashah120  | Mnrqa002  |  PAULAROTH2       | SHIP	 | COMBO_PDP_SHIP_PFNY |
+	    | 09    | F437767 | ashah120  | Mnrqa002  | PAULAROTH2        | PDP	     | COMBO_PDP_SHIP_PFNY |
+	    | 10    | F437767 | ashah120  | Mnrqa002  | PAULAROTH2        | SHIP	 | COMBO_PDP_SHIP_PFNY |
 			
 
   #-------------------------------------------------
@@ -83,7 +83,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab StartDate | 09/01/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -94,7 +94,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+	Then the user validates Prepare For Next Year page content for individual
 
 	@prod_prepareForNextYear02a
     Examples: 
