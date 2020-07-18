@@ -92,7 +92,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
-    Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
+    #Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content for individual
 
