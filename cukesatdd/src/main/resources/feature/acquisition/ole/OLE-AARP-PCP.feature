@@ -56,8 +56,8 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd ESRD on Medicare Info Page
-      | MedicaidNumber | <medicaidnumber> |
+    #Then the user validates requierd ESRD on Medicare Info Page
+      #| MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
