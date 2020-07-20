@@ -123,7 +123,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	public WebElement addressCheckBox;
 	
-	@FindBy(xpath="//span[text()='Update This Provider']")
+	@FindBy(xpath="//span[text()='Edit Saved']")
 	private WebElement EditSavedButton;
 	
 	@FindBy(xpath="//span[text()='View Saved Providers']")
