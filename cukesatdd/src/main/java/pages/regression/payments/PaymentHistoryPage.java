@@ -214,7 +214,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeOneTimepaymentButton;
 
-	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	//@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
 	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
