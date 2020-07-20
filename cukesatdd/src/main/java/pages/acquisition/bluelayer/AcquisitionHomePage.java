@@ -1950,7 +1950,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
 							&& rname.toUpperCase().contains("BLAYER")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
