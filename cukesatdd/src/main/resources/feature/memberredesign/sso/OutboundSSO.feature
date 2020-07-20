@@ -66,5 +66,5 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TID   | planType                | memberType | copayCategory | Test Scenario   | optumrxssolink           |
       | TC004 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        |
       | TC005 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton |
-      | TC006 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton |
+    # | TC006 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton |
       | TC007 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    |
