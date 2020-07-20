@@ -272,19 +272,26 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(saveBtn2);
 		saveBtn2.click();
 	}
-	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-	jsClickNew(Viewsavebtn);
-	if(validate(EditSavedButton)){
+	if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		ViewsaveOldbtn.click();
+	else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+		Viewsavebtn.click();
+	if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 		ViewSavedProvidersLink.click();
 	}
-	validateNew(providerNameText);
-	String providerSaved = providerNameText.getText().trim();
-	System.out.println("Hospital Name is : " + providerSaved);
-	MRConstants.PROV_NAME=providerSaved;
-	Checkcoverage.click();
-	/*validateNew(Checkcoverage);
-	jsClickNew(Checkcoverage);*/
+	else
+		System.out.println("New Rally page not displayed");
+	 
+	}
+	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		System.out.println("OLD Rally page displayed");
+		Checkcoverage.click();
+	}	
+	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		System.out.println("NEW Rally page displayed");
+		FinishButton.click();
+	}else
+		System.out.println("Issue with Xpath");
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -398,8 +405,15 @@ public void selectsProviderFromGlobaHeader() {
 			saveBtn2.click();
 		}
 		
-		CommonUtility.waitForPageLoadNew(driver, ViewsaveProviderbtn, 30);
-		ViewsaveProviderbtn.click();
+		validateNew(providerNameText);
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			Viewsavebtn.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
+			ViewSavedProvidersLink.click();
+		}
+		}
 		
 		if(validate(EditSavedButton)){
 			ViewSavedProvidersLink.click();
@@ -441,9 +455,26 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		System.out.println("Hospital Name is : " + providerSaved);
 		MRConstants.PROV_NAME=providerSaved;
 		
-		validateNew(finishReturnBtn, 10);
-
-		finishReturnBtn.click();
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			Viewsavebtn.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
+			ViewSavedProvidersLink.click();
+		}
+		else
+			System.out.println("New Rally page not displayed");
+		 
+		}
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+			System.out.println("OLD Rally page displayed");
+			Checkcoverage.click();
+		}	
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			System.out.println("NEW Rally page displayed");
+			FinishButton.click();
+		}else
+			System.out.println("Issue with Xpath");
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 		return new PlanDetailsPage(driver);
@@ -470,15 +501,26 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 			saveBtn2.click();
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-		jsClickNew(Viewsavebtn);
-		if(validate(EditSavedButton)){
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			Viewsavebtn.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 			ViewSavedProvidersLink.click();
 		}
-		validateNew(providerNameText);
-		validateNew(Checkcoverage);
-		jsClickNew(Checkcoverage);
+		else
+			System.out.println("New Rally page not displayed");
+		 
+		}
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+			System.out.println("OLD Rally page displayed");
+			Checkcoverage.click();
+		}	
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			System.out.println("NEW Rally page displayed");
+			FinishButton.click();
+		}else
+			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
