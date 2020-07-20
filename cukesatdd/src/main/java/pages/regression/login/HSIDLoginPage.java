@@ -37,21 +37,27 @@ public class HSIDLoginPage extends UhcDriver {
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
 
-	@FindBy(xpath = "//div[@title='Satisfactory']")
+	@FindBy(xpath = "//*[@title='Satisfactory']")
 	private WebElement satisfactorySmiley;
 
 	@FindBy(xpath = "//textarea[@id='textarea']")
 	private WebElement textBoxInIperceptionSmileySurvey;
 
-	@FindBy(xpath = "//button[@class='buttonNav btnNext one-twelfth enabled']")
+	@FindBy(xpath = "//button[@class='buttonNav btnNext one-twelfth enabled' or @class='buttonNav btnNext enabled']")
 	private WebElement buttonInIperceptionSmileySurvey;
 
-	@FindBy(xpath = "//span[contains(text(),'Other')]")
+	@FindBy(xpath = "//label[contains(text(),'Other')]")
 	private WebElement optionInIperceptionSmileySurvey;
 
-	@FindBy(xpath = "//span[contains(text(),'10')]")
+	@FindBy(xpath = "//button[@class='buttonNav btnNext buttonExpoRadio1 enabled']")
+	private WebElement buttonToContinueAfterOptionSelection;
+	
+	@FindBy(xpath = "//label[contains(text(),'10')]")
 	private WebElement rating10InIperceptionSmileySurvey;
 
+	@FindBy(xpath = "//button[@class='buttonNav btnNext enabled']")
+	private WebElement buttonToContinueAfterRatingSelection;
+	
 	@FindBy(xpath = "//input[@id='Finish']")
 	private WebElement doneButtonInIperceptionSmileySurvey;
 
@@ -515,8 +521,7 @@ public class HSIDLoginPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("Now switching to frame with id - expoFrm");
-		driver.switchTo().frame("expoFrm");
+		
 		textBoxInIperceptionSmileySurvey
 				.sendKeys("Automation Test from portals for smiley survey on signin page");
 		try {
@@ -540,6 +545,7 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("now will select options");
 
 		optionInIperceptionSmileySurvey.click();
+		buttonToContinueAfterOptionSelection.click();
 		System.out.println("Waiting for 2 seconds now");
 		try {
 			Thread.sleep(2000);
@@ -549,6 +555,7 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 
 		rating10InIperceptionSmileySurvey.click();
+		buttonToContinueAfterRatingSelection.click();
 		System.out.println("Waiting for 2 seconds now");
 		try {
 			Thread.sleep(2000);

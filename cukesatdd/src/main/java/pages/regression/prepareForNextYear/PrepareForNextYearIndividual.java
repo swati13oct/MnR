@@ -39,6 +39,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewPlanChangesSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Plan Changes section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Review plan changes";
@@ -213,6 +214,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewPlanMaterialsSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Plan Materials section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Review Plan Materials";
@@ -271,6 +273,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourBenefitsPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Materials - Plan Benefits section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Review your plan benefits and costs for next year";
@@ -411,6 +414,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Review your Prescription drug coverage for next year";
@@ -551,6 +555,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewProviderInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Plan Materials - Provider section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Review provider information for next year";
@@ -578,14 +583,14 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			String expUrl="member.mymedicareaccount.com|member.uhc.com|connect.werally.com";
+			//tbd String expUrl="member.mymedicareaccount.com|member.uhc.com|connect.werally.com";
+			String expUrl="https://connect.int.werally.in/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 			WebElement expElement=providerSearchHeaderTxt;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
+			
 			targetItem=section+subSection+" - arrow after Search For Providers link";
 			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-
 
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
@@ -814,6 +819,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Review Plan Materials - Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Review pharmacy information for next year";
