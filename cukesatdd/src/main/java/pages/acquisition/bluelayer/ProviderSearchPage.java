@@ -404,8 +404,6 @@ public void selectsProviderFromGlobaHeader() {
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-		
-		validateNew(providerNameText);
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
 		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
@@ -449,11 +447,6 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 			selectLocationOption.click();
 			saveBtn2.click();
 		}
-
-		validateNew(providerNameText);
-		String providerSaved = providerNameText.getText().trim();
-		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
 		
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();

@@ -353,7 +353,7 @@ public class ProviderSearchPage extends UhcDriver {
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-		validateNew(providerNameText);
+	
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
 		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
