@@ -247,7 +247,7 @@ public class MRScenario {
 			} else if ((environment.contains("team-a")
 					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) ||  (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-uhc-rx")))))) {
+							|| (environment.equalsIgnoreCase("team-c")) ||  (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t"))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
