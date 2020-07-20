@@ -147,9 +147,6 @@ public class bswiftPage extends UhcDriver {
 	   public void clickSubmit() throws InterruptedException {
 		   submitButton.click();
 		    Thread.sleep(5000);
-		    
-		    MemberAuthPage memberauth1 = new MemberAuthPage(driver);
-		    memberauth1.emailAddressRequiredWorkaround();
 		    new MemberAuthPage(driver).emailAddressRequiredWorkaround();	   
 		   	CommonUtility.checkPageIsReadyNew(driver);
 			new MemberAuthPage(driver).goGreenSplashPageWorkaround();
