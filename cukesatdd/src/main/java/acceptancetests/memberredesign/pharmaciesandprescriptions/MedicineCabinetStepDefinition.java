@@ -490,13 +490,21 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user views the OptumRx landing page in a new browser tab$")
-	public void user_views_the_OptumRx_landing_page_in_a_new_browser_tab() throws Throwable {
+	@Then("^user views the OptumRx \"([^\"]*)\" page in a new browser tab$")
+	public void user_views_the_OptumRx_My_Prescriptions_page_in_a_new_browser_tab(String landingPage) throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOptumRxLandingPage();
+		pnpPg.validateOptumRxLandingPage(landingPage);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	/*@Then("^user views the OptumRx Order Status page in a new browser tab$")
+	public void user_views_the_OptumRx_Order_Status_page_in_a_new_browser_tab() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOptumRxLandingPage("Order Status");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}*/
 
 	@When("^user clicks the Renew Medication call to action button$")
 	public void user_clicks_the_Renew_Medication_call_to_action_button() throws Throwable {
@@ -510,7 +518,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_home_delivery_medication_on_hold() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		//
+		pnpPg.validateMedicationsOnActionableHold();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}

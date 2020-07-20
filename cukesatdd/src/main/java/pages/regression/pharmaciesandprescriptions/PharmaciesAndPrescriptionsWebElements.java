@@ -284,14 +284,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected WebElement OptumRxDrugPricePageHeader;
 
-	@FindBy(xpath = "")
-	protected WebElement OptumRxLandingPageHeader;
+	@FindBy(xpath = "//h1[text()='My Prescriptions']")
+	protected WebElement OptumRxMyPrescriptionHeader;
 
 	@FindBy(xpath = "")
 	protected WebElement PharmacyLocatorToolHeader;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxMedicineCabinetHeader;
+	
+	@FindBy(xpath = "//h1[text()='Order status']")
+	protected WebElement OptumRxOrderStatusHeader;
 
 	// Medicine Cabinet
 	@FindBy(xpath = "//h2[contains(text(),'Current Medications')]")
@@ -643,10 +646,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 	
 	public void clickOnRefillMedicationCTAOnCurrentMedications() {
-		List<Integer> listOfIndex = getListOfIndexForRefillMedication();
+		//List<Integer> listOfIndex = getListOfIndexForRefillMedication();
  		Random rand = new Random();
-		rand_int = rand.nextInt(listOfIndex.size());
-		listOfRefillMedication.get(listOfIndex.get(rand_int)).click();
+		rand_int = rand.nextInt(listOfRefillMedication.size());
+		listOfRefillMedication.get(rand_int).click();
 	}
 	
 	public List<Integer> getListOfIndexForRenewMedication(){
@@ -658,10 +661,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 	
 	public void clickOnRenewMedicationCTAOnCurrentMedications() {
-		List<Integer> listOfIndex = getListOfIndexForRenewMedication();
+		//List<Integer> listOfIndex = getListOfIndexForRenewMedication();
  		Random rand = new Random();
-		rand_int = rand.nextInt(listOfIndex.size());
-		listOfRenewMedication.get(listOfIndex.get(rand_int)).click(); 		
+		rand_int = rand.nextInt(listOfRenewMedication.size());
+		listOfRenewMedication.get(rand_int).click(); 		
  	}
 	
 	public List<Integer> getListOfIndexForResolveHold(){
@@ -673,10 +676,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 	
 	public void clickOnResolveHoldCTAOnCurrentMedications() {
-		List<Integer> listOfIndex = getListOfIndexForResolveHold();
+		//List<Integer> listOfIndex = getListOfIndexForResolveHold();
  		Random rand = new Random();
-		rand_int = rand.nextInt(listOfIndex.size());
-		listOfResolveHold.get(listOfIndex.get(rand_int)).click(); 		
+		rand_int = rand.nextInt(listOfResolveHold.size());
+		listOfResolveHold.get(rand_int).click(); 		
  	}
 	
 	public List<Integer> getListOfIndexForTrackStatus(){
@@ -870,6 +873,20 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@data-test-is-informational-hold='true']/ancestor::div[1]/..//a")
 	protected List<WebElement> listOfmedicationHavingInformationalHold;
 	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']")
+	protected List<WebElement> listOfRefillMedicationBtn;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-renew']")
+	protected List<WebElement> listOfRenewMedicationBtn;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfPharmacyEligibleFrRefill;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfPharmacyEligibleFrRenew;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfPharmacyEligibleFrHold;
 	
 	
 	

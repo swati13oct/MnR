@@ -910,12 +910,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateRefillMedications() {
-		Assert.assertTrue("PROBLEM - unable to locate Refill Medicationss text element",
-				pnpValidate(RefillMedications));
+		Assert.assertTrue("PROBLEM - unable to locate HD Drug Eligible For Refill",
+				validateHDDrugEligibleForRefill());
+				//pnpValidate(RefillMedications));
 	}
 
 	public void validateRenewMedications() {
-		Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element", pnpValidate(RenewMedications));
+		Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element", 
+				validateHDDrugEligibleForRenew());
+				//pnpValidate(RenewMedications));
+	}
+	
+	public void validateMedicationsOnActionableHold() {
+		Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element", 
+				validateHDDrugEligibleForRenew());
+				//pnpValidate(RenewMedications));
 	}
 
 	public List<String> getDrugNameListValue() {
@@ -1305,7 +1314,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateHDDrugDisplayedOnCurrentMedication());
 	}
 
-	public void validateOptumRxLandingPage() {
+	public void validateOptumRxLandingPage(String page) {
 		Set<String> handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
@@ -1313,8 +1322,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String OptumRxLandingPageHandle = winHandle;
 			driver.switchTo().window(OptumRxLandingPageHandle);
+			if(page.equals("My Prescriptions"))
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Landing Page Header element",
-					pnpValidate(OptumRxLandingPageHeader));
+					validate(OptumRxMyPrescriptionHeader));
+			{
+			Assert.assertTrue("PROBLEM - unable to locate OptumRx Landing Page Header element",
+						validate(OptumRxOrderStatusHeader));
+			}
 		}
 		driver.close();
 		driver.switchTo().window(pnpPageHandle);
@@ -1581,4 +1595,67 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return listOfVal;
 	}
+	
+	public boolean validateHDDrugEligibleForRefill() {
+	if(listOfPharmacyEligibleFrRefill.size()>0) {
+		for (int i = 0; i < listOfPharmacyEligibleFrRefill.size(); i++) {
+			  String text = listOfPharmacyEligibleFrRefill.get(i).getText();
+				for (WebElement child : listOfPharmacyEligibleFrRefill.get(i).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+				}
+			if (!text.trim().equals("OptumRx")) {
+				return false;
+			}
+		}
+		return true;
+	}
+		return false;
+	}
+	
+	public boolean validateHDDrugEligibleForRenew() {
+		if(listOfPharmacyEligibleFrRenew.size()>0) {
+			/*for(WebElement ele:listOfPharmacyEligibleFrRenew)
+			{
+				if(!ele.getText().equals("OptumRx")) {
+					return false;
+				}
+			}*/
+			
+			for (int i = 0; i < listOfPharmacyEligibleFrRenew.size(); i++) {
+				  String text = listOfPharmacyEligibleFrRenew.get(i).getText();
+					for (WebElement child : listOfPharmacyEligibleFrRenew.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+					}
+				if (!text.trim().equals("OptumRx")) {
+					return false;
+				}
+			}
+			return true;
+		}
+			return false;
+		}
+	
+	public boolean validateHDDrugEligibleForActionableHold() {
+		if(listOfHDMedicationHavingHold.size()>0) {
+			/*for(WebElement ele:listOfHDMedicationHavingHold)
+			{
+				if(!ele.getText().equals("OptumRx")) {
+					return false;
+				}
+			}*/
+			
+			for (int i = 0; i < listOfHDMedicationHavingHold.size(); i++) {
+				  String text = listOfHDMedicationHavingHold.get(i).getText();
+					for (WebElement child : listOfHDMedicationHavingHold.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+					}
+				if (!text.trim().equals("OptumRx")) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+			return false;
+		}
 }
