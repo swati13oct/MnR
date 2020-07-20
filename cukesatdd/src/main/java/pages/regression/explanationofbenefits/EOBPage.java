@@ -198,7 +198,8 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		//tbd if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		if (planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
@@ -218,7 +219,8 @@ public class EOBPage extends EOBBase{
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
 
-			String expUrl="How_to_read_Medical_EOB.pdf";
+			//tbd String expUrl="How_to_read_Medical_EOB.pdf";
+			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 			//TODO - validate PDF content when code deploy onto stage
@@ -458,6 +460,7 @@ public class EOBPage extends EOBBase{
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
+		sleepBySec(1);
 		sendkeys(fromTxtField,fromDate);
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -648,7 +651,7 @@ public class EOBPage extends EOBBase{
 	 * this method is to validate the site leaving popup on the eob page
 	 */
 	public void validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 

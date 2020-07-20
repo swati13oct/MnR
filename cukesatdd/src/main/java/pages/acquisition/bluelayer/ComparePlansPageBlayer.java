@@ -106,7 +106,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
 	
-	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]//img")
    	private WebElement callsam;
    	
    	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")

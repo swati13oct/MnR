@@ -491,13 +491,15 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
 	private WebElement pharamciesAndPrescriptionsLink;
 	
-	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
+	@FindBy(xpath="//div[2]/h2[contains(text(),'Pharmacy Locator')]")
 	private WebElement findAPharmacyLink;
 	@FindBy(xpath = "//span[contains(text(),'View Your Claims')]")
 	private WebElement claimsDashboardLink1;
 	@FindBy(id="premiumpayment_3")
 	private WebElement premiumPayments;
 	
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
+	protected WebElement LookUpDrugsButton;
 	
 	private PageData myAccountHome;
 	
@@ -4138,6 +4140,8 @@ public class AccountHomePage extends UhcDriver {
 								"shadow-root element has been located, now clicking on Pharmacies And Prescriptions tab");
 						TestHarness.checkForIPerceptionModel(driver);
 						PharmaciesAndPrescriptionsTab.click();
+						System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+						CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
 					}
 
 					else {
