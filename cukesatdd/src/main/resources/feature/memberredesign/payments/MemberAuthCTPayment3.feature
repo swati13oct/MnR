@@ -1,7 +1,7 @@
 @regressionMember
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
- @regressionMemberPROD @memAuthProdSetUpRecurringChecking @CodeTransformers
+  @regressionMemberPROD @memAuthProdSetUpRecurringChecking @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 05 -Verify Setup Recurring for Checking Account Federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -24,8 +24,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     And user navigates to review your Automatic screen and selects agreements for EFT
 
     Examples: 
-      | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | norm749     | PDP      | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
+      | F243897 | ashah120 | Mnrqa002 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD @memAuthProdSetUpRecurringCC @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 06- Verify Setup Recurring for CC federal member
@@ -49,4 +49,3 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
       | F243897 | ashah120 | Mnrqa002 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
- 

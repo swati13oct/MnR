@@ -290,6 +290,9 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
 	private WebElement TestHarnesspaymentsLink;
+	
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
+	protected WebElement LookUpDrugsButton;
 		
 	String category = null;
 
@@ -1338,6 +1341,8 @@ public class TestHarness extends UhcDriver {
     		}
     		CommonUtility.checkPageIsReady(driver);
     		checkForIPerceptionModel(driver);
+    		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}

@@ -48,7 +48,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 
-	@FindBy(xpath = "//*[not (contains(@class,'ng-hide')) and contains(@class,'btn btn--primary onetimepayment')]")
+	//Commented by @jkuma14 @FindBy(xpath = "//*[not (contains(@class,'ng-hide')) and contains(@class,'btn btn--primary onetimepayment')]")
+	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement oneTimePaymentBtn;
 
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
@@ -213,7 +214,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeOneTimepaymentButton;
 
-	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	//@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
 	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
@@ -417,7 +419,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, paymentOverviewSection,20);
 		 openAndValidate();
-	}
+		}
 
 	public PaymentHistoryPage(WebDriver driver, boolean skipOpenAndValidation) {
 		super(driver);
@@ -542,7 +544,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn,30);
 		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
-			validateNew(paymentHistoryApp);
+			//validateNew(paymentHistoryApp);
 			validateNew(oneTimePaymentBtn);
 		}
 	}

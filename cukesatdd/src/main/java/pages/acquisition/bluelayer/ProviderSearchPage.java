@@ -137,9 +137,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[text()='Continue Searching']")
 	private WebElement continueSearching;
 	
-	@FindBy(xpath="(//button[contains(text(),'Finish')])[1]")
-	private WebElement Finish;
-	
+	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	private WebElement finishReturnBtn;
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -216,17 +215,15 @@ public class ProviderSearchPage extends UhcDriver {
 		saveBtn2.click();
 	}
 	
-	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
-	jsClickNew(Viewsavebtn);
-	if(validate(EditSavedButton)){
-		ViewSavedProvidersLink.click();
-	}
 	validateNew(providerNameText);
-	validateNew(Finish);
-	Finish.click();
-	//jsClickNew(Finish);
-	waitForCountDecrement(2);
+	String providerSaved = providerNameText.getText().trim();
+	System.out.println("Hospital Name is : " + providerSaved);
+	MRConstants.PROV_NAME=providerSaved;
+	
+	validateNew(finishReturnBtn, 10);
+
+	finishReturnBtn.click();
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 	return new VPPPlanSummaryPage(driver);
@@ -260,7 +257,7 @@ public class ProviderSearchPage extends UhcDriver {
 	String providerSaved = providerNameText.getText().trim();
 	System.out.println("Hospital Name is : " + providerSaved);
 	MRConstants.PROV_NAME=providerSaved;
-	Finish.click();
+	//Finish.click();
 	/*validateNew(Finish);
 	jsClickNew(Finish);*/
 	waitForCountDecrement(2);
@@ -317,8 +314,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 
 		 jsClickNew(Savedproviders); 
-		 validateNew(Finish); 
-		 Finish.click();
+		 validateNew(finishReturnBtn); 
+		 finishReturnBtn.click();
 		 
 		/*Old Changes
 		 * jsClickNew(Savedproviders); validateNew(providerNameText);
@@ -413,18 +410,15 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 			selectLocationOption.click();
 			saveBtn2.click();
 		}
+
+		validateNew(providerNameText);
+		String providerSaved = providerNameText.getText().trim();
+		System.out.println("Hospital Name is : " + providerSaved);
+		MRConstants.PROV_NAME=providerSaved;
 		
-		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		validateNew(finishReturnBtn, 10);
 
-		jsClickNew(Viewsavebtn);
-		if(validate(EditSavedButton)){
-			ViewSavedProvidersLink.click();
-		}
-
-		validateNew(Finish);
-		Finish.click();
-		//jsClickNew(Finish);
-		waitForCountDecrement(2);
+		finishReturnBtn.click();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 		return new PlanDetailsPage(driver);
@@ -458,8 +452,8 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 			ViewSavedProvidersLink.click();
 		}
 		validateNew(providerNameText);
-		validateNew(Finish);
-		jsClickNew(Finish);
+		//validateNew(Finish);
+		//jsClickNew(Finish);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
