@@ -273,7 +273,7 @@ Feature: MVP - Current Medications
     When user have a home delivery medication eligible for refill
     When user clicks Refill Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-  #  And user validates the external link icon in the button
+    And user validates the external link icon in the button
 
     Examples: 
       | FID     | planType | memberType                  |
@@ -289,7 +289,7 @@ Feature: MVP - Current Medications
     When user views a home delivery medication eligible for renewal
     When user clicks the Renew Medication call to action button
     Then user views the OptumRx landing page in a new browser tab
-  #  And user validates the external link icon in the button
+    And user validates the external link icon in the button
 
     Examples: 
       | FID     | planType | memberType                  |
