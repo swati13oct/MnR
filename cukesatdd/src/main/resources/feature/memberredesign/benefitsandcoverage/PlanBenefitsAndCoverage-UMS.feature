@@ -150,8 +150,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
-      | Plan Benefits Table | <PlanBenefitsTable> |
+   # And the user verifies that the correct pdfs are coming in the plan material section
+     # | Plan Benefits Table | <PlanBenefitsTable> |
     #note: moved to footer feature
     #And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
@@ -163,11 +163,11 @@ Feature: 1.01 Member  benefits and Coverage page
     ### note: number of benefits tile may change if swap user
 
     Examples: 
-      | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards | Identifier           | count | rider   |
-      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  | Plan Benefits Table |  6                   | EffectiveShipMedSupp |     3 | NoRider |
+      | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
+      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  6                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
-  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember
+  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember @kottu
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
