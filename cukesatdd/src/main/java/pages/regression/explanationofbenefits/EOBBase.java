@@ -59,13 +59,28 @@ public class EOBBase extends EOBWebElements{
 
 	}
 
-	public int waitForEobPageToLoad() {
+	public int waitForEobPageToLoad(boolean mayHaveEob) {
 		int maxTry=30;
 		int numberOfSeconds=5;
-		return waitForEobPageToLoad(maxTry, numberOfSeconds);
+		if (!mayHaveEob) {
+			maxTry=0;
+		}
+		return waitForEobPageToLoad(maxTry, numberOfSeconds,mayHaveEob);
+	}
+
+	public int waitForEobPageToLoad() {
+		boolean mayHaveEob=true;
+		int maxTry=30;
+		int numberOfSeconds=5;
+		return waitForEobPageToLoad(maxTry, numberOfSeconds,mayHaveEob);
+	}
+
+	public int waitForEobPageToLoad(int maxTry, int numberOfSeconds) {
+		boolean mayHaveEob=true;
+		return waitForEobPageToLoad(maxTry, numberOfSeconds, mayHaveEob);
 	}
 	
-	public int waitForEobPageToLoad(int maxTry, int numberOfSeconds) {
+	public int waitForEobPageToLoad(int maxTry, int numberOfSeconds, boolean mayHaveEob) {
 		int c=0;
 		int total=0;
 		while (c<maxTry) {
@@ -78,7 +93,8 @@ public class EOBBase extends EOBWebElements{
 			System.out.println("slept total of '"+(total)+"' seconds...");
 		}
 		System.out.println("waited total of '"+(total)+"' seconds for the eobLoadingimage to disappear...");
-		sleepBySec(5); //note: keep to let the page settle down w/ the pdf loading in the background
+		if (mayHaveEob)
+			sleepBySec(5); //note: keep to let the page settle down w/ the pdf loading in the background
 		return total;
 	}
 	
@@ -185,7 +201,10 @@ public class EOBBase extends EOBWebElements{
 				if (planType.equalsIgnoreCase("mapd")) {
 					if (eobValidate(comboTab_MAPD))
 						comboTab_MAPD.click();
-				} else if (planType.equalsIgnoreCase("ship")) {
+				} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+					if (eobValidate(comboTab_MA))
+						comboTab_MA.click();
+				} else if (planType.equalsIgnoreCase("ship") || planType.toLowerCase().contains("ship")) {
 					if (eobValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();
 				} else if (planType.equalsIgnoreCase("pdp")) {

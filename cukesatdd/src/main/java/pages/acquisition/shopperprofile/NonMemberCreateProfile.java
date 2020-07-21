@@ -77,6 +77,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	 * @param details
 	 * @return
 	 */
+	//public ComparePlansPage createProfile(DataTable details) {
 	public VPPPlanSummaryPage createProfile(DataTable details) {
 		
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
@@ -128,8 +129,11 @@ public class NonMemberCreateProfile extends UhcDriver {
 			Thread.sleep(5000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
+			/*if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+				return new ComparePlansPage(driver);*/
 			}else {
 				System.out.println("Plan Summary page is not loaded");
+				//System.out.println("Compare Plans page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {

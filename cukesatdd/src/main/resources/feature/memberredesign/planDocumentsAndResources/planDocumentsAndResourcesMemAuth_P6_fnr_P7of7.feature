@@ -110,5 +110,5 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
 	@memAuth_active_ship_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-      | 19-114 | 15119,15304 | qavgogine | qavgogine | q1_feb_ship_20_001 | SHIP  | IND_EFF_PDnR          | true   | false  |
-      | 19-120 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_001| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    
+      | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false  |
+      | 19-120 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_002| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    

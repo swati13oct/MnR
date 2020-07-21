@@ -1,5 +1,5 @@
 @prepareForNextYear
-Feature: 1.21 Member Prepare For Next Year
+Feature: 1.25 Member Prepare For Next Year
 
 ##### note: team and stage may have different AEM date setup, separate the scenarios
 
@@ -35,6 +35,7 @@ Feature: 1.21 Member Prepare For Next Year
 	   #| 02    | F437767 | MA	     | GRP_OFFCYC_PFNY     |
 	    | 03    | F437767 | MAPD	 | GRP_OFFCYC_PFNY     |
 
+	#note: activate when ship user is available		
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prepareForNextYear01b
     Examples: 
@@ -42,7 +43,8 @@ Feature: 1.21 Member Prepare For Next Year
 	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
 	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 06    | F437767 | SHIP	 | IND_PFNY            |
-			
+	
+	#note: activate when combo user is available		
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
@@ -83,6 +85,9 @@ Feature: 1.21 Member Prepare For Next Year
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |
@@ -95,36 +100,38 @@ Feature: 1.21 Member Prepare For Next Year
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+	Then the user validates Prepare For Next Year page content for individual
 
 	@prepareForNextYear02a @devRegression
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
-	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 11    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+
+	@prepareForNextYear02a
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 12    | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 
 	# ignore group cases for now until code is ready
 	#@prepareForNextYear02b
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	#    | 14    | F437767 | PDP	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |  
-	#    | 15    | F437767 | MAPD	 | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 16    | F437767 | MA	     | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |  
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | false | false  | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 
-    #tbd clean up later, these are invalid, user must have english to be able to have spanish or chinese
-	#tbd @prepareForNextYear02d
-    #tbd Examples: 
-	#tbd     | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
-	#tbd     | 19    | F437767 | MAPD	 | IND_ES_PreNexYr| false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#tbd     | 20    | F437767 | MAPD	 | IND_ZH_PreNexYr| false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false |
-	#tbd     | 21    | F437767 | MAPD	 | IND_ESZH_PreNexYr| false  | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false |
+    @prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+        | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
+        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    
 ##### end - cases for team env #################################################################
 
@@ -141,9 +148,9 @@ Feature: 1.21 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
-      | AEM Toggle             | OFF            |
+      | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
@@ -153,7 +160,7 @@ Feature: 1.21 Member Prepare For Next Year
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA offcycle user available at the moment
-    @prepareForNextYear01a @devRegression
+    @prepareForNextYear01a
     Examples: 
 	    | index | FID     | planType | memberType          |
 	   #| 01    | F437767 | PDP	     | GRP_OFFCYC_PFNY     |
@@ -167,7 +174,7 @@ Feature: 1.21 Member Prepare For Next Year
 	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
 	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 06    | F437767 | SHIP	 | IND_PFNY            |
-			
+
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
@@ -193,9 +200,9 @@ Feature: 1.21 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
-      | AEM Toggle             | OFF            |
+      | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
       | Milestone 3 Date       | 10/15/2020     |
@@ -208,6 +215,9 @@ Feature: 1.21 Member Prepare For Next Year
       | Evidence of Coverage English           | <ev_us> |
       | Evidence of Coverage Spanish           | <ev_es> |
       | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
       | Provider Directory English             | <pr_us> |
       | Provider Directory Spanish             | <pr_es> |
       | Provider Directory Chinese             | <pr_zh> |
@@ -220,28 +230,35 @@ Feature: 1.21 Member Prepare For Next Year
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+	Then the user validates Prepare For Next Year page content for individual
 
-	@prepareForNextYear02a @devRegression
+	@prepareForNextYear02a
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	    | 11    | F437767 | PDP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 13    | F437767 | MA	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	    | 11    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 12    | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+
 
 	# ignore group cases for now until code is ready
 	#@prepareForNextYear02b
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	#    | 14    | F437767 | PDP	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 15    | F437767 | MAPD	 | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	#    | 16    | F437767 | MA	     | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
-	    | 18    | F437767 | PCP	     | IND_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | 
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+
+    @prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |  
+        | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  |
+#        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
 	    
 ##### end - cases for stage env #################################################################
 

@@ -190,16 +190,17 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		validateNew(select_btn_first);
 		System.out.println("first pharmacy");
 		jsClickNew(select_btn_first);
+		threadsleep(5000);
 		validateNew(selectedPharmacyName);
 		String selectedPharmacyText = selectedPharmacyName.getText().trim();
 		Assert.assertTrue(firstPharmacyText.contains(selectedPharmacyText),"Selected Pharmacy name not matches");
 	}
 	
 	public void navigateToStep3() {
-
 		if (!(loadingBlock.isEmpty())) {
 			waitforElementDisapper(By.className("loading-dialog"), 60);
 		}
+		scrollToView(step3);
 		validateNew(step3);
 		step3.click();
 	}

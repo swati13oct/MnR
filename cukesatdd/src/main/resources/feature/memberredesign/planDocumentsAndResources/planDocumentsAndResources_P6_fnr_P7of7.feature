@@ -90,8 +90,12 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 7
       | index  | TID         | planType | memberType            | fnr_sd | fnr_di |
       | 18-113 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false  |
 
-	@active_ship_7of7 @devRegression
+	@active_ship_7of7
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_di |
       | 19-114 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true   | false  |
+
+	@active_ship_7of7 @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_di |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false  |    

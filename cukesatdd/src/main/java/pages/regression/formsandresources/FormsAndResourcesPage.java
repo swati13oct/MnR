@@ -2684,15 +2684,19 @@ System.out.println(memberType);
 			pymtTabTopMenu.click();
 			System.out.println("Premium Payment tab has been clicked");
 			CommonUtility.checkPageIsReadyNew(driver);
-			Thread.sleep(4000);
+			Thread.sleep(5000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current URL is: " + driver.getCurrentUrl());
 			if (driver.getCurrentUrl().contains("payments")) {
 				System.out.println("payments text was returned in URL , returning PaymentHistoryPage");
 				return new PaymentHistoryPage(driver);
+				
 			}
+					
 		}
 
 		catch (Exception e) {
+			System.out.println("Catch Blocked reached , some exception has occured");
 			Assert.fail("Premium Payment tab was NOT loaded when clicked from Forms and Resources, Test FAILED");
 			return null;
 		}

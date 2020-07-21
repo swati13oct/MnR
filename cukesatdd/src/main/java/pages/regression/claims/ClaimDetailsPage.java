@@ -318,18 +318,14 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					claimsValidate(medicalClaimsDetlTxt));
 			System.out.println("Medical Claims Details text is seen on the Claims Details page");
 		}
-		//tbd if (getOnlyTestUiFlag()) 
-		//tbd 	System.out.println("TEST UI ONLY - will not test Learn More and claims detail table on claims detail page");
-		//tbd else {
-			Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",
-					claimsValidate(lrnMoreLnkTog));
-			System.out.println("Learn More link is seen on the Claims Details Page");
-			Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",
-					claimsValidate(claimsDetlTblMainSect));
-			Assert.assertTrue("PROBLEM - Claims Table is not present in Claims Details Page", 
-					claimsDetlTblMainSect.isDisplayed());
-			System.out.println("Claims table is seen in the Cliams details page");
-			//tbd }
+		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",
+				claimsValidate(lrnMoreLnkTog));
+		System.out.println("Learn More link is seen on the Claims Details Page");
+		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",
+				claimsValidate(claimsDetlTblMainSect));
+		Assert.assertTrue("PROBLEM - Claims Table is not present in Claims Details Page", 
+				claimsDetlTblMainSect.isDisplayed());
+		System.out.println("Claims table is seen in the Cliams details page");
 	}
 
 	/**

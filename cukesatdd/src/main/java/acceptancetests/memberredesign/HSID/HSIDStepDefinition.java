@@ -1306,11 +1306,11 @@ public class HSIDStepDefinition {
 								 * @todo :agent enters credentials 
 								 */
 								 @Given("^agent enters credentials$") 
-								 public void agententercredentials() throws InterruptedException{
+								 public void agententercredentials(DataTable credentialsList) throws InterruptedException{
 									 Thread.sleep(5000);
-									 String username = "AARPStage8";
+									 String username = credentialsList.asList(String.class).get(0);
+									 String password = credentialsList.asList(String.class).get(1);
 									aarpChatAgentLogin.enterusername(username);
-									 String password =  "AARPStage8";
 									aarpChatAgentLogin.enterpassword(password);	
 									 aarpChatAgentLogin.clickSubmit();
 									
@@ -1322,11 +1322,11 @@ public class HSIDStepDefinition {
 									 * @todo :agent enters credentials 
 									 */
 									 @Given("^agent enters credentials for federal$") 
-									 public void fedagententercredentials() throws InterruptedException{
+									 public void fedagententercredentials(DataTable credentialsList) throws InterruptedException{
 										 Thread.sleep(5000);
-										 String username = "MRagent8";
+										 String username = credentialsList.asList(String.class).get(0);
+										 String password = credentialsList.asList(String.class).get(1);
 										aarpChatAgentLogin.enterusername(username);
-										 String password =  "MRagent8";
 										aarpChatAgentLogin.enterpassword(password);	
 										 aarpChatAgentLogin.clickSubmit();
 										
