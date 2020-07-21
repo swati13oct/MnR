@@ -77,7 +77,7 @@ public class GlobalWebElements extends UhcDriver {
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
 	//@FindBy(id = "gfn_lnk_row2_3")
-	@FindBy(xpath = "//*[contains(@id, 'gfn_lnk_row2_3')]//*[contains(text(), 'Medicare Supplement')]")
+	@FindBy(xpath = "//*[contains(@id, 'gfn_lnk_row2_4')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_4")
