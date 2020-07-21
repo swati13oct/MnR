@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -128,12 +129,10 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		String paymentTabListXpath="//div[contains(@class,'tabs')]//li";
 		String[] tmp=memberType.split("_");
 		//note: assumption - combo of 2 plans only with format of COMBO_<plan1>_<plan2>_<featureIdentifier>
-		System.out.println("TEST 1 - memberType='"+memberType+"' | length='"+tmp.length+"'");
 		Assert.assertTrue("PROBLEM - haven't code to handle this memberType format yet", tmp.length<=4);
 		String targetPlanType=planType;
 		if (planType.toUpperCase().contains("SHIP_")) {
 			String[] tmp2=planType.split("_");
-			System.out.println("TEST 2- planType='"+planType+"' | length='"+tmp2.length+"'");
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
@@ -450,7 +449,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 				PDDocument document = PDDocument.load(TestFile);
 				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : "+PDFText);
+				//keepForDebug System.out.println("PDF text : "+PDFText);
 				if(PDFText!=null && !PDFText.equals("")){
 					note.add("\tPASSED - validated pdf content is not null");
 				} else {
@@ -554,63 +553,38 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public List<String> validateLnkBehavior(String planType, String memberType, String targetItem, WebElement targetElement, String expUrl, WebElement expElement) {
 		List<String> note=new ArrayList<String>();
 		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
+		//		String actHrefUrl=targetElement.getAttribute("href");
 		if (targetItem.contains("Search For Providers link")) {
-			String actHrefUrl=targetElement.getAttribute("ng-click");
-			String[] tmpLnk=expUrl.split("\\|");
-			boolean found=false;
-			for (String u: tmpLnk) {
-				if (actHrefUrl.contains(u)) {
-					found=true;
-					break;
-				}
-			}
-			Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+actHrefUrl+"'", found);
-			note.add("\tPASSED - validation for link element href value for "+targetItem);
-			if (MRScenario.environment.contains("team-a")) { 
-				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
-				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
-			} else {
-				String winHandleBefore = driver.getWindowHandle();
+			String winHandleBefore = driver.getWindowHandle();
 
-				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int beforeClicked_numTabs=beforeClicked_tabs.size();	
-				CommonUtility.waitForPageLoad(driver, expElement, 5);
-				targetElement.click();
-				CommonUtility.checkPageIsReady(driver);
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int beforeClicked_numTabs=beforeClicked_tabs.size();	
+			CommonUtility.waitForPageLoad(driver, expElement, 5);
+			targetElement.click();
+			CommonUtility.checkPageIsReady(driver);
 
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();
-				Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				CommonUtility.checkPageIsReady(driver);
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
 
-				String currentUrl=driver.getCurrentUrl();
-				boolean found2=false;
-				for (String u: tmpLnk) {
-					if (currentUrl.contains(u)) {
-						found2=true;
-						break;
-					}
-				}
-				Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+currentUrl+"'", found2);
-				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-				note.add("\tPASSED - validation for link target page loading for "+targetItem);
+			String currentUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+			note.add("\tPASSED - validation for link target page loading for "+targetItem);
 
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-
-			}
-		} else {
-			String actHrefUrl=targetElement.getAttribute("href");
-			Assert.assertTrue("PROBLEM - link '"+targetItem+"' element href value is not as expected.  Expected to contain='"+expUrl+"' | Actual='"+actHrefUrl+"'", actHrefUrl.contains(expUrl));
-			note.add("\tPASSED - validation for link element href value for "+targetItem);
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+		} else { 
+			//tbd		Assert.assertTrue("PROBLEM - link '"+targetItem+"' element href value is not as expected.  Expected to contain='"+expUrl+"' | Actual='"+actHrefUrl+"'", actHrefUrl.contains(expUrl));
+			//tbd		note.add("\tPASSED - validation for link element href value for "+targetItem);
 
 			if (MRScenario.environment.contains("team-a")) { 
 				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
 				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
 			} else {
 				String originalUrl=driver.getCurrentUrl();
-				
 				targetElement.click();
 				CommonUtility.waitForPageLoad(driver, expElement, 10);
 				String currentUrl=driver.getCurrentUrl();
@@ -618,7 +592,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				note.add("\tPASSED - validation for link destination after click for "+targetItem);
 				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
 				note.add("\tPASSED - validation for link target page loading for "+targetItem);
-				
 				backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 			}
 		}
@@ -634,7 +607,26 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		System.out.println("Validate PDF Doc text section exists");
 		Assert.assertTrue("PROBLEM - unable to locate the Adobe link",noWaitValidate(adobeLink));
 
-		return "PASSED Adobe PDF doc text validation";
+		validateSiteLeaveingPopUP(adobeLink);
+		
+		return "\tPASSED Adobe PDF doc text validation";
+	}
+
+	public String validateSiteLeaveingPopUP(WebElement targetLink) {
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link", noWaitValidate(targetLink));
+		jsClickNew(targetLink);
+		CommonUtility.waitForPageLoad(driver, siteLeavingProceedButton, 10);
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", noWaitValidate(siteLeavingProceedButton));
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", noWaitValidate(siteLeavingCancelButton));
+		//note: click cancel and validate any element on page
+		checkModelPopup(driver,2);
+		siteLeavingCancelButton.click();
+		sleepBySec(1);
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link after clicking Leave Site Cancel button", noWaitValidate(targetLink));
+		noWaitValidate(targetLink);
+		return "\tPASSED Site Leaving Proceed/Cancel Popup validation";
 	}
 
 

@@ -210,8 +210,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validate vas tiles on vas page
 
     Examples: 
-      |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable |numberOfBenefitCards|Identifier| count| rider   |
-      |15094|ashah120|Mnrqa002|Gcdurant3| HIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
+      |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   |
+      |15094|ashah120|Mnrqa002|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
   @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Medica_Nonlis
@@ -346,7 +346,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
-      | Copay Category | <copayCategory> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
     And user clicks on member to select
@@ -376,6 +375,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples:  
       | TID   |username |password|MemUserName| planType | memberType|Identifier| count | rider  |
       | 15098 | ashah120|Mnrqa002|1sirsteven@gmail.com |SSUP  | COMBO_Group_BnC      |GrpEffectiveSSUP| 4     | NoRider |
+
+
 
   #TC14_Benefits_for_PCPMember
   @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Pcp_Medica_Nonlis

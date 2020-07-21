@@ -168,16 +168,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'planmaterials')]//a")
 	protected WebElement viewPlanMaterialsLnk;
 	
-	@FindBy(css=".DRUG_PRICING_TILE_Group #pharmacyTileLinkId")
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
 	protected WebElement LookUpDrugsButton;
 	
-	@FindBy(css=".MEDICINE_CABINET_TILE #pharmacyTileLinkId")
+	@FindBy(xpath ="//p[contains(text(),'Refill your prescriptions with home delivery')]")
 	protected WebElement orderPrescriptionsButton;
 	
 	@FindBy(css=".ORDER_STATUS_TILE #pharmacyTileLinkId")
 	protected WebElement checkDelieryStatusButton;
 	
-	@FindBy(css=".BENEFITS_INFORMATION #pharmacyTileLinkId")
+	@FindBy(xpath ="//p[contains(text(),'View your prescription drug spending to date')]")
 	protected WebElement drugCostSummaryButton;
 	
 	@FindBy(xpath = "//h1")
