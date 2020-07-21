@@ -714,4 +714,13 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRemainingPrescriptionsOnMyMedPage(totalMedication);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	/*@Then("^user will see remaining prescriptions on the My Medications page$")
+	public void user_will_see_remaining_prescriptions_on_the_My_Medications_page() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRemainingPrescriptionsOnMyMedPage(totalMedication);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}*/
+	
 }
