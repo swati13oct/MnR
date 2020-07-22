@@ -63,7 +63,7 @@ Feature: 1.02 Member Profile page
 
     Examples: 
       | TID      | planType | memberType                     |
-      | Unknown1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
+      | Unknxown1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
       | Unknown2 | MA       | MA_AARP_GOGreen_Profilepref    |
       | Unknown3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
@@ -189,9 +189,9 @@ Feature: 1.02 Member Profile page
     And the user validate the temporary section on profile page for ship member
 
     @devRegression @mocked
-    Examples: 
+    Examples:
     | TID   | userSelection           | planType | memberType          |
-    | xxxxx | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |   
+    | xxxxx | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |
 
   @accountProfile10 @EPMPProfilePageContactusGroup 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
@@ -338,24 +338,24 @@ Feature: 1.02 Member Profile page
     
    @accountProfile17a
    Examples:
-    | TID		 | planType  |  memberType  | copayCategory | 
+    | TID		 | planType  |  memberType  | copayCategory |
     | Unknown_17 | MA        |  Individual  |  NON LIS_ProfilePref      |
     | Unknown_18 | PDP       |  Individual  |  NON LIS_ProfilePref      |
     | Unknown_19 | MAPD      |  Individual  |  NON LIS_ProfilePref      |
 
    @accountProfile17b
    Examples:
-    | TID		 | planType  |  memberType  | copayCategory | 
+    | TID		 | planType  |  memberType  | copayCategory |
     | Unknown_20 | PCP       |  Individual  |  NON LIS_ProfilePref      |
-    | Unknown_21 | Medica    |  Individual  |  NON LIS_ProfilePref      |  
+    | Unknown_21 | Medica    |  Individual  |  NON LIS_ProfilePref      |
     | Unknown_22 | MAGroup   |  Group       |  NON LIS_ProfilePref      |
-    | Unknown_23 | MAPDGroup |  Group       |  NON LIS_ProfilePref      | 
+    | Unknown_23 | MAPDGroup |  Group       |  NON LIS_ProfilePref      |
 
    @accountProfile17c
    Examples:
-    | TID		 | planType  |  memberType  | copayCategory | 
-    | Unknown_24 | PDPGroup  |  Group       |  NON LIS_ProfilePref      | 
-    | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS_ProfilePref      | 
+    | TID		 | planType  |  memberType  | copayCategory |
+    | Unknown_24 | PDPGroup  |  Group       |  NON LIS_ProfilePref      |
+    | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS_ProfilePref      |
     | Unknown_26 | COMBO     | FedShip      |  NON LIS_ProfilePref      |
     | Unknown_27 | SSUPGroup |Group         |  NON LIS_ProfilePref      |
    

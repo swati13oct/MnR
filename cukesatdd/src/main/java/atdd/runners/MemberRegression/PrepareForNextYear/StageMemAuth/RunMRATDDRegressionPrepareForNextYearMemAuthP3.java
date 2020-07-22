@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.PrepareForNextYear;
+package atdd.runners.MemberRegression.PrepareForNextYear.StageMemAuth;
 
 
 import org.junit.runner.RunWith;
