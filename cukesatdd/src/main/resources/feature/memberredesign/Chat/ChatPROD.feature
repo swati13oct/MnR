@@ -16,7 +16,7 @@ Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
     Examples: 
       | username | password | member      |
-      | ashah120 | Mnrqa002 | Pramila1946 |
+      | ashah120 | Mnrqa003 | Pramila1946 |
 
   @regressionMemberPROD @regressionMemberPRODGroupChat
   Scenario Outline: Scenario: <Scenario> - Verify member auth functionality For Group member CHAT
@@ -33,4 +33,4 @@ Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
     Examples: 
       | username | password | member       |
-      | ashah120 | Mnrqa002 | 2nancyreeves |
+      | ashah120 | Mnrqa003 | 2nancyreeves |
