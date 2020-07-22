@@ -626,18 +626,6 @@ public class ContactusRedesignStepDefinition {
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactusPage.GroupvalidateChatWithUsOnPROD();
 	}
-	
-	@Then("^the user validates the CHAT section for SHIP member on PROD$")
-	public void validate_Chat_Section_PROD() throws InterruptedException {	
-		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-		contactusPage.validateChatWithUsOnPRODForSHIP();
-	}
-	
-	@Then("^the user validates the CHAT section for group member on PROD$")
-	public void validate_Chat_Section_group_PROD() throws InterruptedException {	
-		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-		contactusPage.GroupvalidateChatWithUsOnPROD();
-	}
 }
 
 
