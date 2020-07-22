@@ -25,7 +25,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | ashah120 | Mnrqa003 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD @memAuthProdSetUpRecurringCC @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 06- Verify Setup Recurring for CC federal member
@@ -48,4 +48,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+      | F243897 | ashah120 | Mnrqa003 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |

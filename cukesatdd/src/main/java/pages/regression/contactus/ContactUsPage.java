@@ -11,10 +11,12 @@ import pages.regression.accounthomepage.AccountHomePage;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -1755,10 +1757,11 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public Boolean isChatWithUsTimeOn(String startTime, String endTime) {
-    	Calendar cal = Calendar.getInstance();
+    	Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        String systemTime= sdf.format(cal.getTime());
-        System.out.println("The current system time is - "+systemTime);
+        sdf.setTimeZone(TimeZone.getTimeZone("US/Central"));
+        String systemTime= sdf.format(date);
+        System.out.println("The current central system time is - "+systemTime);
              
         LocalTime target = LocalTime.parse(systemTime) ;
         Boolean result = ( 
@@ -1839,9 +1842,6 @@ public class ContactUsPage extends UhcDriver{
 			}
 		}
 	}
-	
-	
-	
 }
 
 

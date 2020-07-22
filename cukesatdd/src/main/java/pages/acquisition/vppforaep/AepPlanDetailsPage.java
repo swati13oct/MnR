@@ -338,7 +338,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-		
+
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
@@ -377,6 +377,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 					columnName = columnName.replace("PS","");
 					if(key.contains(columnName)) { 
 						flag = false;
+						if(key.contains("footnotes") && columnName.equalsIgnoreCase("footnotes"))
+							tmpUIString2 = tmpKeyString;
 						break;
 					}
 				
@@ -464,6 +466,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 						benefitValueUI = benefitValueUI.replace("footnote1", "");
 					else if(benefitValueUI.contains("1."))
 						benefitValueUI = benefitValueUI.replace("1.", ".");
+					
+					if(benefitValueUI.contains(".2"))
+						benefitValueUI = benefitValueUI.replace(".2", ".");
+					else if(benefitValueUI.contains(".1"))
+						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
 					if(key.equalsIgnoreCase(columnName)) {
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
@@ -500,14 +507,22 @@ public class AepPlanDetailsPage extends UhcDriver {
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
 							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
-						
+						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")) {
+							if(benefitValueUI.contains(benefitValue)) {
+								flag=true; break;
+							}else {
+								flag=false; 
+								System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								tmpUIString2 = tmpUIString1;
+								break;
+							}
 						}
 								
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col:6 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}

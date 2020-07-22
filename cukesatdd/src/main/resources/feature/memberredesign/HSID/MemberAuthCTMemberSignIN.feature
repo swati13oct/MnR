@@ -15,8 +15,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | username | password | member                | Scenario                                                        |
-      | ashah120 | Mnrqa002 | skho@roadrunner.com   | Scenario 1:  Search with member username : Federal Member- NICE |
-      | ashah120 | Mnrqa002 | Pramila1946           | Scenario 2a: Search using username – SHIP Member                |
-      | ashah120 | Mnrqa002 | marylamb823           | Scenario 3: Search using username – PCP Plan Member             |
-      | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM | Scenario 4: Search using username – Medica Plan Member          |
+      | ashah120 | Mnrqa003 | skho@roadrunner.com   | Scenario 1:  Search with member username : Federal Member- NICE |
+      | ashah120 | Mnrqa003 | Pramila1946           | Scenario 2a: Search using username – SHIP Member                |
+      | ashah120 | Mnrqa003 | marylamb823           | Scenario 3: Search using username – PCP Plan Member             |
+      | ashah120 | Mnrqa003 | SUSICHAPMAN@GMAIL.COM | Scenario 4: Search using username – Medica Plan Member          |
   

@@ -27,7 +27,7 @@ Feature: S1.1 To test Member Auth premium payment flows for SHIP member Micro Ap
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | ashah120 | Mnrqa003 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
     @regressionMemberPROD @memAuthProdSetUpRecurringEFT @CodeTransformers
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 07 - Verify Payment Hisory Section and Cancel for Fed Recurring EFT
@@ -46,6 +46,6 @@ Feature: S1.1 To test Member Auth premium payment flows for SHIP member Micro Ap
 
     Examples: 
       | UID     | username | password | memUserName       | planType |
-      | F243897 | ashah120 | Mnrqa002 | vernajohnson19651 | SHIP     |
+      | F243897 | ashah120 | Mnrqa003 | vernajohnson19651 | SHIP     |
 
   

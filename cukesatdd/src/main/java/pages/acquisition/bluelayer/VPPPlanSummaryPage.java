@@ -298,7 +298,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement snpPlansViewLink;
 
 	
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]//h2")
 	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
