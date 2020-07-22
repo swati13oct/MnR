@@ -455,7 +455,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-testid='medication-action-contact-pharmacy']")
 	protected List<WebElement> listOfCallToActionForRetailDrug;
 
-	@FindBy(xpath = "//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]//button")
+	@FindBy(xpath = "//a[contains(@data-testid,'medication-action') and not(contains(@data-testid,'get-pricing'))]//button")
 	protected List<WebElement> listOfTrackCallToAction;
 	
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
@@ -476,7 +476,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]/span[1]")
 	protected List<WebElement> listOfCallToActnForActiveMedication;
 	
-	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'learn-more'))]")
+	@FindBy(xpath="//*[contains(@data-testid,'medication-action') and not(contains(@data-testid,'get-pricing'))]")
 	protected List<WebElement> listOfCTAWithoutSpanTag;
 
 	public List<String> getDrugNameListValue() {
@@ -893,10 +893,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@data-testid,'medication-status-percent')]//*[@id='WhiteCheck_svg__a']")
 	protected List<WebElement> listOfCheckMarkOnFullHarveyBall;
 	
-	@FindBy(xpath="(//div[@class=\"sc-LzLrp iewWRX\"]//div//strong)[1]")
+	@FindBy(xpath="(//div[@class='sc-LzLqD hRXAiG']//div//strong)[1]")
 	protected WebElement drugsAvailableOnMyMedication;
 	
-	@FindBy(xpath="(//div[@class=\"sc-LzLrp iewWRX\"]//div//strong)[2]")
+	@FindBy(xpath="(//div[@class='sc-LzLqD hRXAiG']//div//strong)[2]")
 	protected WebElement totaldrugsAvailableOnMyMedication;
 	
 	//(////div[@class='sc-LzLrp iewWRX']//div//strong)[2]

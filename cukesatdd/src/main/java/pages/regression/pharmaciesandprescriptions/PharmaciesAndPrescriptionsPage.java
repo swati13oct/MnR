@@ -726,7 +726,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F392596
 	public void clickOnViewAllMedicationsLink() {
 		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
-				pnpValidate(ViewAllMedications));
+				validate(ViewAllMedications,50));
 		ViewAllMedications.click();
 
 	}
