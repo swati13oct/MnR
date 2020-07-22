@@ -179,7 +179,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//section[contains(@class,'disclaimer')]//strong[contains(text(),'This page contains PDF documents')]/../a")
 	protected WebElement adobeLink;
 
-	
+	@FindBy(xpath = "//a[contains(@id, 'proceedbtn')]")
+	protected WebElement siteLeavingProceedButton;
+
+	@FindBy(xpath = "//a[contains(@id, 'cancelbtn')]")
+	protected WebElement siteLeavingCancelButton;
+
 	//note: milestone1 -------------------------------------
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']")
 	protected WebElement tl_milestone1Date;
@@ -462,7 +467,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Search for Providers')]/../i")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Provider Directory')]/../span[contains(text(),'or open')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Search for Providers')]/../span[contains(text(),'or open')]")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_pr_en_OR;
 	
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Provider Directory')]")
@@ -640,7 +645,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement zipCodeField_acq;
 	
 	//note: provider search page
-	@FindBy(xpath="//h1[contains(text(),'What')]")
+	@FindBy(xpath="//h1/span[contains(text(),'Enter')]")
 	protected WebElement providerSearchHeaderTxt;
 	
 	//note: Drug Search page

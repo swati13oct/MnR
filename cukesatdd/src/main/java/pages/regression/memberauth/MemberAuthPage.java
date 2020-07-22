@@ -424,6 +424,7 @@ public class MemberAuthPage extends UhcDriver {
 		return null;
 	}
 
+	/* tbd
 	public void splashPgWorkaroundForProd() {
 		String workaroundUrl="https://member.uat.uhc.com/aarp/dashboard"; //offline-prod, rally will take care of redirecting afterward
 		if (MRScenario.environment.equalsIgnoreCase("prod")) 
@@ -441,7 +442,58 @@ public class MemberAuthPage extends UhcDriver {
 		}
 		checkModelPopup(driver, 1);
 		Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page", !driver.getCurrentUrl().contains("gogreen-splash.html"));
+	} */
+	
+	public void splashPgWorkaroundForProd() {
+		System.out.println("Proceed to perform the splash page workaround on this env...");
+		Assert.assertTrue("PROBLEM - this workaround is for offline-prod or online-prod only.  current env='"+MRScenario.environment+"'",
+				MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"));
+
+		String currentUrl=driver.getCurrentUrl();
+		System.out.println("Current url="+currentUrl);
+		String part1="";	
+		if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			part1="https://member.uat.uhc.com";	//note: offline-prod
+			if (currentUrl.contains("/pcp/") || currentUrl.contains("/medica/")) 
+				part1="https://member.uat.mymedicareaccount.com"; //note: offline-prod medica or ppcp
+		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			part1="https://member.uhc.com";
+			if (currentUrl.contains("/pcp/") || currentUrl.contains("/medica/")) 
+				part1="https://member.mymedicareaccount.com";
+		}
+		
+		String part2="";
+		if (currentUrl.contains("com/pcp/content/"))
+			part2="/pcp/dashboard";
+		else if (currentUrl.contains("com/medica/content/"))
+			part2="/medica/dashboard";
+		else if (currentUrl.contains("com/aarp/content/"))
+			part2="/aarp/dashboard";
+		else if (currentUrl.contains("com/content/"))
+			part2="/medicare/dashboard";
+		else if (currentUrl.contains("com/retiree/content/"))
+			part2="/retiree/dashboard";
+		else 
+			Assert.assertTrue("PROBLEM - not sure how to work around this URL: "+currentUrl, false);
+		
+		String workaroundUrl=part1+part2;
+		System.out.println("Workaround url="+currentUrl);
+		
+		CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
+		System.out.println("User encounteredd some splash page, handle it...");
+		try {
+			if (validate(goGreenGoToHomepageBtn,0)) {
+				System.out.println("Skipping the splash page by directly navigating to the Rally dashboard home page");
+				driver.navigate().to(workaroundUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		} catch (Exception e1) {
+			System.out.println("did not encounter 'Go To Homepage' button on the splash page, some error on the page"+e1);
+		}
+		checkModelPopup(driver, 1);
+		Assert.assertTrue("PROBLEM - unable to navigate away from the splash page", driver.getCurrentUrl().contains("dashboard"));
 	}
+
 	
 	public void goGreenSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {

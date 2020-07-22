@@ -3140,6 +3140,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 						comboTab_MA.click();
 					else if (noWaitValidate(comboTab_MA_planDoc)) 
 						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("hip")) {
+					if (noWaitValidate(comboTab_SHIP_HIP)) 
+						comboTab_SHIP_HIP.click();
 				} else if (planType.equalsIgnoreCase("ship")) {
 					if (noWaitValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();
