@@ -49,7 +49,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=ind_revPlnChgSec_circle;
+		targetElement=ind_revPlnChgSec_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -78,7 +78,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateLanguageDropdown(section, ind_revPlnChgSec_docSec_langDropdown, ind_revPlnChgSec_lang_en, ind_revPlnChgSec_lang_es, ind_revPlnChgSec_lang_zh));
 
 			targetItem=section+" - checkmark";
-			targetElement=ind_revPlnChgSec_docSec_checkMark;
+			targetElement=ind_revPlnChgSec_docSec_checkMark_noGreen;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			note.add("\t=================");
@@ -94,6 +94,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
 			targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			
+			//note: after link click, section circle should turn green
+			targetItem=section+" - green circle";
+			targetElement=ind_revPlnChgSec_circle_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
 
 			String docName="Annual Notice of Changes";
 			note.add("\t=================");
@@ -118,6 +129,18 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - Arrow after '"+docName+" (PDF)'";
 				targetElement=ind_revPlnChgSec_docSec_anoc_en_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+				
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				//note: after link click, section circle should turn green
+				targetItem=section+" - green circle";
+				targetElement=ind_revPlnChgSec_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 			} else {
 				note.add("\tDO NOT EXPECT '"+docName+"' document to display");
 				Assert.assertTrue("SHOULD land on SAR page", false);;
@@ -146,6 +169,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
 				targetElement=ind_revPlnChgSec_docSec_anoc_es_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				//note: after link click, section circle should turn green
+				targetItem=section+" - green circle";
+				targetElement=ind_revPlnChgSec_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
 
 			} else {
 				note.add("\tDO NOT "+targetLang+" EXPECT '"+docName+"' document to display");
@@ -187,6 +221,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
 
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				//note: after link click, section circle should turn green
+				targetItem=section+" - green circle";
+				targetElement=ind_revPlnChgSec_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
@@ -201,11 +246,19 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
 				targetElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
 				note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+				//note: after link click, section circle should turn green
+				targetItem=section+" - green circle";
+				targetElement=ind_revPlnChgSec_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}	
+		
 
 		Select select = new Select(ind_revPlnChgSec_docSec_langDropdown);           
 		select.selectByValue("en_us");
@@ -224,7 +277,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=ind_revPlnMatlsSec_circle;
+		targetElement=ind_revPlnMatlsSec_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -265,6 +318,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 				note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
 			}
+			
+			//note: after link click, section circle should turn green
+			targetItem=section+" - green circle";
+			targetElement=ind_revPlnMatlsSec_circle_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
@@ -279,7 +339,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		String subSection=" - Review your plan benefits and costs for next year";
 
 		String targetItem=section+" - checkmark";
-		WebElement targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark;
+		WebElement targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -317,6 +377,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
 
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
 
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
@@ -346,6 +410,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+" - Arrow after '"+docName+"' doc link'";
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
@@ -386,6 +456,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
 
+				//note: after link click, little check should turn green
+				targetItem=section+" - green checkmark";
+				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
 			} else {
 				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 				//note: no doc then no dropdown
@@ -419,7 +494,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.add("\t=================");
 		String subSection=" - Review your Prescription drug coverage for next year";
 		String targetItem=section+subSection;
-		WebElement targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark;
+		WebElement targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+subSection+" - header";
@@ -467,6 +542,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			Assert.assertTrue("SHOULD land on SAR page", false);
@@ -493,6 +572,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -531,6 +614,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -560,7 +647,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.add("\t=================");
 		String subSection=" - Review provider information for next year";
 		String targetItem=section+subSection;
-		WebElement targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark;
+		WebElement targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+subSection+" - header";
@@ -592,6 +679,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
@@ -627,6 +718,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			Assert.assertTrue("SHOULD land on SAR page", false);
@@ -653,6 +748,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -691,6 +790,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -727,6 +830,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			Assert.assertTrue("SHOULD land on SAR page", false);
@@ -753,6 +860,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -791,15 +902,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			/* TODO
-				//note: no doc then no dropdown
-				ind_reviewPlanChanges_docSection_langDropdown.click();
-				targetItem="Chinese language dropdown option'";
-				targetElement=ind_reviewPlanMaterials_lang_chinese;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			 */
+
+			targetItem="Chinese language dropdown option'";
+			targetElement=ind_revPlnChgSec_lang_zh_ava;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
@@ -824,7 +936,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.add("\t=================");
 		String subSection=" - Review pharmacy information for next year";
 		String targetItem=section+subSection;
-		WebElement targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark;
+		WebElement targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+subSection+" - header";
@@ -843,6 +955,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
+		//note: after link click, little check should turn green
+		targetItem=section+" - green checkmark";
+		targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
+		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+subSection+" - arrow after Drug Search link";
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk_arrow;
@@ -868,10 +984,14 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-
 			targetItem=section+" - Arrow after '"+docName+"' link'";
 			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_arrow;
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 		} else {
@@ -900,6 +1020,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -938,6 +1062,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			CommonUtility.waitForPageLoad(driver, targetElement, 10);
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 		} else {
 			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
 			//note: no doc then no dropdown
@@ -969,7 +1097,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=ind_compPlnsSec_circle;
+		targetElement=ind_compPlnsSec_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -980,7 +1108,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_compPlnsSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String showDocDateStr="10/01/"+String.valueOf(getCurrentYear());
+		String showDocDateStr="9/15/"+String.valueOf(getCurrentYear());
 		Date showDocDate=convertStrToDate(showDocDateStr);
 		boolean showSection=false;
 		if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
@@ -995,6 +1123,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Learn about other plan choices' section");
 			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, docDisplayMap));
+
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
@@ -1008,7 +1137,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		String subSection=" - Learn about other plan choices";
 
 		String targetItem=section+" - checkmark";
-		WebElement targetElement=ind_compPlnsSec_lrnOthPlnSec_checkMark;
+		WebElement targetElement=ind_compPlnsSec_lrnOthPlnSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -1025,31 +1154,62 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_compPlnsSec_lrnOthPlnSec_skipThisLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		//TODO - validate link destination
-
 		targetItem=section+subSection+" - Skip This Link Arrow";
 		targetElement=ind_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		ind_compPlnsSec_lrnOthPlnSec_skipThisLnk.click();
+		//note: after link click, little check should turn green
+		targetItem=section+" - green checkmark";
+		targetElement=ind_compPlnsSec_lrnOthPlnSec_checkMark_green;
+		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - 'or open' text before Compare New Plans Link";
+		// see link after m1 before m4 will see Compare link
+		String showDocDateStr1="10/01/"+String.valueOf(getCurrentYear());
+		Date showDocDate1=convertStrToDate(showDocDateStr1);
+
+		String showDocDateStr2="12/07/"+String.valueOf(getCurrentYear());
+		Date showDocDate2=convertStrToDate(showDocDateStr2);
+
+		boolean showSection=false;
+		if ((currentDate.equals(showDocDate1) || currentDate.after(showDocDate1))
+				&& (currentDate.before(showDocDate2))	) {
+			showSection=true;
+		}
+
+		targetItem=section+subSection+" - 'or' text before Compare New Plans Link";
 		targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		if (showSection) {
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - Compare New Plans Link";
-		targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - Compare New Plans Link";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		//TODO - validate link destination
+			//note - validate link destination
+			String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
+			WebElement expElement=acqPlanOverviewBox;
+			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+			
+			targetItem=section+subSection+" - Compare New Plans Link Arrow";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - Compare New Plans Link Arrow";
-		targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			//note: after link click, section circle should turn green
+			targetItem=section+" - green circle";
+			targetElement=ind_compPlnsSec_circle_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+		
+
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr1+"' and before date '"+showDocDateStr2+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		}
 
 		return note;
 	}
 
-	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Enroll in the plan that works for you";
@@ -1060,7 +1220,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=ind_enrolPlnSec_circle;
+		targetElement=ind_enrolPlnSec_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -1070,24 +1230,39 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetItem=section+" - text";
 		targetElement=ind_enrolPlnSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
+		
+		String showDocDateStr="9/15/"+String.valueOf(getCurrentYear());
+		Date showDocDate1=convertStrToDate(showDocDateStr);
 
-		section=section+" - document ";
+		boolean showSection=false;
+		if (currentDate.equals(showDocDate1) || currentDate.after(showDocDate1)) {
+			showSection=true;
+		}
+
+		section=section+" - Choose your plan ";
 		targetItem=section+" section";
 		targetElement=ind_enrolPlnSec_choYurPlnSec;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		if (showSection) {
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Choose your plan");
-		note.addAll(validateChoosePlan(section, planType, memberType, currentDate, docDisplayMap));
+			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Choose your plan");
+			note.addAll(validateChoosePlan(section, planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
+
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		}
+		
 		return note;
 	}
 
-	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Choose your plan";
 
 		String targetItem=section+" - checkmark";
-		WebElement targetElement=ind_enrolPlnSec_choYurPlnSec_checkMark;
+		WebElement targetElement=ind_enrolPlnSec_choYurPlnSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -1100,10 +1275,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		//---------------------------
-		String showDocDateStr="12/07/"+String.valueOf(getCurrentYear());
+		String showDocDateStr="09/15/"+String.valueOf(getCurrentYear());
 		Date showDocDate=convertStrToDate(showDocDateStr);
 		boolean showSection=false;
-		if (currentDate.before(showDocDate) ) {
+		if (currentDate.after(showDocDate) ) {
 			showSection=true;
 		}
 
@@ -1112,12 +1287,20 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//TODO - validate link destination
-
 			targetItem=section+subSection+" - Stay in Current Plan link Arrow";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+
+			ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk.click();
+			//note: after link click, little check should turn green
+			targetItem=section+" - green checkmark";
+			targetElement=ind_enrolPlnSec_choYurPlnSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem=section+subSection+" - Stay in Current Plan link";
+			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			//---------------------------
 			showDocDateStr="10/15/"+String.valueOf(getCurrentYear());
@@ -1132,8 +1315,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			if (showSection2) {
 				note.addAll(validateHaveItem(targetItem, targetElement));
 
-				//TODO - validate link destination
-
 				targetItem=section+subSection+" - Stay in Current Plan - 'or open' text before Compare New Plans Link";
 				targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
 				note.addAll(validateHaveItem(targetItem, targetElement));
@@ -1142,21 +1323,47 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				targetItem=section+subSection+" - Stay in Current Plan  - Compare New Plans Link Arrow";
 				targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
 				note.addAll(validateHaveItem(targetItem, targetElement));
+
+				
+				targetItem=section+subSection+" - Selected New Plan - Compare New Plans Link";
+				targetElement=ind_enrolPlnSec_choYurPlnSec_seleNewPln_compNewPlnsLnk;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+	
+				//note - validate link destination
+				String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
+				WebElement expElement=acqPlanOverviewBox;
+				note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+				
+				//note: after link click, section circle should turn green
+				targetItem=section+" - green circle";
+				targetElement=ind_enrolPlnSec_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+
 			} else {
 				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}	
-			
+
 			//---------------------------
-			targetItem=section+subSection+" - Selected New Plan";
-			targetElement=ind_enrolPlnSec_choYurPlnSec_seleNewPln_text;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+subSection+" - Selected New Plan - Compare New Plans Link";
-			targetElement=ind_enrolPlnSec_choYurPlnSec_seleNewPln_compNewPlnsLnk;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//TODO - validate link destination
+			if (showNxtYrPlanName) {
+				
+				showDocDateStr="10/15/"+String.valueOf(getCurrentYear());
+				showDocDate=convertStrToDate(showDocDateStr);
+				boolean showSection3=false;
+				if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
+					showSection3=true;
+				}
+				targetItem=section+subSection+" - Selected New Plan";
+				targetElement=ind_enrolPlnSec_choYurPlnSec_seleNewPln_text;
+				if (showSection3) {
+					note.addAll(validateHaveItem(targetItem, targetElement));
+				} else {
+					Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+					note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+				}	
+				
+			}
+			
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
@@ -1184,6 +1391,22 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		}	
 		return note;
 	}
+	
+	/**  cookie names - todo - stopped at 10/17 for Enroll
+	 reviewPlanChanges
+findoutnew
+
+
+reviewPlanMaterials
+planBenefits
+priscriptionInfo
+providerInfo
+pharmacyInfo
+
+comparePlansOnline
+
+enrollInaPlan
+	 */
 
 
 

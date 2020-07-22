@@ -21,6 +21,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -554,7 +555,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		List<String> note=new ArrayList<String>();
 		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
 		//		String actHrefUrl=targetElement.getAttribute("href");
-		if (targetItem.contains("Search For Providers link")) {
+		if (targetItem.contains("Search For Providers link") || targetItem.contains("Compare New Plans Link")) {
 			String winHandleBefore = driver.getWindowHandle();
 
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -569,6 +570,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			CommonUtility.checkPageIsReady(driver);
 
+			CommonUtility.waitForPageLoad(driver, expElement, 10);
 			String currentUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
 			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
@@ -580,20 +582,20 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			//tbd		Assert.assertTrue("PROBLEM - link '"+targetItem+"' element href value is not as expected.  Expected to contain='"+expUrl+"' | Actual='"+actHrefUrl+"'", actHrefUrl.contains(expUrl));
 			//tbd		note.add("\tPASSED - validation for link element href value for "+targetItem);
 
-			if (MRScenario.environment.contains("team-a")) { 
-				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
-				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
-			} else {
+		//tbd	if (MRScenario.environment.contains("team-a")) { 
+			//tbd		note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
+			//tbd		note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
+			//tbd	} else {
 				String originalUrl=driver.getCurrentUrl();
 				targetElement.click();
 				CommonUtility.waitForPageLoad(driver, expElement, 10);
 				String currentUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected to land on='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+				Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected url to contains '"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
 				note.add("\tPASSED - validation for link destination after click for "+targetItem);
 				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
 				note.add("\tPASSED - validation for link target page loading for "+targetItem);
 				backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
-			}
+				//tbd	}
 		}
 		
 		return note;
@@ -629,6 +631,23 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return "\tPASSED Site Leaving Proceed/Cancel Popup validation";
 	}
 
+	/**
+	 * deleteCookie - return true if successfully deleted the cookie
+	 * @param cookieName
+	 * @return
+	 */
+	public boolean deleteCookie(String cookieName) {
+		driver.manage().deleteCookieNamed(cookieName);
+		return getCookie(cookieName);
+	}
+	
+	public boolean getCookie(String cookieName) {
+		Cookie cookie=driver.manage().getCookieNamed(cookieName);
+		if (cookie==null) 
+			return false;
+		else
+			return true;
+	}	
 
 
 	
