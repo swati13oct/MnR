@@ -123,6 +123,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
 	
+	@FindBy(xpath="//span[contains(@class,'redError') and not(contains(@class,'ng-hide')) and contains(text(),'Either your UserName or Password was incorrect.')]")
+	protected WebElement initialLoginErr;
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -197,6 +200,7 @@ public class MemberAuthPage extends UhcDriver {
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
 		search.click();
+		Assert.assertTrue("PROBLEM - got initial login error on member auth, please check to see if input username/passowrd is correct or if password expired?", !validate(initialLoginErr,0));
 		waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()) {
 			System.out.println("member auth Login successfull");

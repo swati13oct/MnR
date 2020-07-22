@@ -25,6 +25,7 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
     Then test setup stores documents expectation info  
+      | Show Next Year PlanName| <showNxtYrPlan>|
       | Annual Notice of Changes English       | <an_us> | 
       | Annual Notice of Changes Spanish       | <an_es> |
       | Annual Notice of Changes Chinese       | <an_zh> |
@@ -129,11 +130,11 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
 
     @prepareForNextYear03_ind
     Examples: 
-	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	    | 11    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false |
+	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 11    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false         |
 
     #@prepareForNextYear03_grp
     #Examples: 
-	#    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh |
-	#    | 13    | F437767 | MAPD	 | GRP_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false |
+	#    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 13    | F437767 | MAPD	 | GRP_PFNY           | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
 
