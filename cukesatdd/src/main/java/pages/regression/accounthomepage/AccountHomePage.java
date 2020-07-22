@@ -308,7 +308,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
 	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
