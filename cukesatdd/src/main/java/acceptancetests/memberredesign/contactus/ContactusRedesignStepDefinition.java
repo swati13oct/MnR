@@ -626,7 +626,6 @@ public class ContactusRedesignStepDefinition {
 		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactusPage.GroupvalidateChatWithUsOnPROD();
 	}
-	
 }
 
 
