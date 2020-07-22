@@ -65,7 +65,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
-	@FindBy(xpath = "//*[contains(@id, 'gfn_lnk_row2_4')]//*[contains(text(), 'Medicare Supplement')]")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")
