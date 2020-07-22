@@ -354,11 +354,8 @@ public class FindCarePage extends UhcDriver {
 		PrimaryCareClinicButton.click();
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
-		FirstHospitalRecord.click();
 		validate(Facilityicon);
-		if (HospName.equals(PlanHeading.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
-		}
+		System.out.println("Provder Name is verified :: " + HospName);
 		selectProviderBtn.click();		
 		if(validate(addressCheckBox)){
 			addressCheckBox.click();

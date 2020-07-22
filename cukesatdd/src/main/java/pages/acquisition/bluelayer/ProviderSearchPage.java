@@ -221,13 +221,9 @@ public class ProviderSearchPage extends UhcDriver {
 			saveBtn2.click();
 		}
 		
-		validateNew(providerNameText);
-		String providerSaved = providerNameText.getText().trim();
-		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
+		
 		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
 			Viewsavebtn.click();
 		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
@@ -237,6 +233,11 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("New Rally page not displayed");
 		 
 		}
+		validateNew(providerNameText);
+		String providerSaved = providerNameText.getText().trim();
+		System.out.println("Hospital Name is : " + providerSaved);
+		MRConstants.PROV_NAME=providerSaved;
+		
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();

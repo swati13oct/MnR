@@ -288,7 +288,6 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
-		FirstHospitalRecord.click();
 		validate(Facilityicon);
 		selectProviderBtn.click();		
 		if(validate(addressCheckBox)){
