@@ -3531,4 +3531,20 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
 		planComparePage.CounterNewRemoveLink(Counter);
 	}
+	
+	@And("^the user signs in with optum Id in medsup flow$")
+	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+	
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.signInOptumId(username, password);
+	}
 }
