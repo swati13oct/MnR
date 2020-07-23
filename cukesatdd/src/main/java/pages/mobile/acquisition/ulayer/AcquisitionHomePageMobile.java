@@ -452,17 +452,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		openAndValidate();
 	}
 
-	public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate(alreadyOnSite);
-	}
-	
-	public AcquisitionHomePageMobile(WebDriver driver, String siteOrPage) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate(siteOrPage);
-	}
+//	public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
+//		super(driver);
+//		PageFactory.initElements(driver, this);
+//		openAndValidate(alreadyOnSite);
+//	}
+//	
+//	public AcquisitionHomePageMobile(WebDriver driver, String siteOrPage) {
+//		super(driver);
+//		PageFactory.initElements(driver, this);
+//		openAndValidate(siteOrPage);
+//	}
 
     
 	public String fetchEnvironmentUrls () {
@@ -482,7 +482,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 
 
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
 			
@@ -523,8 +523,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Proactive chat popup not displayed");
 		}
 		}
-	}
-	public void openAndValidate(String siteOrPage) {
+	}*/
+	/*public void openAndValidate(String siteOrPage) {
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
@@ -568,7 +568,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			openAndValidate();
 		}
 	}
-	
+	*/
 	public String getTestSiteUrl() {
 		return testSiteUrl;
 	}
@@ -615,27 +615,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public VPPPlanSummaryPageMobile searchPlansForLearnFindPlans(String zipcode, String countyName) {
-		sendkeys(learnzipCodeField, zipcode);
-		learnfindPlansButton.click();
-		try {
-			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
-
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
-			return new VPPPlanSummaryPageMobile(driver);
-		}
-		return null;
-	}
+//	public VPPPlanSummaryPageMobile searchPlansForLearnFindPlans(String zipcode, String countyName) {
+//		sendkeys(learnzipCodeField, zipcode);
+//		learnfindPlansButton.click();
+//		try {
+//			if (countyModal.isDisplayed()) {
+//				for (WebElement county : countyRows) {
+//					if (county.getText().equalsIgnoreCase(countyName)) {
+//						county.click();
+//						break;
+//					}
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.println("county box not found");
+//		}
+//		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+//			return new VPPPlanSummaryPageMobile(driver);
+//		}
+//		return null;
+//	}
 
 	public VPPPlanSummaryPageMobile navigateToVpp(String zipcode) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
@@ -698,21 +698,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public Boolean visitAARPOrgClick() {
-		validateNew(visitAARPLink);
-		visitAARPLink.click();
-		validateNew(visitAARPLink);
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		if (getTitle().equalsIgnoreCase("You are now leaving AARPMedicarerx.com")) {
-			proceedLink.click();
-			if (driver.getCurrentUrl().equals("http://www.aarp.org/")) {
-				return true;
-
-			}
-		}
-		return false;
-	}
+//	public Boolean visitAARPOrgClick() {
+//		validateNew(visitAARPLink);
+//		visitAARPLink.click();
+//		validateNew(visitAARPLink);
+//		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//		driver.switchTo().window(tabs.get(1));
+//		if (getTitle().equalsIgnoreCase("You are now leaving AARPMedicarerx.com")) {
+//			proceedLink.click();
+//			if (driver.getCurrentUrl().equals("http://www.aarp.org/")) {
+//				return true;
+//
+//			}
+//		}
+//		return false;
+//	}
 
 	public Boolean validate_alreadyPlanMemberButton_inactive() {
 		return validateNew(alreadyPlanMemberButtonInactive);
@@ -1065,7 +1065,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 
-
+/*
 	public AboutUsAARPPage aboutUsFooterClick() {
 		validateNew(footerAboutUsLink);
 		footerAboutUsLink.click();
@@ -1157,7 +1157,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return false;
 
 	}
-
+*/
 	public boolean validateAllElementsOnPage() {
 		if (!validateNew(zipCodeField) && !validateNew(findPlansButton) && !validateNew(lookzip))
 			return false; // if all three elements return false for validation
@@ -1205,7 +1205,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 		
-	
+	/*
 	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {		
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
@@ -1244,7 +1244,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}		
-	
+	*/
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
 		Actions action = new Actions(driver);
@@ -1292,6 +1292,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 	
 	}
+	/*
 	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
     {             
            waitforElement(ShopForaplan);
@@ -1303,7 +1304,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
            else {
                   return null;}
     }
-	
+	*/
 	public WelcomePage ZipcodeSearchToOLEWithOutCounty(String zipcode,String planName) throws Exception {
 		try {
 			Thread.sleep(3000);
@@ -1380,7 +1381,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		
 		return new VPPPlanSummaryPageMobile(driver);
 	}
-	public  keywordSearchAARP searchfield() {
+	/*public  keywordSearchAARP searchfield() {
 		validate (searchfield);		
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
 		validate (searchbutton);
@@ -1398,7 +1399,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new  keywordSearchAARP(driver);
 		return null;	
 	}
-	
+	*/
 		public ZipcodeLookupHomePage looksupforZipcodes() {
 
 			lookzip.click();
@@ -1482,13 +1483,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 backToTop.click();	
 		}
 
-		public void validateHeaderLinks() {
-			  validateNew(headerSignInLink);
-			  validateNew(headerRegisterLink);
-			  validateNew(visitAARPLink);
-			  validateNew(AARPlogo);
-			  validateNew(visitorprofileicon);
-			}
+//		public void validateHeaderLinks() {
+//			  validateNew(headerSignInLink);
+//			  validateNew(headerRegisterLink);
+//			  validateNew(visitAARPLink);
+//			  validateNew(AARPlogo);
+//			  validateNew(visitorprofileicon);
+//			}
 
 		public void signInheader() {
 			headerSignInLink.click();
@@ -1507,21 +1508,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			
 		}
 
-		public void validateAARPlogo() {
-			// TODO Auto-generated method stub
-			  validateNew(AARPlogo);	
-			  WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
-			  WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
-				if(AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()){
-					Assert.assertTrue(true);
-					System.out.println("Correct AARP Logo is Displayed");
-				}
-				else
-				{
-					Assert.fail("AARP logo is not dispalyed for Ulayer");
-				}	
-
-		}
+//		public void validateAARPlogo() {
+//			// TODO Auto-generated method stub
+//			  validateNew(AARPlogo);	
+//			  WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
+//			  WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+//				if(AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()){
+//					Assert.assertTrue(true);
+//					System.out.println("Correct AARP Logo is Displayed");
+//				}
+//				else
+//				{
+//					Assert.fail("AARP logo is not dispalyed for Ulayer");
+//				}	
+//
+//		}
 
 		public void navigateToPath(String path) {
 
@@ -1547,7 +1548,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			validateNew(footerDisclaimersLink);
 			validateNew(footerAgentsnBrokersLink);
 			validateNew(footerAccessibilitylink);
-			validateNew(aarpOrgLink);
+			//validateNew(aarpOrgLink);
 			validateNew(medicareAdvantagePlansLink);
 			validateNew(medicareSupplementInsurancePlansLink);
 			validateNew(medicarePrescriptionDrug_PlansLink);
@@ -1573,21 +1574,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			checkModelPopup(driver, 30);
 		
 		}
-		
-		public void CheckiPerseptions() {
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-			try{
-				if(proactiveChatExitBtn.isDisplayed())
-					jsClickNew(proactiveChatExitBtn);
-			}catch(Exception e){
-				System.out.println("Proactive chat popup not displayed");
-			}
-		}
-		
+//		
+//		public void CheckiPerseptions() {
+//			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+//			try{
+//				if(proactiveChatExitBtn.isDisplayed())
+//					jsClickNew(proactiveChatExitBtn);
+//			}catch(Exception e){
+//				System.out.println("Proactive chat popup not displayed");
+//			}
+//		}
+//		
 		
 		public void validateSubNavShopPlanLinks() {
 			CheckPageLoad();
-			CheckiPerseptions();
+			//CheckiPerseptions();
 		
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
@@ -1641,7 +1642,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
 				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
+				//actions.moveToElement(AARPlogo);
 				actions.build().perform();
 }
 			else {
@@ -1652,7 +1653,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		public void validateSubNavMedEdLinks() {
 			CheckPageLoad();
-			CheckiPerseptions();
+			//CheckiPerseptions();
 		
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
@@ -1693,7 +1694,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			  Assert.assertTrue(true); 
 			  System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
 				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
+				//actions.moveToElement(AARPlogo);
 				actions.build().perform();
 		  } 
 		  else { 

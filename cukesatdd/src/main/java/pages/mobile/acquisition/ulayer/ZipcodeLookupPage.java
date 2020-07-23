@@ -63,7 +63,7 @@ public class ZipcodeLookupPage extends UhcDriver {
 
 	}
 
-	public ZipcodeSelectionPage enterAddressDetailsplansPage(String address,
+	/*public ZipcodeSelectionPage enterAddressDetailsplansPage(String address,
 			String city, String state) {
 
 		sendkeys(addressField, address);
@@ -78,7 +78,7 @@ public class ZipcodeLookupPage extends UhcDriver {
 		return null;
 
 	}
-
+*/
 	@Override
 	public void openAndValidate() {
 		validate(addressField);

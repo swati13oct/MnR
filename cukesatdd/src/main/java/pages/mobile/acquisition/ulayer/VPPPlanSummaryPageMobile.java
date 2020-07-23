@@ -1279,7 +1279,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return false;
 
 	}
-	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
+	/*	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
 
 
 		if (planName.contains("HMO")) {
@@ -1385,7 +1385,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				}
 				return null;
 	}
-
+*/
+	/*
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -1416,6 +1417,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	*/
 
 	
 	public void clickonViewPlans() {
@@ -1710,7 +1712,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 
-	public MultiCountyModalPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+	/*public MultiCountyModalPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
 		ChangeLocationLink.click();
 		validate(ZipCodeTxtBx);
 		ZipCodeTxtBx.click();
@@ -1725,7 +1727,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return null;
 	}
-
+*/
 	public VPPPlanSummaryPageMobile validatePromoWidjetAArp(String planName) {
 		try {
 			Thread.sleep(6000);
@@ -3150,7 +3152,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 
-	public PlanDetailsPage clickViewDetails_AddedToCompare() {
+/*	public PlanDetailsPage clickViewDetails_AddedToCompare() {
 
 		validateNew(ViewPlanLink_AddedToCompare);
 		ViewPlanLink_AddedToCompare.click();
@@ -3159,7 +3161,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return new PlanDetailsPage(driver);
 		return null;
 	}
-
+*/
 
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	//a[contains(@class, 'EBRC')]

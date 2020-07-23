@@ -24,8 +24,8 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.MultiCountyModalPage;
-import pages.mobile.acquisition.ulayer.PlanDetailsPage;
+//import pages.mobile.acquisition.ulayer.MultiCountyModalPage;
+//import pages.mobile.acquisition.ulayer.PlanDetailsPage;
 import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePage;
@@ -56,26 +56,26 @@ public class VppStepDefinitionUpdatedMobileAARP {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
-	@Given("^the user is on UHC medicare acquisition site page on AARP on Mobile$")
-	public void the_user_on_uhc_medicares_Site_on_Mobile() {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "Blayer");
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-	
-	@Given("^the user lands on AARP medicare acquisition site page on Mobile$")
-	public void the_user_lands_AARP_medicares_Site_on_AARP_Mobile() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "Ulayer");
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "Ulayer");
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
+//	@Given("^the user is on UHC medicare acquisition site page on AARP on Mobile$")
+//	public void the_user_on_uhc_medicares_Site_on_Mobile() {
+//		WebDriver wd = getLoginScenario().getWebDriverNew();
+//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "Blayer");
+//
+//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+//				aquisitionhomepage);
+//	}
+//	
+//	@Given("^the user lands on AARP medicare acquisition site page on Mobile$")
+//	public void the_user_lands_AARP_medicares_Site_on_AARP_Mobile() {
+//		WebDriver wd = getLoginScenario().getWebDriver();
+//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "Ulayer");
+//
+//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "Ulayer");
+//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+//				aquisitionhomepage);
+//	}
 
 	/**
 	 * @throws InterruptedException 
@@ -247,82 +247,82 @@ public class VppStepDefinitionUpdatedMobileAARP {
 	 * @toDo:user view plan details of the above selected plan in AARP site and
 	 *            validates
 	 */
-	@When("^the user view plan details of the above selected plan in AARP site and validates on Mobile$")
-	public void user_views_plandetails_selected_plan_aarp_Mobile(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);
-		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, PlanName);
+//	@When("^the user view plan details of the above selected plan in AARP site and validates on Mobile$")
+//	public void user_views_plandetails_selected_plan_aarp_Mobile(DataTable givenAttributes) {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+//		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, PlanName);
+//
+//		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+//		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
+//		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
+//		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+//		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
+//		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+//		if (vppPlanDetailsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+//			Assert.assertTrue(true);
+//		} else
+//			Assert.fail("Error in Loading the Plan Details Page");
+//
+//	}
+//	
+//	@Then("^the user view plan details of the first plan in the given plan type in AARP site and validates on Mobile$")
+//	public void user_views_plandetails_selected_plantype_aarp_Mobile() {
+//		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+//		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
+//		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+//		if (vppPlanDetailsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+//			Assert.assertTrue(true);
+//		} else
+//			Assert.fail("Error in Loading the Plan Details Page");
+//
+//	}
 
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in Loading the Plan Details Page");
-
-	}
-	
-	@Then("^the user view plan details of the first plan in the given plan type in AARP site and validates on Mobile$")
-	public void user_views_plandetails_selected_plantype_aarp_Mobile() {
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in Loading the Plan Details Page");
-
-	}
-
-	@When("^the user validates the pdf section on Mobile$")
-	public void userValidatesPDFSection() {
-		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		vppPlanDetailsPage.validatePdfSection(planType);
-	}
-
-	
-	@Then("^User clicks on Back to Plans link and navigate back to plan summary in AARP site on Mobile$")
-	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_AARP_site_Mobile() {
-
-		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-
-		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
-		if (plansummaryPage != null) {
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in validating the Plan Summary Page");
-	}
-	
-	@And("^User click on add to compare checkbox and click on view details link on AARP Mobile$")
-	public void user_click_on_compare_checkbox_AARP_Mobile() {
-		VPPPlanSummaryPageMobile vppplansummarypage = (VPPPlanSummaryPageMobile) loginScenario
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		vppplansummarypage.clickCompareChkBox();
-		PlanDetailsPage planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
-		if (planDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
-		}
-	}
-	
-	@Then("^I uncheck and go back to the vpp page to validate for AARP on Mobile$")
-	public void uncheck_and_validate_vpp_page_for_AARP_Mobile() {
-		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		plandetailspage.clickCompareBox();
-		VPPPlanSummaryPageMobile vppsummarypage = plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
-			vppsummarypage.verifyPlanComapreCheckboxIsUncheckedforFirstPlan();
-	}
-	
+//	@When("^the user validates the pdf section on Mobile$")
+//	public void userValidatesPDFSection() {
+//		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
+//		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//		vppPlanDetailsPage.validatePdfSection(planType);
+//	}
+//
+//	
+//	@Then("^User clicks on Back to Plans link and navigate back to plan summary in AARP site on Mobile$")
+//	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_AARP_site_Mobile() {
+//
+//		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//
+//		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+//		if (plansummaryPage != null) {
+//			Assert.assertTrue(true);
+//		} else
+//			Assert.fail("Error in validating the Plan Summary Page");
+//	}
+//	
+//	@And("^User click on add to compare checkbox and click on view details link on AARP Mobile$")
+//	public void user_click_on_compare_checkbox_AARP_Mobile() {
+//		VPPPlanSummaryPageMobile vppplansummarypage = (VPPPlanSummaryPageMobile) loginScenario
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+//		vppplansummarypage.clickCompareChkBox();
+//		PlanDetailsPage planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
+//		if (planDetailsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
+//		}
+//	}
+//	
+//	@Then("^I uncheck and go back to the vpp page to validate for AARP on Mobile$")
+//	public void uncheck_and_validate_vpp_page_for_AARP_Mobile() {
+//		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//		plandetailspage.clickCompareBox();
+//		VPPPlanSummaryPageMobile vppsummarypage = plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+//			vppsummarypage.verifyPlanComapreCheckboxIsUncheckedforFirstPlan();
+//	}
+//	
 	/**
 	 * @toDo:user validates the available plans for selected plan types
 	 */
@@ -364,40 +364,40 @@ public class VppStepDefinitionUpdatedMobileAARP {
 				planSummaryPage.getSpecificPlanInfo(planName));
 	}
 
-	@Then("^the user view plan details of the above selected plan in AARP site vpp on Mobile$")
-	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vppMobile(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String planName = memberAttributesRow.get(0).getCells().get(1);
-		String planType = memberAttributesRow.get(1).getCells().get(1);
-		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, planName);
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
-			// Assert.assertTrue(true);
-			// }else
-			// Assert.fail("Error in validating the Plan Details Page");
-
-		}
-	}
-
-	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection AARP on Mobile$")
-	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection_Mobile()
-			throws InterruptedException {
-		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
-		// vppPlanDetailsPage);
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		vppPlanDetailsPage.validatetopbacktoplanslink();
-		vppPlanDetailsPage.browserBack();
-		vppPlanDetailsPage.validatedownbacktoplanslink();
-
-	}
-
+//	@Then("^the user view plan details of the above selected plan in AARP site vpp on Mobile$")
+//	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vppMobile(DataTable givenAttributes) {
+//
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		String planName = memberAttributesRow.get(0).getCells().get(1);
+//		String planType = memberAttributesRow.get(1).getCells().get(1);
+//		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, planName);
+//		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+//
+//		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+//		if (vppPlanDetailsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+//			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
+//			// Assert.assertTrue(true);
+//			// }else
+//			// Assert.fail("Error in validating the Plan Details Page");
+//
+//		}
+//	}
+//
+//	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection AARP on Mobile$")
+//	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection_Mobile()
+//			throws InterruptedException {
+//		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+//		// vppPlanDetailsPage);
+//		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//		vppPlanDetailsPage.validatetopbacktoplanslink();
+//		vppPlanDetailsPage.browserBack();
+//		vppPlanDetailsPage.validatedownbacktoplanslink();
+//
+//	}
+//
 
 
 	@When("^the user performs zipcode search using widget following information in the AARP site on Mobile$")
@@ -541,38 +541,38 @@ public class VppStepDefinitionUpdatedMobileAARP {
 			Assert.fail("Error in validating the OLE Campaign Landing");
 	}
 
-	@When("^the user navigates to the plan Details page on Mobile$")
-	public void user_navigates_to_plan_details_page_Mobile(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);
-		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, PlanName);
-
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
-		System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in Loading the Plan Details Page");
-
-	}
-
-	@Then("^the user Click on Look up your Provider button on Mobile$")
-	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage_Mobile() {
-
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-
-		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
-		if(providerSearchPage!=null) {
-			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-		}
-
-	}
+//	@When("^the user navigates to the plan Details page on Mobile$")
+//	public void user_navigates_to_plan_details_page_Mobile(DataTable givenAttributes) {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+//		getLoginScenario().saveBean(VPPMobileCommonConstants.PLAN_NAME, PlanName);
+//
+//		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+//
+//		String planType = (String) getLoginScenario().getBean(VPPMobileCommonConstants.PLAN_TYPE);
+//		System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
+//		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
+//		if (vppPlanDetailsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+//			Assert.assertTrue(true);
+//		} else
+//			Assert.fail("Error in Loading the Plan Details Page");
+//
+//	}
+//
+//	@Then("^the user Click on Look up your Provider button on Mobile$")
+//	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage_Mobile() {
+//
+//		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//
+//		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+//		if(providerSearchPage!=null) {
+//			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+//		}
+//
+//	}
 
 	@When("^the user performs plan search using Standalone Zipcode information in the AARP site$")
 	public void the_user_performs_plan_search_using_Standalone_Zipcode_information_in_the_AARP_site(DataTable givenAttributes) throws Throwable {
@@ -612,12 +612,12 @@ public class VppStepDefinitionUpdatedMobileAARP {
 	}
 
 
-	@Then("^the user clicks on Enroll Now for AARP site from Plan Details$")
-	public void the_user_clicks_on_Enroll_Now_for_AARP_site_from_Plan_Details() throws Throwable {
-	   
-			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	}
+//	@Then("^the user clicks on Enroll Now for AARP site from Plan Details$")
+//	public void the_user_clicks_on_Enroll_Now_for_AARP_site_from_Plan_Details() throws Throwable {
+//	   
+//			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+//					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//	}
 
 	@When("^the user clicks on Lookup zipcode on AARP on Mobile$")
 	public void the_user_clicks_on_Lookup_zipcode_on_AARP_on_Mobile() throws Throwable {

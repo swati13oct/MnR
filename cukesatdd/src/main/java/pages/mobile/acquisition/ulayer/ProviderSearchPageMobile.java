@@ -337,7 +337,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	}
 
-	public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
+	/*public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		// TODO Auto-generated method stub
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
@@ -375,7 +375,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new PlanDetailsPage(driver);
 
 	}
-
+*/
 
 	public VPPPlanSummaryPageMobile MultipleselectsProvider() {
 		GetStarted.click();
