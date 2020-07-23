@@ -24,6 +24,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 	@Override
 	public void openAndValidate(){
+		validateAsMuchAsPossible=false;
+	}
+	
+	public void openAndValidate(boolean input_validateAsMuchAsPossible){
+		validateAsMuchAsPossible=input_validateAsMuchAsPossible;
 	}
 
 	public boolean hasPrepareForNextYearTabDisplay(boolean expectTab) {
@@ -42,10 +47,12 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the PrepareForNextYear page...");
 		if (noWaitValidate(prepareForNextYearTab)) {
 			prepareForNextYearTab.click();
+			//tbd Assert.assertTrue("PROBLEM - loader still spinning after 30 seconds.  Page may have trouble loading.",waitForElementToDisappear(driver, loadingSpinner, 30));
 		}
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
-		checkModelPopup(driver,1);
+		checkModelPopup(driver,3);
+		//tbd sleepBySec(2);
 		Assert.assertTrue("PROBLEM - unable to navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 
 		if (expComboTab) 
@@ -155,7 +162,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 			//note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap));
 			//note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap));
-			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap));
+			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
 			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
 		} else {
 			note.addAll(pnfyGroup.validateReviewPlanChangesSection_grp(planType, memberType, currentDate, docDisplayMap));

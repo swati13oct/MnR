@@ -151,7 +151,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Senior Supplement Plan')]")
 	protected WebElement comboTab_SSP_planDoc;
-	
+
+	@FindBy(xpath="//div[contains(@class,'loading-block') and contains(@style,'block')]")
+	protected WebElement loadingSpinner;
+
 	@FindBy(xpath="//a[@id='preparefornextyear']")
 	protected WebElement prepareForNextYearTab;
 	
@@ -279,11 +282,15 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]")
 	protected WebElement ind_revPlnChgSec;
 	
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[contains(@class,'circle')]")
+	protected WebElement ind_revPlnChgSec_circle_noGreen1;
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and not(contains(@class,'green'))]")
-	protected WebElement ind_revPlnChgSec_circle_noGreen;
+	protected WebElement ind_revPlnChgSec_circle_noGreen2;
 
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[contains(@class,'circle')]")
+	protected WebElement ind_revPlnChgSec_circle_green1;
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and contains(@class,'green')]")
-	protected WebElement ind_revPlnChgSec_circle_green;
+	protected WebElement ind_revPlnChgSec_circle_green2;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//h3")
 	protected WebElement ind_revPlnChgSec_header;
@@ -337,8 +344,8 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_en;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]/../i")
-	protected WebElement ind_revPlnChgSec_docSec_anoc_en_arrow;
+	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'PDF')]/../i")
+	//tbd protected WebElement ind_revPlnChgSec_docSec_anoc_bf_arrow;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_es;
@@ -611,6 +618,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Ind')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Compare with')]/../i")
 	protected WebElement ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
 
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Ind')]//div[contains(@class,'planchoices_ind')]//p[contains(text(),'You have selected')]")
+	protected WebElement ind_compPlnsSec_lrnOthPlnSec_selectedPlan_text;
+
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Ind')]//div[contains(@class,'planchoices_ind')]//p[contains(text(),'You have selected')]/strong")
+	protected WebElement ind_compPlnsSec_lrnOthPlnSec_selectedPlan_planName;
+
 	//note: Enroll in the plan that works for you
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'review-sub')]")
 	protected WebElement ind_enrolPlnSec;
@@ -653,15 +666,18 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//p[1]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
 
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//p[1]//a[contains(text(),'Compare with')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//a[contains(text(),'Compare with')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
 
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//p[1]//a[contains(text(),'Compare with')]/../i[2]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//a[contains(text(),'Compare with')]/../i")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
 
 	//note: Enroll in the plan that works for you - Choose your plan - You selected Plan Name
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'newplan')]//p[contains(text(),'You selected Plan Name')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'newplan_id1')]//p[contains(text(),'You selected')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_seleNewPln_text;
+	
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'newplan_id1')]//p[contains(text(),'You selected')]/strong")
+	protected WebElement ind_enrolPlnSec_choYurPlnSec_seleNewPln_planName;
 
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//p[2]//a[contains(text(),'Compare with')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_seleNewPln_compNewPlnsLnk;
@@ -672,6 +688,8 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'currentplan') and not(contains(@class,'ng-hide'))]//p[contains(text(),'You will stay in')]")
 	protected WebElement ind_enrolPlnSec_choYurPlnSec_stayInCurrPln_planName;
+
+	
 	
 	//note: aarp acq site zipcode input box
 	@FindBy(xpath="//input[@id='cta-zipcode']")
@@ -682,7 +700,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement providerSearchHeaderTxt;
 	
 	//note: Drug Search page
-	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	@FindBy(xpath="//h1[contains(@class,'h1')]")
 	protected WebElement dceHeader;
 	
 	//note: Pharmacy Locator page
@@ -692,6 +710,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	//note: Acq compare plan
 	@FindBy(xpath="//div[contains(@class,'plan-overview-wrapper')]")
 	protected WebElement acqPlanOverviewBox;
+	
+	//note: Acq popup exit
+	@FindBy(xpath="//button[contains(text(),'Exit')]")
+	protected WebElement acqPopupExit;
 	
 	/* TODO
 	@FindBy(xpath="//div[contains(@class,'next-year-section')]//div[@class='step-section'][3]")

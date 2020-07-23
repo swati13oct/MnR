@@ -25,7 +25,9 @@ import pages.regression.prepareForNextYear.AemPage;
 import pages.regression.prepareForNextYear.PrepareForNextYearPage;
 
 public class PrepareForNextYearStepDefinition {
-
+	
+	protected static Boolean validateAsMuchAsPossible=false;
+	
 	@Autowired
 	MRScenario loginScenario;
 
@@ -418,11 +420,26 @@ public class PrepareForNextYearStepDefinition {
 		}
 		testNote.addAll(sectionNote);
 
+		boolean finalCheck=true;
+		for(String s: testNote) {
+			if (s.contains("FAILED")) {
+				finalCheck=false;
+				break;
+			}
+		}
 		testNote.add("\t=================");
-		testNote.add("\tPASSED - page content validation");
+		if (finalCheck)
+			testNote.add("\tPASSED - page content validation");
+		else 
+			testNote.add("\t * FAILED - page content validation");
+			
+		//tbd testNote.add("\t=================");
+		//tbd testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
+		
 	}	
 
 	@SuppressWarnings("unchecked")
@@ -445,6 +462,7 @@ public class PrepareForNextYearStepDefinition {
 		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 
 		pfnyPg.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
+		pfnyPg.setValidateAsMuchAsPossible(validateAsMuchAsPossible);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, pfnyPg);	
 	}
 	

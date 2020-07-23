@@ -58,8 +58,8 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_prepareForNextYear01d
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
-	    | 09    | F437767 | qavgogine | qavgogine | q1_feb_2020SHIP_002     | PDP	   | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | qavgogine | qavgogine | q1_feb_2020SHIP_002     | SHIP	   | COMBO_PDP_SHIP_PFNY |
+	    | 09    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | PDP	   | COMBO_PDP_SHIP_PFNY |
+	    | 10    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | SHIP	   | COMBO_PDP_SHIP_PFNY |
 			
 
   #-------------------------------------------------
