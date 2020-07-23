@@ -39,6 +39,6 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15343 | qavgogine | qavgogine | PerfDreamEOB_026| FED_SHIP_COMBO | RewardsMember | true    | true           |
-      | 15343 | qavgogine | qavgogine | Dream_EOB_MA_002| SHIP_FED_COMBO | RewardsMember | false   | true           |
+      | 15343 | qavgogine | qavgogine | q3_sep_UAT4_Group163| SHIP_FED_COMBO | RewardsMember | false   | true           |
  
  

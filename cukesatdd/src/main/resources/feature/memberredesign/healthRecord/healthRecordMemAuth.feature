@@ -85,8 +85,8 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	 #  | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
-	    | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | MA       | COMBO_SHIP_MA_IHR  | true       |
+	 #  | 16    | F424804 | qavgogine | qavgogine | q2_june_combo0017       | PDP      | COMBO_SHIP_PDP_IHR | true       |
+	    | 16    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group163       | MA       | COMBO_SHIP_MA_IHR  | true       |
 
     @memAuth_ihr_f
     Examples: 
