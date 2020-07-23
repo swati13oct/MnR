@@ -4,7 +4,7 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568656 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member views Active Prescription Drugs
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -19,7 +19,7 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568656 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member has more than 10 active prescriptions
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -119,7 +119,9 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -132,7 +134,9 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -145,7 +149,9 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -158,7 +164,9 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -233,7 +241,7 @@ Feature: MVP - My Medications
 
   @MyMedications @F448402 @US2568665 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball:Request received
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
