@@ -499,7 +499,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		} else {
 			Assert.assertTrue("PROBLEM - haven't code to handle filter '"+pharmacyType+"' yet", false);
 		}
-		driver.findElement(By.xpath("//label[@id='"+labelId+"']")).click();
+		WebElement label = driver.findElement(By.xpath("//label[@id='"+labelId+"']"));
+		jsClickNew(label);
 
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
