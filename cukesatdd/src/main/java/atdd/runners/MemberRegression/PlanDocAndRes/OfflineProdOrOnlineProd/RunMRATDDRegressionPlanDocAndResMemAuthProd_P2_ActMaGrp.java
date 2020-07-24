@@ -19,6 +19,6 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_Act
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp.json" }, tags = { "@prod_planAndDocuments02","@prod_active_ma_ind" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp.json" }, tags = { "@prod_planAndDocuments02","@prod_active_ma_grp" })
 public class RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp {
 }
