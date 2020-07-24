@@ -1011,7 +1011,7 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - is able to open pdf url, proceed to validate content");
 				PDDocument document = PDDocument.load(urlConnection.getInputStream());
 				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : " + PDFText);
+				//keepForDebug System.out.println("PDF text : " + PDFText);
 
 				String error="Your Explannation of Benefits is currently unavailable.";
 				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
@@ -1068,7 +1068,7 @@ public class EOBPage extends EOBBase{
 			System.out.println("TEST - is able to open pdf url, proceed to validate content");
 			PDDocument document = PDDocument.load(urlConnection.getInputStream());
 			String PDFText = new PDFTextStripper().getText(document);
-			System.out.println("PDF text : " + PDFText);
+			//keepForDebug System.out.println("PDF text : " + PDFText);
 
 			String error="Your Explannation of Benefits is currently unavailable.";
 			if (PDFText.contains(error)) {
