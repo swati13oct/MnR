@@ -339,6 +339,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
+		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
+			columnName = columnName.replace(" Zero", "");
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
@@ -364,8 +366,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
 				else if(benefitValueUI.endsWith("2"))
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-				else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
+				else if(benefitValueUI.contains("Out-of-NetworkBenefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
+					benefitValue = benefitValue.replace("Opensinanewwindow", "");
+				}
 			}
 			//removing footnote values from the end of the key values if any
 			
