@@ -383,11 +383,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = false;
 						if(key.contains("footnotes") && columnName.equalsIgnoreCase("footnotes"))
 							tmpUIString2 = tmpKeyString;
+						tmpUIString2 = tmpUIString1;
 						break;
 					}
 				
 				}else if(key.equalsIgnoreCase(columnName)) {
 						flag= false;
+						tmpUIString2 = tmpUIString1;
 						 break;
 					}
 			
