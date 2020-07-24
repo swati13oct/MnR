@@ -217,18 +217,25 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
-			//tbd String expUrl="How_to_read_Medical_EOB.pdf";
+			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+			System.out.println("total tab size="+newTab.size());
+
+			//note: Use the list of window handles to switch between windows
+			driver.switchTo().window(newTab.get(newTab.size()-1));
+			CommonUtility.checkPageIsReady(driver);
+
 			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			//TODO - validate PDF content when code deploy onto stage
-			
-			driver.navigate().back();
+
+			//note: Switch back to original window
+			driver.close();
+			driver.switchTo().window(newTab.get(newTab.size()-2));
 			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
-			sleepBySec(3);
+			sleepBySec(5);
+
 			if (memberType.contains("COMBO")) 
 				goToSpecificComboTab(planType);
 		}
