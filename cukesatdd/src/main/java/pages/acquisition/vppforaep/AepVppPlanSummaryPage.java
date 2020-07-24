@@ -269,7 +269,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			String benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase();
-			key = key.replace(",", "");
+			//key = key.replace(",", "");
 			columnName = columnName.toLowerCase();
 			if(columnName.contains("tier"))
 				System.out.println();
