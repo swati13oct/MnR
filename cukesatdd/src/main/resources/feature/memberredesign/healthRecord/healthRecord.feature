@@ -10,7 +10,7 @@ Feature: 1.24 Member Individual Health Record
       | Expect Link | <expectLink>       |
     Then the user validates clicking Health Record link will open new tab to the target page
 	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
-	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
+	#Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
