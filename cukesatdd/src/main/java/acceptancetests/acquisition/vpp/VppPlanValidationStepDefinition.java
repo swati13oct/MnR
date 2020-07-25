@@ -424,17 +424,18 @@ public class VppPlanValidationStepDefinition {
 								 if(cellIndex==0) { 
 									 
 									  String countyName = row.getCell(4).getStringCellValue();
-									 
+									  String planYear = row.getCell(5).getStringCellValue();
 									  String planName = row.getCell(3).getStringCellValue();
 									  
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 									  planSummaryPage.checkForMultiCountyPopup(countyName);
+									  planSummaryPage.selectYearOption(planYear);
 									  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);   									  							  		
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 									 
 									 resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))

@@ -336,13 +336,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
-		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="";
+		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
 		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
 			columnName = columnName.replace(" Zero", "");
 		for(String key : benefitsMap.keySet()) {
-			String benefitValueUI = benefitsMap.get(key);
+			benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
@@ -537,8 +537,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 			}
 		
 
-			if(counter == 0)
+			if(counter == 0) {
 				flag = false;
+				System.out.println("Values did not match for col:7 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+				tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+			}
 		
 			comparedResult.put(flag, tmpUIString2);
 			return comparedResult;
