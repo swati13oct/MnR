@@ -114,12 +114,12 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				  
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
-				 
+				 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
 					 	int failureCounter = 0;
-					 	int cellIndex = 0;System.out.println("INSIDE Row");
+					 	int cellIndex = 0;
 					 	
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
@@ -350,7 +350,7 @@ public class VppPlanValidationStepDefinition {
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
-		System.out.println("Set of TFNs from Sheet : "+sheetName);
+		
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -391,7 +391,7 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
-				
+				 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
