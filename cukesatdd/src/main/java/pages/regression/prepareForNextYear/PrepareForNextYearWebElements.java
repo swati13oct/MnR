@@ -353,10 +353,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]/../i")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_zh;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_zh_arrow;
 
 	// individual - reivew plan materials
@@ -427,10 +427,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//a[contains(text(),'Comprobante de')]/../i")
 	protected WebElement ind_revPlnMatlsSec_plnBeneSec_eoc_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'EOC')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnMatlsSec_plnBeneSec_eoc_zh;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'EOC')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnMatlsSec_plnBeneSec_eoc_zh_arrow;
 	
 	//note: Review Plan Materials - Prescription
@@ -467,10 +467,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'prescription_mapd_pdp')]//a[contains(text(),'Formulario')]/../i")
 	protected WebElement ind_revPlnMatlsSec_presDrugSec_cf_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'prescription_mapd_pdp')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'prescription_mapd_pdp')]//div[contains(@class,'formulery')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnMatlsSec_presDrugSec_cf_zh;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'prescription_mapd_pdp')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'prescription_mapd_pdp')]//div[contains(@class,'formulery')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
 
 	//note: Review Plan Materials - Provider Info
@@ -507,10 +507,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Directorio')]/../i")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@data-ng-if,'1027')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_pr_zh;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@data-ng-if,'1027')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_pr_zh_arrow;
 
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Vendor Information Sheet')]")
@@ -525,10 +525,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(text(),'Informaci')]/../i")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//div[contains(@class,'provider')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_ve_zh;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'Reviewprovider_MA_MAPD')]//div[contains(@class,'provider')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
 
 	//note: Review Plan Materials - Pharmacy Info
@@ -565,10 +565,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'pharmacy_MAPD_PDP')]//a[contains(text(),'Informaci')]/../i")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_ph_es_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'pharmacy_MAPD_PDP')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'pharmacy_MAPD_PDP')]//div[contains(@class,'Pharmacy')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_ph_zh;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'pharmacy_MAPD_PDP')]//a[contains(@ng-if,'zh') and contains(text(),'PDF')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'pharmacy_MAPD_PDP')]//div[contains(@class,'Pharmacy')]//div[contains(@data-ng-if,'zh')]//a[contains(text(),'PDF')]/../i")
 	protected WebElement ind_revPlnMatlsSec_pharInfoSec_ph_zh_arrow;
 
 	//note: Compare plans online

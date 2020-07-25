@@ -118,45 +118,46 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		note.add("\t=================");
 
-		targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
-		targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		//TODO - delete this when they remove the link
+		//tbd targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
+		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
+		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String expUrl="https://www.aarpmedicareplans.com/";
-		WebElement expElement=zipCodeField_acq;
-		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+		//tbd String expUrl="https://www.aarpmedicareplans.com/";
+		//tbd WebElement expElement=zipCodeField_acq;
+		//tbd note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-		targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
-		targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
+		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
+		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
-		//note: after link click, little check should turn green
-		note.add("\n\tValidate after clicking 'Compare Your Current Plan To Next Year's Plan' link");
-		targetItem=section+" - green checkmark";
-		targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd //note: after link click, little check should turn green
+		//tbd note.add("\n\tValidate after clicking 'Compare Your Current Plan To Next Year's Plan' link");
+		//tbd targetItem=section+" - green checkmark";
+		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
 		
-		//note: after link click, section circle should turn green
-		targetItem=section+" - green circle";
-		if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-			targetElement=ind_revPlnChgSec_circle_green1;
-		else 
-			targetElement=ind_revPlnChgSec_circle_green2;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd //note: after link click, section circle should turn green
+		//tbd targetItem=section+" - green circle";
+		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
+		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
+		//tbd else 
+		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
+		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
-		note.add("\n\tValidate after cookie remove for 'Compare Your Current Plan To Next Year Plan' section cookie");
-		deleteCookieAndReloadPgn(cookiePlnChgSection_findNew);
-		targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		//tbd note.add("\n\tValidate after cookie remove for 'Compare Your Current Plan To Next Year Plan' section cookie");
+		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection_findNew);
+		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
+		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
 
-		note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
-		deleteCookieAndReloadPgn(cookiePlnChgSection);
-		if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-			targetElement=ind_revPlnChgSec_circle_green1;
-		else 
-			targetElement=ind_revPlnChgSec_circle_green2;
-		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		//tbd note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
+		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection);
+		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
+		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
+		//tbd else 
+		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
+		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 
 		String docName="Annual Notice of Changes";
@@ -182,65 +183,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 		
-		/* tbd
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnChgSec_docSec_langDropdown, targetLang);
-
-			Select select2 = new Select(ind_revPlnMatlsSec_docSec_langDropdown);           
-			String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
-			if (validateAsMuchAsPossible) {
-				if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
-					note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
-			} else {
-				Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
-			}
-
-			targetElement=ind_revPlnChgSec_docSec_anoc_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_es_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, section circle should turn green
-			targetItem=section+" - green circle";
-			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-				targetElement=ind_revPlnChgSec_circle_green1;
-			else 
-				targetElement=ind_revPlnChgSec_circle_green2;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-		} else {
-			note.add("\tDO NOT "+targetLang+" EXPECT '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Spanish language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_es_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+" (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_es_arrow;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}
-		*/
-		
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -263,73 +205,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 		
-			/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnChgSec_docSec_langDropdown, targetLang);
-
-			Select select2 = new Select(ind_revPlnMatlsSec_docSec_langDropdown);        
-			String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
-			if (validateAsMuchAsPossible) {
-				if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"))
-					note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
-			} else {
-				Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
-			}
-
-			targetElement=ind_revPlnChgSec_docSec_anoc_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, section circle should turn green
-			targetItem=section+" - green circle";
-			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-				targetElement=ind_revPlnChgSec_circle_green1;
-			else 
-				targetElement=ind_revPlnChgSec_circle_green2;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Chinese language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_zh_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after 'Annual Notice of Changes (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			//note: after link click, section circle should turn green
-			targetItem=section+" - green circle";
-			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-				targetElement=ind_revPlnChgSec_circle_green1;
-			else 
-				targetElement=ind_revPlnChgSec_circle_green2;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-		}
-		*/
-
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnChgSec_docSec_langDropdown;
@@ -351,50 +226,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		
-		
-		/* tbd 
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnChgSec_docSec_langDropdown, targetLang);
-
-			targetItem=section+" - the 'or' text";
-			targetElement=ind_revPlnChgSec_docSec_befAnocOr;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_en;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-			
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+" (PDF)'";
-			targetElement=ind_revPlnChgSec_docSec_anoc_en_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, section circle should turn green
-			targetItem=section+" - green circle";
-			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-				targetElement=ind_revPlnChgSec_circle_green1;
-			else 
-				targetElement=ind_revPlnChgSec_circle_green2;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-		} else {
-			note.add("\tDO NOT EXPECT '"+docName+"' document to display");
-			Assert.assertTrue("SHOULD land on SAR page", false);;
-		}
-	*/
-	return note;
+		return note;
 	}
 	
 	public List<String> validateReviewPlanMaterialsSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
@@ -437,15 +269,15 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review your plan benefits and costs for next year' section");
 			note.addAll(validateReviewYourBenefitsPlans(section, planType, memberType, currentDate, docDisplayMap));
 
-			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
+			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review your Prescription drug coverage for next year' section");
 				note.addAll(validateReviewYourPresDrug(section, planType, memberType, currentDate, docDisplayMap));
 			}
-			if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review provider information for next year' section");
 				note.addAll(validateReviewProviderInfo(section, planType, memberType, currentDate, docDisplayMap));
 			}
-			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
+			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 				note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
 			}
@@ -514,61 +346,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
 
-			
-			/* tbd
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-				Select select2 = new Select(ind_revPlnChgSec_docSec_langDropdown);           
-				String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
-				if (validateAsMuchAsPossible) {
-					if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
-						note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
-				} else {
-					Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
-				}
-
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es_arrow;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				//note: after link click, little check should turn green
-				note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-				targetItem=section+" - green checkmark";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-				deleteCookieAndReloadPgn(cookiePlnMatSection_plnBft);
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem="Spanish language dropdown option'";
-				targetElement=ind_revPlnChgSec_lang_es_ava;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es_arrow;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-			} */
-
 			//note: if there is chinese doc
 			note.add("\t=================");
 			targetLang="Chinese";
@@ -591,61 +368,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
 
-			/* tbd 
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-				Select select2 = new Select(ind_revPlnChgSec_docSec_langDropdown);           
-				String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
-				if (validateAsMuchAsPossible) {
-					if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
-						note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
-				} else {
-					Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
-				}
-
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh_arrow;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				//note: after link click, little check should turn green
-				note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-				targetItem=section+" - green checkmark";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-				deleteCookieAndReloadPgn(cookiePlnMatSection_plnBft);
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem="Chinese language dropdown option'";
-				targetElement=ind_revPlnChgSec_lang_zh_ava;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh;
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' link'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh_arrow;
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			} */
-
 			note.add("\t=================");
 			targetLang="English";
 			langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -666,35 +388,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					pdfElement, arrowAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
-
-			/* tbd 
-			if (docDisplayMap.get(docName+" "+targetLang)) {
-				note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-				selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-				note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-				note.addAll(validatePdf(targetItem, targetElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en_arrow;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-				//note: after link click, little check should turn green
-				note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-				targetItem=section+" - green checkmark";
-				targetElement=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
-				note.addAll(validateHaveItem(targetItem, targetElement));
-
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				Assert.assertTrue("SHOULD land on SAR page", false);;
-			}
-			*/
-
 
 		} else {
 			if (validateAsMuchAsPossible) {
@@ -735,7 +428,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String expUrl="medicareplans.com/health-plans/estimate-drug-costs.html";
+		String expUrl="/health-plans/estimate-drug-costs.html";
+		if (memberType.toUpperCase().contains("UHC"))
+			expUrl="uhcmedicaresolutions.com"+expUrl;
+		else 
+			expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=dceHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 	
@@ -774,53 +471,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				willDeleteCookie));
 
 		
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
-			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Spanish language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_es_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}
-		*/
-
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -843,53 +493,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after Comprehensive Formulary link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
-			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Chinese language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_zh_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after Comprehensive Formulary link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} */
-
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -900,7 +503,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecCookie=cookiePlnMatSection_predrg;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
+		willDeleteCookie=false;
 		note.addAll(validatePdInSubSection(
 				docDisplayMap, 
 				section, subSection, 
@@ -910,39 +513,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-
-		/* tbd 
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_en;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - 'or open' text before '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_en_OR;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_bf_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			Assert.assertTrue("SHOULD land on SAR page", false);
-		}
-		*/
 
 		return note;
 	}
@@ -1029,53 +599,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_provInfo);
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Spanish language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_es_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}*/
-
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -1098,53 +621,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_provInfo);
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Chinese language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_zh_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after Comprehensive Formulary link'";
-			targetElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} */
-		
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -1165,51 +641,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-
-		/* tbd 
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - 'or open' text before '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_OR;
-			if (showSection) {
-				CommonUtility.waitForPageLoad(driver, targetElement, 10);
-				note.addAll(validateHaveItem(targetItem, targetElement));
-			} else {
-				if (validateAsMuchAsPossible) {
-					if (!noWaitValidate(targetElement)) 
-						note.add("\tPASSED - validation for NOT HAVING "+targetItem);
-					else
-						note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-				} else {
-					Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
-					note.add("\tPASSED - validation for NOT HAVING "+targetItem);
-				}
-			}	
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_pr_en_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			Assert.assertTrue("SHOULD land on SAR page", false);
-		}
-		*/
 
 		//------------------------------------------------------------------
 		docName="Vendor Information Sheet";
@@ -1235,53 +666,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_provInfo);
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Spanish language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_es_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} */
-
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -1304,53 +688,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 		
-		/* tbd
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_provInfo);
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-
-			targetItem="Chinese language dropdown option'";
-			targetElement=ind_revPlnChgSec_lang_zh_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after Comprehensive Formulary link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}		*/
-
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -1361,7 +698,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
+		willDeleteCookie=false;
 		note.addAll(validatePdInSubSection(
 				docDisplayMap, 
 				section, subSection, 
@@ -1371,33 +708,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-
-		/* tbd 
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_ve_en_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			Assert.assertTrue("SHOULD land on SAR page", false);
-		} */
 
 		return note;
 	}
@@ -1427,7 +737,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String expUrl="medicareplans.com/health-plans/aarp-pharmacy.html";
+		String expUrl="/health-plans/aarp-pharmacy.html";
+		if (memberType.toUpperCase().contains("UHC"))
+			expUrl="uhcmedicaresolutions.com"+expUrl;
+		else 
+			expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
@@ -1465,54 +779,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_pharInfo);
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Spanish language dropdown option'";
-			targetElement=ind_revPlnMatlsSec_lang_es_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_es;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_es_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} */
-
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -1535,53 +801,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		/* tbd 
-		targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnMatSection_pharInfo);
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			//note: no doc then no dropdown
-			targetItem="Chinese language dropdown option'";
-			targetElement=ind_revPlnMatlsSec_lang_zh_ava;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after Comprehensive Formulary link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		} */
-
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -1592,7 +811,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecCookie=cookiePlnMatSection_pharInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
+		willDeleteCookie=false;
 		note.addAll(validatePdInSubSection(
 				docDisplayMap, 
 				section, subSection, 
@@ -1602,39 +821,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-
-		/* tbd 
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(ind_revPlnMatlsSec_docSec_langDropdown, targetLang);
-
-			targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-			note.addAll(validatePdfLinkTxt(docName, targetElement));
-
-			note.addAll(validatePdf(targetItem, targetElement));
-
-			targetItem=section+" - 'or open' text before '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_OR;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Arrow after '"+docName+"' link'";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_arrow;
-			CommonUtility.waitForPageLoad(driver, targetElement, 10);
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-		} else {
-			note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-			Assert.assertTrue("SHOULD land on SAR page", false);
-		} */
 
 		return note;
 	}
@@ -1781,7 +967,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
-			String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
+			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
+			String expUrl="/health-plans.html#/plan-summary";
+			if (memberType.toUpperCase().contains("UHC"))
+				expUrl="uhcmedicaresolutions.com"+expUrl;
+			else 
+				expUrl="aarpmedicareplans.com"+expUrl;
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 			
@@ -1859,7 +1050,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		//note: circle would be green >= M4 w/o user doing anything
 		targetItem=section+" - Circle";
-		if (currentDate.before(showDocDate4)) {
+		if (currentDate.before(showDocDate3)) {
 			targetElement=ind_enrolPlnSec_circle_noGreen;
 		} else {
 			targetElement=ind_enrolPlnSec_circle_green;
@@ -2036,7 +1227,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 			
 			//note - validate link destination
-			String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
+			String expUrl="/health-plans.html#/plan-summary";
+			if (memberType.toUpperCase().contains("UHC"))
+				expUrl="uhcmedicaresolutions.com"+expUrl;
+			else 
+				expUrl="aarpmedicareplans.com"+expUrl;
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 

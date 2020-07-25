@@ -114,7 +114,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     #Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content for individual
+	Then the user validates Prepare For Next Year page content
 
 	@prod_prepareForNextYear02a
     Examples: 
