@@ -123,8 +123,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(backToAllPlans);
-		validate(plandetails);
+		validate(backToAllPlans,30);
+		validate(plandetails,30);
 
 	}
 
