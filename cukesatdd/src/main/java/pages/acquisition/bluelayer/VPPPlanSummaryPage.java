@@ -3895,8 +3895,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void CheckClick_CurrentYear_Plans() {
 
 		try {
-			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
-			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			//WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
+		//	WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'currentYear')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : " + CurrentYearRadio.getText());
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
