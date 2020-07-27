@@ -21,7 +21,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
+	@FindBy(id = "drugsearch")
 	public WebElement EnterDrugNameTxt;
 	
 	@FindBy(xpath = "//button[@id='search']")

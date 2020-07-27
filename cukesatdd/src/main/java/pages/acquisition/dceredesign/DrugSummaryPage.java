@@ -15,7 +15,7 @@ public class DrugSummaryPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "//*[@class='row mb-20']//div[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(xpath = "//*[@class='uhc-filter-group']")
@@ -42,13 +42,13 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
 	public WebElement drugsCovered;
 	
-	@FindBy(xpath = "//a[contains(text(),'Why Average?')]")
+	@FindBy(xpath = "//button[contains(text(),'Why Average?')]")
 	public WebElement whyAverageLink;
 	
-	@FindBy(xpath = "//*[@id='includeArrowRight_0']/..")
+	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]")
 	public WebElement whatsIncludedLink;
 	
-	@FindBy(xpath = "//*[@id='priceArrowRight_0']/..")
+	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
 	public WebElement drugPricingLink;
 	
 	@FindBy(xpath = "//button/span[text()='View Drug Costs']")
@@ -70,7 +70,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public DrugSummaryPage validateDrugSummaryPage() throws InterruptedException {
-		if(validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) &&	validateNew(pharmacyLink) && validateNew(sortDropdown)&&
+		if(validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) &&	validateNew(pharmacyLink) &&
 		validateNew(planCardHeader)&&
 		validateNew(avgMonthlyDrugCost) &&
 		validateNew(monthlyPremium)&&
