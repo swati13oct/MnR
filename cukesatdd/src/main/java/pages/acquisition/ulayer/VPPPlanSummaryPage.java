@@ -4008,6 +4008,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		} 
 	}
 	
+	@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
+	private WebElement InsuranceAgentLink;
+	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
+		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
+		InsuranceAgentLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("agent-appointment.html"))
+			return new IsInsuranceAgent(driver);
+		else
+			return null;
+	}
 	public void saveAllPlans(String savePlanNames, String planType){
 		String testPlanXpath="";
 		String initial_savePlanIconXpath = "";
