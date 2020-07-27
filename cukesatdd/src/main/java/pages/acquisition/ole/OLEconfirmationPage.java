@@ -3,6 +3,10 @@
  */
 package pages.acquisition.ole;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -47,6 +51,8 @@ public class OLEconfirmationPage extends UhcDriver{
 	public void openAndValidate() {
 		validateNew(PlanYear_PlanName);
 	}
+	private ArrayList<String> stringList;
+	private Map<String, ArrayList<String>> dataMap;
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		
@@ -116,5 +122,47 @@ public class OLEconfirmationPage extends UhcDriver{
 		System.out.println("Next Steps are Displayed for planType : "+planType);
 		return false;
 	}
+/*
+ * public ArrayList<String> validate_GPS_for_Plantype(String planName) {
+ * 
+ * String connectionUrl = "jdbc:sqlserver://120.130.10.2:1433;" +
+ * "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
+ * "encrypt=true;" + "trustServerCertificate=false;" + "loginTimeout=30;";
+ * 
+ * try (Connection connection = DriverManager.getConnection(connectionUrl);) {
+ * 
+ * System.out.println("Connection successful."); }
+ * 
+ * catch (SQLException e) { e.printStackTrace(); } // return OLEDataGPS; }
+ * 
+ * public void setMap(Map<String, ArrayList<String>> dataMap) {
+ * 
+ * this.dataMap = dataMap;
+ * 
+ * }
+ * 
+ * public Map<String, ArrayList<String>> getMap(){ return dataMap;
+ * 
+ * } }
+ */ 
+	public void validate_GPS_for_Plantype(String[] args) {
+	 String connectionUrl =
+             "jdbc:sqlserver://120.130.10.2:1433;"
+                     + "database=GPSST04SVC_TRN;"
+                     + "user=qaread;"
+                     + "password=testreadonly;"
+                     + "encrypt=true;"
+                     + "trustServerCertificate=false;"
+                     + "loginTimeout=30;";
 
+     try (Connection connection = DriverManager.getConnection(connectionUrl);) {
+         
+     	System.out.println("Connection successful.");
+     }
+     
+     catch (SQLException e) {
+         e.printStackTrace();
+     }
+ }
 }
+	

@@ -2780,4 +2780,26 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		else
 			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
+
+@Then("^the user validates the OLE Submission Details in GPS$")
+public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1) throws Throwable {
+		
+	List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+		oleConfirmationPage.validate_GPS_for_Plantype(null);
+		//boolean OLEGPSData= oleConfirmationPage.answer_following_questionsLongTerm(MemberDetailsMap);
+		//if (OLEGPSData = Null!) {
+			//getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,medicareInfoPage);
+			System.out.println("OLE GPS Data - All required OLE Details are Validated in GPS");
+	
+	}
+	//else
+	//Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
+
 }

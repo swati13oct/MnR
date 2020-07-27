@@ -403,6 +403,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+		
+		<dependency>
+   			<groupId>com.google.code.plsqlmaven</groupId>
+    		<artifactId>plsql-maven-plugin</artifactId>
+    		<version>1.11</version>
+		</dependency>
 		<dependency>
 		    <groupId>com.applitools</groupId>
 		    <artifactId>eyes-selenium-java3</artifactId>
@@ -433,7 +439,8 @@
     <groupId>io.appium</groupId>
     <artifactId>java-client</artifactId>
     <version>7.3.0</version>
-	</dependency>		
+	</dependency>	
+		
 		<dependency>
     <groupId>jdbcJar</groupId>
     <artifactId>ojdbc6</artifactId>
