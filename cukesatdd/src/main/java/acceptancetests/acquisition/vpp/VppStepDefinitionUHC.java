@@ -1875,15 +1875,7 @@ public class VppStepDefinitionUHC {
 	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
 		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayer PlanComparePage = planComparePage.validateCallSam();
-		if (PlanComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, PlanComparePage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
+		planComparePage.validateCallSam();
 	}
 	
 	
@@ -3226,5 +3218,21 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewlessplansComparePage();
+		}
+		
+		@And("^the user signs in with optum Id in medsup flow for uhc$")
+		public void the_user_signs_in_with_optum_Id(DataTable credentials) {
+			List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String username = plannameAttributesMap.get("User Name");
+			String password = plannameAttributesMap.get("Password");
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.signInOptumId(username, password);
 		}
 } 

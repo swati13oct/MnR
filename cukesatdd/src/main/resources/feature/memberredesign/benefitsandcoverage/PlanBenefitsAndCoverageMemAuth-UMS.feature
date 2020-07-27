@@ -199,8 +199,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
-      | Plan Benefits Table | <PlanBenefitsTable> |
+   # And the user verifies that the correct pdfs are coming in the plan material section
+      #| Plan Benefits Table | <PlanBenefitsTable> |
     #note: moved to footer feature
     #And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
@@ -210,8 +210,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validate vas tiles on vas page
 
     Examples: 
-      |TID  |username |password |MemUserName        |planType|memberType|language|PlanBenefitsTable  |numberOfBenefitCards|Identifier          | count| rider   |
-      |15094|qavgogine|qavgogine|q1_feb_2020SHIP_002| SHIP   |SHIP_BnC  | ENGLISH|Plan Benefits Table| 6                  |EffectiveShipMedSupp|   3  | NoRider |
+      |TID  |username |password |MemUserName        |planType|memberType|language|numberOfBenefitCards|Identifier          | count| rider   |
+      |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 6                  |EffectiveShipMedSupp|   3  | NoRider |
       
  #TC12_Benefits_for_MedicaMember
   @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_memAuth 
