@@ -37,9 +37,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
-      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
-      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
-      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa003 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ashah120 | Mnrqa003 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa003 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
@@ -77,7 +77,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType |
-      | 15347 | ashah120 | Mnrqa002 | rldf1942 | SHIP     | IND_footer |
+      | 15347 | ashah120 | Mnrqa003 | rldf1942 | SHIP     | IND_footer |
 
   @prod_footer03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
@@ -112,13 +112,13 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     Then the user navigates to the Health and Wellness page
     Then user validates Need Help section content for health and wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
-      | 15347 | ashah120 | Mnrqa002 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
-      | 15347 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
-      | 15347 | ashah120 | Mnrqa002 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa003 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ashah120 | Mnrqa003 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ashah120 | Mnrqa003 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer04
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
@@ -154,6 +154,6 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName      | planType | memberType            |
-      #| 15347 | ashah120 | Mnrqa002 | rldf1942      | SHIP     | IND_footer            |
+      #| 15347 | ashah120 | Mnrqa003 | rldf1942      | SHIP     | IND_footer            |
       #note: combo user with SHIP priority
-      #| xxxxx | ashah120 | Mnrqa002 | LUISGARCIA2054  | MA       | SHIP_FED_COMBO_footer |
+      #| xxxxx | ashah120 | Mnrqa003 | LUISGARCIA2054  | MA       | SHIP_FED_COMBO_footer |

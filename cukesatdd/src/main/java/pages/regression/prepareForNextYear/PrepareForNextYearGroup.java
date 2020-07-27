@@ -53,7 +53,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - checkmark";
-		targetElement=grp_reviewPlanChanges_docSection_checkMark;
+		targetElement=grp_reviewPlanChanges_docSection_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
