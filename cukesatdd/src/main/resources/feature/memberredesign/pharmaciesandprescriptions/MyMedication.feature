@@ -101,7 +101,7 @@ Feature: MVP - My Medications
       | FID     | planType | memberType         |
       | F448402 | MAPD     | Rx_Grp_PnP_rx_Call |
 
-  @MyMedications @F448402 @US2568667 @Naresh @Testing 
+  @MyMedications @F448402 @US2568667 @Naresh @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -128,7 +128,7 @@ Feature: MVP - My Medications
 
     Examples: 
       | FID     | planType | memberType                          |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+      | F392596 | MAPD      | Rx_Individual_PnP_rx_refill_renewal |
 
   @MyMedications @F448402 @US2568667 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
@@ -141,7 +141,7 @@ Feature: MVP - My Medications
 
     Examples: 
       | FID     | planType | memberType                          |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill_renewal |
+      | F392596 | MAPD      | Rx_Individual_PnP_rx_refill_renewal |
 
   @MyMedications @F448402 @US2568667 @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
@@ -263,7 +263,6 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  
   @MyMedications @F448402 @US2568656 @Naresh @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member selects the next page
     Given login with following details logins in the member portal and validate elements
@@ -278,3 +277,51 @@ Feature: MVP - My Medications
     Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MyMedications @F392596 @US2508869 @Naresh @Testing @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
+    When user have a home delivery medication eligible for refill
+    And user clicks Refill Medication call to action button
+    Then user views the OptumRx "My Prescriptions" page in a new browser tab
+
+    Examples: 
+      | FID     | planType | memberType                  |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx_refill |
+
+  @MyMedications @F392596 @US2508869 @Naresh @Testing @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
+    When user views a home delivery medication eligible for renewal
+    And user clicks the Renew Medication call to action button
+    Then user will view the OptunRx "My Prescriptions" page in a new browser tab
+
+    Examples: 
+      | FID     | planType | memberType                   |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx_renewal |
+
+  @MyMedications @F392596 @US2508869 @Naresh @Testing @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Resolve hold (SSO)
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user views the Medicine Cabinet on the My Medications page
+    When user views a home delivery medication on hold
+    And user clicks the Resolve Hold call to action button
+    Then user views the OptumRx "Order Status" page in a new browser tab
+
+    Examples: 
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
