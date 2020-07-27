@@ -35,7 +35,7 @@ Feature: 1.24 Member Individual Health Record
 	    | index | FID     | planType                 | memberType         | expectLink | 
 	   | 03    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR | false      |
+	    | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR| false      |
 
     @no_ihr_c
     Examples: 
@@ -77,7 +77,7 @@ Feature: 1.24 Member Individual Health Record
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 15    | F424804 | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	 #  | 16    | F424804 | PDP      | COMBO_SHIP_PDP_IHR | true       |
-	    | 16    | F424804 | MA       | COMBO_SHIP_MA_IHR  | true       |
+	    | 16    | F424804 | MAPD       | COMBO_SHIP_MAPD_IHR| true       |
 
     @ihr_f
     Examples: 

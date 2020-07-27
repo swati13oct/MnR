@@ -86,7 +86,8 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
       | index | planType | memberType        | note                              | flagZeroEob |
       | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | false       |  
      #| 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
-      | 08    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                        | false       | 
+      | 08    | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                        | false       | 
+     #| 08    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                        | false       | 
 
     @dreamEob01e
     Examples: 

@@ -48,8 +48,8 @@ Feature: 1.25 Member Prepare For Next Year
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
-	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MAPD_PFNY|
+	    | 08    | F437767 | MAPD	 | COMBO_SHIP_MAPD_PFNY|
 			
 	@prepareForNextYear01d
     Examples: 
@@ -188,8 +188,8 @@ Feature: 1.25 Member Prepare For Next Year
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
-	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MAPD_PFNY|
+	    | 08    | F437767 | MAPD     | COMBO_SHIP_MAPD_PFNY|
 			
 	@prepareForNextYear01d
     Examples: 
