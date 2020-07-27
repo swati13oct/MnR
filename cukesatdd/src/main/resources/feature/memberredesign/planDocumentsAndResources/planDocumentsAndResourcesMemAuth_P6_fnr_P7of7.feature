@@ -63,7 +63,7 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
 	@memAuth_active_ma_ind_7of7 @memAuth_active_ma_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-      | 09-104 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203  | MA  | AARP_IND_EFF_PDnR     | true   | true   |
+      | 09-104 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595  | MA  | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@memAuth_active_ma_grp_7of7 @memAuth_active_ma_7of7
 	Examples: 
