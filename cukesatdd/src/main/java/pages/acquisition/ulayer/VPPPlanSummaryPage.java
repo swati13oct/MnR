@@ -493,7 +493,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
 		private WebElement ResumeZipCode;
 
-		@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]//..//span")
+		@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]/following-sibling::span")
 		private WebElement resumeKey;
 
 		@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
@@ -703,12 +703,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
 		private WebElement peoplesHealthPlanName;
 		
-		//@FindBy(xpath = "//*[contains(@class,'cta-button action_optum')]")
-		@FindBy(xpath = "//*[@id='ole-form-controls']//*[@class='cta-button action_optum_sign_in']")
+		@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
 		private WebElement signIn;
 		
-		@FindBy(css="div.signupCTA.signupContainer a")
-		private WebElement signOut;
+		@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
+		private WebElement submitApplicationBtn;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3215,7 +3214,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
-		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
+		validateNew(nextButton);
 		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
@@ -3255,26 +3254,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-		Thread.sleep(3000);
-		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
-		validateNew(resumeApplicationBtn);
+		//validateNew(resumeApplicationBtn);
 		waitTillElementClickableInTime(applicationID, 30);
 		applicationID.sendKeys(ApplicationID);
 		ResumeDOB.sendKeys(DOB);
 		ResumeZipCode.sendKeys(zipcode);
-		resumeApplicationBtn.click();
-		jsClickNew(resumeApplicationBtn);
-		System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");
+		//resumeApplicationBtn.click();
+		submitApplicationBtn.click();
+		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page");
 	}
 
 
 
 	public void ResumeApplicationButtonValidation(String FirstName,String LastName) throws InterruptedException{
-		Thread.sleep(2000);
-		CommonUtility.waitForPageLoadNew(driver, welcomeHeader, 30);
+		
 		validateNew(welcomeHeader);
 
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		nextButton.click();
 		Thread.sleep(2000);
 		nextButton.click();
@@ -4097,28 +4093,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 
-	
-	@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
-	private WebElement InsuranceAgentLink;
-	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
-		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
-		InsuranceAgentLink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("agent-appointment.html"))
-			return new IsInsuranceAgent(driver);
-		else
-			return null;
-	}
-	
-	public void signIn(String username,String password) {
+
+	public void signInOptumId(String username, String password) {
 		try {
-			//if(waitForJStoLoad()){
-				//Assert.assertTrue("Sign in Link is not displayed", validateNew(signIn));
-			//}
-				//Thread.sleep(6000);	
-			validateNew(signIn);
-			jsClickNew(signIn);
-			//signIn.click();
+			
+			signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
@@ -4136,35 +4115,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 		
 	}
-	
-	/*
-	 * public boolean waitForJStoLoad () {
-	 * 
-	 * WebDriverWait wait = new WebDriverWait(driver, 30); JavascriptExecutor js =
-	 * (JavascriptExecutor) driver; // wait for jQuery to load
-	 * ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-	 * 
-	 * @Override public Boolean apply(WebDriver driver) { try { return
-	 * ((Long)js.executeScript("return jQuery.active") == 0); } catch (Exception e)
-	 * { return true; } } };
-	 * 
-	 * // wait for Javascript to load ExpectedCondition<Boolean> jsLoad = new
-	 * ExpectedCondition<Boolean>() {
-	 * 
-	 * @Override public Boolean apply(WebDriver driver) { return
-	 * js.executeScript("return document.readyState")
-	 * .toString().equals("complete"); } };
-	 * 
-	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
-	 */
-	
 
 }

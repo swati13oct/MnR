@@ -3265,5 +3265,19 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			planComparePage.validateViewlessplansComparePage();
 		}
 		
+		@And("^the user signs in with optum Id in medsup flow for uhc$")
+		public void the_user_signs_in_with_optum_Id(DataTable credentials) {
+			List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
 		
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String username = plannameAttributesMap.get("User Name");
+			String password = plannameAttributesMap.get("Password");
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.signInOptumId(username, password);
+		}
 } 

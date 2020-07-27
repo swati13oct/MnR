@@ -77,7 +77,7 @@ Feature: 2.12 ACQ - Global Components UHC
     @ShopPlan_Shop2_GlobalCompsUHC
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                       | tfnFlag |
-      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2] | true    |
       | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |

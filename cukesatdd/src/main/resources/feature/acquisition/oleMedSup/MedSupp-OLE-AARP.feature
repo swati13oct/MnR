@@ -21,6 +21,9 @@ Given the user is on AARP medicare acquisition site landing page
        Then the user signs in with optum Id credentials to resume application in AARP site
       | User Name | <userName> |
       | Password  | <password> | 
+     Then the user signs in with optum Id in medsup flow
+     		|User Name | <username> |
+     		|Password | <password>|
      Then user enters data to resume the application in the AARP site
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
@@ -32,8 +35,8 @@ Given the user is on AARP medicare acquisition site landing page
     
       
        Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |userName | password  |
-      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID2  | TiggerTigger1 | 
+      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password | 
+      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|
      
   
 @UHC_Retrive_App_AARP @oleMedSupUlayer

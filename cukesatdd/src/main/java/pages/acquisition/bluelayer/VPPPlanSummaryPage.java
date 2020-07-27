@@ -661,11 +661,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
 	private List<WebElement> plansInPopup;
 	
-	@FindBy(xpath = "//*[@id='ole-form-controls']//*[@class='cta-button action_optum_sign_in']")
+	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
 	private WebElement signIn;
 	
-	@FindBy(css="div.signupCTA.signupContainer a")
-	private WebElement signOut;
+	@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
+	private WebElement submitApplicationBtn;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
@@ -991,8 +991,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
-			sleepBySec(9);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+			// sleepBySec(9);
 //							jsClickNew(maPlansViewLink);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -3783,10 +3783,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ResumeZipCode.click();
 		Thread.sleep(2000);
 		ResumeZipCode.sendKeys(zipcode);
-		resumeApplicationBtn.click();
+		submitApplicationBtn.click();
 
 		System.out.println(
-				"Resume application button has been clicked successfully after entering the data on resume application page");
+				"Submit application button has been clicked successfully after entering the data on resume application page");
 	}
 
 	public void ResumeApplicationButtonValidation(String FirstName, String LastName) throws InterruptedException {
@@ -4580,16 +4580,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void waitForPlanSummaryPageLoad() {
 		CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
 	}
-	
-	public void signIn(String username,String password) {
+
+	public void signInOptumId(String username, String password) {
 		try {
-			//if(waitForJStoLoad()){
-				//Assert.assertTrue("Sign in Link is not displayed", validateNew(signIn));
-			//}
-				//Thread.sleep(6000);	
-			validateNew(signIn);
-			jsClickNew(signIn);
-			//signIn.click();
+			
+			signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
@@ -4607,12 +4602,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 		
 	}
+
 }
