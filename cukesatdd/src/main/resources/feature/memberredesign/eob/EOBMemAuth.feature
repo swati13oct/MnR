@@ -64,7 +64,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs1
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | qavgogine | qavgogine | q1_feb_2020SHIP_002     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB  Medical | true        | 
+      | 11    | qavgogine | qavgogine | q3_SEP_2020SHIP_001     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB  Medical | true        | 
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs2
     Examples: 

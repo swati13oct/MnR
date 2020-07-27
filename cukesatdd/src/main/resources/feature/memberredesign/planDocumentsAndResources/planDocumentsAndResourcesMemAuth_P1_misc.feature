@@ -100,7 +100,7 @@ Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Document
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
-      | 20-115 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_002    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
+      | 20-115 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 
 

@@ -98,6 +98,6 @@ Feature: 1.06.5.1 Member Plans and Documents - section: Provider Directory -or- 
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 19-095 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | false | false | false    | false    | false    | false    | false    | false    | 
-      | 20-119 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_002    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false    | false    | false    | false    | false    | false    | 
+      | 20-119 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false    | false    | false    | false    | false    | false    | 
   
   
