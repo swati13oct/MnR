@@ -217,7 +217,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user have a home delivery medication eligible for refill
-   # Then user validates the external link icon in the button
+    Then user validates the external link icon in the button
 
     Examples: 
       | FID     | planType | memberType                  |
@@ -231,7 +231,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views active medications
     When user views a home delivery medication eligible for renewal
-  #  Then user validates the external link icon in the button
+    Then user validates the external link icon in the button
 
     Examples: 
       | FID     | planType | memberType                   |

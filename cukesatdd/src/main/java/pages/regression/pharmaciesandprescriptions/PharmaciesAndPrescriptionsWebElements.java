@@ -231,7 +231,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
 	protected List<WebElement> sixMedications;
 
-	@FindBy(xpath = "//*[@aria-label='external link']")
+	@FindBy(xpath = "//*[@data-testid='resolve-hold-external-icon']")
 	protected List<WebElement> externalLink;
 
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
