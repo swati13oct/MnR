@@ -26,7 +26,7 @@ Feature: 1.09 Member Health and Wellness Page
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15341 | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | MA       | UHC_RewardsMember | true      | true           |
+      | 15341 | MA       | UHC_RewardsMember | true      | false          |
 
     @healthAndWellness01b
     Examples: 
@@ -55,7 +55,7 @@ Feature: 1.09 Member Health and Wellness Page
 
     Examples: 
       | TID   | planType  | memberType        | hasReward | hasRenewActive |
-      | 15341 | MA        | UHC_RewardsMember | true      | true           |
+      | 15341 | MA        | UHC_RewardsMember | true      | false          |
       
   @healthAndWellness03    
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated AARP member on the new Member site, I want to validate health and wellness page content via AARP deeplink

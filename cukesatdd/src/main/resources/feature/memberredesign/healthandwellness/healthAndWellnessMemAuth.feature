@@ -26,19 +26,19 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | qavgogine | qavgogine | q1_feb_nice_019 | MAPD     | RewardsMember     | true      | true           |
-      | 15341 | qavgogine | qavgogine | q2_june_NiceSeg_1595 | MA   | AARP_RewardsMember| true      | true           |
-      | 15341 | qavgogine | qavgogine | q1_uhc_ma001 | MA    | UHC_RewardsMember       | true      | true           |
+      | 15341 | qavgogine | qavgogine | q2_may_rally002 | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | qavgogine | qavgogine | q1_uhc_ma001    | MA       | UHC_RewardsMember | true      | false          |
 
     @memAuth_healthAndWellness01b
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | qavgogine | qavgogine | q2_jun_aarp0179 | PDP      | RewardsMember     | false     | false          |
-      | xxxxx | qavgogine | qavgogine | PaidInFullShip0011 | SHIP | RewardsMember     | false     | false           |
+      | xxxxx | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | RewardsMember     | false     | false          |
 
     @memAuth_healthAndWellness01c
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | qavgogine | qavgogine | q3_sep_UAT4_AARP023| FED_SHIP_COMBO | RewardsMember | false    | true           |
-      | 15343 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| SHIP_FED_COMBO | RewardsMember | true   | true           |
+      | 15343 | qavgogine | qavgogine | q3_sep_UAT4_AARP023| FED_SHIP_COMBO | RewardsMember | false    | true       |
+      | 15343 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| SHIP_FED_COMBO | RewardsMember | true   | true       |
  
  
