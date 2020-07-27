@@ -2,9 +2,9 @@
 Feature: MVP - My Medications
   I am a user of the M&R Portal with Rx benefits, I must have access to My Medications on P&P Page
 
-  @MyMedications @F448402 @US2568656 @Testing
+  @MyMedications @F448402 @US2568656 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member views Active Prescription Drugs
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -17,9 +17,9 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MyMedications @F448402 @US2568656 @Testing
+  @MyMedications @F448402 @US2568656 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Member has more than 10 active prescriptions
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -99,9 +99,9 @@ Feature: MVP - My Medications
 
     Examples: 
       | FID     | planType | memberType         |
-      | F448402 | MAPD     | Rx_Grp_PnP_rx_Call |
+      | F448402 | PDP     | Rx_Grp_PnP_rx_Call |
 
-  @MyMedications @F448402 @US2568667 @Naresh @Testing
+  @MyMedications @F448402 @US2568667 @Naresh @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx Home Delivery medication on informational hold
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -117,9 +117,11 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F448402 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MyMedications @F448402 @US2568667 @Testing
+  @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for refill
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -130,9 +132,11 @@ Feature: MVP - My Medications
       | FID     | planType | memberType                          |
       | F392596 | MAPD      | Rx_Individual_PnP_rx_refill_renewal |
 
-  @MyMedications @F448402 @US2568667 @Testing
+  @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home Delivery medication eligible for renewal
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -143,9 +147,11 @@ Feature: MVP - My Medications
       | FID     | planType | memberType                          |
       | F392596 | MAPD      | Rx_Individual_PnP_rx_refill_renewal |
 
-  @MyMedications @F448402 @US2568667 @Testing
+  @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order in progress
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -156,9 +162,11 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MyMedications @F448402 @US2568667 @Testing
+  @MyMedications @F448402 @US2568667 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Home delivery order delivered
-    Given I am an M&R member viewing Current Medications the Medicine Cabinet
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user have active medications
@@ -231,9 +239,9 @@ Feature: MVP - My Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @MyMedications @F448402 @US2568665 @Testing
+  @MyMedications @F448402 @US2568665 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball:Request received
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -247,7 +255,7 @@ Feature: MVP - My Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MyMedications @F448402 @US2568665 @Testing
+  @MyMedications @F448402 @US2568665 @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Harvey ball: Processing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -308,7 +316,7 @@ Feature: MVP - My Medications
 
     Examples: 
       | FID     | planType | memberType                   |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx_renewal |
+      | F436319 | PDP     | Rx_Individual_PnP_rx_renewal |
 
   @MyMedications @F392596 @US2508869 @Naresh @Testing @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Resolve hold (SSO)
