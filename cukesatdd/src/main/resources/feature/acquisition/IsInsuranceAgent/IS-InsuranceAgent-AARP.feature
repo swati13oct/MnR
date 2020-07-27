@@ -1,8 +1,7 @@
-@IS_InsuranceAgent_AARP
 Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow in AARP site
 
   @IS_InsuranceAgent_AARP
-  Scenario Outline: UID: <UID> - To Test IS Decision Guide E2E on AARP site
+  Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
