@@ -45,7 +45,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | xxxxx | qavgogine  | qavgogine | Dream_EOB_MAPD_007 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
-      | 15236 | qavgogine  | qavgogine | q1_feb_2020SHIP_034 | SHIP | Individual       | COMPASS_CLAIMS  | 
+      | 15236 | qavgogine  | qavgogine | PaidInFullShip0011 | SHIP | Individual       | COMPASS_CLAIMS  | 
 
     @memAuth_rallyClaims01e
     Examples: 

@@ -333,4 +333,3 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	  | TID   | username  | password  | MemUserName     | planType | memberType        		 |
 	  | 15272 | ashah120 | Mnrqa002 | TOMIKOARMER2    | MA       | IndAARPMA_Pharmacylocator |
 	  | 15272 | ashah120 | Mnrqa002 | kataz2525    | SHIP     | IndSHIP_Pharmacylocator   |
-

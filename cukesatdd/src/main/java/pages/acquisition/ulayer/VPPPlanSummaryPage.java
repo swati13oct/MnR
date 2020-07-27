@@ -2,7 +2,9 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -88,7 +90,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
+	//@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -97,7 +101,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
 
-
+	@FindBy(xpath="//a[@id='popupClose']")
+	private WebElement closeProfilePopup;
+	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement showPdpPlans;
 
@@ -318,13 +324,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
 	private WebElement planOverviewFindPlanButton;
 
-	@FindBy(xpath="//a[@id='popupClose']")
-	private WebElement closeProfilePopup;
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
+	private WebElement nextBestActionModal;
+	
+	@FindBy(xpath = "//div[@class='component_title']")
+	private WebElement nextBestActionModalMsg;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
+	private WebElement getStartedBtn;
+
+	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
+	private WebElement nextBestActionModalFindMyDoctorsBtn;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	
+	@FindBy(xpath = "button[ng-click='getProviders()']")
+	private WebElement findMyDoctorBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Select a Plan')]")
+	private WebElement contEnrollmentBtn;
 	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -399,7 +427,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
-
+		
+		@FindBy(id = "sign-up-modal-header")
+		private WebElement createProfilePopup;
+		
+		@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
+		private List<WebElement> plansInPopup;
+		
+		@FindBy(xpath = "//div[@class='uhc-modal']")
+		private WebElement selectPlanForEnrolModal;
+		
 		@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
 		private WebElement startDrpDwnOption;
 
@@ -452,7 +489,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
 		private WebElement ResumeZipCode;
 
-		@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]//..//span")
+		@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]/following-sibling::span")
 		private WebElement resumeKey;
 
 		@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
@@ -611,6 +648,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//span[@class='multiple-added-text show']")
 		private WebElement multipleCompareText;
 		
+		@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
+		private List<WebElement> planNames;
 		
 		@FindBy(id = "change-location")
 		private WebElement changeLocationBtn;
@@ -659,6 +698,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
 		private WebElement peoplesHealthPlanName;
+		
+		@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+		private WebElement signIn;
+		
+		@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
+		private WebElement submitApplicationBtn;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -736,8 +781,75 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return validatePopup;
 	}
 
+	public void validateButton(String BtnName) {
+		if (BtnName.equalsIgnoreCase("Get Started")) {
+			validate(getStartedBtn);
+		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
+			validate(findMyDoctorBtn);
+		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
+			validate(contEnrollmentBtn);
+		}
+	}
 
+	public void clickOnButtonInPlanSummaryPage(String BtnName) {
+		if (BtnName.equalsIgnoreCase("Get Started")) {
+			getStartedBtn.click();
+		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
+			waitTillElementClickableInTime(findMyDoctorBtn, 5);
+			findMyDoctorBtn.click();
+		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
+			waitTillElementClickableInTime(contEnrollmentBtn, 5);
+			contEnrollmentBtn.click();
+		}
+	}
+	
+	public void verifyNextBestActionModalForProviderSearch() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Provider search message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
+		nextBestActionModalFindMyDoctorsBtn.click();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+				break;
+		}
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+				}
+		return null;
+	}
+	
+	public void verifyNextBestActionModalForEnrollPlan() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_ENROLL_PLAN+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public void clickContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
+	
 	public void viewPlanSummary(String planType) {
+		//driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
@@ -745,8 +857,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
+			sleepBySec(8);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
@@ -806,12 +918,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
-
+		
+		System.out.println("page is loaded");
+		CommonUtility.waitForPageLoad(driver, vppTop, 10);
+		System.out.println("validated vppTop");
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		//switchToNewTabNew(ProviderSearchLink);
+	
+		System.out.println("checkPageIsReady=====");
+		CommonUtility.checkPageIsReady(driver);
+		
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ProviderSearchLink.click();
@@ -1740,7 +1859,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ZipCodeTxtBx.sendKeys(zipcode);
 		validate(FIndPlansButton);
 		FIndPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+			CommonUtility.checkPageIsReadyNew(driver);
 		if (countyModal.isDisplayed()) {
 			return new MultiCountyModalPage(driver);
 		}
@@ -2291,6 +2411,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 		validateNew(PlanSelectorToolRightRail);
 		System.out.println("Plan Selector Tool Section is present");    
 	}
+	
+	public List<String> getAllPlanNames()
+	{
+		List<String> allPlanNames=new ArrayList<String>();
+		for(WebElement plan:planNames) {
+			allPlanNames.add(plan.getText());
+		}
+		return allPlanNames;
+	}
 
 	public void validatePlanSelectorPageInRightRail() throws Exception  {
 		validateNew(StartPlanSelector);
@@ -2635,12 +2764,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+					
+		}else{
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		}
-		sleepBySec(2);
-		if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+		  sleepBySec(2);
+		
 			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
 	}
 
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName, String isMultiCounty) {
@@ -3080,7 +3210,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
-		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
+		validateNew(nextButton);
 		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
@@ -3120,25 +3250,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
-		validateNew(resumeApplicationBtn);
+		//validateNew(resumeApplicationBtn);
 		waitTillElementClickableInTime(applicationID, 30);
 		applicationID.sendKeys(ApplicationID);
 		ResumeDOB.sendKeys(DOB);
 		ResumeZipCode.sendKeys(zipcode);
-		resumeApplicationBtn.click();
-
-		System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");
+		//resumeApplicationBtn.click();
+		submitApplicationBtn.click();
+		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page");
 	}
 
 
 
 	public void ResumeApplicationButtonValidation(String FirstName,String LastName) throws InterruptedException{
-		Thread.sleep(2000);
-		CommonUtility.waitForPageLoadNew(driver, welcomeHeader, 30);
+		
 		validateNew(welcomeHeader);
 
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		nextButton.click();
 		Thread.sleep(2000);
 		nextButton.click();
@@ -3473,19 +3601,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 
 		public void checkOneCheckboxVerifyAutoSelection(String Status) {
+			System.out.println("Status==="+Status);
+			
 			WebElement Checkbox = driver.findElement(By
 					.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			
+				System.out.println("Checkbox for first box==="+Checkbox);
+				
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].click();", Checkbox);
 			System.out.println("checked One plan for plan compare");
-			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			
+			
+			
 			if (Status.contains("true")) {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is checked");
 				String text = multipleCompareText.getText();
 				System.out.println(text);
 			} else {
+				String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+			System.out.println("Plan compare checkbox status for second box:" + CheckStatus);
 				Assert.assertEquals(Status, CheckStatus.trim());
 				System.out.println("Verified checkbox is un checked");
 			}
@@ -3598,7 +3736,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * @param planName
 		 */
 		public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
-			//validatePlanSummary();
+
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+			System.out.println("Scrolled...");
+			waitforElementNew(agentModeBanner);
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 			
@@ -3654,8 +3796,86 @@ for (int i = 0; i < initialCount + 1; i++) {
 			}
 		}
 		
-		public void savePDPPlans() {
-			
+		public void savePlan(String planName)
+		{		
+			try {
+				List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+				System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+				Thread.sleep(5000);
+				for (String plan: listOfTestPlans) {
+					WebElement savePlan = driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				}
+				if(createProfilePopup.isDisplayed()) {
+					closeProfilePopup.click();
+				}
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public void verifySelectPlanForEnrollModalForSavedPlans(String planName) {
+			try
+			{
+			List<String> expectedPlanNames = Arrays.asList(planName.split(","));
+			List<String> actualPlanNames = new ArrayList<String>();
+			if (selectPlanForEnrolModal.isDisplayed()) {
+				for (WebElement plan : plansInPopup) {
+					String text = plan.getText();
+					for (WebElement child : plan.findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					actualPlanNames.add(text.trim());
+				}
+				Collections.sort(expectedPlanNames);
+				Collections.sort(actualPlanNames);
+				System.out.println(expectedPlanNames);
+				System.out.println(actualPlanNames);
+				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+			}
+			} catch (Exception ex) {
+				System.out.println("NBA modal not found");
+			}
+		}
+
+		public List<String> getSavedPlanNames() {
+			List<String> allPlanNames = new ArrayList<String>();
+			for (WebElement plan : planNames) {
+				allPlanNames.add(plan.getText());
+			}
+			return allPlanNames;
+		}
+		
+		public void verifySelectPlanForEnrollModalForallPlans(List<String>allPlanNames) {
+			try {
+				List<String> actualPlanNames = new ArrayList<String>();
+				if (selectPlanForEnrolModal.isDisplayed()) {
+					for (WebElement plan : plansInPopup) {
+						String text = plan.getText();
+						for (WebElement child : plan.findElements(By.xpath("./*"))) {
+							text = text.replaceFirst(child.getText(), "");
+						}
+						actualPlanNames.add(text.trim());
+					}
+					Collections.sort(allPlanNames);
+					Collections.sort(actualPlanNames);
+					System.out.println(allPlanNames);
+					System.out.println(actualPlanNames);
+					Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
+							+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
+				}
+				
+			}
+				catch(Exception ex) {
+				System.out.println("NBA modal not found");
+			}
+		}
+		
+		public void waitForPlanSummaryPageLoad() {
+			CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
 		}
 		
 		/**
@@ -3677,8 +3897,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("#########"+existingProviders.getText().trim()+"#########");
 				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
 			}
+			
 			validatePlanSummary();
-			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
 			//Validate Drugs
@@ -3866,6 +4086,35 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 			
 		return marketingBulletDetails;
+		
+	}
+
+
+	public void signInOptumId(String username, String password) {
+		try {
+			
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
 		
 	}
 

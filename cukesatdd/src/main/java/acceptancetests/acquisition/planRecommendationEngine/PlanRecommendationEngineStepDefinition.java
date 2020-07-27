@@ -220,7 +220,6 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
 		headerAndFooter.breadCrumbs();
-		planSelectorhomepage.landingpage();
 }
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -903,5 +902,11 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorResultspage.checkVPP(true);
 		else
 			planSelectorResultspage.checkVPP(false);
+	}
+	
+	@Then("^user validate Plan Names in VPP Summary and Details in results page$")
+   	public void verify_Plan_names_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -14,6 +15,7 @@ import acceptancetests.data.LoginCommonConstants;
 import cucumber.api.Scenario;
 // To be added
 import cucumber.api.java.After;
+import junit.framework.Assert;
 
 /**
  * This class will take a screen shot of the last screen executed by cucumber
@@ -56,7 +58,7 @@ public class GlobalTearDown {
 	 */
 	@After
 	public void tearDown(Scenario scenario) {
-
+		try {
 		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
 		{
 		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -82,12 +84,13 @@ public class GlobalTearDown {
 					e.printStackTrace();
 				}
 			 //mrScen.DriverQuit();
-			if(wd.getClass().toString().toUpperCase().contains("ANDROID")||wd.getClass().toString().toUpperCase().contains("IOS")) {
 				wd.quit();
-				System.out.println("---- Mobile Script Execution Completed ----");
-			}
+				System.out.println("---- Script Execution Completed ----");
+			
 		}
-
+		} catch (WebDriverException e) {
+			Assert.assertTrue("Got WebDriverException exception: "+e, false);
+		}
 	}
 	// to be added
 	/**

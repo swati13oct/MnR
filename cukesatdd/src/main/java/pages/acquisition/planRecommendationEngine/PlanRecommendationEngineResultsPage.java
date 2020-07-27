@@ -12,12 +12,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
@@ -74,11 +77,14 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 
 //Result Page Elements
 	
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
 	private WebElement planZipInfo;
 	
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
+	
+	@FindBy(css = "span.title small")
+	private WebElement planname;
 
 	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
 	private WebElement planBasedInfo;
@@ -115,6 +121,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview h3")
 	private List<WebElement> MAPlansName;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview")
+	private List<WebElement> MAPlansNames;
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) h3")
 	private WebElement MA1stPlanName;
@@ -209,6 +218,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview h3")
 	private List<WebElement> PDPPlansName;
 	
+	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview")
+	private List<WebElement> PDPPlansNames;
+	
 	@FindBy(css = "div[data-rel='#plan-list-4']")
 	private WebElement SNPPlanInfo;
 
@@ -224,6 +236,12 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) h3")
 	private WebElement SNP1stPlanName;
 	
+	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview h3")
+	private List<WebElement> SNPPlansName;
+	
+	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview")
+	private List<WebElement> SNPPlansNames;
+	
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview div.plan-name-div")
 	private List<WebElement> SNPPlansId;
 
@@ -235,6 +253,12 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='uhc-container']//h4[contains(text(),'Need Help?')]")
 	private WebElement needhelptxtMS;
+	
+	@FindBy(css = ".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(1)")
+	private WebElement ViewPlanDetailsButton;
+	
+	@FindBy(css = ".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(2)")
+	private WebElement EnrollPlanButton;
 	
 // Provider and Drug Details in Plan Type
 	
@@ -292,6 +316,17 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(id = "MultipleCounty")
 	private WebElement multiCountyInfo;
+	
+// VPP Details page
+	
+	@FindBy(css = ".uhc-container div.content h2:nth-child(2)")
+	private WebElement planNameVPPDetailsPage;
+	
+	@FindBy(id = "backToPlanSummaryTop")
+	private WebElement backtoPlanSummary;
+	
+	@FindBy(css = ".segment h2")
+	private WebElement planNameEnrollPage;
 	
 		
 //Result Loading Page Element Verification Method 
@@ -621,7 +656,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			WebElement drugSummary = MA1stPlanList.get(0).findElement(By.cssSelector("a.add-drug"));
 			validate(drugSummary,20);
 			Assert.assertTrue(drugSummary.getText().contains("Enter drug information"), "Enter drug information link is not available");
-			drugSummary.click();
+			jsClickNew(drugSummary);
 			pageloadcomplete();
 			Assert.assertTrue(driver.getCurrentUrl().contains("drug-cost-estimator"),
 					"Page is not navigated to DCE");
@@ -1126,6 +1161,134 @@ public void checkVPP(boolean isPREVPP) {
 			System.out.println(changeZIPVPP.getText());
 		}
 	}
+}
+
+public void validatePlanNamesSummaryAndDetails() {
+	System.out.println("Validating Plan Names in result pages : ");
+	plansLoader();
+	int maPlanCount = Integer.parseInt(MAPlanCount.getText());
+	System.out.println(maPlanCount);
+	validate(MA1stPlanName, 60);
+	verifyPlanNames(MAPlansName, maPlanCount);
+	verifyviewplanDetails(MAPlansName, maPlanCount);
+	verifyEnrollDetails(MAPlansName, maPlanCount);
+	plansLoader();
+	PDPViewPlansLink.click();
+	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
+	System.out.println(pdpPlanCount);
+	validate(PDP1stPlanName, 60);
+	verifyviewplanDetails(PDPPlansName, pdpPlanCount);
+	verifyEnrollDetails(PDPPlansName, pdpPlanCount);
+	plansLoader();
+	SNPViewPlansLink.click();
+	int snpPlanCount = Integer.parseInt(SNPPlanCount.getText());
+	System.out.println(snpPlanCount);
+	validate(SNP1stPlanName, 60);
+	verifyPlanNames(SNPPlansName, snpPlanCount);
+	verifyviewplanDetails(SNPPlansName, snpPlanCount);
+	verifyEnrollDetails(SNPPlansName, snpPlanCount);
+	}
+
+
+public void verifyPlanNames(List<WebElement> plansName, int maPlanCount) {
+	List<String> vppPlans = new ArrayList<String>();
+	System.out.println(plansName.size());
+	for(int i=0;i<maPlanCount;i++) {
+			vppPlans.add(verifygetplanName(plansName.get(i)));
+	}		
+	System.out.println("Plan Name compared Successful Clicks on Plan Name");
+}
+
+public String verifygetplanName(WebElement plan) {
+	String actualplanName = "";
+	scrollToView(plan);
+	String exceptedplanName = plan.getText().trim();
+	System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
+	plan.click();
+	pageloadcomplete();
+	actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+	Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+	backtoPlanSummary.click();
+	pageloadcomplete();
+	return actualplanName;
+}
+
+public String verifyviewplanDetails(List<WebElement> plansName, int PlanCount) {
+	WebElement planViewdetailsBut = null;
+	String actualplanName = "";
+	String exceptedplanName = "";
+	for(int i=0;i<PlanCount;i++) {
+	scrollToView(plansName.get(i));
+    exceptedplanName = plansName.get(i).getText().trim();
+    System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
+    if(exceptedplanName.contains("SNP"))
+    	planViewdetailsBut = SNPPlansNames.get(i).findElement(By.cssSelector(".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(1)"));
+    else if(exceptedplanName.contains("PDP"))
+    	planViewdetailsBut = PDPPlansNames.get(i).findElement(By.cssSelector("#viewmoredetlinkpdp"));
+    else
+    	planViewdetailsBut = MAPlansNames.get(i).findElement(By.cssSelector(".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(1)"));
+	planViewdetailsBut.click();
+	pageloadcomplete();
+	actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+	Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+	backtoPlanSummary.click();
+	pageloadcomplete();
+	}
+	System.out.println("Plan Name compared Successful Clicks on View Plan Details");
+	return actualplanName;
+}
+
+public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
+	WebElement planViewdetailsBut = null;
+	String actualplanName = "";
+	String exceptedplanName = "";
+	for(int i=0;i<PlanCount;i++) {
+		if(i>=1) {
+			if(actualplanName.contains("PDP"))
+				PDPViewPlansLink.click();
+			else if ((actualplanName.contains("SNP")) || (actualplanName.contains("Medicare Advantage")))
+				break;
+		}
+		scrollToView(plansName.get(i));
+    exceptedplanName = plansName.get(i).getText().trim();
+    System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
+    if(exceptedplanName.contains("SNP"))
+    	planViewdetailsBut = SNPPlansNames.get(i).findElement(By.cssSelector(".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(2)"));
+    else if(exceptedplanName.contains("PDP"))
+    	planViewdetailsBut = PDPPlansNames.get(i).findElement(By.cssSelector("div.enrollment span"));
+    else
+    	planViewdetailsBut = MAPlansNames.get(i).findElement(By.cssSelector(".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(2)"));
+	planViewdetailsBut.click();
+	pageloadcomplete();
+	actualplanName = planNameEnrollPage.getText().trim(); 
+	System.out.println("Plan Name in Plan Enroll Page: "+actualplanName);
+	Assert.assertTrue(actualplanName.contains(exceptedplanName), "--- Plan name are not matches---");
+//	backtoPlanSummary.click();
+	browserBack();
+	try {
+        WebDriverWait wait = new WebDriverWait(driver, 2);
+        if(wait.until(ExpectedConditions.alertIsPresent())==null) 
+        	System.out.println("alert was not present");
+        else {
+        	Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        System.out.println("alert was present and accepted");
+        }
+        
+    } catch (Exception e) {
+        //exception handling
+    }
+	}
+	System.out.println("Plan Name compared Successful Clicks on Enroll Plan");
+	return actualplanName;
+}
+
+public void browserBack() {
+
+	driver.navigate().back();
+	plansLoader();
 }
 	
 }

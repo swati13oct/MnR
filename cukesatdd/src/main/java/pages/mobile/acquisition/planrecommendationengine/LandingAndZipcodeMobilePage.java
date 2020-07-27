@@ -14,8 +14,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import atdd.framework.UhcDriver;
 
-import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
-
 public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	public LandingAndZipcodeMobilePage(WebDriver driver) {
@@ -188,8 +186,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			validate(zipcodePageCountyQuestionMark, 20);
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
-			Select multicounty = new Select(multicountySelect);
-			mobileSelectOption(multicounty, inputdata.get("County Name"));
+			//Select multicounty = new Select(multicountySelect);
+			mobileSelectOption(multicountySelect, inputdata.get("County Name"),true);
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
