@@ -559,7 +559,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected List<WebElement> listOfExtrnalLinkOnHold;
 
 	// ********************* Kiran ************************
-	@FindBy(xpath="//h1[@class='sc-fzXfLV bhyuxg sc-LzLNv euLIZt']")
+	@FindBy(xpath="//h1[@class='sc-LzLtS ikxaqs']") //ask for DataTestId attribute
 	protected WebElement MedicationName_OnDrugInfoPage;
 
 	@FindBy(xpath = "")
@@ -568,7 +568,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@class='sc-LzLrs ieWmEy' and contains(text(),'My Medication')]")
  	protected WebElement myMedicationsHeader;
 
-	@FindBy(xpath = "//span[text()='LEARN MORE']/parent::button")
+	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
 	protected List<WebElement> listOfLearnMore;
 
 	@FindBy(xpath = "")
@@ -690,6 +690,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  		return listOfIndex;
 	}    	
 	
+	public void viewTrackStatusCTAOnCurrentMedications() {
+		List<Integer> listOfIndex = getListOfIndexForTrackStatus();
+ 		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfTrackStatus.get(listOfIndex.get(rand_int));		
+ 	}
+	
 	public void clickOnTrackStatusCTAOnCurrentMedications() {
 		List<Integer> listOfIndex = getListOfIndexForTrackStatus();
  		Random rand = new Random();
@@ -703,7 +710,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  				listOfIndex.add(i);
  		}
  		return listOfIndex;
-	}    	   	
+	} 
+	
+	public void ViewOrderCTAOnCurrentMedications() {
+		List<Integer> listOfIndex = getListOfIndexForViewOrder();
+ 		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfViewOrder.get(listOfIndex.get(rand_int)); 		
+ 	}
 	
 	public void clickOnViewOrderCTAOnCurrentMedications() {
 		List<Integer> listOfIndex = getListOfIndexForViewOrder();

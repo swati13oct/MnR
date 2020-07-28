@@ -784,7 +784,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateOrderStatusForTrackHDDrug());
 	}
 	
-	List<String> listOfOrderStatusForTrackHDMedicine = new ArrayList<>(Arrays.asList("Request Received","Verifying with Doctor","Order Verified","Order Processing","Order Shipped","Order Delivered"));
+	List<String> listOfOrderStatusForTrackHDMedicine = new ArrayList<>(Arrays.asList("Request Received","Verifying With Doctor","Order Verified","Order Processing","Shipped","Delivered"));
 	
 	public boolean validateOrderStatusForTrackHDDrug() {
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
@@ -1045,16 +1045,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public List<Integer> getListOfIndexForHDPharmacy() {
 		List<Integer> listOfIndex = new ArrayList<>();
 		for (int i = 0; i < listOfPharmacyName.size(); i++) {
-			//System.out.println("HD Pharmacy "+listOfPharmacyName.get(i).getText());
-			
-			
-				//String text = listOfPharmacyName.get(i).getText();
-				//WebElement child=listOfPharmacyName.get(i).findElements(By.xpath("./*"));
-				//text = text.replaceFirst(child.getText(), "");
-				
-				
-	
-		    String text = listOfPharmacyName.get(i).getText();
+			String text = listOfPharmacyName.get(i).getText();
 			for (WebElement child : listOfPharmacyName.get(i).findElements(By.xpath("./*"))) {
 			text = text.replaceFirst(child.getText(), "");
 			}

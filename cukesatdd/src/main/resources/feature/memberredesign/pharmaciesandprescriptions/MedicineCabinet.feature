@@ -92,7 +92,7 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran
+  @MedicineCabinet @F392596 @US2301929 @Kiran @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects drug on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -106,21 +106,21 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType      |
       | F392596 | MAPD     | Rx_Group_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2301929 @Kiran @NoDataDependency
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user  selects Learn More button on Current Medications
+  @MedicineCabinet @F392596 @US2301929 @Kiran @Testing
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user selects Learn More button on Current Medications
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user clicks on the Learn More button on one of my active prescriptions listed under Current Medications
-    Then validate user redirects to the Drug Info page for that prescription/medication in the same browser tab
+    Then user validates the Drug Info overview page for that prescription/medication in the same browser tab
 
     Examples: 
       | FID     | planType | memberType          |
       | F392596 | MAPD     | Rx_Indiviual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
+  @MedicineCabinet @F392596 @US2508786 @Kiran @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views order status on Medicine Cabinet
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -134,15 +134,30 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508786 @Kiran @NoDataDependency
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify with doctor, Order Verified
+  @MedicineCabinet @F392596 @US2508786 @Kiran @Testing
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify harvey ball for Verifying with doctor
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views a home delivery drug listed in his Current Medications
-    Then user validates the status of Verifying with doctor or status of Order verified
+    Then user validates the status of Verifying with doctor
+    Then user views an empty Harvey Ball on that medication's row
+
+    Examples: 
+      | FID     | planType | memberType           |
+      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MedicineCabinet @F392596 @US2508786 @Kiran @Testing
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify harvey ball for Order Verified
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user views the Current Medications
+    When user views a home delivery drug listed in his Current Medications
+    Then user validates the status of Order verified
     Then user views an empty Harvey Ball on that medication's row
 
     Examples: 
@@ -263,54 +278,48 @@ Feature: MVP - Current Medications
       | FID     | planType | memberType             |
       | F392596 | MAPD     | Rx_Group_PnP_Delivered |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
-    When user have a home delivery medication eligible for refill
-    When user clicks Refill Medication call to action button
-    Then user views the OptumRx landing page in a new browser tab
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType                  |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
-
-  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
-    When user views a home delivery medication eligible for renewal
-    When user clicks the Renew Medication call to action button
-    Then user views the OptumRx landing page in a new browser tab
-    And user validates the external link icon in the button
-
-    Examples: 
-      | FID     | planType | memberType                  |
-      | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
-
-  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify  Resolve hold (SSO)
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
-    When user views a home delivery medication on hold
-    When user clicks the Resolve Hold call to action button
-    Then user views the OptumRx landing page in a new browser tab
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
-
-  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
+  #  @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
+  # Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill medication (SSO)
+  #   Given login with following details logins in the member portal and validate elements
+  #   | Plan Type   | <planType>   |
+  # | Member Type | <memberType> |
+  # When user navigates to the pharmacies and prescriptions page from testharness page
+  # Then user views the Current Medications
+  # When user have a home delivery medication eligible for refill
+  # When user clicks Refill Medication call to action button
+  # Then user views the OptumRx landing page in a new browser tab
+  # And user validates the external link icon in the button
+  # Examples:
+  # | FID     | planType | memberType                  |
+  # | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
+  # @MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
+  # Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication (SSO)
+  #   Given login with following details logins in the member portal and validate elements
+  #   | Plan Type   | <planType>   |
+  #    | Member Type | <memberType> |
+  #  When user navigates to the pharmacies and prescriptions page from testharness page
+  #  Then user views the Current Medications
+  #  When user views a home delivery medication eligible for renewal
+  #  When user clicks the Renew Medication call to action button
+  #  Then user views the OptumRx landing page in a new browser tab
+  #  And user validates the external link icon in the button
+  #  Examples:
+  #    | FID     | planType | memberType                  |
+  #    | F392596 | PDP      | Rx_Individual_PnP_rx_refill |
+  #@MedicineCabinet @F392596 @US2508869 @Kiran @NoDataDependency
+  #Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify  Resolve hold (SSO)
+  # Given login with following details logins in the member portal and validate elements
+  #  | Plan Type   | <planType>   |
+  #  | Member Type | <memberType> |
+  #  When user navigates to the pharmacies and prescriptions page from testharness page
+  #  Then user views the Current Medications
+  #  When user views a home delivery medication on hold
+  #  When user clicks the Resolve Hold call to action button
+  #  Then user views the OptumRx landing page in a new browser tab
+  # Examples:
+  #   | FID     | planType | memberType           |
+  #   | F392596 | MAPD     | Rx_Individual_PnP_rx |
+  @MedicineCabinet @F392596 @US2508869 @Kiran @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Track status
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -319,13 +328,12 @@ Feature: MVP - Current Medications
     Then user views the Current Medications
     When user views an active medication currently in progress for home delivery
     When user clicks the Track Status call to action button on that medication's row
-    Then user view the Order Status page for that medication
 
     Examples: 
       | FID     | planType | memberType           |
       | F392596 | MAPD     | Rx_Individual_PnP_rx |
 
-  @MedicineCabinet @F392596 @US2508869 @Kiran @DataDependency
+  @MedicineCabinet @F392596 @US2508869 @Kiran @Testing
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View order
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -333,8 +341,7 @@ Feature: MVP - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user views an active medication home delivery order that has been delivered
-    When user clicks the View order call to action button on that medication's row
-    Then user view the Order Status page for that medication
+    When user views the View order call to action button on that medication's row
 
     Examples: 
       | FID     | planType | memberType           |
@@ -488,6 +495,36 @@ Feature: MVP - Current Medications
     When user views a home delivery medication on hold
     And user clicks the Resolve Hold call to action button
     Then user views the OptumRx "Order Status" page in a new browser tab
+
+    Examples: 
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MedicineCabinet @F392596 @US2508869 @Kiran @Testing
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View order
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user views the Current Medications
+    When user views an active medication currently in progress for home delivery
+    When user clicks the Track Status call to action button on that medication's row
+    Then user view the Order Status page for that medication
+    
+    Examples: 
+      | FID     | planType | memberType           |
+      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+
+  @MedicineCabinet @F392596 @US2508869 @Kiran @Testing
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View order
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user views the Current Medications
+    When user views an active medication home delivery order that has been delivered
+    When user clicks the View order call to action button on that medication's row
+    Then user view the Order Status page for that medication
     
     Examples: 
       | FID     | planType | memberType           |
