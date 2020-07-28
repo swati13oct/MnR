@@ -8,24 +8,24 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionVppPlanSummary
+ * this file is to run test cases for RunMRATDDAcquisitionPlanRecommendationEngineUlayer
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
-		retryCount=0,
+		retryCount=1,
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionVppDSTBlayer.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineUlayer.json",
 		detailedReport = true,
 		detailedAggregatedReport = true,
 		overviewReport = true,
 		toPDF = true,
-		outputFolder = "target/RunMRATDDAcquisitionVppDSTBlayer")
+		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineUlayer")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" },
 		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" },
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppDSTBlayer.json" },
+		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineUlayer.json" },
 		tags = { "@SanityPRE" })
-public class RunMRATDDAcquisitionVppDSTBlayer { 
+public class RunMRATDDAcquisitionPlanRecommendationEngineUlayer { 
  
 }
