@@ -2342,15 +2342,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 		String url=driver.getCurrentUrl();
 		System.out.println("Current page URL: "+url);
-		if(url.equalsIgnoreCase("robot")){
+		
 			WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
 			if(validateNew(pageLoadText))
 				return true;
 			else
 				return false;
-		}else{
-			return false;
-		}
 		
 	}
 	
