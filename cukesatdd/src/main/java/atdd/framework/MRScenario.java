@@ -247,7 +247,7 @@ public class MRScenario {
 			} else if ((environment.contains("team-a")
 					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) ||  (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t"))))) {
+							|| (environment.equalsIgnoreCase("team-c")) ||  (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")|| (environment.equalsIgnoreCase("team-uhc-rx")))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
@@ -991,7 +991,7 @@ try {
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_79.0.3945.16\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chromedriver_win32\\chromedriver.exe");
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
 				return webDriver;

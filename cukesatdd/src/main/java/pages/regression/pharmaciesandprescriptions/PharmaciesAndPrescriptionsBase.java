@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
@@ -345,12 +346,14 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	
 	//F436319
 		public boolean pnpNotificationPositionValidate(WebElement element) {
-			return !element.getCssValue("margin-top").equals(null);
+			return element.getCssValue("margin-top").equals("15px");
 		}	
 		
 		//F436319
 		public void closePnPNotification(WebElement element) {
-			element.click();
+			Actions actions = new Actions(driver);
+			actions.moveToElement(element);
+			actions.click().build().perform();
 		}
 
 }
