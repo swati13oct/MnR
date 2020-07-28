@@ -2606,4 +2606,38 @@ public void validateResultSummaryPage() {
 		}
 	}
 
+public boolean isValidatePageLoadError(){
+		
+		String url=driver.getCurrentUrl();
+		System.out.println("Current page URL: "+url);
+		if(url.equalsIgnoreCase("robot")){
+			WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
+			if(validateNew(pageLoadText))
+				return true;
+			else
+				return false;
+		}else{
+			return false;
+		}
+		
+	}
+		
+	public boolean isValidateContent(String file){		
+		if(file.equals("robot")){
+			
+			String validContent= driver.findElement(By.xpath("/html/body/pre")).getText();
+			if(!validContent.isEmpty())
+				return true;
+			else 
+				return false;			
+		}else if(file.equals("sitemap")){
+			
+			String validContent= driver.findElement(By.xpath("/html/body/div[2]/span")).getText();
+			if(!validContent.isEmpty())
+				return true;
+			else 
+				return false;	
+		}
+		return false;
+	}
 }
