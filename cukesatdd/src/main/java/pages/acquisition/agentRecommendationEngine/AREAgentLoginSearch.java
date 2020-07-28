@@ -71,7 +71,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		cloakInBtn.click();
 		switchAnotherWindow(curWind);
 		commonUtils.plansLoader();
-		Assert.assertTrue(validate(stausTxt, 60), "Search not success");
+		//Assert.assertTrue(validate(stausTxt, 60), "Search not success");
 	}
 
 	public void switchAnotherWindow(String curWin) {

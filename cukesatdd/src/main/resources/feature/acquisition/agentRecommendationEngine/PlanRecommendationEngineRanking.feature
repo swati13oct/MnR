@@ -14,5 +14,5 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email              |
       | qavgogine | qavgogine | MARDI@MEMBER.COM   |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM  |
-      | qavgogine | qavgogine | xamegy@getnada.com |
+      #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
+      #| qavgogine | qavgogine | xamegy@getnada.com |
