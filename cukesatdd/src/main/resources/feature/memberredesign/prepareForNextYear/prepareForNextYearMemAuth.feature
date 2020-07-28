@@ -52,14 +52,14 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_prepareForNextYear01c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
-	    | 07    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group163    | SHIP	   | COMBO_SHIP_MAPD_PFNY|
-	    | 08    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group163    | MAPD	   | COMBO_SHIP_MAPD_PFNY|
+	    | 07    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group163    | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
+	    | 08    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group163    | MAPD	   | COMBO_SHIP_MAPD_IND_PFNY|
 			
 	@memAuth_prepareForNextYear01d
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
-	    | 09    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | PDP	   | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | SHIP	   | COMBO_PDP_SHIP_PFNY |
+	    | 09    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | PDP	   | COMBO_PDP_IND_SHIP_PFNY |
+	    | 10    | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 			
 
   #-------------------------------------------------

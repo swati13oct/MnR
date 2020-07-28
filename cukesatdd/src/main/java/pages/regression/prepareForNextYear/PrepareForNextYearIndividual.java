@@ -17,17 +17,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 	protected static String cookiePlnChgSection="reviewPlanChanges";
 	protected static String cookiePlnChgSection_findNew="findoutnew";
-	
+
 	protected static String cookiePlnMatSection="reviewPlanMaterials";
 	protected static String cookiePlnMatSection_plnBft="planBenefits";
 	protected static String cookiePlnMatSection_predrg="priscriptionInfo";
 	protected static String cookiePlnMatSection_provInfo="providerInfo";
 	protected static String cookiePlnMatSection_pharInfo="pharmacyInfo";
-	
+
 	protected static String cookieComPlnSection="comparePlansOnline";
-	
+
 	protected static String cookieEnrPlnSection="enrollInaPlan";
-	
+
 	public PrepareForNextYearIndividual(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -83,7 +83,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		if (currentDate.equals(showDocDate) || currentDate.after(showDocDate)) {
 			showSection=true;
 		}
-		
+
 		String subSection=" - Find out what's new";
 		targetItem=section+subSection+" section";
 		targetElement=ind_revPlnChgSec_docSec;
@@ -106,7 +106,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}
 		}	
-		
+
 		return note;
 	}
 
@@ -137,7 +137,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
 		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
-		
+
 		//tbd //note: after link click, section circle should turn green
 		//tbd targetItem=section+" - green circle";
 		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
@@ -182,7 +182,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-		
+
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -204,7 +204,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-		
+
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnChgSec_docSec_langDropdown;
@@ -228,7 +228,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		return note;
 	}
-	
+
 	public List<String> validateReviewPlanMaterialsSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		System.out.println("Proceed to validate Review Plan Materials section content...");
 		List<String> note=new ArrayList<String>();
@@ -281,7 +281,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 				note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
 			}
-			
+
 			//note: after link click, section circle should turn green
 			note.add("\n\tValidate after all subsection links turned green");
 			targetItem=section+" - green circle";
@@ -435,7 +435,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=dceHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-	
+
 		note.add("\n\tValidate after clicking 'Drug Search' link");
 		targetItem=section+" - green checkmark";
 		targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
@@ -470,7 +470,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		
+
 		//note: if there is chinese doc
 		note.add("\t=================");
 		targetLang="Chinese";
@@ -549,7 +549,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			String expUrl="https://connect.int.werally.in/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 			WebElement expElement=providerSearchHeaderTxt;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-			
+
 			targetItem=section+subSection+" - arrow after Search For Providers link";
 			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -559,7 +559,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+" - green checkmark";
 			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-			
+
 			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
 			deleteCookieAndReloadPgn(cookiePlnMatSection_provInfo);
 			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
@@ -687,7 +687,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				pdfElement, arrowAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
-		
+
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=ind_revPlnMatlsSec_docSec_langDropdown;
@@ -837,7 +837,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		String showDocDateStr4=m4+String.valueOf(getCurrentYear());
 		Date showDocDate4=convertStrToDate(showDocDateStr4);
-		
+
 		targetItem=section+" - Circle";
 		if (currentDate.before(showDocDate4)) {
 			targetElement=ind_compPlnsSec_circle_noGreen;
@@ -897,7 +897,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		Date showDocDate4=convertStrToDate(showDocDateStr4);
 
 		WebElement targetElement=null;
-		
+
 		String targetItem=section+" - checkmark";
 		if(currentDate.before(showDocDate4)) {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_checkMark_noGreen;
@@ -917,7 +917,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-		
+
 		// see link before m4 will see Compare link
 		boolean showSection=false;
 		if (currentDate.before(showDocDate4)) {
@@ -975,7 +975,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				expUrl="aarpmedicareplans.com"+expUrl;
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-			
+
 			targetItem=section+subSection+" - Compare New Plans Link Arrow";
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
@@ -1064,7 +1064,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetItem=section+" - text";
 		targetElement=ind_enrolPlnSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
-		
+
 		boolean showSection=false;
 		if ((currentDate.equals(showDocDate1) || currentDate.after(showDocDate1))
 				&& currentDate.before(showDocDate4)) {
@@ -1225,7 +1225,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+subSection+" - Compare New Plans Link";
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-			
+
 			//note - validate link destination
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
@@ -1292,90 +1292,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			} else {
 				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr3+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
-				
+
 			}
 		}	
-		
+
 		return note;
 	}
-	
-	public List<String> validatePdInSubSection(
-			HashMap<String, Boolean> docDisplayMap, 
-			String section, String subSection, 
-			String docName, String targetLang, 
-			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
-			WebElement pdfElement, WebElement arrowAftPdfElement, 
-			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
-			boolean willDeleteCookie) {
 
-		List<String> note=new ArrayList<String> ();
-		String targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-		if (docDisplayMap.get(docName+" "+targetLang)) {
-			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
-			selectValueFromDropdown(langDropdownElement1, targetLang);
-
-			Select select2 = new Select(langDropdownElement2);           
-			String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
-			if (validateAsMuchAsPossible) {
-				if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
-					note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
-			} else {
-				Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
-			}
-			
-			CommonUtility.waitForPageLoad(driver, pdfElement, 10);
-			note.addAll(validateHaveItem(targetItem, pdfElement));
-			note.addAll(validatePdfLinkTxt(docName, pdfElement));
-			note.addAll(validatePdf(targetItem, pdfElement));
-
-
-			//targetItem=section+" - arrow before pdf";
-			//note.addAll(validateHaveItem(targetItem, arrowBefPdfElement));
-			
-			//targetItem=section+" - the 'or' text";
-			//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
-			
-			targetItem=section+" - Arrow after '"+docName+"' doc link'";
-			note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
-
-			//note: after link click, little check should turn green
-			//note: some section has inconsistent way to locate the green chkmrk xpath...that's why need to figure out which xpath to use
-			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
-			targetItem=section+" - green checkmark";
-			WebElement subSecChkmrkgreen=subSecChkmrkgreen1;
-			if (noWaitValidate(subSecChkmrkgreen1)) {
-				subSecChkmrkgreen=subSecChkmrkgreen1;
-			} else {
-				subSecChkmrkgreen=subSecChkmrkgreen2;
-			}
-			note.addAll(validateHaveItem(targetItem, subSecChkmrkgreen));
-
-			if (willDeleteCookie) {
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(subSecCookie);
-			note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
-			}
-
-		} else {
-			if (targetLang.equalsIgnoreCase("ENGLISH")) {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				Assert.assertTrue("SHOULD land on SAR page", false);
-			} else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem=targetLang+" language dropdown option'";
-				note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
-
-				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
-				CommonUtility.waitForPageLoad(driver, pdfElement, 5);
-				note.addAll(validateDontHaveItem(targetItem, pdfElement));
-
-				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
-			}
-		}
-		return note;
-
-	}
 
 }

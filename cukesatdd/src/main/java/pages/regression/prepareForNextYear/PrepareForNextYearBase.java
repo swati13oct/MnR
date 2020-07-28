@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -750,5 +751,84 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,3);
 	}
 
+	public List<String> validatePdInSubSection(
+			HashMap<String, Boolean> docDisplayMap, 
+			String section, String subSection, 
+			String docName, String targetLang, 
+			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
+			WebElement pdfElement, WebElement arrowAftPdfElement, 
+			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
+			boolean willDeleteCookie) {
+
+		List<String> note=new ArrayList<String> ();
+		String targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
+			selectValueFromDropdown(langDropdownElement1, targetLang);
+
+			Select select2 = new Select(langDropdownElement2);           
+			String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
+			if (validateAsMuchAsPossible) {
+				if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
+					note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
+			} else {
+				Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
+			}
+
+			CommonUtility.waitForPageLoad(driver, pdfElement, 10);
+			note.addAll(validateHaveItem(targetItem, pdfElement));
+			note.addAll(validatePdfLinkTxt(docName, pdfElement));
+			note.addAll(validatePdf(targetItem, pdfElement));
+
+
+			//targetItem=section+" - arrow before pdf";
+			//note.addAll(validateHaveItem(targetItem, arrowBefPdfElement));
+
+			//targetItem=section+" - the 'or' text";
+			//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
+
+			targetItem=section+" - Arrow after '"+docName+"' doc link'";
+			note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+
+			//note: after link click, little check should turn green
+			//note: some section has inconsistent way to locate the green chkmrk xpath...that's why need to figure out which xpath to use
+			note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
+			targetItem=section+" - green checkmark";
+			WebElement subSecChkmrkgreen=subSecChkmrkgreen1;
+			if (noWaitValidate(subSecChkmrkgreen1)) {
+				subSecChkmrkgreen=subSecChkmrkgreen1;
+			} else {
+				subSecChkmrkgreen=subSecChkmrkgreen2;
+			}
+			note.addAll(validateHaveItem(targetItem, subSecChkmrkgreen));
+
+			if (willDeleteCookie) {
+				note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
+				deleteCookieAndReloadPgn(subSecCookie);
+				note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
+			}
+
+		} else {
+			if (targetLang.equalsIgnoreCase("ENGLISH")) {
+				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+				Assert.assertTrue("SHOULD land on SAR page", false);
+			} else {
+				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+				//note: no doc then no dropdown
+				targetItem=targetLang+" language dropdown option'";
+				note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+
+				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+				CommonUtility.waitForPageLoad(driver, pdfElement, 5);
+				note.addAll(validateDontHaveItem(targetItem, pdfElement));
+
+				targetItem=section+" - Arrow after '"+docName+"' doc link'";
+				note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+			}
+		}
+		return note;
+
+	}
+	
 	
 }

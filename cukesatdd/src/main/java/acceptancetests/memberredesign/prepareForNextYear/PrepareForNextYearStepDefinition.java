@@ -329,7 +329,7 @@ public class PrepareForNextYearStepDefinition {
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
-	public void user_validatePrepareForNextYearPageContent_individual() throws InterruptedException {
+	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
 
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
 		if (!expPrepareForNextYearTab) {

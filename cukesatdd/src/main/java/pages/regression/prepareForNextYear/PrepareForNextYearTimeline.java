@@ -34,8 +34,27 @@ public class PrepareForNextYearTimeline extends PrepareForNextYearBase {
 	public void openAndValidate(){
 	}
 
+	/** 
+	 * GROUP user has no timeline box
+	 * @return
+	 */
+	public List<String> validateNoTimeLineBoxContent() {
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		note.add("\tValidate Timeline...");
+		String targetItem="NO Time line section";
+		WebElement targetElement=tl_section;
+		Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+		note.add("\tPASSED - validation for "+targetItem);
+
+		targetItem="NO Time line box header";
+		targetElement=tl_sectionHeader;
+		Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+		note.add("\tPASSED - validation for "+targetItem);
+		return note;
+	}
 	
-	public List<String>  validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3, boolean expNoBlue_t4, boolean expNoBlue_t5) {
+	public List<String> validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3, boolean expNoBlue_t4, boolean expNoBlue_t5) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		note.add("\tValidate Timeline...");
