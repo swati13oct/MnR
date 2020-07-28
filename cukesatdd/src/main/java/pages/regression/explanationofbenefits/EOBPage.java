@@ -221,7 +221,7 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on new tab after clicking Learn More link.  number of existing tabs before clicking link='"+beforeClicked_numTabs+"' | after='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
 			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 			System.out.println("total tab size="+newTab.size());

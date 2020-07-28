@@ -395,6 +395,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void validateRenewActive(String planType) {
+		checkModelPopup(driver,3);
 		String originalUrl=driver.getCurrentUrl();
 		if (planType.toUpperCase().contains("SHIP") && !planType.toUpperCase().contains("COMBO")) { 
 			//note: that shoe icon ------------------
