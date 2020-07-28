@@ -203,4 +203,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+	
+	@When("^user should be able to see Medicare Advantage plan by default$")
+	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@When("^user should be able to toggle between plan types$")
+	public void user_should_be_able_to_toggle_between_plan_types() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+		drugSummaryPage.verifySNPPlanToggle();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 }

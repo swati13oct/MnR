@@ -62,6 +62,15 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='disclaimer-accordion-wrap']")
 	public WebElement disclaimer;
+	
+	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	public WebElement planTypeHeading;
+	
+	@FindBy(xpath = "//label[@class='uhc-filter column column-4']//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	public WebElement pdpPlanToggle;
+	
+	@FindBy(xpath = "//label[@class='uhc-filter column column-4']//span[contains(text(),'Medicare Special Needs Plans')]")
+	public WebElement snpPlanToggle;
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
@@ -86,6 +95,29 @@ public class DrugSummaryPage extends UhcDriver {
 		return new DrugSummaryPage(driver);
 		}
 		
+		return null;
+	}
+	
+	public DrugSummaryPage verifyDefaultPlanType() throws InterruptedException {
+		if(planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+			return new DrugSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public DrugSummaryPage verifyPDPPlanToggle() throws InterruptedException {
+		pdpPlanToggle.click();
+		if(planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
+			return new DrugSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public DrugSummaryPage verifySNPPlanToggle() throws InterruptedException {
+		snpPlanToggle.click();
+		if(planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
+			return new DrugSummaryPage(driver);
+		}
 		return null;
 	}
 }
