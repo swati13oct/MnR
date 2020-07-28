@@ -1935,7 +1935,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			{
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
 							&& rname.toUpperCase().contains("ULAYER")) {
