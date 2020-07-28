@@ -2793,14 +2793,18 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		}
 		
 		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-		oleConfirmationPage.validate_GPS_for_Plantype(null);
-		//boolean OLEGPSData= oleConfirmationPage.answer_following_questionsLongTerm(MemberDetailsMap);
-		//if (OLEGPSData = Null!) {
-			//getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,medicareInfoPage);
-			System.out.println("OLE GPS Data - All required OLE Details are Validated in GPS");
+		boolean ConfirmationPage_Status = oleConfirmationPage.validate_plan_details(MemberDetailsMap);
+		Assert.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
+		OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+	/*	OLEGPSData=OLEGPSValidation.validate_GPS_for_Plantype(null);
 	
+		if (OLEGPSData != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
+			System.out.println("OLE GPS Data - All required OLE Details are Validated in GPS");
+			Assert.assertTrue(true);
 	}
-	//else
-	//Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
-
-}
+	else
+	Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
+*/
+		}
+	}
