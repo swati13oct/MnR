@@ -246,7 +246,8 @@ public class VppStepDefinitionUHC {
 			e.printStackTrace();
 		}*/
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.CheckClick_NextYear_Plans();
+		//plansummaryPage.CheckClick_NextYear_Plans();
+		plansummaryPage.handlePlanYearSelectionPopup(plantype);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
