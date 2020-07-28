@@ -109,9 +109,12 @@ public class DCEStepDefinitionUHC {
 
 	@Then("^user should be navigated to UHC, zipcode and plan year capture page for Non AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_Non_AEP() {
-		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+		/*ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();*/
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP on UHC$")

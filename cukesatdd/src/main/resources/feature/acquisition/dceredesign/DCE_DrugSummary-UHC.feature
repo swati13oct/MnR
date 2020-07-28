@@ -12,10 +12,11 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
     And adds drugs in drug list page on UHC
     | DrugName | <drugName> |
     And clicks on Review drug cost button on UHC
-    Then user should be navigated to zipcode and plan year capture page for AEP on UHC
+    #Then user should be navigated to zipcode and plan year capture page for AEP on UHC
+    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
     When user enters valid zipcode and county on UHC
       | ZipCode | <zipCode> |
-    And user selects plan year on UHC
+   # And user selects plan year on UHC
     And user clicks on continue button on UHC
     Then load screen should be displayed on UHC
     And user should be navigated to Review drug cost estimate page on UHC
@@ -23,7 +24,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  90210 |
       
   @drugSummary_SAM_Icon_UHC
   Scenario Outline: Test to verify SAM icon is visiblle on Drug summary page
@@ -36,10 +37,11 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
     And adds drugs in drug list page on UHC
     | DrugName | <drugName> |
     And clicks on Review drug cost button on UHC
-    Then user should be navigated to zipcode and plan year capture page for AEP on UHC
+    #Then user should be navigated to zipcode and plan year capture page for AEP on UHC
+    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
     When user enters valid zipcode and county on UHC
       | ZipCode | <zipCode> |
-    And user selects plan year on UHC
+    #And user selects plan year on UHC
     And user clicks on continue button on UHC
     Then load screen should be displayed on UHC
     And user should be navigated to Review drug cost estimate page on UHC
@@ -48,4 +50,4 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  90210 |
