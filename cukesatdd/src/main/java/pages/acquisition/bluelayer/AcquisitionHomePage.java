@@ -2607,14 +2607,21 @@ public void validateResultSummaryPage() {
 	}
 
 public boolean isValidatePageLoadError(){
-		
 		String url=driver.getCurrentUrl();
-		System.out.println("Current page URL: "+url);
-		WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
-			if(validateNew(pageLoadText))
+			
+			System.out.println("Url is:::" +url);
+			WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
+			if(validate(pageLoadText)){
+				System.out.println("page not found webelement identified");
+			
 				return true;
-			else
+			}
+			else{
+				System.out.println("page not found webelement is not identified");
 				return false;
+			}
+				
+		
 				
 	}
 		

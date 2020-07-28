@@ -34,6 +34,7 @@ public class DeploymentFilesStepDefinitionAARP {
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Boolean isPageLoadError=aquisitionhomepage.isValidatePageLoadError();
+		System.out.println("isPageLoadError--"+isPageLoadError);
 		if(isPageLoadError)
 			Assert.assertFalse("Page is not laoading properly. It is showing error -PAGE NOT FOUND", false);
 		else
