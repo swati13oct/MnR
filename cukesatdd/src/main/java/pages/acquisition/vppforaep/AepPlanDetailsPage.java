@@ -444,6 +444,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					benefitValue = benefitValue.toLowerCase();
+					benefitValue = benefitValue.replaceAll("\\*", "");
 					if(key.contains(benefitValue)) {
 						flag = true;break;
 					}else {
