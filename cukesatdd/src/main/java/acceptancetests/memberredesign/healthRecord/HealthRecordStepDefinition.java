@@ -101,7 +101,7 @@ public class HealthRecordStepDefinition {
 	}				
 
 	@SuppressWarnings("unchecked")
-	@Then("^the user validates clicking Health Record link will open new tab to the target page$")
+	@Then("^the user validates clicking Health Record link will open to the target page$")
 	public void user_validate_healthRecordLinkDestination() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
