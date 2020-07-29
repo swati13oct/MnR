@@ -5,8 +5,11 @@ package pages.acquisition.ole;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -14,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -39,6 +43,9 @@ public class OLEconfirmationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='pdptextbtn']")
 	private WebElement NextSteps_PDPBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
+	private WebElement confirmationNumber;
 
 	
 	public OLEconfirmationPage(WebDriver driver) {
@@ -61,6 +68,7 @@ public class OLEconfirmationPage extends UhcDriver{
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_County = planDetailsMap.get("County");
 		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
+		String Expected_ConfirmationNumber = planDetailsMap.get("Confirmation Number");
 		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
@@ -68,6 +76,7 @@ public class OLEconfirmationPage extends UhcDriver{
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
+		System.out.println("Confirmation Number is Displayed on OLE : "+Expected_ConfirmationNumber);
 
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
@@ -122,48 +131,76 @@ public class OLEconfirmationPage extends UhcDriver{
 		System.out.println("Next Steps are Displayed for planType : "+planType);
 		return false;
 	}
-/*
- * public ArrayList<String> validate_GPS_for_Plantype(String planName) {
- * 
- * String connectionUrl = "jdbc:sqlserver://120.130.10.2:1433;" +
- * "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
- * "encrypt=true;" + "trustServerCertificate=false;" + "loginTimeout=30;";
- * 
- * try (Connection connection = DriverManager.getConnection(connectionUrl);) {
- * 
- * System.out.println("Connection successful."); }
- * 
- * catch (SQLException e) { e.printStackTrace(); } // return OLEDataGPS; }
- * 
- * public void setMap(Map<String, ArrayList<String>> dataMap) {
- * 
- * this.dataMap = dataMap;
- * 
- * }
- * 
- * public Map<String, ArrayList<String>> getMap(){ return dataMap;
- * 
- * } }
- */ 
-	public void validate_GPS_for_Plantype(String[] args) {
-	 String connectionUrl =
-             "jdbc:sqlserver://120.130.10.2:1433;"
-                     + "database=GPSST04SVC_TRN;"
-                     + "user=qaread;"
-                     + "password=testreadonly;"
-                     + "encrypt=true;"
-                     + "trustServerCertificate=false;"
-                     + "loginTimeout=30;";
 
-     try (Connection connection = DriverManager.getConnection(connectionUrl);) {
-         
-     	System.out.println("Connection successful.");
-     }
-     
-     catch (SQLException e) {
-         e.printStackTrace();
-     }
+  public Map<String, String> retrieve_GPS_data(String confirmationNumber) {
+	  	   Connection connection = createDataBaseConnection();
+		   ResultSet rs = null;
+		   Statement stmt = null;
+		   Map<String, String> gpsData = new HashMap<String, String>();
+		   try {
+			   stmt = connection.createStatement();
+			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY_1 + confirmationNumber );
+			   while(rs.next()) {
+				   String firstName = rs.getString("FIRST_NAME");
+				   gpsData.put("First Name", firstName);
+				   //String middleInitial = rs.getString("MIDDLE_INITIAL");---Prashant
+				   //gpsData.put("MiddleInitial", middleInitial);---Prashant
+				   String lastName = rs.getString("LAST_NAME");
+				   gpsData.put("Last Name", lastName);
+				   //add for all the gps columns
+				   //String confirmationNumber = rs.getString("XEROX_STAGE_ID");--Prashant
+				   //gpsData.put("Confirmation No", confirmationNumber);----Prashant
+			   }
+		   } catch (Exception e) {
+			   e.printStackTrace();
+		}
+		   finally {
+			   try {
+			   if(stmt!=null) {
+				   stmt.close();
+				} 
+			   if(rs!=null) {
+				   rs.close();
+				} 
+			   if(connection!=null) {
+				   connection.close();
+				}
+			   
+			   }catch (SQLException e) {
+					e.printStackTrace();
+				}
+			   }
+	return gpsData;
+	  
+  }
+	 
+ public Connection createDataBaseConnection() {
+		Connection connection = null;
+		try {
+			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
+			 if(connection!=null) {
+				 System.out.println("Connection successful.");
+			 }
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
+		return connection;
+		}	
+	
+	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
+		boolean flag = false;
+		String confirmation_no = confirmationNumber.getText();
+		//map.put("Confirmation No", confirmation_no);---Prashant
+		Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
+		if(map.equals(gpsdatamap)) {
+			flag = true;
+		}
+		return flag;
+	}
  }
 	
-}
+	
+	
+
 	

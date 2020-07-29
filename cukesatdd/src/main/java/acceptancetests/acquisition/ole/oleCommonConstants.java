@@ -43,5 +43,6 @@ public class oleCommonConstants {
 	public static final String HEALTH_INSURANCE_NAME = "healthinsurancename";
 	public static final String GROUP_NUMBER = "groupnumber";
 	public static final String MEMBER_NUMBER = "membernumber";
+	public static final String CONFIRMATION_NUMBER = "membernumber";
 
 }

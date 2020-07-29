@@ -2792,10 +2792,61 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		
-		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-		boolean ConfirmationPage_Status = oleConfirmationPage.validate_plan_details(MemberDetailsMap);
-		Assert.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
-		OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+		String plantype = MemberDetailsMap.get("Plan Type");
+		
+		//OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+		//boolean ConfirmationPage_Status = oleConfirmationPage.validate_plan_details(MemberDetailsMap);
+		//Assert.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
+		
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("team-acme")) ) {
+			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (OLEGPSValidation != null) {
+				Map<String, String> DetailsMap = new HashMap<String, String>();
+				DetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
+				DetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
+				
+				/*DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+				DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+				DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+				DetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
+				DetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
+				DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
+				DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
+				DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
+				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+				DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
+				DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
+				DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
+				DetailsMap.put("Perm_city", (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY));
+				DetailsMap.put("MAILING_QUESTION", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION));
+				DetailsMap.put("Mailing_Street", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET));
+				DetailsMap.put("Mailing_City", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY));
+				DetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
+				DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
+				DetailsMap.put("Email", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL));
+*/
+				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
+				if (Validation_Status) {
+					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated in GPS");
+					Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated in GPS");
+				}
+			} else {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
+				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+			}
+		} else {
+			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment/team acme environment");
+		}
+
+	
 	/*	OLEGPSData=OLEGPSValidation.validate_GPS_for_Plantype(null);
 	
 		if (OLEGPSData != null) {
