@@ -1,5 +1,10 @@
 package pages.acquisition.dceredesign;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -119,5 +124,29 @@ public class DrugSummaryPage extends UhcDriver {
 			return new DrugSummaryPage(driver);
 		}
 		return null;
+	}
+	
+	@FindBy(id = "sign-up-modal-header")
+	private WebElement createProfilePopup;
+	
+	public void savePlan(String planName)
+	{		
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+			System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan: listOfTestPlans) {
+				//WebElement savePlan = driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
+				WebElement savePlan = driver.findElement(By.xpath("//button[contains(@id,'saveBtn') and @aria-label='Save "+plan+"']"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+			}
+			/*if(createProfilePopup.isDisplayed()) {
+				closeProfilePopup.click();
+			}*/
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

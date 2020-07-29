@@ -176,6 +176,37 @@ public class DCEStepDefinitionUHC {
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
+	
+	@When("^user should be able to see Medicare Advantage plan by default on UHC$")
+	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default_UHC() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^user saves plan as favorite on drug summary UHC site$")
+	public void user_saves_plan_as_favorite_on_drug_summary_UHC_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		/*VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.savePlan(PlanName);*/
+	}
+	
+	@When("^user should be able to toggle between plan types on UHC$")
+	public void user_should_be_able_to_toggle_between_plan_types_UHC() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+		drugSummaryPage.verifySNPPlanToggle();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 
 	@When("^user verify the drug summary page on UHC$")
 	public void user_verify_the_drug_summary_page_uhc() throws InterruptedException {
