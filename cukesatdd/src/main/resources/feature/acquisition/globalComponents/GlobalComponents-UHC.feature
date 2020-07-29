@@ -73,7 +73,11 @@ Feature: 2.12 ACQ - Global Components UHC
       | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | #New page
+      | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | #New page
+      | shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | #New page
+      | safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | #New page
+   
     @ShopPlan_Shop2_GlobalCompsUHC
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                       | tfnFlag |
@@ -104,7 +108,8 @@ Feature: 2.12 ACQ - Global Components UHC
       | enroll.html                             | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | enroll/ma-enrollment.html               | ShopPlan: Enroll MA Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | enroll/pdp-enrollment.html              | ShopPlan: Enroll PDP Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | enroll/ms-apply.html                    | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | #New page
+  
     @ShopPlan_Resources1_GlobalCompsUHC
     Examples: 
       | path                                                              | pageName                             | tfnXpath                                                       | tfnFlag |
