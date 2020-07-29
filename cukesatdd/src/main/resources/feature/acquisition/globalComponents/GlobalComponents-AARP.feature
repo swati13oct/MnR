@@ -68,12 +68,13 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
-      | path                            | pageName                    | tfnXpath                                                       | tfnFlag |
-      | shop.html                       | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+     | path                            | pageName                    | tfnXpath                                                       | tfnFlag |
+     | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | true   |
+   #   | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true   | #New Rebuild
+    #  | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+    #  | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+    #  | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+    #  | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Shop2_GlobalCompsAARP
     Examples: 
