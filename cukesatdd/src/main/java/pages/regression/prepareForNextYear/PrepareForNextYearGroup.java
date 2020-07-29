@@ -63,10 +63,11 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 		note.addAll(validateReviewPlanChangesSection(section, planType, memberType, currentDate, docDisplayMap));
 
+		/* tbd
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review your Prescription drug coverage for next year' section");
 			note.addAll(validateReviewYourPresDrug(section, planType, memberType, currentDate, docDisplayMap));
-		}
+		} */
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 			note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
@@ -116,7 +117,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -138,7 +139,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
 		subSecChkmrkgreen2=null;
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -159,7 +160,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
 		subSecChkmrkgreen2=null;
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -184,7 +185,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -206,7 +207,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -227,7 +228,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -316,7 +317,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -338,7 +339,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -359,7 +360,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -376,7 +377,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 
 
-
+	/* tbd 
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
 		List<String> note=new ArrayList<String>();
@@ -434,7 +435,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -457,7 +458,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -478,7 +479,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(
+		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -490,5 +491,6 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 		return note;
 	}
+	*/
 
 }

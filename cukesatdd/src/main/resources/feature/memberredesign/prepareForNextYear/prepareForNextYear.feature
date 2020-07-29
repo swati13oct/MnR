@@ -129,16 +129,16 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 2-06  | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 	# ignore group cases for now until code is ready
-	#@prepareForNextYear02d
-    #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-07  | F443004 | MAPD	  | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	@prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-07  | F443004 | MAPD	 | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	#@prepareForNextYear02e
-    #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-08  | F443004 | PDP	  | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |  
-	#    | 2-09  | F443004 | MA	      | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	@prepareForNextYear02e
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-08  | F443004 | PDP	     | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |  
+	    | 2-09  | F443004 | MA	     | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
     @prepareForNextYear02f
     Examples: 
@@ -146,10 +146,11 @@ Feature: 1.25 Member Prepare For Next Year
         | 2-10  | F437767 | MAPD	 | IND_ESZH_PFNY        | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true          |
         | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY    | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-    @prepareForNextYear02g
-    Examples: 
-	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+    #this user doesn't have anoc, re-enable this when finding a user that has it
+    #@prepareForNextYear02g
+    #Examples: 
+	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true  | true  | true  | true  | true  | false | true          |
 
     @prepareForNextYear02h
     Examples: 
@@ -296,15 +297,17 @@ Feature: 1.25 Member Prepare For Next Year
         | 2-10  | F437767 | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
         | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
 
-    @prepareForNextYear02g
-    Examples: 
-	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+    #this user doesn't have anoc, re-enable this when finding a user that has it
+    #@prepareForNextYear02g
+    #Examples: 
+	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
 
-    @prepareForNextYear02h
-    Examples: 
-	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	#combo is not ready for stage testing yet
+    #@prepareForNextYear02h
+    #Examples: 
+	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 	    
 ##### end - cases for stage env #################################################################
 

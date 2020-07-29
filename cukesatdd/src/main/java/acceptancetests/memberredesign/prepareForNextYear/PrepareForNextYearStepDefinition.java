@@ -323,6 +323,7 @@ public class PrepareForNextYearStepDefinition {
 		docDisplayMap.put(inputField, display);
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP, docDisplayMap);
+		
 	}
 
 	
@@ -330,8 +331,13 @@ public class PrepareForNextYearStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
 	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
-
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
+		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
+
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 			if (testNote==null)
@@ -345,6 +351,8 @@ public class PrepareForNextYearStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+		if (expComboTab) 
+			pfnyPg.handleComboTabIfComboUser(planType, memberType);
 
 		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -359,8 +367,6 @@ public class PrepareForNextYearStepDefinition {
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-		
-		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
 		
 		//note: validate timeline and Find update section content
 		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
@@ -385,10 +391,6 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t=================");
 		pfnyPg.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
-
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
 
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {

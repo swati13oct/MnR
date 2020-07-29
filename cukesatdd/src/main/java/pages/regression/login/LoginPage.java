@@ -86,7 +86,13 @@ public class LoginPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='authQuestionTitle' and contains(text(),'logged out of your account')]")
 	protected WebElement loggedOutMsg;
-	    
+	
+	@FindBy(xpath="//div[@id='memberSignInGlobalErrorMessageInvalid' and not(contains(@class,'ng-hide'))]")
+	protected WebElement loginPageError;
+
+	@FindBy(xpath="//h1[contains(text(),'Resource') and contains(text(),'not found')]")
+	protected WebElement resourceNotFoundError;
+
 	    MRScenario loginScenario;
 		
 		public MRScenario getLoginScenario() {
@@ -217,6 +223,9 @@ public class LoginPage extends UhcDriver {
 				}catch (Exception e) {
 				System.out.println("Privacy error Page didn't appear");
 			}
+
+			Assert.assertTrue("PROBLEM - encountered login page error on the login page", !validate(loginPageError,0));
+
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
 			signInButton.click();
@@ -229,6 +238,9 @@ public class LoginPage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("No Such alert displayed");
 			}
+
+			Assert.assertTrue("PROBLEM - encountered Resource not found error", !validate(resourceNotFoundError,0));
+
 			// CommonUtility.checkPageIsReady(driver);
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			Alert alert;

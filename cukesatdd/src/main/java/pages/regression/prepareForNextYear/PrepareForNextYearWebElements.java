@@ -838,7 +838,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[contains(@class,'Pharmacy_mapd_group')]//a[contains(text(),'Find a Pharmacy')]/../i")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[contains(@class,'Pharmacy_mapd_group')]//a[contains(text(),'Find a Pharmacy')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[(contains(@class,'Pharmacy_mapd_group') or contains(@class,'pharmacy_pdp_group')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 
 	@FindBy(xpath="")
