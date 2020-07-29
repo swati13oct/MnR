@@ -82,7 +82,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return driver;
 	}
 	
-	
+	/* tbd 
 	public List<String> validateReviewPlanChangesSection_grp(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		String section="Review plan changes";
@@ -91,7 +91,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=grp_reviewPlanDocs_circle;
+		targetElement=grp_reviewPlanDocs_circle_noGren;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -126,8 +126,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return note;
 	}
 	
-
-	
 	public List<String> validateReviewPlanMaterialsSection_grp(String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
 		List<String> note=new ArrayList<String>();
 		note.add("=============================================");
@@ -136,36 +134,61 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		note.add("TODO - validation for "+targetItem);
 		return note;
 	}
+	*/
+
 	
 	
 	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
-		if (memberType.contains("GRP")) {
+		if (memberType.contains("SAR")) {
 			note.add("SKIP - Find Updates section content validation for now, work in progress");
 			return note;
 		}
-
-		String targetItem="Find updates to your plan benefits section";
-		WebElement targetElement=findUpdatesSection;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem="Find updates to your plan benefits section header";
-		targetElement=findUpdatesSection_header;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem="Find updates for next year's plan section text";
-		targetElement=findUpdatesSection_text;
-		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		//---------------------------------------------
 		if (memberType.contains("IND")) {
 			System.out.println("Proceed to validate section content for individual user...");
 
+			String targetItem="Find updates to your plan benefits section";
+			WebElement targetElement=ind_findUpdatesSection;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem="Find updates to your plan benefits section header";
+			targetElement=ind_findUpdatesSection_header;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem="Find updates for next year's plan section text";
+			targetElement=ind_findUpdatesSection_text;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap));
 			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap));
 			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
 			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
-		} else {
+		} else if (memberType.contains("GRP")) {
+			String targetItem="Find updates to your plan benefits section";
+			WebElement targetElement=grp_findUpdatesSection;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem="Find updates to your plan benefits section header";
+			targetElement=grp_findUpdatesSection_header;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem="Find updates for next year's plan section text";
+			targetElement=grp_findUpdatesSection_text;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			String section="Compare Plan Online"; //note: should not have
+			targetItem=section;
+			targetElement=grp_comparePlanOnlineSection;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+			section="Enroll Plan";  //note: should not have
+			targetItem=section;
+			targetElement=grp_enrollPlanSection;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
 			note.addAll(pnfyGroup.validateReviewPlanDocumentsSection_grp(planType, memberType, currentDate, docDisplayMap));
 		}
 

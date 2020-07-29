@@ -39,7 +39,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - Circle";
-		targetElement=grp_reviewPlanDocs_circle;
+		targetElement=grp_reviewPlanDocs_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		targetItem=section+" - header";
@@ -52,10 +52,6 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 		targetItem=section+" - language dropdown";
 		targetElement=grp_reviewPlanDocs_docSection_langDropdown;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+" - checkmark";
-		targetElement=grp_reviewPlanDocs_docSection_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		section=section+" - document ";
@@ -80,7 +76,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		//note: after link click, section circle should turn green
 		note.add("\n\tValidate after all subsection links turned green");
 		targetItem=section+" - green circle";
-		targetElement=grp_reviewPlanDocs_docSection_checkMark_green;
+		targetElement=grp_reviewPlanDocs_circle_green;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -113,7 +109,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		String targetLang="Spanish";
 		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		WebElement langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		WebElement langDropdownElement2=null; 
 		WebElement pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_es;
 		WebElement arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_es_arrow;
 		String subSecCookie=cookiePlnChgSection_plnChg;
@@ -135,7 +131,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="Chinese";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_zh;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_zh_arrow;
 		subSecCookie=cookiePlnChgSection_plnChg;
@@ -156,7 +152,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="English";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en_arrow;
 		subSecCookie=cookiePlnChgSection_plnChg;
@@ -181,7 +177,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="Spanish";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_es;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_es_arrow;
 		subSecCookie=cookiePlnChgSection_plnChg;
@@ -203,7 +199,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="Chinese";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_zh;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_zh_arrow;
 		subSecCookie=cookiePlnChgSection_plnChg;
@@ -224,7 +220,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="English";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en_arrow;
 		subSecCookie=cookiePlnChgSection_plnChg;
@@ -313,7 +309,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		String targetLang="Spanish";
 		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		WebElement langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		WebElement langDropdownElement2=null; 
 		WebElement pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_es;
 		WebElement arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_es_arrow;
 		String subSecCookie=cookiePlnDocsSection_pharInfo;
@@ -335,7 +331,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="Chinese";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_zh;
 		arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_zh_arrow;
 		subSecCookie=cookiePlnDocsSection_pharInfo;
@@ -356,7 +352,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="English";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_en_arrow;
 		subSecCookie=cookiePlnDocsSection_pharInfo;
@@ -431,7 +427,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		String targetLang="Spanish";
 		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		WebElement langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		WebElement langDropdownElement2=null; 
 		WebElement pdfElement=grp_revPlnDocsSec_presDrugSec_cf_es;
 		WebElement arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_es_arrow;
 		String subSecCookie=cookiePlnDocsSection_predrg;
@@ -454,7 +450,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="Chinese";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_presDrugSec_cf_zh;
 		arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_zh_arrow;
 		subSecCookie=cookiePlnDocsSection_predrg;
@@ -475,7 +471,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetLang="English";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
 		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=grp_reviewPlanDocs_docSection_langDropdownXYZ; 
+		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_presDrugSec_cf_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_en_arrow;
 		subSecCookie=cookiePlnDocsSection_predrg;
@@ -494,9 +490,5 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 		return note;
 	}
-
-
-
-
 
 }

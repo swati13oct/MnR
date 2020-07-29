@@ -933,7 +933,9 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			scrollElementToCenterScreen(ind_compPlnsSec_lrnOthPlnSec_skipThisLnk);
 			ind_compPlnsSec_lrnOthPlnSec_skipThisLnk.click();
+			CommonUtility.waitForPageLoad(driver, ind_compPlnsSec_lrnOthPlnSec_checkMark_green, 5);
 			//note: after link click, little check should turn green
 			targetItem=section+" - green checkmark";
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_checkMark_green;

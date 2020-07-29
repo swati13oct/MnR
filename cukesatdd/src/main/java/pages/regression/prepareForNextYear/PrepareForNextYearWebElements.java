@@ -164,7 +164,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'timeline section')]")
 	protected WebElement tl_section;
 	
-	@FindBy(xpath="//h3[contains(text(),'Dates to Remember')]")
+	@FindBy(xpath="//h2[contains(text(),'Dates to Remember')]")
 	protected WebElement tl_sectionHeader;
 
 	@FindBy(xpath="//a[contains(text(),'RETURN TO PREVIOUS PAGE')]")
@@ -189,10 +189,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement siteLeavingCancelButton;
 
 	//note: milestone1 -------------------------------------
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='September 15']")
 	protected WebElement tl_milestone1Date;
 
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']/../label[contains(@class,'date-content')]")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='September 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone1Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]")
@@ -205,10 +205,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement tl_milestone1Dot_blue;
 
 	//note: milestone2 -------------------------------------
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 1']")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 1']")
 	protected WebElement tl_milestone2Date;
 
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 1']/../label[contains(@class,'date-content')]")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 1']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone2Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][2]")
@@ -221,10 +221,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement tl_milestone2Dot_blue;
 
 	//note: milestone3 -------------------------------------
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 15']")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 15']")
 	protected WebElement tl_milestone3Date;
 
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 15']/../label[contains(@class,'date-content')]")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone3Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][3]")
@@ -237,10 +237,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement tl_milestone3Dot_blue;
 
 	//note: milestone4 -------------------------------------
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='December 7']")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='December 7']")
 	protected WebElement tl_milestone4Date;
 
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='December 7']/../label[contains(@class,'date-content')]")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='December 7']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone4Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][4]")
@@ -253,10 +253,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement tl_milestone4Dot_blue;
 
 	//note: milestone5 -------------------------------------
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='January 1']")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='January 1']")
 	protected WebElement tl_milestone5Date;
 
-	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='January 1']/../label[contains(@class,'date-content')]")
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='January 1']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone5Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][5]")
@@ -270,13 +270,23 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	// note Find updates section -------------------------------
 	@FindBy(xpath="//div[contains(@class,'findupdates')]")
-	protected WebElement findUpdatesSection;
+	protected WebElement ind_findUpdatesSection;
 
 	@FindBy(xpath="//div[contains(@class,'findupdates')]//h3")
-	protected WebElement findUpdatesSection_header;
+	protected WebElement ind_findUpdatesSection_header;
 	
 	@FindBy(xpath="//div[contains(@class,'findupdates')]//p")
-	protected WebElement findUpdatesSection_text;
+	protected WebElement ind_findUpdatesSection_text;
+
+	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]")
+	protected WebElement grp_findUpdatesSection;
+
+	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//h3")
+	protected WebElement grp_findUpdatesSection_header;
+	
+	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//p")
+	protected WebElement grp_findUpdatesSection_text;
+
 
 	//note: ind - review plan changes
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]")
@@ -720,26 +730,29 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub']")
 	protected WebElement grp_reviewPlanDocsSection;
 	
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub']//span[@class='circle']")
-	protected WebElement grp_reviewPlanDocs_circle;
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub' and not(contains(@class,'green'))]//span[@class='circle']")
+	protected WebElement grp_reviewPlanDocs_circle_noGreen;
+
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub' and contains(@class,'green')]//span[@class='circle']")
+	protected WebElement grp_reviewPlanDocs_circle_green;
 
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//h3")
 	protected WebElement grp_reviewPlanDocs_header;
 
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//p//strong[contains(text(), 'September 30')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//p[contains(text(),'Read your plan documents to make sure')]")
 	protected WebElement grp_reviewPlanDocs_text;
 	
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline') and not(contains(@class,'ng-hide'))]")
+	protected WebElement grp_comparePlanOnlineSection;
 	
+	@FindBy(xpath="//div[contains(@class,'Enrollplan') and not(contains(@class,'ng-hide'))]")
+	protected WebElement grp_enrollPlanSection;
 	
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]")
 	protected WebElement grp_reviewPlanDocs_docSection;
 
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]//select")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//select")
 	protected WebElement grp_reviewPlanDocs_docSection_langDropdown;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]//select")
-	protected WebElement grp_reviewPlanDocs_docSection_langDropdownXYZ;
-
 
 	@FindBy(xpath="xyz//select//option[@lang='en' and contains(@style,'block')]")
 	protected WebElement grp_reviewPlanDocs_lang_en_ava;
@@ -760,18 +773,11 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement grp_reviewPlanDocs_lang_zh;
 
 	
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]//i[contains(@class,'checkmarkSection')]")
-	protected WebElement grp_reviewPlanDocs_docSection_checkMark_noGreen;
-	
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]//i[contains(@class,'checkmarkSection')]")
-	protected WebElement grp_reviewPlanDocs_docSection_checkMark_green;
-
-	
 	//note: Subsection - Review your plan changes for next year
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]/div[contains(@class,'anocavailable')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]/div[contains(@class,'anocavailable')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_checkMark_green;
 
 	@FindBy(xpath="")
@@ -817,22 +823,22 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_en_arrow;
 
 	//note: Subsection - Review your pharmacy information for next year
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_checkMark_noGreen;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_checkMark_green;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//h4[contains(text(),'Review pharmacy information')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_header;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//p[contains(text(),'to see which pharmacies')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_text;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[contains(@class,'Pharmacy_mapd_group')]//a[contains(text(),'Find a Pharmacy')]/../i")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[contains(@class,'Pharmacy_mapd_group')]//a[contains(text(),'Find a Pharmacy')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 
 	@FindBy(xpath="")
@@ -854,22 +860,22 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_en_arrow;
 
 	//note: Subsection - Review your prescription drug coverage for next year
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_checkMark_noGreen;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_checkMark_green;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//h4[contains(text(),'Review your Prescription drug coverage')]")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_header;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//p[contains(text(),'Use our drug search')]")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_text;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//div[contains(@class,'formulery_mapd_group')]//a[contains(text(),'Drug Search')]/../i")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_drugSrchLnk_arrow;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//div[contains(@class,'formulery_mapd_group')]//a[contains(text(),'Drug Search')]")
 	protected WebElement grp_revPlnDocsSec_presDrugSec_drugSrchLnk;
 
 	@FindBy(xpath="")

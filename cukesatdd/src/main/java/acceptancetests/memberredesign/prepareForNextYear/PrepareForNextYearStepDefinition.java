@@ -26,7 +26,7 @@ import pages.regression.prepareForNextYear.PrepareForNextYearPage;
 
 public class PrepareForNextYearStepDefinition {
 	
-	protected static Boolean validateAsMuchAsPossible=false;
+	protected static Boolean validateAsMuchAsPossible=true;
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -144,7 +144,7 @@ public class PrepareForNextYearStepDefinition {
 				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate)) 
 				&& (!aem_tabToggle))	
 			expPrepareForNextYearTab=false;
-		if (planType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("COMBO") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
+		if (planType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
 			expPrepareForNextYearTab=false;
 		if (memberType.toUpperCase().contains("GRP") && memberType.toUpperCase().contains("OFFCYC"))
 			expPrepareForNextYearTab=false;
@@ -462,7 +462,6 @@ public class PrepareForNextYearStepDefinition {
 		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 
 		pfnyPg.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
-		pfnyPg.setValidateAsMuchAsPossible(validateAsMuchAsPossible);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, pfnyPg);	
 	}
 	
