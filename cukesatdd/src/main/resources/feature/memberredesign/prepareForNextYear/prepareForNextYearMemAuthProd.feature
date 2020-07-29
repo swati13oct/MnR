@@ -39,7 +39,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	   #| 1-01  | F437767 | ashah120  | Mnrqa003  |  testUserName     | PDP	     | GRP_OFFCYC_PFNY     |
 	   #| 1-02  | F437767 | ashah120  | Mnrqa003  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
-#TBD    | 1-03  | F437767 | ashah120  | Mnrqa003  |  testUserName     | MAPD	 | GRP_OFFCYC_PFNY     |
+        | 1-03  | F437767 | ashah120  | Mnrqa003  |  diannahill1      | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prod_prepareForNextYear01b
