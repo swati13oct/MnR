@@ -2352,22 +2352,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public boolean isValidateContent(String file){		
-		if(file.equals("robot.txt")){
+		if(file.equals("robot")){
 			
-			String validContent= driver.findElement(By.xpath("/html/body/pre")).getText();
-			if(!validContent.isEmpty())
-				return true;
-			else 
-				return false;			
-		}else if(file.equals("sitemap.xml")){
+			File newFile = new File("driver.getCurrentUrl()");
 			
-			String validContent= driver.findElement(By.xpath("/html/body/div[2]/span")).getText();
-			if(!validContent.isEmpty())
-				return true;
+			if (newFile.length() == 0)
+				return false;
 			else 
-				return false;	
+				return true;			
+		}else if(file.equals("sitemap")){
+			
+			File newFile = new File("driver.getCurrentUrl()");
+			
+			if (newFile.length() == 0)
+				return false;
+			else 
+				return true;	
 		}
 		return false;
+		
 	}
 	
 	}

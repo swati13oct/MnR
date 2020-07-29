@@ -2628,19 +2628,22 @@ public boolean isValidatePageLoadError(){
 	public boolean isValidateContent(String file){		
 		if(file.equals("robot")){
 			
-			String validContent= driver.findElement(By.xpath("/html/body/pre")).getText();
-			if(!validContent.isEmpty())
-				return true;
+			File newFile = new File("driver.getCurrentUrl()");
+			
+			if (newFile.length() == 0)
+				return false;
 			else 
-				return false;			
+				return true;			
 		}else if(file.equals("sitemap")){
 			
-			String validContent= driver.findElement(By.xpath("/html/body/div[2]/span")).getText();
-			if(!validContent.isEmpty())
-				return true;
+			File newFile = new File("driver.getCurrentUrl()");
+			
+			if (newFile.length() == 0)
+				return false;
 			else 
-				return false;	
+				return true;	
 		}
 		return false;
+		
 	}
 }
