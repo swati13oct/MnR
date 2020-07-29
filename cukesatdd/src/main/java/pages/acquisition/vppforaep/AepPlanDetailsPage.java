@@ -416,7 +416,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
 				benefitValue = benefitValue.replaceAll("\\u2022", "");
-				
+				benefitValue = benefitValue.replaceAll("\\u00AE", "");
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("footnotes")) { 
 					key = key.replace("\n", "");
 					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
