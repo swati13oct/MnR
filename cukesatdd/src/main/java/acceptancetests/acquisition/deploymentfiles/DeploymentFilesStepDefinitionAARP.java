@@ -36,7 +36,7 @@ public class DeploymentFilesStepDefinitionAARP {
 		Boolean isPageLoadError=aquisitionhomepage.isValidatePageLoadError();
 		System.out.println("isPageLoadError--"+isPageLoadError);
 		if(isPageLoadError)
-			Assert.assertFalse("Page is not laoading properly. It is showing error -PAGE NOT FOUND", false);
+		Assert.fail("Page is not loading properly. It is showing error -PAGE NOT FOUND");
 		else
 			Assert.assertTrue("Page is loading.", true);
 		
