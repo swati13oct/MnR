@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
