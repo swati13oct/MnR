@@ -211,7 +211,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@Then("^user saves plan as favorite on drug summary AARP site$")
+	@Then("^user saves plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

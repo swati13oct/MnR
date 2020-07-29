@@ -78,7 +78,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
       
       
-          @dCERedesign_PlanSave @F476042
+          @dCERedesign_PlanSave_AARP @F476042
   Scenario Outline: Test to verify unauthenticated user save the plan on drug summary page and see the saved plan on guest profile 
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
@@ -97,7 +97,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user should be able to see Medicare Advantage plan by default
-    Then user saves plan as favorite on drug summary AARP site
+    Then user saves plan as favorite on drug summary page AARP site
        | Test Plans | <testPlans> |
        Examples: 
       | path                     | pageName                   |drugName|zipCode |testPlans|
