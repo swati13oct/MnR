@@ -44,7 +44,8 @@ public class OLEconfirmationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='pdptextbtn']")
 	private WebElement NextSteps_PDPBtn;
 	
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
+	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
+	@FindBy(xpath = "//p[@class='confirmation-number']")
 	private WebElement confirmationNumber;
 
 	
@@ -143,13 +144,77 @@ public class OLEconfirmationPage extends UhcDriver{
 			   while(rs.next()) {
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
-				   //String middleInitial = rs.getString("MIDDLE_INITIAL");---Prashant
-				   //gpsData.put("MiddleInitial", middleInitial);---Prashant
 				   String lastName = rs.getString("LAST_NAME");
 				   gpsData.put("Last Name", lastName);
 				   //add for all the gps columns
-				   //String confirmationNumber = rs.getString("XEROX_STAGE_ID");--Prashant
-				   //gpsData.put("Confirmation No", confirmationNumber);----Prashant
+				   /* String confirmationNumber = rs.getString("XEROX_STAGE_ID");
+				   gpsData.put("Confirmation No", confirmationNumber);
+				   String middleInitial = rs.getString("MIDDLE_INITIAL");
+				   gpsData.put("MiddleInitial", middleInitial);
+				    String medicareNumber = rs.getString("MEDICAID_NUMBER");
+				   gpsData.put("First Name", firstName);
+				   String mailingZipcode = rs.getString("MAILING_ZIP_CD");
+				   gpsData.put("First Name", firstName);
+				   String mailingState = rs.getString("MAILING_STATE_CD");
+				   gpsData.put("First Name", mailingState);
+				   String mailingCity = rs.getString("MAILING_CITY");
+				   gpsData.put("First Name", mailingCity);
+				   String mailingAddress2 = rs.getString("MAILING_ADDRESS_LINE_2");
+				   gpsData.put("First Name", mailingAddress2);
+				   String mailingAddress1 = rs.getString("MAILING_ADDRESS_LINE_1");
+				   gpsData.put("First Name", mailingAddress1);
+				   String doB = rs.getString("DATE_OF_BIRTH");
+				   gpsData.put("First Name", doB);
+				   String gender = rs.getString("GENDER");
+				   gpsData.put("First Name", gender);
+				   String address1 = rs.getString("ADDRESS_LINE_1");
+				   gpsData.put("First Name", address1);
+				   String address2 = rs.getString("ADDRESS_LINE_2");
+				   gpsData.put("First Name", address2);
+				    String zipCode = rs.getString("ZIP_CD");
+				   gpsData.put("First Name", zipCode );
+				   String state = rs.getString("STATE_CD");
+				   gpsData.put("First Name", state);
+				   String city = rs.getString("CITY");
+				   gpsData.put("First Name", city);
+					String dayTimePhoneNumber = rs.getString("DAYTIME_PHONE_NUM");
+				   gpsData.put("First Name", dayTimePhoneNumber);
+				  String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
+				   gpsData.put("First Name", eveningTimePhoneNumber); 	
+			 String medicareNumber = rs.getString("MEDICARE_NUMBER");
+				   gpsData.put("First Name", medicareNumber); 
+				    String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
+				   gpsData.put("First Name", partAEffectiveDate); 
+				    String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
+				   gpsData.put("First Name", partBEffectiveDate); 
+				    String healthInsurance= rs.getString("DO_YOU_HAVE_OTHER_HEALTH_INS");
+				   gpsData.put("First Name", healthInsurance); 
+				    String healthInsuranceName = rs.getString("OTHER_HEALTH_INSURANCE_NAME");
+				   gpsData.put("First Name", healthInsuranceName); 
+				    String healthInsuranceGroupName = rs.getString("OTHER_HEALTH_INSURANCE_GRP_NUM");
+				   gpsData.put("First Name", healthInsuranceGroupName); 
+				    String healthInsuranceID  = rs.getString("OTHER_HEALTH_INSURANCE_ID");
+				   gpsData.put("First Name", healthInsuranceID); 
+				    String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
+				   gpsData.put("First Name", secondaryCoverageName); 
+				    String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
+				   gpsData.put("First Name", otherCoverageName); 
+				     String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
+				   gpsData.put("First Name", secondaryGroup); 
+				    String secondaryId = rs.getString("SECONDARY_RX_ID");
+				   gpsData.put("First Name", secondaryId); 
+				     String note = rs.getString("NOTE");
+				   gpsData.put("First Name", note); 
+				    String effectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
+				   gpsData.put("First Name", effectiveDate); 
+				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
+				   gpsData.put("First Name", pcpNumber); 
+				     String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
+				   gpsData.put("First Name", pcpName); 
+				    String dentalPlatinum = rs.getString("DENTAL_PLATINUM");
+				   gpsData.put("First Name", dentalPlatinum);    
+
+				     * *///----prashant
 			   }
 		   } catch (Exception e) {
 			   e.printStackTrace();
