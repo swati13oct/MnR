@@ -78,7 +78,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
   
-       @dCERedesign_PlanSave @F476042
+       @dCERedesign_PlanSaveUHC @F476042
       
      Scenario Outline: Test to verify unauthenticated user save the plan on drug summary page and see the saved plan on guest profile 
   
@@ -102,47 +102,10 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default on UHC
     Then user saves plan as favorite on drug summary UHC site
       | Test Plans | <testPlans> |
-    
     #And user validates the added plans on visitor profile page of UHC site
       #| Test Plans | <testPlans> |
     
        Examples: 
       | path                     | pageName                   |drugName|zipCode |testPlans|
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|
-
-
- @drugSummarySavedPlanAuthenticatedUHC
-  
-  Scenario Outline: Test to verify saved plan on drug summary page for authenticated Visitor Profile page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user navigates to following UHC medicare solutions site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates Get Started Page for UHC
-    When the user clicks on Add drugs button on UHC
-    And adds drugs in drug list page on UHC
-    | DrugName | <drugName> |
-    And clicks on Review drug cost button on UHC
-    #Then user should be navigated to zipcode and plan year capture page for AEP on UHC
-    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
-    When user enters valid zipcode and county on UHC
-      | ZipCode | <zipCode> |
-   # And user selects plan year on UHC
-    And user clicks on continue button on UHC
-    Then load screen should be displayed on UHC
-    And user should be navigated to Review drug cost estimate page on UHC
-    And user should be able to see Medicare Advantage plan by default on UHC
-    Then user saves plan as favorite on drug summary UHC site
-      | Test Plans | <testPlans> |
-       And the user clicks on the shopping cart icon in UHC site
-    Then the user signs in with optum Id credentials in UHC site
-      | User Name | <userName> |
-      | Password  | <password> |
-    
-    #And user validates the added plans on visitor profile page of UHC site
-      #| Test Plans | <testPlans> |
-    
-       Examples: 
-      | path                     | pageName                   |drugName|zipCode |testPlans|userName|password|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|jarvisstage23111|Password@8|
 
