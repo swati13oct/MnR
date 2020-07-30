@@ -165,14 +165,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 			if (MRScenario.environment.contains("team-a")) {
 				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
 			} 		
-			healthAndWellness.isDisplayed();
+			Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness));
+			//tbd healthAndWellness.isDisplayed();
 			healthAndWellness.click();
 			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
 		} catch (Exception e) {
 			if (hwValidate(healthAndWellness_harness)) {
 				System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
 				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-				healthAndWellness_harness.isDisplayed();
+				Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
+				//tbd healthAndWellness_harness.isDisplayed();
 				healthAndWellness_harness.click();
 				waitforElement(titleText);
 			} else {
@@ -199,7 +201,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 * Validates Health and Wellness page
 	 */
 	public void validateHnWDashboardnL2Tabs(){
-		Assert.assertTrue("Lifestyle icon is not displayed", lifestyleIcon.isDisplayed());
+		Assert.assertTrue("PROBLEM - Lifestyle icon is not displayed", hwValidate(lifestyleIcon));
 		//Assert.assertTrue("Learning icon is not displayed", learningIcon.isDisplayed());
 		driver.getCurrentUrl();
 		if (driver.getCurrentUrl().contains("health-and-wellness"))

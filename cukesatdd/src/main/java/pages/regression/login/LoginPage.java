@@ -209,6 +209,7 @@ public class LoginPage extends UhcDriver {
 		}
 		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			try {
 				if(privacyNotice.getText().contains("Your connection is not private"))
 				{

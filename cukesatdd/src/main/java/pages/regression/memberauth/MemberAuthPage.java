@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -300,122 +301,125 @@ public class MemberAuthPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		try {
-			
-		// waitforElement(MemberPopUpLogin);
-		CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
-		try {
-		Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		}
-		if (MemberPopUpLogin.isDisplayed()) {
-			System.out.println("Pop up Login Button is displayed");
-			try {
-			Thread.sleep(2000);
-			} catch (InterruptedException e) {
-			}
-			System.out.println("Scrolling to Login Button");
-			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
-			jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin);
+
+			// waitforElement(MemberPopUpLogin);
+			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
-			MemberPopUpLogin.click();
-			System.out.println("popup login button clicked");
-			System.out.println("wait for 10 seconds");
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-			}
-			// switchToNewTab();
-			String mainwindow = driver.getWindowHandle();
-			Set<String> allWindowHandles = driver.getWindowHandles();
-			for (String currentWindowHandle : allWindowHandles) {
-				if (!currentWindowHandle.equals(mainwindow)) {
-					driver.switchTo().window(currentWindowHandle);
+			if (MemberPopUpLogin.isDisplayed()) {
+				System.out.println("Pop up Login Button is displayed");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
 				}
-			}
+				System.out.println("Scrolling to Login Button");
+				JavascriptExecutor jse2 = (JavascriptExecutor) driver;
+				jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+				}
+				MemberPopUpLogin.click();
+				System.out.println("popup login button clicked");
+				System.out.println("wait for 10 seconds");
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+				}
+				// switchToNewTab();
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					if (!currentWindowHandle.equals(mainwindow)) {
+						driver.switchTo().window(currentWindowHandle);
+					}
+				}
 
-			System.out.println("Switched to new tab");
-			CommonUtility.checkPageIsReadyNew(driver);
-			if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
-					|| MRScenario.environment.equalsIgnoreCase("prod")
-					|| MRScenario.environment.equalsIgnoreCase("team-h")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
-			{
+				System.out.println("Switched to new tab");
 				CommonUtility.checkPageIsReadyNew(driver);
-				try
+				if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
+						|| MRScenario.environment.equalsIgnoreCase("prod")
+						|| MRScenario.environment.equalsIgnoreCase("team-h")
+						|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
 				{
-					System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
-					CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
-				}
-				catch (Exception e)
-				{
-					System.out.println("Catch block with no significance");
-				}
-				emailAddressRequiredWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				goGreenSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				anocSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				paymentSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
-					System.out.println("COVID 19 Banner page has appeared");
-					try {
-						CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-						if (validate(homePageNotice, 10)) {
-							homePageNotice.click();
-							CommonUtility.checkPageIsReadyNew(driver);
-						} else if (validate(homePageNotice2, 0)) {
-							homePageNotice2.click();
-							CommonUtility.checkPageIsReadyNew(driver);
-						} else if (validate(homePageNotice3, 0)) {
-							homePageNotice3.click();
-							CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.checkPageIsReadyNew(driver);
+					try
+					{
+						System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
+						CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
+					}
+					catch (Exception e)
+					{
+						System.out.println("Catch block with no significance");
+					}
+					emailAddressRequiredWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					goGreenSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					anocSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					paymentSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					if (driver.getCurrentUrl().contains("bannerpopup.html")) {
+						System.out.println("COVID 19 Banner page has appeared");
+						try {
+							CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
+							if (validate(homePageNotice, 10)) {
+								homePageNotice.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							} else if (validate(homePageNotice2, 0)) {
+								homePageNotice2.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							} else if (validate(homePageNotice3, 0)) {
+								homePageNotice3.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							}
+							Thread.sleep(3000);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("Catch block");
 						}
-						Thread.sleep(3000);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						System.out.println("Catch block");
+					} else {
+						System.out.println("COVID 19 Banner page did not appear");
 					}
-				} else {
-					System.out.println("COVID 19 Banner page did not appear");
-				}
-				checkModelPopup(driver, 2);
-				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
-				// waitforElement(SuperUser_DashboardBanner);
-				if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
-					System.out.println("CSR Dashboard Page is displayed for the Member");
-					checkModelPopup(driver,5);
-					return new AccountHomePage(driver);
-				}
-			} else if (MRScenario.environment.startsWith("team")) {
-				if (driver.getCurrentUrl().contains("/testharness")) {
-					try {
-						Alert alert = driver.switchTo().alert();
-						alert.accept();
-						Alert alert1 = driver.switchTo().alert();
-						alert1.accept();
-					} catch (Exception e) {
-						System.out.println("No alert displayed");
+					checkModelPopup(driver, 2);
+					CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
+					// waitforElement(SuperUser_DashboardBanner);
+					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
+						System.out.println("CSR Dashboard Page is displayed for the Member");
+						checkModelPopup(driver,5);
+						return new AccountHomePage(driver);
 					}
-					System.out.println("CSR - Lower ENV TestHarness Page is displayed for the Member");
-					TestHarness.checkForIPerceptionModel(driver);
-					return new AccountHomePage(driver);
-				}
-			} else
-				System.out.println("CSR Dashboard Page is NOT displayed for the Member");
-			return null;
+				} else if (MRScenario.environment.startsWith("team")) {
+					if (driver.getCurrentUrl().contains("/testharness")) {
+						try {
+							Alert alert = driver.switchTo().alert();
+							alert.accept();
+							Alert alert1 = driver.switchTo().alert();
+							alert1.accept();
+						} catch (Exception e) {
+							System.out.println("No alert displayed");
+						}
+						System.out.println("CSR - Lower ENV TestHarness Page is displayed for the Member");
+						TestHarness.checkForIPerceptionModel(driver);
+						return new AccountHomePage(driver);
+					}
+				} else
+					System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+				return null;
 
-		} else {
-			System.out.println("not able to switch to new window");
-			return null;
-		}
+			} else {
+				System.out.println("not able to switch to new window");
+				return null;
+			}
 		} catch (TimeoutException e) {
 			Assert.assertTrue("PROBLEM - after 60 seconds the dashboard is still not done loading", false);
+			return null;
+		} catch (UnsupportedCommandException ue) {
+			Assert.assertTrue("PROBLEM - Got UnreachableBrowserException. Exception="+ue.getStackTrace()+" | SaurceLab URL="+MRScenario.returnJobURL(), false);
 			return null;
 		}
 
