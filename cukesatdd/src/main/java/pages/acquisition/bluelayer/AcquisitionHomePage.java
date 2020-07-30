@@ -1935,7 +1935,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			{
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
 							&& rname.toUpperCase().contains("ULAYER")) {
@@ -2255,7 +2256,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement MAplansLink = driver.findElement(By.xpath(
 				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
 		WebElement MedSuppPlansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+				"//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
 		WebElement PDPplansLink = driver.findElement(By.xpath(
 				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 		WebElement SNPplansLink = driver.findElement(
