@@ -657,6 +657,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
 	private List<WebElement> plansInPopup;
+	
+	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+	private WebElement signIn;
+	
+	@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
+	private WebElement submitApplicationBtn;
+	
+	
+	@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
+	private WebElement  NextYearPlans;
+	
+	@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
+	private WebElement  CurrentYearPlans;
+	
+	@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
+	private WebElement  SelectYearGoBtn;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
@@ -982,8 +998,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
-			sleepBySec(9);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+			// sleepBySec(9);
 //							jsClickNew(maPlansViewLink);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -3773,10 +3789,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ResumeZipCode.click();
 		Thread.sleep(2000);
 		ResumeZipCode.sendKeys(zipcode);
-		resumeApplicationBtn.click();
+		submitApplicationBtn.click();
 
 		System.out.println(
-				"Resume application button has been clicked successfully after entering the data on resume application page");
+				"Submit application button has been clicked successfully after entering the data on resume application page");
 	}
 
 	public void ResumeApplicationButtonValidation(String FirstName, String LastName) throws InterruptedException {
@@ -3889,8 +3905,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void CheckClick_CurrentYear_Plans() {
 
 		try {
-			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
-			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			//WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
+		//	WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'currentYear')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : " + CurrentYearRadio.getText());
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
@@ -3914,11 +3932,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 //			WebDriverWait d=new WebDriverWait(driver, 60);
 //			d.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@for, 'next_Year')]")));
 			sleepBySec(10);
-			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
-			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : " + NextYearRadio.getText());
+		//WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			//WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : " +NextYearPlans.getText());
 			System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
-			NextYearRadio.click();
+			NextYearPlans.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
 			SelectYearGoBtn.click();
@@ -3929,6 +3949,43 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
+	
+	
+	public void handlePlanYearSelectionPopup(String planType) {
+		
+
+	      
+		try{
+	
+			if (!(planType.equalsIgnoreCase("MS"))) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if (validate(planYearPopup, 30)) {
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+					}
+				}
+			}
+		
+		else {
+			System.out.println("Popup is not present for AEP : ");
+		
+			if(validate(CurrentYearPlans, 30)) {
+				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
+				CurrentYearPlans.click();
+			}
+				
+	      }
+		
+	}catch(Exception e) {
+			e.printStackTrace();
+	
+	}	      
+	
+	
+}
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;
@@ -4557,4 +4614,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void waitForPlanSummaryPageLoad() {
 		CommonUtility.waitForPageLoadNew(driver, nextBestActionModal, 30);
 	}
+
+	public void signInOptumId(String username, String password) {
+		try {
+			
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+		
+	}
+
 }

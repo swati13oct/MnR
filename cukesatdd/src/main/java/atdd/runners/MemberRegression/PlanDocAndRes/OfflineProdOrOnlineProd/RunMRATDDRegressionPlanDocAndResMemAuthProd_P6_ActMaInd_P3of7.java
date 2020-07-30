@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_ActMaInd_P3of7.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_ActMaInd_P3of7")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp.json" }, tags = { "@prod_planAndDocuments02","@prod_active_ma_grp" })
-public class RunMRATDDRegressionPlanDocAndResMemAuthProd_P2_ActMaGrp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_ActMaInd_P3of7.json" }, tags = { "@prod_planAndDocuments06_3of7","@prod_active_ma_ind_3of7" })
+public class RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_ActMaInd_P3of7 {
 }
