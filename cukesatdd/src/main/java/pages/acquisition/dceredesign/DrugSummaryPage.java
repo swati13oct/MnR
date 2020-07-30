@@ -149,4 +149,41 @@ public class DrugSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='PDP']")
+	private WebElement clickPdpplan;
+	
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
+	private WebElement clickSnpplan;
+	
+	public void clickOnPDPPlan()
+	{
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(clickPdpplan);
+		JavascriptExecutor je = (JavascriptExecutor)driver;
+		je.executeScript("arguments[0].click()", clickPdpplan);
+		//clickPdpplan.click();
+		
+		
+	}
+	
+	public void clickOnSNPPlan()
+	{
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(clickSnpplan);
+		JavascriptExecutor je = (JavascriptExecutor)driver;
+		je.executeScript("arguments[0].click()", clickSnpplan);
+	}
+	
+	
 }

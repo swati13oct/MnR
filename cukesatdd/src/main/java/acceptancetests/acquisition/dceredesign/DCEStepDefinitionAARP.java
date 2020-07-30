@@ -226,6 +226,27 @@ public class DCEStepDefinitionAARP {
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);*/
 	}
+	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
+	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnPDPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
+	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 	
 	@When("^user should be able to toggle between plan types$")
 	public void user_should_be_able_to_toggle_between_plan_types() throws Throwable {

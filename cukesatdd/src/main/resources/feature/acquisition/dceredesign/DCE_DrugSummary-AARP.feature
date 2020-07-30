@@ -99,7 +99,16 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
     Then user saves plan as favorite on drug summary page AARP site
        | Test Plans | <testPlans> |
-       Examples: 
-      | path                     | pageName                   |drugName|zipCode |testPlans|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|
-      
+    Then user save PDP plan as favorite on drug summary page AARP site
+     | PDP Plans | <pdptestPlans> |
+     Then user save SNP plan as favorite on drug summary page AARP site
+     | SNP Plans | <snptestPlans> |
+    Then the user clicks on the shopping cart icon in AARP site
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+       |PDP Plans | <pdptestPlans> |
+       | SNP Plans | <snptestPlans> |
+        
+        Examples: 
+      | path                     | pageName                   |drugName|zipCode |testPlans|pdptestPlans|snptestPlans|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|

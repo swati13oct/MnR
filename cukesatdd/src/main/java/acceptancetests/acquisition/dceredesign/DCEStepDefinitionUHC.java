@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
@@ -198,6 +199,28 @@ public class DCEStepDefinitionUHC {
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);*/
+	}
+	
+	@Then("^user save PDP plan as favorite on drug summary page UHC site$")
+	public void user_saves_pdp_plan_as_favorite_on_drug_summary_UHC_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnPDPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^user save SNP plan as favorite on drug summary page UHC site$")
+	public void user_saves_snp_plan_as_favorite_on_drug_summary_UHC_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
 	@When("^user should be able to toggle between plan types on UHC$")
