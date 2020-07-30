@@ -2,7 +2,7 @@
 Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
 
 @DCE_DrugSummary_ValidatePage_UHC
-  Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
+  Scenario Outline: Test to verify the Drug summary page in UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  90210 |
       
        @drugSummary_PlanToggle_UHC @F477157
-  Scenario Outline: Test to verify plan toggle is visiblle on Drug summary page
+  Scenario Outline: Test to verify plan toggle is visible on Drug summary page
    Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
@@ -78,10 +78,8 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
   
-       @dCERedesign_PlanSaveUHC @F476042
-      
+       @dCERedesign_PlanSaveUHC @F476042   
      Scenario Outline: Test to verify unauthenticated user save the plan on drug summary page and see the saved plan on guest profile 
-  
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |

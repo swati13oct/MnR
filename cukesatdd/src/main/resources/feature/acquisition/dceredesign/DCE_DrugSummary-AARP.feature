@@ -1,8 +1,8 @@
 @dce_redesign_Drug_summary_AARP @F426576
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
-@DCE_DrugSummary_ValidatePage
-  Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
+@DCE_DrugSummary_ValidatePage_AARP
+  Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       
       
       @drugSummary_PlanToggle @F477157
-  Scenario Outline: Test to verify SAM icon is visiblle on Drug summary page
+  Scenario Outline: Test to verify plan toggle functionality on Drug summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
