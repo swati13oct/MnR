@@ -36,9 +36,8 @@ public class DeploymentFilesStepDefinitionUHC {
 		Boolean isPageLoadError=aquisitionhomepage.isValidatePageLoadError();
 		if(isPageLoadError)
 			Assert.fail("Page is not loading properly. It is showing error -PAGE NOT FOUND");
-			
 		else
-			Assert.fail("File is not loading");
+			Assert.assertTrue("Page is loading.", true); 
 		
 	}
 	

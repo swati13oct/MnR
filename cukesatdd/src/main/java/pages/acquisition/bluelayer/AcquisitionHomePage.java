@@ -2607,7 +2607,7 @@ public void validateResultSummaryPage() {
 	}
 
 public boolean isValidatePageLoadError(){
-			String url=driver.getCurrentUrl();
+		String url=driver.getCurrentUrl();
 			
 			System.out.println("Url is:::" +url);
 			if(driver.findElements(By.id("medicareTitle")).isEmpty()){
@@ -2618,8 +2618,6 @@ public boolean isValidatePageLoadError(){
 					System.out.println("else");
 					return true;
 				}
-				
-		
 				
 	}
 		
