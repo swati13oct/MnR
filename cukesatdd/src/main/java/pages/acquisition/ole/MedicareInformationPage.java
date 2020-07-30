@@ -210,6 +210,21 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 	
+	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')]")
+	private WebElement PrescriptionCoverageQuestionFlagYes;
+
+	@FindBy(xpath= "//*[contains(@id,'hasPrescriptionDrugCoverageNo')]")
+	private WebElement PrescriptionCoverageQuestionFlagNo;
+
+	@FindBy(xpath= "//*[contains(@id,'insuranceName0')]")
+	private WebElement PrescriptionCoverageNameField;
+
+	@FindBy(xpath= "//*[contains(@id,'pdGroupNumber0')]")
+	private WebElement PrescriptionCoveragegroupNumberField;
+
+	@FindBy(xpath= "//*[contains(@id,'memberIdNumber0')]")
+	private WebElement PrescriptionCoveragememberNumberField;
+	
 
 	//=============================================================================	
 	
@@ -979,4 +994,49 @@ public boolean  answer_following_questionsLongTerm(Map<String, String> memberDet
 	return true;
 
 	}
+
+
+
+
+
+public boolean answer_following_questions_PrescriptionCoverage(Map<String, String> memberDetailsMap) {
+	boolean Validation_Flag = true;
+	
+	try
+	{
+
+	if(PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
+		jsClickNew(PrescriptionCoverageQuestionFlagNo);
+		if(!validate(healthInsuranceNameField) && validate(groupNumberField)){
+			System.out.println("LongTermQuestion Options is yes : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("LongTermQuestion Options  :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	PrescriptionCoverageQuestionFlagYes.isDisplayed();
+	jsClickNew(PrescriptionCoverageQuestionFlagYes);	
+	
+	String PrescriptionName = memberDetailsMap.get("Prescription Name");
+	String PDGroupNumber = memberDetailsMap.get("PD Group Number");
+	String PDMemberNumber = memberDetailsMap.get("PDMemberNumber");
+	
+	sendkeysNew(PrescriptionCoverageNameField, PrescriptionName);
+	sendkeysNew(PrescriptionCoveragegroupNumberField, PDGroupNumber);
+	sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
+	
+	}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+	}
+	return true;
+
+}
 }

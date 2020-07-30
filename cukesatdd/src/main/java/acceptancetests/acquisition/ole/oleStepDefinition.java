@@ -2782,6 +2782,31 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	}
 
 
+@Then("^the user validates the Prescription drug coverage questions in Medicare Information Page$")
+public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
+		
+	List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questions_PrescriptionCoverage(MemberDetailsMap);
+		if (medicareInfoPageLongTerm) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Prescription drug coverage Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Group Number"));
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+
+
 @Then("^the user validates the OLE Submission Details in GPS$")
 public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1) throws Throwable {
 		

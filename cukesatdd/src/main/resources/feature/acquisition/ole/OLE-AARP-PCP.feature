@@ -63,6 +63,14 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
+    Then the user validates the long term questions in Medicare Information Page
+    | Health Insurance Name| <healthinsurancename>  |
+    |   Group Number			 | <groupnumber>          |
+    | Member Number        | <membernumber>         | 
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    | Prescription Name			| <prescriptioncoveragename>  |
+    |  PD Group Number			 | <pdgroupnumber>  |
+    | PD Member Number        | <pdmembernumber>   | 
     Then the user navigates to SEP Page
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
@@ -94,13 +102,13 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
     Then the user clicks on Submit Enrollment to complete enrollment
  		#Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-     | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    # | Plan Type | <plantype> |
      
     Examples: 
-      | TID   | PlanType | zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType|
-      | 15513 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |Valid|
-      | 15514 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |Invalid|
+      | TID   | PlanType | zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
+      | 15513 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance            |1562759    | ABC12345     |PrescriptionCoverage            |5646136   | ABC12345 |Valid|
+      | 15514 | MA-MBI   |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |1562759    | ABC12345     |PrescriptionCoverage            |5646136   | ABC12345|Invalid|
    
    @MA_OLE_AARP_LT
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
