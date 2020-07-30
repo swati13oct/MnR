@@ -12,11 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
-	protected static String cookiePlnDocsSection="reviewPlanDocs";
-	protected static String cookiePlnChgSection_plnChg="planChange";
-	protected static String cookiePlnDocsSection_predrg="priscriptionInfo";
-	protected static String cookiePlnDocsSection_pharInfo="pharmacyInfo";
-
+	protected static String cookiePlnDocsSection="reviewPlandocuments_grp";
+	protected static String cookiePlnDocsSection_revPlnChg="anoc_group";
+	protected static String cookiePharInfoSection="reviewplanId";
 
 	public PrepareForNextYearGroup(WebDriver driver) {
 		super(driver);
@@ -63,23 +61,19 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 		note.addAll(validateReviewPlanChangesSection(section, planType, memberType, currentDate, docDisplayMap));
 
-		/* tbd
-		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
-			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review your Prescription drug coverage for next year' section");
-			note.addAll(validateReviewYourPresDrug(section, planType, memberType, currentDate, docDisplayMap));
-		} */
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
-			note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
+			note.addAll(validateReviewPharmacyInfo(planType, memberType, currentDate, docDisplayMap));
+		} else {
+			System.out.println("TEST - planType='"+planType+"' - Proceed to validate NO 'Review pharmacy information for next year' section");
+			note.addAll(validateNoReviewPharmacyInfo());
 		}
-
 
 		//note: after link click, section circle should turn green
 		note.add("\n\tValidate after all subsection links turned green");
 		targetItem=section+" - green circle";
 		targetElement=grp_reviewPlanDocs_circle_green;
 		note.addAll(validateHaveItem(targetItem, targetElement));
-
 
 		return note;		
 
@@ -89,7 +83,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		System.out.println("Proceed to validate Review plan documents - Review your plan changes for next year section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
-		String subSection=" - Review your plan benefits and costs for next year";
+		String subSection=" - Review your plan changes for next year";
 
 		String targetItem=section+" - checkmark";
 		WebElement targetElement=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
@@ -99,24 +93,19 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetElement=grp_revPlnDocsSec_plnChngSec_Header;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - text";
-		targetElement=grp_revPlnDocsSec_plnChngSec_Text;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
 		//--------------------------------------------------
 		String docName="Annual Notice of Changes";
-		//note: if there is spanish doc
 		note.add("\t=================");
-		String targetLang="Spanish";
+		String targetLang="English";
 		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
+		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
 		WebElement langDropdownElement2=null; 
-		WebElement pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_es;
-		WebElement arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_es_arrow;
-		String subSecCookie=cookiePlnChgSection_plnChg;
-		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
-		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		boolean willDeleteCookie=true;
+		WebElement pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en;
+		WebElement arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en_arrow;
+		String subSecCookie=cookiePlnDocsSection_revPlnChg;
+		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
+		WebElement subSecChkmrkgreen2=null;
+		boolean willDeleteCookie=false;
 		note.addAll(validatePdInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
@@ -127,96 +116,18 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
-		//note: if there is chinese doc
-		note.add("\t=================");
-		targetLang="Chinese";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_zh;
-		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_zh_arrow;
-		subSecCookie=cookiePlnChgSection_plnChg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
-		subSecChkmrkgreen2=null;
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		note.add("\t=================");
-		targetLang="English";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en;
-		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en_arrow;
-		subSecCookie=cookiePlnChgSection_plnChg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_noGreen;
-		subSecChkmrkgreen2=null;
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
+		note.add("\n\tValidate after cookie remove for '"+subSection+"' subSection cookie");
+		deleteCookieAndReloadPgn(cookiePlnDocsSection_revPlnChg);
+		targetElement=grp_revPlnDocsSec_plnChngSec_checkMark_green;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		
+		note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
+		deleteCookieAndReloadPgn(cookiePlnDocsSection);
+		targetElement=grp_revPlnDocsSec_plnChngSec_checkMark_green;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 		//---------------------------------------
 		docName="Evidence of Coverage";
-		//note: if there is spanish doc
-		note.add("\t=================");
-		targetLang="Spanish";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_es;
-		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_es_arrow;
-		subSecCookie=cookiePlnChgSection_plnChg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		//note: if there is chinese doc
-		note.add("\t=================");
-		targetLang="Chinese";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_zh;
-		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_zh_arrow;
-		subSecCookie=cookiePlnChgSection_plnChg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
 		note.add("\t=================");
 		targetLang="English";
 		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
@@ -224,7 +135,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en_arrow;
-		subSecCookie=cookiePlnChgSection_plnChg;
+		subSecCookie=cookiePlnDocsSection_revPlnChg;
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
@@ -239,27 +150,38 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				willDeleteCookie));
 		return note;
 	}
-
-	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
-		System.out.println("Proceed to validate Review Plan Materials - Pharmacy section content...");
+	
+	public List<String> validateNoReviewPharmacyInfo() {
+		System.out.println("Proceed to validate NO Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
-		String subSection=" - Review pharmacy information for next year";
-		String targetItem=section+subSection;
-		WebElement targetElement=grp_revPlnDocsSec_pharInfoSec_checkMark_noGreen;
+		String section="Review pharmacy information";
+		String targetItem=section+" - section";
+		WebElement targetElement=grp_reviewPharInfoSection;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		return note;
+	}
+
+	public List<String> validateReviewPharmacyInfo(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		System.out.println("Proceed to validate Pharmacy section content...");
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		String section="Review pharmacy information";
+		String targetItem=section+" - section";
+		WebElement targetElement=grp_reviewPharInfoSection;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - header";
-		targetElement=grp_revPlnDocsSec_pharInfoSec_header;
+		targetItem=section+" - Circle";
+		targetElement=grp_reviewPharInfo_circle_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - text";
-		targetElement=grp_revPlnDocsSec_pharInfoSec_text;
+		targetItem=section+" - header";
+		targetElement=grp_reviewPharInfo_header;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		//------------------------------------------
-		targetItem=section+subSection+" - arrow after Find a Pharmacy link";
-		targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
+		targetItem=section+" - text";
+		targetElement=grp_reviewPharInfo_text;
+		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
 		Date showDocDate1=convertStrToDate(showDocDateStr1);
@@ -268,9 +190,13 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			showSection=true;
 		}
 
-		targetItem=section+subSection+" - Find a Pharmacy link";
-		targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
+		targetItem=section+" section";
+		targetElement=grp_reviewPharInfo_docSection;
 		if (showSection) {
+			note.addAll(validateHaveItem(targetItem, targetElement));
+			
+			targetItem=section+" - Find a Pharmacy";
+			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			String expUrl="/health-plans/aarp-pharmacy.html";
@@ -281,16 +207,18 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			WebElement expElement=pharmacyHeader;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-			//note: after link click, little check should turn green
-			note.add("\n\tValidate after clicking 'Find a Pharmacy' link");
-			targetItem=section+" - green checkmark";
-			targetElement=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
+			targetItem=section+" - arrow after Find a Pharmacy link";
+			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-			deleteCookieAndReloadPgn(cookiePlnDocsSection_pharInfo);
-			targetElement=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
+			//note: after link click, section circle should turn green
+			note.add("\n\tValidate after link clicked, circle turned green");
+			targetItem=section+" - green circle";
+			targetElement=grp_reviewPharInfo_circle_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			
+
 		} else {
 			if (validateAsMuchAsPossible) {
 				if (!noWaitValidate(targetElement))
@@ -303,194 +231,11 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			}
 		}
 
-		//------------------------------------------
-		String docName="Pharmacy Directory Information";
-		//note: if there is spanish doc
-		note.add("\t=================");
-		String targetLang="Spanish";
-		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		WebElement langDropdownElement2=null; 
-		WebElement pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_es;
-		WebElement arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_es_arrow;
-		String subSecCookie=cookiePlnDocsSection_pharInfo;
-		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		//note: if there is chinese doc
-		note.add("\t=================");
-		targetLang="Chinese";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_zh;
-		arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_zh_arrow;
-		subSecCookie=cookiePlnDocsSection_pharInfo;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		note.add("\t=================");
-		targetLang="English";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_pharInfoSec_ph_en;
-		arrowAftPdfElement=grp_revPlnDocsSec_pharInfoSec_ph_en_arrow;
-		subSecCookie=cookiePlnDocsSection_pharInfo;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
 		return note;
 	}
 
 
 
 
-
-	/* tbd 
-	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
-		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
-		List<String> note=new ArrayList<String>();
-		note.add("\t=================");
-		String subSection=" - Review your Prescription drug coverage for next year";
-		String targetItem=section+subSection;
-		WebElement targetElement=grp_revPlnDocsSec_presDrugSec_checkMark_noGreen;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+subSection+" - header";
-		targetElement=grp_revPlnDocsSec_presDrugSec_header;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+subSection+" - text";
-		targetElement=grp_revPlnDocsSec_presDrugSec_text;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+subSection+" - arrow after Drug Search link";
-		targetElement=grp_revPlnDocsSec_presDrugSec_drugSrchLnk_arrow;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+subSection+" - Drug Search link";
-		targetElement=grp_revPlnDocsSec_presDrugSec_drugSrchLnk;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		String expUrl="/health-plans/estimate-drug-costs.html";
-		if (memberType.toUpperCase().contains("UHC"))
-			expUrl="uhcmedicaresolutions.com"+expUrl;
-		else 
-			expUrl="aarpmedicareplans.com"+expUrl;
-		WebElement expElement=dceHeader;
-		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
-		note.add("\n\tValidate after clicking 'Drug Search' link");
-		targetItem=section+" - green checkmark";
-		targetElement=grp_revPlnDocsSec_presDrugSec_checkMark_green;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-		deleteCookieAndReloadPgn(cookiePlnDocsSection_predrg);
-		targetElement=grp_revPlnDocsSec_presDrugSec_checkMark_green;
-		note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		//---------------------------------------------
-		String docName="Comprehensive Formulary";
-		//note: if there is spanish doc
-		note.add("\t=================");
-		String targetLang="Spanish";
-		WebElement langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		WebElement langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_es_ava;
-		WebElement langDropdownElement2=null; 
-		WebElement pdfElement=grp_revPlnDocsSec_presDrugSec_cf_es;
-		WebElement arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_es_arrow;
-		String subSecCookie=cookiePlnDocsSection_predrg;
-		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-
-		//note: if there is chinese doc
-		note.add("\t=================");
-		targetLang="Chinese";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_zh_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_presDrugSec_cf_zh;
-		arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_zh_arrow;
-		subSecCookie=cookiePlnDocsSection_predrg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		note.add("\t=================");
-		targetLang="English";
-		langDropdownElement1=grp_reviewPlanDocs_docSection_langDropdown;
-		langDropdown1_targetLangOptionElement=grp_reviewPlanDocs_lang_en_ava;
-		langDropdownElement2=null; 
-		pdfElement=grp_revPlnDocsSec_presDrugSec_cf_en;
-		arrowAftPdfElement=grp_revPlnDocsSec_presDrugSec_cf_en_arrow;
-		subSecCookie=cookiePlnDocsSection_predrg;
-		subSecChkmrkgreen1=grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
-				docDisplayMap, 
-				section, subSection, 
-				docName, targetLang, 
-				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
-				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
-
-		return note;
-	}
-	*/
 
 }

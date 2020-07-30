@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -24,7 +23,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -34,9 +32,7 @@ import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -758,6 +754,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			}
 			select.selectByValue(value);
 		} catch (WebDriverException e) {
+			e.printStackTrace();
 			if (validateAsMuchAsPossible) {
 				System.out.println("unable to select expected langauge "+targetLang+" option from dropdown");
 				return false;
@@ -774,10 +771,11 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		deleteCookie(cookieName);
 		driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 5);
 		checkModelPopup(driver,3);
 	}
-
+	
 	public List<String> validatePdInSubSection(
 			String planType, 
 			HashMap<String, Boolean> docDisplayMap, 

@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -82,62 +81,6 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return driver;
 	}
 	
-	/* tbd 
-	public List<String> validateReviewPlanChangesSection_grp(String planType, String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
-		List<String> note=new ArrayList<String>();
-		String section="Review plan changes";
-		String targetItem=section+" - section";
-		WebElement targetElement=grp_reviewPlanDocsSection;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+" - Circle";
-		targetElement=grp_reviewPlanDocs_circle_noGren;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+" - header";
-		targetElement=grp_reviewPlanDocs_header;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		targetItem=section+" - text";
-		targetElement=grp_reviewPlanDocs_text;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		section=section+" - document ";
-		targetItem=section+" section";
-		targetElement=grp_reviewPlanDocs_docSection;
-		if (showSectionDoc_f1) {
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - language dropdown";
-			targetElement=grp_reviewPlanDocs_docSection_langDropdown;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - checkmark";
-			targetElement=grp_reviewPlanDocs_docSection_checkMark_noGreen;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
-			targetElement=grp_reviewPlanDocs_docSection_langDropdown;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-		} else {
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
-		}
-		return note;
-	}
-	
-	public List<String> validateReviewPlanMaterialsSection_grp(String memberType, Date currentDate, boolean showSectionDoc_f1, boolean showSectionDoc_f2, boolean showSectionDoc_f3, boolean showSectionDoc_f4, HashMap<String, Boolean> docDisplayMap) {
-		List<String> note=new ArrayList<String>();
-		note.add("=============================================");
-		String section="Review plan materials for group";
-		String targetItem=section;
-		note.add("TODO - validation for "+targetItem);
-		return note;
-	}
-	*/
-
-	
-	
 	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		if (memberType.contains("SAR")) {
@@ -175,7 +118,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			targetElement=grp_findUpdatesSection_header;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			targetItem="Find updates for next year's plan section text";
+			targetItem="Find updates to your plan benefits section text";
 			targetElement=grp_findUpdatesSection_text;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 

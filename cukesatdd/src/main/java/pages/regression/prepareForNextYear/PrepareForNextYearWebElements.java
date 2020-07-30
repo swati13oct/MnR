@@ -727,13 +727,21 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	//=======================================================================================
 	//note: group - review plan documents
+	//note: should not have
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline') and not(contains(@class,'ng-hide'))]")
+	protected WebElement grp_comparePlanOnlineSection;
+	
+	@FindBy(xpath="//div[contains(@class,'Enrollplan') and not(contains(@class,'ng-hide'))]")
+	protected WebElement grp_enrollPlanSection;
+
+	//note: review plan documents section
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub']")
 	protected WebElement grp_reviewPlanDocsSection;
 	
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub' and not(contains(@class,'green'))]//span[@class='circle']")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[@class='circle']")
 	protected WebElement grp_reviewPlanDocs_circle_noGreen;
 
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub' and contains(@class,'green')]//span[@class='circle']")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[@class='circle']")
 	protected WebElement grp_reviewPlanDocs_circle_green;
 
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//h3")
@@ -742,25 +750,19 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//p[contains(text(),'Read your plan documents to make sure')]")
 	protected WebElement grp_reviewPlanDocs_text;
 	
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline') and not(contains(@class,'ng-hide'))]")
-	protected WebElement grp_comparePlanOnlineSection;
-	
-	@FindBy(xpath="//div[contains(@class,'Enrollplan') and not(contains(@class,'ng-hide'))]")
-	protected WebElement grp_enrollPlanSection;
-	
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'documentsMain')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]")
 	protected WebElement grp_reviewPlanDocs_docSection;
 
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//select")
 	protected WebElement grp_reviewPlanDocs_docSection_langDropdown;
 
-	@FindBy(xpath="xyz//select//option[@lang='en' and contains(@style,'block')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//select//option[@lang='en' and contains(@style,'block')]")
 	protected WebElement grp_reviewPlanDocs_lang_en_ava;
 
-	@FindBy(xpath="xyz//select//option[@lang='es' and contains(@style,'block')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//select//option[@lang='es' and contains(@style,'block')]")
 	protected WebElement grp_reviewPlanDocs_lang_es_ava;
 
-	@FindBy(xpath="xyz//select//option[@lang='zh' and contains(@style,'block')]")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//select//option[@lang='zh' and contains(@style,'block')]")
 	protected WebElement grp_reviewPlanDocs_lang_zh_ava;
 	
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//select//option[@lang='en']")
@@ -771,7 +773,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//select//option[@lang='zh']")
 	protected WebElement grp_reviewPlanDocs_lang_zh;
-
 	
 	//note: Subsection - Review your plan changes for next year
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]/div[contains(@class,'anocavailable')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
@@ -780,125 +781,47 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]/div[contains(@class,'anocavailable')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_checkMark_green;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]/div[contains(@class,'anocavailable')]//h4")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_Header;
 
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_Text;
-
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]//div[contains(@class,'Review_PlanCh_Group')]//a[contains(text(),'Annual')]")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_en;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]//div[contains(@class,'Review_PlanCh_Group')]//a[contains(text(),'Annual')]/../i")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_en_arrow;
 
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_es;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_es_arrow;
-	
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_zh;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_anoc_zh_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_es;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_es_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_zh;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_zh_arrow;
-
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]//div[contains(@class,'Review_PlanCh_Group')]//a[contains(text(),'Evidence')]")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_en;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'annualNoticeDocuments ')]//div[contains(@class,'Review_PlanCh_Group')]//a[contains(text(),'Evidence')]/../i")
 	protected WebElement grp_revPlnDocsSec_plnChngSec_eoc_en_arrow;
 
+	//note: review pharmacy information section
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub']")
+	protected WebElement grp_reviewPharInfoSection;
+	
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[@class='circle']")
+	protected WebElement grp_reviewPharInfo_circle_noGreen;
+
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[@class='circle']")
+	protected WebElement grp_reviewPharInfo_circle_green;
+
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//h3")
+	protected WebElement grp_reviewPharInfo_header;
+
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//p[contains(text(),'Pharmacy Locator to see')]")
+	protected WebElement grp_reviewPharInfo_text;
+	
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'pharmacyLink_group')]")
+	protected WebElement grp_reviewPharInfo_docSection;
+
 	//note: Subsection - Review your pharmacy information for next year
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_checkMark_noGreen;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_checkMark_green;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//h4[contains(text(),'Review pharmacy information')]")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_header;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//p[contains(text(),'to see which pharmacies')]")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_text;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[contains(@class,'Pharmacy_mapd_group')]//a[contains(text(),'Find a Pharmacy')]/../i")
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'pharmacyLink_group')]//a[contains(text(),'Find a Pharmacy')]/../i")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'pharmacy_MAPD_PDP_Group')]//div[(contains(@class,'Pharmacy_mapd_group') or contains(@class,'pharmacy_pdp_group')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Find a Pharmacy')]")
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'pharmacyLink_group')]//a[contains(text(),'Find a Pharmacy')]")
 	protected WebElement grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_es;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_es_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_zh;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_zh_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_en;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_pharInfoSec_ph_en_arrow;
-
-	//note: Subsection - Review your prescription drug coverage for next year
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_checkMark_noGreen;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_checkMark_green;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//h4[contains(text(),'Review your Prescription drug coverage')]")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_header;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//p[contains(text(),'Use our drug search')]")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_text;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//div[contains(@class,'formulery_mapd_group')]//a[contains(text(),'Drug Search')]/../i")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_drugSrchLnk_arrow;
-
-	@FindBy(xpath="//div[contains(@class,'Reviewplandocuments_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'prescription_mapd_pdp_Group')]//div[contains(@class,'formulery_mapd_group')]//a[contains(text(),'Drug Search')]")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_drugSrchLnk;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_es;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_es_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_zh;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_zh_arrow;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_en;
-
-	@FindBy(xpath="")
-	protected WebElement grp_revPlnDocsSec_presDrugSec_cf_en_arrow;
-
-	
-	
-	
 	//=======================================================================================
 	//note: bookmark related
 	@FindBy(xpath="//div[@id='error_block']//p")

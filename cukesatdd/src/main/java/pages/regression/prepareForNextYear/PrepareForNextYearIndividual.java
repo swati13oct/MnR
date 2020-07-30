@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.util.CommonUtility;
 
 public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
@@ -272,15 +270,24 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review your Prescription drug coverage for next year' section");
 				note.addAll(validateReviewYourPresDrug(section, planType, memberType, currentDate, docDisplayMap));
+			} else {
+				System.out.println("TEST - planType='"+planType+"' - Proceed to validate NO 'Review your Prescription drug coverage for next year' section");
+				note.addAll(validateNoReviewYourPresDrug(section));
 			}
 			
 			if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review provider information for next year' section");
 				note.addAll(validateReviewProviderInfo(section, planType, memberType, currentDate, docDisplayMap));
+			} else {
+				System.out.println("TEST - planType='"+planType+"' - Proceed to validate NO 'Review provider information for next year' section");
+				note.addAll(validateNoReviewProviderInfo(section));
 			}
 			if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) {
 				System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
 				note.addAll(validateReviewPharmacyInfo(section, planType, memberType, currentDate, docDisplayMap));
+			} else {
+				System.out.println("TEST - planType='"+planType+"' - Proceed to validate NO 'Review pharmacy information for next year' section");
+				note.addAll(validateNoReviewPharmacyInfo(section));
 			}
 
 			//note: after link click, section circle should turn green
@@ -403,6 +410,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		}	
 		return note;
 	}
+	
+	public List<String> validateNoReviewYourPresDrug (String section) {
+		System.out.println("Proceed to validate NO Review Plan Materials - Prescription Drug section content...");
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		String subSection=" - Review your Prescription drug coverage for next year";
+		String targetItem=section+subSection;
+		WebElement targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_noGreen;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		return note;
+	}
 
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
@@ -515,6 +533,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
+		return note;
+	}
+	
+	public List<String> validateNoReviewProviderInfo(String section) {
+		System.out.println("Proceed to validate NO Review Plan Materials - Provider section content...");
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		String subSection=" - Review provider information for next year";
+		String targetItem=section+subSection;
+		WebElement targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_noGreen;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
 		return note;
 	}
 
@@ -713,6 +742,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		return note;
 	}
 
+	public List<String> validateNoReviewPharmacyInfo(String section) {
+		System.out.println("Proceed to validate NO Review Plan Materials - Pharmacy section content...");
+		List<String> note=new ArrayList<String>();
+		note.add("\t=================");
+		String subSection=" - Review pharmacy information for next year";
+		String targetItem=section+subSection;
+		WebElement targetElement=ind_revPlnMatlsSec_pharInfoSec_checkMark_noGreen;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		return note;
+	}
+	
 	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
 		System.out.println("Proceed to validate Review Plan Materials - Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
