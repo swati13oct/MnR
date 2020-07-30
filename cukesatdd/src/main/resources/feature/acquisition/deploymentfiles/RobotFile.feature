@@ -6,11 +6,11 @@ Given the user is on the AARP medicare site landing page
 And user opens the page to validate on AARP
  | pagename | <pagename> |
 Then the user validates whether page load is loading on AARP
-#Then the user validates whether correct content is visible on AARP
-#| pagename | <pagename> |
+Then the user validates whether correct content is visible on AARP
+| pagename | <pagename> |
 Examples: 
 | pagename |
-|robot.txt|
+|robots.txt|
 
 @robotTxtFileUHC
 Scenario Outline: To test the robot txt file is loading on UHC
@@ -22,4 +22,4 @@ Then the user validates whether correct content is visible on UHC
 | pagename | <pagename> |
 Examples: 
 | pagename |
-|robot.txt|
+|robots.txt|

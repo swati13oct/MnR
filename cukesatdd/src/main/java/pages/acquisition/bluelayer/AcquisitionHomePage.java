@@ -2619,25 +2619,34 @@ public boolean isValidatePageLoadError(){
 					return true;
 				}
 				
+		
 	}
 		
 	public boolean isValidateContent(String file){		
-		if(file.equals("robot")){
+		if(file.contains("robot")){
 			
-			File newFile = new File("driver.getCurrentUrl()");
+			WebElement xpathvar =driver.findElement(By.xpath("/html/body/pre"));
+			int fileTextCount =xpathvar.getText().length();
 			
-			if (newFile.length() == 0)
+			if(xpathvar.isDisplayed()&&fileTextCount > 20){
+					System.out.println("file loaded");
+					return true;
+			}else{
+				System.out.println("file not loaded");
 				return false;
-			else 
-				return true;			
-		}else if(file.equals("sitemap")){
+			}				
+		}else if(file.contains("sitemap")){
 			
-			File newFile = new File("driver.getCurrentUrl()");
+			WebElement xpathvar =driver.findElement(By.xpath("//*[@id='folder1']"));
+			System.out.println("xpath=="+xpathvar.getText());
 			
-			if (newFile.length() == 0)
+				if(xpathvar.isDisplayed()){
+					System.out.println("xml id found");
+					return true;
+			}else{
+				System.out.println("xml id not found");
 				return false;
-			else 
-				return true;	
+			}	
 		}
 		return false;
 		
