@@ -2607,19 +2607,17 @@ public void validateResultSummaryPage() {
 	}
 
 public boolean isValidatePageLoadError(){
-		String url=driver.getCurrentUrl();
+			String url=driver.getCurrentUrl();
 			
 			System.out.println("Url is:::" +url);
-			WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
-			if(validate(pageLoadText)){
-				System.out.println("page not found webelement identified");
-			
-				return true;
-			}
-			else{
-				System.out.println("page not found webelement is not identified");
-				return false;
-			}
+			if(driver.findElements(By.id("medicareTitle")).isEmpty()){
+					System.out.println("if");	
+					return false;
+				}
+				else{
+					System.out.println("else");
+					return true;
+				}
 				
 		
 				

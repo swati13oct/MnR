@@ -2338,16 +2338,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 	
-	public boolean isValidatePageLoadError(){
+	public boolean isValidatePageLoadError() {
 	
 		String url=driver.getCurrentUrl();
 		System.out.println("Current page URL: "+url);
-		
-			WebElement pageLoadText= driver.findElement(By.xpath("//*[@id='medicareTitle']/h1"));
-			if(validateNew(pageLoadText))
-				return true;
-			else
+		if(driver.findElements(By.id("medicareTitle")).isEmpty()){
+			//if(driver.findElement(By.xpath("//*[@id='medicareTitle']/h1").id(id)){
+				System.out.println("if");	
 				return false;
+			}
+			else{
+				System.out.println("else");
+				return true;
+			}
 		
 	}
 	

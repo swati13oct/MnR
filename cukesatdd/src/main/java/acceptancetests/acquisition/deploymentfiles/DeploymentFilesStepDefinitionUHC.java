@@ -28,7 +28,7 @@ public class DeploymentFilesStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	@Then("^the user validates whether page load error is not visible on UHC$")
+	@Then("^the user validates whether page load is loading on UHC$")
 	public void the_user_validates_whether_page_is_loading_UHC() throws InterruptedException {
 		
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -36,8 +36,9 @@ public class DeploymentFilesStepDefinitionUHC {
 		Boolean isPageLoadError=aquisitionhomepage.isValidatePageLoadError();
 		if(isPageLoadError)
 			Assert.fail("Page is not loading properly. It is showing error -PAGE NOT FOUND");
+			
 		else
-			Assert.assertTrue("Page is loading.", true);
+			Assert.fail("File is not loading");
 		
 	}
 	

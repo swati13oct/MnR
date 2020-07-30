@@ -2,6 +2,7 @@ package acceptancetests.acquisition.deploymentfiles;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,17 +29,17 @@ public class DeploymentFilesStepDefinitionAARP {
 		return loginScenario;
 	}
 
-	@Then("^the user validates whether page load error is not visible on AARP$")
-	public void the_user_validates_whether_page_is_loading_AARP() throws InterruptedException {
+	@Then("^the user validates whether page load is loading on AARP$")
+	public void the_user_validates_whether_page_is_loading_AARP()  {
 		
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		Boolean isPageLoadError=aquisitionhomepage.isValidatePageLoadError();
-		System.out.println("isPageLoadError--"+isPageLoadError);
+		Boolean isPageLoadError = aquisitionhomepage.isValidatePageLoadError();
+		
 		if(isPageLoadError)
-		Assert.fail("Page is not loading properly. It is showing error -PAGE NOT FOUND");
+			Assert.fail("Page is not loading properly. It is showing error -PAGE NOT FOUND");
 		else
-			Assert.assertTrue("Page is loading.", true);
+			Assert.assertTrue("Page is loading.", true); 
 		
 	}
 	
@@ -62,8 +63,7 @@ public class DeploymentFilesStepDefinitionAARP {
 		if(isValidContent)
 			Assert.assertTrue("File is loaded", true);
 		else
-			Assert.assertFalse("File is not loading.", false);
-		
+			Assert.fail("File is not loading");
 	}
 
 	
