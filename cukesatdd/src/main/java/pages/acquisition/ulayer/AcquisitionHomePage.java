@@ -2354,7 +2354,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	
-	public boolean isValidateContent(String file) throws ParserConfigurationException, SAXException, IOException{	
+	public boolean isValidateContent(String file) {	
 	if(file.contains("robot")){
 			
 			WebElement xpathvar =driver.findElement(By.xpath("/html/body/pre"));
