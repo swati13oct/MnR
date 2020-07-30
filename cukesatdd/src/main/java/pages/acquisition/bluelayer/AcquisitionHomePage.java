@@ -2626,9 +2626,10 @@ public boolean isValidatePageLoadError(){
 		if(file.contains("robot")){
 			
 			WebElement xpathvar =driver.findElement(By.xpath("/html/body/pre"));
-			int fileTextCount =xpathvar.getText().length();
+			String strFileContent =xpathvar.getText();
+			boolean strSiteMap=strFileContent.contains("Sitemap");
 			
-			if(xpathvar.isDisplayed()&&fileTextCount > 20){
+			if(xpathvar.isDisplayed() && strSiteMap){
 					System.out.println("file loaded");
 					return true;
 			}else{
