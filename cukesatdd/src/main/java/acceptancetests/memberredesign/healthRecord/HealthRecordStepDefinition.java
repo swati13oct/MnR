@@ -343,7 +343,7 @@ public class HealthRecordStepDefinition {
 
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToBenefitsPage();
+		wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
 		//note: consumerDetail only show up on secondary page, get all the info now for later use
 		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
@@ -398,12 +398,12 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		//note: navigate to benefits then planDoc
-		wd=healthRecordPage.navigateToBenefitsPage();
+		//note: in these navigation method will first go to benefits then go to planDoc
+		//tbd wd=healthRecordPage.navigateToBenefitsPage();
 		if (memberType.toUpperCase().contains("PREEFF")) 
-			wd=healthRecordPage.navigateToPlanDocPage_preEff();
+			wd=healthRecordPage.navigateToPlanDocPage_preEff(memberType);
 		else
-			wd=healthRecordPage.navigateToPlanDocPage();
+			wd=healthRecordPage.navigateToPlanDocPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -504,8 +504,8 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		//note: navigate to benefits then order
-		wd=healthRecordPage.navigateToBenefitsPage();
-		wd=healthRecordPage.navigateToOrderPage();
+		wd=healthRecordPage.navigateToBenefitsPage(memberType);
+		wd=healthRecordPage.navigateToOrderPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -777,7 +777,7 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToPharmacyLocatorPage();
+		wd=healthRecordPage.navigateToPharmacyLocatorPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -830,7 +830,7 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToDcePage();
+		wd=healthRecordPage.navigateToDcePage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;

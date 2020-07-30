@@ -127,6 +127,13 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(@class,'redError') and not(contains(@class,'ng-hide')) and contains(text(),'Either your UserName or Password was incorrect.')]")
 	protected WebElement initialLoginErr;
 	
+	@FindBy(xpath="//span[@class='redError' and contains(text(),'Unable to retrieve member')]")
+	protected WebElement redUnableToRetrMemErr;
+	
+	@FindBy(xpath="//h1[@translate='INTERNAL_ERROR_SORRY']")
+	protected WebElement sorryItsNotYouErr;
+
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -204,10 +211,11 @@ public class MemberAuthPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - got initial login error on member auth, please check to see if input username/passowrd is correct or if password expired?", !validate(initialLoginErr,0));
 		waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()) {
-			System.out.println("member auth Login successfull");
+			System.out.println("member auth Login successfully");
 			return new MemberAuthPage(driver);
-		} else
+		} else {
 			return null;
+		}
 	}
 
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
@@ -216,6 +224,7 @@ public class MemberAuthPage extends UhcDriver {
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
+		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
 		if (MemberTableUserName.isDisplayed()) {
@@ -386,6 +395,7 @@ public class MemberAuthPage extends UhcDriver {
 					}
 					checkModelPopup(driver, 2);
 					CommonUtility.checkPageIsReadyNew(driver);
+					Assert.assertTrue("PROBLEM - Got 'Sorry. It's not you' error instead of landing on dashboard", !validate(sorryItsNotYouErr,0));
 					CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
 					// waitforElement(SuperUser_DashboardBanner);
 					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {

@@ -38,6 +38,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'formsandresources')]")
 	protected WebElement planDocTopMenuLnk;
+	
+	@FindBy(xpath="//h1[contains(text(),'Plan Documents')]")
+	protected WebElement planDocHeaderTxt;
 
 	@FindBy(xpath="//a[contains(@id,'myDoc')]")
 	protected WebElement myDocLnk;

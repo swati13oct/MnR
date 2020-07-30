@@ -73,7 +73,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
-	    | 12    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_012   | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | true       |
 
     @memAuth_ihr_d
     Examples: 
@@ -85,8 +85,6 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	 #  | 16    | F424804 | qavgogine | qavgogine | q2_june_combo0017       | PDP      | COMBO_SHIP_PDP_IHR | true       |
-	 #   | 16    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group163       | MA       | COMBO_SHIP_MA_IHR  | true       |
 	    | 16    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011       | MAPD       | COMBO_SHIP_MAPD_IHR  | true       |
 
     @memAuth_ihr_f
