@@ -45,7 +45,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	private WebElement NextSteps_PDPBtn;
 	
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
-	@FindBy(xpath = "//p[@class='confirmation-number']")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
 	private WebElement confirmationNumber;
 
 	
