@@ -133,14 +133,14 @@ public class OLEconfirmationPage extends UhcDriver{
 		return false;
 	}
 
-  public Map<String, String> retrieve_GPS_data(String confirmationNumber) {
+  public Map<String, String> retrieve_GPS_data(String confirmation_no) {
 	  	   Connection connection = createDataBaseConnection();
 		   ResultSet rs = null;
 		   Statement stmt = null;
 		   Map<String, String> gpsData = new HashMap<String, String>();
 		   try {
 			   stmt = connection.createStatement();
-			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY_1 + confirmationNumber );
+			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY_1 + confirmation_no );
 			   while(rs.next()) {
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
@@ -256,6 +256,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
 		String confirmation_no = confirmationNumber.getText();
+		 System.out.println("OLE confirmation number is  " +confirmation_no);
 		//map.put("Confirmation No", confirmation_no);---Prashant
 		Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
 		if(map.equals(gpsdatamap)) {

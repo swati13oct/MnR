@@ -874,7 +874,8 @@ public class CommonConstants {
 			  "encrypt=true;" + "trustServerCertificate=false;" + "loginTimeout=30;";
 	*/
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@localhost:1521:GPSST04SVC_TRN";
-	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
+	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
+	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	public static final String GPS_QUERY = "Select MEDICAID_IND,\n" + 
 			"MEDICAID_NUMBER,\n" + 
 			"MAILING_ZIP_CD,\n" + 
@@ -917,6 +918,6 @@ public class CommonConstants {
 			"";
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
-			"LAST_NAME from Xerox_stage where xerox_stage_id = '36417675'";
+			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 }
