@@ -80,6 +80,15 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div#multiSelect button[class*='uhc-button']")
 	private WebElement applyBtn;
+	
+	@FindBy(css = "a[dtmname*=' Drugs']")
+	private WebElement AddDrugsLink;
+	
+	@FindBy(css = "a[dtmname*=' Doctors']")
+	private WebElement AddDoctorsLink;
+	
+	@FindBy(css = "a[dtmname*=' Hospitals']")
+	private WebElement AddHospitalsLink;
 
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
@@ -181,6 +190,64 @@ public class AREPlanRanking extends UhcDriver {
 			Assert.assertTrue(elemCheck.isSelected(), "Unable to Select "+elemCheck);
 		else
 			Assert.assertFalse(elemCheck.isSelected(), "Unable to Deselect "+elemCheck);
+	}
+	
+	public void agentaddDrugsPlanCompare(String drugDetails) {
+		pageloadcomplete();
+		System.out.println("Validate Adding Drugs from Plan Compare page : ");
+		validate(AddDrugsLink);
+		AddDrugsLink.click();
+		DCEPage dceobj = new DCEPage(driver);
+		dceobj.drugsHandlerWithdetails(drugDetails);
+		dceobj.choosePharmacyandBacktoPlans();
+	}
+	
+	public void DrugsInPlanCompare(String drugDetails) {
+		pageloadcomplete();
+		System.out.println("Validate Added Drugs in Plan Compare page : ");
+	}
+	
+	public void DeleteinDCE(String drugDetails) {
+		pageloadcomplete();
+		System.out.println("Delete Added Drugs in DCE page : ");
+		validate(AddDrugsLink);
+		AddDrugsLink.click();
+		DCEPage dceobj = new DCEPage(driver);
+		dceobj.deletedrugsHandlerWithdetails(drugDetails);
+	}
+	
+	public void agentaddProvidersPlanCompare(String doctors) {
+		pageloadcomplete();
+		System.out.println("Validate Adding Doctors from Plan Compare page : ");
+		validate(AddDoctorsLink);
+		AddDoctorsLink.click();
+		doctorModellookup(doctors);
+	}
+	
+	
+	public void doctorModellookup(String search) {
+		WerallyPage rallyobj = new WerallyPage(driver);
+    	String curWindow = driver.getWindowHandle();
+    	System.out.println(curWindow);
+    	rallyobj.validateLinksanotherWindow(curWindow,"Adding Doctors",search);
+    	threadsleep(5000);		
+	}
+	
+	public void DoctorsInPlanCompare(String docDetails) {
+		pageloadcomplete();
+		System.out.println("Validate Added Doctors in Plan Compare page : ");
+	}
+	
+	public void DeleteinWerally(String docDetails) {
+		pageloadcomplete();
+		System.out.println("Delete Added Doctors in Werally page : ");
+		validate(AddDoctorsLink);
+		AddDoctorsLink.click();
+		WerallyPage rallyobj = new WerallyPage(driver);
+    	String curWindow = driver.getWindowHandle();
+    	System.out.println(curWindow);
+    	rallyobj.validateLinksanotherWindow(curWindow,"Delete Doctors",docDetails);
+    	threadsleep(5000);		
 	}
 	
 }

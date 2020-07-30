@@ -120,7 +120,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | Drug Selection |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
   @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6

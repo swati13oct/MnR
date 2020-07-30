@@ -72,5 +72,35 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank =  new AREPlanRanking(wd);
 		planRank.validateUIElements();
 	}
+	
+	@Then("^user adds Drugs in plan compare page$")
+   	public void add_drugs_plan_compare_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking addDrug =  new AREPlanRanking(wd);
+		addDrug.agentaddDrugsPlanCompare(inputValues.get("Drug Details"));
+   	}
+	
+	@Then("^user verify Drugs added in plan compare page vs DCE$")
+	public void drugs_plan_compare_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking addDrug =  new AREPlanRanking(wd);
+		addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
+		addDrug.DeleteinDCE(inputValues.get("Drugs Names"));
+   	}
+	
+	@When("^user adds providers in plan compare page$")
+	public void add_provider_plan_compare_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking addProvider =  new AREPlanRanking(wd);
+		addProvider.agentaddProvidersPlanCompare(inputValues.get("Doctors"));
+   	}
+	
+	@Then("^user verify added Providers in plan compare page vs Werally$")
+	public void doc_plan_compare_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking addDrug =  new AREPlanRanking(wd);
+		addDrug.DoctorsInPlanCompare(inputValues.get("Doctors Names"));
+		addDrug.DeleteinWerally(inputValues.get("Delete Doctors"));
+   	}
 
 }
