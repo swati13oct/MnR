@@ -413,7 +413,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
 		private WebElement yearDrpDwnOptionPartA;
 		
-		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+		//@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+		@FindBy(xpath="//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2021 plans')]")
 		private WebElement nextYearSelection;
 		
 		@FindBy(id = "mpbed-month")
@@ -599,7 +600,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 		public static WebElement proactiveChatExitBtn;
 
-		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+		//@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='startoverdetails']")
 		private WebElement planYearPopup;
 		
 		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
@@ -713,7 +715,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
 		private WebElement  NextYearPlans;
 		
-		@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
+		//@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
+		@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
 		private WebElement  CurrentYearPlans;
 		
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
@@ -3416,6 +3419,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 			
 			SelectYearGoBtn.click();
+			//CurrentYearPlans.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
@@ -3426,8 +3430,31 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void handlePlanYearSelectionPopup(String planType) {
 		
-
-	      
+		try{
+			
+		if (!(planType.equalsIgnoreCase("MS"))) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if(validate(CurrentYearPlans, 30)) {
+			System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
+			//CurrentYearPlans.click();
+			jsClickNew(CurrentYearPlans);
+				
+			}
+		}	
+		else {
+			
+			if (validate(planYearPopup, 30)) {
+					if (validate(nextYearSelection)) {
+						nextYearSelection.click();
+						CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+						planYearPopupGoButton.click();
+						System.out.println("Popup is not present for AEP : ");
+					}
+			}
+				
+	      }
+	      /*
 		try{
 	
 			if (!(planType.equalsIgnoreCase("MS"))) {
@@ -3436,7 +3463,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		if (validate(planYearPopup, 30)) {
 			if (validate(nextYearSelection)) {
 				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				validate(planYearPopupGoButton, 30);
+				//CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
 				planYearPopupGoButton.click();
 					}
 				}
@@ -3447,10 +3475,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 			if(validate(CurrentYearPlans, 30)) {
 				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
-				CurrentYearPlans.click();
+				//CurrentYearPlans.click();
+				jsClickNew(CurrentYearPlans);
 			}
 				
-	      }
+	      }*/
 		
 	}catch(Exception e) {
 			e.printStackTrace();

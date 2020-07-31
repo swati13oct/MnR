@@ -3956,39 +3956,70 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	
 	public void handlePlanYearSelectionPopup(String planType) {
-		
-
-	      
+		 
 		try{
-	
+			
 			if (!(planType.equalsIgnoreCase("MS"))) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup, 30)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-				planYearPopupGoButton.click();
-					}
-				}
-			}
-		
-		else {
-			System.out.println("Popup is not present for AEP : ");
-		
+			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 			if(validate(CurrentYearPlans, 30)) {
 				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
-				CurrentYearPlans.click();
-			}
+				//CurrentYearPlans.click();
+				jsClickNew(CurrentYearPlans);
+					
+				}
+			}	
+			else {
 				
-	      }
+				if (validate(planYearPopup, 30)) {
+						if (validate(nextYearSelection)) {
+							nextYearSelection.click();
+							CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+							planYearPopupGoButton.click();
+							System.out.println("Popup is not present for AEP : ");
+						}
+				}
+					
+		      }
+		      /*
+			try{
 		
-	}catch(Exception e) {
-			e.printStackTrace();
-	
-	}	      
-	
-	
+				if (!(planType.equalsIgnoreCase("MS"))) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+			if (validate(planYearPopup, 30)) {
+				if (validate(nextYearSelection)) {
+					nextYearSelection.click();
+					validate(planYearPopupGoButton, 30);
+					//CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+					planYearPopupGoButton.click();
+						}
+					}
+				}
+			
+			else {
+				System.out.println("Popup is not present for AEP : ");
+			
+				if(validate(CurrentYearPlans, 30)) {
+					System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
+					//CurrentYearPlans.click();
+					jsClickNew(CurrentYearPlans);
+				}
+					
+		      }*/
+			
+		}catch(Exception e) {
+				e.printStackTrace();
+			/*	System.out.println("Popup is not present for AEP : ");
+				WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+				WebElement SelectYearGoBtn = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
+				System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
+				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+SelectYearGoBtn.getText());
+				SelectYearGoBtn.click();*/			
+				
+		
+		}	      
+
 }
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")

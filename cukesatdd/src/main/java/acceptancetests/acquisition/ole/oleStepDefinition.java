@@ -2825,6 +2825,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		}
 		
 		String plantype = MemberDetailsMap.get("Plan Type");
+		String [] dateArray = null;
 		
 		//OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		//boolean ConfirmationPage_Status = oleConfirmationPage.validate_plan_details(MemberDetailsMap);
@@ -2835,30 +2836,73 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
 				Map<String, String> DetailsMap = new HashMap<String, String>();
-				DetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
-				DetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
+				String firstName = (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME);
+				DetailsMap.put("First Name", firstName.toUpperCase());
 				
-				/*DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+				String lastName = (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME);
+				DetailsMap.put("Last Name", lastName.toUpperCase());
+				
+				/*DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+				String gender= (String) getLoginScenario().getBean(oleCommonConstants.GENDER);
+				gender=gender.substring(0, 1);
+				DetailsMap.put("Gender",gender);*/
+				
+		/*		String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
+				partAEffective = OLEGPSValidation.converttogpsDate(partAEffective);
+				DetailsMap.put("PartA Date", partAEffective);
+				
+				String partBEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE);
+				partBEffective  = OLEGPSValidation.converttogpsDate(partBEffective );
+				DetailsMap.put("PartB Date", partBEffective);
+			
+				String dob = (String) getLoginScenario().getBean(oleCommonConstants.DOB);
+				dob  = OLEGPSValidation.converttogpsDate(dob );
+				DetailsMap.put("DOB", dob);
+
+				String medicareNumber= (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER);
+				medicareNumber=medicareNumber.replaceAll("", "-").toUpperCase();
+				DetailsMap.put("Medicare Number", medicareNumber);*/
+				
+			/*	DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
+				
+				String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
+				DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
+
+				String groupNumber = (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER);
+				DetailsMap.put("Group Number", groupNumber.toUpperCase());
+				
+				DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
+				
+				String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
+				DetailsMap.put("Prescription Name", prescriptionCoverageName.toUpperCase());
+				
+				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
+				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
+				
+				DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));*/
+				
+				
+				
+				/*
+				 DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
-				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+				
 				DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 				DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-				DetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
-				DetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
 				DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
+			DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 				DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 				DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
+			DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
+			DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
+			DetailsMap.put("Perm_city", (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY));
+			DetailsMap.put("MAILING_QUESTION", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION));
+			DetailsMap.put("Mailing_Street", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET));
+			DetailsMap.put("Mailing_City", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY));
+		DetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
+		DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
+			DetailsMap.put("Email", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL));
 				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-				DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
-				DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
-				DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
-				DetailsMap.put("Perm_city", (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY));
-				DetailsMap.put("MAILING_QUESTION", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION));
-				DetailsMap.put("Mailing_Street", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET));
-				DetailsMap.put("Mailing_City", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY));
-				DetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
-				DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
-				DetailsMap.put("Email", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL));
 */
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
 				if (Validation_Status) {
@@ -2866,8 +2910,8 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
 					Assert.assertTrue(true);
 				} else {
-					System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated in GPS");
-					Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated in GPS");
+					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
+					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);

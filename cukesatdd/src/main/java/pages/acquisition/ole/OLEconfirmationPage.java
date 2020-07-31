@@ -9,14 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import atdd.framework.UhcDriver;
 
@@ -26,7 +30,8 @@ import atdd.framework.UhcDriver;
  */
 public class OLEconfirmationPage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
+	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
 	private WebElement PlanYear_PlanName;
 	
 	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]/..")
@@ -43,11 +48,10 @@ public class OLEconfirmationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='pdptextbtn']")
 	private WebElement NextSteps_PDPBtn;
-	
+
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
 	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
 	private WebElement confirmationNumber;
-
 	
 	public OLEconfirmationPage(WebDriver driver) {
 		super(driver);
@@ -59,8 +63,6 @@ public class OLEconfirmationPage extends UhcDriver{
 	public void openAndValidate() {
 		validateNew(PlanYear_PlanName);
 	}
-	private ArrayList<String> stringList;
-	private Map<String, ArrayList<String>> dataMap;
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		
@@ -69,7 +71,6 @@ public class OLEconfirmationPage extends UhcDriver{
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_County = planDetailsMap.get("County");
 		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
-		String Expected_ConfirmationNumber = planDetailsMap.get("Confirmation Number");
 		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
@@ -77,7 +78,6 @@ public class OLEconfirmationPage extends UhcDriver{
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
-		System.out.println("Confirmation Number is Displayed on OLE : "+Expected_ConfirmationNumber);
 
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
@@ -133,7 +133,7 @@ public class OLEconfirmationPage extends UhcDriver{
 		return false;
 	}
 
-  public Map<String, String> retrieve_GPS_data(String confirmation_no) {
+	  public Map<String, String> retrieve_GPS_data(String confirmation_no) {
 	  	   Connection connection = createDataBaseConnection();
 		   ResultSet rs = null;
 		   Statement stmt = null;
@@ -146,6 +146,36 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("First Name", firstName);
 				   String lastName = rs.getString("LAST_NAME");
 				   gpsData.put("Last Name", lastName);
+				   String gender = rs.getString("GENDER");
+				   gpsData.put("Gender", gender);
+				   String medicareNumber = rs.getString("MEDICARE_NUMBER");
+				   gpsData.put("Medicare Number", medicareNumber); 
+				   String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
+					gpsData.put("PartA Date", partAEffectiveDate); 
+					String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
+					gpsData.put("PartB Date", partBEffectiveDate); 
+					String doB = rs.getString("DATE_OF_BIRTH");
+					gpsData.put("DOB", doB);
+					String zipCode = rs.getString("ZIP_CD");
+					gpsData.put("Zip Code", zipCode );
+
+					String healthInsuranceName = rs.getString("OTHER_HEALTH_INSURANCE_NAME");
+					 gpsData.put("Health Insurance Name", healthInsuranceName); 
+					   String healthInsuranceGroupName = rs.getString("OTHER_HEALTH_INSURANCE_GRP_NUM");
+					 gpsData.put("Group Number", healthInsuranceGroupName); 
+					    String healthInsuranceID  = rs.getString("OTHER_HEALTH_INSURANCE_ID");
+					   gpsData.put("Member Number", healthInsuranceID); 
+					    String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
+					   gpsData.put("Prescription Name", secondaryCoverageName); 
+					    String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					
+					   //   PD Member Number
+						   
 				   //add for all the gps columns
 				   /* String confirmationNumber = rs.getString("XEROX_STAGE_ID");
 				   gpsData.put("Confirmation No", confirmationNumber);
@@ -181,7 +211,7 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("First Name", dayTimePhoneNumber);
 				  String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
 				   gpsData.put("First Name", eveningTimePhoneNumber); 	
-			 String medicareNumber = rs.getString("MEDICARE_NUMBER");
+			 	String medicareNumber = rs.getString("MEDICARE_NUMBER");
 				   gpsData.put("First Name", medicareNumber); 
 				    String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
 				   gpsData.put("First Name", partAEffectiveDate); 
@@ -237,9 +267,9 @@ public class OLEconfirmationPage extends UhcDriver{
 			   }
 	return gpsData;
 	  
-  }
+ }
 	 
- public Connection createDataBaseConnection() {
+public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
@@ -261,12 +291,65 @@ public class OLEconfirmationPage extends UhcDriver{
 		Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
 		if(map.equals(gpsdatamap)) {
 			flag = true;
+		} else {
+			Map <String, String> matched = new HashMap<>();
+			Map <String, String> mismatched = new HashMap<>();
+			for (String keySource : map.keySet()) {
+				String strSource = map.get(keySource);
+			    if (gpsdatamap.containsKey(keySource)) { // keys match
+			    	String strTarget = gpsdatamap.get(keySource);
+			        if (strSource.equals(strTarget)) { // values match
+			            matched.put(keySource, strSource);
+			        } else { // values don't match
+			            mismatched.put(keySource, strSource);
+			        }
+			}
+			}
+
+			// print out matched
+			System.out.println("Matched values in OLE GPS");
+			System.out.println("============");  
+			System.out.println("Key\tValue");
+			System.out.println("============");
+			for (String key : matched.keySet()) {
+			    System.out.println(key + "\t" + matched.get(key).toString());
+			  Assert.assertTrue(key + "\t" + matched.get(key).toString(), false);
+			}
+
+			// print out mismatched
+			System.out.println();
+			System.out.println("Mismatched values in OLE GPS");
+			System.out.println("============");
+			System.out.println("Key\tValue");
+			System.out.println("============");
+			for (String key : mismatched.keySet()) {
+			    System.out.println(key + "\t" + mismatched.get(key).toString());
+			  Assert.assertTrue(key + "\t" + mismatched.get(key).toString(), false);
+			}
 		}
 		return flag;
 	}
- }
 	
 	
-	
-
+	public String converttogpsDate(String intputDate) {
+		
+		String [] dateArray = intputDate.split("-");
+		int day = Integer.parseInt(dateArray[0]);
+		if(day<10) {
+			day = day % 10;
+		}
+		int month = Integer.parseInt(dateArray[1]);
+		if(month<10) {
+			month = month % 10;
+		}
+		
+		String year= dateArray[2];
+		
+		String outputDate= day+"/"+month+"/"+year; 
+		System.out.println("Output Date====================== "+outputDate);
+		
+		return outputDate;	
+		
+	}
+}
 	
