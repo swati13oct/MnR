@@ -109,8 +109,6 @@ public class WerallyPage extends UhcDriver {
 						werallyResults = werallySearch(type,search);
 					else if(type.toUpperCase().contains("DELETE"))
 						werallyResults = werallySearchfordelete(type,search);
-					System.out.println("werallyResults Size is : "+werallyResults.size());
-					System.out.println("werallyResults Content is : "+werallyResults);
 					}
 					else {
 						threadsleep(5000);

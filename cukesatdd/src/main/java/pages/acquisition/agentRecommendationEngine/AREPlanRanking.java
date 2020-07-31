@@ -3,6 +3,10 @@
  */
 package pages.acquisition.agentRecommendationEngine;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,6 +93,21 @@ public class AREPlanRanking extends UhcDriver {
 	
 	@FindBy(css = "a[dtmname*=' Hospitals']")
 	private WebElement AddHospitalsLink;
+	
+	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] div[class*='text-semibold']")
+	private WebElement NumberofPlans;
+	
+	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] div[class*='text-dark']")
+	private List<WebElement> plancards;
+	
+	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
+	private List<WebElement> viewplandetailslink;
+	
+	@FindBy(css = ".uhc-container div.content h2:nth-child(2)")
+	private WebElement planNameVPPDetailsPage;
+	
+	@FindBy(css = "a.compare-link")
+	private List<WebElement> backtoComparePlans;
 
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
@@ -248,6 +267,56 @@ public class AREPlanRanking extends UhcDriver {
     	System.out.println(curWindow);
     	rallyobj.validateLinksanotherWindow(curWindow,"Delete Doctors",docDetails);
     	threadsleep(5000);		
+	}
+	
+	public void validateViewPlanDetails() {
+		System.out.println("Validate ARE View Plan Details : ");
+		int totalnumberofplans = Integer.parseInt(NumberofPlans.getText().trim().split(" ")[0]);
+		verifyPlanNames(plancards, totalnumberofplans, viewplandetailslink);		
+	}
+	
+	public void verifyPlanNames(List<WebElement> plansName, int PlanCount, List<WebElement> viewplandetails) {
+		List<String> vppPlans = new ArrayList<String>();
+		System.out.println(plansName.size());
+		System.out.println(viewplandetails.size());
+		int plan = 0;
+		if(plansName.size()!=viewplandetails.size()) {
+			for(plan=1;plan <= PlanCount; plan++) {
+				for(int i = 0; i<viewplandetails.size(); i++)
+					vppPlans.add(verifygetplanName(plansName.get(plan),viewplandetails.get(i)));
+				}
+		}
+		else {
+			for(plan=0;plan < PlanCount; plan++) {
+				for(int i = 0; i<viewplandetails.size(); i++)
+					vppPlans.add(verifygetplanName(plansName.get(plan),viewplandetails.get(i)));
+				}
+		}
+			
+		System.out.println("Plan Name compared Successful Clicks on Plan Name");
+	}
+	
+	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
+		String actualplanName = "";
+		String exceptedplanName = plan.getText().trim();
+		String VIew = planInPDP.getText().trim();
+		System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
+		System.out.println("View "+VIew);
+		planInPDP.click();
+		pageloadcomplete();
+		actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+		System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+		Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+		WebElement comparePlanlink = backtoComparePlans.get(0);
+		comparePlanlink.click();
+		pageloadcomplete();
+		return actualplanName;
+	}
+	
+	public void validateSavePlan() {
+		System.out.println("Validate ARE Save Plans functionality : ");
+		int totalnumberofplans = Integer.parseInt(NumberofPlans.getText().trim().split(" ")[0]);
+//		verifySavePlans(plancards, totalnumberofplans);		
 	}
 	
 }

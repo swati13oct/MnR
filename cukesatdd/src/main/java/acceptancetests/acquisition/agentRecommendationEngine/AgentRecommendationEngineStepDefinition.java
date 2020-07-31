@@ -102,5 +102,17 @@ public class AgentRecommendationEngineStepDefinition {
 		addDrug.DoctorsInPlanCompare(inputValues.get("Doctors Names"));
 		addDrug.DeleteinWerally(inputValues.get("Delete Doctors"));
    	}
+	
+	@Then("^agent validates view plan details in plancompare page$")
+	public void agent_verify_viewplandetails() {
+		AREPlanRanking planRank =  new AREPlanRanking(wd);
+		planRank.validateViewPlanDetails();
+	}
+	
+	@Then("^agent validates save plans in plancompare page$")
+	public void agent_verify_saveplan() {
+		AREPlanRanking planRank =  new AREPlanRanking(wd);
+		planRank.validateSavePlan();
+	}
 
 }
