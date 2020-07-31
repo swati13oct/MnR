@@ -24,7 +24,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//*[@id='drugPopHeading']")
 	public WebElement TellUsABoutHeader;
 	
-	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
 	public WebElement TellUsABoutCloseBtn;
 
 	@FindBy(xpath = "//*[contains(@for,'radio-1-input')]//div[contains(@class,'label')]")
@@ -44,6 +44,21 @@ public class TellUsAboutDrug extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
+	
+	@FindBy(xpath = "//select[contains(@id, 'selectdosage')]")
+	public WebElement SelectDosageDrpDwn;
+	
+	@FindBy(xpath = "//select[contains(@id, 'new-drug-packaging')]")
+	public WebElement SelectPackageDrpDwn;
+	
+	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")
+	public WebElement QuantityTxt;
+	
+	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
+	public WebElement FrequentyDrpDwn;
+	
+	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
+	public WebElement supplyLengthDrpDwn;
 
 	public TellUsAboutDrug(WebDriver driver) {
 		super(driver);
@@ -105,6 +120,39 @@ public class TellUsAboutDrug extends UhcDriver {
 		Assert.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
+	
+	public void selectDosage(String Dosage) {
+		validateNew(SelectDosageDrpDwn);
+		jsClickNew(SelectDosageDrpDwn);
+		WebElement Drug = driver.findElement(By.xpath("//select[@id='selectdosage']//option[contains(text(), '"+Dosage+"')]"));
+		jsClickNew(Drug);
+	}
 
+	public void selectPackage(String Package) {
+		validateNew(SelectPackageDrpDwn);
+		jsClickNew(SelectPackageDrpDwn);
+		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-packaging']//option[contains(text(), '"+Package+"')]"));
+		jsClickNew(element);
+	
+	}
+	
+	public void selectQuantity(String Quantity) {
+		validateNew(QuantityTxt);
+		QuantityTxt.sendKeys(Quantity);
+	}
 
+	public void selectFrequency(String Frequency) {
+		validateNew(FrequentyDrpDwn);
+		jsClickNew(FrequentyDrpDwn);
+		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-frequency']//option[contains(text(), '"+Frequency+"')]"));
+		jsClickNew(element);
+	}
+
+	public void selectSupplyLength(String SupplyLength) {
+		validateNew(supplyLengthDrpDwn);
+		jsClickNew(supplyLengthDrpDwn);
+		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
+		jsClickNew(element);
+	
+	}
 }

@@ -52,7 +52,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//*[@id='drugPopHeading']")
 	public WebElement TellUsABoutHeader;
 	
-	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
 	public WebElement TellUsABoutCloseBtn;
 	
 	//uhc-menu-item	
@@ -62,7 +62,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(),'Add to  drug List')]")
 	public WebElement addToDrugList;
 	
-	@FindBy(xpath = "(//button//span[contains(text(),'Next:Review Drug Costs')])[1]")
+	@FindBy(xpath = "(//button//span[contains(text(),'Next: Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 	
 	@FindBy(xpath = "//input[@id='zip-code']")
@@ -163,5 +163,45 @@ public class BuildYourDrugList extends UhcDriver {
 		}		
 		
 	}
+
+	public TellUsAboutDrug SearchaddDrugs(String drugName) {
+		validateNew(EnterDrugNameTxt);
+		EnterDrugNameTxt.sendKeys(drugName);
+		validateNew(SearchBtn);
+		jsClickNew(SearchBtn);
+		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
+		validateNew(SelectDrug);
+		jsClickNew(SelectDrug);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
+		{
+			return new TellUsAboutDrug(driver);
+		}
+		else {
+			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}
+	}
+
+	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	public WebElement DrugDetails_ChangePharmacyLnk;
+
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	public WebElement DrugDetails_DrugCostsHeading;
+
+	public DrugDetailsPage navigateToDrugDetailsPage() {
+		validateNew(reviewDrugCost);
+		jsClickNew(reviewDrugCost);
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
+		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+		{
+			return new DrugDetailsPage(driver);
+		}
+		else {
+			Assert.fail("Zip Code Entry Page is NOT Displayed");
+			return null;
+		}		
+	}
+	
 
 }

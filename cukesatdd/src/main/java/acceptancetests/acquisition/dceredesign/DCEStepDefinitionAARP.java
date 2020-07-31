@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
@@ -23,6 +24,7 @@ import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VisitorProfilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -54,6 +56,28 @@ public class DCEStepDefinitionAARP {
 		GetStartedPage DCEgetStarted = new GetStartedPage(driver);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
+	}
+	@When("^I access the acquisition DCE Redesign from home page$")
+	public void I_access_the_DCE_redesign_home_page() throws InterruptedException {
+
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		GetStartedPage getStartedPage = acquisitionHomePage.navigateToDCERedesignFromHome();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+	
+	/*verify DCE flow from Ulayer home page hover over*/
+	@When("^I click on DCE Redesign link from Shop for a plan hover over for AARP site$")
+	public void i_click_on_DCE_Redesign_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		GetStartedPage getStartedPage = acquisitionHomePage.navigateToDCERedesignFromSubNav();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 	}
 	
 	@Then("^the user clicks on Build Drug List to navigate to Build Drug List Page$")
@@ -220,6 +244,7 @@ public class DCEStepDefinitionAARP {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
+	
 	@Then("^user enters valid zipcode and county in AARP$")
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -292,4 +317,151 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		//zipCodePlanYearPage.verifyLoadScreen();
 	}
+	
+	@Then("^the user searches and adds the following Drug to Drug List$")
+	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		System.out.println(drugName);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		TellUsAboutDrug tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
+		buildDrugList = tellUsAboutDrug.ClickAddDrug();
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		druglist = druglist+"&"+drugName;
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+	}
+	
+	@Then("^the user validates all added drugs in DrugList$")
+	public void the_user_validates_all_added_drugs_in_DrugList() throws Throwable {
+	}
+	
+	@And("^I access the DCE Redesign on aarp site from Plan Summary for first plan$")
+	public void accessDCERign_PlanSummary(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromPlanSummary(plantype);
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+	@And("^I access the DCE Redesign on aarp site from Plan Summary for mentioned plan$")
+	public void accessDCERign_PlanSummaryforPlan(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+		
+	}
+	
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
+	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		GetStartedPage getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}	
+	
+	@Then("^the user navigates to Med Ed - Prescription Drugs Page$")
+	public void the_user_navigates_to_Med_Ed_Prescription_Drugs_Page() throws Throwable {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acquisitionHomePage.navigateToMedEdPresDrugPage();
+
+	}
+
+	@Then("^the uset clicks on Estimate Drug Costs Link to land on DCE Redesign$")
+	public void the_uset_clicks_on_Estimate_Drug_Costs_Link_to_land_on_DCE_Redesign() throws Throwable {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		GetStartedPage getStartedPage = acquisitionHomePage.clickDCERedesignLinkonMedEdPage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+
+	
+	@Then("^the user navigates to Shop plans for PDP Page and clicks on DCE link fto land on DCE Redesign$")
+	public void the_user_navigates_to_Shop_plans_for_PDP_Page_and_clicks_on_DCE_link_fto_land_on_DCE_Redesign()
+			throws Throwable {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acquisitionHomePage.navigateToShopPDPpage();
+		GetStartedPage getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");	
+	}
+	
+
+	@Then("^the user clicks on Review Drug Costs to Land on Drug DetailsP Page$")
+	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_Page() throws Throwable {
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugDetailsPage drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("^the user validates planName matches plan Name in VPP$")
+	public void the_user_validates_planName_matches_plan_Name_in_VPP() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		drugDetailsPage.validatePlanName(PlanName);
+	}
+
+	@Then("^the user validates Drug Costs section$")
+	public void the_user_validates_Drug_Costs_section() throws Throwable {
+	}
+
+	@Then("^the user validates Your Drugs sections$")
+	public void the_user_validates_Your_Drugs_sections() throws Throwable {
+	}
+
+	@Then("^the user validates Monthly Drug Costs by Stage Section$")
+	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Section() throws Throwable {
+	}
+
+	@Then("^the user validates Important information section$")
+	public void the_user_validates_Important_information_section() throws Throwable {
+	}
+
+	@Then("^the user validates Disclaimers section$")
+	public void the_user_validates_Disclaimers_section() throws Throwable {
+	}
+	
 }

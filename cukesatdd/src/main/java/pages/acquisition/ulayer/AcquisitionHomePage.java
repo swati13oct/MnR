@@ -31,7 +31,7 @@ import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-
+import pages.acquisition.dceredesign.GetStartedPage;
 /**
  * @author pperugu
  *
@@ -1370,6 +1370,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 	
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
+		validateNew(getStarted);
+		getStarted.click();
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 	public DrugCostEstimatorPage navigateToDCEToolFromVPP() throws InterruptedException {
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
@@ -1504,6 +1517,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
      	
      		return new DrugCostEstimatorPage(driver);
+	 }
+	
+	public GetStartedPage navigateToDCERedesignFromSubNav() {
+     	navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+		
 	 }
 	
 	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
@@ -2090,6 +2112,50 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		  else { 
 			  Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page"); 
 			  }
+		}
+		
+		public void navigateToMedEdPresDrugPage()
+		{
+			waitforElement(lnkLearnAboutMedicare);
+			if (lnkLearnAboutMedicare.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(lnkLearnAboutMedicare);
+				actions.build().perform();
+				System.out.println("Hover over Learn about Medicare completed");
+		    }
+			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+			jsClickNew(PresProvidersBenefitsLink);
+		}
+		
+		public GetStartedPage clickDCERedesignLinkonMedEdPage() {
+			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+			validateNew(DCELink);
+			jsClickNew(DCELink);
+			if (validateNew(AddMyDrugsBtn))
+				return new GetStartedPage(driver);
+			return null;
+		}
+		
+		public void navigateToShopPDPpage()
+		{
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(ShopForaplan);
+				actions.build().perform();
+				System.out.println("Hover over Shop for a Plan completed");
+		    }
+			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+			jsClickNew(PDPplansLink);
+		}
+		
+		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
+			validateNew(DCELink);
+			jsClickNew(DCELink);
+			if (validateNew(AddMyDrugsBtn))
+				return new GetStartedPage(driver);
+			return null;
 		}
 
 		public void headerRegisterLink() {
