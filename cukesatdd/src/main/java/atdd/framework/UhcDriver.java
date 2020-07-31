@@ -815,7 +815,8 @@ try {
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
-		String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		//tbd String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		String urlGetSysTime=testSiteUrl+ "/PlanBenefitsWAR/profiledetail/aarp";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -951,9 +952,9 @@ try {
 		}
 	}
 	
-	public void jsSendkeys(MobileElement element,String keys) {
+	public void jsSendkeys(WebElement searchBox,String keys) {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("arguments[0].value='"+ keys +"';", element);
+		jse.executeScript("arguments[0].value='"+ keys +"';", searchBox);
 	}
 	
 	public void pageloadcomplete() {
@@ -981,14 +982,18 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will select option from dropdown based on visible text mobile
 	 */
-	public void mobileSelectOption(Select element,String option) {
+	public void mobileSelectOption(WebElement selectElement,String option,boolean clickElement) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		}
 		else {
 			String curHandle = ((IOSDriver) driver).getContext();
 			System.out.println("curHandle - "+curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
+			if(clickElement)
+				selectElement.click();
+			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
@@ -1008,7 +1013,7 @@ try {
 		threadsleep(500);
 		}
 		catch(Exception e){
-			System.out.println("Unable to Hide the IOS Keypad");
+			System.out.println("IOS Screen Unable to Click text : "+text);
 		}
 		((IOSDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());

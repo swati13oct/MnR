@@ -138,7 +138,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
-      | 1598162 |   80001 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @vppPlanSummaryUHC04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
@@ -279,8 +279,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+   When user selects a provider and retuns to VPP page in ums
+   Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
 
     Examples: 
@@ -336,7 +336,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @vppPlanSummaryUHC13 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+  Scenario Outline: TID: <TID>- zipcode -<zipcode> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Lookup zipcode on UHC
     Then verify find a zipcode popup displpayed and Enter values and click on LookupZipcode on uhc
@@ -366,11 +366,11 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |
 
   @vppPlanSummaryUHC14 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Change Zipcode on VPP using Search By Address
+  Scenario Outline: TID: <TID> -zipcode -<zipcode> -plan type: <plantype> - Verify Change Zipcode on VPP using Search By Address
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user clicks on Change Zip code link in UMS site
     Then user clicks on Select by Address and Enter fileds in UMS Site
@@ -418,7 +418,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
 
   @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+  Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |

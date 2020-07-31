@@ -28,28 +28,28 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     @prod_rallyClaims01a
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
-      | 15234 | ashah120   | Mnrqa002  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
-      | xxxxx | ashah120   | Mnrqa002  | 1GIRL4DEAN   | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
+      | 15234 | ashah120   | Mnrqa003  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
+      | xxxxx | ashah120   | Mnrqa003  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
     @prod_rallyClaims01b
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15268 | ashah120   | Mnrqa002  | BATLLOT@AOL.COM | PCP   | Individual          | COSMOS_CLAIMS   | 
+      | 15268 | ashah120   | Mnrqa003  | BATLLOT@AOL.COM | PCP   | Individual          | COSMOS_CLAIMS   | 
 
     @prod_rallyClaims01c
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | ashah120   | Mnrqa002  | BILL.ROSNER123# | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
+      | 15230 | ashah120   | Mnrqa003  | BILL.ROSNER123# | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
 
     @prod_rallyClaims01d
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | xxxxx | ashah120   | Mnrqa002  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
-      | 15236 | ashah120   | Mnrqa002  | Pramila1946  | SHIP     | Individual          | COMPASS_CLAIMS  | 
+      | xxxxx | ashah120   | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
+      | 15236 | ashah120   | Mnrqa003  | vernajohnson19651  | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
     @prod_rallyClaims01e
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15299 | ashah120   | Mnrqa002  | nawal1215    | PDP      | Individual          | RX_CLAIMS       | 
-      | 15300 | ashah120   | Mnrqa002  | MON48DA      | PDP      | GROUP               | RX_CLAIMS       | 
+      | 15299 | ashah120   | Mnrqa003  | nawal1215    | PDP      | Individual          | RX_CLAIMS       | 
+      | 15300 | ashah120   | Mnrqa003  | MON48DA      | PDP      | GROUP               | RX_CLAIMS       | 
   #----- end of Non Regression claims scenarios section ------------------------

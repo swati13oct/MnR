@@ -35,15 +35,15 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
     @prod_CommunicationPreferences1a
     Examples:
       | TID   | username | password | MemUserName  | userSelection | planType                      |
-      | 15311 | ashah120 | Mnrqa002 | DSOADY17     | xxxxx         | MAPD_AARP_GOGreen_Profilepref |
-      | 15312 | ashah120 | Mnrqa002 | TOMIKOARMER2 | xxxxx         | MA_AARP_GOGreen_Profilepref   |
+      | 15311 | ashah120 | Mnrqa003 | DSOADY17     | xxxxx         | MAPD_AARP_GOGreen_Profilepref |
+      | 15312 | ashah120 | Mnrqa003 | TOMIKOARMER2 | xxxxx         | MA_AARP_GOGreen_Profilepref   |
 
     @prod_CommunicationPreferences1b
     Examples:
       | TID   | username | password | MemUserName       | userSelection | planType                       |
-      | 15313 | ashah120 | Mnrqa002 | LSLOMSKI777       | xxxxx         | PDP_AARP_GOGreen_Profilepref   |
-      | 15314 | ashah120 | Mnrqa002 | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
-      | 15316 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref |
+      | 15313 | ashah120 | Mnrqa003 | LSLOMSKI777       | xxxxx         | PDP_AARP_GOGreen_Profilepref   |
+      | 15314 | ashah120 | Mnrqa003 | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
+      | 15316 | ashah120 | Mnrqa003 | WILLIAMGARRISON48 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref |
 
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
@@ -73,7 +73,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName | userSelection | planType | memberType       |
-      | 15309 | ashah120 | Mnrqa002 | lloydkoby32 | xxxxx         | SHIP     | SHIP_ProfilePref |
+      | 15309 | ashah120 | Mnrqa003 | kataz2525 | xxxxx         | SHIP     | SHIP_ProfilePref |
 
 
   @prod_CommunicationPreferences03
@@ -96,8 +96,8 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName           | planType           |
-      #| 15310 | ashah120 | Mnrqa002 | testusername    | SSUP_ProfilePref       |
-#      | 15376 | ashah120 | Mnrqa002 | erbenoit56    | Terminated_ProfilePref |
-      | 15308 | ashah120 | Mnrqa002 | marylamb823           | PCP_ProfilePref    |
-      | 15308 | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM | MEDICA_ProfilePref |
+      #| 15310 | ashah120 | Mnrqa003 | testusername    | SSUP_ProfilePref       |
+#      | 15376 | ashah120 | Mnrqa003 | erbenoit56    | Terminated_ProfilePref |
+      | 15308 | ashah120 | Mnrqa003 | marylamb823           | PCP_ProfilePref    |
+      | 15308 | ashah120 | Mnrqa003 | SUSICHAPMAN@GMAIL.COM | MEDICA_ProfilePref |
       

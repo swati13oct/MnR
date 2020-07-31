@@ -85,6 +85,14 @@ public class PaymentsFormPage extends UhcDriver {
 	}
 
 	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) throws Exception {
+checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
@@ -412,7 +420,7 @@ public class PaymentsFormPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		if (driver.getCurrentUrl().contains("payments/overview.html"))
+		if (driver.getCurrentUrl().contains("payments/overview"))
 				{
 			System.out.println("User is on Payment Overview Page after clicking cancel");
 			return new PaymentHistoryPage(driver);

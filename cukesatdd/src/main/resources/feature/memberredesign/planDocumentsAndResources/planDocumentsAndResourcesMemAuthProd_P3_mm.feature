@@ -36,63 +36,72 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #	@prod_preeffective_ma_mapd
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 01-039 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
-#      | 02-040 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-#      | 03-041 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 01-039 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 02-040 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
+#      | 03-041 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 04-042 | xxxxx       | ashah120  | Mnrqa002  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
-#      | 05-043 | xxxxx       | ashah120  | Mnrqa002  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
+#      | 04-042 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 05-043 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
 
 #	@prod_terminated_ma_mapd
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 06-044 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
-#      | 07-045 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
-#      | 08-046 | xxxxx       | ashah120  | Mnrqa002  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
+#      | 06-044 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
+#      | 07-045 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
+#      | 08-046 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
-	@prod_active_ma
+	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | ashah120  | Mnrqa002  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
-      | 10-048 | 15130       | ashah120  | Mnrqa002  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
+      | 09-047 | 15129       | ashah120  | Mnrqa003  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
 
-	@prod_active_mapd
+	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 11-049 | 15108       | ashah120  | Mnrqa002  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+      | 10-048 | 15130       | ashah120  | Mnrqa003  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
+#      | 10-048 | 15130       | ashah120  | Mnrqa003  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | false | false | 
 
-	@prod_active_mapd
+	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 12-050 | 15303       | ashah120  | Mnrqa002  | Andersonga1@Bellsouth.Net    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
+      | 11-049 | 15108       | ashah120  | Mnrqa003  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+
+	@prod_active_mapd @prod_active_mapd_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 12-050 | 15303       | ashah120  | Mnrqa003  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | false | false |
 #     ### note: PEEHIP group terminated as of 12/31/2019
-#     #| 13-051 | 15130       | ashah120  | Mnrqa002  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
+#     #| 13-051 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
 #	@prod_active_pcp_medica
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 14-052 | 15128       | ashah120  | Mnrqa002  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
-#      | 15-053 | 15128       | ashah120  | Mnrqa002  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
+#      | 14-052 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
+#      | 15-053 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
-	@prod_active_pdp
+	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 16-054 | 15126,15127 | ashah120  | Mnrqa002  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
-      | 17-055 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
+      | 16-054 | 15126,15127 | ashah120  | Mnrqa003  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
+
+	@prod_active_pdp @prod_active_pdp_grp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 17-055 | 15131,15233 | ashah120  | Mnrqa003  | DKELLY27    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | false |
 
 	@prod_active_ssup
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 18-056 | 15131,15233 | ashah120  | Mnrqa002  | DKELLY27    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
+      | 18-056 | 15131,15233 | ashah120  | Mnrqa003  | DKELLY27    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 19-057 | 15119,15304 | ashah120  | Mnrqa002  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
-#      | 20-117 | 15119,15304 | ashah120  | Mnrqa002  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
+      | 19-057 | 15119,15304 | ashah120  | Mnrqa003  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+#      | 20-117 | 15119,15304 | ashah120  | Mnrqa003  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 
      

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.memberauth.MemberAuthPage;
 
 /**
  * @author pminhas
@@ -145,8 +146,17 @@ public class bswiftPage extends UhcDriver {
 	   /*This method will click submit button on SSO test harness page */
 	   public void clickSubmit() throws InterruptedException {
 		   submitButton.click();
-		   Thread.sleep(2000);
-		       }
+		    Thread.sleep(5000);
+		    new MemberAuthPage(driver).emailAddressRequiredWorkaround();	   
+		   	CommonUtility.checkPageIsReadyNew(driver);
+			new MemberAuthPage(driver).goGreenSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
+			new MemberAuthPage(driver).anocSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
+			new MemberAuthPage(driver).paymentSplashPageWorkaround();
+			CommonUtility.checkPageIsReadyNew(driver);
+		    Thread.sleep(2000);
+		     }
 
 	public void checkCovid19Page() {
 		// TODO Auto-generated method stub

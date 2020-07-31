@@ -435,7 +435,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefMailServPlan) {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
-			expUrl="health-plans/resources/mail-order-pharmacy.html";
+			expUrl="resources/mail-order-pharmacy.html";
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
@@ -499,7 +499,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		} else {
 			Assert.assertTrue("PROBLEM - haven't code to handle filter '"+pharmacyType+"' yet", false);
 		}
-		driver.findElement(By.xpath("//label[@id='"+labelId+"']")).click();
+		WebElement label = driver.findElement(By.xpath("//label[@id='"+labelId+"']"));
+		jsClickNew(label);
 
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);

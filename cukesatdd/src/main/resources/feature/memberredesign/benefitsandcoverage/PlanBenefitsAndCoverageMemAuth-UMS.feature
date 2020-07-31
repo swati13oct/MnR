@@ -133,7 +133,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 15091 |qavgogine | qavgogine| q3_sep_Active_combo_002|SHIP_HIP    | ComboFEDShip_BnC |
+      | 15091 |qavgogine | qavgogine| q1_feb_2020SHIP_002|SHIP_HIP    | ComboFEDShip_BnC |
       
     #TC10_Benefits_for_TexasERSMember
   @benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part3_memAuth
@@ -199,8 +199,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
-      | Plan Benefits Table | <PlanBenefitsTable> |
+   # And the user verifies that the correct pdfs are coming in the plan material section
+      #| Plan Benefits Table | <PlanBenefitsTable> |
     #note: moved to footer feature
     #And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
@@ -210,8 +210,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validate vas tiles on vas page
 
     Examples: 
-      |TID  |username |password |MemUserName        |planType|memberType|language|PlanBenefitsTable  |numberOfBenefitCards|Identifier          | count| rider   |
-      |15094|qavgogine|qavgogine|q1_feb_2020SHIP_003| HIP    |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7                  |EffectiveShipMedSupp|   3  | NoRider |
+      |TID  |username |password |MemUserName        |planType|memberType|language|numberOfBenefitCards|Identifier          | count| rider   |
+      |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 6                  |EffectiveShipMedSupp|   3  | NoRider |
       
  #TC12_Benefits_for_MedicaMember
   @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_memAuth 
@@ -1078,7 +1078,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates Drug coverage header and text under the section
     And the user validates copay and CoInsurance section
     Then the Village user validates text in table
-    Then user validates the Optum Rx link in Benefits and Coverage pageNON LIS       
+    Then user validates the Optum Rx link in Benefits and Coverage page       
     
        Examples: 
       | TID   |username |password  |MemUserName| planType | memberType| copayCategory | name                | memberid     | effectivedate | monthlypremium |

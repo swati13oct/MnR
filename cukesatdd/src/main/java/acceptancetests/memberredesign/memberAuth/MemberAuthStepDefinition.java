@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mysql.jdbc.Driver;
 
@@ -114,8 +115,11 @@ public class MemberAuthStepDefinition{
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthPage memberauth = new MemberAuthPage(wd);
-		memberauth.navigateToLoginURL();
-
+		try {
+			memberauth.navigateToLoginURL();
+		} catch (WebDriverException e) {
+			Assert.assertTrue("Got WebDriverException: "+e, false);
+		}
 		if(memberauth!=null){
 			getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
 		}
@@ -324,7 +328,7 @@ public class MemberAuthStepDefinition{
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
-			Assert.fail();
+			Assert.fail("Unable to land on dashboard after clicking on member");
 		}
 	}
 	

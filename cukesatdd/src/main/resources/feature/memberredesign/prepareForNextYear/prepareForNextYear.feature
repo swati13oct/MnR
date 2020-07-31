@@ -1,20 +1,23 @@
 @prepareForNextYear
-Feature: 1.21 Member Prepare For Next Year
+Feature: 1.25 Member Prepare For Next Year
 
+##### note: team and stage may have different AEM date setup, separate the scenarios
+
+##### begin - cases for team env #################################################################
   #-------------------------------------------------
   # note: for cases below -
   # note: UserType and memberType that would NOT expect to see tab even if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear01 @noTab @regressionMember
+  @prepareForNextYear01 @noTab @regressionMember @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
-      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
       | Milestone 2 Date       | 10/01/2020     |
@@ -32,6 +35,7 @@ Feature: 1.21 Member Prepare For Next Year
 	   #| 02    | F437767 | MA	     | GRP_OFFCYC_PFNY     |
 	    | 03    | F437767 | MAPD	 | GRP_OFFCYC_PFNY     |
 
+	#note: activate when ship user is available		
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prepareForNextYear01b
     Examples: 
@@ -39,7 +43,8 @@ Feature: 1.21 Member Prepare For Next Year
 	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
 	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 06    | F437767 | SHIP	 | IND_PFNY            |
-			
+	
+	#note: activate when combo user is available		
 	@prepareForNextYear01c
     Examples: 
 	    | index | FID     | planType | memberType          |
@@ -58,14 +63,93 @@ Feature: 1.21 Member Prepare For Next Year
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prepareForNextYear02 @hasTab @regressionMember
+  @prepareForNextYear02 @hasTab @regressionMember @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 09/15/2020     |
+      | Milestone 2 Date       | 10/01/2020     |
+      | Milestone 3 Date       | 10/15/2020     |
+      | Milestone 4 Date       | 12/07/2020     |
+      | Milestone 5 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info  
+      | Show Next Year PlanName| <showNxtYrPlan>|
+      | Annual Notice of Changes English       | <an_us> | 
+      | Annual Notice of Changes Spanish       | <an_es> |
+      | Annual Notice of Changes Chinese       | <an_zh> |
+      | Evidence of Coverage English           | <ev_us> |
+      | Evidence of Coverage Spanish           | <ev_es> |
+      | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
+      | Provider Directory English             | <pr_us> |
+      | Provider Directory Spanish             | <pr_es> |
+      | Provider Directory Chinese             | <pr_zh> |
+      | Vendor Information Sheet English       | <ve_us> |
+      | Vendor Information Sheet Spanish       | <ve_es> |
+      | Vendor Information Sheet Chinese       | <ve_zh> |
+      | Pharmacy Directory Information English | <ph_us> |
+      | Pharmacy Directory Information Spanish | <ph_es> |
+      | Pharmacy Directory Information Chinese | <ph_zh> |
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+    Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates Prepare For Next Year page content for individual
+
+	@prepareForNextYear02a @devRegression
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	    | 11    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@prepareForNextYear02a
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+	    | 12    | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	# ignore group cases for now until code is ready
+	#@prepareForNextYear02b
+    #Examples: 
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |  
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+
+	@prepareForNextYear02c
+    Examples: 
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+    @prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+        | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true          |
+        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true| true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    
+##### end - cases for team env #################################################################
+
+##### begin - cases for stage env #################################################################
+  #-------------------------------------------------
+  # note: for cases below -
+  # note: UserType and memberType that would NOT expect to see tab even if current system date is within AEM range and toggle is ON
+  # note: current system date will be determined at run time
+  #-------------------------------------------------
+  @prepareForNextYear01 @noTab @regressionMember @stageEnv
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 08/31/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -74,27 +158,110 @@ Feature: 1.21 Member Prepare For Next Year
       | Milestone 4 Date       | 12/07/2020     |
       | Milestone 5 Date       | 01/01/2021     |
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
+
+    # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
+    # note: no MA offcycle user available at the moment
+    @prepareForNextYear01a
+    Examples: 
+	    | index | FID     | planType | memberType          |
+	   #| 01    | F437767 | PDP	     | GRP_OFFCYC_PFNY     |
+	   #| 02    | F437767 | MA	     | GRP_OFFCYC_PFNY     |
+	    | 03    | F437767 | MAPD	 | GRP_OFFCYC_PFNY     |
+
+    # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
+    @prepareForNextYear01b
+    Examples: 
+	    | index | FID     | planType | memberType          |
+	    | 04    | F437767 | MA	     | IND_PREEFF_PFNY     |
+	    | 05    | F437767 | MA	     | IND_TERM_PFNY       |
+	    | 06    | F437767 | SHIP	 | IND_PFNY            |
+
+	@prepareForNextYear01c
+    Examples: 
+	    | index | FID     | planType | memberType          |
+	    | 07    | F437767 | SHIP	 | COMBO_SHIP_MA_PFNY  |
+	    | 08    | F437767 | MA	     | COMBO_SHIP_MA_PFNY  |
+			
+	@prepareForNextYear01d
+    Examples: 
+	    | index | FID     | planType | memberType          |
+	    | 09    | F437767 | PDP	     | COMBO_PDP_SHIP_PFNY |
+	    | 10    | F437767 | SHIP	 | COMBO_PDP_SHIP_PFNY |
+			
+
+  #-------------------------------------------------
+  # note: for cases below -
+  # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
+  # note: current system date will be determined at run time
+  #-------------------------------------------------
+  @prepareForNextYear02 @hasTab @regressionMember @stageEnv
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 09/15/2020     |
+      | Milestone 2 Date       | 10/01/2020     |
+      | Milestone 3 Date       | 10/15/2020     |
+      | Milestone 4 Date       | 12/07/2020     |
+      | Milestone 5 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info  
+      | Show Next Year PlanName| <showNxtYrPlan>|
+      | Annual Notice of Changes English       | <an_us> | 
+      | Annual Notice of Changes Spanish       | <an_es> |
+      | Annual Notice of Changes Chinese       | <an_zh> |
+      | Evidence of Coverage English           | <ev_us> |
+      | Evidence of Coverage Spanish           | <ev_es> |
+      | Evidence of Coverage Chinese           | <ev_zh> |
+      | Comprehensive Formulary English        | <co_us> |
+      | Comprehensive Formulary Spanish        | <co_es> |
+      | Comprehensive Formulary Chinese        | <co_zh> |
+      | Provider Directory English             | <pr_us> |
+      | Provider Directory Spanish             | <pr_es> |
+      | Provider Directory Chinese             | <pr_zh> |
+      | Vendor Information Sheet English       | <ve_us> |
+      | Vendor Information Sheet Spanish       | <ve_es> |
+      | Vendor Information Sheet Chinese       | <ve_zh> |
+      | Pharmacy Directory Information English | <ph_us> |
+      | Pharmacy Directory Information Spanish | <ph_es> |
+      | Pharmacy Directory Information Chinese | <ph_zh> |
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content
+	Then the user validates Prepare For Next Year page content for individual
 
-	@prepareForNextYear02a @devRegression
+	@prepareForNextYear02a
     Examples: 
-	    | index | FID     | planType | memberType |
-	    | 11    | F437767 | PDP	     | IND_PFNY   |
-	    | 12    | F437767 | MAPD	 | IND_PFNY   |
-	    | 13    | F437767 | MA	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 11    | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 12    | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 13    | F437767 | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	@prepareForNextYear02b
-    Examples: 
-	    | index | FID     | planType | memberType |
-	    | 14    | F437767 | PDP	     | GRP_PFNY   |
-	    | 15    | F437767 | MAPD	 | GRP_PFNY   |
-	    | 16    | F437767 | MA	     | GRP_PFNY   |
+
+	# ignore group cases for now until code is ready
+	#@prepareForNextYear02b
+    #Examples: 
+	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 14    | F437767 | PDP	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 15    | F437767 | MAPD	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 16    | F437767 | MA	      | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
 	@prepareForNextYear02c
     Examples: 
-	    | index | FID     | planType | memberType | 
-	    | 17    | F437767 | MEDICA	 | IND_PFNY   |
-	    | 18    | F437767 | PCP	     | IND_PFNY   |
+	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+	    | 17    | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 18    | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+    @prepareForNextYear02d
+    Examples: 
+	    | index | FID     | planType | memberType     | an_us | an_es | an_zh | ev_us | ev_es | co_us | co_es | co_zh | ev_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+        | 19    | F437767 | MAPD	 | IND_ESZH_PreNexYr| true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
+#        | 20    | F437767 | MAPD	 | IND_1ACT_PreNexYr| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+	    
+##### end - cases for stage env #################################################################
+
 	    
