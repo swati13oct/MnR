@@ -77,7 +77,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 
 //Result Page Elements
 	
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
 	private WebElement planZipInfo;
 	
 	@FindBy(css = "body>div#overlay")

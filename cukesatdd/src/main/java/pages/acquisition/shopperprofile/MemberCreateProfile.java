@@ -62,8 +62,8 @@ public class MemberCreateProfile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 15);
 	}
 	
-	public ComparePlansPage createProfile(DataTable details) {
-		
+	//public ComparePlansPage createProfile(DataTable details) {
+	public VPPPlanSummaryPage createProfile(DataTable details) {
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -97,10 +97,13 @@ public class MemberCreateProfile extends UhcDriver {
 			waitforElementNew(successMessage);
 			switchToNewTab();
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
-				return new ComparePlansPage(driver);
+			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			/*if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+				return new ComparePlansPage(driver);*/
 			}else {
-				System.out.println("Plan Compare page is not loaded");
+				System.out.println("Plan Summary page is not loaded");
+				//System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {

@@ -329,8 +329,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user delets all the added drugs on visitor profile page of UHC site
 
     Examples: 
-      | state   | userName | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
-      | Alabama | mnrqavd  | Password@4 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
+      | state   | userName           | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
+      | Alabama | mnrqavd2@gmail.com | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
 
   @providerFlowUHCAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -354,8 +354,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user delets all the added providers on visitor profile page of UHC site
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd  | Password@4 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county          | userName           | password   | plantype | planName                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile

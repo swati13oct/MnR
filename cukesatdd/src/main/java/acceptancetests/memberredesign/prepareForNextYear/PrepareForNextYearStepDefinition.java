@@ -25,7 +25,9 @@ import pages.regression.prepareForNextYear.AemPage;
 import pages.regression.prepareForNextYear.PrepareForNextYearPage;
 
 public class PrepareForNextYearStepDefinition {
-
+	
+	protected static Boolean validateAsMuchAsPossible=false;
+	
 	@Autowired
 	MRScenario loginScenario;
 
@@ -70,7 +72,7 @@ public class PrepareForNextYearStepDefinition {
 		if (getLoginScenario().getBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME) != null)
 			needRollBackTime=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.END_OF_TEST_ROLL_BACK_TIME);
 		if (needRollBackTime) {
-			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			WebDriver wd = getLoginScenario().getWebDriverNew();
 			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 			PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
@@ -106,6 +108,7 @@ public class PrepareForNextYearStepDefinition {
 			} else {
 				System.out.println("TEST - orig_currentDate=null, assume no date changed involved, no need to do final check");
 			}
+			wd.quit();
 		} else {
 			System.out.println("TEST - skip final system date check");
 		}
@@ -189,12 +192,19 @@ public class PrepareForNextYearStepDefinition {
 
 	@Then("^test setup stores documents expectation info$")
 	public void storeDocInfo(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+
+		String inputField="Show Next Year PlanName";
+		String tmp=memberAttributesMap.get(inputField);
+		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean showNxtYrPlanName=Boolean.valueOf(tmp);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME,showNxtYrPlanName);
+		
 		HashMap<String, Boolean> docDisplayMap=new HashMap<String, Boolean>();
 		//----------------------------------
 		String docName="Annual Notice of Changes";
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String inputField=docName+" English";
-		String tmp=memberAttributesMap.get(inputField);
+		inputField=docName+" English";
+		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
@@ -350,6 +360,8 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
+		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
+		
 		//note: validate timeline and Find update section content
 		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
 		Date milestone2Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE2_DATE);
@@ -370,8 +382,6 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.CURRENT_SYSTEM_DATE, currentDate);	
 
 
-		if (testNote==null)
-			testNote=new ArrayList<String>();
 		testNote.add("\t=================");
 		pfnyPg.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
@@ -382,33 +392,54 @@ public class PrepareForNextYearStepDefinition {
 
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
+			System.out.println("TEST - 1");
 			testNote.add("\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
+			System.out.println("TEST - 2");
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
+			System.out.println("TEST - 3");
 			testNote.add("\t  Validation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
+			System.out.println("TEST - 4");
 			testNote.add("\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
+			System.out.println("TEST - 5");
 			testNote.add("\tValidation for milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
+			System.out.println("TEST - 6");
 			testNote.add("\tValidation for milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap);
+			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
 		testNote.addAll(sectionNote);
 
+		boolean finalCheck=true;
+		for(String s: testNote) {
+			if (s.contains("FAILED")) {
+				finalCheck=false;
+				break;
+			}
+		}
 		testNote.add("\t=================");
-		testNote.add("\tPASSED - page content validation");
+		if (finalCheck)
+			testNote.add("\tPASSED - page content validation");
+		else 
+			testNote.add("\t * FAILED - page content validation");
+			
+		//tbd testNote.add("\t=================");
+		//tbd testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
+		
 	}	
 
 	@SuppressWarnings("unchecked")
@@ -431,6 +462,7 @@ public class PrepareForNextYearStepDefinition {
 		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 
 		pfnyPg.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
+		pfnyPg.setValidateAsMuchAsPossible(validateAsMuchAsPossible);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, pfnyPg);	
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -137,7 +138,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
 			return directorySection;
-		else if(planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
+		else if(planType.equalsIgnoreCase("ship")||planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
 			return directorySectionMedSupp;
 		else
 			return null;
@@ -471,7 +472,12 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		try {
 			getLinkBackToTop_copy().click();
 		}catch(Exception ex){
+			try {
 			getLinkBackToTop().click();
+			} catch (ElementClickInterceptedException ee) {
+				((JavascriptExecutor) driver)
+			    .executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+			}
 		}
 		sleepBySec(1);
 	}

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
@@ -112,7 +113,8 @@ public class DCEStepDefinitionAARP {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEgetStarted.clickAddDrugsBtn();
-		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
+		// zipCodePlanYearPage);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP in AARP$")
@@ -145,6 +147,9 @@ public class DCEStepDefinitionAARP {
 		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		 */
 
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 	
 	@Then("^the user validates No Drug found error message for search$")
@@ -309,13 +314,12 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
 	}
-	
 
 	@Then("^load screen should be displayed in AARP$")
 	public void load_screen_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		//zipCodePlanYearPage.verifyLoadScreen();
+		// zipCodePlanYearPage.verifyLoadScreen();
 	}
 	
 	@Then("^the user searches and adds the following Drug to Drug List$")
@@ -464,4 +468,63 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Disclaimers_section() throws Throwable {
 	}
 	
+
+	@When("^user verify the drug summary page$")
+	public void user_verify_the_drug_summary_page() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user should be able to see Medicare Advantage plan by default$")
+	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user saves plan as favorite on drug summary page AARP site$")
+	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		/*VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.savePlan(PlanName);*/
+	}
+	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
+	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnPDPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
+	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user should be able to toggle between plan types$")
+	public void user_should_be_able_to_toggle_between_plan_types() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+		drugSummaryPage.verifySNPPlanToggle();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 }

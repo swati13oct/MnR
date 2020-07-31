@@ -116,6 +116,7 @@ public class MRScenario {
 	public static String desktopBrowserName;
 	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
+	public static String runnerFiles = "";
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -190,6 +191,7 @@ public class MRScenario {
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
+		runnerFiles = System.getenv("RUNNER_NAME");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -614,7 +616,7 @@ try {
 		}else{
 		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.contains("chargers"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else 
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
@@ -1248,6 +1250,10 @@ try {
 
 		return con;
 
+	}
+
+	public static Map<String, String> getProps() {
+		return props;
 	}
 
 }

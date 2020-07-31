@@ -39,8 +39,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
 	private WebElement NextYearLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
-	private WebElement vppTopHeader;
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 	
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
@@ -261,21 +261,27 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return result;
 	}
 	
-	public boolean compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
-		boolean flag = true;
-		
+	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
+		boolean flag = true; int counter =0;
+		String tmpUIString1 = "",tmpUIString2="";
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		for(String key : benefitsMap.keySet()) {
 			String benefitValueUI = benefitsMap.get(key);
-		
+			tmpUIString1 = benefitValueUI;
+			key = key.toLowerCase();
+			key = key.replace(",", "");
+			columnName = columnName.toLowerCase();
+			if(columnName.contains("tier"))
+				System.out.println();
+			
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
-				
+				counter++;
 				//if(key.contains(columnName)) {
 						flag= true;break;
 				//	}
 			
 			}else if(key.contains(columnName)) {
-
-
+						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
@@ -286,13 +292,18 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						}else {
 							flag = false;
 							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							tmpUIString2 = tmpUIString1;
 							break;
 						}
 					
 				}
 			}
 		
-		return flag;
+		if(counter == 0)
+			flag = false;
+		
+		comparedResult.put(flag, tmpUIString2);
+		return comparedResult;
 		
 	}
 	
@@ -300,7 +311,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		if(validate(countyModal,20)) {
 			driver.findElement(By.xpath("//*[contains(@id,'selectCounty')]//*[contains(text(),'" + countyName + "')]")).click();
-			validateNew(vppTopHeader,20);
+			validateNew(zipcodeChangeLink,20);
 			flag = true;
 		}
 		

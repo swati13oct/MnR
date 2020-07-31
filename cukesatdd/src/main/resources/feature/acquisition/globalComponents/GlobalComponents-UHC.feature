@@ -77,7 +77,7 @@ Feature: 2.12 ACQ - Global Components UHC
     @ShopPlan_Shop2_GlobalCompsUHC
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                       | tfnFlag |
-      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2] | true    |
       | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -144,13 +144,13 @@ Feature: 2.12 ACQ - Global Components UHC
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                                | true    |
       | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                                | true    |
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                                | false   |
-      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
+      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | //a[contains(@href ,'tel') and contains(@class,'tel')] | true    |
 
     @MiscellaneousLinks_GlobalCompsUHC
     Examples: 
       | path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |
       | estimate-drug-costs.html!/drug-cost-estimator                | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      | aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
       | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
 

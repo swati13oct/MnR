@@ -2,6 +2,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -109,8 +110,11 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h2[@class='provider-name']//a")
 	public WebElement SavedProviderName;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	public WebElement CheckProviderCoverageButton;
+	
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	private WebElement FinishButton;
 
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
 	public WebElement EditproviderlistLink;
@@ -129,6 +133,12 @@ public class FindCarePage extends UhcDriver {
 	
 	@FindBy(xpath="//span[text()='View Saved Providers']")
 	private WebElement ViewSavedProvidersLink;
+	
+	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	private WebElement selectProviderBtn;
+
+	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
+	private WebElement ViewsaveOldbtn;
 
 	public ComparePlansPageBlayer getstarted() throws Exception {
 		validate(GetstartedButton);
@@ -264,6 +274,7 @@ public class FindCarePage extends UhcDriver {
 	}
 	
 	public ComparePlansPageBlayer providerfromMedicalGroup() throws Exception {
+		String ParentWindow = null;
 		System.out.println("In find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
@@ -272,36 +283,40 @@ public class FindCarePage extends UhcDriver {
 		MedicalGroupsButton.click();
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
-		FirstHospitalRecord.click();
+		System.out.println("selected Provder Name is : " + HospName);
 		validate(Medicalgroupicon);
-		if (HospName.equals(PlanHeading.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
-		}
-		SaveButton.click();
-		waitforElement(ProviderNameHeader);
-		String ProvName = ProviderNameHeader.getText();
-		if (HospName.equals(ProvName)) {
-			System.out.println("Provder Name is verified");
-		} else {
-			System.out.println("selected Provder Name is not matching");
-		}
-		
+		selectProviderBtn.click();		
 		if(validate(addressCheckBox)){
 			addressCheckBox.click();
 			addressSaveButton.click();
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
-		ViewSavedButton.click();
-		if(validate(EditSavedButton)){
+		
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			ViewSavedButton.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 			ViewSavedProvidersLink.click();
 		}
-		waitforElement(SavedHeader);
-		if (HospName.equals(SavedProviderName.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
+		else
+			System.out.println("New Rally page not displayed");
+		 
 		}
-		String ParentWindow = driver.getTitle();
-		CheckProviderCoverageButton.click();
+		
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+			System.out.println("OLD Rally page displayed");
+			ParentWindow = driver.getTitle();
+			CheckProviderCoverageButton.click();
+		}	
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			System.out.println("NEW Rally page displayed");
+			ParentWindow = driver.getTitle();
+			FinishButton.click();
+		}else
+			System.out.println("Issue with Xpath");
+	
 		Set<String> handles1 = driver.getWindowHandles();
 		for (String windowHandle : handles1) {
 			if (!windowHandle.equals(ParentWindow)) {
@@ -328,6 +343,7 @@ public class FindCarePage extends UhcDriver {
 	}
 	
 	public ComparePlansPageBlayer providerfromPrimaryCareClinicButton() throws Exception {
+		String ParentWindow = null;
 		System.out.println("In find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
@@ -338,37 +354,40 @@ public class FindCarePage extends UhcDriver {
 		PrimaryCareClinicButton.click();
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
-		FirstHospitalRecord.click();
 		validate(Facilityicon);
-		if (HospName.equals(PlanHeading.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
-		}
-		SaveButton.click();
-		waitforElement(ProviderNameHeader);
-		String ProvName = ProviderNameHeader.getText();
-		if (HospName.equals(ProvName)) {
-			System.out.println("Provder Name is verified");
-		} else {
-			System.out.println("selected Provder Name is not matching");
-		}
-		
+		System.out.println("Provder Name is verified :: " + HospName);
+		selectProviderBtn.click();		
 		if(validate(addressCheckBox)){
 			addressCheckBox.click();
 			addressSaveButton.click();
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
-		validate(ViewSavedButton);
-		ViewSavedButton.click();
-		if(validate(EditSavedButton)){
+		
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			ViewSavedButton.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 			ViewSavedProvidersLink.click();
 		}
-		waitforElement(SavedHeader);
-		if (HospName.equals(SavedProviderName.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
+		else
+			System.out.println("New Rally page not displayed");
+		 
 		}
-		String ParentWindow = driver.getTitle();
-		CheckProviderCoverageButton.click();
+		
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+			System.out.println("OLD Rally page displayed");
+			ParentWindow = driver.getTitle();
+			CheckProviderCoverageButton.click();
+		}	
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			System.out.println("NEW Rally page displayed");
+			ParentWindow = driver.getTitle();
+			FinishButton.click();
+		}else
+			System.out.println("Issue with Xpath");
+	
 		Set<String> handles1 = driver.getWindowHandles();
 		for (String windowHandle : handles1) {
 			if (!windowHandle.equals(ParentWindow)) {
@@ -395,7 +414,7 @@ public class FindCarePage extends UhcDriver {
 	}
 	
 	public ComparePlansPageBlayer placesfromHospital() throws Exception {
-
+		String ParentWindow = null;
 		CommonUtility.waitForPageLoadNew(driver, GetstartedButton, 45);
 		GetstartedButton.click();
 		System.out.println("in find care page");
@@ -411,37 +430,39 @@ public class FindCarePage extends UhcDriver {
 		if (HospName.equals(PlanHeading.getText())) {
 			System.out.println("Provder Name is verified :: " + HospName);
 		}
-		CommonUtility.waitForPageLoadNew(driver, SaveButton, 45);
-		jsClickNew(SaveButton);
-		waitforElement(ProviderNameHeader);
-		String ProvName = ProviderNameHeader.getText();
-		if (HospName.equals(ProvName)) {
-			System.out.println("Provder Name is verified");
-		} else {
-			System.out.println("selected Provder Name is not matching");
-		}
-
-		if (validate(addressCheckBox)) {
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		selectProviderBtn.click();		
+		if(validate(addressCheckBox)){
 			addressCheckBox.click();
-			validateNew(addressSaveButton);
 			addressSaveButton.click();
 		}
-		CommonUtility.waitForPageLoadNew(driver, ViewSavedButton, 30);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
-		ViewSavedButton.click();
-		if(validate(EditSavedButton)){
+		
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			ViewSavedButton.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 			ViewSavedProvidersLink.click();
 		}
-		waitforElement(SavedHeader);
-		if (HospName.equals(SavedProviderName.getText())) {
-			System.out.println("Provder Name is verified :: " + HospName);
+		else
+			System.out.println("New Rally page not displayed");
+		 
 		}
-		String providerSaved = SavedProviderName.getText().trim();
-		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
-		String ParentWindow = driver.getTitle();
-		CheckProviderCoverageButton.click();
+		
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+			System.out.println("OLD Rally page displayed");
+			ParentWindow = driver.getTitle();
+			CheckProviderCoverageButton.click();
+		}	
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			System.out.println("NEW Rally page displayed");
+			ParentWindow = driver.getTitle();
+			FinishButton.click();
+		}else
+			System.out.println("Issue with Xpath");
+	
 		Set<String> handles1 = driver.getWindowHandles();
 		for (String windowHandle : handles1) {
 			if (!windowHandle.equals(ParentWindow)) {

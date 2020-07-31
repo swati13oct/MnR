@@ -79,10 +79,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
 	private WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -92,10 +92,10 @@ public class ComparePlansPage extends UhcDriver {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
@@ -544,7 +544,7 @@ public class ComparePlansPage extends UhcDriver {
 		return null;
 	}
 		
-    public ComparePlansPage validateCallSam() throws InterruptedException {
+    public void validateCallSam() throws InterruptedException {
         boolean present;
         try {
         validateNew(callsam);
@@ -554,14 +554,12 @@ public class ComparePlansPage extends UhcDriver {
         }
         if (present) {
           System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-          return new ComparePlansPage(driver);
         }
         else
         	System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
-       return null;
 	}
 	
-	public ComparePlansPage validateCallSamContent() throws InterruptedException {
+	public void validateCallSamContent() throws InterruptedException {
 		
 		Actions action = new Actions(driver);
 		WebElement element = callsam;
@@ -570,25 +568,25 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
-		
         if (CallSam.equalsIgnoreCase(toolTipText)) {
           System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-          return new ComparePlansPage(driver);
         }
         else
         	System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
-       return null;
 	}
 	
-	public ComparePlansPage  validateCallpopup() throws InterruptedException {
+	public void  validateCallpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
 		callsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 		driver.switchTo().activeElement();
-		System.out.println(CallSamTFN.getText());
-		CallSamTFNClose.click();
-		validateNew(callsam);		
-		return null;
+		if (CallSamTFN.getText().isEmpty()) {
+			// return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		} else {
+			CallSamTFNClose.click();
+			validateNew(callsam);
+		}
 	}
 	
 	public ComparePlansPage validateChatSam() throws InterruptedException {

@@ -128,9 +128,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
 
-	
-	@FindBy(xpath = "//div[@class='overview-main']/span/h2")
-	//@FindBy(xpath = "//div[@class='overview-main']/h2")
+	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
@@ -191,6 +189,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
 	 */
 
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
+	
 	@FindBy(id = "zipcode")
 	private WebElement zipCode;
 
@@ -1089,7 +1090,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
 	//	}
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
 			}
@@ -2020,7 +2021,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
 			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 

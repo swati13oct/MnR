@@ -43,7 +43,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
 	private WebElement planZipInfo;
 
 	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")

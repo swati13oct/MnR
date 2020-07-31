@@ -285,8 +285,9 @@ public class MRConstants {
   
   public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
   
-  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic."+ getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
-
+  //old public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic."+ getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
+  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-mnrgeneric2."+ getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
+  
   public static final String MEMBER_AUTH_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 
   public static final String MEMBER_AUTH_TEAM = "https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/memberauth.html#/memberAuthLogin";

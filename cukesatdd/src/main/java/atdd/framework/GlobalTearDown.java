@@ -86,6 +86,7 @@ public class GlobalTearDown {
 			 //mrScen.DriverQuit();
 				wd.quit();
 				System.out.println("---- Script Execution Completed ----");
+			
 		}
 		} catch (WebDriverException e) {
 			Assert.assertTrue("Got WebDriverException exception: "+e, false);

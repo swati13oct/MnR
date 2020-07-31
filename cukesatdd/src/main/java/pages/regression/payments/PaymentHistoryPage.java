@@ -48,7 +48,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 
-	@FindBy(xpath = "//*[not (contains(@class,'ng-hide')) and contains(@class,'btn btn--primary onetimepayment')]")
+	//Commented by @jkuma14 @FindBy(xpath = "//*[not (contains(@class,'ng-hide')) and contains(@class,'btn btn--primary onetimepayment')]")
+	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement oneTimePaymentBtn;
 
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
@@ -123,7 +124,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
 	private WebElement SetUpAutoPayButtonCC;
 
-	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAOneTimePaymentButton;
 
 	// @FindBy(xpath =
@@ -210,10 +211,11 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@ng-show='greyedoutError' and @class='errorcolor' and contains( .,'You are not authorized')]")
 	private WebElement notAuthorizedMsg;
 
-	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeOneTimepaymentButton;
 
-	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	//@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
 	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
@@ -310,10 +312,10 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='custom-from']")
 	private WebElement customSearchFrom;
 
-	@FindBy(xpath = "//table[@class='table-responsive']//tr//td//a[text()='Download']")
+	@FindBy(xpath = "//table[@id='resultscount_0']//tr/td/div[@class='svg-link-holder ng-scope']/a[contains(text(),'Download')]")
 	private WebElement downloadLink;
 
-	@FindBy(xpath = "//embed[@id='plugin']")
+	@FindBy(xpath = "//embed[@type='application/pdf']")
 	private WebElement pDFDoc;
 
 
@@ -412,12 +414,21 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
 	protected WebElement preEffectiveTechSupportNumber;
 	
+	@FindBy(id = "menubutton1_0")
+	private WebElement billingHistoryDateRangeDropdown;
+	
+	@FindBy(xpath = "//ul[@id='menu3_0']/li[4]/a")
+	private WebElement billingHistoryLast24MonthsOption;
+	
+	@FindBy(xpath = "//*[@class='payment-method-btn']/a[text()='Manage Payment Method']")
+	private WebElement managePaymentMethodButton;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, paymentOverviewSection,20);
 		 openAndValidate();
-	}
+		}
 
 	public PaymentHistoryPage(WebDriver driver, boolean skipOpenAndValidation) {
 		super(driver);
@@ -542,7 +553,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn,30);
 		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
-			validateNew(paymentHistoryApp);
+			//validateNew(paymentHistoryApp);
 			validateNew(oneTimePaymentBtn);
 		}
 	}
@@ -965,13 +976,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPayment() throws Exception {
-		CommonUtility.waitForPageLoad(driver, EditAutomaticPaymentsButton, 20);
+		CommonUtility.waitForPageLoad(driver, managePaymentMethodButton, 20);
 		Thread.sleep(5000);
 		try {
 			TestHarness.checkForIPerceptionModel(driver);
-			EditAutomaticPaymentsButton.click();
+			managePaymentMethodButton.click();
 		} catch (Exception e1) {
-			System.out.println("Edit Automation Payment button was not clicked or displayed");	
+			System.out.println("Manage Payment Method button was not clicked or displayed");	
 		}
 		System.out.println("User clicked on Update Automatic Button");
 		try {
@@ -1605,41 +1616,39 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	
 	public void validatePDFDownloadLink() throws Exception {
-		new Actions(driver).moveToElement(DateRangerDropDown).perform();
-		waitAndClick(last24MonthsOption);
+		new Actions(driver).moveToElement(billingHistoryDateRangeDropdown).perform();
+		waitAndClick(billingHistoryLast24MonthsOption);
 		sleepBySec(5);
 		String expectedText = "Last 24 months";
-		String actualText = last24MonthsOption.getAttribute("innerHTML");
+		String actualText = billingHistoryLast24MonthsOption.getAttribute("innerHTML");
 		Assert.assertTrue("PROBLEM - last24MonthsOption text is not as expected. Expected='" + expectedText
 				+ "' | Actual='" + actualText + "'", expectedText.equals(actualText));
 		Assert.assertTrue("PROBLEM - got server error for last24MonthsOption option", !hasServerError());
 		List<WebElement> totalTableRowsList = driver
-				.findElements(By.xpath("//div[@id='paymentTable1']/div/div/table/tbody/tr"));
+				.findElements(By.xpath("//div[@class='history-table__body']/table[@id='resultscount_0']/tbody/tr"));
 		int totalRows_24Months = totalTableRowsList.size();
 		System.out.println("total rows including header Last 24 Months=" + totalRows_24Months);
 
-		String ParentWindow = driver.getTitle();
+		String ParentWindow = driver.getWindowHandle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", downloadLink);
 		jsClickNew(downloadLink);
 
 		Thread.sleep(25000);
 		Set<String> handles1 = driver.getWindowHandles();
+		if (handles1.size()==1) {
+			System.out.println("New window not opened");
+			Assert.fail("Bill payment PDF not downloaded");
+		}
 		for (String windowHandle : handles1) {
 			if (!windowHandle.equals(ParentWindow)) {
 				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("PRO Document")) {
-					System.out.println("We are on PRO Document winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(pDFDoc);
-					break;
-				}
-			} else {
-				System.out.println("Not found PRO Document Expected window");
-				driver.switchTo().window(ParentWindow);
+				Thread.sleep(1000);
+				String newWindowURL = driver.getCurrentUrl();
+				System.out.println("Window URL is : " + newWindowURL);
+				Thread.sleep(1000);
+				waitforElement(pDFDoc);
+				break;
 			}
 
 		}

@@ -94,6 +94,8 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateHeaderSectionContent(String planType) {
+		checkModelPopup(driver,2);
+		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -196,7 +198,8 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		//tbd if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		if (planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
@@ -214,17 +217,25 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
-			String expUrl="How_to_read_Medical_EOB.pdf";
+			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+			System.out.println("total tab size="+newTab.size());
+
+			//note: Use the list of window handles to switch between windows
+			driver.switchTo().window(newTab.get(newTab.size()-1));
+			CommonUtility.checkPageIsReady(driver);
+
+			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			//TODO - validate PDF content when code deploy onto stage
-			
-			driver.navigate().back();
+
+			//note: Switch back to original window
+			driver.close();
+			driver.switchTo().window(newTab.get(newTab.size()-2));
 			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
-			sleepBySec(3);
+			sleepBySec(5);
+
 			if (memberType.contains("COMBO")) 
 				goToSpecificComboTab(planType);
 		}
@@ -232,6 +243,7 @@ public class EOBPage extends EOBBase{
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -455,6 +467,7 @@ public class EOBPage extends EOBBase{
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
+		sleepBySec(1);
 		sendkeys(fromTxtField,fromDate);
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -645,7 +658,7 @@ public class EOBPage extends EOBBase{
 	 * this method is to validate the site leaving popup on the eob page
 	 */
 	public void validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 
@@ -1005,7 +1018,7 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - is able to open pdf url, proceed to validate content");
 				PDDocument document = PDDocument.load(urlConnection.getInputStream());
 				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : " + PDFText);
+				//keepForDebug System.out.println("PDF text : " + PDFText);
 
 				String error="Your Explannation of Benefits is currently unavailable.";
 				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
@@ -1062,7 +1075,7 @@ public class EOBPage extends EOBBase{
 			System.out.println("TEST - is able to open pdf url, proceed to validate content");
 			PDDocument document = PDDocument.load(urlConnection.getInputStream());
 			String PDFText = new PDFTextStripper().getText(document);
-			System.out.println("PDF text : " + PDFText);
+			//keepForDebug System.out.println("PDF text : " + PDFText);
 
 			String error="Your Explannation of Benefits is currently unavailable.";
 			if (PDFText.contains(error)) {
@@ -1114,8 +1127,10 @@ public class EOBPage extends EOBBase{
 		int max=eobCount;
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
-			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
-				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+		}
+		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) { 
+			System.out.println("TEST - limit the amount of EOB detail validation to speed up the run on offline/online-prod");
+			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
 		}
 		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
@@ -1217,11 +1232,21 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateComboTab(String memberType) {
-		if (memberType.contains("MULTI_SHIP")) {
+		if (memberType.contains("MULTI_SHIP") && !memberType.contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
 			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
 			//should not see tabs
+		} else if (memberType.contains("COMBO_MULTI_SHIP")) {
+			//note: one of the tab should be for 'SUPPLEMENTAL INSURANCE PLANS' 
+			boolean found=false;
+			for (WebElement e: comboTabList) {
+				if (e.getText().equals("SUPPLEMENTAL INSURANCE PLANS")) {
+					found=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have a tab with text 'SUPPLEMENTAL INSURANCE PLANS'",found);
 		} else 
 			if (memberType.contains("COMBO")) {
 				if (memberType.contains("SSP")) {

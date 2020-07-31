@@ -1,5 +1,6 @@
 package pages.acquisition.shopperprofile;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,7 +39,11 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 		}
 		else if (MRScenario.environment.equals("stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
-			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
+			
+			if(driver.findElements(By.id("loginusername")).size()>0) {
+				CommonUtility.waitForPageLoadNew(driver, username, 45);
+			}else
+				CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		}else {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
 			CommonUtility.waitForPageLoadNew(driver, username, 45);
@@ -56,7 +61,15 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 		if (MRScenario.environment.equals("offline")) {
 		}
 		else if (MRScenario.environment.equals("stage")) {
-			System.out.println("########Skipping sign In for stage########");
+			if(driver.findElements(By.id("loginusername")).size()>0) {
+				waitforElement(username);
+				sendkeys(username, userName);
+				sendkeys(password, passWord);
+				btnLogin.click();
+				CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
+			}
+			else
+				System.out.println("########Skipping sign In for stage########");
 		}else {
 			waitforElement(username);
 			sendkeys(username, userName);
