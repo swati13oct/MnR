@@ -980,6 +980,15 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(5000);
 		try {
 			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Scrolling to Manage Payment Method Button");
+			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
+			jse2.executeScript("arguments[0].scrollIntoView()", managePaymentMethodButton);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			}
+			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Now clicking on Manage Payment Method Button");
 			managePaymentMethodButton.click();
 		} catch (Exception e1) {
 			System.out.println("Manage Payment Method button was not clicked or displayed");	
