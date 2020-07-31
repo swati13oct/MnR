@@ -257,7 +257,8 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.CheckClick_NextYear_Plans();
+		//plansummaryPage.CheckClick_NextYear_Plans();
+		plansummaryPage.handlePlanYearSelectionPopup(plantype);
 	}
 
 
