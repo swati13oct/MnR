@@ -144,7 +144,9 @@ public class PrepareForNextYearStepDefinition {
 				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate)) 
 				&& (!aem_tabToggle))	
 			expPrepareForNextYearTab=false;
-		if (planType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
+		if (planType.toUpperCase().contains("SHIP") &&  !memberType.toUpperCase().contains("COMBO"))
+			expPrepareForNextYearTab=false;
+		if(memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
 			expPrepareForNextYearTab=false;
 		if (memberType.toUpperCase().contains("GRP") && memberType.toUpperCase().contains("OFFCYC"))
 			expPrepareForNextYearTab=false;
@@ -168,7 +170,7 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
 
 		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
 			expComboTab=true;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 
@@ -326,7 +328,33 @@ public class PrepareForNextYearStepDefinition {
 		
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	@Then("^the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page$")
+	public void user_validatePrepareForNextYearPageNoShipCombboTab() throws InterruptedException {
+		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		if (!expPrepareForNextYearTab) {
+			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			testNote.add("\tNo tab show for this test setup, skipping Prepare For Next Year page content validation...");
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			return;
+		}
+		//note: if able to get to this point means the page should exist
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+		if (pfnyPg.valiateNoShipComboTab())
+			testNote.add("\tPASSED - Prepare For Next Year page does not have SHIP tab showing for SHIP COMBO user");
+		else
+			testNote.add("\t * FAILED - Prepare For Next Year page should not have SHIP tab showing for SHIP COMBO user");
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Prepare For Next Year page content$")
@@ -1575,7 +1603,7 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
 
 		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
 			expComboTab=true;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 

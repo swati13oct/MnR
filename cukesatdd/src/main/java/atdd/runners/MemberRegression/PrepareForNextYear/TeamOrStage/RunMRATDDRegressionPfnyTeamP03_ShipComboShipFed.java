@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyTeamP03_ShipComboShipFed.js
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyTeamP03_ShipComboShipFed")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyTeamP03_ShipComboShipFed.json" }, tags = { "@teamEnv","@prepareForNextYear01c" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyTeamP03_ShipComboShipFed.json" }, tags = { "@teamEnv","@prepareForNextYear03a" })
 public class RunMRATDDRegressionPfnyTeamP03_ShipComboShipFed {
 
 }

@@ -174,6 +174,12 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 	}
 
+	public boolean valiateNoShipComboTab() {
+		if (noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_HIP))
+			return false;
+		return true;
+	}
+	
 	/**
 	 * Navigate to specific plan for combo user
 	 * @param planType
