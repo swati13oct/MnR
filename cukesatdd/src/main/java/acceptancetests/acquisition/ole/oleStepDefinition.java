@@ -2799,7 +2799,7 @@ public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medica
 			System.out.println("OLE Prescription drug coverage Questions in Medicare Information Page - All required Member Details are entered");
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
-			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));
 			Assert.assertTrue(true);
 		}
 		else

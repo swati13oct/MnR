@@ -1022,7 +1022,7 @@ public boolean answer_following_questions_PrescriptionCoverage(Map<String, Strin
 	
 	String PrescriptionName = memberDetailsMap.get("Prescription Name");
 	String PDGroupNumber = memberDetailsMap.get("PD Group Number");
-	String PDMemberNumber = memberDetailsMap.get("PDMemberNumber");
+	String PDMemberNumber = memberDetailsMap.get("PD Member Number");
 	
 	sendkeysNew(PrescriptionCoverageNameField, PrescriptionName);
 	sendkeysNew(PrescriptionCoveragegroupNumberField, PDGroupNumber);
