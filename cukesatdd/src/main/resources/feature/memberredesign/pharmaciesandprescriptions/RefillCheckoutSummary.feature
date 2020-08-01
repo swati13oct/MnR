@@ -3,14 +3,14 @@ Feature: Refill - Checkout summary
 
   @RefillMedications @F481927 @US2767410 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When user have a home delivery medication eligible for refill
     And user clicks Refill Medication call to action button
-    Then user views the Medications section
-    And User will see the number of medications in my order indicated in the header
+    Then user will see Complete Your Refill Page
+    When user views the Medications section
+    Then user will see the number of medications in my order indicated in the header
 
     Examples: 
       | FID     | planType | memberType           |
@@ -18,13 +18,13 @@ Feature: Refill - Checkout summary
 
   @RefillMedications @F481927 @US2767410 @Scenario2
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication information 
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When user have a home delivery medication eligible for refill
     And user clicks Refill Medication call to action button
-    Then user views the Medications section
+    Then user will see Complete Your Refill Page
+    When user views the Medications section
     And user validates the medication name
     And user validates the strength of the medication
     And user validates the price I paid for the medication
@@ -37,41 +37,11 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
-  @RefillMedications @F481927 @US2767410 @Scenario3
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication shipments
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks View all medications link to view the My Medications page
-    When user clicks Refill All Medications button
-    Then user views the Medications section
-    Then user sees the different shipments indicated
-    And user sees the estimated delivery date for each shipment
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx |
-
-  @RefillMedications @F481927 @US2767410 @Scenario4
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto refill
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    When user have a home delivery medication eligible for refill
-    And user clicks Refill Medication call to action button
-    Then user views the Medications section
-    Then user sees the auto refill line populate for any eligible medication
-    And user sees an information icon
-
-    Examples: 
-      | FID     | planType | memberType           |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+  
 
   @RefillMedications @F481927 @US2767410 @Scenario5
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove links
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
