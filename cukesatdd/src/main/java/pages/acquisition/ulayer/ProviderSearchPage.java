@@ -64,7 +64,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 	
-	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+//	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	@FindBy(xpath = "(//*[contains(@class,'action-btn') and contains(text(),'Finish')])[2]")
 	private WebElement finishReturnBtn;
 	
 	@FindBy(xpath = "//*[text()='View Saved']")
@@ -532,11 +533,16 @@ public class ProviderSearchPage extends UhcDriver {
 		 waitForCountDecrement(2);
 		 driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		 return new VPPPlanSummaryPage(driver);
-		*/
+		
 		 
 		jsClickNew(Savedproviders);
 		validateNew(Finish);
-		Finish.click();	
+		Finish.click();	*/
+		
+		 jsClickNew(Savedproviders); 
+		 validateNew(finishReturnBtn); 
+		 finishReturnBtn.click();
+		 
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new VPPPlanSummaryPage(driver);
