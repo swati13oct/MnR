@@ -139,7 +139,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[text()='Continue Searching']")
 	private WebElement continueSearching;
 	
-	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	//@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	@FindBy(xpath = "(//*[contains(@class,'action-btn') and contains(text(),'Finish')])[2]")
 	private WebElement finishReturnBtn;
 	
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
