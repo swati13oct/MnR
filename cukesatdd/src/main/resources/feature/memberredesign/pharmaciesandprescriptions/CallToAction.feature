@@ -144,7 +144,7 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
   @CallToAction @F436319 @US2498865   
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify LIS (1-4 ) user dont see Drug Cost Summary call to action
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify LIS one to four  user dont see Drug Cost Summary call to action
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
