@@ -274,11 +274,19 @@ public class LoginPage extends UhcDriver {
 						homePageNotice3.click();
 						CommonUtility.checkPageIsReady(driver);
 					}
+					//tbd if (null!=MRScenario.environment 
+					//tbd 		&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
 					if (null!=MRScenario.environment 
-							&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
+							&& MRScenario.environment.contains("team-h")) { 
 						//note: sometimes take longer to load page on team env
 						Thread.sleep(4000);
-						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*4 sec.");
+					} else if (MRScenario.environment.contains("team-a")) {
+						System.out.println("Time elapsed post sign In clicked --" + counter);
+						if ((counter>0) && (counter % 3) == 0) {
+							System.out.println("...waited for a while...referesh the page and see if it helps");
+							driver.navigate().refresh();
+						}
 					} else {
 						Thread.sleep(2000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");

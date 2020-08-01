@@ -180,6 +180,28 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return true;
 	}
 	
+	public boolean findComboTab(String planType) {
+		if (planType.equalsIgnoreCase("mapd")) {
+			if (noWaitValidate(comboTab_MAPD) || noWaitValidate(comboTab_MAPD_planDoc))
+				return true;
+		} else if (planType.equalsIgnoreCase("ma")) {
+			if (noWaitValidate(comboTab_MA) || noWaitValidate(comboTab_MA_planDoc)) 
+				return true;
+		} else if (planType.equalsIgnoreCase("ship")) {
+			if (noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc)) 
+				return true;
+		} else if (planType.toLowerCase().contains("ship_hip")) {
+			if (noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+				return true;
+		} else if (planType.equalsIgnoreCase("pdp")) {
+			if (noWaitValidate(comboTab_PDP) || noWaitValidate(comboTab_PDP_planDoc))
+				return true;
+		} else if (planType.equalsIgnoreCase("ssp") || noWaitValidate(comboTab_SSP_planDoc)) {
+			return true;
+		} 
+		return false;
+	}
+	
 	/**
 	 * Navigate to specific plan for combo user
 	 * @param planType
@@ -640,7 +662,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 					//note: back to prior page and move on
 					if (!driver.getCurrentUrl().contains("preparefornextyear/overview.html")) {
 						driver.get(urlBeforeClick);
-						goToSpecificComboTab(planType,false);
+						//tbd goToSpecificComboTab(planType,false);
 						CommonUtility.checkPageIsReady(driver);
 						checkModelPopup(driver,5);
 					}
@@ -847,7 +869,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				if (willDeleteCookie) {
 					note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
 					deleteCookieAndReloadPgn(subSecCookie);
-					goToSpecificComboTab(planType, false);
+					//tbd goToSpecificComboTab(planType, false);
 					note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
 				}
 

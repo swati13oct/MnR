@@ -140,7 +140,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Hospital Indemnity')]") 
 	protected WebElement comboTab_SHIP_HIP_planDoc;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(.,'Prescription') and not(contains(text(),'Medicare'))]") 
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 

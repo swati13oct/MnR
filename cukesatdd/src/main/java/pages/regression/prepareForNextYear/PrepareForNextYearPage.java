@@ -56,7 +56,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		Assert.assertTrue("PROBLEM - unable to navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 
 		if (expComboTab) 
-			handleComboTabIfComboUser(planType, memberType);
+			Assert.assertTrue("PROBLEM - unable to locate the combo tab for planType '"+planType+"' on Prepare For Next Year page", findComboTab(planType));
+			//tbd handleComboTabIfComboUser(planType, memberType);
 		return new PrepareForNextYearPage(driver);
 	}
 
