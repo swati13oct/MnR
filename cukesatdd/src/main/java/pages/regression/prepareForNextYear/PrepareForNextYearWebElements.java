@@ -167,6 +167,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//h2[contains(text(),'Dates to Remember')]")
 	protected WebElement tl_sectionHeader;
 
+	@FindBy(xpath="//h3[contains(text(),'Dates to Remember')]")
+	protected WebElement tbd_tl_sectionHeader;
+	
 	@FindBy(xpath="//a[contains(text(),'RETURN TO PREVIOUS PAGE')]")
 	protected WebElement returnToPrevPgLnk;
 	
@@ -175,6 +178,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='loading-block' and contains(@style,'none')]")
 	protected WebElement noLoadingSpinner;
+	
+	@FindBy(xpath="//div[@class='loading-block' and contains(@style,'display')]")
+	protected WebElement loadingSpinnerOnScreen;
 	
 	@FindBy(xpath="//section[contains(@class,'disclaimer')]//strong[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
@@ -195,6 +201,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='September 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone1Text;
 
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']")
+	protected WebElement tbd_tl_milestone1Date;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']/../label[contains(@class,'date-content')]")
+	protected WebElement tbd_tl_milestone1Text;
+
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]")
 	protected WebElement tl_milestone1Line;
 
@@ -210,6 +222,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 1']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone2Text;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 1']")
+	protected WebElement tbd_tl_milestone2Date;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 1']/../label[contains(@class,'date-content')]")
+	protected WebElement tbd_tl_milestone2Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][2]")
 	protected WebElement tl_milestone2Line;
@@ -227,6 +245,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='October 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone3Text;
 
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 15']")
+	protected WebElement tbd_tl_milestone3Date;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 15']/../label[contains(@class,'date-content')]")
+	protected WebElement tbd_tl_milestone3Text;
+
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][3]")
 	protected WebElement tl_milestone3Line;
 
@@ -243,6 +267,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='December 7']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone4Text;
 
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='December 7']")
+	protected WebElement tbd_tl_milestone4Date;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='December 7']/../label[contains(@class,'date-content')]")
+	protected WebElement tbd_tl_milestone4Text;
+
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][4]")
 	protected WebElement tl_milestone4Line;
 
@@ -258,6 +288,12 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//span[text()='January 1']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone5Text;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='January 1']")
+	protected WebElement tbd_tl_milestone5Date;
+
+	@FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='January 1']/../label[contains(@class,'date-content')]")
+	protected WebElement tbd_tl_milestone5Text;
 
 	@FindBy(xpath="//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][5]")
 	protected WebElement tl_milestone5Line;
@@ -800,10 +836,10 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[@class='review-sub']")
 	protected WebElement grp_reviewPharInfoSection;
 	
-	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[@class='circle']")
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and not(contains(@class,'green'))]")
 	protected WebElement grp_reviewPharInfo_circle_noGreen;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[@class='circle']")
+	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//div[contains(@class,'reviewplansMain')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and contains(@class,'green')]")
 	protected WebElement grp_reviewPharInfo_circle_green;
 
 	@FindBy(xpath="//div[contains(@class,'ReviewPharmacy_Group')]//h3")

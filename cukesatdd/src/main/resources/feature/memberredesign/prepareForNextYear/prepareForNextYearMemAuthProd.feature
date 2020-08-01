@@ -51,14 +51,10 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 			
 	@prod_prepareForNextYear01c
     Examples: 
-	    | index | FID     | username  | password  | MemUserName       | planType | memberType             |
-	    | 1-07  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43  | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY |
-			
-	@prod_prepareForNextYear01d @noTab
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName       | planType | memberType              |
-	    | 1-08  | F437767 | ashah120  | Mnrqa003  | PAULAROTH2        | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
-			
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType                 |
+	    | 1-07  | F437767 | ashah120  | Mnrqa003  | JSENFYFDRE#ERY2GO | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F437767 | ashah120  | Mnrqa003  | JSENFYFDRE#ERY2GO | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+		
 
   #-------------------------------------------------
   # note: for cases below -
@@ -157,4 +153,33 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-12  | F437767 | ashah120  | Mnrqa003  | PAULAROTH2                | PDP	     | COMBO_PDP_IND_SHIP_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    
+  @prod_prepareForNextYear03 @hasTab @noCombTabOnPfny
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 09/15/2020     |
+      | Milestone 2 Date       | 10/01/2020     |
+      | Milestone 3 Date       | 10/15/2020     |
+      | Milestone 4 Date       | 12/07/2020     |
+      | Milestone 5 Date       | 01/01/2021     |
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
+
+	@prepareForNextYear03a
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
+	    | 3-01  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+			
+	@prepareForNextYear03b
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
+	    | 3-02  | F437767 | ashah120  | Mnrqa003  | PAULAROTH2              | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 	    

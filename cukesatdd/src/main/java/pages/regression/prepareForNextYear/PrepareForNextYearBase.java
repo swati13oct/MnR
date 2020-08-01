@@ -38,7 +38,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-	protected static boolean validateAsMuchAsPossible=true;
+	protected static boolean validateAsMuchAsPossible=false;
 	
 	protected static final String m1="09/15/";
 	protected static final String m2="10/01/";
@@ -475,10 +475,11 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 
+		//note: for provider directory, it will take a while to load b/c it's a big file
 		if (!MRScenario.environment.contains("team-a")) {
 			try {
 				URL TestURL = new URL(driver.getCurrentUrl());
-				sleepBySec(5); //note: let the page settle before validating content
+				sleepBySec(3); //note: let the page settle before validating content
 				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 				PDDocument document = PDDocument.load(TestFile);
 				String PDFText = new PDFTextStripper().getText(document);
@@ -657,7 +658,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			String currentUrl=driver.getCurrentUrl();
 			if (validateAsMuchAsPossible) {
 				if (!currentUrl.contains(expUrl))
-					note.add("\t * PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'");
+					note.add("\t * FAILED: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'");
 			} else {
 				Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
 			}
@@ -778,6 +779,13 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+		if (noWaitValidate(loadingSpinnerOnScreen)) {
+			System.out.println("Give it one more try before givng up...");
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+			Assert.assertTrue("PROBLEM - loading spinner won't go away...", !noWaitValidate(loadingSpinnerOnScreen));
+		}
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 5);
 		checkModelPopup(driver,3);
 	}

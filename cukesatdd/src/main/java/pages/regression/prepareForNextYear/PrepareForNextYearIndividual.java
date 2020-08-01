@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
@@ -449,9 +450,15 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 		String expUrl="/health-plans/estimate-drug-costs.html";
 		if (memberType.toUpperCase().contains("UHC"))
-			expUrl="uhcmedicaresolutions.com"+expUrl;
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			else
+				expUrl="uhcmedicaresolutions.com"+expUrl;
 		else 
-			expUrl="aarpmedicareplans.com"+expUrl;
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			else 
+				expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=dceHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
@@ -779,10 +786,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		String expUrl="/health-plans/aarp-pharmacy.html";
-		if (memberType.toUpperCase().contains("UHC"))
-			expUrl="uhcmedicaresolutions.com"+expUrl;
-		else 
-			expUrl="aarpmedicareplans.com"+expUrl;
+		if (memberType.toUpperCase().contains("UHC")) {
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			else
+				expUrl="uhcmedicaresolutions.com"+expUrl;
+		} else {
+			if (MRScenario.environment.contains("stage"))
+				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			else
+				expUrl="aarpmedicareplans.com"+expUrl;
+		}
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
@@ -1013,9 +1027,15 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
-				expUrl="uhcmedicaresolutions.com"+expUrl;
+				if (MRScenario.environment.contains("stage"))
+					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+				else
+					expUrl="uhcmedicaresolutions.com"+expUrl;
 			else 
-				expUrl="aarpmedicareplans.com"+expUrl;
+				if (MRScenario.environment.contains("stage"))
+					expUrl="aarpmedicareplans.uhc.com"+expUrl;
+				else
+					expUrl="aarpmedicareplans.com"+expUrl;
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
@@ -1272,9 +1292,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			//note - validate link destination
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
-				expUrl="uhcmedicaresolutions.com"+expUrl;
+				if (MRScenario.environment.contains("stage"))
+					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+				else
+					expUrl="uhcmedicaresolutions.com"+expUrl;
 			else 
-				expUrl="aarpmedicareplans.com"+expUrl;
+				if (MRScenario.environment.contains("stage"))
+					expUrl="aarpmedicareplans.uhc.com"+expUrl;
+				else
+					expUrl="aarpmedicareplans.com"+expUrl;
+
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 

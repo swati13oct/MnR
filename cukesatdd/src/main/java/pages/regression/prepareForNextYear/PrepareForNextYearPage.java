@@ -46,12 +46,12 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	public PrepareForNextYearPage fromBenefitsPgNavigateToPrepareForNextYearPage(String planType, String memberType, boolean expComboTab) {
 		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the PrepareForNextYear page...");
 		if (noWaitValidate(prepareForNextYearTab)) {
+			checkModelPopup(driver,3);
 			prepareForNextYearTab.click();
 			//tbd Assert.assertTrue("PROBLEM - loader still spinning after 30 seconds.  Page may have trouble loading.",waitForElementToDisappear(driver, loadingSpinner, 30));
 		}
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
-		checkModelPopup(driver,3);
 		//tbd sleepBySec(2);
 		Assert.assertTrue("PROBLEM - unable to navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 

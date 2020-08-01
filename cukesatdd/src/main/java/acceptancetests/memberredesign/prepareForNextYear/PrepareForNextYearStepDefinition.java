@@ -150,6 +150,8 @@ public class PrepareForNextYearStepDefinition {
 			expPrepareForNextYearTab=false;
 		if (memberType.toUpperCase().contains("GRP") && memberType.toUpperCase().contains("OFFCYC"))
 			expPrepareForNextYearTab=false;
+		if (memberType.toUpperCase().contains("COMBO") && memberType.toUpperCase().contains("PDP") && memberType.toUpperCase().contains("SSP"))
+			expPrepareForNextYearTab=false;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);	
 
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);

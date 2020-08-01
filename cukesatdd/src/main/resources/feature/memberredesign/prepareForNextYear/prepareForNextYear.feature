@@ -44,22 +44,11 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 1-05  | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | SHIP	 | IND_PFNY            |
 	
-	#note: activate when combo user is available		
 	@prepareForNextYear01c
     Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-07  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
-			
-	@prepareForNextYear01d
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-08  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
-			
-	@prepareForNextYear01e
-    Examples: 
 	    | index | FID     | planType | memberType                 |
-	    | 1-09  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	    | 1-10  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-07  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
@@ -157,7 +146,6 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 2-05  | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 	    | 2-06  | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	# ignore group cases for now until code is ready
 	@prepareForNextYear02d
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
@@ -202,7 +190,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/30/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -231,19 +219,9 @@ Feature: 1.25 Member Prepare For Next Year
 
 	@prepareForNextYear01c
     Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-07  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
-			
-	@prepareForNextYear01d
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-08  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
-			
-	@prepareForNextYear01e
-    Examples: 
 	    | index | FID     | planType | memberType          |
-	    | 1-09  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	    | 1-10  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-07  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-18  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 
   #-------------------------------------------------
   # note: for cases below -
@@ -257,7 +235,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/30/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -300,7 +278,7 @@ Feature: 1.25 Member Prepare For Next Year
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-03  | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 2-04  | F437767 | MA	     | UHC_IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-04  | F437767 | MA	     | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 	@prepareForNextYear02c
     Examples: 
@@ -308,7 +286,7 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 2-05  | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 	    | 2-06  | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	# ignore group cases for now until code is ready
+	# code not on stage yet
 	#@prepareForNextYear02d
     #Examples: 
 	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
@@ -324,7 +302,7 @@ Feature: 1.25 Member Prepare For Next Year
     Examples: 
 	    | index | FID     | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
         | 2-10  | F437767 | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
-        | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+        | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY | false | false | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
 
     #this user doesn't have anoc, re-enable this when finding a user that has it
     #@prepareForNextYear02g
@@ -345,7 +323,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 06/30/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -357,15 +335,16 @@ Feature: 1.25 Member Prepare For Next Year
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-	@prepareForNextYear03a
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 3-01  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
+    #note: not yet on stage
+	#@prepareForNextYear03a
+    #Examples: 
+	#    | index | FID     | planType | memberType              |
+	#    | 3-01  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
 			
-	@prepareForNextYear03b
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 3-02  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
+	#@prepareForNextYear03b
+    #Examples: 
+	#    | index | FID     | planType | memberType              |
+	#    | 3-02  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
 
 	    
 ##### end - cases for stage env #################################################################

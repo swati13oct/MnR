@@ -52,10 +52,9 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_prepareForNextYear01c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
+	    | 1-07  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 			
-	@memAuth_prepareForNextYear01d
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
 			
 
   #-------------------------------------------------

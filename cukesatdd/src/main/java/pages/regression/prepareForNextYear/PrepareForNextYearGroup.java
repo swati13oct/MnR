@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.MRScenario;
+
 public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 	protected static String cookiePlnDocsSection="reviewPlandocuments_grp";
@@ -200,10 +202,17 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			String expUrl="/health-plans/aarp-pharmacy.html";
-			if (memberType.toUpperCase().contains("UHC"))
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-			else 
-				expUrl="aarpmedicareplans.com"+expUrl;
+			if (memberType.toUpperCase().contains("UHC")) {
+				if (MRScenario.environment.contains("stage"))
+					expUrl="uhcmedicaresolutions.uhc"+expUrl;
+				else
+					expUrl="uhcmedicaresolutions.com"+expUrl;
+			} else {
+				if (MRScenario.environment.contains("stage"))
+					expUrl="aarpmedicareplans.uhc"+expUrl;
+				else
+					expUrl="aarpmedicareplans.com"+expUrl;
+			}
 			WebElement expElement=pharmacyHeader;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
