@@ -123,8 +123,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(backToAllPlans);
-		validate(plandetails);
+		validate(backToAllPlans,30);
+		validate(plandetails,30);
 
 	}
 
@@ -336,11 +336,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
-		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="";
+		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
+		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
+			columnName = columnName.replace(" Zero", "");
 		for(String key : benefitsMap.keySet()) {
-			String benefitValueUI = benefitsMap.get(key);
+			benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
@@ -355,7 +357,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			
 			//removing all the footnote words from the string as they represent footnote
-			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider"))) {
+			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total"))) {
 				if(benefitValueUI.endsWith("footnote2"))
 					benefitValueUI = benefitValueUI.replace("footnote2", "");
 				else if(benefitValueUI.endsWith("footnote1"))
@@ -364,8 +366,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
 				else if(benefitValueUI.endsWith("2"))
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-				else if(benefitValueUI.contains("Out-of-NetworkBenefits"))
+				else if(benefitValueUI.contains("Out-of-NetworkBenefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
+					benefitValue = benefitValue.replace("Opensinanewwindow", "");
+				}
 			}
 			//removing footnote values from the end of the key values if any
 			
@@ -379,11 +383,14 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = false;
 						if(key.contains("footnotes") && columnName.equalsIgnoreCase("footnotes"))
 							tmpUIString2 = tmpKeyString;
+						else
+							tmpUIString2 = tmpUIString1;
 						break;
 					}
 				
 				}else if(key.equalsIgnoreCase(columnName)) {
 						flag= false;
+						tmpUIString2 = tmpUIString1;
 						 break;
 					}
 			
@@ -409,7 +416,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 				benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
 				benefitValue = benefitValue.replaceAll("\\u2022", "");
-				
+				benefitValue = benefitValue.replaceAll("\\u00AE", "");
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("footnotes")) { 
 					key = key.replace("\n", "");
 					key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
@@ -437,6 +444,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					benefitValue = benefitValue.toLowerCase();
+					benefitValue = benefitValue.replaceAll("\\*", "");
 					if(key.contains(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -531,8 +539,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 			}
 		
 
-			if(counter == 0)
+			if(counter == 0) {
 				flag = false;
+				System.out.println("Values did not match for col:7 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+				tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+			}
 		
 			comparedResult.put(flag, tmpUIString2);
 			return comparedResult;

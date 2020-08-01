@@ -38,7 +38,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2019 |
 
   @addDrugsDCE
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug and pharmacy information from DCE to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
       | State | <state> |
@@ -110,9 +110,10 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
 
+# The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+#      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionUHC @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
