@@ -1,6 +1,6 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 14 to 21
 
-   #Test Case 14 - AARP MAPD Plan member
+  #Test Case 14 - AARP MAPD Plan member
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -39,7 +39,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
     Examples: 
       | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
-      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 90019633509 | OneTime     |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 50025629105 | OneTime     |
 
   #Test Case 15
   @regressionMember
@@ -66,8 +66,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     And the user is displayed with an error message on Edit Recurring EFT Review that he is not authorized
 
     Examples: 
-      | TID   | username  | password  | member          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | qavgogine | qavgogine | q2_june_rto0002 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15118 | qavgogine | qavgogine | recurringpayment001 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 16 - Any member will work
   @regressionMember
@@ -137,16 +137,16 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
     Examples: 
       | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
-      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 | 60023626906 | OneTime     |
+      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 |     3760900 | OneTime     |
 
-  #Test Case 18 -Member with Recurring method already setup and with billing history
+  #Test Case 18 -Member with Recurring method already setup and with billing history (same as in test case #15)
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-    Then User Scrolls down and validate that Payment History Section and scrolls up
+    Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Update Automatic payments on payment overview page
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on cancel button in One time EFT or Recurring EFT flow
@@ -157,12 +157,12 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
   #Test Case 19 - Member with Recurring method already setup and with billing history
   @regressionMember
-  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Message for Recurring EFT
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Messages for Recurring EFT when user doesn't enter values in the form and clicks on continue button
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-    Then User Scrolls down and validate that Payment History Section and scrolls up
+    Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Update Automatic payments on payment overview page
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on Authorize button to validate error message
@@ -178,7 +178,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-    Then User Scrolls down and validate that Payment History Section and scrolls up
+    Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Make one time payment on payment overview page
     And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
     And the user clicks on cancel button in One time EFT or Recurring EFT flow
@@ -194,7 +194,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-    Then User Scrolls down and validate that Payment History Section and scrolls up
+    Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Make one time payment on payment overview page
     And the user validates the Payment Summary option on New page OTP
 
