@@ -16,7 +16,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
     Examples: 
       | TID   | planType | memberType              | copayCategory | Test Scenario          | username | password | member      |
-      | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | University Of Kentucky | jkuma14  | Brock@02 | Kywoman1953 |
+      | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | University Of Kentucky | jkuma14  | Brock@03 | Kywoman1953 |
 
   @regressionMemberPROD
   Scenario Outline: Verify that user is able to perfom Outbound SSO - MyHCE_<Test Scenario>
@@ -34,7 +34,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
     Examples: 
       | TID   | planType | memberType | copayCategory | zipCode | Test Scenario             | username | password | member                    |
-      | XXXXX | MAPD     | myhce      | NON LIS       |   30527 | TC_SSO_SHBP_Georgia_myHCE | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
+      | XXXXX | MAPD     | myhce      | NON LIS       |   30527 | TC_SSO_SHBP_Georgia_myHCE | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
 
   @regressionMemberPROD
   Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Benefits and Coverage Page from <optumrxssolink>
@@ -54,9 +54,9 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
     Examples: 
       | TID   | planType | memberType | copayCategory | Test Scenario   | optumrxssolink                                                  | username | password | member                    |
-      | TC001 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
-      | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
-      | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
+      | TC001 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
+      | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
+      | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
 
   @regressionMemberPROD2
   Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
@@ -76,7 +76,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
     Examples: 
       | TID   | planType                | memberType | copayCategory | Test Scenario   | optumrxssolink           | username | password | member                    |
-      | TC004 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
-      | TC005 | IndividualWithPayment   | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton | jkuma14  | Brock@02 | dbar3322                  |
-   #  | TC006 | IndividualWithPayment   | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton | jkuma14  | Brock@02 | dbar3322                  |
-      | TC007 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    | jkuma14  | Brock@02 | Andersonga1@Bellsouth.Net |
+      | TC004 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
+      | TC005 | IndividualWithPayment   | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton | jkuma14  | Brock@03 | dbar3322                  |
+   #  | TC006 | IndividualWithPayment   | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton | jkuma14  | Brock@03 | dbar3322                  |
+      | TC007 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
