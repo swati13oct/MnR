@@ -86,6 +86,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(CurrentYearLink);
+		validate(zipcodeChangeLink,30);
 	}
 	
 	
@@ -263,13 +264,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
-		String tmpUIString1 = "",tmpUIString2="";
+		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		for(String key : benefitsMap.keySet()) {
-			String benefitValueUI = benefitsMap.get(key);
+			 benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase();
-			key = key.replace(",", "");
+			//key = key.replace(",", "");
 			columnName = columnName.toLowerCase();
 			if(columnName.contains("tier"))
 				System.out.println();
@@ -291,7 +292,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col: "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println("Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
@@ -299,8 +300,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				}
 			}
 		
-		if(counter == 0)
+		if(counter == 0) {
 			flag = false;
+			System.out.println("Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+			tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+		}
 		
 		comparedResult.put(flag, tmpUIString2);
 		return comparedResult;
@@ -337,6 +341,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			validateNew(planListContainer, 30);
 			
 		}
+	}
+	
+	public void selectYearOption(String year) {
+		try {
+			if(year.equalsIgnoreCase("current")) {
+				if(validate(CurrentYearLink))
+					CurrentYearLink.click();
+			}else {
+				if(validate(NextYearLink))
+					NextYearLink.click();
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		
 	}
 }
 

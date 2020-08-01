@@ -3981,10 +3981,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 					
 		      }
-		      /*
-			try{
 		
-				if (!(planType.equalsIgnoreCase("MS"))) {
+			/*	if (!(planType.equalsIgnoreCase("MS"))) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 			if (validate(planYearPopup, 30)) {

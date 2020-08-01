@@ -92,7 +92,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
 
   @vppPlanDetailsAARP05 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - To click Back to all plans from Top and bottom of the plan deatils page and verify redirection back to the VPP-Summary page AARP site
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - To click Back to all plans from Top and bottom of the plan deatils page and verify redirection back to the VPP-Summary page AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -112,7 +112,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00004 |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppPlanDetailsAARP06 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
-  Scenario Outline: Plan type: <plantype> - Verify OLE Landing from VPP Plan Details
+  Scenario Outline: <TCID> - Plan type: <plantype> - Verify OLE Landing from VPP Plan Details
     Given the user lands on AARP medicare acquisition site page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -134,7 +134,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00009 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        |
 
   @vppPlanDetailsAARP07 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Provider Search  in AARP site from Plan Details page
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -153,7 +153,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00010 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppPlanDetailsAARP08 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
@@ -201,7 +201,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00011 |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @vppPlanDetailsAARP09 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -221,7 +221,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00015 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
   @vppPlanDetailsAARP10 @vppPlanDetailsAARPRun03
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - To verify links displayed in the global footer on plan details page for AARP site
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - To verify links displayed in the global footer on plan details page for AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -246,7 +246,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00016 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
