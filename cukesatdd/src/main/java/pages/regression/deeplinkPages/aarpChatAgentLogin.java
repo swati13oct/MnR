@@ -13,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.login.ConfirmSecurityQuestion;
 
 /**
  * @author pminhas
@@ -159,6 +158,7 @@ public class aarpChatAgentLogin extends UhcDriver {
 					}
 					//validateNew(agent);
 					try {
+						CommonUtility.waitForPageLoadNewForClick(driver, agent, 60);
 						agent.click(); 					
 						System.out.println("*** agent clicked ***");
 						agentstatusReady.click();
@@ -169,6 +169,7 @@ public class aarpChatAgentLogin extends UhcDriver {
 						System.out.println("*** agent not 1 clicked ***");
 						e1.printStackTrace();
 						System.out.println("*** agent not 2 clicked ***");
+						Assert.fail("Agent not set to ready state");
 					}
 					if (driver.getCurrentUrl().contains("ui/ad/v1/index.html")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());

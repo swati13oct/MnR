@@ -13,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class VPPTestHarnessPage extends UhcDriver {
 
@@ -56,7 +55,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='changes-submitted']//h3")
 	private WebElement countyModalDetails;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//input[@id='zipcode']")
@@ -239,7 +238,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@ng-click,'medsup')]")
 	private WebElement medsupCreateButton;
 
-	@FindBy(xpath = "//div[@id='Plan F']//h2")
+	@FindBy(xpath = "//div[@id='PlanF']//h2")
 	private WebElement medsupPlanF;
 
 	@FindBy(xpath = "//input[@id='vpp-zip-search']")

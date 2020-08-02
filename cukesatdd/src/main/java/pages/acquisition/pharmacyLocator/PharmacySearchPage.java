@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -117,12 +118,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		return true;
 	}
 
-	public void validateNoresultsZipcodeError() {
-		zipcodeField.sendKeys("11111");
-		searchbtn.click();
-		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
-	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
 		moveMouseToElement(mapToggleElement);
@@ -252,34 +247,34 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
-			String exp_noZipTxt="A ZIP code is required to locate a pharmacy. Please enter a ZIP code.";
+			String exp_noZipTxt="Please enter a ZIP code";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
 					pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt=noZipcode.getText();
 				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
-						exp_noZipTxt.equals(act_noZipTxt));
+						act_noZipTxt.contains(exp_noZipTxt));
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
-				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this: 12345.";
+				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt=invalidZip.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 							+ "Expected='"+exp_zipFormatErrTxt+"' | Actual='"+act_zipFormatErrTxt+"'",
-							exp_zipFormatErrTxt.equals(act_zipFormatErrTxt));
+							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
 				}
 			} else { //note: if format is right then going to assume u r getting this error
-				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria may help you get a different result.";
+				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
 						pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt=modifyZipErr.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 							+ "Expected='"+exp_noPlanForZipErrTxt+"' | Actual='"+act_noPlanForZipErrTxt+"'",
-							exp_noPlanForZipErrTxt.equals(act_noPlanForZipErrTxt));
+							act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt));
 				}
 			} //note: may need to code for a case when zip result in no result but don't know of a zip that has that behavior yet
 		}
@@ -440,7 +435,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefMailServPlan) {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
-			expUrl="health-plans/resources/mail-order-pharmacy.html";
+			expUrl="resources/mail-order-pharmacy.html";
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
@@ -504,7 +499,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		} else {
 			Assert.assertTrue("PROBLEM - haven't code to handle filter '"+pharmacyType+"' yet", false);
 		}
-		driver.findElement(By.xpath("//label[@id='"+labelId+"']")).click();
+		WebElement label = driver.findElement(By.xpath("//label[@id='"+labelId+"']"));
+		jsClickNew(label);
 
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);

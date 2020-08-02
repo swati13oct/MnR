@@ -2,6 +2,7 @@ package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,7 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override

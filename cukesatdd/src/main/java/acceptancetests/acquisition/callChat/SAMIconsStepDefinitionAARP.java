@@ -1,19 +1,17 @@
 package acceptancetests.acquisition.callChat;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  *Functionality:Global Header Footer 
@@ -70,10 +68,19 @@ public class SAMIconsStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
+		//aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
 
-	
+	@Then("^the user validates whether chat Agent is Available on AARP")
+	public void the_user_validates_whether_chat_Agent_is_visible_on_UHC() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.verifyChatpopup();
+		aquisitionhomepage.validateChatpopupconnect();	
+		
+	}
 
 	
 	

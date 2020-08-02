@@ -9,6 +9,7 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.planDocumentsAndResources.PlanDocumentsAndResourcesCommonConstants;
@@ -87,7 +88,7 @@ public class MyDocumentsStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
 		} else {
 			int forceTimeoutInMin=5;
-			System.out.println("Proceeed to Plan Documents & Resources page");
+			System.out.println("Proceed to Plan Documents & Resources page");
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage = accountHomePage.navigateDirectToPlanDocPage(memberType,planType, forceTimeoutInMin);
 			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
@@ -145,7 +146,7 @@ public class MyDocumentsStepDefinition {
 			myDocumentsPage.validateTableHeaders();	
 			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
 			myDocumentsPage.validateTableContent();
-			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table,currentNumberOfRowsInDocumentsTable="+currentNumberOfRowsInDocumentsTable+" previousNumberOfRowsInDocumentsTable="+ previousNumberOfRowsInDocumentsTable, currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
 		/**
@@ -179,6 +180,8 @@ public class MyDocumentsStepDefinition {
 			Assert.assertTrue("Problem with Number of Documents in the Documents Table. currentNumberOfRowsInDocumentsTable='"+currentNumberOfRowsInDocumentsTable+"' | previousNumberOfRowsInDocumentsTable='"+previousNumberOfRowsInDocumentsTable+"'", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
+		else
+			previousNumberOfRowsInDocumentsTable=0;
 	}
 	
 	/**

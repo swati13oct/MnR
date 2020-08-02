@@ -62,7 +62,7 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = new PharmaciesAndPrescriptionsPage(null);
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPageNew();
+			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPage();
 			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
 					pnpPg);
 		} else {

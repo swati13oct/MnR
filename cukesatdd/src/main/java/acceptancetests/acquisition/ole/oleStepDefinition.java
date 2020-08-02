@@ -1,5 +1,6 @@
 package acceptancetests.acquisition.ole;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -442,7 +443,7 @@ public class oleStepDefinition {
 			Assert.fail();
 		}
 	}
-
+	
 	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
@@ -2460,7 +2461,307 @@ public class oleStepDefinition {
 		} else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
+	/**
+	 * @param planName 
+	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in UHC VPP page are same
+	 */
+	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the VPP displayed$")
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
+		
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+		
+		
+		}
+	/**
+	 * @toDo: Select the provider in PCP and continue to OLE Flow
+	 */
+			
+	/**
+	 * @param planName 
+	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in AARP VPP page are same
+	 */
+	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed$")
+	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
+		public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_AARP_VPP_displayed(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
+		Assert.assertFalse("Providers not added",pcpproviders.isEmpty());
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppproviders = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("Provider")) {
+	            vppproviders = entry.getValue();
+	            }
+		}
+		System.out.println("List of providers in VPP page is: "+ vppproviders);
+		System.out.println("List of providers in PCP page is: "+ pcpproviders);
+		
+		if(vppproviders.size()<=9)
+		{
+			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+		}
+		else {
+			for(String provider : pcpproviders){
+				if(vppproviders.contains(provider)){
+			        continue;
+			    }else{
+			    	Assert.assertTrue("Providers does not match", false); 
+			    }
+			}
+		}
+	}
 	
-} 
+	@Then("^the user select providers from the PCP page and continue to OLE Flow$")
+	public void the_user_select_providers_from_the_PCP_page_and_continue_to_OLE_Flow() throws Throwable {		
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		PrimaryCarePhysicianPage pcpproviderPage = pcpPage.navigate_PCPPage();
+		
+			}
+	/**
+	 
+	 * To Validate the OLE WELCOME Page Marketing bullets 
+	 * @param planAttributes
+	 * @throws Throwable
+	 */
+	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
+	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		//String plantype = givenAttributesMap.get("Plan Type");
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
+		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
+		
+		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
+		
+		
+		pages.acquisition.ulayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		
+		
+	}
+	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
+	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = givenAttributesMap.get("PlanName");
+		//String plantype = givenAttributesMap.get("Plan Type");
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
+		Assert.assertFalse("Providers not added",marketingBullets.isEmpty());
+		
+		
+		
+		pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ArrayList<String> vppmarketingBullets = null;
+		Map<String, ArrayList<String>> map = planSummaryPage.getMap();
+		for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+	            String key = entry.getKey();
+	            if(key.equalsIgnoreCase("MarketingBullet")) {
+	            vppmarketingBullets = entry.getValue();
+	            }
+		}
+		
+		
+		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
+		
+		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		
+	}
+		
+	@Then("^the User validates RadioButtons option in SEP Page$")
+	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {		
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		boolean Validation_Status = specialElectionPeriodPage.validate_SEP_RadioButton_options();
+		if(Validation_Status){
+			System.out.println("Radio Button Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Radio Button Options in OLE SEP PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	@Then("^the user navigates to Medicare Information Page for DSNP$")
+	public void the_user_navigates_to_Medicare_Information_Page_for_DSNP() throws Throwable {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+			MedicareInformationPage medicalInformationPage = welcomePage.navigate_to_medicare_info_page();
+			if (medicalInformationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+						medicalInformationPage);
+				System.out.println("OLE medical Information Page is Displayed");
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("OLE Medical Information Page is NOT Displayed");
+		//}
+	}
+	@Then("^the user enters following required Medicare Informations for DSNP$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_pages_DSNP(DataTable planAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String CardType = MedicareDetailsMap.get("Card Type");
+		
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n)+"C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details_dsnp(MedicareDetailsMap);
+		if (isInformationFilled) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
+			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+	
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Medicare Info data entry failed");
+	}
+
+/*@Then("^the user validates the long term questions in Medicare Information Page$")
+public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page() throws Throwable {
+	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+	MedicareInformationPage medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm();
+}
+*/
+
+@Then("^the user validates the long term questions in Medicare Information Page$")
+public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
+		
+	List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm(MemberDetailsMap);
+		if (medicareInfoPageLongTerm) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Other Insurance Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE_NAME, MemberDetailsMap.get("Health Insurance Name"));
+			getLoginScenario().saveBean(oleCommonConstants.GROUP_NUMBER, MemberDetailsMap.get("Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.MEMBER_NUMBER, MemberDetailsMap.get("Member Number"));
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+}

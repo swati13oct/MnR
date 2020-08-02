@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.pharmacylocator;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.ordermaterials.OrderMaterialsPage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
-import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
@@ -21,6 +15,10 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Functionality: Pharmacy locator in New Member redesign
@@ -84,6 +82,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		String language = inputAttributesMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+				getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE,language);
 		pharmacySearchPage.searchesPharmacy(language);
 	}
 
@@ -209,7 +208,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String inputZip=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
-		pharmacySearchPage = pharmacySearchPage.validateErrorMessages(inputZip);
+		String language=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.LANGUAGE);
+		pharmacySearchPage = pharmacySearchPage.validateErrorMessages(inputZip,language);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 

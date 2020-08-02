@@ -3,12 +3,15 @@ package pages.regression.planDocumentsAndResources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
+
+import atdd.framework.MRScenario;
 
 public class PlanDocApiResponse {
 
@@ -154,6 +157,7 @@ public class PlanDocApiResponse {
 			return success;
 		} 
 		Assert.assertTrue("PROBLEM - docListArrayObj should not be null, may have trouble getting API response in this test run", docListArrayObj!=null);
+
 		for (int i=0; i<docListArrayObj.size(); i++) {
 			JSONObject eachObjDocListArray = (JSONObject) docListArrayObj.get(i);
 			Document docObj=buildDocumentObj(eachObjDocListArray);
@@ -169,137 +173,193 @@ public class PlanDocApiResponse {
 					String docCategory="Benefit Highlights";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("3")) {
-					//tbd if (!memberType.contains("PREEFF")) {
-						String docCategory="Summary of Benefits";
-						//note: Conversation with Keri where Feb copy deck is not available yet
-						//note: since PDP GROUP is showing the doc in Membership Materials, then use it as expected behavior
-						docObjMap.put(docCategory, docObj);
-						if (docObj.getLanguage().equals("en_us")) {
+					String docCategory="Summary of Benefits";
+					//note: Conversation with Keri where Feb copy deck is not available yet
+					//note: since PDP GROUP is showing the doc in Membership Materials, then use it as expected behavior
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
 							planMatl_en_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
 								memMatl_en_curYr_docList.add(docObjMap);
-						} else if (docObj.getLanguage().equals("es")) {
+						}
+					} else if (docObj.getLanguage().equals("es")) {
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
 							planMatl_es_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
 								memMatl_es_curYr_docList.add(docObjMap);
-						} else if (docObj.getLanguage().equals("zh")) {
+						}
+					} else if (docObj.getLanguage().equals("zh")) {
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
 							planMatl_zh_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
-					//tbd }
+					}
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_curYr_docList))
+							annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_curYr_docList))
+							annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
+							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("8003")) {
 					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_curYr_docList))
+							annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_curYr_docList))
+							annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
+							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
-					//tbd if (planType.equals("MAPD") && memberType.contains("GROUP") && section.equals("Plan Materials"))
-					//tbd 	docCategory="Formulary/Drug List - Comprehensive";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_curYr_docList))
+							annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_curYr_docList))
+							annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
+							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7022")) {
 					String docCategory="Alternative Drug List";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2019")) {
 					String docCategory="Prior Authorization Criteria";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2020")) {
 					String docCategory="Step Therapy Criteria";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2021")) {
 					String docCategory="Formulary Additions";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2022")) {
 					String docCategory="Formulary Deletions";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("8006")) { 
 					String docCategory="Getting Started Guide";
@@ -307,333 +367,478 @@ public class PlanDocApiResponse {
 						docCategory="Quick Start Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6014")) {
 					String docCategory="Annual Notice of Changes";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_curYr_docList))
+							annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_curYr_docList))
+							annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
+							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1027")) {
 					String docCategory="Provider Directory";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_curYr_docList))
+							proPhmDir_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_curYr_docList))
+							proPhmDir_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_curYr_docList))
+							proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7025")) {
 					String docCategory="Vendor Information Sheet";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_curYr_docList))
+							proPhmDir_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_curYr_docList))
+							proPhmDir_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_curYr_docList))
+							proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1028") || docObj.getType().equals("1026")) {
 					String docCategory="Pharmacy Directory";
 					//String docCategory="Pharmacy Directory Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_curYr_docList))
+							proPhmDir_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_curYr_docList))
+							proPhmDir_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_curYr_docList))
+							proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7001")) {
 					String docCategory="UnitedHealth Passport Program";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("5002")) {
 					String docCategory="Plan Benefits Table";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("5006")) {
 					String docCategory="A Guide to Health Insurance for People with Medicare";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("4005")) {
 					String docCategory="Additional Drug Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_curYr_docList))
+							annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_curYr_docList))
+							annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
+							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("5009")) {
 					String docCategory="CDI Long Notice (CA Only)";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+								memMatl_en_curYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+								memMatl_es_curYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+								memMatl_zh_curYr_docList.add(docObjMap);
+						}
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
 					docObjMap2.put(docCategory2, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap2);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap2);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap2);
 					}
 				} else if (docObj.getType().equals("1021")) {
 					String docCategory="Schedule of benefits";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6011")) {
 					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7010")) {
 					String docCategory="Your Plan Getting Started";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1042")) {
-					String docCategory="Moving to your new plan";
+					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6016")) {
 					String docCategory="Plan Summary";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6017")) {
 					String docCategory="Plan Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
+							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
+							memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}					
 				//--------------	
-		    //note: for next year section
+				//note: for next year section
 			} else if (docObj.getYear().equals(nextYear)) {
 				if (docObj.getType().equals("6002")) {
 					String docCategory="Benefit Highlights";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("3")) {
 					String docCategory="Summary of Benefits";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
-							memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+								memMatl_en_nxtYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
-							memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+								memMatl_es_nxtYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
-							memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP")) {
+							if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+								memMatl_zh_nxtYr_docList.add(docObjMap);
+						}
 					}
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_nxtYr_docList))
+							annNotChgDoc_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_nxtYr_docList))
+							annNotChgDoc_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
+							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("8003")) {
 					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_nxtYr_docList))
+							annNotChgDoc_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_nxtYr_docList))
+							annNotChgDoc_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
+							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
-					//tbd if (planType.equals("MAPD") && memberType.contains("GROUP") && section.equals("Plan Materials"))
-					//tbd 	docCategory="Formulary/Drug List - Comprehensive";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_nxtYr_docList))
+							annNotChgDoc_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_nxtYr_docList))
+							annNotChgDoc_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
+							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 
 					}
 				} else if (docObj.getType().equals("7022")) {
 					String docCategory="Alternative Drug List";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2019")) {
 					String docCategory="Prior Authorization Criteria";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2020")) {
 					String docCategory="Step Therapy Criteria";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2021")) {
 					String docCategory="Formulary Additions";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2022")) {
 					String docCategory="Formulary Deletions";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("8006")) {
 					String docCategory="Getting Started Guide";
@@ -641,165 +846,243 @@ public class PlanDocApiResponse {
 						docCategory="Quick Start Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6014")) {
 					String docCategory="Annual Notice of Changes";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_nxtYr_docList))
+							annNotChgDoc_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_nxtYr_docList))
+							annNotChgDoc_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
+							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1027")) {
 					String docCategory="Provider Directory";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_nxtYr_docList))
+							proPhmDir_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_nxtYr_docList))
+							proPhmDir_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_nxtYr_docList))
+							proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1042")) {
-					String docCategory="Moving to your new plan";
+					String docCategory="Plan Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7025")) {
 					String docCategory="Vendor Information Sheet";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_nxtYr_docList))
+							proPhmDir_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_nxtYr_docList))
+							proPhmDir_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_nxtYr_docList))
+							proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1028") || docObj.getType().equals("1026")) {
 					String docCategory="Pharmacy Directory";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						proPhmDir_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_en_nxtYr_docList))
+							proPhmDir_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						proPhmDir_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_es_nxtYr_docList))
+							proPhmDir_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						proPhmDir_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, proPhmDir_zh_nxtYr_docList))
+							proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("4005")) {
 					String docCategory="Additional Drug Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_en_nxtYr_docList))
+							annNotChgDoc_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_es_nxtYr_docList))
+							annNotChgDoc_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
-						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
+							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("5009")) {
 					String docCategory="CDI Long Notice (CA Only)";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+								memMatl_en_nxtYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+								memMatl_es_nxtYr_docList.add(docObjMap);
+						}
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+							if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+								memMatl_zh_nxtYr_docList.add(docObjMap);
+						}
 					}
 					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
 					String docCategory2="Privacy Notice";
 					docObjMap2.put(docCategory2, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap2);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap2);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory2, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap2);
 					}
 				} else if (docObj.getType().equals("1021")) {
 					String docCategory="Schedule of benefits";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6011")) {
 					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7010")) {
 					String docCategory="Your Plan Getting Started";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6016")) {
 					String docCategory="Plan Summary";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("6017")) {
 					String docCategory="Plan Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				}
 			}
@@ -1243,6 +1526,22 @@ public class PlanDocApiResponse {
 
 	public void setNoteList(List<String> noteList) {
 		this.noteList = noteList;
+	}
+
+	public boolean isDuplicate(String docCategory, List<HashMap<String, Document>> planMatl_en_curYr_docList) {
+		boolean found=false;
+		for (HashMap<String, Document> h: planMatl_en_curYr_docList) {
+			Map.Entry<String, Document> entry = h.entrySet().iterator().next();
+			String key = entry.getKey();
+			if (key.equalsIgnoreCase(docCategory)) {
+				System.out.println("TEST - got a duplicate!");
+				found=true;
+				break;
+			}
+		}
+		if (!found)
+			System.out.println("TEST - got NO duplicate!");
+		return found;
 	}
 
 

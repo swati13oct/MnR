@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -24,14 +25,14 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
-import pages.regression.benefitandcoverage.ValueAddedServicepage;
-import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -108,59 +109,65 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 	@Then("^The user navigates to Benefits and Coverage page$")
-    public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+	public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-           //Sardar Start
-           BenefitsAndCoveragePage benefitsCoveragePage;
-           //Sardar End
+		//Sardar Start
+		BenefitsAndCoveragePage benefitsCoveragePage;
+		//Sardar End
 
-           System.out.println("***The user navigates to Benefits and Coverage page***");
-           List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-           Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-           for (int i = 0; i < memberAttributesRow.size(); i++) {
-                  memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-                               memberAttributesRow.get(i).getCells().get(1));
-           }
-           String plantype = memberAttributesMap.get("Plan Type");
-           Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-           List<String> desiredAttributes = new ArrayList<String>();
-           for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
-                  {
-                        String key = iterator.next();
-                        desiredAttributes.add(memberAttributesMap.get(key));
-                  }
-           }
+		System.out.println("***The user navigates to Benefits and Coverage page***");
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
 
-     //Sardar Start
-           if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-        	   TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-        	   benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
-           }else {
-        	   //Sardar end
-        	   AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-        	   //Sardar Start commented try catch and added "}" for End of else
-        	   //try {
-        	   //Thread.sleep(10000);
-        	   //} catch (InterruptedException e) {
-        	   // TODO Auto-generated catch block
-        	   //e.printStackTrace();
-        	   //}
-        	   benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
-           }
-           //Sardar End
-           if (benefitsCoveragePage != null) {
-        	   getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-           }
-           else
-
-           {
-        	   System.out.println("Benefits and Coverage page object is Null ");
-           }
+		//Sardar Start
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
+		}else {
+			//Sardar end
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			//Sardar Start commented try catch and added "}" for End of else
+			//try {
+			//Thread.sleep(10000);
+			//} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			//}
+			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+		}
+		//Sardar End
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		}
+		else
+		{
+			System.out.println("Benefits and Coverage page object is Null ");
+		}
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		benefitsCoveragePage.goToSpecificComboTab(planType, false);
 	}
 
 
 	@Then("^The user navigate to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		System.out.println("***The user navigates to Benefits and Coverage page***");
 		BenefitsAndCoveragePage benefitsCoveragePage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -172,6 +179,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			if (memberType.toUpperCase().contains("COMBO")) 
+				benefitsCoveragePage.goToSpecificComboTab(planType);
 		}
 		else
 
@@ -277,7 +286,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
-		System.out.println("***user navigates to Benefits coverage page***");
+		/*		System.out.println("***user navigates to Benefits coverage page***");
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
@@ -293,7 +302,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		{
 			System.out.println("Benefits and Coverage page object is Null ");
 		}
-
+*/
 	}
 
 
@@ -1861,7 +1870,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.MEMBERTYPE);
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String planType = (String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		planBenefitsCoverage.validateWaysToSaveSection(planType, memberType);
 
@@ -1976,7 +1985,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=1;
 		if(planType.equalsIgnoreCase("MA"))
 			planId=2;
-		if(planType.equalsIgnoreCase("MedSupp"))
+		if(planType.equalsIgnoreCase("MedSupp") || planType.equalsIgnoreCase("HIP"))
 			planId=3;
 		if(planType.equalsIgnoreCase("PDP"))
 			planId=4;

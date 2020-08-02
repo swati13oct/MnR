@@ -4,11 +4,6 @@
 package pages.regression.sso;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,11 +11,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.util.CommonUtility;
-import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
+import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
 
 /**
  * @author jkuma14

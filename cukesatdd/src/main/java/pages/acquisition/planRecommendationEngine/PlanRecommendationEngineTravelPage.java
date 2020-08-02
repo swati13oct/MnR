@@ -3,17 +3,13 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class PlanRecommendationEngineTravelPage extends UhcDriver {
 
@@ -28,7 +24,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
-	String page = "Care";
+	String page = "Travel";
 	
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
@@ -37,7 +33,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 
 // Special Needs Page Elements
 
-	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
+	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
 
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
@@ -87,24 +83,23 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			String currentPageUrl = driver.getCurrentUrl();	
 			currentPageUrl.contains("/plan-recommendation-engine.html/");
 			validate(planSelectorPageTilte);
-			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
-			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 4: Care Away From Home"));
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("24% Complete"));
+			desktopCommonUtils.currentPageValidation(page.toUpperCase());
 			validate(pageRequiredInfo);
-			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			validate(travelWithin);
-			Assert.assertTrue(travelWithin.getText().contains("within"));
+//			Assert.assertTrue(travelWithin.getText().contains("within"));
 			validate(travelAnotherpart, 30);
-			Assert.assertTrue(travelAnotherpart.getText().contains("another"));
+//			Assert.assertTrue(travelAnotherpart.getText().contains("another"));
 			validate(travelPrimary, 30);
-			Assert.assertTrue(travelPrimary.getText().contains("primary"));
+//			Assert.assertTrue(travelPrimary.getText().contains("primary"));
 			validate(travelNone, 30);
-			Assert.assertTrue(travelNone.getText().contains("None"));
+//			Assert.assertTrue(travelNone.getText().contains("None"));
 			previousBtn.click();
 			System.out.println("Validationg "+page+" page Previous button functionality");
-			desktopCommonUtils.previouspageValidation(page.toUpperCase());
+			desktopCommonUtils.previousPageValidation(page.toUpperCase());
 		}
 		
 // Splitting the input options and selecting it and Clicking on Continue Button 		
@@ -119,34 +114,32 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			}else {
 				if(options.isEmpty()){
 					continueBtn.click();
-					validate(errorMessage, 30);
-					Assert.assertTrue(errorMessage.getText().contains("No"));
+					desktopCommonUtils.desktopErrorValidation(page);
 				}else if(options.contains("None")) {
 					String snpoptions[] = options.split(",");
 					for(String option:snpoptions) {
 						travelpageFunctional(option);
 					}
 					continueBtn.click();
-					validate(errorMessage, 30);
-					Assert.assertTrue(errorMessage.getText().contains("Please"));
+					desktopCommonUtils.desktopErrorValidation(page);
 				}
 			}			
 		}
 		
 		
-//Special Needs Page Function Verification		
+//Care Away Page Function Verification		
 		
 		public void travelpageFunctional(String TravelType) {
 			System.out.println("SNP Option "+TravelType+ " Selection");
-			if (TravelType.equalsIgnoreCase("within")) {
+			if (TravelType.equalsIgnoreCase("withinUS")) {
 				validate(travelWithin);
 				travelWithin.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
-			}else if (TravelType.equalsIgnoreCase("another")) {
+			}else if (TravelType.equalsIgnoreCase("outsideUS")) {
 				validate(travelAnotherpart);
 				travelAnotherpart.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
-			}else if (TravelType.equalsIgnoreCase("primary")) {
+			}else if (TravelType.equalsIgnoreCase("regular")) {
 				validate(travelPrimary);
 				travelPrimary.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");

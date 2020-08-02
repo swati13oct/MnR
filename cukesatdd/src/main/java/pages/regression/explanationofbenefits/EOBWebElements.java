@@ -1,10 +1,12 @@
 package pages.regression.explanationofbenefits;
 
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
 
 public class EOBWebElements extends UhcDriver{
@@ -108,10 +110,11 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 
-	@FindBy(xpath = "//div[contains(@class,'learnmore') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Learn More About EOB')]")
+	@FindBy(xpath = "//div[(@id='medical-prescription-results' or @id='error-results') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Learn More About EOB')]")
 	protected WebElement rightRailLearnMoreHeader;
 
-	@FindBy(xpath = "//a[contains(text(),'How to read your monthly Medical Explanation of Benefits')]")
+	//tbd @FindBy(xpath = "//a[contains(text(),'How to read your monthly Medical Explanation of Benefits')]")
+	@FindBy(xpath = "//div[(@id='medical-prescription-results' or @id='error-results') and not(contains(@class,'ng-hide'))]//a[contains(text(),'How to read your monthly Explanation of Benefits')]")
 	protected WebElement rightRailLearnMoreLink;
 
 	@FindBy(xpath = "//h1")
@@ -120,7 +123,6 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
 	protected WebElement eobHeader;
 	
-	//tbd @FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/h2[contains(text(),'Explanation of Benefits (EOB) Search')]")
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/h2[not(contains(@class,'ng-hide')) and contains(text(),'Explanation of Benefits (EOB) Search')]")
 	protected WebElement eobSubSectionHeader;
 	
@@ -197,7 +199,10 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath=".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li")
 	protected List<WebElement> listOfEobs;
-	
+
+	@FindBy(xpath=".//table//tbody//tr")
+	protected List<WebElement> listOfEobs_dream;
+
 	@FindBy(xpath="//div[contains(@class,'eobErrors')]//p[contains(text(),'no EOBs available')]")
 	protected WebElement noEobErr;
 	

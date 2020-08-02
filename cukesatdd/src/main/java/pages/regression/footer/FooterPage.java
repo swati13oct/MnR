@@ -303,6 +303,9 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
+	
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,' Medicare Advantage Plan')]") 
+	protected WebElement comboTab_MA;
 
 
 	public FooterPage (WebDriver driver) {
@@ -453,7 +456,8 @@ public class FooterPage extends UhcDriver {
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
-			accountprofile.click();
+			JavascriptExecutor ex=(JavascriptExecutor)driver;
+			ex.executeScript("arguments[0].click()", accountprofile);
 			footerCheckModelPopup(driver);
 			if (accountSettingOptionShip.isDisplayed()) {
 				System.out.println("Profile and Preferance link is displayed");
@@ -562,7 +566,7 @@ public class FooterPage extends UhcDriver {
 	}
 	
 	public void validateSignInPgFooter() {
-		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 5);
+		CommonUtility.waitForPageLoad(driver, unauthFooter_lastUpdate, 10);
 		Assert.assertTrue("PROBLEM - unable to locate footer section on sign-in page", footerValidate(unauthFooter_section));
 		
 		String testLinkName="ABOUT US";
@@ -747,11 +751,11 @@ public class FooterPage extends UhcDriver {
 					needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, 
 					needHelp_PlanSupport_wkDayHrs, null);
 			
-			validateSection="Need Help - Chat With Us";
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat Section", footerValidate(needHelp_ChatSection));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat img", footerValidate(needHelp_Chat_img));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat section header", footerValidate(needHelp_Chat_header));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat txt", footerValidate(needHelp_Chat_txt));
+			//validateSection="Need Help - Chat With Us";
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat Section", footerValidate(needHelp_ChatSection));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat img", footerValidate(needHelp_Chat_img));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat section header", footerValidate(needHelp_Chat_header));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat txt", footerValidate(needHelp_Chat_txt));
 		}
 		System.out.println("Main window = "+driver.getTitle());
 		return driver.getCurrentUrl();
@@ -824,10 +828,15 @@ public class FooterPage extends UhcDriver {
 					footerValidate(comboTab_PDP));
 			targetTab=comboTab_PDP;
 		} else if (planType.equalsIgnoreCase("SSUP")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", 
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SSUP", 
 					footerValidate(comboTab_SSUP));
 			targetTab=comboTab_SSUP;
-		} else {
+		} 
+		else if (planType.equalsIgnoreCase("MA")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", 
+					footerValidate(comboTab_MA));
+			targetTab=comboTab_MA;
+		}else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover "
 					+ "planType '"+planType+"' for combo testing", false);
 		}

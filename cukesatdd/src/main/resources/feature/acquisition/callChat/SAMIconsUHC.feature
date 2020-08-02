@@ -13,7 +13,8 @@ Then the user validates whether chat icon is visible on UHC
 Examples: 
 | pagename |
 |/|
-|medicare-plans.html|
+|plan-recommendation-engine.html|
+#|medicare-plans.html|
 |health-plans/estimate-drug-costs.html|
 
 @headerUHC_2 @samChatCall_1
