@@ -1,7 +1,7 @@
 Feature: MVP - Call to Action
   I am a user of the M&R Portal with Rx benefits I must have access to PnP notifications and call to action cards
 
-  @CallToAction @F436319 @US2498888   
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify PnP notifications displayed only on PnP page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -18,7 +18,7 @@ Feature: MVP - Call to Action
       | FID     | planType | memberType             |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
-  @CallToAction @F436319 @US2498888   
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify persist of PnP notifications until user log out
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -34,7 +34,7 @@ Feature: MVP - Call to Action
       | FID     | planType | memberType             |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
-  @CallToAction @F436319 @US2498888   
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for each call to action.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -52,7 +52,7 @@ Feature: MVP - Call to Action
     Then user validates an image for Order Prescription Call To Action
     Then user validates a title for Order Prescription Call To Action
     Then user validates a description for Order Prescription Call To Action
-    Then user view Drug Cost Summary To Action
+    Then user view Drug Cost Summary Call To Action
     Then user validates an image for Drug Cost Summary Call To Action
     Then user validates a title for Drug Cost Summary Call To Action
     Then user validates a description for Drug Cost Summary Call To Action
@@ -61,9 +61,9 @@ Feature: MVP - Call to Action
       | FID     | planType | memberType             |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
-  @CallToAction @F436319 @US2498888   
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of each call to action tile on P&P page
-  Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -76,7 +76,7 @@ Feature: MVP - Call to Action
       | FID     | planType | memberType             |
       | F436319 | MAPD     | AARP_Individual_PnP_rx |
 
-  @CallToAction @F436319 @US2498888   
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of each call to action tile on P&P page for SEIB User
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -91,46 +91,109 @@ Feature: MVP - Call to Action
       | FID     | planType | memberType       |
       | F436319 | MAPD     | AARP_SEIB_PnP_rx |
 
-  @CallToAction @F479445 @US2752085   
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify indidiviual user redirected to DET Rally page when click Drug Lookup Call to Action.
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    When user clicks on Drug Lookup Call To Action
-    Then user will be directed to the Drug Estimator tool developed by Rally
-
-    Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
-
-  @CallToAction @F479445 @US2752085    
+  #@CallToAction @F479445 @US2752085
+  #Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify indidiviual user redirected to DET Rally page when click Drug Lookup Call to Action.
+  # Given login with following details logins in the member portal and validate elements
+  #  | Plan Type   | <planType>   |
+  # | Member Type | <memberType> |
+  # When user navigates to the pharmacies and prescriptions page from testharness page
+  #When user clicks on Drug Lookup Call To Action
+  #then user will be directed to the Drug Estimator tool developed by Rally
+  # Examples:
+  #  | FID     | planType | memberType             |
+  # | F436319 | MAPD     | AARP_Individual_PnP_rx |
+  @CallToAction @F479445 @US2752085 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify group user redirected to DET Rally page when click Drug Lookup Call to Action.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When user clicks on Drug Lookup Call To Action
-    Then user will be directed to the Drug Estimator tool developed by Rally
+    Then user view Find and Price a Medication Call To Action
+    Then user will not see a leaving this site icon for Find and Price a Medication CTA
+    When user clicks on Find and Price a Medication Call To Action
+    Then user will be directed to the Drug Estimator tool developed by Rally in the same window
 
     Examples: 
-      | FID     | planType | memberType        |
-      | F436319 | MAPD     | AARP_Group_PnP_rx |
+      | FID     | planType | memberType              |
+      | F479445 | MAPD     | Rally_Individual_Pnp_rx |
 
-  @CallToAction @F479445 @US2752083    
+  @CallToAction @F479445 @US2752083 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user redirected to Choose a plan year page when click on Pharmacy Locator call to action
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
     Then user will be directed to the Choose a plan year page
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType              |
+      | F479445 | MAPD     | Rally_Individual_Pnp_rx |
 
-  @CallToAction @F436319 @US2498945   
+  @CallToAction @F479445 @US2752088 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify user ability to select a plan year in order to reach the correct pharmacy locator tool.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Pharmacy Locator Call To Action
+    And user clicks on Pharmacy Locator call to action displayed second within that section
+    Then user will be directed to the Choose a plan year page
+    Then user will be see a back button on Choose a plan year page
+    Then user will see the page header on Choose a plan year page
+    Then user will see descriptive content on Choose a plan year page
+    Then user will see a twenty twenty call to action on Choose a plan year page
+    Then user will see a twenty twentyone call to action on Choose a plan year page
+    Then user will see the FAQ section on Choose a plan year page
+    Then user will see the Need Help section on Choose a plan year page
+    Then user will see the More Info section on Choose a plan year page
+    Then user will see the global footer on Choose a plan year page
+
+    Examples: 
+      | FID     | planType | memberType              |
+      | F479445 | MAPD     | Rally_Individual_Pnp_rx |
+
+  @CallToAction @F479445 @US2752088 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify user directed to the new pharmacy search tool being developed by Rally for 2020 plan year
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Pharmacy Locator Call To Action
+    And user clicks on Pharmacy Locator call to action displayed second within that section
+    Then user will be directed to the Choose a plan year page
+    Then user will see a twenty twenty call to action on Choose a plan year page
+    Then user will NOT see the External link icon for twenty twenty call to action on Choose a plan year page
+    When user click on the twenty twenty call to action on Choose a plan year page
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window
+    When user click on the back button on Pharmacy Locator tool built by Rally
+    Then user will be directed to the Choose a plan year page
+
+    Examples: 
+      | FID     | planType | memberType              |
+      | F479445 | MAPD     | Rally_Individual_Pnp_rx |
+
+  @CallToAction @F479445 @US2752088 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify user directed to the new pharmacy search tool being developed by Rally for 2020 plan year
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Pharmacy Locator Call To Action
+    And user clicks on Pharmacy Locator call to action displayed second within that section
+    Then user will be directed to the Choose a plan year page
+    Then user will see a twenty twentyone call to action on Choose a plan year page
+    When user click on the twenty twentyone call to action on Choose a plan year page
+    Then user will be directed to the legacy Pharmacy Locator tool in the same browser window
+    When user click on the back button on the legacy Pharmacy Locator tool page
+    Then user will be directed to the Choose a plan year page
+
+    Examples: 
+      | FID     | planType | memberType              |
+      | F479445 | MAPD     | Rally_Individual_Pnp_rx |
+
+  @CallToAction @F436319 @US2498945 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user redirected to OptumRx manage prescriptions page on new tab when click on Refill Home Delivery Call to Action
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -140,42 +203,19 @@ Feature: MVP - Call to Action
     Then user will SSO to OptumRx manage prescriptions page on new tab
 
     Examples: 
-      | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | FID     | planType | memberType              |
+      | F436319 | MAPD     | Rally_Individual_Pnp_rx |
 
-  @CallToAction @F436319 @US2498865   
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify LIS one to four  user dont see Drug Cost Summary call to action
+  @CallToAction @F479445 @US2752084 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user have access to the ANOC page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user will NOT see the Drug Cost Summary call to action
+    Then user view ANOC Call To Action
+    When user clicks on ANOC Call To Action
+    Then user will be redirected to the ANOC page in a new tab
 
     Examples: 
       | FID     | planType | memberType       |
-      | F436319 | MAPD     | AARP_LIS1_PnP_rx |
-
-  @CallToAction @F436319 @US2498865    
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify LIS 0 user see Drug Cost Summary call to action
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user will see the Drug Cost Summary call to action
-
-    Examples: 
-      | FID     | planType | memberType       |
-      | F436319 | MAPD     | AARP_LIS0_PnP_rx |
-
-  @CallToAction @F436319 @US2498865  
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify LIS 0 user when click on Drug Cost Summary call to action will be redirected to OptumRx benefits information page on new tab
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    When user clicks on Drug Cost Summary call to action
-    Then user will SSO to OptumRx benefits information page on new tab
-
-    Examples: 
-      | FID     | planType | memberType       |
-      | F436319 | MAPD     | AARP_LIS0_PnP_rx |
+      | F479445 | MAPD     | AARP_LIS0_PnP_rx |

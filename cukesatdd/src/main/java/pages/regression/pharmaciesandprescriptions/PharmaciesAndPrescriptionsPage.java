@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
@@ -439,8 +440,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F436319
 	public void validatePharmacies_PrescriptionNotification() {
-		
-		Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification,30));
+
+		Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
 	}
 
 	// F436319
@@ -467,11 +468,21 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		DrugCostSummaryCallToActnBtn.click();
 	}
 
-	// F436319
-	/*public void validateNavigationToDrugCostSummaryPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Whats New Page Header element",
-				pnpValidate(DrugCostSummaryPageHeader));
-	}*/
+	public void validateFindAndPriceExternalLinkIconNotDisplayed() {
+		Assert.assertTrue("PROBLEM - Find and Price a Medication External Link Icon is displayed",
+				pnpValidate(FindAndPriceExternalIcon));
+	}
+
+	public void validateDrugEstimatorToolPageOpensInSameWindow() {
+		int size = countNoOfNewWindowTab();
+		if (size == 0) {
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is displayed in same browser window", true);
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page header is displayed successfully",
+					pnpValidate(DrugEstimatorToolPageHeader, 30));
+		} else {
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is not displayed in same browser window", false);
+		}
+	}
 
 	// F436319
 	public void closePharmacies_PrescriptionNotification() {
@@ -491,7 +502,33 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Drug Lookup
 	public void validateDrugLookupCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element",
-				validate(DrugLookupCallToActnBtn,30));
+				validate(DrugLookupCallToActnBtn, 30));
+	}
+
+	public void validateFindAndPriceAMedicationCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
+				validate(FindAndPriceCallToActnBtn, 30));
+	}
+
+	public void clickFindAndPriceAMedicationCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
+				validate(FindAndPriceCallToActnBtn, 30));
+		FindAndPriceCallToActnBtn.click();
+	}
+
+	public void validateANOCCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+				validate(ANOCCallToActnBtn, 30));
+	}
+
+	public void clickANOCCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+				validate(ANOCCallToActnBtn, 30));
+		ANOCCallToActnBtn.click();
+	}
+
+	public void validateANOCPageHeader() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC Page Header element", validate(ANOCCallToActnBtn, 30));
 	}
 
 	// F436319
@@ -569,14 +606,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F436319 Drug Cost Summary To Action
 	public void validateOrderPrescriptonCallToActionNOTDisplayedOnPnPPage() {
 		boolean isOrderPrescriptionCTA_NotDisplayed = pnpValidate(OrderPrescriptionCallToActnBtn);
-		System.out.println("isOrderPrescriptionCTA_NotDisplayed" + isOrderPrescriptionCTA_NotDisplayed);
 		Assert.assertFalse("PROBLEM - able to locate Order Prescription Call to action element",
 				pnpValidate(OrderPrescriptionCallToActnBtn));
 	}
-	
+
 	public void validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage() {
 		boolean isDrugCostSummaryCTA_NotDisplayed = pnpValidate(DrugCostSummaryCallToActnBtn);
-		System.out.println("isDrugCostSummaryCTA_NotDisplayed" + isDrugCostSummaryCTA_NotDisplayed);
 		Assert.assertFalse("PROBLEM - able to locate Drug Cost Summary Call to action element",
 				pnpValidate(DrugCostSummaryCallToActnBtn));
 	}
@@ -604,28 +639,32 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup Call to Action at First Position",
 				DrugLookupCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
-	
+
 	public void validateSecondPositionOfPharmacyLocatorCallToActionOnPnPPage(String position) {
 		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Second Position",
 				PharmacyLocatorCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
-	
+
 	public void validateThirdPositionOfOrderPrescriptionCallToActionOnPnPPage(String position) {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Second Position",
+		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Third Position",
 				OrderPrescriptionCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
-	
+
 	public void validateFourthPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Second Position",
+		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Fourth Position",
 				DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
-	
-	// F436319
-	public void clickOnDrugLookupCallToAction() {
-		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup Call to Action element",
-				pnpValidate(DrugLookupCallToActnBtn));
-		DrugLookupCallToActnBtn.click();
 
+	public void validateThirdPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
+		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Third Position",
+				DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
+	}
+
+	// F436319
+	public void clickOnFindAndPriceAMedicationCallToAction() {
+		Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication Call to Action element",
+				pnpValidate(FindAndPriceCallToActnBtn));
+		FindAndPriceCallToActnBtn.click();
 	}
 
 	// F436319
@@ -650,13 +689,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to Action element",
 				pnpValidate(PharmacyLocatorCallToActnBtn));
 		PharmacyLocatorCallToActnBtn.click();
-
 	}
-	
+
 	// F436319
 	public void validateNavigationToChoosePlanYearPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Tool Header element",
-				pnpValidate(PharmacyLocatorToolHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Choose a plan year page Header element",
+				pnpValidate(HeaderOnChoosePlanYearPage));
 
 	}
 
@@ -685,7 +723,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		driver.switchTo().window(pnpPageHandle);
 
 	}
-	
+
 	public void validateNavigationToOptumRxManagePrescriptionOnNewTab() {
 
 		Set handles = driver.getWindowHandles();
@@ -696,13 +734,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Manage Prescription Page Header element",
-					pnpValidate(OptumRxManagePrescriptionHeader));
+					pnpValidate(OptumRxManagePrescriptionHeader, 30));
 		}
 		driver.close();
 		driver.switchTo().window(pnpPageHandle);
 
 	}
-	
+
 	public void validateNavigationToOptumRxBenefitsInformationOnNewTab() {
 
 		Set handles = driver.getWindowHandles();
@@ -713,10 +751,102 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Benefits Information Page Header element",
-					pnpValidate(OptumRxBenefitsInformationHeader));
+					pnpValidate(OptumRxBenefitsInformationHeader, 30));
 		}
 		driver.close();
 		driver.switchTo().window(pnpPageHandle);
 
 	}
+
+	public void validateBackButtonOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Back Button element on Choose a plan year page",
+				pnpValidate(BackButtonOnChoosePlanYearPage));
+	}
+
+	public void validateHeaderOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Header element on Choose a plan year page",
+				pnpValidate(HeaderOnChoosePlanYearPage));
+	}
+
+	public void validateDescriptiveContentOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Descriptive Content element on Choose a plan year page",
+				pnpValidate(DescriptiveContentOnChoosePlanYearPage));
+	}
+
+	public void validateTwentyTwentyCTAOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2020 CTA element on Choose a plan year page",
+				pnpValidate(PharmacyLocator2020CTA));
+	}
+
+	public void clickTwentyTwentyCTAOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2020 CTA element on Choose a plan year page",
+				pnpValidate(PharmacyLocator2020CTA));
+		PharmacyLocator2020CTA.click();
+	}
+
+	public void validateTwentyTwentyOneCTAOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(PharmacyLocator2021CTA));
+	}
+
+	public void clickTwentyTwentyOneCTAOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(PharmacyLocator2021CTA));
+		PharmacyLocator2021CTA.click();
+	}
+
+	public void validateExternalIconNotDisplayedForTwentyTwentyCTAOnChoosePlanYearPage() {
+		Assert.assertFalse("PROBLEM - able to locate External Icon for 2020 CTA element on Choose a plan year page",
+				pnpValidate(PharmacyLocator2020CTAExternalIcon));
+	}
+
+	public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow() {
+		int size = countNoOfNewWindowTab();
+		if (size == 0) {
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is displayed in same browser window", true);
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page header is displayed successfully",
+					pnpValidate(HeaderOnPharmacyLocatorPageByRally, 30));
+		} else {
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is not displayed in same browser window", false);
+		}
+	}
+
+	public void validateLegacyPharmacyLocatortoolInSameBrowserWindow() {
+		int size = countNoOfNewWindowTab();
+		if (size == 0) {
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is displayed in same browser window", true);
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page header is displayed successfully",
+					pnpValidate(HeaderLegacyPharmacyLocatorPage, 30));
+		} else {
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is not displayed in same browser window",
+					false);
+		}
+	}
+
+	public void clickBackButtonOnPharmacyLocatortoolbuiltbyRally() {
+		Assert.assertFalse("PROBLEM - unable to locate Back Button On Pharmacy Locator Page By Rally ",
+				pnpValidate(BackButtonOnPharmacyLocatorPageByRally));
+		BackButtonOnPharmacyLocatorPageByRally.click();
+	}
+
+	public void validateFAQSectionOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(FAQSectionOnChoosePlanYearPage));
+	}
+
+	public void validateNeedHelpSectionOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(NeedHelpSectionOnChoosePlanYearPage));
+	}
+
+	public void validateMoreInfoSectionOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(MoreInformationSectionOnChoosePlanYearPage));
+	}
+
+	public void validateGlobalFooterOnChoosePlanYearPage() {
+		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+				pnpValidate(GlobalFooterSectionOnChoosePlanYearPage));
+	}
+
 }

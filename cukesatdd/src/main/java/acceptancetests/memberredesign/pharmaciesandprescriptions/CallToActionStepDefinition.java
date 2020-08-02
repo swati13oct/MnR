@@ -20,6 +20,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mysql.jdbc.PacketTooBigException;
+
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -79,7 +81,7 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotification();
-		}
+	}
 
 	@Then("^user must see that message at the top of the PnP page$")
 	public void user_must_see_that_message_at_the_top_of_the_pnp_page() throws Throwable {
@@ -93,7 +95,7 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnPharmacyLocatorCallToAction();
-		//pnpPg.validateNavigationToChoosePlanYearPage();
+		// pnpPg.validateNavigationToChoosePlanYearPage();
 	}
 
 	@Then("^PnP notification will not be displayed on Pharmacy Locator page$")
@@ -102,7 +104,7 @@ public class CallToActionStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages();
 	}
-	
+
 	@When("^user navigate to Home page$")
 	public void user_navigate_to_home_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -123,14 +125,14 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.navigateBackToPnPPage();
-}
+	}
 
 	@Then("^PnP notification will only appear on the main PnP page$")
 	public void pnp_notification_will_only_appear_on_the_main_pnp_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotification();
-}
+	}
 
 	@When("^user click the cross icon to close the notification$")
 	public void user_click_the_cross_icon_to_close_the_notification() throws Throwable {
@@ -153,7 +155,7 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnPharmacyLocatorCallToAction();
-		//pnpPg.validateNavigationToChoosePlanYearPage();
+		// pnpPg.validateNavigationToChoosePlanYearPage();
 		pnpPg.navigateBackToPnPPage();
 		pnpPg.validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage();
 	}
@@ -164,6 +166,15 @@ public class CallToActionStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDrugLookupCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user view Find and Price a Medication Call To Action$")
+	public void user_view_Find_and_Price_a_Medication_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateFindAndPriceAMedicationCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 	}
 
 	@Then("^user validates an image for Drug Lookup Call To Action$")
@@ -256,14 +267,14 @@ public class CallToActionStepDefinition {
 
 	}
 
-	@Then("^user view Drug Cost Summary To Action$")
-	public void user_view_Drug_Cost_Summary_To_Action() throws Throwable {
+	@Then("^user view Drug Cost Summary Call To Action$")
+	public void user_view_Drug_Cost_Summary_Call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateDrugCostSummaryCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@Then("^user validates an image for Drug Cost Summary Call To Action$")
 	public void user_validates_an_image_for_Drug_Cost_Summary_Call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -315,7 +326,8 @@ public class CallToActionStepDefinition {
 	}
 
 	@Then("^user validates the Drug Cost Summary text content displayed fourth within that section$")
-	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_fourth_within_that_section() throws Throwable {
+	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_fourth_within_that_section()
+			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateFourthPositionOfDrugCostSummaryCallToActionOnPnPPage("4");
@@ -323,10 +335,11 @@ public class CallToActionStepDefinition {
 	}
 
 	@Then("^user validates the Drug Cost Summary text content displayed third within that section$")
-	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_third_within_that_section() throws Throwable {
+	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_third_within_that_section()
+			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		//pnpPg.validatePositionOfCallToActionOnPnPPage(2, "Whats");
+		pnpPg.validateThirdPositionOfDrugCostSummaryCallToActionOnPnPPage("3");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -339,18 +352,30 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user clicks on Drug Lookup Call To Action$")
-	public void user_clicks_on_Drug_Lookup_call_to_action() throws Throwable {
+	@When("^user clicks on Find and Price a Medication Call To Action$")
+	public void user_clicks_on_Find_and_Price_a_Medication_call_to_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickOnDrugLookupCallToAction();
+		pnpPg.clickOnFindAndPriceAMedicationCallToAction();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user will be directed to the Drug Estimator tool developed by Rally$")
-	public void user_will_be_directed_to_the_Drug_Estimator_tool_developed_by_Rally() throws Throwable {
-		// New Change goes here
-	}	
+	@Then("^user will not see a leaving this site icon for Find and Price a Medication CTA$")
+	public void user_will_not_see_a_leaving_this_site_icon_for_Find_and_Price_a_Medication_CTA() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateFindAndPriceExternalLinkIconNotDisplayed();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will be directed to the Drug Estimator tool developed by Rally in the same window$")
+	public void user_will_be_directed_to_the_Drug_Estimator_tool_developed_by_Rally_in_the_same_window()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDrugEstimatorToolPageOpensInSameWindow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 	@Then("^user navigates to Optum Rx Drug pricing Page using Single Sign On SSO on new tab$")
 	public void user_navigates_to_Optum_Rx_Drug_pricing_Page_using_Single_Sign_On_SSO_on_new_tab() throws Throwable {
@@ -386,7 +411,7 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-	
+
 	@Then("^user will SSO to OptumRx manage prescriptions page on new tab$")
 	public void user_will_SSO_to_OptumRx_manage_prescriptions_page_on_new_tab() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -395,7 +420,7 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-	
+
 	@Then("^user will SSO to OptumRx benefits information page on new tab$")
 	public void user_will_SSO_to_OptumRx_benefits_information_page_on_new_tab() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -419,30 +444,188 @@ public class CallToActionStepDefinition {
 
 	}
 
-	@When("^user clicks on Whats New call to action$")
-	public void user_clicks_on_Whats_New_call_to_action() throws Throwable {
+	@Then("^user will NOT see the Drug Cost Summary call to action$")
+	public void user_will_NOT_see_the_Drug_Cost_Summary_call_to_action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user clicks on Drug Cost Summary call to action$")
+	public void user_clicks_on_Drug_Cost_Summary_call_to_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickDrugCostSummaryCallToAction();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 	}
 
-	/*@Then("^user will be directed to the Whats New page$")
-	public void user_navigates_to_the_Whats_New_Page() throws Throwable {
+	/*******************************************************************************/
+
+	@Then("^user will be see a back button on Choose a plan year page$")
+	public void user_will_be_see_a_back_button_on_Choose_a_plan_year_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNavigationToDrugCostSummaryPage();
+		pnpPg.validateBackButtonOnChoosePlanYearPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
-	}*/
-
-	/*@Then("^user validates the header on Whats New Page$")
-	public void user_validates_the_header_on_Whats_New_Page() throws Throwable {
+	@Then("^user will see the page header on Choose a plan year page$")
+	public void user_will_see_the_page_header_on_Choose_a_plan_year_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages();
+		pnpPg.validateHeaderOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see descriptive content on Choose a plan year page$")
+	public void user_will_see_descriptive_content_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDescriptiveContentOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see a twenty twenty call to action on Choose a plan year page$")
+	public void user_will_see_a_twenty_twenty_call_to_action_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateTwentyTwentyCTAOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see a twenty twentyone call to action on Choose a plan year page$")
+	public void user_will_see_a_twenty_twentyone_call_to_action_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateTwentyTwentyOneCTAOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see the FAQ section on Choose a plan year page$")
+	public void user_will_see_the_FAQ_section_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateFAQSectionOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see the Need Help section on Choose a plan year page$")
+	public void user_will_see_the_Need_Help_section_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateNeedHelpSectionOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see the More Info section on Choose a plan year page$")
+	public void user_will_see_the_More_Info_section_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateMoreInfoSectionOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see the global footer on Choose a plan year page$")
+	public void user_will_see_the_global_footer_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateGlobalFooterOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user click on the twenty twenty call to action on Choose a plan year page$")
+	public void user_click_on_the_twenty_twenty_call_to_action_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickTwentyTwentyCTAOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user click on the twenty twentyone call to action on Choose a plan year page$")
+	public void user_click_on_the_twenty_twentyone_call_to_action_on_Choose_a_plan_year_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickTwentyTwentyOneCTAOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will NOT see the External link icon for twenty twenty call to action on Choose a plan year page$")
+	public void user_will_NOT_see_the_External_link_icon_for_twenty_twenty_call_to_action_on_Choose_a_plan_year_page()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateExternalIconNotDisplayedForTwentyTwentyCTAOnChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window$")
+	public void user_will_be_directed_to_the_new_Pharmacy_Locator_tool_built_by_Rally_in_the_same_browser_window()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user click on the back button on Pharmacy Locator tool built by Rally$")
+	public void user_click_on_the_back_button_on_Pharmacy_Locator_tool_built_by_Rally() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickBackButtonOnPharmacyLocatortoolbuiltbyRally();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will be directed to the legacy Pharmacy Locator tool in the same browser window$")
+	public void user_will_be_directed_to_the_legacy_Pharmacy_Locator_tool_in_the_same_browser_window()
+			throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateLegacyPharmacyLocatortoolInSameBrowserWindow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user clicks on Find and Price a Medication Call To Action$")
+	public void user_clicks_on_Find_and_Price_a_Medication_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickFindAndPriceAMedicationCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user click on the back button on the legacy Pharmacy Locator tool page$")
+	public void user_click_on_the_back_button_on_the_legacy_Pharmacy_Locator_tool_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickFindAndPriceAMedicationCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user view ANOC Call To Action$")
+	public void user_view_ANOC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateANOCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user clicks on ANOC Call To Action$")
+	public void user_clicks_on_ANOC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickANOCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will be redirected to the ANOC page in a new tab$")
+	public void user_will_be_redirected_to_the_ANOC_page_in_a_new_tab() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateANOCCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
-	}*/
+	}
 
 }
