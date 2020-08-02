@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class OrderConfirmationWebElements extends UhcDriver {
+public class CheckOutSummaryWebElements extends UhcDriver {
 
-	public OrderConfirmationWebElements(WebDriver driver) {
+	public CheckOutSummaryWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -83,7 +83,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath="//h4[@data-testid='os__payment__title']/..")
 	protected WebElement paymentSection;
 	
-	@FindBy(xpath="//*[@data-testid='os__payment__ccImage']")
+	@FindBy(xpath="//*[@data-testid='os__payment__ccImage']/img")
 	protected WebElement paymentCreditCardImage;
 	
 	@FindBy(xpath="//*[@data-testid='os__payment__ccNumber']")
@@ -134,10 +134,13 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	protected WebElement medicationShipments;
 	
 	@FindBy(xpath="//*[@data-testid='os__rx__prescriptionsContainer']")
-	protected List<WebElement> listOfRefillMedication;
+	protected List<WebElement> listOfPrescriptions;
 	
 	@FindBy(xpath="//*[@data-testid='section__header' and contains(text(),'Medications')]/..")
-	protected WebElement refillMedicationSection;
+	protected WebElement medicationsSection;
+	
+	@FindBy(xpath="//*[@data-testid='rx__price']")
+	protected List<WebElement> listOfPrice;
 	
 	
 	
