@@ -9,7 +9,6 @@ Feature: Technical Touchpoints
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user has a Walgreens drug
-    And that drug has one or more refills remaining
     When user selects the Get Pricing button on that drug
     Then user views the Prices page for that medication
     Then user sees the Manage at Walgreens CTA
@@ -30,7 +29,6 @@ Feature: Technical Touchpoints
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     When user has a Walgreens drug
-    And that drug has one or more refills remaining
     When user selects the Get Pricing button on that drug
     Then user views the Prices page for that medication
     Then user sees the Manage at Walgreens CTA
@@ -50,7 +48,6 @@ Feature: Technical Touchpoints
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    And that drug has one or more refills remaining
     When user selects the Get Pricing button on that drug
     Then user views the Prices page for that medication
     Then user sees the Transfer to Walgreens cta option for each Walgreens store that appears in the search results
@@ -60,5 +57,5 @@ Feature: Technical Touchpoints
 
     Examples:
       | FID     | planType | memberType                      |
-      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
+      | F482427 | MAPD     | AARP_Individual_PnP_rx_not_walgreen |
 
