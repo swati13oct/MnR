@@ -271,12 +271,13 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.selectPlanYear();
 	}
 
-	@When("^user clicks on continue button in AARP$")
-	public void user_clicks_on_continue_button_in_AARP() {
+	@When("^user clicks on continue button in Zip Entry Page in AARP$")
+	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		zipCodePlanYearPage.clickContinueBtn();
-		zipCodePlanYearPage.verifyLoadScreen();
+		DrugSummaryPage drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
+		//zipCodePlanYearPage.verifyLoadScreen();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^user should be navigated to Review drug cost estimate page in AARP$")
@@ -450,24 +451,62 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user validates Drug Costs section$")
 	public void the_user_validates_Drug_Costs_section() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugCosts();
 	}
 
 	@Then("^the user validates Your Drugs sections$")
 	public void the_user_validates_Your_Drugs_sections() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateYourDrugs();
 	}
 
 	@Then("^the user validates Monthly Drug Costs by Stage Section$")
 	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Section() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateMonthlyCostStage();
 	}
 
 	@Then("^the user validates Important information section$")
 	public void the_user_validates_Important_information_section() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateImportantInfo();
 	}
 
 	@Then("^the user validates Disclaimers section$")
 	public void the_user_validates_Disclaimers_section() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDisclaimerAccordian();
 	}
+
+	@Then("^the user validates link to Drug Summary Page$")
+	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugSummaryPage drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+
+	}
+
 	
+	@Then("^the user selects View Drug details for following plantype and PlanName$")
+	public void the_user_selects_View_Drug_details_for_following_plantype_and_PlanName(DataTable attributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		DrugDetailsPage drugDetailsPage = drugSummaryPage.clickViewDrugDetailsForPlan(plantype,planName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {

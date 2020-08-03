@@ -1759,17 +1759,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public GetStartedPage navigateToDCERedesignFromVPPPlanCard(String plantype, String planName){
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			WebElement dceLink = driver.findElement
-					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::a[contains(text(),'Enter drug information')]"));
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card ng-scope')]//descendant::a[contains(@class,'add-drug')]"));
 			if(validate(dceLink))
 				dceLink.click();
 
 		}else{
 			WebElement dceLink = driver.findElement
-					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
 			dceLink.click();
 		}	
-		CommonUtility.waitForPageLoad(driver, step1, 30);
-		validateNew(step1);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;

@@ -61,8 +61,16 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		}
 	}
 
-	public void clickContinueBtn() {
+	public DrugSummaryPage clickContinueBtn() {
+		validateNew(continueBtn);
 		continueBtn.click();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		if(validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		}
+		Assert.fail("DCE - Drug Summary Page is not displayed");
+		return null;	
 	}
 	
 	public void selectPlanYear() {

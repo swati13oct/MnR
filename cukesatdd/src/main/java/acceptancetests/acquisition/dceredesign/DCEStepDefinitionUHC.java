@@ -57,13 +57,13 @@ public class DCEStepDefinitionUHC {
 
 	}
 
-	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
+/*	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
 	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1) throws Throwable {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 
-	}
+	}*/
 
 	@Then("^load screen should be displayed$")
 	public void load_screen_should_be_displayed() {

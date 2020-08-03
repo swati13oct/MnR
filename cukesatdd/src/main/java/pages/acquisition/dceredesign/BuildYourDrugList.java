@@ -126,8 +126,8 @@ public class BuildYourDrugList extends UhcDriver {
 		EnterDrugNameTxt.sendKeys(partialDrug);
 		validateNew(AutoCompleteList);
 		System.out.println("Drug Auto complete lis COunt : "+AutoCompleteitems.size());
-		if(validateNew(AutoCompleteList) && AutoCompleteitems.size()==5) {
-			System.out.println("Drug Autocomplete Validated - 5 drugs displayed for autocomplete");
+		if(validateNew(AutoCompleteList) && AutoCompleteitems.size()<=5) {
+			System.out.println("Drug Autocomplete Validated - less than or 5 drugs displayed for autocomplete");
 		}
 		else
 			Assert.fail("Drug Autocomplete NOT Validated");		
@@ -198,7 +198,7 @@ public class BuildYourDrugList extends UhcDriver {
 			return new DrugDetailsPage(driver);
 		}
 		else {
-			Assert.fail("Zip Code Entry Page is NOT Displayed");
+			Assert.fail("Drug Details is NOT Displayed");
 			return null;
 		}		
 	}

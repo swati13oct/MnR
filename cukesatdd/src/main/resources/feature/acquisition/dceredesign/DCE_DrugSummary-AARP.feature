@@ -16,7 +16,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user verify the drug summary page
@@ -41,7 +41,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     Then the user validates whether call icon is visible on AARP
@@ -67,7 +67,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user should be able to see Medicare Advantage plan by default
@@ -93,7 +93,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user should be able to see Medicare Advantage plan by default

@@ -27,16 +27,19 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
 	public WebElement TellUsABoutCloseBtn;
 
-	@FindBy(xpath = "//*[contains(@for,'radio-1-input')]//div[contains(@class,'label')]")
-	public WebElement BrandDrugRadio;
-	
-	@FindBy(xpath = "//*[contains(@for,'radio-2-input')]//div[contains(@class,'label')]")
-	public WebElement GenericDrugRadio;
-	
+	/*
+	 * @FindBy(xpath =
+	 * "//*[contains(@for,'radio-1-input')]//div[contains(@class,'label')]") public
+	 * WebElement BrandDrugRadio;
+	 * 
+	 * @FindBy(xpath =
+	 * "//*[contains(@for,'radio-2-input')]//div[contains(@class,'label')]") public
+	 * WebElement GenericDrugRadio;
+	 */	
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//button[@type= 'submit' and contains(@dtmname, 'add to drug list')]")
+	@FindBy(xpath = "//button[@type= 'submit' and contains(@attr.dtmname, 'confirm')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -73,9 +76,14 @@ public class TellUsAboutDrug extends UhcDriver {
 	}
 
 	public void validateBrandDrugPage(String BrandDrugName, String genericDrugName) {
+		BrandDrugName = BrandDrugName.toLowerCase();
+		genericDrugName = genericDrugName.toLowerCase();
+		
+		WebElement BrandDrugRadio = driver.findElement(By.xpath("//uhc-radio[contains(@dtmname, '"+BrandDrugName+"')]//input"));
+		WebElement GenericDrugRadio = driver.findElement(By.xpath("//uhc-radio[contains(@dtmname, '"+genericDrugName+"')]//input"));
 		validateNew(BrandDrugRadio);
 		validateNew(GenericDrugRadio);
-		if(BrandDrugRadio.getText().contains(BrandDrugName) && BrandDrugRadio.isEnabled() && GenericDrugRadio.getText().contains(genericDrugName)) {
+		if(BrandDrugRadio.isEnabled() && !GenericDrugRadio.isEnabled()) {
 			System.out.println("Brand Name and Generic Drug Options are displayed and Brand Name Option is Selected by default");
 			
 		}

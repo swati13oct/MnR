@@ -3,6 +3,7 @@ package pages.acquisition.dceredesign;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class DrugSummaryPage extends UhcDriver {
 
-	public DrugSummaryPage(WebDriver driver) throws InterruptedException {
+	public DrugSummaryPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -70,20 +72,23 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
 	public WebElement planTypeHeading;
-	
-	@FindBy(xpath = "//label[@class='uhc-filter column column-4']//span[contains(text(),'Medicare Prescription Drug Plans')]")
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
+	public WebElement mapdPlanToggle;
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
 	public WebElement pdpPlanToggle;
 	
-	@FindBy(xpath = "//label[@class='uhc-filter column column-4']//span[contains(text(),'Medicare Special Needs Plans')]")
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
 	public WebElement snpPlanToggle;
 
 	@Override
-	public void openAndValidate() throws InterruptedException {
+	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
 		
 	}
 	
-	public DrugSummaryPage validateDrugSummaryPage() throws InterruptedException {
+	public DrugSummaryPage validateDrugSummaryPage(){
 		if(validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) &&	validateNew(pharmacyLink) &&
 		validateNew(planCardHeader)&&
 		validateNew(avgMonthlyDrugCost) &&
@@ -103,14 +108,15 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
-	public DrugSummaryPage verifyDefaultPlanType() throws InterruptedException {
+	public DrugSummaryPage verifyDefaultPlanType(){
+		validateNew(planTypeHeading);
 		if(planTypeHeading.getText().contains("Medicare Advantage Plans")) {
 			return new DrugSummaryPage(driver);
 		}
 		return null;
 	}
 	
-	public DrugSummaryPage verifyPDPPlanToggle() throws InterruptedException {
+	public DrugSummaryPage verifyPDPPlanToggle(){
 		pdpPlanToggle.click();
 		if(planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
 			return new DrugSummaryPage(driver);
@@ -118,7 +124,7 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
-	public DrugSummaryPage verifySNPPlanToggle() throws InterruptedException {
+	public DrugSummaryPage verifySNPPlanToggle(){
 		snpPlanToggle.click();
 		if(planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
 			return new DrugSummaryPage(driver);
@@ -183,6 +189,54 @@ public class DrugSummaryPage extends UhcDriver {
 		validate(clickSnpplan);
 		JavascriptExecutor je = (JavascriptExecutor)driver;
 		je.executeScript("arguments[0].click()", clickSnpplan);
+	}
+
+	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	public WebElement DrugDetails_ChangePharmacyLnk;
+
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	public WebElement DrugDetails_DrugCostsHeading;
+
+	public DrugDetailsPage clickViewDrugDetailsForPlan(String plantype, String planName) {
+		if (plantype.equalsIgnoreCase("MAPD")) {
+			validateNew(mapdPlanToggle);
+			jsClickNew(mapdPlanToggle);
+			System.out.println("MAPD Plan Toggle Clicked");
+			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugDetailsLinkforPlan);
+			jsClickNew(DrugDetailsLinkforPlan);
+			System.out.println("View Drug Details Clicked for MAPD Plan : "+planName);
+
+		}
+		else if(plantype.equalsIgnoreCase("PDP")){
+			validateNew(pdpPlanToggle);
+			jsClickNew(pdpPlanToggle);
+			System.out.println("PDP Plan Toggle Clicked");
+			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugDetailsLinkforPlan);
+			jsClickNew(DrugDetailsLinkforPlan);
+			System.out.println("View Drug Details Clicked for PDP Plan : "+planName);
+
+		}
+		else{
+			validateNew(snpPlanToggle);
+			jsClickNew(snpPlanToggle);
+			System.out.println("SNP Plan Toggle Clicked");
+			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugDetailsLinkforPlan);
+			jsClickNew(DrugDetailsLinkforPlan);
+			System.out.println("View Drug Details Clicked for SNP Plan : "+planName);
+
+		}
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+		{
+			return new DrugDetailsPage(driver);
+		}
+		else {
+			Assert.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}		
 	}
 	
 	
