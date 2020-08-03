@@ -589,7 +589,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 			if (IPerceptionsFrame.isEmpty()) {
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					System.out.println(e.getMessage());
 				}
