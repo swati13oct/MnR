@@ -1,27 +1,14 @@
 package acceptancetests.acquisition.providersearch;
 
-import gherkin.formatter.model.DataTableRow;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-import pages.acquisition.uhcretiree.DrugLookUpPage;
-import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -30,6 +17,12 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 
 
 /**
@@ -164,6 +157,17 @@ public class ProviderSearchStepDefinitionAARP {
 
 		}
 	}
+	
+	@When("^user selects a Hospitals and retuns to VPP page in ulayer$")
+	public void user_selects_Hospitals_and_return_vpp_page_ulayer() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
 			
 			
 	/**
@@ -186,6 +190,28 @@ public class ProviderSearchStepDefinitionAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
+	
+	/**
+	 * @toDo:Verify provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
+	public void verify_provider_covered_ulayer(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyproviderName(planName);
+	}
+	
 	
 	
 	/**
@@ -336,5 +362,66 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
+	
+	
+	@Then("^User store the information provided from rally to vpp page in Ulayer$")
+	public void user_store_the_information_provided_from_rally_to_vpp_page_in_Ulayer(DataTable givenAttributes) {
+	
+	List<DataTableRow> givenAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+
+	String planName = givenAttributesMap.get("PlanName");
+
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+	/*ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	plansummaryPage.setStringList(providers);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	
+	//Adding Line for Marketing bullet points
+	VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
+	plansummaryPage1.setStringList(vppmarketingBullets);
+	Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+	// Line End for Marketing bullet points
+	*/
+	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	System.out.println("List of Providers in OLE page is: " + providers);
+	ArrayList<String> vppmarketingBullets =plansummaryPage.validate_marketing_details(planName);
+	Assert.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    map.put("Provider", providers);
+    map.put("MarketingBullet", vppmarketingBullets);
+    plansummaryPage.setMap(map);
+    
+
+
+	}
+		
+
+/**
+* @toDo:user user selects a Multiple providers
+*/
+@When("^user selects a multiple providers and retuns to VPP page in Ulayer$")
+public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_Ulayer() {
+{
+	ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+			.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+	VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
+	Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+}
+}
 
 }		

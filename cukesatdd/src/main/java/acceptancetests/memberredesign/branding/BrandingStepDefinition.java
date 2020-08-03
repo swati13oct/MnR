@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -55,19 +56,18 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
      }
 		
-	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline") || (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
-	//String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
-	//Thread.sleep(3000);
+	
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		Thread.sleep(3000);
-	//accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
+	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
+	Thread.sleep(3000);
+	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
-	System.out.println("Skipping the validation of logo on dashboard page (stage) due to issues with identification of logo object");
-
+	
 	}
 	
-	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || ((MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness))) || (MRScenario.environment.equalsIgnoreCase("offline-stage")))
 	{
 		
 		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
@@ -80,7 +80,7 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 	}
 	    else 
 	    {
-			System.out.println("Not verifying anything as the environment is not set to team-h or Stage, update the step definition please");
+			System.out.println("Not verifying anything as the environment is not set to prod, offline, team-h or Stage test harness, update the step definition please");
 		}
 	
 }
@@ -96,22 +96,19 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
 	
-	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline") || (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 
-//	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
-//	String cologoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard CoLogo");
-	Thread.sleep(3000);
+	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
+	String cologoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard CoLogo");
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		Thread.sleep(3000);
-//	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
-//	accountHomePage.validateCoLogoImagePresent(cologoToBeDisplayedOnDashboard);
-	System.out.println("Skipping the validation of logo and cologo on dashboard page (stage) due to issues with identification of logo object");
+	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
+	accountHomePage.validateCoLogoImagePresent(cologoToBeDisplayedOnDashboard);
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	
 	}
 	
-	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || ((MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness))) || (MRScenario.environment.equalsIgnoreCase("offline-stage")))
 	{
 		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
 		String cologoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page CoLogo");
@@ -134,18 +131,26 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 }
 
 @Then("^user clicks on benefits and coverage tab on home page or test harness page$")
-public void userClicksOnBenefitAndCoveragePage() throws Throwable {
-	
-	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+public void userClicksOnBenefitAndCoveragePage(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) 
+	{
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+     }
+	String PlanType = memberAttributesMap.get("PlanType");
+	if ((MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline"))
 	{
 	
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 	Thread.sleep(9000);
-	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
+	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage(PlanType);
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
-	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)) || MRScenario.environment.equalsIgnoreCase("offline-stage"))
 	{
 		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -156,7 +161,7 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	
 	else 
     {
-		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage");
+		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage or offline stage or prod or offline");
 	}
 	
 	
@@ -193,12 +198,12 @@ public void verifyCorrectCoLogoDisplayedOnSecondaryPage(DataTable givenAttribute
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
-
+	
 	String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
 	String cologoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page CoLogo");
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(15000);
+	
 	benefitsCoveragePage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 	benefitsCoveragePage.validateCoLogoImagePresent(cologoToBeDisplayedOnSecondaryPage);
 }

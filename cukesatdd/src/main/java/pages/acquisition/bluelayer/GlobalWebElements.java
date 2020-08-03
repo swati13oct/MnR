@@ -67,7 +67,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	 public static WebElement visitorprofileicon;
 	
-	@FindBy(id = "hsid-submit")
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
 	public static WebElement signIn;
 
 	@FindBy(id = "gfn_lnk_row2_1")
@@ -77,7 +77,7 @@ public class GlobalWebElements extends UhcDriver {
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
 	//@FindBy(id = "gfn_lnk_row2_3")
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Supplement')]")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_4")

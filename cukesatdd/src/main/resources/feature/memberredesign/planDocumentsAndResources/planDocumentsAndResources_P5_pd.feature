@@ -53,7 +53,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09--085 | 15129      | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | 09-085 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | false    | false    | false    |
       | 10-086 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@active_mapd @devRegression
@@ -85,10 +85,14 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 18-094 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false | false | false    | false    | false    | false    | false    | false    |
 
-	@active_ship @devRegression
+	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 19-095 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false    | false    | false    | false    | false    | false    | 
+
+	@active_ship @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 20-119 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false    | false    | false    | false    | false    | false    | 
   
   

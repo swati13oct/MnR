@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -72,7 +73,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		checkModelPopup(driver, 3);
 		validateFieldsOnBenefitsAndCoveragePage();
 	}
 
@@ -283,7 +284,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		LookUpDrugsButton.click();
 		sleepBySec(40);
 		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs2.get(0));
+		if(tabs2.size() == (2)) {
+			
+			driver.switchTo().window(tabs2.get(0));
+		}
+		else if(tabs2.size()==(3))  
+		{
+			driver.switchTo().window(tabs2.get(1));
+		}
+		
 
 	}
 
@@ -399,7 +408,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				Assert.assertTrue("The element" + element.getText() + "should display", true);
 				System.out.println(element.getText());
 			} else {
-				Assert.fail();
+				Assert.fail("Not getting expected drug cost drop down options. Expected to see AND/OR of the followings: Standard Retail Pharmacy / Preferred Mail Service Pharmacy / Preferred Retail Pharmacy");
 			}
 		}
 	}
@@ -651,13 +660,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
 			Assert.assertTrue("Hospital Visits field text was changed or not found" ,HospitalVisits.getText().contains("HOSPITAL CARE"));
 
+			scrollElementToCenterScreen(OutpatientSurgeryCenterValue);
 			if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 				Assert.fail("Problem>>>>>>>>>>>>>.Outpatient Surgery Center Value is not displaying<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			}
+			scrollElementToCenterScreen(OfficVisitsValue);
 			if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
 				System.out.println(">>>>>>>>>>Office Visits value is not displaying<<<<<<<<<<<<<<<<<<<<");
 				Assert.fail();
 			}
+			
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-900)", "");
+			System.out.println(">>>>>scrolled up for verifying jump link section and checks respective sections<<<<<<<<<<<<<");
 		}
 	}
 
@@ -673,6 +688,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Header-Ambulance Header", AmbulanceHeader);
 		validateWithValue("Header-Hospital Visits", HospitalVisits);
 		validateWithValue("Header-Office Visits", OfficeVisits);
+		scrollElementToCenterScreen(OfficeVisits);
 		validateWithValue("Header-Outpatient Surgery Center", OutpatientSurgeryCenter);
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertTrue(OutpatientSurgeryCenter.getText().contains("OUTPATIENT HOSPITAL SERVICES"));
@@ -681,6 +697,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertEquals(AmbulanceHeader.getText(), "AMBULANCE");
 		System.out.println(EmergencyHeader.getText());
 		Assert.assertEquals(EmergencyHeader.getText(), "EMERGENCY CARE");
+		
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 			System.out.println(">>>>>>>>>>Outpatient Surgery Center Value is blank<<<<<<<<<<<<<<<<<<<<");
 			Assert.fail();
@@ -864,7 +881,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,3000)", "");
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {
@@ -901,17 +918,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void contactUslinkShip() {
 		sleepBySec(30);
 		validateNew(contactUslink,0);
-		/*contactUslink.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Title is " + getTitle());
-		driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-*/
-		//Assert.assertTrue(getTitle().equalsIgnoreCase("Contact"));
 	}
 
 	public void valiadateCatastrophicCoverageValue(String copayType) {
@@ -938,34 +944,20 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				System.out.println(">>>>>>>>>>PDF visible<<<<<<<: "+pdfnames);
 			}
 			Assert.assertTrue("PROBLEM - not getting expected number of PDFs.  Expected='"+a.length+"' | Actual='"+pdfs.size()+"'",a.length==pdfs.size());
-			//tbd if(a.length==pdfs.size())
-			//tbd {
-				for (int i=0;i<pdfs.size();i++)
-				{  
-					String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
-					Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
-					//tbd if(StringUtils.isNotEmpty(pdf1[0]))
-					//tbd {
-						System.out.println(pdf1[0]);
-						System.out.println(a[i]);
-						if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
-							checkflag = true;
-						}
-						else {
-							checkflag=false;
-							break;
-						}
-						//tbd }
-						//tbd else
-						//tbd {
-						//tbd Assert.fail();
-						//tbd }
+			for (int i=0;i<pdfs.size();i++)
+			{  
+				String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
+				Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
+				System.out.println(pdf1[0]);
+				System.out.println(a[i]);
+				if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
+					checkflag = true;
 				}
-			//tbd }
-			//tbd else
-				//tbd {
-				//tbd 	Assert.fail();
-				//tbd }
+				else {
+					checkflag=false;
+					break;
+				}
+			}
 		}
 		else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL"))
 		{
@@ -1088,7 +1080,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+					//System.out.println("PDF text : "+PDFText);
 					Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
@@ -1123,7 +1115,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		driver.get(originalUrl);
-		//tbd navigateToBenefitsPg(plantype);		
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("landing URL is ="+driver.getCurrentUrl());
 		sleepBySec(10);
@@ -1138,7 +1129,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		sleepBySec(20);
-		//tbd navigateToBenefitsPg(plantype);
 		driver.get(originalUrl);
 	}
 
@@ -1187,12 +1177,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		int j = 0;
 		List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/th"));
 		List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/td[1]"));
-		//tbd WebElement tabletext  = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[i]/td[j]/div"));
 
-		for( i = 0 ; i<rows.size();i++)
-		{
-			for ( j = 0 ; j<cols.size();j++)
-			{
+		for( i = 0 ; i<rows.size();i++)	{
+			for ( j = 0 ; j<cols.size();j++) {
 				System.out.println(driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr["+i+"]/td["+j+"]/div")).getText());
 			}
 		}
@@ -1251,23 +1238,54 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
+		System.out.println("Actual logo's source on Secondary page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);          
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page main logo assert condition is passed");              
-	}
+		System.out.println("Secondary page main logo assert condition for image source is passed");  
+		
+		System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+        System.out.println("Now checking that image naturalWidth is not zero , which identifies that image is actually displayed on page");
+			        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", logoImage);
+			        if (!ImagePresent)
+			        {
+			         System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			         System.out.println("naturalWidth is not greater than zero , logo image was not displayed.");
+			         Assert.fail("naturalWidth is not greater than zero , logo image was not displayed.");
+			        }
+			        else
+			        {
+			        	System.out.println("naturalWidth of logo is "+logoImage.getAttribute("naturalWidth"));
+			            System.out.println("naturalWidth is not zero , Logo image was displayed.");
+			         }
 
+	}
+	
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
+		System.out.println("Actual cologo's source on secondary page is   " + cologo_src
 				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page co logo assert condition is passed");
+		System.out.println("Secondary page co logo assert condition for image source is passed");
+		System.out.println("Now checking that co-image naturalwidth is not zero , which identifies that image is actually displayed on page");
+		System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", cologoImage);
+        if (!ImagePresent)
+        {
+         System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+         System.out.println("naturalwidth is zero , co-logo image was not displayed.");
+         Assert.fail("naturalwidth is zero , co-logo image was not displayed.");
+        }
+        else
+        {
+        	System.out.println("naturalwidth of cologo is : "+cologoImage.getAttribute("naturalWidth"));
+            System.out.println("naturalwidth is not zero , co-logo image was displayed.");
+            
+        }
 	}
-
+	
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {
 		validateWithValue("Paln name", planName2);
@@ -1491,11 +1509,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		jse.executeScript("window.scrollBy(0,-100)", "");
 
 		validateNew(OfficeVisits);
+		scrollElementToCenterScreen(OfficeVisits);
 		validateNew(pcpValue);
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
-		Assert.assertTrue("PROBLEM - unable to locate value for the element", !input.equals(""));
+		Assert.assertTrue("PROBLEM - unable to locate value for the element Primary care provider on 'OFFICE VISITS' tile", !input.equals(""));
 		System.out.println("PCP value to be validated: "+ input);
 
 		Pattern pattern = Pattern.compile("^\\d{1,4}\\.\\d{2}\\%$"); if
@@ -2051,12 +2070,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
 				getJmpLinkToPrimaryCareProvider().isDisplayed());
 		if (rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+			Assert.assertTrue("jmpLinkToOptionalServices(Riders) isn't displayed",
 					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
 
-		if (memberType.equalsIgnoreCase("Individual")) {
+		if (memberType.contains("Individual")) {
 			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
 			Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
 					getJmpLinkToPlanDocumentsAndResources().isDisplayed());
@@ -2163,7 +2182,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCNoDeductible() {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(!NoDeductible1Text.getText().contains("$")){
 				System.out.println("No $ Amount is displayed for Member with No Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
@@ -2186,7 +2205,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnCSingleDeductible(String deductibleAmount1) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1)){
+		if(validate(MedicalDeductibleCard1,0)){
 			if(Deductible1Text.getText().contains(deductibleAmount1)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" is displayed for Member with Single Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -2209,7 +2228,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean ValidateBnC_DualDeductible(String deductibleAmount1, String deductibleAmount2) {
 		sleepBySec(5);
 		boolean Validation_Flag = true;
-		if(validate(MedicalDeductibleCard1) && validate(MedicalDeductibleCard2) ){
+		if(validate(MedicalDeductibleCard1,0) && validate(MedicalDeductibleCard2,0) ){
 			if(Deductible1Text.getText().contains(deductibleAmount1) && Deductible2Text.getText().contains(deductibleAmount2)){
 				System.out.println("Expected $ Amount "+deductibleAmount1+" AND "+deductibleAmount2+" is displayed for Member with Dual Deductible");
 				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
@@ -3100,5 +3119,143 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(SearchProvider,0);
 		validateNew(StartSearch,0);
 	}
+
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 * @param flagNonCombo
+	 */
+	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		if (flagNonCombo)
+			goToSpecificComboTab(planType);
+		else {
+			try {
+				if (planType.equalsIgnoreCase("mapd")) {
+					if (noWaitValidate(comboTab_MAPD))
+						comboTab_MAPD.click();
+					else if (noWaitValidate(comboTab_MAPD_planDoc))
+						comboTab_MAPD_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ma")) {
+					if (noWaitValidate(comboTab_MA)) 
+						comboTab_MA.click();
+					else if (noWaitValidate(comboTab_MA_planDoc)) 
+						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("hip")) {
+					if (noWaitValidate(comboTab_SHIP_HIP)) 
+						comboTab_SHIP_HIP.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					if (noWaitValidate(comboTab_SHIP)) 
+						comboTab_SHIP.click();
+					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+						comboTab_SHIP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					if (noWaitValidate(comboTab_PDP))
+						comboTab_PDP.click();
+					else if (noWaitValidate(comboTab_PDP_planDoc))
+						comboTab_PDP_planDoc.click();
+				} else if (planType.equalsIgnoreCase("ssp") || planType.equalsIgnoreCase("ssup")) {
+					if (noWaitValidate(comboTab_SSP)) 
+						comboTab_SSP.click();
+					else if (noWaitValidate(comboTab_SSP_planDoc))
+						comboTab_SSP_planDoc.click();
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		sleepBySec(2);
+	}
+
+	/**
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
+	 * @param planType
+	 */
+	public void goToSpecificComboTab(String planType) {
+		//TODO: need to enhance it to handle multi plans of the same plan type, e.g. multiple ship plans each w/ different ship plan category name
+		try {
+			if (planType.toLowerCase().contains("mapd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", noWaitValidate(comboTab_MAPD) || noWaitValidate(comboTab_MAPD_planDoc));
+				if (noWaitValidate(comboTab_MAPD)) 
+					comboTab_MAPD.click();
+				else if (noWaitValidate(comboTab_MAPD_planDoc)) 
+					comboTab_MAPD_planDoc.click();
+			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", noWaitValidate(comboTab_MA) || noWaitValidate(comboTab_MA_planDoc));
+				if (noWaitValidate(comboTab_MA)) 
+					comboTab_MA.click();
+				else if (noWaitValidate(comboTab_MA_planDoc)) 
+					comboTab_MA_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship_hip")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP_HIP)) 
+					comboTab_SHIP_HIP.click();
+				else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+					comboTab_SHIP_HIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ship")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
+				if (noWaitValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+				else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+					comboTab_SHIP_planDoc.click();
+			} else if (planType.toLowerCase().contains("pdp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", noWaitValidate(comboTab_PDP) || noWaitValidate(comboTab_PDP_planDoc));
+				if (noWaitValidate(comboTab_PDP)) 
+					comboTab_PDP.click();
+				else if (noWaitValidate(comboTab_PDP_planDoc)) 
+					comboTab_PDP_planDoc.click();
+			} else if (planType.toLowerCase().contains("ssp") || planType.toLowerCase().contains("ssup")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", noWaitValidate(comboTab_SSP) || noWaitValidate(comboTab_SSP_planDoc));
+				if (noWaitValidate(comboTab_SSP))
+					comboTab_SSP.click();
+				else if (noWaitValidate(comboTab_SSP_planDoc))
+					comboTab_SSP_planDoc.click();
+			} else {
+				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
+	public boolean noWaitValidate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else
+				System.out.println("Element not found/not visible");
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+		}
+		return false;
+	}
+	
+	
+	public void navigateToSHIPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		CommonUtility.waitForPageLoad(driver, ShipTab, 20);
+		System.out.println("Now clicking on SHIP Plan Tab");
+		try {
+			ShipTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SHIP Plan Tab was not displayed");
+			Assert.fail("SHIP Plan Tab was not displayed");
+		}
+	}
+
+	public void navigateToSSUPTab() {
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now clicking on Group SSUP Plan Tab");
+		try {
+			SSUPTab.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			System.out.println("SSUP Plan Tab was not displayed");
+			Assert.fail("SSUP Plan Tab was not displayed");
+		}
+	}	
 }
 

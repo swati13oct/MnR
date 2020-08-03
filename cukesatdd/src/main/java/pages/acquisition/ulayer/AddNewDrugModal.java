@@ -1,7 +1,6 @@
 package pages.acquisition.ulayer;
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

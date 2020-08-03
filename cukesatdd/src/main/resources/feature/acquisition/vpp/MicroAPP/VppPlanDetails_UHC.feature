@@ -1,5 +1,5 @@
 @vppPlanDetailsUHC
-Feature: Vpp to plan Details UHC Scenarios
+Feature: 2.01.2-Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC01 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
@@ -151,7 +151,7 @@ Feature: Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC08 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
-    Given the user is on the uhcmedicaresolutions site landing page
+    Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
       | Zip Code    | <zipcode>     |
       | County      | <county>      |
@@ -240,7 +240,7 @@ Feature: Vpp to plan Details UHC Scenarios
       | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
   @vppPlanDetailsUHC10 @vppPlanDetailsUHCRun03
-  Scenario Outline: TCID - <TCID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
+  Scenario Outline: TID - <TID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |

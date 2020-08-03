@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -54,7 +53,7 @@ public class MultiCountyModalPage extends UhcDriver {
 		boolean ValidationFlag = true;
 		if(validate(MultiCOunty_CancelBtn)){
 			MultiCOunty_CancelBtn.click();
-			if(currentUrl().contains("health-plans.html#/zipcode") && ZipCodeTxtBx.getText().isEmpty()){
+			if(currentUrl().contains("health-plans.html#/plan-summary") && ZipCodeTxtBx.getText().isEmpty()){
 				ValidationFlag = (!ValidationFlag)?false:true;
 			}else{
 				System.out.println("Zip code entry page is not displayed with Zip code field blank");

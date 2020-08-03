@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.regression.login.LoginPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.SecurityQuestionsPage;
-import pages.regression.testharness.*;
+import pages.regression.login.LoginPage;
+import pages.regression.testharness.TestHarness;
 
 public class CommonStepDefinition {
 	@Autowired

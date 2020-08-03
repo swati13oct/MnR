@@ -1,14 +1,18 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import acceptancetests.util.CommonUtility;
 
 public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  {
 	
 	public PlanDocumentsAndResourcesNH(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 					planDocValidate(needHelp_contactUsLink));
 			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 			//note: handle combo tab
 			//note: if specific scenario target combo user then flag if no combo, else just select right plan and move on
 			if (memberType.toLowerCase().contains("combo")) { 

@@ -1,8 +1,6 @@
 package pages.dashboard_deprecated.member.ulayer;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 /**
  * 
@@ -15,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * Functionality : this page validates the Claim Summary page.

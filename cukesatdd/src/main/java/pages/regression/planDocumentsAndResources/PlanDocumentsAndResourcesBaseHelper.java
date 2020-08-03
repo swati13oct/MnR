@@ -20,6 +20,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public PlanDocumentsAndResourcesBaseHelper(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -138,7 +139,10 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("This test is for combo plans, select the tab accordingly");
 			goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
 			goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+		} else {
+			goToSpecificComboTab(planType, false);
 		}
+		
 		
 		checkModelPopup(driver, 5);
 		StopWatch pageLoad = new StopWatch();
@@ -166,8 +170,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		
-		
 	}
 	
 	public void refreshPage(String planType, String memberType, String origUrlBeforeClick) {
@@ -189,6 +191,8 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("This test is for combo plans, select the tab accordingly");
 			goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
 			goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+		} else {
+			goToSpecificComboTab(planType, false);
 		}
 		
 		checkModelPopup(driver, 5);
@@ -217,8 +221,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		
-		
 	}
 
 
@@ -232,15 +234,19 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		try {
 			if (planType.equalsIgnoreCase("mapd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", planDocValidate(comboTab_MAPD));
+				scrollElementToCenterScreen(comboTab_MAPD);
 				comboTab_MAPD.click();
 			} else if (planType.equalsIgnoreCase("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", planDocValidate(comboTab_SHIP));
+				scrollElementToCenterScreen(comboTab_SHIP);
 				comboTab_SHIP.click();
 			} else if (planType.equalsIgnoreCase("pdp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", planDocValidate(comboTab_PDP));
+				scrollElementToCenterScreen(comboTab_PDP);
 				comboTab_PDP.click();
 			} else if (planType.equalsIgnoreCase("ssp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", planDocValidate(comboTab_SSP));
+				scrollElementToCenterScreen(comboTab_SSP);
 				comboTab_SSP.click();
 			} else {
 				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
@@ -256,22 +262,31 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	 * @param flagNonCombo
 	 */
 	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		System.out.println("TEST - check to see if there is any combo tab to click");
 		if (flagNonCombo)
 			goToSpecificComboTab(planType);
 		else {
 			try {
 				if (planType.equalsIgnoreCase("mapd")) {
-					if (planDocValidate(comboTab_MAPD))
+					if (planDocValidate(comboTab_MAPD)) {
+						scrollElementToCenterScreen(comboTab_MAPD);
 						comboTab_MAPD.click();
+					}
 				} else if (planType.equalsIgnoreCase("ship")) {
-					if (planDocValidate(comboTab_SHIP)) 
+					if (planDocValidate(comboTab_SHIP)) {
+						scrollElementToCenterScreen(comboTab_SHIP);
 						comboTab_SHIP.click();
+					}
 				} else if (planType.equalsIgnoreCase("pdp")) {
-					if (planDocValidate(comboTab_PDP))
+					if (planDocValidate(comboTab_PDP)) {
+						scrollElementToCenterScreen(comboTab_PDP);
 						comboTab_PDP.click();
+					}
 				} else if (planType.equalsIgnoreCase("ssp")) {
-					if (planDocValidate(comboTab_SSP)) 
+					if (planDocValidate(comboTab_SSP)) {
+						scrollElementToCenterScreen(comboTab_SSP);
 						comboTab_SSP.click();
+					}
 				} 
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -311,9 +326,22 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 
 	}
 	
-	public void backToTopOfPage() {
+	public void backToTopOfPage(String planType, String memberType) {
 		//moveMouseToElement(pageHeader);
+		checkModelPopup(driver, 5);
+		if (!planDocValidate(backToTopLink)) {
+			String origUrlBeforeClick=driver.getCurrentUrl();
+			refreshPage(planType, memberType, origUrlBeforeClick);
+		}
+		CommonUtility.waitForPageLoad(driver, backToTopLink, 5);
 		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
+		if (memberType.toLowerCase().contains("combo")) { 
+			System.out.println("This test is for combo plans, select the tab accordingly");
+			goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
+			goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+		} else {
+			goToSpecificComboTab(planType, false);
+		}
 	}
 
 	/**
@@ -337,7 +365,6 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	public List<String> doNoteAndText(List<HashMap<String, Document>> inputList, List<String> noteList) {
 		String docs="";
 		for (HashMap<String, Document> item: inputList) {
-			//tbd noteList=doNoteAndText("    "+item.keySet(), noteList);
 			docs=docs+" "+item.keySet();
 		}
 		noteList=doNoteAndText("    "+docs, noteList);

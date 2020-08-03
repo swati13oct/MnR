@@ -1,6 +1,8 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,7 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 
 	public PlanDocumentsAndResourcesMD(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 		String section="My Documents";
 		String item="SEARCH DOCUMENTS";
 		WebElement lnkElement=myDocumentLink_MD;
-		String expectedUrl="/content/medicare/member/my-documents/overview.html";
+		String expectedUrl="/member/my-documents/overview.html";
 		
 		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
@@ -81,7 +84,7 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 			} catch (UnhandledAlertException ua) {
 				System.out.println("Got Alert error, let's try again");
 				driver.get(origUrl);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				sleepBySec(10);
 				validateLinkDest(testInputInfoMap, lnkElement);
 			}
