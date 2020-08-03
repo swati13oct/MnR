@@ -73,6 +73,10 @@ public class TellUsAboutDrug extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(TellUsABoutHeader);
 		validateNew(TellUsABoutCloseBtn);
+		validateNew(AddDrugBtn);
+		validateNew(supplyLengthDrpDwn);
+		validateNew(FrequentyDrpDwn);
+		validateNew(QuantityTxt);
 	}
 
 	public void validateBrandDrugPage(String BrandDrugName, String genericDrugName) {
