@@ -78,7 +78,7 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
 
   @regressionMember
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -111,7 +111,7 @@ Feature: 1.15 Member pre-effective functionality
       
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | 
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | tomwindsor1955 | 06/01/2020    | 
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | tomwindsor1955 | 06/01/2020    | 
   
   
   @regressionMember2

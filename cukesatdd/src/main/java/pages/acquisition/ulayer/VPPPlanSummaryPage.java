@@ -3423,30 +3423,30 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void handlePlanYearSelectionPopup(String planType) {
 		
 
-	      
 		try{
-	
+			
 			if (!(planType.equalsIgnoreCase("MS"))) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup, 30)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-				planYearPopupGoButton.click();
-					}
-				}
-			}
-		
-		else {
-			System.out.println("Popup is not present for AEP : ");
-		
+			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 			if(validate(CurrentYearPlans, 30)) {
 				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
-				CurrentYearPlans.click();
-			}
+				//CurrentYearPlans.click();
+				jsClickNew(CurrentYearPlans);
+					
+				}
+			}	
+			else {
 				
-	      }
+				if (validate(planYearPopup, 30)) {
+						if (validate(nextYearSelection)) {
+							nextYearSelection.click();
+							CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+							planYearPopupGoButton.click();
+							System.out.println("Popup is not present for AEP : ");
+						}
+				}
+					
+		      }
 		
 	}catch(Exception e) {
 			e.printStackTrace();

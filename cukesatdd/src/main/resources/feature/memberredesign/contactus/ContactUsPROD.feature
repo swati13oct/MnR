@@ -19,8 +19,8 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
    
     Examples:   
     | UID        | username | password | member            | planType      | techSupportTFN     | planSupportTFN    |
-	| TestCase1  | jkuma14  | Brock@02 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
-	| TestCase2  | jkuma14  | Brock@02 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
+	| TestCase1  | jkuma14  | Brock@03 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
+	| TestCase2  | jkuma14  | Brock@03 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCaseCombo2	
 @regressionMemberPROD1
@@ -38,8 +38,8 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
    
     Examples:   
     | UID        | username | password | member            | planType      | 
-	| TestCase3  | jkuma14  | Brock@02 | DKELLY27          | ComboPDPSSUP  |
-	| TestCase4  | jkuma14  | Brock@02 | OLGITA@68         | ComboPdpSHIP  |				
+	| TestCase3  | jkuma14  | Brock@03 | DKELLY27          | ComboPDPSSUP  |
+	| TestCase4  | jkuma14  | Brock@03 | OLGITA@68         | ComboPdpSHIP  |				
 
 #TestCasePCP3
  @regressionMemberPROD2
@@ -60,7 +60,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     | Plan Type       | <planType>       |
   Examples:   
     | UID        | username | password | member            | planType      |  techSupportTFN     | planSupportTFN    |
-	| TestCase3  | jkuma14  | Brock@02 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
+	| TestCase3  | jkuma14  | Brock@03 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
 
 #TestCaseSHIP4
   @regressionMemberPROD2
@@ -92,7 +92,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
 
     Examples: 
       | UID   | plantype | username | password | member        | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | callUsSHIPTFN     | generalQueTFN    | claimQueTFN |
-      | 15380 | PHIP     | jkuma14  | Brock@02 | vernajohnson19651  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
+      | 15380 | PHIP     | jkuma14  | Brock@03 | vernajohnson19651  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
 	  
 
 #TestCaseClickTOCallCancel5
@@ -111,7 +111,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
 
     Examples: 
       | UID   | planType | username | password | member         | phoneNumber |
-      | 15224 | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |  9999999999 |
+      | 15224 | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |  9999999999 |
 
 #TestCaseClickTOCallCancel6
 @regressionMemberPROD3
@@ -129,9 +129,9 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     
      Examples: 
       | UID       | planType | username | password | member         |
-      | 152201    | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |
-      | US2438941 | PHIP     | jkuma14  | Brock@02 | vernajohnson19651  |
-      | 152255    | PCP     | jkuma14  | Brock@02 | marylamb823       |
+      | 152201    | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |
+      | US2438941 | PHIP     | jkuma14  | Brock@03 | vernajohnson19651  |
+      | 152255    | PCP     | jkuma14  | Brock@03 | marylamb823       |
       
 #TestCaseClickTOCallCancel7
 @regressionMemberPROD2
@@ -148,7 +148,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
 
     Examples: 
      | UID   | planType | username | password | member         | 
-     | 15224 | MA     |  jkuma14 | Brock@02 | BEVERLY_BOB5 |
+     | 15224 | MA     |  jkuma14 | Brock@03 | BEVERLY_BOB5 |
       
       
 #TestCaseClickTOCallCancel8
@@ -165,6 +165,6 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     Then Verify and navigate the see how to guide link on the contactUs page
      Examples: 
       | UID       | planType | username | password | member         |
-      | 152201    | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |
+      | 152201    | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |
       
       
