@@ -72,7 +72,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     #Then the user validates the eob count for all available search ranges
     #  | Flag Zero EOB User | <flagZeroEob> |
 
-    @COSMOS_MEDICAL @devRegression
+    @COSMOS_MEDICAL
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob | 
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
@@ -82,7 +82,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 02    | MA       | COSMOS_EOB_R      | Medical           | true        |
 
-    @COSMOS_DRUG  @devRegression
+    @COSMOS_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 03    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
@@ -158,7 +158,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     #  | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs @SHIP_EOBs1
+    @SHIP_EOBs @SHIP_EOBs1 @devRegression
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB     | Medical | true        | 

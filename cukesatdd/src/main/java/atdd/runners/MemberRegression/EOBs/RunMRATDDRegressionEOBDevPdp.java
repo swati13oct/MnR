@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionEOBDevMedical.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBDevMedical")
+jsonReport = "target/cucumber-RunMRATDDRegressionEOBDevPdp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBDevPdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBDevMedical.json" }, tags = { "@devRegression","@COSMOS_MEDICAL" })
-public class RunMRATDDRegressionEOBDevMedical {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBDevPdp.json" }, tags = { "@devRegression","@dreamEob01b" })
+public class RunMRATDDRegressionEOBDevPdp {
 
 }
