@@ -233,9 +233,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> tenMedications;
-	
-	@FindBy(xpath = "//*[@data-testid='resolve-hold-external-icon']")
-	protected List<WebElement> externalLink;
 
 	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
 	protected WebElement findPrescriptionDesc;
@@ -577,6 +574,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
 	protected List<WebElement> listOfLearnMore;
 
+	@FindBy(xpath = "//a[@data-testid='medication-action-get-pricing']")
+	protected List<WebElement> listOfGetPricing;
+
 	@FindBy(xpath = "")
 	protected List<WebElement> listOfHDMedication;// need to update by Kiran
 	
@@ -617,6 +617,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  		return listOfIndex;
  	}
 
+
+	public boolean properUseTab() {
+
+
+		if (properUseTab.getText().contains("Proper Use")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void  clickOnActiveMedicationDisplayedOnCurrentMedications() {
  		List<Integer> listOfIndex = getListOfIndexForDrugName();
  		Random rand = new Random();
@@ -642,13 +653,69 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  		//need to find the drug name 
  		//DrugNameLearnMore = listOfLearnMore.get(listOfIndex.get(rand_int));
  	}
- 	
- 	public List<Integer> getListOfIndexForRefillMedication(){
+
+	public void clickOnGetPricingButtonDisplayedOnCurrentMedications() {
+		List<Integer> listOfIndex = getListOfIndexForLearnMore();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfGetPricing.get(listOfIndex.get(rand_int)).click();
+
+	}
+
+
+	public List<Integer> getListOfIndexForRefillMedication(){
 		List<Integer> listOfIndex = new ArrayList<>();
  		for(int i=0; i<listOfRefillMedication.size();i++) {
  				listOfIndex.add(i);
  		}
  		return listOfIndex;
+	}
+
+	public boolean clickProceedButton() {
+
+		waitforElement(siteLeavingPopUp);
+		boolean proceeding = true;
+		jsClickNew(siteLeavingPopUpProceedBtn);
+		if(driver.getWindowHandles().size()>0) {
+			proceeding=true;
+			Assert.assertTrue(driver.getWindowHandles().size()>0);
+		}else {
+			proceeding=false;
+		}
+		return proceeding;
+	}
+
+	public boolean clickCancelButton() {
+
+		waitforElement(siteLeavingPopUp);
+		boolean canceling = true;
+		jsClickNew(siteLeavingPopUpCancelBtn);
+		if(driver.getWindowHandles().size()>0) {
+			canceling=true;
+			Assert.assertTrue(driver.getWindowHandles().size()>0);
+		}else {
+			canceling=false;
+		}
+		return canceling;
+	}
+
+	public void clickManageAtWalgreens() {
+
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfManageAtWalgreens.size());
+		listOfManageAtWalgreens.get(rand_int).click();
+	}
+
+	public void clickTransferAtWalgreens() {
+
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfTransferAtWalgreens.size());
+		listOfTransferAtWalgreens.get(rand_int).click();
+	}
+	public void clickGetPricingWalgreems() {
+
+		walgreensGetPricing.click();
+
 	}
 	
 	public void clickOnRefillMedicationCTAOnCurrentMedications() {
@@ -709,6 +776,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		rand_int = rand.nextInt(listOfIndex.size());
 		listOfTrackStatus.get(listOfIndex.get(rand_int)).click(); 		
  	}
+
+	public List<Integer> getListOfIndexForManageAtWalgreens(){
+		List<Integer> listOfIndex = new ArrayList<>();
+		for(int i=0; i<listOfManageAtWalgreens.size();i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+	public List<Integer> getListOfIndexForTransferToWalgreens(){
+		List<Integer> listOfIndex = new ArrayList<>();
+		for(int i=0; i<listOfTransferAtWalgreens.size();i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
 	
 	public List<Integer> getListOfIndexForViewOrder(){
 		List<Integer> listOfIndex = new ArrayList<>();
@@ -716,7 +799,21 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  				listOfIndex.add(i);
  		}
  		return listOfIndex;
-	} 
+	}
+
+	public void ViewManageAtWalgreens() {
+		List<Integer> listOfIndex = getListOfIndexForManageAtWalgreens();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfManageAtWalgreens.get(listOfIndex.get(rand_int));
+	}
+
+	public void ViewTransferToWalgreens() {
+		List<Integer> listOfIndex = getListOfIndexForTransferToWalgreens();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfTransferAtWalgreens.get(listOfIndex.get(rand_int));
+	}
 	
 	public void ViewOrderCTAOnCurrentMedications() {
 		List<Integer> listOfIndex = getListOfIndexForViewOrder();
@@ -744,6 +841,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 			return false;
 		}
 	}
+
+
 
 	public boolean tenActivePrescription() {
 
@@ -773,7 +872,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean externalLink() {
-		if (externalLink.size() > 3) {
+		if (externalLink.size() >=0) {
 			return true;
 		} else {
 			return false;
@@ -935,6 +1034,45 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//button[@data-testid='medication-action-resolve-hold']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
 	protected List<WebElement> listOfPharmacyEligibleFrHold;
+
+	@FindBy(xpath="//span[text()='Proper Use']")
+	protected WebElement properUseTab;
+
+	// walgreens related
+
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='walgreens']")
+	protected List<WebElement> walgreens;
+
+	@FindBy(xpath="//button[@data-testid='manage-at-walgreens']")
+	protected List<WebElement> listOfManageAtWalgreens;
+
+	@FindBy(xpath = "//*[@data-testid='walgreens-external-icon']")
+	protected List<WebElement> externalLink;
+
+	@FindBy(css="div.siteleaving-popup-footer>div")
+	protected WebElement siteLeavingPopUp;
+
+	@FindBy(css="div.siteleaving-popup-footer a#cancelbtn")
+	protected WebElement siteLeavingPopUpCancelBtn;
+
+	@FindBy(css="div.siteleaving-popup-footer a#proceedbtn")
+	protected WebElement siteLeavingPopUpProceedBtn;
+
+	@FindBy(xpath = "//div[contains(text(),'Submit request')]")
+	protected WebElement submitRequestBtn;
+
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div/div[2]/div/div/div[3]/div[3]/div[2]/div[1]/div[2]/div[2]")
+	protected WebElement walgreensRefillsLeft;
+
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div/div[2]/div/div/div[3]/div[3]/div[2]/div[2]/div[1]/a")
+	protected WebElement walgreensGetPricing;
+
+	@FindBy(xpath="//button[@data-testid='transfer-at-walgreens']")
+	protected List<WebElement> listOfTransferAtWalgreens;
+
+
+
+
 	
 	
 	

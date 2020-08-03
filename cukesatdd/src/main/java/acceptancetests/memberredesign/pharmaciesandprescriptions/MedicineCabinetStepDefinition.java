@@ -313,6 +313,7 @@ public class MedicineCabinetStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateHarveyBallOrderStatusForHDDrug("Verifying with doctor", "0");
 		pnpPg.validateHarveyBallOrderStatusForHDDrug("Order Verified", "0");
+		pnpPg.validateHarveyBallOrderStatusForHDDrug("Request canceled", "0");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 

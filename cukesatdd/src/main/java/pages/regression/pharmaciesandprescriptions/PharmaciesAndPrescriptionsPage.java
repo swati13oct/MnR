@@ -758,6 +758,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - Refills Left not available", validateFieldValueContent(listOfRefillsLeft));
 	}
 
+	public void validateRefillsLeftWalgreens() {
+		Assert.assertTrue("PROBLEM - Refills Left amount not available", validateRefillLeftAmount(walgreensRefillsLeft));
+	}
+
 	public void validateDayOfSupply() {
 		Assert.assertTrue("PROBLEM - Days Of Supply not available", validateFieldValueContent(listOfDaysSupply));
 	}
@@ -906,6 +910,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	}
 
+	public void validateWalgreensSubmitRequestBtn() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", submitRequestBtn);
+		Assert.assertTrue("PROBLEM - unable to locate Walgreens website Submit request button element",
+				pnpValidate(submitRequestBtn));
+	}
+
 	public void validateHalfHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", isHalfHarveyBall());
 	}
@@ -913,6 +924,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements",
 				isOneFourthHarveyBall() );
+	}
+
+	public void validateWalgreensDrug() {
+		Assert.assertTrue("PROBLEM - unable to locate Walgreens Drug",
+				validateWalgreens());
+		//pnpValidate(RefillMedications));
 	}
 
 	public void validateRefillMedications() {
@@ -971,6 +988,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					return false;
 				}
 			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validateRefillLeftAmount(WebElement refillLeft) {
+
+		int refill=Integer.parseInt(refillLeft.getText());
+		if (refill> 0) {
 			return true;
 		} else {
 			return false;
@@ -1258,8 +1285,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 	}
 
+	public boolean validatePAndPPageURL() {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void validateOderStatusPage() {
 		Assert.assertTrue("PROBLEM - Order Status page is not displayed", validateOderStatusPageURL());
+	}
+
+	public void validatePAndPPage() {
+		Assert.assertTrue("PROBLEM - P and P page is not displayed", validatePAndPPageURL());
 	}
 
 	public void validateClickOnHDDrugCTA(String orderStatus, String callToAction) {
@@ -1288,6 +1327,17 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateShippedOrderStatusForHDDrug(String orderStatus) {
 		Assert.assertTrue("PROBLEM - Shipped Order not available on Current Medication",
+				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
+	}
+
+	public void validateProperUseTab() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Proper Use tab element",
+				properUseTab());
+	}
+
+	public void validateCanceledOrderStatusForHDDrug(String orderStatus) {
+		Assert.assertTrue("PROBLEM - Request Canceled not available on Current Medication",
 				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
 	}
 
@@ -1591,6 +1641,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			listOfVal.add(ele.getText());
 		}
 		return listOfVal;
+	}
+
+	public boolean validateWalgreens() {
+		if(walgreens.size()>=0) {
+			for (int i = 0; i < walgreens.size(); i++) {
+				String text = walgreens.get(i).getText();
+				for (WebElement child : walgreens.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+				if (!text.trim().equals("Walgreens")) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean validateHDDrugEligibleForRefill() {

@@ -39,6 +39,10 @@ public class CanceledOrdersStepDefinition {
 	@Then("^user views a status of Request canceled$")
 	public void user_views_a_status_of_Request_canceled() throws Throwable {
 
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateCanceledOrderStatusForHDDrug("Request canceled");
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	    
 	}
