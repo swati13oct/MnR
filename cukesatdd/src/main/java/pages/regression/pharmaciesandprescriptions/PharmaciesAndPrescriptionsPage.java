@@ -1721,4 +1721,34 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 			return false;
 		}
+	
+	public void validateRefillRemainingFieldOnCurrentMed(String expectedVal) {
+		Assert.assertTrue("PROBLEM - Refill Remaining Field not available for HD Medication on Current Medication",
+				verifyRefillRemainingFieldForHDMedication(expectedVal));
+	}
+	
+	
+	public boolean verifyRefillRemainingFieldForHDMedication(String expectedVal){
+		for(WebElement ele:listofHDMedicationHavingRefillLeftField) {
+			if(!(ele.getText().equalsIgnoreCase(expectedVal))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void validateRefillRemainingValueOnCurrentMed() {
+		Assert.assertTrue("PROBLEM - Refill Remaining Val not available for HD Medication on Current Medication",
+				verifyRefillRemainingValueForHDMedication());
+	}
+	
+	
+	public boolean verifyRefillRemainingValueForHDMedication(){
+		for(WebElement ele:listofHDMedicationHavingRefillLeftVal) {
+			if(!(ele.getText().isEmpty())) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

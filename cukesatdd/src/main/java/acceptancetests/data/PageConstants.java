@@ -713,4 +713,6 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String AARP_CHAT_AGENT_LOGIN="aarpChatAgentLogin";
 
 	public static final String CONFIRMATION_NUMBER="verifyConfirmationNumberPresent";
+	
+	public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
 }

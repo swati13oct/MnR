@@ -9,8 +9,8 @@ Feature: Need Help Phone Numbers
     Then the user navigates to the Pharmacies and Prescriptions page
     Then user validates Need Help section content for pharmacies and prescriptions page
 
-    Examples:
-      | TID   | planType | memberType                 |
-      | 15347 | MAPD     | IndMAPDUHC_footer          |
-      | 15347 | MEDICA   | Ind_footer                 |
-      | 15347 | PCP      | In
+    Examples: 
+      | TID   | planType | memberType        |
+      | 15347 | MAPD     | IndMAPDUHC_footer |
+      | 15347 | MEDICA   | Ind_footer        |
+      | 15347 | PCP      | In                |

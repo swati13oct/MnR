@@ -752,7 +752,32 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRemainingPrescriptionsOnMyMedPage(totalMedication);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-
+	
+	
+	@Then("^user views the HD Medications on Current Medications$")
+	public void user_views_the_HD_Medications_on_Current_Medications() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHDDrug();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user will see \"([^\"]*)\" field$")
+	public void user_will_see_field(String expectedVal) {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRefillRemainingFieldOnCurrentMed(expectedVal);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user validates amount of refills remaining for the prescriptions$")
+	public void user_validates_amount_of_refills_remaining_for_the_prescriptions() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRefillRemainingValueOnCurrentMed();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
 	/*
 	 * @Then("^user will see remaining prescriptions on the My Medications page$")
 	 * public void
