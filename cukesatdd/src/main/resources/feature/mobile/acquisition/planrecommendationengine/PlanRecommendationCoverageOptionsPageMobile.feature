@@ -31,7 +31,7 @@ Feature: Plan Selector Tool flow - Verify coverage options page in plan recommen
       |   90201 | NO            | Los Angeles | MAPD          |
       |   10001 | NO            | New York    | MA            |
       |   12345 | NO            | Schenectady | PDP           |
-      |   20007 | NO            | Columbia    | NA            |
+      |   20007 | NO            | Columbia    | None          |
 
   @PRE @planrecommandonationmobile @coveragepagemobile @coveragepageprevious @F372736
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page Previous button functionality Multi County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile

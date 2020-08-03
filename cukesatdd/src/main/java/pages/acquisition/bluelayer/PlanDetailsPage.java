@@ -27,12 +27,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
-
-import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -40,6 +34,9 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 public class PlanDetailsPage extends UhcDriver {
@@ -244,6 +241,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h2[@class='ng-binding']")
 	private WebElement planNameValue;
+	
+	@FindBy(xpath = "//*[@id='drugBenefits']/h3")
+	private WebElement prescDrugHeading;
 	
 	
 	
@@ -823,12 +823,7 @@ public class PlanDetailsPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, getLnkEnterDrugInformation(), 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getLnkEnterDrugInformation());
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", getLnkEnterDrugInformation());
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(currentUrl().contains("/estimate-drug-costs.html")) {
 			driver.navigate().refresh();//page hangs sometimes, added to rectify the same
 			return new DrugCostEstimatorPage(driver);
@@ -1121,6 +1116,7 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public void clickAndValidatePrescriptionDrugBenefits() {
 		prescriptiondrugTab.click();
+		 CommonUtility.waitForPageLoadNew(driver, prescDrugHeading, 45);
 		if(drugBenefitsSection.isDisplayed()){	
 				Assert.assertTrue(true);
 				System.out.println("We are on prescriptiondrugTab");

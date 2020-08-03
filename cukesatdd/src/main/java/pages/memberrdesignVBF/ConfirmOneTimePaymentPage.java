@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**

@@ -56,7 +56,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//input[@id='zipcode']")
@@ -218,7 +218,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@ng-click,'medsup')]")
 	private WebElement medsupCreateButton;
 
-	@FindBy(xpath = "//div[@id='Plan F']//h2")
+	@FindBy(xpath = "//div[@id='PlanF']//h2")
 	private WebElement medsupPlanF;
 
 	@FindBy(xpath = "//input[@id='vpp-zip-search']")

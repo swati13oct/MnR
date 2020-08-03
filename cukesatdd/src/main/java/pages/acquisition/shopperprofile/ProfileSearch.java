@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -18,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class ProfileSearch extends UhcDriver {
@@ -57,6 +59,9 @@ public class ProfileSearch extends UhcDriver {
 	
 	@FindBy(css="a.back-button")
 	private WebElement backToProfileSearch;
+	
+	@FindBy(xpath="//a[text()='Non Member']")
+	private WebElement nonMemberTab;
 
 	public static final String DELETE_PROFILE_URL = "http://digital-checkout-team-e.ocp-elr-core-nonprod.optum.com/digital-checkout/guest/profile";
 	
@@ -94,6 +99,12 @@ public class ProfileSearch extends UhcDriver {
 		validateSearchProfileResults();
 	}
 	
+	/**
+	 * Search Profile and Delete for a member
+	 * @param email
+	 * @param dob
+	 * @param mbi
+	 */
 	public void searchProfileAndDelete(String email,String dob,String mbi) {
 		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
@@ -102,7 +113,7 @@ public class ProfileSearch extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
-			deleteProfile.deleteAProfile(email, dob, mbi);
+			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
@@ -113,12 +124,16 @@ public class ProfileSearch extends UhcDriver {
 		}
 	}
 	
-	public CreateProfile clickOnCreateProfile() {
+	/**
+	 * Click on create profile button
+	 * @return
+	 */
+	public MemberCreateProfile clickOnCreateProfile() {
 			try {
 				btnCreateProfile.click();
 				Thread.sleep(5000);
 				if(driver.getCurrentUrl().contains("create-profile")) {
-					return new CreateProfile(driver);
+					return new MemberCreateProfile(driver);
 				}else {
 					System.out.println("Create Profile failed");
 					return null;
@@ -127,11 +142,7 @@ public class ProfileSearch extends UhcDriver {
 				Assert.fail("Create Profile failed");
 				return null;
 			}
-			
 	}
-	
-	
-	
 	/**
 	 * Validate error messages	
 	 * @param emptyFields
@@ -176,25 +187,82 @@ public class ProfileSearch extends UhcDriver {
 	 * Cloak In the Searched Profile
 	 * @return
 	 */
+	//public ComparePlansPage doCloakIn() {
 	public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			ArrayList<String> tabs = new ArrayList<String>(
                     driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			driver.switchTo().window(tabs.get(0)).close();
 			driver.switchTo().window(tabs.get(1));
-			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
+			/*if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+				return new ComparePlansPage(driver);*/
 			}else {
 				System.out.println("Plan Summary page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	/**
+	 * Click on create profile for non member
+	 * @return
+	 */
+	public NonMemberCreateProfile clickOnCreateProfileForNonMember() {
+		try {
+			btnCreateProfile.click();
+			Thread.sleep(5000);
+			driver.findElement(By.xpath("//a[text()='Non Member']")).click();
+			if(driver.getCurrentUrl().contains("create-profile")) {
+				return new NonMemberCreateProfile(driver);
+			}else {
+				System.out.println("Create Profile failed");
+				return null;
+		}
+		} catch (Exception e) {
+			Assert.fail("Create Profile failed");
+			return null;
+		}
+	}
+	
+	/**
+	 * Search Profile and Delete for a Non member
+	 * @param email
+	 * @param dob
+	 * @param mbi
+	 */
+	public void searchProfileAndDeleteNonMember(DataTable nonMemberDetails) {
+		
+		List<DataTableRow> givenAttributesRow = nonMemberDetails.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String emailID = givenAttributesMap.get("Email");
+		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
+		sendkeys(visitorEmail, emailID);
+		btnSearchShopper.click();
+		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
+		if(searchResults.size()>0) {
+			DeleteProfile deleteProfile = new DeleteProfile(driver);
+			deleteProfile.deleteAProfile(emailID);
+			backToProfileSearch.click();
+			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
+			sendkeys(visitorEmail, emailID);
+			btnSearchShopper.click();
+		}else {
+			CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 20);
+			System.out.println("########No user found########");
 		}
 	}
 }

@@ -64,7 +64,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	public  String[] getConfirmRegistrationURLWithSubjectandEmailContent()
 			throws MessagingException, IOException, InterruptedException {
 
-		String username = "codetransformertesting@gmail.com";
+		String username = "codetransformer002@gmail.com";
         String pwd = "codetransformer@1";
         
         Thread.sleep(44000);

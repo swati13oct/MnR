@@ -45,7 +45,7 @@ public class CQLoginPage extends UhcDriver {
 	 /*This method will open CQ SSO Test Harness page */
 	public CQLoginPage navigateToLoginURL(){
 		
-		if(MRScenario.environment.contains("ucpcontent")){
+		if(MRScenario.environment.contains("sot")){
 			start(AUTHOR_URL);
 		}else{
 			start(STAGE_SSO_TESTHANESS_URL);

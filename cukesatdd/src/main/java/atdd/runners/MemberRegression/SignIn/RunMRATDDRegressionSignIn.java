@@ -14,12 +14,12 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", 
+@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", 
 jsonReport = "target/cucumber-RunMRATDDRegressionSignIn.json", detailedReport = true, detailedAggregatedReport = true, 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSignIn")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
-features = { "src/main/resources/feature/memberredesign/HSID/HSID.feature" }, plugin = {
-		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionSignIn.json" }, tags = { "@hsid6" })
+features = { "src/main/resources/feature/memberredesign/HSID/SignIn1.feature" }, plugin = {
+		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionSignIn.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionSignIn {
 
 }

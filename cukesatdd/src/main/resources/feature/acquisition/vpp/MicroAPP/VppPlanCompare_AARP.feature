@@ -1,5 +1,5 @@
 @vppPlanCompareAARP
-Feature: Vpp to plan Compare AARP Scenarios
+Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
 
   @vppPlanCompareAARP01 @vppPlanCompareAARPRun01 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Rally Tool from Plan Compare Page for AARP

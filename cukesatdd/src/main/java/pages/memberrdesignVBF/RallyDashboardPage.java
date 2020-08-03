@@ -227,10 +227,10 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, HelloMessage, 60);
 		//validateNew(panelClaims);
 		//validateNew(panelHome);
-		validateNew(HelloMessage);
+		validateNew(HelloMessage,0);
 
 		if (category != null && category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-			validateNew(coverageEndedText);
+			validateNew(coverageEndedText,0);
 		}
 	}
 

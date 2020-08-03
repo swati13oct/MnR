@@ -111,15 +111,18 @@ public class MRScenario {
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
 	public static String mobileDeviceName = "";
+	public static String mobileDeviceOSName = "";
+	public static String mobileDeviceOSVersion = "";
 	public static String desktopBrowserName;
 	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
+	public static String runnerFiles = "";
 
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
-	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public static String TESTOBJECTAPIKEY = "";
 	
 	public static final String HSID_ENV="PDB_STAGE";
 	public static final String HSIDDB_USERNAME="njain112";
@@ -165,16 +168,16 @@ public class MRScenario {
 			browsername = props.get("BrowserName");
 			isTestHarness = props.get("isTestHarness");
 			isHSIDCompatible = props.get("isHSIDCompatible");
-			mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
-					: System.getenv("DEVICE_NAME"));
-			mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT")) ? props.get("SaucslabDeviceName")
-					: mobileDeviceName;
-
+			TESTOBJECTAPIKEY = props.get("SaucelabsTestObjectAPIKey");
+			mobileDeviceName = props.get("SaucelabsDeviceName");
+			mobileDeviceOSName = props.get("SaucelabsDeviceOSName");
+			mobileDeviceOSVersion = props.get("SaucelabsDeviceOSVersion");
 		} else { // running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE) ? "Yes"
 					: System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+			environmentMedicare = environment;
 		}
 
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER)
@@ -188,6 +191,7 @@ public class MRScenario {
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
+		runnerFiles = System.getenv("RUNNER_NAME");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -243,11 +247,10 @@ public class MRScenario {
 
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
-
 			} else if ((environment.contains("team-a")
 					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) ||  (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-uhc-rx")))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-uhc-rx"))))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
@@ -367,7 +370,7 @@ public class MRScenario {
 		String url = HSIDDB_URL;
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
-System.out.println("Con established*********");
+			System.out.println("Con established*********");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -380,38 +383,38 @@ System.out.println("Con established*********");
 	}
 
 	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-	//	Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		stmt = con.createStatement();
 		String sql;
-		ResultSet rs1=null;
+		ResultSet rs1 = null;
 		try {
-			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
+					+ "'";
 			rs1 = stmt.executeQuery(sql);
 			rs1.first();
 			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
 			System.out.println(HLTHSF_ID);
 		} catch (Exception e) {
-		System.out.println("Already data not available in the mbr DB");
-		}
-		finally {
+			System.out.println("Already data not available in the mbr DB");
+		} finally {
 			rs1.close();
 			stmt.close();
-			con.close();	
+			con.close();
 		}
-		
+
 	}
 
 	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		try {
-			rs = stmt.executeQuery(
-					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
+					+ lastName + "'");
 			int initialrowcount = 0;
 			while (rs.next()) {
 				initialrowcount = rs.getInt(1);
@@ -420,8 +423,8 @@ System.out.println("Con established*********");
 			stmt.executeUpdate(
 					"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 
-			rs = stmt.executeQuery(
-					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
+					+ lastName + "'");
 			int finalrowcount = 0;
 			while (rs.next()) {
 				finalrowcount = rs.getInt(1);
@@ -441,7 +444,7 @@ System.out.println("Con established*********");
 
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -455,8 +458,8 @@ System.out.println("Con established*********");
 			}
 			System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
 
-			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
-					+ lastName + "'");
+			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
 			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
 					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
 			int finalrowcount = 0;
@@ -469,54 +472,52 @@ System.out.println("Con established*********");
 			} else {
 				System.out.println("Still Records exist in the table: mbr_prtl");
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the mbr_portal DB");
 		}
-	
-		
-		
+
 	}
 
 	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
 			throws SQLException {
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		String sql;
-try {
-	sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-	ResultSet rs1 = stmt.executeQuery(sql);
-	rs1.first();
-	String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-	System.out.println(HLTHSF_ID);
-	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	int initialrowcount = 0;
-	while (rs.next()) {
-		initialrowcount = rs.getInt(1);
-	}
-	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
-	stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	int finalrowcount = 0;
-	while (rs.next()) {
-		finalrowcount = rs.getInt(1);
-	}
-	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
-	if (finalrowcount == 0) {
-		System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
-	} else {
-		System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
-	}	
+		try {
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
+					+ "'";
+			ResultSet rs1 = stmt.executeQuery(sql);
+			rs1.first();
+			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
+			System.out.println(HLTHSF_ID);
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			int initialrowcount = 0;
+			while (rs.next()) {
+				initialrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+			stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			int finalrowcount = 0;
+			while (rs.next()) {
+				finalrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+			if (finalrowcount == 0) {
+				System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+			} else {
+				System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+			}
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the DB");
 		}
-		
-		
+
 	}
 
 	public void removeMember() {
@@ -579,50 +580,45 @@ try {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
-		System.out.println("Using properties for environment ...."
-		+ propertiesFileToPick);
+		System.out.println("Using properties for environment ...." + propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-		System.out
-		.println("Using CI as default since environment was not passed in !!!");
-		propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+			System.out.println("Using CI as default since environment was not passed in !!!");
+			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
-		// Read properties from classpath
-		StringBuffer propertyFilePath = new StringBuffer(
-		CommonConstants.PROPERTY_FILE_FOLDER);
-		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-		.append(CommonConstants.PROPERTY_FILE_NAME);
-		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
-		.toString());
-		try {
-		prop.load(is);
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-		for (String key : prop.stringPropertyNames()) {
-		String value = prop.getProperty(key);
-		props.put(key, value);
-		}
+			// Read properties from classpath
+			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
+			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+					.append(CommonConstants.PROPERTY_FILE_NAME);
+			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+			try {
+				prop.load(is);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			for (String key : prop.stringPropertyNames()) {
+				String value = prop.getProperty(key);
+				props.put(key, value);
+			}
 
-		if (props.containsKey("Domain")) {
-		domain = props.get("Domain");
-		} else {
+			if (props.containsKey("Domain")) {
+				domain = props.get("Domain");
+			} else {
+				
 		domain = null;
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage"))
+		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat")||environment.contains("team-uhc-rx"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else 
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
 		System.out.println("env chosen is: "+ environment);
 		System.out.println("domain chosen is: "+ domain);
-
-		return null;
+			return null;
 		}
 	}
-
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		formCompositeDesiredAttributes(desiredAttributes);
@@ -718,32 +714,33 @@ try {
 
 	public WebDriver getWebDriver() {
 
-		
-		  
-		  isSauceLabSelected = true; DesiredCapabilities capabilities =
-		  DesiredCapabilities.chrome();
-		  
-		  capabilities.setCapability("platform", "Windows 7");
-		  capabilities.setCapability("version", "66.0");
-		  capabilities.setCapability("screenResolution", "1920x1080");
-		  //capabilities.setCapability("parent-tunnel", "sauce_admin");
-		  capabilities.setCapability("parent-tunnel", "optumtest");
-		  capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-		  //capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-		  //capabilities.setCapability("name", "MRATDD-TestSuite");
-		  //capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
-		  capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" +
-		  System.getenv("RUNNER_NUMBER")); String jobName = "VBF Execution - Using " +
-		  capabilities.getBrowserName() + " in  " + System.getProperty("environment")
-		  +" environment"; capabilities.setCapability("name", jobName);
-		  capabilities.setCapability("recordMp4", true); try { webDriver = new
-		  RemoteWebDriver(new URL(URL), capabilities); MRScenario.sessionId =
-		  ((RemoteWebDriver) webDriver).getSessionId().toString();
-		  System.out.println("Session ID:" + (((RemoteWebDriver)
-		  webDriver).getSessionId()).toString()); getJobURL(getSessionId()); } catch
-		  (MalformedURLException e) { // TODO Auto-generated catch block
-		  e.printStackTrace(); } return webDriver;
-		 
+		isSauceLabSelected = true;
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+		capabilities.setCapability("platform", "Windows 7");
+		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("screenResolution", "1920x1080");
+		// capabilities.setCapability("parent-tunnel", "sauce_admin");
+		capabilities.setCapability("parent-tunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+		// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+		// capabilities.setCapability("name", "MRATDD-TestSuite");
+		// capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  "
+				+ System.getProperty("environment") + " environment";
+		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
+		try {
+			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+			getJobURL(getSessionId());
+		} catch (MalformedURLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return webDriver;
+
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -944,6 +941,9 @@ try {
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after " + browserVersion);
+		
+		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1920x1080"
+				: System.getProperty(CommonConstants.SCREEN_RESOLUTION));
 
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? "null" : System.getProperty("phantomjs"));
@@ -985,16 +985,16 @@ try {
 
 			webDriver.get("google.com");
 
-			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-				Map<String, Object> chromeOptions = new HashMap<String, Object>();
-				//chromeOptions.put("binary", pathToBinary);
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_79.0.3945.16\\chromedriver.exe");
-				webDriver = new ChromeDriver();
-				saveBean(CommonConstants.WEBDRIVER, webDriver);
-				return webDriver;
+		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+			Map<String, Object> chromeOptions = new HashMap<String, Object>();
+			// chromeOptions.put("binary", pathToBinary);
+			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+			// System.setProperty("webdriver.chrome.driver", pathToBinary);
+			System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chromedriver_win32\\chromedriver.exe");
+			webDriver = new ChromeDriver();
+			saveBean(CommonConstants.WEBDRIVER, webDriver);
+			return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1034,12 +1034,14 @@ try {
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1440x900");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1024x768");
+				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("maxDuration", "3600");
 			} else if (browserName.equalsIgnoreCase("chrome")) {
 				System.out.println("Inside chrome");
@@ -1048,13 +1050,20 @@ try {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("recordMp4", true);
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "10000");
 			} else if (browserName.equalsIgnoreCase("edge")) {
 				System.out.println("Inside Edge");
 				capabilities = DesiredCapabilities.edge();
 				capabilities.setCapability("platform", "Windows 10");
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
+				capabilities.setCapability("maxDuration", "3600");
+			}else if (browserName.equalsIgnoreCase("safari")) {
+				System.out.println("Inside safari");
+				capabilities = DesiredCapabilities.safari();
+				capabilities.setCapability("platform", "Mac 10.15");
+				capabilities.setCapability("version", browserVersion);
+				capabilities.setCapability("screenResolution", "1920x1440");
 				capabilities.setCapability("maxDuration", "3600");
 			}
 			if (!(null == capabilities)) {
@@ -1080,7 +1089,6 @@ try {
 						+ System.getProperty("environment") + " environment";
 				capabilities.setCapability("name", jobName);
 				try {
-
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
@@ -1137,84 +1145,56 @@ try {
 		return digest;
 	}
 
+	/**
+	 * @author Murali - mmurugas
+	 * This method will invoke the Appium driver for Mobile automation
+	 */	
 	public AppiumDriver getMobileDriver() {
-
-		String findDeviceName = "iPhone X"; // Default device
-		String mobileOSName;
-		mobileDeviceName = System.getenv("DEVICE_NAME");
-		if(mobileDeviceName==null)
-			mobileDeviceName =props.get("SaucslabDeviceName");
-		String deviceName = mobileDeviceName.toUpperCase().trim();
-		System.out.println("Given device : " + deviceName);
+		if (props == null) {
+			TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
+			mobileDeviceName = System.getenv("DEVICE_NAME");
+			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
+			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
+			if(System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
+				sauceLabsMobileTunnelIdentifier=System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
+		}
+		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
-		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for
-																									// device allocation
+		// max 30 mins for device allocation - mobileSessionTimeout
+		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); 
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		// Offline prod and prod env. should not use tunnels
+		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
-
-		if (deviceName.contains("IPHONEX") || deviceName.contains("IPHONE X"))
-			findDeviceName = "iPhone X";
-		if (deviceName.contains("IPHONE8") || deviceName.contains("IPHONE 8"))
-			findDeviceName = "iPhone 8";
-		if (deviceName.contains("IPHONE7+") || deviceName.contains("IPHONE 7 PLUS") || deviceName.contains("IPHONE 7+")
-				|| deviceName.contains("IPHONE 7PLUS"))
-			findDeviceName = "iPhone 7 Plus";
-		if (deviceName.contains("IPAD AIR 1") || deviceName.equals("IPAD AIR") || deviceName.equals("IPAD")
-				|| deviceName.contains("IPAD AIR1") || deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
-			findDeviceName = "iPad Air";
-		if (deviceName.contains("IPAD AIR 2") || deviceName.contains("IPAD AIR2") || deviceName.contains("IPAD AIR1")
-				|| deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
-			findDeviceName = "iPad Air 2";
-		if (deviceName.contains("S9") || deviceName.equals("SAMSUNG") || deviceName.contains("GALAXY"))
-			findDeviceName = "Samsung Galaxy S9";
-		if (deviceName.contains("S8+") || deviceName.contains("S8 +") || deviceName.contains("S8PLUS")
-				|| deviceName.contains("S8 PLUS"))
-			findDeviceName = "Samsung Galaxy S8+";
-		if (deviceName.contains("S8"))
-			findDeviceName = "Samsung Galaxy S8";
-
-		capabilities.setCapability("deviceName", findDeviceName);
-
-		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
-			mobileOSName = "Android";
-			capabilities.setCapability("platformVersion", "8");
-			capabilities.setCapability("phoneOnly", "true");
-		} else {
-			mobileOSName = "iOS";
-			capabilities.setCapability("phoneOnly", "true");
-			capabilities.setCapability("platformVersion", "12");
-
-			if (findDeviceName.toUpperCase().contains("IPAD")) {
-				capabilities.setCapability("tabletOnly", "true");
-				capabilities.setCapability("phoneOnly", "false");
-			}
-			if (findDeviceName.toUpperCase().equals("IPAD AIR")) {
-				capabilities.setCapability("platformVersion", "11");
-			}
-		}
-		capabilities.setCapability("platformName", mobileOSName);
+		capabilities.setCapability("deviceName", mobileDeviceName);
+		capabilities.setCapability("platformName", mobileDeviceOSName);
+		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + findDeviceName + " in  "
+		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
 				+ sauceLabsMobileTunnelIdentifier + " environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
-		// capabilities.setCapability("acceptSslCerts", true);
 		capabilities.setCapability("forceMjsonwp", true);
-		// capabilities.setCapability("autoAcceptAlerts", true);
+		//capabilities.setCapability("autoAcceptAlerts", true);
 		try {
-			if (mobileOSName.equalsIgnoreCase("Android"))
+			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
+				capabilities.setCapability("browserName", "Chrome");
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-			else
+			}
+			else {
+				capabilities.setCapability("browserName", "Safari");
 				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+			}
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(findDeviceName + " JobURL  --- "
+			System.out.println(mobileDeviceName + " JobURL  --- "
 					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
 			// System.out.println("JobReportURL ---
@@ -1228,7 +1208,7 @@ try {
 		}
 		return mobileDriver;
 	}
-	
+
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
@@ -1238,24 +1218,35 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "qawrite";  //gpsuat3UserName
-			String pwd = "testwrite$"; //gpsuat3UserPass
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))";  //gpsuat3Url
-			//String url = "jdbc:oracle:thin:@dbslt0058.uhc.com:1521:gpsts18svc.uhc.com";
+			String user = "qawrite";  
+			String pwd = "testwrite$"; 
+			
+			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
+			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
+			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established*********");
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Oracle Database Connection not established");
 		}
 
-	//	System.out.println("Connected to: " + env.toUpperCase() + " database");
+		// System.out.println("Connected to: " + env.toUpperCase() + " database");
 
 		return con;
 
 	}
-	
+
+	public static Map<String, String> getProps() {
+		return props;
+	}
 
 }

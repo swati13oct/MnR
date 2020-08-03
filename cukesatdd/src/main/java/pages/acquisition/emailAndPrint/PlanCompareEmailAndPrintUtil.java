@@ -151,7 +151,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void validatePrintPlanCompare() {
 		sleepBySec(1); //note: keep this sleep for compare page
 		CommonUtility.waitForPageLoad(driver, compare_validateprintbutton, 5);
-		moveMouseToElement(cmpPgHeader);
+		//moveMouseToElement(cmpPgHeader);
 		validateNew(compare_validateprintbutton);
 		System.out.println("successfully validated the Print in plan compare page ");
 	}

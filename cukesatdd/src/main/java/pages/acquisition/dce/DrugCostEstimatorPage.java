@@ -291,6 +291,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Drugs')]")
 	public WebElement drugsLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugModal')]")
+	public WebElement drugModalPopup;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -379,6 +382,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
 	private WebElement costText;
+	
+	@FindBy(xpath = "//*[contains(@id, 'backToPlanSummaryTop')]")
+	private WebElement backToPlanLink;
 
 	@Override
 	public void openAndValidate() {
@@ -402,11 +408,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(addDrug);
+		//Thread.sleep(10000);
+		waitforElementNew(addDrug,20);
 		addDrug.click();
 
-if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
+		if (validateNew(drugModalPopup)) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;
@@ -937,7 +943,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		AddDrugDetails addDrugDetails = addNewDrugModal.clickonSearchButton(drug);
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
 		savingsOppurtunity.savedrugbutton();
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 
 	}
 
@@ -1696,19 +1702,9 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	}
 	
 	public PlanDetailsPage clickOnReturnLink() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		waitTillElementClickableInTime(returnLink,10);
 		returnLink.click();	
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		validate(backToPlanLink);
 		if(currentUrl().contains("#/details")){
 			return new PlanDetailsPage(driver);
 		}

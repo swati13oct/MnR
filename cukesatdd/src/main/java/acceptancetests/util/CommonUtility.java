@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -21,6 +19,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 
 /**
  * @author pjaising
@@ -436,7 +436,7 @@ public class CommonUtility {
 	 * @return
 	 */
 	public static boolean checkPageIsReadyNew(WebDriver driver) {
-
+		try {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		for (int counter = 0; counter <= 23; counter++) {
@@ -452,6 +452,10 @@ public class CommonUtility {
 			}			
 		}
 		Assert.fail("TimeOut!!! Page not loaded");
+		} catch (WebDriverException e) {
+			Assert.assertTrue("PROBLEM - got webdriver exception: "+e, false);
+			return false;
+		}
 		return false;
 	}
 }

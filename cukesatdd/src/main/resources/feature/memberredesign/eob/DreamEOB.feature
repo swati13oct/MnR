@@ -84,8 +84,9 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01d 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
-      | 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+      | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | false       |  
+     #| 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
+      | 08    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                        | false       | 
 
     @dreamEob01e
     Examples: 
@@ -97,5 +98,5 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 11    | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
-      | 12    | MAPD     | ES_D_NICE_EOBB    | 1 new D spanish, old M            | true        |
+      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |
       

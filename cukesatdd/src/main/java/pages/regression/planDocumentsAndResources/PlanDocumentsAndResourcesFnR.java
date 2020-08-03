@@ -3,16 +3,19 @@ package pages.regression.planDocumentsAndResources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import acceptancetests.util.CommonUtility;
 
 public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDocLinksHelper  {
 
 	public PlanDocumentsAndResourcesFnR(WebDriver driver) {
 		super(driver);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
 	@Override
@@ -50,7 +53,9 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 			return authorizationFormsAndInfo_sectionAF_FnR;
 		if (section_FnR.equals("Medication Authorization Forms") || section_FnR.equals("Medication Authorization forms")) 
 			return medicationAuthForm_sectionMA_FnR;
-		if (section_FnR.equals("Other Resources")) 
+		if (section_FnR.equals("Other Resources") 
+				|| section_FnR.equals("Other Resources Part1of2") 
+				|| section_FnR.equals("Other Resources Part2of2")) 
 			return otherResources_orSection_fnr;
 		if (section_FnR.equals("Disenrollment")) 
 			return disenrollmentInfo_sectionDI_FnR;
@@ -83,7 +88,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		System.out.println("Proceed to expand the section");
 		sleepBySec(1);
 		subSectionElement.click();
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(1);
 		section_note.add("  PASSED - subsection '"+subSection_FnR+"' section element validation");
 		return section_note;
@@ -106,10 +111,11 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		}
 		//----------------------------------------------
 		Assert.assertTrue("PROBLEM - unable to locate sub-section '"+subSection_FnR+"' in '"+section+"' section", planDocValidate(subSectionElement));
+		scrollElementToCenterScreen(subSectionElement);
 		moveMouseToElement(subSectionElement);
 		subSectionElement.click();
 		System.out.println("TEST - clicked subsection to collapse it");
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		return;
 	}
 
@@ -168,11 +174,11 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 				moveMouseToElement(subSectionElement); 
 				subSectionElement.click();
 				CommonUtility.waitForPageLoad(driver, docElement, 5);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 			scrollElementToCenterScreen(docElement);
 			moveMouseToElement(docElement); 
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
 	
@@ -187,6 +193,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			checkModelPopup(driver,1);
 			jumpLinkElement.click();
 			CommonUtility.waitForPageLoad(driver, sectionElement, 5);
 			Assert.assertTrue("PROBLEM - unable to locate section for '"+item+"' after clicking jumplink", planDocValidate(sectionElement));

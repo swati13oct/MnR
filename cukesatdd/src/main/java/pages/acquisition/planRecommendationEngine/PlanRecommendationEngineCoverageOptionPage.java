@@ -3,14 +3,12 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
@@ -28,7 +26,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Coverage Options";
+	String page = "Coverage";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -37,7 +35,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
 // Coverage Option page Elements
 
-	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
+	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
 
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
@@ -86,26 +84,25 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 2: Coverage Option"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(coverageTitle);
-		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+//		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 		validate(plantypeMAPD, 30);
-		Assert.assertTrue(plantypeMAPD.getText().contains("and"));
+//		Assert.assertTrue(plantypeMAPD.getText().contains("and"));
 		validate(plantypeMA, 30);
-		Assert.assertTrue(plantypeMA.getText().contains("Medical"));
+//		Assert.assertTrue(plantypeMA.getText().contains("Medical"));
 		validate(plantypePDP, 30);
-		Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
+//		Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
 		validate(plantypeNone, 30);
-		Assert.assertTrue(plantypeNone.getText().contains("don't"));
+//		Assert.assertTrue(plantypeNone.getText().contains("don't"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 //Coverage Option Page Function Verification		
@@ -124,14 +121,14 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 			validate(plantypePDP);
 			plantypePDP.click();
 			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("NA")) {
+		} else if (planType.equalsIgnoreCase("None")) {
 			validate(plantypeNone);
 			plantypeNone.click();
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
 		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+//		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Coverage option page - Select Plantype and click on Previous Button	
@@ -150,27 +147,27 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 			validate(plantypePDP);
 			plantypePDP.click();
 			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("NA")) {
+		} else if (planType.equalsIgnoreCase("None")) {
 			validate(plantypeNone);
 			plantypeNone.click();
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
 		if (radioselect.isDisplayed()) {
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+			Assert.assertTrue(pageProgressPercentage.getText().contains("10% Complete"));
 		} else {
 			System.out.println("Plan Type not selected in Coverage Options Page");
 		}
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 //Coverage Option Page Function Verification			
 	public void coverageOptionpageerror() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
 		continueBtn.click();
-		Assert.assertTrue(errorMessage.getText().contains("No"));
+		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
 	public void browserBack() {

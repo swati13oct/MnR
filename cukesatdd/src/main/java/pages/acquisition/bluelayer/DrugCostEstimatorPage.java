@@ -26,15 +26,14 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.checkPageIsReadyNew(driver);
-		openAndValidate();
+		//CommonUtility.checkPageIsReadyNew(driver);
+		//openAndValidate();
 	
 	}
 
@@ -469,13 +468,21 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
+	@FindBy(xpath = "(//p[text()='Drug Costs from Formulary']//ancestor::th/parent::tr//td[1]//span[@class='ng-scope'])[2]")
+	public WebElement planCompareVerifyEstimatedDrugCostValue;
+	
 	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 	
 	@FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
 	
-		
+	@FindBy(xpath="//*[@id='drugcostestimatorDetails']/preceding::h1")
+    private WebElement drugCostEstimatorPageHeaderText;
+	
+	@FindBy(id="atddBackToPlans")
+    private WebElement backToPlansBtn;
+			
 	public WebElement getImgLoadingIndicator() {
 		return imgLoadingIndicator;
 	}
@@ -1988,7 +1995,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
 		scrollToView(btnViewCost);
-		getBtnViewCost().click();
+		jsClickNew(getBtnViewCost());
+		//getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}
 	
@@ -2026,6 +2034,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return new ComparePlansPageBlayer(driver);
 		
 	}	
+	
+	public ComparePlansPageBlayer clickBtnBackToPlancomparenew() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
+		return new ComparePlansPageBlayer(driver);
+
+	}
+	
+	
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
@@ -2143,4 +2162,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
 	}
 	
+	public DrugCostEstimatorPage validateDCEPageDisplayed() {
+		waitforElementNew(drugCostEstimatorPageHeaderText,15);
+		Assert.assertTrue("DCE page is not loaded", drugCostEstimatorPageHeaderText.getText().equals("Drug Cost Estimator"));
+		return null;
+	}
+	
+	public void clickBackToPlansBtn() {
+		backToPlansBtn.click();
+	}
 }

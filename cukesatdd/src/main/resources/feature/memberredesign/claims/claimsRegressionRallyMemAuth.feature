@@ -29,7 +29,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | qavgogine  | qavgogine | q1_uhc_ma001 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
-      | xxxxx | qavgogine  | qavgogine | testUsername | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
+      | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group289 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
 
     @memAuth_rallyClaims01b
     Examples: 
@@ -39,17 +39,17 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     @memAuth_rallyClaims01c
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | qavgogine  | qavgogine | q3_sep_uat4_cosmos_008 | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
+      | 15230 | qavgogine  | qavgogine | q2_apr_aarp0250 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
 
     @memAuth_rallyClaims01d
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-#     | xxxxx | qavgogine  | qavgogine | testUsername | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
-      | 15236 | qavgogine | qavgogine | q1_feb_2020SHIP_034 | SHIP     | Individual          | COMPASS_CLAIMS  | 
+      | xxxxx | qavgogine  | qavgogine | Dream_EOB_MAPD_007 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
+      | 15236 | qavgogine  | qavgogine | PaidInFullShip0011 | SHIP | Individual       | COMPASS_CLAIMS  | 
 
     @memAuth_rallyClaims01e
     Examples: 
-      | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15299 | qavgogine  | qavgogine | q3_sep_UAT4_AARP057 | PDP      | Individual          | RX_CLAIMS       | 
-#     | 15300 | qavgogine  | qavgogine | testUsername | PDP      | GROUP               | RX_CLAIMS       | 
+      | TID   | username   | password  | MemUserName    | planType | memberType        | claimSystem     | 
+      | 15299 | qavgogine  | qavgogine | q3_sep_UAT4_AARP057 | PDP | Individual        | RX_CLAIMS       | 
+      | 15300 | qavgogine  | qavgogine | q2_jun_grp0070 | PDP      | GROUP             | RX_CLAIMS       | 
   #----- end of Non Regression claims scenarios section ------------------------

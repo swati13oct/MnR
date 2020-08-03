@@ -151,7 +151,9 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	
 	public static final String PROFILE_SEARCH = "ProfileSearch";
 	
-	public static final String CREATE_A_PROFILE= "CreateProfile";
+	public static final String NON_MEMBER_CREATE_A_PROFILE= "NonMemberCreateProfile";
+	
+	public static final String MEMBER_CREATE_A_PROFILE= "MemberCreateProfile";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
 
@@ -716,3 +718,4 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	
 	public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
 }
+
