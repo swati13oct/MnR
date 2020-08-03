@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanShop1A
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShopPlanShop1AARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanShop1AARP.json" }, tags = { "@ShopPlan_Shop1_GlobalCompsAARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanShop1AARP.json" }, tags = { "@ShopPlan_Shop2_GlobalCompsAARP" })
 public class RunMRATDDAcquisitionGlobalComponentsShopPlanShop1AARP {
 
 }
