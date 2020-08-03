@@ -2838,16 +2838,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				Map<String, String> DetailsMap = new HashMap<String, String>();
 				String firstName = (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME);
 				DetailsMap.put("First Name", firstName.toUpperCase());
-				
 				String lastName = (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME);
 				DetailsMap.put("Last Name", lastName.toUpperCase());
-				
-				/*DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 				String gender= (String) getLoginScenario().getBean(oleCommonConstants.GENDER);
 				gender=gender.substring(0, 1);
-				DetailsMap.put("Gender",gender);*/
+				DetailsMap.put("Gender",gender);
 				
-		/*		String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
+				String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
 				partAEffective = OLEGPSValidation.converttogpsDate(partAEffective);
 				DetailsMap.put("PartA Date", partAEffective);
 				
@@ -2860,10 +2858,9 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("DOB", dob);
 
 				String medicareNumber= (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER);
-				medicareNumber=medicareNumber.replaceAll("", "-").toUpperCase();
-				DetailsMap.put("Medicare Number", medicareNumber);*/
+				medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
+				DetailsMap.put("Medicare Number", medicareNumber);
 				
-			/*	DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
 				
 				String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
 				DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
@@ -2879,7 +2876,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
 				
-				DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));*/
+				DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
 				
 				
 				
@@ -2934,4 +2931,6 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 	Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
 */
 		}
+
+
 	}

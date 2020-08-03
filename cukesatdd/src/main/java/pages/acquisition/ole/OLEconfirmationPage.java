@@ -133,14 +133,14 @@ public class OLEconfirmationPage extends UhcDriver{
 		return false;
 	}
 
-	  public Map<String, String> retrieve_GPS_data(String confirmation_no) {
+	public Map<String, String> retrieve_GPS_data(String confirmation_no) {
 	  	   Connection connection = createDataBaseConnection();
 		   ResultSet rs = null;
 		   Statement stmt = null;
 		   Map<String, String> gpsData = new HashMap<String, String>();
 		   try {
 			   stmt = connection.createStatement();
-			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY_1 + confirmation_no );
+			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY + confirmation_no );
 			   while(rs.next()) {
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
@@ -151,10 +151,13 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String medicareNumber = rs.getString("MEDICARE_NUMBER");
 				   gpsData.put("Medicare Number", medicareNumber); 
 				   String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
+				   	partAEffectiveDate = partAEffectiveDate.substring(0, 10);
 					gpsData.put("PartA Date", partAEffectiveDate); 
 					String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
-					gpsData.put("PartB Date", partBEffectiveDate); 
+					partBEffectiveDate = partBEffectiveDate.substring(0, 10);
+					gpsData.put("PartB Date", partBEffectiveDate);
 					String doB = rs.getString("DATE_OF_BIRTH");
+					doB = doB.substring(0, 10);
 					gpsData.put("DOB", doB);
 					String zipCode = rs.getString("ZIP_CD");
 					gpsData.put("Zip Code", zipCode );
@@ -267,7 +270,7 @@ public class OLEconfirmationPage extends UhcDriver{
 			   }
 	return gpsData;
 	  
- }
+}
 	 
 public Connection createDataBaseConnection() {
 		Connection connection = null;
@@ -312,8 +315,9 @@ public Connection createDataBaseConnection() {
 			System.out.println("Key\tValue");
 			System.out.println("============");
 			for (String key : matched.keySet()) {
-			    System.out.println(key + "\t" + matched.get(key).toString());
-			  Assert.assertTrue(key + "\t" + matched.get(key).toString(), false);
+				String matchedValue = key + "\t" + matched.get(key).toString();
+			    System.out.println(matchedValue);
+			  Assert.assertTrue(matchedValue, flag);
 			}
 
 			// print out mismatched
@@ -323,8 +327,9 @@ public Connection createDataBaseConnection() {
 			System.out.println("Key\tValue");
 			System.out.println("============");
 			for (String key : mismatched.keySet()) {
-			    System.out.println(key + "\t" + mismatched.get(key).toString());
-			  Assert.assertTrue(key + "\t" + mismatched.get(key).toString(), false);
+				String mismatchedValue = key + "\t" + mismatched.get(key).toString();
+			    System.out.println(mismatchedValue);
+			  Assert.assertTrue(mismatchedValue, flag);
 			}
 		}
 		return flag;
@@ -332,24 +337,12 @@ public Connection createDataBaseConnection() {
 	
 	
 	public String converttogpsDate(String intputDate) {
-		
-		String [] dateArray = intputDate.split("-");
-		int day = Integer.parseInt(dateArray[0]);
-		if(day<10) {
-			day = day % 10;
-		}
-		int month = Integer.parseInt(dateArray[1]);
-		if(month<10) {
-			month = month % 10;
-		}
-		
-		String year= dateArray[2];
-		
-		String outputDate= day+"/"+month+"/"+year; 
+		String date = intputDate.substring(2, 4);
+		String month = intputDate.substring(0, 2);;
+		String year = intputDate.substring(4,8);
+		String outputDate= year+"-"+month+"-"+date; 
 		System.out.println("Output Date====================== "+outputDate);
-		
 		return outputDate;	
-		
 	}
 }
 	
