@@ -1,5 +1,7 @@
 package pages.regression.healthRecord;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +31,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'claims')]")
 	protected WebElement claimsTopMenuLnk;
+	
+	@FindBy(xpath="//h1[contains(.,'Sign In')]")
+	protected WebElement claimsSysTestPg;
 
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@track,'explanation')]")
 	protected WebElement eobTopSubMenuLnk;
@@ -103,6 +108,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath= "//button[@id='accountprofile']")
 	protected WebElement testHarn_AcctProfBtn;
+	
+	@FindBy(xpath="//ul[contains(@class,'dropdown-menu')]//li")
+	protected List<WebElement> testHarn_AcctProfDropdown;
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
@@ -158,5 +166,8 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Senior Supplement Plan')]")
 	protected WebElement comboTab_SSP_planDoc;
+	
+	@FindBy(xpath="//h1[contains(.,'Benefit Summary')]")
+	protected WebElement benefitsPgHeader;
 
 }

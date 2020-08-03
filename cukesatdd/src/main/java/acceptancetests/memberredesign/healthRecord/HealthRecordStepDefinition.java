@@ -171,6 +171,16 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToFindCarePage();
+		//note: FindCare and Claims page are Rally page, let it bypass if getting some Sorry error or systest3 page
+		if (wd.getCurrentUrl().contains("systest3")) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page land on systest3 sign-in page");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		} else if (healthRecordPage.hasSorryError()) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page has 'Sorry it's not us' error");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		}
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -226,6 +236,17 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToClaimsPage();
+		CommonUtility.checkPageIsReady(wd);
+		//note: FindCare and Claims page are Rally page, let it bypass if getting some Sorry error or systest3 page
+		if (wd.getCurrentUrl().contains("systest3")) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page land on systest3 sign-in page");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		} else if (healthRecordPage.hasSorryError()) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page has 'Sorry it's not us' error");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		}
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -399,7 +420,6 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		//note: in these navigation method will first go to benefits then go to planDoc
-		//tbd wd=healthRecordPage.navigateToBenefitsPage();
 		if (memberType.toUpperCase().contains("PREEFF")) 
 			wd=healthRecordPage.navigateToPlanDocPage_preEff(memberType);
 		else

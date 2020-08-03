@@ -10,13 +10,13 @@ Feature: 1.24 Member Individual Health Record
       | Expect Link | <expectLink>       |
     Then the user validates clicking Health Record link will open to the target page
 	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
-	#Then the user navigates to Claims page if applicable and validate Health Record link display behavior
+	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
 	Then the user navigates to Payments page and validate Health Record link display behavior
-	#Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
+	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
 	Then the user navigates to Account Settings page and validate Health Record link display behavior
 	Then the user navigates to Contact Us page and validate Health Record link display behavior

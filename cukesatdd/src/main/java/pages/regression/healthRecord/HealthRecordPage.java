@@ -1,15 +1,19 @@
 package pages.regression.healthRecord;
 
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 
@@ -132,13 +136,15 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate FindCare link on top menu", false);
 			}
 		}
-		sleepBySec(1);
+		sleepBySec(2);
 		return driver;
 	}
 
 	public WebDriver navigateToClaimsPage() {
+		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 5);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
+			CommonUtility.waitForPageLoad(driver, claimsSysTestPg, 10); //note: Rally claims sometimes lands on systest3 sign-in page, wait n c if this is the case
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -149,6 +155,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
 			}
 		}
+		CommonUtility.checkPageIsReady(driver);
 		return driver;
 	}
 
@@ -198,6 +205,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate Benefits link on top menu", false);
 			}
 		}
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 5);
 		return driver;
 	}
 	
@@ -349,7 +357,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 				acctSettingMenuShadowRootBtn.click();
 				checkModelPopup(driver,1);
+				WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
+				Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+				
 			} catch (Exception e) {
+				e.printStackTrace();
 				if (noWaitValidate(sorryError)) {
 					//note: try one more time before giving up
 					System.out.println("try one more time before giving up");
@@ -365,8 +377,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 						else 
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
 					}
-				} else
-					Assert.assertTrue("PROBLEM - unable to locate Account Profile button on top menu", false);
+				} 
 			}
 			try {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
@@ -389,6 +400,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 			jse.executeScript("window.scrollBy(0,50)", "");
 			scrollToView(testHarn_AcctProfBtn);
 			jsClickNew(testHarn_AcctProfBtn);
+
+			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
 
 			//note: don't know why .click() doesn't work
 			checkModelPopup(driver,1);
@@ -419,7 +432,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				acctSettingMenuShadowRootBtn.click();
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			} 
 			try {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
 				
@@ -450,6 +463,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 		testHarn_desktop_AcctProf_IHRLnk.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,1);
-	}			
+	}		
+	
+	public boolean hasSorryError() {
+		return noWaitValidate(sorryError);
+	}
 
 }
