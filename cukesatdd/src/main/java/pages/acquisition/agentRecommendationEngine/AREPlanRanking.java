@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -148,6 +147,8 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
 		System.out.println("Current URL : " + currentPageUrl);
+		Assert.assertTrue(validate(planRankingTxt),"Ranking text is missing");
+		Assert.assertTrue(validate(planRankingDropdown),"Ranking Dropdown is missing");																
 		planRankingDropdown.click();
 		Assert.assertTrue(validate(dentalCheckLabel),"Dental Checkbox is missing");
 		Assert.assertTrue(validate(visionCheckLabel),"Vision Checkbox is missing");
@@ -162,6 +163,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		Assert.assertTrue(drugCheck.isSelected(), "Drug is not selected by default");
 		Assert.assertTrue(doctorCheck.isSelected(), "Doctor is not selected by default");
+		
+		//Deselect All
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
 		applyBtn.click();
@@ -169,6 +172,8 @@ public class AREPlanRanking extends UhcDriver {
 		boolean dropClose = validate(applyBtn, 10);
 		System.out.println("Drop close : " + dropClose);
 		Assert.assertFalse(dropClose);
+		
+		//Select All
 		planRankingDropdown.click();
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", true);
@@ -236,7 +241,9 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		if (select)
+			Assert.assertTrue(elemCheck.isSelected(), "Unable to Select "+elemCheck);
 		else
+			Assert.assertFalse(elemCheck.isSelected(), "Unable to Deselect "+elemCheck);
 	}
 
 	public void agentaddDrugsPlanCompare(String drugDetails) {
@@ -271,8 +278,13 @@ public class AREPlanRanking extends UhcDriver {
 		doctorModellookup(doctors);
 	}
 
+ 
 	public void doctorModellookup(String search) {
 		WerallyPage rallyobj = new WerallyPage(driver);
+    	String curWindow = driver.getWindowHandle();
+    	System.out.println(curWindow);
+    	rallyobj.validateLinksanotherWindow(curWindow,"Adding Doctors",search);
+    	threadsleep(5000);		
 	}
 
 	public void DoctorsInPlanCompare(String docDetails) {
@@ -286,11 +298,16 @@ public class AREPlanRanking extends UhcDriver {
 		validate(AddDoctorsLink);
 		AddDoctorsLink.click();
 		WerallyPage rallyobj = new WerallyPage(driver);
+    	String curWindow = driver.getWindowHandle();
+    	System.out.println(curWindow);
+    	rallyobj.validateLinksanotherWindow(curWindow,"Delete Doctors",docDetails);
+    	threadsleep(5000);
 	}
 
 	public void validateViewPlanDetails() {
 		System.out.println("Validate ARE View Plan Details : ");
 		int totalnumberofplans = Integer.parseInt(NumberofPlans.getText().trim().split(" ")[0]);
+		verifyPlanNames(plancards, totalnumberofplans, viewplandetailslink);														
 	}
 
 	public void validateEnrollPlan() {
