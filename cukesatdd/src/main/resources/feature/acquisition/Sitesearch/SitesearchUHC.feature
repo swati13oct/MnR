@@ -44,7 +44,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
     
  @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
- Scenario Outline: Verify search results in UHC site for Error - search value -<newsearchvalue>
+ Scenario Outline: Verify search results in UHC site for Error - search value -<NewSearchValue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>|
