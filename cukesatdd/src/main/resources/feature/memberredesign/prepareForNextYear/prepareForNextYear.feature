@@ -149,13 +149,13 @@ Feature: 1.25 Member Prepare For Next Year
 	@prepareForNextYear02d @devRegression
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-07  | F443004 | MAPD	 | GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
+	    | 2-07  | F443004 | MAPD	 | UHC_GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
 
 	@prepareForNextYear02e
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-08  | F443004 | PDP	     | GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |  
-	    | 2-09  | F443004 | MA	     | GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
+	    | 2-08  | F443004 | PDP	     | UHC_GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |  
+	    | 2-09  | F443004 | MA	     | UHC_GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
 
     @prepareForNextYear02f
     Examples: 
@@ -289,14 +289,14 @@ Feature: 1.25 Member Prepare For Next Year
 	# code not on stage yet
 	#@prepareForNextYear02d
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-07  | F443004 | MAPD	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | index | FID     | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 2-07  | F443004 | MAPD	  | UHC_GRP_PFNY | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
 	#@prepareForNextYear02e
     #Examples: 
-	#    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-08  | F443004 | PDP	  | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
-	#    | 2-09  | F443004 | MA	      | GRP_PFNY   | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | index | FID     | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 2-08  | F443004 | PDP	  | UHC_GRP_PFNY | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 2-09  | F443004 | MA	      | UHC_GRP_PFNY | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
     @prepareForNextYear02f
     Examples: 
