@@ -52,7 +52,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		System.out.println("Login into Agent: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		System.out.println("Current URL : " + currentPageUrl);
-		if (validate(username,10)) {
+		if (validate(username, 10)) {
 			System.out.println("Loging In...");
 			username.sendKeys(user);
 			password.sendKeys(pass);
@@ -71,7 +71,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		cloakInBtn.click();
 		switchAnotherWindow(curWind);
 		commonUtils.plansLoader();
-		//Assert.assertTrue(validate(stausTxt, 60), "Search not success");
+		// Assert.assertTrue(validate(stausTxt, 60), "Search not success");
 	}
 
 	public void switchAnotherWindow(String curWin) {

@@ -17,6 +17,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
+  
   @ARE @DrugARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
@@ -79,7 +80,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
-  
+
   @ARE @EnrollPlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
@@ -93,6 +94,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
+
   @ARE @PlansReorder @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page

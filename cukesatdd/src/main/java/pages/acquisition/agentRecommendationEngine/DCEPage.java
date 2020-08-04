@@ -3,7 +3,6 @@
  */
 package pages.acquisition.agentRecommendationEngine;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
 
@@ -40,7 +38,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "button#drug-search-button")
 	private WebElement drugsearchButton;
-	
+
 	@FindBy(css = "p[id*='drugDosageStrengthId']")
 	private List<WebElement> drugsListed;
 
@@ -48,7 +46,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#drugModal .modal-header")
 	private WebElement modalheader;
-	
+
 	@FindBy(css = "#modal uhc-radio[class*='check']")
 	private WebElement modalSelcetedDrug;
 
@@ -58,8 +56,8 @@ public class DCEPage extends UhcDriver {
 	@FindBy(css = "#drugModal #drug-alt-search-button")
 	private WebElement modalcontinue;
 
-	//Dosage Modal
-	
+	// Dosage Modal
+
 	@FindBy(css = "#drugModal #popup3 section>h2")
 	private WebElement modalTitle;
 
@@ -77,31 +75,31 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#drugModal #drug-dosage-button")
 	private WebElement modalDosageContinue;
-	
+
 	@FindBy(css = "#drugModal #save-drug-button")
 	private WebElement modalGenericContinue;
 
 	@FindBy(css = "a[class*='pharmacy']")
 	private WebElement pickPharmacyButton;
-	
+
 	@FindBy(css = "#select-pharmacy-button-0")
 	private WebElement pharmacy1stSelectButton;
-	
+
 	@FindBy(css = "button[dtmname*='previous']")
 	private WebElement previoustoStep1;
 
 	@FindBy(css = "#nextSummary")
 	private WebElement viewCostButton;
-	
+
 	@FindBy(css = "#atddBackToPlans")
 	private WebElement backtoPlansButton;
-	
+
 	@FindBy(css = "a[dtmname*='Return']")
 	private WebElement returntoPlan;
-	
+
 	@FindBy(css = "button.delete-drug-confirm")
 	private WebElement deleteBtn;
-	
+
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
 		boolean searchButtonClick = false;
@@ -139,29 +137,27 @@ public class DCEPage extends UhcDriver {
 
 	}
 
-    public void choosePharmacyandBacktoPlans() {
-    	validate(pickPharmacyButton);
-    	pickPharmacyButton.click();
-    	pageloadcomplete();
-    	threadsleep(2000);
-    	validate(pharmacy1stSelectButton);
-    	pharmacy1stSelectButton.click();
-    	threadsleep(2000);
-    	pageloadcomplete();
-    	validate(previoustoStep1);
-    	previoustoStep1.click();
-    	pageloadcomplete();
-    	threadsleep(2000);
-    	validate(returntoPlan);
-    	returntoPlan.click();
-/*    	validate(viewCostButton);
-    	viewCostButton.click();
-    	validate(backtoPlansButton);
-    	backtoPlansButton.click(); */
-}
+	public void choosePharmacyandBacktoPlans() {
+		validate(pickPharmacyButton);
+		pickPharmacyButton.click();
+		pageloadcomplete();
+		threadsleep(2000);
+		validate(pharmacy1stSelectButton);
+		pharmacy1stSelectButton.click();
+		threadsleep(2000);
+		pageloadcomplete();
+		validate(previoustoStep1);
+		previoustoStep1.click();
+		pageloadcomplete();
+		threadsleep(2000);
+		validate(returntoPlan);
+		returntoPlan.click();
+		/*
+		 * validate(viewCostButton); viewCostButton.click();
+		 * validate(backtoPlansButton); backtoPlansButton.click();
+		 */
+	}
 
-	
-	
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
@@ -189,8 +185,7 @@ public class DCEPage extends UhcDriver {
 			}
 			if (threeeMonthfrequency)
 				freq.selectByVisibleText("Every 3 Months");
-			
-			
+
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
@@ -212,23 +207,23 @@ public class DCEPage extends UhcDriver {
 			String drugInfo = drugslist[i];
 			if (drugInfo.trim().length() > 0) {
 				dosage = drugInfo;
-				delete(dosage); 
+				delete(dosage);
 			}
 		}
-    	threadsleep(2000);
-    	validate(returntoPlan);
-    	returntoPlan.click();
+		threadsleep(2000);
+		validate(returntoPlan);
+		returntoPlan.click();
 	}
-	
+
 	public void delete(String dosage) {
 		validate(drugsearchBox, 30);
-		WebElement deleteLink = driver.findElement(By.xpath("//*[contains(@class,'drugTileHeight')]//p[contains(text(),'"+dosage+"')]/../../ul/li/a[@class='delete-drug']"));
+		WebElement deleteLink = driver
+				.findElement(By.xpath("//*[contains(@class,'drugTileHeight')]//p[contains(text(),'" + dosage
+						+ "')]/../../ul/li/a[@class='delete-drug']"));
 		deleteLink.click();
 		threadsleep(2000);
 		deleteBtn.click();
-		pageloadcomplete();		
+		pageloadcomplete();
 	}
-			
-	
 
 }

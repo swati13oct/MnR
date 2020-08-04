@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -31,9 +30,9 @@ public class WerallyPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 	}
-		
+
 	ArrayList<String> werallyResults = new ArrayList<String>();
-	
+
 	String page = "Werally";
 
 	@FindBy(id = "planSelectorTool")
@@ -69,75 +68,76 @@ public class WerallyPage extends UhcDriver {
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
 	private WebElement saveModalCloseContinueSearchbutton;
-	
+
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
-	
+
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
 	private WebElement finishReturnButton;
-	
+
 //Rally Home Page
-	
+
 	@FindBy(css = "div[class*='exportSavedProviders'] button[class*='action-btn']")
 	private WebElement viewSavedProviderbutton;
-	
+
 //Switch to Werally Window Page
-    
-    public ArrayList<String> validateLinksanotherWindow(String primaryWindow,String type,String search) {
-    	String browser = MRScenario.browsername;
-    	String env = MRScenario.environment;
+
+	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search) {
+		String browser = MRScenario.browsername;
+		String env = MRScenario.environment;
 		threadsleep(2000);
-		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 3) {
 			for (String window : windows) {
 				System.out.println(window.replace("page-", ""));
 				if (!window.equals(primaryWindow)) {
 					driver.switchTo().window(window);
-					if(browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("edge") || browser.equalsIgnoreCase("IE"))
+					if (browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("edge")
+							|| browser.equalsIgnoreCase("IE"))
 						driver.manage().window().maximize();
 					System.out.println(driver.getCurrentUrl());
-					if(driver.getCurrentUrl().contains("werally.in") || driver.getCurrentUrl().contains("werally.com"))  {
-					if(env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline"))
-            			Assert.assertTrue(driver.getCurrentUrl().contains("werally.com") , "Prod Connected to Incorrect Rally");
-					else
-						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in") , "Non Prod Connected to Incorrect Rally");
-					if(type.toUpperCase().contains("ADDING"))
-						werallyResults = werallySearch(type,search);
-					else if(type.toUpperCase().contains("DELETE"))
-						werallyResults = werallySearchfordelete(type,search);
-					}
-					else {
+					if (driver.getCurrentUrl().contains("werally.in")
+							|| driver.getCurrentUrl().contains("werally.com")) {
+						if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline"))
+							Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
+									"Prod Connected to Incorrect Rally");
+						else
+							Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
+									"Non Prod Connected to Incorrect Rally");
+						if (type.toUpperCase().contains("ADDING"))
+							werallyResults = werallySearch(type, search);
+						else if (type.toUpperCase().contains("DELETE"))
+							werallyResults = werallySearchfordelete(type, search);
+					} else {
 						threadsleep(5000);
 					}
-		}
+				}
 				threadsleep(5000);
 				driver.switchTo().window(primaryWindow);
 			}
-		System.out.println(driver.getCurrentUrl());
-		threadsleep(1000);
-	} else {
-		System.out.println("Unexpected windows opened");
-		driver.switchTo().window(primaryWindow);
-		threadsleep(1000);
-		Assert.assertTrue(false);
-	}
+			System.out.println(driver.getCurrentUrl());
+			threadsleep(1000);
+		} else {
+			System.out.println("Unexpected windows opened");
+			driver.switchTo().window(primaryWindow);
+			threadsleep(1000);
+			Assert.assertTrue(false);
+		}
 		return werallyResults;
-    }
-	
-    public ArrayList<String> werallySearch(String type, String searchParameter) {
+	}
+
+	public ArrayList<String> werallySearch(String type, String searchParameter) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
-		boolean newRally=false;
+		boolean newRally = false;
 		try {
 			validate(welcomeTilte, 30);
 			getStarted.click();
-		} 
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("No Get Started button available in werally");
 		}
 		if (type.toUpperCase().contains("DOCTORS") || type.toUpperCase().contains("HOSPITALS")) {
@@ -152,61 +152,58 @@ public class WerallyPage extends UhcDriver {
 					int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 					int count = 1;
 					if (actualResultscount >= count) {
-						for (int i = count-1; i >= 0; i--) {
+						for (int i = count - 1; i >= 0; i--) {
 							threadsleep(5000);
-							WebElement saveButton = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
+							WebElement saveButton = searchResults.get(i)
+									.findElement(By.cssSelector("div[class*='hidden'] button"));
 							saveButton.click();
 							threadsleep(3000);
 							String text = saveModalCloseContinueSearchbutton.getText();
-							if(text.toUpperCase().contains("SEARCHING"))
-								newRally=true;
-							if (j == (doclist.length)-1) {
-								if(newRally)
+							if (text.toUpperCase().contains("SEARCHING"))
+								newRally = true;
+							if (j == (doclist.length) - 1) {
+								if (newRally)
 									finishReturnButton.click();
 								else
 									viewSavedbutton.click();
-							}
-							else {
+							} else {
 								saveModalCloseContinueSearchbutton.click();
 							}
-						}	
-						if(!newRally)
+						}
+						if (!newRally)
 							checkProviderCoveragebutton.click();
 						try {
-					        WebDriverWait wait = new WebDriverWait(driver, 2);
-					        if(wait.until(ExpectedConditions.alertIsPresent())==null) {
-					        	System.out.println("alert was not present");
-					        }else {
-					        	Alert alert = driver.switchTo().alert();
-						        alert.accept();
-						        System.out.println("alert was present and accepted");
-					        }
-					        
-					    } catch (Exception e) {
-					        //exception handling
-					    }
+							WebDriverWait wait = new WebDriverWait(driver, 2);
+							if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
+								System.out.println("alert was not present");
+							} else {
+								Alert alert = driver.switchTo().alert();
+								alert.accept();
+								System.out.println("alert was present and accepted");
+							}
+
+						} catch (Exception e) {
+							// exception handling
+						}
 					}
+				} else {
+					System.out.println("Required search Results is not Returned");
+					Assert.assertTrue(false);
 				}
-			 else {
-				System.out.println("Required search Results is not Returned");
-				Assert.assertTrue(false);
 			}
-		}
 			Collections.sort(doctorsName);
 		}
 		return doctorsName;
-		}
-    
-    public ArrayList<String> werallySearchfordelete(String type, String searchParameter) {
+	}
+
+	public ArrayList<String> werallySearchfordelete(String type, String searchParameter) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
-		boolean newRally=false;
+		// boolean newRally=false;
 		try {
 			validate(welcomeTilte, 30);
 			getStarted.click();
-		} 
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("No Get Started button available in werally");
 		}
 		validate(viewSavedProviderbutton, 30);
@@ -224,14 +221,14 @@ public class WerallyPage extends UhcDriver {
 		validate(checkProviderCoveragebutton, 30);
 		checkProviderCoveragebutton.click();
 		return doctorsName;
-    }
-    
-    public void delete(String docInfo) {
-   		WebElement deleteLink = driver.findElement(By.xpath("//*[contains(@class,'provider-name')]/a[contains(text(),'"+docInfo+"')]/../../../../div[contains(@class,'provider-header')]/p[2]/span/button[@class='link']"));
-   		jsClickNew(deleteLink);
-		threadsleep(2000);
-		pageloadcomplete();		
 	}
-    
-}
 
+	public void delete(String docInfo) {
+		WebElement deleteLink = driver.findElement(By.xpath("//*[contains(@class,'provider-name')]/a[contains(text(),'"
+				+ docInfo + "')]/../../../../div[contains(@class,'provider-header')]/p[2]/span/button[@class='link']"));
+		jsClickNew(deleteLink);
+		threadsleep(2000);
+		pageloadcomplete();
+	}
+
+}
