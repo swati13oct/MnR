@@ -15,6 +15,7 @@ import acceptancetests.data.LoginCommonConstants;
 import cucumber.api.Scenario;
 // To be added
 import cucumber.api.java.After;
+import io.appium.java_client.AppiumDriver;
 import junit.framework.Assert;
 
 /**
@@ -62,6 +63,7 @@ public class GlobalTearDown {
 		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
 		{
 		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		   // AppiumDriver wd1  =(AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
 			
 			// To get the report embedded in the report
