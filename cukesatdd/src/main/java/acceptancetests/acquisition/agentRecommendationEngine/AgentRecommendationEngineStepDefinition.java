@@ -115,6 +115,12 @@ public class AgentRecommendationEngineStepDefinition {
 		planRank.validateSavePlan();
 	}
 	
+	@Then("^agent validates enroll plans in plancompare page$")
+	public void agent_verify_enroll() {
+		AREPlanRanking planRank =  new AREPlanRanking(wd);
+		planRank.validateEnrollPlan();
+	}
+	
 	@Then("^agent validates ranking plans order in plancompare page$")
 	public void agent_verify_rankin_planorder(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);

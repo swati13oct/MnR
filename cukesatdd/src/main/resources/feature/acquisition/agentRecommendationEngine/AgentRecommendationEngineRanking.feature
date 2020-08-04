@@ -25,7 +25,6 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    Then agent validates plan ranking drop down UI plancompare page
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user verify Drugs added in plan compare page vs DCE
@@ -43,7 +42,6 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    Then agent validates plan ranking drop down UI plancompare page
     When user adds providers in plan compare page
       | Doctors | <Doctors> |
     Then user verify added Providers in plan compare page vs Werally
@@ -62,7 +60,6 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    #Then agent validates plan ranking drop down UI plancompare page
     Then agent validates view plan details in plancompare page
 
     Examples: 
@@ -77,13 +74,25 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    Then agent validates plan ranking drop down UI plancompare page
     Then agent validates save plans in plancompare page
 
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
+  
+  @ARE @EnrollPlansARE @F439411
+  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    Then agent validates enroll plans in plancompare page
 
+    Examples: 
+      | User      | Pass      | Email            |
+      | qavgogine | qavgogine | MARDI@MEMBER.COM |
   @ARE @PlansReorder @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
