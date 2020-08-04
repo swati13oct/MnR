@@ -218,7 +218,6 @@ public class VppPlanValidationStepDefinition {
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
-		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

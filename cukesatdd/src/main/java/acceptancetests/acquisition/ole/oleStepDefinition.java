@@ -2832,7 +2832,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		//Assert.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("team-acme")) ) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")) ) {
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
 				Map<String, String> DetailsMap = new HashMap<String, String>();

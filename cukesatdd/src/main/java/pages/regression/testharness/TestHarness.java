@@ -321,7 +321,7 @@ public class TestHarness extends UhcDriver {
 				//(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 				System.out.println("The selected category is " +category);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
-			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
+			//tbd CommonUtility.waitForPageLoad(driver, pcpMedicaLogo, 30);
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
@@ -1140,8 +1140,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		Thread.sleep(5000);
-		checkForIPerceptionModel(driver);
+		//tbd Thread.sleep(5000);
+		checkModelPopup(driver,5);
+		//checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 

@@ -618,6 +618,8 @@ try {
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
+		else if(environment.contains("mnr-acq"))
+			domain = "origin-elr-dmz.optum.com";
 		else 
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
 		System.out.println("env chosen is: "+ environment);

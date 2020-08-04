@@ -211,7 +211,8 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
 
@@ -257,10 +258,26 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		//plansummaryPage.CheckClick_NextYear_Plans();
-		plansummaryPage.handlePlanYearSelectionPopup(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
+	@And("^the user selects plan year for the AARP site$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+	}
 
 	/**
 	 * @toDo:select multiple plans to compare in MA and click on compare plan link
@@ -281,11 +298,11 @@ public class VppStepDefinitionUpdatedAARP {
 		int plansForCompare=0;
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
-			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansForCompare=plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
-			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansForCompare=plansummaryPage.checkAllPDPlans();
 		}
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
@@ -1114,7 +1131,7 @@ public class VppStepDefinitionUpdatedAARP {
 		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
-
+		
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
@@ -1388,19 +1405,19 @@ public class VppStepDefinitionUpdatedAARP {
 		// note: the second plan in the list will be unsaved
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
 	}
@@ -3212,7 +3229,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(newTestDriver);
-		plansummaryPage.handlePlanYearSelectionPopup(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		CommonUtility.checkPageIsReady(newTestDriver);
 		List<String> noteList=plansummaryPage.validatePlanSummaryEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
@@ -3234,7 +3251,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		//keep PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(newTestDriver);
 		PlanDetailsPage tmpPg=(PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(tmpPg.driver);
-		//keep email_vppPlanDetailsPage.handlePlanYearSelectionPopup(planType);
+		//keep email_vppPlanDetailsPage.handlePlanYearSelectionPopup();
 		//keep CommonUtility.checkPageIsReady(newTestDriver);
 		
 		
@@ -3258,7 +3275,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
 		ComparePlansPage comparePlansPage = new ComparePlansPage(newTestDriver);
-		comparePlansPage.handlePlanYearSelectionPopup(planType);
+		comparePlansPage.handlePlanYearSelectionPopup();
 		CommonUtility.checkPageIsReady(newTestDriver);
 		comparePlansPage.checkModelPopup(newTestDriver);
 		//note: temperary bypass for now until the flash issue is resolved
@@ -3299,7 +3316,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.viewPlanSummary(plantype);
-			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansummaryPage.handlePlanYearSelectionPopup();
 		} else {
 			System.out.println("boo");
 			System.exit(0);
