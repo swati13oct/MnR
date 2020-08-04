@@ -65,11 +65,6 @@ public class DCEStepDefinitionUHC {
 
 	}
 
-	@Then("^load screen should be displayed$")
-	public void load_screen_should_be_displayed() {
-
-	}
-
 	@When("^the user clicks on Add drugs button on UHC$")
 	public void the_user_clicks_on_Add_drugs_button_UHC() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
@@ -268,6 +263,28 @@ public class DCEStepDefinitionUHC {
 
 	@Then("^load screen should be displayed on UHC$")
 	public void load_screen_should_be_displayed_on_uhc() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		// zipCodePlanYearPage.verifyLoadScreen();
+	}
+	
+	@When("^user clicks on change pharmacy link from summary page in UHC$")
+	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_UHC() throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickChangePharmacy();
+	}
 
+	@Then("^change pharmacy modal should be displayed in UHC$")
+	public void change_pharmacy_modal_should_be_displayed_in_UHC() throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.selectPharmacyModalDisplayed();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user verify change pharmacy modal in UHC$")
+	public void user_verify_change_pharmacy_modal_in_UHC() throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateSelectPharmacyPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 }

@@ -249,10 +249,30 @@ public class DCEStepDefinitionAARP {
 	}
 	
 	@When("^user should be able to toggle between plan types$")
-	public void user_should_be_able_to_toggle_between_plan_types() throws Throwable {
+	public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyPDPPlanToggle();
 		drugSummaryPage.verifySNPPlanToggle();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user clicks on change pharmacy link from summary page in AARP$")
+	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_AARP() throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickChangePharmacy();
+	}
+
+	@Then("^change pharmacy modal should be displayed in AARP$")
+	public void change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.selectPharmacyModalDisplayed();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user verify change pharmacy modal in AARP$")
+	public void user_verify_change_pharmacy_modal_in_AARP() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 }
