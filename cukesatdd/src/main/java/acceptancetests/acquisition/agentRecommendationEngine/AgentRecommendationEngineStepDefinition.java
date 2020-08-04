@@ -114,5 +114,16 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank =  new AREPlanRanking(wd);
 		planRank.validateSavePlan();
 	}
+	
+	@Then("^agent validates ranking plans order in plancompare page$")
+	public void agent_verify_rankin_planorder(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank =  new AREPlanRanking(wd);
+		planRank.verifyRankingOrder(
+				inputValues.get("ZIP"),inputValues.get("Ranking Options"),
+				inputValues.get("CurrentPlan"),inputValues.get("ChangeInOrder"),
+				inputValues.get("Expected Plans Order")
+				);
+	}
 
 }

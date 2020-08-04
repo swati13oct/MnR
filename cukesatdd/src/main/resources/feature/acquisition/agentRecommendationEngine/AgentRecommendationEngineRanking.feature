@@ -54,7 +54,6 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email            | Doctors                                  | DelDoctorsNames                          |
       | qavgogine | qavgogine | MARDI@MEMBER.COM | Okeke, Ernest I, MD:Clower, Daniel C, MD | Okeke, Ernest I, MD:Clower, Daniel C, MD |
 
-      
   @ARE @ViewPlanDetailsARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
@@ -69,7 +68,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
-      
+
   @ARE @SavePlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
@@ -84,3 +83,22 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
+
+  @ARE @PlansReorder @F439411
+  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    Then agent validates ranking plans order in plancompare page
+      | ZIP                  | <PlanCompareZIP> |
+      | Ranking Options      | <RankingOptions> |
+      | CurrentPlan          | <CurrentPlan>    |
+      | ChangeInOrder        | <ChangeInOrder>  |
+      | Expected Plans Order | <PlansOrder>     |
+
+    Examples: 
+      | User      | Pass      | Email            | PlanCompareZIP | RankingOptions     | CurrentPlan | ChangeInOrder | PlansOrder                                                                                                                                   |
+      | qavgogine | qavgogine | API@MEMBERDD.COM |          11226 | fitness,lowpremium | YES         | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
