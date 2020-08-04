@@ -70,7 +70,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='disclaimer-accordion-wrap']")
 	public WebElement disclaimer;
 	
-	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
@@ -81,6 +81,48 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
 	public WebElement snpPlanToggle;
+	
+	@FindBy(id = "changePharmacyLink")
+	public WebElement changePharmacy;
+	
+	@FindBy(id = "selectaPharmacyHeader")
+	public WebElement selectPharmacyHeader;
+	
+	@FindBy(id = "selectPharmcyModalCloseLink")
+	public WebElement selectPharmacyModalCloseBtn;
+	
+	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
+	public WebElement selectedPharmacyLink;
+	
+	@FindBy(id = "milesDropdown")
+	public WebElement distanceDrpDown;
+	
+	@FindBy(id = "pharmacy-zip-filter")
+	public WebElement pharmacyZipcodeSearch;
+	
+	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
+	public WebElement pharmacySearchBtn;
+	
+	@FindBy(id = "mailSelectPharmacyBtn0")
+	public WebElement preferredMailPharmacy;
+	
+	@FindBy(id = "optumRxTxt")
+	public WebElement optumRxMsg;
+	
+	@FindBy(xpath = "//*[@role='list']")
+	public WebElement pharmacyListSection;
+	
+	@FindBy(id = "matchingLbl")
+	public WebElement matchingPharmacyCount;
+	
+	@FindBy(id = "sortDropdown")
+	public WebElement sortDrpdown;
+	
+	@FindBy(id = "paginationBackBtn")
+	public WebElement backBtn;
+	
+	@FindBy(id = "paginationNextBtn")
+	public WebElement nextBtn;
 
 	@Override
 	public void openAndValidate() {
@@ -239,5 +281,30 @@ public class DrugSummaryPage extends UhcDriver {
 		}		
 	}
 	
+	public void clickChangePharmacy() {
+		changePharmacy.click();
+	}
 	
+	public DrugSummaryPage selectPharmacyModalDisplayed() throws InterruptedException {
+		if(validateNew(selectPharmacyHeader)) {
+			return new DrugSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public DrugSummaryPage validateSelectPharmacyPage() throws InterruptedException {
+		if(validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink) &&	validateNew(distanceDrpDown) &&
+		validateNew(pharmacyZipcodeSearch)&&
+		validateNew(pharmacySearchBtn) &&
+		validateNew(preferredMailPharmacy)&&
+		validateNew(pharmacyListSection)&&
+		validateNew(matchingPharmacyCount)&&
+		validateNew(sortDrpdown)&&
+		validateNew(backBtn)&&
+		validateNew(nextBtn)) {
+		return new DrugSummaryPage(driver);
+		}
+		
+		return null;
+	}
 }
