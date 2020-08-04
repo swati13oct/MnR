@@ -114,5 +114,11 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank =  new AREPlanRanking(wd);
 		planRank.validateSavePlan();
 	}
+	
+	@Then("^agent validates enroll plans in plancompare page$")
+	public void agent_verify_enroll() {
+		AREPlanRanking planRank =  new AREPlanRanking(wd);
+		planRank.validateEnrollPlan();
+	}
 
 }
