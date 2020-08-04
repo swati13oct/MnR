@@ -1,7 +1,7 @@
 Feature: Refill - Checkout summary
   I am a user of the M&R Portal with Rx benefits I must have access to checkout information for refillable medications
 
-  @F481927 @US2767410 @Scenario1 @Test
+  @F481927 @US2767410 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -16,22 +16,21 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType                  |
       | F481927 | MAPD     | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767410 @Scenario2
+  @F481927 @US2767410 @Scenario2 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication information 
     Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
-    Then user will see "Complete Your Refill Page
+    And user fetches medication information and clicks on Refill Medication call to action button
+    Then user will see "Complete Your Refill" Page
     When user views the Medications section
-    And user validates the medication name on Che
-    And user validates the strength of the medication
-    And user validates the price I paid for the medication
-    And user validates the day supply of the medication
-    And user views the Rx number
-    And user views the provider
-    And user views the remaining refills
+    And user validates the medication name and strength
+    And user validates the price
+    And user validates the day supply
+    And user validates the Rx number
+    And user validates the provider
+    And user validates the remaining refills
 
     Examples: 
       | FID     | planType | memberType           |
@@ -137,7 +136,7 @@ Feature: Refill - Checkout summary
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks Refill Medication call to action button
     Then user views the "Complete Your Refill" page
-    When user view the Order summary section
+    When user will view the section above Place Order Btn
     Then user will see a message about shipping address
     And user will see shipping address
 
@@ -197,16 +196,15 @@ Feature: Refill - Checkout summary
       | F481927 | MAPD     | Rx_Individual_PnP_rx |
 
   @F481927 @US2767408 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove links
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
     Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks Refill Medication call to action button
     Then user views the "Complete Your Refill" page
-    When user select Place Order
-    Then user will view the order confirmation page
-
+    And user will see Place Order Btn
+    
     Examples: 
       | FID     | planType | memberType           |
       | F481927 | MAPD     | Rx_Individual_PnP_rx |

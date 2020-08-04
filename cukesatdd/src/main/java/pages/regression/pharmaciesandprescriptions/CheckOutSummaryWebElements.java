@@ -65,112 +65,97 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//h4[text()='Shipping Address']/..")
 	protected WebElement shippingAddressSection;
-	
+
 	@FindBy(xpath = "//div[@data-testid='address__name']/..")
 	protected WebElement shippingAddressContent;
-	
+
 	@FindBy(xpath = "//*[@data-testid='os__shipping__preferredLabel']//span")
 	protected WebElement shippingpreferredLabel;
-	
+
 	@FindBy(xpath = "//*[@data-testid='os__shipping__changeAddressCTA']")
 	protected WebElement changeShippingAddrssCTA;
-	
-	//*********************Payment Section***************************//
-	
-	@FindBy(xpath="//h4[@data-testid='os__payment__title']")
+
+	// *********************Payment Section***************************//
+
+	@FindBy(xpath = "//h4[@data-testid='os__payment__title']")
 	protected WebElement paymentHeader;
-	
-	@FindBy(xpath="//h4[@data-testid='os__payment__title']/..")
+
+	@FindBy(xpath = "//h4[@data-testid='os__payment__title']/..")
 	protected WebElement paymentSection;
-	
-	@FindBy(xpath="//*[@data-testid='os__payment__ccImage']/img")
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']/img")
 	protected WebElement paymentCreditCardImage;
-	
-	@FindBy(xpath="//*[@data-testid='os__payment__ccNumber']")
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccNumber']")
 	protected WebElement paymentCreditCardNumber;
-	
-	@FindBy(xpath="//*[@data-testid='os__payment__ccExpDate']")
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccExpDate']")
 	protected WebElement paymentCreditCardExpDate;
-	
-	@FindBy(xpath="//*[@data-testid='os__payment__PreferredLabel']//span")
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__PreferredLabel']//span")
 	protected WebElement paymentPreferredLabel;
-	
+
 	@FindBy(xpath = "//*[@data-testid='os__payment__changePaymentCTA']")
 	protected WebElement changePaymentCTA;
-	
-	//*************************Medication Section**********************
-	
-	@FindBy(xpath="//*[@data-testid='rx__removeCTA']")
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']/..")
+	protected WebElement preferredPaymentMethod;
+	// *************************Medication Section**********************
+
+	@FindBy(xpath = "//*[@data-testid='rx__removeCTA']")
 	protected List<WebElement> listOfRemoveItemFromOrderCTA;
-	
-	@FindBy(xpath="//*[@data-testid='rx__drugNameSize']")
+
+	@FindBy(xpath = "//*[@data-testid='rx__drugNameSize']")
 	protected List<WebElement> listOfDrugName;
-	
-	@FindBy(xpath="//*[@data-testid='rx__quantity']")
-	protected List<WebElement> listOfDaySupply; 
-	
-	@FindBy(xpath="//*[@data-testid='rx__number']")
+
+	@FindBy(xpath = "//*[@data-testid='rx__quantity']")
+	protected List<WebElement> listOfDaySupply;
+
+	@FindBy(xpath = "//*[@data-testid='rx__number']")
 	protected List<WebElement> listOfRxNumber;
-	
-	@FindBy(xpath="//*[@data-testid='rx__providerName']")
+
+	@FindBy(xpath = "//*[@data-testid='rx__providerName']")
 	protected List<WebElement> listOfProviderName;
-	
-	@FindBy(xpath="//*[@data-testid='rx__refillsLeft']")
+
+	@FindBy(xpath = "//*[@data-testid='rx__refillsLeft']")
 	protected List<WebElement> listOfRefillRemaining;
-	
-	@FindBy(xpath="//*[@data-testid='os__shipping__estimatedDate']")
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
 	protected List<WebElement> listfOfEstimatedDate;
-	
-	@FindBy(xpath="//*[@data-testid='section__header' and contains(text(),'Medications')]")
+
+	@FindBy(xpath = "//*[@data-testid='section__header' and contains(text(),'Medications')]")
 	protected WebElement medicationsHeader;
-	
-	@FindBy(xpath="//*[@data-testid='os__shipping__selectLabel']")
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__selectLabel']")
 	protected WebElement shippingMethdLabel;
-	
-	@FindBy(xpath="//*[@data-testid='os__shipping__methodSelect']")
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']")
 	protected WebElement shippingMethdDrpDwn;
-	
-	@FindBy(xpath="//*[@data-testid='os__shipping__shipments']")
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__shipments']")
 	protected WebElement medicationShipments;
-	
-	@FindBy(xpath="//*[@data-testid='os__rx__prescriptionsContainer']")
+
+	@FindBy(xpath = "//*[@data-testid='os__rx__prescriptionsContainer']")
 	protected List<WebElement> listOfPrescriptions;
-	
-	@FindBy(xpath="//*[@data-testid='section__header' and contains(text(),'Medications')]/..")
+
+	@FindBy(xpath = "//*[@data-testid='section__header' and contains(text(),'Medications')]/..")
 	protected WebElement medicationsSection;
-	
-	@FindBy(xpath="//*[@data-testid='rx__price']")
+
+	@FindBy(xpath = "//*[@data-testid='rx__price']")
 	protected List<WebElement> listOfPrice;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
+	protected List<WebElement> listOfEstimatedDate;
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__shipments']")
+	protected List<WebElement> listOfShippingShipments;
+
+	// ***********************Shipping Dropdown*********************************
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']//div")
+	protected WebElement shippingDrpDownVal;
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']")
+	protected WebElement shippingDrpDown;
 
 }
