@@ -215,6 +215,19 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user has scrolled up");
 		}
 	}
+	
+	@Then("^User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed$")
+	public void Validate_History_PaymentForFed() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUpForFed();
+		
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
+		}
+	}
 
 	@Then("^User Scrolls down to validate Payment History Section$")
 	public void Validate_History_Payment_section() throws InterruptedException {

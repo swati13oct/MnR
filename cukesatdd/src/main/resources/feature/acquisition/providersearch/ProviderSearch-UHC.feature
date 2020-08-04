@@ -34,31 +34,39 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | planname                             | year     |
       |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-  @ProviderSearchFromGlobalHeaderBlayer1 @AcqRegressionProviderSearchBlayer
-  Scenario Outline: Verify Provider Search  in UMS site from Global Header
+  @ProviderSearchFromGlobalHeaderBlayer1 
+  Scenario Outline: Verify Provider Search  in UMS site from Global Header- plan count - <plancount>
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
     Then the user enters the zipcode and counts the plan Blayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
 
+	@AcqRegressionProviderSearchBlayer
     Examples: 
       | zipcode | plancount |
       |   10001 |        12 |
+      
+    Examples: 
+      | zipcode | plancount |
       |   55344 |         7 |
       |   04011 |         6 |
 
   @ProviderSearchFromWidgetBlayer @AcqRegressionProviderSearchBlayer
-  Scenario Outline: Verify Provider Search  in UMS site from Global Header
+  Scenario Outline: Verify Provider Search  in UMS site from Global Header - plan count - <plancount>
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
     Then the user enters the zipcode and counts the plan Blayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
 
+	@AcqRegressionProviderSearchBlayer
     Examples: 
       | zipcode | plancount |
       |   10001 |        12 |
+      
+    Examples: 
+      | zipcode | plancount |
       |   55344 |         7 |
       |   04011 |         6 |
 
