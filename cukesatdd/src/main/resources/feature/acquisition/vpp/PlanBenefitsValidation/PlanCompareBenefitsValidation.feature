@@ -12,69 +12,69 @@ Feature: ACQ-Plan benefits validation
 			@planCompareBenefitsAARP01
     	Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet1  | AARP |
+      | Plan Compare_Benefits_Data | Sheet1  | AARP |
       
       @planCompareBenefitsAARP02
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet2  | AARP |
+      | Plan Compare_Benefits_Data | Sheet2  | AARP |
       
       @planCompareBenefitsAARP03
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet3  | AARP |
+      | Plan Compare_Benefits_Data | Sheet3  | AARP |
       
       @planCompareBenefitsAARP04
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet4  | AARP |
+      | Plan Compare_Benefits_Data | Sheet4  | AARP |
       
       @planCompareBenefitsAARP05
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet5  | AARP |
+      | Plan Compare_Benefits_Data | Sheet5  | AARP |
       
       @planCompareBenefitsAARP06
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet6  | AARP |
+      | Plan Compare_Benefits_Data | Sheet6  | AARP |
       
       @planCompareBenefitsAARP07
     	Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet7  | AARP |
+      | Plan Compare_Benefits_Data | Sheet7  | AARP |
       
       @planCompareBenefitsAARP08
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet8  | AARP |
+      | Plan Compare_Benefits_Data | Sheet8  | AARP |
       
       @planCompareBenefitsAARP09
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet9  | AARP |
+      | Plan Compare_Benefits_Data | Sheet9  | AARP |
       
       @planCompareBenefitsAARP10
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet10  | AARP |
+      | Plan Compare_Benefits_Data | Sheet10  | AARP |
       
       @planCompareBenefitsAARP11
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet11 | AARP |
+      | Plan Compare_Benefits_Data | Sheet11 | AARP |
       
       @planCompareBenefitsAARP12
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | Sheet12  | AARP |
+      | Plan Compare_Benefits_Data | Sheet12  | AARP |
       
       @planCompareBenefitsPDPAARP01
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | PDPSheet1  | AARP |
+      | Plan Compare_Benefits_Data | PDPSheet1  | AARP |
       
        @planCompareBenefitsPDPAARP02
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | PDPSheet2  | AARP |
+      | Plan Compare_Benefits_Data | PDPSheet2  | AARP |

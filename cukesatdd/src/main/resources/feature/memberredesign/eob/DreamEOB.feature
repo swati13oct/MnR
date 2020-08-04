@@ -73,12 +73,20 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 03    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
+
+    @dreamEob01b @devRegression
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
       | 04    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 05    | MA       | COSMOS_EOB_R      | old C                             | false       |
+
+    @dreamEob01c  @devRegression
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
       | 06    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @dreamEob01d 
@@ -86,7 +94,8 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
       | index | planType | memberType        | note                              | flagZeroEob |
       | 07    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | false       |  
      #| 08    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
-      | 08    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                        | false       | 
+      | 08    | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                        | false       | 
+     #| 08    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                        | false       | 
 
     @dreamEob01e
     Examples: 
