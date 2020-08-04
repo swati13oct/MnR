@@ -91,3 +91,29 @@ Feature: To test member Signin from various Deeplinks
     Examples: 
       | username        | password   |
       | q2_jun_aarp0126 | Password@1 |
+
+  @regressionMember @deepLink @F444247
+  Scenario Outline: Verify that user is able to navigate to member pages from Ping Federate Test Harness Page for canopy
+    Given User lands on the ping federate SSO test harness page
+    And testharness page is displayed with all the fields
+    And User enter details on ping federate test harness page
+      | SAML_SUBJECT  | <samlsubject>   |
+      | First Name    | <firstName>     |
+      | Last Name     | <lastName>      |
+      | DOB           | <dateOfBirth>   |
+      | MBI           | <mbi>           |
+      | APPLANDINGURLSTAGE | <applandingurlStage> |
+      | APPLANDINGURLTEAHH | <applandingurlteamh> |
+      | APPLANDINGURLOFFLINESTAGE | <applandingurlofflinestage> |
+      | UHC_ID        | <uhcid>         |
+    And user clicks on submit button on the Ping Federate Test Harness Page
+    Then user should be navigated to below page of member portal
+      | <navigatedPage> |
+
+    Examples: 
+      | samlsubject   | firstName | lastName | dateOfBirth | mbi         | applandingurlStage                                             			   | navigatedPage 	   | uhcid | applandingurlteamh | applandingurlofflinestage |
+      | canopyhealth  | KASEEB 	  | GAULDEN  | 12071947	   | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/pharmacy          | pharmacy 		   |       |  |  |
+      | canopyhealth  | KASEEB 	  | GAULDEN  | 12071947    | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/payments          | payment 		   |       |  |  |
+      | canopyhealth  | KASEEB 	  | GAULDEN  | 12071947    | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/order-materials   | order-materials   |       |  |  |
+      | canopyhealth  | KASEEB 	  | GAULDEN  | 12071947    | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/benefits-coverage | benefits-coverage |       |  |  |
+      
