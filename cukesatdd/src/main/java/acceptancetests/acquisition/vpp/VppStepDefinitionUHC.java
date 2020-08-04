@@ -248,7 +248,7 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
 	
-	@When("user selects plan year for the UMS site$")
+	@When("the user selects plan year for the UMS site$")
 	public void user_selects_plan_year(DataTable givenAttributes) {
 	
 		List<DataTableRow> givenAttributesRow = givenAttributes
