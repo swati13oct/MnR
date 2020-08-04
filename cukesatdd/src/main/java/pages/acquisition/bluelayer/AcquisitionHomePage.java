@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -1935,7 +1935,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
+			{
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
 							&& rname.toUpperCase().contains("ULAYER")) {
@@ -2608,4 +2609,50 @@ public void validateResultSummaryPage() {
 		}
 	}
 
+public boolean isValidatePageLoadError(){
+		String url=driver.getCurrentUrl();
+			
+			System.out.println("Url is:::" +url);
+			if(driver.findElements(By.id("medicareTitle")).isEmpty()){
+					System.out.println("if");	
+					return false;
+				}
+				else{
+					System.out.println("else");
+					return true;
+				}
+				
+		
+	}
+		
+	public boolean isValidateContent(String file){		
+		if(file.contains("robot")){
+			
+			WebElement xpathvar =driver.findElement(By.xpath("/html/body/pre"));
+			String strFileContent =xpathvar.getText();
+			boolean strSiteMap=strFileContent.contains("Sitemap");
+			
+			if(xpathvar.isDisplayed() && strSiteMap){
+					System.out.println("file loaded");
+					return true;
+			}else{
+				System.out.println("file not loaded");
+				return false;
+			}				
+		}else if(file.contains("sitemap")){
+			
+			WebElement xpathvar =driver.findElement(By.xpath("//*[@id='folder1']"));
+			System.out.println("xpath=="+xpathvar.getText());
+			
+				if(xpathvar.isDisplayed()){
+					System.out.println("xml id found");
+					return true;
+			}else{
+				System.out.println("xml id not found");
+				return false;
+			}	
+		}
+		return false;
+		
+	}
 }

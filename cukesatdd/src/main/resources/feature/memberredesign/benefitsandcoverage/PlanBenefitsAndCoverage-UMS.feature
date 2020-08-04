@@ -164,7 +164,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
-      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  6                   | EffectiveShipMedSupp |     3 | NoRider |
+      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember @kottu

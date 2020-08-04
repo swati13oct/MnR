@@ -64,7 +64,7 @@ Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Document
 	@memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
       | 10-010 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@memAuth_active_mapd
@@ -100,7 +100,7 @@ Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Document
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
-      | 20-115 | 15119,15304 | qavgogine | qavgogine | q1_feb_2020SHIP_002    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
+      | 20-115 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 
 
