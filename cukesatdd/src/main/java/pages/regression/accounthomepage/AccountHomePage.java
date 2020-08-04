@@ -1,5 +1,7 @@
 package pages.regression.accounthomepage;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -4321,6 +4323,13 @@ public class AccountHomePage extends UhcDriver {
 			
 }
 		return null;
+	}
+	
+	public void verifyLoggedInPageForCanopy(String expectedURL, String expectedTitle) throws InterruptedException {
+		   String currentPageURL = currentUrl();
+		   String currentPageTitle = getTitle();
+		   assertTrue("Navigated page URL not matched for Canopy deep link", currentPageURL.contains(expectedURL));
+		   assertTrue("Navigated page title not matched for Canopy deep link", currentPageTitle.contains(expectedTitle));
 	}
 
 }
