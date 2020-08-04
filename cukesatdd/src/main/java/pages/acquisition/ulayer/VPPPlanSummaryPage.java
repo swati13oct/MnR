@@ -3429,34 +3429,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void handlePlanYearSelectionPopup(String planYear) {
-		
-	
+
 			CommonUtility.checkPageIsReadyNew(driver);			
-			if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
-				System.out.println("Popup is present for AEP : ");	
-				if(planYear.equalsIgnoreCase("current")) {				//if the scenario is for the current year
-					if (validate(currentYearSelection)) {
-						currentYearSelection.click();
-					}
-				}else if(planYear.equalsIgnoreCase("future")) {			// if the scenario is for the future year
-					if (validate(nextYearSelection))
-						nextYearSelection.click();	
-				}
-					validateNew(planYearPopupGoButton);
-					planYearPopupGoButton.click();
-			}else {														// if the plan year popup is not displayed
 				if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 					if(validate(CurrentYearPlansBtn, 20)) {
 						System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 						jsClickNew(CurrentYearPlansBtn);	
 					}
-				}else if(planYear.equalsIgnoreCase("future")) {
-					if(validate(NextYearPlansBtn, 20)) {
-						System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
-						jsClickNew(NextYearPlansBtn);	
-					}
 				}
-			}
+			
 	}
 			
 		
