@@ -149,6 +149,12 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='os__shipping__shipments']")
 	protected List<WebElement> listOfShippingShipments;
+	
+	@FindBy(xpath="//*[@data-testid='shipment__container']")
+	protected List<WebElement> listOfShipmentContainers;
+	
+	@FindBy(xpath="//*[@data-testid='rx__autoEnroll__cta']")
+	protected List<WebElement> listOfAutoRefillCTA;
 
 	// ***********************Shipping Dropdown*********************************
 
@@ -157,5 +163,16 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']")
 	protected WebElement shippingDrpDown;
+	
+	
+	@FindBy(xpath="")
+	protected WebElement refillAllMedicationCTA;
+	
+	@FindBy(xpath="//ul[@aria-labelledby='select-shipping-method']/li")
+	protected List<WebElement> listOfShippingMethodDrpDwnVal;
+	
+	
+	
+	
 
 }

@@ -211,4 +211,26 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateProviderName() {
 		return !listOfProviderName.get(listOfProviderName.size() - 1).getText().isEmpty();
 	}
+
+	public boolean validateShippingContainer() {
+		return listOfShipmentContainers.size() > 1;
+	}
+
+	public boolean validateShipmentIndicated() {
+		int shippingContainer = listOfShipmentContainers.size();
+		return listOfShippingShipments.size() == shippingContainer;
+	}
+
+	public boolean validateEstimateDeliveryDate() {
+		int shippingContainer = listOfShipmentContainers.size();
+		return listfOfEstimatedDate.size() == shippingContainer;
+	}
+
+	public boolean validateAutoRefill() {
+		return listOfAutoRefillCTA.size() > 0;
+	}
+
+	public void clickOnRefillALLMedicationCTA() {
+		refillAllMedicationCTA.click();
+	}
 }
