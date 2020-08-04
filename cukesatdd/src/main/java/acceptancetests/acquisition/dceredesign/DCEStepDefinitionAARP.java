@@ -86,6 +86,10 @@ public class DCEStepDefinitionAARP {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		druglist = "";
+		System.out.println("Setting Drugs List : "+druglist);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 	 
@@ -338,12 +342,30 @@ public class DCEStepDefinitionAARP {
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		druglist = druglist+"&"+drugName;
+		System.out.println("Drugs List : "+druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
 	
+	@Then("^the user tries to add following drug over cabinet limit and validates error modal$")
+	public void the_user_searches_and_adds_and_validates_drug_cabinet_limit(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		System.out.println(drugName);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugList.SearchValidate_DrugCountError(drugName);
+	}
+	
 	@Then("^the user validates all added drugs in DrugList$")
 	public void the_user_validates_all_added_drugs_in_DrugList() throws Throwable {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		buildDrugList.ValidateAddedDrugsList(druglist);
 	}
 	
 	@And("^I access the DCE Redesign on aarp site from Plan Summary for first plan$")
@@ -466,7 +488,13 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateMonthlyCostStage();
 	}
-
+	
+	@Then("^the user validates Monthly Drug Costs by Stage Info Modals$")
+	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Info_Modals() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugStageInfoModals();
+	}
+	
 	@Then("^the user validates Important information section$")
 	public void the_user_validates_Important_information_section() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -487,7 +515,34 @@ public class DCEStepDefinitionAARP {
 
 	}
 
+	@Then("^the user validates Drug List in Your Drugs Section on Drug Details Page$")
+	public void the_user_validates_druglist_yourDrugs_DrugDetailsPage() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		drugDetailsPage.ValidatesDrugsList(druglist);
+
+	}
 	
+	@Then("^the user validates Drug List in Monthly Drug Costs by Stage Section on Drug Details Page$")
+	public void the_user_validates_druglist_monthly_drug_costs_stage_DrugDetailsPage() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		drugDetailsPage.ValidatesDrugsList_MonthlyDrugStage(druglist);
+
+	}
+	
+	@Then("^the user Validates All Tier info and Drug Limits displayed on Your Drugs Section on Drug Details Page$")
+	public void the_user_validates_tiers_drugLimits_yourDrugs_DrugDetailsPage() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.ValidatesDrugsTier_LimitsDisplayed();
+	}
+
+	@Then("^the user Validates All Tier info and Drug Limits details displayed in Important Information Section on Drug Details Page$")
+	public void the_user_validates_tiers_drugLimits_importantInfo_DrugDetailsPage() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.ValidatesDrugsTier_Limits_ImportantInfo();
+	}
+
 	@Then("^the user selects View Drug details for following plantype and PlanName$")
 	public void the_user_selects_View_Drug_details_for_following_plantype_and_PlanName(DataTable attributes)
 			throws Throwable {

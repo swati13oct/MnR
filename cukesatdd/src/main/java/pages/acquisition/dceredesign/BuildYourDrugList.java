@@ -202,6 +202,53 @@ public class BuildYourDrugList extends UhcDriver {
 			return null;
 		}		
 	}
+
+	
+	@FindBy(xpath = "//uhc-modal[contains(@modalheader, 'Drug List Limit')]")
+	public WebElement DrugListModal_Header;
+
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__close')]")
+	public WebElement DrugListModal_Close;
+
+	@FindBy(xpath = "//button[contains(text(), 'Got it')]")
+	public WebElement DrugListModal_GotItBtn;
+
+	@FindBy(xpath = "//div[contains(text(), '25 drugs')]")
+	public WebElement DrugListModal_Message;
+	
+	public void SearchValidate_DrugCountError(String drugName) {
+		validateNew(EnterDrugNameTxt);
+		EnterDrugNameTxt.sendKeys(drugName);
+		validateNew(SearchBtn);
+		jsClickNew(SearchBtn);
+
+		if(validateNew(DrugListModal_Header) && validateNew(DrugListModal_Close) && validateNew(DrugListModal_GotItBtn)) {
+			jsClickNew(DrugListModal_GotItBtn);
+			System.out.println("Got It button Clicked to close modal");
+			Assert.assertTrue("Drug List limit Modal and message are Displayed as Expected : "+DrugListModal_Message, true);
+		}
+		else
+			Assert.fail("Drug List Modal and Message NOT Displayed!!!");
+		
+	}
+
+	
+	public void ValidateAddedDrugsList(String druglist) {
+		String[] DrugListItems = druglist.split("&");
+		System.out.println("Added Drug Count : "+DrugListItems.length);
+		for(String currentDrug : DrugListItems) {
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
+			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit "+currentDrug+"')]"));
+			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove "+currentDrug+"')]"));
+
+			if(validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
+				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
+			}
+			else
+				Assert.fail("Drug List Validation FAILED for Drug : "+currentDrug);
+		}
+	}
 	
 
 }
