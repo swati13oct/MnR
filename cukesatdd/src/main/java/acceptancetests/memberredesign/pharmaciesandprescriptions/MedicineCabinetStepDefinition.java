@@ -777,7 +777,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRefillRemainingValueOnCurrentMed();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	/*
 	 * @Then("^user will see remaining prescriptions on the My Medications page$")
 	 * public void
@@ -789,5 +789,27 @@ public class MedicineCabinetStepDefinition {
 	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
 	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
 	 */
+	
+	@Then("^user views the HD Medications on My Medications page$")
+	public void user_views_the_HD_Medications_on_My_Medications_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHDDrug();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user view a medication card with a retail prescription$")
+	public void user_view_a_medication_card_with_a_retail_prescription() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will not see the \"([^\"]*)\" field for that prescriptions$")
+	public void user_will_not_see_the_field_for_that_prescriptions(String arg1) throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 }

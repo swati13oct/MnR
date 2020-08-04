@@ -1214,6 +1214,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//h1[@id='page_title' and contains(text(),'Benefits Information')]")
 	protected WebElement OptumRxBenefitsInformationHeader;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
+	protected List<WebElement> listOfAmntPaidEligibleFrRefill;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationEligibleFrRefill;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
+	protected List<WebElement> listOfRefillLeftEligibleFrRefill;
+	
+	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
+	protected List<WebElement> listOfDaySupplyEligibleFrRefill;
 
 }
 

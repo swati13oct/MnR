@@ -1,5 +1,7 @@
+@F479509
 Feature: Refills Remaining
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field for HD Prescription on My Medication Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -10,10 +12,11 @@ Feature: Refills Remaining
     And user views the HD Medications on My Medications page
     And user will see "Refills Left" field
 
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Remaining Value for HD Prescription on My Medication Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -25,10 +28,11 @@ Feature: Refills Remaining
     When user will see "Refills Left" field
     Then user validates amount of refills remaining for the prescriptions
 
-    Examples:
+    Examples: 
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field for HD Prescription on Current Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -42,6 +46,7 @@ Feature: Refills Remaining
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Remaining Value for HD Prescription on Current Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -56,6 +61,7 @@ Feature: Refills Remaining
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field not available for Retail Prescription on Current Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -68,6 +74,7 @@ Feature: Refills Remaining
       | FID     | planType | memberType           |
       | F436319 | MAPD     | Rx_Individual_PnP_rx |
 
+  @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field not available for Retail Prescription on Current Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

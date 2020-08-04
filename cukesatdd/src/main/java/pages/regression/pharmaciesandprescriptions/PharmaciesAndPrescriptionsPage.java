@@ -2049,5 +2049,28 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return true;
 	}
+	
+	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+		return new CheckOutSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public List<Object> fetchesMedicationInformationFrRefill(){
+		List<Object> listOfVal=new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfRefillMedication.size());
+		listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+		listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
+		listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
+		listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+	
+	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
+		listOfRefillMedication.get(rand_int).click();
+	}
 
 }
