@@ -128,10 +128,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 	}
 		
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:
 	 */
 	@And("^user access DCE tool on aarp site$")
-	public void accessDCETool(DataTable attributes){
+	public void accessDCETool(DataTable attributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
