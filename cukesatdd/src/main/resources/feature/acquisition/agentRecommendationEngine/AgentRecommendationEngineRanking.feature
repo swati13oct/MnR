@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @AREElements @dropdownUI @F439411
+  @ARE @AREElements @dropdownUI @F439411 @F480483
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -9,7 +9,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    Then agent validates plan ranking drop down UI plancompare page
+    #Then agent validates plan ranking drop down UI plancompare page
 
     Examples: 
       | User      | Pass      | Email            |
@@ -28,8 +28,8 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Email | <Email> |
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    #Then user verify Drugs added in plan compare page vs DCE
-     # | Drugs Names | <DrugNameDosage> |
+    Then user verify Drugs added in plan compare page vs DCE
+      | Drugs Names | <DrugNameDosage> |
 
     Examples: 
       | User      | Pass      | Email            | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                               | DrugNameDosage                                |
