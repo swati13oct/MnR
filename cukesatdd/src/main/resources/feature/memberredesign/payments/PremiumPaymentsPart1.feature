@@ -20,10 +20,28 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
       | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2024 |
       | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2024 |
-
+      
+ #Test Case 00 
+ ##Below test case is for updating stop date of recurring payment(referenceNumber is of immediate last successful recurring transaction)
+  @regressionMember
+  Scenario Outline: Test Case - Update stop date of recurring payment
+  Given Update stop date of recurring payment
+       | referenceNumber  | <referenceNumber> |
+       | householdID   | <householdID> |
+    Examples: 
+      | TestCase | householdID  | referenceNumber|
+      | TC2-P1   | 30019596303  |  112255071     |
+      | TC2-P1   | 31476200 | 132357419       |
+      | TC3-P1   | 3777000      |  526688       |
+      | TC3-P1   | 31476200 |  132357419      |
+      |  C4-P1   | 70018905807 | 111146330     |
+	  |	TC4-P2   | 380023506638 | 118539181     |
+	  |	TC5-P1   | 920035201792 |  137394841    |
+	  |	TC5-P2   | 940021790794 |  137221436    |
+      
   #Test Case 01
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
+  Scenario Outline: TID: <memberType> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -47,7 +65,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
 
   #Test Case 02
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 02 - Verify Setup Recurring for Checking Account
+  Scenario Outline: TID: <memberType> - Test Case 02 - Verify Setup Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -68,13 +86,13 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | Payment Type | <paymentType> |
 
     Examples: 
-      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
-      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | TID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
+      | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 30019596303 |
+      | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |   31476200 |
 
   #Test Case 03
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 03 - Verify Setup Recurring for CC
+  Scenario Outline: TID: <memberType> - Test Case 03 - Verify Setup Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -90,15 +108,15 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
     And delete confirmation number GPS for recurring payment
       | Payment Type | <paymentType> |
-
+		
     Examples: 
-      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |
-      | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |
+      | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |  householdID |
+      | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 3777000 |
+      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  31476200 |
 
   #Test Case 04
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 04 - Verify Update Recurring for Checking Account
+  Scenario Outline: TID: <memberType> - Test Case 04 - Verify Update Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -119,13 +137,13 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | Payment Type | <paymentType> |
 
     Examples: 
-      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
-      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
+      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 70018905807 |
+      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 380023506638 |
 
   #Test Case 05
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 05 - Verify Update Recurring for CC
+  Scenario Outline: TID: <memberType> - Test Case 05 - Verify Update Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -141,15 +159,14 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
-
     Examples: 
-      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear | paymentType |
-      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   |
-      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |
+      | TID       | planType | memberType                   | Name | CreditCardNumber | validMonth | validYear | paymentType | householdID |
+      | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 920035201792 |
+      | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   | 940021790794 |
 
   #Test Case 06
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 06 -Verify Stop Recurring payment flow for Federal memeber
+  Scenario Outline: TID: <memberType> - Test Case 06 -Verify Stop Recurring payment flow for Federal memeber
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -163,3 +180,43 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | TID       | planType | memberType                  |
      | F242866   | MAPD     | UpdateRecurrStop_Payments   |
      | US1588469 | PDP      | ComboUpdateStopRec_Payments |  
+     
+     
+  #Test Case 07
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the overPayment credit flag and verbiage
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+     | TC7   | MAPD     | OverpaymentCreditFlag   |
+    
+     #Test Case 08
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overdue flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the overdue and total amount due
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+        |TC8| MAPD      | OverdueFlag | 
+     
+ #Test Case 09
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the Paid in Full flag and its verbiage
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+     | TC9 | MAPD      | PaidInFullFlag |  

@@ -2,8 +2,8 @@
 Feature: 1.16 Prod Member Contact us Page 
 
 #TestCaseIndi1
-@regressionMemberPROD
-Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for individual member on contactUs page 
+@regressionMemberPROD1
+Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone numbers for individual member on contactUs page 
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
 		| Username | <username> |
@@ -19,12 +19,12 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
    
     Examples:   
     | UID        | username | password | member            | planType      | techSupportTFN     | planSupportTFN    |
-	| TestCase1  | jkuma14  | Brock@02 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
-	| TestCase2  | jkuma14  | Brock@02 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
+	| TestCase1  | jkuma14  | Brock@03 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
+	| TestCase2  | jkuma14  | Brock@03 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCaseCombo2	
-@regressionMemberPROD
-Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for combo member on contactUs page
+@regressionMemberPROD1
+Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone numbers for combo member on contactUs page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
 		| Username | <username> |
@@ -38,12 +38,12 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
    
     Examples:   
     | UID        | username | password | member            | planType      | 
-	| TestCase3  | jkuma14  | Brock@02 | DKELLY27          | ComboPDPSSUP  |
-	| TestCase4  | jkuma14  | Brock@02 | OLGITA@68         | ComboPdpSHIP  |				
+	| TestCase3  | jkuma14  | Brock@03 | DKELLY27          | ComboPDPSSUP  |
+	| TestCase4  | jkuma14  | Brock@03 | OLGITA@68         | ComboPdpSHIP  |				
 
 #TestCasePCP3
- @regressionMemberPROD
-  Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone numbers for PCP member on contactUs page
+ @regressionMemberPROD2
+  Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone numbers for PCP member on contactUs page
  Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
 		| Username | <username> |
@@ -60,11 +60,11 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
     | Plan Type       | <planType>       |
   Examples:   
     | UID        | username | password | member            | planType      |  techSupportTFN     | planSupportTFN    |
-	| TestCase3  | jkuma14  | Brock@02 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
+	| TestCase3  | jkuma14  | Brock@03 | marylamb823       | PCP           |   1-800-721-0627  |	1-866-231-7201  |
 
 #TestCaseSHIP4
-  @regressionMemberPROD
-   Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify SHIP Email Us Widget Confirm Request in contact us redesign page
+  @regressionMemberPROD2
+   Scenario Outline: UID: <UID> -Plan Type: <planType> Verify SHIP Email Us Widget Confirm Request in contact us redesign page
    Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
 		| Username | <username> |
@@ -91,13 +91,13 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
       | Year                  | <year>                 |
 
     Examples: 
-      | TID   | plantype | username | password | member        | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | callUsSHIPTFN     | generalQueTFN    | claimQueTFN |
-      | 15380 | PHIP     | jkuma14  | Brock@02 | Pramila1946  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
+      | UID   | plantype | username | password | member        | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | callUsSHIPTFN     | generalQueTFN    | claimQueTFN |
+      | 15380 | PHIP     | jkuma14  | Brock@03 | vernajohnson19651  | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | 1-866-254-3132    | 1-800-523-5800   | 1-800-523-5880 |
 	  
 
 #TestCaseClickTOCallCancel5
-@regressionMemberPROD
- Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify clickToCall Widget Expansion -Drop-Down, Text Box and Button UI- and click on cancel on contactUS redesign page
+@regressionMemberPROD2
+ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify clickToCall Widget Expansion -Drop-Down, Text Box and Button UI- and click on cancel on contactUS redesign page
 	Given the user is on member auth login flow page 
 	When the member is able to login with correct username and password 
 		| Username | <username> |
@@ -110,12 +110,61 @@ Scenario Outline: TID: <TID> -Plan Type: <plantype> Verify labels and telephone 
       | Phone Number | <phoneNumber> |
 
     Examples: 
-      | TID   | planType | username | password | member         | phoneNumber |
-      | 15224 | MAPD     |  jkuma14 | Brock@02 | LMHOCHSCHILD11 |  9999999999 |
-      
+      | UID   | planType | username | password | member         | phoneNumber |
+      | 15224 | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |  9999999999 |
 
+#TestCaseClickTOCallCancel6
+@regressionMemberPROD3
+ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify View qquestion button and common questions on the contactUS redesign page
+   Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    And the user click on view questions button and validate the questions links
+   | Plan Type   | <plantype>   |
+    
+     Examples: 
+      | UID       | planType | username | password | member         |
+      | 152201    | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |
+      | US2438941 | PHIP     | jkuma14  | Brock@03 | vernajohnson19651  |
+      | 152255    | PCP     | jkuma14  | Brock@03 | marylamb823       |
+      
+#TestCaseClickTOCallCancel7
+@regressionMemberPROD2
+  Scenario Outline: UID: <UID> -Plan Type: <planType> Verify terminated members view on contact us redesign page
+     Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then user should only see the Technical Support and Plan Support components
+
+    Examples: 
+     | UID   | planType | username | password | member         | 
+     | 15224 | MA     |  jkuma14 | Brock@03 | BEVERLY_BOB5 |
       
       
-      
+#TestCaseClickTOCallCancel8
+@regressionMemberPROD3
+  Scenario Outline: UID: <UID> -Plan Type: <planType> Verify the See how to guide link on the contactUs page
+    Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then Verify and navigate the see how to guide link on the contactUs page
+     Examples: 
+      | UID       | planType | username | password | member         |
+      | 152201    | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |
       
       

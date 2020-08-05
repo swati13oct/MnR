@@ -79,59 +79,96 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public String currentPageName, currrentPagePercentage, previousPageName, previousPagePercentage, nextPageName,
 			nextPagePercentage;
 
-	public void mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount,
-			boolean swipeUp) {
+	public boolean mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
+		boolean swipeScusses = true;
 		try {
 			validate(footerCallbannerSection, 30);
 			validate(element, 30);
 			int locationDifference = 100;
+			/*
+			System.out.println("Footer Size :"+footerCallbannerSection.getSize());
+			System.out.println("Footer Location :"+footerCallbannerSection.getLocation());
+			System.out.println("Footer X : "+footerCallbannerSection.getLocation().getX());
+			System.out.println("Footer Y : "+footerCallbannerSection.getLocation().getY());
+			System.out.println("Element Size :"+element.getSize());
+			System.out.println("Element Location :"+element.getLocation());
+			System.out.println("Element X : "+element.getLocation().getX());
+			System.out.println("Element Y : "+element.getLocation().getY());
+			*/		
 			if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
-				mobileswipe(percentage, swipeUp);
-				swipeCount--;
+				swipeScusses = mobileswipe(percentage, swipeUp);
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipe(percentage, swipeUp);
+					swipeCount--;
+				}
 				mobileFindElementBeforeCallBanner(element, percentage, swipeCount, swipeUp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Element not visible footer banner");
 		}
+		return swipeScusses;
 	}
 
-	public void mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
+	public boolean mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
+		boolean swipeScusses = true;
 		try {
 			validate(headerSection, 30);
 			validate(element, 30);
 			int locationDifference = 150;
+			/*
+			System.out.println("Header X : "+headerSection.getLocation().getX());
+			System.out.println("Header Y : "+headerSection.getLocation().getY());
+			System.out.println("Element X : "+element.getLocation().getX());
+			System.out.println("Element Y : "+element.getLocation().getY());
+			*/
 			if (element.getLocation().getY() - headerSection.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
-				mobileswipe(percentage, swipeUp);
-				swipeCount--;
+				swipeScusses = mobileswipe(percentage, swipeUp);
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipe(percentage, swipeUp);
+					swipeCount--;
+				}
 				mobileFindElementAfterHeader(element, percentage, swipeCount, swipeUp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Element not visible");
 		}
+		return swipeScusses;
 	}
 
+	String swipeDownPercentage = "60%";
+	// if swipe using longPress then 50% else 75% for swipe towards up
+	String swipeUpPercentage = "75%";
 	public void mobileLocateElementClick(WebElement element) {
-		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
-		mobileFindElementAfterHeader(element, "50%", 4, false);
+		mobileFindElementBeforeCallBanner(element, swipeUpPercentage, 8, true);
+		mobileFindElementAfterHeader(element, swipeDownPercentage, 8, false);
 		element.click();
 	}
 
-	public void mobileLocateElement(WebElement element) {
-		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
-		mobileFindElementAfterHeader(element, "50%", 4, false);
+	public boolean mobileLocateElement(WebElement element) {
+		boolean locateStatus = false;
+		boolean locateB = mobileFindElementBeforeCallBanner(element, swipeUpPercentage, 8, true);
+		boolean locateA = mobileFindElementAfterHeader(element, swipeDownPercentage, 8, false);
+		if (locateB && locateA)
+			locateStatus = true;
+		return locateStatus;
 	}
+	
 	public void mobileLocateElement(WebElement element,String swipepercentage) {
 		mobileFindElementBeforeCallBanner(element, swipepercentage, 8, true);
-		mobileFindElementAfterHeader(element, swipepercentage, 4, false);
+		mobileFindElementAfterHeader(element, swipepercentage, 8, false);
 	}
 
 	public void mobileLocateElementClick(WebElement element, int swipeup, int swipedown) {
-		mobileFindElementBeforeCallBanner(element, "50%", swipeup, true);
-		mobileFindElementAfterHeader(element, "50%", swipedown, false);
+		mobileFindElementBeforeCallBanner(element, swipeUpPercentage, swipeup, true);
+		mobileFindElementAfterHeader(element, swipeDownPercentage, swipedown, false);
 		element.click();
 	}
 
@@ -424,4 +461,54 @@ public class CommonutilitiesMobile extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.textToBePresentInElement(element, text));
 	}
+	
+	public boolean mobileFindElementHorizontal(WebElement element, String percentage, int swipeCount, boolean swipeRight) {
+		boolean swipeScusses = true;
+		try {
+			if (validate(element, 5)==false &&swipeCount > 0) {
+				swipeScusses = mobileswipeHorizantal(percentage, swipeRight);
+				if (swipeScusses) {
+					swipeCount--;
+				} else {
+					mobileswipeHorizantal(percentage, swipeRight);
+					swipeCount--;
+				}
+				mobileFindElementHorizontal(element, percentage, swipeCount, swipeRight);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element not visible");
+		}
+		return swipeScusses;
+	}
+
+	// if swipe using longPress then 50% else 75% for swipe towards right
+	String swipeRightPercentage = "75%";
+	public void mobileFindElementHorizontal(WebElement element) {
+		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
+	}
+	
+	public void mobileFindElementHorizontal(WebElement element,String swipeRightPercentage) {
+		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
+	}
+	
+	public boolean mobileCheckElementBeforeCallBanner(WebElement element) {
+		boolean status = true;
+		try {
+			validate(footerCallbannerSection, 30);
+			validate(element, 30);
+			int locationDifference = 30;
+			int footerY = footerCallbannerSection.getLocation().getY();
+			int elementY =element.getLocation().getY();
+			//System.out.println("Footer Y: "+footerY+"Element Y :"+elementY);
+			if (footerY - elementY < locationDifference) {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element/Footer banner not visible");
+		}
+		return status;
+	}
+
 }

@@ -7,43 +7,34 @@
  */
 package acceptancetests.memberredesign.sso;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
-import com.mysql.jdbc.Driver;
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.member_deprecated.bluelayer.ProfilePageHsid;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
-import pages.regression.sso.bswiftPage;
 import pages.regression.sso.CQLoginPage;
+import pages.regression.sso.bswiftPage;
 import pages.regression.sso.ssoTestHarnessPage;
 import pages.regression.testharness.TestHarness;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.GlobalTearDown;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 
 //import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
@@ -441,6 +432,33 @@ public class ssoStepDefinition {
 			Assert.fail("Not clicked on pharmacies and prescriptions tab, check conditions above");
 		}
 
+	}
+	
+	@Then("^user should be navigated to below page of member portal$")
+	public void verifyNavigatedPageForCanopyDeepLink(DataTable navigatedPage) throws Throwable {
+		String expectedPage = navigatedPage.asList(String.class).get(0);
+		String pageURL = null, pageTitle = null;
+		switch(expectedPage) {
+			case "pharmacy":
+				pageURL = "member/pharmacy/overview";
+				pageTitle = "UHC M&R Pharmacy";
+				break;
+			case "payment":
+				pageURL = "member/payments/overview";
+				pageTitle = "Premium Payments";
+				break;
+			case "order-materials":
+				pageURL = "member/order-materials/overview";
+				pageTitle = "Order Plan Materials";
+				break;
+			case "benefits-coverage":
+				pageURL = "member/benefits-coverage";
+				pageTitle = "Plan Benefits Summary";
+				break;				
+		}
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.verifyLoggedInPageForCanopy(pageURL, pageTitle);
 	}
 
 }

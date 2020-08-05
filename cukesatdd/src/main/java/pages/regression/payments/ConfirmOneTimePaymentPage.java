@@ -3,6 +3,9 @@ package pages.regression.payments;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +19,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
 
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -68,11 +70,11 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
 	private WebElement OnlyOnePaymentRequestMessage;
-	
+
 	@FindBy(xpath = " //h1[@id='custom-page-title']")
 	private WebElement ConfirmationText; 
 
-	
+
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -301,50 +303,50 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	public void OneTimeCCverification() {
 
 
-			validate(ConfirmationNumber);
-			PaymentsDataVerificationonConfirmationPage();
-			System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		validate(ConfirmationNumber);
+		PaymentsDataVerificationonConfirmationPage();
+		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 
 	}
-	
+
 	public String OneTimeEFTverification() {
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 		String verifyConfirmationNumberPresent = ConfirmationNumber.getText();
 		//getLoginScenario().saveBean(PageConstants.CONFIRMATION_NUMBER, verifyConfirmationNumberPresent);
-				
+
 		if(verifyConfirmationNumberPresent != null)
 		{
 			System.out.println("Confirmation number was displayed, Test Case is Passed");
-			
-		    Assert.assertTrue(true);
+
+			Assert.assertTrue(true);
 		}
 		else
 		{
 			Assert.fail("Confirmation Number was not dispalyed, Test Case if failed");
-			
+
 		}
-		
+
 		return verifyConfirmationNumberPresent;
 	}
 
-	
-	
+
+
 	public void validateEFTSetupVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		PaymentsDataVerificationonConfirmationPage();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
-			} else 
-			{
+		} else 
+		{
 			System.out.println("Confirmation Page for setup recurring not displayed for ship");
 			Assert.fail("Confirmation Page for setup recurring not displayed for ship");
-			}
+		}
 		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
 	}
-	
+
 	@Override
 	public void openAndValidate() {
 		System.out.println("Openandvalidate method of ConfirmOneTimePaymentPage");
@@ -352,11 +354,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	}
 
 	public void deletePaymetnRecordFromGPS(Map<String, String> paymentTypeMap) {
-		
-	
+
 		try (Connection con = MRScenario.getGPSuat3Connection()) {
-					
-		   String referenceNmbr = ConfirmationNumber.getText();								
+
+			String referenceNmbr = ConfirmationNumber.getText();                                                   
 			System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
 			String paymentType = paymentTypeMap.get("Payment Type");
 
@@ -384,18 +385,21 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 				System.out.println("Payment entry not deleted successfully from the GPS");
 				Assert.fail("Payment entry not deleted successfully from the GPS DB");
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-	}
+		}}
+
+
+
+
 
 	public void deletePaymetnRecordFromGPSforexception(Map<String, String> paymentTypeMap, String referenceNmbr) {
-		
+
 		System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
 		try (Connection con = MRScenario.getGPSuat3Connection()) {
-					
-		   //String referenceNmbr = ConfirmationNumber.getText();								
+
+			//String referenceNmbr = ConfirmationNumber.getText();								
 			System.out.println("Confirmation/Reference number to be used in delete query is : "+referenceNmbr);
 			String paymentType = paymentTypeMap.get("Payment Type");
 
@@ -423,7 +427,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 				System.out.println("Payment entry not deleted successfully from the GPS");
 				Assert.fail("Payment entry not deleted successfully from the GPS DB");
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -433,17 +437,36 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		System.out.println("Your confirmation text is:- " + ConfirmationText.getText());
 		PaymentsDataVerificationonConfirmationPage();
 		String verifyConfirmationTextPresent = ConfirmationText.getText();
-			if(verifyConfirmationTextPresent.contains("Your payment has been submitted")){					
-		System.out.println("Your payment submission confirmation text displyed is :- " + ConfirmationText.getText());
-		System.out.println("Confirmation text was displayed, Test Case is Passed");
-	    Assert.assertTrue(true);
-			}
-			else
-			{
-				Assert.fail("Confirmation text was not dispalyed, Test Case if failed");
-			}		
-	
+		if(verifyConfirmationTextPresent.contains("Your payment has been submitted")){					
+			System.out.println("Your payment submission confirmation text displyed is :- " + ConfirmationText.getText());
+			System.out.println("Confirmation text was displayed, Test Case is Passed");
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail("Confirmation text was not dispalyed, Test Case if failed");
+		}		
+
 	}
 
+	public static void updateStopDateInGPSdb(Map<String, String> paymentTypeMap) {
+		String householdID = paymentTypeMap.get("householdID");
+		String referenceNumber = paymentTypeMap.get("referenceNumber");
+		try (Connection con = MRScenario.getGPSuat3Connection()) {
+			Statement stmt = null;
+			ResultSet rs2 = null;
+			stmt = con.createStatement();
+			rs2 = stmt.executeQuery("Update insured_plan_billing set INS_PLAN_BILLING_STOP_DATE = '31-DEC-9999' where HOUSEHOLD_BILLING_PROFILE_ID = '"+referenceNumber+"'");
+				System.out.println("The value of rs2 is "+rs2);
+				System.out.println("Recurring Stop date updated for household id - "+householdID +"and referenceNumber - "+referenceNumber);
+						
+				Assert.assertTrue("Recurring Stop date updated for household id - "+householdID +"and referenceNumber - "+referenceNumber,true);
+			}
+		 catch (Exception e) {
+			 System.err.println("Recurring Stop date is updated for household id - "+householdID +"and referenceNumber - "+referenceNumber);
+			Assert.fail("Recurring Stop date is updated for household id - "+householdID +"and referenceNumber - "+referenceNumber);
+		}
+
+	}
 
 }

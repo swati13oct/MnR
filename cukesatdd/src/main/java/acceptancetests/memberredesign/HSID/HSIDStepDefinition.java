@@ -526,11 +526,13 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
-
+			
 		//note: use this to determine if need to validate footer on sign-in page
 		//note: after obtaining the value, remove it so it will not look for it on csv
 		String validateFooter = memberAttributesMap.get("Validate Footer");
 		memberAttributesMap.remove("Validate Footer");
+		String speedup = memberAttributesMap.get("Speed Up");
+		memberAttributesMap.remove("Speed Up");
 
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
@@ -607,6 +609,9 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
+		if (speedup!=null && speedup.equalsIgnoreCase("true"))
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
@@ -749,6 +754,9 @@ public class HSIDStepDefinition {
 		String deepLinkUrl = memberAttributesMap.get("Deeplink");
 		getLoginScenario().saveBean(LoginCommonConstants.DEEPLINK,deepLinkUrl);
 
+		String speedup = memberAttributesMap.get("Speed Up");
+		memberAttributesMap.remove("Speed Up");
+
 	    //----- note: these parameters won't be in csv, take them out of memberAttributesMap before searching csv
 	 	memberAttributesMap.remove("User Selection");
 	 	memberAttributesMap.remove("Deeplink");
@@ -782,6 +790,8 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
+		if (speedup!=null && speedup.equalsIgnoreCase("true"))
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
 		
@@ -859,19 +869,19 @@ public class HSIDStepDefinition {
 				String value=e.getText();
 				if (value.equalsIgnoreCase("false")) {
 					if (MRScenario.environment.toLowerCase().contains("stage")) 
-						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now", false);
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 					else
 						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", not on stage, okay to move on...");
 				} else {
 					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", okay to move on...");
 				}
 			} else {
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			}
 		} catch (Exception e) {
 			if (MRScenario.environment.toLowerCase().contains("stage")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now.", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			} else {
 				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
 			}
@@ -1296,11 +1306,11 @@ public class HSIDStepDefinition {
 								 * @todo :agent enters credentials 
 								 */
 								 @Given("^agent enters credentials$") 
-								 public void agententercredentials() throws InterruptedException{
+								 public void agententercredentials(DataTable credentialsList) throws InterruptedException{
 									 Thread.sleep(5000);
-									 String username = "AARPStage8";
+									 String username = credentialsList.asList(String.class).get(0);
+									 String password = credentialsList.asList(String.class).get(1);
 									aarpChatAgentLogin.enterusername(username);
-									 String password =  "AARPStage8";
 									aarpChatAgentLogin.enterpassword(password);	
 									 aarpChatAgentLogin.clickSubmit();
 									
@@ -1312,11 +1322,11 @@ public class HSIDStepDefinition {
 									 * @todo :agent enters credentials 
 									 */
 									 @Given("^agent enters credentials for federal$") 
-									 public void fedagententercredentials() throws InterruptedException{
+									 public void fedagententercredentials(DataTable credentialsList) throws InterruptedException{
 										 Thread.sleep(5000);
-										 String username = "MRagent8";
+										 String username = credentialsList.asList(String.class).get(0);
+										 String password = credentialsList.asList(String.class).get(1);
 										aarpChatAgentLogin.enterusername(username);
-										 String password =  "MRagent8";
 										aarpChatAgentLogin.enterpassword(password);	
 										 aarpChatAgentLogin.clickSubmit();
 										

@@ -1,26 +1,26 @@
 package acceptancetests.acquisition.planRecommendationEngine;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.MedicareAdvantagePartCPlansPage;
-import pages.acquisition.bluelayer.MedicareEligibilityPage;
-import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
@@ -34,20 +34,6 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharma
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
-import pages.acquisition.ulayer.AddDrugDetails;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.SavingsOppurtunity;
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 public class PlanRecommendationEngineStepDefinition {
 
@@ -234,7 +220,6 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
 		headerAndFooter.breadCrumbs();
-		planSelectorhomepage.landingpage();
 }
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -898,18 +883,30 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user selects Doctors in Doctors page and validate next page name$")
-	public void select_doctors_next_page_name(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
+	public void select_doctors_next_page_name() {
 		PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-		String status = "Positive_NextPageName";
-		planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
-				inputValues.get("Multi Doctor"), status);
+		planSelectorDoctorspage.navigateDoctorsmodalsession();
 	}
 	
 	@Then("^user validate UI and API recommendation rankings in results page$")
    	public void verify_UI_API_rankings_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-//		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
    	}
+	
+	@Then("^user verifies \"([^\"]*)\" page$")
+	public void verify_vpp_summary_page_mobile(String VPP) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		if (VPP.toUpperCase().contains("PRE"))
+			planSelectorResultspage.checkVPP(true);
+		else
+			planSelectorResultspage.checkVPP(false);
+	}
+	
+	@Then("^user validate Plan Names in VPP Summary and Details in results page$")
+   	public void verify_Plan_names_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
+	}
 }

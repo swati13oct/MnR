@@ -36,6 +36,6 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
     Examples: 
       | username  | password  | memberid    | month | day | year | Scenario                                                             |
       | qavgogine | qavgogine | 928908861-1 |    02 |  28 | 1962 | Scenario 2b: Search using member id and DOB – Fedral Member - COSMOS |
-      | qavgogine | qavgogine | 001893654-1 |    04 |  06 | 1940 | Scenario 2c: Search using member id and DOB – COMBO Member           |
+      | qavgogine | qavgogine | 006727987-1 |    05 |  27 | 1941 | Scenario 2c: Search using member id and DOB – COMBO Member           |
       | qavgogine | qavgogine | 917514052-1 |    10 |  13 | 1931 | Scenario 2d: Search using legacy user member id and DOB              |
    

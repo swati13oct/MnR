@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
 public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
@@ -225,6 +226,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 
                                 public void doctorModellookup(String search,int count) {
                                 	String curWindow = driver.getWindowHandle();
+                                	System.out.println(curWindow);
                         			modalFinddoctors.click();
                                 	validateLinksanotherWindow(curWindow,"Doctors",search, count );
                                 	threadsleep(5000);
@@ -268,18 +270,36 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 //Switch to Werally Window Page
                                 
                                 public ArrayList<String> validateLinksanotherWindow(String primaryWindow,String type,String search,int count) {
+                                	String browser = MRScenario.browsername;
+                                	String env = MRScenario.environment;
                             		threadsleep(2000);
                             		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
                             		System.out.println(windows);
                             		if (windows.size() == 2) {
                             			for (String window : windows) {
+                            				System.out.println(window.replace("page-", ""));
+/*                            				String a = "window.open('https://connect.int.werally.in/welcome-to-check-provider-coverage');";
+                            				((JavascriptExecutor)driver).executeScript(a);*/
                         					if (!window.equals(primaryWindow)) {
+                        						/*try {
+													Thread.sleep(5000);
+												} catch (InterruptedException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}*/
                         						driver.switchTo().window(window);
+                        						if(browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("edge") || browser.equalsIgnoreCase("IE"))
+                        							driver.manage().window().maximize();
                         						System.out.println(driver.getCurrentUrl());
+                        						if(env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("prod-aarp") || env.equalsIgnoreCase("offline-prod") || env.equalsIgnoreCase("offline-prod-aarp"))
+                                        			Assert.assertTrue(driver.getCurrentUrl().contains("werally.com") , "Connected to Incorrect Rally");
+                        						else
+                        							Assert.assertTrue(driver.getCurrentUrl().contains("werally.in") , "Connected to Incorrect Rally");
                         						werallyResults = werally.werallySearch(type,search,count);
                         						System.out.println("werallyResults Size is : "+werallyResults.size());
                         						System.out.println("werallyResults Content is : "+werallyResults);
                             		}
+                        					threadsleep(5000);
                         					driver.switchTo().window(primaryWindow);
                             			}
                             		System.out.println(driver.getCurrentUrl());

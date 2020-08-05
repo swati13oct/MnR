@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionDCEMemAuth.json",detailedReport
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCEMemAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/drugcostestimator" },monochrome= true, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCEMemAuth.json" }, tags = { "@offlineProdTest" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCEMemAuth.json" }, tags = { "@Dce_memAuth" })
 public class RunMRATDDRegressionDCEMemAuth {
 
 }

@@ -35,39 +35,39 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
-    Then the user validates EOB count between API and UI are the same
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6 months ----  
     And the user selects the desired date range
       | Date Range | Last 6 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
-    Then the user validates EOB count between API and UI are the same
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12 months ----  
     And the user selects the desired date range
       | Date Range | Last 12 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
-    Then the user validates EOB count between API and UI are the same
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 18 months ----  
     And the user selects the desired date range
       | Date Range | Last 18 months |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
     Then the user clicks on each eob on first page to validate pdf for DREAM EOB
-    Then the user validates EOB count between API and UI are the same
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Custom Search ----  
     And the user selects the desired date range
       | Date Range | Custom Search |
-    Then the user obtains API response info for validation
+    #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates the right rail section content
-    Then the user validates EOB count between API and UI are the same
+    #Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
@@ -75,36 +75,48 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01a
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 01    | ashah120  | Mnrqa002  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
-      | 02    | ashah120  | Mnrqa002  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
+      | 01    | ashah120  | Mnrqa003  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
 
-    @prod_dreamEob01b 
+    @prod_dreamEob01b
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 03    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
-      | 04    | ashah120  | Mnrqa002  | nawal1215               | PDP      | PDP_RX_DEOB       | true        |  
+      | 02    | ashah120  | Mnrqa003  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
 
     @prod_dreamEob01c 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 05    | ashah120  | Mnrqa002  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
-      | 06    | ashah120  | Mnrqa002  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+#     | 03    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
+      | 04    | ashah120  | Mnrqa003  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
 
     @prod_dreamEob01d 
     Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 05    | ashah120  | Mnrqa003  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
+
+    @prod_dreamEob01e 
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 06    | ashah120  | Mnrqa003  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+
+    @prod_dreamEob01f 
+    Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
-#     | 07    | ashah120  | Mnrqa002  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
-      | 08    | ashah120  | Mnrqa002  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+#     | 07    | ashah120  | Mnrqa003  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
+      | 08    | ashah120  | Mnrqa003  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
-    @prod_dreamEob01e
+    @prod_dreamEob01g
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 09    | ashah120  | Mnrqa002  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
-      | 10    | ashah120  | Mnrqa002  | PAULAROTH2              | PDP      | PDP_SHIP_COMBO_EOB| true        |
+      | 09    | ashah120  | Mnrqa003  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
 
-    @prod_dreamEob01f
+    @prod_dreamEob01h
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 11    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |
-#     | 12    | ashah120  | Mnrqa002  | testuserTBD             | MAPD     | ES_D_NICE_EOB     | true        |
+      | 10    | ashah120  | Mnrqa003  | Norm749                 | PDP      | PDP_SHIP_COMBO_EOB| true        |
+
+    @prod_dreamEob01i
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+#     | 11    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |
+#     | 12    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | ES_D_NICE_EOB     | true        |
       

@@ -85,7 +85,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | SHIP_HIP    | ComboFEDShip_BnC |
+      | 15091 | SHIP_HIP | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
   #Peehip members are discontinued from PROD. None of the available members are Active .Terminated members dont have the BNC page display.
@@ -150,8 +150,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
-      | Plan Benefits Table | <PlanBenefitsTable> |
+   # And the user verifies that the correct pdfs are coming in the plan material section
+     # | Plan Benefits Table | <PlanBenefitsTable> |
     #note: moved to footer feature
     #And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
@@ -160,12 +160,14 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
 
+    ### note: number of benefits tile may change if swap user
+
     Examples: 
-      | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards | Identifier           | count | rider   |
-      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                   | EffectiveShipMedSupp |     3 | NoRider |
+      | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
+      | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
-  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember
+  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember @kottu
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -419,11 +421,19 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
   
-  @devRegression
+  @devRegression @WaystoSave_walgreens
     Examples: 
       | TID   | planType | memberType             |
       | 15242 | PDP      | Wallgreens_BnC         |
+
+  @devRegression @WaystoSave_mailOrder
+    Examples: 
+      | TID   | planType | memberType             |
       | 15243 | PDP      | MailOrderPharamacy_BnC |
+
+  @devRegression @noWaystoSave
+    Examples: 
+      | TID   | planType | memberType             |
       | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
   #TC20_Rider for Fed MA,MAPD plans only  
@@ -642,7 +652,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
 #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
- @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember
+ @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -696,7 +706,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
+      #| UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
     #note: moved to footer feature
@@ -705,8 +715,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
-      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_regressionMember

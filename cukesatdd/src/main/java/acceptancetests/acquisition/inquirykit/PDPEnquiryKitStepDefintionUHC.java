@@ -1,7 +1,5 @@
 package acceptancetests.acquisition.inquirykit;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +7,15 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.EnquiryKitConfirmationPage;
-import pages.acquisition.bluelayer.PDPEnrollementGuidePage;
-import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.EnquiryKitConfirmationPage;
+import pages.acquisition.bluelayer.PDPEnrollementGuidePage;
+import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 
 /**
  *Functionality:PDP Enquiry Kit

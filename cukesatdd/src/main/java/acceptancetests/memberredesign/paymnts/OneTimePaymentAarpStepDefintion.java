@@ -215,6 +215,19 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user has scrolled up");
 		}
 	}
+	
+	@Then("^User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed$")
+	public void Validate_History_PaymentForFed() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUpForFed();
+		
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
+		}
+	}
 
 	@Then("^User Scrolls down to validate Payment History Section$")
 	public void Validate_History_Payment_section() throws InterruptedException {
@@ -2234,7 +2247,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the error is displayed on review payment page for second payment$")
 	public void error_displayed_second_payment() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
@@ -2430,5 +2443,43 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("User is on recurring confirmation page for CC");
 		}
 	}
+	
+	@Given("^Update stop date of recurring payment$")
+	public void updateStopDateInGPSdb(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Update stop date of recurring payment*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+	
+		
+		ConfirmOneTimePaymentPage.updateStopDateInGPSdb(paymentTypeMap);
+	}
+	@Then("^User validates the overPayment credit flag and verbiage$")
+	public void User_validates_the_overPayment_credit_flag_and_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		
+		 paymentHistoryPage.validateOverPaymentFlag();
+		
+	}
+	
+	@Then("^User validates the overdue and total amount due$")
+	public void overdueflag() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		
+		 paymentHistoryPage.overdueflag();
+		
+	}
+	
+	@Then("^User validates the Paid in Full flag and its verbiage$")
+	public void User_validates_the_Paid_in_Full_flag_and_its_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.paidInFullFlag();
+		
+	}
+
 	
 }

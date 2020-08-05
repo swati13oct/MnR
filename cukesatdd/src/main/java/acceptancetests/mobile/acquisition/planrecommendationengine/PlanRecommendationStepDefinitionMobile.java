@@ -583,6 +583,34 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.validateUIAPIRankingPlans();
    	}
 	
+	@Then("^user adds Drugs in vpp summary page mobile$")
+   	public void add_drugs_vpp_summary_page_mobile(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		resultpage.useraddDrugsVPP(inputValues.get("Drug Details"));
+   	}
+	
+	@Then("^user navigate drugs list page and verifies drugs session in Drugs page mobile$")
+   	public void verifies_drugs_vpp_pre__mobile() {
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.verifyExisitngVPPDruglist();
+   	}
+	
+	@Then("^user verifies \"([^\"]*)\" page mobile$")
+	public void verify_vpp_summary_page_mobile(String VPP) {
+		ResultsMobilePage resultpage = new ResultsMobilePage(wd);
+		if (VPP.toUpperCase().contains("PRE"))
+			resultpage.checkVPP(true);
+		else
+			resultpage.checkVPP(false);
+	}
+	
+	@When("^user navigates to PRE landing page menu mobile$")
+	public void user_navigates_PRE_landingpage_menu_mobile() {
+		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
+		preheaderfootermobile.navigatePRELandingpageMenuMobile();
+	}
+	
 	public void readfeaturedataMobile(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();

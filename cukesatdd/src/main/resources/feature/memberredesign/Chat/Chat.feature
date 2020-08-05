@@ -5,19 +5,10 @@ Feature: 1.16 Member Contact us Page CHAT
   Scenario Outline: Verify AARP chat agent login in.
     Given agentlogin lands on page
     And agent enters credentials
-
+	  | <username> | <password> |
     Examples: 
       | username   | password   |
-      | AARPStage8 | AARPStage8 |
-
-  @regressionMember @agentSigninforGroupCHAT @GroupFedChat
-  Scenario Outline: Verify AARP chat agent login in.
-    Given agentlogin lands on page
-    And agent enters credentials for federal
-
-    Examples: 
-      | username | password |
-      | MRagent8 | MRagent8 |
+      | AARPStage1 | AARPStage1 |
 
   @codeWarriors @US2483619 @shipChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
@@ -29,9 +20,18 @@ Feature: 1.16 Member Contact us Page CHAT
 
     Examples: 
       | TID       | plantype | memberType |
-      | US2483619 | SHIP     | SHIPCHAT   |
+      | US2483619 | SHIP     | SHIPCHAT   |	  
+	  
+  @regressionMember @agentSigninforGroupCHAT @GroupFedChat
+  Scenario Outline: Verify AARP chat agent login in.
+    Given agentlogin lands on page
+    And agent enters credentials for federal
+	  | <username> | <password> |
+    Examples: 
+      | username | password |
+      | MRagent8 | MRagent8 |
 
-  @regressionMember @CT @GroupFedChat @p1
+  @regressionMember @CT @GroupFedChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |

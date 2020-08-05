@@ -81,10 +81,14 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 18-037 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | false | false |
 
-	@active_ship @devRegression
+	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 19-038 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+
+	@active_ship @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 20-116 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true  | true  | true  | true  | false | false |  
 
 

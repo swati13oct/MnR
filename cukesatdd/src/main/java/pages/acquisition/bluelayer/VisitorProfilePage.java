@@ -105,11 +105,16 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() {
-		addPlans.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("zipcode"))	{
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver,page);
+		try {
+			addPlans.click();
+			Thread.sleep(10000);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if(driver.getCurrentUrl().contains("#/plan-summary"))	{
+				String page = "health-plans";
+				return new AcquisitionHomePage(driver,page);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -154,6 +159,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
+			Thread.sleep(20000);
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
@@ -231,11 +237,14 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void deletePlans(String plans) {
 		try {
-			List<String> listOfTestPlans = Arrays.asList(plans.split(","));
-			for (String plan: listOfTestPlans) {
-				driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
-				Thread.sleep(5000);
-			}
+			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
+				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+				for (String plan: listOfTestPlans) {
+					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+					Thread.sleep(5000);
+				}
+			}else
+				System.out.println("##############No saved plans available here##############");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -316,12 +325,12 @@ public class VisitorProfilePage extends UhcDriver {
 	public ComparePlansPageBlayer planCompare(String plans) {
 		
 		comparePlans.click();
-		CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
+		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
 		String[] plan = plans.split(",");
 		for(int i=0;i<4;i++) {
 			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
 		}
-		comparePlansOnPopup.click();
+		comparePlansOnPopup.click();*/
 		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");

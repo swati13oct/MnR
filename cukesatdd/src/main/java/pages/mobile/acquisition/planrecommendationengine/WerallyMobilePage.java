@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import io.appium.java_client.MobileElement;
 
 public class WerallyMobilePage extends UhcDriver {
 
@@ -62,12 +63,12 @@ public class WerallyMobilePage extends UhcDriver {
 	// Find doctor element and lookup save button
 	@FindBy(css = "div[class*='hidden'] button")
 	private WebElement doctorsSavebutton;
-	
+
 	@FindBy(css = "div[class*='savedProviderModal'] h1")
 	private WebElement saveModelDoctorName;
-	
+
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
-	private WebElement saveModalClosebutton;
+	private WebElement saveModalCloseContinueSearchbutton;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
@@ -75,47 +76,147 @@ public class WerallyMobilePage extends UhcDriver {
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
 
+	@FindBy(css = "span.location")
+	private WebElement location;
+	
+	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
+	private WebElement finishReturnButton;
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
-		try {
-			validate(welcomeTilte, 30);
-			getStarted.click();
-		} catch (Exception e) {
-			System.out.println("No Get Started button available in werally");
-		}
-		validate(searchBox, 30);
-		if (type.toUpperCase().contains("DOCTOR")) {
-			//searchBox.sendKeys(searchParameter);
-			mobileactionsendkeys(searchBox, searchParameter);
-			hidekeypad();
-			mobileswipe("70%",1,false);
-			//searchButton.click();
-			mobileactiontap(searchButton);
-			pageloadcomplete();
-			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
-			if (actualResultscount >= count) {
-				for (int i = count-1; i >= 0; i--) {
-					threadsleep(1000);
-					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim()+" "
-					+searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']")).getText().trim());
-					WebElement save = searchResults.get(i).findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
-					save.click();
-					threadsleep(1000);
-					if (i == 0)
-						viewSavedbutton.click();
-					else
-						saveModalClosebutton.click();
-				}
-				threadsleep(1000);
-				checkProviderCoveragebutton.click();
-			} else {
-				System.out.println("Required search Results is not Returned");
-				Assert.assertTrue(false);
+		boolean newRally=false;
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			try {
+				validate(welcomeTilte, 30);
+				getStarted.click();
+			} catch (Exception e) {
+				System.out.println("No Get Started button available in werally");
 			}
-			Collections.sort(doctorsName);
-			System.out.println(doctorsName);
+			validate(searchBox, 30);
+			if (type.toUpperCase().contains("DOCTOR")) {
+				mobileactionsendkeys(searchBox, searchParameter);
+				hidekeypad();
+				mobileswipe("50%", false);
+				mobileactiontap(searchButton);
+				pageloadcomplete();
+				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
+				if (actualResultscount >= count) {
+					for (int i = count - 1; i >= 0; i--) {
+						threadsleep(1000);
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim() + " "
+								+ searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']"))
+										.getText().trim());
+						WebElement save = searchResults.get(i)
+								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
+						save.click();
+						threadsleep(1000);
+						String text = saveModalCloseContinueSearchbutton.getText();
+						if(text.toUpperCase().contains("CONTINUE"))
+							newRally=true;
+						if (i == 0) {
+							if(newRally)
+								finishReturnButton.click();
+							else
+								viewSavedbutton.click();
+						}
+						else {
+							saveModalCloseContinueSearchbutton.click();
+						}
+					}
+					threadsleep(1000);
+					if(!newRally)
+						checkProviderCoveragebutton.click();
+				} else {
+					System.out.println("Required search Results is not Returned");
+					Assert.assertTrue(false);
+				}
+			}
 		}
+		// For IOS
+		else {
+			try {
+				validate(welcomeTilte, 30);
+				jsClickMobile(getStarted);
+			} catch (Exception e) {
+				System.out.println("No Get Started button available in werally");
+			}
+			validate(searchBox, 30);
+			threadsleep(5000);
+			if (type.toUpperCase().contains("DOCTOR")) {
+				//driver.navigate().refresh();
+				//pageloadcomplete();
+				String zipinfo = location.getText().trim();
+				String zip = zipinfo.split(" ")[zipinfo.split(" ").length-1];
+				jsSendkeys(searchBox, searchParameter);
+				
+				/* Clicking is not navigating to search results
+				//mobileswipe("50%",2, false);
+				searchBox.click();
+				clickTextIOSNative("return");
+				//searchButton.click();
+				//jsClickMobile(searchButton);
+				//pageloadcomplete();
+				//mobileswipe("50%",1, true);
+				WebElement elem = null;
+				try {
+					//elem=driver.findElement(By.cssSelector("button[name='primary-search-box-action']>span"));
+					//elem=driver.findElement(By.cssSelector("button[name='primary-search-box-action']>span i"));
+					//elem=driver.findElement(By.xpath("//button[@name='primary-search-box-action']"));
+					//elem=driver.findElement(By.xpath("//button[@name='primary-search-box-action']//i"));
+				}catch(Exception e){
+					System.out.println("No");
+				}
+				jsClickMobile(elem);
+				elem.click();
+				System.out.println(driver.getCurrentUrl());
+				//mobileswipe("50%",3, false);
+				*/
+				//Alternative :)
+				String stgRally = "connect.int.werally.in";
+				String prdRally = "connect.werally.com";
+				if(driver.getCurrentUrl().contains(stgRally))
+					driver.navigate().to("https://"+stgRally+"/searchResults/"+zip+"/page-1?term="+searchParameter);
+				else
+					driver.navigate().to("https://"+prdRally+"/searchResults/"+zip+"/page-1?term="+searchParameter);
+				
+				pageloadcomplete();
+				System.out.println("We Rally Result URL : "+driver.getCurrentUrl());
+				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
+				if (actualResultscount >= count) {
+					for (int i = count - 1; i >= 0; i--) {
+						threadsleep(1000);
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim() + " "
+								+ searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']"))
+										.getText().trim());
+						WebElement save = searchResults.get(i)
+								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
+						jsClickMobile(save);
+						threadsleep(1000);
+						String text = saveModalCloseContinueSearchbutton.getText();
+						if(text.toUpperCase().contains("CONTINUE"))
+							newRally=true;
+						if (i == 0) {
+							if(newRally)
+								jsClickMobile(finishReturnButton);
+							else
+								jsClickMobile(viewSavedbutton);
+						}
+						else {
+							jsClickMobile(saveModalCloseContinueSearchbutton);
+						}
+					}
+					threadsleep(1000);
+					if(!newRally)
+						jsClickMobile(checkProviderCoveragebutton);
+				} else {
+					System.out.println("Required search Results is not Returned");
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		Collections.sort(doctorsName);
+		System.out.println(doctorsName);
 		return doctorsName;
 	}
 

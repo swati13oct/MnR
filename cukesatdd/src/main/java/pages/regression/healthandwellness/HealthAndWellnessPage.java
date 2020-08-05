@@ -29,7 +29,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
-	//tbd @FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
 	@FindBy(xpath  = "//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 
@@ -166,14 +165,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 			if (MRScenario.environment.contains("team-a")) {
 				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
 			} 		
-			healthAndWellness.isDisplayed();
+			Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness));
+			//tbd healthAndWellness.isDisplayed();
 			healthAndWellness.click();
 			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
 		} catch (Exception e) {
 			if (hwValidate(healthAndWellness_harness)) {
 				System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
 				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-				healthAndWellness_harness.isDisplayed();
+				Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
+				//tbd healthAndWellness_harness.isDisplayed();
 				healthAndWellness_harness.click();
 				waitforElement(titleText);
 			} else {
@@ -200,7 +201,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 * Validates Health and Wellness page
 	 */
 	public void validateHnWDashboardnL2Tabs(){
-		Assert.assertTrue("Lifestyle icon is not displayed", lifestyleIcon.isDisplayed());
+		Assert.assertTrue("PROBLEM - Lifestyle icon is not displayed", hwValidate(lifestyleIcon));
 		//Assert.assertTrue("Learning icon is not displayed", learningIcon.isDisplayed());
 		driver.getCurrentUrl();
 		if (driver.getCurrentUrl().contains("health-and-wellness"))
@@ -242,7 +243,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.out.println("Not the usual dashboard header, not testharness header, last attempt to see if it's in shadow-root");
 			//last try to see if it's shadowroot element
 			//cssPath="#sticky-main-nav > div > div > div > a[href*='health-and-wellness.html']";
-			//tbd locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
 			for (int i=1; i<=7; i++) {
 				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
 				if (!locateElementWithinShadowRoot(shadowRootHeader, cssPath).equals("notFound")) {
@@ -284,6 +284,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		CommonUtility.waitForPageLoad(driver, shadowRootElement, 5);;
 		hwCheckModelPopup(driver);
 		if (hwValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
@@ -293,7 +294,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 				Assert.assertTrue("Dashboard header is not displayed", hwValidate(element));
 				System.out.println("element is located, click it...");
 				element.click();
-				//tbd waitforElement(titleText);
 				WebDriverWait wait = new WebDriverWait(driver, 60);
 				wait.until(ExpectedConditions.visibilityOf(titleText));
 				hwCheckModelPopup(driver);
@@ -397,6 +397,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void validateRenewActive(String planType) {
+		checkModelPopup(driver,3);
 		String originalUrl=driver.getCurrentUrl();
 		if (planType.toUpperCase().contains("SHIP") && !planType.toUpperCase().contains("COMBO")) { 
 			//note: that shoe icon ------------------

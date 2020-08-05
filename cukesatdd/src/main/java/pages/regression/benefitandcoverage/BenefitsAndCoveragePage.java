@@ -284,7 +284,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		LookUpDrugsButton.click();
 		sleepBySec(40);
 		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs2.get(0));
+		if(tabs2.size() == (2)) {
+			
+			driver.switchTo().window(tabs2.get(0));
+		}
+		else if(tabs2.size()==(3))  
+		{
+			driver.switchTo().window(tabs2.get(1));
+		}
+		
 
 	}
 
@@ -400,7 +408,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				Assert.assertTrue("The element" + element.getText() + "should display", true);
 				System.out.println(element.getText());
 			} else {
-				Assert.fail();
+				Assert.fail("Not getting expected drug cost drop down options. Expected to see AND/OR of the followings: Standard Retail Pharmacy / Preferred Mail Service Pharmacy / Preferred Retail Pharmacy");
 			}
 		}
 	}
@@ -652,13 +660,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
 			Assert.assertTrue("Hospital Visits field text was changed or not found" ,HospitalVisits.getText().contains("HOSPITAL CARE"));
 
+			scrollElementToCenterScreen(OutpatientSurgeryCenterValue);
 			if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 				Assert.fail("Problem>>>>>>>>>>>>>.Outpatient Surgery Center Value is not displaying<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			}
+			scrollElementToCenterScreen(OfficVisitsValue);
 			if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
 				System.out.println(">>>>>>>>>>Office Visits value is not displaying<<<<<<<<<<<<<<<<<<<<");
 				Assert.fail();
 			}
+			
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-900)", "");
+			System.out.println(">>>>>scrolled up for verifying jump link section and checks respective sections<<<<<<<<<<<<<");
 		}
 	}
 
@@ -674,6 +688,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Header-Ambulance Header", AmbulanceHeader);
 		validateWithValue("Header-Hospital Visits", HospitalVisits);
 		validateWithValue("Header-Office Visits", OfficeVisits);
+		scrollElementToCenterScreen(OfficeVisits);
 		validateWithValue("Header-Outpatient Surgery Center", OutpatientSurgeryCenter);
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertTrue(OutpatientSurgeryCenter.getText().contains("OUTPATIENT HOSPITAL SERVICES"));
@@ -682,6 +697,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertEquals(AmbulanceHeader.getText(), "AMBULANCE");
 		System.out.println(EmergencyHeader.getText());
 		Assert.assertEquals(EmergencyHeader.getText(), "EMERGENCY CARE");
+		
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 			System.out.println(">>>>>>>>>>Outpatient Surgery Center Value is blank<<<<<<<<<<<<<<<<<<<<");
 			Assert.fail();
@@ -865,7 +881,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,3000)", "");
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {
@@ -902,17 +918,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void contactUslinkShip() {
 		sleepBySec(30);
 		validateNew(contactUslink,0);
-		/*contactUslink.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Title is " + getTitle());
-		driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-*/
-		//Assert.assertTrue(getTitle().equalsIgnoreCase("Contact"));
 	}
 
 	public void valiadateCatastrophicCoverageValue(String copayType) {
@@ -939,34 +944,20 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				System.out.println(">>>>>>>>>>PDF visible<<<<<<<: "+pdfnames);
 			}
 			Assert.assertTrue("PROBLEM - not getting expected number of PDFs.  Expected='"+a.length+"' | Actual='"+pdfs.size()+"'",a.length==pdfs.size());
-			//tbd if(a.length==pdfs.size())
-			//tbd {
-				for (int i=0;i<pdfs.size();i++)
-				{  
-					String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
-					Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
-					//tbd if(StringUtils.isNotEmpty(pdf1[0]))
-					//tbd {
-						System.out.println(pdf1[0]);
-						System.out.println(a[i]);
-						if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
-							checkflag = true;
-						}
-						else {
-							checkflag=false;
-							break;
-						}
-						//tbd }
-						//tbd else
-						//tbd {
-						//tbd Assert.fail();
-						//tbd }
+			for (int i=0;i<pdfs.size();i++)
+			{  
+				String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
+				Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
+				System.out.println(pdf1[0]);
+				System.out.println(a[i]);
+				if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
+					checkflag = true;
 				}
-			//tbd }
-			//tbd else
-				//tbd {
-				//tbd 	Assert.fail();
-				//tbd }
+				else {
+					checkflag=false;
+					break;
+				}
+			}
 		}
 		else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL"))
 		{
@@ -1089,7 +1080,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+					//System.out.println("PDF text : "+PDFText);
 					Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
@@ -1124,7 +1115,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		driver.get(originalUrl);
-		//tbd navigateToBenefitsPg(plantype);		
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("landing URL is ="+driver.getCurrentUrl());
 		sleepBySec(10);
@@ -1139,7 +1129,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		sleepBySec(20);
-		//tbd navigateToBenefitsPg(plantype);
 		driver.get(originalUrl);
 	}
 
@@ -1188,12 +1177,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		int j = 0;
 		List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/th"));
 		List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/td[1]"));
-		//tbd WebElement tabletext  = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[i]/td[j]/div"));
 
-		for( i = 0 ; i<rows.size();i++)
-		{
-			for ( j = 0 ; j<cols.size();j++)
-			{
+		for( i = 0 ; i<rows.size();i++)	{
+			for ( j = 0 ; j<cols.size();j++) {
 				System.out.println(driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr["+i+"]/td["+j+"]/div")).getText());
 			}
 		}
@@ -1523,11 +1509,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		jse.executeScript("window.scrollBy(0,-100)", "");
 
 		validateNew(OfficeVisits);
+		scrollElementToCenterScreen(OfficeVisits);
 		validateNew(pcpValue);
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
-		Assert.assertTrue("PROBLEM - unable to locate value for the element", !input.equals(""));
+		Assert.assertTrue("PROBLEM - unable to locate value for the element Primary care provider on 'OFFICE VISITS' tile", !input.equals(""));
 		System.out.println("PCP value to be validated: "+ input);
 
 		Pattern pattern = Pattern.compile("^\\d{1,4}\\.\\d{2}\\%$"); if
@@ -2083,12 +2070,11 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
 				getJmpLinkToPrimaryCareProvider().isDisplayed());
 		if (rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+			Assert.assertTrue("jmpLinkToOptionalServices(Riders) isn't displayed",
 					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
 		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
 				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
 
-		//tbd if (memberType.equalsIgnoreCase("Individual")) {
 		if (memberType.contains("Individual")) {
 			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
 			Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
@@ -3154,6 +3140,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 						comboTab_MA.click();
 					else if (noWaitValidate(comboTab_MA_planDoc)) 
 						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("hip")) {
+					if (noWaitValidate(comboTab_SHIP_HIP)) 
+						comboTab_SHIP_HIP.click();
 				} else if (planType.equalsIgnoreCase("ship")) {
 					if (noWaitValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();

@@ -286,8 +286,8 @@ public class DrugMobilePage extends UhcDriver {
 	// Drugs Search Page Element Verification Method
 	public void drugsSearchpageElements() {
 		System.out.println("Drugs Search Validating Page: ");
-		String currentPageUrl = driver.getCurrentUrl();
-		currentPageUrl.contains("/plan-recommendation-engine.html/");
+		//String currentPageUrl = driver.getCurrentUrl();
+		//currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
 		//Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
@@ -344,10 +344,10 @@ public class DrugMobilePage extends UhcDriver {
 			Select freq = new Select(modalFrequencySelect);
 
 			if (!dosage.isEmpty())
-				mobileSelectOption(dos, dosage);
+				mobileSelectOption(modalDosageSelect, dosage,true);
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
-				mobileSelectOption(pack, packageName);
+				mobileSelectOption(modalPackageSelect, packageName,true);
 				packageName = pack.getFirstSelectedOption().getText().trim();
 			}
 			if (!count.isEmpty()) {
@@ -357,7 +357,7 @@ public class DrugMobilePage extends UhcDriver {
 				threadsleep(2000);
 			}
 			if (threeeMonthfrequency)
-				mobileSelectOption(freq, "Every 3 Months");
+				mobileSelectOption(modalFrequencySelect, "Every 3 Months",true);
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
@@ -476,6 +476,7 @@ public class DrugMobilePage extends UhcDriver {
 
 		// Drug details modal cancel
 		drugsearchBox.clear();
+		hidekeypad();
 		mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
 		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
@@ -495,6 +496,7 @@ public class DrugMobilePage extends UhcDriver {
 		// Generic modal back
 		if (generic) {
 			drugsearchBox.clear();
+			hidekeypad();
 			mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
 			hidekeypad();
 			mobileUtils.mobileLocateElementClick(drugsearchButton);
@@ -645,5 +647,13 @@ public class DrugMobilePage extends UhcDriver {
 	public void continueNextpageNameDrug() {
 		clickDrugContinue();
 		mobileUtils.nextPageNameValidation(page.toUpperCase());
+	}
+	
+	public void verifyExisitngVPPDruglist() {
+		drugsInitiate("Yes");
+		ArrayList<String> existingDrugNames = ResultsMobilePage.vppDrugsResults;
+		getDrugsdetails();
+		ResultsMobilePage res = new ResultsMobilePage(driver);
+		res.containsname(existingDrugNames, addedDrugNames);
 	}
 }

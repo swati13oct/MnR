@@ -139,10 +139,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Thread.sleep(5000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
 				String currentURL=driver.getCurrentUrl();
-				String expectedURL="contact-us.html";
+				String expectedURL="contact-us";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
 						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
+				Assert.assertTrue("PROBLEM - unable to find Contact Us Header on Contact us Page. ",
+						pharmacyValidate(contactUsHeader));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
@@ -410,6 +412,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.waitForPageLoad(driver, zipcodeField, 60);
 		moveMouseToElement(inputInstruction);
+		zipcodeField.clear();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 		sendkeys(zipcodeField, zipcode);
 
 		Select select = new Select(distanceDropDownField);           

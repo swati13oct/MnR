@@ -14,9 +14,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import atdd.framework.*;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import cucumber.api.DataTable;
@@ -94,6 +98,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 	@And("^user navigates to plan documents and resources page validation$")
 	public void navigateToPlanAndResourcePageForSegementId(DataTable memberAttributes) throws InterruptedException {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//note: control the default test setup if no input specified
 		this.validateApi=false;
 		this.skipLnkDestCheck=false; 
@@ -130,6 +137,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
 		if (memberType.toUpperCase().contains("COMBO")) 
 			planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
+		else
+			planDocumentsAndResourcesPage.goToSpecificComboTab(planType, false);
 		int currentYear=0;
 		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -472,7 +481,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				expDocList=userHelperProd.getTargetDocList(planType, memberType, section, targetLang);
 			else 
 				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
-		
+
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetLang",targetLang);
@@ -562,7 +571,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validates section Membership Materials or Welcome Guide$")
 	public void validateSection_MM_sanity(DataTable memberAttributes) {
@@ -878,7 +887,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validates section Annual Notice of Changes Documents$")
 	public void validateSection_ANOC_sanity(DataTable memberAttributes) {
@@ -919,7 +928,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user validates jumplink and listing of mandatory documents for section Provider Directory or Pharmacy Directory or Provider and Pharmacy Directories$")
 	public void validateSection_PD(DataTable memberAttributes) {
@@ -1206,7 +1215,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validates section Provider Directory or Pharmacy Directory or Provider and Pharmacy Directories$")
 	public void validateSection_PD_sanity(DataTable memberAttributes) {
@@ -1236,7 +1245,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		//note: validate jumplink
 		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
 		sectionNote.add("PASSED - jumplink validation");
-		
+
 		//note: validate section header
 		planDocumentsAndResourcesPage.validateSectionHeader_PD_sanity(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - section header validation");
@@ -1288,7 +1297,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.valiateSearchDocuments_MD(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - button and destination url validation");
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validate My Documents section$")
 	public void validateSection_MD_sanity(DataTable memberAttributes) {
@@ -1368,7 +1377,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validate Explanation of Benefits section$")
 	public void validateSection_EOB_sanity(DataTable memberAttributes) {
@@ -1518,7 +1527,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-			
+
 			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
 				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
 			else
@@ -1695,10 +1704,10 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
-		
+
 		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user validate Forms and Resources section Part 1 of 2$")
 	public void validateSection_FnR_Part1of2(DataTable memberAttributes) {
@@ -1716,15 +1725,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		boolean premiumPaymentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Premium Payment Information"));
 		boolean reimbursementFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Reimbursement Forms"));
 		boolean authFormsAndInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Authorization Forms and Information"));
-		//tbd boolean medicationAuthFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Medication Authorization Forms"));
-		//tbd boolean otherResourcesDisplay=Boolean.valueOf(memberAttributesMap.get("Other Resources"));
-		//tbd boolean disenrollmentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Disenrollment Information"));
 
-		//tbd if (!sectionDisplay && 
-		//tbd 		(presDrugMailOrderFormDisplay || premiumPaymentInfoDisplay || reimbursementFormsDisplay || authFormsAndInfoDisplay
-		//tbd 				|| medicationAuthFormsDisplay|| otherResourcesDisplay || disenrollmentInfoDisplay)) {
-		//tbd 	Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
-		//tbd }
 		if (!sectionDisplay && 
 				(presDrugMailOrderFormDisplay || premiumPaymentInfoDisplay || reimbursementFormsDisplay || authFormsAndInfoDisplay)) {
 			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
@@ -1815,36 +1816,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-			
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-
-			/* tbd 
-			//-----------------------------
-			subSection="Medication Authorization Forms";
-			sectionPassed=true; //note: reset - assume the section pass to begin with
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(medicationAuthFormsDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
 
 			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
 				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
@@ -1868,96 +1839,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
-			subSection="Other Resources";
-			sectionPassed=true; //note: reset - assume the section pass to begin with
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(otherResourcesDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-
-			//-----------------------------
-			subSection="Disenrollment";
-			sectionPassed=true; //note: reset - assume the section pass to begin with
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(disenrollmentInfoDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-
-			//-----------------------------
-			if (planType.equals("SHIP")) {
-				subSection="SHIP"; //note: ship has no sub-section
-				sectionPassed=true; //note: reset - assume the section pass to begin with
-				testInputInfoMap.put("subSection", subSection);
-				testInputInfoMap.put("expDisplay_FnR", "true"); 
-				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-				//sectionNote.addAll(docSection_note);
-
-				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-				else
-					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-				for(String doc: targetDocList) {
-					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-					sectionNote.addAll(docSection_note);
-					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-						sectionPassed=false;
-				}
-				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-				if (sectionPassed)
-					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-				else {
-					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-					allPassed=false;
-				}
-				sectionNote.add("  ------------------------------------------------------");
-			}
-
-			//-----------------------------
-			if (planType.equals("PDP")) {
+			if (presDrugMailOrderFormDisplay) {
 				subSection="Prescription Drug Mail Order Form";
 				sectionPassed=true; //note: reset - assume the section pass to begin with
 				testInputInfoMap.put("subSection", subSection);
@@ -1986,7 +1868,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				}
 				sectionNote.add("  ------------------------------------------------------");
 			} 
-			*/
 		} 
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
@@ -1994,10 +1875,10 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
-		
+
 		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user validate Forms and Resources section Part 2 of 2$")
 	public void validateSection_FnR_Part2of2(DataTable memberAttributes) {
@@ -2011,19 +1892,10 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		//--------------
 		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
-		//tbd boolean presDrugMailOrderFormDisplay=Boolean.valueOf(memberAttributesMap.get("Prescription Drug Mail Order Form"));
-		//tbd boolean premiumPaymentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Premium Payment Information"));
-		//tbd boolean reimbursementFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Reimbursement Forms"));
-		//tbd boolean authFormsAndInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Authorization Forms and Information"));
 		boolean medicationAuthFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Medication Authorization Forms"));
 		boolean otherResourcesDisplay=Boolean.valueOf(memberAttributesMap.get("Other Resources"));
 		boolean disenrollmentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Disenrollment Information"));
 
-		//tbd if (!sectionDisplay && 
-		//tbd 		(presDrugMailOrderFormDisplay || premiumPaymentInfoDisplay || reimbursementFormsDisplay || authFormsAndInfoDisplay
-		//tbd 				|| medicationAuthFormsDisplay|| otherResourcesDisplay || disenrollmentInfoDisplay)) {
-		//tbd 	Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
-		//tbd }
 		if (!sectionDisplay && 
 				(medicationAuthFormsDisplay|| otherResourcesDisplay || disenrollmentInfoDisplay)) {
 			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
@@ -2046,97 +1918,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		boolean allPassed=true;
 		if (sectionDisplay) { //note: list of items
-			/* tbd 
-			//-----------------------------
-			String subSection="Premium Payment Information";
-			boolean sectionPassed=true;
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(premiumPaymentInfoDisplay));
-			List<String> docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-
-			List<String> targetDocList=new ArrayList<String>();
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-
-			//-----------------------------
-			subSection="Reimbursement Forms";
-			sectionPassed=true; //note: reset - assume the section pass to begin with
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(reimbursementFormsDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-
-			//-----------------------------
-			subSection="Authorization Forms and Information";
-			sectionPassed=true; //note: reset - assume the section pass to begin with
-			if (memberType.toUpperCase().contains("GROUP")) 
-				subSection="Authorization Forms";
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-			
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
-			else
-				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
-				sectionNote.addAll(docSection_note);
-				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
-					sectionPassed=false;
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			if (sectionPassed)
-				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
-			else {
-				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
-				allPassed=false;
-			}
-			sectionNote.add("  ------------------------------------------------------");
-			*/
 			//-----------------------------
 			List<String> targetDocList=new ArrayList<String>();
 			String subSection="Medication Authorization Forms";
@@ -2256,9 +2037,91 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.add("  ------------------------------------------------------");
 			}
 
-			/* tbd 
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Prescription Drug Mail Order Form$")
+	public void validateSection_FnR_ppmo(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean presDrugMailOrderFormDisplay=Boolean.valueOf(memberAttributesMap.get("Prescription Drug Mail Order Form"));
+
+		if (!sectionDisplay && presDrugMailOrderFormDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
 			//-----------------------------
-			if (planType.equals("PDP")) {
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			if (presDrugMailOrderFormDisplay) {
+				//-----------------------------
 				subSection="Prescription Drug Mail Order Form";
 				sectionPassed=true; //note: reset - assume the section pass to begin with
 				testInputInfoMap.put("subSection", subSection);
@@ -2287,7 +2150,118 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				}
 				sectionNote.add("  ------------------------------------------------------");
 			} 
-			*/
+		}
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Premium Payment Information$")
+	public void validateSection_FnR_ppi(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean premiumPaymentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Premium Payment Information"));
+
+		if (!sectionDisplay && premiumPaymentInfoDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (premiumPaymentInfoDisplay) {
+				//-----------------------------
+				subSection="Premium Payment Information";
+				sectionPassed=true;
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(premiumPaymentInfoDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
 		} 
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
@@ -2295,11 +2269,796 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
-		
+
 		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Reimbursement Forms$")
+	public void validateSection_FnR_rf(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean reimbursementFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Reimbursement Forms"));
+
+		if (!sectionDisplay && reimbursementFormsDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (reimbursementFormsDisplay) {
+				//-----------------------------
+				subSection="Reimbursement Forms";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(reimbursementFormsDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Authorization Forms and Information$")
+	public void validateSection_FnR_afni(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean authFormsAndInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Authorization Forms and Information"));
+
+		if (!sectionDisplay && authFormsAndInfoDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (authFormsAndInfoDisplay) {
+				//-----------------------------
+				subSection="Authorization Forms and Information";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				if (memberType.toUpperCase().contains("GROUP")) 
+					subSection="Authorization Forms";
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Medication Authorization Forms$")
+	public void validateSection_FnR_maf(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean medicationAuthFormsDisplay=Boolean.valueOf(memberAttributesMap.get("Medication Authorization Forms"));
+
+		if (!sectionDisplay && medicationAuthFormsDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (medicationAuthFormsDisplay) {
+				//-----------------------------
+				subSection="Medication Authorization Forms";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(medicationAuthFormsDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Other Resources$")
+	public void validateSection_FnR_or(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean otherResourcesDisplay=Boolean.valueOf(memberAttributesMap.get("Other Resources"));
+
+		if (!sectionDisplay && otherResourcesDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (otherResourcesDisplay) {
+				//-----------------------------
+				subSection="Other Resources";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(otherResourcesDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Other Resources Part1of2$")
+	public void validateSection_FnR_or_p1of2(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean otherResourcesDisplay=Boolean.valueOf(memberAttributesMap.get("Other Resources"));
+
+		if (!sectionDisplay && otherResourcesDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (otherResourcesDisplay) {
+				//-----------------------------
+				subSection="Other Resources Part1of2";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(otherResourcesDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Other Resources Part2of2$")
+	public void validateSection_FnR_or_p2of2(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean otherResourcesDisplay=Boolean.valueOf(memberAttributesMap.get("Other Resources"));
+
+		if (!sectionDisplay && otherResourcesDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (otherResourcesDisplay) {
+				//-----------------------------
+				subSection="Other Resources Part2of2";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(otherResourcesDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Then("^user validate Forms and Resources section Disenrollment Information$")
+	public void validateSection_FnR_di(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+		boolean disenrollmentInfoDisplay=Boolean.valueOf(memberAttributesMap.get("Disenrollment Information"));
+
+		if (!sectionDisplay && disenrollmentInfoDisplay) {
+			Assert.assertTrue("PROBLEM - logic error with input setup, please check sceanrio input.  If sectionDisplay is false, searchMedicalEobHsitoryDisplay or searchDrugEobHsitoryDisplay doesn't make sense to have true", false);
+		}
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		boolean allPassed=true;
+		List<String> targetDocList=new ArrayList<String>();
+		List<String> docSection_note=new ArrayList<String>();
+		String subSection="";
+		boolean sectionPassed=false;
+		if (sectionDisplay) { //note: list of items
+			if (disenrollmentInfoDisplay) {
+				//-----------------------------
+				subSection="Disenrollment";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(disenrollmentInfoDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+			//-----------------------------
+			if (planType.equals("SHIP")) {
+				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", "true"); 
+				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
+				//sectionNote.addAll(docSection_note);
+
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					targetDocList=userHelperProd.getTargetDocList(planType, memberType, section, subSection);
+				else
+					targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
+				}
+				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
+				sectionNote.add("  ------------------------------------------------------");
+			}
+
+		} 
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validate Forms and Resources section$")
 	public void validateSection_FnR_sanity(DataTable memberAttributes) {
@@ -2379,7 +3138,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Then("^user sanity validate Renew Magazine section$")
 	public void validateSection_RM_sanity(DataTable memberAttributes) {

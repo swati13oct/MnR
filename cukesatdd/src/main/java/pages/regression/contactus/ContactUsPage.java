@@ -8,10 +8,15 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import pages.regression.accounthomepage.AccountHomePage;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -386,6 +391,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath ="//button[contains(text(),'CANCEL')]")
 	private WebElement cancelEmailUs; 
 	
+	@FindBy(xpath ="//h1[contains(text(),'Learn how to use your member site')]")
+	private WebElement learnHowToUsePageHeader;
+	
 		public JSONObject contactUsJson;
 	
 		private JSONObject secureemailwidgetDataJson;
@@ -608,17 +616,22 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String phoneNumber = memberAttributesMap.get("Phone Number");
 			try {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView(true);", requestACall);
+
 				requestACall.click();
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				new Select(callQuestionAbout);
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				requestACallPhoneNumber.sendKeys(phoneNumber);
 				requestCall_Cancel.click();
-				Thread.sleep(5000);
+				waitforElement(requestACall);
+				Assert.assertTrue("Request a Call button is displaying", requestACall.isDisplayed());
 			} catch (Exception e) {
-				e.printStackTrace();
+				Assert.fail("Request a Call button is not displaying");
+				System.err.println("Request a Call button is not displaying");
 			}
-			waitforElement(requestACall);
+			
 		}
 	
 		public JSONObject getsecurewidget() {
@@ -806,9 +819,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -816,8 +831,12 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					getStartedButton.click();
 					waitforElement(useDifferentEmailRadioButton);
 					useDifferentEmailRadioButton.click();
@@ -854,9 +873,11 @@ public class ContactUsPage extends UhcDriver{
 			// page, as it was not working.
 	
 			try {
-				Thread.sleep(8000);
+				Thread.sleep(3000);
 	
 				if (validate(EmailForm)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					System.out.println("Get Started Button not visible, So using email Form Link!!!");
 					EmailForm.click();
 					Thread.sleep(2000);
@@ -864,9 +885,13 @@ public class ContactUsPage extends UhcDriver{
 					cancelLink1.click();
 					Thread.sleep(2000);
 				} else if (validate(goToInboxButton)) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,550)", "");
 					validateGoToInbox();
 				} else {
 					if (getStartedButton.isDisplayed()) {
+						JavascriptExecutor jse = (JavascriptExecutor) driver;
+						jse.executeScript("window.scrollBy(0,550)", "");
 						getStartedButton.click();
 						waitforElement(useDifferentEmailRadioButton);
 						useDifferentEmailRadioButton.click();
@@ -881,7 +906,7 @@ public class ContactUsPage extends UhcDriver{
 	
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Assert.fail("Secure messaging is failing");
 			}
 	
 		}
@@ -942,6 +967,8 @@ public class ContactUsPage extends UhcDriver{
 		public void validateGoToInbox() {
 			try {
 				waitforElement(goToInboxButton);
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView(true);", goToInboxButton);
 				Assert.assertTrue(validate(goToInboxButton));
 				goToInboxButton.click();
 				Assert.assertTrue(validateNew(goToInboxCtnBtn));
@@ -1093,6 +1120,8 @@ public class ContactUsPage extends UhcDriver{
 		 */
 		public void validateSSOInbox() {
 			try {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,550)", "");
 				validateNew(EmailUsModalbtnContinue);
 				if (!((MRScenario.environment).toLowerCase().contains("team"))) {
 					// switchToNewTabNew(EmailUsModalbtnContinue);
@@ -1503,6 +1532,8 @@ public class ContactUsPage extends UhcDriver{
 		validateWithValue("Text-Claims Questions ", ClaimsQuestions);
 		validateWithValue("Text-call Us ", callUs);
 		validateWithValue("Text-claim Telephonenumber ", claimTelephonenumber);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].scrollIntoView(true);", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text- Need_help Navigating The Website", Need_helpNavigatingTheWebsite);
 		validateWithValue("Text-See how to guides ", Seehowtoguides);
 		validateWithValue("Text-technical Support ContactNumber ", technicalSupportContactNumber);
@@ -1564,6 +1595,7 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			validateWithValue("Help With This Website Text", HelpWithThisWebsitePCP);
 			validateWithValue("Plan Support Text", PlanSupportPCP);
+			
 			if(technicalSupportContactNumber.getText().replaceAll("[\r\n]+", " ").contains(techSupportTFN)
 					&& helpWithYourPlanContactNumber.getText().replaceAll("[\r\n]+", " ").contains(planSupportTFN)) {
 				Assert.assertTrue("Correct Plan support contact number is displayng",true);
@@ -1633,6 +1665,183 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	public void validateSeeHowTGuideLink() {
+		
+		validateWithValue("Text- Seehowtoguides", Seehowtoguides);
+		
+		if (Seehowtoguides.isDisplayed()) {
+			
+			Seehowtoguides.click();
+			
+			CommonUtility.waitForPageLoadNew(driver, learnHowToUsePageHeader, CommonConstants.TIMEOUT_60);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			validateWithValue("Learn how to use your member site", learnHowToUsePageHeader);
+			Assert.assertTrue("See how to guide link is navigated to the respective page sussessfully", true);
+		}
+		else {
+			System.err.println("See how to guide link is not navigated to the respective page sussessfully");
+			Assert.fail("See how to guide link is not navigated to the respective page sussessfully");
+		}
+		
+		
+	}
+
+	/**
+	 * Validate the go to CHAT with us for SHIP member on PROD
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void validateChatWithUsOnPRODForSHIP() throws InterruptedException {
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+
+		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
+			validateNew(chatoffline);
+			Assert.assertTrue(chatoffline.isDisplayed());
+			System.out.println("Chat is currently offline");
+		} else {
+			 validateNew(chatMessage); 
+			 if (chatMessage.isDisplayed())
+			 {		  
+			  System.out.println("**Chat message seen is:->"+chatMessage); 
+			 }
+			 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-three")) 
+			 {
+			  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+			  System.out.println("** User landed on Contact us Page **");		  
+			  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+			  } 
+			 
+			 try {
+				chatLink.getText();
+				chatLink.click();
+				System.out.println("*** Start a Chat link clicked ***");
+			 } catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** Start a Chat link not clicked ***");
+				e1.printStackTrace();
+			 }
+			 try {
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, myself, 60);
+				validateNew(myself);
+			 }	catch (Exception e) {
+				Assert.assertTrue("AARP chat windown not open", true);
+				System.err.println("Agent Chat window not loaded successfully");
+			 }
+			 try {
+				myself.click();
+				System.out.println("*** On Live chat member selected a option ***");
+			 } catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** On live Chat option not selected ***");
+				e1.printStackTrace();
+			 }
+		}
+	}
+	
+	public Boolean isChatWithUsTimeOn(String startTime, String endTime) {
+    	Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("US/Central"));
+        String systemTime= sdf.format(date);
+        System.out.println("The current central system time is - "+systemTime);
+             
+        LocalTime target = LocalTime.parse(systemTime) ;
+        Boolean result = ( 
+          target.isAfter( LocalTime.parse( startTime ) ) 
+          && 
+          target.isBefore( LocalTime.parse( endTime ) ) ) ; 
+        System.out.println("Chat with Us option available = "+result);
+		return result;
+    }
+	/**
+	 * Validate the go to CHAT with us for Group member on PROD
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void GroupvalidateChatWithUsOnPROD() throws InterruptedException {
+		{
+			Thread.sleep(20000);
+			if (validate(iPerceptionframe)) {
+				switchToNewIframe(iPerceptionframe);
+				iPerceptionclosebtn.click();
+				driver.switchTo().defaultContent();
+				
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+		}
+		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
+			validateNew(chatoffline);
+			Assert.assertTrue(chatoffline.isDisplayed());
+			System.out.println("Chat is currently offline");
+		} else {
+			 validateNew(chatMessageGroup); 
+			 if (chatMessageGroup.isDisplayed())
+			 {		  
+			  System.out.println("**Chat message seen is:->"+chatMessageGroup); 
+			 }
+			 if(driver.getCurrentUrl().contains("medicare/member/contact-us/overview.html#/contact-us-two")) 
+			 {
+			  System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+			  System.out.println("** User landed on Contact us Page **");		  
+			  Assert.assertTrue(driver.getTitle().contains("Help & Contact Us")); 
+			  } 						 
+			try {
+				chatLink.getText();
+				chatLink.click();
+				System.out.println("*** Start a Chat link clicked ***");
+	
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** Start a Chat link not clicked ***");
+				e1.printStackTrace();
+	
+			}
+			try {
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					driver.switchTo().window(currentWindowHandle);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, myself, 60);
+				validateNew(myself);
+			}
+				catch (Exception e) {
+				Assert.assertTrue("Chat windown not open", true);
+				System.err.println("Agent Chat window not loaded successfully");
+			}
+			try {
+				myself.click();
+				System.out.println("*** On Live chat member selected a option  to chat with Agent***");
+	
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("*** On live Chat option not selected ***");
+				System.out.println("*** CHAT not live ***");
+				e1.printStackTrace();
+	
+			}
+		}
+	}
 }
 
 

@@ -101,12 +101,14 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
 	protected WebElement comboTab_MAPD;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
-	
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Supplement')]") 
 	protected WebElement comboTab_SHIP;
+
 	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
 	protected WebElement comboTab_PDP;
 
@@ -379,7 +381,11 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Prescription Mail Order Form') and contains(text(),'Preferred Mail Service Pharmacy through OptumRx')]")
 	protected WebElement presMailOrderForm_link_RF_FnR;
 	//- href="/content/dam/UCP/Individual/OptumRx_Home_Delivery_Form.pdf"
-	
+
+	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Medicare Part D Claim Form')]")
+	protected WebElement medicarePartDClaimForm_link_RF_FnR;
+	//- href="/content/dam/shared/documents/Medicare-Part-D-Claim-Form.pdf" 
+
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms')]")
 	protected WebElement authorizationFormsAndInfo_sectionAF_FnR;
 	

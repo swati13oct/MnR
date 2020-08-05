@@ -138,7 +138,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "termsAgree")
 	private WebElement AgreeCheckBox;
 	
-	@FindBy(xpath = "/html/body/div[2]/div/main/div[2]/div[3]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[3]/div/p")
+	@FindBy(xpath = "//p[contains(text(),'The information Only one payment request can be su')]")
 	private WebElement moreThanonePaymentError;
 	
 	@FindBy(id = "memAuthPaymentSubmitError")
@@ -526,8 +526,8 @@ public class OneTimePaymentPage extends UhcDriver {
 	    public void selectAndEnterAmount(String otherAmount) {
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
-		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
+		otherAmountInput.clear();
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
 	}
@@ -573,7 +573,6 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
-		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
@@ -595,7 +594,6 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
-		TestHarness.checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
@@ -656,6 +654,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 	
 	public ConfirmOneTimePaymentPage errorForSecondPayment() {
+		CommonUtility.waitForPageLoad(driver, moreThanonePaymentError, 20);
 		String errorMessage= moreThanonePaymentError.getText();
 		if (errorMessage.contains("Only one payment request can be submitted per business day")) 
 		{

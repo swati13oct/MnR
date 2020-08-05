@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -18,16 +17,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.util.CommonUtility;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -188,7 +186,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'select-pharmacy-buttons')]")
 	public WebElement first_pharmacy_select_LNK;
-	
+
 	@FindBy(id = "select-pharmacy-buttons_1")
 	public WebElement first_pharmacy_select_btn;
 
@@ -197,7 +195,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharInfoId_1']/span")
 	public WebElement first_pharmacy_name;
-	
+
 	@FindBy(id = "mail-service-select")
 	public WebElement mail_service_select_btn;
 
@@ -215,7 +213,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'COST')]]")
 	public WebElement step3;
-	
+
 	@FindBy(xpath = "//li[@id='costsTabId']/a")
 	public WebElement costTab;
 
@@ -278,7 +276,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='drugsTabId']/a")
 	public WebElement step1DrugTab;
-	
+
 	@FindBy(id = "switchToGenericBtnId")
 	public WebElement btnSwitchUpd;
 
@@ -299,39 +297,39 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='loading-dialog']")
 	public WebElement overlay;
-	
+
 	@FindBy(xpath="//div[@class='loading-dialog' and contains(@style,'none')]")
 	public WebElement overlay_disappeared;
-	
+
 	@FindBy(xpath="//a[@role='button' and contains(@class,'pharmacy-tab-show')]")
 	public WebElement nextSelectPharmacyBtn;
-	
+
 	@FindBy(xpath="//*[@id='plan-name-div']/div/div/div/p/a")
 	public WebElement formularypdf;
 
 	@Override
 	public void openAndValidate() {
 
-//		JSONObject jsonObject = new JSONObject();
-//		for (String key : savedrugpage.getExpectedData().keySet()) {
-//			WebElement element = findElement(savedrugpage.getExpectedData().get(key));
-//			validate(element);
-//			try {
-//				jsonObject.put(key, element.getText());
-//			} catch (JSONException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		}
-//		savedrugpageJson = jsonObject;
-//
-//		System.out.println("savedrugpageJson----->" + savedrugpageJson);
-		
+		//		JSONObject jsonObject = new JSONObject();
+		//		for (String key : savedrugpage.getExpectedData().keySet()) {
+		//			WebElement element = findElement(savedrugpage.getExpectedData().get(key));
+		//			validate(element);
+		//			try {
+		//				jsonObject.put(key, element.getText());
+		//			} catch (JSONException e) {
+		//				// TODO Auto-generated catch block
+		//				e.printStackTrace();
+		//			}
+		//
+		//		}
+		//		savedrugpageJson = jsonObject;
+		//
+		//		System.out.println("savedrugpageJson----->" + savedrugpageJson);
+
 		dceValidate(validateIntroductoryText,0);
 		System.out.println("You are on DCE page now ");
 	}
-	
+
 	public void feebackpopupClose() throws InterruptedException
 	{ 
 		if (dceValidate(iPerceptionframe,0)) {
@@ -372,7 +370,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		
+
 		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		String evironment = MRScenario.environment;
 		/*WebElement dcelink = driver.findElement(By.linkText("Estimate Drug Costs"));
@@ -473,7 +471,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click Edit Drug link for particular drug
 	 */
 	public void navgateToEditDrug(String drug) {
-		
+
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
@@ -515,12 +513,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Navigate to step 2 pharmacy tab
 	 */
 	public void navigateToStep2() throws InterruptedException {
-		
+
 		Thread.sleep(5000);
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
 		step2Pharmacy.click();
-	
+
 		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
 		checkModelPopup(driver,1);
 
@@ -628,18 +626,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
 		Thread.sleep(15000);
-		
+
 		//String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
 		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 		delDrgConfirm.click();
-		//tbd Thread.sleep(5000);
 		waitForloader(driver, overlay, 30);
-		//tbd CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-		//tbd Thread.sleep(5000);
-
 	}
 
 	/** 
@@ -654,7 +648,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
 		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-		//tbd Thread.sleep(5000);
 		return new AddDrugDetails(driver);
 	}
 
@@ -663,8 +656,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 		dceValidate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1+ "')]")));
 
 		// List<WebElement> stri =
@@ -677,10 +670,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		.contains(arg2);
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
 		.contains(arg3);
-try {
+		try {
 			Thread.sleep(2000);
 			driver.manage().window().maximize();
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -728,7 +721,7 @@ try {
 	 * Select radius in miles drop down
 	 */
 	public void selectRadius() {
-		
+
 		//Select options = new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
@@ -999,7 +992,6 @@ try {
 	 * select first pharmacy result
 	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
-		//tbd waitForloader(driver, overlay, 30);
 		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_LNK, 20);
 		Thread.sleep(2000);
@@ -1011,13 +1003,10 @@ try {
 		//first_pharmacy_select_btn.click();
 		jsClickNew(first_pharmacy_select_btn);
 		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-		//tbd Thread.sleep(2000);
-		//tbd waitForloader(driver, overlay, 30);
-		//bt dThread.sleep(2000);
 		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
 
-	
+
 	public void verifycost() { 
 
 		waitforElement(left_rail_tot_cost);
@@ -1028,7 +1017,7 @@ try {
 		else Assert.assertTrue("total cost and summary cost is not matching", false);
 
 	}
-	
+
 	/** 
 	 * verifies summary cost
 	 */
@@ -1151,7 +1140,7 @@ try {
 		//addNewDrugModal.selectDrug(drug);
 		addNewDrugModal.continueAddNewDrugModal();
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-		
+
 		addDrugDetails.continueAddDrugDetails();
 
 		// if(addDrugDetails.continueAddDrugDetails()!=null){
@@ -1518,14 +1507,14 @@ try {
 	 */
 	public void validateSwitchGenericOption() {
 
-			WebElement switchGenericOption = driver.findElement(By.id("generic-drug-switch-btn-0"));
-			System.out.println("switch generic option" + switchGenericOption.getText());
-			if (switchGenericOption.isDisplayed()) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue("Drug does not have switch to generic option ",false);
-			}
-		
+		WebElement switchGenericOption = driver.findElement(By.id("generic-drug-switch-btn-0"));
+		System.out.println("switch generic option" + switchGenericOption.getText());
+		if (switchGenericOption.isDisplayed()) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Drug does not have switch to generic option ",false);
+		}
+
 
 	}
 
@@ -1533,18 +1522,18 @@ try {
 	 * 
 	 */
 	public void validateSwitchNowLink() {
-	/*	int drugscount = getDrugsCount();
+		/*	int drugscount = getDrugsCount();
 		System.out.println("drugscount==="+drugscount);
-		
-		if(drugscount>0){
-		*/	WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
-			if (switchNowLink.isDisplayed()) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue("Switch now link is not present",false);
-			}
 
-		/*}else{
+		if(drugscount>0){
+		 */	WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
+		 if (switchNowLink.isDisplayed()) {
+			 Assert.assertTrue(true);
+		 } else {
+			 Assert.assertTrue("Switch now link is not present",false);
+		 }
+
+		 /*}else{
 			//System.out.println("0 drugs");
 			Assert.assertTrue("There are no drugs added ",false);
 		}*/
@@ -1557,14 +1546,14 @@ try {
 	public void validateSaveGenericMessage() {
 		int drugscount = getDrugsCount();
 		/*if (drugscount > 0) {*/
-			List<WebElement> saveGenericMessage = driver
-					.findElements(By.id("generic-drug-saving-amount-0"));
-			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
-			if (valSaveGenericMessage.contains("Save")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue("Save money message is incorect",false);
-			}
+		List<WebElement> saveGenericMessage = driver
+				.findElements(By.id("generic-drug-saving-amount-0"));
+		String valSaveGenericMessage = saveGenericMessage.get(0).getText();
+		if (valSaveGenericMessage.contains("Save")) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Save money message is incorect",false);
+		}
 
 		/*} else {
 			Assert.assertTrue("There are no drugs added ", false);
@@ -1578,20 +1567,13 @@ try {
 	 */
 	public void validateSaveDollarValueMessage() throws InterruptedException {
 		int drugscount = getDrugsCount();
-		
-			List<WebElement> saveGenericMessage = driver
-					.findElements(By.id("generic-drug-saving-amount-0"));
-			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
-			Assert.assertTrue("Save dollar amount message is incorect. "
-					+ "valSaveGenericMessage="+valSaveGenericMessage, 
-					!valSaveGenericMessage.contains("Save money"));
-			/* tbd 
-			if (!valSaveGenericMessage.contains("Save money")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue("Save dollar amount message is incorect",false);
-			} */
 
+		List<WebElement> saveGenericMessage = driver
+				.findElements(By.id("generic-drug-saving-amount-0"));
+		String valSaveGenericMessage = saveGenericMessage.get(0).getText();
+		Assert.assertTrue("Save dollar amount message is incorect. Expect element not to have the text 'Save money' | Actual: "
+				+ "valSaveGenericMessage="+valSaveGenericMessage, 
+				!valSaveGenericMessage.contains("Save money"));
 	}
 
 	/** click on switch now button
@@ -1601,25 +1583,25 @@ try {
 		Dimension dim = new Dimension(1280,1024);
 		driver.manage().window().setSize(dim);
 
-		
-			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
-			JavascriptExecutor js = (JavascriptExecutor)driver;
-			js.executeScript("arguments[0].click();", switchNowLink);
-			//switchNowLink.click();
-			Thread.sleep(3000);
 
-			//switchToGenericHeadingsId
-			if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
-				String savingsOpputunityHeading = driver
-						.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")) {
-					Assert.assertTrue(true);
-				} else {
-					Assert.assertTrue("Savings Oppurtunity modal popup does not show up",false);
-				}
+		WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", switchNowLink);
+		//switchNowLink.click();
+		Thread.sleep(3000);
+
+		//switchToGenericHeadingsId
+		if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
+			String savingsOpputunityHeading = driver
+					.findElement(By.id("switchToGenericHeadingsId")).getText();
+			if (savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.assertTrue("Savings Oppurtunity modal popup does not show up",false);
 			}
+		}
 
-	
+
 
 
 	}
@@ -1632,7 +1614,6 @@ try {
 		{
 			btnSwitchUpd.click();
 			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-			//tbd waitForloader(driver, overlay, 30);
 			Assert.assertTrue(true);
 		}
 		else Assert.assertTrue("update switch to generic button is not present", false);
@@ -1643,20 +1624,13 @@ try {
 	 */
 	public void isGeneric() throws InterruptedException {
 		Thread.sleep(5000);
-		//List<WebElement> lbGenericdrug = driver.findElements(By.id("drugDosageStrengthId"));
 		List<WebElement> lbGenericdrug = driver.findElements(By.xpath("//p[@class='subtitle drugdosagestrength ng-binding']"));  
-	/*	int drugsCount = getDrugsCount();
-		if (drugsCount > 0) {*/
-			String[] genericDrug = lbGenericdrug.get(0).getText().split(" ");
-			if (genericDrug[0].equalsIgnoreCase("ATORVASTATIN")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue("Branded drug is not switched to generic drug",false);
-			}
-
-	/*	} else {
-			Assert.assertTrue("There are no drugs added ", false);
-		}*/
+		String[] genericDrug = lbGenericdrug.get(0).getText().split(" ");
+		if (genericDrug[0].equalsIgnoreCase("ATORVASTATIN")) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Branded drug is not switched to generic drug",false);
+		}
 	}
 
 	/** Navigates to  DCE page
@@ -1664,7 +1638,7 @@ try {
 	 */
 	public void navigateToDCETool() throws InterruptedException {
 
-		
+
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -1675,250 +1649,240 @@ try {
 
 		driver.get(NewDCEUrl);
 		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-
-		//tbd Thread.sleep(15000);
 	}
 
-	//====================================================================
-		//=====================================================================
-		// New Methods for DCE
+	/** 
+	 * Add branded drug
+	 */
+	public void addBrandedDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+		this.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+		addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.submit();
+		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		addDrugDetails.selectDosage(dosage);
+		addDrugDetails.selectQnty(quantity);
+		addDrugDetails.selectFrequency(frequency);
+
+		addDrugDetails.continueAddDrugDetailsBranded();
+
+		SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
+		savings_oppurtunity.savedrugbutton();
+	}
+
+	/** 
+	 * Add Generic drug
+	 */
+	public void addGenricDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+		this.clickOnAddDrug();
+		addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.submit();
+		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		addDrugDetails.selectDosage(dosage);
+		addDrugDetails.selectQnty(quantity);
+		addDrugDetails.selectFrequency(frequency);
+		addDrugDetails.continueAddDrugDetailsGeneric();
+	}
+
+	public void switchToGenericDrug(String branddosage, String gendosage) throws InterruptedException{
+
+		//*[@id="generic-drug-switch-btn-1"]
+		System.out.println("branddosage=="+branddosage);
+
+		System.out.println("gendosage=="+gendosage);
+		//WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
+		//p[contains(text(), 'Exelon Transdermal Patch DIS 9.5MG/24')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]
+		//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
+
+		Dimension dim = new Dimension(1280,1024);
+		driver.manage().window().setSize(dim);
 
 
-		/** 
-		 * Add branded drug
-		 */
-		public void addBrandedDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
-			this.clickOnAddDrug();
-			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
-			addNewDrugModal.typeDrugName(drug);
-			addNewDrugModal.submit();
-			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-			addDrugDetails.selectDosage(dosage);
-			addDrugDetails.selectQnty(quantity);
-			addDrugDetails.selectFrequency(frequency);
+		WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-1"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", switchNowLink);
+		//switchNowLink.click();
+		//Thread.sleep(3000);
 
-			addDrugDetails.continueAddDrugDetailsBranded();
-
-			SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
-			savings_oppurtunity.savedrugbutton();
-		
-
-
-		}
-
-		/** 
-		 * Add Generic drug
-		 */
-		public void addGenricDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
-			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
-			this.clickOnAddDrug();
-			addNewDrugModal.typeDrugName(drug);
-			addNewDrugModal.submit();
-			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-			addDrugDetails.selectDosage(dosage);
-			addDrugDetails.selectQnty(quantity);
-			addDrugDetails.selectFrequency(frequency);
-            addDrugDetails.continueAddDrugDetailsGeneric();
-		 }
-		
-		public void switchToGenericDrug(String branddosage, String gendosage) throws InterruptedException{
-
-			//*[@id="generic-drug-switch-btn-1"]
-			System.out.println("branddosage=="+branddosage);
-			
-			System.out.println("gendosage=="+gendosage);
-			//WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
-			//p[contains(text(), 'Exelon Transdermal Patch DIS 9.5MG/24')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]
-			//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
-			
-			Dimension dim = new Dimension(1280,1024);
-			driver.manage().window().setSize(dim);
-
-			
-				WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-1"));
-				JavascriptExecutor js = (JavascriptExecutor)driver;
-				js.executeScript("arguments[0].click();", switchNowLink);
-				//switchNowLink.click();
-				//Thread.sleep(3000);
-			
 		/*	if (validate(switchNowLink)){
 				switchNowLink.click();
 
 			}	
 			else Assert.assertTrue("Unable to see switch now link", false);
-*/
-			CommonUtility.waitForPageLoad(driver, genericDrugText, 20);
-			//	waitForPageLoad(WebDriver driver, WebElement element, long timeout)
+		 */
+		CommonUtility.waitForPageLoad(driver, genericDrugText, 20);
+		//	waitForPageLoad(WebDriver driver, WebElement element, long timeout)
 
-			Assert.assertEquals("Generic drug is not matching", gendosage, genericDrugText.getText());
-			clickSwitchToGeneric();
+		Assert.assertEquals("Generic drug is not matching", gendosage, genericDrugText.getText());
+		clickSwitchToGeneric();
 
-		}
-
-
+	}
 
 
-		public static void waitForloader(WebDriver driver, WebElement element, long timeout) {
-
-			WebDriverWait wait = new WebDriverWait(driver, timeout);
-			try {
-				WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
-
-				System.out.println("----waitForloader---elementExpected======"+elementExpected);
 
 
-				if ((elementExpected.getAttribute("style").isEmpty() || elementExpected.getText() == null)) {
-					timeout = timeout - 5;
-					if (timeout > 0) {
-						waitForloader(driver, element, timeout);
-					}
-				}
+	public static void waitForloader(WebDriver driver, WebElement element, long timeout) {
 
-			} catch (Exception e) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		try {
+			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
+
+			System.out.println("----waitForloader---elementExpected======"+elementExpected);
+
+
+			if ((elementExpected.getAttribute("style").isEmpty() || elementExpected.getText() == null)) {
 				timeout = timeout - 5;
 				if (timeout > 0) {
 					waitForloader(driver, element, timeout);
-				} else {
-					System.out.println("Not able to locate this " + element + " on page");
-					return;
 				}
 			}
 
-		}
-
-		public boolean validateOptumRxPage() {
-			if(driver.getCurrentUrl().contains("optumrx.com/public/sso-landing"))
-				return true;
-			return false;
-		}
-		
-		public void addDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
-			this.clickOnAddDrug();
-			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
-			addNewDrugModal.typeDrugName(drug);
-			addNewDrugModal.submit();
-			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-			//addDrugDetails.selectDosage(dosage);
-			addDrugDetails.selectQnty(quantity);
-			addDrugDetails.selectFrequency(frequency);
-            addDrugDetails.continueAddDrugDetailsGeneric();
-
-		}
-		
-		@FindBy(xpath = "//a[contains(@class,'cta-button pharmacy-tab-show ng-scope')]") 
-		public WebElement Slect_PharmacyBttn; 
-		
-		@FindBy(xpath = "//a[contains(@id,'select-pharmacy-buttons_0')]") 
-		public WebElement Selct_Button;
-		
-		@FindBy(xpath = "//a[contains(@dtmname,'dce:step 2 pharmacy:select pharmacy:next:view costs')]") 
-		public WebElement view_CostButtn;
-		
-		@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
-		public WebElement stepTherpayPDFLink;
-		
-		@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
-		public WebElement priorAuthPDFLink;
-
-		public void viewSTandPALink() {
-			Slect_PharmacyBttn.click();
-			validateNew(Selct_Button);
-			Selct_Button.click();
-			validateNew(view_CostButtn);
-			view_CostButtn.click();
-			validateNew(stepTherpayPDFLink);
-			if(stepTherpayPDFLink.isDisplayed()) {
-				Assert.assertTrue("Step Therapy PDF Link Displayed",true);
+		} catch (Exception e) {
+			timeout = timeout - 5;
+			if (timeout > 0) {
+				waitForloader(driver, element, timeout);
 			} else {
-				Assert.assertTrue("Step Therapy PDF Link DID NOT Displayed",false);
-			}
-			if(priorAuthPDFLink.isDisplayed()) {
-				Assert.assertTrue("Prior Authorization PDF Link Displayed",true);
-			} else {
-				Assert.assertTrue("Prior Authorization PDF Link DID NOT Displayed",false);
-			}
-
-
-		}
-
-		public void openPAandSTPDF() {
-
-			stepTherpayPDFLink.click();
-			switchToNewTab();
-			if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
-				System.out.println("The PDF page opened");
-			}
-			
-			driver.switchTo().defaultContent();
-			
-			priorAuthPDFLink.click();
-			switchToNewTab();
-			if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
-				System.out.println("The PDF page opened");
+				System.out.println("Not able to locate this " + element + " on page");
+				return;
 			}
 		}
 
-
-		/**
-		 * to validate whether element exists, default up to 2 seconds timeout
-		 * @param element
-		 * @return
-		 */
-		public boolean dceValidate(WebElement element) {
-			long timeoutInSec=0;
-			return dceValidate(element, timeoutInSec);
-		} 
-
-		/**
-		 * to validate whether element exists with input timeout value control
-		 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
-		 * @param element
-		 * @param timeoutInSec
-		 * @return
-		 */
-		public boolean dceValidate(WebElement element, long timeoutInSec) {
-			//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
-			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-			try {
-				if (element.isDisplayed()) {
-					System.out.println("Element '"+element.toString()+"' found!!!!");
-					return true;
-				} else {
-					System.out.println("Element '"+element.toString()+"' not found/not visible");
-				}
-			} catch (Exception e) {
-				System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
-			}
-			//note: default in UhcDriver is 10
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
-			return false;
-		} 
-
-		public void moveMouseToElement(WebElement targetElement) {
-			Actions action = new Actions(driver);
-			action.moveToElement(targetElement).build().perform(); 
-		}
-		
-		public boolean isformularyPDF() {
-
-			if(validate(formularypdf)){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		public void openFormularyPDF() {
-
-			formularypdf.click();
-			switchToNewTab();
-			if(driver.getCurrentUrl().contains(".pdf")) {
-				System.out.println("The PDF page opened");
-			}
-		
-		}
-		
 	}
+
+	public boolean validateOptumRxPage() {
+		if(driver.getCurrentUrl().contains("optumrx.com/public/sso-landing"))
+			return true;
+		return false;
+	}
+
+	public void addDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+		this.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+		addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.submit();
+		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		//addDrugDetails.selectDosage(dosage);
+		addDrugDetails.selectQnty(quantity);
+		addDrugDetails.selectFrequency(frequency);
+		addDrugDetails.continueAddDrugDetailsGeneric();
+
+	}
+
+	@FindBy(xpath = "//a[contains(@class,'cta-button pharmacy-tab-show ng-scope')]") 
+	public WebElement Slect_PharmacyBttn; 
+
+	@FindBy(xpath = "//a[contains(@id,'select-pharmacy-buttons_0')]") 
+	public WebElement Selct_Button;
+
+	@FindBy(xpath = "//a[contains(@dtmname,'dce:step 2 pharmacy:select pharmacy:next:view costs')]") 
+	public WebElement view_CostButtn;
+
+	@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
+	public WebElement stepTherpayPDFLink;
+
+	@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
+	public WebElement priorAuthPDFLink;
+
+	public void viewSTandPALink() {
+		Slect_PharmacyBttn.click();
+		validateNew(Selct_Button);
+		Selct_Button.click();
+		validateNew(view_CostButtn);
+		view_CostButtn.click();
+		validateNew(stepTherpayPDFLink);
+		if(stepTherpayPDFLink.isDisplayed()) {
+			Assert.assertTrue("Step Therapy PDF Link Displayed",true);
+		} else {
+			Assert.assertTrue("Step Therapy PDF Link DID NOT Displayed",false);
+		}
+		if(priorAuthPDFLink.isDisplayed()) {
+			Assert.assertTrue("Prior Authorization PDF Link Displayed",true);
+		} else {
+			Assert.assertTrue("Prior Authorization PDF Link DID NOT Displayed",false);
+		}
+
+
+	}
+
+	public void openPAandSTPDF() {
+
+		stepTherpayPDFLink.click();
+		switchToNewTab();
+		if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
+			System.out.println("The PDF page opened");
+		}
+
+		driver.switchTo().defaultContent();
+
+		priorAuthPDFLink.click();
+		switchToNewTab();
+		if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
+			System.out.println("The PDF page opened");
+		}
+	}
+
+
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean dceValidate(WebElement element) {
+		long timeoutInSec=0;
+		return dceValidate(element, timeoutInSec);
+	} 
+
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean dceValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
+
+	public boolean isformularyPDF() {
+
+		if(validate(formularypdf)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public void openFormularyPDF() {
+
+		formularypdf.click();
+		switchToNewTab();
+		if(driver.getCurrentUrl().contains(".pdf")) {
+			System.out.println("The PDF page opened");
+		}
+
+	}
+
+}
 
 
 

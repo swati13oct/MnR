@@ -35,8 +35,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
-  @addDrugsDCE1 @prodRegression
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  @addDrugsDCE1
+  Scenario Outline: Verify user is able to add drug and pharmacy information from DCE to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -67,7 +67,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -93,7 +93,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
 
-  @addPlansVPP @prodRegression
+  @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -109,12 +109,13 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
 
+# The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+#      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile 
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -235,10 +236,10 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | UID       | zipcode | isMultiCounty | county          | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       | US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
 
-  @vpMSSavePlan @prodRegression
+  @vpMSSavePlan
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -274,7 +275,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then user click on continue as guest button on AARP site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the profile in AARP site
+    And the user back to VPP plan summary page in AARP
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
@@ -323,8 +324,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | state   | userName | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
-      | Alabama | mnrqavd  | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
+      | state   | userName           | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
+      | Alabama | mnrqavd2@gmail.com | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -348,12 +349,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county          | userName           | password   | plantype | planname                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP @prodRegression
+  @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
- 		Given the user is on AARP medicare acquisition site landing page
+    Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |

@@ -1,5 +1,7 @@
 package pages.regression.accounthomepage;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -308,7 +310,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
 	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
@@ -491,13 +493,15 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@data-track-id,'MANAGE_PRESCRIPTIONS')]")
 	private WebElement pharamciesAndPrescriptionsLink;
 	
-	@FindBy(xpath="//div[contains(text(),'FIND A PHARMACY')]")
+	@FindBy(xpath="//div[2]/h2[contains(text(),'Pharmacy Locator')]")
 	private WebElement findAPharmacyLink;
 	@FindBy(xpath = "//span[contains(text(),'View Your Claims')]")
 	private WebElement claimsDashboardLink1;
 	@FindBy(id="premiumpayment_3")
 	private WebElement premiumPayments;
 	
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
+	protected WebElement LookUpDrugsButton;
 	
 	private PageData myAccountHome;
 	
@@ -548,7 +552,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag(String Plantype) {
 
-		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.contains("prod")) {
 			checkModelPopup(driver,5);
 			if (noWaitValidate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
@@ -893,7 +897,7 @@ public class AccountHomePage extends UhcDriver {
 						System.out.println("located shadow-root element, attempt to process further...");
 						WebElement root1 = expandRootElement(shadowRootHeader);
 						try {
-							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
+							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2,#dropdown-toggle-4"));
 							acctSettingMenuShadowRootBtn.click();
 						} catch (Exception e) {
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
@@ -2410,7 +2414,7 @@ public class AccountHomePage extends UhcDriver {
 				Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on testharness page table", validate(eobTestharnessLink,0));
 				eobTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				checkModelPopup(driver,5);
+				checkModelPopup(driver,1);
 				if (noWaitValidate(shadowRootHeader)) {
 					System.out.println("located shadow-root element, attempt to process further...");
 					WebElement root1 = expandRootElement(shadowRootHeader);
@@ -2433,8 +2437,8 @@ public class AccountHomePage extends UhcDriver {
 					Assert.assertTrue("PROBLEM - unable to locate the Explanation of Benefits link on the Rally Dashboard page body", noWaitValidate(EOB_Dashboard));
 					EOB_Dashboard.click();
 				}
-				CommonUtility.checkPageIsReady(driver);
-				checkModelPopup(driver,5);
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver,1);
 			}
 		} else {
 			System.out.println(
@@ -4080,9 +4084,21 @@ public class AccountHomePage extends UhcDriver {
 		 System.out.println("Now checking for header element h1 of the page");
 		 CommonUtility.checkPageIsReadyNew(driver);
 			try {
+				System.out.println("Waiting for 4 seconds");
+				Thread.sleep(4000);
+				System.out.println("Waiting for h1 element to be displayed on page");
+				waitforElement(hcePageText); 
+				if(hcePageText.isDisplayed())
+				{
+					System.out.println("Element for header h1 was displayed on page");
+				}
+				else
+				{
+					Assert.fail("Element for heaer h1 was NOT displayed on page");
+				}				
 				String gethcePageText = hcePageText.getText();
 				System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
-		   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
+				if (gethcePageText.contains("myHealthcare Cost Estimator"))
 		   				{
 		   			System.out.println("myHealthcare Cost Estimator Text was displayed");
 		   			
@@ -4126,6 +4142,8 @@ public class AccountHomePage extends UhcDriver {
 								"shadow-root element has been located, now clicking on Pharmacies And Prescriptions tab");
 						TestHarness.checkForIPerceptionModel(driver);
 						PharmaciesAndPrescriptionsTab.click();
+						System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+						CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
 					}
 
 					else {
@@ -4305,6 +4323,13 @@ public class AccountHomePage extends UhcDriver {
 			
 }
 		return null;
+	}
+	
+	public void verifyLoggedInPageForCanopy(String expectedURL, String expectedTitle) throws InterruptedException {
+		   String currentPageURL = currentUrl();
+		   String currentPageTitle = getTitle();
+		   assertTrue("Navigated page URL not matched for Canopy deep link", currentPageURL.contains(expectedURL));
+		   assertTrue("Navigated page title not matched for Canopy deep link", currentPageTitle.contains(expectedTitle));
 	}
 
 }

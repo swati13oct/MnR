@@ -260,7 +260,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryAARP11 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP11 @vppPlanSummaryAARPRun02
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -293,7 +293,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page in ulayer
+   When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
 
@@ -437,7 +437,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |
 
   @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+  Scenario Outline: TID: <TID> -plan type: <plantype> - plan name: -<planName> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |

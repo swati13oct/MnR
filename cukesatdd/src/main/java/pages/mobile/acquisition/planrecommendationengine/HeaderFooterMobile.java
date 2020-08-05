@@ -490,12 +490,13 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 5, true);
+		//mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 5, true);
 		validate(hearderEmailtext, 30);
-		hearderEmailtext.click();
+		//hearderEmailtext.click();
+		hearderEmailtext.sendKeys("");
 		hearderEmailtext.sendKeys(email);
 		hidekeypad();
-		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 1, true);
+		//mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext, "50%", 1, true);
 		headerEmailsubmitButton.click();
 		validate(headerShopForaPlanThankYou, 30);
 		mobileswipe("90%", 2, false);
@@ -522,8 +523,8 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
-		mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
-		mobileactiontap(footerBackToTopLink);
+		//mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
+		jsClickMobile(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
@@ -799,15 +800,22 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 
 	public void navigatePRELandingpageMobile() {
+		String url = driver.getCurrentUrl();
+		/*
 		validate(headerSectionmenu, 30);
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileswipe("90%", true);
 		validate(headerGetaplanrecommendationLink, 30);
+		hearderEmailtext.sendKeys("");
+		hidekeypad();
+		String link = headerGetaplanrecommendationLink.getAttribute("href").trim();
+		System.out.println("PRE link : "+link);
 		mobileactiontap(headerGetaplanrecommendationLink);
+		*/
+		driver.navigate().to(url+"plan-recommendation-engine.html");//if navigation not working in App
+		pageloadcomplete();
 		validate(landingpageHeader, 30);
-		//mobileUtils.waitTextPresent(landingpageHeader, "plan", 20);
 	}
 
 	public void browserBack() {
@@ -858,6 +866,21 @@ public class HeaderFooterMobile extends UhcDriver {
 		driver.navigate().refresh();
 		threadsleep(1000);
 		pageloadcomplete();
+	}
+	
+	public void navigatePRELandingpageMenuMobile() {
+		validate(headerSectionmenu, 30);
+		headerSectionmenu.click();
+		validate(shopforaplanLink, 30);
+		shopforaplanLink.click();
+		validate(headerGetaplanrecommendationLink, 30);
+		hearderEmailtext.sendKeys("");
+		hidekeypad();
+		String link = headerGetaplanrecommendationLink.getAttribute("href").trim();
+		System.out.println("PRE link : "+link);
+		mobileactiontap(headerGetaplanrecommendationLink);
+		pageloadcomplete();
+		validate(landingpageHeader, 30);
 	}
 
 }
