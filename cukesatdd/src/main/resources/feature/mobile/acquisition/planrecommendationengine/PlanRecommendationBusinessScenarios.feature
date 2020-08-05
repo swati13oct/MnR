@@ -1,7 +1,7 @@
 @PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile @PRESanityMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API vs UI for Recommendation and Ranking using mobile
 # Mobile automation with minimal Business Scenarios
-  @PRE @Rankingmobile @PDPAPIUIRanking @APIRankingmobile @F358846
+  @PRE @Rankingmobile @PDPAPIUIRanking @APIRankingmobile @F358846 @F483324
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate API ranking with UI plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
