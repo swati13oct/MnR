@@ -986,19 +986,13 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
-			plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkAllMAPlans();
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		} else if (planType.equals("PDP")) {
-			plansummaryPage.clickOnPDPPlans();
+			//plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
@@ -1114,21 +1108,21 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		//----- MA plan type ----------------------------
 		String planType="MA";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- PDP plan type ---------------------------
 		planType="PDP";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- SNP plan type ---------------------------
 		planType="SNP";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
@@ -2261,15 +2255,9 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
-			plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkMAPlansOnly(counter);
 			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
