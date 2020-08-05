@@ -211,12 +211,7 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*try {
-			Thread.sleep(7000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 		plansummaryPage.viewPlanSummary(plantype);
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
@@ -247,11 +242,31 @@ public class VppStepDefinitionUHC {
 		}*/
 		plansummaryPage.viewPlanSummary(plantype);
 		//plansummaryPage.CheckClick_NextYear_Plans();
-		plansummaryPage.handlePlanYearSelectionPopup(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
 	
+	@When("the user selects plan year for the UMS site$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+	
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
 	public void Enroll_now_button_validation(DataTable givenAttributes) {

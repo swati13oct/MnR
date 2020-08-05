@@ -886,7 +886,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Plan Benefits Table");
-				targetTestDocList.add("Plan Documents");
+				//targetTestDocList.add("Plan Documents");
 				targetTestDocList.add("A Guide to Health Insurance for People with Medicare");
 				return targetTestDocList;
 			} 

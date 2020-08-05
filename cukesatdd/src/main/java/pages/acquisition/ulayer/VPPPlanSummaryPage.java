@@ -707,10 +707,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		private WebElement submitApplicationBtn;
 		
 		@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
-		private WebElement  NextYearPlans;
+		private WebElement  NextYearPlansBtn;
 		
 		@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
-		private WebElement  CurrentYearPlans;
+		private WebElement  CurrentYearPlansBtn;
 		
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 		private WebElement  SelectYearGoBtn;
@@ -2292,7 +2292,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return null;  
 	}
 	/* Navigation to DCE for all plan types having a plan name*/
-	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName) throws InterruptedException {
 		
 	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
 				
@@ -2303,8 +2303,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
 		}else if(planName.contains("PDP")){
 			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')])"));
-		}else
+		}else {
+			try {
+				DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+			}
+		catch (Exception e){
+			// this block is to remove added drugs
+			
+			driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]")).click();	
+			
+			List<WebElement> removeAddedDrugs = driver.findElements(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'remove-icon')]"));
+			int noOfDrugs = removeAddedDrugs.size();
+			
+			if(removeAddedDrugs != null){
+				for(int i=0; i < noOfDrugs; i++){
+					removeAddedDrugs.get(i).click();
+					Thread.sleep(5000);
+					System.out.println("Drug removed:"+ (i+1));
+					}
+				}
 			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+			}
+		}	
 
 		
 		DCELink.click();
@@ -3406,9 +3426,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			//WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
 			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearPlans.getText());
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearPlansBtn.getText());
 			System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
-			NextYearPlans.click();
+			NextYearPlansBtn.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 			
 			SelectYearGoBtn.click();
@@ -3420,48 +3440,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 	
-	public void handlePlanYearSelectionPopup(String planType) {
-		
+	public void handlePlanYearSelectionPopup(String planYear) {
 
-	      
-		try{
-	
-			if (!(planType.equalsIgnoreCase("MS"))) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup, 30)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-				planYearPopupGoButton.click();
+			CommonUtility.checkPageIsReadyNew(driver);			
+				if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+					if(validate(CurrentYearPlansBtn, 20)) {
+						System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+						jsClickNew(CurrentYearPlansBtn);	
 					}
 				}
-			}
-		
-		else {
-			System.out.println("Popup is not present for AEP : ");
-		
-			if(validate(CurrentYearPlans, 30)) {
-				System.out.println("*****CLICKING ON Year Toggle Go button*****: "+CurrentYearPlans.getText());
-				CurrentYearPlans.click();
-			}
-				
-	      }
-		
-	}catch(Exception e) {
-			e.printStackTrace();
-		/*	System.out.println("Popup is not present for AEP : ");
-			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
-			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
-			System.out.println("*****CLICKING ON Year Toggle Go button*****: "+SelectYearGoBtn.getText());
-			SelectYearGoBtn.click();*/			
 			
-	
-	}	      
-	
-	
-}
+	}
 			
 		
 
@@ -3533,15 +3522,20 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+		
+		if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
+			System.out.println("Popup is present for AEP : ");	
+				if (validate(currentYearSelection)) {
+					currentYearSelection.click();
+				}
+				validateNew(planYearPopupGoButton);
 				planYearPopupGoButton.click();
-				
-			}
-		} 
+		}else {														// if the plan year popup is not displayed
+				if(validate(CurrentYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);	
+				}
+		}
 	}	
 
 	public void selectCurrentYearPlanYearSelectionPopup() {

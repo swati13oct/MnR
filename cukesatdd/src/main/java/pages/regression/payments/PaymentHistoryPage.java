@@ -272,6 +272,12 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='paymentTable' or @id='paymentTable1']")
 	private WebElement paymentTable;
+	
+	@FindBy(xpath = "//div[@id='billingHistoryTable0']")
+	private WebElement billingHistoryTableForFed;
+	
+	@FindBy(xpath = "//div[@id='paymentsHistoryTable0']//div[contains(@class,'history-table__body')]")
+	private WebElement paymentHistoryTableForFed;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
 	private WebElement paymentTablePremiumDueDateHeader;
@@ -417,11 +423,29 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "menubutton1_0")
 	private WebElement billingHistoryDateRangeDropdown;
 	
+	@FindBy(css = "#menubutton1_0")
+	private WebElement billingHistoryDateRangeDropdownForFed;
+	
+	@FindBy(css = "#menubutton_0")
+	private WebElement paymentHistoryDateRangeDropdownForFed;
+		
 	@FindBy(xpath = "//ul[@id='menu3_0']/li[4]/a")
 	private WebElement billingHistoryLast24MonthsOption;
 	
 	@FindBy(xpath = "//*[@class='payment-method-btn']/a[text()='Manage Payment Method']")
 	private WebElement managePaymentMethodButton;
+	
+	@FindBy(xpath = "//div[@class='plan-card__flag-message' and contains(text(),'No Payments Due')]")
+	private WebElement OverpaymentCreditFlag;
+	
+	@FindBy(xpath = "//div[@class='plan-card__notification isPaid']//p[contains(text(),'No further payments needed')]")
+	private WebElement OverpaymentCreditVerbiage;
+	
+	@FindBy(xpath = "//div[@class='plan-card__amount ng-binding']")
+	private WebElement totalAmountDue;
+	
+	@FindBy(xpath = "//div[contains(text(),'Overdue')]")
+	private WebElement overdueFlag;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -980,11 +1004,20 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(5000);
 		try {
 			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Scrolling to Manage Payment Method Button");
+			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
+			jse2.executeScript("arguments[0].scrollIntoView()", managePaymentMethodButton);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			}
+			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Now clicking on Manage Payment Method Button");
 			managePaymentMethodButton.click();
 		} catch (Exception e1) {
 			System.out.println("Manage Payment Method button was not clicked or displayed");	
 		}
-		System.out.println("User clicked on Update Automatic Button");
+		System.out.println("User clicked on Manage Payment Method button");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -1769,6 +1802,99 @@ public class PaymentHistoryPage extends UhcDriver {
 				return new PaymentHistoryPage(driver);
 			}
 			
+			
+			public PaymentHistoryPage scrollDownAndUpForFed() throws InterruptedException {
+				checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Waiting for Make a One time payment button to load");
+				CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+												
+				System.out.println("Now Scrolling to daterange dropdown of Billing history section");
+				JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+				jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+								
+				System.out.println("Hovering mouse over daterange dropdown");	
+				Actions action = new Actions(driver);
+				action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
+				
+				System.out.println("waiting for 2 seconds");	
+				Thread.sleep(2000);
+				System.out.println("Selecting the date from dropdown - Last 24 months ");
+				
+				driver.findElement(By.linkText("Last 24 months")).click();
+				
+				System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
+			    
+			    try {
+					if (billingHistoryTableForFed.isDisplayed()) {
+						System.out.println("Billing History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Billing History table was not displayed, test failed");
+					Assert.fail();
+
+					}
+			    
+			    System.out.println("Now Scrolling to daterange dropdown of Payment history section");
+				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+				jse3.executeScript("arguments[0].scrollIntoView()", paymentHistoryDateRangeDropdownForFed); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+								
+				System.out.println("Hovering mouse over payment history daterange dropdown");	
+				Actions action1 = new Actions(driver);
+				action1.moveToElement(paymentHistoryDateRangeDropdownForFed).build().perform();
+				
+				System.out.println("waiting for 2 seconds");	
+				Thread.sleep(2000);
+				System.out.println("Selecting the date from dropdown - Last 24 months ");
+				
+				driver.findElement(By.linkText("Last 24 months")).click();
+				
+				System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
+			    
+			    try {
+					if (paymentHistoryTableForFed.isDisplayed()) {
+						System.out.println("Payment History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Payment History table was not displayed, test failed");
+					Assert.fail();
+
+					}
+
+			    System.out.println("Now Scrolling to Make A One-Time Payment Button");
+				JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+				jse4.executeScript("arguments[0].scrollIntoView()", MakeOneTimepaymentButton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return new PaymentHistoryPage(driver);
+			}
+			
 	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException {
 		System.out.println("Now checking for Tech Support Number for Pre-effective members");
 		System.out.println(
@@ -1854,4 +1980,62 @@ public class PaymentHistoryPage extends UhcDriver {
 				return null;
 			}
 		}
-}
+	
+	public void validateOverPaymentFlag() {
+	
+			if(OverpaymentCreditFlag.isDisplayed()) {
+				System.out.println("OverPayment flag text is - "+OverpaymentCreditFlag.getText());
+				Assert.assertTrue("OverpaymentCreditFlag is displaying", OverpaymentCreditFlag.isDisplayed());
+				Assert.assertTrue("OverpaymentCreditVerbiage is displaying", OverpaymentCreditVerbiage.isDisplayed());
+				System.out.println("OverPayment verbiage text- "+OverpaymentCreditVerbiage.getText());
+					}
+					else {
+						Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+					}
+		}
+	
+	public void overdueflag() {
+	
+			String amount = totalAmountDue.getText();
+			String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+			System.out.println("Total due amount is "+amountdue);
+			 if(Integer.parseInt(amountdue)!=0) {
+				 Assert.assertTrue("Total amount due value is non-zero", true);
+				 System.out.println("Total amount due value is non-zero");
+			 }
+			if(overdueFlag.isDisplayed()) {
+		Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
+			}
+			else {
+				Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+			}
+		} 
+	
+	public void paidInFullFlag() {
+		
+			if(OverpaymentCreditFlag.isDisplayed()) {
+				Assert.assertTrue("OverpaymentCreditFlag is displaying  ", OverpaymentCreditFlag.isDisplayed());
+				Assert.assertTrue("OverpaymentCreditVerbiage is displaying", OverpaymentCreditVerbiage.isDisplayed());
+					}
+					else {
+						Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+					}
+			String amount = totalAmountDue.getText();
+			String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+			System.out.println("Total due amount is "+amountdue);
+			 if(Integer.parseInt(amountdue)==0) {
+				 Assert.assertTrue("For crdit balance flag total amount due is $ 0", true);
+				 System.out.println("For crdit balance flag total amount due is $ 0");
+			 }
+			 else {
+					Assert.fail("For crdit balance flag total amount due is not $ 0");
+					System.out.println("For crdit balance flag total amount due is $ 0");
+				}
+	}
+	
+		}
+	
+	
+	
+	
+
