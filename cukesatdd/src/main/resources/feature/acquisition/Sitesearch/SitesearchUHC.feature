@@ -2,7 +2,7 @@
 Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
 @SiteSearchUHC  @SiteSearchRegressionUHC
- Scenario Outline: Verify search results in UHC site
+ Scenario Outline: Verify search results in UHC site - search value -<newsearchvalue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>| 
@@ -44,7 +44,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
     
  @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
- Scenario Outline: Verify search results in UHC site for Error
+ Scenario Outline: Verify search results in UHC site for Error - search value -<NewSearchValue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>|
@@ -59,7 +59,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
     |Medicare|InvalidCharacter|medicareeee|  
     
 	@SearchResultsPharmacyLocatorBlayer    @SiteSearchRegressionUHC
-  Scenario Outline: To verify search results in pharmacy locator Blayer page
+  Scenario Outline: To verify search results in pharmacy locator Blayer page - search value -<newsearchvalue>
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |      
    Then the user enter the searchValue in the search text box and hits enter
