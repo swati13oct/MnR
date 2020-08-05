@@ -20,7 +20,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	public void openAndValidate() {
 	}
 
-	@FindBy(xpath = "//h1[@data-testid='os__summary__label']")
+	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
 	protected WebElement orderConfirmationPageHeader;
 
 	// ***************Order Summary Section*****************//

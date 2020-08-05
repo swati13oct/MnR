@@ -2,12 +2,13 @@
 Feature: Refill - Checkout summary
   I am a user of the M&R Portal with Rx benefits I must have access to checkout information for refillable medications
 
-  @F481927 @US2767410 @Scenario1
+  @F481927 @US2767410 @Scenario1 @NeedToTest
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
-    Given login with following details logins in the member portal and validate elementss
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user views the Current Medications
     And user clicks Refill Medication call to action button
     Then user will see "Complete Your Refill" Page
     When user views the Medications section
@@ -15,9 +16,9 @@ Feature: Refill - Checkout summary
 
     Examples: 
       | FID     | planType | memberType                  |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx_refill |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767410 @Scenario2 @Test
+  @F481927 @US2767410 @Scenario2 @NeedToTest
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication information 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -34,10 +35,10 @@ Feature: Refill - Checkout summary
     And user validates the remaining refills
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767410 @Scenario5
+  @F481927 @US2767410 @Scenario5 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -48,8 +49,8 @@ Feature: Refill - Checkout summary
     And user sees a Remove Item From Order CTA
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767407 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Line Item Medications in Order Summary Section
@@ -64,10 +65,10 @@ Feature: Refill - Checkout summary
     And user will see the number of prescriptions included in the order
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767407 @Scenario2
+  @F481927 @US2767407 @Scenario2 @NeedToTest
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify price of Prescriptions in Order Summary Section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -79,10 +80,10 @@ Feature: Refill - Checkout summary
     Then user will see the total price of all medications in the order
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767407 @Scenario3
+  @F481927 @US2767407 @Scenario3 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Line Item Shipping in Order Summary Section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -95,8 +96,8 @@ Feature: Refill - Checkout summary
     And user will see the price of the shipping
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767407 @Scenario4
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Total Price in Order Summary Section
@@ -111,8 +112,8 @@ Feature: Refill - Checkout summary
     And the total will include medication and shipping cost
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767407 @Scenario5
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Disclaimer in Order Summary Section
@@ -126,10 +127,10 @@ Feature: Refill - Checkout summary
     Then user will see a disclaimer related to estimated order total
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2781924 @Scenario1
+  @F481927 @US2781924 @Scenario1 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Confirmation Shipping Address in Order Summary Section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -142,8 +143,8 @@ Feature: Refill - Checkout summary
     And user will see shipping address
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Line Item Medications in Order Summary Section
@@ -157,10 +158,10 @@ Feature: Refill - Checkout summary
     Then user will see Preferred payment method
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767408 @Scenario2
+  @F481927 @US2767408 @Scenario2 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Payment Details
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -176,8 +177,8 @@ Feature: Refill - Checkout summary
     And user will see a Change Payment CTA
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767409 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Shipping Address Details
@@ -193,8 +194,8 @@ Feature: Refill - Checkout summary
     And user will view the Change Shipping address CTA
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
@@ -207,8 +208,8 @@ Feature: Refill - Checkout summary
     And user will see Place Order Btn
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
@@ -224,8 +225,8 @@ Feature: Refill - Checkout summary
     And user will see the estimated delivery date for each shipment
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1 @Test
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
@@ -235,9 +236,9 @@ Feature: Refill - Checkout summary
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks Refill Medication call to action button
     Then user views the "Complete Your Refill" page
-    When user view the medication section
+    When user views the Medications section
     Then user will see the auto refill line populate for any eligible medication
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F481927 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |

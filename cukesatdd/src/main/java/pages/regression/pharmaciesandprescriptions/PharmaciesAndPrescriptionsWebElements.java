@@ -296,7 +296,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected List<WebElement> halfHarveyBall;
 
-	@FindBy(xpath = "//a[contains(text(),'View all medications')]")
+	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
@@ -567,7 +567,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected List<WebElement> listOfHDMedication;// need to update by Kiran
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']")
  	protected List<WebElement> listOfRefillMedication;
  	     	
  	@FindBy(xpath="//button[@data-testid='medication-action-renew']")

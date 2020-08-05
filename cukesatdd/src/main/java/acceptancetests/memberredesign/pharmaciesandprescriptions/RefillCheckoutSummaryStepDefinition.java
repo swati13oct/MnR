@@ -42,10 +42,12 @@ public class RefillCheckoutSummaryStepDefinition {
 
 	@Then("^user views the Medications section$")
 	public void user_views_the_Medications_section() throws Throwable {
-		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		Assert.assertTrue("PROBLEM - Medications Section not available", checkoutSumaryPg.validateMedicationSection());
+		CheckOutSummaryPage checkoutSumaryPg = new CheckOutSummaryPage(null);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+		Assert.assertTrue("PROBLEM - Medications Section not available", checkoutSumaryPg.validateMedicationSection());
 	}
 
 	@And("^User will see the number of medications in my order indicated in the header$")
