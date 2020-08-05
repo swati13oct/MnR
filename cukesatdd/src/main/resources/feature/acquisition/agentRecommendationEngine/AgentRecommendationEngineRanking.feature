@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @AREElements @dropdownUI @F439411 @F485681
+  @ARE @AREElements @dropdownUI @F439411 @F481022
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile

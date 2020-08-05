@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.acquisition.agentRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/agentRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json" }, 
-		tags = {"@F485681"})
+		tags = {"@F481022"})
 public class RunMRATDDAcquisitionAgentRecommendationEngineUlayer {
 
 }
