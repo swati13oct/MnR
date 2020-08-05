@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @AREElements @dropdownUI @F439411 @F481022
+  @ARE @AREElements @dropdownUI @F439411
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -18,7 +18,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
   
-  @ARE @DrugARE @F439411 @F487396
+  @ARE @DrugARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -95,7 +95,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
 
-  @ARE @PlansReorder
+  @ARE @PlansReorder @F487396
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
