@@ -41,10 +41,20 @@ public class CanceledOrdersStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateCanceledOrderStatusForHDDrug("Request canceled");
+		pnpPg.validateCanceledOrderStatusForHDDrug("Request Canceled");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	    
+	}
+
+	@Then("^user views an empty Harvey Ball$")
+	public void user_views_an_empty_Harvey_Ball() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateEmptyHarveyBall();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
 	}
 
 

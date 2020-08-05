@@ -296,6 +296,12 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected List<WebElement> halfHarveyBall;
 
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-0']")
+	protected WebElement emptyHarveyBall;
+
+	@FindBy(xpath = "//h1[contains(text(),'Medication Order Status')]")
+	protected WebElement orderStatusPageHeader;
+
 	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
@@ -582,6 +588,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  	@FindBy(xpath="//button[@data-testid='medication-action-view-order']")
  	protected List<WebElement> listOfViewOrder;
 
+	@FindBy(xpath="//a[@data-testid='medication-action-view-order-cancelled']")
+	protected List<WebElement> listOfViewOrderCancelled;
+
 	List<Integer> listOfIndex = new ArrayList<>();
 	Random rand = new Random();
 	int rand_int;
@@ -794,6 +803,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
  		}
  		return listOfIndex;
 	}
+	public List<Integer> getListOfIndexForViewOrderCancelled(){
+		List<Integer> listOfIndex = new ArrayList<>();
+		for(int i=0; i<listOfViewOrderCancelled.size();i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
 
 	@FindBy(xpath = "//span[@data-test-component='text']//span")
 	protected WebElement PnPNotificationPosition;
@@ -825,6 +841,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		rand_int = rand.nextInt(listOfIndex.size());
 		listOfViewOrder.get(listOfIndex.get(rand_int)).click(); 		
  	}
+
+	public void clickOnViewOrderCancelled() {
+		List<Integer> listOfIndex = getListOfIndexForViewOrderCancelled();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfIndex.size());
+		listOfViewOrderCancelled.get(listOfIndex.get(rand_int)).click();
+	}
 
 	public void clickRefillMedicationsCTA() {
 		// pnpValidate(RefillMedications);
