@@ -50,8 +50,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
 	private WebElement selectProviderBtn;
 
-	@FindBys(value = {
-			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
+	//@FindBys(value = {
+	//		@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
 	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 
