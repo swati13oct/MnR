@@ -2292,7 +2292,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return null;  
 	}
 	/* Navigation to DCE for all plan types having a plan name*/
-	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName) throws InterruptedException {
 		
 	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
 				
@@ -2303,8 +2303,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
 		}else if(planName.contains("PDP")){
 			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')])"));
-		}else
+		}else {
+			try {
+				DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+			}
+		catch (Exception e){
+			// this block is to remove added drugs
+			
+			driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]")).click();	
+			
+			List<WebElement> removeAddedDrugs = driver.findElements(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'remove-icon')]"));
+			int noOfDrugs = removeAddedDrugs.size();
+			
+			if(removeAddedDrugs != null){
+				for(int i=0; i < noOfDrugs; i++){
+					removeAddedDrugs.get(i).click();
+					Thread.sleep(5000);
+					System.out.println("Drug removed:"+ (i+1));
+					}
+				}
 			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+			}
+		}	
 
 		
 		DCELink.click();
@@ -3421,34 +3441,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void handlePlanYearSelectionPopup(String planYear) {
-		
-	
+
 			CommonUtility.checkPageIsReadyNew(driver);			
-			if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
-				System.out.println("Popup is present for AEP : ");	
-				if(planYear.equalsIgnoreCase("current")) {				//if the scenario is for the current year
-					if (validate(currentYearSelection)) {
-						currentYearSelection.click();
-					}
-				}else if(planYear.equalsIgnoreCase("future")) {			// if the scenario is for the future year
-					if (validate(nextYearSelection))
-						nextYearSelection.click();	
-				}
-					validateNew(planYearPopupGoButton);
-					planYearPopupGoButton.click();
-			}else {														// if the plan year popup is not displayed
 				if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 					if(validate(CurrentYearPlansBtn, 20)) {
 						System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 						jsClickNew(CurrentYearPlansBtn);	
 					}
-				}else if(planYear.equalsIgnoreCase("future")) {
-					if(validate(NextYearPlansBtn, 20)) {
-						System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
-						jsClickNew(NextYearPlansBtn);	
-					}
 				}
-			}
+			
 	}
 			
 		
