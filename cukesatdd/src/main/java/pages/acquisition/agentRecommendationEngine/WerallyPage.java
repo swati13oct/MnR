@@ -80,7 +80,7 @@ public class WerallyPage extends UhcDriver {
 
 //Rally Home Page
 
-	@FindBy(css = "div[class*='exportSavedProviders'] button[class*='action-btn']")
+	@FindBy(css = "a.ally-focus-within span")
 	private WebElement viewSavedProviderbutton;
 
 //Switch to Werally Window Page

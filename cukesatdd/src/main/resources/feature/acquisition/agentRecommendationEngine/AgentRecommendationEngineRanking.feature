@@ -18,7 +18,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
   
-  @ARE @DrugARE @F439411
+  @ARE @DrugARE @F439411 @F487396
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -28,8 +28,8 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Email | <Email> |
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    Then user verify Drugs added in plan compare page vs DCE
-      | Drugs Names | <DrugNameDosage> |
+    #Then user verify Drugs added in plan compare page vs DCE
+     # | Drugs Names | <DrugNameDosage> |
 
     Examples: 
       | User      | Pass      | Email            | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                               | DrugNameDosage                                |
@@ -95,7 +95,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
 
-  @ARE @PlansReorder @F487396
+  @ARE @PlansReorder
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
