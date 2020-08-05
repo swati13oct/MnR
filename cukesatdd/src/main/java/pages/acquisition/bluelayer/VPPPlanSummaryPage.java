@@ -990,12 +990,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			validateNew(pdpPlansViewLink, 30);
 			sleepBySec(2); // note: add sleep for timing issue, tried increase timeout from
 							// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			//CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			// sleepBySec(9);
@@ -1746,7 +1746,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
-		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		validateNew(premiumForPlan, 30);
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -1980,12 +1980,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageBlayer(driver);
 		return null;
