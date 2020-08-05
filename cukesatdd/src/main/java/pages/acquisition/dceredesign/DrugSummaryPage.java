@@ -118,6 +118,9 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
+	
+	@FindBy(id = "changePharmacyLink")
+	public WebElement changePharmacyLinkDetailsPage;
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
@@ -252,5 +255,13 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 		
 		return null;
+	}
+	
+	public void clickViewDrugCostBtn() {
+		viewDrugCostBtn.click();
+	}
+	
+	public void  clickChangePharmacyLinkDetailsPage() {
+		changePharmacyLinkDetailsPage.click();
 	}
 }

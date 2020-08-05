@@ -275,4 +275,16 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+	
+	@When("^user clicks view drug cost button in AARP$")
+	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickViewDrugCostBtn();
+	}
+
+	@When("^user clicks on change pharmacy link from details page in AARP$")
+	public void user_clicks_on_change_pharmacy_link_from_details_page_in_AARP() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickChangePharmacyLinkDetailsPage();
+	}
 }
