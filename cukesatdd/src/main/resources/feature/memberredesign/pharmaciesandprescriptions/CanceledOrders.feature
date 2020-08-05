@@ -15,7 +15,7 @@ Feature: Canceled orders - Current Meds and My Medications
 
     Examples:
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F479500 | MAPD     | Rx_Individual_PnP_canceledOrder |
 
 
   @CanceledOrders @F479500 @US2752268 @Scenario3@scenario4
@@ -33,7 +33,7 @@ Feature: Canceled orders - Current Meds and My Medications
 
     Examples:
       | FID     | planType | memberType             |
-      | F392596 | MAPD     | Rx_Group_PnP_Delivered |
+      | F479500 | MAPD     | Rx_Individual_PnP_canceledOrder |
 
 
   @CanceledOrders @F479500 @US2752268 @Scenario1@Scenario2
@@ -51,7 +51,7 @@ Feature: Canceled orders - Current Meds and My Medications
 
     Examples:
       | FID     | planType | memberType           |
-      | F392596 | MAPD     | Rx_Individual_PnP_rx |
+      | F479500 | MAPD     | Rx_Individual_PnP_canceledOrder |
 
 
   @CanceledOrders @F479500 @US2752268 @Scenario3@scenario4
@@ -70,4 +70,4 @@ Feature: Canceled orders - Current Meds and My Medications
 
     Examples:
       | FID     | planType | memberType             |
-      | F392596 | MAPD     | Rx_Group_PnP_Delivered |
+      | F479500 | MAPD     | Rx_Individual_PnP_canceledOrder |
