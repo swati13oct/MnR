@@ -7,7 +7,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
       And the user selects plan year for the UMS site
     |Plan Year | <planyear> |
