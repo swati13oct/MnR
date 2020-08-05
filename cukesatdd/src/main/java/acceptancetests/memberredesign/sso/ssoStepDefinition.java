@@ -433,5 +433,32 @@ public class ssoStepDefinition {
 		}
 
 	}
+	
+	@Then("^user should be navigated to below page of member portal$")
+	public void verifyNavigatedPageForCanopyDeepLink(DataTable navigatedPage) throws Throwable {
+		String expectedPage = navigatedPage.asList(String.class).get(0);
+		String pageURL = null, pageTitle = null;
+		switch(expectedPage) {
+			case "pharmacy":
+				pageURL = "member/pharmacy/overview";
+				pageTitle = "UHC M&R Pharmacy";
+				break;
+			case "payment":
+				pageURL = "member/payments/overview";
+				pageTitle = "Premium Payments";
+				break;
+			case "order-materials":
+				pageURL = "member/order-materials/overview";
+				pageTitle = "Order Plan Materials";
+				break;
+			case "benefits-coverage":
+				pageURL = "member/benefits-coverage";
+				pageTitle = "Plan Benefits Summary";
+				break;				
+		}
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.verifyLoggedInPageForCanopy(pageURL, pageTitle);
+	}
 
 }

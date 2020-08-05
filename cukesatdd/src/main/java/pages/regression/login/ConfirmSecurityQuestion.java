@@ -76,6 +76,8 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 			answerField.sendKeys("team1");
 		} else if (SecurityQtn.contains("color")) {
 			answerField.sendKeys("color1");
+		} else if (SecurityQtn.contains("team")) {
+			answerField.sendKeys("team1");
 		} else {
 			throw new Exception("unknown challenge " + SecurityQtn);
 		}
