@@ -128,10 +128,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 	}
 		
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:
 	 */
 	@And("^user access DCE tool on aarp site$")
-	public void accessDCETool(DataTable attributes){
+	public void accessDCETool(DataTable attributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -146,6 +147,8 @@ public class DCEVPPAcqStepDefinitionAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.viewPlanSummary(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
 		//DrugCostEstimatorPage dce=plansummaryPage.navigateToDCEFromVPP(plantype,planName);
 		DrugCostEstimatorPage dce=plansummaryPage.navigatetoDCEVPP(planName);
 		if(dce!=null){
