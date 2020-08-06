@@ -399,7 +399,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 	
-	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	@FindBy(xpath = "//button[contains(@id,'details-button') and contains(text(),'Advanced')]")
    	private WebElement advancedBtn;
 
    	@FindBy(xpath = "//a[@id='proceed-link']")
@@ -543,18 +543,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			checkModelPopup(driver, 45);
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
+			checkForSecurityPage();
 			checkModelPopup(driver, 20);
 		}
 		// CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		try {
-			if (advancedBtn.isDisplayed()) {
-			advancedBtn.click();
-			proceedLink.click();
-			}
-			} catch (Exception e) {
-			System.out.println("Advanced button not displayed");
-			}
+		
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 20);
 		// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 
@@ -2643,5 +2637,15 @@ public boolean isValidatePageLoadError(){
 		}
 		return false;
 		
+	}
+	public void checkForSecurityPage() {
+		try {
+			if (advancedBtn.isDisplayed()) {
+				advancedBtn.click();
+				proceedLink.click();
+			}
+			} catch (Exception e) {
+				System.out.println("Advanced button not displayed");
+			}
 	}
 }
