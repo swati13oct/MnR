@@ -18,7 +18,7 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767410 @Scenario2 @NeedToTest
+  @F481927 @US2767410 @Scenario2 @NeedToTest @TestAgain
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication information 
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -68,7 +68,7 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767407 @Scenario2 @NeedToTest
+  @F481927 @US2767407 @Scenario2 @NeedToTest @TestReady
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify price of Prescriptions in Order Summary Section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -99,7 +99,7 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767407 @Scenario4
+  @F481927 @US2767407 @Scenario4 @TestReady
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Total Price in Order Summary Section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -161,7 +161,7 @@ Feature: Refill - Checkout summary
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767408 @Scenario2 @Test
+  @F481927 @US2767408 @Scenario2
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Payment Details
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -198,7 +198,7 @@ Feature: Refill - Checkout summary
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Buttn
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -206,13 +206,15 @@ Feature: Refill - Checkout summary
     And user clicks Refill Medication call to action button
     Then user views the "Complete Your Refill" page
     And user will see Place Order Btn
+    When user clicks on Place Order Btn
+    Then user will see the Order Confirmation Page
 
     Examples: 
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
-  @F481927 @US2767408 @Scenario1 @Test
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
+  @F481927 @US2767408 @Scenario1 @TestReady
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Different Shipments and Estimated Delivery Date
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -229,7 +231,7 @@ Feature: Refill - Checkout summary
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1 @Test
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Place Order Button
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto Refill Line Populate
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

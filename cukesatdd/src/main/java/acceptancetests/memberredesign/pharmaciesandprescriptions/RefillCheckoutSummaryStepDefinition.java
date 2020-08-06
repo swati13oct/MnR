@@ -112,7 +112,7 @@ public class RefillCheckoutSummaryStepDefinition {
 		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 		Assert.assertTrue("PROBLEM - " + expectedPage + " Page not available",
-				checkoutSumaryPg.validatePageHeader(expectedPage));
+				checkoutSumaryPg.validateCheckoutPageHeader(expectedPage));
 	}
 
 	@Then("^user will see the number of medications in my order indicated in the header$")
@@ -141,7 +141,7 @@ public class RefillCheckoutSummaryStepDefinition {
 		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 		Assert.assertTrue("PROBLEM - " + expectedPage + " Page not available",
-				checkoutSumaryPg.validatePageHeader(expectedPage));
+				checkoutSumaryPg.validateCheckoutPageHeader(expectedPage));
 	}
 
 	@When("^user view the Order summary section$")
@@ -427,7 +427,7 @@ public class RefillCheckoutSummaryStepDefinition {
 		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 		Assert.assertTrue("PROBLEM - " + expectedPage + " Page not available",
-				checkoutSumaryPg.validatePageHeader(expectedPage));
+				checkoutSumaryPg.validateCheckoutPageHeader(expectedPage));
 	}
 
 	@When("^user clicks Refill All Medication call to action button$")
@@ -471,6 +471,23 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
 		Assert.assertTrue("PROBLEM -Auto Refill Line Populate not available for eligible medication",
 				checkoutSumaryPg.validateAutoRefill());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@When("^user clicks on Place Order Btn$")
+	public void user_clicks_on_Place_Order_Btn() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		checkoutSumaryPg.clickPlaceOrderBtn();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^user will see the Order Confirmation Page$")
+	public void user_will_see_the_Order_Confirmation_Page() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
+				checkoutSumaryPg.validateConfirmationPageHeader());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
 

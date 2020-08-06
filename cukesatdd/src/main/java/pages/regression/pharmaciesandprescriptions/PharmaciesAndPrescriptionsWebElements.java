@@ -296,7 +296,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected List<WebElement> halfHarveyBall;
 
-	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA']")
+	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
@@ -1215,16 +1215,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h1[@id='page_title' and contains(text(),'Benefits Information')]")
 	protected WebElement OptumRxBenefitsInformationHeader;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfAmntPaidEligibleFrRefill;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRefill;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
 	protected List<WebElement> listOfRefillLeftEligibleFrRefill;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleFrRefill;
 
 }
