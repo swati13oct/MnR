@@ -399,7 +399,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	private WebElement SecondarySearchBtn;
 	
-	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
+	@FindBy(xpath = "//button[contains(@id,'details-button') and contains(text(),'Advanced')]")
    	private WebElement advancedBtn;
 
    	@FindBy(xpath = "//a[@id='proceed-link']")
@@ -543,18 +543,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			checkModelPopup(driver, 45);
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
-			checkModelPopup(driver, 30);
+			checkForSecurityPage();
+			checkModelPopup(driver, 20);
 		}
 		// CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		try {
-			if (advancedBtn.isDisplayed()) {
-			advancedBtn.click();
-			proceedLink.click();
-			}
-			} catch (Exception e) {
-			System.out.println("Advanced button not displayed");
-			}
+		
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 20);
 		// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 
@@ -622,11 +616,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		if (isHealthPlan) {
-			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			validateNew(zipCodeHealthPlans, 25);
 			sendkeys(zipCodeHealthPlans, zipcode);
 
 			GoBtnHealthPlans.click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
@@ -1307,20 +1301,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
-		// The below was commented out because the xpath for zipcode and viewplans
-		// button was combined into one to work for both cases. Reach out to Aayush for
-		// any questions.
-		/*
-		 * if(isHealthPlan){ CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
-		 * sendkeys(zipCode, zipcode);
-		 * 
-		 * btnGO.click(); }else{
-		 */
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+
+		validateNew(zipCodeField,30);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		validateNew(vppTop);
 		// }
 		/*
 		 * try { if (countyModal.isDisplayed()) { for (WebElement county : countyRows) {
@@ -1328,7 +1314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * 
 		 * } } } catch (Exception e) { System.out.println("county box not found" ); }
 		 */
-		CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
+		//CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
 
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -2651,5 +2637,15 @@ public boolean isValidatePageLoadError(){
 		}
 		return false;
 		
+	}
+	public void checkForSecurityPage() {
+		try {
+			if (advancedBtn.isDisplayed()) {
+				advancedBtn.click();
+				proceedLink.click();
+			}
+			} catch (Exception e) {
+				System.out.println("Advanced button not displayed");
+			}
 	}
 }
