@@ -2652,18 +2652,19 @@ public boolean isValidatePageLoadError(){
 	
 	public void validateChat() throws InterruptedException {
 		boolean present;
-		
+		try {
 			validateNew(chatsam);
-			if(present = true) {
-		} 
-			else if(present = false)
-			//assert.fail("chat is not available is offline and Prod Enviornment"+ present);
-	
-			
-		if (present) {
-			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			validateChatSamContent();
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
 		}
+		if (present = true) {
+		  System.out.println("@@@@@@@@@Able to find TFN widget @@@@@@@@@"); 
+		  validateChatSamContent();	
+		  }
+		else if(present = false) {
+			  System.out.println("@@@@@@@@@ Not Able to find TFN widget @@@@@@@@@"); 
+			
+		}	
 	}
 	}
-

@@ -82,12 +82,12 @@ public class SAMIconsStepDefinitionAARP {
 		
 	}
 
-	@Then("^the user validates whether chat Agent is not Available on AARP")
+	@Then("^user validates whether chat Agent is not Available on AARP")
 	public void the_user_validates_whether_chat_Agent_is_not_visible_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChat();
-		//aquisitionhomepage.verifyChatpopup();
+		//aquisitionhomepage.validateChatIcon();
 	//	aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
