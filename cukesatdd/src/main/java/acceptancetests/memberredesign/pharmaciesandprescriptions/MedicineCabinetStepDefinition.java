@@ -313,7 +313,7 @@ public class MedicineCabinetStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateHarveyBallOrderStatusForHDDrug("Verifying with doctor", "0");
 		pnpPg.validateHarveyBallOrderStatusForHDDrug("Order Verified", "0");
-		pnpPg.validateHarveyBallOrderStatusForHDDrug("Request canceled", "0");
+		pnpPg.validateHarveyBallOrderStatusForHDDrug("Request Canceled", "0");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -565,11 +565,11 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user view the Order Status page for that medication$")
-	public void user_view_the_Order_Status_page_for_that_medication() throws Throwable {
+	@Then("^user view the Order Status page for the medication$")
+	public void user_view_the_Order_Status_page_for_the_medication() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOderStatusPage();
+		pnpPg.validateOrderStatusHeader();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
@@ -581,11 +581,11 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user clicks the View order call to action button on that medication's row$")
-	public void user_clicks_the_View_order_call_to_action_button_on_that_medication_s_row() throws Throwable {
+	@When("^user clicks the View order call to action button$")
+	public void user_clicks_the_View_order_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickOnViewOrderCTAOnCurrentMedications();
+		pnpPg.clickOnViewOrderCancelled();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 

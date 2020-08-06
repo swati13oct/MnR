@@ -11,14 +11,14 @@ Feature: Canceled orders - Current Meds and My Medications
     Then user views the Current Medications
     When user views a home delivery drug order
     Then user views a status of Request canceled
-    Then user views an empty Harvey Ball on that medication's row
+    Then user views an empty Harvey Ball
 
     Examples:
       | FID     | planType | memberType           |
       | F479500 | MAPD     | Rx_Individual_PnP_canceledOrder |
 
 
-  @CanceledOrders @F479500 @US2752268 @Scenario3@scenario4
+  @CanceledOrders @F479500 @US2752268 @Scenario3@scenario4 @qonaq
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Canceled order Call to action
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -28,8 +28,8 @@ Feature: Canceled orders - Current Meds and My Medications
     When user views a home delivery drug order
     Then user views a status of Request canceled
     Then user views a View Order call to action button on that medication's row
-    When user clicks the View order call to action button on that medication's row
-    Then user view the Order Status page for that medication
+    When user clicks the View order call to action button
+    Then user view the Order Status page for the medication
 
     Examples:
       | FID     | planType | memberType             |
@@ -46,7 +46,7 @@ Feature: Canceled orders - Current Meds and My Medications
     Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
     Then user views a status of Request canceled
-    Then user views an empty Harvey Ball on that medication's row
+    Then user views an empty Harvey Ball
 
 
     Examples:
@@ -65,8 +65,8 @@ Feature: Canceled orders - Current Meds and My Medications
     When user views a home delivery drug order
     Then user views a status of Request canceled
     Then user views a View Order call to action button on that medication's row
-    When user clicks the View order call to action button on that medication's row
-    Then user view the Order Status page for that medication
+    When user clicks the View order call to action button
+    Then user view the Order Status page for the medication
 
     Examples:
       | FID     | planType | memberType             |
