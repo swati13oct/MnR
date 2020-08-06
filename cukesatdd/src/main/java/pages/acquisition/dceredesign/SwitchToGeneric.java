@@ -18,7 +18,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
-public class TellUsAboutDrug extends UhcDriver {
+public class SwitchToGeneric extends UhcDriver {
 
 
 	@FindBy(xpath = "//*[@id='drugPopHeading']")
@@ -39,7 +39,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button__') and contains(text(), 'Add')]")
+	@FindBy(xpath = "//button[@type= 'submit' and contains(@attr.dtmname, 'confirm')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -63,7 +63,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
 	public WebElement supplyLengthDrpDwn;
 
-	public TellUsAboutDrug(WebDriver driver) {
+	public SwitchToGeneric(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();

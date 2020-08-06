@@ -1768,9 +1768,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public GetStartedPage navigateToDCERedesignFromVPPPlanCard(String plantype, String planName){
-		if(plantype.equals("MA")||plantype.equals("MAPD")){
+		if(plantype.equals("MA")||plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")){
 			WebElement dceLink = driver.findElement
-					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card ng-scope')]//descendant::a[contains(@class,'add-drug')]"));
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			if(validate(dceLink))
 				dceLink.click();
 

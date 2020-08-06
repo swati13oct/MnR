@@ -409,9 +409,54 @@ public class DCEStepDefinitionAARP {
 		
 	}
 	
+	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary$")
+	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted() {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		VPPPlanSummaryPage plansummaryPage  = getStartedPage.ClickReturnToBtnToVPPSummary();
+		if (null != plansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}	
+
+	@And("^I access the DCE Redesign on aarp site from Plan Summary for mentioned plan on UHC$")
+	public void accessDCERign_PlanSummaryforPlan_UHC(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+		
+	}
+	
+	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary on UHC$")
+	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted_UHC() {
+		
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		pages.acquisition.bluelayer.VPPPlanSummaryPage UHCplansummaryPage  = getStartedPage.ClickReturnToBtnToVPPSummary_UHC();
+		if (null != UHCplansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, UHCplansummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}	
+
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
-		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
@@ -420,6 +465,7 @@ public class DCEStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
+
 	}	
 	
 	@Then("^the user navigates to Med Ed - Prescription Drugs Page$")
