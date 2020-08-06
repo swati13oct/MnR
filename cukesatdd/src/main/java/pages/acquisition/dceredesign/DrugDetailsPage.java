@@ -1,6 +1,7 @@
 package pages.acquisition.dceredesign;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanDetailsPage;
 
@@ -48,7 +50,16 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]")
 	public WebElement DrugCosts_AnnualEstTotal;
+
+	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_AvgMonDrugCost_Amount;
 	
+	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_MonthlyPremium_Amount;
+	
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_AnnualEstTotal_Amount;
+
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plans Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
@@ -497,6 +508,30 @@ public class DrugDetailsPage extends UhcDriver {
 		else {
 			return null;
 		}
+	}
+
+	public Map<String, String> CaptureDrugCosts() {
+		Map<String, String> DrugDetails = new HashMap<String, String>();
+		
+		validateNew(DrugCosts_AvgMonDrugCost_Amount);
+		validateNew(DrugCosts_MonthlyPremium_Amount);
+		validateNew(DrugCosts_AnnualEstTotal_Amount);
+		validateNew(MonthlyDrugStage_Header);
+
+		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
+		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
+		String COVERED_DRUGS_COUNT = YourDrugs_Header.getText();
+		COVERED_DRUGS_COUNT = COVERED_DRUGS_COUNT.replace("Your Drugs (", "");
+		System.out.println("Covered Drug Text 1 : "+COVERED_DRUGS_COUNT);
+		COVERED_DRUGS_COUNT = COVERED_DRUGS_COUNT.replace(" Covered)", "");
+		System.out.println("Covered Drug Text Final : "+COVERED_DRUGS_COUNT);
+		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
+		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
+		DrugDetails.put("ANNUAL_ESTIMATED_TOTAL", ANNUAL_ESTIMATED_TOTAL);
+		DrugDetails.put("COVERED_DRUGS_COUNT", COVERED_DRUGS_COUNT);
+		
+		return DrugDetails;
 	}
 
 

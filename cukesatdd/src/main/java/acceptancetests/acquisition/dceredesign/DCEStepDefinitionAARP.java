@@ -635,6 +635,36 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
+
+	@Then("^the user Captures Drug costs on Drug Details Page$")
+	public void the_user_Captures_Drug_costs_on_Drug_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		Map<String, String> DrugCosts = drugDetailsPage.CaptureDrugCosts();
+		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
+		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("MONTHLY_PREMIUM");
+		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
+
+		System.out.println(DrugCosts);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+	}
+
+
+	@Then("^the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
+	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.PLAN_DETAILS_PAGE);
+		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
+		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+		if(cost.trim().contains(EstimatedDrugCosts))
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page",true);
+		else
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page",false);
+		
+}
+
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

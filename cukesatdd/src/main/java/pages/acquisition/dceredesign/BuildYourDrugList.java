@@ -39,7 +39,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//*[(@id= 'err_2') or contains(@class, 'errtext')]")
 	public WebElement NoDrugError;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(@class, 'backarrow')]")
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
 	

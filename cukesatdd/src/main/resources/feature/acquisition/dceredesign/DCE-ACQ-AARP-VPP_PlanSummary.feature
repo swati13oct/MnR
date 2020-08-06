@@ -1,8 +1,8 @@
-@DCE_Redesign_VPP_MAPD
-Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP site
+@DCE_Redesign_VPP_PlanSummary
+Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
 
-  @DCE_Redesign_VPP_PlanSummary
-  Scenario Outline: 1.10.2.1 To test the DCE flow for PlanType :  <plantype> from vpp and the switch now option in step 3
+  @DCE_Redesign_VPP_PlanSummary_Plan
+  Scenario Outline: 1.10.2.1 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Details
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -19,12 +19,25 @@ Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP sit
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
     Then the user validates planName matches plan Name in VPP
+    Then the user Captures Drug costs on Drug Details Page
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Important information section
     #Then the user validates Disclaimers section
-		Then the user validates link to Drug Summary Page
+    Then the user validates link to Drug Summary Page
+
+    @DCE_Redesign_VPP_PlanSummary_MAPD
     Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |
       |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @DCE_Redesign_VPP_PlanSummary_PDP
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
+      |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
+
+    @DCE_Redesign_VPP_PlanSummary_SNP
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
+      |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |

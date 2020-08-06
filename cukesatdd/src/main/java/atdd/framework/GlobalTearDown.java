@@ -86,7 +86,7 @@ public class GlobalTearDown {
 					e.printStackTrace();
 				}
 			 //mrScen.DriverQuit();
-				wd.quit();
+				//wd.quit();
 				System.out.println("---- Script Execution Completed ----");
 			
 		}
