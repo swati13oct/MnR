@@ -53,7 +53,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
 		//tbd sleepBySec(2);
-		Assert.assertTrue("PROBLEM - unable to navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
+		String actUrl=driver.getCurrentUrl();
+		String expUrl="member/prepfarefornextyear/overview.html";
+		Assert.assertTrue("PROBLEM - URL for 'Prepare For Next Year' page is not as expected.  Expect to contains '"+expUrl+"' | Acturl URL='"+actUrl+"'", actUrl.contains(expUrl));
+		Assert.assertTrue("PROBLEM - unable to locate 'Prepare For Next Year' page header, assume trouble navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 
 		if (expComboTab) 
 			Assert.assertTrue("PROBLEM - unable to locate the combo tab for planType '"+planType+"' on Prepare For Next Year page", findComboTab(planType));
