@@ -42,10 +42,12 @@ public class RefillCheckoutSummaryStepDefinition {
 
 	@Then("^user views the Medications section$")
 	public void user_views_the_Medications_section() throws Throwable {
-		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		Assert.assertTrue("PROBLEM - Medications Section not available", checkoutSumaryPg.validateMedicationSection());
+		CheckOutSummaryPage checkoutSumaryPg = new CheckOutSummaryPage(null);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+		Assert.assertTrue("PROBLEM - Medications Section not available", checkoutSumaryPg.validateMedicationSection());
 	}
 
 	@And("^User will see the number of medications in my order indicated in the header$")
@@ -427,4 +429,49 @@ public class RefillCheckoutSummaryStepDefinition {
 		Assert.assertTrue("PROBLEM - " + expectedPage + " Page not available",
 				checkoutSumaryPg.validatePageHeader(expectedPage));
 	}
+
+	@When("^user clicks Refill All Medication call to action button$")
+	public void user_clicks_Refill_All_Medication_call_to_action_button() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		checkoutSumaryPg.clickOnRefillALLMedicationCTA();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@When("^user medications are grouped into more than one shipment$")
+	public void user_medications_are_grouped_into_more_than_one_shipment() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM -Medications are not grouped into more than one shipment",
+				checkoutSumaryPg.validateShippingContainer());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^user will see the different shipments indicated$")
+	public void user_will_see_the_different_shipments_indicated() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM -Different Shipments indicated are not available",
+				checkoutSumaryPg.validateShipmentIndicated());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^user will see the estimated delivery date for each shipment$")
+	public void user_will_see_the_estimated_delivery_date_for_each_shipment() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM -Estimated Delivery Date for each shipment not available",
+				checkoutSumaryPg.validateEstimateDeliveryDate());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^user will see the auto refill line populate for any eligible medication$")
+	public void user_will_see_the_auto_refill_line_populate_for_any_eligible_medication() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM -Auto Refill Line Populate not available for eligible medication",
+				checkoutSumaryPg.validateAutoRefill());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
 }

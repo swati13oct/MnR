@@ -999,6 +999,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(CurrentMedicationsHeader));
 	}
 
+	public void validateOrderStatusHeader() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", orderStatusPageHeader);
+		Assert.assertTrue("PROBLEM - unable to locate Order status Header element",
+				pnpValidate(orderStatusPageHeader));
+	}
+
 	public void validateMyMedicationsHeader() {
 
 		Assert.assertTrue("PROBLEM - unable to locate My Medications Header element", pnpValidate(myMedicationsHeader));
@@ -1646,7 +1653,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateCanceledOrderStatusForHDDrug(String orderStatus) {
 		Assert.assertTrue("PROBLEM - Request Canceled not available on Current Medication",
-				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
+				getOrderStatusIndexBasedOnStatusValue(orderStatus).size() >= 0);
 	}
 
 	public boolean validateHDDrugDisplayedOnCurrentMedication() {
@@ -1924,6 +1931,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			return false;
 		}
 
+	}
+
+	public void validateEmptyHarveyBall() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", emptyHarveyBall);
+		Assert.assertTrue("PROBLEM - unable to locate empty harvey ball icon element",
+				pnpValidate(emptyHarveyBall));
 	}
 
 	public List<Integer> getMedIndexBasedOnMedicationName(List<String> listOfMedName) {
