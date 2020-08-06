@@ -21,7 +21,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	}
 
 	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
-	protected WebElement orderConfirmationPageHeader;
+	protected WebElement orderCheckoutPageHeader;
 
 	// ***************Order Summary Section*****************//
 
@@ -83,13 +83,13 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//h4[@data-testid='os__payment__title']/..")
 	protected WebElement paymentSection;
 
-	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']/img")
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']//img")
 	protected WebElement paymentCreditCardImage;
 
 	@FindBy(xpath = "//*[@data-testid='os__payment__ccNumber']")
 	protected WebElement paymentCreditCardNumber;
 
-	@FindBy(xpath = "//*[@data-testid='os__payment__ccExpDate']")
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccExpDate']//span")
 	protected WebElement paymentCreditCardExpDate;
 
 	@FindBy(xpath = "//*[@data-testid='os__payment__PreferredLabel']//span")
@@ -170,6 +170,9 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//ul[@aria-labelledby='select-shipping-method']/li")
 	protected List<WebElement> listOfShippingMethodDrpDwnVal;
+	
+	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
+	protected WebElement orderConfirmationPageHeader;
 	
 	
 	

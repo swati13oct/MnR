@@ -2065,7 +2065,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 	
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
+		CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+			CommonUtility.checkPageIsReady(driver);
 		return new CheckOutSummaryPage(driver);
 		}
 		return null;
@@ -2075,7 +2078,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Object> listOfVal=new ArrayList<>();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfRefillMedication.size());
-		listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+		
+		String text = listOfMedicationEligibleFrRefill.get(rand_int).getText();
+		for (WebElement child : listOfMedicationEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		//listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
@@ -2086,5 +2095,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
 		listOfRefillMedication.get(rand_int).click();
 	}
+	
+	
+	
 
 }
