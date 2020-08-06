@@ -107,8 +107,8 @@ public class VisitorProfileStepDefinition_UHC {
 	}
 	
 	
-	@And("^the user should be able to see the Drug and pharmacy information in the profile page on UHC$")
-	public void the_user_should_be_able_to_see_the_Drug_and_pharmacy_information_in_the_guest_profile_page_on_UHC(DataTable data) {
+	@And("^the user should be able to see the Drug information in the profile page on UHC$")
+	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page_on_UHC(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);

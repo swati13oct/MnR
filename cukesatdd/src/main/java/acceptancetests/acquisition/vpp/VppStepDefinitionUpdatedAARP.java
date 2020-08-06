@@ -1145,6 +1145,8 @@ public class VppStepDefinitionUpdatedAARP {
 		switch (planType) {
 		case "MAPD":
 			plansummaryPage.viewPlanSummary(planType);
+			if(!planType.equalsIgnoreCase("MS"))
+				plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "MA":
