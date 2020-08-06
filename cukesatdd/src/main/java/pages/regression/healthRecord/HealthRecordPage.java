@@ -214,6 +214,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
+			Assert.assertTrue("PROBLEM - this user is expected to be Pre-effective.  Unable to locate the 'VIEW PLAN DOCUMENTS' button on Benefits page.", noWaitValidate(preeff_goToPlanDocBtn));
 			if (noWaitValidate(preeff_goToPlanDocBtn)) {
 				preeff_goToPlanDocBtn.click();
 				CommonUtility.checkPageIsReadyNew(driver);
