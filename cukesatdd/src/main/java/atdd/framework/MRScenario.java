@@ -917,20 +917,6 @@ try {
 
 	public WebDriver getWebDriverNew() {
 
-		File pathToBinary = new File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("binary", pathToBinary);
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        ChromeOptions options=new ChromeOptions();
-        
-        System.setProperty("webdriver.chrome.driver","H:/Tools/chromedriver_win32/chromedriver.exe");
-        options.setExperimentalOption("useAutomationExtension", false);
-        webDriver = new ChromeDriver(options);
-        webDriver.manage().window().maximize();
-             
-		return webDriver;
-
 		// !!!!! ATTENTION !!!!!
 		/// If you're changing this code to get a browser to work the you're
 		// doing it wrong
@@ -949,7 +935,7 @@ try {
 		 * from the System (when running from Jenkins) then based on the environment it
 		 * associates the appropriate domain.
 		 */
-/*
+
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER)
 				: System.getProperty(CommonConstants.JENKINS_BROWSER));
@@ -1126,7 +1112,7 @@ try {
 		}
 		// }
 		return webDriver;
-*/
+
 	}
 
 	public String getSessionId() {
