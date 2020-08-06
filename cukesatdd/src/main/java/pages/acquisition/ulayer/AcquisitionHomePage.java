@@ -497,19 +497,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else {
 			start(AARP_ACQISITION_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PAGE_URL;
+			checkForSecurityPage();
 			checkModelPopup(driver,30);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		try {
-			if (advancedBtn.isDisplayed()) {
-			advancedBtn.click();
-			proceedLink.click();
-			}
-			} catch (Exception e) {
-			System.out.println("Advanced button not displayed");
-			}
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		
+		validateNew(navigationSectionHomeLink, 20);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
@@ -518,7 +512,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}
-
+	
 	public void openAndValidate(String siteOrPage) {
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
@@ -2383,8 +2377,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return false;
 	}
-	
+	public void checkForSecurityPage() {
+		try {
+			if (advancedBtn.isDisplayed()) {
+				advancedBtn.click();
+				proceedLink.click();
+			}
+			} catch (Exception e) {
+				System.out.println("Advanced button not displayed");
+			}
 	}
+}
 
 	 
 

@@ -1,10 +1,20 @@
 package acceptancetests.acquisition.vpp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -976,19 +986,13 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
-			plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkAllMAPlans();
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		} else if (planType.equals("PDP")) {
-			plansummaryPage.clickOnPDPPlans();
+			//plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
@@ -1104,21 +1108,21 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		//----- MA plan type ----------------------------
 		String planType="MA";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- PDP plan type ---------------------------
 		planType="PDP";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- SNP plan type ---------------------------
 		planType="SNP";
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 	//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
@@ -2251,15 +2255,9 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
-			plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkMAPlansOnly(counter);
 			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
@@ -3053,6 +3051,146 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
 
 	}
+	
+	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
+	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String ExcelName = givenAttributesMap.get("ExcelFile");
+		String SheetName = givenAttributesMap.get("WorkSheetName");
+		System.out.println("Set of TFNs from Sheet : "+SheetName);
+		//Getting Date
+		DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+		Date RunDate = new Date();
+		String DateCreated = dateFormat.format(RunDate);
+		String parentDirectory = null;
+		parentDirectory = new java.io.File(".").getCanonicalPath();
+		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+SheetName+"_"+DateCreated+".xls";
+		//Reading Excel.xls file
+		File InputFile = new File(InputFilePath);
+		FileInputStream inputStream = new FileInputStream(InputFile);
+		Workbook workbook = new HSSFWorkbook(inputStream);
+		Sheet sheet = workbook.getSheet(SheetName);
+		int lastRow = sheet.getLastRowNum();
+		Workbook ResultWorkbook = new HSSFWorkbook();
+		Sheet ResultsSheet = ResultWorkbook.createSheet(SheetName);
+		//Setting First Row for Results excel
+		Row resultsRow = ResultsSheet.createRow(0);
+		resultsRow.createCell(0).setCellValue((String) "Zipcode");
+		resultsRow.createCell(1).setCellValue((String) "PlanName");
+		resultsRow.createCell(2).setCellValue((String) "pdfType");
+		resultsRow.createCell(3).setCellValue((String) "docCode");
+		resultsRow.createCell(4).setCellValue((String) "Plan Summary Loaded PASS/FAIL");
+		resultsRow.createCell(5).setCellValue((String) "Plan Details Loaded PASS/FAIL");
+
+		resultsRow.createCell(6).setCellValue((String) "PDF Link Validated PASS/FAIL");
+		resultsRow.createCell(7).setCellValue((String) "PDF URL/Text validated PASS/FAIL");
+		//Looping over entire row
+		try {
+			for(int i=1; i<=lastRow; i++){
+				//Get input data Row
+				Row row = sheet.getRow(i);
+				double zipcodeint = row.getCell(0).getNumericCellValue();
+				
+				String zipcode = String.valueOf(zipcodeint);
+				String isMultiCounty = row.getCell(1).getStringCellValue().trim();
+				String county = row.getCell(2).getStringCellValue().trim();
+				String plantype = row.getCell(3).getStringCellValue().trim();
+				String planName = row.getCell(4).getStringCellValue().trim();
+				String pdfType = row.getCell(5).getStringCellValue().trim();
+				String docCode = row.getCell(6).getStringCellValue().trim();
+
+				System.out.println("Excel data Row # : "+i);
+
+				System.out.println("Zipcode : "+zipcode);
+				System.out.println("Plan Type : "+plantype);
+				System.out.println("Plan Name : "+planName);
+				System.out.println("PDF Type : "+pdfType);
+				System.out.println("Document Code : "+docCode);
+
+				//Create Results Row
+				resultsRow = ResultsSheet.createRow(i);
+				resultsRow.createCell(0).setCellValue((String) zipcode);
+				resultsRow.createCell(1).setCellValue((String) planName);
+				resultsRow.createCell(2).setCellValue((String) pdfType);
+				resultsRow.createCell(3).setCellValue((String) docCode);
+				
+				WebDriver wd = getLoginScenario().getWebDriverNew();
+				AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+				
+				getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+				getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+				getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+				VPPPlanSummaryPage plansummaryPage = null;
+				if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+					plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+				} else {
+					plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+				}
+
+				if (plansummaryPage != null) {
+					resultsRow.createCell(4).setCellValue((String) "PASS");
+
+				} else {
+					resultsRow.createCell(4).setCellValue((String) "FAIL");
+				}
+				
+				plansummaryPage.viewPlanSummary(plantype);
+				plansummaryPage.CheckClick_CurrentYear_Plans();
+				
+				PlanDetailsPage vppPlanDetailsPage = plansummaryPage.navigateToPlanDetails(planName, plantype);
+				if (vppPlanDetailsPage != null) {
+					resultsRow.createCell(5).setCellValue((String) "PASS");
+				} else
+					resultsRow.createCell(5).setCellValue((String) "FAIL");
+				boolean pdfLinkFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(pdfType,docCode);
+				if (pdfLinkFlag) {
+					resultsRow.createCell(6).setCellValue((String) "PASS");
+				} else
+					resultsRow.createCell(6).setCellValue((String) "FAIL");
+				boolean pdfFlag = vppPlanDetailsPage.ClickValidatePDFText_URL_ForDocCode(pdfType, docCode);
+				if (pdfFlag) {
+					resultsRow.createCell(7).setCellValue((String) "PASS");
+				} else
+					resultsRow.createCell(7).setCellValue((String) "FAIL");
+				
+				//wd.close();
+				wd.quit();
+				//getLoginScenario().nullifyWebDriverNew();
+
+			}
+			File OutputFile = new File(OutputFilePath);
+			FileOutputStream outputStream = new FileOutputStream(OutputFile);
+			ResultWorkbook.write(outputStream);
+			inputStream.close();
+			outputStream.flush();
+			
+			outputStream.close();
+
+			//softAssertions.assertAll();
+		} catch (Exception e) {
+			File OutputFile = new File(OutputFilePath);
+			FileOutputStream outputStream = new FileOutputStream(OutputFile);
+			ResultWorkbook.write(outputStream);
+			inputStream.close();
+			outputStream.flush();
+			outputStream.close();
+			//softAssertions.assertAll();
+			e.printStackTrace();
+		}
+
+	}
+
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

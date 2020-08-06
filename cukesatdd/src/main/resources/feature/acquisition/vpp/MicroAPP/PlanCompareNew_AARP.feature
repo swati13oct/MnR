@@ -8,16 +8,18 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     Then verify plan compare checkbox is not visible on plan summary on AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county           | plantype |
-      | 00001 |   96799 | NO            | Western District | PDP      |
-      | 00002 |   78006 | YES           | Bexar County     | SNP      |
-      | 00003 |   90265 | YES           | Ventura County   | MAPD     |
-      | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |
+      | TID   | zipcode | isMultiCounty | county           | plantype |planyear|
+      | 00001 |   96799 | NO            | Western District | PDP      |current|
+      | 00002 |   78006 | YES           | Bexar County     | SNP      |current|
+      | 00003 |   90265 | YES           | Ventura County   | MAPD     |current|
+      | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |current|
 
   @vppPlanCompareAARP02 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: UID: <UID> - Plan Type: <plantype> - Verify Call sticky action menu on AARP site
@@ -26,14 +28,18 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     When verify Call SAM icon is visible or not on Plan Comapare
     And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare
     Then user verify the popup and content on Plan Comapare
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype |
-      | 00005 |   90210 | NO            | Los Angeles County | MAPD     |
+      | TID   | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00005 |   90210 | NO            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP03 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
@@ -42,13 +48,17 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare for AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county         | plantype |
-      | 00006 |   35616 | NO            | Colbert County | MAPD     |
+      | TID   | zipcode | isMultiCounty | county         | plantype |planyear|
+      | 00006 |   35616 | NO            | Colbert County | MAPD     |current|
 
   @vppPlanCompareAARP04 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of AARP site
@@ -57,6 +67,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     #When user accesses global footer of the AARP Medicare Plans home page
     And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
@@ -70,8 +84,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     And user verifies home link of agents&brokers page ulayer
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             | plantype |
-      | 00007 |   90210 | No            | Los Angeles County | MAPD     |
+      | TCID  | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00007 |   90210 | No            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP05 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
@@ -80,12 +94,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then the user clicks on back on all plan linnk in Plan Compare page
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             | plantype |
-      | 00008 |   90210 | No            | Los Angeles County | MAPD     |
+      | TCID  | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00008 |   90210 | No            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP06 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
@@ -94,6 +112,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|  
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then remove one plan from new plan compare page for AARP
@@ -101,8 +123,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then Verify the Plan compare checkbox should be unchecked for the removed plan for AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype |
-      | 00009 |   90210 | NO            | Los Angeles County | MAPD     |
+      | TID   | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00009 |   90210 | NO            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP07 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
@@ -111,6 +133,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for AARP
@@ -118,8 +144,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then Verify newly added plan displayed on new plan compare page for AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | count |
-      | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
+      | TID   | zipcode | isMultiCounty | county             | plantype | count |planyear|
+      | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |current|
 
   @vppPlanCompareAARP08 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
@@ -128,8 +154,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
@@ -143,8 +171,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
-      | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |planyear|
+      | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
   @vppPlanCompareAARP09 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
@@ -153,6 +181,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Add doctors is loaded with doctor summary on Plan Compare page AARP
@@ -164,8 +196,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |
-      | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            |planyear|
+      | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
   @vppPlanCompareAARP10 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
@@ -174,8 +206,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a Hospitals and retuns to VPP page in ulayer
@@ -189,8 +223,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
-      | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |planyear|
+      | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
   @vppPlanCompareAARP11 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for AARP
@@ -199,8 +233,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then verify plan compare page is loaded on AARP
     Then verify Add Hospitals is loaded without summary on Plan Compare page AARP
@@ -213,8 +249,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |
-      | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |planyear|
+      | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
   @vppPlanCompareAARP12 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
@@ -223,8 +259,10 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    And the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I access the DCE tool on aarp site
       | Plan Type | <plantype> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
@@ -280,8 +318,8 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
-      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |planyear|
+      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |current|
 
   @vppPlanCompareAARP13 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE
@@ -290,12 +328,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on new Plan Compare
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             | plantype |
-      | 00016 |   90210 | No            | Los Angeles County | MAPD     |
+      | TCID  | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00016 |   90210 | No            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP14 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to Plan Detail
@@ -304,12 +346,16 @@ Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>| 
     And I select "<plantype>" plans to compare and click on compare plan link in AARP
     Then the user clicks on Plan details link in new Plan Compare page for AARP
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | planName                                       | pdfType               | docCode                 |
-      | 00017 |   90210 | No            | Los Angeles County |              80002 | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | TCID  | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | planName                                       | pdfType               | docCode                 |planyear|
+      | 00017 |   90210 | No            | Los Angeles County |              80002 | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |current|
 
   @vppPlanCompareAARP15 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for Selecting more than 4 plans for plan comapre from VPP
