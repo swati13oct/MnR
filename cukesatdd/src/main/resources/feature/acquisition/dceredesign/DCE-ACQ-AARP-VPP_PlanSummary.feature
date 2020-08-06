@@ -1,7 +1,7 @@
 @DCE_Redesign_VPP_MAPD
 Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP site
 
-  @DCE_Redesign_VPP_MAPD
+  @DCE_Redesign_VPP_PlanSummary
   Scenario Outline: 1.10.2.1 To test the DCE flow for PlanType :  <plantype> from vpp and the switch now option in step 3
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site

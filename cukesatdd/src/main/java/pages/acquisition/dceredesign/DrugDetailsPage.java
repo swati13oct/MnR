@@ -485,10 +485,12 @@ public class DrugDetailsPage extends UhcDriver {
 		
 	}
 
-	public PlanDetailsPage ClickandNavigate_VPPPlanDetails() {
+	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
-		if (driver.getCurrentUrl().contains("details")) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
+			System.out.println("Plan Details Page displayed for current Plan : "+planName);
 			return new PlanDetailsPage(driver);
 		}
 		else {
