@@ -894,20 +894,15 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
-			plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkAllMAPlans();
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		} else if (planType.equals("PDP")) {
-			plansummaryPage.clickOnPDPPlans();
+			//plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.clickCompareChkBoxPDP();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -2120,16 +2115,11 @@ public class VppStepDefinitionUHC {
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
     int counter=Integer.parseInt(Counter);
 	if (planType.equals("MAPD")) {
-		plansummaryPage.clickonViewPlans();
+		//plansummaryPage.clickonViewPlans();
 		plansummaryPage.checkMAPlansOnly(counter);
 		System.out.println("Selected All MAPD plans for Plan Compare");
 	} 
-	try {
-		Thread.sleep(3000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	
 	ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 	if (planComparePage != null) {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);

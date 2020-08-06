@@ -234,7 +234,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,45);
+		checkModelPopup(driver,20);
 		
 	}
 	
