@@ -3212,4 +3212,10 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 	}
+	
+	@Then("^user validates text as NEW for Plan documents under Plan Materials$")
+	public void validate_NEW_Text_Plan_Documents() {
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		planDocumentsAndResourcesPage.validateNEWTextAgainstPlanDocument();
+	}
 }
