@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 jsonReport = "target/cucumber-RunMRATDDRegressionRefillOrderConfirmation.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillOrderConfirmation")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillOrderConfirmation.json" }, tags = { "@F481928" }, monochrome=true)
+features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/RefillOrderConfirmation.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillOrderConfirmation.json" }, tags = { "@RefillOrderConfirmation"}, monochrome=true)
 public class RunMRATDDRegressionRefillOrderConfirmation {
 
 }

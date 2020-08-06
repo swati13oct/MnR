@@ -717,5 +717,7 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String CONFIRMATION_NUMBER="verifyConfirmationNumberPresent";
 	
 	public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
+	
+	public static final String  ORDER_CONFIRMATION_PAGE ="orderConfirmationPage";
 }
 

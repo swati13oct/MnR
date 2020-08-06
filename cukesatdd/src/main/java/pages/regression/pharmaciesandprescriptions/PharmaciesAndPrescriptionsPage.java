@@ -14,8 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-
-
+import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 import acceptancetests.util.CommonUtility;
 import pages.regression.testharness.TestHarness;
 
@@ -2087,7 +2086,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		listOfRefillMedication.get(rand_int).click();
 	}
 	
+	public void refreshPnPPage() {
+		driver.navigate().refresh();
+		validateCurrentMedicationsHeader();
+	}
 	
+	public void validateOrderStatusAndCTAUpdatedForRefillTransaction() {
+		
+	}
+		
 	
 
 }
