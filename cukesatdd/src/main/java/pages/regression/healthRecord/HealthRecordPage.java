@@ -402,11 +402,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 			scrollToView(testHarn_AcctProfBtn);
 			jsClickNew(testHarn_AcctProfBtn);
 
-			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
-
 			//note: don't know why .click() doesn't work
 			checkModelPopup(driver,1);
 			if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+
+				Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
 
 				String expUrl=stageUrl;
 				String actUrl=testHarn_desktop_AcctProf_IHRLnk.getAttribute("href");

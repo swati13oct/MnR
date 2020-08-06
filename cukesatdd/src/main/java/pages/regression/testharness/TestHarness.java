@@ -1295,11 +1295,11 @@ public class TestHarness extends UhcDriver {
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
     			driver.quit(); //note: force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception="+e.getMessage(),false);
     		} catch (WebDriverException we) {
     			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
     			//driver.quit(); //force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception="+we.getMessage(),false);
     		}
     		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
     		Thread.sleep(2000); // note: give it a bit more time to settle down
