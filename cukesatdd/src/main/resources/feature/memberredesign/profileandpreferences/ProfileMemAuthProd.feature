@@ -111,7 +111,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID        | username | password | MemUserName | planType | memberType        |
-      | Unknown_15 | ashah120 | Mnrqa003 | erbenoit56  | MAPD     | Terminated_AccPro |
+      | Unknown_15 | ashah120 | Mnrqa003 | PJVANEKRIS65  | MAPD     | Terminated_AccPro |
 
   @prod_accountProfile05
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
