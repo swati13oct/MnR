@@ -1,6 +1,7 @@
 package pages.acquisition.bluelayer;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -2648,4 +2649,21 @@ public boolean isValidatePageLoadError(){
 				System.out.println("Advanced button not displayed");
 			}
 	}
-}
+	
+	public void validateChat() throws InterruptedException {
+		boolean present;
+		
+			validateNew(chatsam);
+			if(present = true) {
+		} 
+			else if(present = false)
+			//assert.fail("chat is not available is offline and Prod Enviornment"+ present);
+	
+			
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			validateChatSamContent();
+		}
+	}
+	}
+

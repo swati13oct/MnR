@@ -31,9 +31,11 @@ Given user is on blue layer landing page
 And user opens the page to validate on UHC
  | pagename | <pagename> |
 Then the user validates whether call icon is visible on UHC  
+Then the user validates whether chat Agent is not Available on UHC
 		Examples: 
 			| pagename |
 			|/| 
+	
 
 @samChatCallRegression @samChatRegression
 Scenario Outline: 1.19.1.4 To test the SAM icons on UHC site on <pagename>
