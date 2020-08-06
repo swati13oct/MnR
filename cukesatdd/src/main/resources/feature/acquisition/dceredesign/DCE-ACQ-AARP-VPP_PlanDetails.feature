@@ -23,7 +23,7 @@ Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP sit
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Important information section
-    Then the user validates Disclaimers section
+    #Then the user validates Disclaimers section
 		Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |
