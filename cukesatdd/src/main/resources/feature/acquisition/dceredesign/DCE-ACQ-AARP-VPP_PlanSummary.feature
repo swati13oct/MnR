@@ -14,11 +14,6 @@ Feature: 1.10.2 ACQ-DCE-VPP_1 AARP - To test DCE to VPP Plan Summary in AARP sit
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
     Then the user validates Get Started Page
-    Then the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site
-     And I access the DCE Redesign on aarp site from Plan Summary for mentioned plan
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |

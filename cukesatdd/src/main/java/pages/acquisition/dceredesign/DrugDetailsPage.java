@@ -19,6 +19,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.PlanDetailsPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -482,6 +483,17 @@ public class DrugDetailsPage extends UhcDriver {
 				Assert.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "+currentDrug);
 		}		
 		
+	}
+
+	public PlanDetailsPage ClickandNavigate_VPPPlanDetails() {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		if (driver.getCurrentUrl().contains("details")) {
+			return new PlanDetailsPage(driver);
+		}
+		else {
+			return null;
+		}
 	}
 
 

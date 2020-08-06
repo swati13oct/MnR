@@ -443,6 +443,7 @@ public class DCEStepDefinitionAARP {
 		
 	}
 	
+	
 	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary on UHC$")
 	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted_UHC() {
 		
@@ -454,6 +455,31 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}	
+	
+	@Then("^I access the DCE Redesign on aarp site from Plan Details for the plan$")
+	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+		GetStartedPage getStartedPage = plandetailspage.navigateToDCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+
+
+	@Then("^the user Clicks button to VPP Plan Details Page from Drug Details Page$")
+	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		PlanDetailsPage plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails();
+		if (null != plandetailspage) {
+			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		} else
+			Assert.fail("VPP Plan Details not loaded");
+	
+	}
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
