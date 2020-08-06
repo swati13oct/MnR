@@ -633,6 +633,7 @@ public class TestHarness extends UhcDriver {
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			return new DrugCostEstimatorPage(driver);
 		}
 		return null;

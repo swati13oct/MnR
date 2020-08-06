@@ -2559,7 +2559,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println(
 					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
 		}
-
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		return new DrugCostEstimatorPage(driver);
 	}
 
