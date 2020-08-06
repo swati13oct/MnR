@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import atdd.framework.MRScenario;
 
-public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase {
+public class PrepareForNextYearTimelineSar extends PrepareForNextYearBase {
 
-	public PrepareForNextYearTimelineIndividual(WebDriver driver) {
+	public PrepareForNextYearTimelineSar(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -40,7 +40,7 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		return note;
 	}
 	
-	public List<String> validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3, boolean expNoBlue_t4, boolean expNoBlue_t5) {
+	public List<String> validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3) {
 		checkModelPopup(driver,2);
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -52,13 +52,13 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 
 		targetItem="Time line box header";
 		targetElement=tl_sectionHeader;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_sectionHeader));
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
-		//note: milestone1 - Sept 15 ----------------------------------
-		String dateStr="September 15";
+		//note: milestone1 - Oct 1 ----------------------------------
+		String dateStr="October 1";
 		targetItem="Time line '"+dateStr+"' - Line";
-		targetElement=tl_milestone1Line_ind;
+		targetElement=tl_milestone1Line_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		if (expNoBlue_t1) {
 			targetItem=targetItem+" - no blue";
@@ -72,69 +72,21 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		targetItem="Time line '"+dateStr+"' - Circle";
 		if (expNoBlue_t1) {
 			targetItem=targetItem+" - no blue";
-			targetElement=tl_milestone1Dot_noBlue_ind;
+			targetElement=tl_milestone1Dot_noBlue_sar;
 		} else {
 			targetItem=targetItem+" - blue";
-			targetElement=tl_milestone1Dot_blue_ind;
+			targetElement=tl_milestone1Dot_blue_sar;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
-		targetElement=tl_milestone1Date_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone1Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
-
-
-		targetItem="Time line '"+dateStr+"' - Text";
-		targetElement=tl_milestone1Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone1Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		String targetActText=targetElement.getText();
-		String targetExpText="Your Annual Notice of Changes and plan documents for next year will start to be available.";
-		Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
-				+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
-
-		//note: milestone2 - Oct 1 ----------------------------------
-		dateStr="October 1";
-		targetItem="Time line '"+dateStr+"' - Line";
-		targetElement=tl_milestone2Line_ind;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		if (expNoBlue_t2) {
-			targetItem=targetItem+" - no blue";
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", !targetElement.getAttribute("class").contains("blue"));
-		} else {
-			targetItem=targetItem+" - blue";
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
-		}
-		note.add("\tPASSED - validation for "+targetItem);
-
-		targetItem="Time line '"+dateStr+"' - Circle";
-		if (expNoBlue_t2) {
-			targetItem=targetItem+" - no blue";
-			targetElement=tl_milestone2Dot_noBlue_ind;
-		} else {
-			targetItem=targetItem+" - blue";
-			targetElement=tl_milestone2Dot_blue_ind;
-		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
-
-		targetItem="Time line '"+dateStr+"' - Date";
-		targetElement=tl_milestone2Date_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone2Date;
+		targetElement=tl_milestone1Date_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
-		targetElement=tl_milestone2Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone2Text;
+		targetElement=tl_milestone1Text_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		//targetActText=targetElement.getText();
 		//targetExpText="You'll be able to compare next year's plan with your current plan to find out how your coverage may change.";
@@ -143,12 +95,12 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		note.add("\tPASSED - validation for "+targetItem);
 
 
-		//note: milestone3 - Oct 15 ----------------------------------
+		//note: milestone2 - Oct 15 ----------------------------------
 		dateStr="October 15";
 		targetItem="Time line '"+dateStr+"' - Line";
-		targetElement=tl_milestone3Line_ind;
+		targetElement=tl_milestone2Line_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		if (expNoBlue_t3) {
+		if (expNoBlue_t2) {
 			targetItem=targetItem+" - no blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", !targetElement.getAttribute("class").contains("blue"));
 		} else {
@@ -158,27 +110,23 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
-		if (expNoBlue_t3) {
+		if (expNoBlue_t2) {
 			targetItem=targetItem+" - no blue";
-			targetElement=tl_milestone3Dot_noBlue_ind;
+			targetElement=tl_milestone2Dot_noBlue_sar;
 		} else {
 			targetItem=targetItem+" - blue";
-			targetElement=tl_milestone3Dot_blue_ind;
+			targetElement=tl_milestone2Dot_blue_sar;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
-		targetElement=tl_milestone3Date_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone3Date;
+		targetElement=tl_milestone2Date_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
-		targetElement=tl_milestone3Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone3Text;
+		targetElement=tl_milestone2Text_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		//targetActText=targetElement.getText();
 		//targetExpText="If your needs have changed and you want a different plan for next year, you can switch to a new plan.";
@@ -186,57 +134,12 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
 		note.add("\tPASSED - validation for "+targetItem);
 
-
-		//note: milestone4 - Dec 7 ----------------------------------
-		dateStr="December 7";
-		targetItem="Time line '"+dateStr+"' - Line";
-		targetElement=tl_milestone4Line_ind;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		if (expNoBlue_t4) {
-			targetItem=targetItem+" - no blue";
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", !targetElement.getAttribute("class").contains("blue"));
-		} else {
-			targetItem=targetItem+" - blue";
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", targetElement.getAttribute("class").contains("blue"));
-		}
-		note.add("\tPASSED - validation for "+targetItem);
-
-		targetItem="Time line '"+dateStr+"' - Circle";
-		if (expNoBlue_t4) {
-			targetItem=targetItem+" - no blue";
-			targetElement=tl_milestone4Dot_noBlue_ind;
-		} else {
-			targetItem=targetItem+" - blue";
-			targetElement=tl_milestone4Dot_blue_ind;
-		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
-
-		targetItem="Time line '"+dateStr+"' - Date";
-		targetElement=tl_milestone4Date_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone4Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
-
-		targetItem="Time line '"+dateStr+"' - Text";
-		targetElement=tl_milestone4Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone4Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		//targetActText=targetElement.getText();
-		//targetExpText="This is the last day you can join a new plan for next year.";
-		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
-		//		+ "Expected='"+targetExpText+"' | Actual='"+targetActText+"'", targetActText.contains(targetExpText));
-		note.add("\tPASSED - validation for "+targetItem);
-
-
-		//note: milestone5 - Jan 1 ----------------------------------
+		//note: milestone3 - Jan 1 ----------------------------------
 		dateStr="January 1";
 		targetItem="Time line '"+dateStr+"' - Line";
-		targetElement=tl_milestone5Line_ind;
+		targetElement=tl_milestone3Line_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		if (expNoBlue_t5) {
+		if (expNoBlue_t3) {
 			targetItem=targetItem+" - no blue";
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", !targetElement.getAttribute("class").contains("blue"));
 		} else {
@@ -246,27 +149,23 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Circle";
-		if (expNoBlue_t5) {
+		if (expNoBlue_t3) {
 			targetItem=targetItem+" - no blue";
-			targetElement=tl_milestone5Dot_noBlue_ind;
+			targetElement=tl_milestone3Dot_noBlue_sar;
 		} else {
 			targetItem=targetItem+" - blue";
-			targetElement=tl_milestone5Dot_blue_ind;
+			targetElement=tl_milestone3Dot_blue_sar;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
-		targetElement=tl_milestone5Date_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone5Date;
+		targetElement=tl_milestone3Date_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
-		targetElement=tl_milestone5Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone5Text;
+		targetElement=tl_milestone3Text_sar;
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		//targetActText=targetElement.getText();
 		//targetExpText="Your 2021 plan coverage starts today.";

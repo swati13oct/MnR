@@ -50,35 +50,6 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 1-07  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 	    | 1-08  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 
-  @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @teamEnv
-  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
-	Then test setup stores AEM and timeline milestones info
-      | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/16/2020     |
-      | AEM Show Tab EndDate   | 01/02/2021     |
-      | AEM Toggle             | ON             |
-      | Milestone 1 Date       | 09/15/2020     |
-      | Milestone 2 Date       | 10/01/2020     |
-      | Milestone 3 Date       | 10/15/2020     |
-      | Milestone 4 Date       | 12/07/2020     |
-      | Milestone 5 Date       | 01/01/2021     |
-    Then the user validates Prepare For Next Year tab display behavior on Benefits page
-	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
-
-	@prepareForNextYear03a
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-07  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
-			
-	@prepareForNextYear03b
-    Examples: 
-	    | index | FID     | planType | memberType              |
-	    | 1-08  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
-			
   #-------------------------------------------------
   # note: for cases below -
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
@@ -174,6 +145,40 @@ Feature: 1.25 Member Prepare For Next Year
 	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
 	    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
+    #@prepareForNextYear02i
+    #Examples: 
+	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-13  | F443004 | MAPD     | SARSPFNY                | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
+
+  @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @teamEnv
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 06/16/2020     |
+      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 09/15/2020     |
+      | Milestone 2 Date       | 10/01/2020     |
+      | Milestone 3 Date       | 10/15/2020     |
+      | Milestone 4 Date       | 12/07/2020     |
+      | Milestone 5 Date       | 01/01/2021     |
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
+
+	@prepareForNextYear03a
+    Examples: 
+	    | index | FID     | planType | memberType              |
+	    | 1-07  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
+			
+	@prepareForNextYear03b
+    Examples: 
+	    | index | FID     | planType | memberType              |
+	    | 1-08  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
+			
 	    
 ##### end - cases for team env #################################################################
 
@@ -315,6 +320,11 @@ Feature: 1.25 Member Prepare For Next Year
     #Examples: 
 	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
 	#    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+    #@prepareForNextYear02i
+    #Examples: 
+	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-13  | F443004 | MAPD     | SARS_PFNY               | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @stageEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met

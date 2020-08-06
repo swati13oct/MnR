@@ -40,11 +40,6 @@ import atdd.framework.MRScenario;
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	protected static boolean validateAsMuchAsPossible=false;
 	
-	protected static final String m1="09/15/";
-	protected static final String m2="10/01/";
-	protected static final String m3="10/15/";
-	protected static final String m4="12/07/";
-	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -461,6 +456,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	}
 
 	public List<String> validatePdf(String targetDocName, WebElement pdfLink) {
+		checkModelPopup(driver,1);
 		List<String> note=new ArrayList<String>();
 		note.add("\n\tValidation for PDF ='"+targetDocName+"'");
 		String winHandleBefore = driver.getWindowHandle();
@@ -818,7 +814,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			String section, String subSection, 
 			String docName, String targetLang, 
 			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
-			WebElement pdfElement, WebElement arrowAftPdfElement, 
+			WebElement pdfElement, WebElement arrowAftPdfElement, WebElement svgAftPdfElement,
 			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
 			boolean willDeleteCookie) {
 
@@ -852,6 +848,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
 
 				targetItem=section+" - Arrow after '"+docName+"' doc link'";
+				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+
+				targetItem=section+" - svg after '"+docName+"' doc link'";
 				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				//note: after link click, little check should turn green

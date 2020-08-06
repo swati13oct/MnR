@@ -10,10 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.MRScenario;
-
 public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
+	protected static final String m1="09/15/";
+	protected static final String m2="10/01/";
+	protected static final String m3="10/15/";
+	protected static final String m4="12/07/";
+	
 	protected static String cookiePlnDocsSection="reviewPlandocuments_grp";
 	protected static String cookiePlnDocsSection_revPlnChg="anoc_group";
 	protected static String cookiePharInfoSection="reviewplanId";
@@ -104,6 +107,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement langDropdownElement2=null; 
 		WebElement pdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en;
 		WebElement arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en_arrow;
+		WebElement svgAftPdfElement=grp_revPlnDocsSec_plnChngSec_anoc_en_svg;
 		String subSecCookie=cookiePlnDocsSection_revPlnChg;
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null;
@@ -114,7 +118,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -137,6 +141,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		langDropdownElement2=null; 
 		pdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en;
 		arrowAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en_arrow;
+		svgAftPdfElement=grp_revPlnDocsSec_plnChngSec_eoc_en_svg;
 		subSecCookie=cookiePlnDocsSection_revPlnChg;
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -147,7 +152,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 		return note;
@@ -200,7 +205,8 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			targetItem=section+" - Find a Pharmacy";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-
+			String expUrl="/member/pharmacy-locator/overview.html";
+			/* tbd 
 			String expUrl="/health-plans/aarp-pharmacy.html";
 			if (memberType.toUpperCase().contains("UHC")) {
 				if (MRScenario.environment.contains("stage"))
@@ -212,13 +218,18 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 					expUrl="aarpmedicareplans.uhc"+expUrl;
 				else
 					expUrl="aarpmedicareplans.com"+expUrl;
-			}
+			} */
 			WebElement expElement=pharmacyHeader;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
 			targetItem=section+" - arrow after Find a Pharmacy link";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			//TODO - TBD
+			targetItem=section+" - Find a Pharmacy svg";
+			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_svg;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			//note: after link click, section circle should turn green
 			note.add("\n\tValidate after link clicked, circle turned green");
