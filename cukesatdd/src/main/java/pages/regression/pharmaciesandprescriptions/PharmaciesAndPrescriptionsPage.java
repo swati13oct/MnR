@@ -2072,5 +2072,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
 		listOfRefillMedication.get(rand_int).click();
 	}
+	
+	
+	
 
 }

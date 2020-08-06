@@ -16,7 +16,7 @@ Feature: MVP - Call to Action
 
     Examples: 
       | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify persist of PnP notifications until user log out
@@ -32,7 +32,7 @@ Feature: MVP - Call to Action
 
     Examples: 
       | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for each call to action.
@@ -59,7 +59,7 @@ Feature: MVP - Call to Action
 
     Examples: 
       | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of each call to action tile on P&P page
@@ -74,7 +74,7 @@ Feature: MVP - Call to Action
 
     Examples: 
       | FID     | planType | memberType             |
-      | F436319 | MAPD     | AARP_Individual_PnP_rx |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of each call to action tile on P&P page for SEIB User
@@ -101,7 +101,7 @@ Feature: MVP - Call to Action
   #then user will be directed to the Drug Estimator tool developed by Rally
   # Examples:
   #  | FID     | planType | memberType             |
-  # | F436319 | MAPD     | AARP_Individual_PnP_rx |
+  # | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
   @CallToAction @F479445 @US2752085 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify group user redirected to DET Rally page when click Drug Lookup Call to Action.
     Given login with following details logins in the member portal and validate elements
