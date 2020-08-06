@@ -14,7 +14,7 @@ public class MRConstants {
 	public static final String AARPM_URL_OFFLINE = "https://member.offline.aarpmedicareplans.com";
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/home.html";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
-	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
+	public static final String AARP_URL = "https://"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 	public static final String AARP_URL_OFFLINE = "https://offline.aarpmedicareplans.com/";
 	public static final String AARP_URL_PROD = "https://www.aarpmedicareplans.com/";
 	public static final String UHCM_URL_PROD = "https://www.uhcmedicaresolutions.com/";	
@@ -84,7 +84,7 @@ public class MRConstants {
 	
 	
 //public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
-	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
+	public static final String UHC_URL = "https://"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
 	
 	public static final String UHC_URL_OFFLINE = "https://offline.uhcmedicaresolutions.com/";
 	
