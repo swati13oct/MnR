@@ -19,8 +19,8 @@ import atdd.framework.UhcDriver;
 public class CQPage extends UhcDriver{
 	
 	
-	@FindBy(id="apps")
-	private WebElement apps;
+	@FindBy(id="globalnav-start-home-collection")
+	private WebElement globalNavHome;
 	
 	@FindBy(xpath=".//*[contains(@id,'ole-common-form')]")
 	private WebElement oleForm;
@@ -80,7 +80,7 @@ public class CQPage extends UhcDriver{
 	
 	@Override
 	public void openAndValidate() {
-		validateNew(apps);
+		validateNew(globalNavHome);
 	}
 
 	public void validatePage() {
