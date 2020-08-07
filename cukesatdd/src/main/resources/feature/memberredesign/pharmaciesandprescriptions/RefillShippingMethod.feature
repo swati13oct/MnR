@@ -4,7 +4,7 @@ Feature: Refill - Shipping method
 
   @F481922 @US2767428 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -19,7 +19,7 @@ Feature: Refill - Shipping method
 
   @F481922 @US2767429 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -37,7 +37,7 @@ Feature: Refill - Shipping method
 
   @F481922 @US2767429 @Scenario2
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -53,7 +53,7 @@ Feature: Refill - Shipping method
 
   @F481922 @US2767429 @Scenario3
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -69,7 +69,7 @@ Feature: Refill - Shipping method
 
   @F481922 @US2767429 @Scenario4
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Remove Items From Order CTA
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate element
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page

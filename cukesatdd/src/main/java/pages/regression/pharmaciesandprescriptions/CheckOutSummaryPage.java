@@ -80,7 +80,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateTotalLabelUnderOrderSummary() {
-		return validate(orderSummaryTotalLabel);
+		return validate(orderSummaryTotalLabel,20);
 	}
 
 	public boolean validateTotalPriceUnderOrderSummary() {
@@ -246,6 +246,6 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 	
 	public boolean validateConfirmationPageHeader() {
-		return validate(orderCheckoutPageHeader);
+		return validate(orderConfirmationPageHeader);
 	}
 }
