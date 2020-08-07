@@ -659,9 +659,9 @@ public class DCEStepDefinitionAARP {
 		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		if(cost.trim().contains(EstimatedDrugCosts))
-			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page",true);
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : "+cost+"; Actual : "+EstimatedDrugCosts,true);
 		else
-		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page",false);
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : "+cost+"; Actual : \"+EstimatedDrugCosts",false);
 		
 }
 

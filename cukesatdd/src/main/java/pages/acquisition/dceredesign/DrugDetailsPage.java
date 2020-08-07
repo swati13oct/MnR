@@ -181,13 +181,13 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//*[contains(@class, 'closeicon')]")
 	public WebElement StageInfo_Modal_Close;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Initial Coverage Stage')]")
 	public WebElement InitialCoverage_Modal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Coverage Gap Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Coverage Gap Stage')]")
 	public WebElement CoverageGap_Modal_Header;
 	
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Catastrophic Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Catastrophic Coverage Stage')]")
 	public WebElement Catastrophe_Modal_Header;
 
 	public void validateDrugStageInfoModals() {
