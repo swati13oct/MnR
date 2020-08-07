@@ -9,15 +9,14 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
-    #Then agent validates plan ranking drop down UI plancompare page
 
+    #Then agent validates plan ranking drop down UI plancompare page
     Examples: 
       | User      | Pass      | Email            |
       | qavgogine | qavgogine | MARDI@MEMBER.COM |
 
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
-  
   @ARE @DrugARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
@@ -103,13 +102,16 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     Then agent validates ranking plans order in plancompare page
-      | ZIP                  | <PlanCompareZIP> |
-      | Ranking Options      | <RankingOptions> |
-      | CurrentPlan          | <CurrentPlan>    |
-      | ChangeInOrder        | <ChangeInOrder>  |
-      | Expected Plans Order | <PlansOrder>     |
+      | ZIP                  | <PlanCompareZIP>     |
+      | Ranking Options      | <RankingOptions>     |
+      | Current Plan         | <DisplayCurrentPlan> |
+      | ChangeIn Order       | <ChangeInOrder>      |
+      | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email            | PlanCompareZIP | RankingOptions     | CurrentPlan | ChangeInOrder | PlansOrder                                                                                                                                   |
-      | qavgogine | qavgogine | API@MEMBERDD.COM |          11226 | fitness,lowpremium | YES         | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+      | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                                   |
+      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | NO                 | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |

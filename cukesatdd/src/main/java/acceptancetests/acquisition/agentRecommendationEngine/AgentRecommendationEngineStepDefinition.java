@@ -125,8 +125,15 @@ public class AgentRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.verifyRankingOrder(inputValues.get("ZIP"), inputValues.get("Ranking Options"),
-				inputValues.get("CurrentPlan"), inputValues.get("ChangeInOrder"),
+				inputValues.get("Current Plan"), inputValues.get("ChangeIn Order"),
 				inputValues.get("Expected Plans Order"));
+	}
+	
+	@Then("^agent selects county and plan year in plancompare page$")
+	public void agent_changePlanYear(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.checkCountyPlanYear(inputValues.get("Multi County"), inputValues.get("Plan Year"));
 	}
 
 }

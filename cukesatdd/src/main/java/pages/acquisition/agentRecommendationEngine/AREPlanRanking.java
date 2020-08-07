@@ -3,17 +3,22 @@
  */
 package pages.acquisition.agentRecommendationEngine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -142,7 +147,16 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div.plan-ranking-message")
 	private WebElement successMsg;
+	
+	@FindBy(css = "#selectCounty p>a")
+	private List<WebElement> selectMultiZip;
 
+	@FindBy(css = ".modal-body #multiCountyCancelBtn")
+	private WebElement confrimButton;
+	
+	@FindBy(css = "select#plan-year")
+	private WebElement planYear;
+	
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -387,8 +401,11 @@ public class AREPlanRanking extends UhcDriver {
 		int planStartCount = 0;
 		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
 		List<String> plansDetails = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planNameSection) {
-			String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			//String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails.add(val);
 		}
 		if (curPlan.equalsIgnoreCase("yes")) {
@@ -406,17 +423,16 @@ public class AREPlanRanking extends UhcDriver {
 
 		List<String> newplansDetails = new ArrayList<String>();
 		for (WebElement elem : planNameSection) {
-			String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
 			newplansDetails.add(val);
 		}
 
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
-		if (planStartCount == 0)
-			k = planStartCount + 1;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(i) + "BESTMATCH"),
-					"Expected Best Match Text is not applied");
+			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Expected Best Match Text is not applied : "+newplansDetails.get(i));
 			j++;
 		}
 
@@ -447,7 +463,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		List<String> originalplansDetails = new ArrayList<String>();
 		for (WebElement elem : planNameSection) {
-			String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
 			originalplansDetails.add(val);
 		}
 
@@ -515,5 +532,56 @@ public class AREPlanRanking extends UhcDriver {
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
 	}
+	
+	public void checkCountyPlanYear(String multiCounty, String year) {
+		String curYear = getCurrentYear();
+		if (!multiCounty.isEmpty() && !multiCounty.toUpperCase().contains("NONE")) {
+			if (selectMultiZip.get(0).getText().toUpperCase().contains(multiCounty.toUpperCase()))
+				selectMultiZip.get(0).click();
+			else if (selectMultiZip.get(1).getText().toUpperCase().contains(multiCounty.toUpperCase()))
+				selectMultiZip.get(1).click();
+			else if (selectMultiZip.get(2).getText().toUpperCase().contains(multiCounty.toUpperCase()))
+				selectMultiZip.get(2).click();
+			waitforElementInvisibilityInTime(planLoaderscreen, 60);
+			threadsleep(5000);// Plan loader
+		}
 
+		confirmAlert();
+
+		// Checking and Changing to Current Year
+		if (year.equalsIgnoreCase("current")) {
+			if (validate(planYear, 10)) {
+				Select planYearSelect = new Select(planYear);
+				if (!planYearSelect.getFirstSelectedOption().toString().trim().equalsIgnoreCase(curYear)) {
+					planYearSelect.selectByVisibleText(curYear);
+					confirmAlert();
+				}
+			}
+		}
+
+		// Checking and Changing Future Year
+		if (year.equalsIgnoreCase("future")) {
+			if (validate(planYear, 10)) {
+				Select planYearSelect = new Select(planYear);
+				if (planYearSelect.getFirstSelectedOption().toString().trim().equalsIgnoreCase(curYear)) {
+					planYearSelect.selectByVisibleText(String.valueOf(Integer.valueOf(curYear) + 1));
+					confirmAlert();
+				}
+			} else {
+				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
+			}
+		}
+	}
+	
+	public String getCurrentYear() {
+		DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+		Date date = new Date();
+		String curDate = dateFormat.format(date);
+		return curDate.split("/")[2];
+	}
+
+	public void confirmAlert() {
+		if(validate(confrimButton,20))
+			confrimButton.click();
+	}
 }
