@@ -226,10 +226,9 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//TODO - TBD
 			targetItem=section+" - Find a Pharmacy svg";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_svg;
-			note.addAll(validateDontHaveItem(targetItem, targetElement));
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note: after link click, section circle should turn green
 			note.add("\n\tValidate after link clicked, circle turned green");

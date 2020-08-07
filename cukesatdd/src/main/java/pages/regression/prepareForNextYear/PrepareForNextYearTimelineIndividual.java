@@ -41,7 +41,7 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 	}
 	
 	public List<String> validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3, boolean expNoBlue_t4, boolean expNoBlue_t5) {
-		checkModelPopup(driver,2);
+		checkModelPopup(driver,5);
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		note.add("\tValidate Timeline...");
