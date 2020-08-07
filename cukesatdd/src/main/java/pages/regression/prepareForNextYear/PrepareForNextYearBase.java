@@ -38,7 +38,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-	protected static boolean validateAsMuchAsPossible=false;
+	protected static boolean validateAsMuchAsPossible=true;
 	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);

@@ -26,7 +26,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	public void openAndValidate(){
 		validateAsMuchAsPossible=false;
 	}
-	
+
 	public void openAndValidate(boolean input_validateAsMuchAsPossible){
 		validateAsMuchAsPossible=input_validateAsMuchAsPossible;
 	}
@@ -61,7 +61,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 		if (expComboTab) 
 			Assert.assertTrue("PROBLEM - unable to locate the combo tab for planType '"+planType+"' on Prepare For Next Year page", findComboTab(planType));
-			//tbd handleComboTabIfComboUser(planType, memberType);
+		//tbd handleComboTabIfComboUser(planType, memberType);
 		return new PrepareForNextYearPage(driver);
 	}
 
@@ -85,7 +85,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 		return driver;
 	}
-	
+
 	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		if (memberType.contains("SARS")) {
@@ -184,28 +184,23 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
-			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
-				//note: individual is on team-atest | online-stage | offline-prod | online-prod already
-				boolean expNoBlue_t1=true;
-				boolean expNoBlue_t2=true;
-				boolean expNoBlue_t3=true;
-				List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
-				sectionNote1.addAll(s1);
+			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
+			boolean expNoBlue_t1=true;
+			boolean expNoBlue_t2=true;
+			boolean expNoBlue_t3=true;
+			List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
+			sectionNote1.addAll(s1);
 
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SAR case, not ATDD coded yet", false);
 		}
-		
+
 		return sectionNote1;
 	}
 
@@ -225,12 +220,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
 			boolean expNoBlue_t1=true;
@@ -263,13 +254,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
-			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
 			boolean expNoBlue_t1=true;
@@ -280,7 +266,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 			sectionNote1.addAll(s2);
-} else {
+		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SAR case, not ATDD coded yet", false);
 		}
 		return sectionNote1;
@@ -302,12 +288,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			sectionNote1.add("SKIP - SAR has no milestone 4 or 5");
 		} else {
@@ -331,16 +313,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
-			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s1=pnfyTimeline_ind.validateNoTimeLineBoxContent();
-				sectionNote1.addAll(s1);
-				
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s1=pnfyTimeline_ind.validateNoTimeLineBoxContent();
+			sectionNote1.addAll(s1);
+
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			sectionNote1.add("SKIP - SAR has no milestone 4 or 5");
 		} else {
@@ -365,12 +342,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			if (MRScenario.environment.contains("team-a")) {
-				List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
-				sectionNote1.addAll(s2);
-			} else {
-				Assert.assertTrue("NOTE: nothing to do yet, code is on team-atest env only for now", true);
-			}
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SAR case, not ATDD coded yet", false);
 		}

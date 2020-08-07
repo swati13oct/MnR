@@ -222,9 +222,18 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			WebElement expElement=pharmacyHeader;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
+			//note: this arrow xpath is not the same between team-atest and stage...check for both 
 			targetItem=section+" - arrow after Find a Pharmacy link";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
+			if (validateAsMuchAsPossible) {
+				if (noWaitValidate(targetElement) || noWaitValidate(grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow2))
+					note.add("\tPASSED - validation for HAVING "+targetItem);
+				else
+					note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow2));
+				note.add("\tPASSED - validation for HAVING "+targetItem);
+			}
 
 			targetItem=section+" - Find a Pharmacy svg";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_svg;
