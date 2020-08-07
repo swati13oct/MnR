@@ -67,7 +67,7 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       |   99210 | No              | Spokane County | MA       | AARP MedicareComplete Essential (HMO)        | Summary of Benefits   | AAWA19HM4290842_000     |
       |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare MedicareComplete Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2019 |
 
-  @PlanDocs_ExcelValidation
+  @PlanDocs_ExcelValidation1
   Scenario Outline: Verify specific PDF Plan Documents in Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user picks each example from excel to validate Plan Document PDFs and reports into excel
       | ExcelFile     | <excelPath> |
