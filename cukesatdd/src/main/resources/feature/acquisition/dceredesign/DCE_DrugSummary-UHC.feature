@@ -143,8 +143,6 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
       
-      
-       
      @dceRedesignSwitchtoGenericDrugUHC @F484185
     Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
      Given the user is on the uhcmedicaresolutions site landing page
