@@ -865,7 +865,9 @@ public class CommonConstants {
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Stage";
 	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "None";
-	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
+	//public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
+	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "OptumRDC_Manual_Stage";
+	
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";
 	public static final String APPIUM_VERSION = "APPIUM_VERSION";
 	public static final String SCREEN_RESOLUTION = "screenResolution";

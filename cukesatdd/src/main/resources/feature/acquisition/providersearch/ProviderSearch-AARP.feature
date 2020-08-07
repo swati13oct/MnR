@@ -35,21 +35,25 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | planname                             | year     |
       |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-  @ProviderSearchFromGlobalHeaderUlayer1 @AcqRegressionProviderSearchUlayer
-  Scenario Outline: Verify Provider Search  in AARP site from Global Header
+  @ProviderSearchFromGlobalHeaderUlayer1 
+  Scenario Outline: Verify Provider Search  in AARP site from Global Header -plan count-<plancount>
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
 
+    @AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount |
       |   10001 |        12 |
+      
+    Examples: 
+      | zipcode | plancount |
       |   55344 |         7 |
       |   04011 |         6 |
 
-  @ProviderSearchFromWidgetUlayer @AcqRegressionProviderSearchUlayer
+  @ProviderSearchFromWidgetUlayer 
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
@@ -57,9 +61,13 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
 
+	@AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount |
       |   10001 |        12 |
+      
+    Examples: 
+      | zipcode | plancount |
       |   55344 |         7 |
       |   04011 |         6 |
 

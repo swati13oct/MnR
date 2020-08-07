@@ -21,10 +21,10 @@ import pages.acquisition.ulayer.PageTitleConstants;
 
 public class GetStartedPage extends UhcDriver {
 
-	@FindBy(xpath = "//button//span[contains(text(),'Add My Drug')]")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(xpath = "//input[contains(@aria-label, 'Drug Name')]")
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")

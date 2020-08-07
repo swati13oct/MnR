@@ -98,11 +98,14 @@ public class EOBPage extends EOBBase{
 		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
-		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
-		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type label",eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type Dropdown",eobValidate(eobTypeDropdown));	
 			Select eobTypeOptions = new Select(eobTypeDropdown);
@@ -129,8 +132,9 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type label",!eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type dropdown",!eobValidate(eobTypeDropdown));	
 		}
-
-		Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));	
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate Date Range Dropdown",eobValidate(eobDateRangeDropdown));	
 
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
@@ -217,7 +221,7 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on new tab after clicking Learn More link.  number of existing tabs before clicking link='"+beforeClicked_numTabs+"' | after='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
 			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 			System.out.println("total tab size="+newTab.size());
@@ -321,7 +325,7 @@ public class EOBPage extends EOBBase{
 			Select eobTypeOptions = new Select(eobTypeDropdown);
 			eobTypeOptions.selectByVisibleText(targetEobType);
 			waitForEobPageToLoad();
-		} 		
+		}		
 		return new EOBPage(driver);
 	}
 

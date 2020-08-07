@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import java.util.HashMap;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -33,6 +34,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
@@ -705,6 +707,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
 		private WebElement submitApplicationBtn;
 		
+		@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
+		private WebElement  NextYearPlansBtn;
+		
+		@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
+		private WebElement  CurrentYearPlansBtn;
+		
+		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
+		private WebElement  SelectYearGoBtn;
+		
+
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -1524,6 +1536,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 
 	}
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+
+	public GetStartedPage navigateToDCERedesignFromPlanSummary(String plantype) {
+
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
+				//maDCELink.get(0).click();
+
+		}else{
+				List<WebElement> viewPDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+				viewPDPPlans.get(0).click();
+		}
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+
+	}
 
 	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
 		// TODO Auto-generated method stub
@@ -1731,6 +1765,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
+	}
+
+	public GetStartedPage navigateToDCERedesignFromVPPPlanCard(String plantype, String planName){
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card ng-scope')]//descendant::a[contains(@class,'add-drug')]"));
+			if(validate(dceLink))
+				dceLink.click();
+
+		}else{
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
+			dceLink.click();
+		}	
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+
 	}
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
@@ -3391,11 +3443,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 		try {
-			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
-			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
+			//WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			//WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+			//WebElement SelectYearGoBtn = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearPlansBtn.getText());
 			System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
-			NextYearRadio.click();
+			NextYearPlansBtn.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 			
 			SelectYearGoBtn.click();
@@ -3407,19 +3461,38 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 	
-	public void handlePlanYearSelectionPopup(String planType) {
-		if (!(planType.equalsIgnoreCase("MS"))) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-				planYearPopupGoButton.click();
+	public void handlePlanYearSelectionPopup(String planYear) {
+		
+	
+			CommonUtility.checkPageIsReadyNew(driver);			
+			if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
+				System.out.println("Popup is present for AEP : ");	
+				if(planYear.equalsIgnoreCase("current")) {				//if the scenario is for the current year
+					if (validate(currentYearSelection)) {
+						currentYearSelection.click();
+					}
+				}else if(planYear.equalsIgnoreCase("future")) {			// if the scenario is for the future year
+					if (validate(nextYearSelection))
+						nextYearSelection.click();	
+				}
+					validateNew(planYearPopupGoButton);
+					planYearPopupGoButton.click();
+			}else {														// if the plan year popup is not displayed
+				if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+					if(validate(CurrentYearPlansBtn, 20)) {
+						System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+						jsClickNew(CurrentYearPlansBtn);	
+					}
+				}else if(planYear.equalsIgnoreCase("future")) {
+					if(validate(NextYearPlansBtn, 20)) {
+						System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
+						jsClickNew(NextYearPlansBtn);	
+					}
+				}
 			}
-		}
-		}
 	}
+			
+		
 
 	public void handleChatPopup() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
@@ -3489,15 +3562,20 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+		
+		if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
+			System.out.println("Popup is present for AEP : ");	
+				if (validate(currentYearSelection)) {
+					currentYearSelection.click();
+				}
+				validateNew(planYearPopupGoButton);
 				planYearPopupGoButton.click();
-				
-			}
-		} 
+		}else {														// if the plan year popup is not displayed
+				if(validate(CurrentYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);	
+				}
+		}
 	}	
 
 	public void selectCurrentYearPlanYearSelectionPopup() {
