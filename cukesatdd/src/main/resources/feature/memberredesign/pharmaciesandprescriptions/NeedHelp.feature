@@ -6,7 +6,7 @@ Feature: Need Help Phone Numbers
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to the Pharmacies and Prescriptions page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples:
