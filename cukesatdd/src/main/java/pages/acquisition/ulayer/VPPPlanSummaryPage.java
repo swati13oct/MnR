@@ -863,14 +863,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+			 //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
+			sleepBySec(2);
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
-			sleepBySec(8);
+			validateNew(maPlansViewLink, 30);
 			maPlansViewLink.click();
+			sleepBySec(3);
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
@@ -880,9 +881,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
+			
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
+			sleepBySec(3);
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			/*
 			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
@@ -2732,10 +2734,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath="";
+		driver.navigate().refresh();
+		sleepBySec(3);
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 			planTypePath="//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath="//div[@ng-show='showPdpPlans']";
+			driver.navigate().refresh();
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
@@ -2831,7 +2836,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
 		String unsavePlan=listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
@@ -2876,7 +2882,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i=0; i<listOfTestPlans.size(); i++) {
 			if (i==1) { //In the previous steps the plan 0 is unsaved so we will validate plan 1 is still saved

@@ -3132,6 +3132,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
 		String planTypePath = "";
+		driver.navigate().refresh();
+		sleepBySec(3);
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 			planTypePath = "//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
@@ -3242,7 +3244,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
 		String unsavePlan = listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '" + unsavePlan + "'");
@@ -3298,7 +3301,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i = 0; i < listOfTestPlans.size(); i++) {
 			if (i == 0) {

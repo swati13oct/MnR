@@ -91,43 +91,43 @@ public class CQPage extends UhcDriver{
 	public void validateOLEPages() {
 		
 			//AARP pages
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/welcome.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/welcome.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/oleReviewSubmission.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/oleReviewSubmission.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/oleSubmitConfirmation.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/oleSubmitConfirmation.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/modalpopup.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/modalpopup.html");
 			validateNew(cancelForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/ole-tooltip-library.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/ole-tooltip-library.html");
 			validateNew(oleToolTips);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/masterlistquestions.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/masterlistquestions.html");
 			validateNew(masterListPage);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/questionlayout.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/questionlayout.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/ole-righrail.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/ole-righrail.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/aarp/medicareInsuranceInformation.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/aarp/medicareInsuranceInformation.html");
 			validateNew(oleForm);
 			
 			//UHC pages
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/welcome.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/welcome.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/oleReviewSubmission.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/oleReviewSubmission.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/oleSubmitConfirmation.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/oleSubmitConfirmation.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/modalpopup.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/modalpopup.html");
 			validateNew(cancelForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/ole-tooltip-library.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/ole-tooltip-library.html");
 			validateNew(oleToolTips);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/masterlistquestions.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/masterlistquestions.html");
 			validateNew(masterListPage);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/questionlayout.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/questionlayout.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/ole-righrail.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/ole-righrail.html");
 			validateNew(oleForm);
-			driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/ole/uhc/medicareInsuranceInformation.html");
+			driver.get("http://apvrt73396:8080/content/commontools/ole/uhc/medicareInsuranceInformation.html");
 			validateNew(oleForm);
 			
 		
@@ -135,36 +135,36 @@ public class CQPage extends UhcDriver{
 	public void validateVPPPages() {
 		
 		//AARP pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/plan.html?page=summary");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/plan.html?page=summary");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/plan.html?page=detail#/zipcode");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/plan.html?page=detail#/zipcode");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/plan.html?page=portfolio");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/plan.html?page=portfolio");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/plan.html?page=compare");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/plan.html?page=compare");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/mapdmarketing.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/mapdmarketing.html");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/aarp/planmarketing.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/aarp/planmarketing.html");
 		validateNew(vppContent);
 		
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/tool-tip-configuration.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/tool-tip-configuration.html");
 		validateNew(vppToolTip);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/CnSPlans.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/CnSPlans.html");
 		validateNew(cnsPlansContent);
 		
 		//UHC pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/plan.html?page=summary");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/plan.html?page=summary");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/plan.html?page=detail#/zipcode");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/plan.html?page=detail#/zipcode");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/plan.html?page=portfolio");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/plan.html?page=portfolio");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/plan.html?page=compare");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/plan.html?page=compare");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/mapdmarketing.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/mapdmarketing.html");
 		validateNew(vppContent);
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/commontools/vpp/uhc/planmarketing.html");
+		driver.get("http://apvrt73396:8080/content/commontools/vpp/uhc/planmarketing.html");
 		validateNew(vppContent);
 
 	}
@@ -172,28 +172,28 @@ public class CQPage extends UhcDriver{
 	public void validateAcqPages(){
 		
 		//home page
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en.html");
 		validateAcqContent();
 		
 		//shop for a plan pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/health-plans/shop/medicare-advantage-plans.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/health-plans/shop/medicare-advantage-plans.html");
 		validateAcqContent();
 	
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/health-plans/shop/prescription-drug-plans.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/health-plans/shop/prescription-drug-plans.html");
 		validateAcqContent();
 		
 		//Understanding medicare pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/medicare-education/medicare-eligibility.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/medicare-education/medicare-eligibility.html");
 		validateAcqContent();
 		
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/medicare-education/medicare-costs.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/medicare-education/medicare-costs.html");
 		validateAcqContent();
 	
 		//footer links pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/contact-us.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/contact-us.html");
 		validateAcqContent();
 		
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/aarpmedicareplans/en/terms-of-use.html");
+		driver.get("http://apvrt73396:8080/content/aarpmedicareplans/en/terms-of-use.html");
 		validateAcqContent();
 
 	}
@@ -210,21 +210,21 @@ public class CQPage extends UhcDriver{
 	public void validateMemberPages(){
 		
 		//login page
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/login.html");
+		driver.get("http://apvrt73396:8080/content/medicare/login.html");
 		validateMemberPreSingInContent();
 		
 		//secondary pages
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/order-materials.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/order-materials.html");
 		validateMemberContent();
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/benefits.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/benefits.html");
 		validateMemberContent();
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/payments.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/payments.html");
 		validateMemberContent();
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/claims.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/claims.html");
 		validateMemberContent();
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/health-and-wellness.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/health-and-wellness.html");
 		validateMemberContent();
-		driver.get("http://author-sot-6-4.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/eob.html");
+		driver.get("http://apvrt73396:8080/content/medicare/member/eob.html");
 		validateMemberContent();
 
 	}
