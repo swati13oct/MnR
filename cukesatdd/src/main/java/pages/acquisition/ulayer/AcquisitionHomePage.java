@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -311,6 +312,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	String CallSam= "Call a Licensed Insurance Agent";
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
+   	
+	@FindBy(xpath = "//div[@class='sam']")
+   	private WebElement samdiv;
    	
    	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
    	private WebElement chatsamtooltip;
@@ -2387,9 +2391,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Advanced button not displayed");
 			}
 	}
+	public boolean validateChat() throws InterruptedException {
+		boolean present = false;
+		try {
+			//validateNew(chatsam);
+			present=validateNew(samdiv);
+			if(present) {
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
+				String chatbtnid = "sam-button--chat";
+				for(WebElement element : list ) {
+					if(element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+						present = false;
+						break;
+					}
+					
+				}
+			}
+			
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		  	return present;
+	}
 }
-
-	 
-
-
-	 
