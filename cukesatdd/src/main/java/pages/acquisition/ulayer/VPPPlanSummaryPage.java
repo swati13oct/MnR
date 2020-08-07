@@ -387,6 +387,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[@id='backtoplansummarypage']")
 	private WebElement backToAllPlansLnk;
 	
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
+	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	//^^^ note: added for US1598162	
 	
@@ -994,10 +997,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'add-provider')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if(mproviderinfo.toLowerCase().contains("providers covered"))
+		if(mproviderinfo.toLowerCase().contains("provider covered"))
 		{
 			return true;
 		}
@@ -1007,13 +1010,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void verifyproviderName(String planName)
 	{
+		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
 		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 		String mproviderName=ProviderName.getText().trim();
-		Assert.assertEquals(mproviderName,MRConstants.PROV_NAME);
+		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		Assert.assertEquals(mproviderName,rallyProviderName);
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
@@ -3535,7 +3541,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}else {														// if the plan year popup is not displayed
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
-					jsClickNew(CurrentYearPlansBtn);	
+					jsClickNew(CurrentYearPlansBtn);
+					validateNew(AARPlogo, 10);
 				}
 		}
 	}	

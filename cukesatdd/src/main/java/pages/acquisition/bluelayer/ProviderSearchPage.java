@@ -127,7 +127,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Close')]")
 	private WebElement BtnClose;
 	
-	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
+	@FindBy(xpath="//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 	
 	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")

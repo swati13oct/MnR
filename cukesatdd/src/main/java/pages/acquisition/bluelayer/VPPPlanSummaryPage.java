@@ -1277,7 +1277,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public ProviderSearchPage clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		validateNew(ProviderSearchLink);
@@ -1379,13 +1384,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyproviderName(String planName) {
+		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
 		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 		String mproviderName = ProviderName.getText().trim();
-		Assert.assertEquals(mproviderName, MRConstants.PROV_NAME);
+		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		Assert.assertEquals(mproviderName, rallyProviderName);
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 

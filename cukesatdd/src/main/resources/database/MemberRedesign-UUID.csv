@@ -165,7 +165,7 @@ fb15468c-87c5-4312-aaff-ed4048b12872Password@123,MAPD,SetupRecEFT_Payments,,
 b4f87cfd-175e-43e4-9e01-6aa923359621/Password@1,MAPD,UpdateRecurrEFT_Payments,,
 cca1b4a7-8ece-4c82-9c10-957308b514e3/Password@1,PDP,UpdateRecurrCC_Payments,,
 d5a10539-10b8-4c2f-a429-8af0712e825a/Password@1,MAPD,UpdateRecurrStop_Payments,,
-d44f0e52-52b3-4326-a915-fbb987e63fbc/Password@1,SHIP,SHIPUpdate_Payments,,
+c1460896-3faf-458f-b59a-9968050868b8/Password@1,SHIP,SHIPUpdate_Payments,,
 b0ba148f-e0bc-40e9-aed5-3aaba9f77402/Password@1,PDP,ComboMakeOneTimeCCTotal_Payments,,
 4dfea32c-bfe7-473a-a596-5d583947c90c/Password@1,PDP,ComboMakeOneTimeCCOther_Payments,,
 35705246-35b6-4b6b-9807-5e8cb55f12e8/Password@1,PDP,ComboSetupRecEFT_Payments,,
@@ -520,7 +520,7 @@ aabf1d03-cf7b-4a09-a264-99ee85baa156/Password@1,SHIP_MEDICARE SUPPLEMENT,COMBO_S
 8b239213-c332-4157-a15e-13f854225887/Password@1,SHIP_MEDICARE SUPPLEMENT,COMBO_SHIP_PDP_RX_DEOB,,
 3f37deb8-55d3-441a-8c92-110f3a5c3c9e/Password@1,MAPD,ES_CnD_NICE_EOB,,
 6e3e99b2-1f94-4241-a773-1f6d4ec63e74/Password@1,MAPD,ES_D_NICE_EOB,,
-d44f0e52-52b3-4326-a915-fbb987e63fbc/Password@1,SHIP,SHIPCHAT,,
+c1460896-3faf-458f-b59a-9968050868b8/Password@1,SHIP,SHIPCHAT,,
 fbaad1d0-53e3-4fa3-a869-2e7e3089f5ea/Password@1,MA,EXCLUDE_IHR,,
 2d6dc230-d623-4fa7-803a-522ad412495b/Password@1,MA,IHR,,
 edfe0d9a-1c2f-4735-b163-63f120795bb2/Password@1,MAPD,NONBOA_GROUP_IHR,,
@@ -571,3 +571,4 @@ da5ed8b2-6907-4c9c-984b-c687afdac2cb/Password@1,PDP,COMBO_PDP_IND_SHIP_PFNY
 da5ed8b2-6907-4c9c-984b-c687afdac2cb/Password@1,SHIP,COMBO_PDP_IND_SHIP_PFNY
 dce22223-be33-4281-828e-712024e058fb/Password@1,PDP,COMBO_PDP_GRP_SSP_GRP_PFNY
 dce22223-be33-4281-828e-712024e058fb/Password@1,SSP,COMBO_PDP_GRP_SSP_GRP_PFNY
+8dd913e2-d03f-430e-b39b-b94295632b6d/Password@1,SHIP,SHIP_PlanDocument,,
