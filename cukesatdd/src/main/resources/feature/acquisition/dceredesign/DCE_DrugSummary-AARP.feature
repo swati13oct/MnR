@@ -140,7 +140,45 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         Examples: 
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
-      
+     
+     @dceRedesignSwitchtoGenericDrug @F484185
+   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
+      Given the user is on AARP medicare acquisition site landing page
+     When the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+     Then the user validates Get Started Page
+     When the user clicks on Add drugs button
+     And adds drugs in drug list page
+      | DrugName | <drugName> |
+      And adds drugs in drug list page
+      | DrugName | <drugName1> |
+      And clicks on Review drug cost button
+     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+     When user enters valid zipcode and county in AARP
+      | ZipCode | <zipCode> |
+     #And user selects plan year in AARP
+     And user clicks on continue button in AARP
+     #Then load screen should be displayed in AARP
+     And user should be navigated to Review drug cost estimate page in AARP
+     And user should be able to see Medicare Advantage plan by default
+     And user click on View Drug Pricing Modal in AARP
+     And user click on Switch To Generic in AARP
+     And clicks on Review drug cost button
+     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+     When user enters valid zipcode and county in AARP
+      | ZipCode | <zipCode> |
+      And user clicks on continue button in AARP
+      And user should be navigated to Review drug cost estimate page in AARP
+     And user should be able to see Medicare Advantage plan by default
+      And user click on View Drug Pricing Modal in AARP
+      And user verify drug can switch to generic drug in AARP
+     
+       
+        Examples: 
+      | path                     | pageName                   |drugName|drugName1|zipCode |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor| Emsam|10001 |
+     
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
     Given the user is on AARP medicare acquisition site landing page

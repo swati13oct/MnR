@@ -180,6 +180,27 @@ public class DCEStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
+	@When("^user click on View Drug Pricing Modal in UHC$")
+	public void User_click_on_View_Drug_Pricing_Modal_in_UHC() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickViewPricing();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user click on Switch To Generic in UHC$")
+	public void User_click_on_Switch_To_Generic_in_UHC() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickswitchToGeneric();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user verify drug can switch to generic drug in UHC$")
+	public void user_verify_drug_can_switch_to_generic_drug_UHC() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.drugLists();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
+	}
+
 	@Then("^user saves plan as favorite on drug summary UHC site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_UHC_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

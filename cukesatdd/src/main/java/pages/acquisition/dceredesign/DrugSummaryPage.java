@@ -177,6 +177,46 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	@FindBy(id = "priceLinkBtn_0")
+	private WebElement viewProceBtn;
+	
+	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
+	private WebElement switchToGenericBtn;
+	
+	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
+	private WebElement switchToGenericSubmitBtn;
+	
+	@FindBy(xpath = "//table/tbody/tr/td[1]")
+	private List<WebElement> drugNames;
+	
+	@FindBy(id = "drugPricingTitleTxt")
+	private WebElement drugTitle;
+	
+	
+	
+	public void clickViewPricing() {
+		validate(viewProceBtn);
+		viewProceBtn.click();
+	}
+	
+	public void clickswitchToGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		validate(switchToGenericBtn);
+		switchToGenericBtn.click();
+		validate(switchToGenericSubmitBtn);
+		switchToGenericSubmitBtn.click();
+	}
+	
+	public void drugLists() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		for(int i=0;i<drugNames.size();i++) {
+			System.out.println(drugNames.get(i).getText());
+		}
+		Assert.assertTrue(!switchToGenericBtn.isDisplayed());
+	}
+	
 	@FindBy(id = "sign-up-modal-header")
 	private WebElement createProfilePopup;
 	

@@ -698,4 +698,25 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	@When("^user click on View Drug Pricing Modal in AARP$")
+	public void User_click_on_View_Drug_Pricing_Modal_in_AARP() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickViewPricing();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user click on Switch To Generic in AARP$")
+	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickswitchToGeneric();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user verify drug can switch to generic drug in AARP$")
+	public void user_verify_drug_can_switch_to_generic_drug_aarp() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.drugLists();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
+	}
 }
