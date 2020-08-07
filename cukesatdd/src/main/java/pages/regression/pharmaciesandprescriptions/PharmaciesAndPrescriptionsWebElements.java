@@ -400,6 +400,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected List<WebElement> listOfDrugName;*/
 	@FindBy(xpath="//a[@data-testid='medication-data-name']")
  	protected List<WebElement> listOfDrugName;
+	
+	@FindBy(xpath="//a[@data-testid='medication-data-name']/span")
+ 	protected List<WebElement> listOfDrugNameText;
 
 	@FindBy(xpath = "//img[@data-testid='medication-data-image']")
 	protected List<WebElement> listOfDrugImage;
@@ -421,6 +424,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[@data-testid='medication-data-order-status']")
 	protected List<WebElement> listOfOrderStatus;
+	
+	@FindBy(xpath = "//span[@data-testid='medication-data-order-status']/span")
+	protected List<WebElement> listOfOrderStatusText;
 
 	// a[contains(@data-testid,'medication-action') and
 	// not(contains(@data-testid,'learn-more'))]//button
