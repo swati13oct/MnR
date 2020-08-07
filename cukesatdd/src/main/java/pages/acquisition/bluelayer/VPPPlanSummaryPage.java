@@ -1274,7 +1274,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public ProviderSearchPage clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		validateNew(ProviderSearchLink);
@@ -1376,13 +1381,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyproviderName(String planName) {
+		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
 		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 		String mproviderName = ProviderName.getText().trim();
-		Assert.assertEquals(mproviderName, MRConstants.PROV_NAME);
+		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		Assert.assertEquals(mproviderName, rallyProviderName);
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
@@ -3124,6 +3132,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
 		String planTypePath = "";
+		driver.navigate().refresh();
+		sleepBySec(3);
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 			planTypePath = "//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
@@ -3234,7 +3244,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
 		String unsavePlan = listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '" + unsavePlan + "'");
@@ -3290,7 +3301,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i = 0; i < listOfTestPlans.size(); i++) {
 			if (i == 0) {

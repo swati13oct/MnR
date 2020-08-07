@@ -128,7 +128,7 @@ public class VisitorProfilePage extends UhcDriver {
 		jsClickNew(expandDrugBlock);
 		System.out.println("Drug Name Text : " + drugName.getText().trim());
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		//Assert.assertTrue(pharmacyAddress.isDisplayed());
 		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
 	}
 	
@@ -226,10 +226,10 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')][1]//button[contains(@class,'provider-toggle')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//a[contains(@class,'add-provider')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if(mproviderinfo.toLowerCase().contains("providers covered"))
+		if(mproviderinfo.toLowerCase().contains("provider covered"))
 		{
 			return true;
 		}

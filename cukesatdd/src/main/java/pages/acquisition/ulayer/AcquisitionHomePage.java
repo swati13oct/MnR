@@ -401,9 +401,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
 
@@ -473,6 +475,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else if (MRScenario.environment.equals("prod")) {
 			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 			 return testSiteUrl;
+		}else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
 		}
 		else
 			testSiteUrl = AARP_ACQISITION_PAGE_URL;
@@ -493,6 +498,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
+		}else if (MRScenario.environment.contains("stage-0")) {
+			startNew(AARP_ACQISITION_PAGE_URL_NEW);
+			checkModelPopup(driver, 20);
 		}
 		else {
 			start(AARP_ACQISITION_PAGE_URL);
@@ -521,7 +529,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
-			} else {
+			} else if (MRScenario.environment.contains("stage-0")) {
+				startNew(UMS_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			}else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
 			}

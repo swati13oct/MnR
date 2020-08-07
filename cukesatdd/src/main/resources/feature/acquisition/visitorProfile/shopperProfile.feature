@@ -98,7 +98,7 @@ Feature: 1.08. ACQ- Shopper Profile
     And I navigate to step3 page and validate
       | Drug | <drug> |
     And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drug | <drug> |
     And user delets all the added drugs on visitor profile page of AARP site
 

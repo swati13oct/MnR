@@ -426,10 +426,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData cobrowseData;
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	public String MicroAppSiteUrl;
@@ -480,7 +482,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else if (MRScenario.environment.equals("prod")) {
 			testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 			return testSiteUrl;
-		} else
+		} else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = UMS_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
+		}else
 			testSiteUrl = UMS_ACQISITION_PAGE_URL;
 		return testSiteUrl;
 	}
@@ -541,7 +546,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver, 45);
-		} else {
+		}else if (MRScenario.environment.contains("stage-0")) {
+			startNew(UMS_ACQISITION_PAGE_URL_NEW);
+			checkModelPopup(driver, 20);
+		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkForSecurityPage();
 			checkModelPopup(driver, 20);
@@ -561,6 +569,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL);
+			}else if (MRScenario.environment.contains("stage-0")) {
+				startNew(AARP_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
 			} else {
 				startNew(AARP_ACQISITION_PAGE_URL);
 			}
