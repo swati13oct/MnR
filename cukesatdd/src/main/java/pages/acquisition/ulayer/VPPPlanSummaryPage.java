@@ -4168,5 +4168,25 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 		
 	}
+	
+	public void RetrieveURL(String ExpectedsupplementURL) {
+	
+		String CurrentSupplementURL = driver.getCurrentUrl();
+		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
+		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);
+		System.out.println("Actual Supplement URL: "+CurrentSupplementURL);
+
+		if(ExpectedsupplementURL.contentEquals(CurrentSupplementURL)) {
+			System.out.println("****************Submit application button has been clicked successfully after entering the data on resume application page  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Submit application button is not clicked successfully and  resume application page is not loaded ***************");
+		}
+	
+		
+		
+	}
 
 }

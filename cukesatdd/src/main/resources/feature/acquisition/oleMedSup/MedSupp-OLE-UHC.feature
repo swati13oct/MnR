@@ -16,25 +16,30 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
        | Lastname      | <Lastname>    |
        | Zipcode       | <zipcode>     | 
      Then the user navigates to next page to locate resume application button
-   	 	| DOB               | <DOB>         |
-   	 	#| Firstname     | <Firstname>   |
-       #| Lastname      | <Lastname>    |
-       Then the user signs in with optum Id credentials to resume application in UHC site
+   	 	| DOB           | <DOB>         |
+   	 	| Firstname     | <Firstname>   |
+       | Lastname     | <Lastname>    |
+      # Then the user signs in with optum Id credentials to resume application in UHC site
       | User Name | <userName> |
       | Password  | <password> |	
-     Then the user enters data to resume the application
-       | applicationType           | <applicationType>|
-      | ApplicationID |<ApplicationID>|
+      Then the user signs in with optum Id in medsup flow
+     		|User Name | <username> |
+     		|Password | <password>|
+      Then the user validate retrieve application URL in AARP Site
+     | AARP URL    | <AARPUrl> |
+    # Then the user enters data to resume the application
+       | applicationType| <applicationType>|
+      	| ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
        | Zipcode       | <zipcode>     |   
-      Then The user validates the resume application processed
+     # Then The user validates the resume application processed
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
       
       
        Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password | 
-      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password | 
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer

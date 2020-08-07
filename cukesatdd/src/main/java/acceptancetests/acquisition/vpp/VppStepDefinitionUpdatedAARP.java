@@ -32,6 +32,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
@@ -3753,4 +3754,14 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.signInOptumId(username, password);
 	}
+	
+	@Then("^the user validate retrieve application URL in AARP Site$")
+	public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String AARPURL = inputAttributesMap.get("AARP URL");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.RetrieveURL(AARPURL);
+
+	}
+	
 }
