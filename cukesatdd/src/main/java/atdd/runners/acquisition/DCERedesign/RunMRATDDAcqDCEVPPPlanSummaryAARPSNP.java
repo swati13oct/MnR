@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for DCE REdesign - Scenario for VPP Plan Summary Page for MAPD Plans
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryAARPSNP.json",detailedReport = true,
+@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryAARPSNP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanSummaryAARPSNP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryAARPSNP.json" }, tags = { "@DCE_Redesign_VPP_PlanSummary_SNP" })
