@@ -1130,6 +1130,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'currentplan') and not(contains(@class,'ng-hide'))]//p[contains(text(),'You will stay in')]")
 	protected WebElement sars_enrolPlnSec_choYurPlnSec_stayInCurrPln_planName;
 
+	//=======================================================================================
+	@FindBy(xpath="//div[@ng-if='error' and contains(text(),'system error')]")
+	protected WebElement systemError;
 	
 	//=======================================================================================
 	//note: bookmark related
