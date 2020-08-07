@@ -642,7 +642,7 @@ public class DCEStepDefinitionAARP {
 		Map<String, String> DrugCosts = drugDetailsPage.CaptureDrugCosts();
 		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
 		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
-		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("MONTHLY_PREMIUM");
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("ANNUAL_ESTIMATED_TOTAL");
 		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
 
 		System.out.println(DrugCosts);
@@ -661,7 +661,7 @@ public class DCEStepDefinitionAARP {
 		if(cost.trim().contains(EstimatedDrugCosts))
 			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : "+cost+"; Actual : "+EstimatedDrugCosts,true);
 		else
-		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : "+cost+"; Actual : \"+EstimatedDrugCosts",false);
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : "+cost+"; Actual : "+EstimatedDrugCosts,false);
 		
 }
 
