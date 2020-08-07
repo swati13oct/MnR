@@ -1061,7 +1061,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//button[@data-testid='medication-action-renew']")
 	protected List<WebElement> listOfRenewMedicationBtn;
 	
-	@FindBy(xpath="//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	@FindBy(xpath="//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
 	protected List<WebElement> listOfPharmacyEligibleFrRefill;
 	
 	@FindBy(xpath="//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
