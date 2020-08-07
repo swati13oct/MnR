@@ -323,6 +323,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 	
+	@FindBy(xpath = "//div[@class='sam']")
+   	private WebElement samdiv;
+	
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
 
@@ -2650,21 +2653,26 @@ public boolean isValidatePageLoadError(){
 			}
 	}
 	
-	public void validateChat() throws InterruptedException {
-		boolean present;
+	public boolean validateChat() throws InterruptedException {
+		boolean present = false;
 		try {
-			validateNew(chatsam);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
-		}
-		if (present = true) {
-		  System.out.println("@@@@@@@@@Able to find TFN widget @@@@@@@@@"); 
-		  validateChatSamContent();	
-		  }
-		else if(present = false) {
-			  System.out.println("@@@@@@@@@ Not Able to find TFN widget @@@@@@@@@"); 
+			//validateNew(chatsam);
+			present=validateNew(samdiv);
+			if(present) {
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
+				String chatbtnid = "sam-button--chat";
+				for(WebElement element : list ) {
+					if(element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+						present = false;
+						break;
+					}
+					
+				}
+			}
 			
-		}	
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		  	return present;
 	}
-	}
+}

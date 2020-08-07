@@ -35,7 +35,7 @@ Then the user validates whether chat Agent is not Available on UHC
 		Examples: 
 			| pagename |
 			|/| 
-				| medicare-education/medicare-eligibility.html             |
+			| medicare-education/medicare-eligibility.html             |
       | medicare-education/medicare-parts-and-medigap-plans.html | 
       | medicare-education/medicare-benefits.html                |
       | medicare-education/medicare-advantage-plans.html  |
