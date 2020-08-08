@@ -246,6 +246,10 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
 	private WebElement clickSnpplan;
 	
+	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	private WebElement alertTextImg;
+	
+	
 	public void clickOnPDPPlan()
 	{
 		try {
@@ -259,6 +263,30 @@ public class DrugSummaryPage extends UhcDriver {
 		je.executeScript("arguments[0].click()", clickPdpplan);
 		//clickPdpplan.click();
 		
+		
+	}
+	
+	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
+	public WebElement drugPricingDeductText;
+	
+	
+	public void verifyTheTextAlert()
+	{
+		
+		validate(alertTextImg);
+		validate(viewProceBtn);
+	}
+	public void verifyDrugPricingText() {
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(drugTitle);
+		validate(switchToGenericBtn);
+		validate(drugPricingDeductText);
 		
 	}
 	

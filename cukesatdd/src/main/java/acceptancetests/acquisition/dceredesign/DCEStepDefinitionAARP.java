@@ -321,6 +321,21 @@ public class DCEStepDefinitionAARP {
 		buildDrugList.addDrugs(drugName);
 	}
 
+	@When("^user should verify the Extra help in AARP$")
+	public void user_should_verify_the_Extra_help_in_AARP() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.verifyTheTextAlert();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user should verify the drug extra qualification in drug pricing popup in AARP$")
+	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_AARP() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDrugPricingText();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
 	@When("^clicks on Review drug cost button$")
 	public void clicks_on_Review_drug_cost_button() {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
