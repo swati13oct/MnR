@@ -114,4 +114,50 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                                   |
-      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | NO                 | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                 | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+
+  @ARE @PlanYearAutoRanking @F487396
+  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
+    Then agent validates auto ranking for plan year change in plancompare page
+      | Plan Year            | <PlanYear>           |
+      | ZIP                  | <PlanCompareZIP>     |
+      | Ranking Options      | <RankingOptions>     |
+      | Current Plan         | <DisplayCurrentPlan> |
+      | ChangeIn Order       | <ChangeInOrder>      |
+      | Expected Plans Order | <PlansOrder>         |
+
+    Examples: 
+      | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
+
+  @ARE @deleteaddplans @F487396
+  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
+    Then agent deletes and adds plan in plancompare page
+      | ZIP                  | <PlanCompareZIP>     |
+      | Ranking Options      | <RankingOptions>     |
+      | Current Plan         | <DisplayCurrentPlan> |
+      | ChangeIn Order       | <ChangeInOrder>      |
+      | Expected Plans Order | <PlansOrder>         |
+
+    Examples: 
+      | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
+      

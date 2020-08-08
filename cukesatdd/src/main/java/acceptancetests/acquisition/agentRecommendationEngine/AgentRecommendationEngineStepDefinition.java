@@ -163,5 +163,23 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.getplanNames(inputValues.get("ChangeIn Order"),inputValues.get("Expected Plans Order"));
 	}
+	
+	@Then("^agent validates auto ranking for plan year change in plancompare page$")
+	public void agent_autorankin_planyear(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.verifyAutoRankingPlanYear(inputValues.get("Plan Year"),inputValues.get("ZIP"), inputValues.get("Ranking Options"),
+				inputValues.get("Current Plan"), inputValues.get("ChangeIn Order"),
+				inputValues.get("Expected Plans Order"));
+	}
+	
+	@Then("^agent deletes and adds plan in plancompare page$")
+	public void agent_delete_add_plan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.verifyDeleteAddPlan(inputValues.get("ZIP"),inputValues.get("Ranking Options"),
+				inputValues.get("Current Plan"), inputValues.get("ChangeIn Order"),
+				inputValues.get("Expected Plans Order"));
+	}
 
 }

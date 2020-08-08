@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -144,9 +145,12 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']")
 	private List<WebElement> planNameSection;
-	
+
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
 	private List<WebElement> planNamesOnly;
+
+	@FindBy(css = "#compare-table div[class*='flex'][class*='scope'] button[class*='delete']")
+	private List<WebElement> plandeleteButtons;
 
 	@FindBy(css = "div.plan-ranking-message")
 	private WebElement successMsg;
@@ -159,6 +163,15 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "select#plan-year")
 	private WebElement planYear;
+
+	@FindBy(css = "#addanotherplanbutton")
+	private WebElement addPlan;
+
+	@FindBy(css = "div[class*='compare']>div[class*='compare-box']")
+	private List<WebElement> vppCompare;
+
+	@FindBy(css = "div[class*='compare-box'] button")
+	private List<WebElement> vppCompareButton;
 
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
@@ -212,7 +225,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(1000);
 		}
 	}
-	
+
 	public void checkUncheck(String checkOption, boolean select) {
 		System.out.println("Selecting Option " + checkOption + " : " + select);
 		WebElement elemCheck = null, elemClick = null;
@@ -403,14 +416,9 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Verify Ranking and Plans Reorder");
 		int planStartCount = 0;
 		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
-		List<String> plansDetails = new ArrayList<String>();
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement elem : planNameSection) {
-			// String val = elem.getText().trim().toUpperCase().replace(" ", "");
-			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
-			String val = planName.trim().toUpperCase().replace(" ", "");
-			plansDetails.add(val);
-		}
+
+		List<String> plansDetails = getPlanSectionDetails();
+
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
 			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
@@ -424,12 +432,7 @@ public class AREPlanRanking extends UhcDriver {
 		// Validate Success message
 		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
 
-		List<String> newplansDetails = new ArrayList<String>();
-		for (WebElement elem : planNameSection) {
-			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
-			String val = planName.trim().toUpperCase().replace(" ", "");
-			newplansDetails.add(val);
-		}
+		List<String> newplansDetails = getPlanSectionDetails();
 
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
@@ -471,12 +474,7 @@ public class AREPlanRanking extends UhcDriver {
 		boolean msg = validate(successMsg, 10); // Validate message disappear
 		Assert.assertFalse(msg);
 
-		List<String> originalplansDetails = new ArrayList<String>();
-		for (WebElement elem : planNameSection) {
-			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
-			String val = planName.trim().toUpperCase().replace(" ", "");
-			originalplansDetails.add(val);
-		}
+		List<String> originalplansDetails = getPlanSectionDetails();
 
 		Assert.assertTrue(plansDetails.equals(originalplansDetails), "Return to Original order is failed");
 		System.out.println("------- Ranking Validation completed -------");
@@ -544,8 +542,7 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void checkCountyPlanYear(String multiCounty, String year) {
-		threadsleep(10000);
-		String curYear = getCurrentYear();
+		threadsleep(1000);
 		if (!multiCounty.isEmpty() && !multiCounty.toUpperCase().contains("NONE")) {
 			if (selectMultiZip.get(0).getText().toUpperCase().contains(multiCounty.toUpperCase()))
 				selectMultiZip.get(0).click();
@@ -556,9 +553,12 @@ public class AREPlanRanking extends UhcDriver {
 			waitforElementInvisibilityInTime(planLoaderscreen, 60);
 			threadsleep(5000);// Plan loader
 		}
+		confirmAlert(60);
+		changePlanyear(year);
+	}
 
-		confirmAlert();
-
+	public void changePlanyear(String year) {
+		String curYear = getCurrentYear();
 		// Checking and Changing to Current Year
 		if (year.equalsIgnoreCase("current")) {
 			if (validate(planYear, 10)) {
@@ -595,9 +595,14 @@ public class AREPlanRanking extends UhcDriver {
 		if (validate(confrimButton, 20))
 			confrimButton.click();
 	}
-	
+
+	public void confirmAlert(int time) {
+		if (validate(confrimButton, time))
+			confrimButton.click();
+	}
+
 //Session Cookie Methods
-	
+
 	public void verifyClearSession(String zip) {
 		System.out.println("Verify cleared in session storage");
 		int planStartCount = 0;
@@ -609,18 +614,18 @@ public class AREPlanRanking extends UhcDriver {
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails.add(val);
 		}
-		
+
 		// Validate best match Text not displaying in UI
-				int j = 1, k = planStartCount;
-				for (int i = k; i < plansDetails.size() && j <= 4; i++) {
-					Assert.assertFalse(plansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
-							"Plans are having Best Match Text : " + plansDetails.get(i));
-					j++;
-				}
+		int j = 1, k = planStartCount;
+		for (int i = k; i < plansDetails.size() && j <= 4; i++) {
+			Assert.assertFalse(plansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Plans are having Best Match Text : " + plansDetails.get(i));
+			j++;
+		}
 	}
-	
+
 	public void verifySavedSession(String zip, String rankOptions, String rankOptions1) {
-		System.out.println("Verify saved in session storage");	
+		System.out.println("Verify saved in session storage");
 		planRankingDropdown.click();
 		optionSelection(rankOptions, true);
 		applyBtn.click();
@@ -637,15 +642,15 @@ public class AREPlanRanking extends UhcDriver {
 		planRankingDropdown.click();
 		optionSelection(rankOptions1, true);
 	}
-	
+
 	public void verifyDrugDoc(String rankOptions, String planOrders) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		System.out.println("Verify Drug and Doctors Session Storage");	
+		System.out.println("Verify Drug and Doctors Session Storage");
 		planRankingDropdown.click();
 		drugDocDisable(rankOptions, false);
 		applyBtn.click();
 		threadsleep(3000);
-		
+
 		List<String> newplansDetails = new ArrayList<String>();
 		for (WebElement elem : planNameSection) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
@@ -653,18 +658,18 @@ public class AREPlanRanking extends UhcDriver {
 			newplansDetails.add(val);
 		}
 		System.out.println(newplansDetails);
-			
-			int j = 0;
-			ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
-			for (int i = 0; i < givenplansDetails.size(); i++) {
-				Assert.assertTrue(newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
-						"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase() + " Actual: "
-								+ newplansDetails.get(i).toUpperCase());
-				j++;
-			}
+
+		int j = 0;
+		ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
+		for (int i = 0; i < givenplansDetails.size(); i++) {
+			Assert.assertTrue(
+					newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
+					"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase()
+							+ " Actual: " + newplansDetails.get(i).toUpperCase());
+			j++;
 		}
-		
-	
+	}
+
 	public void drugDocDisable(String option, boolean select) {
 		String options[] = option.split(",");
 		for (int i = 0; i < options.length; i++) {
@@ -672,7 +677,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(1000);
 		}
 	}
-	
+
 	public void disable(String checkOption, boolean select) {
 		System.out.println("Selecting Option " + checkOption + " : " + select);
 		WebElement elemCheck = null, elemClick = null;
@@ -688,7 +693,7 @@ public class AREPlanRanking extends UhcDriver {
 			Assert.assertFalse(elemCheck.isEnabled(), "Unable to Select " + elemCheck);
 	}
 
-	public void getplanNames(String changeOrder,String planOrders) {
+	public void getplanNames(String changeOrder, String planOrders) {
 		int planStartCount = 0;
 		List<String> plansDetails1 = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -697,8 +702,145 @@ public class AREPlanRanking extends UhcDriver {
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails1.add(val);
 		}
-				
+
 	}
-	
+
+	public void verifyAutoRankingPlanYear(String year, String zip, String rankOptions, String curPlan,
+			String changeOrder, String planOrders) {
+		System.out.println("Verify Auto Ranking for Plan year change..");
+		int planStartCount = 0;
+		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
+		List<String> plansDetails = getPlanSectionDetails();
+
+		if (curPlan.equalsIgnoreCase("yes")) {
+			planStartCount = 1;
+			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+		}
+		planRankingDropdown.click();
+		validate(applyBtn);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection(rankOptions, true);
+		applyBtn.click();
+		threadsleep(3000);
+		// Validate Success message
+		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
+
+		List<String> newplansDetails = getPlanSectionDetails();
+
+		// Validate best match Text max of 4
+		int j = 1, k = planStartCount;
+		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
+			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
+			j++;
+		}
+
+		if (year.equalsIgnoreCase("current"))
+			changePlanyear("future");
+		else
+			changePlanyear("current");
+
+		newplansDetails = getPlanSectionDetails();
+
+		// Validate best match Text max of 4
+		j = 1;
+		k = planStartCount;
+		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
+			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
+			j++;
+		}
+
+		// Validate Ranking Order - In Future for future plans
+
+		System.out.println("------- Plan Year Auto ranking Validation completed -------");
+	}
+
+	public List<String> getPlanSectionDetails() {
+		List<String> plansDetails = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (WebElement elem : planNameSection) {
+			// String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
+			plansDetails.add(val);
+		}
+		return plansDetails;
+	}
+
+	public void verifyDeleteAddPlan(String zip, String rankOptions, String curPlan, String changeOrder,
+			String planOrders) {
+		System.out.println("Verify Auto Ranking for Plan year change..");
+		int planStartCount = 0;
+		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
+		List<String> plansDetails = getPlanSectionDetails();
+
+		if (curPlan.equalsIgnoreCase("yes")) {
+			planStartCount = 1;
+			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+		}
+		planRankingDropdown.click();
+		validate(applyBtn);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection(rankOptions, true);
+		applyBtn.click();
+		threadsleep(3000);
+		// Validate Success message
+		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
+
+		List<String> newplansDetails = getPlanSectionDetails();
+
+		// Validate best match Text max of 4
+		int j = 1, k = planStartCount;
+		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
+			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
+			j++;
+		}
+
+		newplansDetails = getPlanSectionDetails();
+
+		deletePlan(planStartCount + 1);
+
+		List<String> afterDeleteDetails = getPlanSectionDetails();
+
+		Assert.assertTrue(newplansDetails.size() == afterDeleteDetails.size() + 1, "Delete plan is not Compelted");
+
+		// Validate best match Text max of 4
+		j = 1;
+		k = planStartCount;
+		for (int i = k; i < afterDeleteDetails.size() && j <= 4; i++) {
+			Assert.assertTrue(afterDeleteDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+					"Expected Best Match Text is not applied : " + afterDeleteDetails.get(i));
+			j++;
+		}
+
+		addPlan();
+		validate(planRankingDropdown, 60);
+
+		List<String> afterAddDetails = getPlanSectionDetails();
+
+		Assert.assertTrue(plansDetails.equals(afterAddDetails),
+				"Return to Original order is failed after Adding the deleted One");
+
+		System.out.println("------- Plan Delete Add Validation completed -------");
+	}
+
+	public void deletePlan(int planIndex) {
+		jsClickMobile(plandeleteButtons.get(planIndex));
+		threadsleep(5000);
+	}
+
+	public void addPlan() {
+		System.out.println("Adding Plan....");
+		jsClickMobile(addPlan);
+		threadsleep(5000);
+		plansLoader();
+		for (WebElement elem : vppCompare)
+			if (!elem.findElement(By.cssSelector("input")).isSelected())
+				elem.findElement(By.cssSelector("label")).click();
+		threadsleep(3000);
+		vppCompareButton.get(0).click();
+	}
 
 }
