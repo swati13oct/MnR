@@ -188,7 +188,7 @@ public class ProviderSearchStepDefinitionAARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+		plansummaryPage.verifyproviderName(planName);
 	}
 	
 	/**

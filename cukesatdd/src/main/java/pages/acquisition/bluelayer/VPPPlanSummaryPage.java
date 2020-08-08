@@ -1370,6 +1370,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean providerinfo(String planName) {
 
+		sleepBySec(3);
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
 		String mproviderinfo = ProviderSearchLink.getText();
@@ -1382,6 +1383,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void verifyproviderName(String planName) {
 		String rallyProviderName = MRConstants.PROV_NAME;
+		sleepBySec(2);
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
 		ProviderSearchLink.click();

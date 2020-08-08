@@ -1951,7 +1951,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateTFNelement(String tfnXpath) {
 			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-			validateNew(TFNelement);	
+			validateNew(TFNelement,45);	
 			if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 				System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
 			}
@@ -2001,7 +2001,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
 			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html')]"));
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 

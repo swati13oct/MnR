@@ -113,7 +113,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	public WebElement CheckProviderCoverageButton;
 	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
 	private WebElement FinishButton;
 
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")

@@ -991,8 +991,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean providerinfo(String planName)
 	{
+		
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'add-provider')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-toggle')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("provider covered"))
@@ -1005,6 +1006,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void verifyproviderName(String planName)
 	{
+		sleepBySec(2);
 		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
