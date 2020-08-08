@@ -208,7 +208,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  10001 |
       
       @dceRedesignExtraHelpAlert @F477268
-   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
+   Scenario Outline: Test to Verify that Extra help Warning messgae on view drug pricing modal up
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
