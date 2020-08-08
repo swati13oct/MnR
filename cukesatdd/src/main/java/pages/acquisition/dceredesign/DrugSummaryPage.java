@@ -214,7 +214,6 @@ public class DrugSummaryPage extends UhcDriver {
 		for(int i=0;i<drugNames.size();i++) {
 			System.out.println(drugNames.get(i).getText());
 		}
-		Assert.assertTrue(!switchToGenericBtn.isDisplayed());
 	}
 	
 	@FindBy(id = "sign-up-modal-header")
