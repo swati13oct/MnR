@@ -147,16 +147,16 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div.plan-ranking-message")
 	private WebElement successMsg;
-	
+
 	@FindBy(css = "#selectCounty p>a")
 	private List<WebElement> selectMultiZip;
 
 	@FindBy(css = ".modal-body #multiCountyCancelBtn")
 	private WebElement confrimButton;
-	
+
 	@FindBy(css = "select#plan-year")
 	private WebElement planYear;
-	
+
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -403,7 +403,7 @@ public class AREPlanRanking extends UhcDriver {
 		List<String> plansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planNameSection) {
-			//String val = elem.getText().trim().toUpperCase().replace(" ", "");
+			// String val = elem.getText().trim().toUpperCase().replace(" ", "");
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails.add(val);
@@ -432,18 +432,25 @@ public class AREPlanRanking extends UhcDriver {
 		int j = 1, k = planStartCount;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
 			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
-					"Expected Best Match Text is not applied : "+newplansDetails.get(i));
+					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
 			j++;
 		}
 
 		// Validate Ranking Order
-		j = 0;
-		ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
-		for (int i = planStartCount; i < givenplansDetails.size(); i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains(givenplansDetails.get(j).toUpperCase()),
-					"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j) + " Actual: "
-							+ newplansDetails.get(i));
-			j++;
+
+		if (planOrders.isEmpty() && changeOrder.equalsIgnoreCase("yes")) {
+			Assert.assertFalse(plansDetails.equals(newplansDetails), "Plans are not Re-ordered");
+		} else if (planOrders.isEmpty() && !changeOrder.equalsIgnoreCase("yes")) {
+			Assert.assertTrue(plansDetails.equals(newplansDetails), "Plans are Re-ordered");
+		} else {
+			j = 0;
+			ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
+			for (int i = planStartCount; i < givenplansDetails.size(); i++) {
+				Assert.assertTrue(newplansDetails.get(i).contains(givenplansDetails.get(j).toUpperCase()),
+						"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j) + " Actual: "
+								+ newplansDetails.get(i));
+				j++;
+			}
 		}
 
 		// Check current Plan is not changed and no BestMatch text
@@ -532,7 +539,7 @@ public class AREPlanRanking extends UhcDriver {
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
 	}
-	
+
 	public void checkCountyPlanYear(String multiCounty, String year) {
 		String curYear = getCurrentYear();
 		if (!multiCounty.isEmpty() && !multiCounty.toUpperCase().contains("NONE")) {
@@ -572,7 +579,7 @@ public class AREPlanRanking extends UhcDriver {
 			}
 		}
 	}
-	
+
 	public String getCurrentYear() {
 		DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
 		Date date = new Date();
@@ -581,7 +588,8 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void confirmAlert() {
-		if(validate(confrimButton,20))
+		if (validate(confrimButton, 20))
 			confrimButton.click();
 	}
+
 }
