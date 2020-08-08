@@ -144,6 +144,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']")
 	private List<WebElement> planNameSection;
+	
+	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
+	private List<WebElement> planNamesOnly;
 
 	@FindBy(css = "div.plan-ranking-message")
 	private WebElement successMsg;
@@ -209,7 +212,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(1000);
 		}
 	}
-
+	
 	public void checkUncheck(String checkOption, boolean select) {
 		System.out.println("Selecting Option " + checkOption + " : " + select);
 		WebElement elemCheck = null, elemClick = null;
@@ -541,6 +544,7 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void checkCountyPlanYear(String multiCounty, String year) {
+		threadsleep(10000);
 		String curYear = getCurrentYear();
 		if (!multiCounty.isEmpty() && !multiCounty.toUpperCase().contains("NONE")) {
 			if (selectMultiZip.get(0).getText().toUpperCase().contains(multiCounty.toUpperCase()))
@@ -591,5 +595,110 @@ public class AREPlanRanking extends UhcDriver {
 		if (validate(confrimButton, 20))
 			confrimButton.click();
 	}
+	
+//Session Cookie Methods
+	
+	public void verifyClearSession(String zip) {
+		System.out.println("Verify cleared in session storage");
+		int planStartCount = 0;
+		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
+		List<String> plansDetails = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (WebElement elem : planNameSection) {
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
+			plansDetails.add(val);
+		}
+		
+		// Validate best match Text not displaying in UI
+				int j = 1, k = planStartCount;
+				for (int i = k; i < plansDetails.size() && j <= 4; i++) {
+					Assert.assertFalse(plansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+							"Plans are having Best Match Text : " + plansDetails.get(i));
+					j++;
+				}
+	}
+	
+	public void verifySavedSession(String zip, String rankOptions, String rankOptions1) {
+		System.out.println("Verify saved in session storage");	
+		planRankingDropdown.click();
+		optionSelection(rankOptions, true);
+		applyBtn.click();
+		threadsleep(3000);
+		// Validate Success message
+		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
+		planRankingDropdown.click();
+		optionSelection(rankOptions, true);
+		optionSelection(rankOptions1, true);
+		applyBtn.click();
+		threadsleep(3000);
+		// Validate Success message
+		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
+		planRankingDropdown.click();
+		optionSelection(rankOptions1, true);
+	}
+	
+	public void verifyDrugDoc(String rankOptions, String planOrders) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		System.out.println("Verify Drug and Doctors Session Storage");	
+		planRankingDropdown.click();
+		drugDocDisable(rankOptions, false);
+		applyBtn.click();
+		threadsleep(3000);
+		
+		List<String> newplansDetails = new ArrayList<String>();
+		for (WebElement elem : planNameSection) {
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "").split("SAVEPLAN")[0].split("CLOSE")[0];
+			newplansDetails.add(val);
+		}
+		System.out.println(newplansDetails);
+			
+			int j = 0;
+			ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
+			for (int i = 0; i < givenplansDetails.size(); i++) {
+				Assert.assertTrue(newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
+						"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase() + " Actual: "
+								+ newplansDetails.get(i).toUpperCase());
+				j++;
+			}
+		}
+		
+	
+	public void drugDocDisable(String option, boolean select) {
+		String options[] = option.split(",");
+		for (int i = 0; i < options.length; i++) {
+			disable(options[i], select);
+			threadsleep(1000);
+		}
+	}
+	
+	public void disable(String checkOption, boolean select) {
+		System.out.println("Selecting Option " + checkOption + " : " + select);
+		WebElement elemCheck = null, elemClick = null;
+		if (checkOption.equalsIgnoreCase("drug")) {
+			elemCheck = drugCheck;
+			elemClick = drugCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("doctor")) {
+			elemCheck = doctorCheck;
+			elemClick = doctorCheckLabel;
+		}
+		if (select)
+			Assert.assertFalse(elemCheck.isEnabled(), "Unable to Select " + elemCheck);
+	}
+
+	public void getplanNames(String changeOrder,String planOrders) {
+		int planStartCount = 0;
+		List<String> plansDetails1 = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (WebElement elem : planNamesOnly) {
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "");
+			plansDetails1.add(val);
+		}
+				
+	}
+	
 
 }

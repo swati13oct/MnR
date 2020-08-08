@@ -135,5 +135,33 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.checkCountyPlanYear(inputValues.get("Multi County"), inputValues.get("Plan Year"));
 	}
+	
+	@Then("^agent validates information cleared in session storge$")
+	public void agent_verify_clear_Session(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.verifyClearSession(inputValues.get("ZIP"));
+	}
+	
+	@Then("^agent validates selected information saved in session storge$")
+	public void agent_verify_saved_Session(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.verifySavedSession(inputValues.get("ZIP"), inputValues.get("Ranking Options"), inputValues.get("Ranking Options1"));
+	}
+	
+	@Then("^agent validates Drug and Doctors in session storge$")
+	public void agent_verify_drug_Doc_Session(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.verifyDrugDoc(inputValues.get("Ranking Options"), inputValues.get("Expected Plans Order"));
+	}
+	
+	@Then("^agent get plandetails in plancompare after applied ranking$")
+	public void agent_getPlanDetails(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.getplanNames(inputValues.get("ChangeIn Order"),inputValues.get("Expected Plans Order"));
+	}
 
 }
