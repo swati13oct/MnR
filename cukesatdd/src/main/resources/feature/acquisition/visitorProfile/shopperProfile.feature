@@ -30,8 +30,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                  | mbi           | dob        | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames | providers             |  
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | 5WP6-E79-YX48 | 02/21/1949 | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No |
+      | username  | password  | email           | mbi           | dob        | fname  | lname | enrolledplanName                                | planName                                | drugNames | providers                                                                                                    |
+      | qavgogine | qavgogine | delton@owen.com | 9YD1-C36-CD33 | 11/30/1936 | DELTON | OWEN  | UnitedHealthcare Group Medicare Advantage (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | Paul A Auteri:1694 64th St, Kings, NY, 11204;Kenneth Joseph Nori:112 Quarry Rd Ste 220, Fairfield, CT, 06611 |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -61,8 +61,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | fname  | lname   | mbi           | dob        | enrolledplanName                                     | planName                                             | drugNames | providers             |
-      | qavgogine | qavgogine | AURORA | SHEPLEY | 5WP6-E79-YX48 | 02/21/1949 | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No |
+      | username  | password  | fname  | lname   | mbi           | dob        | enrolledplanName                                     | planName                                             | drugNames | providers |
+      | qavgogine | qavgogine | AURORA | SHEPLEY | 5WP6-E79-YX48 | 02/21/1949 | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No        |
 
   @searchProfileAndAddPlans
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user

@@ -129,7 +129,7 @@ public class ShopperProfileStepDefinition {
 		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		
-		comparePlansPage.validateAgentModeBanners(userData);
+		comparePlansPage.validateMemberDetails(userData);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")
