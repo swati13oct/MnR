@@ -16,6 +16,7 @@ import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -178,6 +179,49 @@ public class DCEStepDefinitionUHC {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDefaultPlanType();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user clicks view drug cost button in UHC$")
+	public void user_clicks_view_drug_cost_button_in_UHC() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	
+    @When("^user should verify the Extra help in UHC$")
+	public void user_should_verify_the_Extra_help_in_UHC() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.verifyTheTextAlert();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user should verify the drug extra qualification in drug pricing popup in UHC$")
+	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_UHC() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDrugPricingText();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	@When("^user clicks on change pharmacy link from details page in UHC$")
+	public void user_clicks_on_change_pharmacy_link_from_details_page_in_UHC() throws InterruptedException {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^details page change pharmacy modal should be displayed in UHC$")
+	public void details_page_change_pharmacy_modal_should_be_displayed_in_UHC() throws InterruptedException {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.selectPharmacyModalDisplayed();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^user verify details page change pharmacy modal in UHC$")
+	public void user_verify_details_page_change_pharmacy_modal_in_UHC() throws InterruptedException {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateSelectPharmacyPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
 	@When("^user click on View Drug Pricing Modal in UHC$")

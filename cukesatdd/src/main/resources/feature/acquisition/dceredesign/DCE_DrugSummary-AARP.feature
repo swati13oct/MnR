@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
       
       
       @drugSummary_SAM_Icon_AARP
@@ -111,7 +111,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         
         Examples: 
       | path                     | pageName                   |drugName|zipCode |testPlans|pdptestPlans|snptestPlans|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
 
       
       @dCERedesign_ChangePharmacy_AARP @F426569
@@ -139,7 +139,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         
         Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  10001 |
      
      @dceRedesignSwitchtoGenericDrug @F484185
    Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
@@ -176,8 +176,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      
        
         Examples: 
-      | path                     | pageName                   |drugName|drugName1|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor| Emsam|10001 |
+      | path                     | pageName                   |drugName|zipCode |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor|10001 |
      
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
@@ -233,5 +233,5 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      
       Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  10001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  10001 |
       
