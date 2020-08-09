@@ -203,10 +203,10 @@ public class ProfileSearch extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(AARPlogo);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {
