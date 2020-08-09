@@ -1090,6 +1090,19 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validateRefillLeftAmount(walgreensRefillsLeft));
 	}
 
+	public void validateNeedHelpSectionPhoneNumbers() {
+
+		Assert.assertTrue("PROBLEM - Need Help section phone numbers not available",
+				validateNeedHelpsPhoneNumbers());
+
+	}
+
+	public void validateNeedHelpSectionHours() {
+
+		Assert.assertTrue("PROBLEM - Need Help section hours of operations not available",
+				validateNeedHelpsHoursOfOperations());
+	}
+
 	public void validateDayOfSupply() {
 		Assert.assertTrue("PROBLEM - Days Of Supply not available", validateFieldValueContent(listOfDaysSupply));
 	}

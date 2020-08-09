@@ -360,6 +360,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'My Medications')]")
 	protected WebElement NumberInParenthesis;
 
+	@FindBy(xpath = "//p[contains(text(),'1-800-721-0627')]")
+	protected WebElement technicalSupportNumber;
+
+	@FindBy(xpath = "//p[contains(text(),'1-844-876-6177')]")
+	protected WebElement planSupportNumber;
+
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]/div/div/p[3]")
+	protected WebElement planSupportHours;
+
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[2]/div/div/p[3]")
+	protected WebElement technicalSupportHours;
+
 	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
 	protected List<WebElement> Disclaimer;
 
@@ -1006,6 +1018,34 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
 
 		if (number == number2) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	public boolean validateNeedHelpsPhoneNumbers() {
+
+		String techNumber="1-800-721-0627";
+		String planNumber="1-844-876-6177";
+
+		if (techNumber.equals(technicalSupportNumber.getText()) && planNumber.equals(planSupportNumber.getText())) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	public boolean validateNeedHelpsHoursOfOperations() {
+
+		String Hours1="7 a.m. - 10 p.m. CT, 7 days a week";
+		String Hours2="8 a.m. - 8 p.m. local time, Monday - Friday";
+
+		if (planSupportHours.getText().equals(Hours1) && technicalSupportHours.getText().equals(Hours2)) {
 
 			return true;
 		} else {

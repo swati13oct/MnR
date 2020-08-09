@@ -7,10 +7,15 @@ Feature: Need Help Phone Numbers
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    Then user validates Need Help section phone numbers
+    Then user validates Need Help section hours of operations
 
     Examples:
-      | TID   | planType | memberType                 |
-      | 15347 | MAPD     | IndMAPDUHC_footer          |
-      | 15347 | MEDICA   | Ind_footer                 |
-      | 15347 | PCP      | Ind_footer                 |
+      | FID     | planType | memberType           |
+      | F479448 | MAPD     | Rx_Individual_PnP_needhelp |
+
+#    Examples:
+#      | TID   | planType | memberType                 |
+#      | 15347 | MAPD     | IndMAPDUHC_footer          |
+#      | 15347 | MEDICA   | Ind_footer                 |
+#      | 15347 | PCP      | Ind_footer                 |
