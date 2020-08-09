@@ -3,7 +3,7 @@ Feature: MVP - Call to Action
 
   @RefillWithWalgreens @F482427 @US2508876 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View Refill with Walgreens CTA
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -19,7 +19,7 @@ Feature: MVP - Call to Action
 
   @RefillWithWalgreens @F482427 @US2508876 @Scenario2
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -35,7 +35,7 @@ Feature: MVP - Call to Action
 
 #  @RefillWithWalgreens @F482427 @US2508876 @Scenario3
 #  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-#    Given login with following details logins in the uhc rx portal
+#    Given login with following details logins in the member portal and validate elements
 #      | Plan Type   | <planType>   |
 #      | Member Type | <memberType> |
 #    When user navigates to the pharmacies and prescriptions page from testharness page
@@ -53,7 +53,7 @@ Feature: MVP - Call to Action
 
   @RefillWithWalgreens @F482427 @US2770427 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View Refill with Walgreens CTA
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -69,7 +69,7 @@ Feature: MVP - Call to Action
 
   @RefillWithWalgreens @F482427 @US2770427 @Scenario2
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -86,7 +86,7 @@ Feature: MVP - Call to Action
 
 #  @RefillWithWalgreens @F482427 @US2770427 @Scenario3
 #  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-#    Given login with following details logins in the uhc rx portal
+#    Given login with following details logins in the member portal and validate elements
 #      | Plan Type   | <planType>   |
 #      | Member Type | <memberType> |
 #    When user navigates to the pharmacies and prescriptions page from testharness page
