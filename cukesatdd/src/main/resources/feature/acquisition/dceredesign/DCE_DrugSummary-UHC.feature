@@ -163,9 +163,9 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
    # And user selects plan year on UHC
     And user clicks on continue button on UHC
     Then load screen should be displayed on UHC
-    And user should be navigated to Review drug cost estimate page on UHC
-    And user should be able to see Medicare Advantage plan by default in UHC
-    And user click on View Drug Pricing Modal on UHC
+    And user should be navigated to Review drug cost estimate page in UHC
+    And user should be able to see Medicare Advantage plan by default on UHC
+    And user click on View Drug Pricing Modal in UHC
      And user click on Switch To Generic in UHC
      And clicks on Review drug cost button
      Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
@@ -174,9 +174,9 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
    # And user selects plan year on UHC
     And user clicks on continue button on UHC
     Then load screen should be displayed on UHC
-    And user should be navigated to Review drug cost estimate page on UHC
-    And user should be able to see Medicare Advantage plan by default in UHC
-    And user click on View Drug Pricing Modal on UHC
+    And user should be navigated to Review drug cost estimate page in UHC
+    And user should be able to see Medicare Advantage plan by default on UHC
+    And user click on View Drug Pricing Modal in UHC
      And user verify drug can switch to generic drug in UHC
      
       Examples: 
