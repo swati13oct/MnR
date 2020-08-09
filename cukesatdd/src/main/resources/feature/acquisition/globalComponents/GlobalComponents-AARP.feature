@@ -78,10 +78,10 @@ Feature: 1.12 ACQ - Global Components AARP
     @ShopPlan_Shop2_GlobalCompsAARP
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                      						 | tfnFlag |
-      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2]				 | true    |
-      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]						 | true    |
-      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 						| true    |
-      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 						| true    |
+      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |(//*[contains(@class,'callus')]//*[contains(@ng-show,'fedTfn')]//*[contains(@class,'tel tfn')])[1]				 | true    |
+      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//*[contains(@ng-show,'medSupTfn')]//*[contains(@class,'tel tfn')]						 | true    |
+      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//*[contains(@ng-show,'fedTfn')]//*[contains(@class,'tel tfn')])[1] 						| true    |
+      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@ng-show,'fedTfn')]//*[contains(@class,'tel tfn')])[1] 						| true    |
 
     @ShopPlan_Shop3_GlobalCompsAARP
     Examples: 
@@ -96,7 +96,6 @@ Feature: 1.12 ACQ - Global Components AARP
       | path                                                                   | pageName                        | tfnXpath                                                       | tfnFlag |
       | shop/medicare-advantage-plans/wellness-discounts.html                  | ShopPlan: Welness Discount      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/medicare-advantage-plans/health-care-management.html              | ShopPlan: Healthcare management | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/medicare-advantage-plans/ma-plan-benefits.html                    | ShopPlan: MA Plan benefits      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/renew-active.html                                                 | ShopPlan: Renew-Active          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Enroll1_GlobalCompsAARP
