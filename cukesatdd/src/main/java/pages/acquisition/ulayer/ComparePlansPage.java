@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -224,6 +225,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
 	private WebElement nonMemberDOB;
 	
+	@FindBy(css="#changes-submitted button")
+	private WebElement popupAccept;
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1025,9 +1028,10 @@ public class ComparePlansPage extends UhcDriver {
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
 		
+		allSet();
 		
-		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		/*System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());*/
 		
 		if(Strings.isNullOrEmpty(enrolledPlan)) {
 			System.out.println("#########Empty Profile#########");
@@ -1107,5 +1111,12 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 	}
+	
+	public void allSet() {
+		CommonUtility.waitForPageLoad(driver, popupAccept, 60);
+		Alert allset = driver.switchTo().alert();
+		allset.accept();
+	}
+	
 }
 

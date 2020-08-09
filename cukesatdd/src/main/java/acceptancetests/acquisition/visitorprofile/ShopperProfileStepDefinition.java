@@ -83,10 +83,8 @@ public class ShopperProfileStepDefinition {
 			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 					.getBean(PageConstants.PROFILE_SEARCH);
 			
-			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
-			//ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
-			//getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
+			ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
