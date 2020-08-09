@@ -206,8 +206,8 @@ Feature: Refill - Checkout summary
     And user clicks Refill Medication call to action button
     Then user views the "Complete Your Refill" page
     And user will see Place Order Btn
-    When user clicks on Place Order Btn
-    Then user will see the Order Confirmation Page
+    #When user clicks on Place Order Btn
+    #Then user will see the Order Confirmation Page
 
     Examples: 
       | FID     | planType | memberType                  |
