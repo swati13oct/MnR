@@ -1114,8 +1114,9 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void allSet() {
 		CommonUtility.waitForPageLoad(driver, popupAccept, 60);
-		Alert allset = driver.switchTo().alert();
-		allset.accept();
+		popupAccept.click();
+		/*Alert allset = driver.switchTo().alert();
+		allset.accept();*/
 	}
 	
 }
