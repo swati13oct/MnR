@@ -1,6 +1,7 @@
 package pages.acquisition.bluelayer;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -321,6 +322,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam = "Call a Licensed Insurance Agent";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
+	
+	@FindBy(xpath = "//div[@class='sam']")
+   	private WebElement samdiv;
 	
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
@@ -2658,5 +2662,28 @@ public boolean isValidatePageLoadError(){
 			} catch (Exception e) {
 				System.out.println("Advanced button not displayed");
 			}
+	}
+	
+	public boolean validateChat() throws InterruptedException {
+		boolean present = false;
+		try {
+			//validateNew(chatsam);
+			present=validateNew(samdiv);
+			if(present) {
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
+				String chatbtnid = "sam-button--chat";
+				for(WebElement element : list ) {
+					if(element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+						present = false;
+						break;
+					}
+					
+				}
+			}
+			
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		  	return present;
 	}
 }

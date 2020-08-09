@@ -60,7 +60,7 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="(//*[@ng-if='::hideInputs !== true'])[1]")
 	private WebElement selectLocationOptionClick;
-	
+
 	@FindBy(xpath="//span[text()='Edit Saved']")
 	private WebElement EditSavedButton;
 	
@@ -77,7 +77,7 @@ public class ProviderSearchPage extends UhcDriver {
 	private WebElement ViewsaveProviderbtn;
 	
 	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
-	private WebElement Checkcoverage;
+	private WebElement Checkcoverage1;
 	
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
 	private WebElement FinishButton;
@@ -129,6 +129,9 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
+	
+	@FindBy(xpath="(//button[contains(text(),'Check Provider Coverage')])[1]")
+	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
 	private WebElement nextYrTile;
@@ -295,6 +298,9 @@ public class ProviderSearchPage extends UhcDriver {
 	String providerSaved = providerNameText.getText().trim();
 	System.out.println("Hospital Name is : " + providerSaved);
 	MRConstants.PROV_NAME=providerSaved;
+	//Finish.click();
+	/*validateNew(Finish);
+	jsClickNew(Finish);*/
 	
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
