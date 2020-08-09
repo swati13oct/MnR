@@ -1,7 +1,7 @@
 @dce_redesign_Drug_summary_AARP @F426576
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
-@DCE_DrugSummary_ValidatePage_AARP
+@DCE_DrugSummary_ValidatePage_AARP @F472327
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
