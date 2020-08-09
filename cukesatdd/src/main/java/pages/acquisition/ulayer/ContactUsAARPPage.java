@@ -9,10 +9,10 @@ import acceptancetests.util.CommonUtility;
 
 public class ContactUsAARPPage extends GlobalWebElements{
 	 
-	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//div[contains(@class,'uhc-container')]")
+	@FindBy(xpath = "//*[contains(@class,'needhelprightrailcontainer')]")
 	public static WebElement rightRailSection_ProvidersOnly;
 	
 	@FindBy(id = "collapse2heading_article_mededaccordion0")
