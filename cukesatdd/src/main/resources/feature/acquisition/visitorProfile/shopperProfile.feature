@@ -31,7 +31,7 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | email                  | mbi           | dob        | fname  | lname   | enrolledplanName                                     | planName                                             | drugNames | providers             |  
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | 5WP6-E79-YX48 | 02/21/1949 | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | 5WP6-E79-YX48 | 02/21/1949 | AURORA | SHEPLEY | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -62,7 +62,7 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | fname  | lname   | mbi           | dob        | enrolledplanName                                     | planName                                             | drugNames | providers             |
-      | qavgogine | qavgogine | AURORA | SHEPLEY | 5WP6-E79-YX48 | 02/21/1949 | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | SCRIPPS CLINIC/SANTEE |
+      | qavgogine | qavgogine | AURORA | SHEPLEY | 5WP6-E79-YX48 | 02/21/1949 | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No |
 
   @searchProfileAndAddPlans
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user

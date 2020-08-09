@@ -204,13 +204,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement DrugCoverageText;	
 		
-	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[1]")
+	@FindBy(css="div.member-info-status>p:nth-child(2)")
 	private WebElement memberName;
 	
-	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[2]")
+	@FindBy(css="div.member-info-status>p:last-child")
 	private WebElement memberMBI;
 	
-	@FindBy(xpath="//div[contains(text(),'Current')]/following::div[contains(text(),'DOB')]")
+	@FindBy(xpath="//div[@class='member-info-status']/following::p[contains(text(),'DOB')]")
 	private WebElement memberDOB;
 	
 	@FindBy(css = "div#CSRLoginAlert>div")
@@ -1030,8 +1030,8 @@ public class ComparePlansPage extends UhcDriver {
 		
 		allSet();
 		
-		/*System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
-		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());*/
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 		
 		if(Strings.isNullOrEmpty(enrolledPlan)) {
 			System.out.println("#########Empty Profile#########");
@@ -1115,8 +1115,6 @@ public class ComparePlansPage extends UhcDriver {
 	public void allSet() {
 		CommonUtility.waitForPageLoad(driver, popupAccept, 60);
 		popupAccept.click();
-		/*Alert allset = driver.switchTo().alert();
-		allset.accept();*/
 	}
 	
 }
