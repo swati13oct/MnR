@@ -1,7 +1,7 @@
 Feature: Need Help Phone Numbers
   I am a user of the M&R Portal with Rx benefits I must have access to Need Help Phone Numbers
 
-  @NeedHelp @F479448 @US2752100 @Scenario1 @Scenario2
+  @NeedHelp @F479448 @US2752100 @Scenario1 @Scenario2 @needHelppp
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

@@ -26,28 +26,28 @@ Feature: MVP - Call to Action
     Then user views the Current Medications
     When user has a Walgreens drug
     When user click on the Manage at Walgreens Call to Action button
-    When user clicks Proceed
+   # When user clicks Proceed
     Then the browser redirects to the Walgreens website where the member will be able to fulfill their prescription
 
     Examples:
       | FID     | planType | memberType                      |
       | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
 
-  @RefillWithWalgreens @F482427 @US2508876 @Scenario3
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
-    When user has a Walgreens drug
-    When user click on the Manage at Walgreens Call to Action button
-    When user clicks on the Cancel button on the modal
-    Then user view the PAndP page
-
-    Examples:
-      | FID     | planType | memberType                      |
-      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
+#  @RefillWithWalgreens @F482427 @US2508876 @Scenario3
+#  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
+#    Given login with following details logins in the uhc rx portal
+#      | Plan Type   | <planType>   |
+#      | Member Type | <memberType> |
+#    When user navigates to the pharmacies and prescriptions page from testharness page
+#    Then user views the Current Medications
+#    When user has a Walgreens drug
+#    When user click on the Manage at Walgreens Call to Action button
+#    When user clicks on the Cancel button on the modal
+#    Then user view the PAndP page
+#
+#    Examples:
+#      | FID     | planType | memberType                      |
+#      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
 
 
 
@@ -58,7 +58,6 @@ Feature: MVP - Call to Action
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
-    Then user views the Medicine Cabinet on the My Medications page
     When user has a Walgreens drug
     Then user sees the Manage at Walgreens CTA
     And user validates the external link icon in the button
@@ -75,10 +74,9 @@ Feature: MVP - Call to Action
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
-    Then user views the Medicine Cabinet on the My Medications page
     When user has a Walgreens drug
     When user click on the Manage at Walgreens Call to Action button
-    When user clicks Proceed
+ #   When user clicks Proceed
     Then the browser redirects to the Walgreens website where the member will be able to fulfill their prescription
 
     Examples:
@@ -86,18 +84,18 @@ Feature: MVP - Call to Action
       | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
 
 
-  @RefillWithWalgreens @F482427 @US2770427 @Scenario3
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
-    Given login with following details logins in the uhc rx portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
-    When user has a Walgreens drug
-    When user click on the Manage at Walgreens Call to Action button
-    When user clicks on the Cancel button on the modal
-    Then user view the PAndP page
-
-    Examples:
-      | FID     | planType | memberType                      |
-      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
+#  @RefillWithWalgreens @F482427 @US2770427 @Scenario3
+#  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Select Refill with Walgreens
+#    Given login with following details logins in the uhc rx portal
+#      | Plan Type   | <planType>   |
+#      | Member Type | <memberType> |
+#    When user navigates to the pharmacies and prescriptions page from testharness page
+#    Then user views the Current Medications
+#    When user has a Walgreens drug
+#    When user click on the Manage at Walgreens Call to Action button
+#    When user clicks on the Cancel button on the modal
+#    Then user view the PAndP page
+#
+#    Examples:
+#      | FID     | planType | memberType                      |
+#      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
