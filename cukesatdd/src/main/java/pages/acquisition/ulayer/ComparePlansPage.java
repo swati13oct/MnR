@@ -228,6 +228,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(css="#changes-submitted button")
 	private WebElement popupAccept;
 	
+	@FindBy(css="input.uhc-switch__input")
+	private WebElement currentPlanToggle;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1045,6 +1048,7 @@ public class ComparePlansPage extends UhcDriver {
 			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
 		}
 		else {
+			CommonUtility.waitForPageLoad(driver, currentPlanToggle, 5);
 			Assert.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
 			Assert.assertEquals("(#"+mbi+")", memberMBI.getText().trim());
 			Assert.assertEquals(fname+" "+lname, memberName.getText().trim().toUpperCase());
