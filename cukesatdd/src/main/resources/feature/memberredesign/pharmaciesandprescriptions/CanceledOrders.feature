@@ -43,7 +43,6 @@ Feature: Canceled orders - Current Meds and My Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
-    Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
     Then user views a status of Request canceled
     Then user views an empty Harvey Ball
@@ -61,7 +60,6 @@ Feature: Canceled orders - Current Meds and My Medications
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
-    Then user views the Medicine Cabinet on the My Medications page
     When user views a home delivery drug order
     Then user views a status of Request canceled
     Then user views a View Order call to action button on that medication's row
