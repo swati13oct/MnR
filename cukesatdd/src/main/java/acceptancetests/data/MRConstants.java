@@ -344,6 +344,8 @@ public class MRConstants {
   public static String AARP_TELESALES_AGENT_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/admin/shopper-profile.html/login";
   
   public static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/admin/shopper-profile.html/login";
+  
+  public static String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
