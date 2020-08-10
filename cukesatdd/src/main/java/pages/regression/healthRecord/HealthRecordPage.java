@@ -313,7 +313,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement pnpTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
 		return driver;
