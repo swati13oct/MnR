@@ -16,8 +16,9 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	String dollarAmntRegex = "^(\\$)((\\d+)|(\\d{1,3})(\\,\\d{3})*)(\\.\\d{2,})?$";
 	String expireDateRegex = "^(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
-	String exireDateRegexAlongwithTex="^[a-zA-Z]*\\s[a-zA-Z]*\\s(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
-	String cardDetailRegex = "^[a-zA-Z]*\\s[*]{4}\\s[0-9]{4}$";
+	String exireDateRegexAlongwithTex = "^[a-zA-Z]*\\s[a-zA-Z]*\\s(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
+	// String cardDetailRegex = "^[a-zA-Z]*\\s[*]{4}\\s[0-9]{4}$";
+	String cardDetailRegex = "^[0-9]{4}$";
 	String cardTypeRegex = "^[a-zA-Z]*$";
 	String medicationsRegex = "^[a-zA-Z]*\\s[(][0-9]*[)]$";
 
@@ -41,12 +42,12 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public float getOverAllMedicationPriceFromMedicationSectn() {
-		/*int overAllPrice = 0;
-		for (WebElement ele : listOfPrice) {
-			int val = Integer.parseInt(ele.getText().substring(1));
-			overAllPrice = overAllPrice + val;
-		}*/
-		
+		/*
+		 * int overAllPrice = 0; for (WebElement ele : listOfPrice) { int val =
+		 * Integer.parseInt(ele.getText().substring(1)); overAllPrice = overAllPrice +
+		 * val; }
+		 */
+
 		float overAllPrice = 0;
 		for (WebElement ele : listOfPrice) {
 			float val = Float.parseFloat(ele.getText().substring(1));
@@ -57,10 +58,12 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateOverAllMedicationAmtUnderOrderSummary() {
 		String medicationPrice = orderSummaryMedicationPrice.getText();
-		float medicationPriceUndrOrderSummary=Float.parseFloat(medicationPrice.substring(1));
-		//int medicationPriceUndrOrderSummary = Float.parseInt(medicationPrice.substring(1));
+		float medicationPriceUndrOrderSummary = Float.parseFloat(medicationPrice.substring(1));
+		// int medicationPriceUndrOrderSummary =
+		// Float.parseInt(medicationPrice.substring(1));
 		float overAllRefillMedicationPrice = getOverAllMedicationPriceFromMedicationSectn();
-		//int overAllRefillMedicationPrice = getOverAllMedicationPriceFromMedicationSectn();
+		// int overAllRefillMedicationPrice =
+		// getOverAllMedicationPriceFromMedicationSectn();
 		return medicationPrice.matches(dollarAmntRegex)
 				&& medicationPriceUndrOrderSummary == overAllRefillMedicationPrice;
 	}
@@ -80,7 +83,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateTotalLabelUnderOrderSummary() {
-		return validate(orderSummaryTotalLabel,20);
+		return validate(orderSummaryTotalLabel, 20);
 	}
 
 	public boolean validateTotalPriceUnderOrderSummary() {
@@ -135,7 +138,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validatePaymentCardType() {
-		return validate(paymentCreditCardImage) && paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
+		return validate(paymentCreditCardImage)
+				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
 	}
 
 	public boolean validateChangePaymentBtn() {
@@ -148,8 +152,10 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateCreditCardNumber() {
+		String cardDetail = paymentCreditCardNumber.getText();
+		String[] arrayVal = cardDetail.split(" ");
 		return !paymentCreditCardNumber.getText().isEmpty()
-				&& paymentCreditCardNumber.getText().matches(cardDetailRegex);
+				&& arrayVal[arrayVal.length - 1].trim().matches(cardDetailRegex);
 	}
 
 	/*
@@ -194,9 +200,10 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateMedicationNameAndStrength() {
 		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
-		System.out.println("Medication Name"+medicationNameAndStrength);
-		System.out.println("Med Name on Refill Page"+listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
-		return medicationNameAndStrength.trim().equalsIgnoreCase(listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
+		System.out.println("Medication Name" + medicationNameAndStrength);
+		System.out.println("Med Name on Refill Page" + listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
+		return medicationNameAndStrength.trim()
+				.equalsIgnoreCase(listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
 	}
 
 	public boolean validateMedicationPrice() {
@@ -211,11 +218,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateRefillsRemaining() {
 		String refillRemainings = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		int refillRemainingsFromMedCab=Integer.parseInt(refillRemainings);
-		String refillRemainingFrmCheckOutPage=listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
-		String[] arrayVal=refillRemainingFrmCheckOutPage.split(":");
-		int refillRemainingsOnCheckOutPage=Integer.parseInt(arrayVal[1].trim());
-		return refillRemainingsFromMedCab==refillRemainingsOnCheckOutPage+1;
+		int refillRemainingsFromMedCab = Integer.parseInt(refillRemainings);
+		String refillRemainingFrmCheckOutPage = listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
+		String[] arrayVal = refillRemainingFrmCheckOutPage.split(":");
+		int refillRemainingsOnCheckOutPage = Integer.parseInt(arrayVal[1].trim());
+		return refillRemainingsFromMedCab == refillRemainingsOnCheckOutPage + 1;
 	}
 
 	public boolean validateRxNumber() {
@@ -247,7 +254,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public void clickOnRefillALLMedicationCTA() {
 		refillAllMedicationCTA.click();
 	}
-	
+
 	public boolean validateConfirmationPageHeader() {
 		return validate(orderConfirmationPageHeader);
 	}
