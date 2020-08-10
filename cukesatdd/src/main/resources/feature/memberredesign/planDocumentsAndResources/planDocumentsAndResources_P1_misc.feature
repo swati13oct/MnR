@@ -74,7 +74,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 14-014 | 15128       | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | false |
-      | 15-015 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
+      | 15-015 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | false |
 
 	@active_pdp
 	Examples: 
