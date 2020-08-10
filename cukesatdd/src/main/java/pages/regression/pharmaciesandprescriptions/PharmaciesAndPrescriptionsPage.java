@@ -652,9 +652,18 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319
+	public void validateImageANOCCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC to action Image element", pnpValidate(ANOCCTAImg));
+	}
+
+	// F436319
 	public void validateTitleDrugCostSummaryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action  Title element",
 				pnpValidate(DrugCostSummaryCTATitle));
+	}
+
+	public void validateTitleANOCCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC to action  Title element", pnpValidate(ANOCCTATitle));
 	}
 
 	// F436319
@@ -664,9 +673,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319
-	public void validateFirstPositionOfDrugLookupCallToActionOnPnPPage(String position) {
-		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup Call to Action at First Position",
-				DrugLookupCallToActnBtn.getAttribute("data-cta-position").equals(position));
+	public void validateFirstPositionOfFindAndPriceCallToActionOnPnPPage(String position) {
+		Assert.assertTrue("PROBLEM - unable to locate Find And Price Call to Action at First Position",
+				FindAndPriceCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
 
 	public void validateSecondPositionOfPharmacyLocatorCallToActionOnPnPPage(String position) {
@@ -679,14 +688,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				OrderPrescriptionCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
 
-	public void validateFourthPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Fourth Position",
-				DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
+	public void validateFourthPositionOfANOCCallToActionOnPnPPage(String position) {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC Call to Action at Fourth Position",
+				ANOCCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
 
-	public void validateThirdPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Third Position",
-				DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
+	public void validateThirdPositionOfANOCCallToActionOnPnPPage(String position) {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC Call to Action at Third Position",
+				ANOCCallToActnBtn.getAttribute("data-cta-position").equals(position));
 	}
 
 	// F436319
@@ -1001,8 +1010,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateOrderStatusHeader() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", orderStatusPageHeader);
-		Assert.assertTrue("PROBLEM - unable to locate Order status Header element",
-				pnpValidate(orderStatusPageHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Order status Header element", pnpValidate(orderStatusPageHeader));
 	}
 
 	public void validateMyMedicationsHeader() {
@@ -1948,8 +1956,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateEmptyHarveyBall() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", emptyHarveyBall);
-		Assert.assertTrue("PROBLEM - unable to locate empty harvey ball icon element",
-				pnpValidate(emptyHarveyBall));
+		Assert.assertTrue("PROBLEM - unable to locate empty harvey ball icon element", pnpValidate(emptyHarveyBall));
 	}
 
 	public List<Integer> getMedIndexBasedOnMedicationName(List<String> listOfMedName) {
@@ -2075,48 +2082,59 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return true;
 	}
-	
+
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
 		CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
 			CommonUtility.checkPageIsReady(driver);
-		return new CheckOutSummaryPage(driver);
+			return new CheckOutSummaryPage(driver);
 		}
 		return null;
 	}
-	
-	public List<Object> fetchesMedicationInformationFrRefill(){
-		List<Object> listOfVal=new ArrayList<>();
+
+	public List<Object> fetchesMedicationInformationFrRefill() {
+		List<Object> listOfVal = new ArrayList<>();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfRefillMedication.size());
-		
+
 		String text = listOfMedicationEligibleFrRefill.get(rand_int).getText();
 		for (WebElement child : listOfMedicationEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
 			text = text.replaceFirst(child.getText(), "");
 		}
 		listOfVal.add(text);
-		//listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+		// listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(rand_int);
 		return listOfVal;
 	}
-	
+
 	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
 		listOfRefillMedication.get(rand_int).click();
 	}
-	
+
 	public void refreshPnPPage() {
 		driver.navigate().refresh();
 		validateCurrentMedicationsHeader();
 	}
-	
+
 	public void validateOrderStatusAndCTAUpdatedForRefillTransaction() {
-		
+		//
+		clickOnViewAllMedicationsLink();
+		validateFieldValueContent(listOfDrugName);
+
 	}
-		
-	
+
+	public void clickTryAgainCurrentmedication() {
+		int count = 0;
+		do {
+			if (tryAgainMedCabTimeOut.isDisplayed()) {
+				tryAgainMedCabTimeOut.click();
+			}
+			count++;
+		} while (count != 2);
+	}
 
 }

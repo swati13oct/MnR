@@ -15,7 +15,7 @@ Feature: MVP - Call to Action
     Then PnP notification will only appear on the main PnP page
 
     Examples: 
-      | FID     | planType | memberType             |
+      | FID     | planType | memberType                 |
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
@@ -31,7 +31,7 @@ Feature: MVP - Call to Action
     And that removal will persist until member logs out
 
     Examples: 
-      | FID     | planType | memberType             |
+      | FID     | planType | memberType                 |
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
@@ -40,10 +40,10 @@ Feature: MVP - Call to Action
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user view Drug Lookup Call To Action
-    Then user validates an image for Drug Lookup Call To Action
-    Then user validates a title for Drug Lookup Call To Action
-    Then user validates a description for Drug Lookup Call To Action
+    Then user view Find and Price a Medication Call To Action
+    Then user validates an image for Find and Price a Medication Call To Action
+    Then user validates a title for Find and Price Call To Action
+    Then user validates a description for Find and Price Call To Action
     Then user view Pharmacy Locator Call To Action
     Then user validates an image for Pharmacy Locator Call To Action
     Then user validates a title for Pharmacy Locator Call To Action
@@ -52,13 +52,13 @@ Feature: MVP - Call to Action
     Then user validates an image for Order Prescription Call To Action
     Then user validates a title for Order Prescription Call To Action
     Then user validates a description for Order Prescription Call To Action
-    Then user view Drug Cost Summary Call To Action
-    Then user validates an image for Drug Cost Summary Call To Action
-    Then user validates a title for Drug Cost Summary Call To Action
-    Then user validates a description for Drug Cost Summary Call To Action
+    Then user view ANOC Call To Action
+    Then user validates an image for ANOC Call To Action
+    Then user validates a title for ANOC Call To Action
+    Then user validates a description for ANOC Call To Action
 
     Examples: 
-      | FID     | planType | memberType             |
+      | FID     | planType | memberType                 |
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
@@ -67,13 +67,13 @@ Feature: MVP - Call to Action
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user validates the Drug Lookup text content displayed first within that section
+    Then user validates the Find and Price text content displayed first within that section
     Then user validates the Pharmacy Locator text content displayed second within that section
     Then user validates the Order Prescription text content displayed third within that section
-    Then user validates the Drug Cost Summary text content displayed fourth within that section
+    Then user validates the ANOC text content displayed fourth within that section
 
     Examples: 
-      | FID     | planType | memberType             |
+      | FID     | planType | memberType                 |
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
@@ -82,10 +82,10 @@ Feature: MVP - Call to Action
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user validates the Drug Lookup text content displayed first within that section
+    Then user validates the Find and Price text content displayed first within that section
     Then user validates the Pharmacy Locator text content displayed second within that section
     Then user validates the Order Prescription text content DID NOT display third within that section
-    Then user validates the Drug Cost Summary text content displayed third within that section
+    Then user validates the ANOC text content displayed third within that section
 
     Examples: 
       | FID     | planType | memberType       |
@@ -167,9 +167,9 @@ Feature: MVP - Call to Action
     Then user will NOT see the External link icon for twenty twenty call to action on Choose a plan year page
     When user click on the twenty twenty call to action on Choose a plan year page
     Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window
-    When user click on the back button on Pharmacy Locator tool built by Rally
-    Then user will be directed to the Choose a plan year page
 
+    #When user click on the back button on Pharmacy Locator tool built by Rally
+    #Then user will be directed to the Choose a plan year page
     Examples: 
       | FID     | planType | memberType              |
       | F479445 | MAPD     | Rally_Individual_Pnp_rx |
@@ -186,9 +186,9 @@ Feature: MVP - Call to Action
     Then user will see a twenty twentyone call to action on Choose a plan year page
     When user click on the twenty twentyone call to action on Choose a plan year page
     Then user will be directed to the legacy Pharmacy Locator tool in the same browser window
-    When user click on the back button on the legacy Pharmacy Locator tool page
-    Then user will be directed to the Choose a plan year page
 
+    #When user click on the back button on the legacy Pharmacy Locator tool page
+    #Then user will be directed to the Choose a plan year page
     Examples: 
       | FID     | planType | memberType              |
       | F479445 | MAPD     | Rally_Individual_Pnp_rx |

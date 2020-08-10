@@ -8,7 +8,7 @@ Feature: Refill Order Confirmation
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    And user fetches medication information and clicks on Refill Medication call to action button
+    And user fetches medication information and clicks on Refill Medication call to action button from My Medication
     Then user will see "Complete Your Refill" Page
     And user will see Place Order Btn
     And user will click on Place Order btn
@@ -17,7 +17,7 @@ Feature: Refill Order Confirmation
     Then user will see order placed date
     Then user will see order tracked as Order Received
     Then user will see order confirmation email messaging
-    Then user will see Oreder Confirmation section
+    Then user will see Order Confirmation section
     Then user will see the shipping method displayed
     Then user will see the shipping address displayed
     Then user will see the payment method displayed
