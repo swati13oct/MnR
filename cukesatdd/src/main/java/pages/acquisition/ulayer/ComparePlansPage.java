@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -1069,13 +1068,12 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
-			for(int i=0;i<providersList.size();i++) {
-				String[] provider = providers.split(";");
-				if(StringUtils.isNullOrEmpty(providers)) {
+			String[] provider = providers.split(";");
+			for(int i=0;i<provider.length;i++) {
+				if(!StringUtils.isNullOrEmpty(providers)) {
 					Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}
-				
 			}
 		}else {
 			
@@ -1083,13 +1081,12 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		
 		if(!drugs.equalsIgnoreCase("no")) {
-			
-			for(int i=0;i<drugList.size();i++) {
-				validate(editDrugsLink);
-				JavascriptExecutor executor = (JavascriptExecutor) driver;
-				executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
-				if(StringUtils.isNullOrEmpty(drugs)) {
-					String[] drugName = drugs.split(",");
+			validate(editDrugsLink);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+			String[] drugName = drugs.split(",");
+			for(int i=0;i<drugName.length;i++) {
+				if(!StringUtils.isNullOrEmpty(drugs)) {
 					Assert.assertTrue(drugName[i].contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}

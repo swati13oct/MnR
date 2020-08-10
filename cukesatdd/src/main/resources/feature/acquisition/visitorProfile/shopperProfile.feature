@@ -30,8 +30,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email           | mbi           | dob        | fname  | lname | enrolledplanName                                | planName                                | drugNames | providers                                                                                                    |
-      | qavgogine | qavgogine | delton@owen.com | 9YD1-C36-CD33 | 11/30/1936 | DELTON | OWEN  | UnitedHealthcare Group Medicare Advantage (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | Paul A Auteri:1694 64th St, Kings, NY, 11204;Kenneth Joseph Nori:112 Quarry Rd Ste 220, Fairfield, CT, 06611 |
+      | username  | password  | email          | mbi           | dob        | fname | lname | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
+      | qavgogine | qavgogine | DAX@MEMBER.COM | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -61,8 +61,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | fname  | lname   | mbi           | dob        | enrolledplanName                                     | planName                                             | drugNames | providers |
-      | qavgogine | qavgogine | AURORA | SHEPLEY | 5WP6-E79-YX48 | 02/21/1949 | AARP Medicare Advantage SecureHorizons Premier (HMO) | AARP Medicare Advantage SecureHorizons Premier (HMO) | No        | No        |
+      | username  | password  | fname | lname | mbi           | dob        | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
+      | qavgogine | qavgogine | DAX   | MUNET | 4F78-QY7-CU31 | 08/05/1951 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
   @searchProfileAndAddPlans
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -322,4 +322,4 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                 |
       | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
-      #| qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |
