@@ -211,8 +211,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateRefillsRemaining() {
 		String refillRemainings = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		return refillRemainings.trim()
-				.equalsIgnoreCase(listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText().trim());
+		int refillRemainingsFromMedCab=Integer.parseInt(refillRemainings);
+		String refillRemainingFrmCheckOutPage=listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
+		String[] arrayVal=refillRemainingFrmCheckOutPage.split(":");
+		int refillRemainingsOnCheckOutPage=Integer.parseInt(arrayVal[1].trim());
+		return refillRemainingsFromMedCab==refillRemainingsOnCheckOutPage+1;
 	}
 
 	public boolean validateRxNumber() {
