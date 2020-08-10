@@ -134,9 +134,8 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone2Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone2Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//TODO - remove the tbd one eventually
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_milestone2Text));
 		//targetActText=targetElement.getText();
 		//targetExpText="You'll be able to compare next year's plan with your current plan to find out how your coverage may change.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
@@ -178,9 +177,8 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone3Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-		 	targetElement=tbd_tl_milestone3Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//TODO - remove the tbd one eventually
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_milestone3Text));
 		//targetActText=targetElement.getText();
 		//targetExpText="If your needs have changed and you want a different plan for next year, you can switch to a new plan.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
@@ -222,9 +220,8 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone4Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-		 	targetElement=tbd_tl_milestone4Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//TODO - remove the tbd one eventually
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_milestone4Text));
 		//targetActText=targetElement.getText();
 		//targetExpText="This is the last day you can join a new plan for next year.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
@@ -266,9 +263,8 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone5Text_ind;
-		if (MRScenario.environment.equalsIgnoreCase("stage")) 
-			targetElement=tbd_tl_milestone5Text;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//TODO - remove the tbd one eventually
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_milestone5Text));
 		//targetActText=targetElement.getText();
 		//targetExpText="Your 2021 plan coverage starts today.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
