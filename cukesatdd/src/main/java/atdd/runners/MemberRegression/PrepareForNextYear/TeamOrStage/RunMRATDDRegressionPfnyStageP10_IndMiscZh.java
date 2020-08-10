@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP07_IndMedicaPcp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP07_IndMedicaPcp")
+jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP10_IndMiscZh.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP10_IndMiscZh")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP07_IndMedicaPcp.json" }, tags = { "@stageEnv","@prepareForNextYear02c" })
-public class RunMRATDDRegressionPfnyStageP07_IndMedicaPcp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP10_IndMiscZh.json" }, tags = { "@stageEnv","@prepareForNextYear02_ind_zh" })
+public class RunMRATDDRegressionPfnyStageP10_IndMiscZh {
 
 }

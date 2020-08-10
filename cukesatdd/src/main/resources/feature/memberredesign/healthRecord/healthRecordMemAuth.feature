@@ -69,10 +69,12 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
 
+	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
     @memAuth_ihr_c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
+	 #  | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDPDP_001  | PDP      | PREEFF_IHR         | true       |
 	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | true       |
 
     @memAuth_ihr_d
