@@ -249,7 +249,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | F322478 |   90210 | NO              | Los Angeles County |
 
   @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: To verify links displayed in the global footer of AARP site
+  Scenario Outline: To verify links displayed in the global footer of AARP site on vpp
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -308,7 +308,8 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
    When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
-
+		Then Verify provider name is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|

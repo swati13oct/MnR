@@ -36,7 +36,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
   @ProviderSearchFromGlobalHeaderUlayer1 
-  Scenario Outline: Verify Provider Search  in AARP site from Global Header -plan count-<plancount>
+  Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
     When the user enters the zipcode and counts the plan Ulayer
@@ -54,7 +54,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   04011 |         6 |
 
   @ProviderSearchFromWidgetUlayer 
-  Scenario Outline: Verify Provider Search  in AARP site from Global Header
+  Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
     When the user enters the zipcode and counts the plan Ulayer
@@ -71,7 +71,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   55344 |         7 |
       |   04011 |         6 |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
+  @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
