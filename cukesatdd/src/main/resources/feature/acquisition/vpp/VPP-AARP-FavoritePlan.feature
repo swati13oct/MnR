@@ -116,6 +116,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
+      |Plan Year				| <planyear>			|
     Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -136,8 +137,8 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|
 
 @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer3 @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page for zipcode change within VPP on AARP site
@@ -151,6 +152,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
+      |Plan Year				| <planyear>			|
     Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -171,8 +173,8 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|
 
 
   @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer4 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
@@ -187,6 +189,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
+      |Plan Year				| <planyear>			|
 	Then user closes the original tab and open new tab for AARP site
 	Then the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -198,6 +201,6 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | SNP Test Plans  | <SNP_testPlans> |
  
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                   |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|
  
