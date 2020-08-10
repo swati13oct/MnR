@@ -12,6 +12,6 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionN
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNeedHelp.json" }, tags = { "@needHelppp" }, monochrome=true)
-public class RunMRATDDRegressionNeedHelp {
+public class RunMRATDDRegressionNeedHelpSection {
 
 }
