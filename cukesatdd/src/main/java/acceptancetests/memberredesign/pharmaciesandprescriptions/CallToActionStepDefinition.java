@@ -160,13 +160,16 @@ public class CallToActionStepDefinition {
 		pnpPg.validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage();
 	}
 
-	@Then("^user view Drug Lookup Call To Action$")
-	public void user_view_drug_lookup_call_to_action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDrugLookupCallToActionOnPnPPage();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
+	/*
+	 * @Then("^user view Drug Lookup Call To Action$") public void
+	 * user_view_drug_lookup_call_to_action() throws Throwable {
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.validateDrugLookupCallToActionOnPnPPage();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
 
 	@Then("^user view Find and Price a Medication Call To Action$")
 	public void user_view_Find_and_Price_a_Medication_Call_To_Action() throws Throwable {
@@ -177,27 +180,27 @@ public class CallToActionStepDefinition {
 
 	}
 
-	@Then("^user validates an image for Drug Lookup Call To Action$")
-	public void user_validates_an_image_for_drug_lookup_call_to_action() throws Throwable {
+	@Then("^user validates an image for Find and Price a Medication Call To Action$")
+	public void user_validates_an_image_for_Find_and_Price_a_Medication_call_to_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateImageDrugLookupCallToActionOnPnPPage();
+		pnpPg.validateImageFindAndPriceCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates a title for Drug Lookup Call To Action$")
-	public void user_validates_a_title_for_drug_and_lookup_call_to_action() throws Throwable {
+	@Then("^user validates a title for Find and Price Call To Action$")
+	public void user_validates_a_title_for_Find_and_Price_call_to_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateTitleDrugLookupCallToActionOnPnPPage();
+		pnpPg.validateTitleFindAndPriceCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates a description for Drug Lookup Call To Action$")
-	public void user_validates_a_description_for_drug_and_lookup_call_To_action() throws Throwable {
+	@Then("^user validates a description for Find and Price Call To Action$")
+	public void user_validates_a_description_for_Find_and_Price_call_To_action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDescriptionDrugLookupCallToActionOnPnPPage();
+		pnpPg.validateDescriptionFindAndPriceCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -267,43 +270,63 @@ public class CallToActionStepDefinition {
 
 	}
 
-	@Then("^user view Drug Cost Summary Call To Action$")
-	public void user_view_Drug_Cost_Summary_Call_To_Action() throws Throwable {
+	/*
+	 * @Then("^user view Drug Cost Summary Call To Action$") public void
+	 * user_view_Drug_Cost_Summary_Call_To_Action() throws Throwable {
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.validateDrugCostSummaryCallToActionOnPnPPage();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
+
+	@Then("^user validates an image for ANOC Call To Action$")
+	public void user_validates_an_image_for_ANOC_Call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDrugCostSummaryCallToActionOnPnPPage();
+		pnpPg.validateImageANOCCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates an image for Drug Cost Summary Call To Action$")
-	public void user_validates_an_image_for_Drug_Cost_Summary_Call_To_Action() throws Throwable {
+	/*
+	 * @Then("^user validates a title for Drug Cost Summary Call To Action$") public
+	 * void user_validates_a_title_for_Drug_Cost_Summary_Call_To_Action() throws
+	 * Throwable { PharmaciesAndPrescriptionsPage pnpPg =
+	 * (PharmaciesAndPrescriptionsPage) getLoginScenario()
+	 * .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.validateTitleDrugCostSummaryCallToActionOnPnPPage();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
+
+	@Then("^user validates a title for ANOC Call To Action$")
+	public void user_validates_a_title_for_ANOC_Call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateImageDrugCostSummaryCallToActionOnPnPPage();
+		pnpPg.validateTitleANOCCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates a title for Drug Cost Summary Call To Action$")
-	public void user_validates_a_title_for_Drug_Cost_Summary_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateTitleDrugCostSummaryCallToActionOnPnPPage();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
+	/*
+	 * @Then("^user validates a description for Drug Cost Summary Call To Action$")
+	 * public void
+	 * user_validates_a_description_for_Drug_Cost_Summary_Call_To_Action() throws
+	 * Throwable { PharmaciesAndPrescriptionsPage pnpPg =
+	 * (PharmaciesAndPrescriptionsPage) getLoginScenario()
+	 * .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.validateDescriptionDrugCostSummaryCallToActionOnPnPPage();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
 
-	@Then("^user validates a description for Drug Cost Summary Call To Action$")
-	public void user_validates_a_description_for_Drug_Cost_Summary_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDescriptionDrugCostSummaryCallToActionOnPnPPage();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-
-	@Then("^user validates the Drug Lookup text content displayed first within that section$")
+	@Then("^user validates the Find and Price text content displayed first within that section$")
 	public void user_validates_the_Find_and_Price_text_content_displayed_first_within_that_section() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateFirstPositionOfDrugLookupCallToActionOnPnPPage("1");
+		pnpPg.validateFirstPositionOfFindAndPriceCallToActionOnPnPPage("1");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -325,21 +348,20 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates the Drug Cost Summary text content displayed fourth within that section$")
-	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_fourth_within_that_section()
-			throws Throwable {
+	@Then("^user validates the ANOC text content displayed fourth within that section$")
+	public void user_validates_the_ANOC_text_content_displayed_fourth_within_that_section() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateFourthPositionOfDrugCostSummaryCallToActionOnPnPPage("4");
+		pnpPg.validateFourthPositionOfANOCCallToActionOnPnPPage("4");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user validates the Drug Cost Summary text content displayed third within that section$")
+	@Then("^user validates the ANOC text content displayed third within that section$")
 	public void user_validates_the_Drug_Cost_Summary_text_content_displayed_third_within_that_section()
 			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateThirdPositionOfDrugCostSummaryCallToActionOnPnPPage("3");
+		pnpPg.validateThirdPositionOfANOCCallToActionOnPnPPage("3");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -439,27 +461,26 @@ public class CallToActionStepDefinition {
 
 	}
 
-	@Then("^user validates pharmacies titles section content$")
-	public void user_validates_pharmacies_titles_section_content() throws Throwable {
-
-	}
-
-	@Then("^user will NOT see the Drug Cost Summary call to action$")
-	public void user_will_NOT_see_the_Drug_Cost_Summary_call_to_action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-
-	@When("^user clicks on Drug Cost Summary call to action$")
-	public void user_clicks_on_Drug_Cost_Summary_call_to_action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickDrugCostSummaryCallToAction();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-	}
+	/*
+	 * @Then("^user will NOT see the Drug Cost Summary call to action$") public void
+	 * user_will_NOT_see_the_Drug_Cost_Summary_call_to_action() throws Throwable {
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 * 
+	 * @When("^user clicks on Drug Cost Summary call to action$") public void
+	 * user_clicks_on_Drug_Cost_Summary_call_to_action() throws Throwable {
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE); pnpPg.clickDrugCostSummaryCallToAction();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	 * 
+	 * }
+	 */
 
 	/*******************************************************************************/
 
