@@ -45,6 +45,9 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(xpath="//table//button")
 	private WebElement btnCloakIn;
 	
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
+	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
 	
@@ -199,6 +202,7 @@ public class ProfileSearch extends UhcDriver {
 			driver.switchTo().window(tabs.get(0)).close();
 			driver.switchTo().window(tabs.get(1));
 			CommonUtility.checkPageIsReadyNew(driver);
+			validateNew(AARPlogo);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			/*if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {

@@ -33,8 +33,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate |
-      | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | weberjo01 | 09/01/2020    |
-      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | BUGME99   | 08/01/2020    |
+      | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | weberjo01 | 09/01/2020    |
+      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | BUGME99   | 08/01/2020    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -69,8 +69,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
-      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | pd20glatmg | 08/01/2020    |
-      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | KALTENST   | 09/01/2020    |
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | pd20glatmg | 08/01/2020    |
+      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | KALTENST   | 09/01/2020    |
 
   @regressionMemberPROD3
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -105,8 +105,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | ppluta    | 08/01/2020    |
-      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@02 | SLSBoland | 09/01/2020    |
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | ppluta    | 08/01/2020    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@03 | SLSBoland | 09/01/2020    |
 
   @regressionMemberPROD4
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -147,7 +147,7 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | karthom55 | 08/01/2020    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | karthom55 | 08/01/2020    | 1-866-254-3132   |
 
   @regressionMemberPROD4
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -183,4 +183,4 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | mcbrayerlg | 09/01/2020    |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | mcbrayerlg | 09/01/2020    |

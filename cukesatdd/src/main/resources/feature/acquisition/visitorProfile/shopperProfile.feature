@@ -98,7 +98,7 @@ Feature: 1.08. ACQ- Shopper Profile
     And I navigate to step3 page and validate
       | Drug | <drug> |
     And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drug | <drug> |
     And user delets all the added drugs on visitor profile page of AARP site
 
@@ -203,7 +203,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
   @createProfileMember
-  Scenario Outline: Telesales agent searching for the Creating a profile
+  Scenario Outline: Telesales agent searching for the Creating a profile - MBI - <mbi>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -234,7 +234,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
 
   @createProfileNonMember
-  Scenario Outline: Telesales agent Creating a Non Member Profile
+  Scenario Outline: Telesales agent Creating a Non Member Profile - Consent - <consent>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |

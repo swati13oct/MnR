@@ -26,7 +26,7 @@ import pages.regression.prepareForNextYear.PrepareForNextYearPage;
 
 public class PrepareForNextYearStepDefinition {
 	
-	protected static Boolean validateAsMuchAsPossible=false;
+	protected static Boolean validateAsMuchAsPossible=true;
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -144,9 +144,13 @@ public class PrepareForNextYearStepDefinition {
 				&& (tabEndDate.after(currentDate) || tabEndDate.equals(currentDate)) 
 				&& (!aem_tabToggle))	
 			expPrepareForNextYearTab=false;
-		if (planType.toUpperCase().contains("SHIP") || memberType.toUpperCase().contains("COMBO") || memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
+		if (planType.toUpperCase().contains("SHIP") &&  !memberType.toUpperCase().contains("COMBO"))
+			expPrepareForNextYearTab=false;
+		if(memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) 
 			expPrepareForNextYearTab=false;
 		if (memberType.toUpperCase().contains("GRP") && memberType.toUpperCase().contains("OFFCYC"))
+			expPrepareForNextYearTab=false;
+		if (memberType.toUpperCase().contains("COMBO") && memberType.toUpperCase().contains("PDP") && memberType.toUpperCase().contains("SSP"))
 			expPrepareForNextYearTab=false;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);	
 
@@ -168,7 +172,7 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
 
 		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
 			expComboTab=true;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 
@@ -323,14 +327,12 @@ public class PrepareForNextYearStepDefinition {
 		docDisplayMap.put(inputField, display);
 
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP, docDisplayMap);
+		
 	}
 
-	
-
 	@SuppressWarnings("unchecked")
-	@Then("^the user validates Prepare For Next Year page content for individual$")
-	public void user_validatePrepareForNextYearPageContent_individual() throws InterruptedException {
-
+	@Then("^the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page$")
+	public void user_validatePrepareForNextYearPageNoShipCombboTab() throws InterruptedException {
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -344,7 +346,43 @@ public class PrepareForNextYearStepDefinition {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
+		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+		
 		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+		if (pfnyPg.valiateNoShipComboTab())
+			testNote.add("\tPASSED - Prepare For Next Year page does not have SHIP tab showing for SHIP COMBO user");
+		else
+			testNote.add("\t * FAILED - Prepare For Next Year page should not have SHIP tab showing for SHIP COMBO user");
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+	}	
+
+	@SuppressWarnings("unchecked")
+	@Then("^the user validates Prepare For Next Year page content$")
+	public void user_validatePrepareForNextYearPageContent() throws InterruptedException {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
+		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
+		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
+		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
+
+		if (!expPrepareForNextYearTab) {
+			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			testNote.add("\tNo tab show for this test setup, skipping Prepare For Next Year page content validation...");
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+			return;
+		}
+		//note: if able to get to this point means the page should exist
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
+		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
+		if (expComboTab) 
+			pfnyPg.handleComboTabIfComboUser(planType, memberType);
 
 		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -359,8 +397,6 @@ public class PrepareForNextYearStepDefinition {
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-		
-		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
 		
 		//note: validate timeline and Find update section content
 		Date milestone1Date = (Date) getLoginScenario().getBean(PrepareForNextYearCommonConstants.MILESTONE1_DATE);
@@ -385,10 +421,6 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t=================");
 		pfnyPg.hasPrepareForNextYearTabDisplay(true);
 		testNote.add("\tPASSED - benefits sub menu tabs is displayed on Prepare For Next Year page");
-
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
 
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
@@ -462,7 +494,6 @@ public class PrepareForNextYearStepDefinition {
 		boolean expComboTab=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB);
 
 		pfnyPg.fromBenefitsPgNavigateToPrepareForNextYearPage(planType, memberType, expComboTab);
-		pfnyPg.setValidateAsMuchAsPossible(validateAsMuchAsPossible);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.PREPARE_FOR_NEXT_YEAR_PAGE, pfnyPg);	
 	}
 	
@@ -1574,7 +1605,7 @@ public class PrepareForNextYearStepDefinition {
 		testNote.add("\t  Expect tab to show ="+expPrepareForNextYearTab);
 
 		boolean expComboTab=false;
-		if (memberType.toLowerCase().contains("combo"))
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
 			expComboTab=true;
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 
