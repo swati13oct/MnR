@@ -108,7 +108,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='rx__drugNameSize']")
 	protected List<WebElement> listOfDrugName;
 
-	@FindBy(xpath = "//*[@data-testid='rx__quantity']")
+	@FindBy(xpath = "//*[@data-testid='rx__daysOfSupply']")
 	protected List<WebElement> listOfDaySupply;
 
 	@FindBy(xpath = "//*[@data-testid='rx__number']")

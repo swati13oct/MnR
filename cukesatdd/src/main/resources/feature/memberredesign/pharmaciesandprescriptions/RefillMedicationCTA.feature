@@ -4,21 +4,21 @@ Feature: Refill medication CTA
 
   @F479509 @US2759127 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When user have a home delivery medication eligible for refill
+    And user have a home delivery medication eligible for refill
     And user clicks Refill Medication call to action button
     Then user will be brought to the "Complete Your Refill" page for that medication
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F436319 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F479509 @US2759129 @Scenario1
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
-    Given login with following details logins in the uhc rx portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -29,5 +29,5 @@ Feature: Refill medication CTA
     Then user will be brought to the "Complete Your Refill" page for that medication
 
     Examples: 
-      | FID     | planType | memberType           |
-      | F436319 | MAPD     | Rx_Individual_PnP_rx |
+      | FID     | planType | memberType                  |
+      | F436319 | PDP      | Rx_Individual_PnP_rx_refill |

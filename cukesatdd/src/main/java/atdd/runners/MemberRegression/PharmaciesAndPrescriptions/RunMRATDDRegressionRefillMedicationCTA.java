@@ -11,7 +11,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionRefillMedicationCTA.json",detai
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillMedicationCTA")
 @CucumberOptions(
 glue = { "atdd.framework", "acceptancetests.memberredesign" },
-features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" },
+features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/RefillMedicationCTA.feature" },
 plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillMedicationCTA.json" },
 tags = { "@F479509" }, monochrome =true)
 public class RunMRATDDRegressionRefillMedicationCTA {
