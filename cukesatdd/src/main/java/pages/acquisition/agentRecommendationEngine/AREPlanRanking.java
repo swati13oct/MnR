@@ -820,14 +820,14 @@ public class AREPlanRanking extends UhcDriver {
 
 		List<String> afterAddDetails = getPlanSectionDetails();
 
-		Assert.assertTrue(plansDetails.equals(afterAddDetails),
-				"Return to Original order is failed after Adding the deleted One");
+		Assert.assertTrue(newplansDetails.equals(afterAddDetails),
+				"Return to Previous Ranking order is failed after Adding the deleted One");
 
 		System.out.println("------- Plan Delete Add Validation completed -------");
 	}
 
 	public void deletePlan(int planIndex) {
-		jsClickMobile(plandeleteButtons.get(planIndex));
+		jsClickMobile(plandeleteButtons.get(planIndex-1));
 		threadsleep(5000);
 	}
 
@@ -837,8 +837,10 @@ public class AREPlanRanking extends UhcDriver {
 		threadsleep(5000);
 		plansLoader();
 		for (WebElement elem : vppCompare)
-			if (!elem.findElement(By.cssSelector("input")).isSelected())
+			if (!elem.findElement(By.cssSelector("input")).isSelected()) {
 				elem.findElement(By.cssSelector("label")).click();
+				break;
+			}
 		threadsleep(3000);
 		vppCompareButton.get(0).click();
 	}
