@@ -1,5 +1,5 @@
 @vppPlanCompareAARPNew
-Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
+Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
   @vppPlanCompareAARP01 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify the checkbox for add to compare link is not visible for single plan.
