@@ -32,6 +32,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
+import pages.acquisition.vppforaep.AepPlanComparePage;
 import pages.acquisition.vppforaep.AepPlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.acquisition.vppforaep.VppCommonPage;
@@ -252,7 +253,7 @@ public class VppPlanValidationStepDefinition {
 		//Setting First Row for Results excel
 
 			try {
-				 AepPlanDetailsPage planDetailsPage = null;
+				 AepPlanComparePage planComparePage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
 				 
@@ -260,7 +261,7 @@ public class VppPlanValidationStepDefinition {
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
-					 	int cellIndex = 0;System.out.println("INSIDE Row");
+						int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
@@ -287,29 +288,35 @@ public class VppPlanValidationStepDefinition {
 								 if(cellIndex==0) { 
 									 
 								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
-								  planDetailsPage = new AepPlanDetailsPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
-								  if(sheetName.contains("PDP")) {
-									  if(!row.getCell(6).getStringCellValue().contains("NA")) {
-										  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
-										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
-										  planDetailsPage.editDrugListAndRemoveDrug();
-									  }else 
-										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
-								  }else
-									  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
-								 
+									 new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+									 planComparePage = new AepPlanComparePage(wd);
+
+									benefitsMap = planComparePage.collectInfoVppPlanComparePg();
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
-									 resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 resultMap = planComparePage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 if(resultMap.containsKey(false))
+										 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
 									 	if(!valueMatches) { 
 									 		newCell.setCellStyle(styleFailed);
+											failureCounter++;
 								 		}else {				
 								 			newCell.setCellStyle(stylePassed);
 								 
 									  }
+								 }
+
+								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
+									 newCell.setCellValue(failureCounter);
+								 else {
+									 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
+										 newCell.setCellValue(cell.getStringCellValue());
+									 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+										 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));
+									 }
 								 }
 							 } 
 

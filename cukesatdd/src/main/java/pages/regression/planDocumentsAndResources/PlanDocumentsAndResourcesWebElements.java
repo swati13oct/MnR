@@ -553,4 +553,6 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'three-bounce')]")
 	protected WebElement spinLoader;
 	
+	@FindBy(xpath="//div[not(contains(@class,'ng-hide')) and contains(@class,'otherPages planMaterial')]//a[contains(@href,'planDocuments.pdf')]/following-sibling::p[text()='New!']")
+	protected WebElement newTextAgainstPlanDocument;
 }

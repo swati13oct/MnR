@@ -434,12 +434,21 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='payment-method-btn']/a[text()='Manage Payment Method']")
 	private WebElement managePaymentMethodButton;
+		
+	@FindBy(xpath = "//div[contains(text(),'Overpayment Credit')]")
+	private WebElement overPaymentCreditFlag;
+	
+	@FindBy(xpath = "//span[contains(text(),'credit applied to future payment(s)')]")
+	private WebElement overPaymentCreditVerbiage;
 	
 	@FindBy(xpath = "//div[@class='plan-card__flag-message' and contains(text(),'No Payments Due')]")
-	private WebElement OverpaymentCreditFlag;
+	private WebElement noPaymentsDueFlag;
 	
 	@FindBy(xpath = "//div[@class='plan-card__notification isPaid']//p[contains(text(),'No further payments needed')]")
-	private WebElement OverpaymentCreditVerbiage;
+	private WebElement paidINFullOverMonthlyPremVerbiage;
+	
+	@FindBy(xpath = "//div[@class='plan-card__amount ng-scope'][contains(text(),'No Payments Due')]")
+	private WebElement nopaymentDuelableunderNextPre_Pay;
 	
 	@FindBy(xpath = "//div[@class='plan-card__amount ng-binding']")
 	private WebElement totalAmountDue;
@@ -1982,57 +1991,58 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 	
 	public void validateOverPaymentFlag() {
-	
-			if(OverpaymentCreditFlag.isDisplayed()) {
-				System.out.println("OverPayment flag text is - "+OverpaymentCreditFlag.getText());
-				Assert.assertTrue("OverpaymentCreditFlag is displaying", OverpaymentCreditFlag.isDisplayed());
-				Assert.assertTrue("OverpaymentCreditVerbiage is displaying", OverpaymentCreditVerbiage.isDisplayed());
-				System.out.println("OverPayment verbiage text- "+OverpaymentCreditVerbiage.getText());
-					}
-					else {
-						Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
-					}
-		}
-	
-	public void overdueflag() {
-	
-			String amount = totalAmountDue.getText();
-			String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
-			System.out.println("Total due amount is "+amountdue);
-			 if(Integer.parseInt(amountdue)!=0) {
-				 Assert.assertTrue("Total amount due value is non-zero", true);
-				 System.out.println("Total amount due value is non-zero");
-			 }
-			if(overdueFlag.isDisplayed()) {
-		Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
-			}
-			else {
-				Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
-			}
-		} 
-	
-	public void paidInFullFlag() {
 		
-			if(OverpaymentCreditFlag.isDisplayed()) {
-				Assert.assertTrue("OverpaymentCreditFlag is displaying  ", OverpaymentCreditFlag.isDisplayed());
-				Assert.assertTrue("OverpaymentCreditVerbiage is displaying", OverpaymentCreditVerbiage.isDisplayed());
-					}
-					else {
-						Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
-					}
-			String amount = totalAmountDue.getText();
-			String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
-			System.out.println("Total due amount is "+amountdue);
-			 if(Integer.parseInt(amountdue)==0) {
-				 Assert.assertTrue("For crdit balance flag total amount due is $ 0", true);
-				 System.out.println("For crdit balance flag total amount due is $ 0");
-			 }
-			 else {
-					Assert.fail("For crdit balance flag total amount due is not $ 0");
-					System.out.println("For crdit balance flag total amount due is $ 0");
+		if(overPaymentCreditFlag.isDisplayed()) {
+			System.out.println("OverPayment flag text is - "+overPaymentCreditFlag.getText());
+			Assert.assertTrue("OverpaymentCreditFlag is displaying", overPaymentCreditFlag.isDisplayed());
+			Assert.assertTrue("OverpaymentCreditVerbiage is displaying", overPaymentCreditVerbiage.isDisplayed());
+			System.out.println("OverPayment verbiage text- "+overPaymentCreditVerbiage.getText());
+				}
+				else {
+					Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
 				}
 	}
+
+public void overdueflag() {
+
+		String amount = totalAmountDue.getText();
+		String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+		System.out.println("Total due amount is "+amountdue);
+		 if(Integer.parseInt(amountdue)!=0) {
+			 Assert.assertTrue("Total amount due value is non-zero", true);
+			 System.out.println("Total amount due value is non-zero");
+		 }
+		if(overdueFlag.isDisplayed()) {
+	Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
+		}
+		else {
+			Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+		}
+	} 
+
+public void paidInFullFlag() {
 	
+		if(noPaymentsDueFlag.isDisplayed()) {
+			Assert.assertTrue("OverpaymentCreditFlag is displaying  ", noPaymentsDueFlag.isDisplayed());
+			Assert.assertTrue("OverpaymentCreditVerbiage is displaying", paidINFullOverMonthlyPremVerbiage.isDisplayed());
+			Assert.assertTrue("No payments due label is dispalying unde next Premiun payment", nopaymentDuelableunderNextPre_Pay.isDisplayed());
+			
+				}
+				else {
+					Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+				}
+		String amount = totalAmountDue.getText();
+		String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+		System.out.println("Total due amount is "+amountdue);
+		 if(Integer.parseInt(amountdue)==0) {
+			 Assert.assertTrue("For paid In Full flag total amount due is $ 0", true);
+			 System.out.println("For paid In Full flag total amount due is $ 0");
+		 }
+		 else {
+				Assert.fail("For paid In Full flag total amount due is not $ 0");
+				System.out.println("For paid In Full flag total amount due is not $ 0");
+			}
+}
 		}
 	
 	

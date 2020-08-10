@@ -210,14 +210,14 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		
+		checkModelPopup(driver,20);
 	}
 	
 	public VPPPlanSummaryPage backToVPPPage(){
