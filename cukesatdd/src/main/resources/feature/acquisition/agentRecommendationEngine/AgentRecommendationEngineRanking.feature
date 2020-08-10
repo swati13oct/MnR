@@ -139,7 +139,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
 
-  @ARE @deleteaddplans @F487396 @F457409
+  @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile

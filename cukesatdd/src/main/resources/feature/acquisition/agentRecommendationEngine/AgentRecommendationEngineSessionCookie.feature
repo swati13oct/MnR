@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression @ARESessionCookie
 Feature: Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
-  @ARE @ClearedSessionNewCloakIn
+  @ARE @ClearedSessionNewCloakIn @F457409
   Scenario Outline: - <Email> To Verify agent login and validating cleating session storage in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -19,7 +19,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP |
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 |
 
-  @ARE @SavedSessionDropdown
+  @ARE @SavedSessionDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -39,7 +39,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
 
-  @ARE @NoDrugDocInDropdown
+  @ARE @NoDrugDocInDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -58,7 +58,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email             | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                                   |
       | qavgogine | qavgogine | ATDD@MEMBERDD.COM | None          | current  | drug,doctor    | Plan1(HMO),Plan2(HMO),MOSAIC(HMO),Essential(HMO),Choice(PPO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Essential(RegionalPPO) |
 
-  @ARE @AddEditDeleteDrug
+  @ARE @AddEditDeleteDrug @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
