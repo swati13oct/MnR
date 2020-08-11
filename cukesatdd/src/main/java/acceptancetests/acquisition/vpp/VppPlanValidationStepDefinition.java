@@ -291,10 +291,16 @@ public class VppPlanValidationStepDefinition {
 									 new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									 planComparePage = new AepPlanComparePage(wd);
 
-									benefitsMap = planComparePage.collectInfoVppPlanComparePg();
+									 if(sheetName.contains("PDP")) {
+										 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP");
+									 }
+									 else
+									 {
+									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(3).getStringCellValue());
+									 }
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+								 if(!(currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
 									 resultMap = planComparePage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
