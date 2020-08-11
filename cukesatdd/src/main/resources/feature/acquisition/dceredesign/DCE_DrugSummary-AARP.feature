@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Emsam|  90210 |
       
       
       @drugSummary_SAM_Icon_AARP
@@ -49,7 +49,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  90210 |
       
       
       @drugSummary_PlanToggle @F477157
@@ -75,7 +75,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  90210 |
       
       
         @dCERedesign_PlanSave_AARP @F476042
@@ -111,7 +111,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         
         Examples: 
       | path                     | pageName                   |drugName|zipCode |testPlans|pdptestPlans|snptestPlans|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
 
       
       @dCERedesign_ChangePharmacy_AARP @F426569
@@ -139,5 +139,5 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         
         Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |emsam|  10001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Emsam|  10001 |
       

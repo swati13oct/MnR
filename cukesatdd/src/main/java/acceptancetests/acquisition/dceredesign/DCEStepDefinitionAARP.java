@@ -115,7 +115,7 @@ public class DCEStepDefinitionAARP {
 	@When("^the user clicks on Add drugs button$")
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		DCEgetStarted.clickAddDrugsBtn();
 		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
 		// zipCodePlanYearPage);
