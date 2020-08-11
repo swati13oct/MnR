@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP05_IndMapd.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP05_IndMapd")
+jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP09_GrpMa.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP09_GrpMa")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP05_IndMapd.json" }, tags = { "@stageEnv","@prepareForNextYear02a" })
-public class RunMRATDDRegressionPfnyStageP05_IndMapd {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP09_GrpMa.json" }, tags = { "@stageEnv","@prepareForNextYear02_grp_ma" })
+public class RunMRATDDRegressionPfnyStageP09_GrpMa {
 
 }

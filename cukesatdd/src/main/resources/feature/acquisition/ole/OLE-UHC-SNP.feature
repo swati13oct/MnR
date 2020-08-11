@@ -158,7 +158,7 @@ Feature: 2.05.4.ACQ-OLE SNP UMS
 #    Then the user answers following questions in Medicare Information Page
 #      | PDP Question      | <pdpFlag>      |
 #      | LongTerm Question | <longTermFlag> |
-Then the user validates the long term questions in Medicare Information Page
+		Then the user validates the long term questions in Medicare Information Page
     | Health Insurance Name| <healthinsurancename>  |
     |   Group Number			 | <groupnumber>          |
     | Member Number        | <membernumber>         | 
@@ -167,7 +167,7 @@ Then the user validates the long term questions in Medicare Information Page
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
     Then the user navigates to SEP Page
-        	|	Input Data					 | <inputdataType>   |
+     	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page

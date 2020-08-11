@@ -355,9 +355,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(5000);
+		Assert.assertTrue("PROBLEM - unable to locate addDrug element on page", validate(addDrug, 0));
 		waitforElement(addDrug);
 		addDrug.click();
-		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition") ||  driver.getTitle().equalsIgnoreCase("Overview")|| driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
