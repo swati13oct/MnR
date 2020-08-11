@@ -34,8 +34,14 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in AARP Site
     Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in AARP Site
-    Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
-    Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
+    # New steps for DCE Redesign
+    And I access the DCE Redesign on aarp site from Plan Summary for mentioned plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then the user validates Get Started Page
+    Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
+    #Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
+    #Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
     #    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
     #    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans
