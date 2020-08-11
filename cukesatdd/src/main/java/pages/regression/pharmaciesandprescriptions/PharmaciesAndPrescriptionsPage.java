@@ -498,7 +498,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateFindAndPriceExternalLinkIconNotDisplayed() {
-		Assert.assertTrue("PROBLEM - Find and Price a Medication External Link Icon is displayed",
+		Assert.assertFalse("PROBLEM - Find and Price a Medication External Link Icon is displayed",
 				pnpValidate(FindAndPriceExternalIcon));
 	}
 
@@ -1004,7 +1004,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", CurrentMedicationsHeader);
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
-				pnpValidate(CurrentMedicationsHeader));
+				pnpValidate(CurrentMedicationsHeader,30));
 	}
 
 	public void validateOrderStatusHeader() {
@@ -2130,7 +2130,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void clickTryAgainCurrentmedication() {
 		int count = 0;
 		do {
-			if (tryAgainMedCabTimeOut.isDisplayed()) {
+			if (validate(tryAgainMedCabTimeOut)) {
 				tryAgainMedCabTimeOut.click();
 			}
 			count++;
