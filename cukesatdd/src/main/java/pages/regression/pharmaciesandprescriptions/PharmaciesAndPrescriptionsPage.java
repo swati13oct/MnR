@@ -14,6 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 import acceptancetests.util.CommonUtility;
 import pages.regression.testharness.TestHarness;
@@ -2084,9 +2086,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
-		CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+		CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
 			CommonUtility.checkPageIsReady(driver);
 			return new CheckOutSummaryPage(driver);
 		}
@@ -2137,4 +2139,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		} while (count != 2);
 	}
 
+	
+	
+	public void waitTillMedCabLoads() {
+		if(!validate(ViewAllMedications,20)) {
+			System.out.println("Inside waitTillMedCabLoads");
+			tryAgainMedCabTimeOut.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);
+		}
+	}
+	
+	
 }
