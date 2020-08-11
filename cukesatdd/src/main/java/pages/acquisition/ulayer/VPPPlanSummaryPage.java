@@ -726,6 +726,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 		private WebElement  SelectYearGoBtn;
 		
+		@FindBy(xpath = "//input[@class='nextButton']")
+		private WebElement  Submit;
 
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -4227,13 +4229,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void RetrieveURL(String ExpectedsupplementURL) {
-	
+		
+		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		Submit.click();
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
 		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);
 		System.out.println("Actual Supplement URL: "+CurrentSupplementURL);
 
-		if(ExpectedsupplementURL.contentEquals(CurrentSupplementURL)) {
+		if(ExpectedsupplementURL.equalsIgnoreCase(CurrentSupplementURL)) {
 			System.out.println("****************Submit application button has been clicked successfully after entering the data on resume application page  ***************");
 
 			Assert.assertTrue(true);
