@@ -413,6 +413,7 @@ public class RefillCheckoutSummaryStepDefinition {
 	public void user_clicks_Refill_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRefill();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);

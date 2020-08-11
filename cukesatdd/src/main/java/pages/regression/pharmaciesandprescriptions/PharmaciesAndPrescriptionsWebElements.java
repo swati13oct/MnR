@@ -1303,5 +1303,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//button/span[@data-test-component='text' and contains(text(),'Try Again')]")
 	protected WebElement tryAgainMedCabTimeOut;
+	
+	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
+	protected WebElement orderCheckoutPageHeader;
 
 }
