@@ -416,7 +416,7 @@ public class HSIDStepDefinition {
 		loginPage.switchToIperceptionSmileySurveyAndSubmit();
 
 	}
-	
+	/* tbd 
 	//vvv note: added for 'sorry' login error workaround	
 	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
 		String bypassSorry = System.getProperty("bypassSorry");
@@ -507,7 +507,8 @@ public class HSIDStepDefinition {
 		return result;
     }
 	//^^^ note: added for 'sorry' login error workaround	
-
+	*/
+	
 	//----------- updated to handle microapp
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
@@ -641,7 +642,15 @@ public class HSIDStepDefinition {
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			} else {  
-				sorryWorkAroundAttempt(wd, testDataType, category, planType);
+				//tbd sorryWorkAroundAttempt(wd, testDataType, category, planType);
+				try {
+					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", !sorry.isDisplayed());
+				} catch (Exception e) {}
+				try { //check to see if it has something went wrong eeror
+					WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", !wentWrong.isDisplayed());
+				} catch (Exception e) {}
 			}
 		} else { //note: isHSIDCompatible=no then go to either dashboard or testharness
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -689,6 +698,7 @@ public class HSIDStepDefinition {
 		}
 	}
 	
+	/* tbd 
 	public void sorryWorkAroundAttempt(WebDriver wd, String testDataType, String category, String planType) throws InterruptedException {
 		// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
 		if ((testDataType==null) && (category==null) && (planType==null)) {
@@ -734,6 +744,7 @@ public class HSIDStepDefinition {
 		}
 
 	}
+	*/
 	
 
 	@And("^login with a deeplink in the member portal and validate elements$")

@@ -405,9 +405,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
 
@@ -477,6 +479,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else if (MRScenario.environment.equals("prod")) {
 			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 			 return testSiteUrl;
+		}else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
 		}
 		else
 			testSiteUrl = AARP_ACQISITION_PAGE_URL;
@@ -497,6 +502,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
+		}else if (MRScenario.environment.contains("stage-0")) {
+			startNew(AARP_ACQISITION_PAGE_URL_NEW);
+			checkModelPopup(driver, 20);
 		}
 		else {
 			start(AARP_ACQISITION_PAGE_URL);
@@ -525,7 +533,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
-			} else {
+			} else if (MRScenario.environment.contains("stage-0")) {
+				startNew(UMS_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			}else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
 			}
@@ -1944,7 +1955,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateTFNelement(String tfnXpath) {
 			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-			validateNew(TFNelement);	
+			validateNew(TFNelement,45);	
 			if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 				System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
 			}
@@ -1994,7 +2005,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
 			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
+			List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
@@ -2012,7 +2023,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(ResourceLink);
 			
 			validateNew(MAplansLink);
-			validateNew(MedSuppPlansLink);
+			Assert.assertTrue(MedSuppPlansLink.size()>0,"No Med Sup link found in the header navigation");
 			validateNew(PDPplansLink);
 			validateNew(SNPplansLink);
 			
@@ -2023,7 +2034,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			if(ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
-					&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
+					&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed()
 					&& SNPplansLink.isDisplayed() && PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 

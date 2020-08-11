@@ -229,7 +229,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | F322478 |   80001 | NO            | Jefferson County |
 
   @vppPlanSummaryUHC09 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: To verify links displayed in Global footer section in UMS site
+  Scenario Outline: To verify links displayed in Global footer section in UMS site on vpp
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -288,7 +288,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
    When user selects a provider and retuns to VPP page in ums
    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
-
+		Then Verify provider name is displayed on Plan Summary page ums
+      | PlanName | <planName> |
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
