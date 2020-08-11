@@ -671,6 +671,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Description element",
 				pnpValidate(DrugCostSummaryCTADescription));
 	}
+	
+	public void validateDescriptionANOCCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate ANOC to action Description element",
+				pnpValidate(ANOCCTADescription));
+	}
 
 	// F436319
 	public void validateFirstPositionOfFindAndPriceCallToActionOnPnPPage(String position) {

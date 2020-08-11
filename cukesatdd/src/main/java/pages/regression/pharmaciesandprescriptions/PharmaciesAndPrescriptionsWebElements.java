@@ -1228,6 +1228,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
+	
+	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	protected WebElement ANOCCTADescription;
 
 	@FindBy(xpath = "//div[@data-testid='anoc-CTA']")
 	protected WebElement ANOCCallToActnBtn;
