@@ -48,6 +48,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_the_Current_Medications() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
 		pnpPg.validateCurrentMedicationsHeader();
 		// pnpPg.validateMyMedicationsHeader();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
