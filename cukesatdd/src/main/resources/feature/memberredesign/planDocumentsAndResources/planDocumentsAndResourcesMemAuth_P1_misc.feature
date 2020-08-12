@@ -82,8 +82,8 @@ Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Document
 #	@memAuth_active_pcp_medica      
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#      | 14-014 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
-#      | 15-015 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
+#      | 14-014 | 15128       | qavgogine | qavgogine | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | false |
+#      | 15-015 | 15128       | qavgogine | qavgogine | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | false |
 
 	@memAuth_active_pdp
 	Examples: 

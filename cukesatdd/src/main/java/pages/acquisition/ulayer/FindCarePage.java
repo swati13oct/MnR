@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -136,7 +137,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
 	private WebElement FinishButton;
 
 	public ComparePlansPage getstarted() throws Exception {
@@ -226,49 +227,32 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			ViewSavedButton.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ ViewSavedButton.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
 		
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
-			ParentWindow = driver.getTitle();
+			//ParentWindow = driver.getTitle();
 			CheckProviderCoverageButton.click();
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
-			ParentWindow = driver.getTitle();
+			//ParentWindow = driver.getTitle();
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
 	
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Compare Medicare Plans")) {
-					System.out.println("We are on Compare Medicare Plans winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(editDoctorsLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -297,17 +281,18 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			ViewSavedButton.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ ViewSavedButton.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
 		
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
@@ -320,26 +305,8 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
-	
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Compare Medicare Plans")) {
-					System.out.println("We are on Compare Medicare Plans winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(editHospitalsLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
 
-		}
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -371,48 +338,32 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			ViewSavedButton.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ ViewSavedButton.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
 		
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			ParentWindow = driver.getTitle();
 			CheckProviderCoverageButton.click();
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 			ParentWindow = driver.getTitle();
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Compare Medicare Plans")) {
-					System.out.println("We are on Compare Medicare Plans winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(editDoctorsLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}
+		
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -442,17 +393,18 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			ViewSavedButton.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ ViewSavedButton.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
 		
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
@@ -466,25 +418,7 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 	
-		Set<String> handles1 = driver.getWindowHandles();
-		for (String windowHandle : handles1) {
-			if (!windowHandle.equals(ParentWindow)) {
-				driver.switchTo().window(windowHandle);
-				String title = driver.getTitle();
-				System.out.println("Window title is : " + title);
-				if (title.contains("Compare Medicare Plans")) {
-					System.out.println("We are on Compare Medicare Plans winodow opened");
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-					waitforElement(editHospitalsLink);
-					break;
-				}
-			} else {
-				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
-			}
-
-		}
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;

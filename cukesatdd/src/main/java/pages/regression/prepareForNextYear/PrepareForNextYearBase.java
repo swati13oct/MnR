@@ -38,12 +38,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-	protected static boolean validateAsMuchAsPossible=false;
-	
-	protected static final String m1="09/15/";
-	protected static final String m2="10/01/";
-	protected static final String m3="10/15/";
-	protected static final String m4="12/07/";
+	protected static boolean validateAsMuchAsPossible=true;
 	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);
@@ -461,6 +456,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	}
 
 	public List<String> validatePdf(String targetDocName, WebElement pdfLink) {
+		checkModelPopup(driver,1);
 		List<String> note=new ArrayList<String>();
 		note.add("\n\tValidation for PDF ='"+targetDocName+"'");
 		String winHandleBefore = driver.getWindowHandle();
@@ -475,14 +471,13 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int afterClicked_numTabs=afterClicked_tabs.size();
 		if (validateAsMuchAsPossible) {
-		if ((afterClicked_numTabs-beforeClicked_numTabs)!=1) {
-			note.add("\t * FAILED - Did not get expected new tab after clicking '"+targetDocName+"' link");
-			note.add("\t * FAILED - validating PDF content");
-			return note;
-		}
+			if ((afterClicked_numTabs-beforeClicked_numTabs)!=1) {
+				note.add("\t * FAILED - Did not get expected new tab after clicking '"+targetDocName+"' link");
+				note.add("\t * FAILED - validating PDF content");
+				return note;
+			}
 		} else {
-			
-		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 		}
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		CommonUtility.checkPageIsReady(driver);
@@ -498,7 +493,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 
 		//note: for provider directory, it will take a while to load b/c it's a big file
-		if (!MRScenario.environment.contains("team-a")) {
+		if (MRScenario.environment.equals("offline")) {
 			try {
 				URL TestURL = new URL(driver.getCurrentUrl());
 				sleepBySec(3); //note: let the page settle before validating content
@@ -527,9 +522,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				else
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
-		} else {
-			note.add("\tOn lower env, skip validating PDF content");
-		}
+		} else  {
+			note.add("\tOn '"+MRScenario.environment.contains("stage")+"' env, skip validating PDF content to speed up the run");
+		} 
 
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -545,9 +540,15 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			if (noWaitValidate(targetElement))
 				note.add("\tPASSED - validation for HAVING "+targetItem);
 			else
-				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
+				if (noWaitValidate(systemError)) 
+					note.add("\t * FAILED - unable to locate element for '"+targetItem+"' - got system error on screen");
+				else
+					note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+			if (noWaitValidate(systemError)) 
+				Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"' - got system error on screen", noWaitValidate(targetElement));
+			else
+				Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for HAVING "+targetItem);
 		}
 	
@@ -562,9 +563,15 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			if (!noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			else
-				note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"'");
+				if (noWaitValidate(systemError)) 
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' - got system error on screen");
+				else
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+			if (noWaitValidate(systemError)) 
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' - got system error on screen", !noWaitValidate(targetElement));
+			else 
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
 			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 		}
 		return note;
@@ -690,11 +697,18 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			if (validateAsMuchAsPossible) {
 				if (noWaitValidate(expElement))
 					note.add("\tPASSED - validation for link target page loading for "+targetItem);
-				else
-					note.add("\t * FAILED, unable to locate expected element on the destination page");
+				else {
+					if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+						note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+					else
+						note.add("\t * FAILED, unable to locate expected element on the destination page");
+				}
 			} else {
-				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-				note.add("\tPASSED - validation for link target page loading for "+targetItem);
+				if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+					note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+				else
+					Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+					note.add("\tPASSED - validation for link target page loading for "+targetItem);
 			}
 
 			driver.close();
@@ -818,7 +832,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			String section, String subSection, 
 			String docName, String targetLang, 
 			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
-			WebElement pdfElement, WebElement arrowAftPdfElement, 
+			WebElement pdfElement, WebElement arrowAftPdfElement, WebElement svgAftPdfElement,
 			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
 			boolean willDeleteCookie) {
 
@@ -852,6 +866,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
 
 				targetItem=section+" - Arrow after '"+docName+"' doc link'";
+				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+
+				targetItem=section+" - svg after '"+docName+"' doc link'";
 				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				//note: after link click, little check should turn green
