@@ -1994,8 +1994,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
-		String testharurl = "content/" + testharnessurl + "testharness.html";
-		// String testharurl = "content/pharmacysearchtestharnesspage.html";
+		String testharurl = "content/"+testharnessurl+"testharness.html";
+		if(testharnessurl.contentEquals("dce")) {
+			testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		}
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
