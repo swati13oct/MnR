@@ -22,20 +22,20 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @prod_healthAndWellness01a
+    @prod_healthAndWellness01_ma_mapd
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | ashah120  | Mnrqa003  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
       | 15341 | ashah120  | Mnrqa003  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
       | 15341 | ashah120  | Mnrqa003  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | true           |
 
-    @prod_healthAndWellness01b
+    @prod_healthAndWellness01_pdp_ship
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | ashah120  | Mnrqa003  | nawal1215       | PDP      | RewardsMember     | false     | false          |
       | xxxxx | ashah120  | Mnrqa003  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false           |
 
-    @prod_healthAndWellness01c
+    @prod_healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15343 | ashah120  | Mnrqa003  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |

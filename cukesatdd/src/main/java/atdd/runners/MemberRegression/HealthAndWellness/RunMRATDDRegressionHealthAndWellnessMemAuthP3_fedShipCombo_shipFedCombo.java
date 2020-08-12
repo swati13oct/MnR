@@ -16,11 +16,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionHealthAndWellnessMemAuthP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthAndWellnessMemAuthP2")
+jsonReport = "target/cucumber-RunMRATDDRegressionHealthAndWellnessMemAuthP3_fedShipCombo_shipFedCombo.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthAndWellnessMemAuthP3_fedShipCombo_shipFedCombo")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthandwellness" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthAndWellnessMemAuthP2.json" }, tags = { "@memAuth_@healthAndWellness01b" })
-public class RunMRATDDRegressionHealthAndWellnessMemAuthP2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthAndWellnessMemAuthP3_fedShipCombo_shipFedCombo.json" }, tags = { "@memAuth_healthAndWellness01_fedShipCombo_shipFedCombo" })
+public class RunMRATDDRegressionHealthAndWellnessMemAuthP3_fedShipCombo_shipFedCombo {
 
 }
