@@ -9,10 +9,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionClaimsRallyMemAuthProdP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsRallyMemAuthProdP2")
+jsonReport = "target/cucumber-RunMRATDDRegressionClaimsRallyMemAuthProdP3_mapd.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsRallyMemAuthProdP3_mapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsRallyMemAuthProdP2.json" }, tags = { "@prod_rallyClaims01b" })
-public class RunMRATDDRegressionClaimsRallyMemAuthProdP2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsRallyMemAuthProdP3_mapd.json" }, tags = { "@prod_rallyClaims01_mapd" })
+public class RunMRATDDRegressionClaimsRallyMemAuthProdP3_mapd {
 }

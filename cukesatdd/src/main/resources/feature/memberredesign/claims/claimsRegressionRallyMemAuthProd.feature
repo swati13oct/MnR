@@ -25,29 +25,29 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     Then the user click MyClaims top menu sub option
     Then user validates landing on Rally Claims Page
     
-    @prod_rallyClaims01a
+    @prod_rallyClaims01_ma
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | ashah120   | Mnrqa003  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | ashah120   | Mnrqa003  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
-    @prod_rallyClaims01b
+    @prod_rallyClaims01_medica_pcp
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15268 | ashah120   | Mnrqa003  | BATLLOT@AOL.COM | PCP   | Individual          | COSMOS_CLAIMS   | 
 
-    @prod_rallyClaims01c
+    @prod_rallyClaims01_mapd
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15230 | ashah120   | Mnrqa003  | BILL.ROSNER123# | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
+      | xxxxx | ashah120   | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
 
-    @prod_rallyClaims01d
+    @prod_rallyClaims01_ship
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | xxxxx | ashah120   | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
       | 15236 | ashah120   | Mnrqa003  | vernajohnson19651  | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-    @prod_rallyClaims01e
+    @prod_rallyClaims01_pdp
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15299 | ashah120   | Mnrqa003  | nawal1215    | PDP      | Individual          | RX_CLAIMS       | 
