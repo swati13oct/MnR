@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -99,6 +100,18 @@ public class VisitorProfilePage extends UhcDriver {
 		addrugs.click();
 		if(currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	
+	public GetStartedPage addDrug_DCERedesign(){
+		
+		addrugs.click();
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
 		return null;
 	}
 	

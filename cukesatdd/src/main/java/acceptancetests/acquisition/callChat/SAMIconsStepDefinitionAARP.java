@@ -1,9 +1,13 @@
 package acceptancetests.acquisition.callChat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
@@ -82,6 +86,15 @@ public class SAMIconsStepDefinitionAARP {
 		
 	}
 
-	
-	
+	@Then("^user validates whether chat Agent is not Available on AARP")
+	public void the_user_validates_whether_chat_Agent_is_not_visible_on_UHC() throws Throwable {
+	boolean flag= false;
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	flag=aquisitionhomepage.validateChat();
+
+		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
+		
+	}
+
 }

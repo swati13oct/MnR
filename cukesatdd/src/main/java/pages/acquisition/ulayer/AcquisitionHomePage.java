@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-
+import pages.acquisition.dceredesign.GetStartedPage;
 /**
  * @author pperugu
  *
@@ -312,6 +313,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
+	@FindBy(xpath = "//div[@class='sam']")
+   	private WebElement samdiv;
+   	
    	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
    	private WebElement chatsamtooltip;
    	
@@ -401,9 +405,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
 
@@ -473,6 +479,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else if (MRScenario.environment.equals("prod")) {
 			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 			 return testSiteUrl;
+		}else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
 		}
 		else
 			testSiteUrl = AARP_ACQISITION_PAGE_URL;
@@ -493,6 +502,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
+		}else if (MRScenario.environment.contains("stage-0")) {
+			startNew(AARP_ACQISITION_PAGE_URL_NEW);
+			checkModelPopup(driver, 20);
 		}
 		else {
 			start(AARP_ACQISITION_PAGE_URL);
@@ -521,7 +533,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
-			} else {
+			} else if (MRScenario.environment.contains("stage-0")) {
+				startNew(UMS_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			}else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
 			}
@@ -560,6 +575,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
 		String testharurl = "content/"+testharnessurl+"testharness.html";
+		if(testharnessurl.contentEquals("dce")) {
+			testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		}
 		//String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
@@ -1362,6 +1380,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 	
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
+		validateNew(getStarted);
+		getStarted.click();
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 	public DrugCostEstimatorPage navigateToDCEToolFromVPP() throws InterruptedException {
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
@@ -1496,6 +1527,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
      	
      		return new DrugCostEstimatorPage(driver);
+	 }
+	
+	public GetStartedPage navigateToDCERedesignFromSubNav() {
+     	navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+		
 	 }
 	
 	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
@@ -1940,7 +1980,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateTFNelement(String tfnXpath) {
 			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-			validateNew(TFNelement);	
+			validateNew(TFNelement,45);	
 			if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 				System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
 			}
@@ -1990,7 +2030,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
 			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
+			List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
@@ -2008,7 +2048,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(ResourceLink);
 			
 			validateNew(MAplansLink);
-			validateNew(MedSuppPlansLink);
+			Assert.assertTrue(MedSuppPlansLink.size()>0,"No Med Sup link found in the header navigation");
 			validateNew(PDPplansLink);
 			validateNew(SNPplansLink);
 			
@@ -2019,7 +2059,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			if(ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
-					&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
+					&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed()
 					&& SNPplansLink.isDisplayed() && PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
@@ -2082,6 +2122,50 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		  else { 
 			  Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page"); 
 			  }
+		}
+		
+		public void navigateToMedEdPresDrugPage()
+		{
+			waitforElement(lnkLearnAboutMedicare);
+			if (lnkLearnAboutMedicare.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(lnkLearnAboutMedicare);
+				actions.build().perform();
+				System.out.println("Hover over Learn about Medicare completed");
+		    }
+			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+			jsClickNew(PresProvidersBenefitsLink);
+		}
+		
+		public GetStartedPage clickDCERedesignLinkonMedEdPage() {
+			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+			validateNew(DCELink);
+			jsClickNew(DCELink);
+			if (validateNew(AddMyDrugsBtn))
+				return new GetStartedPage(driver);
+			return null;
+		}
+		
+		public void navigateToShopPDPpage()
+		{
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(ShopForaplan);
+				actions.build().perform();
+				System.out.println("Hover over Shop for a Plan completed");
+		    }
+			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+			jsClickNew(PDPplansLink);
+		}
+		
+		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
+			validateNew(DCELink);
+			jsClickNew(DCELink);
+			if (validateNew(AddMyDrugsBtn))
+				return new GetStartedPage(driver);
+			return null;
 		}
 
 		public void headerRegisterLink() {
@@ -2387,9 +2471,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Advanced button not displayed");
 			}
 	}
+	public boolean validateChat() throws InterruptedException {
+		boolean present = false;
+		try {
+			//validateNew(chatsam);
+			present=validateNew(samdiv);
+			if(present) {
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
+				String chatbtnid = "sam-button--chat";
+				for(WebElement element : list ) {
+					if(element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+						present = false;
+						break;
+					}
+					
+				}
+			}
+			
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		  	return present;
+	}
 }
-
-	 
-
-
-	 

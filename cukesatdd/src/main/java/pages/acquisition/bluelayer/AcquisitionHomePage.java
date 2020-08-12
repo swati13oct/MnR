@@ -1,6 +1,7 @@
 package pages.acquisition.bluelayer;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -322,6 +323,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 	
+	@FindBy(xpath = "//div[@class='sam']")
+   	private WebElement samdiv;
+	
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
 	private WebElement ChatCancelBtn;
 
@@ -426,10 +430,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData cobrowseData;
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	public String MicroAppSiteUrl;
@@ -480,7 +486,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else if (MRScenario.environment.equals("prod")) {
 			testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 			return testSiteUrl;
-		} else
+		} else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = UMS_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
+		}else
 			testSiteUrl = UMS_ACQISITION_PAGE_URL;
 		return testSiteUrl;
 	}
@@ -541,7 +550,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver, 45);
-		} else {
+		}else if (MRScenario.environment.contains("stage-0")) {
+			startNew(UMS_ACQISITION_PAGE_URL_NEW);
+			checkModelPopup(driver, 20);
+		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkForSecurityPage();
 			checkModelPopup(driver, 20);
@@ -561,6 +573,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL);
+			}else if (MRScenario.environment.contains("stage-0")) {
+				startNew(AARP_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
 			} else {
 				startNew(AARP_ACQISITION_PAGE_URL);
 			}
@@ -1979,8 +1994,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
-		String testharurl = "content/" + testharnessurl + "testharness.html";
-		// String testharurl = "content/pharmacysearchtestharnesspage.html";
+		String testharurl = "content/"+testharnessurl+"testharness.html";
+		if(testharnessurl.contentEquals("dce")) {
+			testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		}
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -2190,7 +2208,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateTFNelement(String tfnXpath) {
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-		validateNew(TFNelement);
+		validateNew(TFNelement,45);
 		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
 			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
 		} else {
@@ -2241,8 +2259,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		WebElement MAplansLink = driver.findElement(By.xpath(
 				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-		WebElement MedSuppPlansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans-classic.html')]"));
+		List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
+
 		WebElement PDPplansLink = driver.findElement(By.xpath(
 				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 		WebElement SNPplansLink = driver.findElement(
@@ -2266,7 +2284,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(ResourceLink);
 
 		validateNew(MAplansLink);
-		validateNew(MedSuppPlansLink);
+		Assert.assertTrue(MedSuppPlansLink.size()>0,"No Med Sup link found in the header navigation");
 		validateNew(PDPplansLink);
 		validateNew(SNPplansLink);
 
@@ -2277,7 +2295,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		if (ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 				&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
-				&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
+				&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed()
 				&& SNPplansLink.isDisplayed() && PlanSelectorLink.isDisplayed() && DCELink.isDisplayed()
 				&& PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
 			Assert.assertTrue(true);
@@ -2647,5 +2665,28 @@ public boolean isValidatePageLoadError(){
 			} catch (Exception e) {
 				System.out.println("Advanced button not displayed");
 			}
+	}
+	
+	public boolean validateChat() throws InterruptedException {
+		boolean present = false;
+		try {
+			//validateNew(chatsam);
+			present=validateNew(samdiv);
+			if(present) {
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
+				String chatbtnid = "sam-button--chat";
+				for(WebElement element : list ) {
+					if(element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+						present = false;
+						break;
+					}
+					
+				}
+			}
+			
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		  	return present;
 	}
 }

@@ -33,8 +33,14 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     #      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in UMS Site
     #   Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site
-    Then the user clicks on enter drug information link in the benefits table and validates the DCE Home Page for MAPD, PDP , DSNP Plan in UMS Site
-    Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in UMS Site
+    # New steps for DCE Redesign
+    And I access the DCE Redesign on aarp site from Plan Summary for mentioned plan on UHC
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then the user validates Get Started Page
+    Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary on UHC
+#    Then the user clicks on enter drug information link in the benefits table and validates the DCE Home Page for MAPD, PDP , DSNP Plan in UMS Site
+#    Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in UMS Site
     #   Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in UMS site
     #    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in UMS site
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans in UMS Site
@@ -229,7 +235,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | F322478 |   80001 | NO            | Jefferson County |
 
   @vppPlanSummaryUHC09 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: To verify links displayed in Global footer section in UMS site
+  Scenario Outline: To verify links displayed in Global footer section in UMS site on vpp
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -288,7 +294,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
    When user selects a provider and retuns to VPP page in ums
    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
-
+		Then Verify provider name is displayed on Plan Summary page ums
+      | PlanName | <planName> |
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
