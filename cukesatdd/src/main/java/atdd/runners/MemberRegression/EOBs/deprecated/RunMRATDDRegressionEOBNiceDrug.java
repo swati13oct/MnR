@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.EOBs;
+package atdd.runners.MemberRegression.EOBs.deprecated;
 
 import org.junit.runner.RunWith;
 
@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionEOBRx.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBRx")
+jsonReport = "target/cucumber-RunMRATDDRegressionEOBNiceDrug.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBNiceDrug")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBRx.json" }, tags = { "@regressionMember", "@RX_PDP" })
-public class RunMRATDDRegressionEOBRx {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBNiceDrug.json" }, tags = { "@regressionMember", "@NICE_DRUG" })
+public class RunMRATDDRegressionEOBNiceDrug {
 
 }

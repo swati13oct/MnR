@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.EOBs;
+package atdd.runners.MemberRegression.EOBs.deprecated;
 
 import org.junit.runner.RunWith;
 

@@ -7,7 +7,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
 
   ##### ----------------- keep all scenarios below this line when dream EOB switches on, below are for SHIP and other non-federal cases ---------------
-  @prod_eob02
+  @prod_eob01
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
