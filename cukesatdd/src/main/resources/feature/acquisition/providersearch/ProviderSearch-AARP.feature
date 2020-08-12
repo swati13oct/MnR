@@ -36,7 +36,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
   @ProviderSearchFromGlobalHeaderUlayer1 
-  Scenario Outline: Verify Provider Search  in AARP site from Global Header -plan count-<plancount>
+  Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
     When the user enters the zipcode and counts the plan Ulayer
@@ -54,7 +54,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   04011 |         6 |
 
   @ProviderSearchFromWidgetUlayer 
-  Scenario Outline: Verify Provider Search  in AARP site from Global Header
+  Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
     When the user enters the zipcode and counts the plan Ulayer
@@ -71,24 +71,27 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   55344 |         7 |
       |   04011 |         6 |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
+  @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
-
+	Then Verify provider name is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planname                             |
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county          | plantype | planname                             |planyear|
+      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |current|
 
   @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
@@ -97,8 +100,10 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site and select Next year
+   And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
     Then the user navigates to the plan Details page
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button
@@ -106,8 +111,8 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                                |
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |
+      | zipcode | isMultutiCounty | county          | plantype | planName                                |planyear|
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |current|
 
   @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
