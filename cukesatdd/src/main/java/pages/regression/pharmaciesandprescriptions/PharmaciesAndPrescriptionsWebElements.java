@@ -1288,9 +1288,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfAmntPaidEligibleFrRefill;
-
+	
+	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
+	protected List<WebElement> listOfAmntPaidEligibleFrRenew;
+	
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRefill;
+	
+	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationEligibleFrRenew;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
 	protected List<WebElement> listOfRefillLeftEligibleFrRefill;
@@ -1298,6 +1304,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleFrRefill;
 
+	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
+	protected List<WebElement> listOfDaySupplyEligibleFrRenew;
+	
 	@FindBy(xpath = "//button/span[@data-test-component='text' and contains(text(),'Try Again')]")
 	protected WebElement tryAgainMedCabTimeOut;
 

@@ -2110,9 +2110,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		listOfVal.add(rand_int);
 		return listOfVal;
 	}
+	
+	public List<Object> fetchesMedicationInformationFrRenew() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfRenewMedication.size());
+
+		String text = listOfMedicationEligibleFrRenew.get(rand_int).getText();
+		for (WebElement child : listOfMedicationEligibleFrRenew.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		// listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+		//listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
+		listOfVal.add(listOfDaySupplyEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
 
 	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
 		listOfRefillMedication.get(rand_int).click();
+	}
+	
+	public void clickOnRenewMedicationCTABasedOnIndex(int index) {
+		listOfRenewMedication.get(rand_int).click();
 	}
 
 	public void refreshPnPPage() {
