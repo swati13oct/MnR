@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP13_ComboPdpSsp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP13_ComboPdpSsp")
+jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP15_ComboMaPdp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP15_ComboMaPdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP13_ComboPdpSsp.json" }, tags = { "@stageEnv","@prepareForNextYear01_comboPdpSsp" })
-public class RunMRATDDRegressionPfnyStageP13_ComboPdpSsp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP15_ComboMaPdp.json" }, tags = { "@stageEnv","@prepareForNextYear01_comboMaPdp" })
+public class RunMRATDDRegressionPfnyStageP15_ComboMaPdp {
 
 }

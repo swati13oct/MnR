@@ -2,7 +2,6 @@ package pages.regression.prepareForNextYear;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
@@ -12,12 +11,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.MRScenario;
 
-public class PrepareForNextYearSar extends PrepareForNextYearBase {
+public class PrepareForNextYearSars extends PrepareForNextYearBase {
 
 	protected static final String m1="10/01/";
 	protected static final String m2="10/15/";
 
-	public PrepareForNextYearSar(WebDriver driver) {
+	public PrepareForNextYearSars(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -28,7 +27,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 	}
 
 
-	public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Compare plans online";
@@ -62,7 +61,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Learn about other plan choices' section");
-			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
+			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, showNxtYrPlanName));
 
 		} else {
 			if (validateAsMuchAsPossible) {
@@ -78,7 +77,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 		return note;
 	}
 
-	public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Learn about other plan choices";
@@ -158,7 +157,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 		return note;
 	}
 
-	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Enroll in the plan that works for you";
@@ -199,7 +198,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Choose your plan");
-			note.addAll(validateChoosePlan(section, planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
+			note.addAll(validateChoosePlan(section, planType, memberType, currentDate, showNxtYrPlanName));
 
 		} else {
 			if (validateAsMuchAsPossible) {
@@ -217,7 +216,7 @@ public class PrepareForNextYearSar extends PrepareForNextYearBase {
 		return note;
 	}
 
-	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Choose your plan";

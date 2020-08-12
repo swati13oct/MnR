@@ -311,51 +311,51 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	
 	//note: milestone1 for sar -------------------------------------
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 1']")
-	protected WebElement tl_milestone1Date_sar;
+	protected WebElement tl_milestone1Date_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 1']/../span[contains(@class,'date-content')]")
-	protected WebElement tl_milestone1Text_sar;
+	protected WebElement tl_milestone1Text_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]")
-	protected WebElement tl_milestone1Line_sar;
+	protected WebElement tl_milestone1Line_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]//div[contains(@class,'stepper-circle') and not(contains(@class,'stepper-circle-blue'))]//i")
-	protected WebElement tl_milestone1Dot_noBlue_sar;
+	protected WebElement tl_milestone1Dot_noBlue_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]//div[contains(@class,'stepper-circle') and contains(@class,'stepper-circle-blue')]//i")
-	protected WebElement tl_milestone1Dot_blue_sar;
+	protected WebElement tl_milestone1Dot_blue_sars;
 
 	//note: milestone2 for sar -------------------------------------
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 15']")
-	protected WebElement tl_milestone2Date_sar;
+	protected WebElement tl_milestone2Date_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 15']/../span[contains(@class,'date-content')]")
-	protected WebElement tl_milestone2Text_sar;
+	protected WebElement tl_milestone2Text_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][2]")
-	protected WebElement tl_milestone2Line_sar;
+	protected WebElement tl_milestone2Line_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][2]//div[contains(@class,'stepper-circle') and not(contains(@class,'stepper-circle-blue'))]//i")
-	protected WebElement tl_milestone2Dot_noBlue_sar;
+	protected WebElement tl_milestone2Dot_noBlue_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][2]//div[contains(@class,'stepper-circle') and contains(@class,'stepper-circle-blue')]//i")
-	protected WebElement tl_milestone2Dot_blue_sar;
+	protected WebElement tl_milestone2Dot_blue_sars;
 
 	//note: milestone3 for dar -------------------------------------
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='January 1']")
-	protected WebElement tl_milestone3Date_sar;
+	protected WebElement tl_milestone3Date_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='January 1']/../span[contains(@class,'date-content')]")
-	protected WebElement tl_milestone3Text_sar;
+	protected WebElement tl_milestone3Text_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][3]")
-	protected WebElement tl_milestone3Line_sar;
+	protected WebElement tl_milestone3Line_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][3]//div[contains(@class,'stepper-circle') and not(contains(@class,'stepper-circle-blue'))]//i")
-	protected WebElement tl_milestone3Dot_noBlue_sar;
+	protected WebElement tl_milestone3Dot_noBlue_sars;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][3]//div[contains(@class,'stepper-circle') and contains(@class,'stepper-circle-blue')]//i")
-	protected WebElement tl_milestone3Dot_blue_sar;
+	protected WebElement tl_milestone3Dot_blue_sars;
 	
 
 	// note Find updates section -------------------------------
@@ -378,13 +378,13 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement grp_findUpdatesSection_text;
 
 	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]")
-	protected WebElement sar_findUpdatesSection;
+	protected WebElement sars_findUpdatesSection;
 
 	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//h3")
-	protected WebElement sar_findUpdatesSection_header;
+	protected WebElement sars_findUpdatesSection_header;
 	
 	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//p")
-	protected WebElement sar_findUpdatesSection_text;
+	protected WebElement sars_findUpdatesSection_text;
 
 	//note: ind - review plan changes
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]")

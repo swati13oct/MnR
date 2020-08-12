@@ -1066,14 +1066,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			targetItem=section+subSection+" - Compare New Plans Link arrow";
-			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+subSection+" - Compare New Plans Link svg";
-			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
 
 			//note - validate link destination
 			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
@@ -1090,6 +1082,15 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					expUrl="aarpmedicareplans.com"+expUrl;
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+
+			targetItem=section+subSection+" - Compare New Plans Link arrow";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem=section+subSection+" - Compare New Plans Link svg";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
 
 			//tbd targetItem=section+subSection+" - Compare New Plans Link Arrow";
 			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;

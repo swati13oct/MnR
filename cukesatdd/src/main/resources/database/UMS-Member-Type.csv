@@ -551,6 +551,8 @@ q4_dec_uhc102/Password@1,MAPD,UHC_IND_1ACT_PFNY,,
 q2_jun_grp0255/Password@1,PDP,COMBO_PDP_GRP_SSP_GRP_PFNY,,
 q2_jun_grp0255/Password@1,SSP,COMBO_PDP_GRP_SSP_GRP_PFNY,,
 q3_sept_UAT4_AARP_013/Password@1,MAPD,SARS_PFNY
+johndeere1001/Password@1,MA,COMBO_MA_GRP_PDP_GRP_PFNY
+johndeere1001/Password@1,PDP,COMBO_MA_GRP_PDP_GRP_PFNY
 q2_pay_002/Password@1,MAPD,OverpaymentCreditFlag,,
 q2_pay_001/Password@1,MAPD,OverdueFlag,,
 premiumpayment007/Password@1,MAPD,PaidInFullFlag,,

@@ -303,6 +303,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,1);
 		if (!originalUrl.contains("/dashboard")) //note: rally dashboard has no tab for combo
 			handleComboTabIfComboUser(planType, memberType);
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
 		checkModelPopup(driver,3);
 		return driver;
 	}
