@@ -65,6 +65,8 @@ public class AepPlanComparePage extends UhcDriver {
 			if(columnName.contains("tier"))
 				System.out.println();
 
+			benefitValue = benefitValue.trim();
+
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
 				//if(key.contains(columnName)) {
@@ -102,13 +104,16 @@ public class AepPlanComparePage extends UhcDriver {
 	}
 
 
-	public HashMap<String, String> collectInfoVppPlanComparePg(String planType) {
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
 
 		//Read Plan Summary table
 		result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
+
+		//Read Optional Services(Riders)
+		result.putAll(readBenefitsData("optional-services-table", ""));
 
 		//Read prescription Drug Benefits and PlanCosts table
 		result.putAll(readBenefitsData("prescription-drug-table", ""));
@@ -120,26 +125,29 @@ public class AepPlanComparePage extends UhcDriver {
 			result.putAll(readBenefitsData("medical-benefits-table", ""));
 			result.putAll(readBenefitsData("additional-benefits-table", ""));
 
+
 			//Read OON Benefits data
-			WebElement medicareBenefitsSlider = driver.findElement(By.id("medicareBenefitsSlider"));
-			WebElement additionalBenefitsStartSlider = driver.findElement(By.id("additionalBenefitsStartSlider"));
+			if(network.trim().startsWith("OON")) {
+				WebElement medicareBenefitsSlider = driver.findElement(By.id("medicareBenefitsSlider"));
+				WebElement additionalBenefitsStartSlider = driver.findElement(By.id("additionalBenefitsStartSlider"));
 
-			if (medicareBenefitsSlider != null && medicareBenefitsSlider.isDisplayed()) {
-				jsClickNew(medicareBenefitsSlider);
-				if (medicareBenefitsSlider.getAttribute("aria-checked").equals("true")) {
-					result.putAll(readBenefitsData("medical-benefits-table", "OON"));
+				if (medicareBenefitsSlider != null && medicareBenefitsSlider.isDisplayed()) {
+					jsClickNew(medicareBenefitsSlider);
+					if (medicareBenefitsSlider.getAttribute("aria-checked").equals("true")) {
+						result.putAll(readBenefitsData("medical-benefits-table", "OON"));
+					}
 				}
-			}
 
-			if (additionalBenefitsStartSlider != null && additionalBenefitsStartSlider.isDisplayed()) {
-				jsClickNew(additionalBenefitsStartSlider);
-				if (additionalBenefitsStartSlider.getAttribute("aria-checked").equals("true")) {
-					result.putAll(readBenefitsData("additional-benefits-table", "OON"));
+				if (additionalBenefitsStartSlider != null && additionalBenefitsStartSlider.isDisplayed()) {
+					jsClickNew(additionalBenefitsStartSlider);
+					if (additionalBenefitsStartSlider.getAttribute("aria-checked").equals("true")) {
+						result.putAll(readBenefitsData("additional-benefits-table", "OON"));
+					}
 				}
 			}
 
 		}
-
+		System.out.println("Finished collecting the info on vpp compare page =====");
 		return result;
 	}
 
@@ -153,6 +161,11 @@ public class AepPlanComparePage extends UhcDriver {
 
 		String rowXpath="//table[contains(@id,'"+tableId+"')]//tbody//tr[contains(@class,'uhc')]";
 		List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
+
+		if(listOfRowsInPlanCompareTbl==null || listOfRowsInPlanCompareTbl.size() == 0)
+		{
+			return  result;
+		}
 
 		for (int i=0; i<listOfRowsInPlanCompareTbl.size(); i++) {
 
@@ -181,7 +194,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 
 		}
-		System.out.println("Finished collecting the info on vpp compare page =====");
+
 
 		for(String keyValue : result.keySet()) {
 			System.out.println("Table : "+tableId +" | Key : "+keyValue+"\t| Value: "+result.get(keyValue));
