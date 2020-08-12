@@ -249,6 +249,11 @@ public class VppPlanValidationStepDefinition {
 			CellStyle styleFailed = ResultWorkbook.createCellStyle();
 			styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
 			styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
+			CellStyle styleIgnore = ResultWorkbook.createCellStyle();
+			styleIgnore.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			styleIgnore.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
 			  
 		//Setting First Row for Results excel
 
@@ -306,9 +311,16 @@ public class VppPlanValidationStepDefinition {
 									 if(resultMap.containsKey(false))
 										 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
-									 	if(!valueMatches) { 
-									 		newCell.setCellStyle(styleFailed);
-											failureCounter++;
+									 	if(!valueMatches) {
+									 		//Ignore OON column data validation for a Plan that is only In-network
+											if(row.getCell(1).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+											{
+												newCell.setCellStyle(styleIgnore);
+											}
+											else {
+												newCell.setCellStyle(styleFailed);
+												failureCounter++;
+											}
 								 		}else {				
 								 			newCell.setCellStyle(stylePassed);
 								 
@@ -320,8 +332,15 @@ public class VppPlanValidationStepDefinition {
 								 else {
 									 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
 										 newCell.setCellValue(cell.getStringCellValue());
-									 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
-										 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));
+									 } else {
+										 //Ignore OON column data validation for a Plan that is only In-network
+										 if(row.getCell(1).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+										 {
+											 newCell.setCellValue(cell.getStringCellValue());
+										 }
+										 else {//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+											 newCell.setCellValue("Excel Value: " + cell.getStringCellValue() + " / UI Value: " + resultMap.get(false));
+										 }
 									 }
 								 }
 							 } 
