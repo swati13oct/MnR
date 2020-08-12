@@ -1682,14 +1682,18 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
-				if (listOfPharmacyName.get(val).getText().equals("OptumRx")) {
-					return true;
+					String text = listOfPharmacyName.get(val).getText();
+					for (WebElement child : listOfPharmacyName.get(val).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+				System.out.println("Pharmacy Name : "+text);	
+				if (!text.equals("OptumRx")) {
+					return false;
 				}
 			}
-			return false;
-
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
