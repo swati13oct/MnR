@@ -292,11 +292,11 @@ public class VppPlanValidationStepDefinition {
 									 planComparePage = new AepPlanComparePage(wd);
 
 									 if(sheetName.contains("PDP")) {
-										 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP");
+										 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP","");
 									 }
 									 else
 									 {
-									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(3).getStringCellValue());
+									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(3).getStringCellValue(), row.getCell(1).getStringCellValue());
 									 }
 								 }
 
