@@ -406,6 +406,8 @@ public class MRConstants {
   public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
   
   public static String PROV_NAME = "";
+  public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";
+  //public static final String AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
  }
 
 	    

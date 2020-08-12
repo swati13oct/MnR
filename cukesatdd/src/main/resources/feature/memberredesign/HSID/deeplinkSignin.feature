@@ -116,3 +116,17 @@ Feature: To test member Signin from various Deeplinks
       | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/payments          | payment           |       |                    |                           |
       | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/order-materials   | order-materials   |       |                    |                           |
       | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/benefits-coverage | benefits-coverage |       |                    |                           |
+
+   @regressionMember @codeWarriors @F477221
+   Scenario Outline: Verify SHIP Member lands on the healthwellness page after signing in from healthwellness deeplink.
+    Given I am an M&R SHIP member
+    And the page is displayed with all the fields
+    And I Sign on to the M&R Member Portal
+      | User Name | <username> |
+      | Password  | <password> |
+    And I will land on the Talix page for At Your Best
+
+    Examples: 
+      | username            | password   |
+      | q3_SEP_2020SHIP_019 | Password@1 |
+      
