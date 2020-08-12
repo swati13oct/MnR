@@ -23,27 +23,31 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	Then the user navigates to Health and Wellness page from Provider Search page
 	Then the user navigates to Account Settings page from Provider Search page
 	
-	@prod_providerSearch01a
+	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 01    | ashah120  | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
+	    | 01    | ashah120  | Mnrqa003  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch |
 	    | 02    | ashah120  | Mnrqa003  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01b
+	@prod_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 03    | ashah120  | Mnrqa003  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch |
-	    | 04    | ashah120  | Mnrqa003  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | ashah120  | Mnrqa003  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
 
-	@prod_providerSearch01c
+	@prod_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-        | 05    | ashah120  | Mnrqa003  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
-	    | 06    | ashah120  | Mnrqa003  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
+        | 04    | ashah120  | Mnrqa003  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
+	    | 05    | ashah120  | Mnrqa003  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
 
-	@prod_providerSearch01d
+	@prod_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 07    | ashah120  | Mnrqa003  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
-	    | 08    | ashah120  | Mnrqa003  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+	    | 06    | ashah120  | Mnrqa003  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | 07    | ashah120  | Mnrqa003  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+
+	@prod_providerSearch01_grp
+    Examples: 
+	    | index | username  | password  | MemUserName          | planType | memberType              | 
+	    | 08    | ashah120  | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
 

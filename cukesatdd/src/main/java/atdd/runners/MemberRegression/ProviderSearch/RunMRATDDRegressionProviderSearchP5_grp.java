@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionProviderSearchMemAuthProdP3.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProviderSearchMemAuthProdP3")
+jsonReport = "target/cucumber-RunMRATDDRegressionProviderSearchP5_grp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProviderSearchP5_grp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/providerSearch" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProviderSearchMemAuthProdP3.json" }, tags = { "@prod_providerSearch01c" })
-public class RunMRATDDRegressionProviderSearchMemAuthProdP3 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProviderSearchP5_grp.json" }, tags = { "@providerSearch01_grp" })
+public class RunMRATDDRegressionProviderSearchP5_grp {
 
 }
