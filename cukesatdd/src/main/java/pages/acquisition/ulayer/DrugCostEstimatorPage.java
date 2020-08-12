@@ -37,13 +37,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement dceplanname;
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	@FindBy(id = "add-drug")
+	@FindBy(xpath = "//*[contains(@id,'addDrug')]")
 	public WebElement addDrug;
 
-	@FindBy(id = "pharmacyTabId")
+	@FindBy(xpath = "//*[contains(@id,'build-your-drug-list')]")
 	public WebElement step2;
 
-	@FindBy(id = "drugsTabId")
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement step1;
 
 	@FindBy(id = "pharmacy-form")
@@ -187,7 +187,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(id = "costsTabId")
+	@FindBy(xpath = "//*[contains(@id,'review-drug-costs')]")
 	public WebElement step3;
 
 	@FindBy(id = "drugcosts")
