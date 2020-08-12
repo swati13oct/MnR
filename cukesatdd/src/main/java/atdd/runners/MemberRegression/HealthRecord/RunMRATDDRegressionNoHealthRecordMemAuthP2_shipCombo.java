@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP3.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoHealthRecordMemAuthP3")
+jsonReport = "target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP2_shipCombo.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoHealthRecordMemAuthP2_shipCombo")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP3.json" }, tags = { "@memAuth_no_ihr_c" })
-public class RunMRATDDRegressionNoHealthRecordMemAuthP3 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP2_shipCombo.json" }, tags = { "@memAuth_no_ihr_shipCombo" })
+public class RunMRATDDRegressionNoHealthRecordMemAuthP2_shipCombo {
 
 }

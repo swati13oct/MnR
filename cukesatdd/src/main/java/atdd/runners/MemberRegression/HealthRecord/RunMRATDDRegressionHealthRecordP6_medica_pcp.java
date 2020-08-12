@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionHealthRecordMemAuthP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthRecordMemAuthP2")
+jsonReport = "target/cucumber-RunMRATDDRegressionHealthRecordP6_medica_pcp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthRecordP6_medica_pcp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthRecordMemAuthP2.json" }, tags = { "@memAuth_ihr_b" })
-public class RunMRATDDRegressionHealthRecordMemAuthP2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthRecordP6_medica_pcp.json" }, tags = { "@ihr_medica_pcp" })
+public class RunMRATDDRegressionHealthRecordP6_medica_pcp {
 
 }
