@@ -2136,6 +2136,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
 		CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
+		CommonUtility.waitForPageLoad(driver, estimatedDateOnCheckOutPage, 60);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
 			CommonUtility.checkPageIsReady(driver);
@@ -2199,5 +2200,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 	}
 	
+	public boolean validateRetailMedNotHavingRefillLeftField() {
+		for(WebElement ele:listOfHDMedicationHavingRefillflag) {
+			if(ele.getAttribute("data-is-refill-eligible").equals("false")) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }

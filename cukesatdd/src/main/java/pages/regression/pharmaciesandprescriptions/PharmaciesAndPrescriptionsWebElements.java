@@ -1326,5 +1326,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
 	protected WebElement orderCheckoutPageHeader;
+	
+	@FindBy(xpath="//div[@data-is-refill-eligible]")
+	protected List<WebElement> listOfHDMedicationHavingRefillflag;
+	
+	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
+	protected WebElement estimatedDateOnCheckOutPage;
 
 }
