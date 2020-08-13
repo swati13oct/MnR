@@ -1267,7 +1267,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//main/div[2]/div[1]/div/div/div[1]/div/div[2]/button[@data-testid='back-button']")
 	protected WebElement BackButtonOnChoosePlanYearPage;
 
-	@FindBy(xpath = "(//main/div/div/div[1]/div/div/div[1]/div/div[4]/text()")
+	@FindBy(xpath = "//div[@data-testid='pharmacy-locator-subheading' and contains(text(),'You can search our directory of current covered pharmacies or view next year')]")
 	protected WebElement DescriptiveContentOnChoosePlanYearPage;
 
 	@FindBy(xpath = "//button[@data-testid='pharmacy-locator-2020-CTA-button']")
