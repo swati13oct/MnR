@@ -304,10 +304,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
-	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='refill-all-meds-CTA']")
+	@FindBy(xpath = "//a[@data-testid='refill-all-meds']")
 	protected WebElement refillAllMedications;
 
-	@FindBy(xpath = "//*[contains(text(),'Refill all home delivery medications in one place.']")
+	@FindBy(xpath = "//*[contains(text(),'medications in one place.')]")
 	protected WebElement refillAllMedicationsExplanation;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
