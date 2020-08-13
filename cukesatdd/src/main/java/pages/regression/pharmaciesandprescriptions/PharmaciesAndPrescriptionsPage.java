@@ -1062,6 +1062,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	}
 
+	public void validateNumberOfRefillMedications() {
+
+		Assert.assertTrue(
+				"PROBLEM - unable to validate that number of refill medications ",
+				corredpondingRefillMedicationsNumbers());
+
+	}
+
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
 				disclaimer());
@@ -1072,6 +1080,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
 				validate(ViewAllMedications, 50));
 		ViewAllMedications.click();
+
+	}
+
+	public void clickOnRefillAllMedications() {
+		Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element",
+				validate(refillAllMedications, 50));
+		refillAllMedications.click();
 
 	}
 
@@ -1215,6 +1230,26 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(ViewAllMedications));
 	}
 
+	public void validateRefillAllMedications() {
+		Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element on My Medications",
+				pnpValidate(refillAllMedications));
+	}
+
+	public void validateNoRefillAllMedications() {
+		Assert.assertFalse("PROBLEM - should unable to locate Refill All Medications link text element on My Medications",
+				pnpValidate(refillAllMedications));
+	}
+
+	public void validateRefillAllMedicationsExplanation() {
+		Assert.assertTrue("PROBLEM - unable to locate explanation of Refill All Medications link text element on My Medications",
+				pnpValidate(refillAllMedicationsExplanation));
+	}
+
+	public void validateNoRefillAllMedicationsExplanation() {
+		Assert.assertFalse("PROBLEM - should unable to locate explanation of Refill All Medications link text element on My Medications",
+				pnpValidate(refillAllMedicationsExplanation));
+	}
+
 	public void validateRequestReceived() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
@@ -1278,6 +1313,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateRefillMedications() {
 		Assert.assertTrue("PROBLEM - unable to locate HD Drug Eligible For Refill", validateHDDrugEligibleForRefill());
+		// pnpValidate(RefillMedications));
+	}
+
+	public void validateNoRefillMedications() {
+		Assert.assertFalse("PROBLEM - it should not able to locate HD Drug Eligible For Refill", validateHDDrugEligibleForRefill());
 		// pnpValidate(RefillMedications));
 	}
 
@@ -1689,14 +1729,18 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
-				if (listOfPharmacyName.get(val).getText().equals("OptumRx")) {
-					return true;
+					String text = listOfPharmacyName.get(val).getText();
+					for (WebElement child : listOfPharmacyName.get(val).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+				System.out.println("Pharmacy Name : "+text);	
+				if (!text.equals("OptumRx")) {
+					return false;
 				}
 			}
-			return false;
-
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -2094,6 +2138,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
 		CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
+		CommonUtility.waitForPageLoad(driver, estimatedDateOnCheckOutPage, 60);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
 			CommonUtility.checkPageIsReady(driver);
@@ -2157,5 +2202,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 	}
 	
+	public boolean validateRetailMedNotHavingRefillLeftField() {
+		for(WebElement ele:listOfHDMedicationHavingRefillflag) {
+			if(ele.getAttribute("data-is-refill-eligible").equals("false")) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }
