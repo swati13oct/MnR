@@ -139,9 +139,9 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user should be navigated to zipcode and plan year capture page for Non AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_Non_AEP() {
-		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP in AARP$")
