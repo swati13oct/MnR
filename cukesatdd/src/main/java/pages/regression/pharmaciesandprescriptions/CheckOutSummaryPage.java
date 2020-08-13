@@ -74,6 +74,15 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateShippingFeeUnderOrderSummary() {
 		String shippingMethod = shippingDrpDownVal.getText();
+		int count = 0;
+		while (!shippingMethod.contains("Standard")) {
+			shippingMethod = shippingDrpDownVal.getText();
+			count++;
+			if (count > 20) {
+				break;
+			}
+		}
+		shippingMethod = shippingDrpDownVal.getText();
 		String shippingFee = orderSummaryShippingFee.getText();
 		String[] arry = shippingMethod.split("-");
 		if (!arry[1].trim().equals("Free")) {
@@ -208,8 +217,9 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateMedicationPrice() {
-		String medicationPrice = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
-		return medicationPrice.trim().equalsIgnoreCase(listOfPrice.get(listOfPrice.size() - 1).getText().trim());
+		// String medicationPrice =
+		// RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
+		return listOfPrice.get(listOfPrice.size() - 1).getText().trim().matches(dollarAmntRegex);
 	}
 
 	public boolean validateDaySupply() {
@@ -258,5 +268,15 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateConfirmationPageHeader() {
 		return validate(orderConfirmationPageHeader, 20);
+	}
+
+	public boolean validateDaySupplyForRenew() {
+		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
+		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(daySupply.trim());
+	}
+
+	public boolean validateShippingAlternateDate() {
+		validate(shippingAlternateMsg, 20);
+		return !shippingAlternateMsg.getText().isEmpty();
 	}
 }

@@ -2158,7 +2158,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		// listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
-		listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
+		//listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(rand_int);
 		return listOfVal;
 	}
@@ -2173,10 +2173,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			text = text.replaceFirst(child.getText(), "");
 		}
 		listOfVal.add(text);
-		// listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
-		//listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
 		listOfVal.add(listOfDaySupplyEligibleFrRenew.get(rand_int).getText());
-		listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		//listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
 		listOfVal.add(rand_int);
 		return listOfVal;
 	}
@@ -2230,5 +2228,4 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return true;
 	}
-	
 }

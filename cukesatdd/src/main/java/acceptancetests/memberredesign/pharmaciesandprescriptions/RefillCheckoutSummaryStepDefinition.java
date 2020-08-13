@@ -491,5 +491,16 @@ public class RefillCheckoutSummaryStepDefinition {
 				checkoutSumaryPg.validateConfirmationPageHeader());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
+	
+	@When("^user fetches medication informations and clicks on Renew Medication call to action button$")
+	public void user_fetches_medication_informations_clicks_Renew_Medication_call_to_action_button() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 }
