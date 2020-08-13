@@ -369,7 +369,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
 				else if(benefitValueUI.endsWith("2"))
 					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-				else if(benefitValueUI.contains("Out-of-NetworkBenefits")) {
+				else if(benefitValueUI.contains("Out-of-NetworkBenefits")&&columnName.equalsIgnoreCase("Out-of-Network Benefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
 				}else if(key.equalsIgnoreCase("Dental")&&benefitValueUI.contains("$")) {
@@ -380,7 +380,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			
 		
 			//if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
-			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
 				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
@@ -416,11 +416,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 					}
 					columnName = columnName+"PS";
-			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silver sneakers")||columnName.equalsIgnoreCase("Footnotes")||columnName.equalsIgnoreCase("Estimated annual total")) {
+			}else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silversneakers")||columnName.equalsIgnoreCase("Footnotes")||columnName.equalsIgnoreCase("Estimated annual total")) {
 			
 				
 				benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
 				benefitValue = benefitValue.replaceAll("\\u2022", "");
+				benefitValueUI = benefitValueUI.replaceAll("\\u00AE", "");
 				benefitValue = benefitValue.replaceAll("\\u00AE", "");
 				 if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("footnotes")) { 
 					key = key.replace("\n", "");
