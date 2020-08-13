@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionRefillAllMedicationCTAMyMedicat
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillAllMedicationCTAMyMedication")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillAllMedicationCTAMyMedication.json" }, tags = {"@RefillAllMedicationsCTA_MyMedications","@MemberVBF"}, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillAllMedicationCTAMyMedication.json" }, tags = {"@F479518"}, monochrome=true)
 public class RunMRATDDRegressionRefillAllMedicationCTAMyMedication {
 
 }
