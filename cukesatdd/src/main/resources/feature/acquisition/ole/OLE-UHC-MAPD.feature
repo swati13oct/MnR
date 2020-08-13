@@ -10,8 +10,6 @@ Feature: 2.05.2.ACQ-OLE MAPD UMS
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-     # When user views plans of the below plan type in UMS site
-      #| Plan Type | <plantype> |
       And the user selects plan year for the UMS site
     |Plan Year | <planyear> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow

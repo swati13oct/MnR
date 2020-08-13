@@ -82,10 +82,10 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-    Then the user validates the Plan and Member details on Review and Submit Page
+    #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-	Then the user validates the OLE Submission Details in GPS
-| Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+		| Plan Type | <plantype> |
     Examples: 
       | TID   | PlanType |Plan Year| zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
      # | 15516 | PDP-MBI  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |                | false    | 04261944 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |Valid |
