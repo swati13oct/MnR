@@ -1016,6 +1016,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println("Scrolling to Manage Payment Method Button");
 			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
 			jse2.executeScript("arguments[0].scrollIntoView()", managePaymentMethodButton);
+			jse2.executeScript("window.scrollBy(0,-50)", "");
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

@@ -35,6 +35,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -1548,6 +1549,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 
 	}
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+
+	public GetStartedPage navigateToDCERedesignFromPlanSummary(String plantype) {
+
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
+				//maDCELink.get(0).click();
+
+		}else{
+				List<WebElement> viewPDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+				viewPDPPlans.get(0).click();
+		}
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+
+	}
 
 	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
 		// TODO Auto-generated method stub
@@ -1755,6 +1778,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
+	}
+
+	public GetStartedPage navigateToDCERedesignFromVPPPlanCard(String plantype, String planName){
+		if(plantype.equals("MA")||plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")){
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
+			if(validate(dceLink))
+				dceLink.click();
+
+		}else{
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
+			dceLink.click();
+		}	
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+
 	}
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
@@ -2297,7 +2338,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+		if(driver.getCurrentUrl().contains("drug-costs")){
 			System.out.println("DCE Page is loaded");
 			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
 		}	
@@ -2342,7 +2383,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+		if(driver.getCurrentUrl().contains("estimate-drug-costs")){
 			System.out.println("DCE Page is loaded");
 			return new DrugCostEstimatorPage(driver);
 		}	

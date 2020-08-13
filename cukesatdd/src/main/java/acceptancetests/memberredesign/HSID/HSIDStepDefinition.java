@@ -41,6 +41,7 @@ import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
 import pages.regression.deeplinkPages.coverageandBenefitsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
 import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPage;
+import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPageSHIP;
 import pages.regression.deeplinkPages.myDocumentsDeeplinkLoginPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
@@ -1345,4 +1346,57 @@ public class HSIDStepDefinition {
 									     Thread.sleep(3000);
 									     aarpChatAgentLogin.aarpchatagentreadystate();
 									}
+									 /** 
+										 * @todo :member lands on myDocuments deep link
+										 */
+										@Given("^I am an M&R SHIP member$")
+										public void the_SHIP_user_iS_on_deeplink_Page() throws InterruptedException{
+											WebDriver wd = getLoginScenario().getWebDriver();
+											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL();
+											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
+										}
+										/** 
+										 * @todo :deep link login page elements validate  
+										 */
+										@And("^the page is displayed with all the fields$")
+										public void signin_pageis_displayed(){
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) loginScenario.getBean(PageConstants.AARP_HAWL);
+											healthwellnessDeepLinkLoginPageSHIP.validatePageElements();
+										}  
+										/** 
+										 * @todo :on the healthwellness deep link page SHIP member enters login credentials 
+										 */
+										@Given("^I Sign on to the M&R Member Portal$")
+										public void the_user_is_on(DataTable givenAttributes) throws InterruptedException{
+											/* Reading the given attribute from feature file */
+											List<DataTableRow> memberAttributesRow = givenAttributes
+													.getGherkinRows();
+											Map<String, String> memberAttributesMap = new HashMap<String, String>();
+											for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+												memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+														.get(0), memberAttributesRow.get(i).getCells().get(1));
+											}
+
+											String username = memberAttributesMap.get("User Name");
+											String password  = memberAttributesMap.get("Password");
+											System.out.println("User name : "+username );
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+											Thread.sleep(5000);
+											System.out.println("Title of new page : "+healthwellnessDeepLinkLoginPageSHIP.getTitle());
+											healthwellnessDeepLinkLoginPageSHIP.enterusername(username);
+											healthwellnessDeepLinkLoginPageSHIP.enterpassword(password);	
+											healthwellnessDeepLinkLoginPageSHIP.clickSubmit();
+										}
+										/** 
+										 * @todo :member lands on healthwellness deep link page 
+										 */
+										 @Given("^I will land on the Talix page for At Your Best$") 
+										 public void i_will_land_on_the_Talix_page_for_At_Your_Best() throws InterruptedException{											
+											 healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+										     Thread.sleep(3000);
+										     healthwellnessDeepLinkLoginPageSHIP.validateHealthWellnessPage();
+										}
 }
