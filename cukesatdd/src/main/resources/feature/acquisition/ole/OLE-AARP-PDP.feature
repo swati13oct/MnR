@@ -87,6 +87,7 @@ Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
     Then the user clicks on Submit Enrollment to complete enrollment
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
+    
     # Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type
     Examples: 
