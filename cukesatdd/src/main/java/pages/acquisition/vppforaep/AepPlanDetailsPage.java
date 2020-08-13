@@ -347,7 +347,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
 			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 		//replace all the next lines and spaces from the string
-
+			
+			if(key.contains("Passport"))
+				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol 
+			
 			key = key.toLowerCase(); 
 			columnName = columnName.toLowerCase();
 			
@@ -357,7 +360,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			
 			//removing all the footnote words from the string as they represent footnote
-			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total"))) {
+			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
 				if(benefitValueUI.endsWith("footnote2"))
 					benefitValueUI = benefitValueUI.replace("footnote2", "");
 				else if(benefitValueUI.endsWith("footnote1"))
@@ -369,6 +372,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 				else if(benefitValueUI.contains("Out-of-NetworkBenefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
+				}else if(key.equalsIgnoreCase("Dental")&&benefitValueUI.contains("$")) {
+					benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
 				}
 			}
 			//removing footnote values from the end of the key values if any
@@ -480,7 +485,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
-					if(key.equalsIgnoreCase(columnName)) {
+					if(key.equalsIgnoreCase(columnName)) {	
+						
+						if(key.equalsIgnoreCase("Dental")) {
+							benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
+						}
+						
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 								flag = true;break;
 							}else {
