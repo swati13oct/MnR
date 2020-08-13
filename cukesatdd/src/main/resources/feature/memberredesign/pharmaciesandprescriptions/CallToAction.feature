@@ -35,7 +35,7 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for each call to action.
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for Find and Price call to action.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -44,14 +44,47 @@ Feature: MVP - Call to Action
     Then user validates an image for Find and Price a Medication Call To Action
     Then user validates a title for Find and Price Call To Action
     Then user validates a description for Find and Price Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for Pharmacy Locator call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view Pharmacy Locator Call To Action
     Then user validates an image for Pharmacy Locator Call To Action
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for Order Prescription call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view Order Prescription Call To Action
     Then user validates an image for Order Prescription Call To Action
     Then user validates a title for Order Prescription Call To Action
     Then user validates a description for Order Prescription Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image, title and description for ANOC call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view ANOC Call To Action
     Then user validates an image for ANOC Call To Action
     Then user validates a title for ANOC Call To Action

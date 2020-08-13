@@ -493,11 +493,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319
-	public void clickDrugCostSummaryCallToAction() {
+	/*public void clickDrugCostSummaryCallToAction() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to Action element",
 				pnpValidate(DrugCostSummaryCallToActnBtn));
 		DrugCostSummaryCallToActnBtn.click();
-	}
+	}*/
 
 	public void validateFindAndPriceExternalLinkIconNotDisplayed() {
 		Assert.assertFalse("PROBLEM - Find and Price a Medication External Link Icon is displayed",
@@ -531,10 +531,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319 Drug Lookup
-	public void validateDrugLookupCallToActionOnPnPPage() {
+	/*public void validateDrugLookupCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element",
 				validate(DrugLookupCallToActnBtn, 30));
-	}
+	}*/
 
 	public void validateFindAndPriceAMedicationCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
@@ -563,26 +563,26 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319
-	public void validateImageDrugLookupCallToActionOnPnPPage() {
+	/*public void validateImageDrugLookupCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Image element",
 				pnpValidate(DrugLookupCTAImg));
-	}
+	}*/
 
 	// F436319
-	public void validateTitleDrugLookupCallToActionOnPnPPage() {
+	/*public void validateTitleDrugLookupCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Title element",
 				pnpValidate(DrugLookupCTATitle));
-	}
+	}*/
 
 	// F436319
-	public void validateDescriptionDrugLookupCallToActionOnPnPPage() {
+	/*public void validateDescriptionDrugLookupCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Description element",
 				pnpValidate(DrugLookupCTADescription));
-	}
+	}*/
 
 	// F436319 Pharmacy Locator Call To Action
 	public void validatePharmacyLocatorCallToActionOnPnPPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Tile element",
+		Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action button element",
 				pnpValidate(PharmacyLocatorCallToActnBtn));
 	}
 
@@ -606,7 +606,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F436319 Refill Home Delivery Call To Action
 	public void validateOrderPrescriptionCallToActionOnPnPPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action Tile element",
+		Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action button element",
 				pnpValidate(OrderPrescriptionCallToActnBtn));
 	}
 
@@ -629,29 +629,29 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319 Drug Cost Summary To Action
-	public void validateDrugCostSummaryCallToActionOnPnPPage() {
+	/*public void validateDrugCostSummaryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Tile element",
 				pnpValidate(DrugCostSummaryCallToActnBtn));
-	}
+	}*/
 
 	// F436319 Drug Cost Summary To Action
 	public void validateOrderPrescriptonCallToActionNOTDisplayedOnPnPPage() {
 		boolean isOrderPrescriptionCTA_NotDisplayed = pnpValidate(OrderPrescriptionCallToActnBtn);
-		Assert.assertFalse("PROBLEM - able to locate Order Prescription Call to action element",
+		Assert.assertFalse("PROBLEM - able to locate Order Prescription Call to action button element",
 				pnpValidate(OrderPrescriptionCallToActnBtn));
 	}
 
-	public void validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage() {
+	/*public void validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage() {
 		boolean isDrugCostSummaryCTA_NotDisplayed = pnpValidate(DrugCostSummaryCallToActnBtn);
 		Assert.assertFalse("PROBLEM - able to locate Drug Cost Summary Call to action element",
 				pnpValidate(DrugCostSummaryCallToActnBtn));
-	}
+	}*/
 
 	// F436319
-	public void validateImageDrugCostSummaryCallToActionOnPnPPage() {
+/*	public void validateImageDrugCostSummaryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Image element",
 				pnpValidate(DrugCostSummaryCTAImg));
-	}
+	}*/
 
 	// F436319
 	public void validateImageANOCCallToActionOnPnPPage() {
@@ -659,20 +659,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	// F436319
-	public void validateTitleDrugCostSummaryCallToActionOnPnPPage() {
+/*	public void validateTitleDrugCostSummaryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action  Title element",
 				pnpValidate(DrugCostSummaryCTATitle));
-	}
+	}*/
 
 	public void validateTitleANOCCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate ANOC to action  Title element", pnpValidate(ANOCCTATitle));
 	}
 
 	// F436319
-	public void validateDescriptionDrugCostSummaryCallToActionOnPnPPage() {
+	/*public void validateDescriptionDrugCostSummaryCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Description element",
 				pnpValidate(DrugCostSummaryCTADescription));
-	}
+	}*/
 	
 	public void validateDescriptionANOCCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate ANOC to action Description element",
@@ -849,10 +849,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		int size = countOfNewWindowTab();
 		if (size == 1) {
 			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is displayed in same browser window", true);
-			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page header is displayed successfully",
-					pnpValidate(HeaderOnPharmacyLocatorPageByRally, 30));
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+					pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
 		} else {
-			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is not displayed in same browser window", false);
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+					pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is displayed but NOT in same browser window", false);
 		}
 	}
 
@@ -860,10 +862,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		int size = countOfNewWindowTab();
 		if (size == 1) {
 			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is displayed in same browser window", true);
-			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page header is displayed successfully",
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page Page is displayed successfully",
 					pnpValidate(HeaderLegacyPharmacyLocatorPage, 30));
 		} else {
-			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is not displayed in same browser window",
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 					false);
 		}
 
@@ -897,31 +899,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F436319 Find and Price
 	public void validateFindAndPriceCallToActionOnPnPPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Tile element",
-				pnpValidate(findPrescriptionsCallToActnBtn));
+		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Button element",
+				pnpValidate(FindAndPriceCallToActnBtn));
 	}
 
 	// F436319
 	public void validateImageFindAndPriceCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Image element",
-				pnpValidate(findPrescriotionImage));
+				pnpValidate(FindAndPriceCTAImg));
 	}
 
 	// F436319
 	public void validateTitleFindAndPriceCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Title element",
-				pnpValidate(findPrescriptionTitle));
+				pnpValidate(FindAndPriceCTATitle));
 	}
 
 	// F436319
 	public void validateDescriptionFindAndPriceCallToActionOnPnPPage() {
 		Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Description element",
-				pnpValidate(findPrescriptionDesc));
+				pnpValidate(FindAndPriceCTADescription));
 	}
 
 	// F436319 Refill Home Delivery Call To Action
 	public void validateRefillHomeDeliveryCallToActionOnPnPPage() {
-		Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Tile element",
+		Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Button element",
 				pnpValidate(managePrescriptionCallToActnBtn));
 	}
 

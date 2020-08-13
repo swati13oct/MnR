@@ -217,7 +217,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='FindAndPriceADrug_svg__a']/.)[1]")
 	protected WebElement findPrescriotionImage;
 
-	@FindBy(xpath = "(//h2[contains(text(),'Find')])[1]")
+	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find and Price a Medication')]")
 	protected WebElement findPrescriptionTitle;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
@@ -226,25 +226,25 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'LEARN MORE')]")
 	protected List<WebElement> tenMedications;
 
-	@FindBy(xpath = "(//p[contains(text(),'Look up')])[1]")
+	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description' and contains(text(),'Find out if your drugs are covered, estimate costs and ways to help save money.')]")
 	protected WebElement findPrescriptionDesc;
 
 	@FindBy(xpath = "//*[@id='PharmacyLocator_svg__a']")
 	protected WebElement pharmacyLocatorImage;
 
-	@FindBy(xpath = "//h2[contains(text(),'Pharmacy')]")
+	@FindBy(xpath = "//h2[@data-testid='find-pharmacy-CTA-title' and contains(text(),'Pharmacy Locator')]")
 	protected WebElement pharmacyLocatorTitle;
 
-	@FindBy(xpath = "//p[contains(text(),'Find a pharmacy')]")
+	@FindBy(xpath = "//p[@data-testid='find-pharmacy-CTA-description' and contains(text(),'Find a network pharmacy near you.')]")
 	protected WebElement pharmacyLocatorDesc;
 
 	@FindBy(xpath = "//*[@id='CheckOrderStatus_svg__a']")
 	protected WebElement managePresciptionImage;
 
-	@FindBy(xpath = "//h2[contains(text(),'Manage')]")
+	@FindBy(xpath = "//h2[@data-testid='order-prescription-CTA-title' and contains(text(),'Order')]//span[contains(text(),'Prescriptions')]")
 	protected WebElement managePrescriptionTitle;
 
-	@FindBy(xpath = "//p[contains(text(),'Refill')]")
+	@FindBy(xpath = "//p[@data-testid='order-prescription-CTA-description' and contains(text(),'Refill your prescriptions with home delivery')]")
 	protected WebElement managePrescriptionDesc;
 
 	@FindBy(xpath = "//p[contains(text(),'Check')]/ancestor::button//div[@class='sc-LzLMh enfnLm']/*")
@@ -1159,28 +1159,28 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement MedicationCostSummaryExternalIcon;
 
 	// Drug Lookup Call to Action
-	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
-	protected WebElement DrugLookupCallToActnBtn;
+	/*@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
+	protected WebElement DrugLookupCallToActnBtn;*/
+
+	/*@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
+	protected WebElement DrugLookupCTAImg;*/
+	
+	/*@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
+	protected WebElement DrugLookupCTATitle;*/
+	
+	/*@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description']")
+	protected WebElement DrugLookupCTADescription;*/
 
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
 	protected WebElement FindAndPriceCallToActnBtn;
-
-	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
-	protected WebElement DrugLookupCTAImg;
-
+	
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
 	protected WebElement FindAndPriceCTAImg;
 
-	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
-	protected WebElement DrugLookupCTATitle;
-
-	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find and Price a Medication')]")
 	protected WebElement FindAndPriceCTATitle;
 
-	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description']")
-	protected WebElement DrugLookupCTADescription;
-
-	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description']")
+	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description' and contains(text(),'Find out if your drugs are covered, estimate costs and ways to help save money.')]")
 	protected WebElement FindAndPriceCTADescription;
 
 	// Pharmacy Locator
@@ -1191,10 +1191,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='find-pharmacy-CTA-icon']")
 	protected WebElement PharmacyLocatorCTAImg;
 
-	@FindBy(xpath = "//h2[@data-testid='find-pharmacy-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='find-pharmacy-CTA-title' and contains(text(),'Pharmacy Locator')]")
 	protected WebElement PharmacyLocatorCTATitle;
 
-	@FindBy(xpath = "//p[@data-testid='find-pharmacy-CTA-description']")
+	@FindBy(xpath = "//p[@data-testid='find-pharmacy-CTA-description' and contains(text(),'Find a network pharmacy near you.')]")
 	protected WebElement PharmacyLocatorCTADescription;
 
 	// Order Prescription
@@ -1204,32 +1204,32 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='order-prescription-CTA-icon']")
 	protected WebElement OrderPrescriptionCTAImg;
 
-	@FindBy(xpath = "//h2[@data-testid='order-prescription-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='order-prescription-CTA-title' and contains(text(),'Order')]/span[contains(text(),'Prescriptions')]")
 	protected WebElement OrderPrescriptionCTATitle;
 
-	@FindBy(xpath = "//p[@data-testid='order-prescription-CTA-description']")
+	@FindBy(xpath = "//p[@data-testid='order-prescription-CTA-description' and contains(text(),'Refill your prescriptions with home delivery')]")
 	protected WebElement OrderPrescriptionCTADescription;
 
 	// Drug Cost Summary
-	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
-	protected WebElement DrugCostSummaryCallToActnBtn;
+	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
+	protected WebElement DrugCostSummaryCallToActnBtn;*/
 
-	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
-	protected WebElement DrugCostSummaryCTAImg;
-
-	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
-	protected WebElement ANOCCTAImg;
-
-	@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
-	protected WebElement DrugCostSummaryCTATitle;
-
-	@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
-	protected WebElement ANOCCTATitle;
-
+	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
+	protected WebElement DrugCostSummaryCTAImg;*/
+	
+	/*@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
+	protected WebElement DrugCostSummaryCTATitle;*/
+	
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
+
+	@FindBy(xpath = "//div[@data-testid='anoc-CTA-icon']")
+	protected WebElement ANOCCTAImg;	
+
+	@FindBy(xpath = "//h2[@data-testid='anoc-CTA-title']")
+	protected WebElement ANOCCTATitle;
 	
-	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	@FindBy(xpath = "//p[@data-testid='anoc-CTA-description']")
 	protected WebElement ANOCCTADescription;
 
 	@FindBy(xpath = "//div[@data-testid='anoc-CTA']")
@@ -1274,8 +1274,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-component='BackButton']")
 	protected WebElement BackButtonOnPharmacyLocatorPageByRally;
 
-	@FindBy(xpath = "//h2[text()='Results for ']")
-	protected WebElement HeaderOnPharmacyLocatorPageByRally;
+	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
+	protected WebElement SearchButtonPharmacyLocatorPageByRally;
 
 	@FindBy(id = "pharmacylocatorheader_id")
 	protected WebElement HeaderLegacyPharmacyLocatorPage;
