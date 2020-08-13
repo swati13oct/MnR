@@ -507,11 +507,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateDrugEstimatorToolPageOpensInSameWindow() {
 		int size = countOfNewWindowTab();
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is displayed in same browser window", true);
-			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page header is displayed successfully",
+			Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
 					pnpValidate(DrugEstimatorToolPageHeader, 30));
 		} else {
-			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is not displayed in same browser window", false);
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
+					pnpValidate(DrugEstimatorToolPageHeader, 30));
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 		}
 	}
 
@@ -848,7 +850,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow() {
 		int size = countOfNewWindowTab();
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is displayed in same browser window", true);
+			Assert.assertTrue("PROBLEM - same window is opened", true);
 			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
 					pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
 		} else {
@@ -861,8 +863,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateLegacyPharmacyLocatortoolInSameBrowserWindow() {
 		int size = countOfNewWindowTab();
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is displayed in same browser window", true);
-			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page Page is displayed successfully",
+			Assert.assertTrue("PROBLEM - same browser window is opened", true);
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page Page is NOT displayed successfully",
 					pnpValidate(HeaderLegacyPharmacyLocatorPage, 30));
 		} else {
 			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
