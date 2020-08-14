@@ -198,6 +198,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public void clickPlaceOrderBtn() {
 		validate(orderSummaryPlaceOrderBtn, 20);
 		orderSummaryPlaceOrderBtn.click();
+		orderSummaryPlaceOrderBtn.click();
 	}
 
 	public boolean validatePreferredPaymentMethod() {
