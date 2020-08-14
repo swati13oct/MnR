@@ -220,3 +220,16 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType                  |
      | TC9 | MAPD      | PaidInFullFlag |  
+
+   #Test Case 10
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overdue flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates tool tips on the page
+ 
+    Examples: 
+      | TID       | planType | memberType   |
+      | TC9       | MAPD     | OverdueFlag  | 

@@ -698,8 +698,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(css="a#provider-title-")
 		private WebElement existingProvidersForNonMember;
 		
-		@FindBy(css="div#providersBanner>div")
-		private WebElement existingProviders;
+		@FindBy(css="div#newProvidersBanner>div")
+		private WebElement numberOfProviders;
 
 		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 		private WebElement rockyMountainLogo;
@@ -3850,16 +3850,26 @@ for (int i = 0; i < initialCount + 1; i++) {
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
+				driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='provider-list added'][1]")).click();
+				//Validate Drugs
+				List<WebElement> providersList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li"));
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers ("+providersList.size()+")", numberOfProviders.getText().trim());
+				
+				//Split the providers
+				String[] provider = providers.split(";");
+				
 				for(int i=0;i<providersList.size();i++) {
-					Assert.assertTrue(providers.contains(providersList.get(i).getText().trim()));
-					System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+					scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")));
+					provider[i]=provider[i].replace(":", "\n");
+					Assert.assertEquals(provider[i], driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim());
+					System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim()+"#########");
 				}
 			}else {
-				System.out.println("#########"+existingProviders.getText().trim()+"#########");
-				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 			}
 			
-			validatePlanSummary();
 			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
@@ -3993,8 +4003,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 					System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
 				}
 			}else {
-				System.out.println("#########"+existingProviders.getText().trim()+"#########");
-				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 			}
 			
 			validatePlanSummary();
