@@ -13,8 +13,8 @@ import atdd.framework.MRScenario;
 
 public class PrepareForNextYearSars extends PrepareForNextYearBase {
 
-	protected static final String m1="10/01/";
-	protected static final String m2="10/15/";
+	private static final String m1="10/01/";
+	private static final String m2="10/15/";
 
 	public PrepareForNextYearSars(WebDriver driver) {
 		super(driver);
@@ -49,6 +49,12 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 
 		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
 		Date showDocDate1=convertStrToDate(showDocDateStr1);
+System.out.println("TEST - currentDate="+convertDateToStrFormat_MMDDYYYY(currentDate));
+System.out.println("TEST - showDocDate1="+convertDateToStrFormat_MMDDYYYY(showDocDate1));
+System.out.println("TEST - m1="+m1);
+System.out.println("TEST - currentDate.equals(showDocDate1)="+currentDate.equals(showDocDate1));
+System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(showDocDate1));
+		
 		boolean showSection=false;
 		if (currentDate.equals(showDocDate1) || currentDate.after(showDocDate1)) {
 			showSection=true;
@@ -82,7 +88,7 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 		note.add("\t=================");
 		String subSection=" - Learn about other plan choices";
 
-		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
+		String showDocDateStr2=m1+String.valueOf(getCurrentYear());
 		Date showDocDate2=convertStrToDate(showDocDateStr2);
 
 		WebElement targetElement=null;
@@ -107,13 +113,9 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 			showSection=true;
 		}
 
-		targetItem=section+subSection+" - 'or' text before Compare New Plans Link";
-		targetElement=sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
+		targetItem=section+subSection+" - Compare New Plans Link";
+		targetElement=sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 		if (showSection) {
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+subSection+" - Compare New Plans Link";
-			targetElement=sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
@@ -170,9 +172,6 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
 		Date showDocDate1=convertStrToDate(showDocDateStr1);
 
-		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
-		Date showDocDate2=convertStrToDate(showDocDateStr2);
-
 		//note: circle would be green >= M4 w/o user doing anything
 		targetItem=section+" - Circle";
 		targetElement=sars_enrolPlnSec_circle_noGreen;
@@ -187,7 +186,7 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		boolean showSection=false;
-		if ((currentDate.equals(showDocDate2) || currentDate.after(showDocDate2))) {
+		if ((currentDate.equals(showDocDate1) || currentDate.after(showDocDate1))) {
 			showSection=true;
 		}
 
@@ -230,37 +229,23 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 		targetElement=sars_enrolPlnSec_choYurPlnSec_header;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - text";
-		targetElement=sars_enrolPlnSec_choYurPlnSec_text;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//---------------------------
-		System.out.println("Proceed to validate 'Stay in Current Plan' link behavior...");
-		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
-		Date showDocDate1=convertStrToDate(showDocDateStr1);
-
-		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
-		Date showDocDate2=convertStrToDate(showDocDateStr2);
-
+		//tbd targetItem=section+subSection+" - text";
+		//tbd targetElement=sars_enrolPlnSec_choYurPlnSec_text;
+		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
 		//---------------------------
 		System.out.println("Proceed to validate 'Compare next year plan' link behavior...");
-
+		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
+		Date showDocDate1=convertStrToDate(showDocDateStr1);
 		boolean showSection=false;
-		if (currentDate.equals(showDocDate2)  && currentDate.after(showDocDate2)) {
+		if (showDocDate1.equals(currentDate)  || currentDate.after(showDocDate1)) {
 			showSection=true;
 		}
+		System.out.println("TEST -showSection="+showSection);			
 		targetItem=section+subSection+" - Compare New Plans Link Arrow";
 		targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+subSection+" - 'or' text before Compare New Plans Link";
-			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_OR;
-			if (noWaitValidate(ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk))
-				note.addAll(validateHaveItem(targetItem, targetElement));
-			else
-				note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			targetItem=section+subSection+" - Compare New Plans Link";
 			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
@@ -298,9 +283,9 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 				if (!noWaitValidate(targetElement)) 
 					note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 				else
-					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr2+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr1+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
 			} else {
-				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr2+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr1+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}
 		}	

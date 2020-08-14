@@ -377,13 +377,13 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//p")
 	protected WebElement grp_findUpdatesSection_text;
 
-	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]")
+	@FindBy(xpath="//div[contains(@class,'findupdates_sar')]")
 	protected WebElement sars_findUpdatesSection;
 
-	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//h3")
+	@FindBy(xpath="//div[contains(@class,'findupdates_sar')]//h3")
 	protected WebElement sars_findUpdatesSection_header;
 	
-	@FindBy(xpath="//div[contains(@class,'Findupdates_Group')]//p")
+	@FindBy(xpath="//div[contains(@class,'findupdates_sar')]//p")
 	protected WebElement sars_findUpdatesSection_text;
 
 	//note: ind - review plan changes
@@ -1032,41 +1032,41 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec;
 	
 	//note: Compare plans online - Learn about other plan choices
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//i[contains(@class,'checkmarkSection') and not(contains(@class,'greenColor'))]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_checkMark_noGreen;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//i[contains(@class,'checkmarkSection') and contains(@class,'greenColor')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_checkMark_green;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//h4[contains(text(),'Learn about')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//h4[contains(text(),'Learn about')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_header;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//h4[contains(text(),'Learn about')]/../div/p[contains(text(),'If you are happy with your current plan')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//h4[contains(text(),'Learn about')]/../div/p[contains(text(),'Check coverage and costs of plans in your area')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_text;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Skip this step')]")
-	protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk;
+	//tbd @FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Skip this step')]")
+	//tbd protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Skip this step')]/../i")
-	protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
+	//tbd @FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Skip this step')]/../i")
+	//tbd protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
 	
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Compare with')]/../span[contains(text(),'or')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Compare with')]/../span[contains(text(),'or')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Compare with')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Compare with')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//a[contains(text(),'Compare with')]/../i")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Compare with')]/../i")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//p[contains(text(),'You have selected')]")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//p[contains(text(),'You have selected')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_selectedPlan_text;
 
-	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_ind')]//p[contains(text(),'You have selected')]/strong")
+	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//p[contains(text(),'You have selected')]/strong")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_selectedPlan_planName;
 
 	//note: Enroll in the plan that works for you
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_ind')]//div[contains(@class,'review-sub')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'review-sub')]")
 	protected WebElement sars_enrolPlnSec;
 	
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and not(contains(@class,'green'))]")
@@ -1078,7 +1078,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//h3")
 	protected WebElement sars_enrolPlnSec_header;
 
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//p//strong[contains(text(), 'October 15')]")
+	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//p//strong[contains(text(), 'October 1')]")
 	protected WebElement sars_enrolPlnSec_text;
 	
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]")
@@ -1094,8 +1094,8 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]//h4[contains(text(),'Choose your plan')]")
 	protected WebElement sars_enrolPlnSec_choYurPlnSec_header;
 
-	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]//h4[contains(text(),'Choose your plan')]/../div/p[contains(text(),'Decide if you want to stay')]")
-	protected WebElement sars_enrolPlnSec_choYurPlnSec_text;
+	//tbd @FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]//h4[contains(text(),'Choose your plan')]/../div/p[contains(text(),'Decide if you want to stay')]")
+	//tbd protected WebElement sars_enrolPlnSec_choYurPlnSec_text;
 
 	//note: Enroll in the plan that works for you - Choose your plan - Stay in plan
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//a[contains(text(),'Stay in current plan')]")

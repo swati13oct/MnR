@@ -38,7 +38,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-	protected static boolean validateAsMuchAsPossible=true;
+	protected static boolean validateAsMuchAsPossible=false;
 	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);
@@ -867,10 +867,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
 
 				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				targetItem=section+" - svg after '"+docName+"' doc link'";
-				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				//note: after link click, little check should turn green
 				//note: some section has inconsistent way to locate the green chkmrk xpath...that's why need to figure out which xpath to use

@@ -218,10 +218,11 @@ Feature: 1.25 Member Prepare For Next Year
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content for user with SARs plan
 
-@abc    @prepareForNextYear04_sars
+    @prepareForNextYear04_sars
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY               | true          |
+	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
 
 	    
 ##### end - cases for team env #################################################################

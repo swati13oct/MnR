@@ -14,23 +14,23 @@ import atdd.framework.MRScenario;
 
 public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
-	protected static final String m1="09/15/";
-	protected static final String m2="10/01/";
-	protected static final String m3="10/15/";
-	protected static final String m4="12/07/";
+	private static final String m1="09/15/";
+	private static final String m2="10/01/";
+	private static final String m3="10/15/";
+	private static final String m4="12/07/";
 	
-	protected static String cookiePlnChgSection="reviewPlanChanges";
-	protected static String cookiePlnChgSection_findNew="findoutnew";
+	private static String cookiePlnChgSection="reviewPlanChanges";
+	private static String cookiePlnChgSection_findNew="findoutnew";
 
-	protected static String cookiePlnMatSection="reviewPlanMaterials";
-	protected static String cookiePlnMatSection_plnBft="planBenefits";
-	protected static String cookiePlnMatSection_predrg="priscriptionInfo";
-	protected static String cookiePlnMatSection_provInfo="providerInfo";
-	protected static String cookiePlnMatSection_pharInfo="pharmacyInfo";
+	private static String cookiePlnMatSection="reviewPlanMaterials";
+	private static String cookiePlnMatSection_plnBft="planBenefits";
+	private static String cookiePlnMatSection_predrg="priscriptionInfo";
+	private static String cookiePlnMatSection_provInfo="providerInfo";
+	private static String cookiePlnMatSection_pharInfo="pharmacyInfo";
 
-	protected static String cookieComPlnSection="comparePlansOnline";
+	private static String cookieComPlnSection="comparePlansOnline";
 
-	protected static String cookieEnrPlnSection="enrollInaPlan";
+	private static String cookieEnrPlnSection="enrollInaPlan";
 
 	public PrepareForNextYearIndividual(WebDriver driver) {
 		super(driver);
@@ -99,6 +99,14 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateLanguageDropdown(section, ind_revPlnChgSec_docSec_langDropdown, ind_revPlnChgSec_lang_en, ind_revPlnChgSec_lang_es, ind_revPlnChgSec_lang_zh));
 
 			note.addAll(validateFindOutNewSection_ind(section, subSection, planType, memberType, docDisplayMap));
+			
+			
+			note.add("\n\tValidate after all subsection links turned green");
+			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
+			 	targetElement=ind_revPlnChgSec_circle_green1;
+			else 
+			 	targetElement=ind_revPlnChgSec_circle_green2;
+			 note.addAll(validateHaveItem(targetItem, targetElement));		
 		} else {
 			if (validateAsMuchAsPossible) {
 				if (!noWaitValidate(targetElement))

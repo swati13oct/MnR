@@ -38,7 +38,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	}
 
 	PrepareForNextYearTimelineIndividual pnfyTimeline_ind=new PrepareForNextYearTimelineIndividual(driver);
-	PrepareForNextYearTimelineSars pnfyTimeline_sar=new PrepareForNextYearTimelineSars(driver);
+	PrepareForNextYearTimelineSars pnfyTimeline_sars=new PrepareForNextYearTimelineSars(driver);
 	PrepareForNextYearIndividual pnfyIndividual=new PrepareForNextYearIndividual(driver);
 	PrepareForNextYearGroup pnfyGroup=new PrepareForNextYearGroup(driver);
 	PrepareForNextYearSars pnfySar=new PrepareForNextYearSars(driver);
@@ -197,7 +197,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			boolean expNoBlue_t1=false;
 			boolean expNoBlue_t2=false;
 			boolean expNoBlue_t3=false;
-			List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
+			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
@@ -239,7 +239,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			boolean expNoBlue_t1=false;
 			boolean expNoBlue_t2=true;
 			boolean expNoBlue_t3=true;
-			List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
+			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
@@ -279,7 +279,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			boolean expNoBlue_t1=false;
 			boolean expNoBlue_t2=false;
 			boolean expNoBlue_t3=true;
-			List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
+			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
@@ -372,7 +372,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			boolean expNoBlue_t1=false;
 			boolean expNoBlue_t2=false;
 			boolean expNoBlue_t3=false;
-			List<String> s1=pnfyTimeline_sar.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
+			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
