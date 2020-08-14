@@ -57,7 +57,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see Refill order confirmation page$")
 	public void user_will_see_Refill_order_confirmation_page() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displaced",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
@@ -65,7 +65,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see order number$")
 	public void user_will_see_order_number() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Number is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderNumber());
 	}
@@ -73,7 +73,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see order placed date$")
 	public void user_will_see_order_placed_date() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Placed Date is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderPlacedDate());
 	}
@@ -81,7 +81,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see order tracked as Order Received$")
 	public void user_will_see_order_tracked_as_Order_Received() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Tracker as Order Received is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderPlacedDate());
 	}
@@ -89,7 +89,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see order confirmation email messaging$")
 	public void user_will_see_order_confirmation_email_messaging() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Confirmation Email Message is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateEmailConfirmationMessage());
 	}
@@ -97,7 +97,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see Order Confirmation section$")
 	public void user_will_see_Oreder_Confirmation_section() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Confirmaction section is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderConfirmation());
 	}
@@ -105,7 +105,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the shipping method displayed$")
 	public void user_will_see_the_shipping_method_displayed() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Shipping method is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateShippingMethod());
 	}
@@ -113,7 +113,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the shipping address displayed$")
 	public void user_will_see_the_shipping_address_displayed() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Shipping address is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateShippingAddress());
 	}
@@ -121,7 +121,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the payment method displayed$")
 	public void user_will_see_the_payment_method_displayed() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - payment method is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validatePaymentMethod());
 	}
@@ -129,7 +129,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the order total displayed$")
 	public void user_will_see_the_order_total_displayed() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Total is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderTotal());
 	}
@@ -137,7 +137,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see an order total disclaimer displayed$")
 	public void user_will_see_an_order_total_disclaimer_displayed() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Total Disclaimer is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderTotalDisclaimer());
 	}
@@ -145,7 +145,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the estimated delivery date$")
 	public void user_will_see_the_estimated_delivery_date() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Estimated Delivery Date is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateEstimatedDeliveryDate());
 	}
@@ -153,7 +153,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@When("^user view the Medications section$")
 	public void user_view_the_Medications_section() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Medication Section is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateMedicationSection());
 	}
@@ -161,7 +161,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the drug name and strength$")
 	public void user_will_see_the_drug_name_and_strength() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Name and Strength is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateDrugNameAndStrength());
 	}
@@ -169,7 +169,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the day supply$")
 	public void user_will_see_the_day_supply() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Day supply is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateDaySupply());
 	}
@@ -177,7 +177,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will view the price$")
 	public void user_will_view_the_price() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateDrugPrice());
 	}
@@ -185,7 +185,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will view the Rx number$")
 	public void user_will_view_the_Rx_number() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateRxNumber());
 	}
@@ -193,7 +193,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will view the provider$")
 	public void user_will_view_the_provider() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateRxProviderName());
 	}
@@ -201,7 +201,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will view the remaining refills$")
 	public void user_will_view_the_remaining_refills() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateRxRefillsLeft());
 	}
@@ -209,7 +209,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@When("^user select the Go to Pharmacies and Prescriptions button$")
 	public void user_select_the_Go_to_Pharmacies_and_Prescriptions_button() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateRxNumber());
 	}

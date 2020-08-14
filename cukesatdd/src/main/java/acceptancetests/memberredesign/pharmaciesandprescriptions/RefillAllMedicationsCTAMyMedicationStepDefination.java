@@ -92,12 +92,11 @@ public class RefillAllMedicationsCTAMyMedicationStepDefination {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.waitTillMedCabLoads();
+		
 		pnpPg.clickOnRefillAllMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-	
 	@Then("^user will view all eligible refill medications moved into the refill flow$")
 	public void user_will_view_all_eligible_refill_medications_moved_into_the_refill_flow() throws Throwable {
 
