@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDdeeplink.json", detailedReport = true, de
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDdeeplink")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/HSID/deeplinkSignin.feature" }, plugin = {
-		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDdeeplink.json" }, tags = { "@F477221","@regressionMember","@F444247","@accountProfileDeeplink"})
+		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDdeeplink.json" }, tags = { "@regressionMember" })
 public class RunMRATDDdeeplink {
 
 	
