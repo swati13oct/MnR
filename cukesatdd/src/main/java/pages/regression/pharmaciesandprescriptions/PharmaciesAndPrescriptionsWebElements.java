@@ -307,7 +307,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='refill-all-meds']")
 	protected WebElement refillAllMedications;
 
-	@FindBy(xpath = "//*[contains(text(),'medications in one place.')]")
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div[1]/div")
 	protected WebElement refillAllMedicationsExplanation;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
@@ -362,7 +362,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
-	@FindBy(xpath = "//div[contains(text(),'My Medications')]")
+	@FindBy(xpath = "//h4[@data-testid='section__header']")
 	protected WebElement NumberInParenthesis;
 
 	@FindBy(xpath = "//p[contains(text(),'1-800-721-0627')]")
@@ -1035,6 +1035,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean corredpondingRefillMedicationsNumbers() {
+
+
 		String numberTXT = NumberInParenthesis.getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 
