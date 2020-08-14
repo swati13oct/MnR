@@ -44,7 +44,10 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 				CommonUtility.waitForPageLoadNew(driver, username, 45);
 			}else
 				CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
-		}else {
+		}else if (MRScenario.environment.equals("team-e")) {
+			start(MRConstants.AARP_TELESALES_AGENT_TEAM_E_PAGE_URL);
+		}
+		else {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
 			CommonUtility.waitForPageLoadNew(driver, username, 45);
 		}
