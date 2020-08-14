@@ -64,7 +64,7 @@ public class RenewOrderConfirmationStepDefinition {
 	@Then("^user will see Renew order confirmation page$")
 	public void user_will_see_Renew_order_confirmation_page() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displayed",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());    
 	}
