@@ -231,5 +231,5 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User validates tool tips on the page
  
     Examples: 
-      | TID       | planType | memberType  |
-      | TC9       | MAPD     | OverdueFlag | 
+      | TID       | planType | memberType   |
+      | TC9       | MAPD     | OverdueFlag  | 

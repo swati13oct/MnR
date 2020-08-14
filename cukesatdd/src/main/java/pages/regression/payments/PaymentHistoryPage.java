@@ -2176,8 +2176,8 @@ public void toolTipsValidation() throws InterruptedException {
 		System.out.println("Learn More About Your Billing History tool tip is displaying successfully");
 	}
 	else {
-		System.err.println("Learn More About Your Billing History popup is failing "); 
-		Assert.fail("Learn More About Your Billing History popup is failing ");
+		System.err.println("Learn More About Your Billing History popup is failing"); 
+		Assert.fail("Learn More About Your Billing History popup is failing");
 
 	}
 
@@ -2192,8 +2192,8 @@ public void toolTipsValidation() throws InterruptedException {
 		System.out.println("Learn More About Your Payment History tool tip is displaying successfully");
 	}
 	else {
-		System.err.println("Learn More About Your Payment History popup is failing "); 
-		Assert.fail("Learn More About Your Payment History popup is failing ");
+		System.err.println("Learn More About Your Payment History popup is failing"); 
+		Assert.fail("Learn More About Your Payment History popup is failing");
 
 	}
 }

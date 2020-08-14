@@ -1240,7 +1240,7 @@ try {
 			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
 						
 			con = DriverManager.getConnection(url, user, pwd);
-			System.out.println("Oracle Database Connection established*********");
+			System.out.println("Oracle Database Connection established**********");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
