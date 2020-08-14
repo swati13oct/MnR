@@ -586,7 +586,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='sc-LzLtS ikxaqs']") // ask for DataTestId attribute
 	protected WebElement MedicationName_OnDrugInfoPage;
 
-	@FindBy(xpath = "//span[contains(text(),'?')]")
+	@FindBy(xpath = "//a[@data-testid='pagination-next']")
 	protected WebElement nextPageArrow;
 
 	@FindBy(xpath = "//div[@class='sc-LzLrs ieWmEy' and contains(text(),'My Medication')]")

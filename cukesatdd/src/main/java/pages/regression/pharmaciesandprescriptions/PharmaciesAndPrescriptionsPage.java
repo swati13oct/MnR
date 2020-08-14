@@ -1906,6 +1906,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void clickOnNextPageArrow() {
+		Assert.assertTrue("PROBLEM - Next Page Navigation is disabled",validate(nextPageArrow,30));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", nextPageArrow);
 		nextPageArrow.click();
