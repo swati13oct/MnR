@@ -602,7 +602,7 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Then("^user will view active retail medications$")
+	@Then("^user will view active retail medications$|^user view a medication card with a retail prescription$")
 	public void user_will_view_active_retail_medications() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -802,17 +802,19 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user view a medication card with a retail prescription$")
-	public void user_view_a_medication_card_with_a_retail_prescription() throws Throwable {
+	@Then("^user will not see the Refills Left field for that prescriptions$")
+	public void user_will_not_see_the_field_for_that_prescriptions() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.verifyRefillLeftNotAvailableForRetalPharm();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-
-	@Then("^user will not see the \"([^\"]*)\" field for that prescriptions$")
-	public void user_will_not_see_the_field_for_that_prescriptions(String arg1) throws Throwable {
+	
+	@When("^user views a home delivery medication eligible for renewal on My Medication Page$")
+	public void user_views_a_home_delivery_medication_eligible_for_renewal_on_My_Medication_Page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRenewMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
