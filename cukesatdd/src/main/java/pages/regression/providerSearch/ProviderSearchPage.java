@@ -274,6 +274,8 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 20);
 		checkModelPopup(driver, 1);
+		if (noWaitValidate(benefitsPgHeader)) 
+			CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 15);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page",
 				noWaitValidate(benefitsPgHeader));
 		return driver;
