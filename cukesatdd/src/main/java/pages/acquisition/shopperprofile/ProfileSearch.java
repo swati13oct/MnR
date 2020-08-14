@@ -190,8 +190,8 @@ public class ProfileSearch extends UhcDriver {
 	 * Cloak In the Searched Profile
 	 * @return
 	 */
-	//public ComparePlansPage doCloakIn() {
-	public VPPPlanSummaryPage doCloakIn() {
+	public ComparePlansPage doCloakIn() {
+	//public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
@@ -203,12 +203,10 @@ public class ProfileSearch extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(AARPlogo);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
-			/*if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
-				return new ComparePlansPage(driver);*/
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
+				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {
