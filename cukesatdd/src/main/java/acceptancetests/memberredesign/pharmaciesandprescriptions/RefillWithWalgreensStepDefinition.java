@@ -44,8 +44,8 @@ public class RefillWithWalgreensStepDefinition {
 
 	}
 
-	@Then("^user sees the Manage at Walgreens CTA$")
-	public void user_sees_the_Manage_at_Walgreens_CTA() throws Throwable {
+	@Then("^user sees the walgreens button$")
+	public void user_sees_the_walgreens_button() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -54,8 +54,8 @@ public class RefillWithWalgreensStepDefinition {
 
 	}
 
-	@When("^user click on the Manage at Walgreens Call to Action button$")
-	public void user_click_on_the_Manage_at_Walgreens_Call_to_Action_button() throws Throwable {
+	@When("^user click on the walgreens button$")
+	public void user_click_on_the_walgreens_button() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
