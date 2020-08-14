@@ -98,7 +98,7 @@ public class RenewOrderConfirmationStepDefinition {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Estimated Delivery Date Alert Message is Not displayed on Order Confirmation Page",
-				orderConfirmationPage.validateEstimationDateAlertMsg(EstimationDateAlertMessage, 30));
+				orderConfirmationPage.validateEstimationDateAlertMsg());
 	}
 
 }
