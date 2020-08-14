@@ -79,5 +79,7 @@ public static final String PRIMARYCARE = "primarycare";
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
 
+	public static final String PLAN_YEAR = "planYear";
+
 }
 

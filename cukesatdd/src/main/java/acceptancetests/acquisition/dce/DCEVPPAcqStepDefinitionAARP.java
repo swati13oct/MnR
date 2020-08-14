@@ -23,6 +23,7 @@ import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -553,10 +554,13 @@ public class DCEVPPAcqStepDefinitionAARP {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName=memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
+			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+
 		}
 		
 		

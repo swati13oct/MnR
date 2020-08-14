@@ -214,6 +214,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
+			Assert.assertTrue("PROBLEM - this user is expected to be Pre-effective.  Unable to locate the 'VIEW PLAN DOCUMENTS' button on Benefits page.", noWaitValidate(preeff_goToPlanDocBtn));
 			if (noWaitValidate(preeff_goToPlanDocBtn)) {
 				preeff_goToPlanDocBtn.click();
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -312,7 +313,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement pnpTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
 		return driver;
@@ -401,11 +402,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 			scrollToView(testHarn_AcctProfBtn);
 			jsClickNew(testHarn_AcctProfBtn);
 
-			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
-
 			//note: don't know why .click() doesn't work
 			checkModelPopup(driver,1);
 			if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+
+				Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
 
 				String expUrl=stageUrl;
 				String actUrl=testHarn_desktop_AcctProf_IHRLnk.getAttribute("href");

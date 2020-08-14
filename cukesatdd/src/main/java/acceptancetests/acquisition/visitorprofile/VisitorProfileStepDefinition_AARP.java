@@ -104,8 +104,8 @@ public class VisitorProfileStepDefinition_AARP {
 	}
 	
 	
-	@And("^the user should be able to see the Drug and pharmacy information in the guest profile page$")
-	public void the_user_should_be_able_to_see_the_Drug_and_pharmacy_information_in_the_guest_profile_page(DataTable data) {
+	@And("^the user should be able to see the Drug information in the guest profile page$")
+	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);

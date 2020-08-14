@@ -15,13 +15,14 @@ public class MRConstants {
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/home.html";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
+	public static final String AARP_URL_NEW = "https://"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 	public static final String AARP_URL_OFFLINE = "https://offline.aarpmedicareplans.com/";
 	public static final String AARP_URL_PROD = "https://www.aarpmedicareplans.com/";
 	public static final String UHCM_URL_PROD = "https://www.uhcmedicaresolutions.com/";	
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/login.html";
 	public static final String UHCM_URL_OFFLINE = "https://member.offline.uhcmedicaresolutions.com";
 	//public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicarsolutions." + getDomain() + "/";
-	public static final String AUTHOR_URL = "http://author-"+MRScenario.environment+"." + getDomain() + "/";
+	public static final String AUTHOR_URL = "http://apvrt73396:8080";
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/plan-preview.html";
 	
 	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/plan-preview.html";
@@ -85,6 +86,8 @@ public class MRConstants {
 	
 //public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
 	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
+	
+	public static final String UHC_URL_NEW = "https://"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/";
 	
 	public static final String UHC_URL_OFFLINE = "https://offline.uhcmedicaresolutions.com/";
 	
@@ -403,6 +406,8 @@ public class MRConstants {
   public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
   
   public static String PROV_NAME = "";
+  public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";
+  //public static final String AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
  }
 
 	    
