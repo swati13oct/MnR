@@ -667,7 +667,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}*/
 
 	public void validateTitleANOCCallToActionOnPnPPage() {
-		Assert.assertTrue("PROBLEM - unable to locate ANOC to action  Title element", pnpValidate(ANOCCTATitle));
+		Assert.assertTrue("PROBLEM - unable to locate ANOC to action Title element", pnpValidate(ANOCCTATitle));
 	}
 
 	// F436319
@@ -881,22 +881,23 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateFAQSectionOnChoosePlanYearPage() {
-		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+		Assert.assertTrue("PROBLEM - unable to locate FAQ section on Choose a plan year page",
 				pnpValidate(FAQSectionOnChoosePlanYearPage));
 	}
 
 	public void validateNeedHelpSectionOnChoosePlanYearPage() {
-		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+		Assert.assertTrue("PROBLEM - unable to Need help section on Choose a plan year page",
 				pnpValidate(NeedHelpSectionOnChoosePlanYearPage));
 	}
 
 	public void validateMoreInfoSectionOnChoosePlanYearPage() {
-		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+		Assert.assertTrue("PROBLEM - unable to locate More Information Section  on Choose a plan year page",
 				pnpValidate(MoreInformationSectionOnChoosePlanYearPage));
 	}
 
 	public void validateGlobalFooterOnChoosePlanYearPage() {
-		Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+		validateNew(GlobalFooterSectionOnChoosePlanYearPage);
+		Assert.assertTrue("PROBLEM - unable to locate Global Footer Section on Choose a plan year page",
 				pnpValidate(GlobalFooterSectionOnChoosePlanYearPage));
 	}
 
