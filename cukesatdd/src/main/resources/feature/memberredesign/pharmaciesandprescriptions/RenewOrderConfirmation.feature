@@ -33,4 +33,4 @@ Feature: Renew Order Confirmation
 
     Examples: 
       | FID     | planType | memberType                                |
-      | F484053 | PDP      | Rx_Individual_PnP_rx_renewal_Confirmation |
+      | F484053 | MAPD     | Rx_Individual_PnP_rx_renewal_Confirmation |
