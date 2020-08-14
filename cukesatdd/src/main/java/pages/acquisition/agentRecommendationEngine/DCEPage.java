@@ -128,7 +128,9 @@ public class DCEPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				drugAddBtn.click();
+				validate(drugAddBtn);
+				jsClickNew(drugAddBtn);
+//				drugAddBtn.click();
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -142,16 +144,17 @@ public class DCEPage extends UhcDriver {
 		pickPharmacyButton.click();
 		pageloadcomplete();
 		threadsleep(2000);
-		validate(pharmacy1stSelectButton);
+/*		validate(pharmacy1stSelectButton);
 		pharmacy1stSelectButton.click();
 		threadsleep(2000);
-		pageloadcomplete();
+		pageloadcomplete();*/
 		validate(previoustoStep1);
 		previoustoStep1.click();
 		pageloadcomplete();
 		threadsleep(2000);
 		validate(returntoPlan);
 		returntoPlan.click();
+		pageloadcomplete();
 		/*
 		 * validate(viewCostButton); viewCostButton.click();
 		 * validate(backtoPlansButton); backtoPlansButton.click();

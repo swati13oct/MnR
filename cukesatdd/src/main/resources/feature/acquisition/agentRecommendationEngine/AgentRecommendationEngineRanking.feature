@@ -9,11 +9,14 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
 
     #Then agent validates plan ranking drop down UI plancompare page
     Examples: 
-      | User      | Pass      | Email            |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
@@ -25,14 +28,17 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user verify Drugs added in plan compare page vs DCE
       | Drugs Names | <DrugNameDosage> |
 
     Examples: 
-      | User      | Pass      | Email            | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                               | DrugNameDosage                                |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Lipitor TAB 10MG:morphine sulfate CAP 10MG ER |
+      | User      | Pass      | Email                 | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                               | DrugNameDosage                                |IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Lipitor TAB 10MG:morphine sulfate CAP 10MG ER | None          | current  |
 
   @ARE @ProviderARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -42,6 +48,9 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     When user adds providers in plan compare page
       | Doctors | <Doctors> |
     Then user verify added Providers in plan compare page vs Werally
@@ -49,8 +58,8 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Delete Doctors | <DelDoctorsNames> |
 
     Examples: 
-      | User      | Pass      | Email            | Doctors                                  | DelDoctorsNames                          |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM | Okeke, Ernest I, MD:Clower, Daniel C, MD | Okeke, Ernest I, MD:Clower, Daniel C, MD |
+      | User      | Pass      | Email                 | Doctors                                  | DelDoctorsNames                          | IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | Okeke, Ernest I, MD:Clower, Daniel C, MD | Okeke, Ernest I, MD:Clower, Daniel C, MD | None          | current  |
 
   @ARE @ViewPlanDetailsARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -60,11 +69,14 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     Then agent validates view plan details in plancompare page
 
     Examples: 
-      | User      | Pass      | Email            |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM |
+      | User      | Pass      | Email                 |IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @SavePlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -74,11 +86,14 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     Then agent validates save plans in plancompare page
 
     Examples: 
-      | User      | Pass      | Email            |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM |
+      | User      | Pass      | Email                 |IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrollPlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -88,11 +103,14 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     Then agent validates enroll plans in plancompare page
 
     Examples: 
-      | User      | Pass      | Email            |
-      | qavgogine | qavgogine | MARDI@MEMBER.COM |
+      | User      | Pass      | Email                 |IfMultiCounty | PlanYear |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @PlansReorder @F487396
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -102,6 +120,9 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+   	And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
     And agent selects county and plan year in plancompare page
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
@@ -114,7 +135,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                                   |
-      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                 | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
 
   @ARE @PlanYearAutoRanking @F487396
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
@@ -160,4 +181,3 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
-      

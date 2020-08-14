@@ -214,7 +214,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 
 	
-	@When("^user navigate Plan Recommendation Engine Using Get Help Choosing in Tools$")
+	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
 	public void navigate_Plan_Selector_tool() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);

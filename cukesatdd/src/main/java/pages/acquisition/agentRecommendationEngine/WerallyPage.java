@@ -72,15 +72,18 @@ public class WerallyPage extends UhcDriver {
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
 
-	@FindBy(css = "#savedProviders>.export-saved-providers button")
+	@FindBy(css = "div[class*='exportSavedProviders'] button[class*='action-btn'] span")
 	private WebElement checkProviderCoveragebutton;
+	
+	@FindBy(css = ".modal-body button[type*='submit']")
+	private WebElement returnToEnrollment;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
 	private WebElement finishReturnButton;
 
 //Rally Home Page
 
-	@FindBy(css = "a.ally-focus-within span")
+	@FindBy(css = ".feature a[href*='/saved-providers']")
 	private WebElement viewSavedProviderbutton;
 
 //Switch to Werally Window Page
@@ -217,9 +220,11 @@ public class WerallyPage extends UhcDriver {
 		}
 		validate(viewSavedProviderbutton, 30);
 		viewSavedProviderbutton.click();
-		threadsleep(5000);
+		threadsleep(5000); 
 		validate(checkProviderCoveragebutton, 30);
 		checkProviderCoveragebutton.click();
+		validate(returnToEnrollment, 30);
+		returnToEnrollment.click();
 		return doctorsName;
 	}
 

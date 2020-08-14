@@ -154,14 +154,35 @@ public class AgentRecommendationEngineStepDefinition {
 	public void agent_verify_drug_Doc_Session(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking planRank = new AREPlanRanking(wd);
-		planRank.verifyDrugDoc(inputValues.get("Ranking Options"), inputValues.get("Expected Plans Order"));
+		planRank.verifyDrugDoc(inputValues.get("Ranking Options"), inputValues.get("Expected Plans Order"), inputValues.get("Current Plan"));
 	}
 	
-	@Then("^agent get plandetails in plancompare after applied ranking$")
+	@When("^Agent fetch original PlanOrder in plancompare page$")
+	public void original_planOrder(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.OriginalPlanOrder(inputValues.get("Ranking Options"));
+	}
+	
+	@Then("^agent get plandetails after editing Drugs in plancompare$")
 	public void agent_getPlanDetails(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking planRank = new AREPlanRanking(wd);
-		planRank.getplanNames(inputValues.get("ChangeIn Order"),inputValues.get("Expected Plans Order"));
+		planRank.rankingplancomparion(inputValues.get("Current Plan"),inputValues.get("ChangeIn Order"),inputValues.get("Expected Plans Order"));
+	}
+	
+	@Then("^Apply ranking and get plans names in plancompare page$")
+	public void agent_apply_getPlanDetails(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.applyRankingGetplanNames(inputValues.get("Ranking Options"));
+	}
+	
+	@Then("^agent verify Drug option disabled and Original Plans Order in plancompare page$")
+	public void agent_DrugDisbale_PlanDetails(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.disableDrugOriginalPlans(inputValues.get("Current Plan"),inputValues.get("ChangeIn Order1"),inputValues.get("Ranking Options"),inputValues.get("Expected Plans Order"));
 	}
 	
 	@Then("^agent validates auto ranking for plan year change in plancompare page$")
