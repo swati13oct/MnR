@@ -2135,7 +2135,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
 		LocalStorage localStorage = webStorage.getLocalStorage();		
 
-		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
+		String DCE_uhcacquisition = localStorage.getItem("ucp_uhcacquisition");
 		System.out.println("UHC ACQ info from Local Storage");
 		System.out.println(DCE_uhcacquisition);
 		boolean validation_Flag=false;
@@ -2147,7 +2147,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
-		String DCEDrugList = localStorage.getItem("drugList");
+		String DCEDrugList = localStorage.getItem("ucp_drugList");
 		System.out.println("UHC DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;
