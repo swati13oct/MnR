@@ -780,12 +780,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+			CommonUtility.waitForPageLoad(driver, OptumRxManagePrescriptionHeader, 60);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Manage Prescription Page Header element",
 					pnpValidate(OptumRxManagePrescriptionHeader, 30));
 		}
 		driver.close();
 		driver.switchTo().window(pnpPageHandle);
-
 	}
 
 	public void validateNavigationToOptumRxBenefitsInformationOnNewTab() {
@@ -797,6 +797,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+			CommonUtility.waitForPageLoad(driver, OptumRxBenefitsInformationHeader, 60);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Benefits Information Page Header element",
 					pnpValidate(OptumRxBenefitsInformationHeader, 30));
 		}
