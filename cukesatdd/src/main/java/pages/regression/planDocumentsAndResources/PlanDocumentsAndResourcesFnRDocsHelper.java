@@ -505,10 +505,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("switchTab", "true");
 			testInputInfoMap.put("headerText","Your Privacy is Important");
 			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//tbd if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
 				testInputInfoMap.put("headerText","You have the right to privacy");
 				testInputInfoMap.put("sampleBodyText","What you need to do");
-			}
+				//tbd }
 			return testInputInfoMap; 
 		}	
 
