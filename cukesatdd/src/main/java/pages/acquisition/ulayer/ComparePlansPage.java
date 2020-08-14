@@ -238,6 +238,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
 	private List<WebElement> drugList;
 	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1065,9 +1068,9 @@ public class ComparePlansPage extends UhcDriver {
 		
 		//Validate Providers
 		if(!providers.equalsIgnoreCase("no")) {
-			validate(editDoctorsLink);
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+			validate(editDoctorsLink);
 			String[] provider = providers.split(";");
 			for(int i=0;i<provider.length;i++) {
 				if(!StringUtils.isNullOrEmpty(providers)) {
@@ -1129,5 +1132,19 @@ public class ComparePlansPage extends UhcDriver {
 		popupAccept.click();
 	}
 	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
 

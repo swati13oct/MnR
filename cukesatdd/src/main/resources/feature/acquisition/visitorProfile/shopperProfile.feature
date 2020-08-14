@@ -99,8 +99,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                                | drugNames | providers                 | testPlans                                                                    |
-      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | ALLA, M.D., SREENIVASA R. | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
+      | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                                | drugNames | providers | testPlans                                                                    |
+      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | No        | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
 
   @searchProfileAndAddDrugs
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
@@ -133,8 +133,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email              | plan                                    | plantype | drug    | dosage   | quantity | frequency     | branded |
-      | qavgogine | qavgogine | MAKAYLA@MEMBER.COM | AARP Medicare Advantage Walgreens (PPO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
+      | username  | password  | email              | plan                                               | plantype | drug    | dosage   | quantity | frequency     | branded |
+      | qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
 
   @searchProfileAndProviderFlow
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
@@ -144,16 +144,25 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then Navigate to Visitor Profile page on AARP site
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
     And user delets all the added providers on visitor profile page of AARP site
     And the user clicks on the add plans button in the profile in agent mode in AARP site
-    Then user saves two plans as favorite on AARP site
+     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    When the user Click on Is my Provider covered link Ulayer
+     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
@@ -166,8 +175,8 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email           | plantype | planname                                | testPlans                                                                                |
-      | qavgogine | qavgogine | DELTON@OWEN.com | MAPD     | AARP Medicare Advantage Walgreens (PPO) | AARP Medicare Advantage Walgreens (PPO),UnitedHealthcare Medicare Advantage Plan 3 (HMO) |
+      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | testPlans                                                                                   |
+      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
@@ -204,8 +213,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | fname | lname    | mbi           | dob        | plantype | enrolledplanName                           | planName                                 | drugNames | providers             | testPlans                                                                            |
-      | qavgogine | qavgogine | KARRY | MOUSTAFA | 2UY4-R98-DN88 | 12/26/1962 | MAPD     | UnitedHealthcare Dual Complete (PPO D-SNP) | AARP Medicare Advantage Plan 1 (HMO-POS) | No        | POULOS, M.D., ANNA M. | AARP Medicare Advantage Plan 1 (HMO-POS),AARP Medicare Advantage Choice Plan 2 (PPO) |
+      | username  | password  | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | testPlans                                                                    |
+      | qavgogine | qavgogine | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Choice (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
