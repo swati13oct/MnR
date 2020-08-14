@@ -1591,8 +1591,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
 		if (listOfIndex.size() != 0) {
 			for (Integer val : listOfIndex) {
-				System.out.println("Retail Pharmacy Name :" + listOfPharmacyName.get(val).getText());
-				if (listOfPharmacyName.get(val).getText().equals("OptumRx")) {
+				//System.out.println("Retail Pharmacy Name :" + listOfPharmacyName.get(val).getText());
+				
+				String text = listOfPharmacyName.get(val).getText();
+				for (WebElement child : listOfPharmacyName.get(val).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+				if (text.trim().equals("OptumRx")) {
 					return false;
 				}
 			}
@@ -1732,7 +1737,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 						text = text.replaceFirst(child.getText(), "");
 					}
 				System.out.println("Pharmacy Name : "+text);	
-				if (!text.equals("OptumRx")) {
+				if (!text.trim().equals("OptumRx")) {
 					return false;
 				}
 			}
@@ -2112,12 +2117,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public boolean verifyRefillRemainingFieldForHDMedication(String expectedVal) {
+		if(verifyHdMedicationEligibleForRefiilLeftField()) {
 		for (WebElement ele : listofHDMedicationHavingRefillLeftField) {
 			if (!(ele.getText().equalsIgnoreCase(expectedVal))) {
 				return false;
 			}
 		}
 		return true;
+		}
+		return false;
 	}
 
 	public void validateRefillRemainingValueOnCurrentMed() {
@@ -2127,7 +2135,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public boolean verifyRefillRemainingValueForHDMedication() {
 		for (WebElement ele : listofHDMedicationHavingRefillLeftVal) {
-			if (!(ele.getText().isEmpty())) {
+			if (ele.getText().isEmpty()) {
 				return false;
 			}
 		}
@@ -2136,7 +2144,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
 		CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
-		CommonUtility.waitForPageLoad(driver, estimatedDateOnCheckOutPage, 60);
+		CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
 			CommonUtility.checkPageIsReady(driver);
@@ -2192,7 +2200,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	
 	
 	public void waitTillMedCabLoads() {
-		if(!validate(ViewAllMedications,20)) {
+		if(!validate(ViewAllMedications,60)) {
 			System.out.println("Inside waitTillMedCabLoads");
 			tryAgainMedCabTimeOut.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -2201,12 +2209,26 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 	
 	public boolean validateRetailMedNotHavingRefillLeftField() {
-		for(WebElement ele:listOfHDMedicationHavingRefillflag) {
-			if(ele.getAttribute("data-is-refill-eligible").equals("false")) {
+		for(WebElement ele:listOfMedicationSectionNotFrmOptum) {
+			if(!ele.getAttribute("data-is-refill-eligible").equals("false")) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
+	
+	public boolean verifyHdMedicationEligibleForRefiilLeftField() {
+		for(WebElement ele:listOfMedicationSectionFromOptum) {
+			if(!ele.getAttribute("data-is-refill-eligible").trim().equalsIgnoreCase("true")) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void verifyRefillLeftNotAvailableForRetalPharm() {
+		Assert.assertTrue("PROBLEM - Refill Left Field available for Retail Medication",
+				validateRetailMedNotHavingRefillLeftField());
+	}
 }

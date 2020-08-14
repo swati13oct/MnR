@@ -24,7 +24,7 @@ Feature: Refill medication CTA
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
     Then user views the Medicine Cabinet on the My Medications page
-    When user have a home delivery medication eligible for refill
+    When user views a home delivery medication eligible for renewal on My Medication Page
     And user clicks Refill Medication call to action button
     Then user will be brought to the "Complete Your Refill" page for that medication
 
