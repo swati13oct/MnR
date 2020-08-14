@@ -2,10 +2,12 @@ package pages.regression.pharmaciesandprescriptions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.memberredesign.pharmaciesandprescriptions.MedicineCabinetStepDefinition;
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
+import acceptancetests.util.CommonUtility;
 
 public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
@@ -196,9 +198,13 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public void clickPlaceOrderBtn() {
+		CommonUtility.waitForPageLoad(driver, orderSummaryPlaceOrderBtn,30);
 		validate(orderSummaryPlaceOrderBtn, 20);
-		orderSummaryPlaceOrderBtn.click();
-		orderSummaryPlaceOrderBtn.click();
+		Actions actions = new Actions(driver);
+		actions.moveToElement(orderSummaryPlaceOrderBtn);
+		actions.click().build().perform();
+		/*orderSummaryPlaceOrderBtn.click();
+		orderSummaryPlaceOrderBtn.click();*/
 	}
 
 	public boolean validatePreferredPaymentMethod() {

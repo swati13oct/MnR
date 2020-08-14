@@ -12,7 +12,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	
 	public boolean validateOrderConfirmationThankyouMessage() {
 		
-		return validate(ThankyouMessageOrderConfirmation,120);
+		return validate(ThankyouMessageOrderConfirmation,60);
 	}
 	
 	public boolean validateOrderNumber() {
