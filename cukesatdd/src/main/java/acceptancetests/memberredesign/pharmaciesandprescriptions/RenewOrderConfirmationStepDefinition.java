@@ -46,7 +46,7 @@ public class RenewOrderConfirmationStepDefinition {
 	public void user_fetches_medication_information_and_clicks_on_Renew_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickTryAgainCurrentmedication();
+		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
 		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedication();
 		while (indexOfRenewMedication.size() == 0) {
@@ -73,7 +73,7 @@ public class RenewOrderConfirmationStepDefinition {
 	public void the_page_should_be_refreshed_so_that_the_status_of_this_renew_and_CTA_are_updated_per_this_renew_transaction() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickTryAgainCurrentmedication();
+		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
 		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
 		int count = 0;
