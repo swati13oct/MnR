@@ -10,7 +10,7 @@ Feature: Renew - Checkout summary
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user clicks the Renew Medication call to action button
-    Then user will see "Complete Your Renew" Page
+    Then user will see "Complete Your Renewal" Page
     When user views the Medications section
     Then user will see the number of medications in my order indicated in the header
 
@@ -25,7 +25,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user fetches medication information and clicks on Renew Medication call to action button
-    Then user will see "Complete Your Renew" Page
+    Then user will see "Complete Your Renewal" Page
     When user views the Medications section
     And user validates the medication name and strength
     And user validates the price
@@ -58,7 +58,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Order summary section
     Then user will see the line item Medications
     And user will see the number of prescriptions included in the order
@@ -74,7 +74,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Order summary section
     Then user will see the total price of all medications in the order
 
@@ -89,7 +89,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Order summary section
     Then user will see the line item Shipping
     And user will see the price of the shipping
@@ -105,7 +105,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Order summary section
     Then user will see the price total
     And the total will include medication and shipping cost
@@ -121,7 +121,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Order summary section
     Then user will see a disclaimer related to estimated order total
 
@@ -136,7 +136,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user will view the section above Place Order Btn
     Then user will see a message about shipping address
     And user will see shipping address
@@ -152,7 +152,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Payment section
     Then user will see Preferred payment method
 
@@ -167,7 +167,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Payment section
     Then user will see the card type
     And user will see the last four digits of the card number
@@ -186,7 +186,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user view the Shipping Address section
     Then user will see Preferred shipping address
     And user will view the Preferred Address label
@@ -203,7 +203,7 @@ Feature: Renew - Checkout summary
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     And user will see Place Order Btn
 
     #When user clicks on Place Order Btn
@@ -212,55 +212,52 @@ Feature: Renew - Checkout summary
       | FID     | planType | memberType                   |
       | F484041 | PDP      | Rx_Individual_PnP_rx_renewal |
 
-  @F484041 @US2767408 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Different Shipments and Estimated Delivery Date
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks View all medications link to view the My Medications page
-    And user clicks Refill All Medication call to action button
-    Then user views the "Complete Your Renew" page
-    When user medications are grouped into more than one shipment
-    Then user will see the different shipments indicated
-    And user will see the estimated delivery date for each shipment
-
-    Examples: 
-      | FID     | planType | memberType                   |
-      | F484041 | PDP      | Rx_Individual_PnP_rx_renewal |
-
-  @F484041 @US2767408 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto Refill Line Populate
+  @F484041 @US2777869 @Scenario4 @Testinggggg
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OptumRx contacting the provider for a new prescription message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks the Renew Medication call to action button
-    Then user views the "Complete Your Renew" page
+    Then user views the "Complete Your Renewal" page
     When user views the Medications section
-    Then user will see the auto refill line populate for any eligible medication
+    Then user will see message about OptumRx contacting the provider for a new prescription
 
     Examples: 
       | FID     | planType | memberType                   |
       | F484041 | PDP      | Rx_Individual_PnP_rx_renewal |
 
+  #@F484041 @US2767408 @Scenario1
+  #Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto Refill Line Populate
+  # Given login with following details logins in the member portal and validate elements
+  #  | Plan Type   | <planType>   |
+  #   | Member Type | <memberType> |
+  # When user navigates to the pharmacies and prescriptions page from testharness page
+  # And user clicks the Renew Medication call to action button
+  # Then user views the "Complete Your Renewal" page
+  # When user views the Medications section
+  # Then user will see the auto refill line populate for any eligible medication
+  # Examples:
+  #    | FID     | planType | memberType                   |
+  #   | F484041 | PDP      | Rx_Individual_PnP_rx_renewal |
   @F484041 @Regression
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Renew Page Functionality
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Renewal Page Functionality
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user fetches medication information and clicks on Renew Medication call to action button
-    Then user will see "Complete Your Renew" Page
+    And user fetches medication informations and clicks on Renew Medication call to action button
+    Then user will see "Complete Your Renewal" Page
     When user views the Medications section
     Then user will see the number of medications in my order indicated in the header
     And user validates the medication name and strength
     And user validates the price
-    And user validates the day supply
+    And user validates the day supply for Renew
     And user validates the Rx number
     And user validates the provider
     And user sees a Remove Item From Order CTA
-    And user will see the estimated delivery date for each shipment
+    And user will see message about OptumRx contacting the provider for a new prescription
+    #And user will see the estimated delivery date for each shipment
     When user view the Order summary section
     Then user will see the line item Medications
     And user will see the number of prescriptions included in the order

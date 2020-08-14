@@ -304,6 +304,12 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
+	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='refill-all-meds-CTA']")
+	protected WebElement refillAllMedications;
+
+	@FindBy(xpath = "//*[contains(text(),'Refill all home delivery medications in one place.']")
+	protected WebElement refillAllMedicationsExplanation;
+
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
 	protected WebElement totalMedicationsInCurrenMedications;
 
@@ -598,7 +604,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']")
 	protected List<WebElement> listOfRefillMedication;
 
-	@FindBy(xpath = "//button[@data-testid='medication-action-renew']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-renew']")
 	protected List<WebElement> listOfRenewMedication;
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
@@ -1028,6 +1034,20 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean corredpondingRefillMedicationsNumbers() {
+		String numberTXT = NumberInParenthesis.getText();
+		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+
+		if (number>0) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+
 	public boolean validateNeedHelpsPhoneNumbers() {
 
 		String techNumber="1-800-721-0627";
@@ -1228,6 +1248,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
+	
+	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	protected WebElement ANOCCTADescription;
 
 	@FindBy(xpath = "//div[@data-testid='anoc-CTA']")
 	protected WebElement ANOCCallToActnBtn;
@@ -1289,13 +1312,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfAmntPaidEligibleFrRefill;
 	
-	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfAmntPaidEligibleFrRenew;
 	
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRefill;
 	
-	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRenew;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
@@ -1304,10 +1327,19 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleFrRefill;
 
-	@FindBy(xpath = "//button[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleFrRenew;
 	
 	@FindBy(xpath = "//button/span[@data-test-component='text' and contains(text(),'Try Again')]")
 	protected WebElement tryAgainMedCabTimeOut;
+	
+	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
+	protected WebElement orderCheckoutPageHeader;
+	
+	@FindBy(xpath="//div[@data-is-refill-eligible]")
+	protected List<WebElement> listOfHDMedicationHavingRefillflag;
+	
+	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
+	protected WebElement estimatedDateOnCheckOutPage;
 
 }

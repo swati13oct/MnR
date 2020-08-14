@@ -227,7 +227,7 @@ public class RefillOrderConfirmationStepDefinition {
 			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickTryAgainCurrentmedication();
+		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
 		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
 		int count = 0;
@@ -251,7 +251,7 @@ public class RefillOrderConfirmationStepDefinition {
 	public void user_clicks_Refill_Medication_call_to_action_button_from_My_Medication() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickTryAgainCurrentmedication();
+		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
 		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedication();
 		while (indexOfRefillMedication.size() == 0) {

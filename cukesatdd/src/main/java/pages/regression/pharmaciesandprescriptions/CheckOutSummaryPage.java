@@ -27,11 +27,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateOrderSummarySection() {
-		return validate(orderSummarySection);
+		return validate(orderSummarySection, 20);
 	}
 
 	public boolean validateMedicationLineUnderOrderSummary() {
-		return validate(orderSummaryMedicationLabel);
+		return validate(orderSummaryMedicationLabel, 20);
 	}
 
 	public boolean validatePrescriptionNumberUnderOrderSummary() {
@@ -69,11 +69,20 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateShippingLabelUnderOrderSummary() {
-		return validate(orderSummaryShippingLabel);
+		return validate(orderSummaryShippingLabel, 20);
 	}
 
 	public boolean validateShippingFeeUnderOrderSummary() {
 		String shippingMethod = shippingDrpDownVal.getText();
+		int count = 0;
+		while (!shippingMethod.contains("Standard")) {
+			shippingMethod = shippingDrpDownVal.getText();
+			count++;
+			if (count > 20) {
+				break;
+			}
+		}
+		shippingMethod = shippingDrpDownVal.getText();
 		String shippingFee = orderSummaryShippingFee.getText();
 		String[] arry = shippingMethod.split("-");
 		if (!arry[1].trim().equals("Free")) {
@@ -98,7 +107,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateDisclaimerUnderOrderSummary() {
-		return validate(orderSummaryDisclaimer);
+		return validate(orderSummaryDisclaimer, 20);
 	}
 
 	public boolean validateConfirmationMsgUnderOrderSummary() {
@@ -110,11 +119,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validatePlaceOrderBtnUnderOrderSummary() {
-		return validate(orderSummaryPlaceOrderBtn);
+		return validate(orderSummaryPlaceOrderBtn, 20);
 	}
 
 	public boolean validateShippingAddressSection() {
-		return validate(shippingAddressSection);
+		return validate(shippingAddressSection, 20);
 	}
 
 	public boolean validatePreferedShippingAddressLabel() {
@@ -126,11 +135,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateChangeShippingAddressBtn() {
-		return validate(changeShippingAddrssCTA);
+		return validate(changeShippingAddrssCTA, 20);
 	}
 
 	public boolean validatePaymentSection() {
-		return validate(paymentSection);
+		return validate(paymentSection, 20);
 	}
 
 	public boolean validatePreferedPaymentLabel() {
@@ -143,7 +152,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateChangePaymentBtn() {
-		return validate(changePaymentCTA);
+		return validate(changePaymentCTA, 20);
 	}
 
 	public boolean validateCardExpiryDate() {
@@ -167,10 +176,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	 */
 
 	public boolean validateMedicationSection() {
-		return validate(medicationsSection);
+		return validate(medicationsSection, 20);
 	}
 
 	public boolean validatePrescriptionNumberUnderMedicationSectn() {
+		validate(prescriptionContainer, 30);
 		int totalMedication = listOfPrescriptions.size();
 		return medicationsHeader.getText().contains(Integer.toString(totalMedication))
 				&& medicationsHeader.getText().matches(medicationsRegex);
@@ -186,16 +196,16 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public void clickPlaceOrderBtn() {
-		validate(orderSummaryPlaceOrderBtn);
+		validate(orderSummaryPlaceOrderBtn, 20);
 		orderSummaryPlaceOrderBtn.click();
 	}
 
 	public boolean validatePreferredPaymentMethod() {
-		return validate(preferredPaymentMethod);
+		return validate(preferredPaymentMethod, 20);
 	}
 
 	public boolean validateConfirmationSection() {
-		return validate(orderSummaryConfirmationSection);
+		return validate(orderSummaryConfirmationSection, 20);
 	}
 
 	public boolean validateMedicationNameAndStrength() {
@@ -207,8 +217,9 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateMedicationPrice() {
-		String medicationPrice = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
-		return medicationPrice.trim().equalsIgnoreCase(listOfPrice.get(listOfPrice.size() - 1).getText().trim());
+		// String medicationPrice =
+		// RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
+		return listOfPrice.get(listOfPrice.size() - 1).getText().trim().matches(dollarAmntRegex);
 	}
 
 	public boolean validateDaySupply() {
@@ -256,6 +267,16 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateConfirmationPageHeader() {
-		return validate(orderConfirmationPageHeader);
+		return validate(orderConfirmationPageHeader, 20);
+	}
+
+	public boolean validateDaySupplyForRenew() {
+		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
+		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(daySupply.trim());
+	}
+
+	public boolean validateShippingAlternateDate() {
+		validate(shippingAlternateMsg, 20);
+		return !shippingAlternateMsg.getText().isEmpty();
 	}
 }

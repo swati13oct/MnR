@@ -14,7 +14,7 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |
 
   @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Remaining Value for HD Prescription on My Medication Page
@@ -30,7 +30,7 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |
 
   @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field for HD Prescription on Current Medication
@@ -44,7 +44,7 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |
 
   @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Remaining Value for HD Prescription on Current Medication
@@ -59,7 +59,7 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |
 
   @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field not available for Retail Prescription on Current Medication
@@ -72,7 +72,7 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |
 
   @F479509
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Refill Left Field not available for Retail Prescription on Current Medication
@@ -87,4 +87,4 @@ Feature: Refills Remaining
 
     Examples: 
       | FID     | planType | memberType           |
-      | F479509 | PDP      | Rx_Individual_PnP_rx |
+      | F479509 | MAPD     | Rx_Individual_PnP_rx |

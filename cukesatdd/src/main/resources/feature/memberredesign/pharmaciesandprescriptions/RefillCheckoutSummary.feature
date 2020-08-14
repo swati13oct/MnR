@@ -222,29 +222,28 @@ Feature: Refill - Checkout summary
     And user clicks View all medications link to view the My Medications page
     And user clicks Refill All Medication call to action button
     Then user views the "Complete Your Refill" page
-    When user medications are grouped into more than one shipment
-    Then user will see the different shipments indicated
-    And user will see the estimated delivery date for each shipment
-
-    Examples: 
-      | FID     | planType | memberType                  |
-      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
-
-  @F481927 @US2767408 @Scenario1 @Test
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto Refill Line Populate
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
-    Then user views the "Complete Your Refill" page
     When user views the Medications section
-    Then user will see the auto refill line populate for any eligible medication
+    #When user medications are grouped into more than one shipment
+    #Then user will see the different shipments indicated
+    Then user will see the estimated delivery date for each shipment
 
     Examples: 
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
+  #@F481927 @US2767408 @Scenario1 @Test
+  #Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Auto Refill Line Populate
+  # Given login with following details logins in the member portal and validate elements
+  #  | Plan Type   | <planType>   |
+  # | Member Type | <memberType> |
+  #When user navigates to the pharmacies and prescriptions page from testharness page
+  #And user clicks Refill Medication call to action button
+  #Then user views the "Complete Your Refill" page
+  #When user views the Medications section
+  #Then user will see the auto refill line populate for any eligible medication
+  #Examples:
+  # | FID     | planType | memberType                  |
+  #| F481927 | PDP      | Rx_Individual_PnP_rx_refill |
   @F481927 @Regression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Refill Page Functionality
     Given login with following details logins in the member portal and validate elements

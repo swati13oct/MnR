@@ -649,4 +649,12 @@ public class CallToActionStepDefinition {
 
 	}
 
+	@Then("^user validates a description for ANOC Call To Action$")
+	public void user_validates_a_description_for_ANOC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDescriptionANOCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
 }
