@@ -14,6 +14,11 @@ import atdd.framework.MRScenario;
 
 public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
+	protected static final String m1="09/15/";
+	protected static final String m2="10/01/";
+	protected static final String m3="10/15/";
+	protected static final String m4="12/07/";
+	
 	protected static String cookiePlnChgSection="reviewPlanChanges";
 	protected static String cookiePlnChgSection_findNew="findoutnew";
 
@@ -44,7 +49,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			return false;
 	}
 
-	PrepareForNextYearTimeline pnfyTimeline=new PrepareForNextYearTimeline(driver);
+	PrepareForNextYearTimelineIndividual pnfyTimeline=new PrepareForNextYearTimelineIndividual(driver);
 
 	public List<String>  validateTimeLineBoxContent(boolean expNoBlue_t1, boolean expNoBlue_t2, boolean expNoBlue_t3, boolean expNoBlue_t4, boolean expNoBlue_t5) {
 		return pnfyTimeline.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
@@ -168,6 +173,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement langDropdownElement2=ind_revPlnMatlsSec_docSec_langDropdown; 
 		WebElement pdfElement=ind_revPlnChgSec_docSec_anoc_es;
 		WebElement arrowAftPdfElement=ind_revPlnChgSec_docSec_anoc_es_arrow;
+		WebElement svgAftPdfElement=ind_revPlnChgSec_docSec_anoc_es_svg;
 		String subSecCookie=cookiePlnChgSection_findNew;
 		WebElement subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		WebElement subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -178,7 +184,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -190,6 +196,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnMatlsSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnChgSec_docSec_anoc_zh;
 		arrowAftPdfElement=ind_revPlnChgSec_docSec_anoc_zh_arrow;
+		svgAftPdfElement=ind_revPlnChgSec_docSec_anoc_zh_svg;
 		subSecCookie=cookiePlnChgSection_findNew;
 		subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2;
@@ -200,7 +207,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -211,6 +218,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnMatlsSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnChgSec_docSec_anoc_en;
 		arrowAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_arrow;
+		svgAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_svg;
 		subSecCookie=cookiePlnChgSection_findNew;
 		subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2;
@@ -221,7 +229,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -341,6 +349,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			WebElement langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 			WebElement pdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es;
 			WebElement arrowAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es_arrow;
+			WebElement svgAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_es_svg;
 			String subSecCookie=cookiePlnMatSection_plnBft;
 			WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -351,7 +360,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
 					langDropdownElement2, 
-					pdfElement, arrowAftPdfElement, 
+					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
 
@@ -363,6 +372,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 			pdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh;
 			arrowAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh_arrow;
+			svgAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_zh_svg;
 			subSecCookie=cookiePlnMatSection_plnBft;
 			subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -373,7 +383,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
 					langDropdownElement2, 
-					pdfElement, arrowAftPdfElement, 
+					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
 
@@ -384,6 +394,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 			pdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en;
 			arrowAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en_arrow;
+			svgAftPdfElement=ind_revPlnMatlsSec_plnBeneSec_eoc_en_svg;
 			subSecCookie=cookiePlnMatSection_plnBft;
 			subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -394,7 +405,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
 					langDropdownElement2, 
-					pdfElement, arrowAftPdfElement, 
+					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
 
@@ -444,6 +455,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		targetItem=section+subSection+" - svg after Drug Search link";
+		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_svg;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+
 		targetItem=section+subSection+" - Drug Search link";
 		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
@@ -482,6 +497,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		WebElement pdfElement=ind_revPlnMatlsSec_presDrugSec_cf_es;
 		WebElement arrowAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_es_arrow;
+		WebElement svgAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_es_svg;
 		String subSecCookie=cookiePlnMatSection_predrg;
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -492,7 +508,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -505,6 +521,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_presDrugSec_cf_zh;
 		arrowAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_zh_svg;
 		subSecCookie=cookiePlnMatSection_predrg;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -515,7 +532,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -526,6 +543,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_presDrugSec_cf_en;
 		arrowAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_en_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_presDrugSec_cf_en_svg;
 		subSecCookie=cookiePlnMatSection_predrg;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -536,7 +554,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -591,7 +609,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			targetItem=section+subSection+" - svg after Search For Providers link";
+			targetElement=ind_revPlnMatlsSec_provInfoSec_provSrchLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 			//note: after link click, little check should turn green
+			
 			note.add("\n\tValidate after clicking 'Search For Providers' link");
 			targetItem=section+" - green checkmark";
 			targetElement=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
@@ -622,6 +644,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		WebElement pdfElement=ind_revPlnMatlsSec_provInfoSec_pr_es;
 		WebElement arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_es_arrow;
+		WebElement svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_es_svg;
 		String subSecCookie=cookiePlnMatSection_provInfo;
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -632,7 +655,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -644,6 +667,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_provInfoSec_pr_zh;
 		arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_zh_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_zh_svg;
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -654,7 +678,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -665,6 +689,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_provInfoSec_pr_en;
 		arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_en_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_pr_en_svg;
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -675,7 +700,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -689,6 +714,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_provInfoSec_ve_es;
 		arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_es_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_es_svg;
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -699,7 +725,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -711,6 +737,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_provInfoSec_ve_zh;
 		arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_zh_svg;
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -721,7 +748,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -732,6 +759,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_provInfoSec_ve_en;
 		arrowAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_en_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_provInfoSec_ve_en_svg;
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -742,7 +770,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -781,10 +809,17 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk_arrow;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		//TODO - TBD
+		targetItem=section+subSection+" - svg after Find a Pharmacy link";
+		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk_arrow;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+
 		targetItem=section+subSection+" - Find a Pharmacy link";
 		targetElement=ind_revPlnMatlsSec_pharInfoSec_pharSrchLnk;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
+		String expUrl="/member/pharmacy-locator/overview.html";
+		/* tbd 
 		String expUrl="/health-plans/aarp-pharmacy.html";
 		if (memberType.toUpperCase().contains("UHC")) {
 			if (MRScenario.environment.contains("stage")) 
@@ -796,10 +831,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				expUrl="aarpmedicareplans.uhc.com"+expUrl;
 			else
 				expUrl="aarpmedicareplans.com"+expUrl;
-		}
+		} */
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
+		
+		
 		//note: after link click, little check should turn green
 		note.add("\n\tValidate after clicking 'Find a Pharmacy' link");
 		targetItem=section+" - green checkmark";
@@ -820,6 +856,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		WebElement pdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_es;
 		WebElement arrowAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_es_arrow;
+		WebElement svgAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_es_svg;
 		String subSecCookie=cookiePlnMatSection_pharInfo;
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -830,7 +867,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -842,6 +879,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh;
 		arrowAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_zh_svg;
 		subSecCookie=cookiePlnMatSection_pharInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -852,7 +890,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -863,6 +901,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement2=ind_revPlnChgSec_docSec_langDropdown; 
 		pdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_en;
 		arrowAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_arrow;
+		svgAftPdfElement=ind_revPlnMatlsSec_pharInfoSec_ph_en_svg;
 		subSecCookie=cookiePlnMatSection_pharInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
@@ -873,7 +912,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
 				langDropdownElement2, 
-				pdfElement, arrowAftPdfElement, 
+				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
 
@@ -988,6 +1027,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			targetItem=section+subSection+" - Skip This Link svg";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_skipThisLnk_svg;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
 			scrollElementToCenterScreen(ind_compPlnsSec_lrnOthPlnSec_skipThisLnk);
 			ind_compPlnsSec_lrnOthPlnSec_skipThisLnk.click();
 			CommonUtility.waitForPageLoad(driver, ind_compPlnsSec_lrnOthPlnSec_checkMark_green, 5);
@@ -1023,6 +1066,15 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			targetItem=section+subSection+" - Compare New Plans Link arrow";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem=section+subSection+" - Compare New Plans Link svg";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+
 			//note - validate link destination
 			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
 			String expUrl="/health-plans.html#/plan-summary";
@@ -1039,9 +1091,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-			targetItem=section+subSection+" - Compare New Plans Link Arrow";
-			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
+			//tbd targetItem=section+subSection+" - Compare New Plans Link Arrow";
+			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
+			//tbd note.addAll(validateHaveItem(targetItem, targetElement));
+
+			//tbd targetItem=section+subSection+" - Compare New Plans Link svg";
+			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
+			//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			note.add("\n\tValidate after clicking 'Compare New Plans' link");
 			//note: after link click, section circle should turn green
@@ -1234,6 +1290,11 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			targetItem=section+subSection+" - Stay in Current Plan link svg";
+			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk_svg;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+
 			ind_enrolPlnSec_choYurPlnSec_stayInPlnLnk.click();
 			note.add("\n\tValidate after clicking 'Stay in Current Plan' link");
 			//note: after link click, little check should turn green
@@ -1276,6 +1337,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetItem=section+subSection+" - Compare New Plans Link Arrow";
 		targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
 		if (showSection) {
+			note.addAll(validateHaveItem(targetItem, targetElement));
+
+			targetItem=section+subSection+" - Compare New Plans Link svg";
+			targetElement=ind_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_svg;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			targetItem=section+subSection+" - 'or' text before Compare New Plans Link";

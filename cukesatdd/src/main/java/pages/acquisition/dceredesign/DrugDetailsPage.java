@@ -1,6 +1,7 @@
 package pages.acquisition.dceredesign;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.PlanDetailsPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -47,7 +50,16 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]")
 	public WebElement DrugCosts_AnnualEstTotal;
+
+	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_AvgMonDrugCost_Amount;
 	
+	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_MonthlyPremium_Amount;
+	
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
+	public WebElement DrugCosts_AnnualEstTotal_Amount;
+
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plans Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
@@ -207,13 +219,13 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//*[contains(@class, 'closeicon')]")
 	public WebElement StageInfo_Modal_Close;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Initial Coverage Stage')]")
 	public WebElement InitialCoverage_Modal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Coverage Gap Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Coverage Gap Stage')]")
 	public WebElement CoverageGap_Modal_Header;
 	
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//div[contains(text(), 'Catastrophic Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Catastrophic Coverage Stage')]")
 	public WebElement Catastrophe_Modal_Header;
 
 	public void validateDrugStageInfoModals() {
@@ -522,8 +534,42 @@ public class DrugDetailsPage extends UhcDriver {
 		
 	}
 
-	public void  clickChangePharmacyLinkDetailsPage() {
-		DrugDetails_ChangePharmacyLnk.click();
+	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
+			System.out.println("Plan Details Page displayed for current Plan : "+planName);
+			return new PlanDetailsPage(driver);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public Map<String, String> CaptureDrugCosts() {
+		Map<String, String> DrugDetails = new HashMap<String, String>();
+		
+		validateNew(DrugCosts_AvgMonDrugCost_Amount);
+		validateNew(DrugCosts_MonthlyPremium_Amount);
+		validateNew(DrugCosts_AnnualEstTotal_Amount);
+		validateNew(MonthlyDrugStage_Header);
+
+		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
+		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
+		String COVERED_DRUGS_COUNT = YourDrugs_Header.getText();
+		COVERED_DRUGS_COUNT = COVERED_DRUGS_COUNT.replace("Your Drugs (", "");
+		System.out.println("Covered Drug Text 1 : "+COVERED_DRUGS_COUNT);
+		COVERED_DRUGS_COUNT = COVERED_DRUGS_COUNT.replace(" Covered)", "");
+		System.out.println("Covered Drug Text Final : "+COVERED_DRUGS_COUNT);
+		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
+		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
+		DrugDetails.put("ANNUAL_ESTIMATED_TOTAL", ANNUAL_ESTIMATED_TOTAL);
+		DrugDetails.put("COVERED_DRUGS_COUNT", COVERED_DRUGS_COUNT);
+		
+		return DrugDetails;
 	}
 
 	public void selectPharmacyModalDisplayed() throws InterruptedException {
@@ -551,5 +597,9 @@ public class DrugDetailsPage extends UhcDriver {
 		else {
 		Assert.fail("Select Pharmacy Modal not as expected");
 		}
+	}
+	
+	public void  clickChangePharmacyLinkDetailsPage() {
+		DrugDetails_ChangePharmacyLnk.click();
 	}
 }

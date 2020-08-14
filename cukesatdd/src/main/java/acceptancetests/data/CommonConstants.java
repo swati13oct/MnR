@@ -871,5 +871,57 @@ public class CommonConstants {
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";
 	public static final String APPIUM_VERSION = "APPIUM_VERSION";
 	public static final String SCREEN_RESOLUTION = "screenResolution";
+	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +
+			  "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
+			  "encrypt=true;" + "trustServerCertificate=false;" + "loginTimeout=30;";
+	*/
+	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@localhost:1521:GPSST04SVC_TRN";
+	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
+	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	
+	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
+	public static final String GPS_QUERY = "Select MEDICAID_IND,\n" + 
+			"MEDICAID_NUMBER,\n" + 
+			"MAILING_ZIP_CD,\n" + 
+			"MAILING_STATE_CD,\n" + 
+			"MAILING_CITY,\n" + 
+			"MAILING_ADDRESS_LINE_2,\n" + 
+			"MAILING_ADDRESS_LINE_1,\n" + 
+			"FIRST_NAME,\n" + 
+			"MIDDLE_INITIAL,\n" + 
+			"LAST_NAME,\n" + 
+			"DATE_OF_BIRTH,\n" + 
+			"GENDER,\n" + 
+			"ADDRESS_LINE_1,\n" + 
+			"ADDRESS_LINE_2,\n" + 
+			"CITY,\n" + 
+			"STATE_CD,\n" + 
+			"ZIP_CD,\n" + 
+			"DAYTIME_PHONE_NUM,\n" + 
+			"EVENING_PHONE_NUM,\n" + 
+			"PAPERLESS_PREFERENCE_IND,\n" + 
+			"EMAIL,\n" + 
+			"LANGUAGE_PREFERENCE,\n" + 
+			"MEDICARE_NUMBER,\n" + 
+			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
+			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
+			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
+			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
+			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
+			"OTHER_HEALTH_INSURANCE_ID,\n" + 
+			"SECONDARY_RX_COVERAGE_NAME,\n" + 
+			"OTHER_RX_COVERAGE_NAME,\n" + 
+			"SECONDARY_RX_GROUP,\n" + 
+			"SECONDARY_RX_ID,\n" + 
+			"NOTE,\n" + 
+			"REQUESTED_EFFECTIVE_DATE,\n" + 
+			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
+			"XEROX_STAGE_ID,\n" +
+			"PRIMARY_CARE_PHYSICIAN,\n" + 
+			"DENTAL_PLATINUM from Xerox_stage where xerox_stage_id =\n" + 
+			"";
+	public static final String GPS_QUERY_1 ="Select\n" + 
+			"FIRST_NAME,\n" + 
+			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
+	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 }

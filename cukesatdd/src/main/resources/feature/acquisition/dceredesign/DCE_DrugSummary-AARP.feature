@@ -24,6 +24,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+
       
       
       @drugSummary_SAM_Icon_AARP
@@ -49,7 +50,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  90210 |
       
       
       @drugSummary_PlanToggle @F477157 @F472327
@@ -75,7 +76,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  90210 |
       
       
         @dCERedesign_PlanSave_AARP @F476042
@@ -111,7 +112,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
         
         Examples: 
       | path                     | pageName                   |drugName|zipCode |testPlans|pdptestPlans|snptestPlans|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Emsam|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
 
       
       @dCERedesign_ChangePharmacy_AARP @F426569
@@ -223,8 +224,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
      And user should verify the Extra help in AARP
      And user click on View Drug Pricing Modal in AARP
-     And user should verify the drug extra qualification in drug pricing popup in AARP
-     
+     And user should verify the drug extra qualification in drug pricing popup in AARP  
      
       Examples: 
       | path                     | pageName                   |drugName|zipCode |

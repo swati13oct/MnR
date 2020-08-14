@@ -18,6 +18,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class GetStartedPage extends UhcDriver {
 
@@ -29,6 +30,9 @@ public class GetStartedPage extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
+	
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
+	public WebElement LinktoExitScenario;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -66,5 +70,23 @@ public class GetStartedPage extends UhcDriver {
 		 * Assert.fail("Did not Navigate to Build Drug List Page"); return null;
 		 */
 	}
+
+	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);	
+		}
+		return null;
+	}
+
+	public pages.acquisition.bluelayer.VPPPlanSummaryPage ClickReturnToBtnToVPPSummary_UHC() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
+		}
+		return null;	}
+		
 
 }

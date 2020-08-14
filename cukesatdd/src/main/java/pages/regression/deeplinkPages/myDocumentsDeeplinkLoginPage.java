@@ -242,6 +242,7 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 					checkForIPerceptionModel(driver);
 					CommonUtility.checkPageIsReadyNew(driver);	
 					validateNew(textonpage);
+					System.out.println("*** Element Validated -->" +textonpage.getText());
 					if (driver.getCurrentUrl().contains("documents/overview.html?deeplink=true")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on My Documents deeplink Page **");

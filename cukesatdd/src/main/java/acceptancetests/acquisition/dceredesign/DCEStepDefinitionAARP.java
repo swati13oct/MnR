@@ -106,11 +106,10 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
-
+	
 	@Then("^the user validates error message for blank search$")
 	public void the_user_validates_error_message_for_blank_search() throws Throwable {
-		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEbuildDrugList.validateNoDrug_ErrorMsg();
 	}
 
@@ -394,39 +393,38 @@ public class DCEStepDefinitionAARP {
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		buildDrugList.ValidateAddedDrugsList(druglist);
 	}
-
+	
 	@And("^I access the DCE Redesign on aarp site from Plan Summary for first plan$")
-	public void accessDCERign_PlanSummary(DataTable attributes) {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	public void accessDCERign_PlanSummary(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = memberAttributesMap.get("Plan Type");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromPlanSummary(plantype);
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-
 	@And("^I access the DCE Redesign on aarp site from Plan Summary for mentioned plan$")
-	public void accessDCERign_PlanSummaryforPlan(DataTable attributes) {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	public void accessDCERign_PlanSummaryforPlan(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
@@ -434,22 +432,94 @@ public class DCEStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
-
+		
 	}
+	
+	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary$")
+	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted() {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		VPPPlanSummaryPage plansummaryPage  = getStartedPage.ClickReturnToBtnToVPPSummary();
+		if (null != plansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}	
 
-	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
-	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
+	@And("^I access the DCE Redesign on aarp site from Plan Summary for mentioned plan on UHC$")
+	public void accessDCERign_PlanSummaryforPlan_UHC(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-
-		GetStartedPage getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+		
+	}
+	
+	
+	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary on UHC$")
+	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted_UHC() {
+		
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		pages.acquisition.bluelayer.VPPPlanSummaryPage UHCplansummaryPage  = getStartedPage.ClickReturnToBtnToVPPSummary_UHC();
+		if (null != UHCplansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, UHCplansummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}	
+	
+	@Then("^I access the DCE Redesign on aarp site from Plan Details for the plan$")
+	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+		GetStartedPage getStartedPage = plandetailspage.navigateToDCERedesign();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
+
+	@Then("^the user Clicks button to VPP Plan Details Page from Drug Details Page$")
+	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		PlanDetailsPage plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
+		if (null != plandetailspage) {
+			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		} else
+			Assert.fail("VPP Plan Details not loaded");
+	
+	}
+
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
+	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		GetStartedPage getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+
+	}	
+	
 	@Then("^the user navigates to Med Ed - Prescription Drugs Page$")
 	public void the_user_navigates_to_Med_Ed_Prescription_Drugs_Page() throws Throwable {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -469,6 +539,7 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
+	
 	@Then("^the user navigates to Shop plans for PDP Page and clicks on DCE link fto land on DCE Redesign$")
 	public void the_user_navigates_to_Shop_plans_for_PDP_Page_and_clicks_on_DCE_link_fto_land_on_DCE_Redesign()
 			throws Throwable {
@@ -479,30 +550,28 @@ public class DCEStepDefinitionAARP {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assert.fail("DCE Redesign page object not loaded");	
 	}
+	
 
 	@Then("^the user clicks on Review Drug Costs to Land on Drug DetailsP Page$")
 	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_Page() throws Throwable {
-		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DrugDetailsPage drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user validates planName matches plan Name in VPP$")
 	public void the_user_validates_planName_matches_plan_Name_in_VPP() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
 
 	@Then("^the user validates Drug Costs section$")
 	public void the_user_validates_Drug_Costs_section() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDrugCosts();
 	}
 
@@ -602,13 +671,42 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
+	@Then("^the user Captures Drug costs on Drug Details Page$")
+	public void the_user_Captures_Drug_costs_on_Drug_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		Map<String, String> DrugCosts = drugDetailsPage.CaptureDrugCosts();
+		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
+		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("ANNUAL_ESTIMATED_TOTAL");
+		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
+
+		System.out.println(DrugCosts);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+	}
+
+
+	@Then("^the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
+	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.PLAN_DETAILS_PAGE);
+		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
+		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+		if(cost.trim().contains(EstimatedDrugCosts))
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : "+cost+"; Actual : "+EstimatedDrugCosts,true);
+		else
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : "+cost+"; Actual : "+EstimatedDrugCosts,false);
+		
+}
+
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
-
+	
 	@When("^user should be able to see Medicare Advantage plan by default$")
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -617,26 +715,22 @@ public class DCEStepDefinitionAARP {
 	}
 
 	@Then("^user saves plan as favorite on drug summary page AARP site$")
-	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
-			throws InterruptedException {
+	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.savePlan(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
-		/*
-		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); List<DataTableRow>
-		 * memberAttributesRow = givenAttributes.getGherkinRows(); String PlanName =
-		 * memberAttributesRow.get(0).getCells().get(1); System.out.println("Plan name"
-		 * + PlanName); plansummaryPage.savePlan(PlanName);
-		 */
+		/*VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.savePlan(PlanName);*/
 	}
-
 	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
-	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
-			throws InterruptedException {
+	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
@@ -645,10 +739,9 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.savePlan(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
-
+	
 	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
-	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
-			throws InterruptedException {
+	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
@@ -657,17 +750,17 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.savePlan(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
-
+	
 	@When("^user should be able to toggle between plan types$")
-	public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException {
+	public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyPDPPlanToggle();
 		drugSummaryPage.verifySNPPlanToggle();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
-
+	
 	@When("^user clicks on change pharmacy link from summary page in AARP$")
-	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_AARP() throws InterruptedException {
+	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_AARP() throws InterruptedException  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickChangePharmacy();
 	}
@@ -685,7 +778,7 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
-
+	
 	@When("^user clicks view drug cost button in AARP$")
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -744,4 +837,5 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.verifyDrugListsUpdated(drugName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
 	}
+
 }
