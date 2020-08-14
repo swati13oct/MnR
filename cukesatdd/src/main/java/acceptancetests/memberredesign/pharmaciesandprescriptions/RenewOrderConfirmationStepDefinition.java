@@ -92,5 +92,13 @@ public class RenewOrderConfirmationStepDefinition {
 		}
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	    
 	}
+	
+	@Then("^user will see the estimated delivery date alert message$")
+	public void user_will_see_the_estimated_delivery_date_alert_message() throws Throwable {
+		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
+		Assert.assertTrue("PROBLEM - Estimated Delivery Date Alert Message is Not displayed on Order Confirmation Page",
+				orderConfirmationPage.validateEstimationDateAlertMsg(EstimationDateAlertMessage, 30));
+	}
 
 }

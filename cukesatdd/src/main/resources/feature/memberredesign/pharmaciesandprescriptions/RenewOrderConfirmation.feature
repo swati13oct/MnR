@@ -11,7 +11,6 @@ Feature: Renew Order Confirmation
     Then user will see "Complete Your Renewal" Page
     And user will see Place Order Btn
     Then user will see Renew order confirmation page
-    Then user will see order number
     Then user will see order placed date
     Then user will see order tracked as Order Received
     Then user will see order confirmation email messaging
@@ -21,7 +20,7 @@ Feature: Renew Order Confirmation
     Then user will see the payment method displayed
     Then user will see the order total displayed
     Then user will see an order total disclaimer displayed
-    Then user will see the estimated delivery date
+    Then user will see the estimated delivery date alert message
     When user view the Medications section
     Then user will see the drug name and strength
     And user will see the day supply

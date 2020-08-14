@@ -90,4 +90,8 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 		return validate(GoBackToPnPPageOrderConfirmation);
 	}
 	
+	public boolean validateEstimationDateAlertMsg() {
+		return validate(EstimationDateAlertMessage);
+	}
+	
 }
