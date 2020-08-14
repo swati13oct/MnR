@@ -240,9 +240,18 @@ public class DCEStepDefinitionUHC {
 	}
 	
 	@When("^user verify drug can switch to generic drug in UHC$")
-	public void user_verify_drug_can_switch_to_generic_drug_UHC() throws Throwable {
+	public void user_verify_drug_can_switch_to_generic_drug_UHC(DataTable givenAttributes) throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.drugLists();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		System.out.println(drugName);
+		
+		drugSummaryPage.verifyDrugListsUpdated(drugName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
 	}
 
