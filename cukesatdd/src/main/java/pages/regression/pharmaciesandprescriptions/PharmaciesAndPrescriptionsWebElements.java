@@ -1343,5 +1343,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
 	protected WebElement estimatedDateOnCheckOutPage;
+	
+	@FindBy(xpath = "//*[@data-testid='rx__drugNameSize']")
+	protected WebElement drugNameOnCheckOutPage;
 
+	@FindBy(xpath="//div[@data-testid='medication-data-pharmacy-name' and (contains(text(),'OptumRx'))]/ancestor::div[@data-testid]")
+	protected List<WebElement> listOfMedicationSectionFromOptum;
+	
+	@FindBy(xpath="//div[@data-testid='medication-data-pharmacy-name' and not(contains(text(),'OptumRx'))]/ancestor::div[@data-testid]")
+	protected List<WebElement> listOfMedicationSectionNotFrmOptum;
+	
+	
 }

@@ -161,7 +161,7 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see the drug name and strength$")
 	public void user_will_see_the_drug_name_and_strength() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Name and Strength is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateDrugNameAndStrength());
 	}
