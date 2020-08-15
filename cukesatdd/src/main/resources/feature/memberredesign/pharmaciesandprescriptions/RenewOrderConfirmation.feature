@@ -2,7 +2,7 @@ Feature: Renew Order Confirmation
   Display Renew order confirmation.
 
   @RenewOrderConfirmation @F484053 @US2777880 @US2777881 @US2777882 @US2777883 @US2777884 @US2777885 @US2777886
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify Refill Order Confirmation page components
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify Renew Order Confirmation page components
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
