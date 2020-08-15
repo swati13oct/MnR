@@ -64,13 +64,13 @@ public class RenewOrderConfirmationStepDefinition {
 
 	@Then("^user will see Renew order confirmation page$")
 	public void user_will_see_Renew_order_confirmation_page() throws Throwable {
-		OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(null);
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
-		getLoginScenario().saveBean(PageConstants.ORDER_CONFIRMATION_PAGE, orderConfirmationPage);
-		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displayed",
-				orderConfirmationPage.validateOrderConfirmationThankyouMessage()); 
+		OrderConfirmationPage orderConfirmationPage =  new OrderConfirmationPage(null);
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		orderConfirmationPage = checkoutSumaryPg.navigateToOrderConfirmationPage();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
+				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
 
 	@Then("^the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction$")

@@ -48,8 +48,6 @@ public class RefillOrderConfirmationStepDefinition {
 	public void user_will_click_on_Place_Order_btn() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		Assert.assertTrue("PROBLEM - Place Order Button not available",
-				checkoutSumaryPg.validatePlaceOrderBtnUnderOrderSummary());
 		checkoutSumaryPg.clickPlaceOrderBtn();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
@@ -57,12 +55,12 @@ public class RefillOrderConfirmationStepDefinition {
 	@Then("^user will see Refill order confirmation page$")
 	public void user_will_see_Refill_order_confirmation_page() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage =  new OrderConfirmationPage(null);
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
-		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, orderConfirmationPage);
-		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displaced",
-				orderConfirmationPage.validateOrderConfirmationThankyouMessage());		
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		orderConfirmationPage = checkoutSumaryPg.navigateToOrderConfirmationPage();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
+				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
 	
 	@Then("^user will see order number$")

@@ -287,4 +287,14 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		validate(shippingAlternateMsg, 20);
 		return !shippingAlternateMsg.getText().isEmpty();
 	}
+	
+	public OrderConfirmationPage navigateToOrderConfirmationPage() {
+		//CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("order-confirmation")) {
+			CommonUtility.checkPageIsReady(driver);
+			return new OrderConfirmationPage(driver);
+		}
+		return null;
+	}
 }
