@@ -11,7 +11,7 @@ Feature: Refill Order Confirmation
     And user fetches medication information and clicks on Refill Medication call to action button from My Medication
     Then user will see "Complete Your Refill" Page
     And user will see Place Order Btn
-    And user will clicks on Place Order btn
+    When user will clicks on Place Order btn
     Then user will see Refill order confirmation page
     Then user will see order number
     Then user will see order placed date
