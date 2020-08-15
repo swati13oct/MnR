@@ -200,7 +200,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateMedicationNameAndStrength() {
-		validate(drugNameOnCheckOutPage,40);
+		//validate(drugNameOnCheckOutPage,40);
 		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
 		System.out.println("Medication Name" + medicationNameAndStrength);
 		System.out.println("Med Name on Refill Page" + listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
