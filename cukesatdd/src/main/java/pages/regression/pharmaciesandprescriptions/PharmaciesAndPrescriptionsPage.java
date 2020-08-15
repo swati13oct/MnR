@@ -2159,6 +2159,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return null;
 	}
+	
+	public OrderConfirmationPage navigateToOrderConfirmationPage() {
+		//CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("order-confirmation")) {
+			CommonUtility.checkPageIsReady(driver);
+			return new OrderConfirmationPage(driver);
+		}
+		return null;
+	}
 
 	public List<Object> fetchesMedicationInformationFrRefill() {
 		List<Object> listOfVal = new ArrayList<>();
