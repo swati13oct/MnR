@@ -56,12 +56,15 @@ public class RefillOrderConfirmationStepDefinition {
 
 	@Then("^user will see Refill order confirmation page$")
 	public void user_will_see_Refill_order_confirmation_page() throws Throwable {
-		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
+		OrderConfirmationPage orderConfirmationPage =  new OrderConfirmationPage(null);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, orderConfirmationPage);
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displaced",
-				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
+				orderConfirmationPage.validateOrderConfirmationThankyouMessage());		
 	}
-
+	
 	@Then("^user will see order number$")
 	public void user_will_see_order_number() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()

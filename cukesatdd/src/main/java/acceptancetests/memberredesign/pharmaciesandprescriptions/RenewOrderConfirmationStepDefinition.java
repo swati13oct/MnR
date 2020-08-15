@@ -67,7 +67,7 @@ public class RenewOrderConfirmationStepDefinition {
 		OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(null);
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		//orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
+		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
 		getLoginScenario().saveBean(PageConstants.ORDER_CONFIRMATION_PAGE, orderConfirmationPage);
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displayed",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage()); 

@@ -646,7 +646,6 @@ public class CallToActionStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateANOCCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 	}
 
 	@Then("^user validates a description for ANOC Call To Action$")
