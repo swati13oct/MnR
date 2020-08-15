@@ -65,17 +65,6 @@ public class RefillOrderConfirmationStepDefinition {
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());		
 	}
 	
-	@Then("^user will see \"([^\"]*)\" Page$")
-	public void user_will_see_Complete_Your_Refill_Page(String expectedPage) throws Throwable {
-		CheckOutSummaryPage checkoutSumaryPg = new CheckOutSummaryPage(null);
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
-		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
-		Assert.assertTrue("PROBLEM - " + expectedPage + " Page not available",
-				checkoutSumaryPg.validateCheckoutPageHeader(expectedPage));
-	}
-
 	@Then("^user will see order number$")
 	public void user_will_see_order_number() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
