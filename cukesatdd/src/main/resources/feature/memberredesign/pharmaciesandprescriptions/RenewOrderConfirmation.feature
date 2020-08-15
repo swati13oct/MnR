@@ -11,7 +11,7 @@ Feature: Renew Order Confirmation
     Then user will see "Complete Your Renewal" Page
     And user will see Place Order Btn
     When user clicks on Place Order Btn
-    Then user will see Renew order confirmation page
+    Then user will see the Order Confirmation Page
     Then user will see order placed date
     Then user will see order tracked as Order Received
     Then user will see order confirmation email messaging
