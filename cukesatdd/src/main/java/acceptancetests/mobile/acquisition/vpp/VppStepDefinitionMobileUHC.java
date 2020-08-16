@@ -2083,13 +2083,6 @@ public class VppStepDefinitionMobileUHC {
 		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
-	}	
-	
-	@Then("^remove one plan from plan compare page for UHC$")
-	public void remove_one_plan_from_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnRemoveLink();
 	}
 	
 	@Then("^click on back to plans on plan compare page for UHC$")
@@ -2130,13 +2123,6 @@ public class VppStepDefinitionMobileUHC {
 		Assert.fail("Error in loading the compare plans page");
 }
 	
-	@Then("^Click on Add Icon and verify it navigates to plan summary page for UHC$")
-	public void click_on_Add_Icon_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnAddIcon();		
-	}
-	
 	@Then("^check one plan and add it to plancompare for UHC$")
 	public void check_one_plan_and_add_it_to_plancompare_for_UHC() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2149,13 +2135,6 @@ public class VppStepDefinitionMobileUHC {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
-	@Then("^Verify newly added plan displayed on plan compare page for UHC$")
-    public void verify_newly_added_plan_displayed_on_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validatenewlyAddPlan();
-    }
 
 	@Then("^user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare$")
 	public void user_select_and_unselect_one_plan_for_plan_compare() throws Throwable {
@@ -2175,17 +2154,6 @@ public class VppStepDefinitionMobileUHC {
 
 	}
 	
-	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on Plan Compare")
-	  public void user_clicks_enrollInPlan_PlanCompare_UHC() throws InterruptedException{
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plan_UHC();
-	   if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading Welcome Page for OLE");
-		}
-	  }
-	
 	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare")
 	  public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException{
 		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
@@ -2195,19 +2163,6 @@ public class VppStepDefinitionMobileUHC {
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
-	  }
-	
-	@Then("^the user clicks on Plan details link in Plan Compare page on UHC")
-	  public void user_clicks_planDetails_PlanCompare_UHC() throws InterruptedException{
-		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetail();
-			if (vppPlanDetailsPage != null) {
-					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-					Assert.assertTrue(true);
-				} 
-			else
-				Assert.fail("Error in Loading the Plan Details Page");
-		
 	  }
 	
 	@Then("^the user clicks on Plan details link in new Plan Compare page on UHC")

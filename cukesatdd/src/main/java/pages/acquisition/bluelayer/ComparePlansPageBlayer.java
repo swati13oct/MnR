@@ -266,23 +266,6 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		}
 		return null;
 	}
-
-   	public WelcomePage Enroll_OLE_Plan_UHC() throws InterruptedException {
-   		WebElement enrollForPlan = null;
-   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/span"));
-   		if(enrollForPlan!=null){
-   			//validateNew(enrollForPlan);
-   			enrollForPlan.click();
-   		}
-   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-   		System.out.println(driver.getCurrentUrl());
-   		if(driver.getCurrentUrl().contains("welcome"))
-   		{
-   			System.out.println("OLE Welcome Page is Displayed");
-   			return new WelcomePage(driver);
-   		}
-   		return null;
-   	  	}
    	
    	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
    		WebElement enrollForPlan = null;
@@ -445,15 +428,6 @@ public class ComparePlansPageBlayer extends UhcDriver {
 
 	}
 	
-	public void clickOnRemoveLink(){
-		validateNew(removeLink);
-		String PlanName=remove4thplanName.getText();
-		System.out.println("4th plan name is : " + PlanName );
-		remove4thplan.click();
-		System.out.println("Clicked on Remove Link on plan Compare page");
-
-	}
-	
 	public void clickOnNewRemoveLink(){
 		validateNew(Newremove4thplan);
 		String PlanName=Newremove4thplanName.getText();
@@ -478,23 +452,6 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		System.out.println("Validated all links plan compare");
 		
 	}
-
-     public VPPPlanSummaryPage clickOnAddIcon(){
-    	 
-    	//a[@class='planNameVisibility']//h3
-    	 
-    	 validateNew(add3Plan);
-    	 add3Plan.click();
- 		try {
- 			Thread.sleep(4000);
- 		} catch (InterruptedException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 		}
- 		if(currentUrl().contains("#/plan-summary"))
- 			return new VPPPlanSummaryPage(driver);
- 		return null;
-     }
      
 public VPPPlanSummaryPage clickOnNewAddIcon(){
     	 
@@ -510,17 +467,6 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  			return new VPPPlanSummaryPage(driver);
  		return null;
      }
-     
-     public void validatenewlyAddPlan() {
-    	 
-    	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
- 		int plansForCompare=allMAPlans.size();
- 		if (plansForCompare == 3) {
- 			Assert.assertTrue(true);
- 			System.out.println("Verified Three plans Added on plan compare");
- 		}
- 		else Assert.assertTrue(false); 		
- 	}
      
      public void validatenewlyAddPlanonNewPlanComapre() {
 	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//div[contains(@class,'align-items-lg-start')]//div"));	
@@ -629,22 +575,6 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  		validateNew(chatsam);		
  		return null;
  	}
- 	
- 	public ComparePlansPageBlayer navigateToPlanDetail() {
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View details')])[1]"));
-				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
-				PlanDetailsLink.click();
-				System.out.println("View Plan Details Link is clicked");
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("#/details")) 
-		{	
-			return new ComparePlansPageBlayer(driver);
-		}
-		return null;
-	}
  	
  	public ComparePlansPageBlayer navigateToPlanDetailfromplanCompare() {
 		CommonUtility.checkPageIsReadyNew(driver);
