@@ -284,3 +284,28 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Examples: 
       | TCID   | zipcode | isMultutiCounty | county       | plantype | planName                                               |planyear|
       | 000017 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |current|
+
+       @vppPlanDetailsAARP12 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user click on Dental Cover Popup he must be able to validate plan defaults in AARP
+      | Optional Rider | <optionalRider> |
+      | Plan Name      | <planName>      |
+
+    Examples: 
+      | TID        | zipcode | isMultutiCounty | county          | plantype | planName                                                         | optionalRider   |
+      | F435191-01 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum |
+      | F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum |
+      | F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum |
+      | F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 |
+      | F435191-05 |   55343 | No              | Hennepin County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)                   |                 |
+      | F435191-06 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     |                 |
