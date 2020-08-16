@@ -179,3 +179,28 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
       | 00014 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
+
+ @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user click on Dental Cover Popup he must be able to validate plan defaults in UHC
+      | Optional Rider | <optionalRider> |
+      | Plan Name      | <planName>      |
+
+    Examples: 
+      | TID        | zipcode | isMultutiCounty | county          | plantype | planName                                                         | optionalRider   |
+      | F435191-01 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum |
+      | F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum |
+      | F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum |
+      | F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 |
+      | F435191-05 |   55343 | No              | Hennepin County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)                   |                 |
+      | F435191-06 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     |                 |
+      
