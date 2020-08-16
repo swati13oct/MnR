@@ -1244,6 +1244,41 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(refillAllMedications));
 	}
 
+	public void selectTwoDayShipping() throws InterruptedException {
+
+		Assert.assertTrue("PROBLEM - unable to Select two Shipping Method on Complete Your Refill page",choosingTwoDayShipping());
+
+
+	}
+
+	public boolean choosingTwoDayShipping() {
+
+      standarShipping.click();
+      if(twoDayShipping.isDisplayed()){
+      	twoDayShipping.click();
+      	return true;
+	  }else {
+      	return false;
+	  }
+	}
+
+	public boolean choosingExpeditedShipping()  {
+		selectShippingMethod.click();
+		if(expeditedShipping.isDisplayed()){
+			expeditedShipping.click();
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public void selectExpeditedShipping()  {
+
+		Assert.assertTrue("PROBLEM - unable to Select expedited Shipping Method on Complete Your Refill page",choosingExpeditedShipping());
+
+
+	}
+
 	public void validateRefillAllMedicationsExplanation() {
 		Assert.assertTrue("PROBLEM - unable to locate explanation of Refill All Medications link text element on My Medications",
 				pnpValidate(refillAllMedicationsExplanation));
@@ -1322,6 +1357,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateNoRefillMedications() {
 		Assert.assertFalse("PROBLEM - it should not able to locate HD Drug Eligible For Refill", validateHDDrugEligibleForRefill());
+		// pnpValidate(RefillMedications));
+	}
+
+	public void validateNoEstimatedDeliveryDate() {
+		Assert.assertFalse("PROBLEM - it should not able to locate estimated delivery date webelement", validate(estimatedDeliveryDate));
 		// pnpValidate(RefillMedications));
 	}
 

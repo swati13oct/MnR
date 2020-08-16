@@ -307,6 +307,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='refill-all-meds']")
 	protected WebElement refillAllMedications;
 
+	@FindBy(id = "shipping-method-select-element")
+	protected WebElement standarShipping;
+
+	@FindBy(xpath = "//li[contains(text(),'Two-day Shipping - $6.00')]")
+	protected WebElement twoDayShipping;
+
+	@FindBy(xpath = "//li[contains(text(),'Expedited Shipping - $12.50')]")
+	protected WebElement expeditedShipping;
+
+	@FindBy(id = "shipping-method-select-element")
+	protected WebElement selectShippingMethod;
+
 	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div[1]/div")
 	protected WebElement refillAllMedicationsExplanation;
 
@@ -1337,6 +1349,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@data-testid='rx__drugNameSize']")
 	protected WebElement drugNameOnCheckOutPage;
+
+	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
+	protected WebElement estimatedDeliveryDate;
 
 	@FindBy(xpath="//div[@data-testid='medication-data-pharmacy-name' and (contains(text(),'OptumRx'))]/ancestor::div[@data-testid]")
 	protected List<WebElement> listOfMedicationSectionFromOptum;
