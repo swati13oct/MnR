@@ -82,10 +82,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
-	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//a[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")
+	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//button)[4]")
 	private WebElement Newremove4thplan;
 	
-	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//div[contains(@ng-if,'planName')]")
+	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
 	
 	@FindBy(xpath="//*[@class='view-more-link']")
@@ -457,7 +457,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	public void clickOnNewRemoveLink(){
 		validateNew(Newremove4thplan);
 		String PlanName=Newremove4thplanName.getText();
-		System.out.println("3rd plan name is : " + PlanName );
+		System.out.println("4th plan name is : " + PlanName );
 		Newremove4thplan.click();
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
@@ -523,7 +523,7 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  	}
      
      public void validatenewlyAddPlanonNewPlanComapre() {
-	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//th[@ng-repeat='plan in count']//div[contains(@ng-if,'planName')]"));	
+	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//div[contains(@class,'align-items-lg-start')]//div"));	
 			int plansForCompare=allMAPlans.size();
 			if (plansForCompare == 3) {
 				Assert.assertTrue(true);
