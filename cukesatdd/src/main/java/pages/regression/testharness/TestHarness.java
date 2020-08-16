@@ -321,7 +321,7 @@ public class TestHarness extends UhcDriver {
 				//(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 				System.out.println("The selected category is " +category);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
-			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
+			//tbd CommonUtility.waitForPageLoad(driver, pcpMedicaLogo, 30);
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
@@ -633,6 +633,7 @@ public class TestHarness extends UhcDriver {
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			return new DrugCostEstimatorPage(driver);
 		}
 		return null;
@@ -1140,8 +1141,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		Thread.sleep(5000);
-		checkForIPerceptionModel(driver);
+		//tbd Thread.sleep(5000);
+		checkModelPopup(driver,5);
+		//checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
@@ -1293,11 +1295,11 @@ public class TestHarness extends UhcDriver {
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
     			driver.quit(); //note: force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception="+e.getMessage(),false);
     		} catch (WebDriverException we) {
     			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
     			//driver.quit(); //force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception="+we.getMessage(),false);
     		}
     		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
     		Thread.sleep(2000); // note: give it a bit more time to settle down

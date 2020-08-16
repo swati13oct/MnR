@@ -52,7 +52,10 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement AARPSearchLinkfromGoogle;
 	
 	//@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
-	@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")	
+	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")	
+	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHea')]")
+	//@FindBy(xpath = "//a[@href='https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html']")
+	@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
@@ -92,7 +95,8 @@ public class CampaignTFNPage extends UhcDriver {
 
 	//@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')]")
 	//@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-ad')]")
-	@FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	//@FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html') or contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromBing;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")

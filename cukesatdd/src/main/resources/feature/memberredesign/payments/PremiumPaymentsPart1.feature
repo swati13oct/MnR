@@ -180,3 +180,56 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | TID       | planType | memberType                  |
      | F242866   | MAPD     | UpdateRecurrStop_Payments   |
      | US1588469 | PDP      | ComboUpdateStopRec_Payments |  
+     
+     
+  #Test Case 07
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the overPayment credit flag and verbiage
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+     | TC7   | MAPD     | OverpaymentCreditFlag   |
+    
+     #Test Case 08
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overdue flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the overdue and total amount due
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+        |TC8| MAPD      | OverdueFlag | 
+     
+ #Test Case 09
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates the Paid in Full flag and its verbiage
+ 
+    Examples: 
+      | TID       | planType | memberType                  |
+     | TC9 | MAPD      | PaidInFullFlag |  
+
+   #Test Case 10
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overdue flag and verbiage
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates tool tips on the page
+ 
+    Examples: 
+      | TID       | planType | memberType   |
+      | TC9       | MAPD     | OverdueFlag  | 

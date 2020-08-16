@@ -13,11 +13,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
+import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -79,10 +81,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
 	private WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]//img")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -92,10 +94,10 @@ public class ComparePlansPage extends UhcDriver {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
@@ -203,13 +205,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement DrugCoverageText;	
 		
-	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[1]")
+	@FindBy(css="div.member-info-status>p:nth-child(2)")
 	private WebElement memberName;
 	
-	@FindBy(xpath="//div[contains(text(),'Current')]/preceding-sibling::div/span[2]")
+	@FindBy(css="div.member-info-status>p:last-child")
 	private WebElement memberMBI;
 	
-	@FindBy(xpath="//div[contains(text(),'Current')]/following::div[contains(text(),'DOB')]")
+	@FindBy(xpath="//div[@class='member-info-status']/following::p[contains(text(),'DOB')]")
 	private WebElement memberDOB;
 	
 	@FindBy(css = "div#CSRLoginAlert>div")
@@ -224,6 +226,20 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
 	private WebElement nonMemberDOB;
 	
+	@FindBy(css="#changes-submitted button")
+	private WebElement popupAccept;
+	
+	@FindBy(css="input.uhc-switch__input")
+	private WebElement currentPlanToggle;
+	
+	@FindBys(value = { @FindBy(css = "table#your-doctors-table tbody>tr") })
+	private List<WebElement> providersList;
+	
+	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
+	private List<WebElement> drugList;
+	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement shoppingCartIcon;
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -234,7 +250,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,45);
+		checkModelPopup(driver,20);
 		
 	}
 	
@@ -544,7 +560,7 @@ public class ComparePlansPage extends UhcDriver {
 		return null;
 	}
 		
-    public ComparePlansPage validateCallSam() throws InterruptedException {
+    public void validateCallSam() throws InterruptedException {
         boolean present;
         try {
         validateNew(callsam);
@@ -554,14 +570,12 @@ public class ComparePlansPage extends UhcDriver {
         }
         if (present) {
           System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-          return new ComparePlansPage(driver);
         }
         else
         	System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
-       return null;
 	}
 	
-	public ComparePlansPage validateCallSamContent() throws InterruptedException {
+	public void validateCallSamContent() throws InterruptedException {
 		
 		Actions action = new Actions(driver);
 		WebElement element = callsam;
@@ -570,25 +584,25 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
-		
         if (CallSam.equalsIgnoreCase(toolTipText)) {
           System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-          return new ComparePlansPage(driver);
         }
         else
         	System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
-       return null;
 	}
 	
-	public ComparePlansPage  validateCallpopup() throws InterruptedException {
+	public void  validateCallpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
 		callsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 		driver.switchTo().activeElement();
-		System.out.println(CallSamTFN.getText());
-		CallSamTFNClose.click();
-		validateNew(callsam);		
-		return null;
+		if (CallSamTFN.getText().isEmpty()) {
+			// return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		} else {
+			CallSamTFNClose.click();
+			validateNew(callsam);
+		}
 	}
 	
 	public ComparePlansPage validateChatSam() throws InterruptedException {
@@ -1009,7 +1023,7 @@ public class ComparePlansPage extends UhcDriver {
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
 	 * @param planName
 	 */
-	public void validateAgentModeBanners(DataTable userData) {
+	public void validateMemberDetails(DataTable userData) {
 
 		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1027,6 +1041,7 @@ public class ComparePlansPage extends UhcDriver {
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
 		
+		allSet();
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -1043,43 +1058,45 @@ public class ComparePlansPage extends UhcDriver {
 			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
 		}
 		else {
+			CommonUtility.waitForPageLoad(driver, currentPlanToggle, 5);
 			Assert.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
 			Assert.assertEquals("(#"+mbi+")", memberMBI.getText().trim());
 			Assert.assertEquals(fname+" "+lname, memberName.getText().trim().toUpperCase());
-			Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
+			//Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
 			
 		}
 		
-		/*//Validate Providers
+		//Validate Providers
 		if(!providers.equalsIgnoreCase("no")) {
-			for(int i=0;i<providersList.size();i++) {
-				Assert.assertTrue(providers.contains(providersList.get(i).getText().trim()));
-				System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+			validate(editDoctorsLink);
+			String[] provider = providers.split(";");
+			for(int i=0;i<provider.length;i++) {
+				if(!StringUtils.isNullOrEmpty(providers)) {
+					Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+				}
 			}
 		}else {
-			System.out.println("#########"+existingProviders.getText().trim()+"#########");
-			Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+			
+			System.out.println("#########No Providers for this member#########");
 		}
 		
-		validatePlanSummary();
-		//Validate Plan Name
-		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
-		
-		if(!drugNames.equalsIgnoreCase("no")) {
-			
-			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
-			//Validate Drugs
-			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
-			
-			for(int i=0;i<drugList.size();i++) {
-				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
-				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
-				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+		if(!drugs.equalsIgnoreCase("no")) {
+			validate(editDrugsLink);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+			String[] drugName = drugs.split(",");
+			for(int i=0;i<drugName.length;i++) {
+				if(!StringUtils.isNullOrEmpty(drugs)) {
+					Assert.assertTrue(drugName[i].contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+				}
 			}
 		}else {
-			System.out.println("#########"+prescriptions.getText().trim()+"#########");
-			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
-		}*/
+			System.out.println("#########No Drugs available for this member#########");
+		}
 		
 	}
 	
@@ -1108,6 +1125,26 @@ public class ComparePlansPage extends UhcDriver {
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+	}
+	
+	public void allSet() {
+		CommonUtility.waitForPageLoad(driver, popupAccept, 60);
+		popupAccept.click();
+	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 }
 

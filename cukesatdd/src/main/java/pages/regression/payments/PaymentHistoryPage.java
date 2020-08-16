@@ -272,6 +272,12 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='paymentTable' or @id='paymentTable1']")
 	private WebElement paymentTable;
+	
+	@FindBy(xpath = "//div[@id='billingHistoryTable0']")
+	private WebElement billingHistoryTableForFed;
+	
+	@FindBy(xpath = "//div[@id='paymentsHistoryTable0']//div[contains(@class,'history-table__body')]")
+	private WebElement paymentHistoryTableForFed;
 
 	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
 	private WebElement paymentTablePremiumDueDateHeader;
@@ -417,11 +423,92 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "menubutton1_0")
 	private WebElement billingHistoryDateRangeDropdown;
 	
+	@FindBy(css = "#menubutton1_0")
+	private WebElement billingHistoryDateRangeDropdownForFed;
+	
+	@FindBy(css = "#menubutton_0")
+	private WebElement paymentHistoryDateRangeDropdownForFed;
+		
 	@FindBy(xpath = "//ul[@id='menu3_0']/li[4]/a")
 	private WebElement billingHistoryLast24MonthsOption;
 	
 	@FindBy(xpath = "//*[@class='payment-method-btn']/a[text()='Manage Payment Method']")
 	private WebElement managePaymentMethodButton;
+	
+	@FindBy(xpath = "//div[contains(text(),'Overpayment Credit')]")
+	private WebElement overPaymentCreditFlag;
+
+	@FindBy(xpath = "//span[contains(text(),'credit applied to future payment(s)')]")
+	private WebElement overPaymentCreditVerbiage;
+
+	@FindBy(xpath = "//div[@class='plan-card__flag-message' and contains(text(),'No Payments Due')]")
+	private WebElement noPaymentsDueFlag;
+
+	@FindBy(xpath = "//div[@class='plan-card__notification isPaid']//p[contains(text(),'No further payments needed')]")
+	private WebElement paidINFullOverMonthlyPremVerbiage;
+
+	@FindBy(xpath = "//div[@class='plan-card__amount ng-scope'][contains(text(),'No Payments Due')]")
+	private WebElement nopaymentDuelableunderNextPre_Pay;
+
+	@FindBy(xpath = "//div[@class='plan-card__amount ng-binding']")
+	private WebElement totalAmountDue;
+
+	@FindBy(xpath = "//div[contains(text(),'Overdue')]")
+	private WebElement overdueFlag;
+
+	@FindBy(xpath = "//button[contains(text(),'Total Amount Due ')]")
+	private WebElement totalAmntDuelink;
+
+	@FindBy(xpath = "//div[@id='amount-due-content']")
+	private WebElement totalAmntDueToolTip;
+
+	@FindBy(xpath = "//div[@id='amount-due-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement totalAmntDueCloseBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Next Premium Payment ')]")
+	private WebElement NextPremiumPaymentlink;
+
+	@FindBy(xpath = "//div[@id='next-payment-content']")
+	private WebElement NextPremiumPaymentToolTip;
+
+	@FindBy(xpath = "//div[@id='next-payment-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement NextPremiumPaymentCloseBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Monthly Premium')]")
+	private WebElement MonthlyPremiumtlink;
+
+	@FindBy(xpath = "//div[@id='monthly-premium']")
+	private WebElement MonthlyPremiumtToolTip;
+
+	@FindBy(xpath = "//div[@id='monthly-premium']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement MonthlyPremiumtCloseBtn;
+
+	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
+	private WebElement Learnaboutwaystopaylink;
+
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']")
+	private WebElement LearnaboutwaystopayToolTip;
+
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnaboutwaystopayCloseBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Learn More About Your Billing History ')]")
+	private WebElement LearnMoreAboutYourBillingHistorylink;
+
+	@FindBy(xpath = "//div[@id='b-history-content-0']")
+	private WebElement LearnMoreAboutYourBillingHistoryToolTip;
+
+	@FindBy(xpath = "//div[@id='b-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnMoreAboutYourBillingHistoryCloseBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Learn More About Your Payment History ')]")
+	private WebElement LearnMoreAboutYourPaymentHistorylink;
+
+	@FindBy(xpath = "//div[@id='p-history-content-0']")
+	private WebElement LearnMoreAboutYourPaymentHistoryToolTip;
+
+	@FindBy(xpath = "//div[@id='p-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnMoreAboutYourPaymentHistoryCloseBtn;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -980,11 +1067,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(5000);
 		try {
 			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Scrolling to Manage Payment Method Button");
+			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
+			jse2.executeScript("arguments[0].scrollIntoView()", managePaymentMethodButton);
+			jse2.executeScript("window.scrollBy(0,-50)", "");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			}
+			TestHarness.checkForIPerceptionModel(driver);
+			System.out.println("Now clicking on Manage Payment Method Button");
 			managePaymentMethodButton.click();
 		} catch (Exception e1) {
 			System.out.println("Manage Payment Method button was not clicked or displayed");	
 		}
-		System.out.println("User clicked on Update Automatic Button");
+		System.out.println("User clicked on Manage Payment Method button");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -1769,6 +1866,99 @@ public class PaymentHistoryPage extends UhcDriver {
 				return new PaymentHistoryPage(driver);
 			}
 			
+			
+			public PaymentHistoryPage scrollDownAndUpForFed() throws InterruptedException {
+				checkForIPerceptionModel(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Waiting for Make a One time payment button to load");
+				CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButton, 20);
+												
+				System.out.println("Now Scrolling to daterange dropdown of Billing history section");
+				JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+				jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+								
+				System.out.println("Hovering mouse over daterange dropdown");	
+				Actions action = new Actions(driver);
+				action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
+				
+				System.out.println("waiting for 2 seconds");	
+				Thread.sleep(2000);
+				System.out.println("Selecting the date from dropdown - Last 24 months ");
+				
+				driver.findElement(By.linkText("Last 24 months")).click();
+				
+				System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
+			    
+			    try {
+					if (billingHistoryTableForFed.isDisplayed()) {
+						System.out.println("Billing History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Billing History table was not displayed, test failed");
+					Assert.fail();
+
+					}
+			    
+			    System.out.println("Now Scrolling to daterange dropdown of Payment history section");
+				JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+				jse3.executeScript("arguments[0].scrollIntoView()", paymentHistoryDateRangeDropdownForFed); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+								
+				System.out.println("Hovering mouse over payment history daterange dropdown");	
+				Actions action1 = new Actions(driver);
+				action1.moveToElement(paymentHistoryDateRangeDropdownForFed).build().perform();
+				
+				System.out.println("waiting for 2 seconds");	
+				Thread.sleep(2000);
+				System.out.println("Selecting the date from dropdown - Last 24 months ");
+				
+				driver.findElement(By.linkText("Last 24 months")).click();
+				
+				System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
+			    CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
+			    
+			    try {
+					if (paymentHistoryTableForFed.isDisplayed()) {
+						System.out.println("Payment History table is displayed");
+						Thread.sleep(2000);
+					}
+				} catch (Exception e) {
+					System.out.println("Payment History table was not displayed, test failed");
+					Assert.fail();
+
+					}
+
+			    System.out.println("Now Scrolling to Make A One-Time Payment Button");
+				JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+				jse4.executeScript("arguments[0].scrollIntoView()", MakeOneTimepaymentButton); 
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return new PaymentHistoryPage(driver);
+			}
+			
 	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException {
 		System.out.println("Now checking for Tech Support Number for Pre-effective members");
 		System.out.println(
@@ -1854,4 +2044,164 @@ public class PaymentHistoryPage extends UhcDriver {
 				return null;
 			}
 		}
+	
+	public void validateOverPaymentFlag() {
+		
+		if(overPaymentCreditFlag.isDisplayed()) {
+			System.out.println("OverPayment flag text is - "+overPaymentCreditFlag.getText());
+			Assert.assertTrue("OverpaymentCreditFlag is displaying", overPaymentCreditFlag.isDisplayed());
+			Assert.assertTrue("OverpaymentCreditVerbiage is displaying", overPaymentCreditVerbiage.isDisplayed());
+			System.out.println("OverPayment verbiage text- "+overPaymentCreditVerbiage.getText());
+				}
+				else {
+					Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+				}
+	}
+
+public void overdueflag() {
+
+		String amount = totalAmountDue.getText();
+		String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+		System.out.println("Total due amount is "+amountdue);
+		 if(Integer.parseInt(amountdue)!=0) {
+			 Assert.assertTrue("Total amount due value is non-zero", true);
+			 System.out.println("Total amount due value is non-zero");
+		 }
+		if(overdueFlag.isDisplayed()) {
+	Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
+		}
+		else {
+			Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+		}
+	} 
+
+public void paidInFullFlag() {
+	
+		if(noPaymentsDueFlag.isDisplayed()) {
+			Assert.assertTrue("OverpaymentCreditFlag is displaying  ", noPaymentsDueFlag.isDisplayed());
+			Assert.assertTrue("OverpaymentCreditVerbiage is displaying", paidINFullOverMonthlyPremVerbiage.isDisplayed());
+			Assert.assertTrue("No payments due label is dispalying unde next Premiun payment", nopaymentDuelableunderNextPre_Pay.isDisplayed());
+			
+				}
+				else {
+					Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+				}
+		String amount = totalAmountDue.getText();
+		String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+		System.out.println("Total due amount is "+amountdue);
+		 if(Integer.parseInt(amountdue)==0) {
+			 Assert.assertTrue("For paid In Full flag total amount due is $ 0", true);
+			 System.out.println("For paid In Full flag total amount due is $ 0");
+		 }
+		 else {
+				Assert.fail("For paid In Full flag total amount due is not $ 0");
+				System.out.println("For paid In Full flag total amount due is not $ 0");
+			}
 }
+
+public void toolTipsValidation() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
+	System.out.println("Validate Total Amount Due pop-up ");
+	if(totalAmntDuelink.isDisplayed()) 
+	{ 
+		totalAmntDuelink.click() ;
+	Thread.sleep(2000);
+	Assert.assertTrue("Total Amount Due pop-up is displaying",totalAmntDueToolTip.isDisplayed()); 
+	totalAmntDueCloseBtn.click();
+	Thread.sleep(2000);
+	Assert.assertTrue("total Amount Due label is displaying",totalAmntDuelink.isDisplayed());
+	System.out.println("Total amount due tool tip is displaying successfully"); 
+			}
+	else { 
+		System.err.println("Total amount due popup is failing ");
+	Assert.fail("Total amount due popup is failing ");
+	}
+
+	System.out.println("Validate Next Premium Payment pop-up ");
+	if(NextPremiumPaymentlink.isDisplayed()) 
+	{ 
+		NextPremiumPaymentlink.click() ;
+	Thread.sleep(2000);
+	Assert.assertTrue("Next Premium Payment  pop-up is displaying",NextPremiumPaymentToolTip.isDisplayed());
+	NextPremiumPaymentCloseBtn.click();
+	Thread.sleep(2000);
+	Assert.assertTrue("Next Premium Payment label is displaying",NextPremiumPaymentlink.isDisplayed());
+	System.out.println("Next Premium Payment tip is displaying successfully"); }
+	else {
+	System.err.println("Next Premium Payment  popup is failing ");
+	Assert.fail("Next Premium Payment  popup is failing ");
+
+	}
+
+	System.out.println("Validate Monthly Premium pop-up ");
+	if(MonthlyPremiumtlink.isDisplayed()) 
+	{
+	MonthlyPremiumtlink.click() ;
+	Thread.sleep(2000); 
+	Assert.assertTrue("Monthly Premium pop-up is displaying",MonthlyPremiumtToolTip.isDisplayed());
+	MonthlyPremiumtCloseBtn.click();
+			Thread.sleep(2000);
+			Assert.assertTrue("Monthly Premium label is displaying",MonthlyPremiumtlink.isDisplayed());
+			System.out.println("Monthly Premium tip is displaying successfully"); } else
+			{ 
+				System.err.println("Monthly Premium popup is failing ");
+			Assert.fail("Monthly Premium popup is failing ");
+
+			}
+
+	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
+	if(Learnaboutwaystopaylink.isDisplayed()) {
+		Learnaboutwaystopaylink.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Ways To Pay pop-up is displaying", LearnaboutwaystopayToolTip.isDisplayed());
+		LearnaboutwaystopayCloseBtn.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Ways To Paylabel is displaying", Learnaboutwaystopaylink.isDisplayed());
+		System.out.println("Learn More About Ways To Pay tip is displaying successfully");
+	}
+	else {
+		System.err.println("Learn More About Ways To Pay popup is failing "); 
+		Assert.fail("Learn More About Ways To Pay popup is failing ");
+
+	}
+	System.out.println("Validate Learn More About Your Billing History pop-up ");
+	if(LearnMoreAboutYourBillingHistorylink.isDisplayed()) {
+		LearnMoreAboutYourBillingHistorylink.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Billing History pop-up is displaying", LearnMoreAboutYourBillingHistoryToolTip.isDisplayed());
+		LearnMoreAboutYourBillingHistoryCloseBtn.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Billing History label is displaying", LearnMoreAboutYourBillingHistorylink.isDisplayed());
+		System.out.println("Learn More About Your Billing History tool tip is displaying successfully");
+	}
+	else {
+		System.err.println("Learn More About Your Billing History popup is failing"); 
+		Assert.fail("Learn More About Your Billing History popup is failing");
+
+	}
+
+	System.out.println("Validate Learn More About Your payment History pop-up ");
+	if(LearnMoreAboutYourPaymentHistorylink.isDisplayed()) {
+		LearnMoreAboutYourPaymentHistorylink.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Payment History pop-up is displaying", LearnMoreAboutYourPaymentHistoryToolTip.isDisplayed());
+		LearnMoreAboutYourPaymentHistoryCloseBtn.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Payment History label is displaying", LearnMoreAboutYourPaymentHistorylink.isDisplayed());
+		System.out.println("Learn More About Your Payment History tool tip is displaying successfully");
+	}
+	else {
+		System.err.println("Learn More About Your Payment History popup is failing"); 
+		Assert.fail("Learn More About Your Payment History popup is failing");
+
+	}
+}
+
+
+		}
+	
+	
+	
+	
+

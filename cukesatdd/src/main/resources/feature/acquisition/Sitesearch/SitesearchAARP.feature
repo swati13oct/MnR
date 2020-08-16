@@ -2,7 +2,7 @@
 Feature:1.03 Acq-To test Sitesearch results in AMP site
 
 @SiteSearchAARP @SiteSearchRegressionAARP @vbfGate
- Scenario Outline: Verify search results in AARP site
+ Scenario Outline: Verify search results in AARP site -search value -<newsearchvalue>
    Given the user is on AARP medicare acquisition site landing page
    Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>| 
@@ -18,7 +18,7 @@ Feature:1.03 Acq-To test Sitesearch results in AMP site
       
 
 @SiteSearchAARPErrorHandling @SiteSearchRegressionAARP
- Scenario Outline: Verify search results in AARP site
+ Scenario Outline: Verify search results in AARP site - search value -<NewSearchValue>
    Given the user is on AARP medicare acquisition site landing page
    Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>| 

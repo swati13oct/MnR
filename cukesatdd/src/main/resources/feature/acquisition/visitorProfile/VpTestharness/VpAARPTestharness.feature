@@ -186,7 +186,7 @@ Feature: VP Testharness flow Navigations for AARP Site
       | 00008 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |   91020 | $0             | $0            |
 
   @vpTestharnessAARP09 @vpTestharnessAARPRun01 @AddDrugsAndPharamcyForGuest
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Visitor Profile with Drugs and Pharmacy from VP Testharness page
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Visitor Profile with Drugs from VP Testharness page
     Given the user is on VistorProfile TestHarness page for AARP
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
@@ -196,8 +196,8 @@ Feature: VP Testharness flow Navigations for AARP Site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
     Then user switch back to Vp Testharness Page on AARP site
-    And user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on AARP site
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    And user selects helper mode for Launch Visitor Profile with Drugs in Visitor Profile on AARP site
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug> |
 
     Examples: 
@@ -205,7 +205,7 @@ Feature: VP Testharness flow Navigations for AARP Site
       | 00009 | visitorprofile | Ulayer   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) | Lipichol 540 CAP |
 
   @vpTestharnessAARP10 @vpTestharnessAARPRun01 @AddDrugsAndPharamcyForAuthenticated
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Visitor Profile with Drugs and Pharmacy from VP Testharness page for Authenticated
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Visitor Profile with Drugs from VP Testharness page for Authenticated
     Given the user is on VistorProfile TestHarness page for AARP
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
@@ -217,8 +217,8 @@ Feature: VP Testharness flow Navigations for AARP Site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
     Then user switch back to Vp Testharness Page on AARP site
-    And user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on AARP site
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    And user selects helper mode for Launch Visitor Profile with Drugs in Visitor Profile on AARP site
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug> |
     Then user switch back to Vp Testharness Page on AARP site
     And user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site

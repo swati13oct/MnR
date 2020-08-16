@@ -616,8 +616,10 @@ try {
 		}else{
 		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
+		else if(environment.contains("mnr-acq"))
+			domain = "origin-elr-dmz.optum.com";
 		else 
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
 		System.out.println("env chosen is: "+ environment);
@@ -1225,20 +1227,20 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "qawrite";  
-			String pwd = "testwrite$"; 
+			String user = "UHG_001375809";  
+			String pwd = "Oracle@1234"; 
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
 			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
 			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
-			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
 						
 			con = DriverManager.getConnection(url, user, pwd);
-			System.out.println("Oracle Database Connection established*********");
+			System.out.println("Oracle Database Connection established**********");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

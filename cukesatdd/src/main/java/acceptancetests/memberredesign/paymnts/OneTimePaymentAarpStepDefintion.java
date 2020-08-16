@@ -215,6 +215,19 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user has scrolled up");
 		}
 	}
+	
+	@Then("^User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed$")
+	public void Validate_History_PaymentForFed() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUpForFed();
+		
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
+		}
+	}
 
 	@Then("^User Scrolls down to validate Payment History Section$")
 	public void Validate_History_Payment_section() throws InterruptedException {
@@ -2444,8 +2457,36 @@ public class OneTimePaymentAarpStepDefintion {
 	
 		
 		ConfirmOneTimePaymentPage.updateStopDateInGPSdb(paymentTypeMap);
-
+	}
+	@Then("^User validates the overPayment credit flag and verbiage$")
+	public void User_validates_the_overPayment_credit_flag_and_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		
+		 paymentHistoryPage.validateOverPaymentFlag();
 		
 	}
+	
+	@Then("^User validates the overdue and total amount due$")
+	public void overdueflag() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		
+		 paymentHistoryPage.overdueflag();
+		
+	}
+	
+	@Then("^User validates the Paid in Full flag and its verbiage$")
+	public void User_validates_the_Paid_in_Full_flag_and_its_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.paidInFullFlag();
+		
+	}
+	@Then("^User validates tool tips on the page$")
+	public void User_validates_tool_tips_on_the_page() throws Throwable {
+		System.out.println("******User validates tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.toolTipsValidation();
+		
+	}
+
 	
 }

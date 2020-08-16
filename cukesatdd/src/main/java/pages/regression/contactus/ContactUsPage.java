@@ -11,10 +11,12 @@ import pages.regression.accounthomepage.AccountHomePage;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -1316,7 +1318,10 @@ public class ContactUsPage extends UhcDriver{
 				}
 			}
 	
-			
+			if(chatoffline.isDisplayed()) {
+				Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
+				System.out.println("Chat is currently offline");
+			} else {
 			 validateNew(chatMessage); 
 			 if (chatMessage.isDisplayed())
 			 {		  
@@ -1368,6 +1373,7 @@ public class ContactUsPage extends UhcDriver{
 				e1.printStackTrace();
 	
 			}
+		}
 		
 		}
 	
@@ -1433,7 +1439,11 @@ public class ContactUsPage extends UhcDriver{
 				} else {
 					System.out.println("iPerception Pop Up not displayed");
 				}
-			}		
+			}
+			if(chatoffline.isDisplayed()) {
+				Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
+				System.out.println("Chat is currently offline");				
+			} else {
 			 validateNew(chatMessageGroup); 
 			 if (chatMessageGroup.isDisplayed())
 			 {		  
@@ -1481,7 +1491,7 @@ public class ContactUsPage extends UhcDriver{
 				e1.printStackTrace();
 	
 			}
-		
+			}
 		}
 		
 	public void validateCombolabelAndLinks(DataTable givenAttributes) throws InterruptedException {
@@ -1704,9 +1714,10 @@ public class ContactUsPage extends UhcDriver{
 				System.out.println("iPerception Pop Up not displayed");
 			}
 
-		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
-			validateNew(chatoffline);
-			Assert.assertTrue(chatoffline.isDisplayed());
+//		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
+//			validateNew(chatoffline);
+		if(chatoffline.isDisplayed()) {
+			Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
 			System.out.println("Chat is currently offline");
 		} else {
 			 validateNew(chatMessage); 
@@ -1755,10 +1766,11 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public Boolean isChatWithUsTimeOn(String startTime, String endTime) {
-    	Calendar cal = Calendar.getInstance();
+    	Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        String systemTime= sdf.format(cal.getTime());
-        System.out.println("The current system time is - "+systemTime);
+        sdf.setTimeZone(TimeZone.getTimeZone("US/Central"));
+        String systemTime= sdf.format(date);
+        System.out.println("The current central system time is - "+systemTime);
              
         LocalTime target = LocalTime.parse(systemTime) ;
         Boolean result = ( 
@@ -1785,9 +1797,10 @@ public class ContactUsPage extends UhcDriver{
 				System.out.println("iPerception Pop Up not displayed");
 			}
 		}
-		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
-			validateNew(chatoffline);
-			Assert.assertTrue(chatoffline.isDisplayed());
+//		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
+//			validateNew(chatoffline);
+		if(chatoffline.isDisplayed()) {
+			Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
 			System.out.println("Chat is currently offline");
 		} else {
 			 validateNew(chatMessageGroup); 
@@ -1839,9 +1852,6 @@ public class ContactUsPage extends UhcDriver{
 			}
 		}
 	}
-	
-	
-	
 }
 
 

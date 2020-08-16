@@ -1,6 +1,7 @@
 package pages.regression.memberauth;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
 //import junit.framework.Assert;
@@ -9,6 +10,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -121,6 +124,16 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
 	
+	@FindBy(xpath="//span[contains(@class,'redError') and not(contains(@class,'ng-hide')) and contains(text(),'Either your UserName or Password was incorrect.')]")
+	protected WebElement initialLoginErr;
+	
+	@FindBy(xpath="//span[@class='redError' and contains(text(),'Unable to retrieve member')]")
+	protected WebElement redUnableToRetrMemErr;
+	
+	@FindBy(xpath="//h1[@translate='INTERNAL_ERROR_SORRY']")
+	protected WebElement sorryItsNotYouErr;
+
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -195,12 +208,14 @@ public class MemberAuthPage extends UhcDriver {
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
 		search.click();
+		Assert.assertTrue("PROBLEM - got initial login error on member auth, please check to see if input username/passowrd is correct or if password expired?", !validate(initialLoginErr,0));
 		waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()) {
-			System.out.println("member auth Login successfull");
+			System.out.println("member auth Login successfully");
 			return new MemberAuthPage(driver);
-		} else
+		} else {
 			return null;
+		}
 	}
 
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
@@ -209,6 +224,7 @@ public class MemberAuthPage extends UhcDriver {
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
+		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
 		if (MemberTableUserName.isDisplayed()) {
@@ -288,111 +304,132 @@ public class MemberAuthPage extends UhcDriver {
 		return null;
 	}
 
-	public AccountHomePage userSelectsMemberEntered() throws InterruptedException {
+	//public AccountHomePage userSelectsMemberEntered() throws InterruptedException {
+	public AccountHomePage userSelectsMemberEntered()  {
+		checkModelPopup(driver, 2);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		try {
 
-		// waitforElement(MemberPopUpLogin);
-		CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
-		Thread.sleep(2000);
-		if (MemberPopUpLogin.isDisplayed()) {
-			System.out.println("Pop up Login Button is displayed");
-			Thread.sleep(2000);
-			System.out.println("Scrolling to Login Button");
-			JavascriptExecutor jse2 = (JavascriptExecutor) driver;
-			jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin);
+			// waitforElement(MemberPopUpLogin);
+			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			MemberPopUpLogin.click();
-			System.out.println("popup login button clicked");
-			System.out.println("wait for 10 seconds");
-			Thread.sleep(10000);
-			// switchToNewTab();
-			String mainwindow = driver.getWindowHandle();
-			Set<String> allWindowHandles = driver.getWindowHandles();
-			for (String currentWindowHandle : allWindowHandles) {
-				if (!currentWindowHandle.equals(mainwindow)) {
-					driver.switchTo().window(currentWindowHandle);
+			if (MemberPopUpLogin.isDisplayed()) {
+				System.out.println("Pop up Login Button is displayed");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
 				}
-			}
+				System.out.println("Scrolling to Login Button");
+				JavascriptExecutor jse2 = (JavascriptExecutor) driver;
+				jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+				}
+				MemberPopUpLogin.click();
+				System.out.println("popup login button clicked");
+				System.out.println("wait for 10 seconds");
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+				}
+				// switchToNewTab();
+				String mainwindow = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				for (String currentWindowHandle : allWindowHandles) {
+					if (!currentWindowHandle.equals(mainwindow)) {
+						driver.switchTo().window(currentWindowHandle);
+					}
+				}
 
-			System.out.println("Switched to new tab");
-			CommonUtility.checkPageIsReadyNew(driver);
-			if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
-					|| MRScenario.environment.equalsIgnoreCase("prod")
-					|| MRScenario.environment.equalsIgnoreCase("team-h")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
-			{
+				System.out.println("Switched to new tab");
 				CommonUtility.checkPageIsReadyNew(driver);
-				try
+				if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
+						|| MRScenario.environment.equalsIgnoreCase("prod")
+						|| MRScenario.environment.equalsIgnoreCase("team-h")
+						|| MRScenario.environment.equalsIgnoreCase("offline-stage")) 
 				{
-					System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
-					CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
-				}
-				catch (Exception e)
-				{
-					System.out.println("Catch block with no significance");
-				}
-				emailAddressRequiredWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				goGreenSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				anocSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				paymentSplashPageWorkaround();
-				CommonUtility.checkPageIsReadyNew(driver);
-				if (driver.getCurrentUrl().contains("bannerpopup.html")) {
-					System.out.println("COVID 19 Banner page has appeared");
-					try {
-						CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-						if (validate(homePageNotice, 10)) {
-							homePageNotice.click();
-							CommonUtility.checkPageIsReady(driver);
-						} else if (validate(homePageNotice2, 0)) {
-							homePageNotice2.click();
-							CommonUtility.checkPageIsReady(driver);
-						} else if (validate(homePageNotice3, 0)) {
-							homePageNotice3.click();
-							CommonUtility.checkPageIsReady(driver);
+					CommonUtility.checkPageIsReadyNew(driver);
+					try
+					{
+						System.out.println("Waiting for continue button of banner page as banner doesn't appear everytime");
+						CommonUtility.waitForPageLoad(driver, homePageNotice, 10);
+					}
+					catch (Exception e)
+					{
+						System.out.println("Catch block with no significance");
+					}
+					emailAddressRequiredWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					goGreenSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					anocSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					paymentSplashPageWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
+					if (driver.getCurrentUrl().contains("bannerpopup.html")) {
+						System.out.println("COVID 19 Banner page has appeared");
+						try {
+							CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
+							if (validate(homePageNotice, 10)) {
+								homePageNotice.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							} else if (validate(homePageNotice2, 0)) {
+								homePageNotice2.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							} else if (validate(homePageNotice3, 0)) {
+								homePageNotice3.click();
+								CommonUtility.checkPageIsReadyNew(driver);
+							}
+							Thread.sleep(3000);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("Catch block");
 						}
-						Thread.sleep(3000);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						System.out.println("Catch block");
+					} else {
+						System.out.println("COVID 19 Banner page did not appear");
 					}
-				} else {
-					System.out.println("COVID 19 Banner page did not appear");
-				}
-				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
-				// waitforElement(SuperUser_DashboardBanner);
-				if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
-					System.out.println("CSR Dashboard Page is displayed for the Member");
-					TestHarness.checkForIPerceptionModel(driver);
-					return new AccountHomePage(driver);
-				}
-			} else if (MRScenario.environment.startsWith("team")) {
-				if (driver.getCurrentUrl().contains("/testharness")) {
-					try {
-						Alert alert = driver.switchTo().alert();
-						alert.accept();
-						Alert alert1 = driver.switchTo().alert();
-						alert1.accept();
-					} catch (Exception e) {
-						System.out.println("No alert displayed");
+					checkModelPopup(driver, 2);
+					CommonUtility.checkPageIsReadyNew(driver);
+					Assert.assertTrue("PROBLEM - Got 'Sorry. It's not you' error instead of landing on dashboard", !validate(sorryItsNotYouErr,0));
+					CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
+					// waitforElement(SuperUser_DashboardBanner);
+					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
+						System.out.println("CSR Dashboard Page is displayed for the Member");
+						checkModelPopup(driver,5);
+						return new AccountHomePage(driver);
 					}
-					System.out.println("CSR - Lower ENV TestHarness Page is displayed for the Member");
-					TestHarness.checkForIPerceptionModel(driver);
-					return new AccountHomePage(driver);
-				}
-			} else
-				System.out.println("CSR Dashboard Page is NOT displayed for the Member");
-			return null;
+				} else if (MRScenario.environment.startsWith("team")) {
+					if (driver.getCurrentUrl().contains("/testharness")) {
+						try {
+							Alert alert = driver.switchTo().alert();
+							alert.accept();
+							Alert alert1 = driver.switchTo().alert();
+							alert1.accept();
+						} catch (Exception e) {
+							System.out.println("No alert displayed");
+						}
+						System.out.println("CSR - Lower ENV TestHarness Page is displayed for the Member");
+						TestHarness.checkForIPerceptionModel(driver);
+						return new AccountHomePage(driver);
+					}
+				} else
+					System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+				return null;
 
-		} else {
-			System.out.println("not able to switch to new window");
+			} else {
+				System.out.println("not able to switch to new window");
+				return null;
+			}
+		} catch (TimeoutException e) {
+			Assert.assertTrue("PROBLEM - after 60 seconds the dashboard is still not done loading", false);
+			return null;
+		} catch (UnsupportedCommandException ue) {
+			Assert.assertTrue("PROBLEM - Got UnreachableBrowserException. Exception="+ue.getStackTrace()+" | SaurceLab URL="+MRScenario.returnJobURL(), false);
 			return null;
 		}
 
@@ -496,6 +533,9 @@ public class MemberAuthPage extends UhcDriver {
 
 	
 	public void goGreenSplashPageWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform goGreen workaround...");
+		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
@@ -508,6 +548,7 @@ public class MemberAuthPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
+				CommonUtility.checkPageIsReadyNew(driver);
 				checkModelPopup(driver, 1);
 				Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("gogreen-splash.html"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
@@ -517,10 +558,15 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+		} else {
+			System.out.println("no need to perform goGreen workaround...");
 		}
 	}
 
 	public void paymentSplashPageWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform payment workaround...");
+		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("login/payment-two-offerings.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, paymentGoToHomepageBtn, 5);
@@ -533,6 +579,7 @@ public class MemberAuthPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
+				CommonUtility.checkPageIsReadyNew(driver);
 				checkModelPopup(driver, 1);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
 				splashPgWorkaroundForProd();
@@ -541,10 +588,14 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+		} else {
+			System.out.println("no need to perform payment workaround...");
 		}
 	}
 
 	public void anocSplashPageWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform anoc workaround...");
 		if (driver.getCurrentUrl().contains("login/anoc.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 5);
@@ -557,6 +608,7 @@ public class MemberAuthPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
+				CommonUtility.checkPageIsReadyNew(driver);
 				checkModelPopup(driver, 1);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
 				splashPgWorkaroundForProd();
@@ -565,11 +617,16 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+		} else {
+			System.out.println("no need to perform anoc workaround...");
 		}
 	}
 	
 	
 	public void emailAddressRequiredWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform email workaround...");
+		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
@@ -582,7 +639,7 @@ public class MemberAuthPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
 				splashPgWorkaroundForProd();
@@ -591,6 +648,8 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+		} else {
+			System.out.println("no need to perform email workaround...");
 		}
 	}  
 

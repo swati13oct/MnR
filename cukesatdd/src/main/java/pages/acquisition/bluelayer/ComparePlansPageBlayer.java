@@ -106,10 +106,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
 	
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]//img")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -119,10 +119,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
@@ -210,14 +210,14 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		
+		checkModelPopup(driver,20);
 	}
 	
 	public VPPPlanSummaryPage backToVPPPage(){
@@ -568,15 +568,18 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
         return null;
  	}
  	
- 	public ComparePlansPageBlayer  validateCallpopup() throws InterruptedException {
+ 	public void  validateCallpopup() throws InterruptedException {
  		//CommonUtility.checkPageIsReady(driver);
  		callsam.click();
  		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
  		driver.switchTo().activeElement();
- 		System.out.println(CallSamTFN.getText());
- 		CallSamTFNClose.click();
- 		validateNew(callsam);		
- 		return null;
+		if (CallSamTFN.getText().isEmpty()) {
+			// return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		} else {
+			CallSamTFNClose.click();
+			validateNew(callsam);
+		}
  	}
  	
  	public ComparePlansPageBlayer validateChatSam() throws InterruptedException {

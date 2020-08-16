@@ -41,6 +41,7 @@ import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
 import pages.regression.deeplinkPages.coverageandBenefitsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
 import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPage;
+import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPageSHIP;
 import pages.regression.deeplinkPages.myDocumentsDeeplinkLoginPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
@@ -416,7 +417,7 @@ public class HSIDStepDefinition {
 		loginPage.switchToIperceptionSmileySurveyAndSubmit();
 
 	}
-	
+	/* tbd 
 	//vvv note: added for 'sorry' login error workaround	
 	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
 		String bypassSorry = System.getProperty("bypassSorry");
@@ -507,7 +508,8 @@ public class HSIDStepDefinition {
 		return result;
     }
 	//^^^ note: added for 'sorry' login error workaround	
-
+	*/
+	
 	//----------- updated to handle microapp
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
@@ -641,7 +643,15 @@ public class HSIDStepDefinition {
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			} else {  
-				sorryWorkAroundAttempt(wd, testDataType, category, planType);
+				//tbd sorryWorkAroundAttempt(wd, testDataType, category, planType);
+				try {
+					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", !sorry.isDisplayed());
+				} catch (Exception e) {}
+				try { //check to see if it has something went wrong eeror
+					WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", !wentWrong.isDisplayed());
+				} catch (Exception e) {}
 			}
 		} else { //note: isHSIDCompatible=no then go to either dashboard or testharness
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -689,6 +699,7 @@ public class HSIDStepDefinition {
 		}
 	}
 	
+	/* tbd 
 	public void sorryWorkAroundAttempt(WebDriver wd, String testDataType, String category, String planType) throws InterruptedException {
 		// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
 		if ((testDataType==null) && (category==null) && (planType==null)) {
@@ -734,6 +745,7 @@ public class HSIDStepDefinition {
 		}
 
 	}
+	*/
 	
 
 	@And("^login with a deeplink in the member portal and validate elements$")
@@ -1334,4 +1346,57 @@ public class HSIDStepDefinition {
 									     Thread.sleep(3000);
 									     aarpChatAgentLogin.aarpchatagentreadystate();
 									}
+									 /** 
+										 * @todo :member lands on myDocuments deep link
+										 */
+										@Given("^I am an M&R SHIP member$")
+										public void the_SHIP_user_iS_on_deeplink_Page() throws InterruptedException{
+											WebDriver wd = getLoginScenario().getWebDriver();
+											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL();
+											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
+										}
+										/** 
+										 * @todo :deep link login page elements validate  
+										 */
+										@And("^the page is displayed with all the fields$")
+										public void signin_pageis_displayed(){
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) loginScenario.getBean(PageConstants.AARP_HAWL);
+											healthwellnessDeepLinkLoginPageSHIP.validatePageElements();
+										}  
+										/** 
+										 * @todo :on the healthwellness deep link page SHIP member enters login credentials 
+										 */
+										@Given("^I Sign on to the M&R Member Portal$")
+										public void the_user_is_on(DataTable givenAttributes) throws InterruptedException{
+											/* Reading the given attribute from feature file */
+											List<DataTableRow> memberAttributesRow = givenAttributes
+													.getGherkinRows();
+											Map<String, String> memberAttributesMap = new HashMap<String, String>();
+											for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+												memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+														.get(0), memberAttributesRow.get(i).getCells().get(1));
+											}
+
+											String username = memberAttributesMap.get("User Name");
+											String password  = memberAttributesMap.get("Password");
+											System.out.println("User name : "+username );
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+											Thread.sleep(5000);
+											System.out.println("Title of new page : "+healthwellnessDeepLinkLoginPageSHIP.getTitle());
+											healthwellnessDeepLinkLoginPageSHIP.enterusername(username);
+											healthwellnessDeepLinkLoginPageSHIP.enterpassword(password);	
+											healthwellnessDeepLinkLoginPageSHIP.clickSubmit();
+										}
+										/** 
+										 * @todo :member lands on healthwellness deep link page 
+										 */
+										 @Given("^I will land on the Talix page for At Your Best$") 
+										 public void i_will_land_on_the_Talix_page_for_At_Your_Best() throws InterruptedException{											
+											 healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+										     Thread.sleep(3000);
+										     healthwellnessDeepLinkLoginPageSHIP.validateHealthWellnessPage();
+										}
 }

@@ -17,9 +17,9 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     #-------------- navigate to the target test page for testing
     Then the user validates Health Record link display behavior on Account Profile dropdown base on test input
       | Expect Link | <expectLink>       |
-    Then the user validates clicking Health Record link will open new tab to the target page
+    Then the user validates clicking Health Record link will open to the target page
 	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
-	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
+	#Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
@@ -44,7 +44,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR | false      |
+	    | 04    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
 
     @memAuth_no_ihr_c
     Examples: 
@@ -69,11 +69,13 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
 
+	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
     @memAuth_ihr_c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
-	    | 12    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_012   | MAPD     | TERM_IHR           | true       |
+	 #  | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDPDP_001  | PDP      | PREEFF_IHR         | true       |
+	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | true       |
 
     @memAuth_ihr_d
     Examples: 
@@ -85,8 +87,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	 #  | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | PDP      | COMBO_SHIP_PDP_IHR | true       |
-	    | 16    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | MA       | COMBO_SHIP_MA_IHR  | true       |
+	    | 16    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011       | MAPD       | COMBO_SHIP_MAPD_IHR  | true       |
 
     @memAuth_ihr_f
     Examples: 

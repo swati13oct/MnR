@@ -98,11 +98,14 @@ public class EOBPage extends EOBBase{
 		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
-		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
-		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type label",eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type Dropdown",eobValidate(eobTypeDropdown));	
 			Select eobTypeOptions = new Select(eobTypeDropdown);
@@ -129,8 +132,9 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type label",!eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type dropdown",!eobValidate(eobTypeDropdown));	
 		}
-
-		Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));	
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate Date Range Dropdown",eobValidate(eobDateRangeDropdown));	
 
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
@@ -217,18 +221,25 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on new tab after clicking Learn More link.  number of existing tabs before clicking link='"+beforeClicked_numTabs+"' | after='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
-			//tbd String expUrl="How_to_read_Medical_EOB.pdf";
+			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+			System.out.println("total tab size="+newTab.size());
+
+			//note: Use the list of window handles to switch between windows
+			driver.switchTo().window(newTab.get(newTab.size()-1));
+			CommonUtility.checkPageIsReady(driver);
+
 			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			//TODO - validate PDF content when code deploy onto stage
-			
-			driver.navigate().back();
+
+			//note: Switch back to original window
+			driver.close();
+			driver.switchTo().window(newTab.get(newTab.size()-2));
 			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
-			sleepBySec(3);
+			sleepBySec(5);
+
 			if (memberType.contains("COMBO")) 
 				goToSpecificComboTab(planType);
 		}
@@ -314,7 +325,7 @@ public class EOBPage extends EOBBase{
 			Select eobTypeOptions = new Select(eobTypeDropdown);
 			eobTypeOptions.selectByVisibleText(targetEobType);
 			waitForEobPageToLoad();
-		} 		
+		}		
 		return new EOBPage(driver);
 	}
 
@@ -1011,7 +1022,7 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - is able to open pdf url, proceed to validate content");
 				PDDocument document = PDDocument.load(urlConnection.getInputStream());
 				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : " + PDFText);
+				//keepForDebug System.out.println("PDF text : " + PDFText);
 
 				String error="Your Explannation of Benefits is currently unavailable.";
 				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
@@ -1068,7 +1079,7 @@ public class EOBPage extends EOBBase{
 			System.out.println("TEST - is able to open pdf url, proceed to validate content");
 			PDDocument document = PDDocument.load(urlConnection.getInputStream());
 			String PDFText = new PDFTextStripper().getText(document);
-			System.out.println("PDF text : " + PDFText);
+			//keepForDebug System.out.println("PDF text : " + PDFText);
 
 			String error="Your Explannation of Benefits is currently unavailable.";
 			if (PDFText.contains(error)) {

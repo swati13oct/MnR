@@ -8,16 +8,18 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     Then verify plan compare checkbox is not visible on plan summary on UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county           | plantype |
-      | 00001 |   96799 | NO            | Western District | PDP      |
-      | 00002 |   78006 | YES           | Bexar County     | SNP      |
-      | 00003 |   90265 | YES           | Ventura County   | MAPD     |
-      | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |
+      | TID   | zipcode | isMultiCounty | county           | plantype |planyear|
+      | 00001 |   96799 | NO            | Western District | PDP      |current|
+      | 00002 |   78006 | YES           | Bexar County     | SNP      |current|
+      | 00003 |   90265 | YES           | Ventura County   | MAPD     |current|
+      | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |current|
 
   @vppPlanCompareUHC02 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Verify Call sticky action menu on AARP site
@@ -26,14 +28,18 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     When verify Call SAM icon is visible or not on Plan Comapare on UHC site
     And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site
     Then user verify the popup and content on Plan Comapare on UHC site
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
-      | 00005 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
+      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
+      | 00005 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
   @vppPlanCompareUHC03 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
@@ -42,13 +48,15 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+   When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county         | plantype |
-      | 00006 |   35616 | NO            | Colbert County | MAPD     |
+      | TID   | zipcode | isMultiCounty | county         | plantype |planyear|
+      | 00006 |   35616 | NO            | Colbert County | MAPD     |current|
 
   @vppPlanCompareUHC04 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - To verify links displayed in the global footer of UHC site
@@ -57,6 +65,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
     And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
@@ -69,8 +81,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     And user verifies home link of agents&brokers page bluelayer
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
-      | 00007 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
+      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
+      | 00007 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
   @vppPlanCompareUHC05 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Navigation for plan comapre to Back to summary page
@@ -79,12 +91,16 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     And click on back to plans on plan compare page for UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
-      | 00008 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
+      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
+      | 00008 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
   @vppPlanCompareUHC06 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
@@ -93,6 +109,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then remove one plan from new plan compare page for UHC
@@ -100,8 +120,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then Verify the Plan compare checkbox should be unchecked for the removed plan for UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype |
-      | 00009 |   90210 | NO            | Los Angeles County | MAPD     |
+      | TID   | zipcode | isMultiCounty | county             | plantype |planyear|
+      | 00009 |   90210 | NO            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareUHC07 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
@@ -110,6 +130,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC
@@ -117,8 +141,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then Verify newly added plan displayed on new plan compare page for UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | count |
-      | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |
+      | TID   | zipcode | isMultiCounty | county             | plantype | count |planyear|
+      | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 |current|
 
   @vppPlanCompareUHC08 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for UHC
@@ -127,8 +151,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
     When user selects a provider and retuns to VPP page in ums
@@ -142,8 +168,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
-      | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |planyear|
+      | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
   @vppPlanCompareUHC09 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for UHC
@@ -152,6 +178,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+      When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then verify Add doctors is loaded with doctor summary on Plan Compare page UHC
@@ -163,8 +193,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |
-      | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultiCounty | county             | plantype | planName                                            |planyear|
+      | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
   @vppPlanCompareUHC10 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for UHC
@@ -173,11 +203,13 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
+   When user selects a Hospitals and retuns to VPP page in ums
     Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
@@ -188,8 +220,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
-      | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |planyear|
+      | 00013 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
   @vppPlanCompareUHC11 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for UHC
@@ -198,6 +230,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then verify Add Hospitals is loaded without summary on Plan Compare page UHC
@@ -210,8 +246,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Your Hospital is loaded with doctor summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |
-      | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | TID   | zipcode | isMultiCounty | county          | plantype | planName                             |planyear|
+      | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
   @vppPlanCompareUHC12 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for UHC
@@ -220,8 +256,10 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And user access DCE tool on UMS site
       | Plan Type | <plantype> |
       | PlanName  | <planName> |
@@ -278,8 +316,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |
-      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |planyear|
+      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |current|
 
   @vppPlanCompareUHC13 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Navigation for plan comapre to OLE
@@ -288,12 +326,16 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     Then the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |
-      | 00016 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |
+      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
+      | 00016 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
   @vppPlanCompareUHC14 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> -  Navigation for plan comapre to Plan Detail
@@ -302,12 +344,16 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     Then the user clicks on Plan details link in new Plan Compare page on UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count | pdfType               | docCode                 |
-      | 00017 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count | pdfType               | docCode                 |planyear|
+      | 00017 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |current|
 
   @vppPlanCompareUHC15 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> -  Validation for Selecting more than 4 plans for plan comapre from VPP
@@ -316,11 +362,15 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+    	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
     Then Click on view more plans for right navigaton on UHC
     Then Click on view less plans for left navigaton on UHC
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county          | plantype | count |
-      | 00018 |   10010 | No            | New York County | MAPD     |     9 |
+      | TID   | zipcode | isMultiCounty | county          | plantype | count |planyear|
+      | 00018 |   10010 | No            | New York County | MAPD     |     9 |current|

@@ -678,6 +678,10 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String IS_DECISION_GUIDE_PAGE1 = "isDecisionGuideStep1Page"; 
 	public static final String IS_DECISION_GUIDE_PAGE2 = "isDecisionGuideStep2Page"; 
+	public static final String IS_INSURANCE_AGENT_PAGE = "isInsuranceAgentStep1Page"; 
+	
+	
+	
 	public static final String STAGE_SSO_TESTHANESS_URL_bswift = "cqloginpage";
 	
 	public static final String plansForCompare="0";
@@ -715,4 +719,18 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String AARP_CHAT_AGENT_LOGIN="aarpChatAgentLogin";
 
 	public static final String CONFIRMATION_NUMBER="verifyConfirmationNumberPresent";
+	/*
+	 * New DCE Redesign - Pages
+	 */
+	
+	public static final String DCE_Redesign_GetStarted="dceredesignGetStarted";
+	public static final String DCE_Redesign_BuildDrugList="dceredesignBuildDrugList";
+	public static final String DCE_Redesign_TellUsAboutDrug="dceredesigntellUsAboutDrug";
+	public static final String DCE_Redesign_DrugDetails="dceredesigndrugdetails";
+
+	public static final String DCE_Redesign_ZipCodePlanYearCapture="dceredesignZipCodePlanYearCapture";
+	public static final String DCE_Redesign_DrugSummary="dcedrugsummary";
+
+	public static final String AARP_HAWL="aarpHAWL";
+	
 }
