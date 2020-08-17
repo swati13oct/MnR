@@ -110,8 +110,9 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 18-113 | 15131,15233 | ashah120  | Mnrqa003  | DKELLY27        | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false   | true   | false  |
 
-	@prod_active_ship_2of2
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa003  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false   | false  | false  |
+    #note - covered by P1of2 already
+	#@prod_active_ship_2of2
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
+    #  | 19-114 | 15119,15304 | ashah120  | Mnrqa003  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false   | false  | false  |
 #     | 19-120 | 15119,15304 | ashah120  | Mnrqa003  | q1_feb_2020SHIP_0   | SHIP | MULTI_IND_EFF_PDnR    | true   | false   | false  | false  |    

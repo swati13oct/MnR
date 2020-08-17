@@ -109,8 +109,9 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 18-113 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255  | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false   | true   | false  |
 
-	@memAuth_active_ship_2of2
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false   | false  | false  |
-      | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001| SHIP  | MULTI_IND_EFF_PDnR    | true   | false   | false  | false  |    
+    #note - covered by P1of2 already
+	#@memAuth_active_ship_2of2
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
+    #  | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false   | false  | false  |
+    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001| SHIP  | MULTI_IND_EFF_PDnR    | true   | false   | false  | false  |    
