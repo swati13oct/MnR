@@ -85,5 +85,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//a[@data-testid='oc__navigate__pharmaRx']")
 	protected WebElement GoBackToPnPPageOrderConfirmation;
-		
+	
+	@FindBy(xpath = "//p[@data-testid='oc__shipping__estimatedDate__alternate__message']/span[text()='We will contact your provider for a new prescription and update you with a delivery date.']")
+	protected WebElement EstimationDateAlertMessage;	
 }

@@ -11,8 +11,8 @@ Feature: Refill Order Confirmation
     And user fetches medication information and clicks on Refill Medication call to action button from My Medication
     Then user will see "Complete Your Refill" Page
     And user will see Place Order Btn
-    And user will click on Place Order btn
-    Then user will see Refill order confirmation page
+    When user clicks on Place Order Btn
+    Then user will see the Order Confirmation Page
     Then user will see order number
     Then user will see order placed date
     Then user will see order tracked as Order Received
@@ -37,4 +37,4 @@ Feature: Refill Order Confirmation
 
     Examples: 
       | FID     | planType | memberType                        |
-      | F481928 | MAPD      | Rx_Individual_Refill_Confirmation |
+      | F481928 | MAPD     | Rx_Individual_Refill_Confirmation |

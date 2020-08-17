@@ -3,12 +3,14 @@ package pages.regression.pharmaciesandprescriptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.memberredesign.pharmaciesandprescriptions.MedicineCabinetStepDefinition;
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
+import acceptancetests.util.CommonUtility;
 
 public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
@@ -204,8 +206,13 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public void clickPlaceOrderBtn() {
+		CommonUtility.waitForPageLoad(driver, orderSummaryPlaceOrderBtn,30);
 		validate(orderSummaryPlaceOrderBtn, 20);
-		orderSummaryPlaceOrderBtn.click();
+		Actions actions = new Actions(driver);
+		actions.moveToElement(orderSummaryPlaceOrderBtn);
+		actions.click().build().perform();
+		/*orderSummaryPlaceOrderBtn.click();
+		orderSummaryPlaceOrderBtn.click();*/
 	}
 
 	public boolean validatePreferredPaymentMethod() {
@@ -217,7 +224,6 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateMedicationNameAndStrength() {
-		//validate(drugNameOnCheckOutPage, 40);
 		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
 		System.out.println("Medication Name" + medicationNameAndStrength);
 		/*
@@ -301,5 +307,15 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateShippingAlternateDate() {
 		validate(shippingAlternateMsg, 20);
 		return !shippingAlternateMsg.getText().isEmpty();
+	}
+	
+	public OrderConfirmationPage navigateToOrderConfirmationPage() {
+		//CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("order-confirmation")) {
+			CommonUtility.checkPageIsReady(driver);
+			return new OrderConfirmationPage(driver);
+		}
+		return null;
 	}
 }

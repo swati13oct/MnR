@@ -16,6 +16,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.pharmaciesandprescriptions.CheckOutSummaryPage;
 import pages.regression.pharmaciesandprescriptions.OrderConfirmationPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
@@ -63,10 +64,13 @@ public class RenewOrderConfirmationStepDefinition {
 
 	@Then("^user will see Renew order confirmation page$")
 	public void user_will_see_Renew_order_confirmation_page() throws Throwable {
-		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displayed",
-				orderConfirmationPage.validateOrderConfirmationThankyouMessage());    
+		OrderConfirmationPage orderConfirmationPage =  new OrderConfirmationPage(null);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
+		getLoginScenario().saveBean(PageConstants.ORDER_CONFIRMATION_PAGE, orderConfirmationPage);
+		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
+				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
 
 	@Then("^the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction$")
@@ -91,6 +95,14 @@ public class RenewOrderConfirmationStepDefinition {
 			}
 		}
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	    
+	}
+	
+	@Then("^user will see the estimated delivery date alert message$")
+	public void user_will_see_the_estimated_delivery_date_alert_message() throws Throwable {
+		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
+		Assert.assertTrue("PROBLEM - Estimated Delivery Date Alert Message is Not displayed on Order Confirmation Page",
+				orderConfirmationPage.validateEstimationDateAlertMsg());
 	}
 
 }

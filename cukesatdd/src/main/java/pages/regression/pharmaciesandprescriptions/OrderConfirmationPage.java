@@ -11,6 +11,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 	
 	public boolean validateOrderConfirmationThankyouMessage() {
+		
 		return validate(ThankyouMessageOrderConfirmation,30);
 	}
 	
@@ -88,6 +89,10 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	
 	public boolean clickGoToPnPPage() {
 		return validate(GoBackToPnPPageOrderConfirmation);
+	}
+	
+	public boolean validateEstimationDateAlertMsg() {
+		return validate(EstimationDateAlertMessage);
 	}
 	
 }
