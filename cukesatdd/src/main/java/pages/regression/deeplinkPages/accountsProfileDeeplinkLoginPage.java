@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -225,17 +226,21 @@ public class accountsProfileDeeplinkLoginPage extends UhcDriver {
 					} while (counter < 2);
 				}
 				
+				@FindBy(xpath = "//*[@id='nav']/button[2]")
+				private WebElement iPerceptionAutoPopUp;
+
+				public WebElement getiPerceptionAutoPopUp() {
+					return iPerceptionAutoPopUp;}
+					
 				public boolean validateAccountProfilePage() {
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					WebDriverWait wait = new WebDriverWait(driver, 20);
+					if (validate(iPerceptionAutoPopUp)) {
+						iPerceptionAutoPopUp.click();
+					} else {
+						System.out.println("iPerception Pop Up not displayed");
 					}
 					checkForIPerceptionModel(driver);
-					validateNew(textonpage);
+					//validateNew(textonpage);
 					if (driver.getCurrentUrl().contains("/account/profile.html?deeplink=true")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on Account Setting deeplink Page **");

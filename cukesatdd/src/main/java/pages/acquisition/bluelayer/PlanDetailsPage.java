@@ -244,9 +244,23 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='drugBenefits']/h3")
 	private WebElement prescDrugHeading;
-	
-	
-	
+
+	// Dental Directoy
+	@FindBy(xpath = "(//h3[text()='Dental Platinum'])//following::a[@id='dentalProviderlink']")
+	private WebElement dentalPopupOptionalRidersLink;
+
+	@FindBy(xpath = "//table[contains(@id,'additional-medical-benefits')]//a[@id='dentalProviderlink']")
+	private WebElement dentalPopupLink;
+
+	@FindBy(xpath = "//button[contains(@ng-click,'dentalCoverRally')]/preceding::button[1]")
+	private WebElement dentalCoverPopupCancel;
+
+	@FindBy(xpath = "//button[@id='dentalCoverPopupContinue']")
+	private WebElement dentalCoverPopupContinue;
+
+	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
+	private WebElement dentalPopupPlanLabel;
+		
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
 	}
@@ -1190,5 +1204,37 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		System.out.println("Plan Name is : " + PlanName);
 		Assert.assertTrue(planNameValue.getText().contains(PlanName), "Message not Landed on PlanDetails Page");
+	}
+	
+	public void validateDentalPopupDefaults(String planName, boolean optionalRider) {
+		try {
+			Thread.sleep(5000);
+			if (optionalRider)
+				dentalPopupOptionalRidersLink.click();
+			else {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("arguments[0].click()", dentalPopupLink);
+			}
+			System.out.println("Plan Name is : " + planName);
+			Assert.assertTrue(dentalPopupPlanLabel.getText().contains(planName),"Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText());
+			String parentWindow = driver.getWindowHandle();
+			dentalCoverPopupContinue.click();
+			Thread.sleep(5000);
+			System.out.println("Moved to dental directoy rally page");
+			
+			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			System.out.println(driver.getTitle());
+			Assert.assertTrue(driver.getTitle().equals("Dental | Find Care"),"Title mismatch for dental directory");
+			System.out.println(driver.getWindowHandles());
+			driver.close();
+			System.out.println(driver.getWindowHandles());
+			driver.switchTo().window(parentWindow);
+			System.out.println(driver.getTitle());
+			dentalCoverPopupCancel.click();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
