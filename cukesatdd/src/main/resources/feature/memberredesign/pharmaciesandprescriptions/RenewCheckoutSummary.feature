@@ -24,7 +24,7 @@ Feature: Renew - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user fetches medication information and clicks on Renew Medication call to action button
+    And user fetches medication informations and clicks on Renew Medication call to action button
     Then user will see "Complete Your Renewal" Page
     When user views the Medications section
     And user validates the medication name and strength

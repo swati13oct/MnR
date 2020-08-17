@@ -121,11 +121,12 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateConfirmationMsgUnderOrderSummary() {
-		return !orderSummaryConfirmationMsg.getText().isEmpty();
+		return validate(orderSummaryConfirmationMsg, 20) && !orderSummaryConfirmationMsg.getText().isEmpty();
 	}
 
 	public boolean validateConfirmationAddrssUnderOrderSummary() {
-		return !orderSummaryConfirmationShippinAddrss.getText().isEmpty();
+		return validate(orderSummaryConfirmationShippinAddrss, 20)
+				&& !orderSummaryConfirmationShippinAddrss.getText().isEmpty();
 	}
 
 	public boolean validatePlaceOrderBtnUnderOrderSummary() {
@@ -137,11 +138,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validatePreferedShippingAddressLabel() {
-		return !shippingpreferredLabel.getText().isEmpty();
+		return validate(shippingpreferredLabel, 20) && !shippingpreferredLabel.getText().isEmpty();
 	}
 
 	public boolean validateShippingAddressContent() {
-		return !shippingAddressContent.getText().isEmpty();
+		return validate(shippingAddressContent, 20) && !shippingAddressContent.getText().isEmpty();
 	}
 
 	public boolean validateChangeShippingAddressBtn() {
@@ -153,11 +154,11 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validatePreferedPaymentLabel() {
-		return !paymentPreferredLabel.getText().isEmpty();
+		return validate(paymentPreferredLabel, 20) && !paymentPreferredLabel.getText().isEmpty();
 	}
 
 	public boolean validatePaymentCardType() {
-		return validate(paymentCreditCardImage)
+		return validate(paymentCreditCardImage, 20)
 				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
 	}
 
@@ -166,7 +167,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateCardExpiryDate() {
-		return !paymentCreditCardExpDate.getText().isEmpty()
+		return validate(paymentCreditCardExpDate, 20) && !paymentCreditCardExpDate.getText().isEmpty()
 				&& paymentCreditCardExpDate.getText().trim().matches(exireDateRegexAlongwithTex);
 	}
 
@@ -206,13 +207,14 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public void clickPlaceOrderBtn() {
-		CommonUtility.waitForPageLoad(driver, orderSummaryPlaceOrderBtn,30);
+		CommonUtility.waitForPageLoad(driver, orderSummaryPlaceOrderBtn, 30);
 		validate(orderSummaryPlaceOrderBtn, 20);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(orderSummaryPlaceOrderBtn);
 		actions.click().build().perform();
-		/*orderSummaryPlaceOrderBtn.click();
-		orderSummaryPlaceOrderBtn.click();*/
+		/*
+		 * orderSummaryPlaceOrderBtn.click(); orderSummaryPlaceOrderBtn.click();
+		 */
 	}
 
 	public boolean validatePreferredPaymentMethod() {
@@ -308,9 +310,9 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		validate(shippingAlternateMsg, 20);
 		return !shippingAlternateMsg.getText().isEmpty();
 	}
-	
+
 	public OrderConfirmationPage navigateToOrderConfirmationPage() {
-		//CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+		// CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("order-confirmation")) {
 			CommonUtility.checkPageIsReady(driver);
