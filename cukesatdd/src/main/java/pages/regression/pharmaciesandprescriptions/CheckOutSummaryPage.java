@@ -1,8 +1,11 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.memberredesign.pharmaciesandprescriptions.MedicineCabinetStepDefinition;
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
@@ -73,22 +76,27 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateShippingFeeUnderOrderSummary() {
-		String shippingMethod = shippingDrpDownVal.getText();
-		int count = 0;
-		while (!shippingMethod.contains("Standard")) {
-			shippingMethod = shippingDrpDownVal.getText();
-			count++;
-			if (count > 20) {
-				break;
+		// String shippingMethod = shippingDrpDownVal.getText();
+		// int count = 0;
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		// wait.until(ExpectedConditions.textToBePresentInElement(shippingDrpDownVal,
+		// "Standard"));
+
+		/*
+		 * while (!shippingMethod.contains("Standard")) { shippingMethod =
+		 * shippingDrpDownVal.getText(); count++; if (count > 10) { break; } }
+		 */
+		if (wait.until(ExpectedConditions.textToBePresentInElement(shippingDrpDownVal, "Standard"))) {
+			String shippingMethod = shippingDrpDownVal.getText();
+			String shippingFee = orderSummaryShippingFee.getText();
+			String[] arry = shippingMethod.split("-");
+			if (!arry[1].trim().equals("Free")) {
+				return shippingFee.equals(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
 			}
+			return shippingFee.equals(arry[1].trim());
 		}
-		shippingMethod = shippingDrpDownVal.getText();
-		String shippingFee = orderSummaryShippingFee.getText();
-		String[] arry = shippingMethod.split("-");
-		if (!arry[1].trim().equals("Free")) {
-			return shippingFee.equals(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
-		}
-		return shippingFee.equals(arry[1].trim());
+		return false;
 	}
 
 	public boolean validateTotalLabelUnderOrderSummary() {
@@ -209,12 +217,26 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validateMedicationNameAndStrength() {
-		validate(drugNameOnCheckOutPage, 40);
+		//validate(drugNameOnCheckOutPage, 40);
 		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
 		System.out.println("Medication Name" + medicationNameAndStrength);
-		System.out.println("Med Name on Refill Page" + listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
-		return medicationNameAndStrength.trim()
-				.equalsIgnoreCase(listOfDrugName.get(listOfDrugName.size() - 1).getText().trim());
+		/*
+		 * int size=listOfDrugName.size(); int count=0; while(size==0) {
+		 * size=listOfDrugName.size();
+		 * 
+		 * 
+		 * }
+		 */
+		/*
+		 * System.out.println("Med Name on Refill Page" +
+		 * listOfDrugName.get(listOfDrugName.size() - 1).getText().trim()); return
+		 * medicationNameAndStrength.trim()
+		 * .equalsIgnoreCase(listOfDrugName.get(listOfDrugName.size() -
+		 * 1).getText().trim());
+		 */
+		return validate(drugNameOnCheckOutPage, 40)
+				&& medicationNameAndStrength.trim().equalsIgnoreCase(drugNameOnCheckOutPage.getText().trim());
+
 	}
 
 	public boolean validateMedicationPrice() {
