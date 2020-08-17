@@ -624,23 +624,12 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return note;
 	}
 	
+	/* tbd 
 	public void validateReturnToPrevPgLnk() {
 		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
 		Assert.assertTrue("PROBLEM - unable to locate the 'RETURN TO PREVIOUS PAGE' link on 'Prepare For Next Year' page'", noWaitValidate(returnToPrevPgLnk));
-		/* keep - when network is stable this works fine
-		returnToPrevPgLnk.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitsPgHeaderText, 10);
-		Assert.assertTrue("PROBLEM - unable to navigate back to benefits page by clicking 'RETURN TO PREVIOUS PAGE' link",noWaitValidate(benefitsPgHeaderText));
-		if (noWaitValidate(prepareForNextYearTab)) {
-			prepareForNextYearTab.click();
-		}
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
-		checkModelPopup(driver,1);
-		Assert.assertTrue("PROBLEM - unable to navigate again to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
-		*/
 	}
+	*/
 
 	public int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);

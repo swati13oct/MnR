@@ -164,11 +164,11 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]")
 	protected WebElement tl_section;
 	
-	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Dates to Remember')]")
-	protected WebElement tl_sectionHeader;
+	//tbd @FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Dates to Remember')]")
+	//tbd protected WebElement tl_sectionHeader;
 
-	@FindBy(xpath="//h3[contains(text(),'Dates to Remember')]")
-	protected WebElement tbd_tl_sectionHeader;
+	//tbd @FindBy(xpath="//h3[contains(text(),'Dates to Remember')]")
+	//tbd protected WebElement tbd_tl_sectionHeader;
 	
 	@FindBy(xpath="//a[contains(text(),'RETURN TO PREVIOUS PAGE')]")
 	protected WebElement returnToPrevPgLnk;

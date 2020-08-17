@@ -278,13 +278,13 @@ public class HSIDLoginPage extends UhcDriver {
 	public Object doLoginWith(String username, String password) {
 		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
 			System.out.println(driver.getCurrentUrl());
-			CommonUtility.waitForPageLoad(driver, oldUsername, 10);
+			CommonUtility.waitForPageLoad(driver, oldUsername, 20);
 			sendkeys(oldUsername, username);
 			sendkeys(oldPassword, password);
 			oldSignInBtn.click();
 		} else {
 			System.out.println(driver.getCurrentUrl());
-			CommonUtility.waitForPageLoad(driver, mnrSignInButton, 10);
+			CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
 			mnrSignInButton.click();
 			validateHsidPageElements();
 			sendkeys(userNameField, username);

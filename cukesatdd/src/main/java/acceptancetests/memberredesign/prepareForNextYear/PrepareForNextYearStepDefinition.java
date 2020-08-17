@@ -399,8 +399,9 @@ public class PrepareForNextYearStepDefinition {
 		if (expComboTab) 
 			pfnyPg.handleComboTabIfComboUser(planType, memberType);
 
-		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		/* tbd
+		//note: validate Return to previous page link
 		if (MRScenario.environment.contains("team-a")) {
 			if (testNote==null)
 				testNote=new ArrayList<String>();
@@ -408,6 +409,7 @@ public class PrepareForNextYearStepDefinition {
 			pfnyPg.validateReturnToPrevPgLnk();
 			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
 		}
+		*/
 		
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
@@ -511,6 +513,7 @@ public class PrepareForNextYearStepDefinition {
 
 		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
+		/* tbd
 		if (MRScenario.environment.contains("team-a")) {
 			if (testNote==null)
 				testNote=new ArrayList<String>();
@@ -518,6 +521,7 @@ public class PrepareForNextYearStepDefinition {
 			pfnyPg.validateReturnToPrevPgLnk();
 			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
 		}
+		*/
 		
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");

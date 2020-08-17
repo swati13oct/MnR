@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import atdd.framework.MRScenario;
 
 public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase {
 
@@ -30,13 +29,16 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		note.add("\tValidate Timeline...");
 		String targetItem="NO Time line section";
 		WebElement targetElement=tl_section;
-		Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
+		/* tbd 
 		targetItem="NO Time line box header";
 		targetElement=tl_sectionHeader;
 		Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
+		*/
 		return note;
 	}
 	
@@ -47,14 +49,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 		note.add("\tValidate Timeline...");
 		String targetItem="Time line section";
 		WebElement targetElement=tl_section;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
+		/* tbd 
 		targetItem="Time line box header";
 		targetElement=tl_sectionHeader;
 		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement) || noWaitValidate(tbd_tl_sectionHeader));
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		note.add("\tPASSED - validation for "+targetItem);
+		*/
 
 		//note: milestone1 - Sept 15 ----------------------------------
 		String dateStr="September 15";
@@ -78,15 +83,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone1Dot_blue_ind;
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone1Date_ind;
 		//tbd if (MRScenario.environment.equalsIgnoreCase("stage")) 
 		//tbd 	targetElement=tbd_tl_milestone1Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 
 		targetItem="Time line '"+dateStr+"' - Text";
@@ -122,15 +129,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone2Dot_blue_ind;
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone2Date_ind;
 		//tbd if (MRScenario.environment.equalsIgnoreCase("stage")) 
 		//tbd 	targetElement=tbd_tl_milestone2Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone2Text_ind;
@@ -165,15 +174,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone3Dot_blue_ind;
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone3Date_ind;
 		//tbd if (MRScenario.environment.equalsIgnoreCase("stage")) 
 		//tbd 	targetElement=tbd_tl_milestone3Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone3Text_ind;
@@ -208,15 +219,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone4Dot_blue_ind;
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone4Date_ind;
 		//tbd if (MRScenario.environment.equalsIgnoreCase("stage")) 
 		//tbd 	targetElement=tbd_tl_milestone4Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone4Text_ind;
@@ -251,15 +264,17 @@ public class PrepareForNextYearTimelineIndividual extends PrepareForNextYearBase
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone5Dot_blue_ind;
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone5Date_ind;
 		//tbd if (MRScenario.environment.equalsIgnoreCase("stage")) 
 		//tbd 	targetElement=tbd_tl_milestone5Date;
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for "+targetItem);
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		//tbd Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		//tbd note.add("\tPASSED - validation for "+targetItem);
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone5Text_ind;

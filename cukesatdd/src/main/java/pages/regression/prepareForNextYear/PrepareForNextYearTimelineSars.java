@@ -31,6 +31,9 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 		note.add("\tValidate Timeline...");
 		String targetItem="NO Time line section";
 		WebElement targetElement=tl_section;
+		note.addAll(validateDontHaveItem(targetItem, targetElement));
+
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (!noWaitValidate(targetElement))
 				note.add("\tPASSED - validation for "+targetItem);
@@ -40,8 +43,9 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-		}
+		} */
 
+		/* tbd 
 		targetItem="NO Time line box header";
 		targetElement=tl_sectionHeader;
 		if (validateAsMuchAsPossible) {
@@ -53,7 +57,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-		}
+		} 
+		*/
 		return note;
 	}
 	
@@ -65,6 +70,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 		note.add("\tValidate Timeline...");
 		String targetItem="Time line section";
 		WebElement targetElement=tl_section;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement))
 				note.add("\tPASSED - validation for "+targetItem);
@@ -74,8 +81,9 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
+		/* tbd 
 		targetItem="Time line box header";
 		targetElement=tl_sectionHeader;
 		if (validateAsMuchAsPossible) {
@@ -87,7 +95,7 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		//note: milestone1 - Oct 1 ----------------------------------
 		String dateStr="October 1";
@@ -124,6 +132,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone1Dot_blue_sars;
 		}
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -131,10 +141,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone1Date_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -142,10 +154,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone1Text_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -154,6 +168,7 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
 		}
+		*/
 		//targetActText=targetElement.getText();
 		//targetExpText="You'll be able to compare next year's plan with your current plan to find out how your coverage may change.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
@@ -195,6 +210,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone2Dot_blue_sars;
 		}
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -202,10 +219,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone2Date_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -213,10 +232,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone2Text_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -224,7 +245,7 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 		//targetActText=targetElement.getText();
 		//targetExpText="If your needs have changed and you want a different plan for next year, you can switch to a new plan.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
@@ -234,6 +255,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 		dateStr="January 1";
 		targetItem="Time line '"+dateStr+"' - Line";
 		targetElement=tl_milestone3Line_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -241,7 +264,7 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 		if (expNoBlue_t3) {
 			targetItem=targetItem+" - no blue";
 			if (validateAsMuchAsPossible) {
@@ -272,6 +295,8 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 			targetItem=targetItem+" - blue";
 			targetElement=tl_milestone3Dot_blue_sars;
 		}
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -279,10 +304,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Date";
 		targetElement=tl_milestone3Date_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -290,10 +317,12 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 
 		targetItem="Time line '"+dateStr+"' - Text";
 		targetElement=tl_milestone3Text_sars;
+		note.addAll(validateHaveItem(targetItem, targetElement));
+		/* tbd 
 		if (validateAsMuchAsPossible) {
 			if (noWaitValidate(targetElement)) 
 				note.add("\tPASSED - validation for "+targetItem);
@@ -301,7 +330,7 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		}
+		} */
 		//targetActText=targetElement.getText();
 		//targetExpText="Your 2021 plan coverage starts today.";
 		//Assert.assertTrue("PROBLEM - text content for element '"+targetItem+"' is not as expected.  "
