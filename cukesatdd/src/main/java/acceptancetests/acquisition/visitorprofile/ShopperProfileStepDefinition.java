@@ -261,10 +261,8 @@ public class ShopperProfileStepDefinition {
 		try {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			//ComparePlansPage comparePlansPage = createProfile.createProfile(details);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
-			//getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

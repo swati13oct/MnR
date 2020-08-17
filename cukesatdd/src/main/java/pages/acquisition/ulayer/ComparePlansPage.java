@@ -1056,8 +1056,8 @@ public class ComparePlansPage extends UhcDriver {
 		String fname = givenAttributesMap.get("First Name");
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
-		String mbi = givenAttributesMap.get("MBI");
 		
+		allSet();
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
