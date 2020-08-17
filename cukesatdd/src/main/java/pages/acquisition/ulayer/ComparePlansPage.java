@@ -1002,13 +1002,19 @@ public class ComparePlansPage extends UhcDriver {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
 			validate(editDoctorsLink);
-			String[] provider = providers.split(";");
-			for(int i=0;i<provider.length;i++) {
-				if(!StringUtils.isNullOrEmpty(providers)) {
-					Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
-					System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+			if(providers.contains(";")) {
+				String[] provider = providers.split(";");
+				for(int i=0;i<provider.length;i++) {
+					if(!StringUtils.isNullOrEmpty(providers)) {
+						Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+						System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+					}
 				}
+			}else {
+				Assert.assertTrue(providers.split(":")[0].contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+				System.out.println("#########"+providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 			}
+			
 		}else {
 			
 			System.out.println("#########No Providers for this member#########");
@@ -1045,7 +1051,6 @@ public class ComparePlansPage extends UhcDriver {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plan = givenAttributesMap.get("Plan Name");
-		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
 		String fname = givenAttributesMap.get("First Name");
@@ -1056,6 +1061,44 @@ public class ComparePlansPage extends UhcDriver {
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		
+		//Validate Providers
+		if(!providers.equalsIgnoreCase("no")) {
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+			validate(editDoctorsLink);
+			if(providers.contains(";")) {
+				String[] provider = providers.split(";");
+				for(int i=0;i<provider.length;i++) {
+					if(!StringUtils.isNullOrEmpty(providers)) {
+						Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+						System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+					}
+				}
+			}else {
+				Assert.assertTrue(providers.split(":")[0].contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+				System.out.println("#########"+providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+			}
+			
+		}else {
+			
+			System.out.println("#########No Providers for this member#########");
+		}
+		
+		if(!drugs.equalsIgnoreCase("no")) {
+			validate(editDrugsLink);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+			String[] drugName = drugs.split(",");
+			for(int i=0;i<drugName.length;i++) {
+				if(!StringUtils.isNullOrEmpty(drugs)) {
+					Assert.assertTrue(drugName[i].contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
+				}
+			}
+		}else {
+			System.out.println("#########No Drugs available for this member#########");
+		}
 	}
 	
 	public void allSet() {

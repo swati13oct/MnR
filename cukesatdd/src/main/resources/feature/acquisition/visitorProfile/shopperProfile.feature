@@ -104,38 +104,37 @@ Feature: 1.08. ACQ- Shopper Profile
 
   #@searchProfileAndAddDrugs
   #Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
-    #Given I am an agent logged into the cloak in tool
-      #| User Name | <username> |
-      #| Password  | <password> |
-    #Then I ask the shopper calling in to provide me with the Email Address and Search
-      #| Email | <email> |
-    #And the profile is found and i click on the CLOAK IN button
-    #Then the user clicks on back on all plan linnk in Plan Compare page
-    #And I access the DCE tool on aarp site
-      #| Plan Type | <plantype> |
-    #And I have added a drug to my drug list
-      #| Drug | <drug> |
-    #And user selects drug details
-      #| Drug      | <drug>      |
-      #| Dosage    | <dosage>    |
-      #| Quantity  | <quantity>  |
-      #| Frequency | <frequency> |
-    #When user successfully adds drug
-      #| Is Branded Drug | <branded> |
-      #| Drug            | <drug>    |
-    #And I navigate to step2 page
-    #And I select the first pharmacy
-    #And I navigate to step3 page and validate
-      #| Drug | <drug> |
-    #And the user clicks on the shopping cart icon on DCE page in AARP
-    #Then the user should be able to see the Drug and pharmacy information in the guest profile page
-      #| Drug | <drug> |
-    #And user delets all the added drugs on visitor profile page of AARP site
-#
-    #Examples: 
-      #| username  | password  | email              | plan                                               | plantype | drug    | dosage   | quantity | frequency     | branded |
-      #| qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
-
+  #Given I am an agent logged into the cloak in tool
+  #| User Name | <username> |
+  #| Password  | <password> |
+  #Then I ask the shopper calling in to provide me with the Email Address and Search
+  #| Email | <email> |
+  #And the profile is found and i click on the CLOAK IN button
+  #Then the user clicks on back on all plan linnk in Plan Compare page
+  #And I access the DCE tool on aarp site
+  #| Plan Type | <plantype> |
+  #And I have added a drug to my drug list
+  #| Drug | <drug> |
+  #And user selects drug details
+  #| Drug      | <drug>      |
+  #| Dosage    | <dosage>    |
+  #| Quantity  | <quantity>  |
+  #| Frequency | <frequency> |
+  #When user successfully adds drug
+  #| Is Branded Drug | <branded> |
+  #| Drug            | <drug>    |
+  #And I navigate to step2 page
+  #And I select the first pharmacy
+  #And I navigate to step3 page and validate
+  #| Drug | <drug> |
+  #And the user clicks on the shopping cart icon on DCE page in AARP
+  #Then the user should be able to see the Drug and pharmacy information in the guest profile page
+  #| Drug | <drug> |
+  #And user delets all the added drugs on visitor profile page of AARP site
+  #
+  #Examples:
+  #| username  | password  | email              | plan                                               | plantype | drug    | dosage   | quantity | frequency     | branded |
+  #| qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
   @searchProfileAndProviderFlow
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
     Given I am an agent logged into the cloak in tool
@@ -159,10 +158,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
     And user delets all the added providers on visitor profile page of AARP site
     And the user clicks on the add plans button in the profile in agent mode in AARP site
-     Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-     When the user Click on Is my Provider covered link Ulayer
+    When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
@@ -288,10 +287,9 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                                | planName                                                         | drugNames   | providers              |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |         | Medica HealthCare Plans MedicareMax (HMO)       | Medica HealthCare Plans MedicareMax (HMO)                        | No          | PLASENCIA, M.D., LUIS  |
-      | qavgogine | qavgogine | EBER@MEMBER.COM          | 09/15/1942 | 7GD8-NC8-NA31 | EBER    | KRICHBAUM  |         | UnitedHealthcare Group Medicare Advantage (PPO) | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Atripla TAB | ISMAIL, M.D., MOHAMMED |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                                 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No          | No                     |
+      | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |         | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile
@@ -329,6 +327,6 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name  | <lname>     |
 
     Examples: 
-      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                 |
-      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Richard Vacca,Alfred Rogers,Robert Sperry |
-      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                        |
+      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                                                                                                                                                                             |
+      | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Alfred H Rogers:611 Watkins Centre Pkwy Ste 250, Chesterfield, VA, 23114;Alfred H Rogers:1510 N 28th St Ste 210, Richmond City, VA, 23223;Robert E Sperry:7611 Forest Ave Ste 100, Henrico, VA, 23229 |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                                                                                                                                                                                    |
