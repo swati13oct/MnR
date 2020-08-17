@@ -3,7 +3,7 @@ Feature: Renew medication CTA
   I am a user of the M&R Portal with Rx benefits I must have access to checkout information for refillable medications
 
   @F479510 @US2759117 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication CTA on Current Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -17,7 +17,7 @@ Feature: Renew medication CTA
       | F479510 | PDP      | Rx_Individual_PnP_rx_renewal |
 
   @F479510 @US2759119 @Scenario1
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Renew medication CTA on My Medication
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

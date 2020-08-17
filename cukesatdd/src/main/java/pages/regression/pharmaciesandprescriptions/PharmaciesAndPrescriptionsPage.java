@@ -1096,7 +1096,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	// F392596
 	public void validateMyMedicationsPage() {
 		Assert.assertTrue("PROBLEM - unable to locate My Medications Page Header element",
-				pnpValidate(MyMedicationsPageHeader));
+				validate(MyMedicationsPageHeader,20));
 	}
 
 	public void validateMedicationName() {
