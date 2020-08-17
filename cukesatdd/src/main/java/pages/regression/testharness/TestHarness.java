@@ -145,6 +145,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
+	@FindBy(xpath = "//a[@class='ng-scope'][contains(text(),'Premium Payments')]")
+	private WebElement premiumPaymentTabOnHeader;	
+	
 	@FindBy(id = "Help")
 	private WebElement helpLink;
 
@@ -381,6 +384,12 @@ public class TestHarness extends UhcDriver {
 			if (driver.getCurrentUrl().contains("testharness")) {
 				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 				TestHarness.checkForIPerceptionModel(driver);
+				try {
+					TestHarnesspaymentsLink.click();
+				} catch (Exception e) {
+					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
+					premiumPaymentTabOnHeader.click();
+				}
 				TestHarnesspaymentsLink.click();
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
