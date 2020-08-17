@@ -76,10 +76,11 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
       | 13    | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs4
+@abc    @prod_SHIP_EOBs @prod_SHIP_EOBs4
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 14    | ashah120  | Mnrqa003  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
+    # | 14    | ashah120  | Mnrqa003  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
+      | 14    | ashah120  | Mnrqa003  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
