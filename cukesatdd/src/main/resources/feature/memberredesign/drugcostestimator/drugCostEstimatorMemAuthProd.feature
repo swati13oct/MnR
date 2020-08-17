@@ -67,6 +67,10 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
     Examples: 
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
       | 15325 | ashah120 | Mnrqa003 | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      | 15325 | ashah120 | Mnrqa003 | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      | 15325 | ashah120 | Mnrqa003 | SUSICHAPMAN@GMAIL.COM | Medica | Medica_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      
+      
 
   @drugCostEstimator6  @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
