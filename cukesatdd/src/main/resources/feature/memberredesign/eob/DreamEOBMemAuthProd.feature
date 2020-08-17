@@ -72,10 +72,12 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
+    #note: WFBATES has partC n D EOB
     @prod_dreamEob01a
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 01    | ashah120  | Mnrqa003  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
+    # | 01    | ashah120  | Mnrqa003  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
+      | 01    | ashah120  | Mnrqa003  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
 
     @prod_dreamEob01b
     Examples: 

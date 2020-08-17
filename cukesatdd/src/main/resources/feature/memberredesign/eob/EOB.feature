@@ -47,8 +47,8 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
-    #Then the user validates the eob count for all available search ranges
-    #  | Flag Zero EOB User | <flagZeroEob> |
+    Then the user validates the eob count for all available search ranges
+      | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @SHIP_EOBs @SHIP_EOBs1 @devRegression
