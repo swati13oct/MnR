@@ -182,9 +182,8 @@ Feature: 1.08. ACQ- Shopper Profile
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
-    Then I ask the shopper calling in to provide me with the Name and Search
-      | First Name | <fname> |
-      | Last Name  | <lname> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan compare page
       | Enrolled Plan Name | <enrolledplanName> |
@@ -212,8 +211,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | testPlans                                                                    |
-      | qavgogine | qavgogine | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Choice (PPO) |
+      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | testPlans                                                                    |
+      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Choice (PPO) |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
@@ -329,4 +328,4 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                    | providers                                                                                                                                                                                             |
       | qavgogine | qavgogine | DFPIXSWF@NONMEMBER.COM | 01/10/1950 | M      | DFPIXSWF | DFPIXSWL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | 1ST Medx-Patch/Lidocaine PAD LIDOCAIN,quinapril hcl TAB 40MG,atorvastatin calcium TAB 10MG,sildenafil citrate TAB 20MG,amoxicillin TAB 875MG | Alfred H Rogers:611 Watkins Centre Pkwy Ste 250, Chesterfield, VA, 23114;Alfred H Rogers:1510 N 28th St Ste 210, Richmond City, VA, 23223;Robert E Sperry:7611 Forest Ave Ste 100, Henrico, VA, 23229 |
-      #| qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                                                                                                                                                                                    |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                           | No                                                                                                                                                                                                    |

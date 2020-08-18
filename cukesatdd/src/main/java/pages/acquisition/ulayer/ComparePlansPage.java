@@ -30,7 +30,7 @@ import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
 	
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(css = "a#backtoplansummarypage")
 	private WebElement BackToAllPlan;
 	
 	@FindBy(id = "enrollment-next-button")
@@ -514,10 +514,14 @@ public class ComparePlansPage extends UhcDriver {
 		
 	public VPPPlanSummaryPage navigateBackToAllPlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
-				BackToAllPlan.click();
-				System.out.println("Back to all plan is clicked");
-		
+		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
+		BackToAllPlan.click();
+		System.out.println("Back to all plan is clicked");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("#/plan-summary")) 
