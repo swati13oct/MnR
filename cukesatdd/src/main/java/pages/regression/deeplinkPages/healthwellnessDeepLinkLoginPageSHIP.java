@@ -23,7 +23,7 @@ import pages.regression.login.ConfirmSecurityQuestion;
  * @author pminhas
  *
  */
-public class myDocumentsDeeplinkLoginPage extends UhcDriver {
+public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 
 	@FindBy(xpath="//*[contains(@id,'submitBtn')]")
 	private static  WebElement signIn;
@@ -49,7 +49,7 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
 	protected WebElement homePageNotice4;
 
-	public myDocumentsDeeplinkLoginPage(WebDriver driver) {
+	public healthwellnessDeepLinkLoginPageSHIP(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -60,13 +60,13 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 				
 	}
 	//page from MR constants 	
-			private static String STAGE_DEEPLINK_URL_my_Documents = MRConstants.STAGE_DEEPLINK_URL_my_Documents;
+			private static String AARP_HAWL = MRConstants.AARP_HAWL;
 			
-			 /*This method will open payments deep link page */
-			public myDocumentsDeeplinkLoginPage navigateToLoginURL(){
-				start(STAGE_DEEPLINK_URL_my_Documents);
+			 /*This method will open deep link page */
+			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(){
+				start(AARP_HAWL);
 				driver.manage().deleteAllCookies();
-
+				
 				try {
 					Thread.sleep(10000);
 				} catch (InterruptedException e) {
@@ -200,11 +200,12 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 						
 						
 					return;
-						}}
+						}
+					}
 				}
 					
 				
-				@FindBy (xpath="//h1[@class='main-heading margin-none']")
+				@FindBy (xpath="//h1[@class='hw-header-h1']")
                 private WebElement textonpage;
 				
 				/**
@@ -232,30 +233,31 @@ public class myDocumentsDeeplinkLoginPage extends UhcDriver {
 					} while (counter < 2);
 				}				
 				
-				public boolean validateMyDocumentsPage() {
+				public boolean validateHealthWellnessPage() {
+					checkForIPerceptionModel(driver);
+					CommonUtility.checkPageIsReadyNew(driver);	
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);	
 					validateNew(textonpage);
-					System.out.println("*** Element Validated -->" +textonpage.getText());
-					if (driver.getCurrentUrl().contains("documents/overview.html?deeplink=true")) {
-						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on My Documents deeplink Page **");
+					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+					
+					if (driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best?deeplink=true")) 
+					{
+						//System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+						System.out.println("** User landed on health and wellness deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
-						Assert.assertTrue(driver.getTitle().contains("Plan Documents & Resources"));
+						Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare™ is available now."));
 						return true;
 						} else {
 							Assert.fail("The element " + textonpage.getText() + "is not found");
 						}
-										
-						return true;							
-					
-				}
+									
+						return true;	
+					}
 				
 				
 }

@@ -205,8 +205,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User validates the overdue and total amount due
  
     Examples: 
-      | TID       | planType | memberType                  |
-        |TC8| MAPD      | OverdueFlag | 
+      | TID       | planType | memberType   |
+     |  TC8       | MAPD     | OverdueFlag  | 
      
  #Test Case 09
   @regressionMember
@@ -218,5 +218,35 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Then User validates the Paid in Full flag and its verbiage
  
     Examples: 
-      | TID       | planType | memberType                  |
-     | TC9 | MAPD      | PaidInFullFlag |  
+      | TID       | planType | memberType |
+     | TC9        | MAPD      | PaidInFullFlag |  
+
+   #Test Case 10
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify tool tips on overview section on the payments page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates tool tips on the payments overview page
+ 
+    Examples: 
+      | TID       | planType | memberType   |
+      | TC10       | MAPD     | OverdueFlag  | 
+      
+  #Test Case 11
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 07 -Verify billing/Payment history table tool tips on the payments overview page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then User validates billing and payment history table tool tips on the page
+ 
+    Examples: 
+      | TID       | planType | memberType   |
+      | TC10       | MAPD     | OverdueFlag  |
+      
+      
+      
+      

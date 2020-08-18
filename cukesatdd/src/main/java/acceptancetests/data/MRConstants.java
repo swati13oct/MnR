@@ -1,6 +1,3 @@
-/**
- * 
- */
 package acceptancetests.data;
 
 import atdd.framework.MRScenario;
@@ -344,6 +341,8 @@ public class MRConstants {
   public static String AARP_TELESALES_AGENT_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/admin/shopper-profile.html/login";
   
   public static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/admin/shopper-profile.html/login";
+  
+  public static String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
@@ -406,6 +405,8 @@ public class MRConstants {
   public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
   
   public static String PROV_NAME = "";
+  public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";
+  //public static final String AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
  }
 
 	    
