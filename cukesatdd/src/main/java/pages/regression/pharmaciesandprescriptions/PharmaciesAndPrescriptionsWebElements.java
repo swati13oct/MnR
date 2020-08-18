@@ -301,7 +301,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(),'Medication Order Status')]")
 	protected WebElement orderStatusPageHeader;
 
-	@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
+	//@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
+	
+	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA' and contains(text(),'View All Medications')]")
 	protected WebElement ViewAllMedications;
 
 	@FindBy(xpath = "//a[@data-testid='refill-all-meds']")
@@ -1118,10 +1120,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@data-testid,'medication-status-percent')]//*[@id='WhiteCheck_svg__a']")
 	protected List<WebElement> listOfCheckMarkOnFullHarveyBall;
 
-	@FindBy(xpath = "(//div[@class='sc-LzLqD hRXAiG']//div//strong)[1]")
+	@FindBy(xpath = "//strong[@data-testid='display-meds-ratio-a']")
 	protected WebElement drugsAvailableOnMyMedication;
 
-	@FindBy(xpath = "(//div[@class='sc-LzLqD hRXAiG']//div//strong)[2]")
+	@FindBy(xpath = "//strong[@data-testid='display-meds-ratio-b']")
 	protected WebElement totaldrugsAvailableOnMyMedication;
 
 	// (////div[@class='sc-LzLrp iewWRX']//div//strong)[2]
@@ -1358,6 +1360,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//div[@data-testid='medication-data-pharmacy-name' and not(contains(text(),'OptumRx'))]/ancestor::div[@data-testid]")
 	protected List<WebElement> listOfMedicationSectionNotFrmOptum;
+	
+	@FindBy(xpath="//div[@data-testid='pagination-next-disabled']")
+	protected WebElement nextPaginationDisabled;
+	
+	@FindBy(xpath="(//span[@data-testid='pagination-description']//strong)[2]")
+	protected WebElement totalNumberOfPage;
+	
 	
 	
 }

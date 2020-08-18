@@ -6,8 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.memberredesign.pharmaciesandprescriptions.MedicineCabinetStepDefinition;
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
+import acceptancetests.util.CommonUtility;
+
+
 
 public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
@@ -289,4 +291,18 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateConfirmationPageHeader() {
 		return validate(orderConfirmationPageHeader, 20);
 	}
+	
+	public OrderConfirmationPage navigateToOrderConfirmationPage() {
+		CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 50);
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Current URL val : "+driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
+			System.out.println("Inside Method of Order Confirmation");
+			CommonUtility.checkPageIsReady(driver);
+			return new OrderConfirmationPage(driver);
+		}
+		return null;
+	}
+
+
 }

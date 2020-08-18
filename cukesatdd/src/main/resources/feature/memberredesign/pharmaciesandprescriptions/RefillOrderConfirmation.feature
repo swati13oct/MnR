@@ -37,4 +37,4 @@ Feature: Refill Order Confirmation
 
     Examples: 
       | FID     | planType | memberType                        |
-      | F481928 | MAPD      | Rx_Individual_Refill_Confirmation |
+      | F481928 | MAPD     | Rx_Individual_Refill_Confirmation |

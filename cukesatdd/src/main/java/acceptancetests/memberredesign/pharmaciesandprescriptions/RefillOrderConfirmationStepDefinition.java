@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -31,8 +32,10 @@ public class RefillOrderConfirmationStepDefinition {
 
 	public static List<Object> listOfMedicationDetail = new ArrayList<>();
 	public static String MedicationName;
-	String refillConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text()," + MedicationName
-			+ ")]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status' and contains(text(),'request received')]";
+
+	String refillConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text(),'"
+			+ MedicationName.toLowerCase()
+			+ "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status' and contains(text(),'request received')]";
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -56,15 +59,15 @@ public class RefillOrderConfirmationStepDefinition {
 
 	@Then("^user will see Refill order confirmation page$")
 	public void user_will_see_Refill_order_confirmation_page() throws Throwable {
-		OrderConfirmationPage orderConfirmationPage =  new OrderConfirmationPage(null);
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		orderConfirmationPage = pnpPg.navigateToOrderConfirmationPage();
-		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, orderConfirmationPage);
+		OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(null);
+		CheckOutSummaryPage checkoutPage = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		orderConfirmationPage = checkoutPage.navigateToOrderConfirmationPage();
+		getLoginScenario().saveBean(PageConstants.ORDER_CONFIRMATION_PAGE, orderConfirmationPage);
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displaced",
-				orderConfirmationPage.validateOrderConfirmationThankyouMessage());		
+				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
-	
+
 	@Then("^user will see order number$")
 	public void user_will_see_order_number() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
@@ -213,8 +216,7 @@ public class RefillOrderConfirmationStepDefinition {
 	public void user_select_the_Go_to_Pharmacies_and_Prescriptions_button() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
-				orderConfirmationPage.validateRxNumber());
+		orderConfirmationPage.clickGoToPnPPage();
 	}
 
 	@Then("^user will view the PnP page$")
@@ -234,19 +236,34 @@ public class RefillOrderConfirmationStepDefinition {
 		pnpPg.clickOnViewAllMedicationsLink();
 		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
 		int count = 0;
-		while (count != 0) {
-			for (int i = 0; i < DrugNameList.size(); i++) {
-				if (DrugNameList.contains(MedicationName)) {
-					WebElement xpath = pnpPg.driver.findElement(By.xpath(refillConfirmationXpath));
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage-1; i++) {
+			for (int j = 0; j < DrugNameList.size(); j++) {
+				if (DrugNameList.get(j).trim().equalsIgnoreCase(MedicationName)) {
+					WebElement xpath = pnpPg.getDriver().findElement(By.xpath(refillConfirmationXpath));
 					Assert.assertTrue("PROBLEM : Refill Completion order status is not updated a request received",
 							pnpPg.validate(xpath, 30));
+					count = 1;
+					break;
 				}
 			}
 			if (count == 0) {
 				pnpPg.clickOnNextPageArrow();
 				DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
+			} else {
+				break;
 			}
 		}
+
+		/*
+		 * while (count == 0) { for (int i = 0; i < DrugNameList.size(); i++) { if
+		 * (DrugNameList.contains(MedicationName)) { WebElement xpath =
+		 * pnpPg.driver.findElement(By.xpath(refillConfirmationXpath)); Assert.
+		 * assertTrue("PROBLEM : Refill Completion order status is not updated a request received"
+		 * , pnpPg.validate(xpath, 30)); } } if (count == 0) {
+		 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+		 * pnpPg.getDrugNameListValueOnMyMedication(); } }
+		 */
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -256,10 +273,19 @@ public class RefillOrderConfirmationStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedication();
+		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+		/*int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage-1; i++) {
+			if(indexOfRefillMedication.size()==0) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+			}else {
+				break;
+			}
+		}*/
 		while (indexOfRefillMedication.size() == 0) {
 			pnpPg.clickOnNextPageArrow();
-			indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedication();
+			indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
 		}
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRefill();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);

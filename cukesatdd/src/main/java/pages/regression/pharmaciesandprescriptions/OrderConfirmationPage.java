@@ -71,23 +71,28 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 
 	public boolean validateDrugPrice() {
-		return validate(rxPriceOrderConfirmation);
+		scrollToView(rxPriceOrderConfirmation);
+		return validate(rxPriceOrderConfirmation,10);
 	}
 	
 	public boolean validateRxNumber() {
-		return validate(RXNumberOrderConfirmation);
+		scrollToView(RXNumberOrderConfirmation);
+		return validate(RXNumberOrderConfirmation,10);
 	}
 	
 	public boolean validateRxProviderName() {
-		return validate(RXProviderNameOrderConfirmation);
+		scrollToView(RXProviderNameOrderConfirmation);
+		return validate(RXProviderNameOrderConfirmation,10);
 	}
 	
 	public boolean validateRxRefillsLeft() {
-		return validate(RefillsRemaianingOrderConfirmation);
+		scrollToView(RefillsRemaianingOrderConfirmation);
+		return validate(RefillsRemaianingOrderConfirmation,10);
 	}
 	
-	public boolean clickGoToPnPPage() {
-		return validate(GoBackToPnPPageOrderConfirmation);
+	public void clickGoToPnPPage() {
+		scrollToView(GoBackToPnPPageOrderConfirmation);
+		GoBackToPnPPageOrderConfirmation.click();
 	}
 	
 }
