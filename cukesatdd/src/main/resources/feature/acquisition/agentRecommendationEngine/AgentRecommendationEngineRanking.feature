@@ -41,7 +41,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | MANUAL1STG@MEMBERDD.COM | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Lipitor TAB 10MG:morphine sulfate CAP 10MG ER | None          | current  |
 
   @ARE @ProviderARE @F439411
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate adding doctors in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -62,7 +62,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | Okeke, Ernest I, MD:Clower, Daniel C, MD | Okeke, Ernest I, MD:Clower, Daniel C, MD | None          | current  |
 
   @ARE @ViewPlanDetailsARE @F439411
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -79,7 +79,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @SavePlansARE @F439411
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate Save Plans in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -96,7 +96,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrollPlansARE @F439411
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate Enroll Plans in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -113,7 +113,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @PlansReorder @F487396
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -138,7 +138,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
 
   @ARE @PlanYearAutoRanking @F487396
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate plan year Auto Ranking in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -161,7 +161,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
 
   @ARE @deleteaddplans @F487396
-  Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
