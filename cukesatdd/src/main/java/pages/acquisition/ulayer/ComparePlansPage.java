@@ -1102,8 +1102,13 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void allSet() {
-		CommonUtility.waitForPageLoad(driver, popupAccept, 60);
-		popupAccept.click();
+		try {
+			CommonUtility.waitForPageLoad(driver, popupAccept, 60);
+			popupAccept.click();
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
