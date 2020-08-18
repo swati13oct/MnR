@@ -43,7 +43,7 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "a#aarpSVGLogo")
 	private WebElement planRankingTxt;
-	
+
 	@FindBy(css = "div#multiSelect>#plan-ranking")
 	private WebElement planRankingDropdown;
 
@@ -100,7 +100,7 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div#multiSelect button[class*='uhc-button']")
 	private WebElement applyBtn;
-	
+
 	@FindBy(css = "#yourdoctorsheading")
 	private WebElement DocName;
 
@@ -133,7 +133,7 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#compare-table-header div[class*='unliked savePlanText']")
 	private List<WebElement> saveplanComparepage;
-	
+
 	@FindBy(css = "#compare-table-header div[class='liked savePlanText']")
 	private List<WebElement> unsaveplanComparepage;
 
@@ -145,8 +145,13 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div[class*='title-compare'] button[class*='btn']")
 	private WebElement comparePlansBtn;
-	
-	
+
+	@FindBy(css = "a[dtmname*='Edit Drugs']")
+	private WebElement editDrugs;
+
+	@FindBy(css = "a[dtmname*='Edit Doctors']")
+	private WebElement editDoctors;
+
 	@FindBy(css = "span[class*='multiple-added-text'] button[class*='cta-button']")
 	private List<WebElement> comparePlansBtninVpp;
 
@@ -302,11 +307,11 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void returnToPlanCompare() {
-	DCEPage dceobj = new DCEPage(driver);
-	dceobj.returnToCompare();
-	validate(planRankingDropdown,60);
+		DCEPage dceobj = new DCEPage(driver);
+		dceobj.returnToCompare();
+		validate(planRankingDropdown, 60);
 	}
-	
+
 	public void DrugsInPlanCompare(String drugDetails) {
 		pageloadcomplete();
 		System.out.println("Validate Added Drugs in Plan Compare page : ");
@@ -523,7 +528,7 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
-			comparePlansBtn.click();			
+			comparePlansBtn.click();
 		}
 		System.out.println("Plan Name compared Successful Clicks on Save Plan");
 	}
@@ -531,13 +536,12 @@ public class AREPlanRanking extends UhcDriver {
 	public String savingplans(WebElement plan, WebElement saveplan, int i) {
 		String exceptedplanName = plan.getText().trim();
 		System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
-		if(saveplan.getText().trim().equals("Save Plan")) {
+		if (saveplan.getText().trim().equals("Save Plan")) {
 			saveplan.click();
-		}
-		else {
-				unsaveplanComparepage.get(i).click();
-					threadsleep(3000);
-					saveplan.click();
+		} else {
+			unsaveplanComparepage.get(i).click();
+			threadsleep(3000);
+			saveplan.click();
 		}
 		threadsleep(5000);
 		return exceptedplanName;
@@ -687,15 +691,17 @@ public class AREPlanRanking extends UhcDriver {
 		List<String> newplansDetails = new ArrayList<String>();
 		for (WebElement elem : planNameSection) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
-			String val = planName.trim().toUpperCase().replace(" ", "").split("SAVEPLAN")[0].split("CLOSE")[0].split("\n")[0];
+			String val = planName.trim().toUpperCase().replace(" ", "").split("SAVEPLAN")[0].split("CLOSE")[0]
+					.split("\n")[0];
 			newplansDetails.add(val);
 		}
 		System.out.println(newplansDetails);
 
 		ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
-		int j=0;
+		int j = 0;
 		for (int i = planstart; i < givenplansDetails.size(); i++) {
-			Assert.assertTrue(newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
+			Assert.assertTrue(
+					newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
 					"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase()
 							+ " Actual: " + newplansDetails.get(i).toUpperCase());
 			j++;
@@ -743,7 +749,7 @@ public class AREPlanRanking extends UhcDriver {
 		applyBtn.click();
 		threadsleep(3000);
 		// Validate Success message
-				Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
+		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
 
 		for (WebElement elem : planNamesOnly) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
@@ -751,7 +757,7 @@ public class AREPlanRanking extends UhcDriver {
 			drugplansDetails.add(val);
 		}
 	}
-	
+
 	public void OriginalPlanOrder(String rankOptions) {
 		System.out.println("Fetching Original PlanOrder in plancompare page");
 		planRankingDropdown.click();
@@ -762,9 +768,9 @@ public class AREPlanRanking extends UhcDriver {
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			originalplanNames.add(val);
 		}
-		System.out.println("Original Plan Orders"+originalplanNames);
+		System.out.println("Original Plan Orders" + originalplanNames);
 	}
-	
+
 	public void rankingplancomparion(String curPlan, String changeOrder, String planOrders) {
 		int planStartCount = 0;
 		threadsleep(3000);
@@ -914,7 +920,7 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void deletePlan(int planIndex) {
-		jsClickMobile(plandeleteButtons.get(planIndex-1));
+		jsClickMobile(plandeleteButtons.get(planIndex - 1));
 		threadsleep(5000);
 	}
 
@@ -931,7 +937,7 @@ public class AREPlanRanking extends UhcDriver {
 		threadsleep(3000);
 		vppCompareButton.get(0).click();
 	}
-	
+
 	public void disableDrugOriginalPlans(String curPlan, String changeOrder, String rankOptions, String planOrders) {
 		System.out.println("Verify Drug option disabled after deleting drugs in DCE");
 		Actions action = new Actions(driver);
@@ -942,9 +948,9 @@ public class AREPlanRanking extends UhcDriver {
 		action.moveToElement(planRankingDropdown).perform();
 		action.moveToElement(planRankingDropdown).click().perform();
 		drugDocDisable(rankOptions, false);
-		compareCurrentOriginalPlan(curPlan,changeOrder,planOrders);
+		compareCurrentOriginalPlan(curPlan, changeOrder, planOrders);
 	}
-	
+
 	public void compareCurrentOriginalPlan(String curPlan, String changeOrder, String planOrders) {
 		int planStartCount = 0;
 		if (curPlan.equalsIgnoreCase("yes")) {
@@ -952,14 +958,14 @@ public class AREPlanRanking extends UhcDriver {
 //			Assert.assertTrue(originalplanNames.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		List<String> newplansDetails = new ArrayList<String>();
-		
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planNamesOnly) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			newplansDetails.add(val);
 		}
-		System.out.println("Plan Orders after deleting doctors: "+newplansDetails);
+		System.out.println("Plan Orders after deleting doctors: " + newplansDetails);
 
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
@@ -975,6 +981,29 @@ public class AREPlanRanking extends UhcDriver {
 			Assert.assertFalse(originalplanNames.equals(newplansDetails), "Plans are Re-ordered");
 		} else if (planOrders.isEmpty() && !changeOrder.equalsIgnoreCase("yes")) {
 			Assert.assertFalse(originalplanNames.equals(newplansDetails), "Plans are Re-ordered");
+		}
+	}
+
+	public void checkDeleteAllDrugs() {
+		if (validate(editDrugs, 10)) {
+			editDrugs.click();
+			System.out.println("Deleting Existing Drugs");
+			DCEPage areDce = new DCEPage(driver);
+			areDce.deleteAllDrugs();
+			areDce.returnToCompare();
+			validate(planRankingDropdown,30);
+		}
+	}
+
+	public void checkDeleteAllDoctors() {
+		if (validate(editDoctors, 10)) {
+			editDoctors.click();
+			System.out.println("Deleting Existing All Providers");
+			WerallyPage werally = new WerallyPage(driver);
+			String curWindow = driver.getWindowHandle();
+			System.out.println(curWindow);
+			werally.validateLinksanotherWindow(curWindow, "Delete All", "");
+			validate(planRankingDropdown,30);
 		}
 	}
 

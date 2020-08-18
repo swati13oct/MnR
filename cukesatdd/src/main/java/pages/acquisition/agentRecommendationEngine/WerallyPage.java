@@ -80,11 +80,17 @@ public class WerallyPage extends UhcDriver {
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
 	private WebElement finishReturnButton;
+	
+	@FindBy(css = "#savedProviders button[title^='Delete']")
+	private List<WebElement> deleteLinks;
 
 //Rally Home Page
 
 	@FindBy(css = ".feature a[href*='/saved-providers']")
 	private WebElement viewSavedProviderbutton;
+	
+	@FindBy(css = ".feature a[track='Find Care']")
+	private WebElement findCarebutton;
 
 //Switch to Werally Window Page
 
@@ -113,8 +119,10 @@ public class WerallyPage extends UhcDriver {
 									"Non Prod Connected to Incorrect Rally");
 						if (type.toUpperCase().contains("ADDING"))
 							werallyResults = werallySearch(type, search);
-						else if (type.toUpperCase().contains("DELETE"))
+						else if (type.toUpperCase().equals("DELETE"))
 							werallyResults = werallySearchfordelete(type, search);
+						else if (type.toUpperCase().contains("ALL"))
+							werallyDeleteAll();
 					} else {
 						threadsleep(5000);
 					}
@@ -234,6 +242,32 @@ public class WerallyPage extends UhcDriver {
 		jsClickNew(deleteLink);
 		threadsleep(2000);
 		pageloadcomplete();
+	}
+	
+	public void werallyDeleteAll() {
+		System.out.println("Deleting all Providers");
+		try {
+			validate(welcomeTilte, 5);
+			getStarted.click();
+		} catch (Exception e) {
+			System.out.println("No Get Started button available in werally");
+		}
+		validate(viewSavedProviderbutton, 30);
+		viewSavedProviderbutton.click();
+		for (WebElement elem:deleteLinks) {
+			elem.click();
+			threadsleep(1000);
+		}
+		validate(findCarebutton,10);
+		findCarebutton.click();
+		threadsleep(2000);
+		validate(viewSavedProviderbutton, 30);
+		viewSavedProviderbutton.click();
+		threadsleep(2000); 
+		validate(checkProviderCoveragebutton, 30);
+		checkProviderCoveragebutton.click();
+		validate(returnToEnrollment, 30);
+		returnToEnrollment.click();
 	}
 
 }
