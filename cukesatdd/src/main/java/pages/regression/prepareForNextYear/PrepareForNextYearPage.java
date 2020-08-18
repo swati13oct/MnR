@@ -58,8 +58,8 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		Assert.assertTrue("PROBLEM - URL for 'Prepare For Next Year' page is not as expected.  Expect to contains '"+expUrl+"' | Acturl URL='"+actUrl+"'", actUrl.contains(expUrl));
 		Assert.assertTrue("PROBLEM - unable to locate 'Prepare For Next Year' page header, assume trouble navigate to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
 
-		if (expComboTab) 
-			Assert.assertTrue("PROBLEM - unable to locate the combo tab for planType '"+planType+"' on Prepare For Next Year page", findComboTab(planType));
+		//tbd if (expComboTab) 
+		//tbd 	Assert.assertTrue("PROBLEM - unable to locate the combo tab for planType '"+planType+"' on Prepare For Next Year page", findComboTab(planType));
 		//tbd handleComboTabIfComboUser(planType, memberType);
 		return new PrepareForNextYearPage(driver);
 	}
@@ -81,7 +81,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		checkModelPopup(driver,1);
 		if (expComboTab) 
 			handleComboTabIfComboUser(planType, memberType);
-
+		
 		return driver;
 	}
 
@@ -381,5 +381,27 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			Assert.assertTrue("NOTE: This is not SARs case, this method is not applicable", false);
 		}
 		return sectionNote1;
+	}
+	
+	public List<String> validateComboPlanName(String expPlanName) {
+		List<String> note=new ArrayList<String>();
+		String targetItem="Plan name element for combo user";
+		note.addAll(validateHaveItem(targetItem, planNameComboUser_pfny));
+
+		String actPlanName=planNameComboUser_pfny.getText();
+
+		targetItem="Plan name text";
+		if (validateAsMuchAsPossible) {
+			if (actPlanName.contains(expPlanName))
+				note.add("\tPASSED - validation for "+targetItem+" - Plan Name="+expPlanName);
+			else {
+				note.add("\t * FAILED - plan name on 'Prepare for Next Year' page is not the same as benefits page. PFNY has '"+actPlanName+"' | planName on Benefits is '"+expPlanName+"'");
+				return note;
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - plan name on 'Prepare for Next Year' page is not the same as benefits page. PFNY has '"+actPlanName+"' | planName on Benefits is '"+expPlanName+"'", actPlanName.contains(expPlanName));
+			note.add("\tPASSED - validation for "+targetItem+" - Plan Name="+expPlanName);
+		} 
+		return note;
 	}
 }

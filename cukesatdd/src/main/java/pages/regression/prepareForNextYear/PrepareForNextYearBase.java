@@ -524,7 +524,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
 		} else  {
-			note.add("\tOn '"+MRScenario.environment.contains("stage")+"' env, skip validating PDF content to speed up the run");
+			note.add("\tOn '"+MRScenario.environment+"' env, skip validating PDF content to speed up the run");
 		} 
 
 		driver.close();
@@ -913,6 +913,11 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 		return note;
 
+	}
+	
+	public String getPlanNameComboUser() {
+		Assert.assertTrue("PROBLEM - unable to locate the plan name on benefits page for this combo user", noWaitValidate(planNameComboUser_benefitsPg));
+		return planNameComboUser_benefitsPg.getText();
 	}
 	
 	

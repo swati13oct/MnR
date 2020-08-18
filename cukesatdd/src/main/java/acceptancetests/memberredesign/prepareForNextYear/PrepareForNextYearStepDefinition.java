@@ -190,6 +190,13 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\tFAILED - Prepare For Next Year tab display behavior is not as expected on Benefits page sub navigation menu. Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 
+		//note: should be on the right plan tab at this point, save the plan name for later validation
+		String testPlanName="";
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
+			testPlanName=pfnyPg.getPlanNameComboUser();
+		System.out.println("TEST - testPlanName="+testPlanName);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PLAN_NAME, testPlanName);		
+		
 		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -382,6 +389,7 @@ public class PrepareForNextYearStepDefinition {
 		boolean expPrepareForNextYearTab = (Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB);	
 		HashMap<String, Boolean> docDisplayMap=(HashMap<String, Boolean>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP);
 		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
+		String testPlanName=(String) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PLAN_NAME);
 
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
@@ -396,8 +404,8 @@ public class PrepareForNextYearStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
-		if (expComboTab) 
-			pfnyPg.handleComboTabIfComboUser(planType, memberType);
+		//tbd if (expComboTab) 
+		//tbd 	pfnyPg.handleComboTabIfComboUser(planType, memberType);
 
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 		/* tbd
@@ -410,6 +418,9 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
 		}
 		*/
+		
+		testNote.addAll(pfnyPg.validateComboPlanName(testPlanName));
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
@@ -1780,7 +1791,7 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_COMBO_TAB, expComboTab);
 
 		wd=prepareForNextYearPage.navigateToBenefitsPage(planType, memberType, expComboTab);
-
+		
 		boolean hasPrepareForNextYearTab=prepareForNextYearPage.hasPrepareForNextYearTabDisplay(expPrepareForNextYearTab);
 		if (expPrepareForNextYearTab==hasPrepareForNextYearTab) {
 			testNote.add("\tPrepare For Next Year tab IS displaying on Benefits page sub navigation menu as expected");
@@ -1790,6 +1801,13 @@ public class PrepareForNextYearStepDefinition {
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PREPARE_FOR_NEXT_YEAR_TAB, expPrepareForNextYearTab);
 		Assert.assertTrue("PROBLEM - Prepare For Next Year tab display behavior is not as expected.  Expected to display='"+expPrepareForNextYearTab+"' | Actual display='"+hasPrepareForNextYearTab+"'", expPrepareForNextYearTab==hasPrepareForNextYearTab);
 
+		//note: should be on the right plan tab at this point, save the plan name for later validation
+		String testPlanName="";
+		if (memberType.toLowerCase().contains("combo") && !planType.toLowerCase().contains("ship"))
+			testPlanName=prepareForNextYearPage.getPlanNameComboUser();
+		System.out.println("TEST - testPlanName="+testPlanName);
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.EXPECT_PLAN_NAME, testPlanName);
+		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}	
 	//---------------------------------------------------

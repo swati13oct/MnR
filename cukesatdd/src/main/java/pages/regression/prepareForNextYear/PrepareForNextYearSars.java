@@ -88,8 +88,8 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		note.add("\t=================");
 		String subSection=" - Learn about other plan choices";
 
-		String showDocDateStr2=m1+String.valueOf(getCurrentYear());
-		Date showDocDate2=convertStrToDate(showDocDateStr2);
+		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
+		Date showDocDate2=convertStrToDate(showDocDateStr1);
 
 		WebElement targetElement=null;
 
@@ -148,10 +148,10 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 				if (!noWaitValidate(targetElement)) {
 					note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 				} else {
-					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr2+"'  | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr1+"'  | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
 				}
 			} else {
-				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr2+"'  | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' after or equal date '"+showDocDateStr1+"'  | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}
 		}
@@ -235,21 +235,22 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 
 		//---------------------------
 		System.out.println("Proceed to validate 'Compare next year plan' link behavior...");
-		String showDocDateStr1=m1+String.valueOf(getCurrentYear());
-		Date showDocDate1=convertStrToDate(showDocDateStr1);
+		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
+		Date showDocDate1=convertStrToDate(showDocDateStr2);
 		boolean showSection=false;
 		if (showDocDate1.equals(currentDate)  || currentDate.after(showDocDate1)) {
 			showSection=true;
 		}
 		System.out.println("TEST -showSection="+showSection);			
-		targetItem=section+subSection+" - Compare New Plans Link Arrow";
-		targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
+		targetItem=section+subSection+" - Compare New Plans Link";
+		targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			targetItem=section+subSection+" - Compare New Plans Link";
-			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk;
+			targetItem=section+subSection+" - Compare New Plans Link Arrow";
+			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+
 
 			//note - validate link destination
 			String expUrl="/health-plans.html#/plan-summary";
@@ -283,9 +284,9 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 				if (!noWaitValidate(targetElement)) 
 					note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 				else
-					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr1+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr2+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
 			} else {
-				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr1+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' before date '"+showDocDateStr2+"' | currentDate='"+convertDateToStrFormat_MMDDYYYY(currentDate)+"'", !noWaitValidate(targetElement));
 				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
 			}
 		}	
