@@ -3841,6 +3841,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			System.out.println("Scrolled...");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			waitforElementNew(agentModeBanner);
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
