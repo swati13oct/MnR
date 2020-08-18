@@ -37,7 +37,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement dceplanname;
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	@FindBy(xpath = "//*[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement addDrug;
 
 	@FindBy(xpath = "//*[contains(@id,'build-your-drug-list')]")
@@ -64,7 +64,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(className = "edit-drug")
 	public WebElement editDrug;
 
-	@FindBy(id = "drug-search-input")
+	@FindBy(xpath = "//input[contains(@id,'drugsearch')]")
 	public WebElement drugsearchinput;
 
 	@FindBy(id = "drugcostestimatorHeading") // [contains(text(),'Cost')][contains(text(),'Estimator')]")
