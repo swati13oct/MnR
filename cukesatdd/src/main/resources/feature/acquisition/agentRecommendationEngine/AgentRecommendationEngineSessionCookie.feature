@@ -17,7 +17,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
 
     Examples: 
       | User      | Pass      | Email               | IfMultiCounty | PlanYear | PlanCompareZIP |
-      | qavgogine | qavgogine | APISTG@MEMBERDD.COM | None          | current  |          10001 |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
 
   @ARE @SavedSessionDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
@@ -37,7 +37,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
 
     Examples: 
       | User      | Pass      | Email               | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
-      | qavgogine | qavgogine | APISTG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
 
   @ARE @NoDrugDocInDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
@@ -75,6 +75,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then Apply ranking and get plans names in plancompare page
+    	| Ranking Options      | <RankingOptions>     |
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch2> |
     Then agent get plandetails after editing Drugs in plancompare
@@ -127,4 +128,4 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
 
     Examples: 
       | User      | Pass      | Email                | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
-      | qavgogine | qavgogine | API8STG@MEMBERDD.COM | None          | current  | Karamuca, Suela, PA | Abroon, John, MD | YES          | YES           |            | doctor         | NO             | Karamuca, Suela, PA:Abroon, John, MD | YES                |
+      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Karamuca, Suela, PA | Abroon, John, MD | YES          | YES           |            | doctor         | NO             | Karamuca, Suela, PA:Abroon, John, MD | YES                |
