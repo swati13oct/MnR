@@ -390,7 +390,7 @@ public class TestHarness extends UhcDriver {
 					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
 					premiumPaymentTabOnHeader.click();
 				}
-				TestHarnesspaymentsLink.click();
+				//TestHarnesspaymentsLink.click();
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
