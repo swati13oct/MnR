@@ -38,7 +38,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User      | Pass      | Email                 | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                               | DrugNameDosage                                |IfMultiCounty | PlanYear |
-      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Lipitor TAB 10MG:morphine sulfate CAP 10MG ER | None          | current  |
+      | qavgogine | qavgogine | MANUAL1STG@MEMBERDD.COM | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Lipitor TAB 10MG:morphine sulfate CAP 10MG ER | None          | current  |
 
   @ARE @ProviderARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate adding drugs in ARE

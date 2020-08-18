@@ -206,8 +206,8 @@ public class AREPlanRanking extends UhcDriver {
 		Assert.assertTrue(validate(doctorCheckLabel), "Doctor Checkbox is missing");
 		Assert.assertTrue(validate(applyBtn), "Apply button is missing");
 
-		Assert.assertTrue(drugCheck.isSelected(), "Drug is not selected by default");
-		Assert.assertTrue(doctorCheck.isSelected(), "Doctor is not selected by default");
+		Assert.assertFalse(drugCheck.isSelected(), "Drug is selected by default");
+		Assert.assertFalse(doctorCheck.isSelected(), "Doctor is selected by default");
 
 		// Deselect All
 		validate(applyBtn);
@@ -298,9 +298,15 @@ public class AREPlanRanking extends UhcDriver {
 		AddDrugsLink.click();
 		DCEPage dceobj = new DCEPage(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
-		dceobj.choosePharmacyandBacktoPlans();
+		returnToPlanCompare();
 	}
 
+	public void returnToPlanCompare() {
+	DCEPage dceobj = new DCEPage(driver);
+	dceobj.returnToCompare();
+	validate(planRankingDropdown,60);
+	}
+	
 	public void DrugsInPlanCompare(String drugDetails) {
 		pageloadcomplete();
 		System.out.println("Validate Added Drugs in Plan Compare page : ");

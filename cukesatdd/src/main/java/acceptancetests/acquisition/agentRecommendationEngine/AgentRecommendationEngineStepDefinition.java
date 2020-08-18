@@ -85,6 +85,7 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking addDrug = new AREPlanRanking(wd);
 		addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
 		addDrug.DeleteinDCE(inputValues.get("Drugs Names"));
+		addDrug.returnToPlanCompare();
 	}
 
 	@When("^user adds providers in plan compare page$")
