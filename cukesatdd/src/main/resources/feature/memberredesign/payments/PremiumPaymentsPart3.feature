@@ -1,6 +1,6 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 14 to 21
 
-  #Test Case 14 - AARP MAPD Plan member
+  #Test Case 14 - Test data needed - Any AARP MAPD Plan member
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -139,7 +139,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
       | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 |     3760900 | OneTime     |
 
-  #Test Case 18 -Member with Recurring method already setup and with billing history (same as in test case #15)
+  #Test Case 18 -Fed Only Member with Recurring method already setup and with billing history (same as in test case #15)
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
@@ -155,7 +155,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | UID       | planType | memberType                |
       | US1463204 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 19 - Member with Recurring method already setup and with billing history
+  #Test Case 19 - Fed Only Member with Recurring method already setup and with billing history
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 19 -Verify Payment Error Messages for Recurring EFT when user doesn't enter values in the form and clicks on continue button
     Given login with following details logins in the member portal and validate elements
@@ -226,3 +226,124 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Examples: 
       | FID    | planType | memberType     |
       | 247601 | Ship     | PaymentHistory |
+
+  #Test Case 23 - Pre-effective federal member with no billing and no payment history
+  @regressionMember
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 23 -Verify payments for Pre-effective Federal member with no billing and no payment history
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down and validate Billing history Section and Payment History Section to ensure that sections are disabled
+
+    Examples: 
+      | planType | memberType             | copayCategory | technicalTFN   | segmentId |
+      | IndMA    | preeffectiveIndPayment | NON LIS       | 1-888-980-8125 |       000 |
+
+  #Test Case 24 - Active member Fed and  Active Group Member with billing and payment history in last 90 days
+  @regressionMember
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 24 -Verify billing and payment history for Active Federal and Active Group member with billing and payment history in last 90 days
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down to the Billing history Section
+    Then user validates billing history section header exists
+    Then Last 90 days is selected by default in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 6 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 12 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 24 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then User Scrolls down to the Payment history Section
+    Then user validates Payment history section header exists
+    Then Last 90 days is selected by default in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 6 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 12 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 24 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+
+    Examples: 
+      | planType  | memberType         | copayCategory |
+      | IndMA     | ACTIVEIndPayment   | NON LIS       |
+      | GroupMAPD | ACTIVEGroupPayment | NON LIS       |
+
+  #Test Case 25 - Billing and Payment history for Fed+Fed - Active Group PDP + Active Group SSUP member with billing and payment history in last 90 days
+  @regressionMember
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 25 -Verify billing and payment history for Fed+Fed - Active Group PDP + Active Group SSUP member with billing and payment history in last 90 days
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down to the Billing history Section
+    Then user clicks to expand the billing hisory section of first plan
+    Then user validates billing history section header exists
+    Then Last 90 days is selected by default in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 6 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 12 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user selects Last 24 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    Then user clicks to expand the payment hisory section of first plan
+    Then user validates Payment history section header exists
+    Then Last 90 days is selected by default in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 6 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 12 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Last 24 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    Then user selects Previous Calendar Year in the Payment History dropdown and views Payment History
+    Then User Scrolls down to the Billing history Section of Second Plan
+    Then user clicks to expand the billing hisory section of Second plan
+    Then user validates billing history section header exists of Second Plan
+    Then Last 90 days is selected by default in the Billing History dropdown of Second Plan
+    Then user validates data is present in billing history table of Second Plan
+    Then user selects Last 6 months in the Billing History dropdown of Second Plan
+    Then user validates data is present in billing history table of Second Plan
+    Then user selects Last 12 months in the Billing History dropdown of Second Plan
+    Then user validates data is present in billing history table of Second Plan
+    Then user selects Last 24 months in the Billing History dropdown of Second Plan
+    Then user validates data is present in billing history table of Second Plan
+    Then user clicks to expand the payment hisory section of Second Plan
+    Then user validates Payment history section header exists of Second Plan
+    Then Last 90 days is selected by default in the Payment History dropdown of Second Plan
+    Then user validates data is present in Payment history table of Second Plan
+    Then user selects Last 6 months in the Payment History dropdown of Second Plan
+    Then user validates data is present in Payment history table of Second Plan
+    Then user selects Last 12 months in the Payment History dropdown of Second Plan
+    Then user validates data is present in Payment history table of Second Plan
+    Then user selects Last 24 months in the Payment History dropdown of Second Plan
+    Then user validates data is present in Payment history table of Second Plan
+    Then user selects Previous Calendar Year in the Payment History dropdown of Second Plan and views Payment History
+
+    Examples: 
+      | planType          | memberType                     | copayCategory |
+      | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       |
+
+  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page
+  @regressionMember
+  Scenario Outline: Verify that member of <Test Scenario> is able to click on Make Payment button Coverage and Benefits page and navigate to Premium Payments page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    And user clicks on benefits and coverage tab on home page or test harness page
+      | PlanType | <planType> |
+    And user scrolls down to Monthly Premium section to click on Make Payment button
+    Then user clicks on Make Payment button and lands on Premium Payments page
+
+    Examples: 
+      | TID   | planType | memberType       | copayCategory | Test Scenario                          |
+      | XXXXX | MAPD     | ACTIVEIndPayment | NON LIS       | Federal member with Total Amount Due>0 |
