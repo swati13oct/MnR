@@ -2494,11 +2494,18 @@ public class OneTimePaymentAarpStepDefintion {
 		 paymentHistoryPage.paidInFullFlag();
 		
 	}
-	@Then("^User validates tool tips on the page$")
+	@Then("User validates tool tips on the payments overview page$")
 	public void User_validates_tool_tips_on_the_page() throws Throwable {
-		System.out.println("******User validates tool tips on the page*****");
+		System.out.println("******User validates tool tips on the payments overview page*****");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
 		 paymentHistoryPage.toolTipsValidation();
+		
+	}
+	@Then("^User validates billing and payment history table tool tips on the page$")
+	public void User_validates_tool_tips_on_billing_tablethe_page() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentHistorytoolTipsValidation();
 		
 	}
 

@@ -2269,7 +2269,10 @@ public void toolTipsValidation() throws InterruptedException {
 			Assert.fail("Monthly Premium popup is failing ");
 
 			}
-
+}
+public void billingPaymentHistorytoolTipsValidation() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
 	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
 	if(Learnaboutwaystopaylink.isDisplayed()) {
 		Learnaboutwaystopaylink.click() ;
@@ -2286,6 +2289,8 @@ public void toolTipsValidation() throws InterruptedException {
 
 	}
 	System.out.println("Validate Learn More About Your Billing History pop-up ");
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourBillingHistorylink);
 	if(LearnMoreAboutYourBillingHistorylink.isDisplayed()) {
 		LearnMoreAboutYourBillingHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2302,6 +2307,7 @@ public void toolTipsValidation() throws InterruptedException {
 	}
 
 	System.out.println("Validate Learn More About Your payment History pop-up ");
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourPaymentHistorylink);
 	if(LearnMoreAboutYourPaymentHistorylink.isDisplayed()) {
 		LearnMoreAboutYourPaymentHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2316,9 +2322,8 @@ public void toolTipsValidation() throws InterruptedException {
 		Assert.fail("Learn More About Your Payment History popup is failing");
 
 	}
+
 }
-
-
 public PaymentHistoryPage verifyBillingAndPaymentHistoryDisabled() throws InterruptedException {
 	checkForIPerceptionModel(driver);
 	CommonUtility.checkPageIsReadyNew(driver);
