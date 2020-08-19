@@ -2509,6 +2509,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 
+	
+	@Then("^validate print billing payment and download buttons on the UI$")
+	public void validatePrintBillingPaymentAndDownloadButtonsOnTheUI() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentAndDownloadButtons();
+		 
+	}
 	@Then("^User Scrolls down to the Billing history Section$")
 	public void UserScrollsDownToTheBillingHistorySection() throws Throwable {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
