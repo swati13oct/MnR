@@ -206,19 +206,6 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 			String expUrl="/member/pharmacy-locator/overview.html";
-			/* tbd 
-			String expUrl="/health-plans/aarp-pharmacy.html";
-			if (memberType.toUpperCase().contains("UHC")) {
-				if (MRScenario.environment.contains("stage"))
-					expUrl="uhcmedicaresolutions.uhc"+expUrl;
-				else
-					expUrl="uhcmedicaresolutions.com"+expUrl;
-			} else {
-				if (MRScenario.environment.contains("stage"))
-					expUrl="aarpmedicareplans.uhc"+expUrl;
-				else
-					expUrl="aarpmedicareplans.com"+expUrl;
-			} */
 			WebElement expElement=pharmacyHeader;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 

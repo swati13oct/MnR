@@ -164,12 +164,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]")
 	protected WebElement tl_section;
 	
-	//tbd @FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Dates to Remember')]")
-	//tbd protected WebElement tl_sectionHeader;
-
-	//tbd @FindBy(xpath="//h3[contains(text(),'Dates to Remember')]")
-	//tbd protected WebElement tbd_tl_sectionHeader;
-	
 	@FindBy(xpath="//a[contains(text(),'RETURN TO PREVIOUS PAGE')]")
 	protected WebElement returnToPrevPgLnk;
 	
@@ -201,12 +195,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='September 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone1Text_ind;
 
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']")
-	//tbd protected WebElement tbd_tl_milestone1Date;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='September 15']/../label[contains(@class,'date-content')]")
-	//tbd protected WebElement tbd_tl_milestone1Text;
-
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//div[contains(@class,'outer-div')][1]")
 	protected WebElement tl_milestone1Line_ind;
 
@@ -222,9 +210,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 1']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone2Text_ind;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 1']")
-	//tbd protected WebElement tbd_tl_milestone2Date;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 1']//span[contains(@class,'date-content')]")
 	protected WebElement tbd_tl_milestone2Text;
@@ -244,9 +229,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 15']/../span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone3Text_ind;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='October 15']")
-	//tbd protected WebElement tbd_tl_milestone3Date;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='October 15']//span[contains(@class,'date-content')]")
 	protected WebElement tbd_tl_milestone3Text;
@@ -270,9 +252,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='December 7']//span[contains(@class,'date-content')]")
 	protected WebElement tl_milestone4Text_ind2;
 
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='December 7']")
-	//tbd protected WebElement tbd_tl_milestone4Date;
-
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='December 7']//span[contains(@class,'date-content')]")
 	protected WebElement tbd_tl_milestone4Text;
 
@@ -293,9 +272,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement tl_milestone5Text_ind;
 
 	protected WebElement tl_milestone5Text_ind2;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'timeline section')]//label[text()='January 1']")
-	//tbd protected WebElement tbd_tl_milestone5Date;
 
 	@FindBy(xpath="//div[contains(@class,'Timeline') and not(contains(@class,'ng-hide'))]//div[contains(@class,'timeline section')]//span[text()='January 1']//span[contains(@class,'date-content')]")
 	protected WebElement tbd_tl_milestone5Text;
@@ -454,9 +430,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_en;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'PDF')]/../i")
-	//tbd protected WebElement ind_revPlnChgSec_docSec_anoc_bf_arrow;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_es;
@@ -1044,12 +1017,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//h4[contains(text(),'Learn about')]/../div/p[contains(text(),'Check coverage and costs of plans in your area')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_text;
 
-	//tbd @FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Skip this step')]")
-	//tbd protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Skip this step')]/../i")
-	//tbd protected WebElement sars_compPlnsSec_lrnOthPlnSec_skipThisLnk_arrow;
-	
 	@FindBy(xpath="//div[contains(@class,'Compareplansonline_Sars')]//div[contains(@class,'planchoices_sars')]//a[contains(text(),'Compare for')]/../span[contains(text(),'or')]")
 	protected WebElement sars_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_OR;
 
@@ -1093,9 +1060,6 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]//h4[contains(text(),'Choose your plan')]")
 	protected WebElement sars_enrolPlnSec_choYurPlnSec_header;
-
-	//tbd @FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//div[contains(@class,'anocavailable')]//h4[contains(text(),'Choose your plan')]/../div/p[contains(text(),'Decide if you want to stay')]")
-	//tbd protected WebElement sars_enrolPlnSec_choYurPlnSec_text;
 
 	//note: Enroll in the plan that works for you - Choose your plan - Stay in plan
 	@FindBy(xpath="//div[contains(@class,'Enrollplan_Sars')]//a[contains(text(),'Stay in current plan')]")

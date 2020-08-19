@@ -129,49 +129,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		note.add("\t=================");
-
-		//TODO - delete this when they remove the link
-		//tbd targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
-		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd String expUrl="https://www.aarpmedicareplans.com/";
-		//tbd WebElement expElement=zipCodeField_acq;
-		//tbd note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
-		//tbd targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
-		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd //note: after link click, little check should turn green
-		//tbd note.add("\n\tValidate after clicking 'Compare Your Current Plan To Next Year's Plan' link");
-		//tbd targetItem=section+" - green checkmark";
-		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-		//tbd //note: after link click, section circle should turn green
-		//tbd targetItem=section+" - green circle";
-		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
-		//tbd else 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd note.add("\n\tValidate after cookie remove for 'Compare Your Current Plan To Next Year Plan' section cookie");
-		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection_findNew);
-		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		//tbd note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
-		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection);
-		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
-		//tbd else 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
-		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-
 		String docName="Annual Notice of Changes";
 		//note: if there is spanish doc
 		note.add("\t=================");
@@ -827,19 +784,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		String expUrl="/member/pharmacy-locator/overview.html";
-		/* tbd 
-		String expUrl="/health-plans/aarp-pharmacy.html";
-		if (memberType.toUpperCase().contains("UHC")) {
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-		} else {
-			if (MRScenario.environment.contains("stage"))
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
-			else
-				expUrl="aarpmedicareplans.com"+expUrl;
-		} */
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 		
@@ -1076,7 +1020,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
 
 			//note - validate link destination
-			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
@@ -1098,15 +1041,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetItem=section+subSection+" - Compare New Plans Link svg";
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-			//tbd targetItem=section+subSection+" - Compare New Plans Link Arrow";
-			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-			//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-			//tbd targetItem=section+subSection+" - Compare New Plans Link svg";
-			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
-			//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
 
 			note.add("\n\tValidate after clicking 'Compare New Plans' link");
 			//note: after link click, section circle should turn green

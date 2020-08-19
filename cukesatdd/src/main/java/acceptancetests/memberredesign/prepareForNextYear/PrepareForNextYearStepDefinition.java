@@ -404,20 +404,8 @@ public class PrepareForNextYearStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 
 		PrepareForNextYearPage pfnyPg = new PrepareForNextYearPage(wd);
-		//tbd if (expComboTab) 
-		//tbd 	pfnyPg.handleComboTabIfComboUser(planType, memberType);
 
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
-		/* tbd
-		//note: validate Return to previous page link
-		if (MRScenario.environment.contains("team-a")) {
-			if (testNote==null)
-				testNote=new ArrayList<String>();
-			testNote.add("\t=================");
-			pfnyPg.validateReturnToPrevPgLnk();
-			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
-		}
-		*/
 		
 		if (memberType.toUpperCase().contains("COMBO")) {
 			testNote.addAll(pfnyPg.validateComboPlanName(testPlanName));
@@ -489,8 +477,6 @@ public class PrepareForNextYearStepDefinition {
 		else 
 			testNote.add("\t * FAILED - page content validation");
 			
-		//tbd testNote.add("\t=================");
-		//tbd testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -526,15 +512,6 @@ public class PrepareForNextYearStepDefinition {
 
 		//note: validate Return to previous page link
 		List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
-		/* tbd
-		if (MRScenario.environment.contains("team-a")) {
-			if (testNote==null)
-				testNote=new ArrayList<String>();
-			testNote.add("\t=================");
-			pfnyPg.validateReturnToPrevPgLnk();
-			testNote.add("\tPASSED - 'RETURN TO PREVIOUS PAGE' link behavior");
-		}
-		*/
 		
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");
@@ -591,13 +568,10 @@ public class PrepareForNextYearStepDefinition {
 		else 
 			testNote.add("\t * FAILED - page content validation");
 			
-		//tbd testNote.add("\t=================");
-		//tbd testNote.add("\tPASSED - page content validation");
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
-		
 	}	
 
 

@@ -624,13 +624,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return note;
 	}
 	
-	/* tbd 
-	public void validateReturnToPrevPgLnk() {
-		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
-		Assert.assertTrue("PROBLEM - unable to locate the 'RETURN TO PREVIOUS PAGE' link on 'Prepare For Next Year' page'", noWaitValidate(returnToPrevPgLnk));
-	}
-	*/
-
 	public int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
@@ -639,10 +632,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		List<String> note=new ArrayList<String>();
 		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
 		//		String actHrefUrl=targetElement.getAttribute("href");
-	 	//tbd if (targetItem.contains("Search For Providers link") 
-		//tbd 		|| targetItem.contains("Compare New Plans Link")
-		//tbd 		|| targetItem.contains("Drug Search link")
-		//tbd 		|| targetItem.contains("Find a Pharmacy link")) {
 			String winHandleBefore = driver.getWindowHandle();
 			String urlBeforeClick=driver.getCurrentUrl();
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -660,7 +649,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 					//note: back to prior page and move on
 					if (!driver.getCurrentUrl().contains("preparefornextyear/overview.html")) {
 						driver.get(urlBeforeClick);
-						//tbd goToSpecificComboTab(planType,false);
 					}
 					return note;
 				} else {
@@ -704,19 +692,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			System.out.println("TEST - Closed tab for '"+targetItem+"'");
 			driver.switchTo().window(winHandleBefore);
 			System.out.println("TEST - Switched back to prior tab");
-			/*
-		} else { 
-			String originalUrl=driver.getCurrentUrl();
-			targetElement.click();
-			CommonUtility.waitForPageLoad(driver, expElement, 10);
-			checkModelPopup(driver,2);
-			String currentUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected url to contains '"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
-			note.add("\tPASSED - validation for link destination after click for "+targetItem);
-			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-			note.add("\tPASSED - validation for link target page loading for "+targetItem);
-			backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
-		} */
 		
 		return note;
 
@@ -881,7 +856,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				if (willDeleteCookie) {
 					note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
 					deleteCookieAndReloadPgn(subSecCookie);
-					//tbd goToSpecificComboTab(planType, false);
 					note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
 				}
 

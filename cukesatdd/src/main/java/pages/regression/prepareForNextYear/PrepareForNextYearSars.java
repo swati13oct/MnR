@@ -119,7 +119,6 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
-			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
@@ -228,10 +227,6 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		targetItem=section+subSection+" - header";
 		targetElement=sars_enrolPlnSec_choYurPlnSec_header;
 		note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd targetItem=section+subSection+" - text";
-		//tbd targetElement=sars_enrolPlnSec_choYurPlnSec_text;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
 
 		//---------------------------
 		System.out.println("Proceed to validate 'Compare next year plan' link behavior...");
