@@ -552,7 +552,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.clickOnResolveHoldCTAOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@When("^user views the Track Status call to action button on that medication's row$")
 	public void user_views_the_Track_Status_call_to_action_button_on_that_medication_s_row() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -576,7 +576,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateOrderStatusHeader();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@When("^user views the View order call to action button on that medication's row$")
 	public void user_views_the_View_order_call_to_action_button_on_that_medication_s_row() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -756,8 +756,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRemainingPrescriptionsOnMyMedPage(totalMedication);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
-	
+
 	@Then("^user views the HD Medications on Current Medications$")
 	public void user_views_the_HD_Medications_on_Current_Medications() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -765,7 +764,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateHDDrug();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@Then("^user will see \"([^\"]*)\" field$")
 	public void user_will_see_field(String expectedVal) {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -773,7 +772,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRefillRemainingFieldOnCurrentMed(expectedVal);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@Then("^user validates amount of refills remaining for the prescriptions$")
 	public void user_validates_amount_of_refills_remaining_for_the_prescriptions() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -793,7 +792,7 @@ public class MedicineCabinetStepDefinition {
 	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
 	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
 	 */
-	
+
 	@Then("^user views the HD Medications on My Medications page$")
 	public void user_views_the_HD_Medications_on_My_Medications_page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -809,7 +808,7 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.verifyRefillLeftNotAvailableForRetalPharm();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
 	@When("^user views a home delivery medication eligible for renewal on My Medication Page$")
 	public void user_views_a_home_delivery_medication_eligible_for_renewal_on_My_Medication_Page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -817,5 +816,12 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRenewMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	
+
+	@When("^user views a home delivery medication eligible for refill on My Medication Page$")
+	public void user_views_a_home_delivery_medication_eligible_for_refill_on_My_Medication_Page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateRefillMedications();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 }

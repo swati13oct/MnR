@@ -182,4 +182,9 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='oc__shipping__estimatedDate__alternate__message']")
 	protected WebElement shippingAlternateMsg;
 
+	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
+	protected WebElement ThankyouMessageOrderConfirmation;
+	
+	@FindBy(xpath="//*[@data-testid='os__shipping__methodSelect']//span")
+	protected WebElement shippingMethodForRenew;
 }

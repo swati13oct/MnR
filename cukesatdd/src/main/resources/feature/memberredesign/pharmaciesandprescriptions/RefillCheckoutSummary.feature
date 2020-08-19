@@ -214,13 +214,14 @@ Feature: Refill - Checkout summary
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
   @F481927 @US2767408 @Scenario1 @TestReady
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Different Shipments and Estimated Delivery Date
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Estimated Delivery Date
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks View all medications link to view the My Medications page
-    And user clicks Refill All Medication call to action button
+    And user clicks Refill Medication call to action button
+    #And user clicks View all medications link to view the My Medications page
+    #And user clicks Refill All Medication call to action button
     Then user views the "Complete Your Refill" page
     When user views the Medications section
     #When user medications are grouped into more than one shipment

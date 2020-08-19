@@ -90,7 +90,7 @@ Feature: MVP - Call to Action
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user views the Current Medications
+    And user clicks View all medications link to view the My Medications page
     When user has a Walgreens drug
     When user click on the walgreens button
     When user clicks on the Cancel button on the modal

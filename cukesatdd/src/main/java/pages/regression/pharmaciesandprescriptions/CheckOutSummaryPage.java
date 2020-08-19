@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.memberredesign.pharmaciesandprescriptions.MedicineCabinetStepDefinition;
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 import acceptancetests.util.CommonUtility;
 
@@ -212,6 +211,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(orderSummaryPlaceOrderBtn);
 		actions.click().build().perform();
+
 		/*
 		 * orderSummaryPlaceOrderBtn.click(); orderSummaryPlaceOrderBtn.click();
 		 */
@@ -312,12 +312,27 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public OrderConfirmationPage navigateToOrderConfirmationPage() {
-		// CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+		CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 50);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getCurrentUrl().contains("order-confirmation")) {
+		System.out.println("Current URL val : " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
 			CommonUtility.checkPageIsReady(driver);
 			return new OrderConfirmationPage(driver);
 		}
 		return null;
+	}
+
+	public void clickPlaceOrderBtnOnCheckOutRenewPage() {
+		CommonUtility.waitForPageLoad(driver, orderSummaryPlaceOrderBtn, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 40);
+		if (wait.until(ExpectedConditions.textToBePresentInElement(shippingMethodForRenew, "Standard"))) {
+			validate(orderSummaryPlaceOrderBtn, 20);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(orderSummaryPlaceOrderBtn);
+			actions.click().build().perform();
+		}
+		/*
+		 * orderSummaryPlaceOrderBtn.click(); orderSummaryPlaceOrderBtn.click();
+		 */
 	}
 }

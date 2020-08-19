@@ -56,7 +56,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__amount']")
 	protected WebElement OrderTotalOrderConfirmation;
 	
-	@FindBy(xpath = "//p[@data-testid='oc__confirm__priceDisclaimer']")
+	@FindBy(xpath = "//span[@data-testid='oc__confirm__priceDisclaimer']")
 	protected WebElement PriceDisclaimerOrderconfirmation;
 
 	@FindBy(xpath = "//div[@data-testid='oc__shipping__estimatedDate']/span[text()='Estimated Delivery Date:']")
@@ -68,10 +68,10 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='rx__drugNameSize']")
 	protected WebElement DrugNameSizeOrderConfirmation;
 	
-	@FindBy(xpath = "//div[@data-testid='rx__quantity']")
+	@FindBy(xpath = "//div[@data-testid='rx__daysOfSupply']")
 	protected WebElement DrugQuantityOrderConfirmation;
 		
-	@FindBy(xpath = "//div[@data-testid='rx__price']/p/text()[1]")
+	@FindBy(xpath = "//div[@data-testid='rx__price']")
 	protected WebElement rxPriceOrderConfirmation;
 	
 	@FindBy(xpath = "//p[@data-testid='rx__number']/span[text()='Rx: ']")

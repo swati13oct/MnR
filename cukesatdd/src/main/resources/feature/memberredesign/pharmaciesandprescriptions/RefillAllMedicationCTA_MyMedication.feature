@@ -44,6 +44,11 @@ Feature: Refill All Medications CTA - My Medications
     When user select the Refill All Medications CTA
     Then user will be brought to the "Complete Your Refill" page for that medication
     Then user will view all eligible refill medications moved into the refill flow
+    When user selects two day shipping
+    Then user will NOT see the estimated delivery date
+    When user select expedited shipping
+    Then user will NOT see the estimated delivery date
+
 
     Examples: 
       | FID     | planType | memberType                 |

@@ -10,7 +10,7 @@ Feature: Renew Order Confirmation
     And user fetches medication information and clicks on Renew Medication call to action button
     Then user will see "Complete Your Renewal" Page
     And user will see Place Order Btn
-    Then user will click on Place Order btn
+    Then user will click on Place Order btn on Checkout Renew Page
     Then user will see Renew order confirmation page
     Then user will see order placed date
     Then user will see order tracked as Order Received
