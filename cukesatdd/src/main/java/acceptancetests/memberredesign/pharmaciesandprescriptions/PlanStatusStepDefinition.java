@@ -109,10 +109,18 @@ public class PlanStatusStepDefinition {
 	@Then("^I will be sent back to the member site dashboard$")
 	public void I_will_be_sent_back_to_the_member_site_dashboard() throws Throwable {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateDashboardURL();
-		Thread.sleep(2000);
+//		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+//				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+//		accountHomePage.validateDashboardURL();
+//		Thread.sleep(2000);
+
+		if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+		{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			accountHomePage.validateLoginonDashboard();
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+
 	}
 
 
