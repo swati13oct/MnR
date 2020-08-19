@@ -419,8 +419,10 @@ public class PrepareForNextYearStepDefinition {
 		}
 		*/
 		
-		testNote.addAll(pfnyPg.validateComboPlanName(testPlanName));
-		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+		if (memberType.toUpperCase().contains("COMBO")) {
+			testNote.addAll(pfnyPg.validateComboPlanName(testPlanName));
+			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+		}
 		
 		pfnyPg.validateAdobePdfDocText();
 		testNote.add("\tPASSED - disclaimer 'This page contains PDF'");

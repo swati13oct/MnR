@@ -650,7 +650,8 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			CommonUtility.waitForPageLoad(driver, expElement, 5);
 			scrollElementToCenterScreen(targetElement);
 			targetElement.click();
-			
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			if (validateAsMuchAsPossible) {
@@ -660,8 +661,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 					if (!driver.getCurrentUrl().contains("preparefornextyear/overview.html")) {
 						driver.get(urlBeforeClick);
 						//tbd goToSpecificComboTab(planType,false);
-						CommonUtility.checkPageIsReady(driver);
-						checkModelPopup(driver,5);
 					}
 					return note;
 				} else {

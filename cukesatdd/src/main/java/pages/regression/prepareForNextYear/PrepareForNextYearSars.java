@@ -247,11 +247,6 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			targetItem=section+subSection+" - Compare New Plans Link Arrow";
-			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-
 			//note - validate link destination
 			String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
@@ -267,6 +262,10 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+
+			targetItem=section+subSection+" - Compare New Plans Link Arrow";
+			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			note.add("\n\tValidate after clicking 'Compare New Plans' link");
 			//note: after link click, little check should turn green
