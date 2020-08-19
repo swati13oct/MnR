@@ -25,6 +25,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.guestPayments.guestPaymentsLogin;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
@@ -64,6 +65,24 @@ public class guestPaymentsLoginStepDefinition {
 				guestPaymentsLogin);
 	}
 
+	@Then("^I validate all the header and page elements$")
+	public void the_user_verifies_headerAndBody() {
+		
+		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin.validateHeaderAndBody();
+		
+	}
+	
+	
+	@When("^I click on link Help me find my id link$")
+	public void the_user_clicks_on_helpMeFindMYID() {
+		
+		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin.validateFindMyBody();
+		
+	}
+	
+	
 	
 
 }

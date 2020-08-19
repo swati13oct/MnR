@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.MRScenario;
@@ -40,6 +41,45 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		
 	}
 
+	public boolean guestPaymentsValidate(WebElement element) {
+		long timeoutInSec=0;
+		return guestPaymentsValidate(element, timeoutInSec);
+	} 
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean guestPaymentsValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+
+
+	public void sleepBySec(int sec) {
+		System.out.println("Sleeping for '"+sec+"' sec");
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	private void openAndValidate(String siteName) {
 		if ("AARP".equalsIgnoreCase(siteName)) {
 				startNew(AARP_GUEST_PAYMENTS_PAGE_URL);
@@ -80,7 +120,23 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	/**
 	 * method to validate the page Elements
 	 */
-	public void validateHeaderSection() {
+
+	public void validateHeaderAndBody() {
+		
+		Assert.assertTrue("PROBLEM - unable to locate the Guest payments Header",guestPaymentsValidate(guestPaymentsHeader));
+		Assert.assertTrue("PROBLEM - unable to locate the static content below header ",guestPaymentsValidate(staticContentBelowHeader));
+		Assert.assertTrue("PROBLEM - unable to locate the sign in link ",guestPaymentsValidate(signInLink));
+		Assert.assertTrue("PROBLEM - unable to locate help Me Find My Id Link ",guestPaymentsValidate(helpMeFindMyIdLink));
+		Assert.assertTrue("PROBLEM - unable to locate the Member ID textfield",guestPaymentsValidate(memberIdTextfield));
+		Assert.assertTrue("PROBLEM - unable to locate the DOB textfield ",guestPaymentsValidate(dobTextfield));
+		Assert.assertTrue("PROBLEM - unable to locate the Next Button ",guestPaymentsValidate(nextButton));
+		Assert.assertTrue("PROBLEM - unable to locate Having Trouble Text ",guestPaymentsValidate(havingTroubleText));
+		Assert.assertTrue("PROBLEM - unable to locate Footer Text ",guestPaymentsValidate(footerText));
+
+	}
+
+	public void validateFindMyBody() {
+		// TODO Auto-generated method stub
 		
 	}
 
