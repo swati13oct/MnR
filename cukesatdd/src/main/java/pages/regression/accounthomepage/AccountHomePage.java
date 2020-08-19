@@ -2959,7 +2959,6 @@ public class AccountHomePage extends UhcDriver {
 	public void validateDashboardURL() {
 		Assert.assertTrue("Dashboard URL is displayed", driver.getCurrentUrl().contains("dashboard"));
 	}
-
 	public void clickAccountProfile() {
 		if (accountProfile.isDisplayed()) {
 			accountProfile.click();
