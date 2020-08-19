@@ -254,15 +254,21 @@ public class VppPlanValidationStepDefinition {
 			styleIgnore.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
 			styleIgnore.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
+			CellStyle styleUpdateMBD = ResultWorkbook.createCellStyle();
+			styleUpdateMBD.setFillForegroundColor(IndexedColors.VIOLET.getIndex());
+			styleUpdateMBD.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
 			  
 		//Setting First Row for Results excel
 
 			try {
 				 AepPlanComparePage planComparePage = null;
+				 AepPlanDetailsPage planDetailsPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				 HashMap <String, String> benefitsDetailMap = new HashMap<String, String>();
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
@@ -281,7 +287,7 @@ public class VppPlanValidationStepDefinition {
 				             
 		                	 try {
 		                		 currentCellValue = cell.getStringCellValue();
-		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue().trim();
 		                	 }catch (Exception e) {
 		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
@@ -301,29 +307,64 @@ public class VppPlanValidationStepDefinition {
 									 }
 									 else
 									 {
-									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(3).getStringCellValue(), row.getCell(1).getStringCellValue());
+									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(4).getStringCellValue(), row.getCell(2).getStringCellValue());
 									 }
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+								 if(cellIndex == 1)
+								 {
+									 new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+									 planDetailsPage = new AepPlanDetailsPage(wd);
+									// benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
 
-									 resultMap = planComparePage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 if(sheetName.contains("PDP")) {
+										 if(!row.getCell(7).getStringCellValue().contains("NA")) {
+											 planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
+											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											 planDetailsPage.editDrugListAndRemoveDrug();
+										 }else
+											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
+									 }else
+										 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+
+								 }
+
+								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") || currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+
+									 resultMap = planComparePage.compareBenefits(currentColName.trim(), currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
 										 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
 									 	if(!valueMatches) {
 									 		//Ignore OON column data validation for a Plan that is only In-network
-											if(row.getCell(1).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+											if(row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
 											{
 												newCell.setCellStyle(styleIgnore);
 											}
 											else {
-												newCell.setCellStyle(styleFailed);
+
+												HashMap <Boolean, String> resultDetailMap = new HashMap<Boolean, String>();
+												String formatedCellValue = currentCellValue;
+
+												formatedCellValue = planComparePage.formatCellValueForPlanDetail(currentColName,currentCellValue);
+
+												if(currentColName.endsWith("PC"))
+												{
+													currentColName = currentColName.substring(0, (currentColName.length()-2));
+												}
+
+												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue,benefitsDetailMap);
+												if(resultDetailMap.containsKey(true) || (resultDetailMap.containsKey(false) && resultDetailMap.get(false).equalsIgnoreCase("BENEFIT NOT FOUND ON THE UI")))
+												{
+													newCell.setCellStyle(styleFailed);
+												}
+												else {
+													newCell.setCellStyle(styleUpdateMBD);
+												}
 												failureCounter++;
 											}
-								 		}else {				
+								 		}else {
 								 			newCell.setCellStyle(stylePassed);
-								 
 									  }
 								 }
 
@@ -334,8 +375,9 @@ public class VppPlanValidationStepDefinition {
 										 newCell.setCellValue(cell.getStringCellValue());
 									 } else {
 										 //Ignore OON column data validation for a Plan that is only In-network
-										 if(row.getCell(1).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+										 if(row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
 										 {
+											 newCell.setCellStyle(styleIgnore);
 											 newCell.setCellValue(cell.getStringCellValue());
 										 }
 										 else {//boolean value is false so it will add the UI value as well to differentiate and mark the cell red

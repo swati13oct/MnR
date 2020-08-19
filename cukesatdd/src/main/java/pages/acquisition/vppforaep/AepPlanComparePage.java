@@ -202,4 +202,22 @@ public class AepPlanComparePage extends UhcDriver {
 			); }
 		return result;
 	}
+
+	//Format Plan compare cell value before validating against plan detail (to avoid making changes to PlanDetail compareBenefits method)
+	public String formatCellValueForPlanDetail(String currentColName, String currentCellValue) {
+
+		String formatedCellValue = currentCellValue;
+
+		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Prescription"))
+		{
+			formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
+		}
+
+		if(currentColName.startsWith("Tier"))
+		{
+			formatedCellValue = currentCellValue.replace(":","");
+		}
+
+		return  formatedCellValue;
+	}
 }
