@@ -365,10 +365,25 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                             				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",","").replace(".", "").split(" ");
                             				Arrays.sort(dname);
                             				System.out.println(Arrays.equals(wname, dname));
-                            				if(Arrays.equals(wname, dname)) {
+                            				if(wname.length == dname.length && Arrays.equals(wname, dname)) {
                             					result=true;
                             					break;
                             				}
+                            				else if(wname.length != dname.length)
+                                            {
+                                                for(int k=0;k<dname.length;k++)
+                                                {
+                                                   if(! Arrays.asList(wname).contains(dname[k]))
+                                                    {
+                                                        result =false;
+                                                        break;
+                                                    }
+                                                   else
+                                                   {
+                                                       result = true;
+                                                   }
+                                                }
+                                            }
                             				else {
                             					result=false;
                             				}
