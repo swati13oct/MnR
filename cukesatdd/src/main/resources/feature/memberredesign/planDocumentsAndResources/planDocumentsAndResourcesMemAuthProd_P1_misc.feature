@@ -84,11 +84,15 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-013 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
-#	@prod_active_pcp_medica      
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#      | 14-014 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | false |
-#      | 15-015 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | false |
+	@prod_active_pcp      
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+      | 14-014 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR       | true  | true   | true  | true  | false |
+
+	@prod_active_medica      
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+      | 15-015 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR | true  | true   | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 

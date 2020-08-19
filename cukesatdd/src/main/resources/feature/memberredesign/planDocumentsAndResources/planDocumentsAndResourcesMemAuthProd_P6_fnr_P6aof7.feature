@@ -83,15 +83,15 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
 
-#	@prod_active_pcp_6aof7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-#      | 14-109 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true   | true   |
+	@prod_active_pcp_6aof7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
+      | 14-109 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true   | true   |
 
-#	@prod_active_medica_6aof7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-#      | 15-110 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true   | true   |
+	@prod_active_medica_6aof7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
+      | 15-110 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true   | true   |
 
 	@prod_active_pdp_ind_6aof7 @prod_active_pdp_6aof7
 	Examples: 

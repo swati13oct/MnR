@@ -76,11 +76,15 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-051 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
-#	@prod_active_pcp_medica
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 14-052 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
-#      | 15-053 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
+	@prod_active_pcp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 14-052 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
+
+	@prod_active_medica
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 15-053 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 

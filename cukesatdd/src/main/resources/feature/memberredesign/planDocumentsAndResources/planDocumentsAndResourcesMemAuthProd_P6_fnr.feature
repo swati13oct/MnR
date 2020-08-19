@@ -89,15 +89,15 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | false    | false   | true   | true   | false   | true   | true   |
 
-#	@prod_active_pcp
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#      | 14-109 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   | 
+	@prod_active_pcp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
+      | 14-109 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR       | true   | true     | true    | true   | true   | true    | true   | true   | 
 
-#	@prod_active_medica
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#      | 15-110 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   | 
+	@prod_active_medica
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
+      | 15-110 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@prod_active_pdp_ind @prod_active_pdp
 	Examples: 

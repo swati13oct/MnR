@@ -82,11 +82,15 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-089 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 
-#	@prod_active_pcp_medica
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-#      | 14-090 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
-#      | 15-091 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+	@prod_active_pcp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 14-090 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+
+	@prod_active_medica
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 15-091 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 

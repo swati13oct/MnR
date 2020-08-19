@@ -78,11 +78,15 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-032 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 
-#	@prod_active_pcp_medica
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-#      | 14-033 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
-#      | 15-034 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+	@prod_active_pcp
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+      | 14-033 | 15128       | ashah120  | Mnrqa003  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+
+	@prod_active_medica
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+      | 15-034 | 15128       | ashah120  | Mnrqa003  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
