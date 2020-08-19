@@ -57,7 +57,7 @@ public class SAMIconsStepDefinitionAARP {
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
+		//aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		/*
 		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
