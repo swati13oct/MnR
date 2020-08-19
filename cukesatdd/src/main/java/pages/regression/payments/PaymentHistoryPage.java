@@ -630,6 +630,22 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='p-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnMoreAboutYourPaymentHistoryCloseBtn;
 	
+	@FindBy(xpath = "//table[@id='resultscount_0']")
+	private WebElement billingTable;
+	
+	@FindBy(xpath = "//button[contains(text(),'Print Billing History ')]")
+	private WebElement PrintBillingHistoryButton;
+	
+	@FindBy(xpath = "//table[@id='paymentresultscount_0']")
+	private WebElement paymentHistoryTable;
+	
+	@FindBy(xpath = "//button[contains(text(),'Print Payment History')]")
+	private WebElement PrintPaymentHistoryButton;
+	
+	@FindBy(xpath = "//button[contains(text(),'Download Payment History ')]")
+	private WebElement downloadPaymentHistory;
+	
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -2269,7 +2285,42 @@ public void toolTipsValidation() throws InterruptedException {
 			Assert.fail("Monthly Premium popup is failing ");
 
 			}
+}
 
+public void billingPaymentAndDownloadButtons() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
+	try {
+		if(billingTable.isDisplayed()) {
+			Assert.assertTrue("Print Billing History Button is displaying", PrintBillingHistoryButton.isDisplayed());
+			System.out.println("Print Billing History Button is displaying");
+		}
+		else {
+			Assert.assertTrue("Print Billing History Button is displaying", !(PrintBillingHistoryButton.isDisplayed()));
+			System.out.println("Print Billing History Button is not displaying because there is not history available");
+		}
+	} catch (Exception e) {
+		System.err.println("Print Billing History Button is not displaying"); 
+		Assert.fail("Print Billing History Button is not displaying");	}
+
+try {
+	if(paymentHistoryTable.isDisplayed()) {
+		Assert.assertTrue("Print Payment History Button is displaying", PrintPaymentHistoryButton.isDisplayed());
+		Assert.assertTrue("download Payment History Button is displaying", downloadPaymentHistory.isDisplayed());
+		System.out.println("Print Payment History and download Buttons are displaying");
+	}
+	else {
+		Assert.assertTrue("Print Payment History Button is displaying",! (PrintPaymentHistoryButton.isDisplayed()));
+		Assert.assertTrue("download Payment History Button is displaying", !(downloadPaymentHistory.isDisplayed()));
+		System.out.println("Print payment History and download button are not displaying because there is not history available");
+	}
+} catch (Exception e) {
+	System.err.println("Print payment History and download button are not displaying"); 
+	Assert.fail("Print payment History and download button are not displaying");	}
+}
+public void billingPaymentHistorytoolTipsValidation() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
 	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
 	if(Learnaboutwaystopaylink.isDisplayed()) {
 		Learnaboutwaystopaylink.click() ;
@@ -2286,6 +2337,8 @@ public void toolTipsValidation() throws InterruptedException {
 
 	}
 	System.out.println("Validate Learn More About Your Billing History pop-up ");
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourBillingHistorylink);
 	if(LearnMoreAboutYourBillingHistorylink.isDisplayed()) {
 		LearnMoreAboutYourBillingHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2302,6 +2355,7 @@ public void toolTipsValidation() throws InterruptedException {
 	}
 
 	System.out.println("Validate Learn More About Your payment History pop-up ");
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourPaymentHistorylink);
 	if(LearnMoreAboutYourPaymentHistorylink.isDisplayed()) {
 		LearnMoreAboutYourPaymentHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2316,9 +2370,8 @@ public void toolTipsValidation() throws InterruptedException {
 		Assert.fail("Learn More About Your Payment History popup is failing");
 
 	}
+
 }
-
-
 public PaymentHistoryPage verifyBillingAndPaymentHistoryDisabled() throws InterruptedException {
 	checkForIPerceptionModel(driver);
 	CommonUtility.checkPageIsReadyNew(driver);

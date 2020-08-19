@@ -49,10 +49,10 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
 	public WebElement drugsCovered;
 	
-	@FindBy(xpath = "//button[contains(text(),'Why Average?')]")
+	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]/following-sibling::button")
 	public WebElement whyAverageLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]")
+	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]/following-sibling::button")
 	public WebElement whatsIncludedLink;
 	
 	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
@@ -67,7 +67,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button//span[text()='Save']")
 	public WebElement saveBtn;
 	
-	@FindBy(xpath = "//*[@id='disclaimer-accordion-wrap']")
+	@FindBy(xpath = "//*[@id='accordion-1-button']")
 	public WebElement disclaimer;
 	
 	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
@@ -123,6 +123,9 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
+	
+	@FindBy(id = "changePharmacyLink")
+	public WebElement changePharmacyLinkDetailsPage;
 
 	@Override
 	public void openAndValidate() {
@@ -174,6 +177,50 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	@FindBy(id = "priceLinkBtn_0")
+	private WebElement viewProceBtn;
+	
+	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
+	private WebElement switchToGenericBtn;
+	
+	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
+	private WebElement switchToGenericSubmitBtn;
+	
+	@FindBy(xpath = "//table/tbody/tr/td[1]")
+	private WebElement drugNames;
+	
+	@FindBy(id = "drugPricingTitleTxt")
+	private WebElement drugTitle;
+	
+	
+	
+	public void clickViewPricing() {
+		//validate(viewProceBtn);
+		//viewProceBtn.click();
+		validate(drugPricingLink);
+		drugPricingLink.click();
+	}
+	
+	public void clickswitchToGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		validate(switchToGenericBtn);
+		switchToGenericBtn.click();
+		validate(switchToGenericSubmitBtn);
+		switchToGenericSubmitBtn.click();
+	}
+	
+	public void verifyDrugListsUpdated(String genericDrug) throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		/*
+		 * for(int i=0;i<drugNames.size();i++) {
+		 * System.out.println(drugNames.get(i).getText()); }
+		 */
+		System.out.println(drugNames);
+		Assert.assertTrue("Drug not switched to generic",drugNames.getText().contains(genericDrug));
+	}
+	
 	@FindBy(id = "sign-up-modal-header")
 	private WebElement createProfilePopup;
 	
@@ -204,6 +251,10 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
 	private WebElement clickSnpplan;
 	
+	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	private WebElement alertTextImg;
+	
+	
 	public void clickOnPDPPlan()
 	{
 		try {
@@ -217,6 +268,30 @@ public class DrugSummaryPage extends UhcDriver {
 		je.executeScript("arguments[0].click()", clickPdpplan);
 		//clickPdpplan.click();
 		
+		
+	}
+	
+	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
+	public WebElement drugPricingDeductText;
+	
+	
+	public void verifyTheTextAlert()
+	{
+		
+		validate(alertTextImg);
+		validate(viewProceBtn);
+	}
+	public void verifyDrugPricingText() {
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(drugTitle);
+		validate(switchToGenericBtn);
+		validate(drugPricingDeductText);
 		
 	}
 	
@@ -286,6 +361,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public DrugSummaryPage selectPharmacyModalDisplayed() throws InterruptedException {
+		waitforElementNew(selectPharmacyHeader, 30);
 		if(validateNew(selectPharmacyHeader)) {
 			return new DrugSummaryPage(driver);
 		}
@@ -306,5 +382,9 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 		
 		return null;
+	}
+	
+	public void clickViewDrugCostBtn() {
+		viewDrugCostBtn.click();
 	}
 }
