@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP10_FedComboShipFed.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP10_FedComboShipFed")
+jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP09_GrpPdp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP09_GrpPdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP10_FedComboShipFed.json" }, tags = { "@memAuth_prepareForNextYear02_combo_ship_fed" })
-public class RunMRATDDRegressionPfnyMemAuthP10_FedComboShipFed {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP09_GrpPdp.json" }, tags = { "@memAuth_prepareForNextYear02_grp_pdp" })
+public class RunMRATDDRegressionPfnyMemAuthP09_GrpPdp {
 
 }

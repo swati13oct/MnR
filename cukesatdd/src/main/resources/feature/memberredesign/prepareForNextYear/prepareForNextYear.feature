@@ -396,7 +396,7 @@ Feature: 1.25 Member Prepare For Next Year
     #@prepareForNextYear02_combo_fed_ship
     #Examples: 
 	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	#    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @stageEnv
@@ -430,6 +430,35 @@ Feature: 1.25 Member Prepare For Next Year
 	#    | index | FID     | planType | memberType              |
 	#    | 3-02  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
 
+  @prepareForNextYear04 @hasTab @regressionMember @stageEnv
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info for user with SARs plan 
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 07/31/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 10/01/2020     |
+      | Milestone 2 Date       | 10/15/2020     |
+      | Milestone 3 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info for user with SARs plan 
+      | Show Next Year PlanName| <showNxtYrPlan>|
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+    Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates Prepare For Next Year page content for user with SARs plan
+
+    @prepareForNextYear04_sars
+    Examples: 
+	    | index | FID     | planType | memberType              | showNxtYrPlan |  
+	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+
+    @prepareForNextYear04_sars
+    Examples: 
+	    | index | FID     | planType | memberType              | showNxtYrPlan |  
+	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
 	    
 ##### end - cases for stage env #################################################################
 

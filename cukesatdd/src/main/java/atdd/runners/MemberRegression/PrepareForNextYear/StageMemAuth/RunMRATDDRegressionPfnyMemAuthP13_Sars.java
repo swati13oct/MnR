@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP07_IndMedicaPcp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP07_IndMedicaPcp")
+jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP13_Sars.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP13_Sars")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP07_IndMedicaPcp.json" }, tags = { "@memAuth_prepareForNextYear02c" })
-public class RunMRATDDRegressionPfnyMemAuthP07_IndMedicaPcp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP13_Sars.json" }, tags = { "@memAuth_prepareForNextYear02_combo_fed_ship" })
+public class RunMRATDDRegressionPfnyMemAuthP13_Sars {
 
 }
