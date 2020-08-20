@@ -38,10 +38,10 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	  | Spanish Next Year                  | <pd_es_ny> | 
 	  | Chinese Next Year                  | <pd_zh_ny> | 
 
-#	@prod_preeffective_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-#      | 01-077 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
+	@prod_preeffective_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 01-077 | xxxxx       | ashah120  | Mnrqa003  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
 #      | 02-078 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
 #      | 03-079 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
@@ -51,12 +51,12 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 #      | 04-080 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | false | true  | true     | true     | false    | false    | false    | false    |
 #      | 05-081 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | false | true  | false    | false    | false    | false    | false    | false    |
 
-#	@prod_terminated_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+	@prod_terminated_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
 #      | 06-082 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 #      | 07-083 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false    | false     | false    | false    | false    | false    |
-#      | 08-084 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
+      | 08-084 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 
 
 	@prod_active_ma @prod_active_ma_ind

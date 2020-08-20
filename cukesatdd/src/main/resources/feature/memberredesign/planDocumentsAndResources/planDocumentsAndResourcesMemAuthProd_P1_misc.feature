@@ -41,10 +41,10 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
     #note: moved to footer feature
 	#Then user validate Need Help section
 
-#	@prod_preeffective_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#      | 01-001 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+	@prod_preeffective_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+      | 01-001 | xxxxx       | ashah120  | Mnrqa003  | weberjo01       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
 #      | 03-003 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
@@ -54,12 +54,12 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 #      | 04-004 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 05-005 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
 
-#	@prod_terminated_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+	@prod_terminated_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 06-006 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true  | true   | true  | false | false |
 #      | 07-007 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
-#      | 08-008 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
+      | 08-008 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 

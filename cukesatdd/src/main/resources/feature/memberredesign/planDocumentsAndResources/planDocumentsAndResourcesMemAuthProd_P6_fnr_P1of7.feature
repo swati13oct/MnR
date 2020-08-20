@@ -32,10 +32,10 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	  | Section Display                    | <fnr_sd>   | 
 	  | Prescription Drug Mail Order Form  | <fnr_pdmo> | 
 
-#	@prod_preeffective_ma_1of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | 
-#      | 01-096 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | 
+	@prod_preeffective_ma_1of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | 
+      | 01-096 | xxxxx       | ashah120  | Mnrqa003  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | 
 #      | 02-097 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | 
 
 #	@prod_preeffective_mapd_1of7
@@ -55,10 +55,10 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 #      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | false    |
 #      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | true   | false    |
 
-#	@prod_terminated_mapd_1of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo |
-#      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | true   | true     |
+	@prod_terminated_mapd_1of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo |
+      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true     |
 
 	@prod_active_ma_ind_1of7 @prod_active_ma_1of7
 	Examples: 

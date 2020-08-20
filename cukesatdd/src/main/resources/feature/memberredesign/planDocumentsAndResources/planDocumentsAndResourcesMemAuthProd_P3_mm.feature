@@ -33,10 +33,10 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	  | Spanish Documents                  | <mm_es> | 
 	  | Chinese Documents                  | <mm_zh> | 
 
-#	@prod_preeffective_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 01-039 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+	@prod_preeffective_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 01-039 | xxxxx       | ashah120  | Mnrqa003  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
 #      | 03-041 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
@@ -46,12 +46,12 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 #      | 04-042 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 05-043 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
 
-#	@prod_terminated_ma_mapd
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+	@prod_terminated_ma_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 06-044 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
 #      | 07-045 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
-#      | 08-046 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
+      | 08-046 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
