@@ -1024,8 +1024,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement ProviderName = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 		String mproviderName=ProviderName.getText().trim();
-		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
-		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		String [] mpname = mproviderName.split("\n");
+		
+		mproviderName = mpname[0].replace(".", "").replace(",", "").trim();
+		rallyProviderName =rallyProviderName.replace(".", "").replace(",", "");
+
 		Assert.assertEquals(mproviderName,rallyProviderName);
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
