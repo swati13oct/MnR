@@ -68,6 +68,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			try {
 				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
 				benefitsTopMenuShadowRootLink.click();
+				CommonUtility.checkPageIsReady(driver);
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Benefits link on top menu", false);
 			}
