@@ -249,7 +249,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 
     @prod_prepareForNextYear04_sars
     Examples: 
-	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
+	    | 4-01  | F443004 | ashah120  | Mnrqa003  | PAULAROTH2              | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | ashah120  | Mnrqa003  | PAULAROTH2              | PDP      | SARS_PFNY               | false         |
 	    
