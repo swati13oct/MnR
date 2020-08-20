@@ -182,9 +182,18 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	    
   @prod_prepareForNextYear03 @hasTab @noCombTabOnPfny
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 08/31/2020     |
@@ -199,7 +208,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-	@prod_prepareForNextYear03a
+@abc	@prod_prepareForNextYear03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
 	    | 3-01  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
@@ -211,9 +220,18 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 
   @prod_prepareForNextYear04 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info for user with SARs plan 
       | EndOfTestRollBackTime  | false          |
       | AEM Show Tab StartDate | 08/31/2020     |

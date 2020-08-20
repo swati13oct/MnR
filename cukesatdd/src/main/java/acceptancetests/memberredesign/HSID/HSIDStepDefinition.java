@@ -637,7 +637,10 @@ public class HSIDStepDefinition {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			} catch (Exception ae) {
 				System.out.println("Exception: "+ae);
-				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Exception", false);
+				if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) 
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** - Got Exception. "+ae.getMessage(), false);
+				else
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Exception. "+ae.getMessage(), false);
 			}
 			
 			if (accountHomePage != null) {
