@@ -135,11 +135,22 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 
 	}
 
-	public void validateFindMyBody() {
-		// TODO Auto-generated method stub
-		
+	public void validateFindMyID() {
+		helpMeFindMyIdLink.click();
+		CancelButtononID.click();
+
 	}
 
+	public void enterIDandBirthDate() {
+		memberIdTextfield.sendKeys("123456");
+		dobTextfield.sendKeys("01/01/2000");
+
+	}
+
+	public void clickNext() {
+		nextButton.click();
+
+	}
 
 }
 

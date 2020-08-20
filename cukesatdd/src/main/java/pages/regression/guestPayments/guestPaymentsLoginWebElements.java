@@ -66,6 +66,12 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "row member-footer")
     public static WebElement footerText;
 
+	@FindBy(className= "memberID")
+	public static WebElement MemberID;
+
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement CancelButtononID;
+
 	
 
 }

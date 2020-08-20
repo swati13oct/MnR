@@ -78,12 +78,27 @@ public class guestPaymentsLoginStepDefinition {
 	public void the_user_clicks_on_helpMeFindMYID() {
 		
 		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
-		guestPaymentsLogin.validateFindMyBody();
+		guestPaymentsLogin.validateFindMyID();
 		
 	}
-	
-	
-	
+
+
+	@Then("^I will enter my Member ID and Date of birth$")
+	public void the_user_entered_MemberID_DateOfBirth() {
+
+		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin.enterIDandBirthDate();
+
+	}
+
+
+	@Then("^I will click next to proceed to the Make a One-time payment page$")
+	public void the_user_clicked_NextButton() {
+
+		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin.clickNext();
+
+	}
 
 }
 
