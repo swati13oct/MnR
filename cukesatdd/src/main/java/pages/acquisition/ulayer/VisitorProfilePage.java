@@ -82,6 +82,15 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css="div.print-back>a:first-child")
 	private WebElement backToPlans;
 	
+	@FindBy(xpath = "//div[@class='multi-year-select']")
+	private WebElement profileMultiYear;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
+	private WebElement profileNxtYrPlans;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	private WebElement profileCrntYrPlans;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -203,6 +212,20 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param plans
 	 */
 	public void deletePlans(String plans) {
+		if(validate(profileMultiYear, 10))
+		{
+			profileNxtYrPlans.click();
+			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
+				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+			else
+				System.out.println("##############No saved plans available for 2021##############");
+			
+			profileCrntYrPlans.click();
+		}
+		else {
+			System.out.println("##############MultiYear not displayed##############");
+			}
+		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
@@ -210,11 +233,12 @@ public class VisitorProfilePage extends UhcDriver {
 					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
 					Thread.sleep(5000);
 				}
-			}else
-				System.out.println("##############No saved plans available here##############");
-		} catch (Exception e) {
+				}
+				else
+					System.out.println("##############No saved plans available here##############");
+		}	catch (Exception e) {
 			e.printStackTrace();
-		}
+			}
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
 	
