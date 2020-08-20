@@ -143,7 +143,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
 	
-	@FindBy(xpath="//div[text()='Your Hospitals']")
+	@FindBy(xpath="//*[contains(@id,'yourhospitalsheading')]")
 	private WebElement yourHospitalsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Hospitals']")
@@ -158,13 +158,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
 	private WebElement HospitalSummaryCoverageHeader;
 
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'provider-name')]")
+	@FindBy(xpath="//tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
 	private WebElement HospitalProviderName;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement HospitalProviderCoverageText;	
 	
-	@FindBy(xpath="//div[text()='Your Doctors']")
+	@FindBy(xpath="//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Doctors']")
@@ -172,16 +172,17 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
+	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
 	private WebElement providerSumamryHeader;
 	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
 	private WebElement providerSumamryHeaderCount;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//th//div[contains(@class,'provider-name')]")
+	@FindBy(xpath="//th//*[contains(@class,'provider-name')]")
 	private WebElement FirstProviderName;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
+	@FindBy(xpath="//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;	
 	
 	@FindBy(xpath="//div[text()='Your Drugs']")
@@ -1073,7 +1074,7 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			if(providers.contains(";")) {
 				String[] provider = providers.split(";");
-				for(int i=0;i<provider.length;i++) {
+				for(int i=0;i<providersList.size()-1;i++) {
 					if(!StringUtils.isNullOrEmpty(providers)) {
 						Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 						System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
@@ -1096,7 +1097,7 @@ public class ComparePlansPage extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for(int i=0;i<drugName.length;i++) {
 				if(!StringUtils.isNullOrEmpty(drugs)) {
-					Assert.assertTrue(drugName[i].contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					Assert.assertTrue(drugs.contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}
 			}
