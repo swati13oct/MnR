@@ -49,16 +49,16 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
 #      | 04-099 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false  | false  |
 #      | 05-100 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | false  | false  |
 
-#	@prod_terminated_ma_6bof7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-#      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | true   |
-#      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | true   | true   |
-
-	@prod_terminated_mapd_6bof7
+	@prod_terminated_ma_6bof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true   |
+#      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | true   |
+      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | PJVANEKRIS65    | MA       | GROUP_TERM_PDnR       | true   | true   |
+
+#	@prod_terminated_mapd_6bof7
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
+#      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true   |
 
 	@prod_active_ma_ind_6bof7 @prod_active_ma_6bof7
 	Examples: 

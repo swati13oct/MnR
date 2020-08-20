@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMapd_P2of7.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMapd_P2of7")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMa_P3of7.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMa_P3of7")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMapd_P2of7.json" }, tags = { "@prod_planAndDocuments06_2of7","@prod_terminated_mapd_2of7" })
-public class RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMapd_P2of7 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMa_P3of7.json" }, tags = { "@prod_planAndDocuments06_3of7","@prod_terminated_ma_3of7" })
+public class RunMRATDDRegressionPlanDocAndResMemAuthProd_P6_TermMa_P3of7 {
 }

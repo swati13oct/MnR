@@ -51,16 +51,16 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 #      | 04-099 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false  | false   | false  | false  |
 #      | 05-100 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | false  | false   | false  | false  |
 
-#	@prod_terminated_ma_2of2
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-#      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | false   | true   | true   |
-#      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | true   | false   | true   | true   |
-
-	@prod_terminated_mapd_2of2
+	@prod_terminated_ma_2of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true    | true   | true   | 
+#      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | false   | true   | true   |
+      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | PJVANEKRIS65    | MA       | GROUP_TERM_PDnR       | true   | false   | true   | true   |
+
+#	@prod_terminated_mapd_2of2
+#	Examples: 
+#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
+#      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true    | true   | true   | 
 
 	@prod_active_ma_ind_2of2 @prod_active_ma_2of2
 	Examples: 
