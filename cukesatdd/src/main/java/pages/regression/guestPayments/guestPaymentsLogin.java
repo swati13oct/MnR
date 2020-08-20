@@ -13,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 
@@ -137,19 +139,90 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 
 	public void validateFindMyID() {
 		helpMeFindMyIdLink.click();
+		
+		Assert.assertTrue("PROBLEM - unable to locate Image on the Find my Id link",guestPaymentsValidate(memberIdCardImage));
+		Assert.assertTrue("PROBLEM - unable to locate text on the Find my Id link",guestPaymentsValidate(textOnFindMyIdPopup));
+		
 		CancelButtononID.click();
 
 	}
 
-	public void enterIDandBirthDate() {
-		memberIdTextfield.sendKeys("123456");
-		dobTextfield.sendKeys("01/01/2000");
+	public void enterIDandBirthDate(String memberID, String dob) {
+		memberIdTextfield.sendKeys(memberID);
+		dobTextfield.sendKeys(dob);
 
 	}
 
-	public void clickNext() {
+	public OneTimeGuestPaymentsPage clickNext() {
+		
 		nextButton.click();
+		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		if (driver.getTitle().contains("Payments")) {
+			return new OneTimeGuestPaymentsPage(driver);
+		}
+		return null;
+	}
 
+	public void clicksNextButton() {
+	
+		nextButton.click();
+		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		
+	}
+
+	public void checkErrorMessage() {
+		
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessage));
+		
+	}
+
+	public void checkErrorMessageFromGPS() {
+		
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageFromGPS));
+		
+	}
+
+	public guestPaymentsLogin clickAndLandOnErrorPage() {
+		nextButton.click();
+		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		if (driver.getTitle().contains("error")) {
+			return new guestPaymentsLogin(driver);
+		}
+		
+		return null;
+	
+	}
+
+	public void verifyDetailsOnErrorPage() {
+		
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageOnErrorPage));
+		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",guestPaymentsValidate(signInLinkOnErrorPage));
+		
+		
+		
+		
+	}
+
+	public void verifySignInLinkShouldNotBePresent() {
+		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",!guestPaymentsValidate(signInLinkOnErrorPage));
+		
+		
+	}
+
+	public HSIDLoginPage clickOnSignInLink() {
+		signInLink.click();
+		
+		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
+		
+		if (driver.getTitle().contains("medicare.uhc.com/")) {
+			return new HSIDLoginPage(driver);
+		}
+		
+		return null;
+		
 	}
 
 }

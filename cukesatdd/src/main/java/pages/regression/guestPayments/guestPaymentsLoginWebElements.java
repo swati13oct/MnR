@@ -68,9 +68,32 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 
 	@FindBy(className= "memberID")
 	public static WebElement MemberID;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement memberIdCardImage;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement textOnFindMyIdPopup;
 
 	@FindBy(className= "memberID") // need to update class id
 	public static WebElement CancelButtononID;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement errorMessage;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement errorMessageFromGPS;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement errorMessageOnErrorPage;
+	
+	@FindBy(className= "memberID") // need to update class id
+	public static WebElement signInLinkOnErrorPage;
+	
+	
+	
+	
+	
 
 	
 
