@@ -636,9 +636,9 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 	boolean validation_Flag = true;
 	//ESRD question validation for MA and DSNP
 
-	if (planType.contains("MA")|| planType.contains("SNP")){
-		if(validate(ESRDQuestion ) && planYear.equalsIgnoreCase("current") ) {
-			
+	if (planType.contains("MA")|| planType.contains("SNP") ){
+		if(validate(ESRDQuestion )) {
+			//&& planYear.equalsIgnoreCase("current") 
 			System.out.println("ESRD question is displayed for MA/DSNP plans in Preliminary Questions Page");
 			esrdYes.click();
 			System.out.println("ESRD question : YES clicked"+esrdYes.isSelected());
