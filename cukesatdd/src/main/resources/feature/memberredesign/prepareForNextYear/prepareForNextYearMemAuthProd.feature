@@ -208,7 +208,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-@abc	@prod_prepareForNextYear03a
+	@prod_prepareForNextYear03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
 	    | 3-01  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
