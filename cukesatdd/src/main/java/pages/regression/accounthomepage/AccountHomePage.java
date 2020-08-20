@@ -370,6 +370,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "main-nav")
 	private WebElement dashboardHeader;
 
+	@FindBy(xpath = "//*[@id='pharmacies_5']")
+	protected List<WebElement> PPPageTab;
+
+	@FindBy(linkText = "Go To Pharmacies & Prescriptions Page")
+	protected WebElement goToPPPage;
+
 	// Terminated view
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
@@ -2952,6 +2958,9 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("Header is displayed", dashboardHeader.isDisplayed());
 	}
 
+	public void validateDashboardURL() {
+		Assert.assertTrue("Dashboard URL is displayed", driver.getCurrentUrl().contains("dashboard"));
+	}
 	public void clickAccountProfile() {
 		if (accountProfile.isDisplayed()) {
 			accountProfile.click();
@@ -3312,6 +3321,23 @@ public class AccountHomePage extends UhcDriver {
 	
 	}
 }
+
+	public void validateNoPPPage() {
+		Assert.assertFalse("PROBLEM - able to locate P&P tab element",
+				validateNoPPpage());
+	}
+
+	public boolean validateNoPPpage() {
+
+		if(PPPageTab.size()>0){
+			return false;
+		}else {
+
+			return true;
+		}
+
+	}
+
 
 	/*
 	 * This method checks that correct pre-Effective message is displayed on
@@ -3994,6 +4020,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//span[@class='hide-mobile ng-scope']")
 	private WebElement viewRecomend;
+
+	@FindBy(xpath = "//h1[contains(text(),'Preeffective Test Harness')]")
+	protected WebElement preeffectiveHeader;
 	
 	/*
 	 * This method validates login on Dashboard
@@ -4005,6 +4034,12 @@ public class AccountHomePage extends UhcDriver {
 		String idCard = viewRecomend.getAttribute("innerText");
 		Assert.assertTrue(idCard.contains("VIEW & PRINT MEMBER ID CARDS"));
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
+	}
+
+	public void validatePreeffectiveHeader() {
+
+		Assert.assertTrue("PROBLEM - unable to locate preeffective Header element",
+				preeffectiveHeader.isDisplayed());
 	}
 	
 	public void moveMouseToElement(WebElement targetElement) {

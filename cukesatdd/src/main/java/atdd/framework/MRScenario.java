@@ -247,11 +247,10 @@ public class MRScenario {
 
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
-
 			} else if ((environment.contains("team-a")
 					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers")))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-uhc-rx"))))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
@@ -371,7 +370,7 @@ public class MRScenario {
 		String url = HSIDDB_URL;
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
-System.out.println("Con established*********");
+			System.out.println("Con established*********");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -384,38 +383,38 @@ System.out.println("Con established*********");
 	}
 
 	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-	//	Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		stmt = con.createStatement();
 		String sql;
-		ResultSet rs1=null;
+		ResultSet rs1 = null;
 		try {
-			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
+					+ "'";
 			rs1 = stmt.executeQuery(sql);
 			rs1.first();
 			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
 			System.out.println(HLTHSF_ID);
 		} catch (Exception e) {
-		System.out.println("Already data not available in the mbr DB");
-		}
-		finally {
+			System.out.println("Already data not available in the mbr DB");
+		} finally {
 			rs1.close();
 			stmt.close();
-			con.close();	
+			con.close();
 		}
-		
+
 	}
 
 	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		try {
-			rs = stmt.executeQuery(
-					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
+					+ lastName + "'");
 			int initialrowcount = 0;
 			while (rs.next()) {
 				initialrowcount = rs.getInt(1);
@@ -424,8 +423,8 @@ System.out.println("Con established*********");
 			stmt.executeUpdate(
 					"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 
-			rs = stmt.executeQuery(
-					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
+					+ lastName + "'");
 			int finalrowcount = 0;
 			while (rs.next()) {
 				finalrowcount = rs.getInt(1);
@@ -445,7 +444,7 @@ System.out.println("Con established*********");
 
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -459,8 +458,8 @@ System.out.println("Con established*********");
 			}
 			System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
 
-			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
-					+ lastName + "'");
+			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
 			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
 					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
 			int finalrowcount = 0;
@@ -473,54 +472,52 @@ System.out.println("Con established*********");
 			} else {
 				System.out.println("Still Records exist in the table: mbr_prtl");
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the mbr_portal DB");
 		}
-	
-		
-		
+
 	}
 
 	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
 			throws SQLException {
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		//Connection con = getPDBDBConnection(props);
+		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		String sql;
-try {
-	sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-	ResultSet rs1 = stmt.executeQuery(sql);
-	rs1.first();
-	String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-	System.out.println(HLTHSF_ID);
-	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	int initialrowcount = 0;
-	while (rs.next()) {
-		initialrowcount = rs.getInt(1);
-	}
-	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
-	stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-	int finalrowcount = 0;
-	while (rs.next()) {
-		finalrowcount = rs.getInt(1);
-	}
-	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
-	if (finalrowcount == 0) {
-		System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
-	} else {
-		System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
-	}	
+		try {
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
+					+ "'";
+			ResultSet rs1 = stmt.executeQuery(sql);
+			rs1.first();
+			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
+			System.out.println(HLTHSF_ID);
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			int initialrowcount = 0;
+			while (rs.next()) {
+				initialrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+			stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+			int finalrowcount = 0;
+			while (rs.next()) {
+				finalrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+			if (finalrowcount == 0) {
+				System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+			} else {
+				System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+			}
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the DB");
 		}
-		
-		
+
 	}
 
 	public void removeMember() {
@@ -583,40 +580,37 @@ try {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
-		System.out.println("Using properties for environment ...."
-		+ propertiesFileToPick);
+		System.out.println("Using properties for environment ...." + propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-		System.out
-		.println("Using CI as default since environment was not passed in !!!");
-		propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+			System.out.println("Using CI as default since environment was not passed in !!!");
+			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
-		// Read properties from classpath
-		StringBuffer propertyFilePath = new StringBuffer(
-		CommonConstants.PROPERTY_FILE_FOLDER);
-		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-		.append(CommonConstants.PROPERTY_FILE_NAME);
-		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
-		.toString());
-		try {
-		prop.load(is);
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-		for (String key : prop.stringPropertyNames()) {
-		String value = prop.getProperty(key);
-		props.put(key, value);
-		}
+			// Read properties from classpath
+			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
+			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+					.append(CommonConstants.PROPERTY_FILE_NAME);
+			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+			try {
+				prop.load(is);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			for (String key : prop.stringPropertyNames()) {
+				String value = prop.getProperty(key);
+				props.put(key, value);
+			}
 
-		if (props.containsKey("Domain")) {
-		domain = props.get("Domain");
-		} else {
+			if (props.containsKey("Domain")) {
+				domain = props.get("Domain");
+			} else {
+				
 		domain = null;
 		}
 		return props;
 		}else{
 		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
@@ -624,11 +618,9 @@ try {
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
 		System.out.println("env chosen is: "+ environment);
 		System.out.println("domain chosen is: "+ domain);
-
-		return null;
+			return null;
 		}
 	}
-
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		formCompositeDesiredAttributes(desiredAttributes);
@@ -724,32 +716,33 @@ try {
 
 	public WebDriver getWebDriver() {
 
-		
-		  
-		  isSauceLabSelected = true; DesiredCapabilities capabilities =
-		  DesiredCapabilities.chrome();
-		  
-		  capabilities.setCapability("platform", "Windows 7");
-		  capabilities.setCapability("version", "66.0");
-		  capabilities.setCapability("screenResolution", "1920x1080");
-		  //capabilities.setCapability("parent-tunnel", "sauce_admin");
-		  capabilities.setCapability("parent-tunnel", "optumtest");
-		  capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-		  //capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-		  //capabilities.setCapability("name", "MRATDD-TestSuite");
-		  //capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
-		  capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" +
-		  System.getenv("RUNNER_NUMBER")); String jobName = "VBF Execution - Using " +
-		  capabilities.getBrowserName() + " in  " + System.getProperty("environment")
-		  +" environment"; capabilities.setCapability("name", jobName);
-		  capabilities.setCapability("recordMp4", true); try { webDriver = new
-		  RemoteWebDriver(new URL(URL), capabilities); MRScenario.sessionId =
-		  ((RemoteWebDriver) webDriver).getSessionId().toString();
-		  System.out.println("Session ID:" + (((RemoteWebDriver)
-		  webDriver).getSessionId()).toString()); getJobURL(getSessionId()); } catch
-		  (MalformedURLException e) { // TODO Auto-generated catch block
-		  e.printStackTrace(); } return webDriver;
-		 
+		isSauceLabSelected = true;
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+		capabilities.setCapability("platform", "Windows 7");
+		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("screenResolution", "1920x1080");
+		// capabilities.setCapability("parent-tunnel", "sauce_admin");
+		capabilities.setCapability("parent-tunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+		// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+		// capabilities.setCapability("name", "MRATDD-TestSuite");
+		// capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  "
+				+ System.getProperty("environment") + " environment";
+		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
+		try {
+			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+			getJobURL(getSessionId());
+		} catch (MalformedURLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return webDriver;
+
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -994,16 +987,16 @@ try {
 
 			webDriver.get("google.com");
 
-			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-				Map<String, Object> chromeOptions = new HashMap<String, Object>();
-				//chromeOptions.put("binary", pathToBinary);
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_79.0.3945.16\\chromedriver.exe");
-				webDriver = new ChromeDriver();
-				saveBean(CommonConstants.WEBDRIVER, webDriver);
-				return webDriver;
+		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+			Map<String, Object> chromeOptions = new HashMap<String, Object>();
+			// chromeOptions.put("binary", pathToBinary);
+			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+			// System.setProperty("webdriver.chrome.driver", pathToBinary);
+			System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chromedriver_win32\\chromedriver.exe");
+			webDriver = new ChromeDriver();
+			saveBean(CommonConstants.WEBDRIVER, webDriver);
+			return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1217,7 +1210,7 @@ try {
 		}
 		return mobileDriver;
 	}
-	
+
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
@@ -1238,7 +1231,6 @@ try {
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
 			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
-						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");
 			
@@ -1248,7 +1240,7 @@ try {
 			System.out.println("Oracle Database Connection not established");
 		}
 
-	//	System.out.println("Connected to: " + env.toUpperCase() + " database");
+		// System.out.println("Connected to: " + env.toUpperCase() + " database");
 
 		return con;
 

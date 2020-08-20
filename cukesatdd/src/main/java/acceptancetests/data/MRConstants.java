@@ -407,7 +407,7 @@ public class MRConstants {
   public static String PROV_NAME = "";
   public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";
   //public static final String AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
- }
+  
+  public static final String D_Rx_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
 
-	    
- 
+ }

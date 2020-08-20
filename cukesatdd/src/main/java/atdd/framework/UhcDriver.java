@@ -521,6 +521,10 @@ try {
 				break;
 		}
 	}
+	
+	public int countOfNewWindowTab() {
+		return driver.getWindowHandles().size();
+	}
 
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1
