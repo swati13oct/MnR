@@ -1074,7 +1074,7 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			if(providers.contains(";")) {
 				String[] provider = providers.split(";");
-				for(int i=0;i<provider.length;i++) {
+				for(int i=0;i<providersList.size()-1;i++) {
 					if(!StringUtils.isNullOrEmpty(providers)) {
 						Assert.assertTrue(provider[i].split(":")[0].contains(providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 						System.out.println("#########"+providersList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
@@ -1097,7 +1097,7 @@ public class ComparePlansPage extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for(int i=0;i<drugName.length;i++) {
 				if(!StringUtils.isNullOrEmpty(drugs)) {
-					Assert.assertTrue(drugName[i].contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					Assert.assertTrue(drugs.contains(drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}
 			}
