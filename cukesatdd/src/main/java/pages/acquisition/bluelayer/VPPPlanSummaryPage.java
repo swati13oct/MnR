@@ -1396,7 +1396,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String mproviderName = ProviderName.getText().trim();
 		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
 		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
-		Assert.assertEquals(mproviderName, rallyProviderName);
+		Assert.assertTrue(mproviderName.contains(rallyProviderName));
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
