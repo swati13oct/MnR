@@ -60,7 +60,7 @@ public class DCEPage extends UhcDriver {
 	@FindBy(css = "#drugModal #drug-alt-search-button")
 	private WebElement modalcontinue;
 
-	@FindBy(css = "//button[contains(.,'Remove')]")
+	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
 	
 	// Dosage Modal
@@ -226,9 +226,10 @@ public class DCEPage extends UhcDriver {
 	}
 	
 	public void deleteAllDrugs() {
-		for(WebElement del:drugDeleteButtons) {
-			del.click();
-			threadsleep(1000);
+		int drugLimit = drugDeleteButtons.size(); 
+		for(int i=0;i<drugLimit;i++) {
+			drugDeleteButtons.get(0).click();
+			threadsleep(2000);
 		}
 	}
 

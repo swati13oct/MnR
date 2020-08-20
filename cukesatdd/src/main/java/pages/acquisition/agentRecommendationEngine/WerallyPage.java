@@ -246,24 +246,22 @@ public class WerallyPage extends UhcDriver {
 	
 	public void werallyDeleteAll() {
 		System.out.println("Deleting all Providers");
-		try {
-			validate(welcomeTilte, 5);
+		if (validate(getStarted, 5))
 			getStarted.click();
-		} catch (Exception e) {
-			System.out.println("No Get Started button available in werally");
-		}
 		validate(viewSavedProviderbutton, 30);
 		viewSavedProviderbutton.click();
-		for (WebElement elem:deleteLinks) {
-			elem.click();
-			threadsleep(1000);
+		threadsleep(3000);
+		int docLimit = deleteLinks.size(); 
+		for(int i=0;i<docLimit;i++) {
+			deleteLinks.get(0).click();
+			threadsleep(2000);
 		}
-		validate(findCarebutton,10);
+		validate(findCarebutton, 10);
 		findCarebutton.click();
 		threadsleep(2000);
 		validate(viewSavedProviderbutton, 30);
 		viewSavedProviderbutton.click();
-		threadsleep(2000); 
+		threadsleep(2000);
 		validate(checkProviderCoveragebutton, 30);
 		checkProviderCoveragebutton.click();
 		validate(returnToEnrollment, 30);

@@ -760,6 +760,7 @@ public class AREPlanRanking extends UhcDriver {
 
 	public void OriginalPlanOrder(String rankOptions) {
 		System.out.println("Fetching Original PlanOrder in plancompare page");
+		actionMoveTo(planRankingDropdown);
 		planRankingDropdown.click();
 		drugDocDisable(rankOptions, false);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -991,7 +992,8 @@ public class AREPlanRanking extends UhcDriver {
 			DCEPage areDce = new DCEPage(driver);
 			areDce.deleteAllDrugs();
 			areDce.returnToCompare();
-			validate(planRankingDropdown,30);
+			validate(planRankingDropdown,60);
+			actionMoveTo(planRankingDropdown);
 		}
 	}
 
@@ -1004,7 +1006,14 @@ public class AREPlanRanking extends UhcDriver {
 			System.out.println(curWindow);
 			werally.validateLinksanotherWindow(curWindow, "Delete All", "");
 			validate(planRankingDropdown,30);
+			actionMoveTo(planRankingDropdown);
 		}
+	}
+	
+	public void actionMoveTo(WebElement elem) {
+		Actions action = new Actions(driver);
+		action.moveToElement(elem).perform();
+		threadsleep(1000);
 	}
 
 }

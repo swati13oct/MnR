@@ -83,9 +83,10 @@ public class AgentRecommendationEngineStepDefinition {
 	public void drugs_plan_compare_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking addDrug = new AREPlanRanking(wd);
-		addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
-		addDrug.DeleteinDCE(inputValues.get("Drugs Names"));
-		addDrug.returnToPlanCompare();
+		//addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
+		//addDrug.DeleteinDCE(inputValues.get("Drugs Names"));
+		//addDrug.returnToPlanCompare();
+		addDrug.checkDeleteAllDrugs();
 	}
 
 	@When("^user adds providers in plan compare page$")
@@ -99,8 +100,9 @@ public class AgentRecommendationEngineStepDefinition {
 	public void doc_plan_compare_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking addDrug = new AREPlanRanking(wd);
-		addDrug.DoctorsInPlanCompare(inputValues.get("Doctors Names"));
-		addDrug.DeleteinWerally(inputValues.get("Delete Doctors"));
+		//addDrug.DoctorsInPlanCompare(inputValues.get("Doctors Names"));
+		//addDrug.DeleteinWerally(inputValues.get("Delete Doctors"));
+		addDrug.checkDeleteAllDoctors();
 	}
 
 	@Then("^agent validates view plan details in plancompare page$")
@@ -162,6 +164,8 @@ public class AgentRecommendationEngineStepDefinition {
 	public void original_planOrder(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.checkDeleteAllDoctors();
+		planRank.checkDeleteAllDrugs();
 		planRank.OriginalPlanOrder(inputValues.get("Ranking Options"));
 	}
 	
