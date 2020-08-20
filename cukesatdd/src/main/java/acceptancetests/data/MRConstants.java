@@ -407,6 +407,14 @@ public class MRConstants {
   public static String PROV_NAME = "";
   public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";
   //public static final String AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
+  public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedicare.uhc.com/hwp";
+  public static final String AARP_DEEPLINK_URL_Pharmacy = "http://stage-myaarpmedicare.uhc.com/hwp";
+  public static final String PCP_DEEPLINK_URL_Pharmacy = "http://stage-mypcpmedicare.uhc.com/hwp";
+  public static final String Medica_DEEPLINK_URL_Pharmacy = "http://stage-mymedicamedicare.uhc.com/hwp";
+  public static final String UHC_DEEPLINK_URL_VirtualVisit = "http://stage-myuhcmedicare.uhc.com/virtualvisits";
+  public static final String AARP_DEEPLINK_URL_VirtualVisit = "http://stage-myaarpmedicare.uhc.com/virtualvisits";
+  public static final String PCP_DEEPLINK_URL_VirtualVisit = "http://stage-mypcpmedicare.uhc.com/virtualvisits";
+  public static final String Medica_DEEPLINK_URL_VirtualVisit = "http://stage-mymedicamedicare.uhc.com/virtualvisits";
  }
 
 	    

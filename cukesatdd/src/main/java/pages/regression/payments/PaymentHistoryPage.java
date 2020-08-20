@@ -2111,11 +2111,10 @@ public class PaymentHistoryPage extends UhcDriver {
 		/*navigating to signout */
 		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
 		//https://www.medicare.uhc.com/aarp/member/logout.html
+		if (validate(logincontainer)) {
+			System.out.println("Sign in  link is displayed");}
 		 System.out.println("title is: "+driver.getTitle());
 		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
-		 validate(logincontainer);
-		 if (validate(logincontainer)) {
-				System.out.println("Sign in  link is displayed");}
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
