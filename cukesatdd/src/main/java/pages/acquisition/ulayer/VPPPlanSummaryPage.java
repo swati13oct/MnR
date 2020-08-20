@@ -1023,13 +1023,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
-		String mproviderName=ProviderName.getText().trim();
-		String [] mpname = mproviderName.split("\n");
-		
-		mproviderName = mpname[0].replace(".", "").replace(",", "").trim();
-		rallyProviderName =rallyProviderName.replace(".", "").replace(",", "");
 
-		Assert.assertEquals(mproviderName,rallyProviderName);
+		String mproviderName=ProviderName.getText().trim().split("\n")[0];
+		
+		  mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		  rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		 
+		Assert.assertTrue(mproviderName.contains(rallyProviderName));
+
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
@@ -3842,6 +3843,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			System.out.println("Scrolled...");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			waitforElementNew(agentModeBanner);
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
