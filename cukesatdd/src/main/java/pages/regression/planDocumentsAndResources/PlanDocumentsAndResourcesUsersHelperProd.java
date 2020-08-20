@@ -2809,15 +2809,15 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Other Resources Part1of2")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
-				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
-				//targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
-				//targetTestDocList.add("Commitment to quality");
-				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
-				////keep targetTestDocList.add("Step Therapy for Part B Drugs");
-				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
-				targetTestDocList.add("Seasonal flu shot information");
+				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
+				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
+				targetTestDocList.add("Commitment to quality");
+				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
+				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Member rights and responsibilities");
+				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Other Resources Part2of2")) {
