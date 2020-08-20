@@ -414,9 +414,29 @@ public class RefillCheckoutSummaryStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfRefillMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+			}
+		}
+		/*
+		 * while (indexOfRefillMedication.size() == 0) { pnpPg.clickOnNextPageArrow();
+		 * indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed(); }
+		 */
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRefill();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
+
+		/*
+		 * pnpPg.waitTillMedCabLoads(); listOfMedicationDetail =
+		 * pnpPg.fetchesMedicationInformationFrRefill(); int medicationToBeClicked =
+		 * (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		 * pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
+		 */
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -490,6 +510,31 @@ public class RefillCheckoutSummaryStepDefinition {
 		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
 				checkoutSumaryPg.validateConfirmationPageHeader());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@When("^user clicks Refill Medication call to action button to navigate to checkout page$")
+	public void user_clicks_Refill_Medication_call_to_action_button_to_navigate_to_checkout_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfRefillMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+			}
+		}
+
+		/*
+		 * while (indexOfRefillMedication.size() == 0) { pnpPg.clickOnNextPageArrow();
+		 * indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed(); }
+		 */
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRefill();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
 }
