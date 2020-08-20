@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
-		retryCount=0, 
+		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
 		jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json",
