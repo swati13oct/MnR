@@ -4014,7 +4014,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 			}
 			
-			validatePlanSummary();
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
 			//Validate Drugs
