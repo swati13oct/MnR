@@ -1030,7 +1030,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", CurrentMedicationsHeader);
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
-				pnpValidate(CurrentMedicationsHeader, 30));
+			pnpValidate(CurrentMedicationsHeader,50));
 	}
 
 	public void validateOrderStatusHeader() {

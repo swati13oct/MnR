@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -32,11 +31,15 @@ public class RefillOrderConfirmationStepDefinition {
 
 	public static List<Object> listOfMedicationDetail = new ArrayList<>();
 	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
-	String refillConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text(),'"
-			+ MedicationName.toLowerCase()
-			+ "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status' and contains(text(),'request received')]";
-
+	/*
+	 * String refillConfirmationXpath =
+	 * "//a[@data-testid='medication-data-name' and contains(text(),'" +
+	 * MedicationName.toLowerCase() +
+	 * "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status' and contains(text(),'request received')]"
+	 * ;
+	 */
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -233,12 +236,23 @@ public class RefillOrderConfirmationStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
+		String[] array = MedicatioNameToBeSearchedOnP_P.split(" ");
+		String firstWord = array[0].trim();
+		String lastWord = array[array.length - 1].trim();
+		System.out.println("First Word " + firstWord);
+		System.out.println("Last Word " + lastWord);
 		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
 		int count = 0;
 		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
-		for (int i = 0; i < countOfPage - 1; i++) {
+		for (int i = 0; i < countOfPage; i++) {
 			for (int j = 0; j < DrugNameList.size(); j++) {
-				if (DrugNameList.get(j).trim().equalsIgnoreCase(MedicationName)) {
+				System.out.println("Medication Name : " + MedicatioNameToBeSearchedOnP_P);
+				if (DrugNameList.get(j).trim().contains(firstWord) && DrugNameList.get(j).trim().contains(lastWord)) {
+					System.out.println("Inside If Statment : Medication Identified");
+					String refillConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text(),'"
+							+ firstWord.toLowerCase() + "') and contains(text(),'" + lastWord
+							+ "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status' and contains(text(),'request received')]";
+					System.out.println(refillConfirmationXpath);
 					WebElement xpath = pnpPg.getDriver().findElement(By.xpath(refillConfirmationXpath));
 					Assert.assertTrue("PROBLEM : Refill Completion order status is not updated a request received",
 							pnpPg.validate(xpath, 30));
@@ -253,18 +267,77 @@ public class RefillOrderConfirmationStepDefinition {
 				break;
 			}
 		}
-
-		/*
-		 * while (count == 0) { for (int i = 0; i < DrugNameList.size(); i++) { if
-		 * (DrugNameList.contains(MedicationName)) { WebElement xpath =
-		 * pnpPg.driver.findElement(By.xpath(refillConfirmationXpath)); Assert.
-		 * assertTrue("PROBLEM : Refill Completion order status is not updated a request received"
-		 * , pnpPg.validate(xpath, 30)); } } if (count == 0) {
-		 * pnpPg.clickOnNextPageArrow(); DrugNameList =
-		 * pnpPg.getDrugNameListValueOnMyMedication(); } }
-		 */
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+
+	// getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+	// pnpPg);
+
+	/*
+	 * for (int i = 0; i < countOfPage-1; i++) { for (int j = 0; j <
+	 * DrugNameList.size(); j++) { if
+	 * (DrugNameList.get(j).trim().equalsIgnoreCase(MedicationName)) { WebElement
+	 * xpath = pnpPg.getDriver().findElement(By.xpath(refillConfirmationXpath));
+	 * Assert.
+	 * assertTrue("PROBLEM : Refill Completion order status is not updated a request received"
+	 * , pnpPg.validate(xpath, 30)); count = 1; break; } } if (count == 0) {
+	 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+	 * pnpPg.getDrugNameListValueOnMyMedication(); } else { break; } }
+	 */
+
+	/*
+	 * while (count == 0) { for (int i = 0; i < DrugNameList.size(); i++) { if
+	 * (DrugNameList.contains(MedicationName)) { WebElement xpath =
+	 * pnpPg.driver.findElement(By.xpath(refillConfirmationXpath)); Assert.
+	 * assertTrue("PROBLEM : Refill Completion order status is not updated a request received"
+	 * , pnpPg.validate(xpath, 30)); } } if (count == 0) {
+	 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+	 * pnpPg.getDrugNameListValueOnMyMedication(); } }
+	 */
+	// getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+	// pnpPg);
+
+	/*
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE); pnpPg.waitTillMedCabLoads();
+	 * pnpPg.clickOnViewAllMedicationsLink(); List<String> DrugNameList =
+	 * pnpPg.getDrugNameListValueOnMyMedication(); String[] array =
+	 * MedicatioNameToBeSearchedOnP_P.split(" "); String firstWord =
+	 * array[0].trim(); String lastWord = array[array.length - 1].trim();
+	 * System.out.println("First Word " + firstWord);
+	 * System.out.println("Last Word " + lastWord);
+	 * 
+	 * int count = 0; int countOfPage =
+	 * Integer.parseInt(pnpPg.getCountOfMyMedPage()); for (int i = 0; i <
+	 * countOfPage; i++) { for (int j = 0; j < DrugNameList.size(); j++) {
+	 * System.out.println("Medication Name : " + MedicatioNameToBeSearchedOnP_P); if
+	 * (DrugNameList.get(j).trim().contains(firstWord) &&
+	 * DrugNameList.get(j).trim().contains(lastWord)) {
+	 * System.out.println("Inside If Statment : Medication Identified"); String
+	 * renewConfirmationXpath =
+	 * "//a[@data-testid='medication-data-name' and contains(text(),'" +
+	 * firstWord.toLowerCase() + "') and contains(text(),'" + lastWord +
+	 * "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status']";
+	 * System.out.println(renewConfirmationXpath); WebElement xpath =
+	 * pnpPg.getDriver().findElement(By.xpath(renewConfirmationXpath)); Assert.
+	 * assertTrue("PROBLEM : Refill Completion order status is not updated a request received"
+	 * , pnpPg.validate(xpath, 30)); count = 1; break; } } if (count == 0) {
+	 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+	 * pnpPg.getDrugNameListValueOnMyMedication(); } else { break; } }
+	 */
+
+	/*
+	 * int count = 0; while (count != 0) { for (int i = 0; i < DrugNameList.size();
+	 * i++) { if (DrugNameList.contains(MedicationName)) { WebElement xpath =
+	 * pnpPg.driver.findElement(By.xpath(renewConfirmationXpath)); Assert.
+	 * assertTrue("PROBLEM : Renew Completion order status is not updated a request received"
+	 * , pnpPg.validate(xpath, 30)); } } if (count == 0) {
+	 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+	 * pnpPg.getDrugNameListValueOnMyMedication(); } }
+	 */
+	// getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+	// pnpPg);
 
 	@When("^user fetches medication information and clicks on Refill Medication call to action button from My Medication$")
 	public void user_clicks_Refill_Medication_call_to_action_button_from_My_Medication() throws Throwable {
@@ -286,6 +359,7 @@ public class RefillOrderConfirmationStepDefinition {
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRefill();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		MedicationName = listOfMedicationDetail.get(0).toString();
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		System.out.println("Medication Name eligilable for refill medication is" + MedicationName);
 		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
