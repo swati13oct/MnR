@@ -1,6 +1,6 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 14 to 21
+Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 14 to 26
 
-  #Test Case 14 - Test data needed - Any AARP MAPD Plan member
+  #Test Case 14 - Test data needed - Any AARP MAPD Plan member - Error message for multiple payments in a day
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 14 - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -41,7 +41,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
       | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 50025629105 | OneTime     |
 
-  #Test Case 15
+  #Test Case 15 - Member Auth - Error message on submitting payment - Edit Recurring EFT
   @regressionMember
   Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 15 - To validate the unauthorized error message in Edit EFT Payment flow for Member Auth User
     Given the user is on member auth login flow page
@@ -69,7 +69,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | 15118 | qavgogine | qavgogine | recurringpayment001 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  #Test Case 16 - Any member will work
+  #Test Case 16 - Any member will work - Member Auth - Error message on submitting payment - One time EFT
   @regressionMember
   Scenario Outline: TID: <TID> -MemUserName: <member> - Test Case 16 - To validate the error message when memberauth user tries to submit oneTime EFT Payment
     Given the user is on member auth login flow page
@@ -100,7 +100,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
   #Test Case 17 - COMBO member - Needs a SHIP/HIP member with Setup Recurring Payment button and a Fed MAPD/PDP Plan member
   @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 17 - Verify Payment Submission for Combo member - Recurrung EFT for SHIP and One Time EFT for Federal
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 17 - Verify Payment Submission for Fed+SHIP Combo member - Recurrung EFT for SHIP and One Time EFT for Federal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -186,6 +186,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Examples: 
       | UID       | planType | memberType                |
       | US1449078 | MAPD     | UpdateRecurrStop_Payments |
+
+
 
   #Test Case 21 -Any member will work
   @regressionMember
@@ -347,3 +349,49 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Examples: 
       | TID   | planType | memberType       | copayCategory | Test Scenario                          |
       | XXXXX | MAPD     | ACTIVEIndPayment | NON LIS       | Federal member with Total Amount Due>0 |
+      
+      
+      
+  #Test Case 27 - Payment flow  for Fed+Fed - Active Group PDP + Active Group SSUP member - Submit One time EFT for both plans
+  @regressionMember
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 27 -Verify payment submission for Fed+Fed - Active Group PDP + Active Group SSUP member - Submit One time EFT for both plans
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    When the user clicks on Premium Payments on Header 
+    And user clicks on Make one time payment on payment overview page for plan 1
+    And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
+      | Amount to be paid          | <Amount>           |
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+    And the user moves to Go to Payment History Page button
+    And user clicks on Make one time payment on payment overview page for plan 2
+    And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
+      | Amount to be paid          | <Amount>           |
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+  
+     Examples: 
+      | planType          | memberType                     | copayCategory |routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
+      | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 50025629105 | OneTime     |
