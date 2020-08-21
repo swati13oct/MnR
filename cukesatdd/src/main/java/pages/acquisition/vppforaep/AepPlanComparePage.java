@@ -238,7 +238,7 @@ public class AepPlanComparePage extends UhcDriver {
 		    return "Referral to Specialist required?";
 
 		if(currentColName.equalsIgnoreCase("Outpatient Hospital Services"))
-		    return "Outpatient Hospital Services (includes observation services)";
+		    return "Outpatient Hospital Services" +"\n"+"(includes observation services)";
 
 		return  currentColName;
 	}

@@ -350,15 +350,14 @@ public class AepPlanDetailsPage extends UhcDriver {
 			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 		//replace all the next lines and spaces from the string
 			
 			if(key.contains("Passport"))
-				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol 
-			
+				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol
+
 			key = key.toLowerCase(); 
 			columnName = columnName.toLowerCase();
 
-			if(columnName.startsWith("Tier") && !columnName.contains(":"))
-			{
+			if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
 				key = key.replace(":","");
-			}
+
 			
 			if(key.endsWith("1"))
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
