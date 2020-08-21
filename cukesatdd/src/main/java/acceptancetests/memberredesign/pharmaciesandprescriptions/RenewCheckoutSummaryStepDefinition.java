@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.pharmaciesandprescriptions.CheckOutSummaryPage;
@@ -53,4 +54,50 @@ public class RenewCheckoutSummaryStepDefinition {
 		Assert.assertTrue("PROBLEM -Day Supply not available", checkoutSumaryPg.validateDaySupplyForRenew());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
+
+	/*
+	 * @When("^user clicks the Renew Medication call to action button$") public void
+	 * user_clicks_the_Renew_Medication_call_to_action_button() throws Throwable {
+	 * PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage)
+	 * getLoginScenario() .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+	 * pnpPg.clickOnRenewMedicationCTAOnCurrentMedications();
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
+
+	@When("^user clicks Renew Medication call to action button to navigate to checkout page$")
+	public void user_clicks_Renew_Medication_call_to_action_button_to_navigate_to_checkout_page() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfRenewMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+			}
+		}
+
+		/*
+		 * while (indexOfRefillMedication.size() == 0) { pnpPg.clickOnNextPageArrow();
+		 * indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed(); }
+		 */
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user will see the price of the shipping for renew$")
+	public void user_will_see_the_price_of_the_shipping_for_renew() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM -Shipping Price under Order Summary  not available",
+				checkoutSumaryPg.validateShippingFeeUnderOrderSummaryForRenew());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
 }
