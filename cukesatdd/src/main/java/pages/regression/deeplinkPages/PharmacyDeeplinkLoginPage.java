@@ -23,7 +23,7 @@ import pages.regression.login.ConfirmSecurityQuestion;
  * @author pminhas
  *
  */
-public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
+public class PharmacyDeeplinkLoginPage extends UhcDriver {
 
 	@FindBy(xpath="//*[contains(@id,'submitBtn')]")
 	private static  WebElement signIn;
@@ -37,6 +37,8 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
+	@FindBy (xpath="//div[@class='col']//a[@class='btn btn-outline-primary'][contains(text(),'Continue')]")
+	private static  WebElement conti;
 	
 	@FindBy(xpath = "(//*[contains(@class,'btn btn-outline-primary')])[1]")
 	private WebElement homePageNotice;
@@ -46,10 +48,17 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
+	
 	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
 	protected WebElement homePageNotice4;
 
-	public healthwellnessDeepLinkLoginPageSHIP(WebDriver driver) {
+	@FindBy(id = "details-button")
+	protected WebElement proxyPageAdvancedButton;
+	
+	@FindBy(id = "proceed-link")
+	protected WebElement proxyPageProceedLink;
+	
+	public PharmacyDeeplinkLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -60,25 +69,46 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 				
 	}
 	//page from MR constants 	
-			private static String AARP_HAWL = MRConstants.AARP_HAWL;
+			private static String UHC_DEEPLINK_URL_Pharmacy = MRConstants.UHC_DEEPLINK_URL_Pharmacy;
+			private static String AARP_DEEPLINK_URL_Pharmacy = MRConstants.AARP_DEEPLINK_URL_Pharmacy;
+			private static String PCP_DEEPLINK_URL_Pharmacy = MRConstants.PCP_DEEPLINK_URL_Pharmacy;
+			private static String Medica_DEEPLINK_URL_Pharmacy = MRConstants.Medica_DEEPLINK_URL_Pharmacy;
 			
-			 /*This method will open deep link page */
-			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(){
-				start(AARP_HAWL);
+			 /*This method will open pharmacy deep link pages */
+			public PharmacyDeeplinkLoginPage navigateToLoginURL(String brand){
+				switch(brand) {
+					case "UHC" :
+						start(UHC_DEEPLINK_URL_Pharmacy);
+						break;
+					case "AARP" :
+						start(AARP_DEEPLINK_URL_Pharmacy);
+						break;
+					case "PCP" :
+						start(PCP_DEEPLINK_URL_Pharmacy);
+						break;
+					case "Medica" :
+						start(Medica_DEEPLINK_URL_Pharmacy);
+						break;
+				}
 				driver.manage().deleteAllCookies();
 				
 				try {
 					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-				return null;
+					if(proxyPageAdvancedButton.isDisplayed()) {
+						proxyPageAdvancedButton.click();
+						CommonUtility.waitForPageLoadNewForClick(driver, proxyPageProceedLink, 30);
+						proxyPageProceedLink.click();
+					}
+				} catch (Exception e) {
+					System.out.println("proxy page not displayed");
 				}
+				return null;
+			}
 			
 			// This method validated the elements on the DEEPLINK page 
 			public void validatePageElements(){
 				System.out.println(driver.getCurrentUrl());
+				CommonUtility.waitForPageLoadNewForClick(driver, mnrSignInButton, 30);
 				mnrSignInButton.click();
 				validateNew(username);
 				validateNew(password);
@@ -127,24 +157,6 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 							System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
 							CommonUtility.checkPageIsReadyNew(driver);
 						}
-						//note: do not remove wait, need to give it enough time for the dashboard or error page to load
-						System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
-												
-						try {
-							CommonUtility.checkPageIsReadyNew(driver);
-						} catch (NullPointerException  e) {
-							System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
-							CommonUtility.checkPageIsReadyNew(driver);
-						}
-						//note: do not remove wait, need to give it enough time for the dashboard or error page to load
-						System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
-												
-						try {
-							CommonUtility.checkPageIsReadyNew(driver);
-						} catch (NullPointerException  e) {
-							System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
-							CommonUtility.checkPageIsReadyNew(driver);
-						}
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 								|| MRScenario.environment.equalsIgnoreCase("prod")
@@ -173,6 +185,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 										homePageNotice3.click();
 										CommonUtility.checkPageIsReady(driver);
 									}
+									
 									Thread.sleep(3000);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
@@ -180,6 +193,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 								}
 							} else {
 								System.out.println("COVID 19 Banner page did not appear");
+								System.out.println(driver.getCurrentUrl());	
 							}
 							if (driver.getCurrentUrl().contains("/no-email.html")) {
 								System.out.println("No email page has appeared");
@@ -197,15 +211,12 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 							} else {
 								System.out.println("NO emmail page did not appear");
 							}
-						
-						
+											
 					return;
-						}
-					}
-				}
+						}}}
 					
 				
-				@FindBy (xpath="//h1[@class='hw-header-h1']")
+				@FindBy (xpath="//h1[@class='main-heading margin-none']")
                 private WebElement textonpage;
 				
 				/**
@@ -232,34 +243,26 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 						counter++;
 					} while (counter < 2);
 				}				
-				
-				public boolean validateHealthWellnessPage() {
+								
+				public boolean validatePharmacyPage() {
 					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);	
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					validateNew(textonpage);
+					CommonUtility.checkPageIsReadyNew(driver);	
+					//validateNew(textonpage);
 					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-					
-					if (driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best?deeplink=true")) 
-					{
-						//System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on health and wellness deeplink Page **");
-						System.out.println("*** PageTitle ***" + driver.getTitle());
-						//Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare™ is available now."));
-						Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare"));
-						return true;
-						} else {
-							Assert.fail("The element " + textonpage.getText() + "is not found");
-						}
-									
-						return true;	
+					System.out.println("*** Page title ***" + driver.getTitle());
+					if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+						Assert.assertTrue(driver.getTitle().contains("M&R Pharmacy"));
+					} else {
+							Assert.fail("Pharmacy page is not loaded through deeplink");
 					}
-				
+					return true;
+				}
 				
 }
 

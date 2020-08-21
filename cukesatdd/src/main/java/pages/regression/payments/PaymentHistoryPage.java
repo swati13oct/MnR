@@ -1175,6 +1175,42 @@ public class PaymentHistoryPage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan1() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan1, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan1.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan2() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan2, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan2.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
 
 	public SetUpRecurringPage clickOnSetUPAutomaticPayment() throws Exception {
 		Thread.sleep(20000);
@@ -2127,11 +2163,10 @@ public class PaymentHistoryPage extends UhcDriver {
 		/*navigating to signout */
 		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
 		//https://www.medicare.uhc.com/aarp/member/logout.html
+		if (validate(logincontainer)) {
+			System.out.println("Sign in  link is displayed");}
 		 System.out.println("title is: "+driver.getTitle());
 		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
-		 validate(logincontainer);
-		 if (validate(logincontainer)) {
-				System.out.println("Sign in  link is displayed");}
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
