@@ -308,7 +308,7 @@ public class MemberAuthPage extends UhcDriver {
 	public AccountHomePage userSelectsMemberEntered()  {
 		checkModelPopup(driver, 2);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(2, TimeUnit.MINUTES);
 		try {
 
 			// waitforElement(MemberPopUpLogin);
