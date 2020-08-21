@@ -317,6 +317,7 @@ public class MemberAuthPage extends UhcDriver {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
+			Assert.assertTrue("PROBLEM - unable to locate MemberPopUpLogin", validate(MemberPopUpLogin));
 			if (MemberPopUpLogin.isDisplayed()) {
 				System.out.println("Pop up Login Button is displayed");
 				try {
@@ -417,12 +418,15 @@ public class MemberAuthPage extends UhcDriver {
 						TestHarness.checkForIPerceptionModel(driver);
 						return new AccountHomePage(driver);
 					}
-				} else
+				} else {
+					Assert.assertTrue("PROBLEM - CSR Dashboard Page is NOT displayed for the Member", false);
 					System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+				}
 				return null;
 
 			} else {
-				System.out.println("not able to switch to new window");
+				Assert.assertTrue("PROBLEM - not able to switch to new window", false);
+				//tbd System.out.println("not able to switch to new window");
 				return null;
 			}
 		} catch (TimeoutException e) {
