@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionRenewCheckoutSummary.json",deta
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRenewCheckoutSummary")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/RenewCheckoutSummary.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRenewCheckoutSummary.json" }, tags = { "@F484041" }, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRenewCheckoutSummary.json" }, tags = { "@Regression" }, monochrome=true)
 public class RunMRATDDRegressionRenewCheckoutSummary {
 
 }
