@@ -388,9 +388,9 @@ public class TestHarness extends UhcDriver {
 					TestHarnesspaymentsLink.click();
 				} catch (Exception e) {
 					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
+					TestHarness.checkForIPerceptionModel(driver);
 					premiumPaymentTabOnHeader.click();
 				}
-				//TestHarnesspaymentsLink.click();
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
