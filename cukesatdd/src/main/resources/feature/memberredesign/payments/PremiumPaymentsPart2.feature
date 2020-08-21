@@ -1,4 +1,4 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test cases 7 to 13
+Feature: 1.19 Verify the premium payment flows on member portal - Part 2 - Test cases 7 to 13
 
   #Test Case 07
   @regressionMember
