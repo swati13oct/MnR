@@ -780,15 +780,16 @@ public class AREPlanRanking extends UhcDriver {
 			planStartCount = 1;
 //			Assert.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
-		List<String> newplansDetails = getPlanSectionDetails();
-
-		// Validate best match Text max of 4
-		int j = 1, k = planStartCount;
-		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
-					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
-			j++;
+		List<String> newplansDetails = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (WebElement elem : planNameSection) {
+			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
+			String val = planName.trim().toUpperCase().replace(" ", "").split("SAVEPLAN")[0].split("CLOSE")[0]
+					.split("\n")[0];
+			newplansDetails.add(val);
 		}
+		System.out.println(newplansDetails);
+		
 
 		// Validate Ranking Order
 

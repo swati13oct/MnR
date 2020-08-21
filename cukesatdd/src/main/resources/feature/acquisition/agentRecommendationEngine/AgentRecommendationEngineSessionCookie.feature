@@ -92,7 +92,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
 
     Examples: 
       | User      | Pass      | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,1,NO,NO                   | CELECOXIB,NO,CELECOXIB CAP 50MG,,,1,NO,NO                             | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           |            | drug           | NO             | YES                |
+      | qavgogine | qavgogine | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,1,NO,NO                   | CELECOXIB,NO,celecoxib CAP 50MG,,,3,NO,NO                             | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           |            | drug           | NO             | YES                |
 
   @ARE @AddEditDeleteDoctors @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Doctors in ARE
