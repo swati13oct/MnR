@@ -1112,8 +1112,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						}
 					}
 				} else {
-					section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-					Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					if ((planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) &&
+						(targetDocName.contains("Medicare Plan Appeals & Grievances Form (Online)")
+						|| targetDocName.contains("Medical Reimbursement Form (Online)")
+						|| targetDocName.contains("Authorization to Share Personal Information Form"))
+						&& planDocValidate(systemError)
+						&& MRScenario.environment.equalsIgnoreCase("offline")) {
+						section_note.add("    * KNOWN ISSUE - offline-prod domain got system error opening this doc '"+testInputInfoMap.get("docName")+"'");
+					} else {
+						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+						Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					}
 				}
 			}			
 		} else {
