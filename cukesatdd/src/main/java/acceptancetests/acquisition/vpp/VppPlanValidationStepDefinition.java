@@ -326,7 +326,7 @@ public class VppPlanValidationStepDefinition {
 
 								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") || currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
-									 resultMap = planComparePage.compareBenefits(currentColName.trim(), currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 resultMap = planComparePage.compareBenefits(currentColName.trim(), currentCellValue.trim(), benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
 										 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
@@ -380,7 +380,7 @@ public class VppPlanValidationStepDefinition {
                                                     }
                                                 }
 
-												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue,planComparePage.sortDetailMap(benefitsDetailMap));
+												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue.trim(),planComparePage.sortDetailMap(benefitsDetailMap));
 												if(resultDetailMap.containsKey(true) || (resultDetailMap.containsKey(false) && resultDetailMap.get(false).equalsIgnoreCase("BENEFIT NOT FOUND ON THE UI")))
 												{
 													newCell.setCellStyle(styleFailed);
