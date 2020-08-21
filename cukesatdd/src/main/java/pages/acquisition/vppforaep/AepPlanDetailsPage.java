@@ -7,6 +7,7 @@ package pages.acquisition.vppforaep;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
@@ -334,7 +335,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return validation_Flag;
 	}
 	
-	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
+	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
@@ -353,6 +354,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 			
 			key = key.toLowerCase(); 
 			columnName = columnName.toLowerCase();
+
+			if(columnName.startsWith("Tier") && !columnName.contains(":"))
+			{
+				key = key.replace(":","");
+			}
 			
 			if(key.endsWith("1"))
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
@@ -708,5 +714,5 @@ public class AepPlanDetailsPage extends UhcDriver {
 		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
 		dcePage.clickOnReturnLink();
 	}
-	
+
 }
