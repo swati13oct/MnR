@@ -312,7 +312,7 @@ public class MemberAuthPage extends UhcDriver {
 		try {
 
 			// waitforElement(MemberPopUpLogin);
-			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
+			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 30);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
