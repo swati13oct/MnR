@@ -1,23 +1,18 @@
 package acceptancetests.acquisition.vpp;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -26,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
 import pages.acquisition.vppforaep.AepPlanComparePage;
@@ -269,6 +261,8 @@ public class VppPlanValidationStepDefinition {
 				 
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 HashMap <String, String> benefitsDetailMap = new HashMap<String, String>();
+
+				TreeMap<String, String> benefitsDetailMapSorted = new TreeMap<String, String>();
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
@@ -325,7 +319,8 @@ public class VppPlanValidationStepDefinition {
 										 }else
 											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
 									 }else
-										 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+										 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();             //  stores all the table info into hashmap
+
 
 								 }
 
@@ -342,9 +337,11 @@ public class VppPlanValidationStepDefinition {
 												newCell.setCellStyle(styleIgnore);
 											}
 											else {
+                                                newCell.setCellStyle(styleFailed);
 
 												HashMap <Boolean, String> resultDetailMap = new HashMap<Boolean, String>();
 												String formatedCellValue = currentCellValue;
+												String existingUIValue, OONValue, INNValue = "";
 
 												formatedCellValue = planComparePage.formatCellValueForPlanDetail(currentColName,currentCellValue);
 
@@ -353,7 +350,37 @@ public class VppPlanValidationStepDefinition {
 													currentColName = currentColName.substring(0, (currentColName.length()-2));
 												}
 
-												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue,benefitsDetailMap);
+                                                if(currentColName.endsWith("OON"))
+                                                {
+                                                    if(!benefitsDetailMap.containsKey(currentColName)) {
+                                                        currentColName = planComparePage.getPlanDetailColumnName(currentColName.substring(0, (currentColName.length() - 3)));
+
+                                                        if (benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length > 1) {
+                                                            existingUIValue = benefitsDetailMap.get(currentColName);
+                                                            INNValue = existingUIValue.split("/")[0];
+                                                            OONValue = existingUIValue.split("/")[1];
+                                                            benefitsDetailMap.replace(currentColName, existingUIValue, INNValue);
+                                                            benefitsDetailMap.put(currentColName + "OON", OONValue);
+                                                            currentColName = currentColName + "OON";
+                                                        }
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    currentColName = planComparePage.getPlanDetailColumnName(currentColName);
+
+                                                    if(benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length>1)
+                                                    {
+                                                        existingUIValue = benefitsDetailMap.get(currentColName);
+                                                        INNValue = existingUIValue.split("/")[0];
+                                                        OONValue = existingUIValue.split("/")[1];
+                                                        benefitsDetailMap.replace(currentColName,existingUIValue,INNValue);
+                                                        benefitsDetailMap.put(currentColName+"OON", OONValue);
+                                                    }
+                                                }
+
+												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue,planComparePage.sortDetailMap(benefitsDetailMap));
 												if(resultDetailMap.containsKey(true) || (resultDetailMap.containsKey(false) && resultDetailMap.get(false).equalsIgnoreCase("BENEFIT NOT FOUND ON THE UI")))
 												{
 													newCell.setCellStyle(styleFailed);

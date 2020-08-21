@@ -207,7 +207,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 		String formatedCellValue = currentCellValue;
 
-		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Prescription"))
+		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Preventive"))
 		{
 			formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
 		}
