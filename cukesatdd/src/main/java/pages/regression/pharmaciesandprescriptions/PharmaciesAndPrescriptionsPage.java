@@ -1089,8 +1089,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void clickOnRefillAllMedications() {
 		Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element",
-				validate(refillAllMedications, 50));
-		refillAllMedications.click();
+				validate(refillAllMedications.get(0), 50));
+		refillAllMedications.get(0).click();
 
 	}
 
@@ -1236,12 +1236,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateRefillAllMedications() {
 		Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element on My Medications",
-				pnpValidate(refillAllMedications));
+				pnpValidate(refillAllMedications.get(0)));
 	}
 
 	public void validateNoRefillAllMedications() {
 		Assert.assertFalse("PROBLEM - should unable to locate Refill All Medications link text element on My Medications",
-				pnpValidate(refillAllMedications));
+				pnpValidate(refillAllMedications.get(0)));
 	}
 
 	public void selectTwoDayShipping() throws InterruptedException {
