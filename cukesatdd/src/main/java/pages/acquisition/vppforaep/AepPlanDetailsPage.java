@@ -380,6 +380,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
 				}else if(key.equalsIgnoreCase("Dental")&&benefitValueUI.contains("$")) {
 					benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
+					benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
 				}
 			}
 			//removing footnote values from the end of the key values if any
@@ -441,8 +442,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					}else if(key.contains("footnote2")||key.contains("footnotes2")) {
 						key = key.replaceAll("footnote2", "");
 						key = key.replaceAll("footnotes2", "");
-					}else if(key.contains("footnotes"))
-						key = key.replaceAll("footnotes", "");
+					}
 					
 					
 					//removing footnote values from the string
@@ -461,7 +461,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag = true;break;
 					}else {
 						flag = false;
-						System.out.println("Values did not match for col:2 "+columnName+"\n"+benefitValue+"\n"+key);
+						System.out.println("Values did not match for col:2 "+columnName+"\n Excel value: "+benefitValue+"\n UI Value: "+key);
 						tmpUIString2 = tmpKeyString;
 						break;
 					}
@@ -495,7 +495,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					if(key.equalsIgnoreCase(columnName)) {	
 						
 						if(key.equalsIgnoreCase("Dental")) {
-							benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
+							
 						}
 						
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {

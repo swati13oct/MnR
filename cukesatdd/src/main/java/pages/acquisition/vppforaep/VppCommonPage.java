@@ -104,6 +104,7 @@ public class VppCommonPage extends UhcDriver {
 			}
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
 		}
+		driver.navigate().refresh();
 
 	}
 
