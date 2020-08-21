@@ -2406,6 +2406,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public EOBPage navigateDirectToEOBPag() {
+		CommonUtility.checkPageIsReady(driver);
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
 		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")
@@ -2422,10 +2423,10 @@ public class AccountHomePage extends UhcDriver {
 						WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
 						//WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[href$='claims.html']"));
 						claimsTopMenuShadowRootLink.click();
+						CommonUtility.checkPageIsReady(driver);
 					} catch (Exception e) {
 						Assert.assertTrue("PROBLEM - unable to locate Claims link on Rally Dashboard top menu", false);
 					}		
-					
 					if (noWaitValidate(explainationOfBenefits)) 
 						explainationOfBenefits.click();
 					else if (noWaitValidate(eobTopMenuLink)) 
@@ -3761,11 +3762,11 @@ public class AccountHomePage extends UhcDriver {
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
 			driver.quit(); //force the test to fail instead of waiting time
-			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception: "+e.getMessage(),false);
 		} catch (WebDriverException we) {
 			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
 			driver.quit(); //force the test to fail instead of waiting time
-			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception: "+we.getMessage(),false);
 		}
 		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
 		Thread.sleep(2000); // note: give it a bit more time to settle down

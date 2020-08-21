@@ -515,6 +515,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void navigateToStep2() throws InterruptedException {
 
 		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
 		step2Pharmacy.click();
