@@ -5,8 +5,7 @@ package pages.acquisition.vppforaep;
 
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
@@ -219,5 +218,33 @@ public class AepPlanComparePage extends UhcDriver {
 		}
 
 		return  formatedCellValue;
+	}
+
+	public String getPlanDetailColumnName(String currentColName) {
+
+		if(currentColName.equalsIgnoreCase("Primary Care Provider") || currentColName.equalsIgnoreCase("Specialist"))
+			 return currentColName + " Copay";
+
+		if(currentColName.equalsIgnoreCase("Diagnostic Radiology Services"))
+		    return "Diagnostic Radiology Services (such as MRIs/CT scans, etc.)";
+
+		if(currentColName.equalsIgnoreCase("Hearing Aids - All Types"))
+			return  "Hearing Aids";
+
+		if(currentColName.equalsIgnoreCase("Fitness"))
+			return "Fitness Program through Renew Active?";
+
+		if(currentColName.equalsIgnoreCase("Referral Required"))
+		    return "Referral to Specialist required?";
+
+		if(currentColName.equalsIgnoreCase("Outpatient Hospital Services"))
+		    return "Outpatient Hospital Services (includes observation services)";
+
+		return  currentColName;
+	}
+
+	public Map<String, String> sortDetailMap(HashMap<String, String> benefitsDetailMap) {
+		Map<String, String> map = new TreeMap<String, String>(benefitsDetailMap);
+		return map;
 	}
 }
