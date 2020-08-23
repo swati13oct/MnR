@@ -1227,8 +1227,8 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "UHG_001375809";  
-			String pwd = "Oracle@1234"; 
+			String user = "UHG_000611921";  
+			String pwd = "Passx&9e";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
