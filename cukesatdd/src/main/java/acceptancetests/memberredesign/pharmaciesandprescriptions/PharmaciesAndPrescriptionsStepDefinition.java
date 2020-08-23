@@ -278,4 +278,12 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 	 		
 	}
 	
+	@When("^user clicks on Find and Price a Medication Call To Action$")
+	public void user_clicks_on_Find_and_Price_a_Medication_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickFindAndPriceAMedicationCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	 
 }
