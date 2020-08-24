@@ -133,6 +133,10 @@ public class RefillOrderConfirmationStepDefinition {
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - payment method is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validatePaymentMethod());
+		Assert.assertTrue("PROBLEM - payment method type is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validatePaymentMethodType());
+		Assert.assertTrue("PROBLEM - payment method number is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validatePaymentMethodNumber());
 	}
 
 	@Then("^user will see the order total displayed$")

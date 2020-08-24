@@ -53,6 +53,12 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']")
 	protected WebElement PaymentMethodOrderConfirmation;
 	
+	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']/text()[1]")
+	protected WebElement PaymentMethodTypeOrderConfirmation;
+	
+	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']/text()[2]")
+	protected WebElement PaymentMethodNumberOrderConfirmation;
+	
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__amount']")
 	protected WebElement OrderTotalOrderConfirmation;
 	
@@ -64,6 +70,9 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@data-testid='oc__rx__prescriptionsContainer']")
 	protected WebElement MedicationSectionOrderConfirmation;
+	
+	@FindBy(xpath ="//div[@data-testid='oc__rx__prescriptionsContainer']//h3/span")
+	protected WebElement MedicationNameOrderConfirmation;
 
 	@FindBy(xpath = "//div[@data-testid='rx__drugNameSize']")
 	protected WebElement DrugNameSizeOrderConfirmation;
