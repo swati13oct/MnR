@@ -384,11 +384,11 @@ public class VppPlanValidationStepDefinition {
 												if(resultDetailMap.containsKey(true) || (resultDetailMap.containsKey(false) && resultDetailMap.get(false).equalsIgnoreCase("BENEFIT NOT FOUND ON THE UI")))
 												{
 													newCell.setCellStyle(styleFailed);
+                                                    failureCounter++;
 												}
 												else {
 													newCell.setCellStyle(styleUpdateMBD);
 												}
-												failureCounter++;
 											}
 								 		}else {
 								 			newCell.setCellStyle(stylePassed);
