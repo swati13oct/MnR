@@ -38,7 +38,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	
 	public boolean validateShippingMethod() {
 		if(validate(ShippingMethodOrderConfirmation)) {
-			String shippingMethodExpected =" Standard Shipping - Free";
+			String shippingMethodExpected =": Standard Shipping - Free";
 			String shippingMethodActual=ShippingMethodOrderConfirmation.getText();
 			System.out.println("shippingMethodActual" + shippingMethodActual.substring(shippingMethodActual.indexOf(":")));
 			if(shippingMethodExpected.equalsIgnoreCase(shippingMethodActual.substring(shippingMethodActual.indexOf(":")))) {
