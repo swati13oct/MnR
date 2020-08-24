@@ -26,13 +26,16 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
 	protected WebElement ThankyouMessageOrderConfirmation;
 	
-	@FindBy(xpath = "//div[@data-testid='oc__header__orderNumber']/div[text()='Order #']")
+	//@FindBy(xpath = "//div[@data-testid='oc__header__orderNumber']/div[text()='Order #']")
+	@FindBy(xpath = "//*[@data-testid='oc__header__orderNumber' and text()[1]='Order #']")
 	protected WebElement OrderNumberOrderConfirmation;
 	
-	@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
+	//@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
+	@FindBy(xpath = "//p[@data-testid='oc__header__orderDate' and text()[1]='Placed on']")
 	protected WebElement OrderPlacedDateOrderConfirmation;
 	
-	@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
+	//@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
+	@FindBy(xpath = "//p[@data-testid='oc__header__orderDate' and text()[1]='Placed on']")
 	protected WebElement OrderDateOrderConfirmation;
 	
 	@FindBy(xpath = "//div[@data-testid='oc__stepper__container']/div[@aria-current='true']/span[@data-testid='step__label']//span[text()='Order Received']")
@@ -41,7 +44,8 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='oc__header__emailMessage']")
 	protected WebElement EmailMessageOrderConfirmation;
 	
-	@FindBy(xpath = "//h4[@data-testid='oc__confirm__label' and text()='Order Confirmation']")
+	//@FindBy(xpath = "//h4[@data-testid='oc__confirm__label' and text()='Order Confirmation']")
+	@FindBy(xpath ="//h2[@data-testid='oc__confirm__label' and text()='Order Confirmation']")
 	protected WebElement OrderConfirmationSectionHeader;
 	
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingMethod']")
@@ -62,10 +66,12 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__amount']")
 	protected WebElement OrderTotalOrderConfirmation;
 	
-	@FindBy(xpath = "//span[@data-testid='oc__confirm__priceDisclaimer']")
+	//@FindBy(xpath = "//span[@data-testid='oc__confirm__priceDisclaimer']")
+	@FindBy(xpath="//p[@data-testid='oc__confirm__priceDisclaimer']")
 	protected WebElement PriceDisclaimerOrderconfirmation;
 
-	@FindBy(xpath = "//div[@data-testid='oc__shipping__estimatedDate']/span[text()='Estimated Delivery Date:']")
+	//@FindBy(xpath = "//div[@data-testid='oc__shipping__estimatedDate']/span[text()='Estimated Delivery Date:']")
+	@FindBy(xpath="//p[@data-testid='oc__shipping__estimatedDate']/span[text()='Estimated Delivery Date:']")
 	protected WebElement EstimatedDeliveryDateOrderConfirmation;
 	
 	@FindBy(xpath = "//div[@data-testid='oc__rx__prescriptionsContainer']")
@@ -74,7 +80,8 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath ="//div[@data-testid='oc__rx__prescriptionsContainer']//h3/span")
 	protected WebElement MedicationNameOrderConfirmation;
 
-	@FindBy(xpath = "//div[@data-testid='rx__drugNameSize']")
+	//@FindBy(xpath = "//div[@data-testid='rx__drugNameSize']")
+	@FindBy(xpath="//*[@data-testid='rx__drugNameSize']")
 	protected WebElement DrugNameSizeOrderConfirmation;
 	
 	@FindBy(xpath = "//div[@data-testid='rx__daysOfSupply']")
