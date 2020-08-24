@@ -51,6 +51,9 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingMethod']")
 	protected WebElement ShippingMethodOrderConfirmation;
 	
+	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingMethod']")
+	protected WebElement ShippingMethodValueOrderConfirmation;
+	
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingAddress']")
 	protected WebElement ShippingAddressOrderConfirmation;
 	
