@@ -108,6 +108,7 @@ public class VppPlanValidationStepDefinition {
 				  
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
+				 
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
