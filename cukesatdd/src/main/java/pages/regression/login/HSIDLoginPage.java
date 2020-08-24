@@ -129,6 +129,13 @@ public class HSIDLoginPage extends UhcDriver {
 
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
+	
+	@FindBy(xpath="//img[@class='header__logo img_responsive']")
+	protected WebElement logoOnLoginPage;
+	
+	@FindBy(xpath="//button[contains(text(),'Sign In')]")
+	protected WebElement signInButton;
+	
 
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
@@ -946,6 +953,27 @@ public class HSIDLoginPage extends UhcDriver {
 		//note: default in UhcDriver is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
+	}
+
+	public void validateBrand(String siteName) {
+		
+		validateNew(logoOnLoginPage);
+		String brandSource =logoOnLoginPage.getAttribute("src");
+		if(siteName=="RETIREE")
+			//logo for retiree site also have UHC on the dashboard
+			siteName="UHC";
+		
+	  
+		Assert.assertTrue("PROBLEM - unable to locate correct logo on HSID login page", brandSource.contains(siteName));
+		
+		
+	}
+
+	public void validateSignInButton() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Sign In Button on HSID login page", validate(signInButton));
+		
+		
 	} 
 
 }

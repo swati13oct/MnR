@@ -22,7 +22,7 @@ import pages.regression.testharness.TestHarness;
  * @author akapoo18
  *
  */
-public class OneTimeGuestPaymentsPage extends OneTimePaymentWebElements {
+public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 	public OneTimeGuestPaymentsPage(WebDriver driver) {
 		super(driver);
@@ -646,6 +646,48 @@ public class OneTimeGuestPaymentsPage extends OneTimePaymentWebElements {
 			System.out.println("Confirmation Page for one time payment was not displayed");
 			return null;
 		}
+	}
+
+
+
+
+	public void validateHeaderAndPageElements() {
+		// TODO Auto-generated method stub
+		
+		validate(AmountDueTodayButton);
+		validate(creditcardRadioButton);
+	
+	}
+
+	
+
+
+
+	public void selectAmountDueAndCreditCard() {
+		// TODO Auto-generated method stub
+		
+		AmountDueTodayButton.click();
+		System.out.println("User selected Amount due today");
+		
+		creditcardRadioButton.click();
+		System.out.println("User selects Credit Card Option");
+		
+	}
+
+
+
+
+	public void enterCCDetails() {
+
+		
+	}
+
+
+
+
+	public void reviewAndSubmitPaymentDetails() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

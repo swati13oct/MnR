@@ -105,15 +105,19 @@ public class guestPaymentsLoginStepDefinition {
 
 		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		HSIDLoginPage  HSIDLoginPage=guestPaymentsLogin.clickOnSignInLink();
+		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, HSIDLoginPage);
 
 	}
 
 	@Then("^I will see the Logo specific to my plan and the Sign in button$")
 
-	public void verify_logo_and_signIn() {
+	public void verify_logo_and_signIn(DataTable givenAttributes) {
 
-
-	
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String siteName = memberAttributesRow.get(0).getCells().get(1);
+		HSIDLoginPage HSIDLoginPage=(HSIDLoginPage) getLoginScenario().getBean(PageConstants.HSID_LOGIN_PAGE);
+		HSIDLoginPage.validateBrand(siteName);
+		HSIDLoginPage.validateSignInButton();
 
 	}
 
@@ -168,6 +172,38 @@ public class guestPaymentsLoginStepDefinition {
 
 		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.verifySignInLinkShouldNotBePresent();
+
+	}
+	
+	@Then("^I validate all the header and page elements on One-time payment page$")
+	public void validate_header_and_PageElements () {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.validateHeaderAndPageElements();
+
+	}
+	
+	@Then("^I select Past Amount Due and choose a Credit/Debit payment Method$")
+	public void validatePastAmountDueAndCC() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountDueAndCreditCard();
+
+	}
+	
+	@Then("^I will enter card details$")
+	public void enter_CC_Details () {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.enterCCDetails();
+
+	}
+	
+	@Then("^I click on Review and Submit to review payment details$")
+	public void Review_And_Submit () {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.reviewAndSubmitPaymentDetails();
 
 	}
 	

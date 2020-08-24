@@ -21,14 +21,14 @@ import acceptancetests.util.CommonUtility;
  * @author akapoo18
  *
  */
-public class OneTimePaymentWebElements extends UhcDriver{
+public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	
 	/**
 	 * Lists all the elements of Guest Payments Portal
 	 */
 
 	
-	public OneTimePaymentWebElements(WebDriver driver) {
+	public OneTimeGuestPaymentWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
