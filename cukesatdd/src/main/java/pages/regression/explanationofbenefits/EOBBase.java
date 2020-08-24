@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.json.JSONException;
+import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -528,16 +530,51 @@ public class EOBBase extends EOBWebElements{
 		for(String winHandle : driver.getWindowHandles()){
 			driver.switchTo().window(winHandle);
 		}
-		String apiResponseJsonStr=apiResponseJson.getText();
-		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
-		if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"") && !apiResponseJsonStr.contains("\"errorCode\":\"206\"")) {
-			sleepBySec(5);
-			System.out.println("Retry one more time before giving up...");
-			driver.get(inputUrl);
+		String apiResponseJsonStr="";
+		if (eobValidate(apiResponseJson)) {		
 			apiResponseJsonStr=apiResponseJson.getText();
-			System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+			if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"") && !apiResponseJsonStr.contains("\"errorCode\":\"206\"")) {
+				sleepBySec(5);
+				System.out.println("Retry one more time before giving up...");
+				driver.get(inputUrl);
+				apiResponseJsonStr=apiResponseJson.getText();
+				System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+			}
+		} else {
+			String pgStr=driver.getPageSource();
+			System.out.println("TEST - whole page source="+pgStr);
+			String errorCodeStr=pgStr.substring(pgStr.indexOf("<errorCode>"),pgStr.indexOf("</errorCode>"))+"\"</errorCode>";
+			errorCodeStr=errorCodeStr.replace("<errorCode>\"", "<errorCode>");
+			String successStr=pgStr.substring(pgStr.indexOf("<success>"),pgStr.indexOf("</success>"))+"</success>";
+			System.out.println("TEST - errorCodeStr="+errorCodeStr);
+			String dataStr="";
+			String[] tmp=pgStr.split("<data>");
+			System.out.println("TEST - tmp.length="+tmp.length);
+			for (String s: tmp) {
+				if (s.contains("<esp>")) {
+					String[] tmp1=s.split("</data>");
+					String line="<data>"+tmp1[0]+"</data>";
+					System.out.println("TEST - tmp1[0]="+tmp1[0]);
+					System.out.println("TEST - line="+line);
+					System.out.println("TEST - before dataStr="+dataStr);
+					dataStr=dataStr+line;
+					System.out.println("TEST - after dataStr="+dataStr);
+				}
+			}
+			//tbd System.out.println("TEST - dataStr="+dataStr);
+			//tbd System.out.println("TEST - successStr="+successStr);
+			String xmlStr=errorCodeStr+successStr+dataStr;
+			//tbd System.out.println("TEST - xmlStr="+xmlStr);
+			try {
+				org.json.JSONObject xmlJSONObj = XML.toJSONObject(xmlStr);
+				apiResponseJsonStr = xmlJSONObj.toString();
+				//tbd System.out.println("TEST - apiResponseJsonStr="+apiResponseJsonStr);
+				apiResponseJsonStr=apiResponseJsonStr.replace("\\\"\"", "\"");
+			} catch (JSONException je) {
+				Assert.assertTrue("PROBLEM - unable to convert xml to json. xmlStr='"+xmlStr+"' |  Exception="+je.getMessage(), false);
+			}
 		}
-		
+		System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return apiResponseJsonStr;
