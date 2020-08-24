@@ -256,6 +256,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	}
 
 	public WebDriver navigateToBenefitsPage() {
+		checkModelPopup(driver, 1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
 		} else if (noWaitValidate(uhcProviderSearchBenefitsLnk)) {
