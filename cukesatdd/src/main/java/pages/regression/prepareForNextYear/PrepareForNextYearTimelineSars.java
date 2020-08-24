@@ -71,31 +71,6 @@ public class PrepareForNextYearTimelineSars extends PrepareForNextYearBase {
 		String targetItem="Time line section";
 		WebElement targetElement=tl_section;
 		note.addAll(validateHaveItem(targetItem, targetElement));
-		/* tbd 
-		if (validateAsMuchAsPossible) {
-			if (noWaitValidate(targetElement))
-				note.add("\tPASSED - validation for "+targetItem);
-			else {
-				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
-				return note;
-			}
-		} else {
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		} */
-
-		/* tbd 
-		targetItem="Time line box header";
-		targetElement=tl_sectionHeader;
-		if (validateAsMuchAsPossible) {
-			if (noWaitValidate(targetElement))
-				note.add("\tPASSED - validation for "+targetItem);
-			else {
-				note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
-				return note;
-			}
-		} else {
-			Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		} */
 
 		//note: milestone1 - Oct 1 ----------------------------------
 		String dateStr="October 1";

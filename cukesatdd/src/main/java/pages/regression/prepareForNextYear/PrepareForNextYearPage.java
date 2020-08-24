@@ -31,6 +31,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	}
 
 	public boolean hasPrepareForNextYearTabDisplay(boolean expectTab) {
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
 		if (noWaitValidate(prepareForNextYearTab))
 			return true;
 		else 
@@ -189,9 +190,9 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
-			boolean expNoBlue_t1=false;
-			boolean expNoBlue_t2=false;
-			boolean expNoBlue_t3=false;
+			boolean expNoBlue_t1=true;
+			boolean expNoBlue_t2=true;
+			boolean expNoBlue_t3=true;
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
