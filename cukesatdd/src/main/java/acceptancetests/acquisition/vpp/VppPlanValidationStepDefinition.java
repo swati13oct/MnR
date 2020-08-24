@@ -313,9 +313,9 @@ public class VppPlanValidationStepDefinition {
 
 									 if(sheetName.contains("PDP")) {
 										 if(!row.getCell(7).getStringCellValue().contains("NA")) {
-											 planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
+											 //planDetailsPage.navigateToDCEandAddDrug(row.getCell(7).getStringCellValue()); //TODO
 											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
-											 planDetailsPage.editDrugListAndRemoveDrug();
+											 //planDetailsPage.editDrugListAndRemoveDrug();
 										 }else
 											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
 									 }else
@@ -332,53 +332,50 @@ public class VppPlanValidationStepDefinition {
 									  System.out.println(currentColName + " : "+ valueMatches);
 									 	if(!valueMatches) {
 									 		//Ignore OON column data validation for a Plan that is only In-network
-											if(row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+											if(!sheetName.contains("PDP") && row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
 											{
 												newCell.setCellStyle(styleIgnore);
 											}
 											else {
-                                                newCell.setCellStyle(styleFailed);
+												newCell.setCellStyle(styleFailed);
 
-												HashMap <Boolean, String> resultDetailMap = new HashMap<Boolean, String>();
+												HashMap<Boolean, String> resultDetailMap = new HashMap<Boolean, String>();
 												String formatedCellValue = currentCellValue;
 												String existingUIValue, OONValue, INNValue = "";
 
-												formatedCellValue = planComparePage.formatCellValueForPlanDetail(currentColName,currentCellValue);
+												if (!sheetName.contains("PDP")) {
+													formatedCellValue = planComparePage.formatCellValueForPlanDetail(currentColName, currentCellValue);
 
-												if(currentColName.endsWith("PC"))
-												{
-													currentColName = currentColName.substring(0, (currentColName.length()-2));
+													if (currentColName.endsWith("PC")) {
+														currentColName = currentColName.substring(0, (currentColName.length() - 2));
+													}
+
+													if (currentColName.endsWith("OON")) {
+														if (!benefitsDetailMap.containsKey(currentColName)) {
+															currentColName = planComparePage.getPlanDetailColumnName(currentColName.substring(0, (currentColName.length() - 3)));
+
+															if (benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length > 1) {
+																existingUIValue = benefitsDetailMap.get(currentColName);
+																INNValue = existingUIValue.split("/")[0];
+																OONValue = existingUIValue.split("/")[1];
+																benefitsDetailMap.replace(currentColName, existingUIValue, INNValue);
+																benefitsDetailMap.put(currentColName + "OON", OONValue);
+																currentColName = currentColName + "OON";
+															}
+														}
+
+													} else {
+														currentColName = planComparePage.getPlanDetailColumnName(currentColName);
+
+														if (benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length > 1) {
+															existingUIValue = benefitsDetailMap.get(currentColName);
+															INNValue = existingUIValue.split("/")[0];
+															OONValue = existingUIValue.split("/")[1];
+															benefitsDetailMap.replace(currentColName, existingUIValue, INNValue);
+															benefitsDetailMap.put(currentColName + "OON", OONValue);
+														}
+													}
 												}
-
-                                                if(currentColName.endsWith("OON"))
-                                                {
-                                                    if(!benefitsDetailMap.containsKey(currentColName)) {
-                                                        currentColName = planComparePage.getPlanDetailColumnName(currentColName.substring(0, (currentColName.length() - 3)));
-
-                                                        if (benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length > 1) {
-                                                            existingUIValue = benefitsDetailMap.get(currentColName);
-                                                            INNValue = existingUIValue.split("/")[0];
-                                                            OONValue = existingUIValue.split("/")[1];
-                                                            benefitsDetailMap.replace(currentColName, existingUIValue, INNValue);
-                                                            benefitsDetailMap.put(currentColName + "OON", OONValue);
-                                                            currentColName = currentColName + "OON";
-                                                        }
-                                                    }
-
-                                                }
-                                                else
-                                                {
-                                                    currentColName = planComparePage.getPlanDetailColumnName(currentColName);
-
-                                                    if(benefitsDetailMap.containsKey(currentColName) && benefitsDetailMap.get(currentColName).split("/").length>1)
-                                                    {
-                                                        existingUIValue = benefitsDetailMap.get(currentColName);
-                                                        INNValue = existingUIValue.split("/")[0];
-                                                        OONValue = existingUIValue.split("/")[1];
-                                                        benefitsDetailMap.replace(currentColName,existingUIValue,INNValue);
-                                                        benefitsDetailMap.put(currentColName+"OON", OONValue);
-                                                    }
-                                                }
 
 												resultDetailMap = planDetailsPage.compareBenefits(currentColName.trim(),formatedCellValue.trim(),planComparePage.sortDetailMap(benefitsDetailMap));
 												if(resultDetailMap.containsKey(true) || (resultDetailMap.containsKey(false) && resultDetailMap.get(false).equalsIgnoreCase("BENEFIT NOT FOUND ON THE UI")))
@@ -402,7 +399,7 @@ public class VppPlanValidationStepDefinition {
 										 newCell.setCellValue(cell.getStringCellValue());
 									 } else {
 										 //Ignore OON column data validation for a Plan that is only In-network
-										 if(row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
+										 if(!sheetName.contains("PDP") && row.getCell(2).getStringCellValue().trim().startsWith("IN") && currentColName.trim().endsWith("OON"))
 										 {
 											 newCell.setCellStyle(styleIgnore);
 											 newCell.setCellValue(cell.getStringCellValue());
