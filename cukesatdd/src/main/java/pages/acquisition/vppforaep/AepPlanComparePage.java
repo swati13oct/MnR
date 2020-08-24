@@ -108,12 +108,12 @@ public class AepPlanComparePage extends UhcDriver {
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
 
-		//Read Plan Summary table
-		result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
-
 		//Read prescription Drug Benefits and PlanCosts table
 		result.putAll(readBenefitsData("prescription-drug-table", ""));
 		result.putAll(readBenefitsData("plan-costs-table", ""));
+
+		//Read Plan Summary table
+		result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
 
 		if(planType.startsWith("MA")) {
 
@@ -162,6 +162,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 		if(listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0)
 		{
+			System.out.println(tableId + " - Could not read table data");
 			return result;
 		}
 
@@ -209,7 +210,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Preventive"))
 		{
-			formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
+			//formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
 		}
 
 		if(currentColName.startsWith("Tier"))
