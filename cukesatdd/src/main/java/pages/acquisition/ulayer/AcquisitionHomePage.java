@@ -637,7 +637,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		testSiteUrl=driver.getCurrentUrl();
 		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
 		try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);
