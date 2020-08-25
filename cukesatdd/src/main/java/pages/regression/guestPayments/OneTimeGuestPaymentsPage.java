@@ -772,6 +772,101 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		
 	}
 
+	public void selectAmountDueAndEFTAcc() {
+
+		pastAmountDueRadioButton.click();
+		System.out.println(">>>>>>>>Past Amount due radio button is clicked<<<<<<<<<<<");
+
+		eftCheckingRadioButton.click();
+		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheeftAccDetailsIframeforEFTAcc();
+	}
+
+	private void validateTheeftAccDetailsIframeforEFTAcc() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersNameTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Account Number",guestPaymentsValidate(accountNumberTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Routing Number Text Field",guestPaymentsValidate(routingNumberTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Review And Submit Button",guestPaymentsValidate(reviewAndSubmitButton));
+
+	}
+
+	public ReviewOneTimeGuestPaymentsPage enterEFTAccountDetails(Map<String, String> accountAttributessMap) {
+
+		String AccountHoldersName = accountAttributessMap.get("AccountHoldersName");
+		String AccountNumber = accountAttributessMap.get("AccountNumber");
+		String RoutingNumber = accountAttributessMap.get("RoutingNumber");
+
+		System.out.println(">>>>>>>>>>>>Entering Account Holder's Name<<<<<<<<<<<<<<<<<<<");
+		bankHoldersNameTextField.sendKeys(AccountHoldersName);
+
+		System.out.println(">>>>>>>>>>>>Entering Account Number<<<<<<<<<<<<<<<<<<<");
+		accountNumberTextField.sendKeys(AccountNumber);
+
+		System.out.println(">>>>>>>>>>>>Entering Routing Number<<<<<<<<<<<<<<<<<<<");
+		routingNumberTextField.sendKeys(RoutingNumber);
+
+		reviewAndSubmitButton.click();
+		System.out.println(">>>>>>>Review and Submit button is clicked<<<<<<<");
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, reviewAndSubmitPageHeader, 45);
+
+		if (driver.getTitle().contains("Review")) {
+			System.out.println(">>>>>>>>>>Review Guest Payments page is displayed<<<<<<<<<<");
+			return new ReviewOneTimeGuestPaymentsPage(driver);
+		} else {
+			System.out.println(">>>>>>>>>Review Guest Payments page is not displayed<<<<<<<<<<");
+			return null;
+		}
+
+	}
+
+	public void selectAmountDueCurrentChargesAndCreditCard() {
+
+		pastAmountCurrentChargesRadioButton.click();
+		System.out.println(">>>>>>>>Past Amount & Current charges due radio button is clicked<<<<<<<<<<<");
+
+		creditcardRadioButton.click();
+		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheAddCardDetailsIframeforCreditCard();
+	}
+
+	public void selectAmountDueCurrentChargesAndEFTAcc() {
+
+		pastAmountCurrentChargesRadioButton.click();
+		System.out.println(">>>>>>>>Past Amount and Current charges due radio button is clicked<<<<<<<<<<<");
+
+		eftCheckingRadioButton.click();
+		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheeftAccDetailsIframeforEFTAcc();
+	}
+
+	public void selectOtherAmountDueAndCreditCard() {
+
+		otherAmountRadioButton.click();
+		System.out.println(">>>>>>>>Other Amount due radio button is clicked<<<<<<<<<<<");
+
+		creditcardRadioButton.click();
+		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheAddCardDetailsIframeforCreditCard();
+	}
+
+	public void selectOtherAmountDueAndEFTAcc() {
+
+		otherAmountRadioButton.click();
+		System.out.println(">>>>>>>>Other Amount due radio button is clicked<<<<<<<<<<<");
+
+		eftCheckingRadioButton.click();
+		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheeftAccDetailsIframeforEFTAcc();
+	}
+
 
 
 

@@ -114,6 +114,15 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement reviewAndSubmitPageHeader;
 
+	@FindBy(xpath = "")
+	public WebElement bankHoldersNameTextField;
+
+	@FindBy(xpath = "")
+	public WebElement routingNumberTextField;
+
+	@FindBy(xpath = "")
+	public WebElement accountNumberTextField;
+
 
 
 }

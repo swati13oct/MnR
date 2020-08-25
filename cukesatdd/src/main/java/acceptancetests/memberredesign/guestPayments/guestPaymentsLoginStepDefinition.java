@@ -250,6 +250,66 @@ public class guestPaymentsLoginStepDefinition {
 
 
 	}
+
+	@Then("^I select Past Amount Due and choose a EFT Checking acc payment Method$")
+	public void validatePastAmountDueAndEFTAcc() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountDueAndEFTAcc();
+
+	}
+
+	@Then("^I will enter EFT Checking Account Details$")
+	public void enter_EFTCheckingAccount_Details (DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		ReviewOneTimeGuestPaymentsPage ReviewOneTimeGuestPaymentsPage = oneTimeGuestPaymentsPage.enterEFTAccountDetails(memberAttributesMap);
+
+		if (ReviewOneTimeGuestPaymentsPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_OneTime_Guest_Payments_Page, ReviewOneTimeGuestPaymentsPage);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>User is on Review One time Guest Payments page<<<<<<<<<<<<<<<<<<<<<<<<,");
+		}
+
+
+	}
+
+	@Then("^I select Past Amount & current charges Due and choose a Credit/Debit payment Method$")
+	public void validatePastAmountcurrentchargesDueAndCC() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountDueCurrentChargesAndCreditCard();
+
+	}
+
+	@Then("^I select Past Amount & current charges Due and choose a EFT Checking acc payment Method$")
+	public void validatePastAmountCurrentChargesDueAndEFTAcc() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountDueCurrentChargesAndEFTAcc();
+
+	}
+
+	@Then("^I select and entered other amount Due and choose a Credit/Debit payment Method$")
+	public void validateOtherAmountDueAndAndCC() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectOtherAmountDueAndCreditCard();
+
+	}
+
+	@Then("^I select and entered other amount Due and choose a EFT Checking acc payment Method$")
+	public void validateOtherAmountDueAndEFTAcc() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectOtherAmountDueAndEFTAcc();
+
+	}
 	
 
 }
