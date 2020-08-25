@@ -675,7 +675,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
-		int MAPD = 7;
+		int MAPD = 6;
 		int PDP = 4;
 		int None = 7;
 		if(plan.equalsIgnoreCase("MAPD")) {
