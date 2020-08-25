@@ -4,6 +4,7 @@
 package pages.regression.drugcostestimator;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -306,6 +307,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='plan-name-div']/div/div/div/p/a")
 	public WebElement formularypdf;
+	
+	@FindBy(xpath="//span[text()='Drug Lookup']")
+	public WebElement drugLookupOption;
+	
+	@FindBy(xpath="//p[@class='subtitle ng-binding']")
+	public WebElement drugDosageField;
+	
+	@FindBy(xpath="//p[@class='color-gray margin-extra-small ng-binding']")
+	public WebElement drugQuantityField;
 
 	@Override
 	public void openAndValidate() {
@@ -561,7 +571,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else Assert.assertTrue("btnSearch is not present", false);
 		Select options = new Select(milesSelection);
 		options.selectByVisibleText(radius);
-
+		if(!validate(first_pharmacy_select_btn)) {
+			btnSearch.click();
+		}
+		
 	}
 
 	/** 
@@ -1880,6 +1893,57 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("The PDF page opened");
 		}
 
+	}
+	
+	public void clickDrugLookupOption() {
+		drugLookupOption.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+	public void verifyDrugDosage(String dosage) {
+		if(validate(drugDosageField)) {
+			Assert.assertTrue("Drug dosage not matched. Expected-"+ dosage +" Actual-" + drugDosageField.getText(), drugDosageField.getText().contains(dosage));
+		} else {
+			Assert.fail("Drug dosage not displayed on DCE");
+		}
+	}
+
+	public void verifyDrugQuantity(String quantityOnDCE) {
+		if(validate(drugQuantityField)) {
+			Assert.assertTrue("Drug qty not matched. Expected-"+ quantityOnDCE +" Actual-" + drugQuantityField.getText(), drugQuantityField.getText().contains(quantityOnDCE));
+		} else {
+			Assert.fail("Drug qty not displayed on DCE");
+		}
+	}
+
+	public void verifyTooltips() {
+		WebElement tooltipLocator, tooltipValue;
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap.put("Total Estimated Annual Drug Costs", "This is the amount you pay as your share");
+		memberAttributesMap.put("Annual Deductible", "If your plan has an annual deductible");
+		memberAttributesMap.put("NC - Not Covered", "Not Covered (NC)");
+		memberAttributesMap.put("LA - Limited Access", "Limited Access Drugs");
+		memberAttributesMap.put("7D - Seven Days Supply", "An opioid drug");
+		memberAttributesMap.put("ST - Step Therapy", "Step Therapy There may be effective");
+		memberAttributesMap.put("PA - Prior Authorization", "Prior Authorization The plan requires");
+		memberAttributesMap.put("DL - Dispensing Limit", "Dispensing limits applied to this drug");
+		memberAttributesMap.put("QL - Quantity Limits", "Quantity Limit The plan will cover only a certain amount");
+		memberAttributesMap.put("ADC - Additional Drug Coverage", "Your plan includes extra coverage for certain drugs");
+		
+		try {
+			for(Map.Entry<String, String> entry : memberAttributesMap.entrySet()) {
+				tooltipLocator = driver.findElement(By.xpath("//*[text()='" + entry.getKey() + "']/span[@role='tooltip']"));
+				Actions action = new Actions(driver);
+				action.moveToElement(tooltipLocator).build().perform();
+				tooltipValue = driver.findElement(By.id("tooltip"));
+				Thread.sleep(1000);
+				System.out.println("Tooltip value = " + tooltipValue.getText());
+				System.out.println("Assert value = " + tooltipValue.getText().contains(entry.getValue()));
+				//Assert.assertTrue("Tooltip not matched for" + entry.getKey(), tooltipValue.getText().contains(entry.getValue()));
+			}
+		}catch (Exception e) {
+			System.out.println("Error occured while verifying tooltips " + e.getMessage());
+		}
 	}
 
 }
