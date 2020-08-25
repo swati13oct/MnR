@@ -105,6 +105,8 @@ public class AepPlanComparePage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
+	    threadsleep(5000);
+
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
 
@@ -157,7 +159,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 		HashMap<String, String> result=new HashMap<String, String>();
 
-		validateNew(driver.findElement(By.id(tableId)));
+		//validateNew(driver.findElement(By.id(tableId)));
 
 		String rowXpath="//table[contains(@id,'"+tableId+"')]//tbody//tr[contains(@class,'uhc')]";
 		List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
