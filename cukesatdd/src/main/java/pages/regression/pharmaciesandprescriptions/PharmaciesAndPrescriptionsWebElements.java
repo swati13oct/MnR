@@ -1376,6 +1376,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="(//span[@data-testid='pagination-description']//strong)[2]")
 	protected WebElement totalNumberOfPage;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']")
+	protected List<WebElement> listOfTransferToHDCTA;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfRetailPharmacyNameEligibleForTransferToHD;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//a[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfRetailMedEligibleForTransferToHD;
+	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")
+	protected List<WebElement> listOfDaySupplyEligibleForTransferToHD;
 }
