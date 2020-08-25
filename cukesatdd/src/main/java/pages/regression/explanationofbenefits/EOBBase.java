@@ -639,7 +639,9 @@ public class EOBBase extends EOBWebElements{
 			try {
 				org.json.JSONObject xmlJSONObj = XML.toJSONObject(xmlStr);
 				apiResponseJsonStr = xmlJSONObj.toString();
-				apiResponseJsonStr=apiResponseJsonStr.replace("\\\"\"", "\"");
+				System.out.println("TEST - 1 - apiResponseJsonStr"+apiResponseJsonStr);
+				apiResponseJsonStr=apiResponseJsonStr.replaceAll("\\\\\"", "");
+				System.out.println("TEST - 2 - apiResponseJsonStr"+apiResponseJsonStr);
 
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"data\":{}", "\"data\": null");
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"message\":{}", "\"message\": null");
@@ -690,7 +692,14 @@ public class EOBBase extends EOBWebElements{
 		apiResponse.setSuccess(success);
 		apiResponse.setErrorCode(errorCode);
 
-		JSONArray dataListArrayObj = (JSONArray) apiResponseJsobObj.get("data");
+		JSONArray dataListArrayObj=new JSONArray();
+		try {
+			dataListArrayObj = (JSONArray) apiResponseJsobObj.get("data");
+		} catch (ClassCastException e) {
+			JSONObject jo=(JSONObject) apiResponseJsobObj.get("data");
+			dataListArrayObj.add(jo);
+		}
+		//tbd JSONArray dataListArrayObj = (JSONArray) apiResponseJsobObj.get("data");
 		if (dataListArrayObj==null) {
 			System.out.println("TEST - API dataListArrayObj is null - there is no EOB in this search range");
 			return apiResponse;
