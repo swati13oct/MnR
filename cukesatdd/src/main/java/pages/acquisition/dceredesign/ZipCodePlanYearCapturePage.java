@@ -74,9 +74,11 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public void selectPlanYear() {
-		planYearDropdown.click();
-		Select planYear = new Select(planYearDropdown);
-		planYear.selectByIndex(1);
+		if(validate(planYearDropdown)) {
+			planYearDropdown.click();
+			Select planYear = new Select(planYearDropdown);
+			planYear.selectByIndex(1);
+		}
 	}
 	
 	public void validateZipCodePlanYearCapturePageNonAEP() {

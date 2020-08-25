@@ -67,7 +67,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
     Examples: 
       | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | qavgogine | qavgogine | recurringpayment001 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | 15118 | qavgogine | qavgogine | recurringpayment002 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 16 - Any member will work - Member Auth - Error message on submitting payment - One time EFT
   @regressionMember
@@ -336,7 +336,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
   #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page
   @regressionMember
-  Scenario Outline: Verify that member of <Test Scenario> is able to click on Make Payment button Coverage and Benefits page and navigate to Premium Payments page
+  Scenario Outline: Test Case 26 - Verify that member of <Test Scenario> is able to click on Make Payment button Coverage and Benefits page and navigate to Premium Payments page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
