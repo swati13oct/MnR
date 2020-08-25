@@ -157,6 +157,8 @@ public class AepPlanComparePage extends UhcDriver {
 
 		HashMap<String, String> result=new HashMap<String, String>();
 
+		validate(driver.findElement(By.id(tableId)),5);
+
 		String rowXpath="//table[contains(@id,'"+tableId+"')]//tbody//tr[contains(@class,'uhc')]";
 		List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
 
