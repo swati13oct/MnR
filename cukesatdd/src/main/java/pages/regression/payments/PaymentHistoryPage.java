@@ -645,6 +645,11 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Download Payment History ')]")
 	private WebElement downloadPaymentHistory;
 	
+	@FindBy(id = "accountprofile")
+	private WebElement accountProfile;
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
+	private WebElement logOutLink;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -2156,18 +2161,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
 		}
-//	waitforElement(logoutLink);
-    /*  validate(logoutLink);
-	if (validate(logoutLink)) {
-		System.out.println("logout link is displayed");
-		logoutLink.click();*/
 		/*navigating to signout */
-		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
+		//driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
 		//https://www.medicare.uhc.com/aarp/member/logout.html
-		if (validate(logincontainer)) {
-			System.out.println("Sign in  link is displayed");}
-		 System.out.println("title is: "+driver.getTitle());
-		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
+		if (accountProfile.isDisplayed()) {
+			accountProfile.click();
+		}
+		if (validate(logOutLink,0)) {
+			logOutLink.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			validate(logincontainer);
+			System.out.println("title is: "+driver.getTitle());
+			Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+		} else {
+			Assert.fail("Logout option not displayed");
+		}
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
