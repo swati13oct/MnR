@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.regression.explanationofbenefits;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class EOBBase extends EOBWebElements{
 	@Override
 	public void openAndValidate() {
 	}
-	
+
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
@@ -81,7 +78,7 @@ public class EOBBase extends EOBWebElements{
 		boolean mayHaveEob=true;
 		return waitForEobPageToLoad(maxTry, numberOfSeconds, mayHaveEob);
 	}
-	
+
 	public int waitForEobPageToLoad(int maxTry, int numberOfSeconds, boolean mayHaveEob) {
 		int c=0;
 		int total=0;
@@ -99,7 +96,7 @@ public class EOBBase extends EOBWebElements{
 			sleepBySec(5); //note: keep to let the page settle down w/ the pdf loading in the background
 		return total;
 	}
-	
+
 	/**
 	 * Validate Need Help section content
 	 * @param planType
@@ -171,7 +168,7 @@ public class EOBBase extends EOBWebElements{
 			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",eobValidate(hrsOperationElement2));
 		}
 	}
-	
+
 	/**
 	 * Helper method to go back to prior page via browser back, also handles the case if combo tab is involved
 	 * @param planType
@@ -189,7 +186,7 @@ public class EOBBase extends EOBWebElements{
 			goToSpecificComboTab(planType,flagNonCombo);
 		}
 	}
-	
+
 	/**
 	 * Navigate to specific plan for combo user
 	 * @param planType
@@ -222,7 +219,7 @@ public class EOBBase extends EOBWebElements{
 		}
 		sleepBySec(2);
 	}
-	
+
 	/**
 	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
@@ -255,7 +252,7 @@ public class EOBBase extends EOBWebElements{
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Helper method to click on the target test plan on combo tab
 	 * @param planType
@@ -318,7 +315,7 @@ public class EOBBase extends EOBWebElements{
 		bncTab.click();
 		CommonUtility.waitForPageLoad(driver, bncPageHeader, 30);
 		Assert.assertTrue("PROBLEM - unable to locate Benefits and Coverage header after navigating to Benefits and Coverage page", eobValidate(bncPageHeader));
-			return new BenefitsAndCoveragePage(driver);
+		return new BenefitsAndCoveragePage(driver);
 	}
 
 	public void validatePlanNavTab(String planType) { //note: used by member auth page
@@ -332,22 +329,22 @@ public class EOBBase extends EOBWebElements{
 				medsuppNavTab.click();
 		}	
 	}
-	
+
 	public String getUuid() {
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
 		String uuid=getUuidInConsumerDetails(consumerDetails);
 		return uuid;
 	}
-	
+
 	public String getConsumerDetailsFromlocalStorage() {
 		//WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
-		 RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
-		 RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		LocalStorage localStorage = webStorage.getLocalStorage();
 		String consumerDetails=localStorage.getItem("consumerDetails");
 		return consumerDetails;
 	}
-	
+
 	public String getMemberId(Boolean isComboUser, String planType) {
 		//note: if planType is for SHIP, parse the value to get the actual plan category name
 		String lookForPlanCategory= planType;
@@ -360,7 +357,7 @@ public class EOBBase extends EOBWebElements{
 		String memberId = getMemberIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
 		return memberId;
 	}
-	
+
 	public String getUuidInConsumerDetails(String consumerDetails) {
 		String actualUuid=null;
 		try {
@@ -378,10 +375,10 @@ public class EOBBase extends EOBWebElements{
 				actualUuid=tmp[0];
 			}
 		}
-		
+
 		return actualUuid;
 	}
-	
+
 	public String getMemberIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
 		//System.out.println("TEST - consumerDetails="+consumerDetails);
 		String actualMemberId=null;
@@ -408,7 +405,7 @@ public class EOBBase extends EOBWebElements{
 			Assert.assertTrue("PROBLEM - unable to locate the expected planType from localStorage.consumerDetails, "
 					+ "please check to see if feature file input parameter planType contains the actual planType that is in getConsumerInfo API, consumerDetails="+consumerDetails, 
 					actualMemberId!=null);
-			
+
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -443,12 +440,12 @@ public class EOBBase extends EOBWebElements{
 		return urlStr;
 
 	}
-	
+
 	public List<String> getApiRequestUrl(String planType, String memberType, String eobType) {
 		List<String> urlList=new ArrayList<String>();
 		String apiReqeust=null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
-		
+
 		if (eobType.equals("dream")) {
 			//note: need to do two search
 			System.out.println("TEST - first API request...");
@@ -458,17 +455,17 @@ public class EOBBase extends EOBWebElements{
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
 				//System.out.println("TEST each line="+line);
-					if (line.contains(lookForText1) && line.contains(lookForText2)) {
-						apiReqeust=line;
-						System.out.println("TEST found line="+line);
-						//break; //note: only break if looking for the first response, otherwise always take the latest line
-					}
+				if (line.contains(lookForText1) && line.contains(lookForText2)) {
+					apiReqeust=line;
+					System.out.println("TEST found line="+line);
+					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				}
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
 			String m_urlStr=parseLine(apiReqeust);
 			System.out.println("TEST - m_urlStr="+m_urlStr);
 			urlList.add(m_urlStr);
-			
+
 			if (!planType.equals("MA")) {
 				System.out.println("TEST - second API request...");
 				lookForText1="/dreamEob/rx/search?medicareId";
@@ -494,7 +491,7 @@ public class EOBBase extends EOBWebElements{
 			} else if (planType.contains("SHIP")) {
 				lookForText3="/ship";
 			}
-			
+
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
 				//System.out.println("TEST each line="+line);
@@ -519,7 +516,7 @@ public class EOBBase extends EOBWebElements{
 			return urlList; 
 		}
 	}
-	
+
 	public String getApiResponse(String planType, String memberType, String inputUrl)  {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to get API response");
@@ -541,35 +538,117 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
 			}
 		} else {
+			//note: team-atest doesn't show the API response in json format, do some conversion to continue
+			System.out.println("TEST - response is showing as xml on browser");
+			String xmlStr="";
 			String pgStr=driver.getPageSource();
-			System.out.println("TEST - whole page source="+pgStr);
-			String errorCodeStr=pgStr.substring(pgStr.indexOf("<errorCode>"),pgStr.indexOf("</errorCode>"))+"\"</errorCode>";
-			errorCodeStr=errorCodeStr.replace("<errorCode>\"", "<errorCode>");
-			String successStr=pgStr.substring(pgStr.indexOf("<success>"),pgStr.indexOf("</success>"))+"</success>";
-			System.out.println("TEST - errorCodeStr="+errorCodeStr);
-			String dataStr="";
-			String[] tmp=pgStr.split("<data>");
-			System.out.println("TEST - tmp.length="+tmp.length);
-			for (String s: tmp) {
-				if (s.contains("<esp>")) {
-					String[] tmp1=s.split("</data>");
-					String line="<data>"+tmp1[0]+"</data>";
-					System.out.println("TEST - tmp1[0]="+tmp1[0]);
-					System.out.println("TEST - line="+line);
-					System.out.println("TEST - before dataStr="+dataStr);
-					dataStr=dataStr+line;
-					System.out.println("TEST - after dataStr="+dataStr);
+			//tbd System.out.println("TEST - whole page source="+pgStr);
+			if (pgStr.contains("<errorCode")) {
+				String s;
+				if (pgStr.contains("<errorCode/>"))
+					s="<errorCode/>";
+				else {
+					s=pgStr.substring(pgStr.indexOf("<errorCode>"),pgStr.indexOf("</errorCode>"))+"\"</errorCode>";
+					s=s.replace("<errorCode>", "<errorCode>\"");
 				}
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - errorCodeStr="+s);
 			}
-			//tbd System.out.println("TEST - dataStr="+dataStr);
-			//tbd System.out.println("TEST - successStr="+successStr);
-			String xmlStr=errorCodeStr+successStr+dataStr;
+			if (pgStr.contains("<success")) {
+				String s;
+				if (pgStr.contains("<success/>"))
+					s="<success/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<success>"),pgStr.indexOf("</success>"))+"</success>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - successStr="+s);
+			}
+			if (pgStr.contains("<mesg")) {
+				String s;
+				if (pgStr.contains("<mesg/>"))
+					s="<mesg/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<mesg>"),pgStr.indexOf("</mesg>"))+"</mesg>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - mesgStr="+s);
+			}
+			if (pgStr.contains("<message")) {
+				String s;
+				if (pgStr.contains("<message/>"))
+					s="<message/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<message>"),pgStr.indexOf("</message>"))+"</message>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - messageStr="+s);
+			}
+			if (pgStr.contains("<name")) {
+				String s;
+				if (pgStr.contains("<name/>"))
+					s="<name/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<name>"),pgStr.indexOf("</name>"))+"</name>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - messageStr="+s);
+			}
+			if (pgStr.contains("<severity")) {
+				String s;
+				if (pgStr.contains("<severity/>"))
+					s="<severity/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<severity>"),pgStr.indexOf("</severity>"))+"</severity>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - messageStr="+s);
+			}			
+			if (pgStr.contains("<origin")) {
+				String s;
+				if (pgStr.contains("<origin/>"))
+					s="<origin/>";
+				else
+					s=pgStr.substring(pgStr.indexOf("<origin>"),pgStr.indexOf("</origin>"))+"</origin>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - messageStr="+s);
+			}			
+			if (pgStr.contains("<description")) {
+				String s;
+				if (pgStr.contains("<description/>"))
+					s="substring";
+				else
+					s=pgStr.substring(pgStr.indexOf("<description>"),pgStr.indexOf("</description>"))+"</description>";
+				xmlStr=xmlStr+s;
+				//tbd System.out.println("TEST - messageStr="+s);
+			}			
+			if (pgStr.contains("<data")) {
+				String s="";
+				if (pgStr.contains("<data/>"))
+					s="<data/>";
+				else {
+					String[] tmp=pgStr.split("<data>");
+					for (String t: tmp) {
+						if (t.contains("<esp>")) {
+							String[] tmp1=t.split("</data>");
+							String line="<data>"+tmp1[0]+"</data>";
+							//tbd System.out.println("TEST - line="+line);
+							s=s+line;
+						}
+					}				
+				}
+				//tbd System.out.println("TEST - dataStr="+s);
+				xmlStr=xmlStr+s;
+			}
 			//tbd System.out.println("TEST - xmlStr="+xmlStr);
 			try {
 				org.json.JSONObject xmlJSONObj = XML.toJSONObject(xmlStr);
 				apiResponseJsonStr = xmlJSONObj.toString();
-				//tbd System.out.println("TEST - apiResponseJsonStr="+apiResponseJsonStr);
 				apiResponseJsonStr=apiResponseJsonStr.replace("\\\"\"", "\"");
+
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"data\":{}", "\"data\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"message\":{}", "\"message\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"description\":{}", "\"description\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"severity\":{}", "\"severity\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"name\":{}", "\"name\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"mesg\":{}", "\"mesg\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"errorCode\":{}", "\"errorCode\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"success\":{}", "\"success\": null");
 			} catch (JSONException je) {
 				Assert.assertTrue("PROBLEM - unable to convert xml to json. xmlStr='"+xmlStr+"' |  Exception="+je.getMessage(), false);
 			}
@@ -587,9 +666,9 @@ public class EOBBase extends EOBWebElements{
 		String apiResponseJson=getApiResponse(planType, memberType, apiRequestUrl);
 		//System.out.println("TEST - apiResponseJson="+apiResponseJson);
 		return apiResponseJson;
-		
+
 	}
-	
+
 	public EobApiResponse parseApiResponse(String apiResponseJson) {
 		JSONParser parser = new JSONParser();
 		JSONObject apiResponseJsobObj=null;
@@ -602,28 +681,28 @@ public class EOBBase extends EOBWebElements{
 		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null", apiResponseJsobObj!=null);
 		boolean success = (Boolean) apiResponseJsobObj.get("success");
 		String errorCode = (String) apiResponseJsobObj.get("errorCode");
-
 		if (!success) {
 			System.out.println("Unable to get a successful API response");
 			return null;
 		}
 		EobApiResponse apiResponse=new EobApiResponse();
+
 		apiResponse.setSuccess(success);
 		apiResponse.setErrorCode(errorCode);
-
 
 		JSONArray dataListArrayObj = (JSONArray) apiResponseJsobObj.get("data");
 		if (dataListArrayObj==null) {
 			System.out.println("TEST - API dataListArrayObj is null - there is no EOB in this search range");
 			return apiResponse;
 		} 
+
 		for (int i=0; i<dataListArrayObj.size(); i++) {
 			JSONObject eachObj = (JSONObject) dataListArrayObj.get(i);
 			String eobDate = (String) eachObj.get("eobDate");
 			String esp = (String) eachObj.get("esp");
 			String eobType = (String) eachObj.get("eobType");
 			String compoundDoc=(String) eachObj.get("compoundDoc");
-			
+
 			if (eobType!=null && !eobType.equals("")) { 
 				System.out.println("TEST - this is DREAM EOB - eobDate="+eobDate+" | espType="+eobType+" | esp="+esp+" | compoundDoc="+compoundDoc);
 				apiResponse.addEob(eobDate, esp, eobType, compoundDoc);
@@ -651,7 +730,7 @@ public class EOBBase extends EOBWebElements{
 	public boolean findEobOptionUnderClaims() {
 		return eobValidate(eobOptionUnderClaimsMenu);
 	}
-	
+
 	public void scrollElementToCenterScreen(WebElement element) {
 		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
 				+ "var elementTop = arguments[0].getBoundingClientRect().top;"

@@ -153,7 +153,7 @@ public class EobStepDefinition {
 			System.out.println("TEST - m_requestUrl="+m_requestUrl);
 			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
 			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
 
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
