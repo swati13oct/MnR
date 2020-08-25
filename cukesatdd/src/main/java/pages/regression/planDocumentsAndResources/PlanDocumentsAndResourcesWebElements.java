@@ -558,4 +558,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	
 	@FindBy(xpath="//h2[contains(text(),'issue with the system')]")
 	protected WebElement systemError;
+	
+	@FindBy(xpath="//div[contains(@class,'hw-program-root')]")
+	protected WebElement prevIssBody;
 }

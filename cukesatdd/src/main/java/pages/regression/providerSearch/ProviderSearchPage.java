@@ -262,6 +262,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		} else if (noWaitValidate(uhcProviderSearchBenefitsLnk)) {
 			uhcProviderSearchBenefitsLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
+			checkModelPopup(driver, 1);
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
