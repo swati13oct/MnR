@@ -538,6 +538,11 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
 			}
 		} else {
+			if (!apiResponseJsonStr.contains("<errorCode>200</errorCode>") && !apiResponseJsonStr.contains("<errorCode>200</errorCode>")) {
+				sleepBySec(5);
+				System.out.println("Retry one more time before giving up...");
+				driver.get(inputUrl);
+			}
 			//note: team-atest doesn't show the API response in json format, do some conversion to continue
 			System.out.println("TEST - response is showing as xml on browser");
 			String xmlStr="";
@@ -581,6 +586,7 @@ public class EOBBase extends EOBWebElements{
 				xmlStr=xmlStr+s;
 				//tbd System.out.println("TEST - messageStr="+s);
 			}
+			/* tbd 
 			if (pgStr.contains("<name")) {
 				String s;
 				if (pgStr.contains("<name/>"))
@@ -616,7 +622,7 @@ public class EOBBase extends EOBWebElements{
 					s=pgStr.substring(pgStr.indexOf("<description>"),pgStr.indexOf("</description>"))+"</description>";
 				xmlStr=xmlStr+s;
 				//tbd System.out.println("TEST - messageStr="+s);
-			}			
+			}		*/	
 			if (pgStr.contains("<data")) {
 				String s="";
 				if (pgStr.contains("<data/>"))
@@ -639,9 +645,7 @@ public class EOBBase extends EOBWebElements{
 			try {
 				org.json.JSONObject xmlJSONObj = XML.toJSONObject(xmlStr);
 				apiResponseJsonStr = xmlJSONObj.toString();
-				System.out.println("TEST - 1 - apiResponseJsonStr"+apiResponseJsonStr);
 				apiResponseJsonStr=apiResponseJsonStr.replaceAll("\\\\\"", "");
-				System.out.println("TEST - 2 - apiResponseJsonStr"+apiResponseJsonStr);
 
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"data\":{}", "\"data\": null");
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"message\":{}", "\"message\": null");
@@ -651,6 +655,7 @@ public class EOBBase extends EOBWebElements{
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"mesg\":{}", "\"mesg\": null");
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"errorCode\":{}", "\"errorCode\": null");
 				apiResponseJsonStr=apiResponseJsonStr.replace("\"success\":{}", "\"success\": null");
+				apiResponseJsonStr=apiResponseJsonStr.replace("\"uri\":{}", "\"uri\": null");
 			} catch (JSONException je) {
 				Assert.assertTrue("PROBLEM - unable to convert xml to json. xmlStr='"+xmlStr+"' |  Exception="+je.getMessage(), false);
 			}

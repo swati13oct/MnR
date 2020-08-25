@@ -249,7 +249,9 @@ public class EOBPage extends EOBBase{
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
 		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
-		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+		//tbd Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+		if (!eobValidate(eobHeader) || !eobValidate(eobSubSectionDescription))
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 

@@ -153,7 +153,7 @@ public class EobStepDefinition {
 			System.out.println("TEST - m_requestUrl="+m_requestUrl);
 			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing. s="+m_apiResponseJson, eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp1="+m_apiResponseJson, eobResponseObj!=null);
 			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
 
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
@@ -162,7 +162,7 @@ public class EobStepDefinition {
 				System.out.println("TEST - r_requestUrl="+r_requestUrl);
 				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
 				r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
-				Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing. string="+r_apiResponseJson, r_eobResponseObj!=null);
+				Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp2="+r_apiResponseJson, r_eobResponseObj!=null);
 				System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
 			}
 			//note: remove duplicated compoundDoc
