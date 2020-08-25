@@ -1175,6 +1175,42 @@ public class PaymentHistoryPage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan1() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan1, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan1.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan2() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan2, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan2.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
 
 	public SetUpRecurringPage clickOnSetUPAutomaticPayment() throws Exception {
 		Thread.sleep(20000);
@@ -1268,6 +1304,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		SetUpRecurringPaymentsButtonShip.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
+		Thread.sleep(3000);
 		if (driver.getTitle().contains("Set Up Recurring Payments")) {
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
