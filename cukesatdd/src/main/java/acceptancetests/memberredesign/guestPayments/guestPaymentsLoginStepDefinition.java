@@ -17,8 +17,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-
+import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
+import pages.memberrdesignVBF.ReviewOneTimePaymentsPage;
 import pages.regression.guestPayments.OneTimeGuestPaymentsPage;
+import pages.regression.guestPayments.ReviewOneTimeGuestPaymentsPage;
+import pages.regression.guestPayments.confirmOneTimeGuestPaymentsPage;
 import pages.regression.guestPayments.guestPaymentsLogin;
 import pages.regression.login.HSIDLoginPage;
 
@@ -191,19 +194,60 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 	
-	@Then("^I will enter card details$")
-	public void enter_CC_Details () {
+	@Then("^I will enter Credit card Details$")
+	public void enter_CC_Details (DataTable givenAttributes) {
 
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
 		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
-		oneTimeGuestPaymentsPage.enterCCDetails();
+		ReviewOneTimeGuestPaymentsPage ReviewOneTimeGuestPaymentsPage = oneTimeGuestPaymentsPage.enterCCDetails(memberAttributesMap);
+
+		if (ReviewOneTimeGuestPaymentsPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_OneTime_Guest_Payments_Page, ReviewOneTimeGuestPaymentsPage);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>User is on Review One time Guest Payments page<<<<<<<<<<<<<<<<<<<<<<<<,");
+		}
+		
+		
+	}
+	
+	@Then("^I validate header and and page elements on Review & Submit page$")
+	public void Review_And_Submit_Header_And_Page_Elements () {
+
+		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
+		reviewOneTimeGuestPaymentsPage.validateHeaderAndPageElementsOnReviewAndSubmitPage();
 
 	}
 	
-	@Then("^I click on Review and Submit to review payment details$")
-	public void Review_And_Submit () {
+	@Then("^I click on Confirm and Pay$")
+	public void  clickOnConfirmPay () {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
-		oneTimeGuestPaymentsPage.reviewAndSubmitPaymentDetails();
+		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
+		
+		confirmOneTimeGuestPaymentsPage ConfirmOneTimeGuestPaymentsPage = reviewOneTimeGuestPaymentsPage.clickOnConfirmPayOnReviewPage();
+
+		if (ConfirmOneTimeGuestPaymentsPage != null
+				|| (null == ConfirmOneTimeGuestPaymentsPage && ReviewOneTimeGuestPaymentsPage.isBusinessValidation)) {
+			getLoginScenario().saveBean(PageConstants.Confirm_OneTime_Guest_Payments_Page, ConfirmOneTimeGuestPaymentsPage);
+			System.out.println(">>>>>>>>>>>>>User is on Review One time payments page<<<<<<<<<<<<<<<<<<");
+			
+		} else if (null == ConfirmOneTimeGuestPaymentsPage && (!ReviewOneTimePaymentsPage.isBusinessValidation)) {
+			System.out.println(">>>>>>>>>>>.Error in navigation to Confirmation page!!!<<<<<<<<<<<<<");
+			Assert.fail(">>>>>>>>>>>>>.Error in navigation to Confirmation page!!!<<<<<<<<<<<<<<<<<");
+		}
+
+	}
+	
+	@Then("^I navigate to Payment confirmation page and validate all the page elements$")
+	public void  validatePaymentConfirmationPage() {
+
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage =  (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+		
+		confirmOneTimeGuestPaymentsPage.validatePaymentConfirmationPage();
+
 
 	}
 	

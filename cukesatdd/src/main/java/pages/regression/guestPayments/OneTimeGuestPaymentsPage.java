@@ -2,6 +2,7 @@ package pages.regression.guestPayments;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -16,6 +17,7 @@ import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.ReviewOneTimePaymentsPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -30,6 +32,36 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 
+
+	public boolean guestPaymentsValidate(WebElement element) {
+		long timeoutInSec=0;
+		return guestPaymentsValidate(element, timeoutInSec);
+	} 
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean guestPaymentsValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
 
 	
 	public void PaymentsDataVerificationonReviewPage() {
@@ -649,46 +681,98 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 
-
-
+//***********************Code For Predators start here****************
+	
 	public void validateHeaderAndPageElements() {
-		// TODO Auto-generated method stub
+
+		Assert.assertTrue("PROBLEM - unable to locate the One time payments Header",guestPaymentsValidate(guestPaymentsHeader));
+		Assert.assertTrue("PROBLEM - unable to locate the text below the header on One time payments Page",guestPaymentsValidate(oneTimePaymentTextBelowHeader));
+		Assert.assertTrue("PROBLEM - unable to locate select a Payment Header",guestPaymentsValidate(selectAPaymentHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount Due Radio Button",guestPaymentsValidate(pastAmountDueRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount due value",guestPaymentsValidate(pastAmountValue));
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount and Current Charges Radio Button",guestPaymentsValidate(pastAmountCurrentChargesRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate  Past Amount and Current Charges value",guestPaymentsValidate(pastAmountCurrentChargesValue));
+		Assert.assertTrue("PROBLEM - unable to locate other Amount Radio Button",guestPaymentsValidate(otherAmountRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate other Amount Text Field",guestPaymentsValidate(otherAmountTextField));
+		Assert.assertTrue("PROBLEM - unable to locate choose A Payment Heading",guestPaymentsValidate(chooseAPaymentHeading));
+		Assert.assertTrue("PROBLEM - unable to locate credit card Radio Button",guestPaymentsValidate(creditcardRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate eft Checking Radio Button",guestPaymentsValidate(eftCheckingRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Plan Name",guestPaymentsValidate(sideWidgetPlanName));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Member Name Label",guestPaymentsValidate(sideWidgetMemberNameLabel));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Member Name Value",guestPaymentsValidate(sideWidgetMemberNameValue));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Member ID Label",guestPaymentsValidate(sideWidgetMemberIDLabel));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Member ID Value",guestPaymentsValidate(sideWidgetMemberIDValue));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Payment Details Label",guestPaymentsValidate(sideWidgetPaymentDetailsLabel));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Payment Details Value",guestPaymentsValidate(sideWidgetPaymentDetailsValue));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Total You Pay Label",guestPaymentsValidate(sideWidgetTotalYouPayLabel));
+		Assert.assertTrue("PROBLEM - unable to locate side Widget Total You Pay Value",guestPaymentsValidate(sideWidgetTotalYouPayValue));
 		
-		validate(AmountDueTodayButton);
-		validate(creditcardRadioButton);
 	
 	}
 
 	
-
-
 
 	public void selectAmountDueAndCreditCard() {
 		// TODO Auto-generated method stub
 		
-		AmountDueTodayButton.click();
-		System.out.println("User selected Amount due today");
+		pastAmountDueRadioButton.click();
+		System.out.println(">>>>>>>>Past Amount due radio button is clicked<<<<<<<<<<<");
 		
 		creditcardRadioButton.click();
-		System.out.println("User selects Credit Card Option");
+		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
 		
+		validateTheAddCardDetailsIframeforCreditCard();
+	}
+
+
+	private void validateTheAddCardDetailsIframeforCreditCard() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Name On Card TextField",guestPaymentsValidate(nameOnCardTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Card Number Text Field",guestPaymentsValidate(cardNumberTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Expiration Month Dropdown",guestPaymentsValidate(expirationMonthDropdown));
+		Assert.assertTrue("PROBLEM - unable to locate Expiration Year Dropdown ",guestPaymentsValidate(expirationYearDropdown));
+		Assert.assertTrue("PROBLEM - unable to locate Review And Submit Button",guestPaymentsValidate(reviewAndSubmitButton));
+	
 	}
 
 
 
+	public ReviewOneTimeGuestPaymentsPage enterCCDetails(Map<String, String> accountAttributessMap) {
 
-	public void enterCCDetails() {
-
+		String Name = accountAttributessMap.get("Name");
+		String CreditCardNumber = accountAttributessMap.get("CreditCardNumber");
+		String ExpMonth = accountAttributessMap.get("Month");
+		String ExpYr = accountAttributessMap.get("Year");
+		
+		System.out.println(">>>>>>>>>>>>Entering Card Holder's Name<<<<<<<<<<<<<<<<<<<");
+		nameOnCardTextField.sendKeys(Name);
+		
+		System.out.println(">>>>>>>>>>>>Entering Credit Card Number<<<<<<<<<<<<<<<<<<<");
+		cardNumberTextField.sendKeys(CreditCardNumber);
+		
+		System.out.println(">>>>>>>>>>>>Entering Expiration Month<<<<<<<<<<<<<<<<<<<");
+		selectFromDropDownByText(driver, expirationMonthDropdown, ExpMonth);
+		
+		System.out.println(">>>>>>>>>>>>Entering Expiration Year<<<<<<<<<<<<<<<<<<<");
+		selectFromDropDownByText(driver, expirationYearDropdown, ExpYr);
+		
+		reviewAndSubmitButton.click();
+		System.out.println(">>>>>>>Review and Submit button is clicked<<<<<<<");
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, reviewAndSubmitPageHeader, 45);
+		
+		if (driver.getTitle().contains("Review")) {
+			System.out.println(">>>>>>>>>>Review Guest Payments page is displayed<<<<<<<<<<");
+			return new ReviewOneTimeGuestPaymentsPage(driver);
+		} else {
+			System.out.println(">>>>>>>>>Review Guest Payments page is not displayed<<<<<<<<<<");
+			return null;
+		}
 		
 	}
 
 
-
-
-	public void reviewAndSubmitPaymentDetails() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 }
