@@ -99,8 +99,8 @@ Feature: 2.05.1.ACQ-OLE PCP UHC
    	Then the user clicks on Submit Enrollment to complete enrollment
 # 	Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-    | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    #| Plan Type | <plantype> |
    @MA_OLE_UHC_PCP
     Examples: 
       | TID   | PlanType | Plan Year|zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|

@@ -107,8 +107,8 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
     Then the user clicks on Submit Enrollment to complete enrollment
  		#Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-     | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    # | Plan Type | <plantype> |
    
 		@MA_OLE_AARP_PCP @prodRegression 
     Examples: 

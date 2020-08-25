@@ -90,8 +90,8 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-    | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    #| Plan Type | <plantype> |
 		
 		@prodRegression @SNP_OLE_AARP
     Examples: 
@@ -202,8 +202,8 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-	Then the user validates the OLE Submission Details in GPS
-    | Plan Type | <plantype> |
+	#Then the user validates the OLE Submission Details in GPS
+   # | Plan Type | <plantype> |
     #@SNP_OLE_AARP @SNP_OLE_AARP_CSNP @OLE_Regression_Ulayer
     Examples: 
       | TID   | PlanType | Plan Year|zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
