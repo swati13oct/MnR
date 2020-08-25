@@ -614,7 +614,7 @@ try {
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
+		if(environment.equals("stage")||environment.equals("stage-0")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
@@ -1227,8 +1227,8 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "UHG_001375809";  
-			String pwd = "Oracle@1234"; 
+			String user = "UHG_000611921";  
+			String pwd = "Passx&9e";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
