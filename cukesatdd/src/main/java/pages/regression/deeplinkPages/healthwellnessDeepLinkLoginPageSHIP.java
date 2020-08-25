@@ -250,7 +250,8 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 						//System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on health and wellness deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
-						Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare™ is available now."));
+						//Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare™ is available now."));
+						Assert.assertTrue(driver.getTitle().contains("At Your Best by UnitedHealthcare"));
 						return true;
 						} else {
 							Assert.fail("The element " + textonpage.getText() + "is not found");

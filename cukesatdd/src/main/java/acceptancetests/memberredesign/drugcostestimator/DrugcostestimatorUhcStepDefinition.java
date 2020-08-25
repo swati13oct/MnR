@@ -1486,7 +1486,22 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 	
+	@When("^I navigate to find care & costs page from menu$")
+	public void i_navigate_to_find_care_costs_page_from_menu() throws Throwable {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dcePage = null;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
+		} else {
+			AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
+		}
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
+		Assert.assertTrue("Error in navigating to DCE page", dcePage!=null);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+	}
 }
 
 
