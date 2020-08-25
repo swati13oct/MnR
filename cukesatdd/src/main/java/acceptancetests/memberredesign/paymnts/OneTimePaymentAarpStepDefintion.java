@@ -1458,6 +1458,39 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@When("^user clicks on Make one time payment on payment overview page for plan 1$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan1() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan1();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
+	
+	@When("^user clicks on Make one time payment on payment overview page for plan 2$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan2() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan2();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
 	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Next button$")
 	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_Next_button(
 			String otherAmountvalue) throws Throwable {

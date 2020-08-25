@@ -89,6 +89,7 @@ public class VisitorProfileStepDefinition_AARP {
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		VPPPlanSummaryPage planSummary = visitorProfilePage.addPlanForMember();
+		planSummary.handlePlanYearSelectionPopup();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
