@@ -896,7 +896,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void clickBackButtonOnTransferToHD() {
 		Assert.assertFalse("PROBLEM - unable to locate Back Button On Transfer to HD page By Rally ",
-				pnpValidate(backButtonOnTransfer2HD));
+				validate(backButtonOnTransfer2HD));
 		backButtonOnTransfer2HD.click();
 	}
 
