@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.itextpdf.text.log.SysoCounter;
@@ -893,6 +894,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		BackButtonOnPharmacyLocatorPageByRally.click();
 	}
 
+	public void clickBackButtonOnTransferToHD() {
+		Assert.assertFalse("PROBLEM - unable to locate Back Button On Transfer to HD page By Rally ",
+				pnpValidate(backButtonOnTransfer2HD));
+		backButtonOnTransfer2HD.click();
+	}
+
+
+
+
 	public void validateFAQSectionOnChoosePlanYearPage() {
 		Assert.assertTrue("PROBLEM - unable to locate FAQ section on Choose a plan year page",
 				pnpValidate(FAQSectionOnChoosePlanYearPage));
@@ -1089,6 +1099,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
 				disclaimer());
+	}
+
+	public void clickOnRemoveItemFromOrderLink() {
+		Assert.assertTrue("PROBLEM - unable to locate Remove Item from Order link text element",
+				validate(removeItemFromOrderLink, 50));
+		removeItemFromOrderLink.click();
+
 	}
 
 	// F392596
@@ -1357,6 +1374,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isOneFourthHarveyBall());
+	}
+
+	public void validateRemovedMessage() {
+		Assert.assertTrue("PROBLEM - unable to locate a message element that confirming my medication was removed", validate(removedMessage));
+	}
+
+	public void validateZeroPrescriptionMessage() {
+		Assert.assertTrue("PROBLEM - unable to locate a message element that says zero prescription left to refill", validate(zeroPrescriptionMessage));
 	}
 
 	public void validateWalgreensDrug() {
