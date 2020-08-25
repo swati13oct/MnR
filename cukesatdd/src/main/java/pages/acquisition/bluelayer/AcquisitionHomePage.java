@@ -319,7 +319,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
 	private WebElement CallSamTFNClose;
 
-	String CallSam = "Call a Licensed Insurance Agent";
+	//String CallSam = "Call a Licensed Insurance Agent";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 	
@@ -362,7 +362,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn phone')]")
 	private WebElement samChatConnect;
 
-	String ChatSamText = "Chat with a Licensed Insurance Agent";
+	//String ChatSamText = "Chat with a Licensed Insurance Agent";
+   	//String ChatSamText= "Chat with a Licensed Insurance Agent";
+	String ChatSamText= "Chat Now";
+	//String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	@FindBy(id = "pharmacy-zip-search")
 	private WebElement thpharmacyzipsearch;
@@ -1799,7 +1803,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			validateChatSamContent();
+		//	validateChatSamContent();
 		}
 
 	}
@@ -1827,6 +1831,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
 		validateNew(chatsam);
+		System.out.println(chatsam.getText());
 		jsClickNew(chatsam);
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 		//validateandcloseChat();
