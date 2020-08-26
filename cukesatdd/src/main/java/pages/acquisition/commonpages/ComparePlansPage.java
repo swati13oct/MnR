@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -300,6 +301,16 @@ public class ComparePlansPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		closeButtonthankyoumessagepopup.click();
 		System.out.println("Thank you Message pop up is closed");
+	}
+	
+	public void validatePlansAddedonPlancompareforVisitorProfile() {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		int plansForCompare = allMAPlans.size();
+		if (plansForCompare == 2) {
+			Assert.assertTrue(true);
+			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
+		} else
+			Assert.assertTrue(false);
 	}
 	
 }

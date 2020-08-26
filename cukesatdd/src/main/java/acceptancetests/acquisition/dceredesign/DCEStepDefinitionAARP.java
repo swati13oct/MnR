@@ -25,7 +25,7 @@ import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -507,7 +507,7 @@ public class DCEStepDefinitionAARP {
 	
 	}
 
-	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile site$")
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);

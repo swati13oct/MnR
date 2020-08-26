@@ -163,7 +163,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
       | 00010 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsAARP08 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  @vppPlanDetailsAARP08 @vppPlanDetailsAARPRun03
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
@@ -215,6 +215,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
       | 00011 |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
+	
   @vppPlanDetailsAARP09 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
