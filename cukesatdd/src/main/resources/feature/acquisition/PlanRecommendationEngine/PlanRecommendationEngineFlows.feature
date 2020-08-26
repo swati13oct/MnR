@@ -201,7 +201,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   35034 | YES           | Bibb County | MAPD          | None         | outsideUS | Lookup  | robert      | No            | No             | No,No,No,Yes                  | Higher               | MS                | MA                |
+      |   35034 | YES           | Bibb County | MAPD          | None         | outsideUS | Lookup  | john      | No            | No             | No,No,No,Yes                  | Higher               | MS                | MA                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @F358830 @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE

@@ -19,13 +19,13 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -72,7 +72,7 @@ public class DCEStepDefinitionAARP {
 	}
 
 	/* verify DCE flow from Ulayer home page hover over */
-	@When("^I click on DCE Redesign link from Shop for a plan hover over for AARP site$")
+	@When("^I click on DCE Redesign link from Shop for a plan hover over$")
 	public void i_click_on_DCE_Redesign_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -122,7 +122,7 @@ public class DCEStepDefinitionAARP {
 		// zipCodePlanYearPage);
 	}
 
-	@Then("^plan year dropdown should be displayed during AEP in AARP$")
+	@Then("^plan year dropdown should be displayed during AEP$")
 	public void plan_year_dropdown_should_be_displayed_during_AEP_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
@@ -143,7 +143,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
-	@Then("^user should be navigated to zipcode and plan year capture page for AEP in AARP$")
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_AARP() {
 		/*
 		 * ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage)
@@ -164,7 +164,7 @@ public class DCEStepDefinitionAARP {
 		DCEbuildDrugList.validateDrugNotFound_ErrorMsg();
 	}
 
-	@Then("^user enter invalid zipcode in AARP$")
+	@Then("^user enter invalid zipcode$")
 	public void user_enter_invalid_zipcode_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -261,7 +261,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
-	@Then("^user enters valid zipcode and county in AARP$")
+	@Then("^user enters valid zipcode and county$")
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -275,14 +275,14 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 
-	@When("^user selects plan year in AARP$")
+	@When("^user selects plan year$")
 	public void user_selects_plan_year_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.selectPlanYear();
 	}
 
-	@When("^user clicks on continue button in Zip Entry Page in AARP$")
+	@When("^user clicks on continue button in Zip Entry Page$")
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
@@ -291,14 +291,14 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@Then("^user should be navigated to Review drug cost estimate page in AARP$")
+	@Then("^user should be navigated to Review drug cost estimate page$")
 	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
 
-	@Then("^error message should be displayed in AARP$")
+	@Then("^error message should be displayed$")
 	public void error_message_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
@@ -320,7 +320,7 @@ public class DCEStepDefinitionAARP {
 		buildDrugList.addDrugs(drugName);
 	}
 
-	@When("^user should verify the Extra help in AARP$")
+	@When("^user should verify the Extra help$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickOnSNPPlan();
@@ -328,7 +328,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
-	@When("^user should verify the drug extra qualification in drug pricing popup in AARP$")
+	@When("^user should verify the drug extra qualification in drug pricing popup$")
 	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDrugPricingText();
@@ -342,7 +342,7 @@ public class DCEStepDefinitionAARP {
 		buildDrugList.clickReviewDrugCostBtn();
 	}
 
-	@Then("^load screen should be displayed in AARP$")
+	@Then("^load screen should be displayed$")
 	public void load_screen_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
@@ -507,7 +507,7 @@ public class DCEStepDefinitionAARP {
 	
 	}
 
-	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -759,69 +759,69 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
-	@When("^user clicks on change pharmacy link from summary page in AARP$")
+	@When("^user clicks on change pharmacy link from summary page$")
 	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_AARP() throws InterruptedException  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickChangePharmacy();
 	}
 
-	@Then("^change pharmacy modal should be displayed in AARP$")
+	@Then("^change pharmacy modal should be displayed$")
 	public void change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.selectPharmacyModalDisplayed();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@Then("^user verify change pharmacy modal in AARP$")
+	@Then("^user verify change pharmacy modal$")
 	public void user_verify_change_pharmacy_modal_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
-	@When("^user clicks view drug cost button in AARP$")
+	@When("^user clicks view drug cost button$")
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickViewDrugCostBtn();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@When("^user clicks on change pharmacy link from details page in AARP$")
+	@When("^user clicks on change pharmacy link from details page$")
 	public void user_clicks_on_change_pharmacy_link_from_details_page_in_AARP() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@Then("^details page change pharmacy modal should be displayed in AARP$")
+	@Then("^details page change pharmacy modal should be displayed$")
 	public void details_page_change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.selectPharmacyModalDisplayed();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@Then("^user verify details page change pharmacy modal in AARP$")
+	@Then("^user verify details page change pharmacy modal$")
 	public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateSelectPharmacyPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@When("^user click on View Drug Pricing Modal in AARP$")
+	@When("^user click on View Drug Pricing Modal$")
 	public void User_click_on_View_Drug_Pricing_Modal_in_AARP() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickViewPricing();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
-	@When("^user click on Switch To Generic in AARP$")
+	@When("^user click on Switch To Generic$")
 	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickswitchToGeneric();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
-	@When("^user verify drug can switch to generic drug in AARP$")
+	@When("^user verify drug can switch to generic drug$")
 	public void user_verify_drug_can_switch_to_generic_drug_aarp(DataTable givenAttributes) throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		

@@ -1495,4 +1495,11 @@ public class HSIDStepDefinition {
 										     Thread.sleep(3000);
 										     virtualVisitDeeplinkLoginPage.validateVirtualVisitPage();
 										}
+										
+										@Then("^I click on logout and validate the login page$")
+										public void click_on_logout_validate_login_page() {
+											TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+											testHarnessPage.clickAccountProfile();
+											testHarnessPage.logout();
+										}
 }

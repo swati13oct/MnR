@@ -1,6 +1,6 @@
 Feature: 2.05.1.ACQ-OLE PCP UHC
 
-  @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer @fastandfurious @OLE @MA_OLE_UHC_PCP @prodRegression @F401735 @F427594
+  #@junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer @fastandfurious @OLE @MA_OLE_UHC_PCP @prodRegression @F401735 @F427594
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -60,6 +60,7 @@ Feature: 2.05.1.ACQ-OLE PCP UHC
     Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
+      |Plan Year | <planYear> |
    	Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
@@ -98,13 +99,18 @@ Feature: 2.05.1.ACQ-OLE PCP UHC
    	Then the user clicks on Submit Enrollment to complete enrollment
 # 	Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-    | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    #| Plan Type | <plantype> |
+   @MA_OLE_UHC_PCP
     Examples: 
       | TID   | PlanType | Plan Year|zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
        | 15513 | MA-MBI   |  current| 10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG|Valid|
      # 	| 15514 | MA-MBI   |  current| 10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |HI1562759    | 12345ABC     |PrescriptionCoverage            |PD5646136   | 12345BCD|Invalid|
-   
+   @MA_OLE_UHC_PCP_Future
+   Examples: 
+      | TID   | PlanType | Plan Year|zipcode | isMultutiCounty | county          | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
+       | 15513 | MA-MBI   |  future| 10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | New York | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG|Valid|
+     
   @MA_OLE_UHC_LT
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
@@ -154,6 +160,7 @@ Feature: 2.05.1.ACQ-OLE PCP UHC
    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
+      |Plan Year | <planYear> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page

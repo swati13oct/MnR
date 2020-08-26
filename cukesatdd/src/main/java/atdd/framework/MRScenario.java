@@ -614,7 +614,7 @@ try {
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
+		if(environment.contains("stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";

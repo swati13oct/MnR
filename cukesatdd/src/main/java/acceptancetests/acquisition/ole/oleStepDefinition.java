@@ -920,9 +920,10 @@ public class oleStepDefinition {
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			String planyear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
 			
 			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber,planName);
+			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber,planName,planyear);
 			if(Validation_Status){
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
@@ -2931,6 +2932,5 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 	Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
 */
 		}
-
 
 	}
