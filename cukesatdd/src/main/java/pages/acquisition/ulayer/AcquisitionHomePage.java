@@ -309,7 +309,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
-   	String CallSam= "Call a Licensed Insurance Agent";
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
@@ -400,7 +399,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
 
-   	String ChatSamText= "Chat with a Licensed Insurance Agent";
+   	//String ChatSamText= "Chat with a Licensed Insurance Agent";
+	String ChatSamText= "Chat Now";
+	//String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -637,7 +639,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		testSiteUrl=driver.getCurrentUrl();
 		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
 		try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);
@@ -1665,7 +1667,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			present = false;
 			}
 			if (present) {
-			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			  System.out.println("@@@@@@@@@ Able to find Call TFN widget @@@@@@@@@");
 			  
 			}
 		/*
@@ -1695,6 +1697,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
+			System.out.println(callsam.getText());
 			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
@@ -1721,8 +1724,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				present = false;
 			}
 			if (present) {
-			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@"); 
-			  validateChatSamContent();	
+			  System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@"); 
+			//  validateChatSamContent();	
 			  }
 			
 			}
@@ -1748,7 +1751,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 			public void validateChatpopup() throws InterruptedException {
 				//CommonUtility.checkPageIsReady(driver);
+				
 				validateNew(chatsam);
+				System.out.println(chatsam.getText());
 				jsClickNew(chatsam);
 				System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
 				//validateandcloseChat();

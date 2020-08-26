@@ -74,19 +74,21 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	}
 	
 	public void selectPlanYear() {
-		planYearDropdown.click();
-		Select planYear = new Select(planYearDropdown);
-		planYear.selectByIndex(1);
+		if(validate(planYearDropdown)) {
+			planYearDropdown.click();
+			Select planYear = new Select(planYearDropdown);
+			planYear.selectByIndex(1);
+		}
 	}
 	
-	public ZipCodePlanYearCapturePage validateZipCodePlanYearCapturePageNonAEP() {
+	public void validateZipCodePlanYearCapturePageNonAEP() {
 		CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
 		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
 			Assert.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
-			return new ZipCodePlanYearCapturePage(driver);
 		}
+		else {
 		Assert.fail("Did not Navigate to ZipCode and Plan year capture Page");
-		return null;
+		}
 	}
 	
 	public ZipCodePlanYearCapturePage validateZipCodePlanYearCapturePageAEP() {

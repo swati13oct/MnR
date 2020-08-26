@@ -21,7 +21,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -60,7 +60,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'View Plans Details')]")
+	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
@@ -114,6 +114,44 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
+	@FindBy(id = "selectaPharmacyHeader")
+	public WebElement selectPharmacyHeader;
+	
+	@FindBy(id = "selectPharmcyModalCloseLink")
+	public WebElement selectPharmacyModalCloseBtn;
+	
+	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
+	public WebElement selectedPharmacyLink;
+	
+	@FindBy(id = "milesDropdown")
+	public WebElement distanceDrpDown;
+	
+	@FindBy(id = "pharmacy-zip-filter")
+	public WebElement pharmacyZipcodeSearch;
+	
+	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
+	public WebElement pharmacySearchBtn;
+	
+	@FindBy(id = "mailSelectPharmacyBtn0")
+	public WebElement preferredMailPharmacy;
+	
+	@FindBy(id = "optumRxTxt")
+	public WebElement optumRxMsg;
+	
+	@FindBy(xpath = "//*[@role='list']")
+	public WebElement pharmacyListSection;
+	
+	@FindBy(id = "matchingLbl")
+	public WebElement matchingPharmacyCount;
+	
+	@FindBy(id = "sortDropdown")
+	public WebElement sortDrpdown;
+	
+	@FindBy(id = "paginationBackBtn")
+	public WebElement backBtn;
+	
+	@FindBy(id = "paginationNextBtn")
+	public WebElement nextBtn;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -534,6 +572,34 @@ public class DrugDetailsPage extends UhcDriver {
 		return DrugDetails;
 	}
 
-
-
+	public void selectPharmacyModalDisplayed() throws InterruptedException {
+		waitforElementNew(selectPharmacyHeader, 30);
+		if(validateNew(selectPharmacyHeader)) {
+			System.out.println("Select Pharmacy Modal displayed");
+		}
+		else {
+		Assert.fail("Select Pharmacy Modal not displayed");
+		}
+	}
+	
+	public void validateSelectPharmacyPage() throws InterruptedException {
+		if(validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink) &&	validateNew(distanceDrpDown) &&
+		validateNew(pharmacyZipcodeSearch)&&
+		validateNew(pharmacySearchBtn) &&
+		validateNew(preferredMailPharmacy)&&
+		validateNew(pharmacyListSection)&&
+		validateNew(matchingPharmacyCount)&&
+		validateNew(sortDrpdown)&&
+		validateNew(backBtn)&&
+		validateNew(nextBtn)) {
+			System.out.println("Select Pharmacy Modal validated");
+		}
+		else {
+		Assert.fail("Select Pharmacy Modal not as expected");
+		}
+	}
+	
+	public void  clickChangePharmacyLinkDetailsPage() {
+		DrugDetails_ChangePharmacyLnk.click();
+	}
 }

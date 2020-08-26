@@ -698,8 +698,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(css="a#provider-title-")
 		private WebElement existingProvidersForNonMember;
 		
-		@FindBy(css="div#providersBanner>div")
-		private WebElement existingProviders;
+		@FindBy(css="div#newProvidersBanner>div")
+		private WebElement numberOfProviders;
 
 		@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 		private WebElement rockyMountainLogo;
@@ -1023,10 +1023,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
-		String mproviderName=ProviderName.getText().trim();
-		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
-		rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
-		Assert.assertEquals(mproviderName,rallyProviderName);
+
+		String mproviderName=ProviderName.getText().trim().split("\n")[0];
+		
+		  mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		  rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		 
+		Assert.assertTrue(mproviderName.contains(rallyProviderName));
+
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}
 
@@ -2338,7 +2342,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+		if(driver.getCurrentUrl().contains("drug-costs")){
 			System.out.println("DCE Page is loaded");
 			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
 		}	
@@ -2383,7 +2387,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+		if(driver.getCurrentUrl().contains("estimate-drug-costs")){
 			System.out.println("DCE Page is loaded");
 			return new DrugCostEstimatorPage(driver);
 		}	
@@ -3839,6 +3843,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
 			System.out.println("Scrolled...");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			waitforElementNew(agentModeBanner);
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -3850,16 +3859,26 @@ for (int i = 0; i < initialCount + 1; i++) {
 			
 			//Validate Providers
 			if(!providers.equalsIgnoreCase("no")) {
+				driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='provider-list added'][1]")).click();
+				//Validate Drugs
+				List<WebElement> providersList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li"));
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers ("+providersList.size()+")", numberOfProviders.getText().trim());
+				
+				//Split the providers
+				String[] provider = providers.split(";");
+				
 				for(int i=0;i<providersList.size();i++) {
-					Assert.assertTrue(providers.contains(providersList.get(i).getText().trim()));
-					System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+					scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")));
+					provider[i]=provider[i].replace(":", "\n");
+					Assert.assertEquals(provider[i], driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim());
+					System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim()+"#########");
 				}
 			}else {
-				System.out.println("#########"+existingProviders.getText().trim()+"#########");
-				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 			}
 			
-			validatePlanSummary();
 			//Validate Plan Name
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
@@ -3993,11 +4012,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 					System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
 				}
 			}else {
-				System.out.println("#########"+existingProviders.getText().trim()+"#########");
-				Assert.assertEquals("Your existing providers (0)", existingProviders.getText().trim());
+				System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+				Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 			}
 			
-			validatePlanSummary();
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
 			
 			//Validate Drugs

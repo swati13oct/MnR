@@ -62,7 +62,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement addToDrugList;
 	
-	@FindBy(xpath = "(//button//span[contains(text(),'Next: Review Drug Costs')])[1]")
+	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 	
 	@FindBy(xpath = "//input[@id='zip-code']")

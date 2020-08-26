@@ -2166,18 +2166,6 @@ public class VppStepDefinitionUpdatedAARP {
 		planComparePage.validateChatSam();
 				
 	}
-	
-	
-	@Then("^the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on Plan Compare")
-	  public void user_clicks_enrollInPlan_PlanCompare_AARP() throws InterruptedException{
-		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plan();
-	   if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading Welcome Page for OLE");
-		}
-	  }
   
 	@Then("^the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on new Plan Compare")
 	  public void user_clicks_enrollInPlan_newPlanCompare_AARP() throws InterruptedException{
@@ -2188,19 +2176,6 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
-	  }
-	
-	@Then("^the user clicks on Plan details linnk in Plan Compare page")
-	  public void user_clicks_planDetails_PlanCompare_AARP() throws InterruptedException{
-		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetails();
-			if (vppPlanDetailsPage != null) {
-					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-					Assert.assertTrue(true);
-				} 
-			else
-				Assert.fail("Error in Loading the Plan Details Page");
-		
 	  }
 	
 	@Then("^the user clicks on Plan details link in new Plan Compare page for AARP")
@@ -2223,6 +2198,7 @@ public class VppStepDefinitionUpdatedAARP {
 			if (plansummaryPage != null) {
 					getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 					Assert.assertTrue(true);
+					plansummaryPage.handlePlanYearSelectionPopup();
 				} 
 			else
 				Assert.fail("Error in navigating back to Plan Summary Page");
@@ -2286,13 +2262,6 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		
 	}
-	
-	@Then("^remove one plan from plan compare page for AARP$")
-	public void remove_one_plan_from_plan_compare_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnRemoveLink();
-	}
 
 	@Then("^click on back to plans on plan compare page for AARP$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_AARP() throws Throwable {
@@ -2328,13 +2297,6 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-	@Then("^Click on Add Icon and verify it navigates to plan summary page for AARP$")
-	public void click_on_Add_Icon_and_verify_it_navigates_to_plan_summary_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnAddIcon();
-	}
-
 	@Then("^check one plan and add it to plancompare for AARP")
 	public void check_one_plan_and_add_it_to_plancompare_for_AARP() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2346,13 +2308,6 @@ public class VppStepDefinitionUpdatedAARP {
 			// comparePlansPage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@Then("^Verify newly added plan displayed on plan compare page for AARP$")
-	public void verify_newly_added_plan_displayed_on_plan_compare_page_for_AARP() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validatenewlyAddPlan();
 	}
 
 	@Then("^verify plan compare checkbox is not visible on plan summary on AARP$")
@@ -3773,4 +3728,27 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 
 	}
 	
+	@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in AARP$")
+	public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean optionalRiderFlag;
+				if(memberAttributesMap.get("Optional Rider").isEmpty())
+					optionalRiderFlag=false;
+				else {
+					String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(memberAttributesMap.get("Optional Rider"));
+					optionalRiderFlag=true;
+				}
+		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
+	}
 }

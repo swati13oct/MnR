@@ -503,6 +503,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
 	protected WebElement LookUpDrugsButton;
 	
+	@FindBy(id = "globalContentIdForSkipLink")
+	private WebElement PaymentHeadingNew;
+	
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -4268,13 +4271,20 @@ public class AccountHomePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
-			System.out.println("Payment Overview page displayed");
-			return new PaymentHistoryPage(driver);
-		} else {
-			System.out.println("payment overview page not displayed");
-			return null;
+		try {
+			if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+				System.out.println("Payment Overview page displayed");
+				return new PaymentHistoryPage(driver);
+			}
+		} catch (Exception e) {
+			if(PaymentHeadingNew.getText().contains("Premium Payments")){
+				System.out.println("Payment Overview page displayed");
+				return new PaymentHistoryPage(driver);
+			}
 		}
+		System.out.println("payment overview page not displayed");
+		return null;
+		
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage1() {

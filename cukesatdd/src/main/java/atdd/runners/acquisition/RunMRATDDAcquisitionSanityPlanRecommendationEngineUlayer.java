@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionSanityPlanRecommendationEngineUlayer
+ * this file is to run Sanity test cases for PRE using RunMRATDDAcquisitionSanityPlanRecommendationEngineUlayer
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(

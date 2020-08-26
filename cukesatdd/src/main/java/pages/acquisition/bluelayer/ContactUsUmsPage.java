@@ -17,10 +17,10 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsUmsPage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+	@FindBy(xpath = "//*[contains(@class,'header') and contains(text(),'Contact')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]//parent::h2//parent::div//parent::div//parent::div//parent::div//parent::div")
+	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
 	public static WebElement rightRailSection_ProvidersOnly;
 	
 	@FindBy(id = "collapse2heading_article_mededaccordion0")

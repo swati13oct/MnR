@@ -22,7 +22,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |current|
 
   @vppPlanCompareAARP02 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
-  Scenario Outline: UID: <UID> - Plan Type: <plantype> - Verify Call sticky action menu on AARP site
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
