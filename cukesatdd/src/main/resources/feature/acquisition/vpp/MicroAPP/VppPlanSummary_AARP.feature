@@ -320,7 +320,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planname                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
-  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
