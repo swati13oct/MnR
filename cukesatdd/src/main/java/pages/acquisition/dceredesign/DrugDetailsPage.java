@@ -153,6 +153,15 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
+	
+	@FindBy(xpath = "//h1']")
+	public WebElement planHeader;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -177,6 +186,20 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		else
 		Assert.fail("Plan Name validation Failed for Drug Details Page");
+	}
+	
+	public void validateDrugandPanButton() {
+		validateNew(backtoDrugEstBtn);
+		validateNew(backtoSummaryBtn);
+	}
+	
+	public void clickOnBacktoDrugBtn() {
+		validateNew(backtoDrugEstBtn);
+		backtoDrugEstBtn.click();
+	}
+	
+	public void validatePlanDrugDetails() {
+		validateNew(planHeader);
 	}
 
 	public void validateDrugCosts() {

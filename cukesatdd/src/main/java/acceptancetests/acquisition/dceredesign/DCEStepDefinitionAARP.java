@@ -568,6 +568,27 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	
+	@Then("^the user verify the drug cost estimator and view plan summary on VPP detail page in AARP$")
+	public void the_user_verify_the_drug_cost_estimator() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.validateDrugandPanButton();
+	}
+	
+	@Then("^the user click on drug cost estimator on vpp plan detail page in AARP$")
+	public void the_user_click_on_drug_cost_estimator() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.clickOnBacktoDrugBtn();
+	}
+	
+	@Then("^User validates planName matches plan Name in DCE detail page in AARP$")
+	public void the_user_validates_matches_planname() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.validatePlanDrugDetails();
+	}
 
 	@Then("^the user validates Drug Costs section$")
 	public void the_user_validates_Drug_Costs_section() throws Throwable {

@@ -51,3 +51,60 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
+      
+      @DCE_Redesign_DCE_Detail_to_Vpp_Details
+  Scenario Outline: Test to verify the Drug cost estimator and view plan summary from DCE to VPP detail page
+   Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> | 
+     And clicks on Review drug cost button  
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates planName matches plan Name in VPP
+    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
+    Then the user click on drug cost estimator on vpp plan detail page in AARP
+    Then User validates planName matches plan Name in DCE detail page in AARP
+      
+      Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+      @DCE_Redesign_VPPSummary_to_Vpp_Details
+      
+      
+      Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
+    Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |   
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates planName matches plan Name in VPP
+    #Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
+    #Then the user click on view plan summary on vpp detail page in AARP
+    # Then user click on veiw plan details on summary page in AARP
+    # Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
+      
+      Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+      
+      
