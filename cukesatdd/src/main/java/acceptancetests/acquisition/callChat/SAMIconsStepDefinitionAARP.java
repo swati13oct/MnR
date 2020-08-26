@@ -15,7 +15,8 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+//import pages.acquisition.commonpages.AcquisitionHomePage;
 /**
  *Functionality:Global Header Footer 
  */
