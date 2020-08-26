@@ -7,7 +7,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
 ###############################Regression Scenarios Begin Here ########################################
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
-  @memAuth_benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @prod_BnC_Part1 
+  @memAuth_benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -29,7 +29,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15084 | ashah120  | Mnrqa003  |  2jseelin | MAPD   | providerTier_BNC |
       
  #TC02_Primarycareprovider_specialist_withprovidertiering
-  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @prod_BnC_Part1 
+  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @deprecated 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member witprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -51,7 +51,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
  
 
   #TC04_OutpatientSurgeryCentervisits_withoutprovidertiering
-  @memAuth_benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @outpatientcenterMapd 
+  @memAuth_benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @deprecated 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withoutprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -96,7 +96,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15088 |ashah120 | Mnrqa003 |jan06450 | MAPD   | memberWithoutProviderTiering_BnC |
       
        #TC07_Copay_Coinsurance_in_DrugCostsTable 
-  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @prod_BnC_Part2     
+  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @deprecated     
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the copay coinsurance in drugcosts table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -117,7 +117,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15090 |ashah120 | Mnrqa003 |JUDYSTOKES7@GMAIL.COM| MAPD     | Individual_BnC | NON LIS          |
       
    #TC08_BenefitsFor_ComboMembers                                          
-  @benefitsAndCoverage12 @BenefitsForCombo @regression @combo_Benefits
+  @benefitsAndCoverage12 @BenefitsForCombo @regression @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -133,7 +133,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then The user navigate to Benefits and Coverage page
     And the user validates the benefits for a combo member
 
-    Examples: #81aleanjackson
+    Examples:
       | TID   |username  | password  | MemUserName | planType | memberType |
       | 15091 |ashah120  |Mnrqa003 | 81aleanjackson|SHIP_HIP    | ComboFEDShip_BnC |
       
@@ -214,7 +214,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       |15094|ashah120|Mnrqa003|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
       
  #TC12_Benefits_for_MedicaMember
-  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @Medica_Nonlis
+  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -302,7 +302,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15095 |ashah120|Mnrqa003|SUSICHAPMAN@GMAIL.COM| Medica  |Individual_BnC|NON LIS      |ENGLISH |Summary of Benefits| Evidence of Coverage|Comprehensive Formulary - Drug List|Alternative Drug List| 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |       | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018 | Not Available | Tier 2        | true       |IndEffectiveMedica| 6| NoRider |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
-  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @Links_Validation_MA
+  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -379,7 +379,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
 
   #TC14_Benefits_for_PCPMember
-  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @Pcp_Medica_Nonlis
+  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -558,7 +558,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15243 |ashah120| Mnrqa003|BHTRUE1           |PDP       | MailOrderPharamacy_BnC |
       
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
-  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @SavePdpWidgetMapd
+  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -874,7 +874,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15245 |ashah120| Mnrqa003|JamesRShuler1| MAPD| Individual_BnC | LIS 1| ENGLISH | Summary of Benefits | Evidence of Coverage |Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019| Not Available| Extra Help Level : 1 |IndEffectiveAARP |7|Rider |     
       
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
-  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis  @Nonlis
+  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -1115,7 +1115,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15244 |ashah120| Mnrqa003|jfesig1@comcast.net| PDP | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
          
  #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage  @prod_BnC_Part8
+  @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
