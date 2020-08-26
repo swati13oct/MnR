@@ -342,7 +342,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 
                                 public void comparingDrugwithDCE() {
                             		System.out.println("Validating " + page + " page druglist with VPP drugs");
-                                	DrugsInDCE = ACQDrugCostEstimatorPage.DCEDrugsList;
+                            		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+                        			DrugsInDCE = dce.vppDrugsResults;
                             		threadsleep(2000);
                             		drugnamesList();
                             		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
@@ -401,7 +402,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 	for (int i = count-1; i >= 0; i--) {
                     					threadsleep(1000);
                     					drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() +" "
-                    							+drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText());
+                    							+drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().toUpperCase());
                     					}
                                 	Collections.sort(drugNames);
                         			System.out.println("Drugs Name list is : "+drugNames);

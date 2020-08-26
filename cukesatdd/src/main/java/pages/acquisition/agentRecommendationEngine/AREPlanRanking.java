@@ -233,6 +233,14 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Drop close : " + dropClose);
 		Assert.assertFalse(dropClose);
 	}
+	
+	public void validateUIPlanRanking() {
+		System.out.println("Validate ARE PlanRanking Dropdown UI : ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		Assert.assertFalse(validate(planRankingTxt), "Ranking text is displaying");
+		Assert.assertFalse(validate(planRankingDropdown), "Ranking Dropdown is displaying");
+	}
 
 	public void alertAccept() {
 		driver.switchTo().alert().accept();

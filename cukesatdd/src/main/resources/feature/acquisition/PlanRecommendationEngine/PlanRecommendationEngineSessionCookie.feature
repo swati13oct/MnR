@@ -86,21 +86,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
-    And I have added a drugs to my drug list
-      | Drug | <drug> |
-    And user selects drugs details in drugs page
-      | Drug      | <drug>      |
-      | Dosage    | <dosage>    |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-    When user successfully adds drugs
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page in DCE
-    And I select the first pharmacy in DCE
-    And I navigate to step3 page and validate in DCE
-      | Drug | <drug> |
-    And the user clicks on return link to navigate to plan summary page
+   When user adds Drugs in vpp summary page
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -112,8 +99,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Drug Selection | <Drug Selection> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | drug    | dosage   | quantity | frequency     | branded |
-      |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
 
   @PRE @planrecommendation @providersessionVPPtoPRE @F358845 @F427538 @F458224 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans

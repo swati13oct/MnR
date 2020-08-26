@@ -28,7 +28,7 @@ public class DCEPage extends UhcDriver {
 
 	// DCE Page Elements
 
-	@FindBy(css = "#add-drug>section")
+	@FindBy(css = "#adddrugfooter")
 	private WebElement drugAddBtn;
 
 	@FindBy(css = "input#drugsearch")

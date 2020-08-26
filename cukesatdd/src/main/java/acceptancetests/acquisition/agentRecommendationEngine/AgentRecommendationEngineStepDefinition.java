@@ -71,6 +71,12 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.validateUIElements();
 	}
+	
+	@Then("^agent validates plan ranking drop down not displaying in plancompare page$")
+	public void agent_verify_NoplanrankingUI() {
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.validateUIPlanRanking();
+	}
 
 	@Then("^user adds Drugs in plan compare page$")
 	public void add_drugs_plan_compare_page(DataTable givenAttributes) {
