@@ -3505,16 +3505,45 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void handlePlanYearSelectionPopup(String planYear) {
-
+/*
 			CommonUtility.checkPageIsReadyNew(driver);			
 				if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 					if(validate(CurrentYearPlansBtn, 20)) {
 						System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 						jsClickNew(CurrentYearPlansBtn);	
 					}
-				}
+				}*/
+		CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
+			//if(validate(NextYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);	
+		}
+		else{
+			//if(validate(NextYearPlansBtn, 20)) {
+			System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
+			jsClickNew(NextYearPlansBtn);	
+			}
+		
 			
 	}
+	
+	/*public void handlePlanYearFutureSelectionPopup(String planYear) {
+
+		CommonUtility.checkPageIsReadyNew(driver);			
+			if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
+				//if(validate(NextYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);	
+			}
+			else{
+				//if(validate(NextYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
+				jsClickNew(NextYearPlansBtn);	
+				}
+		//	}
+		
+}*/
 			
 		
 
