@@ -307,6 +307,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then user selects Last 24 months in the Payment History dropdown
     Then user validates data is present in Payment history table
     Then user selects Previous Calendar Year in the Payment History dropdown and views Payment History
+    Then user validates data is present in Payment history table
     Then User Scrolls down to the Billing history Section of Second Plan
     Then user clicks to expand the billing hisory section of Second plan
     Then user validates billing history section header exists of Second Plan
@@ -329,7 +330,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then user selects Last 24 months in the Payment History dropdown of Second Plan
     Then user validates data is present in Payment history table of Second Plan
     Then user selects Previous Calendar Year in the Payment History dropdown of Second Plan and views Payment History
-
+    Then user validates data is present in Payment history table of Second Plan
     Examples: 
       | planType          | memberType                     | copayCategory |
       | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       |
