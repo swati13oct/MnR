@@ -10,7 +10,7 @@ Feature: 2.05.1.ACQ-OLE MA UMS
      When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
       And the user selects plan year for the UMS site
-    |Plan Year | <planyear> |
+    |Plan Year | <planYear> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
