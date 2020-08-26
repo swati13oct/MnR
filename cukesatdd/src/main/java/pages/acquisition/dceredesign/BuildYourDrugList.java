@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 public class BuildYourDrugList extends UhcDriver {
@@ -67,6 +68,9 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
+	
+	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
+	public WebElement returnToCompareBtn;
 
 
 	public BuildYourDrugList(WebDriver driver) {
@@ -255,5 +259,11 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 	
+	public ComparePlansPage returnToPlanComparePage() {
+		
+		validateNew(returnToCompareBtn);
+		returnToCompareBtn.click();
+		return new ComparePlansPage(driver);
+	}
 
 }

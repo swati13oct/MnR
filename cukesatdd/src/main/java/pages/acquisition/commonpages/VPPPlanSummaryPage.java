@@ -1284,15 +1284,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 
-	public ComparePlansPage clickOnCompareLink(){
-		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
-		compareLinks.get(1).click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public ComparePlansPage clickOnCompareLink(String planType){
+		if(planType.contains("MAPD")) {
+			List<WebElement> compareLinks = driver
+					.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
+			compareLinks.get(1).click();
+		}else {
+			List<WebElement> compareLinks = driver
+					.findElements(By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
+			jsClickNew(compareLinks.get(1));
 		}
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
