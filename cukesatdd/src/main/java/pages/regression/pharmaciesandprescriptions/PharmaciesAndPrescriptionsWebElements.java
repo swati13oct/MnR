@@ -737,6 +737,34 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		return proceeding;
 	}
 
+	public boolean clickXButton() {
+
+		waitforElement(removeXPopUpBtn);
+		boolean proceeding = true;
+		jsClickNew(removeXPopUpBtn);
+		if (driver.getWindowHandles().size() > 0) {
+			proceeding = true;
+			Assert.assertTrue(driver.getWindowHandles().size() > 0);
+		} else {
+			proceeding = false;
+		}
+		return proceeding;
+	}
+
+	public boolean clickRemoveCancelButton() {
+
+		waitforElement(removePopUpCancelBtn);
+		boolean proceeding = true;
+		jsClickNew(removePopUpCancelBtn);
+		if (driver.getWindowHandles().size() > 0) {
+			proceeding = true;
+			Assert.assertTrue(driver.getWindowHandles().size() > 0);
+		} else {
+			proceeding = false;
+		}
+		return proceeding;
+	}
+
 	public boolean clickCancelButton() {
 
 		waitforElement(siteLeavingPopUp);
@@ -1194,8 +1222,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h1[@data-testid='confirm__delete__message']")
 	protected WebElement removeYesPopUp;
 
+	@FindBy(xpath = "//div[@data-testid='confirm__delete__close']//button")
+	protected WebElement removeXPopUpBtn;
+
 	@FindBy(xpath = "//button[@data-testid='confirm__delete__yes']")
 	protected WebElement removePopUpYesBtn;
+
+	@FindBy(xpath = "//button[@data-testid='confirm__delete__cancel']")
+	protected WebElement removePopUpCancelBtn;
 
 	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div/div[2]/div/div/div[3]/div[3]/div[2]/div[1]/div[2]/div[2]")
 	protected WebElement walgreensRefillsLeft;

@@ -75,4 +75,24 @@ public class TransferToHDRemovePrescriptionStepDefinition {
 
 	}
 
+	@When("^user views popup modal and selects Cancel$")
+	public void user_views_popup_modal_and_selects_Cancel() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickRemoveCancelButton();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
+	@When("^user views popup modal and selects X$")
+	public void user_views_popup_modal_and_selects_X() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickXButton();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
 }
