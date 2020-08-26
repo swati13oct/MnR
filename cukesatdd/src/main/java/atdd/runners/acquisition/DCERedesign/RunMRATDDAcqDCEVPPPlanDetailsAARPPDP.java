@@ -10,13 +10,13 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for DCE REdesign - Scenario for VPP Plan Details Page for PDP Plans
+ * this file is to run test cases for DCE REdesign - Scenario for VPP Plan Details Page for PDP Plans on AARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanDetailsAARPPDP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanDetailsAARPPDP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanDetailsAARPPDP.json" }, tags = { "@DCE_Redesign_VPP_PlanDetails_PDP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanDetailsAARPPDP.json" }, tags = { "@DCE_Redesign_VPP_PlanDetails_PDP_AARP" })
 
 public class RunMRATDDAcqDCEVPPPlanDetailsAARPPDP {
 
