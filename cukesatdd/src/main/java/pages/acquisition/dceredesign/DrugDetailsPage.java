@@ -21,7 +21,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -60,7 +60,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'View Plans Details')]")
+	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")

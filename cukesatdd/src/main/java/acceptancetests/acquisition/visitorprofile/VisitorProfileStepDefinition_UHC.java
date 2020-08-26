@@ -143,7 +143,7 @@ public class VisitorProfileStepDefinition_UHC {
 		visitorProfile.validateAddedMsPlans(savePlanNames);
 	}
 	
-	@And("^the user clicks on the shopping cart icon on DCE page$")
+	@And("^the user clicks on the shopping cart icon on DCE page on uhc$")
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		VisitorProfilePage visitorProfilePage = dce.clickOnShoppingCart();
