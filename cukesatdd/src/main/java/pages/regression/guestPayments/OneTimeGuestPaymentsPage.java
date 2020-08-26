@@ -845,10 +845,13 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		validateTheeftAccDetailsIframeforEFTAcc();
 	}
 
-	public void selectOtherAmountDueAndCreditCard() {
+	public void selectOtherAmountDueAndCreditCard(String otherAmount) {
 
 		otherAmountRadioButton.click();
 		System.out.println(">>>>>>>>Other Amount due radio button is clicked<<<<<<<<<<<");
+         
+		System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<");
+		otherAmountTextField.sendKeys(otherAmount);
 
 		creditcardRadioButton.click();
 		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
@@ -856,10 +859,13 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		validateTheAddCardDetailsIframeforCreditCard();
 	}
 
-	public void selectOtherAmountDueAndEFTAcc() {
+	public void selectOtherAmountDueAndEFTAcc(String otherAmount) {
 
 		otherAmountRadioButton.click();
 		System.out.println(">>>>>>>>Other Amount due radio button is clicked<<<<<<<<<<<");
+
+        System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<");
+	    otherAmountTextField.sendKeys(otherAmount);
 
 		eftCheckingRadioButton.click();
 		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");

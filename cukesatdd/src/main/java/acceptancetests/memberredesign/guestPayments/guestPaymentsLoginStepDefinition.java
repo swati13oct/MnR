@@ -186,7 +186,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 	
-	@Then("^I select Past Amount Due and choose a Credit/Debit payment Method$")
+	@Then("^I select Past Amount Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountDueAndCC() {
 
 		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
@@ -245,7 +245,6 @@ public class guestPaymentsLoginStepDefinition {
 	public void  validatePaymentConfirmationPage() {
 
 		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage =  (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
-		
 		confirmOneTimeGuestPaymentsPage.validatePaymentConfirmationPage();
 
 
@@ -279,7 +278,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 
-	@Then("^I select Past Amount & current charges Due and choose a Credit/Debit payment Method$")
+	@Then("^I select Past Amount & current charges Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountcurrentchargesDueAndCC() {
 
 		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
@@ -295,19 +294,21 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 
-	@Then("^I select and entered other amount Due and choose a Credit/Debit payment Method$")
-	public void validateOtherAmountDueAndAndCC() {
-
+	@Then("^I select and enter other amount Due and choose a Credit Debit payment Method$")
+	public void validateOtherAmountDueAndAndCC(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String otherAmount = memberAttributesRow.get(0).getCells().get(1);
 		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
-		oneTimeGuestPaymentsPage.selectOtherAmountDueAndCreditCard();
+		oneTimeGuestPaymentsPage.selectOtherAmountDueAndCreditCard(otherAmount);
 
 	}
 
 	@Then("^I select and entered other amount Due and choose a EFT Checking acc payment Method$")
-	public void validateOtherAmountDueAndEFTAcc() {
-
+	public void validateOtherAmountDueAndEFTAcc(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String otherAmount = memberAttributesRow.get(0).getCells().get(1);
 		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
-		oneTimeGuestPaymentsPage.selectOtherAmountDueAndEFTAcc();
+		oneTimeGuestPaymentsPage.selectOtherAmountDueAndEFTAcc(otherAmount);
 
 	}
 	
