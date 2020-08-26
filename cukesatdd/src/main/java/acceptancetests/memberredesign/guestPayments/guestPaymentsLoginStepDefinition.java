@@ -106,8 +106,8 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_clicks_SignIn() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
-		HSIDLoginPage  HSIDLoginPage=guestPaymentsLogin.clickOnSignInLink();
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		HSIDLoginPage HSIDLoginPage = guestPaymentsLogin.clickOnSignInLink();
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, HSIDLoginPage);
 
 	}
@@ -118,7 +118,7 @@ public class guestPaymentsLoginStepDefinition {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String siteName = memberAttributesRow.get(0).getCells().get(1);
-		HSIDLoginPage HSIDLoginPage=(HSIDLoginPage) getLoginScenario().getBean(PageConstants.HSID_LOGIN_PAGE);
+		HSIDLoginPage HSIDLoginPage = (HSIDLoginPage) getLoginScenario().getBean(PageConstants.HSID_LOGIN_PAGE);
 		HSIDLoginPage.validateBrand(siteName);
 		HSIDLoginPage.validateSignInButton();
 
@@ -128,7 +128,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_Clicks_Next_Button() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.clicksNextButton();
 
 	}
@@ -137,7 +137,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_gets_Error() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.checkErrorMessage();
 
 	}
@@ -146,7 +146,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_gets_match_Error() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.checkErrorMessageFromGPS();
 
 	}
@@ -155,7 +155,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_clicks_Next_to_land_Error_Page() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin = guestPaymentsLogin.clickAndLandOnErrorPage();
 		Assert.assertTrue("PROBLEM - One Time Guest Payments Page is not Displayed", guestPaymentsLogin != null);
 	}
@@ -164,7 +164,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void the_user_verifies_details_on_Error_Page() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.verifyDetailsOnErrorPage();
 
 	}
@@ -173,29 +173,29 @@ public class guestPaymentsLoginStepDefinition {
 
 	public void signIn_Button_should_not_be_present() {
 
-		guestPaymentsLogin guestPaymentsLogin =  (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin.verifySignInLinkShouldNotBePresent();
 
 	}
-	
-	@Then("^I validate all the header and page elements on One-time payment page$")
-	public void validate_header_and_PageElements () {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+	@Then("^I validate all the header and page elements on One-time payment page$")
+	public void validate_header_and_PageElements() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.validateHeaderAndPageElements();
 
 	}
-	
+
 	@Then("^I select Past Amount Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountDueAndCC() {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectAmountDueAndCreditCard();
 
 	}
-	
+
 	@Then("^I will enter Credit card Details$")
-	public void enter_CC_Details (DataTable givenAttributes) {
+	public void enter_CC_Details(DataTable givenAttributes) {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -203,48 +203,48 @@ public class guestPaymentsLoginStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		ReviewOneTimeGuestPaymentsPage ReviewOneTimeGuestPaymentsPage = oneTimeGuestPaymentsPage.enterCCDetails(memberAttributesMap);
 
 		if (ReviewOneTimeGuestPaymentsPage != null) {
 			getLoginScenario().saveBean(PageConstants.Review_OneTime_Guest_Payments_Page, ReviewOneTimeGuestPaymentsPage);
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>User is on Review One time Guest Payments page<<<<<<<<<<<<<<<<<<<<<<<<,");
 		}
-		
-		
+
+
 	}
-	
+
 	@Then("^I validate header and and page elements on Review & Submit page$")
-	public void Review_And_Submit_Header_And_Page_Elements () {
+	public void Review_And_Submit_Header_And_Page_Elements() {
 
 		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
 		reviewOneTimeGuestPaymentsPage.validateHeaderAndPageElementsOnReviewAndSubmitPage();
 
 	}
-	
+
 	@Then("^I click on Confirm and Pay$")
-	public void  clickOnConfirmPay () {
+	public void clickOnConfirmPay() {
 
 		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
-		
+
 		confirmOneTimeGuestPaymentsPage ConfirmOneTimeGuestPaymentsPage = reviewOneTimeGuestPaymentsPage.clickOnConfirmPayOnReviewPage();
 
 		if (ConfirmOneTimeGuestPaymentsPage != null
 				|| (null == ConfirmOneTimeGuestPaymentsPage && ReviewOneTimeGuestPaymentsPage.isBusinessValidation)) {
 			getLoginScenario().saveBean(PageConstants.Confirm_OneTime_Guest_Payments_Page, ConfirmOneTimeGuestPaymentsPage);
 			System.out.println(">>>>>>>>>>>>>User is on Review One time payments page<<<<<<<<<<<<<<<<<<");
-			
+
 		} else if (null == ConfirmOneTimeGuestPaymentsPage && (!ReviewOneTimePaymentsPage.isBusinessValidation)) {
 			System.out.println(">>>>>>>>>>>.Error in navigation to Confirmation page!!!<<<<<<<<<<<<<");
 			Assert.fail(">>>>>>>>>>>>>.Error in navigation to Confirmation page!!!<<<<<<<<<<<<<<<<<");
 		}
 
 	}
-	
-	@Then("^I navigate to Payment confirmation page and validate all the page elements$")
-	public void  validatePaymentConfirmationPage() {
 
-		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage =  (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+	@Then("^I navigate to Payment confirmation page and validate all the page elements$")
+	public void validatePaymentConfirmationPage() {
+
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
 		confirmOneTimeGuestPaymentsPage.validatePaymentConfirmationPage();
 
 
@@ -253,13 +253,13 @@ public class guestPaymentsLoginStepDefinition {
 	@Then("^I select Past Amount Due and choose a EFT Checking acc payment Method$")
 	public void validatePastAmountDueAndEFTAcc() {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectAmountDueAndEFTAcc();
 
 	}
 
 	@Then("^I will enter EFT Checking Account Details$")
-	public void enter_EFTCheckingAccount_Details (DataTable givenAttributes) {
+	public void enter_EFTCheckingAccount_Details(DataTable givenAttributes) {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -267,7 +267,7 @@ public class guestPaymentsLoginStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		ReviewOneTimeGuestPaymentsPage ReviewOneTimeGuestPaymentsPage = oneTimeGuestPaymentsPage.enterEFTAccountDetails(memberAttributesMap);
 
 		if (ReviewOneTimeGuestPaymentsPage != null) {
@@ -281,7 +281,7 @@ public class guestPaymentsLoginStepDefinition {
 	@Then("^I select Past Amount & current charges Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountcurrentchargesDueAndCC() {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectAmountDueCurrentChargesAndCreditCard();
 
 	}
@@ -289,16 +289,16 @@ public class guestPaymentsLoginStepDefinition {
 	@Then("^I select Past Amount & current charges Due and choose a EFT Checking acc payment Method$")
 	public void validatePastAmountCurrentChargesDueAndEFTAcc() {
 
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectAmountDueCurrentChargesAndEFTAcc();
 
 	}
 
 	@Then("^I select and enter other amount Due and choose a Credit Debit payment Method$")
 	public void validateOtherAmountDueAndAndCC(DataTable givenAttributes) {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			String otherAmount = memberAttributesRow.get(0).getCells().get(1);
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String otherAmount = memberAttributesRow.get(0).getCells().get(1);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectOtherAmountDueAndCreditCard(otherAmount);
 
 	}
@@ -307,10 +307,34 @@ public class guestPaymentsLoginStepDefinition {
 	public void validateOtherAmountDueAndEFTAcc(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String otherAmount = memberAttributesRow.get(0).getCells().get(1);
-		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage =   (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
 		oneTimeGuestPaymentsPage.selectOtherAmountDueAndEFTAcc(otherAmount);
 
 	}
-	
 
+	@Then("^I entered my Email address and click send button to send receipt on my Email$")
+	public void enterEmailandClickSend(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String emailAddress = memberAttributesRow.get(0).getCells().get(1);
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+		confirmOneTimeGuestPaymentsPage.enterEmailAndClickSend(emailAddress);
+
+
+	}
+
+	@Then("^I validate success Email receipt message and click send to another Email$")
+	public void validateEmailSuccessAndClickAnotherEmailLink() {
+
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+		confirmOneTimeGuestPaymentsPage.emailSuccessAndClickEnterAnotherEmail();
+
+	}
+
+	@Then("^I will click on Sign in link to navigate to Member Portal$")
+	public void clickOnSignInLink() {
+
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+		confirmOneTimeGuestPaymentsPage.clickOnSignInLink();
+	}
 }

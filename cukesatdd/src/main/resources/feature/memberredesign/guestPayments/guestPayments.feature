@@ -116,14 +116,18 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
+    Then I entered my Email address and click send button to send receipt on my Email
+      | Email             | <Email>             |
+    And I validate success Email receipt message and click send to another Email
+    Then I will click on Sign in link to navigate to Member Portal
 
     Examples:
-      | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 915516555-1   | 10/29/1947    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
 
   @guestPayment06 @makeOneTimePayment @pastAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
@@ -144,14 +148,18 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
+    Then I entered my Email address and click send button to send receipt on my Email
+      | Email             | <Email>             |
+    And I validate success Email receipt message and click send to another Email
+    Then I will click on Sign in link to navigate to Member Portal
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |       
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 | 
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 | 
+      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo  | routingNo | Email          |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 | 1234512345 | 123123123 | test@optum.com |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 | 1234512345 | 123123123 | test@optum.com |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 | 1234512345 | 123123123 | test@optum.com |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 | 1234512345 | 123123123 | test@optum.com |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 | 1234512345 | 123123123 | test@optum.com |
 
 
   @guestPayment07 @makeOneTimePayment @pastAmount&currentCharges @ccFLow

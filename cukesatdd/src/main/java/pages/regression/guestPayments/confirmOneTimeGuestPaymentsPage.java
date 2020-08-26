@@ -22,6 +22,7 @@ import com.google.common.base.Strings;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.login.HSIDLoginPage;
 
 /**
  * @author akapoo18
@@ -80,6 +81,66 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'confirmationText')]//*[contains(@class,'confirmation__number')][string-length(text())=9]")
 	private WebElement confirmationNumber;
 
+	@FindBy(xpath = "")
+	private WebElement confirmationPageHeader;
+
+	@FindBy(xpath = "")
+	private WebElement thankyouPaymentmessage;
+
+	@FindBy(xpath = "")
+	private WebElement staticContentBelowHeader;
+
+	@FindBy(xpath = "")
+	private WebElement emailAddressText;
+
+	@FindBy(xpath = "")
+	private WebElement emailTextField;
+
+	@FindBy(xpath = "")
+	private WebElement sendEmailButton;
+
+	@FindBy(xpath = "")
+	private WebElement signinIframeHeader;
+
+	@FindBy(xpath = "")
+	private WebElement signinIframeBodytext;
+
+	@FindBy(xpath = "")
+	private WebElement signinButton;
+
+	@FindBy(xpath = "")
+	private WebElement registerNowURL;
+
+	@FindBy(xpath = "")
+	private WebElement paymentReceiptHeader;
+
+	@FindBy(xpath = "")
+	private WebElement printReceiptURL;
+
+	@FindBy(xpath = "")
+	private WebElement planNameonReceipt;
+
+	@FindBy(xpath = "")
+	private WebElement memberNameOnReceipt;
+
+	@FindBy(xpath = "")
+	private WebElement idOnReceipt;
+
+	@FindBy(xpath = "")
+	private WebElement amountPaidOnReceipt;
+
+	@FindBy(xpath = "")
+	private WebElement textDescribingCloseButton;
+
+	@FindBy(xpath = "")
+	private WebElement closeWindowButton;
+
+	@FindBy(xpath = "")
+	private WebElement emailSuccessMessage;
+
+	@FindBy(xpath = "")
+	private WebElement anotherEmailReceipt;
+
 	public confirmOneTimeGuestPaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -114,10 +175,70 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	}
 
 	public void validatePaymentConfirmationPage() {
-		
-		
 
+		Assert.assertTrue("PROBLEM - unable to locate Header",confirmOneTimeGuestPaymentsPage(confirmationPageHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Thanks for your payment! message",confirmOneTimeGuestPaymentsPage(thankyouPaymentmessage));
+		Assert.assertTrue("PROBLEM - unable to locate Body text below header",confirmOneTimeGuestPaymentsPage(staticContentBelowHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Email address for receipt text ",confirmOneTimeGuestPaymentsPage(emailAddressText));
+		Assert.assertTrue("PROBLEM - unable to locate Email address text field",confirmOneTimeGuestPaymentsPage(emailTextField));
+		Assert.assertTrue("PROBLEM - unable to locate send email Button",confirmOneTimeGuestPaymentsPage(sendEmailButton));
+		Assert.assertTrue("PROBLEM - unable to locate Sign in Iframe Header",confirmOneTimeGuestPaymentsPage(signinIframeHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Body text below header",confirmOneTimeGuestPaymentsPage(signinIframeBodytext));
+		Assert.assertTrue("PROBLEM - unable to locate Sign in Button",confirmOneTimeGuestPaymentsPage(signinButton));
+		Assert.assertTrue("PROBLEM - unable to locate Register Now URL Link",confirmOneTimeGuestPaymentsPage(registerNowURL));
+		Assert.assertTrue("PROBLEM - unable to locate Payment Receipt Header",confirmOneTimeGuestPaymentsPage(paymentReceiptHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Print receipt URL Link",confirmOneTimeGuestPaymentsPage(printReceiptURL));
+		Assert.assertTrue("PROBLEM - unable to locate Plan name on receipt",confirmOneTimeGuestPaymentsPage(planNameonReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Member name on receipt",confirmOneTimeGuestPaymentsPage(memberNameOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Member ID on receipt",confirmOneTimeGuestPaymentsPage(idOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Amount paid on receipt",confirmOneTimeGuestPaymentsPage(amountPaidOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate static text above Close Button",confirmOneTimeGuestPaymentsPage(textDescribingCloseButton));
+		Assert.assertTrue("PROBLEM - unable to locate Close Button",confirmOneTimeGuestPaymentsPage(closeWindowButton));
 		
+	}
+
+	public confirmOneTimeGuestPaymentsPage enterEmailAndClickSend(String emailAddress) {
+
+		System.out.println(">>>>>>>>>>>>Entering Email address<<<<<<<<<<<<<<<<<<<");
+		emailTextField.sendKeys(emailAddress);
+
+		sendEmailButton.click();
+		System.out.println(">>>>>>>Send button clicked<<<<<<<");
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, confirmationPageHeader, 45);
+
+		if (driver.getTitle().contains("Confirm")) {
+			System.out.println(">>>>>>>>>>Confirm Payments page is displayed<<<<<<<<<<");
+			return new confirmOneTimeGuestPaymentsPage(driver);
+		} else {
+			System.out.println(">>>>>>>>>Confirm Payments page is not displayed<<<<<<<<<<");
+			return null;
+		}
+
+	}
+
+	public void emailSuccessAndClickEnterAnotherEmail() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Success message for Email Receipt",confirmOneTimeGuestPaymentsPage(emailSuccessMessage));
+		System.out.println(">>>>>>>>>Email Receipt Success Message Displayed<<<<<<<<<<");
+
+		anotherEmailReceipt.click();
+		System.out.println(">>>>>>>>Another Email Receipt Link clicked<<<<<<<<<<<");
+
+		validatePaymentConfirmationPage();
+
+	}
+
+	public void clickOnSignInLink() {
+
+		signinButton.click();
+		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
+
+		if (driver.getTitle().contains("medicare.uhc.com")) {
+			System.out.println(">>>>>>>>User Navigated Member Sign In Page<<<<<<<<<<<");
+		}
+
 	}
 
 
