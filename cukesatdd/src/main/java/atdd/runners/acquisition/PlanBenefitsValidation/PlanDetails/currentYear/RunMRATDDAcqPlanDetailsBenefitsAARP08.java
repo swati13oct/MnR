@@ -1,4 +1,4 @@
-package atdd.runners.acquisition.PlanBenefitsValidation.PlanDetails;
+package atdd.runners.acquisition.PlanBenefitsValidation.PlanDetails.currentYear;
 
 import org.junit.runner.RunWith;
 
