@@ -290,7 +290,7 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
-/*	
+	
 	@And("^the user selects future plan year for the AARP site$")
 	public void user_selects_future_plan_year(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -306,7 +306,7 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
-	}*/
+	}
 
 	/**
 	 * @toDo:select multiple plans to compare in MA and click on compare plan link
