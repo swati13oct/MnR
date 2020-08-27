@@ -401,8 +401,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	//String CallSam= "Call a Licensed Insurance Agent";
-	String CallSam= "Call UnitedHealthcare Ins. Co.";
+	String CallSam= "Call a Licensed Insurance Agent";
+//	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
