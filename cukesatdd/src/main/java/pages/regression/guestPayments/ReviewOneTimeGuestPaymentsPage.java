@@ -76,6 +76,8 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "")
 	private WebElement errorMessage;
 	
+	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
+	public WebElement guestPaymentsHeader;
 
 	
 	public ReviewOneTimeGuestPaymentsPage(WebDriver driver) {
@@ -164,6 +166,29 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 				return null;
 			}
 		}
+
+
+		public OneTimeGuestPaymentsPage clickOnChangePaymentDetailsLink() {
+			
+			changePaymentsDetailsLink.click();
+			
+			System.out.println(">>>>>>>Change Payment details link is clicked<<<<<<<");
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, guestPaymentsHeader, 45);
+			
+			
+			if (driver.getTitle().contains("Payments")) {
+				return new OneTimeGuestPaymentsPage(driver);
+			}
+			else {
+			System.out.println(">>>>>>>>>>>>>>>>>User is not on One Time Payments Page<<<<<<<<<<<<<<<<<<<<<<<<");
+			return null;
+			}
+		}
+			
+			
+		
+			
 		
 		
 

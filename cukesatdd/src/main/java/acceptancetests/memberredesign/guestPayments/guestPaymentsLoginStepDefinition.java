@@ -193,6 +193,13 @@ public class guestPaymentsLoginStepDefinition {
 		oneTimeGuestPaymentsPage.selectAmountDueAndCreditCard();
 
 	}
+	
+	@Then("^I select Credit Debit payment Method$")
+	public void selectCreditDebitLink() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectCreditDebitRadioButton();
+	}
 
 	@Then("^I will enter Credit card Details$")
 	public void enter_CC_Details(DataTable givenAttributes) {
@@ -220,6 +227,24 @@ public class guestPaymentsLoginStepDefinition {
 		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
 		reviewOneTimeGuestPaymentsPage.validateHeaderAndPageElementsOnReviewAndSubmitPage();
 
+	}
+	
+	
+	@Then("^I click on Change Payment Details link$")
+	public void changePaymentDetails() {
+
+		ReviewOneTimeGuestPaymentsPage reviewOneTimeGuestPaymentsPage = (ReviewOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Review_OneTime_Guest_Payments_Page);
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = reviewOneTimeGuestPaymentsPage.clickOnChangePaymentDetailsLink();
+		
+		if (oneTimeGuestPaymentsPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Guest_Payments_Page, oneTimeGuestPaymentsPage);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>User is on One time Guest Payments page<<<<<<<<<<<<<<<<<<<<<<<<,");
+		}
+		else
+		{
+			Assert.assertTrue("PROBLEM - One Time Guest Payments Page is not Displayed", oneTimeGuestPaymentsPage != null);
+		}
+	
 	}
 
 	@Then("^I click on Confirm and Pay$")
@@ -337,4 +362,8 @@ public class guestPaymentsLoginStepDefinition {
 		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
 		confirmOneTimeGuestPaymentsPage.clickOnSignInLink();
 	}
+	
+
+
+	
 }

@@ -875,5 +875,16 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 
 
+	public void selectCreditDebitRadioButton() {
+
+		creditcardRadioButton.click();
+		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+		
+		validateTheAddCardDetailsIframeforCreditCard();
+		
+	}
+
+
+
 
 }

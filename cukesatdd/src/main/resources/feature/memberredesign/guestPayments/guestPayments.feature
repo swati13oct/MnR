@@ -11,11 +11,6 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I click on the sign in link and navigate to Member Portal sign in page
     Then I will see the Logo specific to my plan and the Sign in button
             | Site Name | <siteName> |
-    ## Next two steps will be removed soon
-    Then I will enter my Member ID and Date of birth
-       | Member ID         | <memberID> |
-       | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |
@@ -282,10 +277,9 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |
       
       
-  @guestPayment11 @makeOneTimePayment @EditPayments
+  @guestPayment11 @makeOneTimePayment @changePaymentDetails
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-#workInProgress
     Given I am on the Welcome Page of M&R Guest Premium Payment portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
@@ -301,14 +295,40 @@ Feature: 1.06.7 Member Guest Payments Page
       | AccountNumber      | <accountNo> |
       | RoutingNumber      | <routingNo> |
     Then I validate header and and page elements on Review & Submit page
+    Then I click on Change Payment Details link
+     Then I select Credit Debit payment Method
+    Then I will enter Credit card Details
+      | Name             | <Name>             |
+      | CreditCardNumber | <CreditCardNumber> |
+      | Month            | <validMonth>       |
+      | Year             | <validYear>        |
+    Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |otherAmountDue    |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |  10.05           |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  15.20           |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  20.30           |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 |  11.000          |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |
+      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |otherAmountDue    |Name                 | CreditCardNumber | validMonth | validYear |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |  10.05           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  15.20           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  20.30           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 |  11.000          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
 
+ @guestPayment12 @selectPaymentAmountValidations
+  Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
+    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+      | Site Name | <siteName> |
+    Then I validate all the header and page elements
+    Then I will enter my Member ID and Date of birth
+      | Member ID         | <memberID> |
+      | Date of Birth     |  <dob>     |
+    And I will click Next to proceed to the Make a One-time payment page
+    And I validate payment Amount fields for different member types 
+    
+
+    Examples:
+      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC |hasOtherAmount |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | Y      |  Y    | Y             |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  Y    | Y             |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  N    | Y             |
+      
