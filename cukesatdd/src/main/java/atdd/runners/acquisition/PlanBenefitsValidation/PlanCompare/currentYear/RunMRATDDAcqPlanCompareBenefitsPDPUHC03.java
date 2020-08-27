@@ -1,4 +1,4 @@
-package atdd.runners.acquisition.PlanBenefitsValidation.PlanCompare;
+package atdd.runners.acquisition.PlanBenefitsValidation.PlanCompare.currentYear;
 
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
@@ -11,9 +11,11 @@ import org.junit.runner.RunWith;
 @RunWith(ExtendedCucumber.class)
 
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-        jsonReport = "target/cucumber-RunMRATDDAcqPlanCompareBenefitsUHC03.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqPlanCompareBenefitsUHC03")
+        jsonReport = "target/cucumber-RunMRATDDAcqPlanCompareBenefitsPDPUHC03.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqPlanCompareBenefitsPDPUHC03")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, monochrome = true,
         features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsUHC03.json" }, tags = { "@planCompareBenefitsUHC03" })
-public class RunMRATDDAcqPlanCompareBenefitsUHC03 {
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsPDPUHC03.json" }, tags = { "@current_year and @planCompareBenefitsPDPUHC03" })
+
+
+public class RunMRATDDAcqPlanCompareBenefitsPDPUHC03 {
 }
