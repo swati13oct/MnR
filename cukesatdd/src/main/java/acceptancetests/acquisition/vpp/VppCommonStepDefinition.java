@@ -34,6 +34,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.ComparePlansPage;
 
 
 /**
@@ -119,6 +120,73 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
 
 		}
+	}
+	
+	@And("^the user views the plans of the below plan type$")
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.viewPlanSummary(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
+	}
+	
+	@When("the user selects plan year$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+	
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+	}
+	
+	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
+	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink(planType);
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^verify plan compare page is loaded$")
+	public void verify_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlanComparePage();
 	}
 
 
