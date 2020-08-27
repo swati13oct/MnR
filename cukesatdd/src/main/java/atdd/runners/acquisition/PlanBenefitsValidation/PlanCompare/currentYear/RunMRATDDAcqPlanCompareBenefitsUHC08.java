@@ -14,6 +14,6 @@ import org.junit.runner.RunWith;
         jsonReport = "target/cucumber-RunMRATDDAcqPlanCompareBenefitsUHC08.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqPlanCompareBenefitsUHC08")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, monochrome = true,
         features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsUHC08.json" }, tags = { "@current_year and @planCompareBenefitsUHC08" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsUHC08.json" }, tags = { "@current_year","@planCompareBenefitsUHC08" })
 public class RunMRATDDAcqPlanCompareBenefitsUHC08 {
 }

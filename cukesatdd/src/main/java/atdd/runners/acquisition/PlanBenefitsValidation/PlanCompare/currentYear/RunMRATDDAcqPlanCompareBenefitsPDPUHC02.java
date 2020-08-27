@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
         jsonReport = "target/cucumber-RunMRATDDAcqPlanCompareBenefitsPDPUHC02.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqPlanCompareBenefitsPDPUHC02")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, monochrome = true,
         features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsPDPUHC02.json" }, tags = { "@current_year and @planCompareBenefitsPDPUHC02" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqPlanCompareBenefitsPDPUHC02.json" }, tags = { "@current_year","@planCompareBenefitsPDPUHC02" })
 
 
 public class RunMRATDDAcqPlanCompareBenefitsPDPUHC02 {
