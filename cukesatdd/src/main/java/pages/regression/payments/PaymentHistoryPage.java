@@ -1168,6 +1168,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		TestHarness.checkForIPerceptionModel(driver);
 		try {
 			System.out.println("User is now clicking on Make one time payment button");
+			TestHarness.checkForIPerceptionModel(driver);
 			MakeOneTimepaymentButton.click();
 		} catch (Exception e) {
 			System.out.println("Make one time payment button could not be clicked");
@@ -1309,7 +1310,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		SetUpRecurringPaymentsButtonShip.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		if (driver.getTitle().contains("Set Up Recurring Payments")) {
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
@@ -3412,6 +3413,7 @@ public void userClicksToExpandBillingHistoryOfFirstPlan() throws InterruptedExce
 	System.out.println("Current State of Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3434,6 +3436,7 @@ public void userClicksToExpandBillingHistoryOfSecondPlan() throws InterruptedExc
 	System.out.println("Current State of second Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Second Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3460,6 +3463,7 @@ public void userClicksToExpandPaymentHistoryOfFirstPlan() throws InterruptedExce
 	String currentstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3483,6 +3487,7 @@ public void userClicksToExpandPaymentHistoryOfSecondPlan() throws InterruptedExc
 	String currentstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))

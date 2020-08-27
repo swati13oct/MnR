@@ -252,16 +252,16 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |planyear|
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
-  @vppPlanCompareAARP12 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP12 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on the medicare site landing page
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>| 
     And I access the DCE tool on aarp site
       | Plan Type | <plantype> |

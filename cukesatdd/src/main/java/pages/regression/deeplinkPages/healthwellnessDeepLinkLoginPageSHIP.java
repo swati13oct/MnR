@@ -205,7 +205,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 				}
 					
 				
-				@FindBy (xpath="//h1[@class='hw-header-h1']")
+				@FindBy (xpath="//h1[contains(@class,'hw-header-h1')]")
                 private WebElement textonpage;
 				
 				/**
