@@ -256,10 +256,10 @@ public class VppStepDefinitionUHC {
 		}*/
 		plansummaryPage.viewPlanSummary(plantype);
 		//plansummaryPage.CheckClick_NextYear_Plans();
-		/*if(!plantype.equalsIgnoreCase("MS"))
+		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);*/
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
 	
 	@When("the user selects plan year for the UMS site$")
