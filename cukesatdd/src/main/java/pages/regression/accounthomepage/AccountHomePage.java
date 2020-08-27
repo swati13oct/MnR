@@ -397,7 +397,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	private WebElement OrderMaterial_Dashboard;
 
-	@FindBy(id = "hello-person")
+	@FindBy(xpath = "//*[@id='hello-person' or @class='greeting-person']")
 	private WebElement helloPerson;
 	
 	@FindBy(xpath = "//h1[contains(text(),'Welcome to your new plan')]")
