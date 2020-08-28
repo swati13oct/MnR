@@ -3,19 +3,20 @@ Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename>
-Given user is on blue layer landing page
-And user opens the page to validate on UHC
+Given the user is on medicare acquisition site landing page
+  | Site | <site>	|
+And user opens the page to validate
  | pagename | <pagename> |
-Then the user validates whether call icon is visible on UHC   
-Then the user validates whether chat icon is visible on UHC
+Then the user validates whether call icon is visible  
+Then the user validates whether chat icon is visible
 
 @headerUHC_1 @samChatCall_1 @samChatRegression
 Examples: 
-| pagename |
-|/|
-|plan-recommendation-engine.html|
+|	site	| pagename 															|
+|	UHC		|	/				 															|
+|	UHC		|	plan-recommendation-engine.html				|
 #|medicare-plans.html|
-|health-plans/estimate-drug-costs.html|
+|	UHC		|	health-plans/estimate-drug-costs.html	|
 
 @headerUHC_2 @samChatCall_1
 Examples: 
