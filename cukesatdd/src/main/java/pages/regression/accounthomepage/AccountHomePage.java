@@ -322,7 +322,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = " //h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
 	
-	@FindBy(xpath= "//nav[@id='sub-nav']//a[@class='ng-scope'][contains(text(),'Explanation of Benefits')]")
+	@FindBy(xpath= "//nav[@id='sub-nav']//a[contains(text(),'Explanation of Benefits')]")
 	private WebElement EOBLINK;
 	
 	/*
