@@ -645,6 +645,11 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Download Payment History ')]")
 	private WebElement downloadPaymentHistory;
 	
+	@FindBy(id = "accountprofile")
+	private WebElement accountProfile;
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
+	private WebElement logOutLink;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -1163,7 +1168,44 @@ public class PaymentHistoryPage extends UhcDriver {
 		TestHarness.checkForIPerceptionModel(driver);
 		try {
 			System.out.println("User is now clicking on Make one time payment button");
+			TestHarness.checkForIPerceptionModel(driver);
 			MakeOneTimepaymentButton.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan1() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan1, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan1.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan2() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan2, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan2.click();
 		} catch (Exception e) {
 			System.out.println("Make one time payment button could not be clicked");
 			Assert.fail();
@@ -1268,6 +1310,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		SetUpRecurringPaymentsButtonShip.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
+		Thread.sleep(5000);
 		if (driver.getTitle().contains("Set Up Recurring Payments")) {
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
@@ -2119,19 +2162,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
 		}
-//	waitforElement(logoutLink);
-    /*  validate(logoutLink);
-	if (validate(logoutLink)) {
-		System.out.println("logout link is displayed");
-		logoutLink.click();*/
 		/*navigating to signout */
-		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
+		//driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
 		//https://www.medicare.uhc.com/aarp/member/logout.html
-		 System.out.println("title is: "+driver.getTitle());
-		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
-		 validate(logincontainer);
-		 if (validate(logincontainer)) {
-				System.out.println("Sign in  link is displayed");}
+		if (accountProfile.isDisplayed()) {
+			accountProfile.click();
+		}
+		if (validate(logOutLink,0)) {
+			logOutLink.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			validate(logincontainer);
+			System.out.println("title is: "+driver.getTitle());
+			Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+		} else {
+			Assert.fail("Logout option not displayed");
+		}
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
@@ -3368,6 +3413,7 @@ public void userClicksToExpandBillingHistoryOfFirstPlan() throws InterruptedExce
 	System.out.println("Current State of Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3390,6 +3436,7 @@ public void userClicksToExpandBillingHistoryOfSecondPlan() throws InterruptedExc
 	System.out.println("Current State of second Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Second Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3416,6 +3463,7 @@ public void userClicksToExpandPaymentHistoryOfFirstPlan() throws InterruptedExce
 	String currentstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3439,6 +3487,7 @@ public void userClicksToExpandPaymentHistoryOfSecondPlan() throws InterruptedExc
 	String currentstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))

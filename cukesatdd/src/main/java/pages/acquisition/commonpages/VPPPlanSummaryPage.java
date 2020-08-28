@@ -67,7 +67,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -1200,7 +1200,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
@@ -1284,15 +1284,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 
-	public ComparePlansPage clickOnCompareLink(){
-		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
-		compareLinks.get(1).click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public ComparePlansPage clickOnCompareLink(String planType){
+		if(planType.contains("MAPD")) {
+			List<WebElement> compareLinks = driver
+					.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
+			compareLinks.get(1).click();
+		}else {
+			List<WebElement> compareLinks = driver
+					.findElements(By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
+			jsClickNew(compareLinks.get(1));
 		}
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);

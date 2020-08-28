@@ -296,7 +296,10 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
 	protected WebElement LookUpDrugsButton;
-		
+	
+	@FindBy(xpath = "//a[contains(@id,'findcarecost')]")
+	private WebElement findCareCostMenu;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -388,9 +391,9 @@ public class TestHarness extends UhcDriver {
 					TestHarnesspaymentsLink.click();
 				} catch (Exception e) {
 					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
+					TestHarness.checkForIPerceptionModel(driver);
 					premiumPaymentTabOnHeader.click();
 				}
-				//TestHarnesspaymentsLink.click();
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
@@ -1722,5 +1725,33 @@ public class TestHarness extends UhcDriver {
 			
 			
 		}
-		   
+		
+		public void clickAccountProfile() {
+			checkForIPerceptionModel(driver);
+			if (accountProfile.isDisplayed()) {
+				accountProfile.click();
+			}
+		}
+		
+		public void logout() {
+			if (validate(logOut,0)) {
+				logOut.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+				Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+			} else {
+				Assert.fail("Logout option not displayed");
+			}
+		}
+		
+		public DrugCostEstimatorPage clickFindCareCostMenu() throws InterruptedException {
+			validateNew(findCareCostMenu);
+			findCareCostMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().contains("Find Care")) {
+				return new DrugCostEstimatorPage(driver);
+			}
+			return null;
+		}
 }

@@ -447,4 +447,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		
 	}
+	
+	public void clickFindAndPriceAMedicationCallToActionOnPnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
+				validate(FindAndPriceCallToActnBtn, 30));
+		FindAndPriceCallToActnBtn.click();
+	}
 }

@@ -194,13 +194,16 @@ public class GlobalComponentsStepDefinitionAARP {
 	/**
 	 * @toDo:user clicks on home link of agents&brokers
 	 */
-	@And("^user verifies home link of agents&brokers page ulayer$")
-	public void click_home() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload!= null);
-	}	
+	
+	  @And("^user verifies home link of agents&brokers page ulayer$")
+	  public void click_home() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
+		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  AcquisitionHomePage aquisitionHomePageReload =
+		  aquisitionhomepage.homeFooterClick();
+		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+	  }
+	 	
 	
 	
 	/**

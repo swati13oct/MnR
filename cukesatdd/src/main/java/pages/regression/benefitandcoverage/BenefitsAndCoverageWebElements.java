@@ -1099,6 +1099,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary']")
 	protected WebElement makePaymentButton;
 		
+	@FindBy(linkText = "plan documents")
+	protected WebElement planDocumentsLink;
+	
+	@FindBy(xpath = "//h1[text()='Benefit Summary']")
+	protected WebElement coverageBenefitsNewHeader;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

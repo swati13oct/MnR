@@ -485,9 +485,14 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
 	{
-		CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		//CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now clicking the View Plan Documents Button");
-		viewPlanDocumentsButton.click();
+		if(validate(viewPlanDocumentsButton)) {
+			viewPlanDocumentsButton.click();
+		} else {
+			planDocumentsLink.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new FormsAndResourcesPage(driver);
 	}

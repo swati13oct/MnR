@@ -27,8 +27,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I select the first pharmacy
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user returns to the visitor profile page
-    Then the user should be able to see the Drug information in the guest profile page
+    And the user returns to the visitor profile page on aarp
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
 
     Examples: 
@@ -59,7 +59,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
     And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug information in the guest profile page
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
 
     Examples: 
@@ -318,8 +318,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I select the first pharmacy
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user returns to the visitor profile page
-    Then the user should be able to see the Drug information in the guest profile page
+    And the user returns to the visitor profile page on aarp
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
     And user delets all the added drugs on visitor profile page of AARP site
 

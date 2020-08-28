@@ -59,10 +59,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 		try {
-			validateNew(planName,0);
-			validateNew(memberId,0);
-			validateNew(memberName,0);
-			validateNew(effectiveDate,0);
+			if(validate(planName,0)) {
+				validateNew(planName,0);
+				validateNew(memberId,0);
+				validateNew(memberName,0);
+				validateNew(effectiveDate,0);
+			} else {
+				validateNew(coverageBenefitsNewHeader,0);
+			}
 		} catch (Exception e) {
 			System.out.println("Elements are not found ...");
 		}

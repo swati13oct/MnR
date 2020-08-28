@@ -89,11 +89,12 @@ public class VisitorProfileStepDefinition_AARP {
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		VPPPlanSummaryPage planSummary = visitorProfilePage.addPlanForMember();
+		planSummary.handlePlanYearSelectionPopup();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
 	
-	@And("^the user returns to the visitor profile page$")
+	@And("^the user returns to the visitor profile page on aarp$")
 	public void the_user_returns_to_the_visitor_profile_page() {
 		
 		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -104,7 +105,7 @@ public class VisitorProfileStepDefinition_AARP {
 	}
 	
 	
-	@And("^the user should be able to see the Drug information in the guest profile page$")
+	@And("^the user should be able to see the Drug information in the guest profile page on aarp$")
 	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
@@ -234,7 +235,7 @@ public class VisitorProfileStepDefinition_AARP {
 		visitorProfile.signIn(username, password);
 	}
 	
-	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode$")
+	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp$")
 	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assert.assertTrue(visitorProfile.validateEnrollInPlanIsClickable());
