@@ -356,14 +356,67 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 
-	@Then("^I will click on Sign in link to navigate to Member Portal$")
-	public void clickOnSignInLink() {
+	@Then("^I will click on Sign in and Register Now link to navigate to Member Portal$")
+	public void clickOnSignInAndRegisterNowLink() {
 
 		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
 		confirmOneTimeGuestPaymentsPage.clickOnSignInLink();
+		confirmOneTimeGuestPaymentsPage.clickOnRegisterNowLink();
 	}
-	
 
+	@Then("^I will click on Print on Confirm Payment page to print my Payment Receipt$")
+	public void clickAndValidatePrintReceiptLink() {
 
+		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
+		confirmOneTimeGuestPaymentsPage.clickAndValidatePrintReceiptLink();
+
+	}
+
+	@Then("^I will entered other amount Due$")
+	public void the_user_entered_Other_Amount_Due(DataTable memberAttributes) {
+
+		Map<String, String> memberAttributesMap = parseInputArguments(memberAttributes);
+		String otherAmount = memberAttributesMap.get("Other Amount");
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.enterOtherAmount(otherAmount);
+
+	}
+
+	@Then("^I will get an error message Cannot exceed annual remaining amount$")
+
+	public void other_Amount_Exceed_Error() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.otherAmountExceedAnnualError();
+
+	}
+
+	@Then("^I will get an error message Amount must exceed 1.00$")
+
+	public void other_Amount_Must_Exceed_$1_Error() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.otherAmountExceed1Error();
+
+	}
+
+	@Then("^I will click on Review and Submit button leaving EFT Account information blank$")
+
+	public void reviewAndSubmitClick() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.clickReviewAndSubmit();
+
+	}
+
+	@Then("^I will get an error valid Account EFT information$")
+
+	public void blank_eftAccount_info_Error() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.blankeftAccountError();
+
+	}
 	
 }

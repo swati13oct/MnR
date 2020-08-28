@@ -123,7 +123,14 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement accountNumberTextField;
 
+	@FindBy(xpath = "")
+	public WebElement exceedAnnualerrorMessage;
 
+	@FindBy(xpath = "")
+	public WebElement exceed1errorMessage;
+
+	@FindBy(xpath = "")
+	public WebElement noEftAccountInfo;
 
 }
 

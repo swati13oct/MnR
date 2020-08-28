@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -141,6 +138,9 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "")
 	private WebElement anotherEmailReceipt;
 
+	@FindBy(xpath = "")
+	private WebElement cancelButton;
+
 	public confirmOneTimeGuestPaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -212,8 +212,8 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 			System.out.println(">>>>>>>>>>Confirm Payments page is displayed<<<<<<<<<<");
 			return new confirmOneTimeGuestPaymentsPage(driver);
 		} else {
-			System.out.println(">>>>>>>>>Confirm Payments page is not displayed<<<<<<<<<<");
-			return null;
+				System.out.println(">>>>>>>>>Confirm Payments page is not displayed<<<<<<<<<<");
+				return null;
 		}
 
 	}
@@ -237,10 +237,53 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 
 		if (driver.getTitle().contains("medicare.uhc.com")) {
 			System.out.println(">>>>>>>>User Navigated Member Sign In Page<<<<<<<<<<<");
+		} else {
+			System.out.println(">>>>>>>>>Member Sign In Page is not displayed<<<<<<<<<<");
 		}
 
 	}
 
+	public void clickOnRegisterNowLink() {
 
+		registerNowURL.click();
+		System.out.println(">>>>>>Register Now Link is clicked<<<<<<");
 
+		if (driver.getTitle().contains("Register")) {
+			System.out.println(">>>>>>>>User Navigated Member Register Now Page<<<<<<<<<<<");
+		} else {
+			System.out.println(">>>>>>>>>Register Now Page is not displayed<<<<<<<<<<");
+		}
+
+	}
+
+	public void clickAndValidatePrintReceiptLink() {
+
+		printReceiptURL.click();
+		CommonUtility.waitForPageLoadNew(driver, confirmationPageHeader, 45);
+		System.out.println(">>>>>>Print Payment receipt Link is clicked<<<<<<");
+
+		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(newTab.size());
+		//note: Use the list of window handles to switch between windows
+		driver.switchTo().window(newTab.get(newTab.size()-1));
+		CommonUtility.checkPageIsReady(driver);
+
+		String pdfUrl = driver.getCurrentUrl();
+		System.out.println(" pdf url: '" + pdfUrl+"'");
+		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
+
+//		if (driver.getTitle().contains("Print Receipt")) {
+//			System.out.println(">>>>>>>>User Navigated on Print pdf receipt Page<<<<<<<<<<<");
+//		}
+		cancelButton.click();
+
+		if (driver.getTitle().contains("Confirm")) {
+			System.out.println(">>>>>>>>>>Confirm Payments page is displayed<<<<<<<<<<");
+
+		} else {
+			System.out.println(">>>>>>>>>Confirm Payments page is not displayed<<<<<<<<<<");
+
+		}
+
+	}
 }

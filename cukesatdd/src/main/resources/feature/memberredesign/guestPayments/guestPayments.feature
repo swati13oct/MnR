@@ -111,10 +111,11 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
+    Then I will click on Print on Confirm Payment page to print my Payment Receipt
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
     And I validate success Email receipt message and click send to another Email
-    Then I will click on Sign in link to navigate to Member Portal
+    Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
@@ -146,7 +147,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
     And I validate success Email receipt message and click send to another Email
-    Then I will click on Sign in link to navigate to Member Portal
+    Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name            | accountNo  | routingNo | Email          |
@@ -331,4 +332,60 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | Y      |  Y    | Y             |
       | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  Y    | Y             |
       | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  N    | Y             |
-      
+
+  @guestPayment13 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
+  Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
+
+    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+      | Site Name | <siteName> |
+    Then I validate all the header and page elements
+    Then I will enter my Member ID and Date of birth
+      | Member ID         | <memberID> |
+      | Date of Birth     |  <dob>     |
+    And I will click Next to proceed to the Make a One-time payment page
+    And I validate all the header and page elements on One-time payment page
+    Then I will entered other amount Due
+    #incorrect Amount
+      | Other Amount | 2500 |
+    And I will get an error message Cannot exceed annual remaining amount
+    Then I will entered other amount Due
+    #incorrect Amount
+      | Other Amount | 0.50 |
+    And I will get an error message Amount must exceed 1.00
+
+    Examples:
+      | TID   | planType | memberID    | dob        | siteName |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   |
+
+  @guestPayment14 @ErrorsAndContentOneTimePayment @eftErrorAndContent
+  Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
+
+    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+      | Site Name | <siteName> |
+    Then I validate all the header and page elements
+    Then I will enter my Member ID and Date of birth
+      | Member ID         | <memberID> |
+      | Date of Birth     |  <dob>     |
+    And I will click Next to proceed to the Make a One-time payment page
+    And I validate all the header and page elements on One-time payment page
+    Then I select and entered other amount Due and choose a EFT Checking acc payment Method
+      | Other Amount | <otherAmountDue> |
+    Then I will click on Review and Submit button leaving EFT Account information blank
+    And I will get an error valid Account EFT information
+    Then I will enter EFT Checking Account Details
+      | AccountHoldersName | <Name>      |
+      | AccountNumber      | <accountNo> |
+      | RoutingNumber      | <routingNo> |
+    And I will get an error valid Account EFT information
+
+    Examples:
+      | TID   | planType | memberID    | dob        | siteName | otherAmountDue |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | 15.20          |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | 20.30          |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | 11.000         |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | 333.00         |

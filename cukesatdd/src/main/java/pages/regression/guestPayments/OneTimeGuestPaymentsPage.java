@@ -874,7 +874,6 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 
-
 	public void selectCreditDebitRadioButton() {
 
 		creditcardRadioButton.click();
@@ -884,7 +883,31 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		
 	}
 
+	public void enterOtherAmount(String otherAmount) {
 
+		otherAmountTextField.sendKeys(otherAmount);
+	}
+
+	public void otherAmountExceedAnnualError() {
+
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(exceedAnnualerrorMessage));
+	}
+
+	public void otherAmountExceed1Error() {
+
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(exceed1errorMessage));
+	}
+
+	public void clickReviewAndSubmit() {
+
+		reviewAndSubmitButton.click();
+		System.out.println(">>>>>>>>>>>Review and submit button clicked<<<<<<<<<<<<<<<<<<<<<<");
+	}
+
+	public void blankeftAccountError() {
+
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(noEftAccountInfo));
+	}
 
 
 }
