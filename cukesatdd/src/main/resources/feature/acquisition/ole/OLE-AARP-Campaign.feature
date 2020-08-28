@@ -4,7 +4,7 @@ Feature: 2.05.5. ACQ-OLE Campaign AARP
   #@CampaignURL_OLE_Blayer_uhc @acquisitionRegression @FastnFurious @OLE @Campaign_OLE_UHC @prodRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from UHC Acquisition site VPP Plan Summary
     #Given the user is on UHC medicare acquisition site VPP page after hits Campaign URL
-  Given the user is on AARP medicare acquisition site VPP page after hits Campaign URL
+  Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
   	And the user views the plans of the below plan type in AARP site
   	  | Plan Type | <plantype> |
 		And the user selects plan year for the AARP site
@@ -81,7 +81,7 @@ Feature: 2.05.5. ACQ-OLE Campaign AARP
     #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     #Then the user validates Plan and Member Details on Confirmation Page
-	 @Campaign_OLE_Ulayer
+	 @Campaign_OLE_Ulayer @prodRegression 
     Examples: 
       | TID   | plantype |Plan Year|planYear| planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType| 
      	| 15564 | MAPD     | current|current|AARP Medicare Advantage (HMO-POS)| MBI     | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002  |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | St. Louis | Yes                    |               |             | MO           |    63043 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |Valid|
