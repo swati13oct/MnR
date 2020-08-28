@@ -25,7 +25,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// ***************Order Summary Section*****************//
 
-	@FindBy(xpath = "//h4[text()='Order summary']/..")
+	@FindBy(xpath = "//*[text()='Order summary']/..")
 	protected WebElement orderSummarySection;
 
 	@FindBy(xpath = "//*[@data-testid='os__summary__medicationsLabel_count']")
@@ -63,7 +63,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// *******************Shipping Address Section******************//
 
-	@FindBy(xpath = "//h4[text()='Shipping Address']/..")
+	@FindBy(xpath = "//*[text()='Shipping Address']/..")
 	protected WebElement shippingAddressSection;
 
 	@FindBy(xpath = "//div[@data-testid='address__name']/..")
@@ -77,10 +77,10 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// *********************Payment Section***************************//
 
-	@FindBy(xpath = "//h4[@data-testid='os__payment__title']")
+	@FindBy(xpath = "//*[@data-testid='os__payment__title']")
 	protected WebElement paymentHeader;
 
-	@FindBy(xpath = "//h4[@data-testid='os__payment__title']/..")
+	@FindBy(xpath = "//*[@data-testid='os__payment__title']/..")
 	protected WebElement paymentSection;
 
 	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']//img")

@@ -3,6 +3,8 @@ package pages.regression.pharmaciesandprescriptions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
+
 public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	
 	public OrderConfirmationPage(WebDriver driver) {
@@ -36,35 +38,74 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 	
 	public boolean validateShippingMethod() {
-		return validate(ShippingMethodOrderConfirmation);
+		if(validate(ShippingMethodOrderConfirmation)) {
+			String shippingMethodExpected =": Standard Shipping - Free";
+			String shippingMethodActual=ShippingMethodOrderConfirmation.getText();
+			System.out.println("shippingMethodActual" + shippingMethodActual.substring(shippingMethodActual.indexOf(":")));
+			if(shippingMethodExpected.equalsIgnoreCase(shippingMethodActual.substring(shippingMethodActual.indexOf(":")))) {
+				return true;
+			}
+		}		
+		return false;
 	}
 	
 	public boolean validateShippingAddress() {
-		return validate(ShippingAddressOrderConfirmation);
+		if(validate(ShippingAddressOrderConfirmation)) {
+			boolean flag = ShippingAddressOrderConfirmation.getText().isEmpty();
+			if(flag) {
+				return false;
+			}
+		}
+		return true;
 	}	
 	
 	public boolean validatePaymentMethod() {
-		return validate(PaymentMethodOrderConfirmation);
+		return validate(PaymentMethodOrderConfirmation);		
+	}
+	
+	public boolean validatePaymentMethodType() {
+		return !PaymentMethodTypeOrderConfirmation.getText().isEmpty();
+	}
+	
+	public boolean validatePaymentMethodNumber() {
+		return !PaymentMethodNumberOrderConfirmation.getText().isEmpty();
 	}
 	
 	public boolean validateOrderTotal() {
-		return validate(OrderTotalOrderConfirmation);
+		if(validate(OrderTotalOrderConfirmation)) {
+			return !OrderTotalOrderConfirmation.getText().isEmpty();
+		}
+		return false;		
 	}
 	
 	public boolean validateOrderTotalDisclaimer() {
-		return validate(PriceDisclaimerOrderconfirmation);
+		if(validate(PriceDisclaimerOrderconfirmation)) {
+			return !PriceDisclaimerOrderconfirmation.getText().isEmpty();
+		}
+		return false;
 	}
 	
 	public boolean validateEstimatedDeliveryDate() {
-		return validate(EstimatedDeliveryDateOrderConfirmation);
+		if(validate(EstimatedDeliveryDateOrderConfirmation)) {
+			return !EstimatedDeliveryDateOrderConfirmation.getText().isEmpty();
+		}
+		return false;
 	}
 	
 	public boolean validateMedicationSection() {
 		return validate(MedicationSectionOrderConfirmation);
 	}
 	
+	public boolean validateMedicineNameOnOrderConfirmation() {
+		
+		return true;
+	}
+	
 	public boolean validateDrugNameAndStrength() {
-		return validate(DrugNameSizeOrderConfirmation);
+		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
+		System.out.println("Medication Name" + medicationNameAndStrength);
+		return validate(DrugNameSizeOrderConfirmation, 40)
+				&& medicationNameAndStrength.trim().equalsIgnoreCase(DrugNameSizeOrderConfirmation.getText().trim());
 	}
 	
 	public boolean validateDaySupply() {
