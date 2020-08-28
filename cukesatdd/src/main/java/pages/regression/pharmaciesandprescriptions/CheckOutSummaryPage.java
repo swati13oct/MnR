@@ -19,7 +19,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	String dollarAmntRegex = "^(\\$)((\\d+)|(\\d{1,3})(\\,\\d{3})*)(\\.\\d{2,})?$";
 	String expireDateRegex = "^(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
 	String exireDateRegexAlongwithTex = "^[a-zA-Z]*\\s[a-zA-Z]*\\s(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
-	// String cardDetailRegex = "^[a-zA-Z]*\\s[*]{4}\\s[0-9]{4}$";
+	String cardDetailNameRegex = "^[a-zA-Z]*$";
 	String cardDetailRegex = "^[0-9]{4}$";
 	String cardTypeRegex = "^[a-zA-Z]*$";
 	String medicationsRegex = "^[a-zA-Z]*\\s[(][0-9]*[)]$";
@@ -183,7 +183,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String cardDetail = paymentCreditCardNumber.getText();
 		String[] arrayVal = cardDetail.split(" ");
 		return !paymentCreditCardNumber.getText().isEmpty()
-				&& arrayVal[arrayVal.length - 1].trim().matches(cardDetailRegex);
+				&& arrayVal[arrayVal.length - 1].trim().matches(cardDetailRegex)
+				&& arrayVal[0].trim().matches(cardDetailNameRegex);
 	}
 
 	/*
@@ -271,7 +272,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String refillRemainingFrmCheckOutPage = listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
 		String[] arrayVal = refillRemainingFrmCheckOutPage.split(":");
 		int refillRemainingsOnCheckOutPage = Integer.parseInt(arrayVal[1].trim());
-		return refillRemainingsFromMedCab == refillRemainingsOnCheckOutPage + 1;
+		return refillRemainingsFromMedCab == refillRemainingsOnCheckOutPage;
 	}
 
 	public boolean validateRxNumber() {
