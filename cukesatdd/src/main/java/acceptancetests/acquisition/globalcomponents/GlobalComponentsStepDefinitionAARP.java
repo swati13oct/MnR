@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
@@ -45,6 +46,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+		
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
@@ -336,7 +338,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		}
 	}
 
-	@Then("^the user validates TFN on page$")
+	@Then("^the user validates TFN on page$") 
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -347,8 +349,11 @@ public class GlobalComponentsStepDefinitionAARP {
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
+		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
+		enterZipCodePage.validateZipComp();
 		if(tfnFlag.equalsIgnoreCase("true")) {
 			aquisitionhomepage.validateTFNelement(tfnXpath);
 		}
