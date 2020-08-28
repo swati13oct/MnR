@@ -63,10 +63,12 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 	
 	public boolean validatePaymentMethodType() {
+		System.out.println("Payment Method Type " +PaymentMethodTypeOrderConfirmation.getText());
 		return !PaymentMethodTypeOrderConfirmation.getText().isEmpty();
 	}
 	
 	public boolean validatePaymentMethodNumber() {
+		System.out.println("Payment Method Number " +PaymentMethodNumberOrderConfirmation.getText());
 		return !PaymentMethodNumberOrderConfirmation.getText().isEmpty();
 	}
 	
