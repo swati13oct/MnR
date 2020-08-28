@@ -379,6 +379,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h4[@data-testid='section__header']")
 	protected WebElement NumberInParenthesis;
 
+	@FindBy(xpath = "//h2[@data-testid='section__header']")
+	protected List<WebElement> NumberInParenthesisRefillAll;
+
 	@FindBy(xpath = "//p[contains(text(),'1-800-721-0627')]")
 	protected WebElement technicalSupportNumber;
 
@@ -1022,7 +1025,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean alphaNumeric() {
 		boolean containsDigit = false;
-		String s = NumberInParenthesis.getText();
+		String s = NumberInParenthesisRefillAll.get(0).getText();
 		if (s != null && !s.isEmpty()) {
 			for (char c : s.toCharArray()) {
 				if (containsDigit = Character.isDigit(c)) {
@@ -1034,7 +1037,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean corredpondingMedicationsNumbers() {
-		String numberTXT = NumberInParenthesis.getText();
+		String numberTXT = NumberInParenthesisRefillAll.get(0).getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 		String totalNumber = totalMedicationsInCurrenMedications.getAttribute("data-test-total-medications");
 		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
@@ -1051,7 +1054,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean corredpondingRefillMedicationsNumbers() {
 
 
-		String numberTXT = NumberInParenthesis.getText();
+		String numberTXT = NumberInParenthesisRefillAll.get(0).getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 
 		if (number>0) {
