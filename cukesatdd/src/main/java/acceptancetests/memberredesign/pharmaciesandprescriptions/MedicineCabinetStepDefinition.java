@@ -502,7 +502,7 @@ public class MedicineCabinetStepDefinition {
 	public void user_clicks_Refill_Medication_call_to_action_button() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.waitTillMedCabLoads();
+		//pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnRefillMedicationCTAOnCurrentMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
@@ -821,6 +821,14 @@ public class MedicineCabinetStepDefinition {
 	public void user_views_a_home_delivery_medication_eligible_for_refill_on_My_Medication_Page() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfRefillMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
+			}
+		}
 		pnpPg.validateRefillMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
