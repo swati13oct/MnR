@@ -840,4 +840,15 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
+	
+	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
+   	public void verify_Future_UI_API_rankings_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.checkPlanyear("future");
+		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRankingPlans();
+		planSelectorResultspage.changePlanyear("current");
+		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRankingPlans();
+   	}
 }

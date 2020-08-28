@@ -3,9 +3,12 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -334,7 +337,18 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
 	
-		
+	@FindBy(css = "label[for='currentYear']")
+	private WebElement currentPlanYear;
+	
+	@FindBy(css = "label[for='futureYear']")
+	private WebElement futurePlanYear;
+	
+	@FindBy(css = "input#futureYear[class*='selected']")
+	private WebElement futurePlanYearSelected;
+	
+	@FindBy(css = "input#currentYear[class*='selected']")
+	private WebElement currentPlanYearSelected;
+	
 //Result Loading Page Element Verification Method 
 
 	public void resultsloadingpage() {
@@ -1307,5 +1321,49 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
 }
-	
+
+public boolean changePlanyear(String year) {
+	// Checking and Changing to Current Year
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15)) {
+			currentPlanYear.click();
+			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
+			return true;
+		}
+	}
+
+	// Checking and Changing Future Year
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15)) {
+			futurePlanYear.click();
+			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
+		}
+	}
+	return false;
+}
+
+public boolean checkPlanyear(String year) {
+	// Checking Current year selection
+	try {
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
+			return true;
+		}
+	}
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15) && futurePlanYearSelected.getAttribute("id").length()>0) {
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is not available / not selected");
+		}
+	}
+	}catch(Exception e) {
+		System.out.println("Exception Occcured Plan year toggle");
+	}
+	return false;
+}
+
 }

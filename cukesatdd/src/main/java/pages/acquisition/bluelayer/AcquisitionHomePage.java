@@ -2602,7 +2602,7 @@ public void validateResultSummaryPage() {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
-		}else if (MRScenario.environment.contains("digital")) {
+		}else if (MRScenario.environment.contains("digital-uatv2")) {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
 		}
 	}
