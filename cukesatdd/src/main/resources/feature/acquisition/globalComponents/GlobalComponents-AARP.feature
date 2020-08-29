@@ -37,6 +37,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the AARP Medicare Plans All page
     Then the USer validates Shop for a Plan Navigation links
     Then the user validates Medicare Education Navigation links
+     Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -186,6 +187,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the AARP Medicare Plans All page
     Then the USer validates Shop for a Plan Navigation links
     Then the user validates Medicare Education Navigation links
+     Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -204,6 +206,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Given the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
+    Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
      | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |

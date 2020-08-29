@@ -352,13 +352,18 @@ public class GlobalComponentsStepDefinitionAARP {
 		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
-		enterZipCodePage.validateZipComp();
 		if(tfnFlag.equalsIgnoreCase("true")) {
 			aquisitionhomepage.validateTFNelement(tfnXpath);
 		}
 	}
-
+	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$") 
+	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
+		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
+				enterZipCodePage.validateZipComp(zipCode);
+	}
 	@Then("^the user validates Pro-active Chat$")
 	public void the_user_validates_Pro_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
