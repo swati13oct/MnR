@@ -1783,18 +1783,23 @@ public class OneTimePaymentAarpStepDefintion {
 
 			Assert.assertTrue(true);
 		} else {
+			Assert.fail();
+			
+			//boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
 
-			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
-
-			if(Validation_Status) {
-				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
-				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
-				Assert.assertTrue(true);
-			}else{
-				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
-				Assert.fail();
-			}
+			/*
+			 * if(Validation_Status) { System.out.
+			 * println("Only one payment request message is Displayed in review one time PAGE : "
+			 * + Validation_Status + " - Validation Passed");
+			 * getLoginScenario().saveBean(PageConstants.Update_Review_Page,
+			 * updateReviewPage);
+			 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+			 * Assert.assertTrue(true); }else{ System.out.
+			 * println("Only one payment request message is NOT Displayed in review one time PAGE : "
+			 * +Validation_Status);
+			 */
+				
+			
 
 		}
 	}
@@ -2344,6 +2349,23 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 		
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+
+		
+	}
+	
+	@And("^the user delete update recurring payment record from GPS$")
+	public void DeletePaymentRecordFromGPS(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******the user delete update recurring payment record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);		
+		updateConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
 
 		
 	}
