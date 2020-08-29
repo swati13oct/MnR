@@ -62,6 +62,7 @@ public class PageTitleConstants {
 	public static final String BLAYER_CALPERS_RETIREES_PROVIDER = "CalPERS Retirees – Find a provider";
 	public static final String BLAYER_SDCERA_GROUP_RETIREE_PROVIDER = "SDCERA Group Retiree – Find a provider";
 	public static final String BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE = "Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare";
+	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String ULAYER_OUR_MEDICARE_PLANS = "Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®";
 	public static final String ULAYER_HEALTH_INSURANCE_BROKER_AGENT_TOOLS = "Health Insurance Broker & Agent Tools | AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String ULAYER_MEDICARE_PLANS_AARP_MEDICARE_PLANS = "Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®";
@@ -93,5 +94,6 @@ public class PageTitleConstants {
 	public static final String ULAYER_ENTER_ZIP_CODE = "Please enter your ZIP code as 5 numbers in the following format: 12345.";
 	public static final String ULAYER_LAST_NAME = "Your last name must contain at least 1 character and cannot be more than 35 characters. Please enter up to 35 characters of your last name.";
 	public static final String ULAYER_ENTER_DATE_OF_BIRTH = "Please enter your date of birth like this: MM/DD/YYYY";
+	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="Available Plans in Your Area| UnitedHealthCare®";
 	public static final String ULAYER_ENTER_Zip_Code = "90210";
 }

@@ -47,6 +47,8 @@ public class EnterZipCodePage extends UhcDriver {
 
 	public void validateZipComp() {
 		try {
+			driver.get("https://offline-stage-origin-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
+
 			String zipCode = PageTitleConstants.ULAYER_ENTER_Zip_Code;
 			int zipCodeNumber = 1;
 			// List<WebElement> allZipComp1 =
@@ -54,24 +56,27 @@ public class EnterZipCodePage extends UhcDriver {
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
+				Thread.sleep(3000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
 				ZipcodeButton.get(zipCodeNumber - 1).click();
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
-			
+				Thread.sleep(3000);
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
 					Set<String> newWindow = driver.getWindowHandles();
 					for (String tabs : newWindow) {
 						if (!tabs.equalsIgnoreCase(currentPage))
-							vppPageTitle=driver.switchTo().window(tabs).getTitle();
+							vppPageTitle = driver.switchTo().window(tabs).getTitle();
 					}
 				}
-				
+
+				System.out.println("Actual : " + vppPageTitle);
+				System.out.println("Expected : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 				assertTrue("Not redirected to VPP page",
-						vppPageTitle.contains(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE));
+						vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				driver.navigate().back();
 				zipCodeNumber++;
 			}
