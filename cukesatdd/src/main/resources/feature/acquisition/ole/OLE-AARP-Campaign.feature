@@ -182,7 +182,7 @@ Feature: 2.05.5. ACQ-OLE Campaign AARP
     Given the user is on AARP medicare acquisition site VPP page after hits Campaign URL
   	And the user views the plans of the below plan type in AARP site
   	  | Plan Type | <plantype> |
-			And the user selects future plan year for the AARP site
+		And the user selects plan year for the AARP site
       |Plan Year | <planYear> |
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
