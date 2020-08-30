@@ -108,7 +108,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
 	public WebElement ImportantInfo_Header;
 	
-	@FindBy(xpath = "//a[contains(@dtmname,'view plan formulary')]")
+	@FindBy(xpath = "//h3[contains(text(),'Plan Formulary')]")
 	public WebElement ImportantInfo_planFormularyLink;
 
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")

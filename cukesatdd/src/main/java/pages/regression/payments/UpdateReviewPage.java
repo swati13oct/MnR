@@ -45,6 +45,9 @@ public class UpdateReviewPage extends UhcDriver {
 
 	@FindBy(id = "memAuthPaymentCancelSubmitError")
 	private WebElement csrUnauthorizedErrorMessage;
+	
+	@FindBy(xpath = "//span[contains(@class,'confirmation__number')]")
+	private WebElement ConfirmationNumber;
 
 
 	public UpdateReviewPage(WebDriver driver) {
@@ -85,7 +88,7 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (ConfirmationNumber.isDisplayed()) {
 			System.out.println("Navigated to Recurring Payments Request Submitted page");
 			return new UpdateConfirmationPage(driver);
 		} else {

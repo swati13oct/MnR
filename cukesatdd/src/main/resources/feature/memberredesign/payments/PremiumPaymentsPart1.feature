@@ -29,15 +29,17 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
        | referenceNumber  | <referenceNumber> |
        | householdID   | <householdID> |
     Examples: 
-      | TestCase | householdID  | referenceNumber|
-      | TC2-P1   | 30019596303  |  112255071     |
-      | TC2-P1   | 31476200 | 132357419       |
-      | TC3-P1   | 3777000      |  526688       |
-      | TC3-P1   | 31476200 |  132357419      |
-      |  C4-P1   | 70018905807 | 111146330     |
-	  |	TC4-P2   | 380023506638 | 118539181     |
-	  |	TC5-P1   | 920035201792 |  137394841    |
-	  |	TC5-P2   | 940021790794 |  137221436    |
+     | TestCase | householdID  | referenceNumber|
+     | TC2-P1   | 30019596303  |  112255071     |
+     | TC2-P1   | 31476200 | 132357419       |
+     | TC3-P1   | 3777000      |  526688       |
+     | TC3-P2   | 31476200 |  132357419      |
+     |  C4-P1   | 31476200 | 147084652     |
+	 |	TC4-P2   | 40022405704 | 141455348     |
+     |	TC5-P1   | 920035201792 |  137394841    |
+     |	TC5-P2   | 940021790794 |  137221436    |
+
+     
       
   #Test Case 01
   @regressionMember
@@ -112,7 +114,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear | paymentType |  householdID |
       | F2385256   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2028 | Recurring   | 3777000 |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  31476200 |
+     # | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2028 | Recurring   |  31476200 |
 
   #Test Case 04
   @regressionMember
@@ -133,13 +135,13 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
       | Account holder last name   | <lastName>         |
     And user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring
-    And the user delete recurring payment record from GPS so that he can run recurring payment again
+    And the user delete update recurring payment record from GPS
       | Payment Type | <paymentType> |
 
     Examples: 
       | TID       | planType | memberType                    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType | householdID |
-      | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 70018905807 |
-      | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 380023506638 |
+     | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 31476200 |
+     | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   | 40022405704 |
 
   #Test Case 05
   @regressionMember
@@ -210,7 +212,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
      
  #Test Case 09
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 09 -Verify the overPayment credit flag and verbiage
+  Scenario Outline: TID: <memberType> - Test Case 09 -Verify the Paid In Full flag and verbiage
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
