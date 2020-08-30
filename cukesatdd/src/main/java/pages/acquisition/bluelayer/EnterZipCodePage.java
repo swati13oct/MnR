@@ -47,12 +47,7 @@ public class EnterZipCodePage extends UhcDriver {
 
 	public void validateZipComp(String zipCode) {
 		try {
-			driver.get("https://offline-stage-origin-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
-
-			//String zipCode = PageTitleConstants.ULAYER_ENTER_Zip_Code;
 			int zipCodeNumber = 1;
-			// List<WebElement> allZipComp1 =
-			// driver.findElements(By.xpath("//form[contains(@class,'zipForm')]"));
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
