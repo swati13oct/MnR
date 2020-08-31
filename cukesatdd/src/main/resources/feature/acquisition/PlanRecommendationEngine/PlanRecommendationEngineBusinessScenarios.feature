@@ -99,7 +99,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                |
-      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Tommy Tally | NO            | Yes,Yes,Yes,Yes               | Lower                |
+      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | John        | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Higher               |--> MS Has #1Recommendation
@@ -143,4 +143,4 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption |
-      |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         |
+      |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         |
