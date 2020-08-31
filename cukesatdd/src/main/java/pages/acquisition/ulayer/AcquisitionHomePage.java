@@ -1921,7 +1921,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void signInheader() {
 			headerSignInLink.click();
 			validateNew(signIn);
-			if(driver.getCurrentUrl().contains("medicare.uhc.com/aarp")){
+			if(driver.getCurrentUrl().contains("medicare.uhc.com")){
 				Assert.assertTrue(true);
 				System.out.println("Signin page is loaded");
 				driver.navigate().back();
