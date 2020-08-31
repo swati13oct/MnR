@@ -180,7 +180,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}
@@ -198,8 +198,10 @@ public class DrugDetailsPage extends UhcDriver {
 		backtoDrugEstBtn.click();
 	}
 	
-	public void validatePlanDrugDetails() {
-		validateNew(planHeader);
+	public void validatePlanDrugDetails(String planName) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		validateNew(PlanName_PlanDetails);
 	}
 
 	public void validateDrugCosts() {

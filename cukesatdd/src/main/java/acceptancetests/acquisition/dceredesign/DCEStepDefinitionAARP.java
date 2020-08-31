@@ -332,7 +332,7 @@ public class DCEStepDefinitionAARP {
 	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDrugPricingText();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
 	}
 	
 	@When("^clicks on Review drug cost button$")
@@ -497,16 +497,14 @@ public class DCEStepDefinitionAARP {
 	@Then("^the user Clicks button to VPP Plan Details Page from Drug Details Page$")
 	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		PlanDetailsPage plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
 		if (null != plandetailspage) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 		} else
-			Assert.fail("VPP Plan Details not loaded");
-	
+			Assert.fail("VPP Plan Details not loaded");	
 	}
-
+	
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile in AARP site$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
@@ -586,8 +584,8 @@ public class DCEStepDefinitionAARP {
 	@Then("^User validates planName matches plan Name in DCE detail page in AARP$")
 	public void the_user_validates_matches_planname() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		
-		drugDetailsPage.validatePlanDrugDetails();
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		drugDetailsPage.validatePlanDrugDetails(PlanName);
 	}
 
 	@Then("^the user validates Drug Costs section$")
