@@ -49,7 +49,7 @@ public class guestPaymentsLoginStepDefinition {
 		return memberAttributesMap;
 	}
 
-	@Given("^I am on the Welcome Page of M&R Guest Premium Payment portal$")
+	@Given("^I am on the login screen of Guest Payments Portal$")
 	public void the_user_on_LoginPage(DataTable givenAttributes) {
 		wd = getLoginScenario().getWebDriver();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -58,6 +58,9 @@ public class guestPaymentsLoginStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE, guestPaymentsLogin);
 	}
+
+	
+
 
 	@Then("^I validate all the header and page elements$")
 	public void the_user_verifies_headerAndBody() {

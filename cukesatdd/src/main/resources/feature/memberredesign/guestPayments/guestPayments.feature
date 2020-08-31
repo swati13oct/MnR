@@ -3,8 +3,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
  @guestPayment01 @validateUrlForDifferentBrands
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
-
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
     When I click on link Help me find my id link
@@ -24,7 +23,6 @@ Feature: 1.06.7 Member Guest Payments Page
 
   @guestPayment02 @ErrorsAndContent
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different error scenarios
-
     Given I am on the Welcome Page of M&R Guest Premium Payment portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
