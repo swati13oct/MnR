@@ -185,6 +185,16 @@ public class guestPaymentsLoginStepDefinition {
 		oneTimeGuestPaymentsPage.validateHeaderAndPageElements();
 
 	}
+	@Then("^I validate payment Amount fields for different member types $")
+
+	public void validateAmountFields(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		boolean pastDueDisplay =Boolean.valueOf(memberAttributesMap.get("pastDue"));
+		boolean currentChargesDisplay=Boolean.valueOf(memberAttributesMap.get("currentCharges"));
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.validateAmountFields(pastDueDisplay,currentChargesDisplay);
+
+	}
 
 	@Then("^I select Past Amount Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountDueAndCC() {
@@ -418,5 +428,8 @@ public class guestPaymentsLoginStepDefinition {
 		oneTimeGuestPaymentsPage.blankeftAccountError();
 
 	}
+
+	
+
 	
 }

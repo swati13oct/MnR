@@ -688,10 +688,6 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		Assert.assertTrue("PROBLEM - unable to locate the One time payments Header",guestPaymentsValidate(guestPaymentsHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the text below the header on One time payments Page",guestPaymentsValidate(oneTimePaymentTextBelowHeader));
 		Assert.assertTrue("PROBLEM - unable to locate select a Payment Header",guestPaymentsValidate(selectAPaymentHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Past Amount Due Radio Button",guestPaymentsValidate(pastAmountDueRadioButton));
-		Assert.assertTrue("PROBLEM - unable to locate Past Amount due value",guestPaymentsValidate(pastAmountValue));
-		Assert.assertTrue("PROBLEM - unable to locate Past Amount and Current Charges Radio Button",guestPaymentsValidate(pastAmountCurrentChargesRadioButton));
-		Assert.assertTrue("PROBLEM - unable to locate  Past Amount and Current Charges value",guestPaymentsValidate(pastAmountCurrentChargesValue));
 		Assert.assertTrue("PROBLEM - unable to locate other Amount Radio Button",guestPaymentsValidate(otherAmountRadioButton));
 		Assert.assertTrue("PROBLEM - unable to locate other Amount Text Field",guestPaymentsValidate(otherAmountTextField));
 		Assert.assertTrue("PROBLEM - unable to locate choose A Payment Heading",guestPaymentsValidate(chooseAPaymentHeading));
@@ -907,6 +903,20 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	public void blankeftAccountError() {
 
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(noEftAccountInfo));
+	}
+
+
+
+	public void validateAmountFields(boolean pastDueDisplay, boolean currentChargesDisplay) {
+		
+		if(pastDueDisplay){
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount Due Radio Button",guestPaymentsValidate(pastAmountDueRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount due value",guestPaymentsValidate(pastAmountValue));
+		}
+		 if(currentChargesDisplay){
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount and Current Charges Radio Button",guestPaymentsValidate(pastAmountCurrentChargesRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate  Past Amount and Current Charges value",guestPaymentsValidate(pastAmountCurrentChargesValue));
+		 }
 	}
 
 

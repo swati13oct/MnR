@@ -612,7 +612,7 @@ public class MRConstants {
 	public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
 
 	public static String PROV_NAME = "";
-	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://stage-medicare.uhc.com/aarp/premium-payment";
+	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
 	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://stage-medicare.uhc.com/medicare/premium-payment";
 	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL = "https://stage-medicare.uhc.com/retiree/premium-payment";
 	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://stage-mymedicareaccount.uhc.com/pcp/premium-payment";

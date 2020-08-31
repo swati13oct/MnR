@@ -15,10 +15,10 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |
       | 10000 | MAPD     | 915516555-1   | 10/29/1947    |   AARP      |
-      | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |
-      | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |
-      | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |
-      | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |
+      #| 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |
+      #| 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |
+     # | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |
+     # | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |
 
 
 
@@ -325,13 +325,15 @@ Feature: 1.06.7 Member Guest Payments Page
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     And I validate payment Amount fields for different member types 
-    
+       | pastDue         | <hasPD> |
+       | currentCharges  |  <hasCC>     |
+
 
     Examples:
-      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC |hasOtherAmount |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | Y      |  Y    | Y             |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  Y    | Y             |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | N      |  N    | Y             |
+      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | true   | true   |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | false  | true   |
+      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | false  | false  |
 
   @guestPayment13 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -387,5 +389,5 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |
       | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | 15.20          |
       | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | 20.30          |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | 11.000         |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | 11.00        |
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | 333.00         |
