@@ -33,7 +33,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | planname                             | year     |
-      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
 
   @ProviderSearchFromGlobalHeaderUlayer1 
   Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
@@ -42,16 +42,17 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
     @AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount | year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount |year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromWidgetUlayer 
   Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
@@ -60,16 +61,17 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
 	@AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount | year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount | year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page

@@ -25,7 +25,7 @@ import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
