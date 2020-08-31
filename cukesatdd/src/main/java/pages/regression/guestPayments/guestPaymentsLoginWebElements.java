@@ -78,7 +78,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "memberID") // need to update class id
 	public static WebElement CancelButtononID;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(className= "input-error-msg") 
 	public static WebElement errorMessage;
 	
 	@FindBy(className= "memberID") // need to update class id

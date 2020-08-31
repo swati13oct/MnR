@@ -25,12 +25,12 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different error scenarios
     Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-    Then I validate all the header and page elements
+    #Then I validate all the header and page elements
     And  I click on Next button leaving Member ID and Date of birth blank
     Then I will get an error message
     Then I will enter my Member ID and Date of birth
     #incorrect member id
-       | Member ID         | 01           |
+       | Member ID         | aa           |
        | Date of Birth     | 01/01/1944   |
     Then I will get an error message
     And  I will enter my Member ID and Date of birth
