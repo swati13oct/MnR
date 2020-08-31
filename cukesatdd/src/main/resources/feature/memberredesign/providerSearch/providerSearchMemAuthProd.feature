@@ -26,28 +26,28 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 01    | ashah120  | Mnrqa003  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch |
-	    | 02    | ashah120  | Mnrqa003  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
+	    | 01    | kkumard  | mnrs786@  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch |
+	    | 02    | kkumard  | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 03    | ashah120  | Mnrqa003  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | kkumard  | mnrs786@  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
 
 	@prod_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-        | 04    | ashah120  | Mnrqa003  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
-	    | 05    | ashah120  | Mnrqa003  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
+        | 04    | kkumard  | mnrs786@  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
+	    | 05    | kkumard  | mnrs786@  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
 
 	@prod_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 06    | ashah120  | Mnrqa003  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
-	    | 07    | ashah120  | Mnrqa003  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+	    | 06    | kkumard  | mnrs786@  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | 07    | kkumard  | mnrs786@  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
 
 	@prod_providerSearch01_grp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 08    | ashah120  | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
+	    | 08    | kkumard  | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
 
