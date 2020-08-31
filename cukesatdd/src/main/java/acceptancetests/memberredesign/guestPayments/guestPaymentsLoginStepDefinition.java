@@ -153,6 +153,7 @@ public class guestPaymentsLoginStepDefinition {
 		guestPaymentsLogin.checkErrorMessageFromGPS();
 
 	}
+	
 
 	@Then("^I will click on the Next Button and navigate to an Error page$")
 
@@ -163,6 +164,14 @@ public class guestPaymentsLoginStepDefinition {
 		Assert.assertTrue("PROBLEM - One Time Guest Payments Page is not Displayed", guestPaymentsLogin != null);
 	}
 
+	@Then("^I will click the Next Button on the login page$")
+
+	public void the_user_clicks_On_Next_Button() {
+
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+        guestPaymentsLogin.clicksNextButton();
+
+	}
 	@Then("^I will be instructed to call the number on the back of my ID$")
 
 	public void the_user_verifies_details_on_Error_Page() {

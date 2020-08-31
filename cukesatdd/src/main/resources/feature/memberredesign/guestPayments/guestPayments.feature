@@ -29,17 +29,20 @@ Feature: 1.06.7 Member Guest Payments Page
     And  I click on Next button leaving Member ID and Date of birth blank
     Then I will get an error message
     Then I will enter my Member ID and Date of birth
+    Then I will click the Next Button on the login page
     #incorrect member id
        | Member ID         | aa           |
        | Date of Birth     | 01/01/1944   |
     Then I will get an error message
     And  I will enter my Member ID and Date of birth
+    Then I will click the Next Button on the login page
      #incorrect dob
        | Member ID         | 915516555-1     |
        | Date of Birth     |  01/01/2050     |
     Then I will get an error message
     #incorrect combination
    And  I will enter my Member ID and Date of birth
+    Then I will click the Next Button on the login page
        | Member ID         |  915516555-1      |
        | Date of Birth     |   01/01/1944      |
     Then I will get an Error that match cannot be found in GPS
