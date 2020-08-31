@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -158,6 +159,37 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 		
 	}
 
+
+	public boolean guestPaymentsValidate(WebElement element) {
+		long timeoutInSec=0;
+		return guestPaymentsValidate(element, timeoutInSec);
+	} 
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean guestPaymentsValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+
 	public void PaymentsDataVerificationonConfirmationPage()
 	{
 		List<WebElement> columnsList = null;
@@ -176,24 +208,24 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 
 	public void validatePaymentConfirmationPage() {
 
-		Assert.assertTrue("PROBLEM - unable to locate Header",confirmOneTimeGuestPaymentsPage(confirmationPageHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Thanks for your payment! message",confirmOneTimeGuestPaymentsPage(thankyouPaymentmessage));
-		Assert.assertTrue("PROBLEM - unable to locate Body text below header",confirmOneTimeGuestPaymentsPage(staticContentBelowHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Email address for receipt text ",confirmOneTimeGuestPaymentsPage(emailAddressText));
-		Assert.assertTrue("PROBLEM - unable to locate Email address text field",confirmOneTimeGuestPaymentsPage(emailTextField));
-		Assert.assertTrue("PROBLEM - unable to locate send email Button",confirmOneTimeGuestPaymentsPage(sendEmailButton));
-		Assert.assertTrue("PROBLEM - unable to locate Sign in Iframe Header",confirmOneTimeGuestPaymentsPage(signinIframeHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Body text below header",confirmOneTimeGuestPaymentsPage(signinIframeBodytext));
-		Assert.assertTrue("PROBLEM - unable to locate Sign in Button",confirmOneTimeGuestPaymentsPage(signinButton));
-		Assert.assertTrue("PROBLEM - unable to locate Register Now URL Link",confirmOneTimeGuestPaymentsPage(registerNowURL));
-		Assert.assertTrue("PROBLEM - unable to locate Payment Receipt Header",confirmOneTimeGuestPaymentsPage(paymentReceiptHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Print receipt URL Link",confirmOneTimeGuestPaymentsPage(printReceiptURL));
-		Assert.assertTrue("PROBLEM - unable to locate Plan name on receipt",confirmOneTimeGuestPaymentsPage(planNameonReceipt));
-		Assert.assertTrue("PROBLEM - unable to locate Member name on receipt",confirmOneTimeGuestPaymentsPage(memberNameOnReceipt));
-		Assert.assertTrue("PROBLEM - unable to locate Member ID on receipt",confirmOneTimeGuestPaymentsPage(idOnReceipt));
-		Assert.assertTrue("PROBLEM - unable to locate Amount paid on receipt",confirmOneTimeGuestPaymentsPage(amountPaidOnReceipt));
-		Assert.assertTrue("PROBLEM - unable to locate static text above Close Button",confirmOneTimeGuestPaymentsPage(textDescribingCloseButton));
-		Assert.assertTrue("PROBLEM - unable to locate Close Button",confirmOneTimeGuestPaymentsPage(closeWindowButton));
+		Assert.assertTrue("PROBLEM - unable to locate Header",guestPaymentsValidate(confirmationPageHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Thanks for your payment! message",guestPaymentsValidate(thankyouPaymentmessage));
+		Assert.assertTrue("PROBLEM - unable to locate Body text below header",guestPaymentsValidate(staticContentBelowHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Email address for receipt text ",guestPaymentsValidate(emailAddressText));
+		Assert.assertTrue("PROBLEM - unable to locate Email address text field",guestPaymentsValidate(emailTextField));
+		Assert.assertTrue("PROBLEM - unable to locate send email Button",guestPaymentsValidate(sendEmailButton));
+		Assert.assertTrue("PROBLEM - unable to locate Sign in Iframe Header",guestPaymentsValidate(signinIframeHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Body text below header",guestPaymentsValidate(signinIframeBodytext));
+		Assert.assertTrue("PROBLEM - unable to locate Sign in Button",guestPaymentsValidate(signinButton));
+		Assert.assertTrue("PROBLEM - unable to locate Register Now URL Link",guestPaymentsValidate(registerNowURL));
+		Assert.assertTrue("PROBLEM - unable to locate Payment Receipt Header",guestPaymentsValidate(paymentReceiptHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Print receipt URL Link",guestPaymentsValidate(printReceiptURL));
+		Assert.assertTrue("PROBLEM - unable to locate Plan name on receipt",guestPaymentsValidate(planNameonReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Member name on receipt",guestPaymentsValidate(memberNameOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Member ID on receipt",guestPaymentsValidate(idOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate Amount paid on receipt",guestPaymentsValidate(amountPaidOnReceipt));
+		Assert.assertTrue("PROBLEM - unable to locate static text above Close Button",guestPaymentsValidate(textDescribingCloseButton));
+		Assert.assertTrue("PROBLEM - unable to locate Close Button",guestPaymentsValidate(closeWindowButton));
 		
 	}
 
@@ -220,7 +252,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 
 	public void emailSuccessAndClickEnterAnotherEmail() {
 
-		Assert.assertTrue("PROBLEM - unable to locate Success message for Email Receipt",confirmOneTimeGuestPaymentsPage(emailSuccessMessage));
+		Assert.assertTrue("PROBLEM - unable to locate Success message for Email Receipt",guestPaymentsValidate(emailSuccessMessage));
 		System.out.println(">>>>>>>>>Email Receipt Success Message Displayed<<<<<<<<<<");
 
 		anotherEmailReceipt.click();
