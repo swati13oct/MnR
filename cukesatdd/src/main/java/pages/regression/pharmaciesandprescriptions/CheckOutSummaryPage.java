@@ -208,6 +208,16 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 				&& medicationsHeader.getText().matches(medicationsRegex);
 	}
 
+	public boolean validatePrescriptionNumberUnderMedicationIsMoreThanOne() {
+		validate(prescriptionContainer, 30);
+		int totalMedication = listOfPrescriptions.size();
+		if(totalMedication>1){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	public boolean validateRemoveItemFromOrderCTA() {
 		for (WebElement ele : listOfRemoveItemFromOrderCTA) {
 			if (!(validate(ele) && ele.getTagName().equals("button"))) {

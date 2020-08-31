@@ -54,8 +54,8 @@ public class TransferToHDRemovePrescriptionStepDefinition {
 	}
 
 
-	@And("^a message indicating there are no prescriptions to be transferred$")
-	public void a_message_indicating_there_are_no_prescriptions_to_be_transferred() throws Throwable {
+	@And("^a message indicating there are no prescriptions to$")
+	public void a_message_indicating_there_are_no_prescriptions_to() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
