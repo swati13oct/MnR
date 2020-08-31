@@ -150,6 +150,10 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	public void enterIDandBirthDate(String memberID, String dob) {
 		memberIdTextfield.sendKeys(memberID);
 		dobTextfield.sendKeys(dob);
+		nextButton.click();
+		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		
 
 	}
 
