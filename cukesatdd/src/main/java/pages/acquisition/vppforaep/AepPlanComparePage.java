@@ -5,8 +5,7 @@ package pages.acquisition.vppforaep;
 
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
@@ -65,16 +64,18 @@ public class AepPlanComparePage extends UhcDriver {
 			if(columnName.contains("tier"))
 				System.out.println();
 
+			benefitValue = benefitValue.trim();
+
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
 				counter++;
 				//if(key.contains(columnName)) {
 				flag= true;break;
 				//	}
 
-			}else if(key.contains(columnName)) {
+			}else if(key.trim().equals(columnName.trim())) {
 				counter++;
-				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replace(":","");
-				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","");
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
 
 				//the following code is used to remove the footnote values from the benefit value string.
 
@@ -100,56 +101,155 @@ public class AepPlanComparePage extends UhcDriver {
 		return comparedResult;
 		
 	}
-	
-	public HashMap<String, String> collectInfoVppPlanComparePg() {
-		
+
+
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
+
+	    threadsleep(5000);
+
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
 
-		
-//		if(planType.contains("MA"))
-//			planType = "uhc";
-//		else
-//			planType = "pdp";
+		//Read prescription Drug Benefits and PlanCosts table
+		result.putAll(readBenefitsData("prescription-drug-table", ""));
+		result.putAll(readBenefitsData("plan-costs-table", ""));
 
-		String rowXpath="//table[contains(@id,'compare-table')]//tbody//tr[contains(@class,'uhc')]";
-		List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
-		
-		for (int i=1; i<=listOfRowsInPlanCompareTbl.size(); i++) {
-			
-			String key = "";
-			String value = "";
-			String headerCellXpath = "//table[contains(@id,'compare-table')]//tbody//tr[contains(@class,'uhc')]["+i+"]//th";
-			String planCellXpath = "//table[contains(@id,'compare-table')]//tbody//tr[contains(@class,'uhc')]["+i+"]//td";
-			
-			List<WebElement> headerCellXpathList = driver.findElements(By.xpath(headerCellXpath));
-			List<WebElement> planCellXpathList = driver.findElements(By.xpath(planCellXpath));
-			
-			if(headerCellXpathList.size()!=0) {
-				key = headerCellXpathList.get(0).getText();
+		//Read Plan Summary table
+		result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
+
+		if(planType.startsWith("MA")) {
+
+			//Read INN Benefits data
+			result.putAll(readBenefitsData("medical-benefits-table", ""));
+			result.putAll(readBenefitsData("additional-benefits-table", ""));
+
+			//Read Optional Services (Riders) data
+			result.putAll(readBenefitsData("optional-services-table",""));
+
+			//Read OON Benefits data
+			if(network.trim().startsWith("OON")) {
+				WebElement medicareBenefitsSlider = driver.findElement(By.id("medicareBenefitsSlider"));
+				WebElement additionalBenefitsStartSlider = driver.findElement(By.id("additionalBenefitsStartSlider"));
+
+				if (medicareBenefitsSlider != null && medicareBenefitsSlider.isDisplayed()) {
+					jsClickNew(medicareBenefitsSlider);
+					if (medicareBenefitsSlider.getAttribute("aria-checked").equals("true")) {
+						result.putAll(readBenefitsData("medical-benefits-table", "OON"));
+					}
+				}
+
+				if (additionalBenefitsStartSlider != null && additionalBenefitsStartSlider.isDisplayed()) {
+					jsClickNew(additionalBenefitsStartSlider);
+					if (additionalBenefitsStartSlider.getAttribute("aria-checked").equals("true")) {
+						result.putAll(readBenefitsData("additional-benefits-table", "OON"));
+					}
+				}
 			}
-			
-			if(planCellXpathList.size()!=0) {
-				String cellXpath = planCellXpath+"[1]";
-				WebElement e=driver.findElement(By.xpath(cellXpath));
-				value = e.getText();
-			}
-			
-			result.put(key, value);
-			
-			
+
 		}
 		System.out.println("Finished collecting the info on vpp compare page =====");
-		
-		  for(String keyValue : result.keySet()) {
-		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-		  System.out.println(
-		  "_________________________________________________________________________________________________"
-		  ); }
 		return result;
 	}
-	
+
+	//This method reads the benefit table values on UI into a HashMap as key value pairs
+	//tableId - Id attribute of the benefit table
+	//keyword - this is a parameter passed to generate the key name matching with that of the excel header name to distinguish between PC,INN and OON
+	private HashMap<String, String> readBenefitsData(String tableId, String keyword) {
 
 
-	
+		HashMap<String, String> result=new HashMap<String, String>();
+
+		//validateNew(driver.findElement(By.id(tableId)));
+
+		String rowXpath="//table[contains(@id,'"+tableId+"')]//tbody//tr[contains(@class,'uhc')]";
+		List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
+
+		if(listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0)
+		{
+			System.out.println(tableId + " - Could not read table data");
+			return result;
+		}
+
+		for (int i=0; i<listOfRowsInPlanCompareTbl.size(); i++) {
+
+			try{
+
+				String key = "";
+				String value = "";
+
+				List<WebElement> headerCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("th")));
+				List<WebElement> planCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("td")));
+
+				if(headerCellXpathList.size()!=0) {
+					key = headerCellXpathList.get(0).getText();
+				}
+
+				if(planCellXpathList.size()!=0) {
+					value = planCellXpathList.get(0).getText();
+				}
+
+				result.put(key+keyword, value);
+			}
+			catch(Exception ex)
+			{
+				System.out.println(ex.getMessage());
+			}
+
+
+		}
+
+
+		for(String keyValue : result.keySet()) {
+			System.out.println("Table : "+tableId +" | Key : "+keyValue+"\t| Value: "+result.get(keyValue));
+			System.out.println(
+					"_________________________________________________________________________________________________"
+			); }
+		return result;
+	}
+
+	//Format Plan compare cell value before validating against plan detail (to avoid making changes to PlanDetail compareBenefits method)
+	public String formatCellValueForPlanDetail(String currentColName, String currentCellValue) {
+
+		String formatedCellValue = currentCellValue;
+
+		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Preventive"))
+		{
+			//formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
+		}
+
+		if(currentColName.startsWith("Tier"))
+		{
+			formatedCellValue = currentCellValue.replace(":","");
+		}
+
+		return  formatedCellValue;
+	}
+
+	public String getPlanDetailColumnName(String currentColName) {
+
+		if(currentColName.equalsIgnoreCase("Primary Care Provider") || currentColName.equalsIgnoreCase("Specialist"))
+			 return currentColName + " Copay";
+
+		if(currentColName.equalsIgnoreCase("Diagnostic Radiology Services"))
+		    return "Diagnostic Radiology Services (such as MRIs/CT scans, etc.)";
+
+		if(currentColName.equalsIgnoreCase("Hearing Aids - All Types"))
+			return  "Hearing Aids";
+
+		if(currentColName.equalsIgnoreCase("Fitness"))
+			return "Fitness Program through Renew Active?";
+
+		if(currentColName.equalsIgnoreCase("Referral Required"))
+		    return "Referral to Specialist required?";
+
+		if(currentColName.equalsIgnoreCase("Outpatient Hospital Services"))
+		    return "Outpatient Hospital Services" +"\n"+"(includes observation services)";
+
+		return  currentColName;
+	}
+
+	public Map<String, String> sortDetailMap(HashMap<String, String> benefitsDetailMap) {
+		Map<String, String> map = new TreeMap<String, String>(benefitsDetailMap);
+		return map;
+	}
 }

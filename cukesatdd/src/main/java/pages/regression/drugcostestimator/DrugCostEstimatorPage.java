@@ -1902,8 +1902,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void verifyDrugDosage(String dosage) {
+		String expectedDosage = dosage.toUpperCase();
 		if(validate(drugDosageField)) {
-			Assert.assertTrue("Drug dosage not matched. Expected-"+ dosage +" Actual-" + drugDosageField.getText(), drugDosageField.getText().contains(dosage));
+			System.out.println("drugDosageField value on DCE=" + drugDosageField.getText());
+			Assert.assertTrue("Drug dosage not matched. Expected-"+ dosage +" Actual-" + drugDosageField.getText(), drugDosageField.getText().contains(expectedDosage));
 		} else {
 			Assert.fail("Drug dosage not displayed on DCE");
 		}
@@ -1911,6 +1913,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void verifyDrugQuantity(String quantityOnDCE) {
 		if(validate(drugQuantityField)) {
+			System.out.println("drugQuantityField value on DCE=" + drugQuantityField.getText());
 			Assert.assertTrue("Drug qty not matched. Expected-"+ quantityOnDCE +" Actual-" + drugQuantityField.getText(), drugQuantityField.getText().contains(quantityOnDCE));
 		} else {
 			Assert.fail("Drug qty not displayed on DCE");
@@ -1927,7 +1930,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		memberAttributesMap.put("7D - Seven Days Supply", "An opioid drug");
 		memberAttributesMap.put("ST - Step Therapy", "Step Therapy There may be effective");
 		memberAttributesMap.put("PA - Prior Authorization", "Prior Authorization The plan requires");
-		memberAttributesMap.put("DL - Dispensing Limit", "Dispensing limits applied to this drug");
+		memberAttributesMap.put("DL - Dispensing Limit", "Dispensing limits apply to this drug");
 		memberAttributesMap.put("QL - Quantity Limits", "Quantity Limit The plan will cover only a certain amount");
 		memberAttributesMap.put("ADC - Additional Drug Coverage", "Your plan includes extra coverage for certain drugs");
 		
@@ -1940,7 +1943,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				Thread.sleep(1000);
 				System.out.println("Tooltip value = " + tooltipValue.getText());
 				System.out.println("Assert value = " + tooltipValue.getText().contains(entry.getValue()));
-				//Assert.assertTrue("Tooltip not matched for" + entry.getKey(), tooltipValue.getText().contains(entry.getValue()));
+				Assert.assertTrue("Tooltip not matched for" + entry.getKey(), tooltipValue.getText().contains(entry.getValue()));
 			}
 		}catch (Exception e) {
 			System.out.println("Error occured while verifying tooltips " + e.getMessage());

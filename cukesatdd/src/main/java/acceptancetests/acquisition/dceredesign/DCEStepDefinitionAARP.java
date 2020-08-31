@@ -20,12 +20,13 @@ import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -506,8 +507,27 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("VPP Plan Details not loaded");
 	
 	}
+	
+	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
+	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
+		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		ComparePlansPage planComparePage = buildDrugListPage.returnToPlanComparePage();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
-	@And("^the user clicks on the add drugs button to navigate to DCE Redesign in the profile site$")
+	}
+	
+	@Then("^the user validates drug is displayed on the plan compare page$")
+	public void the_userValidatesDrugInfo(DataTable attributes) throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		planComparePage.validateDrugInfo(drug);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
+
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -836,6 +856,17 @@ public class DCEStepDefinitionAARP {
 		
 		drugSummaryPage.verifyDrugListsUpdated(drugName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
+	}
+	
+	@Then("^I access the DCE Redesign from Plan compare page$")
+	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
+		ComparePlansPage planComparepage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 	}
 
 }

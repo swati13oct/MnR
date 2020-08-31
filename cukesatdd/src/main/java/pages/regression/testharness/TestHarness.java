@@ -1727,6 +1727,7 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		public void clickAccountProfile() {
+			checkForIPerceptionModel(driver);
 			if (accountProfile.isDisplayed()) {
 				accountProfile.click();
 			}
