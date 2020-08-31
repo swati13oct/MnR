@@ -36,6 +36,7 @@ Feature: 2.12 ACQ - Global Components UHC
     When user accesses global footer of the UHC Medicare Solutions All page
     Then the USer validates Shop for a Plan Navigation links on UHC site
     Then the user validates Medicare Education Navigation links on UHC site
+     Then the user validate ZipCode Components on UHC page using ZipCode "90210"
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -183,6 +184,7 @@ Feature: 2.12 ACQ - Global Components UHC
     When user accesses global footer of the UHC Medicare Solutions All page
     Then the USer validates Shop for a Plan Navigation links on UHC site
     Then the user validates Medicare Education Navigation links on UHC site
+    Then the user validate ZipCode Components on UHC page using ZipCode "90210"
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |

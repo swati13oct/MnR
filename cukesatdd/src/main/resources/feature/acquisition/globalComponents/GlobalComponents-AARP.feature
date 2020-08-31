@@ -37,6 +37,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the AARP Medicare Plans All page
     Then the USer validates Shop for a Plan Navigation links
     Then the user validates Medicare Education Navigation links
+    Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -186,6 +187,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the AARP Medicare Plans All page
     Then the USer validates Shop for a Plan Navigation links
     Then the user validates Medicare Education Navigation links
+     Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -196,3 +198,21 @@ Feature: 1.12 ACQ - Global Components AARP
       | path                                                                      | pageName          | tfnXpath       | tfnFlag |
       | medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
       |medicare-supplement-plans/agent-appointment.html                           | Agent Appointment | //*[@id='tfn'] | true    |
+      
+      
+      @GlobalComponentsAARPNewShopPages
+  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+    Given the user is on AARP medicare acquisition site landing page
+    Given the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validate ZipCode Components on page using ZipCode "90210"
+    Then the user validates TFN on page
+     | TFNxpath | <tfnXpath> |
+      | TFNflag  | <tfnFlag>  |
+      
+		 @GlobalComponentsAARPNewShopPages1
+    Examples: 
+      | path                          | pageName                   | tfnXpath                     | tfnFlag |
+      | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+     

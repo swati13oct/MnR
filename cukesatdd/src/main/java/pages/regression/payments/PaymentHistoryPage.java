@@ -650,6 +650,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
 	private WebElement logOutLink;
+
+	@FindBy(xpath = "//h1[contains(text(),'Premium Payments')]")
+	private WebElement premiumPaymentsHeading;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -779,10 +782,10 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn,30);
+		CommonUtility.waitForPageLoad(driver, premiumPaymentsHeading,30);
 		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
 			//validateNew(paymentHistoryApp);
-			validateNew(oneTimePaymentBtn);
+			validateNew(premiumPaymentsHeading);
 		}
 	}
 
