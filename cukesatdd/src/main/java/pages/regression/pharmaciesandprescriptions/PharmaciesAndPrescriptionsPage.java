@@ -1241,7 +1241,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateNoRefillAllMedications() {
 		Assert.assertFalse("PROBLEM - should unable to locate Refill All Medications link text element on My Medications",
-				pnpValidate(refillAllMedications.get(0)));
+				validateNoRefillAllMedicationsBtn());
+	}
+
+	public boolean validateNoRefillAllMedicationsBtn() {
+
+		if(refillAllMedications.size()>=0){
+			 return false;
+		}else {
+			return true;
+		}
 	}
 
 	public void selectTwoDayShipping() throws InterruptedException {
