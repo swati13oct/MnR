@@ -1,9 +1,9 @@
 @Dreameob
 Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
-      | Feature           | UCPEob |
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on stage env
+  #    | Feature           | UCPEob |
 
 
   @dreamEob01 @E2E @regressionMember 
