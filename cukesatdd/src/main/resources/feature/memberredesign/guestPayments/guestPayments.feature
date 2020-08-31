@@ -23,7 +23,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
   @guestPayment02 @ErrorsAndContent
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different error scenarios
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
     And  I click on Next button leaving Member ID and Date of birth blank
@@ -52,7 +52,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
   @guestPayment03 @Blockeduser  @Terminated @100%Subsidy @PremiumtoaBank
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for blocked Members
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -74,7 +74,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
   @guestPayment04 @C&SplanBLOCKED
   Scenario Outline: TID: <TID> - To validate the Guest Payment page E2E Scenario
-      Given I am on the Welcome Page of M&R Guest Premium Payment portal
+      Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -92,7 +92,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment05 @makeOneTimePayment @pastAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -126,7 +126,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment06 @makeOneTimePayment @pastAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -159,7 +159,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment07 @makeOneTimePayment @pastAmount&currentCharges @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -189,7 +189,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment08 @makeOneTimePayment @pastAmount&currentCharges @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -218,7 +218,7 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -249,7 +249,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment10 @makeOneTimePayment @otherAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -279,7 +279,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment11 @makeOneTimePayment @changePaymentDetails
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -315,7 +315,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
  @guestPayment12 @selectPaymentAmountValidations
   Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -336,7 +336,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment13 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
@@ -364,7 +364,7 @@ Feature: 1.06.7 Member Guest Payments Page
   @guestPayment14 @ErrorsAndContentOneTimePayment @eftErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
 
-    Given I am on the Welcome Page of M&R Guest Premium Payment portal
+    Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
