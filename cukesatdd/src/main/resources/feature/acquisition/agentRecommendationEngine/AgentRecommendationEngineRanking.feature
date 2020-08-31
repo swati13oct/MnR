@@ -67,6 +67,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
     Then agent validates save plans in plancompare page
+    	| Plan Year    | <PlanYear>      |
 
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear |

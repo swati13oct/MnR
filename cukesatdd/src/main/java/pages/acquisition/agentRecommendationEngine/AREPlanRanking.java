@@ -193,6 +193,12 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div[class*='compare-box'] button")
 	private List<WebElement> vppCompareButton;
+	
+	@FindBy(css = ".multi-year-select button:nth-child(1)")
+	private WebElement currentPlanYear;
+	
+	@FindBy(css = ".multi-year-select button:nth-child(2)")
+	private WebElement futurePlanYear;
 
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
@@ -439,10 +445,10 @@ public class AREPlanRanking extends UhcDriver {
 		return actualplanName;
 	}
 
-	public void validateSavePlan() {
+	public void validateSavePlan(String year) {
 		System.out.println("Validate ARE Save Plans functionality : ");
 		int saveplans = 2;
-		verifySavePlans(plancards, saveplans, saveplanComparepage);
+		verifySavePlans(plancards, saveplans, saveplanComparepage, year);
 	}
 
 	public void verifyRankingOrder(String zip, String rankOptions, String curPlan, String changeOrder,
@@ -504,7 +510,7 @@ public class AREPlanRanking extends UhcDriver {
 		validate(applyBtn);
 		optionSelection(rankOptions, false);
 		applyBtn.click();
-		threadsleep(3000);
+		threadsleep(3000);;
 		boolean msg = validate(successMsg, 10); // Validate message disappear
 		Assert.assertFalse(msg);
 
@@ -514,27 +520,32 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("------- Ranking Validation completed -------");
 	}
 
-	public void verifySavePlans(List<WebElement> plansName, int saveplans, List<WebElement> saveplanComparepage) {
+	public void verifySavePlans(List<WebElement> plansName, int saveplans, List<WebElement> saveplanComparepage, String year) {
 		List<String> vppPlans = new ArrayList<String>();
 		System.out.println(plansName.size());
 		System.out.println(saveplanComparepage.size());
 		int plan = 0;
 		if (plansName.size() != saveplanComparepage.size()) {
 			for (plan = 1; plan < saveplans; plan++) {
-				for (int i = 0; i < saveplans; i++)
+					int i = 0;
 					vppPlans.add(savingplans(plansName.get(plan + i), saveplanComparepage.get(i), i));
 			}
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
+			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
 		} else {
 			for (plan = 0; plan < saveplans; plan++) {
-				for (int i = 0; i < saveplans; i++)
+					int i = plan;
 					vppPlans.add(savingplans(plansName.get(i), saveplanComparepage.get(i), i));
 			}
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
+			threadsleep(3000);
+			validate(viewSavedItems);
+			viewSavedItems.click();
+			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
 		}
@@ -556,8 +567,7 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
-		validate(viewSavedItems);
-		viewSavedItems.click();
+		
 		String actualplanName = "";
 		String exceptedplanName = "";
 		pageloadcomplete();
@@ -622,6 +632,29 @@ public class AREPlanRanking extends UhcDriver {
 				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
 			}
 		}
+	}
+	
+	public boolean changePlanyearVisitorProfile(String year) {
+		// Checking Current year selection
+		if (year.equalsIgnoreCase("current")) {
+			if (validate(currentPlanYear, 15)) {
+				currentPlanYear.click();
+				Assert.assertTrue(currentPlanYear.getAttribute("class").length()>0,"Current Plan Year is not Selected");
+				return true;
+			}
+		}
+
+		// Checking and Changing Future Year
+		if (year.equalsIgnoreCase("future")) {
+			if (validate(futurePlanYear, 15)) {
+				futurePlanYear.click();
+				Assert.assertTrue(futurePlanYear.getAttribute("class").length()>0,"Future Plan Year is not Selected");
+				return true;
+			} else {
+				Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
+			}
+		}
+		return false;
 	}
 
 	public String getCurrentYear() {
