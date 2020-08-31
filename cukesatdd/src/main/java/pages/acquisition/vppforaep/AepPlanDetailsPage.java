@@ -354,7 +354,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 			key = key.toLowerCase(); 
 			columnName = columnName.toLowerCase();
-
+			benefitValue = benefitValue.toLowerCase();
+			benefitValueUI = benefitValueUI.toLowerCase();
 			if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
 				key = key.replace(":","");
 
@@ -455,7 +456,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					benefitValue = benefitValue.toLowerCase();
-					benefitValue = benefitValue.replaceAll("\\*", "");
+					benefitValue = benefitValue.replaceAll("\\*", "").replace("footnotes2", "");
+					benefitValue = benefitValue.replace("footnotes", "");
 					if(key.contains(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -531,7 +533,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
 							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
-						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")) {
+						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")) {
 							if(benefitValueUI.contains(benefitValue)) {
 								flag=true; break;
 							}else {
