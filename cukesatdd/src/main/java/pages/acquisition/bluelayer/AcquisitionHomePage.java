@@ -577,7 +577,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL);
-			}else if (MRScenario.environment.contains("stage-0")) {
+			}else if (MRScenario.environment.contains("stage-0")||MRScenario.environment.contains("offline-stage-origin")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
 			} else {
@@ -848,7 +848,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		return new VPPPlanSummaryPage(driver);
 	}
-
+	
+	public EnterZipCodePage enterZipCode() {
+		return new EnterZipCodePage(driver);
+	}
+	
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
