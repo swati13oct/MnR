@@ -35,8 +35,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
-      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS  | UHGNetwork |                       |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Online         | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
-      |   94203 | NO            | Sacramento | MAPD          | None         | outsideUS | Lookup     | Robert Deloy Jamieson | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | MA                    | SecureHorizons:SecureHorizons Focus:Advantage Assure |
+      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS  | UHGNetwork |                       |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
+      |   94203 | NO            | Sacramento | MAPD          | None         | outsideUS | Lookup     | John                  | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | MA                    | SecureHorizons:Advantage Assure:SecureHorizons Focus |
 
   @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
@@ -69,7 +69,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
-      |   94203 | NO            | Sacramento | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | MA                    | SecureHorizons Focus:Advantage Assure:SecureHorizons |
+#      |   94203 | NO            | Sacramento | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | MA                    | SecureHorizons Focus:Advantage Assure:SecureHorizons |
 
   @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
