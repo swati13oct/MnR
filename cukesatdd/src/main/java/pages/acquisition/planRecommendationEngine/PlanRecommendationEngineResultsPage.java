@@ -763,9 +763,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			String wname[] = werallypreproviders.get(i).replace(",", "").replace(".", "").split(" ");
 			List<String> wnam = Arrays.asList(wname);
 			for (int j = 0; j < vppprovider.size(); j++) {
-				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").split(" ");
+				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").replace("\n", " ").split(" ");
 				List<String> dnam = Arrays.asList(dname);
-				if (wnam.containsAll(dnam)) {
+				if (wnam.containsAll(dnam) || dnam.containsAll(wnam)) {
 					result = true;
 					break;
 				} else {
