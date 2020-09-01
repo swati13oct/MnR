@@ -19,40 +19,61 @@ Feature: 1.12 ACQ - Global Components AARP
     Then user clicks on back to top link on home page
 
   @globalheaderULayer
-  Scenario: To verify links displayed in the global header of AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When user accesses global header of the AARP Medicare Plans home page
-    And user verifies the AARP logo on home page
-    And user clicks on Sign in link on home page in aarp
-    And user clicks on register link on home page in aarp
-    Then user validates visitor profile on home page in aarp
+  Scenario Outline: To verify links displayed in the global header of AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When user accesses global header of the Medicare Plans home page
+    And user verifies the logo on home page
+    And user clicks on Sign in link on home page
+    And user clicks on register link on home page
+    Then user validates visitor profile on home page
+  
+  @globalheader_AARP
+  Examples: 
+       |	site	|
+       |	AARP	| 
+       
+  @globalheader_UHC
+  Examples: 
+       |	site	|
+       |	UHC	| 
 
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on AARP medicare acquisition site landing page
-    Given the user navigates to following AARP medicare acquisition site page
+    Given the user is on medicare acquisition site landing page
+  		| Site | <site>	|
+    Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the AARP Medicare Plans home page
-    When user accesses global footer of the AARP Medicare Plans All page
-    Then the USer validates Shop for a Plan Navigation links
-    Then the user validates Medicare Education Navigation links
-    Then the user validate ZipCode Components on page using ZipCode "90210"
-    Then the user validates TFN on page
+    When user accesses global header of the Medicare Plans home page
+    When user accesses global footer of the Medicare Plans All page
+    Then the User validates Shop for a Plan Navigation link
+    Then the user validates Medicare Education Navigation link
+    Then the user validate ZipCode Components on the page using ZipCode "90210"
+    Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
    # Then the user validates Pro-active Chat
-    Then the user validates SAM Call Icon
+    Then the user validates whether call icon is visible
    # Then the user validates SAM re-active Chat
 
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
-      | path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      | medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
+      |	AARP	| medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
 
+		@MedEdPages_1_GlobalCompsUHC
+    Examples: 
+      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
+      |	UHC		| medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+		
+		
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
       | path                                              | pageName              | tfnXpath                                      | tfnFlag |
