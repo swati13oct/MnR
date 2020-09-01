@@ -183,82 +183,82 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet>                |
       | Site          | AARP                       |
 
-  @planCompareBenefitsAARP01
+  @planCompareBenefits_NextYearAARP01
     Examples:
       | workSheet   |
       | Sheet2021_1 |
 
-  @planCompareBenefitsAARP02
+  @planCompareBenefits_NextYearAARP02
     Examples:
       | workSheet   |
       | Sheet2021_2 |
 
-  @planCompareBenefitsAARP03
+  @planCompareBenefits_NextYearAARP03
     Examples:
       | workSheet   |
       | Sheet2021_3 |
 
-  @planCompareBenefitsAARP04
+  @planCompareBenefits_NextYearAARP04
     Examples:
       | workSheet   |
       | Sheet2021_4 |
 
-  @planCompareBenefitsAARP05
+  @planCompareBenefits_NextYearAARP05
     Examples:
       | workSheet   |
       | Sheet2021_5 |
 
-  @planCompareBenefitsAARP06
+  @planCompareBenefits_NextYearAARP06
     Examples:
       | workSheet   |
       | Sheet2021_6 |
 
-  @planCompareBenefitsAARP07
+  @planCompareBenefits_NextYearAARP07
     Examples:
       | workSheet   |
       | Sheet2021_7 |
 
-  @planCompareBenefitsAARP08
+  @planCompareBenefits_NextYearAARP08
     Examples:
       | workSheet   |
       | Sheet2021_8 |
 
-  @planCompareBenefitsAARP09
+  @planCompareBenefits_NextYearAARP09
     Examples:
       | workSheet   |
       | Sheet2021_9 |
 
-  @planCompareBenefitsAARP10
+  @planCompareBenefits_NextYearAARP10
     Examples:
       | workSheet    |
       | Sheet2021_10 |
 
-  @planCompareBenefitsAARP11
+  @planCompareBenefits_NextYearAARP11
     Examples:
       | workSheet    |
       | Sheet2021_11 |
 
-  @planCompareBenefitsAARP12
+  @planCompareBenefits_NextYearAARP12
     Examples:
       | workSheet    |
       | Sheet2021_12 |
 
-  @planCompareBenefitsAARP13
+  @planCompareBenefits_NextYearAARP13
     Examples:
       | workSheet    |
       | Sheet2021_13 |
 
-  @planCompareBenefitsPDPAARP01
+  @planCompareBenefits_NextYearPDPAARP01
     Examples:
       | workSheet      |
       | PDPSheet2021_1 |
 
-  @planCompareBenefitsPDPAARP02
+  @planCompareBenefits_NextYearPDPAARP02
     Examples:
       | workSheet      |
       | PDPSheet2021_2 |
 
-  @planCompareBenefitsPDPAARP03
+  @planCompareBenefits_NextYearPDPAARP03
     Examples:
       | workSheet      |
       | PDPSheet2021_3 |
@@ -270,82 +270,82 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet>                |
       | Site          | UHC                        |
 
-  @planCompareBenefitsUHC01
+  @planCompareBenefits_NextYearUHC01
     Examples:
       | workSheet   |
       | Sheet2021_1 |
 
-  @planCompareBenefitsUHC02
+  @planCompareBenefits_NextYearUHC02
     Examples:
       | workSheet   |
       | Sheet2021_2 |
 
-  @planCompareBenefitsUHC03
+  @planCompareBenefits_NextYearUHC03
     Examples:
       | workSheet   |
       | Sheet2021_3 |
 
-  @planCompareBenefitsUHC04
+  @planCompareBenefits_NextYearUHC04
     Examples:
       | workSheet   |
       | Sheet2021_4 |
 
-  @planCompareBenefitsUHC05
+  @planCompareBenefits_NextYearUHC05
     Examples:
       | workSheet   |
       | Sheet2021_5 |
 
-  @planCompareBenefitsUHC06
+  @planCompareBenefits_NextYearUHC06
     Examples:
       | workSheet   |
       | Sheet2021_6 |
 
-  @planCompareBenefitsUHC07
+  @planCompareBenefits_NextYearUHC07
     Examples:
       | workSheet   |
       | Sheet2021_7 |
 
-  @planCompareBenefitsUHC08
+  @planCompareBenefits_NextYearUHC08
     Examples:
       | workSheet   |
       | Sheet2021_8 |
 
-  @planCompareBenefitsUHC09
+  @planCompareBenefits_NextYearUHC09
     Examples:
       | workSheet   |
       | Sheet2021_9 |
 
-  @planCompareBenefitsUHC10
+  @planCompareBenefits_NextYearUHC10
     Examples:
       | workSheet    |
       | Sheet2021_10 |
 
-  @planCompareBenefitsUHC11
+  @planCompareBenefits_NextYearUHC11
     Examples:
       | workSheet    |
       | Sheet2021_11 |
 
-  @planCompareBenefitsUHC12
+  @planCompareBenefits_NextYearUHC12
     Examples:
       | workSheet    |
       | Sheet2021_12 |
 
-  @planCompareBenefitsUHC13
+  @planCompareBenefits_NextYearUHC13
     Examples:
       | workSheet    |
       | Sheet2021_13 |
 
-  @planCompareBenefitsPDPUHC01
+  @planCompareBenefits_NextYearPDPUHC01
     Examples:
       | workSheet      |
       | PDPSheet2021_1 |
 
-  @planCompareBenefitsPDPUHC02
+  @planCompareBenefits_NextYearPDPUHC02
     Examples:
       | workSheet      |
       | PDPSheet2021_2 |
 
-  @planCompareBenefitsPDPUHC03
+  @planCompareBenefits_NextYearPDPUHC03
     Examples:
       | workSheet      |
       | PDPSheet2021_3 |
