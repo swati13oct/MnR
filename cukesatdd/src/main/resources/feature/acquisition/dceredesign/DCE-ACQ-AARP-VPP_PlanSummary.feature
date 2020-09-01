@@ -41,3 +41,33 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
       |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
+      
+      
+       @dceRedesingDrugSummarytoVPPdetail @470713
+      
+       Scenario Outline: Test to Verify that user navigates to vpp detail page from drug summary page to validate drug cost estimator and view plan summary
+       
+    Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+   And adds drugs in drug list page
+    | DrugName | <drugName> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+    When user enters valid zipcode and county in AARP
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be able to see Medicare Advantage plan by default
+    And user click on view plan details on drug summary page
+    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
+    Then the user click on drug cost estimator on vpp plan summary page in AARP
+    #Then User validates planName matches plan Name in DCE summary page in AARP
+   
+    Examples: 
+      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
+      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      

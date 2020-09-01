@@ -569,7 +569,8 @@ public class DCEStepDefinitionAARP {
 	
 	@Then("^the user verify the drug cost estimator and view plan summary on VPP detail page in AARP$")
 	public void the_user_verify_the_drug_cost_estimator() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		Thread.sleep(10000);
+		DrugSummaryPage drugDetailsPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		
 		drugDetailsPage.validateDrugandPanButton();
 	}
@@ -581,9 +582,23 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.clickOnBacktoDrugBtn();
 	}
 	
+	@Then("^the user click on drug cost estimator on vpp plan summary page in AARP$")
+	public void the_user_click_on_drug_cost_estimator_summary() throws Throwable {
+		DrugSummaryPage drugDetailsPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		
+		drugDetailsPage.clickOnBacktoDrugBtn();
+	}
+	
 	@Then("^User validates planName matches plan Name in DCE detail page in AARP$")
 	public void the_user_validates_matches_planname() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		drugDetailsPage.validatePlanDrugDetails(PlanName);
+	}
+	
+	@Then("^User validates planName matches plan Name in DCE summary page in AARP$")
+	public void the_user_validates_summary_planname() throws Throwable {
+		DrugSummaryPage drugDetailsPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanDrugDetails(PlanName);
 	}
@@ -730,6 +745,13 @@ public class DCEStepDefinitionAARP {
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user click on view plan details on drug summary page$")
+	public void user_click_on_view_plan_details_on_drug_summary_page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickOnViewPlan();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 

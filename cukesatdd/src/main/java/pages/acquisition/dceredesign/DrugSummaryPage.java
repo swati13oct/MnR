@@ -72,6 +72,9 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
 	public WebElement planTypeHeading;
+	
+	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+	public WebElement viewPlanButton;
 
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
 	public WebElement mapdPlanToggle;
@@ -153,12 +156,39 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
+	
+	public void validateDrugandPanButton() {
+		validateNew(backtoDrugEstBtn);
+		validateNew(backtoSummaryBtn);
+	}
+	
+	public void clickOnBacktoDrugBtn() {
+		validateNew(backtoDrugEstBtn);
+		backtoDrugEstBtn.click();
+	}
+	
+	public void validatePlanDrugDetails(String planName) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		validateNew(PlanName_PlanDetails);
+	}
+	
 	public DrugSummaryPage verifyDefaultPlanType(){
 		validateNew(planTypeHeading);
 		if(planTypeHeading.getText().contains("Medicare Advantage Plans")) {
 			return new DrugSummaryPage(driver);
 		}
 		return null;
+	}
+	
+	public void clickOnViewPlan(){
+		validateNew(viewPlanButton);
+		viewPlanButton.click();
 	}
 	
 	public DrugSummaryPage verifyPDPPlanToggle(){
