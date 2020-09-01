@@ -848,7 +848,7 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
 		planSelectorResultspage.changePlanyear("current");
-		planSelectorResultspage.validateUIAPIRecommendations();
-		planSelectorResultspage.validateUIAPIRankingPlans();
+		//planSelectorResultspage.validateUIAPIRecommendations();
+		//planSelectorResultspage.validateUIAPIRankingPlans();
    	}
 }

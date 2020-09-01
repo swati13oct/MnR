@@ -214,5 +214,12 @@ public class AgentRecommendationEngineStepDefinition {
 				inputValues.get("Current Plan"), inputValues.get("ChangeIn Order"),
 				inputValues.get("Expected Plans Order"));
 	}
+	
+	@Then("^agent verifies year$")
+	public void agent_verifies_planyear(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.checkYear(inputValues.get("Plan Year"));
+	}
 
 }

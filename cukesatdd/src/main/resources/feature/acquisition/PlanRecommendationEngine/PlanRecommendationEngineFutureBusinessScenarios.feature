@@ -67,7 +67,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Fonseca, Mario J |               | No             | No,No,No,No                   | Lower                |
       |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
-  @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6
+  @PRE @planrecommendation @APIRanking @MAFutureFlowRanking @SanityTest @PRERegression6
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -93,9 +93,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate future vs current UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                 |               | Yes,No,No,No                  | Lower                |
-      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                |
+      | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                |
+      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
   @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PDPFuture
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
