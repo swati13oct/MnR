@@ -16,9 +16,9 @@ Feature: 1.15 Member pre-effective functionality
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that subnavigation is supressed on the coverage and benefits page
-    And verify that correct preeffective message is displayed on coverage and benefits page
-    And verify that correct phone number is displayed in technical support section of coverage and benefits page
-      | Technical TFN | <technicalTFN> |
+    #And verify that correct preeffective message is displayed on coverage and benefits page
+    #And verify that correct phone number is displayed in technical support section of coverage and benefits page
+    #  | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
       | Member Type | <memberType> |
     And user click on the plan documents button
