@@ -4290,5 +4290,21 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		
 	}
+	
+	public void navigateToUrl(String uRLpath) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : "+CurrentURL);
+		String SiteURL = CurrentURL.split(".com")[0];
+		System.out.println("Split URL : "+SiteURL);
+		SiteURL = SiteURL+".com/";
+		System.out.println("Site URL : "+SiteURL);
+		String NavigateToURL = SiteURL+uRLpath;
+		System.out.println("Navigating to URL : "+NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 35);
+		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
+		//return NavigateToURL;
+	}
 
 }
