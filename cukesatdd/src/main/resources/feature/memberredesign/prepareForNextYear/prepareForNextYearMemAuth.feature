@@ -22,7 +22,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -83,7 +83,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -199,7 +199,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -237,8 +237,8 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info for user with SARs plan 
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/16/2020     |
-      | AEM Show Tab EndDate   | 01/02/2021     |
+      | AEM Show Tab StartDate | 09/14/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 10/01/2020     |
       | Milestone 2 Date       | 10/15/2020     |
@@ -253,7 +253,8 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     @memAuth_prepareForNextYear04_sars @devRegression
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_013   | MAPD     | UHC_SARS_PFNY           | false         |
+	   # | 4-01  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_013   | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-01  | F443004 | qavgogine | qavgogine | PerfCCM_07109   | MAPD     | SARS_PFNY           | false         |
 
     @memAuth_prepareForNextYear04_sars
     Examples: 

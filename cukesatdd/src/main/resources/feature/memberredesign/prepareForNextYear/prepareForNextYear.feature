@@ -221,7 +221,8 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear04_sars @devRegression
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	 #  | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MAPD     | SARS_PFNY           | false         |
 
     @prepareForNextYear04_sars
     Examples: 
@@ -244,7 +245,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 07/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -296,7 +297,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 07/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -406,7 +407,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 07/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -437,7 +438,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info for user with SARs plan 
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 07/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 10/01/2020     |
@@ -453,7 +454,8 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear04_sars
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	 #   | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MAPD     | SARS_PFNY           | false         |
 
     @prepareForNextYear04_sars
     Examples: 
