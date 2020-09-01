@@ -413,7 +413,7 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-	@And("^I access the DCE Redesign on aarp site from Plan Summary for mentioned plan$")
+	@And("^I access the DCE Redesign from Plan Summary for mentioned plan$")
 	public void accessDCERign_PlanSummaryforPlan(DataTable attributes){
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
@@ -483,7 +483,7 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("DCE Redesign page object not loaded");
 	}	
 	
-	@Then("^I access the DCE Redesign on aarp site from Plan Details for the plan$")
+	@Then("^I access the DCE Redesign from Plan Details for the plan$")
 	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_DETAILS_PAGE);
