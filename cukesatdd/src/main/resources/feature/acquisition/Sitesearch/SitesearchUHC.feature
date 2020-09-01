@@ -19,15 +19,15 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
   @SiteSearchResultsVPPBlayer    @SiteSearchRegressionUHC
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
+   # When the user performs plan search using following information in UMS site
+     # | Zip Code        | <zipcode>         |
+     # | County Name     | <county>          |
+     # | Is Multi County | <isMultutiCounty> |
+    #When user views plans of the below plan type in UMS site for next year
+     # | Plan Type | <plantype> |
+#    #Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    #Then the user view plan details of the above selected plan in UMS site and validates
+     # | Plan Name | <planName> |
       
       Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>| 
