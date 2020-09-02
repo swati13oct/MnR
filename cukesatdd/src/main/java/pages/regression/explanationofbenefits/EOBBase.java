@@ -685,17 +685,25 @@ public class EOBBase extends EOBWebElements{
 			e.printStackTrace();
 			Assert.assertTrue("PROBLEM - unable to convert target string into json object. inputStr="+apiResponseJson, false);
 		}
-		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null", apiResponseJsobObj!=null);
-		boolean success = (Boolean) apiResponseJsobObj.get("success");
-		String errorCode = (String) apiResponseJsobObj.get("errorCode");
-		if (!success) {
-			System.out.println("Unable to get a successful API response");
-			return null;
-		}
+		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null.  apiResponseJson="+apiResponseJson, apiResponseJsobObj!=null);
 		EobApiResponse apiResponse=new EobApiResponse();
+		try {
+			boolean success = (Boolean) apiResponseJsobObj.get("success");
+			if (!success) {
+				System.out.println("Unable to get a successful API response");
+				return null;
+			}
+			apiResponse.setSuccess(success);
+		} catch(NullPointerException npe) {
+			Assert.assertTrue("PROBLEM - got NPE when trying to parse api response to get success field. apiResponseJson="+apiResponseJson, false);
+		}
+		try {
+			String errorCode = (String) apiResponseJsobObj.get("errorCode");
 
-		apiResponse.setSuccess(success);
-		apiResponse.setErrorCode(errorCode);
+			apiResponse.setErrorCode(errorCode);
+		} catch(NullPointerException npe) {
+			Assert.assertTrue("PROBLEM - got NPE when trying to parse api response to get errorCode field. apiResponseJson="+apiResponseJson, false);
+		}
 
 		JSONArray dataListArrayObj=new JSONArray();
 		try {
