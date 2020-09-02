@@ -34,7 +34,6 @@ Feature: Renew - Remove prescription
     Then user will see "Complete Your Renewal" Page
     When user clicks remove item from Order link
     When user views popup modal and selects Yes
-    When user clicks remove item from Order link
     Then user will see the number of medications in my order indicated in the header
     And a message confirming my medication was removed
     And a message indicating there are no prescriptions to
