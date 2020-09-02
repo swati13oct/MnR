@@ -8,7 +8,6 @@ Feature: Renew - Remove prescription
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks View all medications link to view the My Medications page
     And user clicks Renew Medication call to action button to navigate to checkout page
     Then user will see "Complete Your Renewal" Page
     When user clicks remove item from Order link
@@ -31,7 +30,6 @@ Feature: Renew - Remove prescription
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks View all medications link to view the My Medications page
     And user clicks Renew Medication call to action button to navigate to checkout page
     Then user will see "Complete Your Renewal" Page
     When user clicks remove item from Order link
