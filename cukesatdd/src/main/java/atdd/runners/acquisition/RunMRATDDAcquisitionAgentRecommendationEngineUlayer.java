@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
-		retryCount=0, 
+		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
 		jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json",
@@ -25,7 +25,11 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.acquisition.agentRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/agentRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json" }, 
+<<<<<<< HEAD
 		tags = {"@PlanYearAutoRanking"})
+=======
+		tags = {})
+>>>>>>> 1eab26e369815208a295cef83c78cce084dc34a2
 public class RunMRATDDAcquisitionAgentRecommendationEngineUlayer {
 
 }
