@@ -161,45 +161,49 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void clickHealthnWellnessTab(int index){
-		try {
-			if (MRScenario.environment.contains("team-a")) {
-				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
-			} 		
-			healthAndWellness.isDisplayed();
-			healthAndWellness.click();
-			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
-		} catch (Exception e) {
-			if (hwValidate(healthAndWellness_harness)) {
-				System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
-				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-				healthAndWellness_harness.isDisplayed();
-				healthAndWellness_harness.click();
-				waitforElement(titleText);
-			} else {
-				//String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
-				System.out.println("Unable to locate Rally or testharness HW button, last attemp for shadow-root");
-				String targetCssPath="notFound";
-				for(int i=index; i>=1; i--) {
-					String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
-					System.out.println("TEST - check cssPath="+cssPath);
-					targetCssPath=locateElementWithinShadowRoot(shadowRootHeader,cssPath);
-					if (!targetCssPath.equals("notFound")) {
-						break;
-					}
-				}
-				System.out.println("Will use cssPath='"+targetCssPath+"'");
-				//String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
-				locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
-			}
-		}
-		hwCheckModelPopup(driver);
+		   if (MRScenario.environment.contains("team-a")) {
+	            Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
+	        }     
+	        if (hwValidate(healthAndWellness)) {
+	            healthAndWellness.click();
+	            waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
+
+	 
+
+	        } else if  (hwValidate(healthAndWellness_harness)) {
+	            System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
+	            System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+	            Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
+	            //tbd healthAndWellness_harness.isDisplayed();
+	            healthAndWellness_harness.click();
+	            waitforElement(titleText);
+	        } else {
+	            //String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
+	            System.out.println("Unable to locate Rally or testharness HW button, last attemp for shadow-root");
+	            String targetCssPath="notFound";
+	            for(int i=index; i>=1; i--) {
+	                String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
+	                System.out.println("TEST - check cssPath="+cssPath);
+	                targetCssPath=locateElementWithinShadowRoot(shadowRootHeader,cssPath);
+	                if (!targetCssPath.equals("notFound")) {
+	                    break;
+	                }
+	            }
+	            System.out.println("Will use cssPath='"+targetCssPath+"'");
+	            //String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
+	            locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
+	        }
+
+	 
+
+	        hwCheckModelPopup(driver);
 	}
 
 	/**
 	 * Validates Health and Wellness page
 	 */
 	public void validateHnWDashboardnL2Tabs(){
-		Assert.assertTrue("Lifestyle icon is not displayed", lifestyleIcon.isDisplayed());
+		Assert.assertTrue("PROBLEM - Lifestyle icon is not displayed", hwValidate(lifestyleIcon));
 		//Assert.assertTrue("Learning icon is not displayed", learningIcon.isDisplayed());
 		driver.getCurrentUrl();
 		if (driver.getCurrentUrl().contains("health-and-wellness"))
@@ -395,6 +399,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 	
 	public void validateRenewActive(String planType) {
+		checkModelPopup(driver,3);
 		String originalUrl=driver.getCurrentUrl();
 		if (planType.toUpperCase().contains("SHIP") && !planType.toUpperCase().contains("COMBO")) { 
 			//note: that shoe icon ------------------

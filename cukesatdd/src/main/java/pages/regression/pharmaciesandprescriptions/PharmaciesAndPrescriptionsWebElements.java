@@ -192,6 +192,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(id ="page_title")
 	protected WebElement orderStatusTextInHeaderOptumRx;
 	
+	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
+	protected WebElement FindAndPriceCallToActnBtn;
 	
 	public PharmaciesAndPrescriptionsWebElements(WebDriver driver) {
 		super(driver);

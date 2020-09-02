@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -80,27 +81,31 @@ public class ProviderSearchStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Claims page from Provider Search page$")
 	public void user_toClaims() {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		List<String> testNote=(List<String>) getLoginScenario().getBean(ProviderSearchCommonConstants.TEST_NOTE);
-		if (testNote==null)
-			testNote=new ArrayList<String>();
-		String targetPage="Claims";
-		testNote.add("===================================================");
-		testNote.add("\tValidation for page '"+targetPage+"' landing from Provider Search page");
-		ProviderSearchPage ProviderSearchPage = new ProviderSearchPage(wd);
-		ProviderSearchPage.sleepBySec(5);
-		String originalUrl=wd.getCurrentUrl();
-		wd=ProviderSearchPage.navigateToClaimsPage();
-		String actUrl=wd.getCurrentUrl();
-		String expUrl="claims";
-		Assert.assertTrue("PROBLEM - unable to land on "+targetPage+" page from Provider Saerch page top menu", actUrl.contains(expUrl));
-		testNote.add("\tPASSED - "+targetPage+" page validation from Provider Search page top menu");
-		ProviderSearchPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
-		getLoginScenario().saveBean(ProviderSearchCommonConstants.TEST_NOTE, testNote);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		try {
+			WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+			String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+			List<String> testNote=(List<String>) getLoginScenario().getBean(ProviderSearchCommonConstants.TEST_NOTE);
+			if (testNote==null)
+				testNote=new ArrayList<String>();
+			String targetPage="Claims";
+			testNote.add("===================================================");
+			testNote.add("\tValidation for page '"+targetPage+"' landing from Provider Search page");
+			ProviderSearchPage ProviderSearchPage = new ProviderSearchPage(wd);
+			ProviderSearchPage.sleepBySec(5);
+			String originalUrl=wd.getCurrentUrl();
+			wd=ProviderSearchPage.navigateToClaimsPage();
+			String actUrl=wd.getCurrentUrl();
+			String expUrl="claims";
+			Assert.assertTrue("PROBLEM - unable to land on "+targetPage+" page from Provider Saerch page top menu", actUrl.contains(expUrl));
+			testNote.add("\tPASSED - "+targetPage+" page validation from Provider Search page top menu");
+			ProviderSearchPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			getLoginScenario().saveBean(ProviderSearchCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		} catch (UnreachableBrowserException ue) {
+			Assert.assertTrue("PROBLEM - Got UnreachableBrowserException. Exception="+ue.getStackTrace()+" | SaurceLab URL="+MRScenario.returnJobURL(), false);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

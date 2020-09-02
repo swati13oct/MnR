@@ -35,6 +35,7 @@ import pages.regression.testharness.*;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
 import pages.regression.payments.CreditCardUPGPage;
 import pages.regression.payments.OneTimePaymentPage;
@@ -215,7 +216,33 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user has scrolled up");
 		}
 	}
+	
+	@Then("^User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed$")
+	public void Validate_History_PaymentForFed() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.scrollDownAndUpForFed();
+		
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
+		}
+	}
 
+	@Then("^User Scrolls down and validate Billing history Section and Payment History Section to ensure that sections are disabled$")
+	public void Validate_History_PaymentForPreeffectiveFed() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		
+		paymentHistoryPage.verifyBillingAndPaymentHistoryDisabled();
+		
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		
+		}
+	}	
+	
 	@Then("^User Scrolls down to validate Payment History Section$")
 	public void Validate_History_Payment_section() throws InterruptedException {
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
@@ -1431,6 +1458,39 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@When("^user clicks on Make one time payment on payment overview page for plan 1$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan1() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan1();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
+	
+	@When("^user clicks on Make one time payment on payment overview page for plan 2$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan2() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan2();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
 	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Next button$")
 	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_Next_button(
 			String otherAmountvalue) throws Throwable {
@@ -1723,18 +1783,23 @@ public class OneTimePaymentAarpStepDefintion {
 
 			Assert.assertTrue(true);
 		} else {
+			Assert.fail();
+			
+			//boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
 
-			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
-
-			if(Validation_Status) {
-				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
-				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
-				Assert.assertTrue(true);
-			}else{
-				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
-				Assert.fail();
-			}
+			/*
+			 * if(Validation_Status) { System.out.
+			 * println("Only one payment request message is Displayed in review one time PAGE : "
+			 * + Validation_Status + " - Validation Passed");
+			 * getLoginScenario().saveBean(PageConstants.Update_Review_Page,
+			 * updateReviewPage);
+			 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+			 * Assert.assertTrue(true); }else{ System.out.
+			 * println("Only one payment request message is NOT Displayed in review one time PAGE : "
+			 * +Validation_Status);
+			 */
+				
+			
 
 		}
 	}
@@ -2288,6 +2353,23 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user delete update recurring payment record from GPS$")
+	public void DeletePaymentRecordFromGPS(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******the user delete update recurring payment record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);		
+		updateConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+
+		
+	}
+	
 	@And("^Exception the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecordforexception(DataTable givenAttributes) throws InterruptedException{
 		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
@@ -2444,8 +2526,308 @@ public class OneTimePaymentAarpStepDefintion {
 	
 		
 		ConfirmOneTimePaymentPage.updateStopDateInGPSdb(paymentTypeMap);
-
+	}
+	@Then("^User validates the overPayment credit flag and verbiage$")
+	public void User_validates_the_overPayment_credit_flag_and_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
 		
+		 paymentHistoryPage.validateOverPaymentFlag();
+		
+	}
+	
+	@Then("^User validates the overdue and total amount due$")
+	public void overdueflag() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		
+		 paymentHistoryPage.overdueflag();
+		
+	}
+	
+	@Then("^User validates the Paid in Full flag and its verbiage$")
+	public void User_validates_the_Paid_in_Full_flag_and_its_verbiage() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.paidInFullFlag();
+		
+	}
+	@Then("User validates tool tips on the payments overview page$")
+	public void User_validates_tool_tips_on_the_page() throws Throwable {
+		System.out.println("******User validates tool tips on the payments overview page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.toolTipsValidation();
+		
+	}
+	@Then("^User validates billing and payment history table tool tips on the page$")
+	public void User_validates_tool_tips_on_billing_tablethe_page() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentHistorytoolTipsValidation();
+		
+	}
+
+	
+	@Then("^validate print billing payment and download buttons on the UI$")
+	public void validatePrintBillingPaymentAndDownloadButtonsOnTheUI() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentAndDownloadButtons();
+		 
+	}
+	@Then("^User Scrolls down to the Billing history Section$")
+	public void UserScrollsDownToTheBillingHistorySection() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.UserScrollsDownToTheBillingHistorySection();
+		
+	}
+	
+	@Then("^User Scrolls down to the Billing history Section of Second Plan$")
+	public void UserScrollsDownToTheBillingHistorySectionOfSecondPlan() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.UserScrollsDownToTheBillingHistorySectionOfSecondPlan();
+		
+	}
+	
+	@Then("^user validates billing history section header exists$")
+	public void user_validates_billing_history_section_header_exists() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);		
+			paymentHistoryPage.validateBillingHistoryHeaderExists();
+		
+	}
+	
+	@Then("^user validates billing history section header exists of Second Plan$")
+	public void user_validates_billing_history_section_header_exists_second_plan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);		
+			paymentHistoryPage.validateBillingHistoryHeaderExistsForSecondPlan();
+		
+	}
+	
+		
+	@Then("^Last 90 days is selected by default in the Billing History dropdown$")
+	public void user_validates_date_range_default_is_Last_90_days_new() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateBillingHistoryDateRageDefault();
+	}
+	
+	@Then("^Last 90 days is selected by default in the Billing History dropdown of Second Plan$")
+	public void user_validates_date_range_default_is_Last_90_days_new_Second_Plan() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateBillingHistoryDateRageDefaultSecondPlan();
+	}
+	
+	@Then("^user validates data is present in billing history table$")
+	public void userValidatesDataInBillingHistoryTableFor90Days() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateBillingHistoryTable();
+	}
+	
+	@Then("^user validates data is present in billing history table of Second Plan$")
+	public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateBillingHistoryTableSecondPlan();
+	}
+	
+	
+	@Then("^user selects Last 6 months in the Billing History dropdown$")
+	public void userValidatesDataInBillingHistoryTableFor6Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects6MonthsInBillingHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 6 months in the Billing History dropdown of Second Plan$")
+	public void userValidatesDataInBillingHistoryTableFor6MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects6MonthsInBillingHistoryDropdownSecondPlan();
+	}
+	
+	@Then("^user selects Last 12 months in the Billing History dropdown$")
+	public void userValidatesDataInBillingHistoryTableFor12Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects12MonthsInBillingHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 12 months in the Billing History dropdown of Second Plan$")
+	public void userValidatesDataInBillingHistoryTableFor12MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects12MonthsInBillingHistoryDropdownSecondPlan();
+	}
+	
+	@Then("^user selects Last 24 months in the Billing History dropdown$")
+	public void userValidatesDataInBillingHistoryTableFor24Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects24MonthsInBillingHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 24 months in the Billing History dropdown of Second Plan$")
+	public void userValidatesDataInBillingHistoryTableFor24MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects24MonthsInBillingHistoryDropdownSecondPlan();
+	}
+	
+	@Then("^User Scrolls down to the Payment history Section$")
+	public void UserScrollsDownToThePaymentHistorySection() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.UserScrollsDownToThePaymentHistorySection();
+		
+	}
+	
+	
+	@Then("^user validates Payment history section header exists$")
+	public void user_validates_payment_history_section_header_exists_new() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);		
+			paymentHistoryPage.validatePaymentHistoryHeaderExistsNew();
+		
+	}
+	
+	@Then("^user validates Payment history section header exists of Second Plan$")
+	public void user_validates_payment_history_section_header_exists_new_Second_Plan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);		
+			paymentHistoryPage.validatePaymentHistoryHeaderExistsNewSecondPlan();
+		
+	}
+	
+	@Then("^Last 90 days is selected by default in the Payment History dropdown$")
+	public void user_validates_date_range_default_is_Last_90_days_Payment_History() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryDateRageDefaultNew();
+	}
+	
+	@Then("^Last 90 days is selected by default in the Payment History dropdown of Second Plan$")
+	public void user_validates_date_range_default_is_Last_90_days_Payment_History_Second_Plan() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryDateRageDefaultNewSecondPlan();
+	}
+	
+	@Then("^user validates data is present in Payment history table$")
+	public void userValidatesDataInPaymentHistoryTableFor90Days() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryTable();
+	}
+	
+	@Then("^user validates data is present in Payment history table of Second Plan$")
+	public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryTableSecondPlan();
+	}
+	
+	@Then("^user selects Last 6 months in the Payment History dropdown$")
+	public void userValidatesDataInPaymentHistoryTableFor6Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects6MonthsInPaymentHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 6 months in the Payment History dropdown of Second Plan$")
+	public void userValidatesDataInPaymentHistoryTableFor6MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects6MonthsInPaymentHistoryDropdownSecondPlan();
+	}
+	
+	
+	@Then("^user selects Last 12 months in the Payment History dropdown$")
+	public void userValidatesDataInPaymentHistoryTableFor12Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects12MonthsInPaymentHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 12 months in the Payment History dropdown of Second Plan$")
+	public void userValidatesDataInPaymentHistoryTableFor12MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects12MonthsInPaymentHistoryDropdownSecondPlan();
+	}
+	
+	
+	@Then("^user selects Last 24 months in the Payment History dropdown$")
+	public void userValidatesDataInPaymentHistoryTableFor24Months() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects24MonthsInPaymentHistoryDropdown();
+	}
+	
+	@Then("^user selects Last 24 months in the Payment History dropdown of Second Plan$")
+	public void userValidatesDataInPaymentHistoryTableFor24MonthsSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelects24MonthsInPaymentHistoryDropdownSecondPlan();
+	}
+	
+	@Then("^user selects Previous Calendar Year in the Payment History dropdown and views Payment History$")
+	public void userValidatesDataInPaymentHistoryTableForPreviousCalendarYear() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelectsPreviousCalendarYearInPaymentHistoryDropdown();
+	}
+	
+	@Then("^user selects Previous Calendar Year in the Payment History dropdown of Second Plan and views Payment History$")
+	public void userValidatesDataInPaymentHistoryTableForPreviousCalendarYearSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userSelectsPreviousCalendarYearInPaymentHistoryDropdownSecondPlan();
+	}
+	
+	@Then("^user clicks to expand the billing hisory section of first plan$")
+	public void userClicksToExpandBillingHistoryOfFirstPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userClicksToExpandBillingHistoryOfFirstPlan();
+	}
+	
+	@Then("^user clicks to expand the billing hisory section of Second plan$")
+	public void userClicksToExpandBillingHistoryOfSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userClicksToExpandBillingHistoryOfSecondPlan();
+	}
+	
+	@Then("^user clicks to expand the payment hisory section of first plan$")
+	public void userScrollsDownAndClicksToExpandPaymentHistoryOfFirstPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userClicksToExpandPaymentHistoryOfFirstPlan();
+	}
+	
+	@Then("^user clicks to expand the payment hisory section of Second Plan$")
+	public void userScrollsDownAndClicksToExpandPaymentHistoryOfSecondPlan() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.userClicksToExpandPaymentHistoryOfSecondPlan();
+	}
+	
+	@Then("^user scrolls down to Monthly Premium section to click on Make Payment button$")
+	public void userScrollsToMonthlyPremiumSection() throws InterruptedException {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.userScrollsToMonthlyPremiumSection();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		
+		}
+	
+	@Then("^user clicks on Make Payment button and lands on Premium Payments page$")
+	public void userClicksOnMakePaymentButtonAndLandsOnPremiumPaymentsPage() throws InterruptedException {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.userClicksOnMakePaymentButtonAndLandsOnPremiumPaymentsPage();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
 }

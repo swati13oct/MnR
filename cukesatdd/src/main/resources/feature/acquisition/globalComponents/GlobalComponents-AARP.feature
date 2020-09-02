@@ -19,39 +19,61 @@ Feature: 1.12 ACQ - Global Components AARP
     Then user clicks on back to top link on home page
 
   @globalheaderULayer
-  Scenario: To verify links displayed in the global header of AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When user accesses global header of the AARP Medicare Plans home page
-    And user verifies the AARP logo on home page
-    And user clicks on Sign in link on home page in aarp
-    And user clicks on register link on home page in aarp
-    Then user validates visitor profile on home page in aarp
+  Scenario Outline: To verify links displayed in the global header of AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When user accesses global header of the Medicare Plans home page
+    And user verifies the logo on home page
+    And user clicks on Sign in link on home page
+    And user clicks on register link on home page
+    Then user validates visitor profile on home page
+  
+  @globalheader_AARP
+  Examples: 
+       |	site	|
+       |	AARP	| 
+       
+  @globalheader_UHC
+  Examples: 
+       |	site	|
+       |	UHC	| 
 
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on AARP medicare acquisition site landing page
-    Given the user navigates to following AARP medicare acquisition site page
+    Given the user is on medicare acquisition site landing page
+  		| Site | <site>	|
+    Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the AARP Medicare Plans home page
-    When user accesses global footer of the AARP Medicare Plans All page
-    Then the USer validates Shop for a Plan Navigation links
-    Then the user validates Medicare Education Navigation links
-    Then the user validates TFN on page
+    When user accesses global header of the Medicare Plans home page
+    When user accesses global footer of the Medicare Plans All page
+    Then the User validates Shop for a Plan Navigation link
+    Then the user validates Medicare Education Navigation link
+    Then the user validate ZipCode Components on the page using ZipCode "90210"
+    Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
    # Then the user validates Pro-active Chat
-    Then the user validates SAM Call Icon
+    Then the user validates whether call icon is visible
    # Then the user validates SAM re-active Chat
 
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
-      | path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      | medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      | medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
+      |	AARP	| medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
 
+		@MedEdPages_1_GlobalCompsUHC
+    Examples: 
+      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
+      |	UHC		| medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+		
+		
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
       | path                                              | pageName              | tfnXpath                                      | tfnFlag |
@@ -68,20 +90,30 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
-      | path                            | pageName                    | tfnXpath                                                       | tfnFlag |
-      | shop.html                       | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+       | path                            | pageName                    | tfnXpath                                                       | tfnFlag |
+      | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | true   |
+      | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true   |
+  	  | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+      | shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+      | safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    |  
+   
+  
     @ShopPlan_Shop2_GlobalCompsAARP
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                      						 | tfnFlag |
-      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2]				 | true    |
-      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]						 | true    |
-      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 						| true    |
-      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 						| true    |
+      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1]				 | true    |
+      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2]						 | true    |
+      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | (//*[contains(text(),'Find a Plan')]//following::a[2])							| true    |
+      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 						| true    |
+      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 						| true    |
+      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 						| true    |
+			| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 						| true    |
+
 
     @ShopPlan_Shop3_GlobalCompsAARP
     Examples: 
@@ -96,16 +128,16 @@ Feature: 1.12 ACQ - Global Components AARP
       | path                                                                   | pageName                        | tfnXpath                                                       | tfnFlag |
       | shop/medicare-advantage-plans/wellness-discounts.html                  | ShopPlan: Welness Discount      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/medicare-advantage-plans/health-care-management.html              | ShopPlan: Healthcare management | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/medicare-advantage-plans/ma-plan-benefits.html                    | ShopPlan: MA Plan benefits      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/renew-active.html                                                 | ShopPlan: Renew-Active          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Enroll1_GlobalCompsAARP
     Examples: 
       | path                                    | pageName                   | tfnXpath                                                       | tfnFlag |
-      | enroll.html                             | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | enroll/ma-enrollment.html               | ShopPlan: Enroll MA Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | enroll/pdp-enrollment.html              | ShopPlan: Enroll PDP Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+     | enroll.html                             | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+     | enroll/ma-enrollment.html               | ShopPlan: Enroll MA Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+     | enroll/pdp-enrollment.html              | ShopPlan: Enroll PDP Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+     | enroll/ms-apply.html                    | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+   
     @ShopPlan_Resources1_GlobalCompsAARP
     Examples: 
       | path                                                              | pageName                             | tfnXpath                                                       | tfnFlag |
@@ -133,7 +165,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/ma-resources-materials/ma-information-forms/member-rights.html                         | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html                       | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html              | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | resources/disenrollment-information.html																					               | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/disenrollment-information.html                                                         | ShopPlan: Resources Disenrollment Page| //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
    
     # Replace any "#" chars in the deeplink with "!"
@@ -176,6 +208,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the AARP Medicare Plans All page
     Then the USer validates Shop for a Plan Navigation links
     Then the user validates Medicare Education Navigation links
+     Then the user validate ZipCode Components on page using ZipCode "90210"
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -186,3 +219,21 @@ Feature: 1.12 ACQ - Global Components AARP
       | path                                                                      | pageName          | tfnXpath       | tfnFlag |
       | medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
       |medicare-supplement-plans/agent-appointment.html                           | Agent Appointment | //*[@id='tfn'] | true    |
+      
+      
+      @GlobalComponentsAARPNewShopPages
+  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+    Given the user is on AARP medicare acquisition site landing page
+    Given the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validate ZipCode Components on page using ZipCode "90210"
+    Then the user validates TFN on page
+     | TFNxpath | <tfnXpath> |
+      | TFNflag  | <tfnFlag>  |
+      
+		 @GlobalComponentsAARPNewShopPages1
+    Examples: 
+      | path                          | pageName                   | tfnXpath                     | tfnFlag |
+      | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+     

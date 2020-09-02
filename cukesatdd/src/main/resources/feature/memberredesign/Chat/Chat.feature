@@ -1,24 +1,15 @@
 @regressionMember
-Feature: 1.16 Member Contact us Page CHAT 
+Feature: 1.16 Member Contact us Page CHAT
 
-  @regressionMember @agentSigninforAARPCHAT @shipChat
-  Scenario Outline: Verify AARP chat agent login in.
-    Given agentlogin lands on page
-    And agent enters credentials
-	  | <username> | <password> |
-    Examples: 
-      | username   | password   |
-      | AARPStage1 | AARPStage1 |
-
-  @regressionMember @agentSigninforGroupCHAT @GroupFedChat
-  Scenario Outline: Verify AARP chat agent login in.
-    Given agentlogin lands on page
-    And agent enters credentials for federal
-	  | <username> | <password> |
-    Examples: 
-      | username | password |
-      | MRagent8 | MRagent8 |
-
+  #Agent logins have been commented out as the agents id's expire frequently & the agent portal login does not work not MNR work
+  #@regressionMember @agentSigninforAARPCHAT @shipChat
+  # Scenario Outline: Verify AARP chat agent login in.
+  #  Given agentlogin lands on page
+  # And agent enters credentials
+  #  | <username> | <password> |
+  #  Examples:
+  #    | username   | password   |
+  #    | AARPStage1 | AARPStage1 |
   @codeWarriors @US2483619 @shipChat
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
     Given login with following details logins in the member portal and validate elements
@@ -31,7 +22,15 @@ Feature: 1.16 Member Contact us Page CHAT
       | TID       | plantype | memberType |
       | US2483619 | SHIP     | SHIPCHAT   |
 
-  @regressionMember @CT @GroupFedChat
+  # @regressionMember @agentSigninforGroupCHAT @GroupFedChat
+  #Scenario Outline: Verify AARP chat agent login in.
+  #  Given agentlogin lands on page
+  #  And agent enters credentials for federal
+  #  | <username> | <password> |
+  #   Examples:
+  #    | username | password |
+  #    | MRagent8 | MRagent8 |
+  @regressionMember @CT @GroupFedChat @codeWarriors
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -42,7 +41,5 @@ Feature: 1.16 Member Contact us Page CHAT
     Examples: 
       | TID       | plantype | memberType |
       | US2483619 | GroupFED | FedCHAT    |
-      
-      
     #To check how many agents are logged in
     #window.OgnGenesys.chatStatus() if it is false then chat is offine.

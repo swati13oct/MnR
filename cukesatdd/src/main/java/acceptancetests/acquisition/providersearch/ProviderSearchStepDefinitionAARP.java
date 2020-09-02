@@ -188,7 +188,7 @@ public class ProviderSearchStepDefinitionAARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+		plansummaryPage.verifyproviderName(planName);
 	}
 	
 	/**
@@ -275,12 +275,13 @@ public class ProviderSearchStepDefinitionAARP {
 
 			String zipcode = memberAttributesMap.get("Zip Code");
 			String plancount = memberAttributesMap.get("Plancount");
-		
+			String planYear = memberAttributesMap.get("Year");
 
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode);
+			
+			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
 			 int strplancount = Integer.parseInt(plancount);
 			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
 			 if(intPlanCounts!=strplancount){

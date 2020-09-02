@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -484,9 +485,14 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
 	{
-		CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		//CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now clicking the View Plan Documents Button");
-		viewPlanDocumentsButton.click();
+		if(validate(viewPlanDocumentsButton)) {
+			viewPlanDocumentsButton.click();
+		} else {
+			planDocumentsLink.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new FormsAndResourcesPage(driver);
 	}
@@ -1000,5 +1006,48 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		}
 	}
 
+	public void userScrollsToMonthlyPremiumSection() throws InterruptedException  {
+		// TODO Auto-generated method stub
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now Scrolling to Monthly Premium section");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", monthlyPremiumSection); 
+		System.out.println("User has scrolled to Monthly Premium section");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void userClicksOnMakePaymentButtonAndLandsOnPremiumPaymentsPage() throws InterruptedException {
+
+		CommonUtility.checkPageIsReadyNew(driver);	
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Now Checking that Make Payment Button is displayed");
+		if (makePaymentButton.isDisplayed()) 
+		{
+		System.out.println("Make Payment Button is displayed");
+		} else 
+		{
+				Assert.fail("Make Payment Button is not displayed, please check if correct test data is used, member should have total amount due >0 ");
+		}
+					
+		System.out.println("Now clicking on Make a Payment button");
+		makePaymentButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("content/medicare/member/payments/overview-new.html"))
+			{
+				System.out.println("Payment Overview Page is displayed");	
+			}
+			
+			else
+			{
+				System.out.println("Payment Overview Page is not displayed");
+				Assert.fail("Payment Overview Page is not displayed");
+			}
+		}	
 }
 

@@ -29,6 +29,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -239,6 +240,22 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	private WebElement compareBox;
+	
+	// Dental Directoy
+	@FindBy(xpath = "(//h3[text()='Dental Platinum'])//following::a[@id='dentalProviderlink']")
+	private WebElement dentalPopupOptionalRidersLink;
+
+	@FindBy(xpath = "//table[contains(@id,'additional-medical-benefits')]//a[@id='dentalProviderlink']")
+	private WebElement dentalPopupLink;
+
+	@FindBy(xpath = "//button[contains(@ng-click,'dentalCoverRally')]/preceding::button[1]")
+	private WebElement dentalCoverPopupCancel;
+
+	@FindBy(xpath = "//button[@id='dentalCoverPopupContinue']")
+	private WebElement dentalCoverPopupContinue;
+
+	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
+	private WebElement dentalPopupPlanLabel;	
 
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -469,6 +486,32 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	public GetStartedPage navigateToDCERedesign() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		presDrugTab.get(0).click();
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 	/*extracting cost from prescription tab*/
 	public String costComparisonPrescriptionDrugFromDCE() {
 
@@ -1205,4 +1248,32 @@ public class PlanDetailsPage extends UhcDriver {
 		Assert.assertTrue("Message not Landed on PlanDetails Page", planNameValue.getText().contains(PlanName));
 	}
 
+	public void validateDentalPopupDefaults(String planName, boolean optionalRider) {
+		try {
+			Thread.sleep(5000);
+			if (optionalRider)
+				dentalPopupOptionalRidersLink.click();
+			else {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("arguments[0].click()", dentalPopupLink);
+			}
+			System.out.println("Plan Name is : " + planName);
+			Assert.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),dentalPopupPlanLabel.getText().contains(planName));
+			String parentWindow = driver.getWindowHandle();
+			dentalCoverPopupContinue.click();
+			Thread.sleep(5000);
+			System.out.println("Moved to dental directoy rally page");
+
+			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			System.out.println(driver.getTitle());
+			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
+			driver.close();
+			driver.switchTo().window(parentWindow);
+			dentalCoverPopupCancel.click();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

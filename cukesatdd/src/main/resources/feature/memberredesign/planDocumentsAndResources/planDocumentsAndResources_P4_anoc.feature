@@ -53,7 +53,7 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 09-066 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
-      | 10-067 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 10-067 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
 
 	@active_mapd @devRegression
 	Examples: 

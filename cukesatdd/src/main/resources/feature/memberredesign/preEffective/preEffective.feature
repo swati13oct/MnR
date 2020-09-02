@@ -12,9 +12,9 @@ Feature: 1.15 Member pre-effective functionality
       | PlanType | <planType> |
     And user clicks on the benefits and coverage tab on the dashboard home page or test harness page
     And verify that subnavigation is supressed on the coverage and benefits page
-    And verify that correct preeffective message is displayed on coverage and benefits page
-    And verify that correct phone number is displayed in technical support section of coverage and benefits page
-      | Technical TFN | <technicalTFN> |
+    #And verify that correct preeffective message is displayed on coverage and benefits page
+    #And verify that correct phone number is displayed in technical support section of coverage and benefits page
+    #  | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
       | Member Type | <memberType> |
     And user click on the plan documents button
@@ -78,7 +78,7 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
 
   @regressionMember
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -111,7 +111,7 @@ Feature: 1.15 Member pre-effective functionality
       
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | 
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@02 | tomwindsor1955 | 06/01/2020    | 
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | tomwindsor1955 | 06/01/2020    | 
   
   
   @regressionMember2

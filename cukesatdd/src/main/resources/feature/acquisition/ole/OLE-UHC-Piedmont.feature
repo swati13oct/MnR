@@ -1,7 +1,7 @@
-@spartans @OLE @Piedmont_OLE_UHC @prodRegression
+#@spartans @OLE @Piedmont_OLE_UHC @prodRegression
 Feature: 2.05.1.ACQ-OLE Piedmont UMS
 
-  @Piedmont_OLE_UHC @decrelease2019 @OLE_Regression_Blayer @F365255
+  #@Piedmont_OLE_UHC @decrelease2019 @OLE_Regression_Blayer @F365255
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary for Piedmont plans
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -10,6 +10,8 @@ Feature: 2.05.1.ACQ-OLE Piedmont UMS
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
+         And the user selects plan year for the UMS site
+    |Plan Year | <planyear> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -35,12 +37,12 @@ Feature: 2.05.1.ACQ-OLE Piedmont UMS
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
+   # Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information    
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
+     # | PartA Date         | <partadate>         |
+     # | PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
@@ -50,12 +52,24 @@ Feature: 2.05.1.ACQ-OLE Piedmont UMS
 #    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
+      |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
+       Then the user validates the long term questions in Medicare Information Page
+    | Health Insurance Name| <healthinsurancename>  |
+    |   Group Number			 | <groupnumber>          |
+    | Member Number        | <membernumber>         | 
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    | Prescription Name			| <prescriptioncoveragename>  |
+    |  PD Group Number			 | <pdgroupnumber>  |
+    | PD Member Number        | <pdmembernumber>   | 
     Then the user navigates to SEP Page
+    	|	Input Data					 | <inputdataType>   |
+    	| PartA Date         | <partadate>         |
+   		| PartB Date         | <partbdate>         |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
@@ -78,9 +92,20 @@ Feature: 2.05.1.ACQ-OLE Piedmont UMS
     Then the user clicks on Submit Enrollment to complete enrollment
     #Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-
+	#Then the user validates the OLE Submission Details in GPS
+	#| Plan Type | <plantype> |	
+    @Piedmont_OLE_UHC @prodRegression
     Examples: 
-      | TID     | PlanType    | zipcode | isMultutiCounty | county         | plantype | planName                                    | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | F365255 | MA-MBI      |   24095 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option One (PPO)   | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24095 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
-      | F365255 | MA-PFFS-MBI |   24571 | YES             | Bedford County | MAPD     | Piedmont Select Medicare Option Two (PPO)   | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd   | Los Angeles | Yes                    |               |             | VA           |      24571 | test@test.com | Other reason                                                                                                                                                                                                                                        | other reason text       | yes     | no           | false     | NO                | NO      |
-      | F365255 | MA-MBI      |   24526 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option Three (PPO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24526 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
+      | TID     | PlanType    | Plan Year|zipcode | isMultutiCounty | county         | plantype | planName                                    | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
+      | F365255 | MA-MBI      | current|  24095 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option One (PPO)   | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24095 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | F365255 | MA-PFFS-MBI | current|  24571 | YES             | Bedford County | MAPD     | Piedmont Select Medicare Option Two (PPO)   | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002|      231665465 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    |               |             | VA           |      24571 | test@test.com | Other reason                                                                                                                                                                                                                                        | other reason text       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | F365255 | MA-MBI      | current|  24526 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option Three (PPO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24526 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+		#	| F365255 | MA-MBI      | current|  24095 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option One (PPO)   | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24095 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |InValid|
+    #  | F365255 | MA-PFFS-MBI |   24571 | YES             | Bedford County | MAPD     | Piedmont Select Medicare Option Two (PPO)   | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      231665465 | true     | 04011983 | Female | 123 Perm Rd   | Los Angeles | Yes                    |               |             | VA           |      24571 | test@test.com | Other reason                                                                                                                                                                                                                                        | other reason text       | yes     | no           | false     | NO                | NO      |InValid|
+     # | F365255 | MA-MBI      |   24526 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option Three (PPO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 05011983 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24526 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |InValid|
+		@Piedmont_OLE_UHC_Future
+    Examples: 
+      | TID     | PlanType    | Plan Year|zipcode | isMultutiCounty | county         | plantype | planName                                    | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
+      | F365255 | MA-MBI      | future|  24095 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option One (PPO)   | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24095 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | F365255 | MA-PFFS-MBI | future|  24571 | YES             | Bedford County | MAPD     | Piedmont Select Medicare Option Two (PPO)   | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002|      231665465 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    |               |             | VA           |      24571 | test@test.com | Other reason                                                                                                                                                                                                                                        | other reason text       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | F365255 | MA-MBI      | future|  24526 | NO              | Bedford County | MAPD     | Piedmont Select Medicare Option Three (PPO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | VA           |      24526 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|

@@ -1318,7 +1318,10 @@ public class ContactUsPage extends UhcDriver{
 				}
 			}
 	
-			
+			if(chatoffline.isDisplayed()) {
+				Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
+				System.out.println("Chat is currently offline");
+			} else {
 			 validateNew(chatMessage); 
 			 if (chatMessage.isDisplayed())
 			 {		  
@@ -1370,6 +1373,7 @@ public class ContactUsPage extends UhcDriver{
 				e1.printStackTrace();
 	
 			}
+		}
 		
 		}
 	
@@ -1435,7 +1439,11 @@ public class ContactUsPage extends UhcDriver{
 				} else {
 					System.out.println("iPerception Pop Up not displayed");
 				}
-			}		
+			}
+			if(chatoffline.isDisplayed()) {
+				Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
+				System.out.println("Chat is currently offline");				
+			} else {
 			 validateNew(chatMessageGroup); 
 			 if (chatMessageGroup.isDisplayed())
 			 {		  
@@ -1483,7 +1491,7 @@ public class ContactUsPage extends UhcDriver{
 				e1.printStackTrace();
 	
 			}
-		
+			}
 		}
 		
 	public void validateCombolabelAndLinks(DataTable givenAttributes) throws InterruptedException {
@@ -1706,9 +1714,10 @@ public class ContactUsPage extends UhcDriver{
 				System.out.println("iPerception Pop Up not displayed");
 			}
 
-		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
-			validateNew(chatoffline);
-			Assert.assertTrue(chatoffline.isDisplayed());
+//		if(!isChatWithUsTimeOn("06:00:00", "22:00:00")) {
+//			validateNew(chatoffline);
+		if(chatoffline.isDisplayed()) {
+			Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
 			System.out.println("Chat is currently offline");
 		} else {
 			 validateNew(chatMessage); 
@@ -1788,9 +1797,10 @@ public class ContactUsPage extends UhcDriver{
 				System.out.println("iPerception Pop Up not displayed");
 			}
 		}
-		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
-			validateNew(chatoffline);
-			Assert.assertTrue(chatoffline.isDisplayed());
+//		if(!isChatWithUsTimeOn("09:00:00", "18:00:00")) {
+//			validateNew(chatoffline);
+		if(chatoffline.isDisplayed()) {
+			Assert.assertEquals("chat is currently offline",chatoffline.getText().toLowerCase());
 			System.out.println("Chat is currently offline");
 		} else {
 			 validateNew(chatMessageGroup); 
