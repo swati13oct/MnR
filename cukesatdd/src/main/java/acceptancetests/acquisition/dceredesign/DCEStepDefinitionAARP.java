@@ -609,6 +609,14 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateDrugCosts();
 	}
 
+	@Then("^the user verify the extra help alert message on Drug Detail Page$")
+	public void the_user_verify_the_extra_help_alert_message_on_Drug_Detail_Page() throws Throwable {
+		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
+		drugDetailPage.validateExtraHelpAlert();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);
+	}
+	
+	
 	@Then("^the user validates Your Drugs sections$")
 	public void the_user_validates_Your_Drugs_sections() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()

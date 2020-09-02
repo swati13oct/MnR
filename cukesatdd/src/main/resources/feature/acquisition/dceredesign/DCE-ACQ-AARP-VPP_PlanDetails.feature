@@ -149,3 +149,36 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
       
      
+      @dceRedesignExtraHelpAlertDetailPage @F478554
+   Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
+    Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user verify the extra help alert message on Drug Detail Page  
+    Then the user validates Drug Costs section
+    Then the user validates Your Drugs sections
+    Then the user validates Monthly Drug Costs by Stage Section
+    Then the user validates Important information section
+    #Then the user validates Disclaimers section
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
+     
+      
+      
+      
+      
+     

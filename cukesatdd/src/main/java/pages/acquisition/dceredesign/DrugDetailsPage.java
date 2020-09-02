@@ -289,7 +289,18 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(ImportantInfo_Header);
 		validateNew(ImportantInfo_planFormularyLink);
 	}
-
+	
+	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	private WebElement alertTextImg;
+	
+	@FindBy(id = "priceLinkBtn_0")
+	private WebElement viewProceBtn;
+	
+	public void validateExtraHelpAlert() {
+		
+			validate(alertTextImg);
+			validate(viewProceBtn);
+		}
 	public void validateDisclaimerAccordian() {
 		validateNew(Disclaimer_Accordian);
 		WebElement AccordianContent = driver.findElement(By.xpath("//div[contains(@id,'accordian-content')]//h3[text()='General Disclaimer']"));
