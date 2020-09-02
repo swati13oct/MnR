@@ -178,8 +178,13 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='rx__drugNameSize']")
 	protected WebElement drugNameOnCheckOutPage;
-	
+
 	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
 	protected WebElement ThankyouMessageOrderConfirmation;
 
+	@FindBy(xpath = "//div[@data-testid='header__title']//h1/ancestor::div[contains(@class,'MuiScopedCssBaseline')]/..//*[@data-testid='order-management-disclaimer']")
+	protected WebElement disclaimerBelowSkyLineComponent;
+
+	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
+	protected WebElement disclaimerMessage;
 }
