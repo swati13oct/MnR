@@ -909,8 +909,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='price-drugs-CTA-external-icon']")
 	protected WebElement FindAndPriceExternalIcon;
 
-	@FindBy(xpath = "//h1[text()='What medication can we help you find?']")
-	protected WebElement DrugEstimatorToolPageHeader;
+	@FindBy(xpath = "//input[@data-component=\"SearchBarInput\"]")
+	protected WebElement DrugEstimatorToolPageSearchBar;
 
 	@FindBy(xpath = "//*[@data-testid='order-prescription-CTA-external-icon']")
 	protected WebElement OrderPrescriptionExternalIcon;
@@ -1250,32 +1250,35 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OrderPrescriptionCTADescription;
 
 	// Drug Cost Summary
-	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
-	protected WebElement DrugCostSummaryCallToActnBtn;*/
+	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
+	protected WebElement DrugCostSummaryCallToActnBtn;
 
-	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
-	protected WebElement DrugCostSummaryCTAImg;*/
+	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
+	protected WebElement DrugCostSummaryCTAImg;
 	
-	/*@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
-	protected WebElement DrugCostSummaryCTATitle;*/
+	@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
+	protected WebElement DrugCostSummaryCTATitle;
 	
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
+	
+	@FindBy(xpath = "//div[@data-testid='ANOC-CTA']")
+	protected WebElement ANOCCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='anoc-CTA-icon']")
+	@FindBy(xpath = "//div[@data-testid='ANOC-CTA-icon']")
 	protected WebElement ANOCCTAImg;	
 
-	@FindBy(xpath = "//h2[@data-testid='anoc-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='ANOC-CTA-title']")
 	protected WebElement ANOCCTATitle;
 	
-	@FindBy(xpath = "//p[@data-testid='anoc-CTA-description']")
-	protected WebElement ANOCCTADescription;
-
-	@FindBy(xpath = "//div[@data-testid='anoc-CTA']")
-	protected WebElement ANOCCallToActnBtn;
+	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	protected WebElement ANOCCTADescription;	
 
 	@FindBy(xpath = "//h2[text()='Prepare for Next Year']")
 	protected WebElement ANOCPageHeader;
+	
+	@FindBy(xpath="//*[data-testid='ANOC-CTA-external-icon']")
+	protected WebElement ANOCExternalIcon;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxDrugPricePageHeader;

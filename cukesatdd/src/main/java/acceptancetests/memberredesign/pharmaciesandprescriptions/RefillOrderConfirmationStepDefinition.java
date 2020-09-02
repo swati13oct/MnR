@@ -141,7 +141,7 @@ public class RefillOrderConfirmationStepDefinition {
 	}
 
 	@Then("^user will view the Price Total field$")
-	public void user_will_view_NA_in_the_Price_Total_field() throws Throwable {
+	public void user_will_view_the_Price_Total_field() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Total field value is not displayed on Order Confirmation Page",

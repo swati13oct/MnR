@@ -152,6 +152,45 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image for Drug Cost Summary call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Drug Cost Summary Call To Action
+    Then user validates an image for Drug Cost Summary Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify title for Drug Cost Summary call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Drug Cost Summary Call To Action
+    Then user validates a title for Drug Cost Summary Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify description for Drug Cost Summary call to action.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Drug Cost Summary Call To Action
+    Then user validates a description for Drug Cost Summary Call To Action
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image for ANOC call to action.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -227,12 +266,24 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the text content position of Drug Cost Summary call to action tile on P&P page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user validates the Drug Cost Summary text content displayed fourth within that section
+
+    Examples: 
+      | FID     | planType | memberType                 |
+      | F436319 | MAPD     | AARP_Individual_PnP_CTA_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the text content position of ANOC call to action tile on P&P page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user validates the ANOC text content displayed fourth within that section
+    Then user validates the ANOC text content displayed fifth within that section
 
     Examples: 
       | FID     | planType | memberType                 |
@@ -275,12 +326,24 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | AARP_SEIB_PnP_rx |
 
   @CallToAction @F436319 @US2498888 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of Drug Cost Summary call to action tile on P&P page for SEIB User
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user validates the Drug Cost Summary text content displayed third within that section
+
+    Examples: 
+      | FID     | planType | memberType       |
+      | F436319 | MAPD     | AARP_SEIB_PnP_rx |
+
+  @CallToAction @F436319 @US2498888 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify position of ANOC call to action tile on P&P page for SEIB User
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    Then user validates the ANOC text content displayed third within that section
+    Then user validates the ANOC text content displayed fourth within that section
 
     Examples: 
       | FID     | planType | memberType       |
@@ -473,14 +536,30 @@ Feature: MVP - Call to Action
       | F436319 | MAPD     | Rally_Individual_Pnp_rx |
 
   @CallToAction @F479445 @US2752084 @MemberVBF
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user have access to the ORx benefits information when clcik on Durg Cost Summary CTA
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user view Drug Cost Summary Call To Action
+    And user view external link icon for Drug Cost Summary CTA
+    When user clicks on Drug Cost Summary Call To Action
+    Then user will SSO to OptumRx benefits information page on new tab
+
+    Examples: 
+      | FID     | planType | memberType       |
+      | F479445 | MAPD     | AARP_LIS0_PnP_rx |
+
+  @CallToAction @F479445 @US2752084 @MemberVBF
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user have access to the ANOC page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view ANOC Call To Action
+    And user view external link icon for ANOC CTA
     When user clicks on ANOC Call To Action
-    Then user will be redirected to the ANOC page in a new tab
+    Then user will be redirected to the prepare for Next Year page in a new tab
 
     Examples: 
       | FID     | planType | memberType       |

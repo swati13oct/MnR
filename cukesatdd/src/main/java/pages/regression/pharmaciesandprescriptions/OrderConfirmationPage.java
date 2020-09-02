@@ -2,6 +2,7 @@ package pages.regression.pharmaciesandprescriptions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 
@@ -83,6 +84,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 			if (!orderTotal.isEmpty()) {
 				if (orderTotal.equalsIgnoreCase("Order Total: N/A")) {
 					System.out.println(orderTotal);
+					Assert.assertEquals(orderTotal, "Order Total: N/A", "Order Total: N/A is displayed successfully");
 					return true;
 				}
 				else if (orderTotal.contains("Order Total:$")){
