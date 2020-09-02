@@ -6,7 +6,7 @@ Feature: ACQ-Plan benefits validation
   Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
-      | workSheetName | <workSheet> |
+      | WorkSheetName | <workSheet> |
       | Site          | <site>			|
 
 			@planDetailsBenefitsAARP01
