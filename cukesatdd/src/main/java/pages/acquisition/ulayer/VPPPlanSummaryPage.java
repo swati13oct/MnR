@@ -1634,7 +1634,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(planType.equalsIgnoreCase("PDP")){
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		}else
-			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+			premiumForPlan = driver.findElement(By.xpath("//a[contains(text(), '"+PlanName+"')]//ancestor::div[contains(@class,'plan-card')]//ul[@class='benefits-table']/li[1]/span[@class='float-right']/span/span"));
 		CommonUtility.waitForPageLoadNew(driver,premiumForPlan, 30);
 		String PlanPremium = premiumForPlan.getText();
 
@@ -3651,13 +3651,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void clickOnViewMoreForPlan(String planName) {
-		
-		List<WebElement> viewMoreLink =  driver.findElements
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		
+		threadsleep(2);
+		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'"+planName+"')]//ancestor::div[contains(@class, 'plan-card')]//a[@class='accordion-arrow collapsed']"));
 		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
 				viewMoreLink.get(0).click();
-
 	
 	}
 	
