@@ -753,7 +753,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
+	public void validateclicksOnIsProviderCovered(String planName){
 
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
@@ -763,7 +763,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ProviderSearchLink.click();
-		Thread.sleep(5000);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -1736,29 +1741,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new VPPPlanSummaryPage(driver);
 	}
 
-	public void validateAndClickAddtoCompareinAARP(String planType , String planName) throws InterruptedException {
-		if (planType.equalsIgnoreCase("MAPD")) {
+	public void validateAndClickAddtoCompare(String planType , String planName) throws InterruptedException {
+		//if (planType.contains("MA")) {
 			System.out.println("Choose Plan to Compare : "+planName);
 				WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 				validateNew(addToCompare);
-				addToCompare.click();
+				jsClickNew(addToCompare);
 				
-		}
-			
-		if (planType.equalsIgnoreCase("MA")) {
-			System.out.println("Choose Plan to Compare : "+planName);
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
-			validateNew(addToCompare);
-			addToCompare.click();
-		}
-
-		if (planType.equalsIgnoreCase("PDP")) {
+		/*}else if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("Choose Plan to Compare : "+planName);
 			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-7']"));
 			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
-			addToCompare.click();
-		}
+			jsClickNew(addToCompare);
+		}*/
 
 	}           
 	public boolean compareTextAfterclickingAddtoCompareinAARP(String planName) throws InterruptedException {                
@@ -1770,11 +1766,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return false;
 		}
 	}
-	public void deselectAddToCompareinAARP(String planName){
+	public void deselectAddToCompare(String planName){
 		try{
 			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='ng-scope']"));
-			WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
-			addToCompareCheck.click();
+			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+			jsClickNew(addToCompare);
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
 		}
@@ -1860,26 +1856,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		backButtonInLearnMoreModal.click();
 
 	}
-
-	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
-
+	
+	public void validateIsMyProviderCoveredLink(String planType , String planName) {
 		int attempts = 0;
 		while(attempts < 2) {
 	        try {
-				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-			                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 			    if(planType.equalsIgnoreCase("PDP")){
 			                    validateNonPresenceOfElement(ProviderSearchLink);
 			                    break;
 			    }
 			    else {
-			                    validateNew(ProviderSearchLink);
+			    			validateclicksOnIsProviderCovered(planName);
 			                    break;
 			    }
 	        }catch(StaleElementReferenceException e) {
 	        }
 	    	attempts++;
-		}    
+	    	
+	    	
+		}     
 	}
 
 	public void validatePlanPremium (String planName , String monthlyPremium){

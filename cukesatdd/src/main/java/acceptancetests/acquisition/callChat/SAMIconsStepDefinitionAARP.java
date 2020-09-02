@@ -63,19 +63,6 @@ public class SAMIconsStepDefinitionAARP {
 		 * Assert.assertTrue(true); }
 		 */
 	}
-	@Then("^the user validates whether call icon is visible$")
-	public void the_user_validates_whether_callicon_isvisible() throws InterruptedException {
-		
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
-		aquisitionhomepage.validateCallpopup();
-		/*
-		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
-		 * Assert.assertTrue(true); }
-		 */
-	}
 	
 	@Then("^the user validates whether chat icon is visible on AARP")
 	public void the_user_validates_whether_chaticon_isvisible_on_UHC() throws Throwable {
