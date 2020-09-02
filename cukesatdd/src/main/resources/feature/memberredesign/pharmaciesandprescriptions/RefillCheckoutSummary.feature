@@ -287,6 +287,9 @@ Feature: Refill - Checkout summary
     Then user will see Preferred shipping address
     And user will view the Preferred Address label
     And user will view the Change Shipping address CTA
+    When user view the bottom of Skyline Complete Your Refill Component
+    Then user will view the disclaimer message
+    And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
       | FID     | planType | memberType                  |
