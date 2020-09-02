@@ -310,9 +310,9 @@ Feature: 2.05.5. ACQ-OLE Campaign AARP
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd ESRD on Medicare Info Page
+ 		Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
-      |Plan Year | <planYear> |
+     |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
