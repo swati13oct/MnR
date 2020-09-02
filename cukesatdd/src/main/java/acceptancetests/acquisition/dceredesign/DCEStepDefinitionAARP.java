@@ -558,6 +558,12 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	@Then("^the user verify the Retail chain pharmacy on detail page$")
+	public void the_user_verify_the_Retail_chain_pharmacy_on_detail_page() throws Throwable {
+		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
+		drugDetailPage.validateRetailChainPharmacy();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);
+	}
 
 	@Then("^the user validates planName matches plan Name in VPP$")
 	public void the_user_validates_planName_matches_plan_Name_in_VPP() throws Throwable {

@@ -290,6 +290,14 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(ImportantInfo_planFormularyLink);
 	}
 	
+	@FindBy(xpath = "//div[@class='text-normal']")
+	private WebElement retailChainPharmacy;
+	
+	public void validateRetailChainPharmacy() {
+		
+			validate(retailChainPharmacy);
+		}
+	
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
 	private WebElement alertTextImg;
 	
