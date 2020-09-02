@@ -196,6 +196,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType                  |
      | TC7   | MAPD     | OverpaymentCreditFlag   |
+  #  | TC7-P2   | SHIP     | SHIPOverpaymentCreditFlag   |
     
      #Test Case 08
   @regressionMember
@@ -208,7 +209,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
  
     Examples: 
       | TID       | planType | memberType   |
-     |  TC8       | MAPD     | OverdueFlag  | 
+     |  TC8       | MAPD     | OverdueFlag  |
+   #  |  TC8-P2     | SHIP    | SHIPOverdueFlag  |  
      
  #Test Case 09
   @regressionMember
@@ -222,6 +224,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType |
      | TC9        | MAPD      | PaidInFullFlag |  
+   #  | TC9-P2      | SHIP     | SHIPPaidInFullFlag |
 
    #Test Case 10
   @regressionMember
@@ -235,6 +238,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType   |
       | TC10       | MAPD     | OverdueFlag  | 
+   #   |  TC10-P2     | SHIP    | SHIPOverdueFlag  |
       
   #Test Case 11
   @regressionMember
@@ -248,6 +252,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType   |
       | TC11      | MAPD     | OverdueFlag  |
+  #  |  TC11-P2     | SHIP    | SHIPOverdueFlag  |
       
  #Test Case 12
   @regressionMember
@@ -261,6 +266,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
     Examples: 
       | TID       | planType | memberType   |
       | TC12       | MAPD     | OverdueFlag  |
+   #    |  TC11-P2     | SHIP    | SHIPOverdueFlag  |
       
       
       
