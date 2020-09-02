@@ -170,9 +170,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Important information section
-    #Then the user validates Disclaimers section
-    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-    Then the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page
+    
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
