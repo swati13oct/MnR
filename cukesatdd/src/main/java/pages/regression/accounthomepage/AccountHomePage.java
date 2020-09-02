@@ -459,7 +459,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
-
+	
+	@FindBy(xpath="//a[@href='https://stage-medicare.uhc.com/medicare/member/pharmacy/overview.html']")
+	private WebElement pharmacyPrescriptionTab;
+	
 	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
 	protected WebElement dashboardCovideModalDismissLink;
 	
@@ -3799,6 +3802,10 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLink.click();
 			 else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 pharmacyPrescriptionTab.click();
+				}				 
 			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");

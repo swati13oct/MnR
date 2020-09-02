@@ -140,12 +140,12 @@ public class RefillOrderConfirmationStepDefinition {
 				orderConfirmationPage.validatePaymentMethodNumber());
 	}
 
-	@Then("^user will view NA in the Price Total field$")
+	@Then("^user will view the Price Total field$")
 	public void user_will_view_NA_in_the_Price_Total_field() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - N/A is not displayed in Order Total field on Order Confirmation Page",
-				orderConfirmationPage.validateOrderTotalNA());
+		Assert.assertTrue("PROBLEM - Order Total field value is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validateOrderTotal());
 	}
 
 	@Then("^user will see an order total disclaimer displayed$")
@@ -188,12 +188,12 @@ public class RefillOrderConfirmationStepDefinition {
 				orderConfirmationPage.validateDaySupply());
 	}
 
-	@Then("^user will view NA in the Medication Price field$")
+	@Then("^user will view rx price in the Medication Price field$")
 	public void user_will_view_NA_in_the_Medication_Price_field() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
-				orderConfirmationPage.validateDrugPriceNA());
+		Assert.assertTrue("PROBLEM - Drug Price is not displayed under Medication section on Order Confirmation Page",
+				orderConfirmationPage.validateDrugPrice());
 	}
 
 	@Then("^user will view the Rx number$")

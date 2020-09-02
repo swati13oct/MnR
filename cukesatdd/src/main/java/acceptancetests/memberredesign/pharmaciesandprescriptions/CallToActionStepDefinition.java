@@ -1,40 +1,21 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
 
 import org.junit.Assert;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mysql.jdbc.PacketTooBigException;
-
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
-import pages.regression.login.HSIDLoginPage;
-import pages.regression.login.HsidRegistrationPersonalCreateAccount;
-import pages.regression.login.LoginPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
-import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsWebElements;
 import pages.regression.testharness.TestHarness;
 
 public class CallToActionStepDefinition {
@@ -58,7 +39,7 @@ public class CallToActionStepDefinition {
 
 	@When("^user navigates to the pharmacies and prescriptions page from testharness page$")
 	public void navigate_PnP_page() throws Throwable {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		//WebDriver wd = getLoginScenario().getWebDriver();
 		PharmaciesAndPrescriptionsPage pnpPg = new PharmaciesAndPrescriptionsPage(null);
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -71,6 +52,8 @@ public class CallToActionStepDefinition {
 			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
 			if (pnpPg == null) // note: try secondary page before giving up
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+					pnpPg);
 		}
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", pnpPg != null);
 
@@ -80,7 +63,10 @@ public class CallToActionStepDefinition {
 	public void a_PnP_notification_is_activated() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 		pnpPg.validatePharmacies_PrescriptionNotification();
+		
 	}
 
 	@Then("^user must see that message at the top of the PnP page$")
@@ -88,6 +74,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationPosition();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@When("^user navigate to Pharmacy Locator page$")
@@ -95,6 +83,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnPharmacyLocatorCallToAction();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 		// pnpPg.validateNavigationToChoosePlanYearPage();
 	}
 
@@ -103,6 +93,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@When("^user navigate to Home page$")
@@ -111,6 +103,8 @@ public class CallToActionStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.clickOnPharmacyLocatorCallToAction();
 		pnpPg.validateNavigationToChoosePlanYearPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@Then("^PnP notification will not be displayed on Home page$")
@@ -118,6 +112,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@When("^user navigates back to PnP page$")
@@ -125,6 +121,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.navigateBackToPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@Then("^PnP notification will only appear on the main PnP page$")
@@ -132,6 +130,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotification();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	@When("^user click the cross icon to close the notification$")
@@ -139,6 +139,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.closePharmacies_PrescriptionNotification();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 
 	}
 
@@ -147,6 +149,8 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmacies_PrescriptionNotificationNotDisplayedOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 
 	}
 
@@ -158,6 +162,8 @@ public class CallToActionStepDefinition {
 		// pnpPg.validateNavigationToChoosePlanYearPage();
 		pnpPg.navigateBackToPnPPage();
 		pnpPg.validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
+				pnpPg);
 	}
 
 	/*

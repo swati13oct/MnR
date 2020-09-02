@@ -14,9 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import com.itextpdf.text.log.SysoCounter;
-
-import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 import acceptancetests.util.CommonUtility;
 import pages.regression.testharness.TestHarness;
 
@@ -505,13 +502,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateDrugEstimatorToolPageOpensInSameWindow() {
+		pageloadcomplete();
 		int size = countOfNewWindowTab();
+		System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
+			//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
 			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
 					pnpValidate(DrugEstimatorToolPageHeader, 30));
 		} else {
-			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
+			Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Header is NOT displayed successfully",
 					pnpValidate(DrugEstimatorToolPageHeader, 30));
 			Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 		}
@@ -850,24 +849,29 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow() {
 		int size = countOfNewWindowTab();
+		System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - same window is opened", true);
-			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+			//Assert.assertTrue("PROBLEM - Nnew bowser window is opened", true);
+			//Assert.assertTrue("PROBLEM - same window is opened", true);
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
 					pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
 		} else {
 			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
 					pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
-			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is displayed but NOT in same browser window", false);
+			Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
 		}
 	}
 
 	public void validateLegacyPharmacyLocatortoolInSameBrowserWindow() {
 		int size = countOfNewWindowTab();
+		System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
 		if (size == 1) {
-			Assert.assertTrue("PROBLEM - same browser window is opened", true);
-			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page Page is NOT displayed successfully",
-					pnpValidate(HeaderLegacyPharmacyLocatorPage, 30));
+			//Assert.assertTrue("PROBLEM - same browser window is opened", true);
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+					pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
 		} else {
+			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+					pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
 			Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 					false);
 		}

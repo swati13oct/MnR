@@ -1,7 +1,6 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
@@ -42,8 +41,8 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 			String shippingMethodExpected = "Free";
 			String shippingMethodActual = ShippingMethodOrderConfirmation.getText()
 					.substring(ShippingMethodOrderConfirmation.getText().indexOf("-") + 1);
-			System.out.println("shippingMethodActual" + shippingMethodActual);
-			if (shippingMethodExpected.equalsIgnoreCase(shippingMethodActual)) {
+			System.out.println("shippingMethodActual :: " + shippingMethodActual);
+			if (shippingMethodExpected.equalsIgnoreCase(shippingMethodActual.trim())) {
 				return true;
 			}
 		}
@@ -78,11 +77,16 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 		return !PaymentMethodNumber.isEmpty();
 	}
 
-	public boolean validateOrderTotalNA() {
+	public boolean validateOrderTotal() {
 		if (validate(OrderTotalOrderConfirmation,10)) {
 			String orderTotal = OrderTotalOrderConfirmation.getText();
 			if (!orderTotal.isEmpty()) {
 				if (orderTotal.equalsIgnoreCase("Order Total: N/A")) {
+					System.out.println(orderTotal);
+					return true;
+				}
+				else if (orderTotal.contains("Order Total:$")){
+					System.out.println(orderTotal);
 					return true;
 				}
 			}
@@ -125,12 +129,17 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 		return validate(DrugQuantityOrderConfirmation);
 	}
 
-	public boolean validateDrugPriceNA() {
+	public boolean validateDrugPrice() {
 		scrollToView(rxPriceOrderConfirmation);
 		if (validate(rxPriceOrderConfirmation,10)) {
 			String orderTotal = rxPriceOrderConfirmation.getText();
 			if (!orderTotal.isEmpty()) {
 				if (orderTotal.equalsIgnoreCase("N/A")) {
+					System.out.println(orderTotal);
+					return true;
+				}
+				else if (orderTotal.contains("$")){
+					System.out.println(orderTotal);
 					return true;
 				}
 			}

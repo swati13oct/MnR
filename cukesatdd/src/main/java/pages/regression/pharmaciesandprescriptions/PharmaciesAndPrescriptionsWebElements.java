@@ -817,7 +817,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	// F436319
-	@FindBy(xpath = "//div[@data-testid='global-alert-banner']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
 	protected WebElement PnPNotification;
 
 	public List<Integer> getListOfIndexForManageAtWalgreens() {
@@ -828,7 +828,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		return listOfIndex;
 	}
 
-	@FindBy(xpath = "//div[@data-testid='global-alert-banner']//div//div//button[@data-testid='global-alert-banner-close-button']//span[1]")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
 	protected WebElement PnPNotificationCloseBtn;
 
 	public List<Integer> getListOfIndexForTransferToWalgreens() {
@@ -1216,7 +1216,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
 	protected WebElement FindAndPriceCTAImg;
 
-	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find and Price a Medication')]")
+	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find & Price a Medication')]")
 	protected WebElement FindAndPriceCTATitle;
 
 	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description' and contains(text(),'Find out if your drugs are covered, estimate costs and ways to help save money.')]")
@@ -1316,8 +1316,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
 	protected WebElement SearchButtonPharmacyLocatorPageByRally;
 
-	@FindBy(id = "pharmacylocatorheader_id")
-	protected WebElement HeaderLegacyPharmacyLocatorPage;
+	@FindBy(id = "zipcodeTxt")
+	protected WebElement zipCodeTextBoxLegacyPharmacyLocatorPage;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxMedicineCabinetHeader;
