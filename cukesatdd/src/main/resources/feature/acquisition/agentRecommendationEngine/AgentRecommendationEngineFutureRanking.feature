@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @PlanYearAutoRanking @F487396
+  @ARE @PlanYearAutoRanking @F472941
   Scenario Outline: - <Email> To Verify agent login and validate plan year Auto Ranking in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile

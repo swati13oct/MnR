@@ -653,8 +653,7 @@ public class AREPlanRanking extends UhcDriver {
 		if (year.equalsIgnoreCase("future")) {
 			if (validate(planYear, 10)) {
 				Select planYearSelect = new Select(planYear);
-				Assert.assertEquals(Integer.parseInt(
-						planYearSelect.getFirstSelectedOption().toString().trim()) == (Integer.parseInt(curYear) + 1),
+				Assert.assertEquals(Integer.parseInt(planYearSelect.getFirstSelectedOption().toString().trim()) == (Integer.parseInt(curYear) + 1),
 						"Future Year is not set by default");
 			} else {
 				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");

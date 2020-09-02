@@ -97,7 +97,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PDPFuture
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PDPFuture @F490640
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -116,7 +116,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6 @F466044
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate PDP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
