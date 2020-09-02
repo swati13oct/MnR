@@ -384,4 +384,16 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		return false;
 	}
 
+	public boolean validateDisclaimerAvailableBelowSkyLineComponent() {
+		return validate(disclaimerBelowSkyLineComponent, 10);
+	}
+
+	public boolean validateDisclaimerMessage() {
+		return validate(disclaimerMessage) && !disclaimerMessage.getText().isEmpty();
+	}
+
+	public boolean validateOptumRxDisclaimerMessage(String expectedVal) {
+		return disclaimerMessage.getText().contains(expectedVal);
+	}
+
 }
