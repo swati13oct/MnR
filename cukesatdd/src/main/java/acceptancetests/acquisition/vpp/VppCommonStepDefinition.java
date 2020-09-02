@@ -34,6 +34,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 
 
@@ -209,6 +210,164 @@ public class VppCommonStepDefinition {
 		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
-
 	
+	@And("^the user validates plan summary for the below plan$")
+	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
+				planSummaryPage.getSpecificPlanInfo(planName));
+	}
+	
+	@Then("^the user validates marketing bullets of the plan$")
+	public void validate_marketingBullets() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.validateMarketingBullets(planType, planName);
+	}
+	
+	/**
+	 * @throws InterruptedException
+	 * @toDo:user validates add to compare checkbox on Plan Card
+	 */
+	@Then("^the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans$")
+	public void user_validates_addtocompare_aarp() throws InterruptedException {
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		if (!planType.equals("SNP")) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+			plansummaryPage.validateAndClickAddtoCompare(planType, planName);
+			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
+			plansummaryPage.deselectAddToCompare(planName);
+		}
+	}
+		
+		/**
+		 * @toDo:user view plan details of the above selected plan in AARP site and
+		 *            validates
+		 */
+		@Then("^the user views plan details of the above selected plan and validates$")
+		public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String PlanName = memberAttributesRow.get(0).getCells().get(1);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+			if (vppPlanDetailsPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+				Assert.assertTrue(true);
+			} else
+				Assert.fail("Error in Loading the Plan Details Page");
+
+		}
+		
+		@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary")
+		public void User_clicks_BackToPlansLink_and_validates_redirection() {
+
+			PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+			if (plansummaryPage != null) {
+				Assert.assertTrue(true);
+			} else
+				Assert.fail("Error in validating the Plan Summary Page");
+		}
+		@Then("^the user validates below plan benefit values for the above selected plan$")
+		public void user_validates_planBenefitValues_inAARP(DataTable givenAttributes) {
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			
+				List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+				Map<String, String> memberAttributesMap = new HashMap<String, String>();
+				for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+					memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+							memberAttributesRow.get(i).getCells().get(1));
+				}
+				String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+				String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
+				String specialist = memberAttributesMap.get("Specialist");
+				String referralRequired = memberAttributesMap.get("Referral Required");
+				String outOfPocketMaximum = memberAttributesMap.get("Out Of Pocket Maximum");
+				String prescriptionDrugsTier1 = memberAttributesMap.get("Prescription Drugs, Tier 1");
+				String annualDeductible = memberAttributesMap.get("Annual Deductible");
+				VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+						.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+				plansummaryPage.clickOnViewMoreForPlan(planName);
+				plansummaryPage.validatePlanPremium(planName, monthlyPremium);
+				plansummaryPage.validatePrescriptionDrugsTier1(planName, planType, prescriptionDrugsTier1);
+			 if (!planType.equals("PDP")) {
+				plansummaryPage.validatePrimaryCarePhysicianBenefit(planType, planName, primaryCarePhysician);
+				plansummaryPage.validateSpecialistBenefit(planType, planName, specialist);
+				plansummaryPage.validateReferrralRequiredBenefit(planName, referralRequired);
+				plansummaryPage.validatesOutOfPocketMaximum(planName, outOfPocketMaximum);
+				
+			} else {
+				plansummaryPage.validateAnnualDeductible(planName, annualDeductible);
+				
+			}
+		}
+		
+		@Then("^the user hover overs the tool tip for Why is my premium 0 and validates the text$")
+		public void toolTip_premium0_validateText() throws Throwable {
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			if (planType.equals("MA") || planType.equals("MAPD")) {
+				VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+						.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+				plansummaryPage.toolTipForPremium0(planName);
+			}else if (planType.equals("PDP")) {
+				VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+						.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+				plansummaryPage.toolTipForAnnualDeductible(planName);
+			}
+		}
+		
+		@Then("^the user validates Is my provider covered link$")
+		public void user_validates_IsMyProviderCoveredLink_aarp() throws InterruptedException {
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+				String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+				plansummaryPage.clickOnViewMoreForPlan(planName);
+				plansummaryPage.validateIsMyProviderCoveredLink(planType, planName);
+			
+		}
+		
+		@Then("^the user clicks on Enroll Now and validates the Welcome to OLE Page")
+		public void user_clicks_enrollInPlan_validates_welcomeOLE() throws InterruptedException {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			WelcomePage welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName, planType);
+			if (welcomeOLEPage != null) {
+				getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			} else {
+				Assert.fail("Error Loading Welcome Page for OLE");
+			}
+		}
+
 }

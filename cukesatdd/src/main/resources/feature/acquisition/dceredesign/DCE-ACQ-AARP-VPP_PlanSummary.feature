@@ -11,7 +11,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type and select Next year
       | Plan Type | <plantype> |
-    And I access the DCE Redesign on aarp site from Plan Summary for mentioned plan
+    And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
     Then the user validates Get Started Page
