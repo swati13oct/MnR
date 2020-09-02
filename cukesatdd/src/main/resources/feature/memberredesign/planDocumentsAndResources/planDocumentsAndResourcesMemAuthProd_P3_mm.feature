@@ -36,7 +36,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 01-039 | xxxxx       | kkumard  | mnrs786@  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+      | 01-039 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
 #      | 03-041 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 

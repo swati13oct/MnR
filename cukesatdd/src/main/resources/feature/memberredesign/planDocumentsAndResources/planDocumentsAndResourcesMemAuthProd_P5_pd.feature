@@ -41,7 +41,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 01-077 | xxxxx       | kkumard  | mnrs786@  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | 01-077 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
 #      | 02-078 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
 #      | 03-079 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 

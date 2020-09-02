@@ -35,7 +35,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_preeffective_ma_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
-      | 01-096 | xxxxx       | kkumard  | mnrs786@  | weberjo01    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | 
+      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | 
 #      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  |
 
 #	@prod_preeffective_mapd_3of7
