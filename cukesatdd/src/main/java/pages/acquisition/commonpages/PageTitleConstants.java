@@ -53,7 +53,8 @@ public class PageTitleConstants {
 	public static final String BLAYER_CALPERS_RETIREES_PROVIDER = "CalPERS Retirees – Find a provider";
 	public static final String BLAYER_SDCERA_GROUP_RETIREE_PROVIDER = "SDCERA Group Retiree – Find a provider";
 	public static final String BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE = "Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare";
-	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
+	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcare®";
+	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String ULAYER_OUR_MEDICARE_PLANS = "Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®";
 	public static final String ULAYER_HEALTH_INSURANCE_BROKER_AGENT_TOOLS = "Health Insurance Broker & Agent Tools | AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String ULAYER_MEDICARE_PLANS_AARP_MEDICARE_PLANS = "Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®";

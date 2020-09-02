@@ -1766,7 +1766,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CheckPageLoad();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-			if (driver.getCurrentUrl().contains("profile/guest")) {
+			if (driver.getCurrentUrl().contains("profile/*")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
@@ -1819,7 +1819,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateTFNelement(String tfnXpath) {
 			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
-			jse.executeScript("window.scrollBy(0,2000)");
+			jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+			jse.executeScript("window.scrollBy(0,-500)");
 			validateNew(TFNelement, 45);
 			if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
 				System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
