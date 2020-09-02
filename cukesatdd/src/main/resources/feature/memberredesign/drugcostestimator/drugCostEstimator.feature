@@ -1,4 +1,4 @@
-@drugCostEstimator @regressionMember
+ 
 Feature: 1.07 Member DCE Page
 
   @drugCostEstimator1 @Member_dce_not @NegativeScenario @dce_p1
@@ -94,9 +94,11 @@ Feature: 1.07 Member DCE Page
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
     Examples: 
-      | TID   | planType                       |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
-      | 15325 | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
-
+      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
+      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+	  | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
 
@@ -110,7 +112,7 @@ Feature: 1.07 Member DCE Page
   #| TID   | planType                |
   #| 15337 | IndividualDCEmember_DCE |
 
-  @drugCostEstimator6 @Member_DCE_sso @dce_p3
+  @drugCostEstimator6 @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -146,7 +148,7 @@ Feature: 1.07 Member DCE Page
       | TID   | planType                       |memberType | drug    | dosage           | quantity | frequency     |
       | 15325 | MAPD|MAPD_DCE | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
-  @drugCostEstimator8 @switch_to_generic_case_2 @dce_p3
+  @drugCostEstimator8 @switch_to_generic_case_2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is not selected and it suggests the user with an appropriate save money message and cost savings are also updated
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |

@@ -308,15 +308,16 @@ public class MemberAuthPage extends UhcDriver {
 	public AccountHomePage userSelectsMemberEntered()  {
 		checkModelPopup(driver, 2);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(2, TimeUnit.MINUTES);
 		try {
 
 			// waitforElement(MemberPopUpLogin);
-			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 20);
+			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 30);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
+			Assert.assertTrue("PROBLEM - unable to locate MemberPopUpLogin", validate(MemberPopUpLogin));
 			if (MemberPopUpLogin.isDisplayed()) {
 				System.out.println("Pop up Login Button is displayed");
 				try {
@@ -397,6 +398,10 @@ public class MemberAuthPage extends UhcDriver {
 					CommonUtility.checkPageIsReadyNew(driver);
 					Assert.assertTrue("PROBLEM - Got 'Sorry. It's not you' error instead of landing on dashboard", !validate(sorryItsNotYouErr,0));
 					CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
+					if (!validate(SuperUser_DashboardBanner,0)) {
+						CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
+						Assert.assertTrue("PROBLEM - superuser dashboard banner still not showing after 2 min", validate(SuperUser_DashboardBanner,0));
+					}
 					// waitforElement(SuperUser_DashboardBanner);
 					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
 						System.out.println("CSR Dashboard Page is displayed for the Member");
@@ -417,12 +422,15 @@ public class MemberAuthPage extends UhcDriver {
 						TestHarness.checkForIPerceptionModel(driver);
 						return new AccountHomePage(driver);
 					}
-				} else
+				} else {
+					Assert.assertTrue("PROBLEM - CSR Dashboard Page is NOT displayed for the Member", false);
 					System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+				}
 				return null;
 
 			} else {
-				System.out.println("not able to switch to new window");
+				Assert.assertTrue("PROBLEM - not able to switch to new window", false);
+				//tbd System.out.println("not able to switch to new window");
 				return null;
 			}
 		} catch (TimeoutException e) {
