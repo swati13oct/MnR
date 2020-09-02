@@ -32,6 +32,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 /**
  * @author gumeshna

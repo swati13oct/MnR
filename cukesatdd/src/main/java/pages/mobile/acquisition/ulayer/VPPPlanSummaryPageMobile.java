@@ -38,7 +38,10 @@ import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 
@@ -1584,7 +1587,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName,String planType) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName,String planType) throws InterruptedException {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		if(planType.equalsIgnoreCase("PDP")) {
@@ -1601,7 +1604,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
@@ -2119,7 +2122,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 
-	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
+	public DrugCostEstimatorPageMobile navigatetoDCEPage(String planName){
 		WebElement DCELink = null;
 		
 		if(planName.contains("SNP")){
@@ -2136,7 +2139,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
 			System.out.println("DCE Page is loaded");
-			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
+			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
 		}	
 		else
 			return null;  
@@ -3940,6 +3943,37 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 		
+	}
+	
+	public PlanDetailsPageMobile navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			jsClickNew(MAmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+            WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			PDPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			SNPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/details")) {	
+			return new PlanDetailsPageMobile(driver,planType);
+		}
+		return null;
 	}
 	
 	/*

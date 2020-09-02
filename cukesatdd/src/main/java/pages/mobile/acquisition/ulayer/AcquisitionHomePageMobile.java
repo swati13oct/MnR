@@ -31,6 +31,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.keywordSearchAARP;
 
 
 /**
@@ -479,7 +480,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		    return testSiteUrl;
 	  }
 	
-	
+	public keywordSearchAARP searchfield() {
+		validate(searchfield);
+		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
+		validate(searchbutton);
+		System.out.println("search button is seen on AARP site ==>" + searchbutton.isDisplayed());
+		searchfield.clear();
+		searchfield.sendKeys("medicare");
+		searchbutton.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
+			return new keywordSearchAARP(driver);
+		return null;
+	}
 
 
 	/*@SuppressWarnings("deprecation")
