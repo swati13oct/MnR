@@ -160,7 +160,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
 		
-		if (driver.getTitle().contains("Payments")) {
+		if (validate(makeAPaymentsHeader)) {
 			return new OneTimeGuestPaymentsPage(driver);
 		}
 		return null;

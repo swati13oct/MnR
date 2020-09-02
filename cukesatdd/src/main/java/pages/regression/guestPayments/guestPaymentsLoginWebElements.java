@@ -45,16 +45,16 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "medicare-only")
     public static WebElement staticContentBelowHeader;
 	
-	@FindBy(xpath= "//typography.paragraph/span[contains(text(),'sign in')]")
+	@FindBy(xpath= "//a[contains(text(),'sign in')]")
     public static WebElement signInLink;
 	
-	@FindBy(className= "help-me-find")
+	@FindBy(xpath= "//a[contains(text(),'Help me find my ID')]")
     public static WebElement helpMeFindMyIdLink;
 		
 	@FindBy(xpath= "//input[@placeholder='Member ID']")
     public static WebElement  memberIdTextfield;
 	
-	@FindBy(xpath= "//input[@placeholder='MM/DD/YYYY']")
+	@FindBy(xpath= "//input[@id='dob']")
     public static WebElement dobTextfield;
 	
 	@FindBy(xpath= "//button[contains(text(),'Next')]")
@@ -78,7 +78,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "memberID") // need to update class id
 	public static WebElement CancelButtononID;
 	
-	@FindBy(className= "input-error-msg") 
+	@FindBy(className= "invalid-feedback") 
 	public static WebElement errorMessage;
 	
 	@FindBy(className= "memberID") // need to update class id
@@ -90,7 +90,9 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "memberID") // need to update class id
 	public static WebElement signInLinkOnErrorPage;
 	
-	
+	@FindBy(xpath= "//h1[contains(text(),'Make a One-Time Payment')]")
+	public static WebElement makeAPaymentsHeader;
+
 	
 	
 	

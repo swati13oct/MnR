@@ -33,13 +33,13 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	}
 
 
-	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath = "//h1[contains(text(),'Make a One-Time Payment')]")
 	public WebElement guestPaymentsHeader;
 	
 	@FindBy(xpath = "")
 	public WebElement oneTimePaymentTextBelowHeader;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h3[contains(text(),'Select a Payment Amount')]")
 	public WebElement selectAPaymentHeader;
 	
 	@FindBy(xpath = "")
@@ -54,7 +54,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement pastAmountCurrentChargesValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@name='amount']")
 	public WebElement otherAmountRadioButton;
 	
 	@FindBy(xpath = "")
@@ -63,10 +63,10 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement chooseAPaymentHeading;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@name='paymentMethod'][@value='CC ']")
 	public WebElement creditcardRadioButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@name='paymentMethod'][@value='EFT']")
 	public WebElement eftCheckingRadioButton;
 	
 	@FindBy(xpath = "")
