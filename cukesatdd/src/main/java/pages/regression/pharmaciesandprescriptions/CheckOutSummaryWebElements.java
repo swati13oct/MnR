@@ -187,4 +187,10 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']//span")
 	protected WebElement shippingMethodForRenew;
+
+	@FindBy(xpath = "//div[@data-testid='header__title']//h1/ancestor::div[contains(@class,'MuiScopedCssBaseline')]/..//*[@data-testid='order-management-disclaimer']")
+	protected WebElement disclaimerBelowSkyLineComponent;
+
+	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
+	protected WebElement disclaimerMessage;
 }

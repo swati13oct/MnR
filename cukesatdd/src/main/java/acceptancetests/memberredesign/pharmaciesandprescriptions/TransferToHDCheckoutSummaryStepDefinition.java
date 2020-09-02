@@ -92,5 +92,14 @@ public class TransferToHDCheckoutSummaryStepDefinition {
 		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}*/
+	
+	@When("^user view the bottom of Skyline Transfer to HD Component$")
+	public void user_view_the_bottom_of_Skyline_Transfer_to_HD_Component() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - Disclaimer Message not available below SkyLine Component",
+				checkoutSumaryPg.validateDisclaimerAvailableBelowSkyLineComponent());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
 
 }

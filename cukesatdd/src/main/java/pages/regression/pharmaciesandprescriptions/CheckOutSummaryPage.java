@@ -211,9 +211,9 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validatePrescriptionNumberUnderMedicationIsMoreThanOne() {
 		validate(prescriptionContainer, 30);
 		int totalMedication = listOfPrescriptions.size();
-		if(totalMedication>1){
+		if (totalMedication > 1) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
@@ -391,6 +391,18 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 			return shippingFee.equals(arry[1].trim());
 		}
 		return false;
+	}
+
+	public boolean validateDisclaimerAvailableBelowSkyLineComponent() {
+		return validate(disclaimerBelowSkyLineComponent, 10);
+	}
+
+	public boolean validateDisclaimerMessage() {
+		return validate(disclaimerMessage) && !disclaimerMessage.getText().isEmpty();
+	}
+
+	public boolean validateOptumRxDisclaimerMessage(String expectedVal) {
+		return disclaimerMessage.getText().contains(expectedVal);
 	}
 
 }

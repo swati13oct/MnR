@@ -578,4 +578,30 @@ public class RefillCheckoutSummaryStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
+	@When("^user view the bottom of Skyline Complete Your Refill Component$")
+	public void user_view_the_bottom_of_Skyline_Complete_Your_Refill_Component() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - Disclaimer Message not available below SkyLine Component",
+				checkoutSumaryPg.validateDisclaimerAvailableBelowSkyLineComponent());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^user will view the disclaimer message$")
+	public void user_will_view_the_disclaimer_message() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - Disclaimer Message not available", checkoutSumaryPg.validateDisclaimerMessage());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
+	@Then("^disclaimer will remind the user that \"([^\"]*)\" is fulfilling the order$")
+	public void disclaimer_will_remind_the_user_that_is_fulfilling_the_order(String expectedMsg) throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - OptumRx is not fulfilling the order",
+				checkoutSumaryPg.validateOptumRxDisclaimerMessage(expectedMsg));
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
 }
