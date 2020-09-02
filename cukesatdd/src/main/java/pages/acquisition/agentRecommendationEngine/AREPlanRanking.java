@@ -41,7 +41,10 @@ public class AREPlanRanking extends UhcDriver {
 	List<String> drugplansDetails = new ArrayList<String>();
 	List<String> originalplanNames = new ArrayList<String>();
 
-	@FindBy(css = "a#aarpSVGLogo")
+	@FindBy(css = "a#aarpSVGLogo']")
+	private WebElement Logo;
+	
+	@FindBy(css = "label[for*='plan-ranking']")
 	private WebElement planRankingTxt;
 
 	@FindBy(css = "div#multiSelect>#plan-ranking")
@@ -246,6 +249,7 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Current URL : " + currentPageUrl);
 		Assert.assertFalse(validate(planRankingTxt), "Ranking text is displaying");
 		Assert.assertFalse(validate(planRankingDropdown), "Ranking Dropdown is displaying");
+	
 	}
 
 	public void alertAccept() {
@@ -809,7 +813,7 @@ public class AREPlanRanking extends UhcDriver {
 		scrollToView(print);
 		scrollToView(AddDoctorsLink);
 		threadsleep(3000);
-		scrollToView(planRankingTxt);
+		scrollToView(Logo);
 		action.moveToElement(planRankingDropdown).perform();
 		action.moveToElement(planRankingDropdown).click().perform();
 		optionSelection(rankOptions, true);
@@ -1012,7 +1016,7 @@ public class AREPlanRanking extends UhcDriver {
 		scrollToView(print);
 		scrollToView(AddDoctorsLink);
 		threadsleep(3000);
-		scrollToView(planRankingTxt);
+		scrollToView(Logo);
 		action.moveToElement(planRankingDropdown).perform();
 		action.moveToElement(planRankingDropdown).click().perform();
 		drugDocDisable(rankOptions, false);

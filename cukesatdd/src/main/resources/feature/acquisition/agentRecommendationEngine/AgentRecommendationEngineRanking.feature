@@ -20,8 +20,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
-  
-   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
+  @ARE @EnrolledNonMAPD @nodropdownUI @F496111
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -32,12 +31,13 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     And agent selects county and plan year in plancompare page
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
-		Then agent validates plan ranking drop down not displaying in plancompare page
-		
+    Then agent validates plan ranking drop down not displaying in plancompare page
+
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear |
       | qavgogine | qavgogine | ATDD4STG@MEMBERDD.COM | None          | current  |
-      
+      #| qavgogine | qavgogine | SPOP@NONMEMBER.COM    | None          | current  |
+
   @ARE @ViewPlanDetailsARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
     Given the agent is on shopper profile login page
@@ -67,7 +67,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
     Then agent validates save plans in plancompare page
-    	| Plan Year    | <PlanYear>      |
+      | Plan Year | <PlanYear> |
 
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear |
