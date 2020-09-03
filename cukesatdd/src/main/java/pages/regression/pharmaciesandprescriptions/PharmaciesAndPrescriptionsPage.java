@@ -1062,6 +1062,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	// F392596 Meidine Cabinet
 	public void validateCurrentMedicationsHeader() {
+		pnpValidate(CurrentMedicationsHeader,50);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", CurrentMedicationsHeader);
 		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
