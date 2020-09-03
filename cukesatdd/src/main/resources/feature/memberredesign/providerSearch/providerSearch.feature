@@ -14,27 +14,30 @@ Feature: 1.23 Member Provider Search
 	Then the user navigates to Health and Wellness page from Provider Search page
 	Then the user navigates to Account Settings page from Provider Search page
 	
-	@providerSearch01a
+	@providerSearch01_mapd
     Examples: 
 	    | index | planType | memberType              | 
-	    | 01    | MAPD     | GRP_ProviderSearch      |
+	    | 01    | MAPD     | AARP_IND_ProviderSearch |
 	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
 
-	@providerSearch01b
+	@providerSearch01_pdp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 03    | MAPD     | AARP_IND_ProviderSearch |
-	    | 04    | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | PDP      | AARP_IND_ProviderSearch |
 
-	@providerSearch01c
+	@providerSearch01_ma
     Examples: 
 	    | index | planType | memberType              | 
-        | 05    | MA       | UHC_IND_ProviderSearch  |
-	    | 06    | MA       | AARP_IND_ProviderSearch |
+        | 04    | MA       | UHC_IND_ProviderSearch  |
+	    | 05    | MA       | AARP_IND_ProviderSearch |
 
-	@providerSearch01d
+	@providerSearch01_medica_pcp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 07    | MEDICA   | MEDICA_IND_ProviderSearch |
-	    | 08    | PCP      | PCP_IND_ProviderSearch  |
+	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | 07    | PCP      | PCP_IND_ProviderSearch  |
 
+	@providerSearch01_grp
+    Examples: 
+	    | index | planType | memberType              | 
+	    | 08    | PDP      | AARP_IND_ProviderSearch |

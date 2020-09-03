@@ -42,7 +42,7 @@ public class EnterZipCodePage extends UhcDriver{
 				ZipcodeButton.get(zipCodeNumber - 1).click();
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
-				Thread.sleep(3000);
+				Thread.sleep(20000);
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
@@ -54,9 +54,17 @@ public class EnterZipCodePage extends UhcDriver{
 				}
 
 				System.out.println("Actual : " + vppPageTitle);
-				System.out.println("Expected : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-				assertTrue("Not redirected to VPP page",
+				if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+					System.out.println("Expected : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					assertTrue("Not redirected to VPP page",
+						vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				}
+				else
+				{
+					System.out.println("Expected : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					assertTrue("Not redirected to VPP page",
 						vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				}
 				driver.navigate().back();
 				zipCodeNumber++;
 			}
