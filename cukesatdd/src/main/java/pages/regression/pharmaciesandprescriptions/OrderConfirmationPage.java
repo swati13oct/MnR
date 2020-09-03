@@ -79,7 +79,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 
 	public boolean validateOrderTotal() {
-		if (validate(OrderTotalOrderConfirmation,50)) {
+		if (validate(OrderTotalOrderConfirmation,10)) {
 			String orderTotal = OrderTotalOrderConfirmation.getText();
 			System.out.println(orderTotal);
 			if (!orderTotal.isEmpty()) {
@@ -88,7 +88,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 					Assert.assertEquals(orderTotal, "Order Total: N/A", "Order Total: N/A is displayed successfully");
 					return true;
 				}
-				else if (orderTotal.contains("Order Total:$")){
+				else if (orderTotal.contains("Order Total: $")){
 					System.out.println(orderTotal);
 					return true;
 				}
