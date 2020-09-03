@@ -34,12 +34,14 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
@@ -57,6 +59,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[2]/div/div/span[3]/button]")
 	WebElement compareLinks;
+	
+	@FindBy(xpath = "//*[@id='togglecurrentYear']/a")
+	private WebElement YearToggle;
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
@@ -1103,9 +1108,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 
-	public void verifyCompareCheckBoxesAreUnchecked(){
+	public boolean verifyCompareCheckBoxesAreUnchecked(){
 
 		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		return true;
 
 	}
 
@@ -1255,6 +1261,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return false;
 	}
+	
+	
 
 	public boolean validateVPPPlanSummaryPage() {
 		//note: this refresh line is causign the plan year selection popup not able to click Go, so comment it out for now
@@ -3976,6 +3984,212 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return null;
 	}
 	
+	public String EnrollmentValidation(String PlanName) {
+
+		try {
+			Thread.sleep(5000);
+			try {
+				if (YearToggle.getText().contains("View 2019 Plans"))
+					YearToggle.click();
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				System.out.println("Toggle Not found");
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Plan Name is : " + PlanName);
+
+		if (PlanName.equalsIgnoreCase("UnitedHealthcare Medicare Silver (Regional PPO SNP)")) {
+			WebElement EnrollmentButton = driver
+					.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a)[5]"));
+			String Enrollment = EnrollmentButton.getText();
+			if (EnrollmentButton.isDisplayed())
+				EnrollmentButton.click();
+			System.out.println("Enrollment Button present and clicked");
+			return Enrollment;
+		} else {
+			try {
+				WebElement EnrollmentButton = driver
+						.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/div/a/span"));
+				String Enrollment = EnrollmentButton.getText();
+				if (EnrollmentButton.isDisplayed())
+					EnrollmentButton.click();
+				System.out.println("Enrollment Button present and clicked");
+				return Enrollment;
+			} catch (Exception e) {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,800)", "");
+				WebElement EnrollmentButton = driver.findElement(By.xpath(
+						"(//*[@class='module-plan-overview module swiper-slide ng-scope'])[9]//div[@class='enrollment']//a/span"));
+				String Enrollment = EnrollmentButton.getText();
+				if (EnrollmentButton.isDisplayed())
+					EnrollmentButton.click();
+				System.out.println("Enrollment Button present and clicked");
+				return Enrollment;
+			}
+		}
+	}
+	
+	
+	public WelcomePageMobile EnrollmentValidationChronic(String PlanName) throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+			if (YearToggle.getText().contains("View 2019 Plans"))
+				YearToggle.click();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("Toggle Not found");
+		}
+
+		System.out.println("Plan Name is : " + PlanName);
+		/*
+		 * JavascriptExecutor jse = (JavascriptExecutor)driver;
+		 * jse.executeScript("window.scrollBy(0,-10)", "");
+		 */
+		Thread.sleep(2000);
+		WebElement EnrollmentButton = driver
+				.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a/span)[5]"));
+		if (EnrollmentButton.isDisplayed())
+			EnrollmentButton.click();
+		System.out.println("Enrollment Button present and clicked");
+		Thread.sleep(2000);
+		return new WelcomePageMobile(driver);
+
+	}
+
+	
+	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
+	private WebElement firstPlanDetailsLink;
+
+	public PlanDetailsPageMobile navigateToFirstPlanForPlanDetails(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		firstPlanDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for first plan for " + planType);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/details")) {
+			return new PlanDetailsPageMobile(driver, planType);
+		}
+		return null;
+	}
+	
+	public PlanDetailsPageMobile clickViewDetails_AddedToCompare() {
+
+		validateNew(ViewPlanLink_AddedToCompare);
+		ViewPlanLink_AddedToCompare.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPageMobile(driver);
+		return null;
+	}
+	
+	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//div[not (contains(@class,'ng-hide'))]//a[contains(text(),'View Plan Details')]")
+	private WebElement ViewPlanLink;
+	public PlanDetailsPageMobile clickViewDetails() {
+
+		validateNew(ViewPlanLink);
+		ViewPlanLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPageMobile(driver);
+		return null;
+	}
+
+	@FindBy(xpath = ".//*[@id='viewmoredetlinkpdp']")
+	WebElement viewDetailsPDP;
+	public PlanDetailsPageMobile clickViewDetailsPDP() {
+		if (validate(viewDetailsPDP)) {
+			viewDetailsPDP.click();
+		}
+
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPageMobile(driver);
+		return null;
+	}
+
+	/**
+	 * Methods added for OLE Flow validations
+	 * 
+	 * @author sdwaraka
+	 * @param PlanName
+	 * @return
+	 */
+	public String getPlanPremium(String PlanName) {
+
+		System.out.println("Plan Name is : " + PlanName);
+
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+				+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+		CommonUtility.waitForPageLoadNew(driver, PremiumForPlan, 30);
+		String PlanPremium = PremiumForPlan.getText();
+
+		System.out.println("Premium for Plan : " + PlanPremium);
+		return PlanPremium;
+	}
+	
+	public PlanComparePageMobile selectplantocompare(String planType, String PlanName) {
+		// To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if (planType.contains("PDP")) {
+			System.out.println("Plan Type is :" + planType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :" + count);
+		}
+		int CountUntil = count + 3;
+		do {
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver
+					.findElement(By.xpath("//*[@id = 'compare-plan-" + temp + "']//following-sibling::label"));
+			if (validate(SelectCompare))
+				SelectCompare.click();
+			count++;
+		} while (count < CountUntil);
+
+		try {
+			if (driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]"))
+					.getText().equalsIgnoreCase("Add to compare")) {
+				driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+						+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]"))
+						.click();
+				System.out.println("Add to Compare is clicked for the plan : " + PlanName);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if (driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]"))
+					.getText().equalsIgnoreCase("Added to compare")) {
+				System.out.println("Add to Compare already clicked for the plan : " + PlanName);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> ComparePlansLinks = driver
+				.findElements(By.xpath("//button[contains(text(), 'Compare plans') and @type='submit']"));
+		// validate();
+		for (WebElement CompareLink : ComparePlansLinks) {
+			if (CompareLink.isDisplayed()) {
+				CompareLink.click();
+				CommonUtility.checkPageIsReady(driver);
+				if (driver.getCurrentUrl().contains("plan-compare")) {
+					return new PlanComparePageMobile(driver);
+				}
+			}
+		}
+		System.out.println("Compare Plans Link not displayed");
+		return null;
+	}
+
+
+
 	/*
 	 * public boolean waitForJStoLoad () {
 	 * 
