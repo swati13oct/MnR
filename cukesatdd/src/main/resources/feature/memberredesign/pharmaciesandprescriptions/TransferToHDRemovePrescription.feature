@@ -40,7 +40,7 @@ Feature: Transfer - Remove prescription
     Then user will see "Transfer to Home Delivery" Page
     Then user will see the number of medications in my order indicated in the header
     And a message confirming my medication was removed
-    And a message indicating there are no prescriptions to be transferred
+    And a message indicating there are no prescriptions to
     When user returns to the My Medications page
     Then user will see the "Transfer to Home Delivery" button for eligible medication
 
