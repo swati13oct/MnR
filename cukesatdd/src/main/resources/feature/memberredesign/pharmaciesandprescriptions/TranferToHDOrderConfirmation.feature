@@ -7,7 +7,7 @@ Feature: Transfer Order Confirmation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user fetches medication information and clicks on Transfer to HD Medication call to action button
+    And user fetches medication informations and clicks on Transfer To HD call to action button
     Then user will see "Transfer to Home Delivery" Page
     And user will see Place Order Btn
     Then user will click on Place Order btn on Checkout Transfer Page
