@@ -91,7 +91,7 @@ public class RefillOrderConfirmationStepDefinition {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Order Tracker as Order Received is not displayed on Order Confirmation Page",
-				orderConfirmationPage.validateOrderPlacedDate());
+				orderConfirmationPage.validateOrderReceivedTracker());
 	}
 
 	@Then("^user will see order confirmation email messaging$")

@@ -1,17 +1,15 @@
 Feature: Transfer Order Confirmation
   Display Transfer order confirmation
 
-  @TransferToHDConfirmation @F484053 @US2777921 @US2777922 @US2777924 @US2777925 @US2777926 @US2777923
+  @TransferToHDConfirmation @F484053 @US2777921 @US2777922 @US2777924 @US2777925 @US2777926 @US2777923 @F496830 @US2853935
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify Renew Order Confirmation page components
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    #And user fetches medication information and clicks on Renew Medication call to action button
     And user fetches medication information and clicks on Transfer to HD Medication call to action button
     Then user will see "Transfer to Home Delivery" Page
     And user will see Place Order Btn
-    #Then user will click on Place Order btn on Checkout Renew Page
     Then user will click on Place Order btn on Checkout Transfer Page
     Then user will see Transfer order confirmation page
     Then user will see order placed date
@@ -32,7 +30,6 @@ Feature: Transfer Order Confirmation
     And user will view the provider
     When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
-    #And the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction
     And the page should be refreshed so that the status of this transfer request is updated per this transfer transaction
 
     Examples: 

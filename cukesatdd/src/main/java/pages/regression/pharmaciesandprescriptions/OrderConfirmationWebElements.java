@@ -23,7 +23,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='header__title']//h1")
 	protected WebElement orderConfirmationPageHeader;
 	
-	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
+	@FindBy(xpath = "//*[@data-testid='oc__header__thanksMessage']")
 	protected WebElement ThankyouMessageOrderConfirmation;
 	
 	//@FindBy(xpath = "//div[@data-testid='oc__header__orderNumber']/div[text()='Order #']")
