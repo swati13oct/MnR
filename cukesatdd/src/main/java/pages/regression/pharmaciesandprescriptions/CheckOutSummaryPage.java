@@ -21,7 +21,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	String dollarAmntRegex = "^(\\$)((\\d+)|(\\d{1,3})(\\,\\d{3})*)(\\.\\d{2,})?$";
 	String expireDateRegex = "^(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
 	String exireDateRegexAlongwithTex = "^[a-zA-Z]*\\s[a-zA-Z]*\\s(0[1-9]|1[0-2])\\/?([0-9]{4}|[0-9]{2})$";
-	// String cardDetailRegex = "^[a-zA-Z]*\\s[*]{4}\\s[0-9]{4}$";
+	String cardDetailNameRegex = "^[a-zA-Z]*$";
 	String cardDetailRegex = "^[0-9]{4}$";
 	String cardTypeRegex = "^[a-zA-Z]*$";
 	String medicationsRegex = "^[a-zA-Z]*\\s[(][0-9]*[)]$";
@@ -54,22 +54,29 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 		float overAllPrice = 0;
 		for (WebElement ele : listOfPrice) {
-			float val = Float.parseFloat(ele.getText().substring(1));
-			overAllPrice = overAllPrice + val;
+			if (!(ele.getText().equalsIgnoreCase("N/A"))) {
+				float val = Float.parseFloat(ele.getText().substring(1));
+				overAllPrice = overAllPrice + val;
+			}
 		}
 		return overAllPrice;
 	}
 
 	public boolean validateOverAllMedicationAmtUnderOrderSummary() {
 		String medicationPrice = orderSummaryMedicationPrice.getText();
-		float medicationPriceUndrOrderSummary = Float.parseFloat(medicationPrice.substring(1));
-		// int medicationPriceUndrOrderSummary =
-		// Float.parseInt(medicationPrice.substring(1));
-		float overAllRefillMedicationPrice = getOverAllMedicationPriceFromMedicationSectn();
-		// int overAllRefillMedicationPrice =
-		// getOverAllMedicationPriceFromMedicationSectn();
-		return medicationPrice.matches(dollarAmntRegex)
-				&& medicationPriceUndrOrderSummary == overAllRefillMedicationPrice;
+		System.out.println("Medication Price :" + medicationPrice);
+		if (!(medicationPrice.equals("N/A"))) {
+			float medicationPriceUndrOrderSummary = Float.parseFloat(medicationPrice.substring(1));
+			// int medicationPriceUndrOrderSummary =
+			// Float.parseInt(medicationPrice.substring(1));
+			float overAllRefillMedicationPrice = getOverAllMedicationPriceFromMedicationSectn();
+			// int overAllRefillMedicationPrice =
+			// getOverAllMedicationPriceFromMedicationSectn();
+			return medicationPrice.matches(dollarAmntRegex)
+					&& medicationPriceUndrOrderSummary == overAllRefillMedicationPrice;
+
+		}
+		return !medicationPrice.isEmpty();
 	}
 
 	public boolean validateShippingLabelUnderOrderSummary() {
@@ -108,11 +115,16 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String medicationPrice = orderSummaryMedicationPrice.getText();
 		String shippingPrice = orderSummaryShippingFee.getText();
 		String totalPrice = orderSummaryTotalPrice.getText();
-		if (!shippingPrice.trim().equals("Free")) {
+		if (!shippingPrice.trim().equals("Free") && !(medicationPrice.equalsIgnoreCase("N/A"))) {
 			return Integer.parseInt(totalPrice.substring(1)) == (Integer.parseInt(medicationPrice.substring(1))
-					+ Integer.parseInt(shippingPrice.substring(1)));
+					+ Integer.parseInt(shippingPrice.substring(1))) && totalPrice.matches(dollarAmntRegex);
+		} else if (shippingPrice.trim().equals("Free") && !medicationPrice.equalsIgnoreCase("N/A")) {
+			return totalPrice.trim().equals(medicationPrice.trim()) && totalPrice.matches(dollarAmntRegex);
+
+		} else if (!shippingPrice.trim().equals("Free") && medicationPrice.equalsIgnoreCase("N/A")) {
+			return totalPrice.trim().equals(shippingPrice.trim()) && totalPrice.matches(dollarAmntRegex);
 		}
-		return totalPrice.equals(totalPrice) && totalPrice.matches(dollarAmntRegex);
+		return totalPrice.trim().equals(medicationPrice.trim());
 	}
 
 	public boolean validateDisclaimerUnderOrderSummary() {
@@ -174,7 +186,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String cardDetail = paymentCreditCardNumber.getText();
 		String[] arrayVal = cardDetail.split(" ");
 		return !paymentCreditCardNumber.getText().isEmpty()
-				&& arrayVal[arrayVal.length - 1].trim().matches(cardDetailRegex);
+				&& arrayVal[arrayVal.length - 1].trim().matches(cardDetailRegex)
+				&& arrayVal[0].trim().matches(cardDetailNameRegex);
 	}
 
 	/*
@@ -250,7 +263,18 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateMedicationPrice() {
 		// String medicationPrice =
 		// RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
-		return listOfPrice.get(listOfPrice.size() - 1).getText().trim().matches(dollarAmntRegex);
+		// return listOfPrice.get(listOfPrice.size() -
+		// 1).getText().trim().matches(dollarAmntRegex);
+
+		/*
+		 * String medicationPrice =
+		 * RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(3).toString();
+		 * return
+		 * medicationPrice.trim().equalsIgnoreCase(listOfPrice.get(listOfPrice.size() -
+		 * 1).getText().trim());
+		 */
+		return !(listOfPrice.get(listOfPrice.size() - 1).getText().isEmpty());
+
 	}
 
 	public boolean validateDaySupply() {
@@ -264,7 +288,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String refillRemainingFrmCheckOutPage = listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
 		String[] arrayVal = refillRemainingFrmCheckOutPage.split(":");
 		int refillRemainingsOnCheckOutPage = Integer.parseInt(arrayVal[1].trim());
-		return refillRemainingsFromMedCab == refillRemainingsOnCheckOutPage + 1;
+		return refillRemainingsFromMedCab == refillRemainingsOnCheckOutPage;
 	}
 
 	public boolean validateRxNumber() {
@@ -335,4 +359,41 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		 * orderSummaryPlaceOrderBtn.click(); orderSummaryPlaceOrderBtn.click();
 		 */
 	}
+
+	public boolean validateShippingFeeUnderOrderSummaryForRenew() {
+		// String shippingMethod = shippingDrpDownVal.getText();
+		// int count = 0;
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		// wait.until(ExpectedConditions.textToBePresentInElement(shippingDrpDownVal,
+		// "Standard"));
+
+		/*
+		 * while (!shippingMethod.contains("Standard")) { shippingMethod =
+		 * shippingDrpDownVal.getText(); count++; if (count > 10) { break; } }
+		 */
+		if (wait.until(ExpectedConditions.textToBePresentInElement(shippingMethodForRenew, "Standard"))) {
+			String shippingMethod = shippingMethodForRenew.getText();
+			String shippingFee = orderSummaryShippingFee.getText();
+			String[] arry = shippingMethod.split("-");
+			if (!arry[1].trim().equals("Free")) {
+				return shippingFee.equals(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
+			}
+			return shippingFee.equals(arry[1].trim());
+		}
+		return false;
+	}
+
+	public boolean validateDisclaimerAvailableBelowSkyLineComponent() {
+		return validate(disclaimerBelowSkyLineComponent, 10);
+	}
+
+	public boolean validateDisclaimerMessage() {
+		return validate(disclaimerMessage) && !disclaimerMessage.getText().isEmpty();
+	}
+
+	public boolean validateOptumRxDisclaimerMessage(String expectedVal) {
+		return disclaimerMessage.getText().contains(expectedVal);
+	}
+
 }

@@ -2,14 +2,14 @@
 Feature: Refill - Checkout summary
   I am a user of the M&R Portal with Rx benefits I must have access to checkout information for refillable medications
 
-  @F481927 @US2767410 @Scenario1 @NeedToTest
+  @F481927 @US2767410 @Scenario1 @NeedToTesttttt
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Medication number
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user will see "Complete Your Refill" Page
     When user views the Medications section
     Then user will see the number of medications in my order indicated in the header
@@ -44,7 +44,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the Medications section
     And user sees a Remove Item From Order CTA
 
@@ -58,7 +58,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Order summary section
     Then user will see the line item Medications
@@ -74,7 +74,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Order summary section
     Then user will see the total price of all medications in the order
@@ -89,7 +89,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Order summary section
     Then user will see the line item Shipping
@@ -105,7 +105,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Order summary section
     Then user will see the price total
@@ -121,7 +121,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Order summary section
     Then user will see a disclaimer related to estimated order total
@@ -136,7 +136,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user will view the section above Place Order Btn
     Then user will see a message about shipping address
@@ -152,7 +152,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Payment section
     Then user will see Preferred payment method
@@ -167,7 +167,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Payment section
     Then user will see the card type
@@ -186,7 +186,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     When user view the Shipping Address section
     Then user will see Preferred shipping address
@@ -203,7 +203,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     Then user views the "Complete Your Refill" page
     And user will see Place Order Btn
 
@@ -219,7 +219,7 @@ Feature: Refill - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user clicks Refill Medication call to action button
+    And user clicks Refill Medication call to action button to navigate to checkout page
     #And user clicks View all medications link to view the My Medications page
     #And user clicks Refill All Medication call to action button
     Then user views the "Complete Your Refill" page
@@ -238,7 +238,7 @@ Feature: Refill - Checkout summary
   #  | Plan Type   | <planType>   |
   # | Member Type | <memberType> |
   #When user navigates to the pharmacies and prescriptions page from testharness page
-  #And user clicks Refill Medication call to action button
+  #And user clicks Refill Medication call to action button to navigate to checkout page
   #Then user views the "Complete Your Refill" page
   #When user views the Medications section
   #Then user will see the auto refill line populate for any eligible medication
@@ -287,6 +287,9 @@ Feature: Refill - Checkout summary
     Then user will see Preferred shipping address
     And user will view the Preferred Address label
     And user will view the Change Shipping address CTA
+    When user view the bottom of Skyline Complete Your Refill Component
+    Then user will view the disclaimer message
+    And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
       | FID     | planType | memberType                  |

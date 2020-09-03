@@ -54,7 +54,7 @@ public class RefillOrderConfirmationStepDefinition {
 	public void user_will_click_on_Place_Order_btn() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		//Thread.sleep(50000);
+		// Thread.sleep(50000);
 		checkoutSumaryPg.clickPlaceOrderBtn();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
@@ -115,7 +115,7 @@ public class RefillOrderConfirmationStepDefinition {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Shipping method is not displayed on Order Confirmation Page",
-				orderConfirmationPage.validateShippingMethod());
+				orderConfirmationPage.validateShippingMethodFree());
 	}
 
 	@Then("^user will see the shipping address displayed$")
@@ -132,13 +132,17 @@ public class RefillOrderConfirmationStepDefinition {
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - payment method is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validatePaymentMethod());
+		Assert.assertTrue("PROBLEM - payment method type is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validatePaymentMethodType());
+		Assert.assertTrue("PROBLEM - payment method number is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validatePaymentMethodNumber());
 	}
 
-	@Then("^user will see the order total displayed$")
-	public void user_will_see_the_order_total_displayed() throws Throwable {
+	@Then("^user will view the Price Total field$")
+	public void user_will_view_the_Price_Total_field() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - Order Total is not displayed on Order Confirmation Page",
+		Assert.assertTrue("PROBLEM - Order Total field value is not displayed on Order Confirmation Page",
 				orderConfirmationPage.validateOrderTotal());
 	}
 
@@ -182,11 +186,11 @@ public class RefillOrderConfirmationStepDefinition {
 				orderConfirmationPage.validateDaySupply());
 	}
 
-	@Then("^user will view the price$")
-	public void user_will_view_the_price() throws Throwable {
+	@Then("^user will view rx price in the Medication Price field$")
+	public void user_will_view_NA_in_the_Medication_Price_field() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
-		Assert.assertTrue("PROBLEM - Drug Price is not displayed on Order Confirmation Page",
+		Assert.assertTrue("PROBLEM - Drug Price is not displayed under Medication section on Order Confirmation Page",
 				orderConfirmationPage.validateDrugPrice());
 	}
 
@@ -362,6 +366,27 @@ public class RefillOrderConfirmationStepDefinition {
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		System.out.println("Medication Name eligilable for refill medication is" + MedicationName);
 		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user fetches medication information and clicks on Renew Medication call to action button$")
+	public void user_fetches_medication_information_and_clicks_on_Renew_Medication_call_to_action_button()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+		while (indexOfRenewMedication.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+		}
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
+		MedicationName = listOfMedicationDetail.get(0).toString().trim();
+		System.out.println("Medication Name eligilable for renew medication is" + MedicationName);
+		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 }

@@ -361,7 +361,8 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 
 	// F436319
 	public boolean pnpNotificationPositionValidate(WebElement element) {
-		return element.getCssValue("margin-top").equals("15px");
+		System.out.println("pnpNotification margin value is :: " +  element.getCssValue("margin"));
+		return element.getCssValue("margin").equals("16px 0px");
 	}
 
 	// F436319
