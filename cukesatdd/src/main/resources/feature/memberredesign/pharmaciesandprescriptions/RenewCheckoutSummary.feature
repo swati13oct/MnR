@@ -29,7 +29,7 @@ Feature: Renew - Checkout summary
     When user views the Medications section
     And user validates the medication name and strength
     And user validates the price
-    And user validates the day supply
+    And user validates the day supply for Renew
     And user validates the Rx number
     And user validates the provider
 
