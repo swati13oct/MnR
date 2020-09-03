@@ -248,7 +248,45 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       |   96799 | PDP      | Western District | no             | Orkambi | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
-   
+      
+      @dceSaveplanandBacktoplans
+      
+   Scenario Outline: Test to verify that user Save plan on DCE summary page and navigating back to homepage to retain the cart value
+    Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    And adds drugs in drug list page
+    | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+    When user enters valid zipcode and county in AARP
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be able to see Medicare Advantage plan by default
+    Then user saves plan as favorite on drug summary page AARP site
+       | Test Plans | <testPlans> |
+    Then user save PDP plan as favorite on drug summary page AARP site
+     | PDP Plans | <pdptestPlans> |
+     Then user save SNP plan as favorite on drug summary page AARP site
+     | SNP Plans | <snptestPlans> |
+    Then the user clicks on the shopping cart icon in AARP site
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+       |PDP Plans | <pdptestPlans> |
+       | SNP Plans | <snptestPlans> |
+       
+      And user click on back to all plans on vpp summary
+      Then user validate cart value on plan card in AARP.
+        
+        Examples: 
+     |drug1|zipCode |testPlans|pdptestPlans|snptestPlans|
+     |Orkambi|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+
+      
        
       
      
