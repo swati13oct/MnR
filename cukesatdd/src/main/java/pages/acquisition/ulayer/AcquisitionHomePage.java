@@ -1106,9 +1106,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
-		while(overlayFilm.isDisplayed()) {
-			threadsleep(2);			
-		}
+		while(validate(overlayFilm, 10)) {/**wait*/}
+			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
