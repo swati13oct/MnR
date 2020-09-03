@@ -121,8 +121,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       
-      @noPrescriptionCoverage
-          
+      @noPrescriptionCoverage @F492445
       Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -140,26 +139,26 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      And clicks on Review drug cost button  
     #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
      And user clicks on change pharmacy link from details page in AARP
-     Then user change the pharmacy and click on save and update drug cost
-     Then user validate the monthly premium value on detail page 
+     Then user change the pharmacy to view no prescription coverage
+     #Then user validate the monthly premium value on detail page 
      
      @noPrescriptionCoverge_MAPD
      
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | MAPD      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP Medicare Advantage SecureHorizons Focus (HMO)  |  |
+      |   78006 | MAPD      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP Medicare Advantage Choice (PPO)  |  |
       
-     @noPrescriptionCoverge_PDP
-      Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) |  |
+   # @noPrescriptionCoverge_SNP
+    #  Examples: 
+     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
+      #|   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |  |
       
- 
-   @noPrescriptionCoverge_SNP
-      Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
+     # @noPrescriptionCoverge_PDP
+    #  Examples: 
+     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
+      #|   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) |  |
       
+     
      
       @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102
    Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page

@@ -168,8 +168,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      	| DrugName | <drugName2> |
        
         Examples: 
-      |zipCode|drugName| |drugName2|
-      | 90001 | lipitor|90001 |atorvastatin calcium TAB 10MG|
+      |zipCode|drugName|drugName2|
+      | 90001 | lipitor|atorvastatin calcium TAB 10MG|
      
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
