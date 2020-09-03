@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
+import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillOrderConfirmationStepDefinition;
 
 public class OrderConfirmationPage extends OrderConfirmationWebElements {
 
@@ -121,7 +121,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 
 	public boolean validateDrugNameAndStrength() {
-		String medicationNameAndStrength = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(0).toString();
+		String medicationNameAndStrength = RefillOrderConfirmationStepDefinition.listOfMedicationDetail.get(0).toString();
 		System.out.println("Medication Name eligible for Refill is :: " + medicationNameAndStrength);
 		System.out.println("Drug Name and  Strenght on Order Confirmation is :: " + DrugNameSizeOrderConfirmation);
 		return validate(DrugNameSizeOrderConfirmation, 40)
