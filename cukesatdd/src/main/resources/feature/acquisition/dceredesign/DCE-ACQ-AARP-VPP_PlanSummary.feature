@@ -52,7 +52,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
    And adds drugs in drug list page
-    | DrugName | <drugName> |
+    | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
@@ -68,6 +68,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     #Then User validates planName matches plan Name in DCE summary page in AARP
    
     Examples: 
-      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
-      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
+      |   10001 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+     
       
