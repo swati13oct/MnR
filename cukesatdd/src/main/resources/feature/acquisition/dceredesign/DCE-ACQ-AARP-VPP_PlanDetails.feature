@@ -195,17 +195,17 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user verify the Retail chain pharmacy on detail page
     #And user clicks on change pharmacy link from details page in AARP
     
-        @dceDefaultPharmacy_MAPD
+        @dceRetailChain_MAPD
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   10001 | MAPD      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
     
-       @dceDefaultPharmacy_PDP
+       @dceRetailChain_PDP
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       |   10001 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-      @dceDefaultPharmacy_PDP
+      @dceRetailChain_SNP
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       |   10001 | SNP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
