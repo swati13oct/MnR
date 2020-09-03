@@ -98,7 +98,7 @@ public class RenewOrderConfirmationStepDefinition {
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
 
-	@Then("^the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction$")
+	/*@Then("^the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction$")
 	public void the_page_should_be_refreshed_so_that_the_status_of_this_renew_and_CTA_are_updated_per_this_renew_transaction()
 			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
@@ -137,7 +137,7 @@ public class RenewOrderConfirmationStepDefinition {
 				break;
 			}
 		}
-
+*/
 		/*
 		 * int count = 0; while (count != 0) { for (int i = 0; i < DrugNameList.size();
 		 * i++) { if (DrugNameList.contains(MedicationName)) { WebElement xpath =

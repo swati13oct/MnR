@@ -389,4 +389,46 @@ public class RefillOrderConfirmationStepDefinition {
 		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+
+	@Then("^the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction$")
+	public void the_page_should_be_refreshed_so_that_the_status_of_this_renew_and_CTA_are_updated_per_this_renew_transaction()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
+		String[] array = MedicatioNameToBeSearchedOnP_P.split(" ");
+		String firstWord = array[0].trim();
+		String lastWord = array[array.length - 1].trim();
+		System.out.println("First Word " + firstWord);
+		System.out.println("Last Word " + lastWord);
+
+		int count = 0;
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			for (int j = 0; j < DrugNameList.size(); j++) {
+				System.out.println("Medication Name : " + MedicatioNameToBeSearchedOnP_P);
+				if (DrugNameList.get(j).trim().contains(firstWord) && DrugNameList.get(j).trim().contains(lastWord)) {
+					System.out.println("Inside If Statment : Medication Identified");
+					String renewConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text(),'"
+							+ firstWord.toLowerCase() + "') and contains(text(),'" + lastWord
+							+ "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status']";
+					System.out.println(renewConfirmationXpath);
+					WebElement xpath = pnpPg.getDriver().findElement(By.xpath(renewConfirmationXpath));
+					Assert.assertTrue("PROBLEM : Refill Completion order status is not updated a request received",
+							pnpPg.validate(xpath, 30));
+					count = 1;
+					break;
+				}
+			}
+			if (count == 0) {
+				pnpPg.clickOnNextPageArrow();
+				DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
+			} else {
+				break;
+			}
+		}
+	}
+
 }
