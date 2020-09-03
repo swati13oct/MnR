@@ -2373,4 +2373,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return listOfIndex;
 	}
+	
+	public List<Integer> getListOfIndexForTransferMedication() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfRenewMedication.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
 }
