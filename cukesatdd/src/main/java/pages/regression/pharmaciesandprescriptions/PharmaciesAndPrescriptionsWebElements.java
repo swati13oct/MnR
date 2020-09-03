@@ -1277,7 +1277,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h2[text()='Prepare for Next Year']")
 	protected WebElement ANOCPageHeader;
 	
-	@FindBy(xpath="//*[data-testid='ANOC-CTA-external-icon']")
+	@FindBy(xpath="//*[@data-testid='ANOC-CTA-external-icon']")
 	protected WebElement ANOCExternalIcon;
 
 	@FindBy(xpath = "")
