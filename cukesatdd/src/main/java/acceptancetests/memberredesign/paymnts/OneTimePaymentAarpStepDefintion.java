@@ -2625,10 +2625,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in billing history table of Second Plan$")
-	public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan() {
+    public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTableSecondPlan();
+		paymentHistoryPage.validateBillingHistoryTableSecondPlan(planType);
 	}
 	
 	
@@ -2720,10 +2730,21 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in Payment history table of Second Plan$")
-	public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan() {
+public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
+
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTableSecondPlan();
+		paymentHistoryPage.validatePaymentHistoryTableSecondPlan(planType);
 	}
 	
 	@Then("^user selects Last 6 months in the Payment History dropdown$")
