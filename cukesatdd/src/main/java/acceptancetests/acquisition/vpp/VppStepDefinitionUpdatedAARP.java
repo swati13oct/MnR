@@ -1187,6 +1187,7 @@ public class VppStepDefinitionUpdatedAARP {
 			break;
 		case "SNP":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "PDP":
