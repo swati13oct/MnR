@@ -224,31 +224,5 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO)    |
       
-       @dceSummarydefaultPharmacy @F497405
-       
-        Scenario Outline: Test to Verify retail chanin pharmacy on drug summary page and walgreens after pharmacy 
-   Given the user is on the AARP medicare site landing page
-     When I access the acquisition DCE tool from home page
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-   And adds drugs in drug list page
-    | DrugName | <drugName> |
-    And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
-      | ZipCode | <zipCode> |
-    And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
-    And user should be able to see Medicare Advantage plan by default
-     And user should verify the Extra help in AARP
-     And user click on View Drug Pricing Modal in AARP
-     And user should verify the drug extra qualification in drug pricing popup in AARP  
-     
-     Examples: 
-      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
-      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO)    |
-      
       
       
