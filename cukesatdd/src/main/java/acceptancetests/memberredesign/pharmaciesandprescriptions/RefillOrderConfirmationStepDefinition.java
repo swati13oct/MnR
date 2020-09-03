@@ -25,7 +25,6 @@ public class RefillOrderConfirmationStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
@@ -55,7 +54,7 @@ public class RefillOrderConfirmationStepDefinition {
 	public void user_will_click_on_Place_Order_btn() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		//Thread.sleep(50000);
+		// Thread.sleep(50000);
 		checkoutSumaryPg.clickPlaceOrderBtn();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
@@ -367,6 +366,27 @@ public class RefillOrderConfirmationStepDefinition {
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		System.out.println("Medication Name eligilable for refill medication is" + MedicationName);
 		pnpPg.clickOnRefillMedicationCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@When("^user fetches medication information and clicks on Renew Medication call to action button$")
+	public void user_fetches_medication_information_and_clicks_on_Renew_Medication_call_to_action_button()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+		while (indexOfRenewMedication.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
+		}
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
+		MedicationName = listOfMedicationDetail.get(0).toString().trim();
+		System.out.println("Medication Name eligilable for renew medication is" + MedicationName);
+		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 }

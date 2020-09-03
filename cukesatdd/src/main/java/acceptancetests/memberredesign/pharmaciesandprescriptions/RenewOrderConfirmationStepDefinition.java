@@ -62,26 +62,30 @@ public class RenewOrderConfirmationStepDefinition {
 		return memberAttributesMap;
 	}
 
-	@When("^user fetches medication information and clicks on Renew Medication call to action button$")
-	public void user_fetches_medication_information_and_clicks_on_Renew_Medication_call_to_action_button()
-			throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.waitTillMedCabLoads();
-		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
-		while (indexOfRenewMedication.size() == 0) {
-			pnpPg.clickOnNextPageArrow();
-			indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
-		}
-		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
-		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
-		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
-		MedicationName = listOfMedicationDetail.get(0).toString().trim();
-		System.out.println("Medication Name eligilable for renew medication is" + MedicationName);
-		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
+	/*
+	 * @When("^user fetches medication information and clicks on Renew Medication call to action button$"
+	 * ) public void
+	 * user_fetches_medication_information_and_clicks_on_Renew_Medication_call_to_action_button
+	 * () throws Throwable { PharmaciesAndPrescriptionsPage pnpPg =
+	 * (PharmaciesAndPrescriptionsPage) getLoginScenario()
+	 * .getBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE); pnpPg.waitTillMedCabLoads();
+	 * pnpPg.clickOnViewAllMedicationsLink(); List<Integer> indexOfRenewMedication =
+	 * pnpPg.getListOfIndexForRenewMedicationOnMyMed(); while
+	 * (indexOfRenewMedication.size() == 0) { pnpPg.clickOnNextPageArrow();
+	 * indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed(); }
+	 * listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew(); int
+	 * medicationToBeClicked = (int)
+	 * listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+	 * MedicatioNameToBeSearchedOnP_P =
+	 * listOfMedicationDetail.get(0).toString().trim(); MedicationName =
+	 * listOfMedicationDetail.get(0).toString().trim();
+	 * System.out.println("Medication Name eligilable for renew medication is" +
+	 * MedicationName);
+	 * pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
+	 * getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.
+	 * PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); }
+	 */
 
 	@Then("^user will see Renew order confirmation page$")
 	public void user_will_see_Renew_order_confirmation_page() throws Throwable {
