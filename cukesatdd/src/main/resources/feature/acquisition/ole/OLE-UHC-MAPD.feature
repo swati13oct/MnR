@@ -1,4 +1,4 @@
-#@fastandfurious @OLE @MAPD_OLE_UHC @prodRegression
+ @prodRegression @MAPD_OLE_UHC
 Feature: 2.05.2.ACQ-OLE MAPD UMS
 
   #@MAPD_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
@@ -93,8 +93,6 @@ Then the user validates the Plan details in Personal Information Page OLE Right 
    # | Plan Type | <plantype> |
     # Then the user validates Plan and Member Details on Confirmation Page
     # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-    
-    @prodRegression @MAPD_OLE_UHC 
     Examples: 
       | TID   | PlanType        | Plan Year|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       | 15493| MAPD-PFFS-MBI   |  current|current| 85923| NO              | Navajo County     | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | AZ           |      66843 | test@test.com | None apply                        |            | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
@@ -109,7 +107,7 @@ Then the user validates the Plan details in Personal Information Page OLE Right 
    #   | 15497 | MAPD-MBI      |   10001 | NO              | New York County   | MAPD     | AARP Medicare Advantage Plan 1 (HMO)      | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      631665465 | false    | 01011983 | Male   | 001 Morris Rd | New York    | No                     | 801 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | no           | true      | NO                | NO      |Invalid|
       #| 15561 | MEDICA-MBI    |   33004 | NO              | Broward County     | MAPD     | Medica HealthCare Plans MedicareMax (HMO)           | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / /   | yes     | no           | false     | NO                | NO      |
   
-  # @MAPD_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
+   @prodRegression @MAPD_OLE_UHC 
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -200,9 +198,7 @@ Then the user validates the Plan details in Personal Information Page OLE Right 
 		#Then the user validates the OLE Submission Details in GPS
    # | Plan Type | <plantype> |
     # Then the user validates Plan and Member Details on Confirmation Page
-    # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-   
-	 @prodRegression @MAPD_OLE_UHC 
+    # Then the user Validates Next Steps in Confirmation Page for the Plan Type. 
     Examples: 
       | TID   | PlanType  |Plan Year|planYear|zipcode | isMultutiCounty | county          | plantype | planName                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       #| 15556 | MAPD-RRID-MBI|current |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002  |      631665465 | false    | 04261944 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
