@@ -883,7 +883,7 @@ public class HSIDStepDefinition {
 		} else if (feature.equals("UCPOrderPlanMaterials")) {
 			configPgUrl="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPOrderPlanMaterials/wsConfig";
 		} else if (feature.equals("UCPMyDocuments")) {
-			configPgUrl="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com /UCPMyDocuments/wsConfig";
+			configPgUrl="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPMyDocuments/wsConfig";
 		} else {
 			configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 			if (MRScenario.environment.equals("stage")) 
