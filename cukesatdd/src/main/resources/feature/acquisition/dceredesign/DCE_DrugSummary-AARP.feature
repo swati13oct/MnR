@@ -250,7 +250,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |   96799 | PDP      | Western District | no             | Orkambi | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
       
       @dceSaveplanandBacktoplans   
-   Scenario Outline: Test to verify that user Save plan on DCE summary page and navigating back to homepage to retain the cart value
+   Scenario Outline: Test to verify that user can Save plan on DCE summary page and navigating back to homepage to retain the cart value
     Given the user is on the AARP medicare site landing page
      When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
@@ -272,18 +272,16 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      | PDP Plans | <pdptestPlans> |
      Then user save SNP plan as favorite on drug summary page AARP site
      | SNP Plans | <snptestPlans> |
+     And user click on return to home on drug summary in AARP site
     Then the user clicks on the shopping cart icon in AARP site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
        |PDP Plans | <pdptestPlans> |
        | SNP Plans | <snptestPlans> |
        
-      And user click on back to all plans on vpp summary
-      Then user validate cart value on plan card in AARP.
-        
         Examples: 
      |drug1|zipCode |testPlans|pdptestPlans|snptestPlans|
-     |Orkambi|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP Medicare Advantage Mosaic (HMO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+     |Orkambi|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
 
       
        

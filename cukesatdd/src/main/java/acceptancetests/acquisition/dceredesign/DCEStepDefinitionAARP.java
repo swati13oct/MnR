@@ -769,6 +769,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+
 	@Then("^user saves plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -803,6 +804,13 @@ public class DCEStepDefinitionAARP {
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.clickOnSNPPlan();
 		drugSummaryPage.savePlan(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@And ("^user click on return to home on drug summary in AARP site$")
+	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickOnReturnToHome();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	

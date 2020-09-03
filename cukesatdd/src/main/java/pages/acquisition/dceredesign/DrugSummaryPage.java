@@ -191,6 +191,14 @@ public class DrugSummaryPage extends UhcDriver {
 		viewPlanButton.click();
 	}
 	
+   @FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	public WebElement returnToHomeBtn;
+	
+	public void clickOnReturnToHome(){
+		validateNew(returnToHomeBtn);
+		returnToHomeBtn.click();
+	}
+
 	public DrugSummaryPage verifyPDPPlanToggle(){
 		pdpPlanToggle.click();
 		if(planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
