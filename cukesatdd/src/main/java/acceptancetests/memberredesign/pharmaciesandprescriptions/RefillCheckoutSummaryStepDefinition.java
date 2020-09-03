@@ -572,6 +572,7 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
 		Assert.assertTrue("PROBLEM - Disclaimer Message not available", checkoutSumaryPg.validateDisclaimerMessage());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+
 	}
 
 	@Then("^disclaimer will remind the user that \"([^\"]*)\" is fulfilling the order$")

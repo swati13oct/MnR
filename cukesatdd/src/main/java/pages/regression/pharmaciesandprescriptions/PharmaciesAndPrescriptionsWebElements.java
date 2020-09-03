@@ -379,6 +379,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h4[@data-testid='section__header']")
 	protected WebElement NumberInParenthesis;
 
+	@FindBy(xpath = "//h2[@data-testid='section__header']")
+	protected List<WebElement> NumberInParenthesisRefillAll;
+
 	@FindBy(xpath = "//p[contains(text(),'1-800-721-0627')]")
 	protected WebElement technicalSupportNumber;
 
@@ -814,7 +817,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	// F436319
-	@FindBy(xpath = "//div[@data-testid='global-alert-banner']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
 	protected WebElement PnPNotification;
 
 	public List<Integer> getListOfIndexForManageAtWalgreens() {
@@ -825,7 +828,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		return listOfIndex;
 	}
 
-	@FindBy(xpath = "//div[@data-testid='global-alert-banner']//div//div//button[@data-testid='global-alert-banner-close-button']//span[1]")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
 	protected WebElement PnPNotificationCloseBtn;
 
 	public List<Integer> getListOfIndexForTransferToWalgreens() {
@@ -906,8 +909,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='price-drugs-CTA-external-icon']")
 	protected WebElement FindAndPriceExternalIcon;
 
-	@FindBy(xpath = "//h1[text()='What medication can we help you find?']")
-	protected WebElement DrugEstimatorToolPageHeader;
+	@FindBy(xpath = "//input[@data-component=\"SearchBarInput\"]")
+	protected WebElement DrugEstimatorToolPageSearchBar;
 
 	@FindBy(xpath = "//*[@data-testid='order-prescription-CTA-external-icon']")
 	protected WebElement OrderPrescriptionExternalIcon;
@@ -1022,7 +1025,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean alphaNumeric() {
 		boolean containsDigit = false;
-		String s = NumberInParenthesis.getText();
+		String s = NumberInParenthesisRefillAll.get(0).getText();
 		if (s != null && !s.isEmpty()) {
 			for (char c : s.toCharArray()) {
 				if (containsDigit = Character.isDigit(c)) {
@@ -1034,7 +1037,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean corredpondingMedicationsNumbers() {
-		String numberTXT = NumberInParenthesis.getText();
+		String numberTXT = NumberInParenthesisRefillAll.get(0).getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 		String totalNumber = totalMedicationsInCurrenMedications.getAttribute("data-test-total-medications");
 		int number2 = Integer.parseInt(totalNumber.replaceAll("[^0-9]", ""));
@@ -1051,7 +1054,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean corredpondingRefillMedicationsNumbers() {
 
 
-		String numberTXT = NumberInParenthesis.getText();
+		String numberTXT = NumberInParenthesisRefillAll.get(0).getText();
 		int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
 
 		if (number>0) {
@@ -1213,7 +1216,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
 	protected WebElement FindAndPriceCTAImg;
 
-	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find and Price a Medication')]")
+	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find & Price a Medication')]")
 	protected WebElement FindAndPriceCTATitle;
 
 	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description' and contains(text(),'Find out if your drugs are covered, estimate costs and ways to help save money.')]")
@@ -1247,32 +1250,35 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OrderPrescriptionCTADescription;
 
 	// Drug Cost Summary
-	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
-	protected WebElement DrugCostSummaryCallToActnBtn;*/
+	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA']")
+	protected WebElement DrugCostSummaryCallToActnBtn;
 
-	/*@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
-	protected WebElement DrugCostSummaryCTAImg;*/
+	@FindBy(xpath = "//div[@data-testid='medication-cost-summary-CTA-icon']")
+	protected WebElement DrugCostSummaryCTAImg;
 	
-	/*@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
-	protected WebElement DrugCostSummaryCTATitle;*/
+	@FindBy(xpath = "//h2[@data-testid='medication-cost-summary-CTA-title']")
+	protected WebElement DrugCostSummaryCTATitle;
 	
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
+	
+	@FindBy(xpath = "//div[@data-testid='ANOC-CTA']")
+	protected WebElement ANOCCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='anoc-CTA-icon']")
+	@FindBy(xpath = "//div[@data-testid='ANOC-CTA-icon']")
 	protected WebElement ANOCCTAImg;	
 
-	@FindBy(xpath = "//h2[@data-testid='anoc-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='ANOC-CTA-title']")
 	protected WebElement ANOCCTATitle;
 	
-	@FindBy(xpath = "//p[@data-testid='anoc-CTA-description']")
-	protected WebElement ANOCCTADescription;
-
-	@FindBy(xpath = "//div[@data-testid='anoc-CTA']")
-	protected WebElement ANOCCallToActnBtn;
+	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	protected WebElement ANOCCTADescription;	
 
 	@FindBy(xpath = "//h2[text()='Prepare for Next Year']")
 	protected WebElement ANOCPageHeader;
+	
+	@FindBy(xpath="//*[@data-testid='ANOC-CTA-external-icon']")
+	protected WebElement ANOCExternalIcon;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxDrugPricePageHeader;
@@ -1313,8 +1319,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
 	protected WebElement SearchButtonPharmacyLocatorPageByRally;
 
-	@FindBy(id = "pharmacylocatorheader_id")
-	protected WebElement HeaderLegacyPharmacyLocatorPage;
+	@FindBy(id = "zipcodeTxt")
+	protected WebElement zipCodeTextBoxLegacyPharmacyLocatorPage;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxMedicineCabinetHeader;

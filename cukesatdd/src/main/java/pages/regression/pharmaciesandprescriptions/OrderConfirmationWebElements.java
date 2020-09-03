@@ -60,10 +60,10 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']")
 	protected WebElement PaymentMethodOrderConfirmation;
 	
-	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']/text()[1]")
+	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']")
 	protected WebElement PaymentMethodTypeOrderConfirmation;
 	
-	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']/text()[2]")
+	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']")
 	protected WebElement PaymentMethodNumberOrderConfirmation;
 	
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__amount']")
