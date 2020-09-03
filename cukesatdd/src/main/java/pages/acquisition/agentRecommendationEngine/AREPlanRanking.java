@@ -41,7 +41,7 @@ public class AREPlanRanking extends UhcDriver {
 	List<String> drugplansDetails = new ArrayList<String>();
 	List<String> originalplanNames = new ArrayList<String>();
 
-	@FindBy(css = "a#aarpSVGLogo']")
+	@FindBy(css = "a#aarpSVGLogo")
 	private WebElement Logo;
 	
 	@FindBy(css = "label[for*='plan-ranking']")
@@ -128,7 +128,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#enroll-table div[id*='enrollbtnplancompare'] span[class*='uhc-button']")
 	private List<WebElement> enrollBtn;
 
-	@FindBy(css = ".uhc-container div.content h2:nth-child(2)")
+	@FindBy(css = ".uhc-container div.content h2")
 	private WebElement planNameVPPDetailsPage;
 
 	@FindBy(css = "a.compare-link")
@@ -202,6 +202,12 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = ".multi-year-select button:nth-child(2)")
 	private WebElement futurePlanYear;
+	
+	@FindBy(css = "#plan-summary-table tr:nth-child(7)")
+	private WebElement estimateMedicalCost;
+	
+	@FindBy(css = "#plan-summary-table tr:nth-child(7) span#test-med-cost")
+	private List<WebElement> estimateMedicalCostvalue;
 
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
@@ -532,12 +538,15 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println(saveplanComparepage.size());
 		int plan = 0;
 		if (plansName.size() != saveplanComparepage.size()) {
-			for (plan = 1; plan < saveplans; plan++) {
+			for (plan = 1; plan <= saveplans; plan++) {
 				int i = 0;
 				vppPlans.add(savingplans(plansName.get(plan + i), saveplanComparepage.get(i), i));
 			}
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
+			threadsleep(3000);
+			validate(viewSavedItems);
+			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
@@ -810,7 +819,7 @@ public class AREPlanRanking extends UhcDriver {
 //		DocName.click();
 //		scrollToView(planRankingDropdown);
 		scrollToView(print);
-		scrollToView(AddDoctorsLink);
+		scrollToView(AddDrugsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
 		action.moveToElement(planRankingDropdown).perform();
@@ -1084,6 +1093,24 @@ public class AREPlanRanking extends UhcDriver {
 		Actions action = new Actions(driver);
 		action.moveToElement(elem).perform();
 		threadsleep(1000);
+	}
+	
+	public void estimateMedicalCost(String mediMC) {
+		List<String> estimateMCE = new ArrayList<String>();
+		pageloadcomplete();
+		System.out.println("Validate Estimate Medical Costs in Plan Compare page : ");
+		if(mediMC.equalsIgnoreCase("YES")) {
+		validate(estimateMedicalCost, 30);
+		Assert.assertTrue(estimateMedicalCost.findElement(By.cssSelector("p")).getText().toUpperCase().contains("ESTIMATED ANNUAL MEDICAL COST"), "Estimated Annual Medical Cost row not displayed for this MBI ID");
+		int totalnumberofplans = Integer.parseInt(NumberofPlans.getText().trim().split(" ")[0]);
+		for(int i=1;i<=totalnumberofplans;i++) {
+			estimateMCE.add(estimateMedicalCostvalue.get(i).getText().trim());
+		}
+		System.out.println(estimateMCE);
+		}
+		else {
+			Assert.assertFalse(validate(estimateMedicalCost, 30), "Estimated Annual Medical Cost row is displayed for this MBI ID");
+		}
 	}
 
 }

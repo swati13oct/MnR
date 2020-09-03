@@ -221,5 +221,12 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.checkYear(inputValues.get("Plan Year"));
 	}
+	
+	@Then("^agent validates Estimated Annual Medical Cost in plancompare page$")
+	public void agent_verifies_estimateMCE(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.estimateMedicalCost(inputValues.get("Estimate MedicalCost"));
+	}
 
 }

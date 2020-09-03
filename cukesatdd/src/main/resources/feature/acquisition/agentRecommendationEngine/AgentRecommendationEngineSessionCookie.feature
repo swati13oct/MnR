@@ -16,7 +16,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | ZIP | <PlanCompareZIP> |
 
     Examples: 
-      | User      | Pass      | Email               | IfMultiCounty | PlanYear | PlanCompareZIP |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
 
   @ARE @SavedSessionDropdown @F457409
@@ -36,8 +36,27 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Ranking Options1 | <RankingOptions1> |
 
     Examples: 
-      | User      | Pass      | Email               | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
+
+  @ARE @EstimateMedicalCost @F441593
+  Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
+    Then agent validates Estimated Annual Medical Cost in plancompare page
+      | Estimate MedicalCost | <EstimateMC> |
+
+    Examples: 
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | EstimateMC |
+      | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  | YES        |
+      | qavgogine | qavgogine | ATDD4STG@MEMBERDD.COM | None          | current  | NO         |
 
   @ARE @NoDrugDocInDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
@@ -75,7 +94,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then Apply ranking and get plans names in plancompare page
-    	| Ranking Options      | <RankingOptions>     |
+      | Ranking Options | <RankingOptions> |
     When user adds Drugs in plan compare page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch2> |
     Then agent get plandetails after editing Drugs in plancompare
@@ -127,5 +146,5 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Karamuca, Suela, PA | Abroon, John, MD | YES          | YES           |            | doctor         | NO             | Karamuca, Suela, PA:Abroon, John, MD | YES                |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | Doctors         | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                  | DisplayCurrentPlan |
+      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Emily Adams, NP | Palmer, John, MD | YES          | YES           |            | doctor         | NO             | Emily Adams, NP:Palmer, John, MD | YES                |

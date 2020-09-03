@@ -83,6 +83,12 @@ public class WerallyPage extends UhcDriver {
 	
 	@FindBy(css = "#savedProviders button[title^='Delete']")
 	private List<WebElement> deleteLinks;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation0")
+	private WebElement firstLocation;
+
+	@FindBy(css = "button[aria-describedby*='locationRequired']")
+	private WebElement locationSave;
 
 //Rally Home Page
 
@@ -91,6 +97,15 @@ public class WerallyPage extends UhcDriver {
 	
 	@FindBy(css = ".feature a[track='Find Care']")
 	private WebElement findCarebutton;
+	
+	@FindBy(css = "h1[class*='hidden-phone'] img[alt='UnitedHealthcare']")
+	private WebElement desktopLogo;
+
+	@FindBy(css = "div.exportSavedProviders button[type='submit']")
+	private WebElement savedFinishReturnButton;
+
+	@FindBy(css = "a[track='Saved']")
+	private WebElement viewSavedbutton1;
 
 //Switch to Werally Window Page
 
@@ -169,20 +184,17 @@ public class WerallyPage extends UhcDriver {
 									.findElement(By.cssSelector("div[class*='hidden'] button"));
 							saveButton.click();
 							threadsleep(3000);
-							String text = saveModalCloseContinueSearchbutton.getText();
+							chooseFirstLocation();
+/*							String text = saveModalCloseContinueSearchbutton.getText();
 							if (text.toUpperCase().contains("SEARCHING"))
-								newRally = true;
-							if (j == (doclist.length) - 1) {
-								if (newRally)
-									finishReturnButton.click();
-								else
-									viewSavedbutton.click();
-							} else {
-								saveModalCloseContinueSearchbutton.click();
+								newRally = true; */
+							saveModalCloseContinueSearchbutton.click();
 							}
+						desktopLogo.click();
+						viewSavedbutton1.click();
+						threadsleep(3000);
+						savedFinishReturnButton.click();
 						}
-						if (!newRally)
-							checkProviderCoveragebutton.click();
 						try {
 							WebDriverWait wait = new WebDriverWait(driver, 2);
 							if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
@@ -197,13 +209,14 @@ public class WerallyPage extends UhcDriver {
 							// exception handling
 						}
 					}
-				} else {
-					System.out.println("Required search Results is not Returned");
-					Assert.assertTrue(false);
-				}
+			}
+		}
+		
+			else {
+				System.out.println("Required search Results is not Returned");
+				Assert.assertTrue(false);
 			}
 			Collections.sort(doctorsName);
-		}
 		return doctorsName;
 	}
 
@@ -266,6 +279,15 @@ public class WerallyPage extends UhcDriver {
 		checkProviderCoveragebutton.click();
 		validate(returnToEnrollment, 30);
 		returnToEnrollment.click();
+	}
+	
+	public void chooseFirstLocation() {
+		if (validate(firstLocation, 5)) {
+			firstLocation.click();
+			threadsleep(1000);
+			jsClickNew(locationSave);
+			threadsleep(2000);
+		}
 	}
 
 }
