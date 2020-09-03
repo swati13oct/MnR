@@ -283,7 +283,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OptumRxOrderStatusHeader;
 
 	// Medicine Cabinet
-	@FindBy(xpath = "//h2[contains(text(),'Current Medications')]")
+	@FindBy(xpath = "//*[@data-testid='medcab-title']")
 	protected WebElement CurrentMedicationsHeader;
 
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
