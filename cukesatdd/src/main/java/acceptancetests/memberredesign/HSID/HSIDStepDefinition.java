@@ -869,7 +869,7 @@ public class HSIDStepDefinition {
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="";
 		if (feature.equals("ClaimsMicroApp")) {
-			configPgUrl="http://ucp-claims-mnr-ucp-stage-3.origin-elr-dmz.optum.com/ClaimsMicroApp/wsConfig";
+			configPgUrl="http://ucp-claims-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/ClaimsMicroApp/wsConfig";
 		} else if (feature.equals("UCPEob")) {
 			configPgUrl="http://ucp-eob-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPEob/wsConfig";
 		} else if (feature.equals("UCPHealthWellness")) {
