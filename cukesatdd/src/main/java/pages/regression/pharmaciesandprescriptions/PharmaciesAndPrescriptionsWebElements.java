@@ -306,6 +306,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA' and contains(text(),'View All Medications')]")
 	protected WebElement ViewAllMedications;
 
+	@FindBy(xpath = "//span[contains(text(),'Remove Item from Order')]")
+	protected WebElement removeItemFromOrderLink;
+
 	@FindBy(xpath = "//a[@data-testid='refill-all-meds']")
 	protected List<WebElement> refillAllMedications;
 
@@ -714,6 +717,48 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		waitforElement(siteLeavingPopUp);
 		boolean proceeding = true;
 		jsClickNew(siteLeavingPopUpProceedBtn);
+		if (driver.getWindowHandles().size() > 0) {
+			proceeding = true;
+			Assert.assertTrue(driver.getWindowHandles().size() > 0);
+		} else {
+			proceeding = false;
+		}
+		return proceeding;
+	}
+
+	public boolean clickYesButton() {
+
+		waitforElement(removeYesPopUp);
+		boolean proceeding = true;
+		jsClickNew(removePopUpYesBtn);
+		if (driver.getWindowHandles().size() > 0) {
+			proceeding = true;
+			Assert.assertTrue(driver.getWindowHandles().size() > 0);
+		} else {
+			proceeding = false;
+		}
+		return proceeding;
+	}
+
+	public boolean clickXButton() {
+
+		waitforElement(removeXPopUpBtn);
+		boolean proceeding = true;
+		jsClickNew(removeXPopUpBtn);
+		if (driver.getWindowHandles().size() > 0) {
+			proceeding = true;
+			Assert.assertTrue(driver.getWindowHandles().size() > 0);
+		} else {
+			proceeding = false;
+		}
+		return proceeding;
+	}
+
+	public boolean clickRemoveCancelButton() {
+
+		waitforElement(removePopUpCancelBtn);
+		boolean proceeding = true;
+		jsClickNew(removePopUpCancelBtn);
 		if (driver.getWindowHandles().size() > 0) {
 			proceeding = true;
 			Assert.assertTrue(driver.getWindowHandles().size() > 0);
@@ -1177,6 +1222,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'Submit request')]")
 	protected WebElement submitRequestBtn;
 
+	@FindBy(xpath = "//h1[@data-testid='confirm__delete__message']")
+	protected WebElement removeYesPopUp;
+
+	@FindBy(xpath = "//div[@data-testid='confirm__delete__close']//button")
+	protected WebElement removeXPopUpBtn;
+
+	@FindBy(xpath = "//button[@data-testid='confirm__delete__yes']")
+	protected WebElement removePopUpYesBtn;
+
+	@FindBy(xpath = "//button[@data-testid='confirm__delete__cancel']")
+	protected WebElement removePopUpCancelBtn;
+
 	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div/div[2]/div/div/div[3]/div[3]/div[2]/div[1]/div[2]/div[2]")
 	protected WebElement walgreensRefillsLeft;
 
@@ -1316,6 +1373,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-component='BackButton']")
 	protected WebElement BackButtonOnPharmacyLocatorPageByRally;
 
+	@FindBy(xpath = "//div[contains(@data-testid,'header__icon__left')]/button")
+	protected WebElement backButtonOnTransfer2HD;
+
 	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
 	protected WebElement SearchButtonPharmacyLocatorPageByRally;
 
@@ -1370,6 +1430,12 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='os__shipping__estimatedDate']")
 	protected WebElement estimatedDeliveryDate;
 
+	@FindBy(xpath = "//*[@data-testid='csa__address__successMessage']")
+	protected WebElement removedMessage;
+
+	@FindBy(xpath = "//*[@data-testid='section__content']")
+	protected WebElement zeroPrescriptionMessage;
+
 	@FindBy(xpath="//div[@data-testid='medication-data-pharmacy-name' and (contains(text(),'OptumRx'))]/ancestor::div[@data-testid]")
 	protected List<WebElement> listOfMedicationSectionFromOptum;
 	
@@ -1382,6 +1448,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="(//span[@data-testid='pagination-description']//strong)[2]")
 	protected WebElement totalNumberOfPage;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']")
+	protected List<WebElement> listOfTransferToHDCTA;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
+	protected List<WebElement> listOfRetailPharmacyNameEligibleForTransferToHD;
 	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//a[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfRetailMedEligibleForTransferToHD;
+	
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")
+	protected List<WebElement> listOfDaySupplyEligibleForTransferToHD;
 }

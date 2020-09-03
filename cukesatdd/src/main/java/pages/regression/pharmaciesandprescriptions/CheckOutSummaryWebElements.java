@@ -193,6 +193,4 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
 	protected WebElement disclaimerMessage;
-
-
 }

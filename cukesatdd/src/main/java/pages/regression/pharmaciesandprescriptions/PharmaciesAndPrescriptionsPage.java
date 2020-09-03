@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
@@ -928,6 +929,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		BackButtonOnPharmacyLocatorPageByRally.click();
 	}
 
+	public void clickBackButtonOnTransferToHD() {
+		Assert.assertTrue("PROBLEM - unable to locate Back Button On Transfer to HD page By Rally ",
+				validate(backButtonOnTransfer2HD));
+		backButtonOnTransfer2HD.click();
+	}
+
+
+
+
 	public void validateFAQSectionOnChoosePlanYearPage() {
 		Assert.assertTrue("PROBLEM - unable to locate FAQ section on Choose a plan year page",
 				pnpValidate(FAQSectionOnChoosePlanYearPage));
@@ -1125,6 +1135,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
 				disclaimer());
+	}
+
+	public void clickOnRemoveItemFromOrderLink() {
+		Assert.assertTrue("PROBLEM - unable to locate Remove Item from Order link text element",
+				validate(removeItemFromOrderLink, 50));
+		removeItemFromOrderLink.click();
+
 	}
 
 	// F392596
@@ -1401,6 +1418,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateOneFourthHarveyBall() {
 		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isOneFourthHarveyBall());
+	}
+
+	public void validateRemovedMessage() {
+		Assert.assertTrue("PROBLEM - unable to locate a message element that confirming my medication was removed", validate(removedMessage));
+	}
+
+	public void validateZeroPrescriptionMessage() {
+		Assert.assertTrue("PROBLEM - unable to locate a message element that says zero prescription left to refill", validate(zeroPrescriptionMessage));
 	}
 
 	public void validateWalgreensDrug() {
@@ -2418,7 +2443,6 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfIndex;
 	}
 	
-
 	public List<Integer> getListOfIndexForTransferMedication() {
 		int size = listOfDrugName.size();
 		validate(drugsAvailableOnMyMedication, 10);
@@ -2445,4 +2469,72 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pnpValidate(ANOCExternalIcon));
 	}	
 
+	public void clickOnTransferToHDCTABasedOnIndex(int index) {
+		listOfTransferToHDCTA.get(rand_int).click();
+	}
+	
+	public List<Object> fetchesMedicationInformationFrTransferToHD() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfTransferToHDCTA.size());
+
+		String text = listOfRetailMedEligibleForTransferToHD.get(rand_int).getText();
+		for (WebElement child : listOfRetailMedEligibleForTransferToHD.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleForTransferToHD.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+	
+	public List<Integer> getListOfIndexForRetailTransferToHDOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfTransferToHDCTA.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+	
+	public boolean validateRetailMedicationEligiblForTransferToHD() {
+		if(listOfRetailMedEligibleForTransferToHD.size()>0) {
+		for(WebElement ele:listOfRetailMedEligibleForTransferToHD) {
+			String text = ele.getText();
+			for (WebElement child : ele.findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			if(text.trim().equals("OptumRx")) {
+				return false;
+			}
+		}
+		return true;
+		}
+		return false;
+	}
+	
+	public boolean validateTransferToHDBtnForEligibleMed(String expectedButtonValue) {
+		List<Integer> listOfIndex = getListOfIndexForRetailTransferToHDOnMyMed();
+		if (listOfIndex.size() > 0) {
+			int count = 0;
+			for (Integer val : listOfIndex) {
+				if (listOfTransferToHDCTA.get(val).getText().equalsIgnoreCase(expectedButtonValue)
+						&& listOfTransferToHDCTA.get(val).getTagName().equals("a") && listOfTransferToHDCTA
+								.get(val).getCssValue("background-color").equals("rgba(255, 255, 255, 1)")) {
+					count = count + 1;
+				}
+			}
+			return count == listOfIndex.size();
+		} else {
+			return false;
+		}
+	}
 }

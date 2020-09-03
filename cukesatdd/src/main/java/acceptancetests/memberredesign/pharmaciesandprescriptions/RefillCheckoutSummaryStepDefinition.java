@@ -583,4 +583,25 @@ public class RefillCheckoutSummaryStepDefinition {
 				checkoutSumaryPg.validateOptumRxDisclaimerMessage(expectedMsg));
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
+
+	@When("^user fetches medication informations and clicks on Transfer To HD call to action button$")
+	public void user_fetches_medication_informations_and_clicks_on_Transfer_To_HD_call_to_action_button()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfRenewMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+			}
+		}
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 }
