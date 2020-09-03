@@ -79,8 +79,9 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 
 	public boolean validateOrderTotal() {
-		if (validate(OrderTotalOrderConfirmation,10)) {
+		if (validate(OrderTotalOrderConfirmation,50)) {
 			String orderTotal = OrderTotalOrderConfirmation.getText();
+			System.out.println(orderTotal);
 			if (!orderTotal.isEmpty()) {
 				if (orderTotal.equalsIgnoreCase("Order Total: N/A")) {
 					System.out.println(orderTotal);
