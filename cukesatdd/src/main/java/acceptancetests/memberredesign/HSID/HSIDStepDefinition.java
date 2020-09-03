@@ -878,6 +878,12 @@ public class HSIDStepDefinition {
 			configPgUrl="http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPBenefits/wsConfig";
 		} else if (feature.equals("UCPPlanDocuments")) {
 			configPgUrl="http://ucp-plan-documents-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPPlanDocuments/wsConfig";
+		} else if (feature.equals("UCPProfileAndPreferences")) {
+			configPgUrl="http://ucp-profile-preferences-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPProfileAndPreferences/wsConfig";
+		} else if (feature.equals("UCPOrderPlanMaterials")) {
+			configPgUrl="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPOrderPlanMaterials/wsConfig";
+		} else if (feature.equals("UCPMyDocuments")) {
+			configPgUrl="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com /UCPMyDocuments/wsConfig";
 		} else {
 			configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 			if (MRScenario.environment.equals("stage")) 
