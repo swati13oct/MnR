@@ -87,7 +87,7 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 					Assert.assertEquals(orderTotal, "Order Total: N/A", "Order Total: N/A is displayed successfully");
 					return true;
 				}
-				else if (orderTotal.contains("Order Total:$")){
+				else if (orderTotal.contains("Order Total: $")){
 					System.out.println(orderTotal);
 					return true;
 				}
