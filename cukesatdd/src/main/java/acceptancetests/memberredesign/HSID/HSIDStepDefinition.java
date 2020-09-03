@@ -608,7 +608,7 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		if (speedup!=null && speedup.equalsIgnoreCase("true"))
 			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			

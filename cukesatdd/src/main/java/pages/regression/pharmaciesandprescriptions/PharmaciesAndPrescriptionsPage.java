@@ -791,6 +791,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+			pageloadcomplete();
 			CommonUtility.waitForPageLoad(driver, OptumRxManagePrescriptionHeader, 60);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Manage Prescription Page Header element",
 					pnpValidate(OptumRxManagePrescriptionHeader, 30));
@@ -800,7 +801,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateNavigationToOptumRxBenefitsInformationOnNewTab() {
-
+		pageloadcomplete();
 		Set handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
@@ -808,6 +809,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String OptumRxMedicineCabinetPageHandle = winHandle;
 			driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+			pageloadcomplete();
 			CommonUtility.waitForPageLoad(driver, OptumRxBenefitsInformationHeader, 60);
 			Assert.assertTrue("PROBLEM - unable to locate OptumRx Benefits Information Page Header element",
 					pnpValidate(OptumRxBenefitsInformationHeader, 30));
@@ -819,7 +821,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	
 	
 	public void validatePrepareForNextYearPageDisplayed() {
-
+		pageloadcomplete();
 		Set handles = driver.getWindowHandles();
 		String pnpPageHandle = driver.getWindowHandle();
 		handles.remove(pnpPageHandle);
@@ -827,6 +829,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (winHandle != pnpPageHandle) {
 			String ANOCPageHandle = winHandle;
 			driver.switchTo().window(ANOCPageHandle);
+			pageloadcomplete();
 			CommonUtility.checkPageIsReady(driver);
 			if(currentUrl().contains("/preparefornextyear/overview.html")) {
 				if(getTitle().equalsIgnoreCase("overview")) {
