@@ -147,14 +147,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
    And adds drugs in drug list page
-      | DrugName | <drugName> |
+      | DrugName | <drug1> |
       #And adds drugs in drug list page
       #| DrugName | <drugName1> |
       And clicks on Review drug cost button
      Then user should be navigated to zipcode and plan year capture page for AEP in AARP
      When user enters valid zipcode and county in AARP
       | ZipCode | <zipCode> |
-     And user selects plan year in AARP
+     #And user selects plan year in AARP
      And user clicks on continue button in Zip Entry Page in AARP
      #Then load screen should be displayed in AARP
      And user should be navigated to Review drug cost estimate page in AARP
@@ -168,8 +168,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      	| DrugName | <drugName2> |
        
         Examples: 
-      |zipCode|drugName|drugName2|
-      | 90001 | lipitor|atorvastatin calcium TAB 10MG|
+      |zipCode|drug1|drugName2|
+      | 10001 | Lipitor|atorvastatin calcium TAB 10MG|
      
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
