@@ -1,4 +1,5 @@
 package pages.acquisition.dceredesign;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -161,6 +162,26 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h1']")
 	public WebElement planHeader;
+	
+	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
+	public WebElement keepUsingPharmBtn;
+	
+	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	public WebElement pharmacyName;
+	
+	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
+	public WebElement selectRockPharm;
+	
+	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
+	public WebElement saveDrugBtn;
+	
+	@FindBy(xpath = "//span[contains(text(),'ROCK PHARMACY, the')]")
+	public WebElement rockPharmAlertText;
+	
+	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
+	public WebElement monthlyValue;
+	
+	
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -645,5 +666,30 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void  clickChangePharmacyLinkDetailsPage() {
 		DrugDetails_ChangePharmacyLnk.click();
+	}
+	
+	public void  changePharmacyAndSave() {
+		validateNew(selectRockPharm);
+		selectRockPharm.click();
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();
+	}
+	
+	public void validatePharmVlaues() {
+		validateNew(rockPharmAlertText);
+		System.out.println(rockPharmAlertText.getText());
+		validateNew(monthlyValue);
+		assertTrue(monthlyValue.getText()!="");
+		System.out.println("Monthly Value: "+monthlyValue.getText());		
+	}
+	
+	public void  validatePharmacy() {
+		validateNew(pharmacyName);
+		assertTrue(pharmacyName.getText().contains("WALGREENS"));
+	}
+	
+	public void  validateAndClickKeepPharm() {
+		validateNew(keepUsingPharmBtn);
+		keepUsingPharmBtn.click();
 	}
 }

@@ -143,19 +143,19 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      Then user change the pharmacy and click on save and update drug cost
      Then user validate the monthly premium value on detail page 
      
-     @noPrescriptioncoverge_MAPD
+     @noPrescriptionCoverge_MAPD
      
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   78006 | MAPD      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP Medicare Advantage SecureHorizons Focus (HMO)  |  |
       
-     @noPrescriptioncoverge_PDP
+     @noPrescriptionCoverge_PDP
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) |  |
       
  
-   @noPrescriptioncoverge_SNP
+   @noPrescriptionCoverge_SNP
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
       |   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
