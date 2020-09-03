@@ -171,6 +171,12 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 	
 	public boolean validateEstimationDateAlertMsg() {
-		return validate(EstimationDateAlertMessage,10);
+		if(validate(EstimationDateAlertMessage,10)) {
+			return true;
+		}else if (validate(TransferEstimationDateAlertMessage,10)) {
+			return true;
+		}		
+		return false;
 	}
+	
 }

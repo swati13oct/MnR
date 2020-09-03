@@ -106,5 +106,8 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	protected WebElement GoBackToPnPPageOrderConfirmation;
 	
 	@FindBy(xpath = "//p[@data-testid='oc__shipping__estimatedDate__alternate__message']/span[text()='We will contact your provider for a new prescription and update you with a delivery date.']")
-	protected WebElement EstimationDateAlertMessage;	
+	protected WebElement EstimationDateAlertMessage;
+	
+	@FindBy(xpath = "//p[@data-testid='oc__shipping__estimatedDate__alternate__message']/span[text()='We will contact your provider to transfer your prescription and update you with a delivery date.']")
+	protected WebElement TransferEstimationDateAlertMessage;
 }
