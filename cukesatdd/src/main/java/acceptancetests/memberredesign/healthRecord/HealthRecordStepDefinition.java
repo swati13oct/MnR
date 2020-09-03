@@ -435,8 +435,9 @@ public class HealthRecordStepDefinition {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
 			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+		//note: team-atest planDoc page take too long to load, test fail w/ gateway error mostly, skip this page for now
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
-			testNote.add("\tSkip Health Record link destination validation");
+			testNote.add("\tSkip Health Record link destination validation - planDoc page takes too long to load on team-atest");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			//note: in this case, don't go back yet, keep going to validate MyDoc page

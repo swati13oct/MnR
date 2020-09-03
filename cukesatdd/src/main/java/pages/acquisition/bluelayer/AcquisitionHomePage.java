@@ -365,8 +365,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	//String ChatSamText = "Chat with a Licensed Insurance Agent";
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	//String CallSam= "Call a Licensed Insurance Agent";
-	String CallSam= "Call UnitedHealthcare Ins. Co.";
+	String CallSam= "Call a Licensed Insurance Agent";
+	//String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	@FindBy(id = "pharmacy-zip-search")
 	private WebElement thpharmacyzipsearch;

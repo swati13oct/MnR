@@ -18,33 +18,33 @@ Feature: 1.12.1 Member Rally claims
     Then the user click MyClaims top menu sub option
     Then user validates landing on Rally Claims Page
     
-    @rallyClaims01a @devRegression
+    @rallyClaims01_ma @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     |
       | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
-    @rallyClaims01b
+    @rallyClaims01_medica_pcp
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15268 | PCP      | Individual          | COSMOS_CLAIMS   | 
 
-    @rallyClaims01c @devRegression
+    @rallyClaims01_mapd @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15230 | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
 
-    @rallyClaims01c
+    @rallyClaims01_mapd
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-    @rallyClaims01d @devRegression
+    @rallyClaims01_ship @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15236 | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-    @rallyClaims01e
+    @rallyClaims01_pdp
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15299 | PDP      | Individual          | RX_CLAIMS       | 
