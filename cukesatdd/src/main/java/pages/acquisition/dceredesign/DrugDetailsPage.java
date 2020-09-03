@@ -181,7 +181,17 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
 	public WebElement monthlyValue;
 	
+	@FindBy(xpath = "//*[@class='uhc-modal__content px-10 py-10']/p")
+	public WebElement coverageMsg;
 	
+	@FindBy(xpath = "//*[@id='table_coverage_gap']")
+	public WebElement catastrophicCoverage;
+	
+	@FindBy(xpath = "//*[@id='table_catastrophic_coverage']")
+	public WebElement coverageGap;
+	
+	@FindBy(xpath = "//*[contains(@class, 'closeicon')]")
+	public WebElement modalCloseIcon;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -691,5 +701,33 @@ public class DrugDetailsPage extends UhcDriver {
 	public void  validateAndClickKeepPharm() {
 		validateNew(keepUsingPharmBtn);
 		keepUsingPharmBtn.click();
+	}
+	
+	public void validateCatastrophicCoverageMessage(String message) {
+		if(validateNew(catastrophicCoverage)) {
+			catastrophicCoverage.click();
+			System.out.println(coverageMsg.getText());
+			System.out.println(message);
+			String catastrophicCoverage=coverageMsg.getText();
+			modalCloseIcon.click();
+			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
+		}
+		else {
+		Assert.fail("Catastrophic coverage Modal not displayed");
+		}
+	}
+	
+	public void validateCoverageGapMessage(String message) {
+		if(validateNew(coverageGap)) {
+			coverageGap.click();
+			System.out.println(coverageMsg.getText());
+			System.out.println(message);
+			String coverageGap=coverageMsg.getText();
+			modalCloseIcon.click();
+			Assert.assertTrue("Coverage gap message is incorrect",coverageGap.equals(message));
+		}
+		else {
+		Assert.fail("Coverage gap Modal not displayed");
+		}
 	}
 }

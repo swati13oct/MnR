@@ -161,7 +161,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       |   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
       
      
-      @dceRedesignExtraHelpAlertDetailPage @F478554
+      @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102
    Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -181,12 +181,16 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
-    Then the user validates Important information section
+    #Then the user validates Important information section
+    And the user verifies the catastrophic coverage message
+    |catastrophicCoverage|<catastrophicCoverageMessage>|
+    And the user verifies the coverage gap message
+    |coverageGap|<coverageGapMessage>|
     
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
-      
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |catastrophicCoverageMessage|coverageGapMessage|
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |During the Coverage Gap Stage, the plan pays all of the cost for your drugs.|During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs.|
+            
         @dceRedesignDefaultPharmacy @F497405
         
         Scenario Outline: Test to Verify default Retail chain pharmacy on detail page  
@@ -223,8 +227,5 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       |   10001 | SNP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
-      
-     
-
       
      

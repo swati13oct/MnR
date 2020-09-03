@@ -918,7 +918,36 @@ public class DCEStepDefinitionAARP {
 		System.out.println(drugName);
 		
 		drugSummaryPage.verifyDrugListsUpdated(drugName);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugSummaryPage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+	
+	@Then("^the user verifies the catastrophic coverage message$")
+	public void the_user_verifies_the_catastrophic_coverage_message(DataTable givenAttributes) throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String catastrophicMessage = memberAttributesMap.get("catastrophicCoverage");
+		drugDetailsPage.validateCatastrophicCoverageMessage(catastrophicMessage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("^the user verifies the coverage gap message$")
+	public void the_user_verifies_the_coverage_gap_message(DataTable givenAttributes) throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String coverageGapMessage = memberAttributesMap.get("coverageGapMessage");
+		drugDetailsPage.validateCoverageGapMessage(coverageGapMessage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
 
 }
