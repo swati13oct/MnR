@@ -8,6 +8,8 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
@@ -605,6 +607,57 @@ public class RefillCheckoutSummaryStepDefinition {
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^the page should be refreshed so that the status of this transfer request is updated per this transfer transaction$")
+	public void the_page_should_be_refreshed_so_that_the_status_of_this_transfer_request_is_updated_per_this_transfer_transaction() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<String> DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
+		String[] array = MedicatioNameToBeSearchedOnP_P.split(" ");
+		String firstWord = array[0].trim();
+		String lastWord = array[array.length - 1].trim();
+		System.out.println("First Word "+firstWord);
+		System.out.println("Last Word "+lastWord);
+
+		int count = 0;
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			for (int j = 0; j < DrugNameList.size(); j++) {
+				System.out.println("Medication Name : " + MedicatioNameToBeSearchedOnP_P);
+				if (DrugNameList.get(j).trim().contains(firstWord) && DrugNameList.get(j).trim().contains(lastWord)) {
+					System.out.println("Inside If Statment : Medication Identified");
+					String transferConfirmationXpath = "//a[@data-testid='medication-data-name' and contains(text(),'"
+							+ firstWord.toLowerCase() + "') and contains(text(),'" + lastWord
+							+ "')]/ancestor::div[@data-testid]//span[@data-testid='medication-data-order-status']";
+					System.out.println(transferConfirmationXpath);
+					WebElement xpath = pnpPg.getDriver().findElement(By.xpath(transferConfirmationXpath));
+					Assert.assertTrue("PROBLEM : Renew Completion order status is not updated",
+							pnpPg.validate(xpath, 30));
+					count = 1;
+					break;
+				}
+			}
+			if (count == 0) {
+				pnpPg.clickOnNextPageArrow();
+				DrugNameList = pnpPg.getDrugNameListValueOnMyMedication();
+			} else {
+				break;
+			}
+		}
+
+		/*
+		 * int count = 0; while (count != 0) { for (int i = 0; i < DrugNameList.size();
+		 * i++) { if (DrugNameList.contains(MedicationName)) { WebElement xpath =
+		 * pnpPg.driver.findElement(By.xpath(renewConfirmationXpath)); Assert.
+		 * assertTrue("PROBLEM : Renew Completion order status is not updated a request received"
+		 * , pnpPg.validate(xpath, 30)); } } if (count == 0) {
+		 * pnpPg.clickOnNextPageArrow(); DrugNameList =
+		 * pnpPg.getDrugNameListValueOnMyMedication(); } }
+		 */
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 }

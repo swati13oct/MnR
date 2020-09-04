@@ -23,12 +23,12 @@ Feature: Transfer Order Confirmation
     Then user will see an order total disclaimer displayed
     Then user will see the estimated delivery date alert message
     When user view the Medications section
-    And user will see the drug name and strength on Transfer Order Confirmation
+    And user will see the drug name and strength
     And user will see the day supply
     And user will view rx price in the Medication Price field
     And user will view the Rx number
     And user will view the provider
-    And user will see disclaimer related to OptumRx prescription services 
+    And user will see disclaimer related to OptumRx prescription services
     When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
     And the page should be refreshed so that the status of this transfer request is updated per this transfer transaction
