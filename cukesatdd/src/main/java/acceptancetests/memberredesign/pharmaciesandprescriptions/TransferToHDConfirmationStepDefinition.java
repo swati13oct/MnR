@@ -47,6 +47,16 @@ public class TransferToHDConfirmationStepDefinition {
 		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	@Then("^user will see Transfer to Home Delivery checkout summary Page$")
+	public void user_will_see_Transfer_to_Home_Delivery_checkout_summary_Page() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = new CheckOutSummaryPage(null);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+		Assert.assertTrue("PROBLEM - Transfer To Home Delivery Checkout Summary Page not available",
+				checkoutSumaryPg.validateCheckoutPageHeader());
+	}
 
 	@Then("^user will click on Place Order btn on Checkout Transfer Page$")
 	public void user_will_click_on_Place_Order_btn_on_Checkout_Transfer_Page() throws Throwable {

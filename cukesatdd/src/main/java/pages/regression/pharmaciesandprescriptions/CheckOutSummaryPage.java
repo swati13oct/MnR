@@ -29,6 +29,10 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateCheckoutPageHeader(String expectedVal) {
 		return orderCheckoutPageHeader.getText().equalsIgnoreCase(expectedVal);
 	}
+	
+	public boolean validateCheckoutPageHeader() {
+		return orderCheckoutPageHeader.getText().equalsIgnoreCase("Transfer to Home Delivery");
+	}
 
 	public boolean validateOrderSummarySection() {
 		return validate(orderSummarySection, 20);
