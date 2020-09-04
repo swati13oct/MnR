@@ -206,7 +206,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#plan-summary-table tr:nth-child(7)")
 	private WebElement estimateMedicalCost;
 	
-	@FindBy(css = "#plan-summary-table tr:nth-child(7) span#test-med-cost")
+	@FindBy(css = "#plan-summary-table tr:nth-child(7) div.text-small span")
 	private List<WebElement> estimateMedicalCostvalue;
 
 	public void validateUIElements() {
@@ -1103,6 +1103,7 @@ public class AREPlanRanking extends UhcDriver {
 		validate(estimateMedicalCost, 30);
 		Assert.assertTrue(estimateMedicalCost.findElement(By.cssSelector("p")).getText().toUpperCase().contains("ESTIMATED ANNUAL MEDICAL COST"), "Estimated Annual Medical Cost row not displayed for this MBI ID");
 		int totalnumberofplans = Integer.parseInt(NumberofPlans.getText().trim().split(" ")[0]);
+		threadsleep(5000);
 		for(int i=1;i<=totalnumberofplans;i++) {
 			estimateMCE.add(estimateMedicalCostvalue.get(i).getText().trim());
 		}
