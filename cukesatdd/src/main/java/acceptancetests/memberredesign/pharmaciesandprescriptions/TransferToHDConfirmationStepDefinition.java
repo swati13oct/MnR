@@ -53,7 +53,7 @@ public class TransferToHDConfirmationStepDefinition {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
 		//Thread.sleep(50000);
-		checkoutSumaryPg.clickPlaceOrderBtn();
+		checkoutSumaryPg.clickPlaceOrderBtnOnCheckOutRenewPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
 
