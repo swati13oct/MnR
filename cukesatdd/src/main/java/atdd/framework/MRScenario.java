@@ -1079,7 +1079,7 @@ try {
 				sauceOptions.setCapability("screenResolution", "1920x1440");
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("platformName", "macOS 10.15");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
