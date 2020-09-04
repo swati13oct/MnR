@@ -77,7 +77,6 @@ public class TransferToHDConfirmationStepDefinition {
 				orderConfirmationPage.validateDrugNameAndStrengthTransfer());
 	}
 
-	
 	@And("^user will see disclaimer related to OptumRx pharamcy and prescription services$")
 	public void user_will_see_disclaimer_related_to_OptumRx_prescription_services() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()

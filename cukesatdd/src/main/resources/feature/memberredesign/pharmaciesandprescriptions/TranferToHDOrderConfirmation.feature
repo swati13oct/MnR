@@ -28,7 +28,7 @@ Feature: Transfer Order Confirmation
     And user will view rx price in the Medication Price field
     And user will view the Rx number
     And user will view the provider
-    And user will see disclaimer related to OptumRx prescription services
+    And user will see disclaimer related to OptumRx pharamcy and prescription services
     When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
     And the page should be refreshed so that the status of this transfer request is updated per this transfer transaction
