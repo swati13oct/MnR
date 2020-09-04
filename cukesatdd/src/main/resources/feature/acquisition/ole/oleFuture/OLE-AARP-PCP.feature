@@ -62,7 +62,7 @@ Feature: 2.05.1.ACQ-OLE PCP AARP
  Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+    #Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
