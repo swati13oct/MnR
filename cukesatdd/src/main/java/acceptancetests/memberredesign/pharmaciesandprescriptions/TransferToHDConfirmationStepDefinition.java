@@ -57,7 +57,7 @@ public class TransferToHDConfirmationStepDefinition {
 		Assert.assertTrue("PROBLEM - Transfer To Home Delivery Checkout Summary Page not available",
 				checkoutSumaryPg.validateCheckoutPageHeader());
 	}
-
+	
 	@Then("^user will click on Place Order btn on Checkout Transfer Page$")
 	public void user_will_click_on_Place_Order_btn_on_Checkout_Transfer_Page() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
@@ -67,6 +67,7 @@ public class TransferToHDConfirmationStepDefinition {
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
 
+	
 	@Then("^user will see Transfer order confirmation page$")
 	public void user_will_see_Transfer_order_confirmation_page() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(null);
@@ -77,7 +78,7 @@ public class TransferToHDConfirmationStepDefinition {
 		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
-	
+		
 	@Then("^user will see the drug name and strength on Transfer Confirmation$")
 	public void user_will_see_the_drug_name_and_strength_on_Transfer_Confirmation() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()

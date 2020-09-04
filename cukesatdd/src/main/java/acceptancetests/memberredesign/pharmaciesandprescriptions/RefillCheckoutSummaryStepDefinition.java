@@ -25,6 +25,8 @@ public class RefillCheckoutSummaryStepDefinition {
 	MRScenario loginScenario;
 
 	public static List<Object> listOfMedicationDetail = new ArrayList<>();
+	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -591,16 +593,17 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
 		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
 		for (int i = 0; i < countOfPage; i++) {
-			if (indexOfRenewMedication.size() == 0 && i != countOfPage - 1) {
+			if (indexOfTransferMedication.size() == 0 && i != countOfPage - 1) {
 				pnpPg.clickOnNextPageArrow();
-				indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+				indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
 			}
 		}
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
