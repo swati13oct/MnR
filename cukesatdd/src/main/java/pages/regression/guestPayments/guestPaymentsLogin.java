@@ -190,7 +190,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
 		
-		if (driver.getTitle().contains("error")) {
+		if (driver.getCurrentUrl().contains("not-available")) {
 			return new guestPaymentsLogin(driver);
 		}
 		
@@ -201,6 +201,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	public void verifyDetailsOnErrorPage() {
 		
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageOnErrorPage));
+		Assert.assertTrue(errorMessageOnErrorPage.getText().contains("plan information"));
 		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",guestPaymentsValidate(signInLinkOnErrorPage));
 		
 		

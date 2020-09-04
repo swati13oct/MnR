@@ -81,13 +81,13 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "invalid-feedback") 
 	public static WebElement errorMessage;
 	
-	@FindBy(className= "//div[contains(text(),'unable to recognize your plan information')]") 
+	@FindBy(xpath= "//div[contains(text(),'unable to recognize your plan information')]") 
 	public static WebElement errorMessageFromGPS;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(className= "uhc-tempo-header__h1")
 	public static WebElement errorMessageOnErrorPage;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(xpath= "//a[contains(text(),'sign in')]") 
 	public static WebElement signInLinkOnErrorPage;
 	
 	@FindBy(xpath= "//h1[contains(text(),'Make a One-Time Payment')]")
