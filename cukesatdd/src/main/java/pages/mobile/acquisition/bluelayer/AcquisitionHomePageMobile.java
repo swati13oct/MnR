@@ -175,6 +175,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		driver.navigate().to(pageURL);
 		return null;
 	}
+	
+	public void navigateToPath(String page) {
+		String pageURL = driver.getCurrentUrl() + page;
+		System.out.println("==pageURL==" + pageURL);
+		driver.navigate().to(pageURL);
+		
+	}
 
 	public AcquisitionHomePageMobile validateCallSamOnTablet() throws InterruptedException {
 		boolean present;
