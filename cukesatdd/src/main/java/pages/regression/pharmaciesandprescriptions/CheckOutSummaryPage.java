@@ -353,7 +353,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 50);
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Current URL val : " + driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
 			CommonUtility.checkPageIsReady(driver);
 			return new OrderConfirmationPage(driver);
 		}

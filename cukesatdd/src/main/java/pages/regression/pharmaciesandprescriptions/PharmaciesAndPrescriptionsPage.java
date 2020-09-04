@@ -2285,7 +2285,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);
 		/*CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);*/
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-management")) {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
 			CommonUtility.checkPageIsReady(driver);
 			return new CheckOutSummaryPage(driver);
 		}
@@ -2295,7 +2295,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public OrderConfirmationPage navigateToOrderConfirmationPage() {
 		// CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getCurrentUrl().contains("order-confirmation")) {
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
 			CommonUtility.checkPageIsReady(driver);
 			return new OrderConfirmationPage(driver);
 		}
