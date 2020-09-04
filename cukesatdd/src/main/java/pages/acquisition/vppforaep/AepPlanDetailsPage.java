@@ -479,7 +479,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
-			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
+			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Routine Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
 				
 				counter++;
 				if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
@@ -525,8 +525,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-						else if(benefitValueUI.contains("/") && !benefitValueUI.contains("Ismydoctor"))
-							benefitValueUI = benefitValueUI.replaceAll("/", "");
+				/*
+				 * else if(benefitValueUI.contains("/") &&
+				 * !benefitValueUI.contains("Ismydoctor")) benefitValueUI =
+				 * benefitValueUI.replaceAll("/", "");
+				 */
 						
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
