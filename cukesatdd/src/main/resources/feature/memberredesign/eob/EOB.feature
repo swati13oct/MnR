@@ -51,11 +51,11 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs @SHIP_EOBs1 @devRegression
+@abc    @SHIP_EOBs @SHIP_EOBs1 @devRegression
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB     | Medical | true        | 
-      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB     | Medical | true        | 
+#      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB     | Medical | true        | 
 
     @SHIP_EOBs @SHIP_EOBs2
     Examples: 
