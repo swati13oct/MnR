@@ -272,18 +272,17 @@ Feature: 1.25 Member Prepare For Next Year
 	    | 1-05  | F437767 | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | SHIP	 | IND_PFNY            |
 
-	#note: combo code not ready for stage yet
-	#@prepareForNextYear01_comboPdpSsp
-    #Examples: 
-	#    | index | FID     | planType | memberType          |
-	#    | 1-07  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	#    | 1-18  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	@prepareForNextYear01_comboPdpSsp
+    Examples: 
+	    | index | FID     | planType | memberType          |
+	    | 1-07  | F443004 | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-18  | F443004 | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
 
-	#@prepareForNextYear01_comboMaPdp
-    #Examples: 
-	#    | index | FID     | planType | memberType                |
-	#    | 1-09  | F443004 | MA	     | COMBO_MA_GRP_PDP_GRP_PFNY |
-	#    | 1-10  | F443004 | PDP	     | COMBO_MA_GRP_PDP_GRP_PFNY |
+	@prepareForNextYear01_comboMaPdp
+    Examples: 
+	    | index | FID     | planType | memberType                |
+	    | 1-09  | F443004 | MA	     | COMBO_MA_GRP_PDP_GRP_PFNY |
+	    | 1-10  | F443004 | PDP	     | COMBO_MA_GRP_PDP_GRP_PFNY |
 
   #-------------------------------------------------
   # note: for cases below -
@@ -393,11 +392,10 @@ Feature: 1.25 Member Prepare For Next Year
 	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
 	#    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
 
-	#note: combo code not ready for stage yet
-    #@prepareForNextYear02_combo_fed_ship
-    #Examples: 
-	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+    @prepareForNextYear02_combo_fed_ship
+    Examples: 
+	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @stageEnv
@@ -419,17 +417,15 @@ Feature: 1.25 Member Prepare For Next Year
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-	#note: combo code not ready for stage yet
-	#@prepareForNextYear03a
-    #Examples: 
-	#    | index | FID     | planType | memberType              |
-	#    | 3-01  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
+	@prepareForNextYear03a
+    Examples: 
+	    | index | FID     | planType | memberType              |
+	    | 3-01  | F443004 | SHIP	 | COMBO_SHIP_MAPD_IND_PFNY|
 			
-	#note: combo code not ready for stage yet
-	#@prepareForNextYear03b
-    #Examples: 
-	#    | index | FID     | planType | memberType              |
-	#    | 3-02  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
+	@prepareForNextYear03b
+    Examples: 
+	    | index | FID     | planType | memberType              |
+	    | 3-02  | F443004 | SHIP	 | COMBO_PDP_IND_SHIP_PFNY |
 
   @prepareForNextYear04 @hasTab @regressionMember @stageEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
