@@ -525,11 +525,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-				/*
-				 * else if(benefitValueUI.contains("/") &&
-				 * !benefitValueUI.contains("Ismydoctor")) benefitValueUI =
-				 * benefitValueUI.replaceAll("/", "");
-				 */
+						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor")) 
+							benefitValueUI =benefitValueUI.replaceAll("/", "");
+				 
 						
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
