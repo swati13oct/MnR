@@ -188,4 +188,11 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 		return false;
 	}
 	
+	public boolean validateOptumRxPharamcyAndPrescriptionServices() {
+		scrollToView(OptumRxPnPDisclaimer);
+		return validate(OptumRxPnPDisclaimer, 10);
+		//UnitedHealthcare partners with OptumRx (an affiliate) to provide your pharmacy care services including home delivery and other prescription services.
+		
+	}
+	
 }

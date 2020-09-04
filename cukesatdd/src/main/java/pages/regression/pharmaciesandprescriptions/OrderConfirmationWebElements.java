@@ -110,4 +110,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//p[@data-testid='oc__shipping__estimatedDate__alternate__message']/span[text()='We will contact your provider to transfer your prescription and update you with a delivery date.']")
 	protected WebElement TransferEstimationDateAlertMessage;
+	
+	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
+	protected WebElement OptumRxPnPDisclaimer;
 }
