@@ -762,6 +762,9 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		System.out.println("Verify Drug and Doctors Session Storage");
+		
+		List<String> plansDetails = getPlanSectionDetails();
+		
 		planRankingDropdown.click();
 		drugDocDisable(rankOptions, false);
 		applyBtn.click();
@@ -775,16 +778,21 @@ public class AREPlanRanking extends UhcDriver {
 			newplansDetails.add(val);
 		}
 		System.out.println(newplansDetails);
-
-		ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
-		int j = 0;
-		for (int i = planstart; i < givenplansDetails.size(); i++) {
-			Assert.assertTrue(
-					newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
-					"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase()
-							+ " Actual: " + newplansDetails.get(i).toUpperCase());
-			j++;
+		
+		if (planOrders.isEmpty()) {
+			Assert.assertFalse(plansDetails.equals(newplansDetails), "Plans are not Re-ordered");
+		} else {
+			ArrayList<String> givenplansDetails = new ArrayList<String>(Arrays.asList(planOrders.split(",")));
+			int j = 0;
+			for (int i = planstart; i < givenplansDetails.size(); i++) {
+				Assert.assertTrue(
+						newplansDetails.get(i).toUpperCase().contains(givenplansDetails.get(j).trim().toUpperCase()),
+						"Expected Ranking is Not applied Expected: " + givenplansDetails.get(j).trim().toUpperCase()
+								+ " Actual: " + newplansDetails.get(i).toUpperCase());
+				j++;
+			}
 		}
+		
 	}
 
 	public void drugDocDisable(String option, boolean select) {

@@ -2,7 +2,7 @@
 Feature: Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
   @ARE @ClearedSessionNewCloakIn @F457409
-  Scenario Outline: - <Email> To Verify agent login and validating cleating session storage in ARE
+  Scenario Outline: - <Email> To Verify agent login and validating clearing session storage in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -40,7 +40,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
 
   @ARE @EstimateMedicalCost @F441593
-  Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
+  Scenario Outline: - <Email> To Verify agent login and validating Estimate Medical Cost in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -79,7 +79,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Plan1(HMO),Plan2(HMO),MOSAIC(HMO),Essential(HMO),Choice(PPO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Essential(RegionalPPO) | YES                |
 
   @ARE @AddEditDeleteDrug @F457409
-  Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -114,7 +114,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | qavgogine | qavgogine | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,1,NO,NO                   | CELECOXIB,NO,celecoxib CAP 50MG,,,3,NO,NO                             | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           |            | drug           | NO             | YES                |
 
   @ARE @AddEditDeleteDoctors @F457409
-  Scenario Outline: - <Email> To Verify agent login and validate No Doctors in ARE
+  Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Doctors in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
