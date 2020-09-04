@@ -95,8 +95,8 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_ihr_medica_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 17    | F424804 | kkumard   | mnrs786@  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IHR                | true       |
-	    | 18    | F424804 | kkumard   | mnrs786@  | BATLLOT@AOL.COM          | PCP      | IHR                | true       |
+	    | 17    | F424804 | kkumard   | mnrs786@  | SUSICHAPMAN@GMAIL.COM   | MEDICA   | IHR                | true       |
+	    | 18    | F424804 | kkumard   | mnrs786@  | BATLLOT@AOL.COM         | PCP      | IHR                | true       |
 
 
 	    

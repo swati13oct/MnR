@@ -63,24 +63,24 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @prod_SHIP_EOBs @prod_SHIP_EOBs1
     Examples: 
-      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | false       | 
+      | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
+      | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs2
     Examples: 
-      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true       |
+      | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
+      | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true    | true       |
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs3
     Examples: 
-      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | false   | 
+      | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
+      | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs4
     Examples: 
-      | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-    # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
-      | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true   |  
+      | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
+    # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
