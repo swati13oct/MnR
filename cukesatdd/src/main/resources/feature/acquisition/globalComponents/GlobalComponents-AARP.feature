@@ -2,21 +2,33 @@
 Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
-  Scenario: To verify links displayed in the global footer of AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When user accesses global footer of the AARP Medicare Plans home page
-    And user vaidates the state drop down link on home page
-    And user clicks on View all disclaimer information link on home page
-    And user verifies visit aarp.org link on home page ulayer
-    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
-    And user clicks on contactus link of aboutus page
-    And user clicks on sitemap link of contactus page
-    And user clicks on privacypolicy link of sitemap page
-    And user clicks on termsOfuse link of privacypolicy page
-    And user clicks on disclaimers link of terms&conditions page
-    And user clicks on agents&brokers link of disclaimers page
-    And user verifies and clicks on home link of agents&brokers page ulayer
-    Then user clicks on back to top link on home page
+  Scenario Outline: To verify links displayed in the global footer of AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When user accesses global footer of the Medicare Plans All page
+    And user vaidates the state drop down link on the home page
+    And user clicks on View all disclaimer information link on the home page
+    And user verifies visit aarp.org link on home page
+    And user clicks on Aboutus link from footer of the Medicare Plans home page
+    And user clicks on contactus link on aboutus page
+    And user clicks on sitemap link on contactus page
+    And user clicks on privacypolicy link on sitemap page
+    And user clicks on termsOfuse link on privacypolicy page
+    And user clicks on disclaimers link on terms&conditions page
+    And user clicks on agents&brokers link on disclaimers page
+    And user verifies home link of agents&brokers page
+    Then user clicks on back to top link of home page
+
+	@globalfooter_AARP
+  Examples: 
+       |	site	|
+       |	AARP	|
+ 
+ @globalfooter_UHC
+  Examples: 
+       |	site	|
+       |	UHC	|      
+       
 
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
