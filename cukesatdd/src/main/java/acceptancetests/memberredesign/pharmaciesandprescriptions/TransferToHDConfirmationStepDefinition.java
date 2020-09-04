@@ -27,35 +27,25 @@ public class TransferToHDConfirmationStepDefinition {
 	public static String MedicationName = "";
 	public static String MedicatioNameToBeSearchedOnP_P;
 	
-	@When("^user fetches medication information and clicks on Transfer to HD Medication call to action button$")
-	public void user_fetches_medication_information_and_clicks_on_Transfer_to_HD_Medication_call_to_action_button() throws Throwable {
+	@When("^user fetches medication information and clicks on Transfer To HD call to action button$")
+	public void user_fetches_medication_information_and_clicks_on_Transfer_To_HD_call_to_action_button()
+			throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
-		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
-		for (int i = 0; i < countOfPage; i++) {
-			if (indexOfTransferMedication.size() == 0 && i != countOfPage - 1) {
-				pnpPg.clickOnNextPageArrow();
-				indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
-			}
+		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForTransferMedication();
+		while (indexOfTransferMedication.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfTransferMedication = pnpPg.getListOfIndexForTransferMedication();
 		}
-		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrRenew();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
-		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
+		MedicationName = listOfMedicationDetail.get(0).toString().trim();
+		System.out.println("Medication Name eligilable for renew medication is" + MedicationName);
+		pnpPg.clickOnRenewMedicationCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-	@Then("^user will see Transfer to Home Delivery checkout summary Page$")
-	public void user_will_see_Transfer_to_Home_Delivery_checkout_summary_Page() throws Throwable {
-		CheckOutSummaryPage checkoutSumaryPg = new CheckOutSummaryPage(null);
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		checkoutSumaryPg = pnpPg.navigateToCheckOutSummaryPage();
-		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
-		Assert.assertTrue("PROBLEM - Transfer To Home Delivery Checkout Summary Page not available",
-				checkoutSumaryPg.validateCheckoutPageHeader());
 	}
 	
 	@Then("^user will click on Place Order btn on Checkout Transfer Page$")
@@ -66,7 +56,6 @@ public class TransferToHDConfirmationStepDefinition {
 		checkoutSumaryPg.clickPlaceOrderBtnOnCheckOutRenewPage();
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
-
 	
 	@Then("^user will see Transfer order confirmation page$")
 	public void user_will_see_Transfer_order_confirmation_page() throws Throwable {
@@ -78,9 +67,9 @@ public class TransferToHDConfirmationStepDefinition {
 		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
-		
-	@Then("^user will see the drug name and strength on Transfer Confirmation$")
-	public void user_will_see_the_drug_name_and_strength_on_Transfer_Confirmation() throws Throwable {
+	
+	@Then("^user will see the drug name and strength on Transfer Order Confirmation$")
+	public void user_will_see_the_drug_name_and_strength_on_Transfer_Order_Confirmation() throws Throwable {
 		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		Assert.assertTrue("PROBLEM - Drug Name and Strength is not displayed on Order Confirmation Page",
