@@ -23,7 +23,6 @@ Feature: Transfer Order Confirmation
     Then user will see an order total disclaimer displayed
     Then user will see the estimated delivery date alert message
     When user view the Medications section
-    Then user will see the drug name and strength
     And user will see the day supply
     And user will view rx price in the Medication Price field
     And user will view the Rx number
