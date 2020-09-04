@@ -81,7 +81,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "invalid-feedback") 
 	public static WebElement errorMessage;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(className= "//div[contains(text(),'unable to recognize your plan information')]") 
 	public static WebElement errorMessageFromGPS;
 	
 	@FindBy(className= "memberID") // need to update class id

@@ -38,7 +38,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I will click the Next Button on the login page
      #incorrect dob
        | Member ID         | 915516555-1     |
-       | Date of Birth     |  01/01/2050     |
+       | Date of Birth     |  01/01      |
     Then I will get an error message
     #incorrect combination
    And  I will enter my Member ID and Date of birth
