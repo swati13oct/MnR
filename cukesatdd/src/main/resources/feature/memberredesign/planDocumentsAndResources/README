@@ -63,3 +63,58 @@ Specific for Forms and Resousrces section
 PlanDocApiResponse.java
 	Obtain and parse API response
 	Only applicable if attempting API valiation against UI result
+
+Forms and Resources Section feature files
+	To cut down test run time duration, the coverage is being divided into various feature files.
+	Current setup is to run the P1of7 thu P7of7 set
+	
+	These are all possible setup
+	planDocumentsAndResourcesMemAuth_P6_fnr.feature
+	  Cover sections:
+	  Prescription Drug Mail Order Form  
+	  Premium Payment Information         
+	  Reimbursement Forms                 
+	  Authorization Forms and Information 
+	  Medication Authorization Forms      
+	  Other Resources                     
+	  Disenrollment Information           
+	  
+	planDocumentsAndResourcesMemAuth_P6_fnr_P1of2.feature
+	  Cover sections:
+	  Prescription Drug Mail Order Form  
+	  Premium Payment Information         
+	  Reimbursement Forms                 
+	  Authorization Forms and Information 
+	planDocumentsAndResourcesMemAuth_P6_fnr_P2of2.feature
+	  Cover sections:
+	  Medication Authorization Forms      
+	  Other Resources                     
+	  Disenrollment Information           
+	
+	planDocumentsAndResourcesMemAuth_P6_fnr_P1of7.feature
+	  Cover sections:
+	  Prescription Drug Mail Order Form
+	  NOTE:
+	  This feature file also cover for SHIP user, SHIP has only one section in FnR  
+	planDocumentsAndResourcesMemAuth_P6_fnr_P2of7.feature
+	  Cover sections:
+	  Premium Payment Information         
+	planDocumentsAndResourcesMemAuth_P6_fnr_P3of7.feature
+	  Cover sections:
+	  Reimbursement Forms                 
+	planDocumentsAndResourcesMemAuth_P6_fnr_P4of7.feature
+	  Cover sections:
+	  Authorization Forms and Information 
+	planDocumentsAndResourcesMemAuth_P6_fnr_P5of7.feature
+	  Cover sections:
+	  Medication Authorization Forms      
+	planDocumentsAndResourcesMemAuth_P6_fnr_P6aof7.feature
+	  Cover sections:
+	  Other Resources - first half of this subsection                     
+	planDocumentsAndResourcesMemAuth_P6_fnr_P6bof7.feature
+	  Cover sections:
+	  Other Resources - second half of this subsection                    
+	planDocumentsAndResourcesMemAuth_P6_fnr_P7of7.feature	
+	  Cover sections:
+	  Disenrollment Information           
+	

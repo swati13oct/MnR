@@ -72,51 +72,53 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
+    #note: WFBATES has partC n D EOB
     @prod_dreamEob01a
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 01    | ashah120  | Mnrqa003  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
+    # | 01    | kkumard  | mnrs786@  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
+      | 01    | kkumard  | mnrs786@  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
 
     @prod_dreamEob01b
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 02    | ashah120  | Mnrqa003  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
+      | 02    | kkumard  | mnrs786@  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
 
     @prod_dreamEob01c 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 03    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
-      | 04    | ashah120  | Mnrqa003  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
+#     | 03    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
+      | 04    | kkumard  | mnrs786@  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
 
     @prod_dreamEob01d 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 05    | ashah120  | Mnrqa003  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
+      | 05    | kkumard  | mnrs786@  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
 
     @prod_dreamEob01e 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 06    | ashah120  | Mnrqa003  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+      | 06    | kkumard  | mnrs786@  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
 
     @prod_dreamEob01f 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
-#     | 07    | ashah120  | Mnrqa003  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
-      | 08    | ashah120  | Mnrqa003  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+#     | 07    | kkumard  | mnrs786@  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
+      | 08    | kkumard  | mnrs786@  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
     @prod_dreamEob01g
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 09    | ashah120  | Mnrqa003  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
+      | 09    | kkumard  | mnrs786@  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
 
     @prod_dreamEob01h
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 10    | ashah120  | Mnrqa003  | Norm749                 | PDP      | PDP_SHIP_COMBO_EOB| true        |
+      | 10    | kkumard  | mnrs786@  | Norm749                 | PDP      | PDP_SHIP_COMBO_EOB| true        |
 
     @prod_dreamEob01i
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 11    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |
-#     | 12    | ashah120  | Mnrqa003  | testuserTBD             | MAPD     | ES_D_NICE_EOB     | true        |
+#     | 11    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |
+#     | 12    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | ES_D_NICE_EOB     | true        |
       

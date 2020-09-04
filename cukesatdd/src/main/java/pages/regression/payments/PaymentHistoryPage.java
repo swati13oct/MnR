@@ -211,7 +211,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@ng-show='greyedoutError' and @class='errorcolor' and contains( .,'You are not authorized')]")
 	private WebElement notAuthorizedMsg;
 
-	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	@FindBy(xpath = "(//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment'])[1]")
 	private WebElement MakeOneTimepaymentButton;
 
 	@FindBy(xpath = "(//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment'])[1]")
@@ -653,6 +653,18 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//h1[contains(text(),'Premium Payments')]")
 	private WebElement premiumPaymentsHeading;
+	
+	@FindBy(xpath = "//*[@id='loadingbilling0']/img")
+	private WebElement billingHistoryTable1LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingbilling1']/img")
+	private WebElement billingHistoryTable2LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingpayment0']/img")
+	private WebElement paymentHistoryTable1LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingpayment1']/img")
+	private WebElement paymentHistoryTable2LoadingImage;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -1310,7 +1322,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
 		
 		CommonUtility.waitForPageLoad(driver, SetUpRecurringPaymentsButtonShip, 20);
-		SetUpRecurringPaymentsButtonShip.click();
+		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
 		Thread.sleep(5000);
@@ -2681,7 +2693,7 @@ try {
 	}
 	}
 
-public void validateBillingHistoryTableSecondPlan() {
+public void validateBillingHistoryTableSecondPlan(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
@@ -2709,10 +2721,13 @@ try {
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableRemainingAmountHeader+" | Actual="+actual_billingHistoryTableRemainingAmountHeader,expected_billingHistoryTableRemainingAmountHeader.equals(actual_billingHistoryTableRemainingAmountHeader));
 	System.out.println("Remaining Amount column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableRemainingAmountHeader);
 	
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
 	String expected_billingHistoryTableBillStatementsHeader="Bill Statements (PDF)";
 	String actual_billingHistoryTableBillStatementsHeader=billingHistoryTableBillStatementsHeaderSecondPlan.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableBillStatementsHeader+" | Actual="+actual_billingHistoryTableBillStatementsHeader,expected_billingHistoryTableBillStatementsHeader.equals(actual_billingHistoryTableBillStatementsHeader));
 	System.out.println("Bill Statements (PDF) column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableBillStatementsHeader);
+	}
 	sleepBySec(2);
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='resultscount_1']/tbody/tr"));
 	int expected_rows=1;
@@ -2809,7 +2824,7 @@ try {
 	System.out.println("Value displayed in 1st row of Payment Method is : "+valueofPaymentMethod.getText());
 	Assert.assertTrue("value of Payment Method is not displayed", valueofPaymentMethod.getText()!=null); 
 	
-	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_0']/tbody/tr[1]/td[5]/span[2]"));
+	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_0']/tbody/tr[1]/td[5]"));
 	System.out.println("Value displayed in 1st row of Confirmation# is : "+valueofConfirmation.getText());
 	Assert.assertTrue("value of Confirmation# is not displayed", valueofConfirmation.getText()!=null); 
 	
@@ -2821,7 +2836,7 @@ try {
 	}
 	}
 
-public void validatePaymentHistoryTableSecondPlan() {
+public void validatePaymentHistoryTableSecondPlan(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
@@ -2849,10 +2864,13 @@ try {
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTablePaymentMethodHeader+" | Actual="+actual_paymentHistoryTablePaymentMethodHeader,expected_paymentHistoryTablePaymentMethodHeader.equals(actual_paymentHistoryTablePaymentMethodHeader));
 	System.out.println("Payment Method column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTablePaymentMethodHeader);
 	
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
 	String expected_paymentHistoryTableConfirmationHeader="Confirmation #";
 	String actual_paymentHistoryTableConfirmationHeader=paymentHistoryTableConfirmationHeaderSecondPlan.getText();
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTableConfirmationHeader+" | Actual="+actual_paymentHistoryTableConfirmationHeader,expected_paymentHistoryTableConfirmationHeader.equals(actual_paymentHistoryTableConfirmationHeader));
 	System.out.println("Confirmation # column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTableConfirmationHeader);
+	}
 	sleepBySec(2);
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr"));
 	int expected_rows=1;
@@ -2881,10 +2899,12 @@ try {
 	System.out.println("Value displayed in 1st row of Payment Method is : "+valueofPaymentMethod.getText());
 	Assert.assertTrue("value of Payment Method is not displayed", valueofPaymentMethod.getText()!=null); 
 	
-	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr[1]/td[5]/span[2]"));
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
+	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr[1]/td[5]"));
 	System.out.println("Value displayed in 1st row of Confirmation# is : "+valueofConfirmation.getText());
 	Assert.assertTrue("value of Confirmation# is not displayed", valueofConfirmation.getText()!=null); 
-	
+	}
 	}
 	catch (Exception e1)
 	{
@@ -2915,7 +2935,9 @@ System.out.println("Selecting the date from dropdown - Last 6 Months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+waitforElement(billingHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+Thread.sleep(2000);
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
 
@@ -2953,9 +2975,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 6 Months ");
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -2993,8 +3017,11 @@ TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
 
+waitforElement(billingHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFed.isDisplayed()) {
@@ -3030,9 +3057,12 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 12 months ");
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -3071,9 +3101,12 @@ TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
 
+waitforElement(billingHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (billingHistoryTableForFed.isDisplayed()) {
 		System.out.println("Billing History table is displayed");
@@ -3108,10 +3141,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 24 months ");
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Billing History table is displayed");
@@ -3150,9 +3184,12 @@ TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
 
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3187,9 +3224,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 6 Months ");
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -3226,10 +3265,12 @@ System.out.println("Selecting the date from dropdown - Last 12 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
 
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3264,10 +3305,12 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 12 months ");
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3305,9 +3348,11 @@ TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
 
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3336,10 +3381,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 24 months ");
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3364,9 +3410,10 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Previous Calendar Year ");
 CommonUtility.waitForPageLoad(driver, previousCalendarYear, 20);
 previousCalendarYear.click();
-
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
 System.out.println("Previous Calendar Year has been clicked in dropdown , waiting for Payment history table to load now ");
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3390,9 +3437,10 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Previous Calendar Year ");
 CommonUtility.waitForPageLoad(driver, previousCalendarYear, 20);
 previousCalendarYear.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Previous Calendar Year has been clicked in dropdown , waiting for Payment history table to load now ");
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");

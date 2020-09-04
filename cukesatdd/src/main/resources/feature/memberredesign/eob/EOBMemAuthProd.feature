@@ -7,7 +7,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
 
   ##### ----------------- keep all scenarios below this line when dream EOB switches on, below are for SHIP and other non-federal cases ---------------
-  @prod_eob02
+  @prod_eob01
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -57,29 +57,30 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     Then the user clicks on first eob from the list to validate pdf
     #Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
-    #Then the user validates the eob count for all available search ranges
-    #  | Flag Zero EOB User | <flagZeroEob> |
+    Then the user validates the eob count for all available search ranges
+      | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @prod_SHIP_EOBs @prod_SHIP_EOBs1
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | ashah120  | Mnrqa003  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY | MULTI_SHIP_EOB     | Medical | false       | 
+      | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | false       | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs2
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | ashah120  | Mnrqa003  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true       |
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs3
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 13    | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true   | 
+      | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | false   | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs4
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | flagZeroEob |
-      | 14    | ashah120  | Mnrqa003  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
+    # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true   |  
+      | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
@@ -102,7 +103,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_PHIP_EOBs
     Examples: 
       | index | username  | password  | MemUserName     | TID   | planType | memberType |
-      | 15    | ashah120  | Mnrqa003  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
+      | 15    | kkumard  | mnrs786@  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -126,7 +127,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
   #
   #  Examples: 
   #    | index | username  | password  | MemUserName     | FID    | planType | memberType              |
-  #    | 16    | ashah120  | Mnrqa003  | testusername    | 267688 | SSUP     | EOB_Deeplink_Individual |
+  #    | 16    | kkumard  | mnrs786@  | testusername    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
 
   @prod_eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
@@ -149,4 +150,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | ashah120  | Mnrqa003  | JSENFYFDRE#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | kkumard  | mnrs786@  | JSENFYFDRE#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 

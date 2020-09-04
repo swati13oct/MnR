@@ -168,8 +168,8 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				expectedUrl="https://member.int.mymedicareaccount.uhc.com/PCP/find-care";
 				redirectUrl="https://member.int.mymedicareaccount.uhc.com/pcp/find-care";
 				if (MRScenario.environment.equalsIgnoreCase("offline")) {
-					expectedUrl="https://member.uat.mymedicareaccount.uhc.com/PCP/find-care";
-					redirectUrl="https://member.uat.mymedicareaccount.uhc.com/pcp/find-care";
+					expectedUrl="https://member.uat.mymedicareaccount.com/PCP/find-care";
+					redirectUrl="https://member.uat.mymedicareaccount.com/pcp/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
 					redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
@@ -183,8 +183,8 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				expectedUrl="https://member.int.mymedicareaccount.uhc.com/Medica/find-care";
 				redirectUrl="https://member.int.mymedicareaccount.uhc.com/medica/find-care";
 				if (MRScenario.environment.equalsIgnoreCase("offline")) {
-					expectedUrl="https://member.uat.mymedicareaccount.uhc.com/Medica/find-care";
-					redirectUrl="https://member.uat.mymedicareaccount.uhc.com/medica/find-care";
+					expectedUrl="https://member.uat.mymedicareaccount.com/Medica/find-care";
+					redirectUrl="https://member.uat.mymedicareaccount.com/medica/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
 					redirectUrl="https://member.mymedicareaccount.com/medica/find-care";

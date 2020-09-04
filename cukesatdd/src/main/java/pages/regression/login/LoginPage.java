@@ -226,7 +226,7 @@ public class LoginPage extends UhcDriver {
 			}
 
 			Assert.assertTrue("PROBLEM - encountered login page error on the login page", !validate(loginPageError,0));
-
+			CommonUtility.waitForPageLoad(driver, userNameField, 5);
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
 			signInButton.click();
