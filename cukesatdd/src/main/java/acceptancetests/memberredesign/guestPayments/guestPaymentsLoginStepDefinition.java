@@ -145,7 +145,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 
-	@Then("^I will get an Error that match cannot be found in GPS$")
+	@Then("^I will get an Error that match cannot be found in GPS$")
 
 	public void the_user_gets_match_Error() {
 

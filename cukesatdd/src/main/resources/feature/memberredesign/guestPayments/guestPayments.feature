@@ -45,7 +45,7 @@ Feature: 1.06.7 Member Guest Payments Page
        | Member ID         |  915516555-1      |
        | Date of Birth     |   01/01/1944      |
     Then I will click the Next Button on the login page
-    Then I will get an Error that match cannot be found in GPS
+    Then I will get an Error that match cannot be found in GPS
 
    Examples:
       | TID   | planType |  siteName   |

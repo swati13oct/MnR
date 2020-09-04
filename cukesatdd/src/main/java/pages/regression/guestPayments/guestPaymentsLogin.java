@@ -148,8 +148,9 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	}
 
 	public void enterIDandBirthDate(String memberID, String dob) {
-		
+		memberIdTextfield.clear();
 		memberIdTextfield.sendKeys(memberID);
+		dobTextfield.clear();
 		dobTextfield.sendKeys(dob);
 
 
