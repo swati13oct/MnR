@@ -193,6 +193,10 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'closeicon')]")
 	public WebElement modalCloseIcon;
 	
+	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
+	public WebElement viewPlanBtn;
+	
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -227,6 +231,16 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnBacktoDrugBtn() {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
+	}
+	
+	public void clickOnvppPlan() {
+		validateNew(backtoSummaryBtn);
+		backtoSummaryBtn.click();
+	}
+	
+	public void clickOnvppPlanDetails() {
+		validateNew(viewPlanBtn);
+		viewPlanBtn.click();
 	}
 	
 	public void validatePlanDrugDetails(String planName) {

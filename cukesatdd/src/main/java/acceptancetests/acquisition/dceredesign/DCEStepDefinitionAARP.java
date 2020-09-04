@@ -576,6 +576,14 @@ public class DCEStepDefinitionAARP {
 	@Then("^the user verify the drug cost estimator and view plan summary on VPP detail page in AARP$")
 	public void the_user_verify_the_drug_cost_estimator() throws Throwable {
 		Thread.sleep(10000);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.validateDrugandPanButton();
+	}
+	
+	@Then("^the user verify the drug cost estimator and view plan summary on VPP summary page in AARP$")
+	public void the_user_verify_the_drug_cost_estimator_summary() throws Throwable {
+		Thread.sleep(10000);
 		DrugSummaryPage drugDetailsPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		
 		drugDetailsPage.validateDrugandPanButton();
@@ -586,6 +594,20 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		
 		drugDetailsPage.clickOnBacktoDrugBtn();
+	}
+	
+	@Then("^the user click on view plan summary on vpp detail page in AARP$")
+	public void the_user_click_on_drug_cost_estimator_details() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.clickOnvppPlan();
+	}
+	
+	@Then("^Then user click on veiw plan details on summary page in AARP$")
+	public void the_user_click_on_view_plan_details() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		
+		drugDetailsPage.clickOnvppPlanDetails();
 	}
 	
 	@Then("^the user click on drug cost estimator on vpp plan summary page in AARP$")

@@ -113,13 +113,28 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
-    #Then the user click on view plan summary on vpp detail page in AARP
-    # Then user click on veiw plan details on summary page in AARP
-    # Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
-      
+    Then the user click on view plan summary on vpp detail page in AARP
+    Then user click on veiw plan details on summary page in AARP
+    #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
+     
+      @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
+     
       Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+       @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP
+       
+        Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+       
+       @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP
+     
+       Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
+      
       
       @noPrescriptionCoverage @F492445
       Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
