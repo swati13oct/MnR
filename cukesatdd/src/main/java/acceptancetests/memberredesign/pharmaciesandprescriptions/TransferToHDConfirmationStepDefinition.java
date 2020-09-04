@@ -33,22 +33,17 @@ public class TransferToHDConfirmationStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForTransferMedication();
-		/*
-		 * int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage()); for (int i =
-		 * 0; i < countOfPage-1; i++) { if(indexOfRefillMedication.size()==0) {
-		 * pnpPg.clickOnNextPageArrow(); indexOfRefillMedication =
-		 * pnpPg.getListOfIndexForRefillMedicationOnMyMed(); }else { break; } }
-		 */
-		while (indexOfTransferMedication.size() == 0) {
-			pnpPg.clickOnNextPageArrow();
-			indexOfTransferMedication = pnpPg.getListOfIndexForTransferMedication();
+		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfTransferMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+			}
 		}
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
-		MedicationName = listOfMedicationDetail.get(0).toString();
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
-		System.out.println("Medication Name eligilable for refill medication is" + MedicationName);
 		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
@@ -72,6 +67,15 @@ public class TransferToHDConfirmationStepDefinition {
 		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displaced",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
+	
+	@Then("^user will see the drug name and strength on Transfer Confirmation$")
+	public void user_will_see_the_drug_name_and_strength_on_Transfer_Confirmation() throws Throwable {
+		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
+		Assert.assertTrue("PROBLEM - Drug Name and Strength is not displayed on Order Confirmation Page",
+				orderConfirmationPage.validateDrugNameAndStrengthTransfer());
+	}
+
 
 	@Then("^the page should be refreshed so that the status of this transfer request is updated per this transfer transaction$")
 	public void the_page_should_be_refreshed_so_that_the_status_of_this_transfer_request_is_updated_per_this_transfer_transaction() throws Throwable {
