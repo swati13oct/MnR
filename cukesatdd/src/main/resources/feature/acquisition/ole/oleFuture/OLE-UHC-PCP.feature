@@ -56,7 +56,7 @@ Feature: 2.05.1.ACQ-OLE PCP UHC
       | Email              | <email>             |
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user navigates to Preliminary Questions Page
+    #Then the user navigates to Preliminary Questions Page
    Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |

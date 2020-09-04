@@ -165,7 +165,7 @@ Feature: 2.05.5. ACQ-OLE Campaign UMS
     #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     #Then the user validates Plan and Member Details on Confirmation Page	
-			@Campaign_OLE_UHC_Future
+			@Campaign_OLE_UHC_Future_Team
 			Examples: 
       | TID   | plantype |Plan Year|planYear| planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType| 
      	| 11137 | MAPD     | future|future|AARP Medicare Advantage (HMO-POS)| MBI     | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002  |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | St. Louis | Yes                    |               |             | MO           |    63043 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |Valid|
