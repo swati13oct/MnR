@@ -74,7 +74,7 @@ public class TransferToHDConfirmationStepDefinition {
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
 		orderConfirmationPage = checkoutPage.navigateToOrderConfirmationPage();
 		getLoginScenario().saveBean(PageConstants.ORDER_CONFIRMATION_PAGE, orderConfirmationPage);
-		Assert.assertTrue("PROBLEM - Order Confirmation Page is not displayed",
+		Assert.assertTrue("PROBLEM - Order Confirmation Page not available",
 				orderConfirmationPage.validateOrderConfirmationThankyouMessage());
 	}
 	
