@@ -84,7 +84,8 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement YahooSearchResult;
 
 	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
-	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
+	//@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='sb_form_q']")
@@ -101,7 +102,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
 	//@FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
-	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html')]")
+	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
 	public WebElement UHCSearchLinkfromBing;
 
 
