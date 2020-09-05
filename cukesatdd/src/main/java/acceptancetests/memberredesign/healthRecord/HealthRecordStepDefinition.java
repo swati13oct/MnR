@@ -86,7 +86,7 @@ public class HealthRecordStepDefinition {
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
 			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
 		} else {
@@ -191,7 +191,7 @@ public class HealthRecordStepDefinition {
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -257,7 +257,7 @@ public class HealthRecordStepDefinition {
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
 			testNote.add("\tFAILED - KNOWN ISSUE -Rally page for terminated user - Bypass for now to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -319,7 +319,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo") && !planType.equalsIgnoreCase("SSP"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -382,7 +382,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -429,7 +429,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -473,7 +473,7 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -532,7 +532,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -593,7 +593,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -653,7 +653,7 @@ public class HealthRecordStepDefinition {
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -708,7 +708,7 @@ public class HealthRecordStepDefinition {
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -752,7 +752,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -805,7 +805,7 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -858,7 +858,7 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
@@ -902,7 +902,7 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
