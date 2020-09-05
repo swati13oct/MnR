@@ -506,8 +506,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 			if (validate(selectLocationOption)) {
 				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
-
-				selectLocationOption.click();
+				jsClickNew(selectLocationOption);
+				//selectLocationOption.click();
 
 				validateNew(NewsaveBtn2);
 

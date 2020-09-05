@@ -106,7 +106,8 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
 	And user opens the page to validate on AARP
 	 | pagename | <pagename> |
 	Then the user validates whether call icon is visible on AARP 
-	Then the user validates whether chat icon is visible on AARP	
+	#Then the user validates whether chat icon is visible on AARP	
+	Then the user validates whether chat Agent is Available on AARP	
 	Examples: 
 			| pagename |
 			|/|
