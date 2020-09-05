@@ -45,28 +45,25 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | kkumard   | mnrs786@  | testUserName            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR | false      |
+	    | 04    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR  | false      |
 
-#note: need to find user
-#    @prod_no_ihr_boaGrp1
-#    Examples: 
-#	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-#	    | 05    | F424804 | kkumard   | mnrs786@  | testUserName            | MA       | BOA12322_GROUP_IHR | false      |
-#	    | 06    | F424804 | kkumard   | mnrs786@  | testUserName            | MA       | BOA12323_GROUP_IHR | false      |
+    @prod_no_ihr_boaGrp1
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | 05    | F424804 | kkumard   | mnrs786@  | sks1947                 | MA       | BOA12322_GROUP_IHR | false      |
+	    | 06    | F424804 | kkumard   | mnrs786@  | colombia114@            | MA       | BOA12323_GROUP_IHR | false      |
 
-#note: need to find user
-#    @prod_no_ihr_boaGrp2
-#    Examples: 
-#	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-#	    | 07    | F424804 | kkumard   | mnrs786@  | testUserName            | MA       | BOA12324_TERM_GROUP_IHR | false |
+    @prod_no_ihr_boaGrp2
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | 07    | F424804 | kkumard   | mnrs786@  | jeanne132               | MA       | BOA12324_TERM_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @prod_ihr_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
-#note: need to find user
-#	    | 09    | F424804 | kkumard   | mnrs786@  | testUserName            | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_pdp
     Examples: 
