@@ -3513,9 +3513,32 @@ for (int i = 0; i < initialCount + 1; i++) {
 						jsClickNew(CurrentYearPlansBtn);	
 					}
 				}
+	/*	CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
+			//if(validate(NextYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);	
+		}
+		else{
+			//if(validate(NextYearPlansBtn, 20)) {
+			System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
+			jsClickNew(NextYearPlansBtn);	
+			}
+		*/
 			
 	}
-			
+	
+	public void handlePlanYearFutureSelectionPopup(String planYear) {
+
+		CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.equalsIgnoreCase("future")) {				// if the scenario is for current year
+			if(validate(NextYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Next Year button*****: "+NextYearPlansBtn.getText());
+				jsClickNew(NextYearPlansBtn);	
+		}
+		}
+	
+}		
 		
 
 	public void handleChatPopup() {
@@ -4266,6 +4289,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 		
 		
+	}
+	
+	public void navigateToUrl(String uRLpath) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : "+CurrentURL);
+		String SiteURL = CurrentURL.split(".com")[0];
+		System.out.println("Split URL : "+SiteURL);
+		SiteURL = SiteURL+".com/";
+		System.out.println("Site URL : "+SiteURL);
+		String NavigateToURL = SiteURL+uRLpath;
+		System.out.println("Navigating to URL : "+NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 35);
+		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
+		//return NavigateToURL;
 	}
 
 }
