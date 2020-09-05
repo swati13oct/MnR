@@ -1326,7 +1326,9 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
 		Thread.sleep(5000);
-		if (driver.getTitle().contains("Set Up Recurring Payments")) {
+		System.out.println("Current URL is : "+driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("recurring-eft-start") || driver.getTitle().contains("Set Up Recurring Payments")) 
+		{
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
 		} else {
