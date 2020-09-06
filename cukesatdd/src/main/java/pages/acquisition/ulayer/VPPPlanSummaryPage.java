@@ -41,7 +41,7 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 
 /**
  * @author 
@@ -1576,7 +1576,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
+	public VPPRequestSendEmailPageMobile createVPPRequestSendEmailPage() {
 		// TODO Auto-generated method stub
 		return null;
 	}

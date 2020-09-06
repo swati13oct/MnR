@@ -19,10 +19,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.member_deprecated.ulayer.Rallytool_Page;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -518,17 +518,17 @@ public void comparePlanslnk() throws InterruptedException{
 			
 		}
 
-		public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
-			 return new VPPAarpNeedAStepBackWidget(driver);
+		public VPPAarpNeedAStepBackWidgetMobile validateStepBackWidget(){
+			 return new VPPAarpNeedAStepBackWidgetMobile(driver);
 		}
-		public VPPAarpNeedHelpWidgetPage validateNeedHelpWidget(){
-			 return new VPPAarpNeedHelpWidgetPage(driver);
+		public VPPAarpNeedHelpWidgetPageMobile validateNeedHelpWidget(){
+			 return new VPPAarpNeedHelpWidgetPageMobile(driver);
 		}
-		public VPPNeedMoreInformationWidget validateNeedMoreInformationWidget(){
-			 return new VPPNeedMoreInformationWidget(driver);
+		public VPPNeedMoreInformationWidgetMobile validateNeedMoreInformationWidget(){
+			 return new VPPNeedMoreInformationWidgetMobile(driver);
 		}
-		public VPPRequestSendEmailPage validateEmailWidget(){
-			 return new VPPRequestSendEmailPage(driver);
+		public VPPRequestSendEmailPageMobile validateEmailWidget(){
+			 return new VPPRequestSendEmailPageMobile(driver);
 		}
 		public PlanSelectorPage navigateToPlanSelectorPage(){
 			 planSelector.click();

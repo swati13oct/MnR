@@ -15,6 +15,7 @@ import org.testng.Assert;
 
 import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.AppiumDriver;
 
 public class CommonutilitiesMobile extends UhcDriver {
 

@@ -25,12 +25,21 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import io.appium.java_client.AppiumDriver;
+
 import org.testng.Assert;
 
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.AboutUsAARPPage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
+import pages.acquisition.ulayer.ContactUsAARPPage;
+import pages.acquisition.ulayer.DisclaimersAARPPage;
+import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
+import pages.acquisition.ulayer.SiteMapAARPPage;
 
 /**
  * @author pperugu
@@ -407,7 +416,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
+	
 	private PageData globalFooter;
 
 	public JSONObject globalFooterJson;
@@ -449,7 +459,102 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	
+	
+	public AcquisitionHomePageMobile(WebDriver driver, String site) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(site);
+	}
+	
+	public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(alreadyOnSite);
+	}
+	
+	public AcquisitionHomePageMobile(WebDriver driver, String siteOrPage,String testharnessurl) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(siteOrPage,testharnessurl);
+	}
+	
+	public void openAndValidate(String siteOrPage, String testharnessurl) {
+		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
+		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(AARP_ACQISITION_PROD_PAGE_URL+testharurl);
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
+		else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
+	}
+	
+	
 
+	public void openAndValidate(boolean alreadyOnSite) {
+		if (alreadyOnSite) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		testSiteUrl=driver.getCurrentUrl();
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+		}
+	}
 	// public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
 	// super(driver);
 	// PageFactory.initElements(driver, this);
@@ -472,6 +577,155 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else
 			testSiteUrl = AARP_ACQISITION_PAGE_URL;
 		return testSiteUrl;
+	}
+
+	public void openAndValidate(String site) {
+		if ("BLayer".equalsIgnoreCase(site)|| site.equalsIgnoreCase("UHC")||site.equalsIgnoreCase("UMS")) {
+			if (MRScenario.environment.equals("offline")) {
+				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(UMS_ACQISITION_PROD_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+			} else {
+				startNew(UMS_ACQISITION_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+			}
+			
+		} else if("health-plans".equalsIgnoreCase(site)){
+			isHealthPlan = true;
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("Current page URL: "+driver.getCurrentUrl());
+				testSiteUrl=driver.getCurrentUrl();
+				checkModelPopup(driver,15);
+				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+				try{
+					if(proactiveChatExitBtn!=null)
+					jsClickNew(proactiveChatExitBtn);
+					
+					else 
+						Assert.fail("Please check booleanvalue");
+					
+				}catch(Exception e){
+					System.out.println("Proactive chat popup not displayed");
+				}
+		}else if(site.equalsIgnoreCase("AARP")|| site.equalsIgnoreCase("Ulayer")||site.equalsIgnoreCase("AMP")){
+			if (MRScenario.environment.equals("offline")) {
+				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver,45);
+			}
+			else if (MRScenario.environment.equals("prod")) {
+				start(AARP_ACQISITION_PROD_PAGE_URL);
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver,45);
+			}else if (MRScenario.environment.contains("stage-0")) {
+				startNew(AARP_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			}
+			else {
+				start(AARP_ACQISITION_PAGE_URL);
+				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
+				checkModelPopup(driver,30);		
+			}
+		}
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		checkModelPopup(driver,15);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
+	
+	public void checkForSecurityPage() {
+		if(!MRScenario.domain.contains("uhc.com")) {
+			try {
+				if (advancedBtn.isDisplayed()) {
+					advancedBtn.click();
+					proceedLink.click();
+				}
+				} catch (Exception e) {
+					System.out.println("Advanced button not displayed");
+				}
+		}
+	}
+	
+	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
+		validateNew(footerPrivacyPolicyLink);
+		footerPrivacyPolicyLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(privacyHeader);
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
+			return new PrivacyPolicyAARPPageMobile(driver);
+		}
+		return null;
+	}
+	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
+		validate(footerAgentsnBrokersLink);
+		footerAgentsnBrokersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(brokerHeader);
+		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
+			return new AgentsnBrokersAARPPageMobile(driver);
+		}
+		return null;
+	}
+
+	public DisclaimersAARPPageMobile disclaimersFooterClick() {
+		validate(footerDisclaimersLink);
+		footerDisclaimersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("disclaimer")) {
+			return new DisclaimersAARPPageMobile(driver);
+		}
+		return null;
+	}
+	public AcquisitionHomePageMobile homeFooterClick() {
+		validateNew(footerHomeLink);
+		footerHomeLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(zipCodeField)) {
+			return new AcquisitionHomePageMobile(driver);
+		}
+		return null;
+	}
+
+	public AboutUsAARPPageMobile aboutUsFooterClick() {
+		validateNew(footerAboutUsLink);
+		footerAboutUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().contains("About UnitedHealthcare")) {
+			return new AboutUsAARPPageMobile(driver);
+		}
+		return null;
+	}
+
+	public SiteMapAARPPageMobile siteMapFooterClick() {
+		validateNew(footerSiteMapLink);
+		footerSiteMapLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(siteMapHeader);
+		if (driver.getCurrentUrl().contains("sitemap.html")) {
+			return new SiteMapAARPPageMobile(driver);
+		}
+		return null;
+	}
+
+	public ContactUsAARPPageMobile contactUsFooterClick() {
+		validateNew(footerContactUsLink);
+		footerContactUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsAARPPageMobile(driver);
+		}
+		return null;
 	}
 
 	/*
@@ -1305,14 +1559,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * (driver.getCurrentUrl().contains("medicare.html?q=medicare")) return new
 	 * keywordSearchAARP(driver); return null; }
 	 */
-	public ZipcodeLookupHomePage looksupforZipcodes() {
+	public ZipcodeLookupHomePageMobile looksupforZipcodes() {
 
 		lookzip.click();
 
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
 			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupHomePage(driver);
+			return new ZipcodeLookupHomePageMobile(driver);
 		}
 		return null;
 
@@ -1693,12 +1947,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 		return null;
 	}
-	public  keywordSearchAARP searchfield() {
-		validate (searchfield);		
+
+	public keywordSearchAARP searchfield() {
+		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
-		validate (searchbutton);
-		System.out.println("search button is seen on AARP site ==>"  + searchbutton.isDisplayed());
-		searchfield.clear();		
+		validate(searchbutton);
+		System.out.println("search button is seen on AARP site ==>" + searchbutton.isDisplayed());
+		searchfield.clear();
 		searchfield.sendKeys("medicare");
 		searchbutton.click();
 		try {
@@ -1708,10 +1963,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
-		return new  keywordSearchAARP(driver);
-		return null;	
+			return new keywordSearchAARP(driver);
+		return null;
 	}
-	
 
 	public void openVPPPage() {
 		if (!(MRScenario.getProps() == null)) {

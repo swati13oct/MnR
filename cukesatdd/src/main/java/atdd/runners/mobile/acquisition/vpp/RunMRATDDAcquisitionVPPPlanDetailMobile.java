@@ -16,10 +16,10 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json",deta
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
  outputFolder = "target/RunMRATDDAcquisitionVppPlanDetailMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
-features = { "src/main/resources/feature/mobile/acquisition/vpp" }, 
+features = { "src/main/resources/feature/mobile/acquisition/vpp" }, dryRun=false,
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json" }, 
-tags = { "@vppPlanDetailsBlayer" })
+tags = {})
 public class RunMRATDDAcquisitionVPPPlanDetailMobile { 
  
 }

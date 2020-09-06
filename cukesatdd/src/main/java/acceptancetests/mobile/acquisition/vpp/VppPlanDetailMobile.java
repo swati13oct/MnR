@@ -43,6 +43,7 @@ import pages.acquisition.ulayer.ComparePlansPage;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
@@ -68,7 +69,6 @@ public class VppPlanDetailMobile {
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -619,7 +619,7 @@ public class VppPlanDetailMobile {
 		System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
-		PlanComparePageMobile comparePlansPage = planSummaryPage.selectplantocompare(PlanType, PlanName);
+		ComparePlansPageMobile comparePlansPage = planSummaryPage.selectplantocompare(PlanType, PlanName);
 
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);

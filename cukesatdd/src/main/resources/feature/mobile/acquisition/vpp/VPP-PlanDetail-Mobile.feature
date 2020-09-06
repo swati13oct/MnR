@@ -1,4 +1,4 @@
-@vppPlanDetailsBlayer
+@VPPPlanDetailAndroid
 Feature: 2.03-ACQ-Plan details in vpp flow UMS
 
 
