@@ -1172,13 +1172,15 @@ try {
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		// max 30 mins for device allocation - mobileSessionTimeout
-		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); 
+		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout);
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
+			capabilities.setCapability("parentTunnel", "optumtest");
 			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);

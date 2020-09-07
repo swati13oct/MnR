@@ -51,8 +51,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -84,8 +84,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Multi Doctor        | <isMultiDoctor>    |
     And user adds drugs in Drug page mobile
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -140,8 +140,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -178,10 +178,10 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user validte error function in drug option selection page mobile
       | Drug Selection |  |
     And user verifies exisitng PRE drug session using startover mobile
-    And user selects Pharmacy in Pharmacy page and validate errors mobile
-      | Pharmacy Selection |  |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page and validate errors mobile
+    #  | Pharmacy Selection |  |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user validates additional services error function in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user validates cost preferences error function in cost preferences page mobile
@@ -215,8 +215,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -235,7 +235,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     Then user verifies existing PRE provider session using startnow mobile
       | Multi Doctor | <isMultiDoctor> |
     And user verifies exisitng PRE drug session using startnow mobile
-    And verify continue function on "Pharmacy" page mobile
+    #And verify continue function on "Pharmacy" page mobile
     And verify continue function on "Additional Services" page mobile
     And verify continue function on "Cost Preferences" page mobile
     And user validate elements in loading page mobile
@@ -266,8 +266,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -286,7 +286,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Doctors Search Text | <DoctorsName1>     |
       | Multi Doctor        | <isMultiDoctor1>   |
     And user verifies exisitng PRE drug session using startnow mobile
-    And verify continue function on "Pharmacy" page mobile
+    #And verify continue function on "Pharmacy" page mobile
     And verify continue function on "Additional Services" page mobile
     And verify continue function on "Cost Preferences" page mobile
     And user validate elements in loading page mobile
