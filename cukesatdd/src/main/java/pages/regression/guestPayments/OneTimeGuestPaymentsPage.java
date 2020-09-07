@@ -279,7 +279,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 	public void enterOtherAmount(String otherAmount) {
-
+		otherAmountTextField.clear();
 		otherAmountTextField.sendKeys(otherAmount);
 	}
 
