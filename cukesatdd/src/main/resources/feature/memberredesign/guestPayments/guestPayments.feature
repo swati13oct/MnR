@@ -1,6 +1,7 @@
 @guestPayment
 Feature: 1.06.7 Member Guest Payments Page
 
+#Footer steps are being commented right now, need to enable them later
  @guestPayment01 @validateUrlForDifferentBrands
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
     Given I am on the login screen of Guest Payments Portal
@@ -25,7 +26,7 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different error scenarios
     Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-    #Then I validate all the header and page elements
+    Then I validate all the header and page elements
     And  I click on Next button leaving Member ID and Date of birth blank
     Then I will get an error message
        #incorrect member id
@@ -68,7 +69,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-      #| 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
+      | 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
       | 10008 | TERMINATED            | 958542476-1   | 03/28/1941    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
       | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
@@ -89,7 +90,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName       |
-      | 10011 | C&SBlocked            |915516555-1    | 10/29/1947   |   RETIREE     |
+      | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE     |
       | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |
 
   @guestPayment05 @makeOneTimePayment @pastAmount @ccFLow
