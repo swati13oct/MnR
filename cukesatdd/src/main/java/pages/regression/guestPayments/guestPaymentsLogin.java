@@ -174,6 +174,8 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
 		
 		
 	}

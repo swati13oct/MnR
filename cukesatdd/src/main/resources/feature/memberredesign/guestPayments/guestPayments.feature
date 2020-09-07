@@ -63,11 +63,11 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-      | 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
+     #| 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
       | 10008 | TERMINATEDWithNODUE   | 958542476-1   | 03/28/1941    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
       | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
-      | 10011 | PreffectiveWithNoDue  | 20713181-1    | 09/06/1946    |   RETIREE   |
+      | 10011 | PreffectiveWithNoDue  | 020713181-1   | 09/06/1946    |   RETIREE   |
 
 
   @guestPayment04 @C&SplanBLOCKED @M&RBlocked 
@@ -102,10 +102,10 @@ Feature: 1.06.7 Member Guest Payments Page
 
 
     Examples:
-      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |
-      | 10000 | memberWithPD     | 978196889-1 | 10/19/1941 | true   | true   |
-   #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   |
-      | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  |
+      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
+      | 10000 | memberWithPD     | 978196889-1 | 10/19/1941 | true   | true   | AARP      |
+   #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   | UHC       |
+      | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  | RETIREE   |
 
   @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -117,7 +117,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
+   # And I validate all the header and page elements on One-time payment page
     Then I will entered other amount Due
     #incorrect Amount
       | Other Amount | 2500 |
