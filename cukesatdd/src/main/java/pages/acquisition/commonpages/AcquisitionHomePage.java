@@ -1070,6 +1070,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(viewAllDisclaimerInformationLink);
 
 	}
+	
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
@@ -1099,7 +1100,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		footerPrivacyPolicyLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
-		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
 			return new PrivacyPolicyAARPPage(driver);
 		}
 		return null;
@@ -1109,7 +1110,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
 		return null;
@@ -1960,7 +1961,42 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 			}
 		}
-
+		
+		public void validateStateDropDown() {
+			validateNew(stateDropDown);
+			selectFromDropDownByValue(stateDropDown, "California");
+			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+			System.out.println("State selected : California");
+			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
+			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
+		}
+		
+		public void validateDisclaimer() {
+			validateNew(disclaimerInformation);
+			disclaimerInformation.click();
+			validateNew(backToTop_Disclaimer);
+		}
+		
+		public void validateVisitAarpOrglink() {
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				validateNew(visitAARPFooterLink);
+				String hRef = visitAARPFooterLink.getAttribute("href");
+				System.out.println("href for Visit AARP.org link : " + hRef);
+				Assert.assertTrue(hRef.contains("www.aarp.org"), "Incorrect href for Visit AARP.org : " + hRef);
+				visitAARPFooterLink.isEnabled();
+			}
+			else
+			{
+				System.out.println("UHC Medicare solutions site loaded");
+			}
+			
+		}
+		
+		public void backToToplink() {
+			validateNew(backToTop);
+			backToTop.click();
+		}
+		
 } 
 
 
