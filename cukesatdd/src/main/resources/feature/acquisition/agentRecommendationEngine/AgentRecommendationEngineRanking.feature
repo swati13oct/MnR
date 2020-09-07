@@ -21,7 +21,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
   #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
   #| qavgogine | qavgogine | xamegy@getnada.com |
   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
-  Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
+  Scenario Outline: - <Email> To Verify agent login and validate ARE No dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |
@@ -109,9 +109,10 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email            | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
-      | qavgogine | qavgogine | API@MEMBERDD.COM | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           |            |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      #| qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                           | YES                | YES           |            |
+      | qavgogine | qavgogine | API@MEMBERDD.COM      | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           |            |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
