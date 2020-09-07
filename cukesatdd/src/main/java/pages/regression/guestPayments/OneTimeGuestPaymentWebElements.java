@@ -42,10 +42,10 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//h3[contains(text(),'Select a Payment Amount')]")
 	public WebElement selectAPaymentHeader;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//p[contains(text(),'Past Amount Due')]")
 	public WebElement pastAmountDueRadioButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h2[@class='uhc-tempo-header__h2 token-font-family-heading-three token-color-gray-dark-base m-0 pad34']/parent::*//p[contains(text(),'Past Amount Due')]")
 	public WebElement pastAmountValue;
 	
 	@FindBy(xpath = "")
@@ -54,10 +54,10 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement pastAmountCurrentChargesValue;
 	
-	@FindBy(xpath = "//input[@name='amount']")
+	@FindBy(xpath = "//p[contains(text(),'Other Amount')]")
 	public WebElement otherAmountRadioButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(id = "otherAmount")
 	public WebElement otherAmountTextField;
 	
 	@FindBy(xpath = "")
