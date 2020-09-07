@@ -1,7 +1,7 @@
 Feature: Refill Order Confirmation
   Display Refill order confirmation.
 
-  @RefillOrderConfirmation @F481928 @US2767412 @US2767413 @US2767418 @US2767425 @US2767426 @US2767427 @US2767424 @US2767457
+  @RefillOrderConfirmation @F481928 @F496830 @US2767412 @US2767413 @US2767418 @US2767425 @US2767426 @US2767427 @US2767424 @US2767457 @US2853935
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify Refill Order Confirmation page components
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -21,13 +21,13 @@ Feature: Refill Order Confirmation
     Then user will see the shipping method displayed
     Then user will see the shipping address displayed
     Then user will see the payment method displayed
-    Then user will see the order total displayed
+    Then user will view the Price Total field
     Then user will see an order total disclaimer displayed
     Then user will see the estimated delivery date
     When user view the Medications section
     Then user will see the drug name and strength
     And user will see the day supply
-    And user will view the price
+    And user will view rx price in the Medication Price field
     And user will view the Rx number
     And user will view the provider
     And user will view the remaining refills

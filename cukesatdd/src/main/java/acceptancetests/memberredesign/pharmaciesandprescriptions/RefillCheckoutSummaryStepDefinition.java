@@ -25,6 +25,8 @@ public class RefillCheckoutSummaryStepDefinition {
 	MRScenario loginScenario;
 
 	public static List<Object> listOfMedicationDetail = new ArrayList<>();
+	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -557,27 +559,6 @@ public class RefillCheckoutSummaryStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user fetches medication informations and clicks on Transfer To HD call to action button$")
-	public void user_fetches_medication_informations_and_clicks_on_Transfer_To_HD_call_to_action_button()
-			throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.waitTillMedCabLoads();
-		pnpPg.clickOnViewAllMedicationsLink();
-		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
-		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
-		for (int i = 0; i < countOfPage; i++) {
-			if (indexOfRenewMedication.size() == 0 && i != countOfPage - 1) {
-				pnpPg.clickOnNextPageArrow();
-				indexOfRenewMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
-			}
-		}
-		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
-		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
-		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-
 	@When("^user view the bottom of Skyline Complete Your Refill Component$")
 	public void user_view_the_bottom_of_Skyline_Complete_Your_Refill_Component() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
@@ -593,6 +574,7 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
 		Assert.assertTrue("PROBLEM - Disclaimer Message not available", checkoutSumaryPg.validateDisclaimerMessage());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+
 	}
 
 	@Then("^disclaimer will remind the user that \"([^\"]*)\" is fulfilling the order$")
@@ -604,4 +586,25 @@ public class RefillCheckoutSummaryStepDefinition {
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
 
+	@When("^user fetches medication informations and clicks on Transfer To HD call to action button$")
+	public void user_fetches_medication_informations_and_clicks_on_Transfer_To_HD_call_to_action_button()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfTransferMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+			}
+		}
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
+		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 }

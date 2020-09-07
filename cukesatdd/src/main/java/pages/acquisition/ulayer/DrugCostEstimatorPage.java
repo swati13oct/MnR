@@ -37,13 +37,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement dceplanname;
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	@FindBy(id = "add-drug")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement addDrug;
 
-	@FindBy(id = "pharmacyTabId")
+	@FindBy(xpath = "//*[contains(@id,'build-your-drug-list')]")
 	public WebElement step2;
 
-	@FindBy(id = "drugsTabId")
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement step1;
 
 	@FindBy(id = "pharmacy-form")
@@ -64,7 +64,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(className = "edit-drug")
 	public WebElement editDrug;
 
-	@FindBy(id = "drug-search-input")
+	@FindBy(xpath = "//input[contains(@id,'drugsearch')]")
 	public WebElement drugsearchinput;
 
 	@FindBy(id = "drugcostestimatorHeading") // [contains(text(),'Cost')][contains(text(),'Estimator')]")
@@ -187,7 +187,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(id = "costsTabId")
+	@FindBy(xpath = "//*[contains(@id,'review-drug-costs')]")
 	public WebElement step3;
 
 	@FindBy(id = "drugcosts")
@@ -2069,7 +2069,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(DrugName3);
 		System.out.println(PharmacyName);
 	
-		String DCE_aarpacquisition = ReturnDriverStorage(driver, "localStorage","aarpacquisition" );
+		String DCE_aarpacquisition = ReturnDriverStorage(driver, "localStorage","ucp_aarpacquisition" );
 		System.out.println("AARP ACQ info from Local Storage");
 		System.out.println(DCE_aarpacquisition);
 		boolean validation_Flag=false;
@@ -2081,7 +2081,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("AARP ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
-		String DCEDrugList = ReturnDriverStorage(driver, "localStorage","drugList" );
+		String DCEDrugList = ReturnDriverStorage(driver, "localStorage","ucp_drugList" );
 		System.out.println("AARP DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;

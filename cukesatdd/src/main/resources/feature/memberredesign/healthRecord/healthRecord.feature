@@ -8,15 +8,15 @@ Feature: 1.24 Member Individual Health Record
       | Member Type | <memberType>       |
     Then the user validates Health Record link display behavior on Account Profile dropdown base on test input
       | Expect Link | <expectLink>       |
-    Then the user validates clicking Health Record link will open new tab to the target page
-	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
-	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
-	Then the user navigates to EOB page and validate Health Record link display behavior
+    Then the user validates clicking Health Record link will open to the target page
+#	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
+#	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
+#	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
 	Then the user navigates to Payments page and validate Health Record link display behavior
-	#Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
+	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
 	Then the user navigates to Account Settings page and validate Health Record link display behavior
 	Then the user navigates to Contact Us page and validate Health Record link display behavior
@@ -35,7 +35,7 @@ Feature: 1.24 Member Individual Health Record
 	    | index | FID     | planType                 | memberType         | expectLink | 
 	   | 03    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR | false      |
+	    | 04    | F424804 | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR| false      |
 
     @no_ihr_c
     Examples: 
@@ -60,10 +60,12 @@ Feature: 1.24 Member Individual Health Record
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 10    | F424804 | PDP      | IHR                | true       |
 
+	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
     @ihr_c
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
-	    | 11    | F424804 | MA       | PREEFF_IHR         | true       |
+	  # | 11    | F424804 | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | PDP      | PREEFF_IHR         | true       |
 	    | 12    | F424804 | MAPD     | TERM_IHR           | true       |
 
     @ihr_d
@@ -77,7 +79,7 @@ Feature: 1.24 Member Individual Health Record
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 15    | F424804 | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	 #  | 16    | F424804 | PDP      | COMBO_SHIP_PDP_IHR | true       |
-	    | 16    | F424804 | MA       | COMBO_SHIP_MA_IHR  | true       |
+	    | 16    | F424804 | MAPD       | COMBO_SHIP_MAPD_IHR| true       |
 
     @ihr_f
     Examples: 

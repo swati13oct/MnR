@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -81,6 +82,15 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css="div.print-back>a:first-child")
 	private WebElement backToPlans;
 	
+	@FindBy(xpath = "//div[@class='multi-year-select']")
+	private WebElement profileMultiYear;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
+	private WebElement profileNxtYrPlans;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	private WebElement profileCrntYrPlans;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -99,6 +109,18 @@ public class VisitorProfilePage extends UhcDriver {
 		addrugs.click();
 		if(currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	
+	public GetStartedPage addDrug_DCERedesign(){
+		
+		addrugs.click();
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
 		return null;
 	}
 	
@@ -128,7 +150,7 @@ public class VisitorProfilePage extends UhcDriver {
 		jsClickNew(expandDrugBlock);
 		System.out.println("Drug Name Text : " + drugName.getText().trim());
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		//Assert.assertTrue(pharmacyAddress.isDisplayed());
 		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
 	}
 	
@@ -190,6 +212,20 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param plans
 	 */
 	public void deletePlans(String plans) {
+		if(validate(profileMultiYear, 10))
+		{
+			profileNxtYrPlans.click();
+			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
+				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+			else
+				System.out.println("##############No saved plans available for 2021##############");
+			
+			profileCrntYrPlans.click();
+		}
+		else {
+			System.out.println("##############MultiYear not displayed##############");
+			}
+		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
@@ -197,11 +233,12 @@ public class VisitorProfilePage extends UhcDriver {
 					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
 					Thread.sleep(5000);
 				}
-			}else
-				System.out.println("##############No saved plans available here##############");
-		} catch (Exception e) {
+				}
+				else
+					System.out.println("##############No saved plans available here##############");
+		}	catch (Exception e) {
 			e.printStackTrace();
-		}
+			}
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
 	
@@ -226,7 +263,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')][1]//button[contains(@class,'provider-toggle')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("providers covered"))

@@ -83,10 +83,8 @@ public class ShopperProfileStepDefinition {
 			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 					.getBean(PageConstants.PROFILE_SEARCH);
 			
-			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
-			//ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
-			//getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
+			ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,7 +129,7 @@ public class ShopperProfileStepDefinition {
 		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		
-		comparePlansPage.validateAgentModeBanners(userData);
+		comparePlansPage.validateMemberDetails(userData);
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")
@@ -238,11 +236,9 @@ public class ShopperProfileStepDefinition {
 		try {
 			MemberCreateProfile createProfile = (MemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			//ComparePlansPage comparePlansPage = createProfile.createProfile(details);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
 			Thread.sleep(15000);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
-			//getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -265,10 +261,8 @@ public class ShopperProfileStepDefinition {
 		try {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
-			VPPPlanSummaryPage vppPlanSumamry = createProfile.createProfile(details);
-			//ComparePlansPage comparePlansPage = createProfile.createProfile(details);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
-			//getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
+			ComparePlansPage comparePlansPage = createProfile.createProfile(details);
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

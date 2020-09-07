@@ -29,7 +29,7 @@ Feature: Renew - Checkout summary
     When user views the Medications section
     And user validates the medication name and strength
     And user validates the price
-    And user validates the day supply
+    And user validates the day supply for Renew
     And user validates the Rx number
     And user validates the provider
 
@@ -282,6 +282,9 @@ Feature: Renew - Checkout summary
     Then user will see Preferred shipping address
     And user will view the Preferred Address label
     And user will view the Change Shipping address CTA
+    When user view the bottom of Skyline Complete Your Renew Component
+    Then user will view the disclaimer message
+    And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
       | FID     | planType | memberType                   |

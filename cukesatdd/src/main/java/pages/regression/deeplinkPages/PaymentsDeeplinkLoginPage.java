@@ -233,17 +233,19 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 					}
 					checkForIPerceptionModel(driver);
 					CommonUtility.checkPageIsReadyNew(driver);	
-					validateNew(textonpage);
+					//validateNew(textonpage);
 					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 					System.out.println("*** Page URL ***" + driver.getTitle());
-					if (driver.getCurrentUrl().contains("payments/overview.html?deeplink=true")) {
+					//if (driver.getCurrentUrl().contains("payments/overview.html?deeplink=true")) {
+					if (driver.getCurrentUrl().contains("payments/overview")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on Payments deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
 						Assert.assertTrue(driver.getTitle().contains("Premium Payments"));
 						return true;
 						} else {
-							Assert.fail("The element " + textonpage.getText() + "is not found");
+							//Assert.fail("The element " + textonpage.getText() + "is not found");
+							Assert.fail("Premium Payments page is not loaded");
 						}
 										
 						return true;							

@@ -100,4 +100,13 @@ public class RenewCheckoutSummaryStepDefinition {
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
 
+	@When("^user view the bottom of Skyline Complete Your Renew Component$")
+	public void user_view_the_bottom_of_Skyline_Complete_Your_Renew_Component() throws Throwable {
+		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
+				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
+		Assert.assertTrue("PROBLEM - Disclaimer Message not available below SkyLine Component",
+				checkoutSumaryPg.validateDisclaimerAvailableBelowSkyLineComponent());
+		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
+	}
+
 }

@@ -37,30 +37,24 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     @prod_prepareForNextYear01a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	   #| 01    | F437767 | ashah120  | Mnrqa003  |  testUserName     | PDP	     | GRP_OFFCYC_PFNY     |
-	   #| 02    | F437767 | ashah120  | Mnrqa003  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
-#TBD	    | 03    | F437767 | ashah120  | Mnrqa003  |  testUserName     | MAPD	 | GRP_OFFCYC_PFNY     |
+	   #| 1-01  | F437767 | ashah120  | Mnrqa003  |  testUserName     | PDP	     | GRP_OFFCYC_PFNY     |
+	   #| 1-02  | F437767 | ashah120  | Mnrqa003  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
+        | 1-03  | F437767 | ashah120  | Mnrqa003  |  diannahill1      | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prod_prepareForNextYear01b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-#	    | 04    | F437767 | ashah120  | Mnrqa003  | testUserName      | MA	     | IND_PREEFF_PFNY     |
-#	    | 05    | F437767 | ashah120  | Mnrqa003  | testUserName      | MA	     | IND_TERM_PFNY       |
-	    | 06    | F437767 | ashah120  | Mnrqa003  | Pramila1946       | SHIP	 | IND_PFNY            |
+#	    | 1-04  | F437767 | ashah120  | Mnrqa003  | testUserName      | MA	     | IND_PREEFF_PFNY     |
+#	    | 1-05  | F437767 | ashah120  | Mnrqa003  | testUserName      | MA	     | IND_TERM_PFNY       |
+	    | 1-06  | F437767 | ashah120  | Mnrqa003  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
 	@prod_prepareForNextYear01c
     Examples: 
-	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 07    | F437767 | ashah120  | Mnrqa003  | phleauxdailles43  | SHIP_HIP | COMBO_SHIP_MA_PFNY  |
-	    | 08    | F437767 | ashah120  | Mnrqa003  | phleauxdailles43  | MA	     | COMBO_SHIP_MA_PFNY  |
-			
-	@prod_prepareForNextYear01d @noTab
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 09    | F437767 | ashah120  | Mnrqa003  | PAULAROTH2        | PDP	     | COMBO_PDP_SHIP_PFNY |
-	    | 10    | F437767 | ashah120  | Mnrqa003  | PAULAROTH2        | SHIP	 | COMBO_PDP_SHIP_PFNY |
-			
+	    | index | FID     | username  | password  | MemUserName       | planType | memberType                 |
+	    | 1-07  | F437767 | ashah120  | Mnrqa003  | JSENFYFDRE#ERY2GO | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F437767 | ashah120  | Mnrqa003  | JSENFYFDRE#ERY2GO | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+		
 
   #-------------------------------------------------
   # note: for cases below -
@@ -114,25 +108,78 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     #Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	Then the user validates Prepare For Next Year page content for individual
+	Then the user validates Prepare For Next Year page content
 
 	@prod_prepareForNextYear02a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 11    | F437767 | ashah120  | Mnrqa003  | nawal1215                 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 12    | F437767 | ashah120  | Mnrqa003  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 13    | F437767 | ashah120  | Mnrqa003  | haradaty32                | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-01  | F437767 | ashah120  | Mnrqa003  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 	@prod_prepareForNextYear02b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 14    | F437767 | ashah120  | Mnrqa003  | 7547MCGEE                 | PDP	     | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 15    | F437767 | ashah120  | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD     | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 16    | F437767 | ashah120  | Mnrqa003  | 1GIRL4DEAN                | MA	     | GRP_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-02  | F437767 | ashah120  | Mnrqa003  | nawal1215                 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-03  | F437767 | ashah120  | Mnrqa003  | haradaty32                | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 	@prod_prepareForNextYear02c
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 17    | F437767 | ashah120  | Mnrqa003  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 18    | F437767 | ashah120  | Mnrqa003  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-04  | F437767 | ashah120  | Mnrqa003  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-05  | F437767 | ashah120  | Mnrqa003  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@prod_prepareForNextYear02d
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-06  | F437767 | ashah120  | Mnrqa003  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@prod_prepareForNextYear02e
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-07  | F437767 | ashah120  | Mnrqa003  | 7547MCGEE                 | PDP	     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-08  | F437767 | ashah120  | Mnrqa003  | 1GIRL4DEAN                | MA	     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+    #@prepareForNextYear02f
+    #Examples: 
+	#    | index | FID     | username  | password  | MemUserName              | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+    #    | 2-09  | F437767 | ashah120  | Mnrqa003  | testUserName             | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
+    #    | 2-10  | F437767 | ashah120  | Mnrqa003  | testUserName             | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+
+	@prod_prepareForNextYear02g
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-11  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@prod_prepareForNextYear02h
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-12  | F437767 | ashah120  | Mnrqa003  | PAULAROTH2                | PDP	     | COMBO_PDP_IND_SHIP_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    
+  @prod_prepareForNextYear03 @hasTab @noCombTabOnPfny
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+	Then test setup stores AEM and timeline milestones info
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 09/15/2020     |
+      | Milestone 2 Date       | 10/01/2020     |
+      | Milestone 3 Date       | 10/15/2020     |
+      | Milestone 4 Date       | 12/07/2020     |
+      | Milestone 5 Date       | 01/01/2021     |
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
+
+	@prepareForNextYear03a
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
+	    | 3-01  | F437767 | ashah120  | Mnrqa003  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+			
+	@prepareForNextYear03b
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
+	    | 3-02  | F437767 | ashah120  | Mnrqa003  | PAULAROTH2              | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 	    

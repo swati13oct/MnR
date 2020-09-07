@@ -10,7 +10,7 @@ Scenario Outline:To validate Acquisition pages on AEM are loading
 	
 	Examples:
 		|username  | password |
-		|automation|automation!23 |
+		|admin|admin |
 		
 @CQMemberPages
 Scenario Outline:To validate Member pages on AEM are loading
@@ -21,7 +21,7 @@ Scenario Outline:To validate Member pages on AEM are loading
 	
 	Examples:
 		|username  | password |
-		|automation|automation!23 |
+		|admin|admin |
 
 Scenario Outline:To validate AEM OLE pages are loading
 	Given the user is on the AEM login page and logs in
@@ -31,7 +31,7 @@ Scenario Outline:To validate AEM OLE pages are loading
 	
 	Examples:
 		|username  | password |
-		|automation|automation!23 |
+		|admin|admin |
 
 Scenario Outline:To validate AEM VPP pages are loading 
 	Given the user is on the AEM login page and logs in
@@ -41,5 +41,5 @@ Scenario Outline:To validate AEM VPP pages are loading
 	
 	Examples:
 		|username  | password |
-		|automation|automation!23 |
+		|admin|admin |
 	

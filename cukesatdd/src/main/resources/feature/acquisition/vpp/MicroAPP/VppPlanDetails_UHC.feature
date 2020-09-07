@@ -8,9 +8,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user validates following PDF link is displayes with correct document code for UHC
@@ -21,8 +22,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | DocumentCode | <docCode> |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
-      | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 | planyear |
+      | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
 
   @vppPlanDetailsUHC02 @vppPlanDetailsUHCRun01
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
@@ -31,9 +32,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user validates following PDF link is displayes with correct document code for UHC
@@ -44,8 +46,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | DocumentCode | <docCode> |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             |
-      | 00002 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             | planyear |
+      | 00002 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 | current  |
 
   @vppPlanDetailsUHC03 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
@@ -54,9 +56,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user click on Plan costs tab and validates
@@ -64,10 +67,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium |
-      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          |
-      | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            |
-      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium | planyear |
+      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
+      | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
+      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
 
   @vppPlanDetailsUHC04 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan
@@ -76,9 +79,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user click on Optional Services tab and add the rider
@@ -89,9 +93,9 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium |
-      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
+      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium | planyear |
+      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            | current  |
+      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          | current  |
 
   @vppPlanDetailsUHC05 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
@@ -100,13 +104,15 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code | <zipcode> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     And the user view plan details of the above selected plan in UMS site vpp
       | Plan Name | <planName> |
     Then the user clicks on both top and bottom back to plans link and validates its redirection
 
     Examples: 
-      | TID   | zipcode | planName                                             | plantype |
-      | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
+      | TID   | zipcode | planName                                             | plantype | planyear |
+      | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     | current  |
 
   @vppPlanDetailsUHC06 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - OLE Landing from UHC Acquisition site VPP Plan Details
@@ -117,18 +123,20 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site vpp
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                                   |
-      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)     |
-      | 00005 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            |
-      | 00006 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  |
-      | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
-      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                                   | planyear |
+      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)     | current  |
+      | 00005 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            | current  |
+      | 00006 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  | current  |
+      | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | current  |
+#      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
 
   @vppPlanDetailsUHC07 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Provider Search  in UHC site from Plan Details page
@@ -137,8 +145,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button in UMS site
@@ -146,8 +156,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
     Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               |
-      | 00009 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               | planyear |
+      | 00009 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
   @vppPlanDetailsUHC08 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
@@ -157,6 +167,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | County      | <county>      |
       | aep         | <aep>         |
       | currentyear | <currentyear> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user navigates to the plan details for the given plan type in UMS site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
@@ -216,8 +230,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
-      |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | TID   | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
+      | 00010 |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
   @vppPlanDetailsUHC09 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
@@ -226,18 +240,19 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user click on Prescription Drug Benefits and validates in UHC site
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            |
-      | 00011 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | 00012 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
-      | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
+      | 00011 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
+      | 00012 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     | current  |
+      | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | current  |
 
   @vppPlanDetailsUHC10 @vppPlanDetailsUHCRun03
   Scenario Outline: TID - <TID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
@@ -246,8 +261,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
@@ -261,8 +278,8 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
     And user verifies home link of agents&brokers page bluelayer
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            |
-      | 00014 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
+      | 00014 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
   @vppPlanDetailsUHC11 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
@@ -272,9 +289,10 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
-    When user views plans of the below plan type in UMS site for next year
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     And the user validates the pdf section for uhc
@@ -283,5 +301,31 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
     Then I uncheck and go back to the vpp page to validate
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            |
-      | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
+      | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
+
+  @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the UMS site
+      | Plan Year | <planyear> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user click on Dental Cover Popup he must be able to validate plan defaults in UHC
+      | Optional Rider | <optionalRider> |
+      | Plan Name      | <planName>      |
+
+    Examples: 
+      | TID        | zipcode | isMultutiCounty | county          | plantype | planName                                                         | optionalRider   | planyear |
+      | F435191-01 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | current  |
+      | F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | current  |
+      | F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum | current  |
+      | F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 | current  |
+      | F435191-05 |   55343 | No              | Hennepin County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)                   |                 | current  |
+      | F435191-06 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     |                 | current  |

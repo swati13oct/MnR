@@ -31,7 +31,7 @@ Feature: 1.16 Member Contact us Page CHAT
       | username | password |
       | MRagent8 | MRagent8 |
 
-  @regressionMember @CT @GroupFedChat
+  @regressionMember @CT @GroupFedChat @codeWarriors
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Chat with us  is visible on contactUS page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |

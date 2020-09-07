@@ -46,7 +46,7 @@ public class AddDrugDetails extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
+		validateNew(addDrugDetailsPageHeading, 25);
 		validateNew(selectYourFrequencyDropdown);
 		validateNew(quantityField);
 		//validateNew(dosageDropdown);
