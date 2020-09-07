@@ -35,12 +35,6 @@ Feature: 1.06.7 Member Guest Payments Page
        | Date of Birth     | 01/01/1944   |
     Then I will click the Next Button on the login page
     Then I will get an error message
-    #incorrect dob
-    And  I will enter my Member ID and Date of birth
-       | Member ID         | 915516555-1     |
-       | Date of Birth     |  01/01      |
-    Then I will click the Next Button on the login page
-    Then I will get an error message
     #incorrect combination
    And  I will enter my Member ID and Date of birth
        | Member ID         |  915516555-1      |
