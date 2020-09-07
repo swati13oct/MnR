@@ -613,10 +613,10 @@ public class MRConstants {
 
 	public static String PROV_NAME = "";
 	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
-	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://stage-medicare.uhc.com/medicare/premium-payment";
-	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL = "https://stage-medicare.uhc.com/retiree/premium-payment";
-	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://stage-mymedicareaccount.uhc.com/pcp/premium-payment";
-	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://stage-mymedicareaccount.uhc.com/medica/premium-payment";
+	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
+	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
+	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
+	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://guest-payments-team-predators.ocp-elr-core-nonprod.optum.com/#/";
 	public static final String AARP_HAWL = "http://stage-myaarpmedicare.uhc.com/extras";
 	// public static final String
 	// AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";

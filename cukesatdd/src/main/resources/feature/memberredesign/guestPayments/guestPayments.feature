@@ -76,12 +76,11 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10011 | PreffectiveWithNoDue  | 20713181-1    | 09/06/1946    |   RETIREE   |
 
 
-
   @guestPayment04 @C&SplanBLOCKED @M&RBlocked 
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for Blocked Members with No sign in Link
       Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-    Then I validate all the header and page elements
+   # Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
        | Member ID         | <memberID> |
        | Date of Birth     |  <dob>     |
