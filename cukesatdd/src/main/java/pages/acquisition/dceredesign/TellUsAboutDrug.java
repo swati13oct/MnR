@@ -21,7 +21,8 @@ import pages.acquisition.ulayer.PageTitleConstants;
 public class TellUsAboutDrug extends UhcDriver {
 
 
-	@FindBy(xpath = "//*[@id='drugPopHeading']")
+//	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -57,7 +58,8 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")
 	public WebElement QuantityTxt;
 	
-	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
+//	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
+	@FindBy(id="selectdosage")
 	public WebElement FrequentyDrpDwn;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
