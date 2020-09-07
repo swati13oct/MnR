@@ -70,9 +70,10 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
       | 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
-      | 10008 | TERMINATED            | 958542476-1   | 03/28/1941    |   UHC       |
+      | 10008 | TERMINATEDWithNODUE   | 958542476-1   | 03/28/1941    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
       | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
+      | 10011 | PreffectiveWithNoDue  | 20713181-1    | 09/06/1946    |   RETIREE   |
 
 
 
@@ -166,8 +167,8 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
       | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10001 | PDP      | 915516555-1 | 10/29/1947 | UHC      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10002 | MA       | 915516555-1 | 10/29/1947 | RETIREE  | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
       | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
 
