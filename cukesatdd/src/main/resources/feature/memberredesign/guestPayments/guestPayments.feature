@@ -58,14 +58,14 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for blocked Members
     Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-    #Then I validate all the header and page elements
+    Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
        | Member ID         | <memberID> |
        | Date of Birth     |  <dob>     |
     And  I will click on the Next Button and navigate to an Error page
     And  I will be instructed to call the number on the back of my ID
-    Then I click on the sign in link and navigate to Member Portal sign in page
-    Then I will see the Logo specific to my plan and the Sign in button
+    #Then I click on the sign in link and navigate to Member Portal sign in page
+    #Then I will see the Logo specific to my plan and the Sign in button
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
@@ -76,8 +76,8 @@ Feature: 1.06.7 Member Guest Payments Page
 
 
 
-  @guestPayment04 @C&SplanBLOCKED
-  Scenario Outline: TID: <TID> - To validate the Guest Payment page E2E Scenario
+  @guestPayment04 @C&SplanBLOCKED @M&RBlocked 
+  Scenario Outline: TID: <TID> - To validate the Guest Payment page for Blocked Members with No sign in Link
       Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
     Then I validate all the header and page elements
@@ -86,14 +86,58 @@ Feature: 1.06.7 Member Guest Payments Page
        | Date of Birth     |  <dob>     |
     And I will click on the Next Button and navigate to an Error page
     And I will be instructed to call the number on the back of my ID
-    And I will not see the sign in link to the authenticated M&R member site
+   # And I will not see the sign in link to the authenticated M&R member site
 
     Examples:
-      | TID   | planType              | memberID      | dob           | siteName       |
-      | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE     |
+      | TID   | planType              | memberID      | dob           | siteName    |
+      | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE   |
       | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |
 
-  @guestPayment05 @makeOneTimePayment @pastAmount @ccFLow
+ @guestPayment05 @selectPaymentAmountValidations
+  Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
+    Given I am on the login screen of Guest Payments Portal
+      | Site Name | <siteName> |
+   # Then I validate all the header and page elements
+    Then I will enter my Member ID and Date of birth
+      | Member ID         | <memberID> |
+      | Date of Birth     |  <dob>     |
+    And I will click Next to proceed to the Make a One-time payment page
+    And I validate payment Amount fields for different member types
+       | pastDue         | <hasPD> |
+       | currentCharges  |  <hasCC>     |
+
+
+    Examples:
+      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |
+      | 10000 | memberWithPD     | 978196889-1 | 10/19/1941 | true   | true   |
+   #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   |
+      | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  |
+
+  @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
+  Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
+
+    Given I am on the login screen of Guest Payments Portal
+      | Site Name | <siteName> |
+    Then I validate all the header and page elements
+    Then I will enter my Member ID and Date of birth
+      | Member ID         | <memberID> |
+      | Date of Birth     |  <dob>     |
+    And I will click Next to proceed to the Make a One-time payment page
+    And I validate all the header and page elements on One-time payment page
+    Then I will entered other amount Due
+    #incorrect Amount
+      | Other Amount | 2500 |
+    And I will get an error message Cannot exceed annual remaining amount
+    Then I will entered other amount Due
+    #incorrect Amount
+      | Other Amount | 0.50 |
+    And I will get an error message Amount must exceed 1.00
+
+    Examples:
+      | TID   | planType | memberID    | dob        | siteName |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     |
+
+  @guestPayment07 @makeOneTimePayment @pastAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -127,7 +171,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | CreditCardAutomation | 4111111111111111 | 04         | 2024      | test@optum.com |
 
-  @guestPayment06 @makeOneTimePayment @pastAmount @eftCheckingFLow
+  @guestPayment08 @makeOneTimePayment @pastAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -160,7 +204,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 | 1234512345 | 123123123 | test@optum.com |
 
 
-  @guestPayment07 @makeOneTimePayment @pastAmount&currentCharges @ccFLow
+  @guestPayment09 @makeOneTimePayment @pastAmount&currentCharges @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -190,7 +234,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
 
 
-  @guestPayment08 @makeOneTimePayment @pastAmount&currentCharges @eftCheckingFLow
+  @guestPayment10 @makeOneTimePayment @pastAmount&currentCharges @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -218,7 +262,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 | 
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  
 
-  @guestPayment09 @makeOneTimePayment @otherAmount @ccFLow
+  @guestPayment11 @makeOneTimePayment @otherAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -249,7 +293,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  333.00          |
 
 
-  @guestPayment10 @makeOneTimePayment @otherAmount @eftCheckingFLow
+  @guestPayment12 @makeOneTimePayment @otherAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -279,7 +323,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |
       
       
-  @guestPayment11 @makeOneTimePayment @changePaymentDetails
+  @guestPayment13 @makeOneTimePayment @changePaymentDetails
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -316,53 +360,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 |  11.000          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
       | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
 
- @guestPayment12 @selectPaymentAmountValidations
-  Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
-    Given I am on the login screen of Guest Payments Portal
-      | Site Name | <siteName> |
-    Then I validate all the header and page elements
-    Then I will enter my Member ID and Date of birth
-      | Member ID         | <memberID> |
-      | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
-    And I validate payment Amount fields for different member types 
-       | pastDue         | <hasPD> |
-       | currentCharges  |  <hasCC>     |
 
-
-    Examples:
-      | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | true   | true   |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | false  | true   |
-      | 10000 | memberWithPD     | 915516555-1 | 10/29/1947 | false  | false  |
-
-  @guestPayment13 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
-  Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
-
-    Given I am on the login screen of Guest Payments Portal
-      | Site Name | <siteName> |
-    Then I validate all the header and page elements
-    Then I will enter my Member ID and Date of birth
-      | Member ID         | <memberID> |
-      | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
-    Then I will entered other amount Due
-    #incorrect Amount
-      | Other Amount | 2500 |
-    And I will get an error message Cannot exceed annual remaining amount
-    Then I will entered other amount Due
-    #incorrect Amount
-      | Other Amount | 0.50 |
-    And I will get an error message Amount must exceed 1.00
-
-    Examples:
-      | TID   | planType | memberID    | dob        | siteName |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   |
 
   @guestPayment14 @ErrorsAndContentOneTimePayment @eftErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios

@@ -123,10 +123,10 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement accountNumberTextField;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//div[2][contains(text(),'Cannot exceed annual remaining amount')]")
 	public WebElement exceedAnnualerrorMessage;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//div[2][contains(text(),'Amount must exceed $1.00')]")
 	public WebElement exceed1errorMessage;
 
 	@FindBy(xpath = "")

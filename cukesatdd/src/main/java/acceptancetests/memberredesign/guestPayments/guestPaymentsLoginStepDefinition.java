@@ -161,7 +161,7 @@ public class guestPaymentsLoginStepDefinition {
 
 		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		guestPaymentsLogin = guestPaymentsLogin.clickAndLandOnErrorPage();
-		Assert.assertTrue("PROBLEM - One Time Guest Payments Page is not Displayed", guestPaymentsLogin != null);
+		Assert.assertTrue("PROBLEM - Error page is not displayed", guestPaymentsLogin != null);
 	}
 
 	@Then("^I will click the Next Button on the login page$")
@@ -197,7 +197,7 @@ public class guestPaymentsLoginStepDefinition {
 		oneTimeGuestPaymentsPage.validateHeaderAndPageElements();
 
 	}
-	@Then("^I validate payment Amount fields for different member types $")
+	@Then("^I validate payment Amount fields for different member types$")
 
 	public void validateAmountFields(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);

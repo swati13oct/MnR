@@ -150,6 +150,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	public void enterIDandBirthDate(String memberID, String dob) {
 		memberIdTextfield.clear();
 		memberIdTextfield.sendKeys(memberID);
+		dobTextfield.clear();
 		dobTextfield.sendKeys(dob);
 
 
@@ -159,6 +160,10 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		CommonUtility.waitForPageLoad(driver, makeAPaymentsHeader, 5);
 		
 		if (validate(makeAPaymentsHeader)) {
 			return new OneTimeGuestPaymentsPage(driver);
@@ -189,6 +194,10 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	public guestPaymentsLogin clickAndLandOnErrorPage() {
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
+		
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		CommonUtility.waitForPageLoad(driver, magnifyIcon, 5);
 		
 		if (driver.getCurrentUrl().contains("not-available")) {
 			return new guestPaymentsLogin(driver);

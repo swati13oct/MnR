@@ -92,6 +92,13 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	
 	@FindBy(xpath= "//h1[contains(text(),'Make a One-Time Payment')]")
 	public static WebElement makeAPaymentsHeader;
+	
+	@FindBy(className= "magnfy-icon")
+	public static WebElement magnifyIcon;
+	
+	
+	
+	
 
 	
 	
