@@ -83,6 +83,11 @@ Feature: 1.07 Member DCE Page
       | GenericDosage | <genericdosage> |
       | Quantity      | <quantity2>     |
       | Frequency     | <frequency2>    |
+    When I add branded drug
+      | Drug      | <drug2>      |
+      | Dosage    | <dosage3>    |
+      | Quantity  | <quantity2>  |
+      | Frequency | <frequency2> |
     When I delete the drug
       | Dosage | <genericdosage> |
     When I navigate to Pharmacy tab
@@ -94,10 +99,10 @@ Feature: 1.07 Member DCE Page
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
     Examples: 
-      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
-      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
-      | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
-	  | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
+      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+      | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+	  | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
@@ -245,4 +250,3 @@ Feature: 1.07 Member DCE Page
   #Examples: 
   #    | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
   #    |  PDP     | PDP_DCE 		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
-     
