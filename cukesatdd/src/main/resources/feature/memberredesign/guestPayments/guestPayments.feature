@@ -74,7 +74,7 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for Blocked Members with No sign in Link
       Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-   # Then I validate all the header and page elements
+    Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
        | Member ID         | <memberID> |
        | Date of Birth     |  <dob>     |
@@ -98,9 +98,8 @@ Feature: 1.06.7 Member Guest Payments Page
     And I will click Next to proceed to the Make a One-time payment page
     And I validate payment Amount fields for different member types
        | pastDue         | <hasPD> |
-       | currentCharges  |  <hasCC>     |
-
-
+       | currentCharges  |  <hasCC>   |
+       
     Examples:
       | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
       | 10000 | memberWithPD     | 978196889-1 | 10/19/1941 | true   | false   | AARP      |
@@ -192,11 +191,11 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name            | accountNo  | routingNo | Email          |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 | 1234512345 | 123123123 | test@optum.com |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 | 1234512345 | 123123123 | test@optum.com |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 | 1234512345 | 123123123 | test@optum.com |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 | 1234512345 | 123123123 | test@optum.com |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 | 1234512345 | 123123123 | test@optum.com |
+      | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest Payments1 | 1234512345 | 123123123 | test@optum.com |
+      | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest Payments2 | 1234512345 | 123123123 | test@optum.com |
+      | 10002 | PDP      |980958988-1  | 04/08/1933 | RETIREE  | Guest Payments3 | 1234512345 | 123123123 | test@optum.com |
+      | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest Payments4 | 1234512345 | 123123123 | test@optum.com |
+      | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest Payments5 | 1234512345 | 123123123 | test@optum.com |
 
 
   @guestPayment09 @makeOneTimePayment @pastAmount&currentCharges @ccFLow
