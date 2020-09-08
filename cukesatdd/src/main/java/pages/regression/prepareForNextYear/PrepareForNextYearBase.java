@@ -790,7 +790,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,3);
 	}
 	
-	public List<String> validatePdInSubSection(
+	public List<String> validatePdfInSubSection(
 			String planType, 
 			HashMap<String, Boolean> docDisplayMap, 
 			String section, String subSection, 

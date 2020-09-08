@@ -112,7 +112,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null;
 		boolean willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
@@ -146,7 +146,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 

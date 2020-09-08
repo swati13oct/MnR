@@ -428,7 +428,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//span[contains(text(),'or open')]/*[name()='svg']")
 	protected WebElement ind_revPlnChgSec_docSec_aftAnoc_svg;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_en;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]")
