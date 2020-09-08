@@ -153,7 +153,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		validate(visionQuestion);
 		validate(fitnessQuestion);
 		if (dental.equalsIgnoreCase("Yes")) {
-			jsClickNew(dentalYes);
+			dentalYes.click();
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
@@ -205,7 +205,6 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		Assert.assertTrue(visionError.getText().toUpperCase().contains("NO"));
 		Assert.assertTrue(fitnessError.getText().toUpperCase().contains("NO"));
 		scrollToView(additionalTitleInfo);
-		additionalTitleInfo.click();
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 		if(validate(dentalError,5)==true) {
 			System.out.println("Dental Error is not closed");
