@@ -256,7 +256,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		Assert.assertTrue("PROBLEM - unable to locate My Documents link on Plan Documents and Resources page", noWaitValidate(myDocLnk));
 		try {
 			myDocLnk.click();
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReady(driver);
 		} catch(UnhandledAlertException ae) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

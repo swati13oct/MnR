@@ -53,13 +53,23 @@ public class HealthRecordStepDefinition {
 		}
 	}
 
+	@Then("^the user store expected link behavior$")
+	public void user_validate_storeExpectedLinkBehavior(DataTable memberAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String tmp=memberAttributesMap.get("Expect Link");
+		Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean expHealthRecordLnk=Boolean.valueOf(tmp);
+		getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
+	}
+
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Health Record link display behavior on Account Profile dropdown base on test input$")
-	public void user_validate_healthRecordLink(DataTable memberAttributes) throws InterruptedException {
+	public void user_validate_healthRecordLink() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
+		boolean expHealthRecordLnk= (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);
+		
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
@@ -68,11 +78,11 @@ public class HealthRecordStepDefinition {
 		String targetPage="Initial landing page after login";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String tmp=memberAttributesMap.get("Expect Link");
-		Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
-		boolean expHealthRecordLnk=Boolean.valueOf(tmp);
-		getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
+		//tbd Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		//tbd String tmp=memberAttributesMap.get("Expect Link");
+		//tbd Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		//tbd boolean expHealthRecordLnk=Boolean.valueOf(tmp);
+		//tbd getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		boolean expComboTab=false;

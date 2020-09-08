@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.HealthRecord;
+package atdd.runners.MemberRegression.HealthRecord.OfflineProdOrOnlineProd;
 
 
 import org.junit.runner.RunWith;
@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionHealthRecordMemAuthProdP5_fedShipCombo_shipFedCombo.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthRecordMemAuthProdP5_fedShipCombo_shipFedCombo")
+jsonReport = "target/cucumber-RunMRATDDRegressionIhrMemAuthProd_fedShipCombo_shipFedCombo.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionIhrMemAuthProd_fedShipCombo_shipFedCombo")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthRecordMemAuthProdP5_fedShipCombo_shipFedCombo.json" }, tags = { "@prod_ihr_fedShipCombo_shipFedCombo" })
-public class RunMRATDDRegressionHealthRecordMemAuthProdP5_fedShipCombo_shipFedCombo {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionIhrMemAuthProd_fedShipCombo_shipFedCombo.json" }, tags = { "@prod_ihr_fedShipCombo_shipFedCombo" })
+public class RunMRATDDRegressionIhrMemAuthProd_fedShipCombo_shipFedCombo {
 
 }

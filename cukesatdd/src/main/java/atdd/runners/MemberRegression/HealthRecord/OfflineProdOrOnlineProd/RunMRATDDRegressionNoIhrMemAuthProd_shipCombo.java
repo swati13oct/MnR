@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.HealthRecord;
+package atdd.runners.MemberRegression.HealthRecord.OfflineProdOrOnlineProd;
 
 
 import org.junit.runner.RunWith;
@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthProdP2_shipCombo.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoHealthRecordMemAuthProdP2_shipCombo")
+jsonReport = "target/cucumber-RunMRATDDRegressionNoIhrMemAuthProd_shipCombo.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoIhrMemAuthProd_shipCombo")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthProdP2_shipCombo.json" }, tags = { "@prod_no_ihr_shipCombo" })
-public class RunMRATDDRegressionNoHealthRecordMemAuthProdP2_shipCombo {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoIhrMemAuthProd_shipCombo.json" }, tags = { "@prod_no_ihr_shipCombo" })
+public class RunMRATDDRegressionNoIhrMemAuthProd_shipCombo {
 
 }

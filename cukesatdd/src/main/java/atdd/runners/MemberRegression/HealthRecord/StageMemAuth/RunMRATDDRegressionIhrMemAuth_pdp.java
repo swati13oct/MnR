@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.HealthRecord;
+package atdd.runners.MemberRegression.HealthRecord.StageMemAuth;
 
 
 import org.junit.runner.RunWith;
@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionHealthRecordMemAuthP2_pdp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthRecordMemAuthP2_pdp")
+jsonReport = "target/cucumber-RunMRATDDRegressionIhrMemAuth_pdp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionIhrMemAuth_pdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthRecordMemAuthP2_pdp.json" }, tags = { "@memAuth_ihr_pdp" })
-public class RunMRATDDRegressionHealthRecordMemAuthP2_pdp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionIhrMemAuth_pdp.json" }, tags = { "@memAuth_ihr_pdp" })
+public class RunMRATDDRegressionIhrMemAuth_pdp {
 
 }

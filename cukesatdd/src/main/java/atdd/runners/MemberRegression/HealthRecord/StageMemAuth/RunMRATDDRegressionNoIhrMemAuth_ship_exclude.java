@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.HealthRecord;
+package atdd.runners.MemberRegression.HealthRecord.StageMemAuth;
 
 
 import org.junit.runner.RunWith;
@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP1_ship_exclude.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoHealthRecordMemAuthP1_ship_exclude")
+jsonReport = "target/cucumber-RunMRATDDRegressionNoIhrMemAuth_ship_exclude.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionNoIhrMemAuth_ship_exclude")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoHealthRecordMemAuthP1_ship_exclude.json" }, tags = { "@memAuth_no_ihr_ship_exclude" })
-public class RunMRATDDRegressionNoHealthRecordMemAuthP1_ship_exclude {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionNoIhrMemAuth_ship_exclude.json" }, tags = { "@memAuth_no_ihr_ship_exclude" })
+public class RunMRATDDRegressionNoIhrMemAuth_ship_exclude {
 
 }
