@@ -29,9 +29,11 @@ import io.appium.java_client.AppiumDriver;
 
 import org.testng.Assert;
 
+import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.keywordSearchAARP;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -479,6 +481,29 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage,testharnessurl);
 	}
+	
+	public DCETestHarnessPageMobile GetDCEtestHarnessPage() {
+		return new DCETestHarnessPageMobile(driver);
+	}
+
+	public void fixPrivateConnection() {
+		try {
+			// String URL = "https://self-signed.badssl.com/";
+			threadsleep(1000);
+			if (driver.findElement(By.cssSelector("body.ssl h1")).getText()
+					.contains("Your connection is not private")) {
+				driver.findElement(By.cssSelector("button#details-button")).click();
+				threadsleep(1000);
+				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				threadsleep(1000);
+				pageloadcomplete();
+			}
+		} catch (Exception e) {
+			System.out.println("No SSL error / Exception");
+		}
+
+	}
+
 	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
 		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
