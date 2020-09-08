@@ -1605,7 +1605,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		driver.findElement(By.xpath("//*[@id='js-ole-plan-select']//option[text()='" + planName + "']")).click();
 		waitforElement(enrollButton);
 		enrollButton.click();
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Online Enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
