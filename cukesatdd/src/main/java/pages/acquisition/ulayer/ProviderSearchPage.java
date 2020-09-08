@@ -517,7 +517,8 @@ public class ProviderSearchPage extends UhcDriver {
 			/*New Changes
 			 */
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			continueSearching.click();
+			//continueSearching.click();
+			jsClickNew(continueSearching);
 			
 			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
@@ -551,7 +552,8 @@ public class ProviderSearchPage extends UhcDriver {
 		
 		 jsClickNew(Savedproviders); 
 		 validateNew(finishReturnBtn); 
-		 finishReturnBtn.click();
+		 //finishReturnBtn.click();
+		 jsClickNew(finishReturnBtn); 
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new VPPPlanSummaryPage(driver);
