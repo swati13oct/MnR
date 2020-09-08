@@ -21,7 +21,7 @@ import pages.acquisition.ulayer.PageTitleConstants;
 public class TellUsAboutDrug extends UhcDriver {
 
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]/../preceding-sibling::h1")
+	@FindBy(id = "modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
