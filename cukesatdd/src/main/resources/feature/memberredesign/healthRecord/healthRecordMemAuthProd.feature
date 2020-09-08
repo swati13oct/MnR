@@ -89,7 +89,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | 15    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	    | 16    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | MAPD       | COMBO_SHIP_MA_IHR  | true       |
 
-@xyz    @prod_ihr_medica_pcp
+    @prod_ihr_medica_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 17    | F424804 | kkumard   | mnrs786@  | SUSICHAPMAN@GMAIL.COM   | MEDICA   | IHR                | true       |
