@@ -119,7 +119,8 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
-			String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
+			//tbd String expUrl="/health-plans.html#/plan-summary";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
@@ -243,7 +244,8 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
-			String expUrl="/health-plans.html#/plan-summary";
+			//tbd String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;

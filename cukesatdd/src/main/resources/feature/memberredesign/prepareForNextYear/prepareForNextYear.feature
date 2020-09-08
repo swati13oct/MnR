@@ -399,9 +399,7 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear02_combo_fed_ship
     Examples: 
 	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#note: haven't been able to locate group user w/ 2021 doc yet
-	#   | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | false | false | false | true          |
 
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @stageEnv
@@ -456,13 +454,14 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear04_sars
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	 #   | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MAPD     | SARS_PFNY               | false         |
 
-    @prepareForNextYear04_sars
-    Examples: 
-	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
+	#note: don't have PDP SAR user for the time being
+    #@prepareForNextYear04_sars
+    #Examples: 
+	#    | index | FID     | planType | memberType              | showNxtYrPlan |  
+	#    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
 	    
 ##### end - cases for stage env #################################################################
 
