@@ -77,7 +77,12 @@ public class AepPlanComparePage extends UhcDriver {
 				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
 				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
 
-				//the following code is used to remove the footnote values from the benefit value string.
+				if(columnName.equalsIgnoreCase("Monthly Premium"))
+				{
+					if(benefitValue.endsWith(".00") && !benefitValueUI.contains(".")){
+						benefitValue = benefitValue.replace(".00","");
+					}
+				}
 
 				if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 					flag = true;break;
