@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import cucumber.api.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -675,5 +676,37 @@ public class CallToActionStepDefinition {
 		pnpPg.validateANOCExternalLinkIconDisplayed();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+
+	@And("^the MedCab is NOT visible$")
+	public void the_MedCab_is_NOT_visible() throws Throwable {
+
+	}
+
+	@Then("^user sees the View Current Medications button pinned to the bottom center of page$")
+	public void user_sees_the_View_Current_Medications_button_pinned_to_the_bottom_center_of_page() throws Throwable {
+
+	}
+
+	@When("^user clicks on the View Current Medications button$")
+	public void user_clicks_on_the_View_Current_Medications_button() throws Throwable {
+
+	}
+
+	@Then("^the page will scroll down so that the Current Medications Header is at the top of the page$")
+	public void the_page_will_scroll_down_so_that_the_Current_Medications_Header_is_at_the_top_of_the_page() throws Throwable {
+
+	}
+
+	@And("^the button will no longer be visible$")
+	public void the_button_will_no_longer_be_visible() throws Throwable {
+
+	}
+
+	@When("^user scrolls up so that my current medications are no longer viewable$")
+	public void user_scrolls_up_so_that_my_current_medications_are_no_longer_viewable() throws Throwable {
+
+	}
+
+
 
 }

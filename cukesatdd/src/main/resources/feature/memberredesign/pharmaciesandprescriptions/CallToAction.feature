@@ -564,3 +564,26 @@ Feature: MVP - Call to Action
     Examples: 
       | FID     | planType | memberType       |
       | F479445 | MAPD     | AARP_LIS0_PnP_rx |
+
+
+
+   @F479445 @US2752091 @Scenario1 @scenario2 @ViewCurrentMedications
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user haS access to the View Current Medications button
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And  the MedCab is NOT visible
+    Then user sees the View Current Medications button pinned to the bottom center of page
+    When user clicks on the View Current Medications button
+    Then the page will scroll down so that the Current Medications Header is at the top of the page
+     And the button will no longer be visible
+    When user scrolls up so that my current medications are no longer viewable
+    Then user sees the View Current Medications button pinned to the bottom center of page
+    When user clicks on the View Current Medications button
+    Then the page will scroll down so that the Current Medications Header is at the top of the page
+    And the button will no longer be visible
+
+    Examples:
+      | FID     | planType | memberType       |
+      | F479445 | MAPD     | AARP_PnP_vcm |
