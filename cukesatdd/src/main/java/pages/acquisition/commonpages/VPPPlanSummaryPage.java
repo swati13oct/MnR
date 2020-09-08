@@ -1587,7 +1587,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
 			dceLink.click();
-		}	
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;

@@ -401,7 +401,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 	
-	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;	
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -908,6 +909,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
 	//	}
+			while(validate(overlayFilm, 10)) {/**wait*/}
+			
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
@@ -1534,7 +1537,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
 			validateNew(getStarted);
 			getStarted.click();
-
+			CommonUtility.checkPageIsReadyNew(driver);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
 			return null;

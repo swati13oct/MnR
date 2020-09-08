@@ -13,6 +13,8 @@ import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,11 +32,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +55,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
@@ -56,10 +63,6 @@ import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-
-import java.security.*;
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
@@ -1070,10 +1073,16 @@ try {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("platform", "Mac 10.15");
-				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1440");
 				capabilities.setCapability("maxDuration", "3600");
+				
+				MutableCapabilities sauceOptions = new MutableCapabilities();
+				sauceOptions.setCapability("screenResolution", "1920x1440");
+
+				SafariOptions browserOptions = new SafariOptions();
+				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("browserVersion", browserVersion);
+				browserOptions.setCapability("sauce:options", sauceOptions);
+				capabilities.merge(browserOptions);
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
