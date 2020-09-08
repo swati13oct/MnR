@@ -401,7 +401,9 @@ Feature: 1.25 Member Prepare For Next Year
     @prepareForNextYear02_combo_fed_ship
     Examples: 
 	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	#note: haven't been able to locate group user w/ 2021 doc yet
+	#   | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-13  | F443004 | PDP	  | COMBO_PDP_IND_SHIP_PFNY | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
 
   @prepareForNextYear03 @hasTab @noCombTabOnPfny @regressionMember @stageEnv
