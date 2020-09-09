@@ -347,7 +347,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
-			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 		//replace all the next lines and spaces from the string
+			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("*",""); 		//replace all the next lines and spaces from the string
 			
 			if(key.contains("Passport"))
 				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol
