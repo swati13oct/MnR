@@ -356,6 +356,7 @@ public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throw
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "SNP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);

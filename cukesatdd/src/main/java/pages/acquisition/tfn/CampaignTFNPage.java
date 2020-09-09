@@ -611,5 +611,15 @@ public class CampaignTFNPage extends UhcDriver {
 			Assert.assertTrue("Home Page NOT Displayed", false);
 		}
 	}
+	
+	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
+	private WebElement  CurrentYearPlansBtn;
 
-}
+	public void handlePlanYearSelectionPopup() {
+		CommonUtility.checkPageIsReadyNew(driver);			
+			if(validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);	
+			}
+		}
+		}
