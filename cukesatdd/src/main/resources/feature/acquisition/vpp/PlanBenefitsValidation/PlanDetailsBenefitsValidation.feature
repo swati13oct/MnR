@@ -224,3 +224,13 @@ Feature: ACQ-Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | Sheet2021_14  | AARP |
       
+       @planDetailsBenefitsPDPAARP01_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | SheetPDP2021_1  | AARP |
+      
+       @planDetailsBenefitsPDPAARP02_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | SheetPDP2021_2  | AARP |
+      
