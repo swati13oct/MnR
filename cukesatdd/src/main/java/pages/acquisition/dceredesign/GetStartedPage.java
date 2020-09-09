@@ -82,7 +82,8 @@ public class GetStartedPage extends UhcDriver {
 		jsClickNew(LinktoExitScenario);
 		CommonUtility.checkPageIsReadyNew(driver);
 		
-		while(validate(overlayFilm, 10)) {/**wait*/}
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
 		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
