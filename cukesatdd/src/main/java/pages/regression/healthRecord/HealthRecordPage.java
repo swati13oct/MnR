@@ -268,6 +268,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToOrderPage(String memberType) {
 		navigateToBenefitsPage(memberType);
 		if (noWaitValidate(orderTopMenuLnk)) {
+			checkModelPopup(driver,1);
 			orderTopMenuLnk.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {

@@ -586,7 +586,6 @@ public class HealthRecordStepDefinition {
 		} 
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-
 		boolean hasPaymentTab = (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB);
 		if (!hasPaymentTab) {
 			System.out.println(planType+" user hasPaymentTab=false, doesn't have '"+targetPage+"' page, skipping step...");

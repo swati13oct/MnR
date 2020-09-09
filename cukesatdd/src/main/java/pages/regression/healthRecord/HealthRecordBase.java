@@ -266,7 +266,7 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 
 
 	public boolean getPremiumPaymentInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
-		//System.out.println("TEST - consumerDetails="+consumerDetails);
+		System.out.println("TEST - consumerDetails="+consumerDetails);
 		boolean actualPremiumPayment=false;
 		try {
 			JSONParser parser = new JSONParser();

@@ -1,15 +1,15 @@
 @healthRecord
-Feature: 1.24 Member Individual Health Record - P3 - OrderPlan, Payments, PharmaciesAndPrescriptions
+Feature: 1.24 Member Individual Health Record - P3 - EOB, OrderPlan, PharmaciesAndPrescriptions
 
   @healthRecord01 @regressionMember @US2471601 @F424804
-  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P3 - OrderPlan, Payments, PharmaciesAndPrescriptions
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P3 - EOB, OrderPlan, PharmaciesAndPrescriptions
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
     Then the user store expected link behavior
       | Expect Link | <expectLink>       |
+	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Order Plan Material page and validate Health Record link display behavior
-	Then the user navigates to Payments page and validate Health Record link display behavior
 	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link

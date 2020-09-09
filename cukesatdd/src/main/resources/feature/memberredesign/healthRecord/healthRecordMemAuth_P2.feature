@@ -1,8 +1,8 @@
 @healthRecord
-Feature: 1.24.1 Member Individual Health Record - Member Auth - P2 - EOB, Benefits, PlanDoc, MyDoc
+Feature: 1.24.1 Member Individual Health Record - Member Auth - P2 - Benefits, PlanDoc, MyDoc
 
   @memAuth_healthRecord01 @US2471601 @F424804
-  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - EOB, Benefits, PlanDoc, MyDoc
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - Benefits, PlanDoc, MyDoc
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -19,6 +19,7 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth - P2 - EOB, Benefi
       | Expect Link | <expectLink>       |
 	Then the user navigates to EOB page and validate Health Record link display behavior
 	Then the user navigates to Benefits page and validate Health Record link display behavior
+	Then the user navigates to Payments page and validate Health Record link display behavior
 	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
