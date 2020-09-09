@@ -160,6 +160,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
+	public void openUHCURLOnMobile() {
+		startNewMobile(UMS_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+	}
+
 	
 	/**
 	 * @author Rathulya
