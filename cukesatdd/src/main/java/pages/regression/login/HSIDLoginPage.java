@@ -327,7 +327,8 @@ public class HSIDLoginPage extends UhcDriver {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
-			undeliveryEmailAddressRequiredWorkaround(username);
+			undeliverEmailAddressRequiredWorkaround(username);
+			CommonUtility.checkPageIsReadyNew(driver);
 			emailAddressRequiredWorkaround(username);
 			CommonUtility.checkPageIsReadyNew(driver);
 			goGreenSplashPageWorkaround();
@@ -768,11 +769,11 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 	}
 	
-	public void undeliveryEmailAddressRequiredWorkaround(String username) {
+	public void undeliverEmailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
-				System.out.println("User encounted email splash page, handle it");
+				System.out.println("User encounted un-deliverable email splash page, handle it");
 				try {
 					try {
 						if (validate(emailGoToHomepageBtn,0)) {
@@ -793,7 +794,7 @@ public class HSIDLoginPage extends UhcDriver {
 						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
 					}
 				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter. "+e);
+					System.out.println("Unable to resolve un-deliverable page encounter. "+e);
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
@@ -828,7 +829,7 @@ public class HSIDLoginPage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
-				System.out.println("User encounted email splash page, handle it");
+				System.out.println("User encounted no-email or multiple-emails email splash page, handle it");
 				try {
 					/* note: instead of entering email, click Go to Homepage directly
 					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
@@ -865,7 +866,7 @@ public class HSIDLoginPage extends UhcDriver {
 						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
 					}
 				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter. "+e);
+					System.out.println("Unable to resolve no-email or multiple-emails email page encounter. "+e);
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
