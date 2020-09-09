@@ -19,7 +19,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
@@ -314,6 +314,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 }
                                 
                                 public ArrayList<String> getConfimationPopupResults(int count) {
+                                	waitforElement(modalDoctorsCount);
                             		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
                             		if(count==modalDoctorsList.size() && count==confirmationSize) {
                             			confirmationResults = new ArrayList<String>();

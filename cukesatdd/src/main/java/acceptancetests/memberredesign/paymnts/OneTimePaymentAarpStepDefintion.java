@@ -1809,7 +1809,7 @@ public class OneTimePaymentAarpStepDefintion {
 			throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFT();
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.CSRselectAgreeAndClickOnContinueforEFT();
 		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Update confirmation page for Checking account");

@@ -182,5 +182,5 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | mcbrayerlg | 09/01/2020    |
+      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member      | planstartdate |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | pmorris1148 | 09/01/2020    |

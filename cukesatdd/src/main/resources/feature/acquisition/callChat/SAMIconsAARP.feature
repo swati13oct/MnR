@@ -6,9 +6,8 @@ Given the user is on medicare acquisition site landing page
   | Site | <site>	|
 And user opens the page to validate
  | pagename | <pagename> |
-Then the user validates whether call icon is visible 
-Then the user validates whether chat icon is visible
-
+#Then the user validates whether chat icon is visible on AARP
+Then the user validates whether chat Agent is Available on AARP	
 @header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP
 Examples: 
 |	site	| pagename 															|

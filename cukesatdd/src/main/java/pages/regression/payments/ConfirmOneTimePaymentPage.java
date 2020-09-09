@@ -337,7 +337,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		validate(MakeOneTimePaymentLink);
 		PaymentsDataVerificationonConfirmationPage();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (driver.getTitle().contains("Recurring Payments Request Submitted") || driver.getCurrentUrl().contains("recurring-eft-confirmation")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 		} else 
 		{
