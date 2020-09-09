@@ -69,13 +69,22 @@ public class HealthRecordStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		boolean expHealthRecordLnk= (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);
-		
+
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
+
 		String targetPage="Initial landing page after login";
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
+			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
+
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		//tbd Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
@@ -168,19 +177,19 @@ public class HealthRecordStepDefinition {
 		String targetPage="Find Care";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
+			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("SSUP")
 				|| memberType.toUpperCase().contains("COMBO_SHIP_") 
 				|| memberType.toUpperCase().contains("TERM_") 
 				) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
-			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			return;
-		}
-		if (MRScenario.environment.contains("team-a")) {
-			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
-			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			return;
@@ -725,6 +734,13 @@ public class HealthRecordStepDefinition {
 		String targetPage="Health and Wellness";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally page '"+targetPage+"', skipping step...");
+			testNote.add("\tSkip Health Record validation for env='"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
 		if (memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
