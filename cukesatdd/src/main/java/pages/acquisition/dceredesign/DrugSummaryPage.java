@@ -221,15 +221,23 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
 	private WebElement switchToGenericBtn;
 	
+	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
+	private WebElement lipitorSwitchToGenericBtn;
+	
 	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
 	private WebElement switchToGenericSubmitBtn;
 	
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private WebElement drugNames;
 	
+	@FindBy(id = "drugPricingClose")
+	private WebElement drugClose;
+	
+	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")
+	private WebElement pdpPlan;
+	
 	@FindBy(id = "drugPricingTitleTxt")
 	private WebElement drugTitle;
-	
 	
 	
 	public void clickViewPricing() {
@@ -248,6 +256,23 @@ public class DrugSummaryPage extends UhcDriver {
 		switchToGenericSubmitBtn.click();
 	}
 	
+	public void clicklipitorswitchToGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		validate(lipitorSwitchToGenericBtn);
+		lipitorSwitchToGenericBtn.click();
+		validate(switchToGenericSubmitBtn);
+		switchToGenericSubmitBtn.click();
+	}
+	
+	public void clickOnPdpPlan() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(pdpPlan);
+		pdpPlan.click();
+		validate(viewProceBtn);
+		viewProceBtn.click();
+	}
+	
 	public void verifyDrugListsUpdated(String genericDrug) throws InterruptedException {
 		Thread.sleep(6000);
 		validate(drugTitle);
@@ -255,8 +280,11 @@ public class DrugSummaryPage extends UhcDriver {
 		 * for(int i=0;i<drugNames.size();i++) {
 		 * System.out.println(drugNames.get(i).getText()); }
 		 */
-		System.out.println(drugNames);
+		validate(drugNames);
+		System.out.println(drugNames.getText()+"   "+genericDrug);
 		Assert.assertTrue("Drug not switched to generic",drugNames.getText().contains(genericDrug));
+		validate(drugClose);
+		drugClose.click();
 	}
 	
 	@FindBy(id = "sign-up-modal-header")

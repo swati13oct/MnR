@@ -148,8 +148,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When the user clicks on Add drugs button
    And adds drugs in drug list page
       | DrugName | <drug1> |
-      #And adds drugs in drug list page
-      #| DrugName | <drugName1> |
+      And adds drugs in drug list page
+      | DrugName | <drug2> |
       And clicks on Review drug cost button
      Then user should be navigated to zipcode and plan year capture page for AEP in AARP
      When user enters valid zipcode and county in AARP
@@ -160,16 +160,23 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      And user should be navigated to Review drug cost estimate page in AARP
      And user should be able to see Medicare Advantage plan by default
      And user click on View Drug Pricing Modal in AARP
-     And user click on Switch To Generic in AARP
+     And user click on lipitor Switch To Generic in AARP
       And user should be navigated to Review drug cost estimate page in AARP
      And user should be able to see Medicare Advantage plan by default
       And user click on View Drug Pricing Modal in AARP
       And user verify drug can switch to generic drug in AARP
      	| DrugName | <drugName2> |
-       
+      And user click on PDP plan to view drug pricing in AARP
+        And user click on Switch To Generic in AARP
+      And user should be navigated to Review drug cost estimate page in AARP
+     And user should be able to see Medicare Advantage plan by default
+      And user click on View Drug Pricing Modal in AARP
+      And user verify drug can switch to generic drug in AARP
+     	| DrugName | <drugName3> |
+      
         Examples: 
-      |zipCode|drug1|drugName2|
-      | 10001 | Lipitor|atorvastatin calcium TAB 10MG|
+      |zipCode|drug1|drug2|drugName2|drugName3|
+      | 10001 | Lipitor|Lopressor|atorvastatin calcium TAB 10MG|metoprolol tartrate TAB 50MG|
      
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
