@@ -646,7 +646,10 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		if ((planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("COMBO")) 
 				|| (planType.equalsIgnoreCase("MA")  && !memberType.toUpperCase().contains("COMBO"))
-				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM") || memberType.toUpperCase().contains("PREEFF")) {
+				|| (planType.equalsIgnoreCase("MA")  && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("PDP") && !memberType.toUpperCase().contains("MAPD"))
+				|| planType.equalsIgnoreCase("SSUP") 
+				|| memberType.toUpperCase().contains("TERM") 
+				|| memberType.toUpperCase().contains("PREEFF")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
