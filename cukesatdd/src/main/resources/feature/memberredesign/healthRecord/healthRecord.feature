@@ -61,11 +61,12 @@ Feature: 1.24 Member Individual Health Record
 	    | 10    | F424804 | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
     @ihr_preeff_term
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 11    | F424804 | PDP      | PREEFF_IHR         | true       |
-	    | 12    | F424804 | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | MAPD     | TERM_IHR           | false      |
 
     @ihr_pdpSspCombo
     Examples: 

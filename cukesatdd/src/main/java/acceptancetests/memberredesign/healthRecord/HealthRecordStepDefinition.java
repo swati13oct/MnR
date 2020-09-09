@@ -337,7 +337,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo") && !planType.equalsIgnoreCase("SSP"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -447,7 +450,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -491,7 +497,10 @@ public class HealthRecordStepDefinition {
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
 		hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -550,7 +559,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -610,7 +622,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -673,7 +688,10 @@ public class HealthRecordStepDefinition {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -731,7 +749,10 @@ public class HealthRecordStepDefinition {
 			expHealthRecordLnk=true;
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -775,7 +796,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -828,7 +852,10 @@ public class HealthRecordStepDefinition {
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -881,7 +908,10 @@ public class HealthRecordStepDefinition {
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -925,7 +955,10 @@ public class HealthRecordStepDefinition {
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else

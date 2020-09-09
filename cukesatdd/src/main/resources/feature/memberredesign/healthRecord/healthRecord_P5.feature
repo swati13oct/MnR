@@ -48,11 +48,12 @@ Feature: 1.24.e Member Individual Health Record - P5 - PharmacyLocator, DCE
 	    | 10    | F424804 | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
     @ihr_p5_preeff_term
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 11    | F424804 | PDP      | PREEFF_IHR         | true       |
-	    | 12    | F424804 | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | MAPD     | TERM_IHR           | false      |
 
     @ihr_p5_pdpSspCombo
     Examples: 

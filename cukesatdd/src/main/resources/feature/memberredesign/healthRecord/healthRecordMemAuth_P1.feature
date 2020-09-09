@@ -60,12 +60,13 @@ Feature: 1.24.1.a Member Individual Health Record - Member Auth - P1 - Dashboard
 	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
     @memAuth_ihr_p1_preeff_term
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	 #  | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
 	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDPDP_001  | PDP      | PREEFF_IHR         | true       |
-	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | false      |
 
     @memAuth_ihr_p1_pdpSspCombo
     Examples: 

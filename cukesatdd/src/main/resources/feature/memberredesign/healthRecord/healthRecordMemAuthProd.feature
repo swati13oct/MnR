@@ -41,10 +41,10 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 #note: need to find user
 #	    | 02    | F424804 | kkumard   | mnrs786@  | testUserName            | MA                       | EXCLUDE_IHR        | false       |
 
-@abc    @prod_no_ihr_shipCombo
+    @prod_no_ihr_shipCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
-##	    | 03    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
+	    | 03    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | kkumard   | mnrs786@  | testUserName            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 	    | 04    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_HIP                 | COMBO_SHIP_MA_BOA_IHR  | false      |
 
@@ -72,11 +72,12 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | 10    | F424804 | kkumard   | mnrs786@  | nawal1215               | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
     @prod_ihr_preeff_term
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
-	    | 12    | F424804 | kkumard   | mnrs786@  | BEVERLY_BOB5            | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | kkumard   | mnrs786@  | BEVERLY_BOB5            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_pdpSspCombo
     Examples: 
