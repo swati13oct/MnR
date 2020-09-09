@@ -179,6 +179,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToBenefitsPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			try {
 				checkModelPopup(driver,1);

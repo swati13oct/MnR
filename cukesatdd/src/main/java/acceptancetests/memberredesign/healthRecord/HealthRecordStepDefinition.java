@@ -750,6 +750,7 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
+		healthRecordPage.handleComboTabIfComboUser(planType, memberType);
 		wd=healthRecordPage.navigateToHwPage();
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
