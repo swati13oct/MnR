@@ -661,7 +661,7 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		if ((planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("COMBO")) 
 				|| (planType.equalsIgnoreCase("MA")  && !memberType.toUpperCase().contains("COMBO"))
-				|| (planType.equalsIgnoreCase("MA")  && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("PDP") && !memberType.toUpperCase().contains("MAPD"))
+				|| (memberType.toUpperCase().contains("COMBO") && (!memberType.toUpperCase().contains("PDP") || !memberType.toUpperCase().contains("MAPD")))
 				|| planType.equalsIgnoreCase("SSUP") 
 				|| memberType.toUpperCase().contains("TERM") 
 				|| memberType.toUpperCase().contains("PREEFF")) {
