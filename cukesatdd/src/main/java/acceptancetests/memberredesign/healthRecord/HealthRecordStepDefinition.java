@@ -92,11 +92,18 @@ public class HealthRecordStepDefinition {
 				expComboTab=true;
 		}
 		System.out.println("expComboTab="+expComboTab);
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+		System.out.println("expHealthRecordLnk="+expHealthRecordLnk);
+		System.out.println("memberType.toUpperCase().contains('COMBO')="+memberType.toUpperCase().contains("COMBO"));
+		System.out.println("!memberType.toUpperCase().contains('BOA')="+!memberType.toUpperCase().contains("BOA"));
+		System.out.println("3rd="+(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP")));
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("BOA") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
+		System.out.println("expHealthRecordLnk="+expHealthRecordLnk);
+		
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		System.out.println("hasHealthRecordLnk="+hasHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
 			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
 		} else {
@@ -263,7 +270,7 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("BOA") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
@@ -658,7 +665,7 @@ public class HealthRecordStepDefinition {
 		//note: PnP page doesn't have its own ProductSummary API run, it depends on what was the prior page on
 		//note: ATDD step sequence will land to the target test plan tab first before going to the target page
 		//note: so prior page would be on SHIP plan then clicking PnP will be the SHIP behavior which will NOT have IHR link
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("BOA") 
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
@@ -713,7 +720,7 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("BOA") 
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}

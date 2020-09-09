@@ -10,8 +10,8 @@ Feature: 1.24 Member Individual Health Record - P1 - Dashboard, FindCare, Claims
       | Expect Link | <expectLink>       |
     Then the user validates Health Record link display behavior on Account Profile dropdown base on test input
     Then the user validates clicking Health Record link will open to the target page
-#	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
-#	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
+	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
+	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
     @no_ihr_p1_ship_exclude
@@ -66,7 +66,7 @@ Feature: 1.24 Member Individual Health Record - P1 - Dashboard, FindCare, Claims
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 15    | F424804 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	    | 16    | F424804 | MAPD     | COMBO_SHIP_MAPD_IHR| true       |
+	    | 16    | F424804 | MA       | COMBO_SHIP_MA_IHR  | true       |
 
     @ihr_p1_medica_pcp
     Examples: 

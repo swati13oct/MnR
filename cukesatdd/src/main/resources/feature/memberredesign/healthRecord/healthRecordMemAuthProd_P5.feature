@@ -76,7 +76,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD - P5 - PharmacyLocator, D
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 15    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	    #note: this user is BOA group
-	    | 16    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | MA       | COMBO_SHIP_MA_IHR  | false      |
+	    | 16    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | MA       | COMBO_SHIP_MA_BOA_IHR  | false      |
 
     @prod_ihr_p5_medica_pcp
     Examples: 
