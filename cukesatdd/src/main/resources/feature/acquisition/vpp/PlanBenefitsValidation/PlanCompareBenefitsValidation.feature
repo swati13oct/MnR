@@ -19,7 +19,6 @@ Feature: ACQ-Plan benefits validation
       | workSheet   |
       | Sheet2020_2 |
 
-
   @planCompareBenefitsAARP03
     Examples:
       | workSheet   |
