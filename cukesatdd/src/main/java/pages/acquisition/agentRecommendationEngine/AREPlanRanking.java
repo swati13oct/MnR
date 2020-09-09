@@ -540,7 +540,7 @@ public class AREPlanRanking extends UhcDriver {
 		if (plansName.size() != saveplanComparepage.size()) {
 			for (plan = 1; plan <= saveplans; plan++) {
 				int i = 0;
-				vppPlans.add(savingplans(plansName.get(plan + i), saveplanComparepage.get(i), i));
+				vppPlans.add(savingplans(plansName.get(plan), saveplanComparepage.get(plan - 1), (plan-1)));
 			}
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
@@ -570,7 +570,8 @@ public class AREPlanRanking extends UhcDriver {
 	public String savingplans(WebElement plan, WebElement saveplan, int i) {
 		String exceptedplanName = plan.getText().trim();
 		System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
-		if (saveplan.getText().trim().equals("Save Plan")) {
+		String save = saveplan.getText().trim();
+		if (save.equalsIgnoreCase("Save Plan")) {
 			saveplan.click();
 		} else {
 			unsaveplanComparepage.get(i).click();
@@ -582,15 +583,14 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
-
+		List<String> vpPlans = new ArrayList<String>();
 		String actualplanName = "";
 		String exceptedplanName = "";
 		pageloadcomplete();
+		System.out.println(plansName.size());
 		for (int i = 0; i < plansName.size(); i++) {
 			actualplanName = plansName.get(i).getText().trim();
-			System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
-			exceptedplanName = vppPlans.get(i);
-			Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+			Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
 		}
 	}
 

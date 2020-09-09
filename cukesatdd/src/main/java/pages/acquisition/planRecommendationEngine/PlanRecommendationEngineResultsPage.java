@@ -328,7 +328,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 // VPP Details page
 	
-	@FindBy(css = ".uhc-container div.content h2:nth-child(2)")
+	@FindBy(css = ".uhc-container div.content h2")
 	private WebElement planNameVPPDetailsPage;
 	
 	@FindBy(id = "backToPlanSummaryTop")

@@ -1,5 +1,5 @@
 @PlanRecommendationEngine @FuturePRERegression
-Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
+Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functionalities with recommendation and Ranking with API results
 
   @PRE @FutureAPIRanking @MAPDFlowRankingFuture @SanityTest
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE future year
