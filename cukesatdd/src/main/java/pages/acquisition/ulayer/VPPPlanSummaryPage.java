@@ -722,7 +722,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		private WebElement  NextYearPlansBtn;
 		
 		//@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
-		@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
+//		@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
+		@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
 		private WebElement  CurrentYearPlansBtn;
 		
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
