@@ -364,6 +364,14 @@ public class MemberAuthPage extends UhcDriver {
 					{
 						System.out.println("Catch block with no significance");
 					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("Catch block");
+					}
+
+					undeliverEmailAddressRequiredWorkaround();
 					emailAddressRequiredWorkaround();
 					CommonUtility.checkPageIsReadyNew(driver);
 					goGreenSplashPageWorkaround();
@@ -660,6 +668,36 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("no need to perform email workaround...");
 		}
 	}  
+	
+	public void undeliverEmailAddressRequiredWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform email workaround...");
+		//checkModelPopup(driver, 2);
+		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted email splash page, handle it...");
+				try {
+					if (validate(emailGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						emailGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		} else {
+			System.out.println("no need to perform email workaround...");
+		}
+	} 
 
 
 }

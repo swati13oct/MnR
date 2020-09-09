@@ -46,6 +46,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPharmacyLocatorPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
 			testharnessTblPharmacyLocatorLnk.click();
 		} else if (noWaitValidate(pharmacySearchLink)) {
@@ -180,6 +181,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToBenefitsPage(String memberType) {
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			try {
+				checkModelPopup(driver,1);
 				benefitsTopMenuLnk.click();
 			} catch (TimeoutException te) {
 				if (memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) {

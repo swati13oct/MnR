@@ -327,6 +327,7 @@ public class HSIDLoginPage extends UhcDriver {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			undeliveryEmailAddressRequiredWorkaround(username);
 			emailAddressRequiredWorkaround(username);
 			CommonUtility.checkPageIsReadyNew(driver);
 			goGreenSplashPageWorkaround();
@@ -767,6 +768,61 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 	}
 	
+	public void undeliveryEmailAddressRequiredWorkaround(String username) {
+		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted email splash page, handle it");
+				try {
+					try {
+						if (validate(emailGoToHomepageBtn,0)) {
+							System.out.println("'Go To Homepage' button showed up, click it");
+							//goToHomepage.isDisplayed();
+							emailGoToHomepageBtn.click();
+						}
+					} catch (Exception e1) {
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+					}
+
+					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+					CommonUtility.checkPageIsReadyNew(driver);
+					waitToReachDashboard(username);  //note: after page is completed state, still need this wait for the page to finish loading
+
+					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+					}
+				} catch (Exception e) {
+					System.out.println("Unable to resolve no-email page encounter. "+e);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+		if (driver.getCurrentUrl().contains("bannerpopup.html"))
+		{
+			System.out.println("User landed on banner page and did not see security questions");
+			try {
+				if (noWaitValidate(homePageNotice,0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (noWaitValidate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (noWaitValidate(homePageNotice3,0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}	
+
+			}
+			catch(Exception e)
+			{
+				System.out.println("User landed on banner page and could not proceed ahead");
+			}
+		}
+	}  
 	
 	public void emailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
