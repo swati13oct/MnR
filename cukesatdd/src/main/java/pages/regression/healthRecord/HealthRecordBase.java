@@ -214,11 +214,13 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 				else if (noWaitValidate(comboTab_MA_planDoc)) 
 					comboTab_MA_planDoc.click();
 			} else if (planType.toLowerCase().contains("ship_hip")) {
-				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc) || noWaitValidate(comboTab_SHIP_planDoc));
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc) || noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
 				if (noWaitValidate(comboTab_SHIP_HIP)) 
 					comboTab_SHIP_HIP.click();
 				else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
 					comboTab_SHIP_HIP_planDoc.click();
+				if (noWaitValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
 				else if (noWaitValidate(comboTab_SHIP_planDoc)) 
 					comboTab_SHIP_planDoc.click();
 			} else if (planType.toLowerCase().contains("ship")) {

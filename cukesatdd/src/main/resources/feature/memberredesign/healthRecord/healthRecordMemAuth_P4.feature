@@ -1,5 +1,5 @@
 @healthRecord
-Feature: 1.24.1 Member Individual Health Record - Member Auth - P4 - HealthAndWellness, AccountSettings, ContactUs
+Feature: 1.24.1.d Member Individual Health Record - Member Auth - P4 - HealthAndWellness, AccountSettings, ContactUs
 
   @memAuth_healthRecord01 @US2471601 @F424804
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - HealthAndWellness, AccountSettings, ContactUs
