@@ -652,10 +652,12 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if (MRScenario.environment.contains("stage")) { //note: stage seemed to take longer...
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", 
 						!driver.getCurrentUrl().contains("login/no-email.html") && !driver.getCurrentUrl().contains("login/multiple-emails.html"));
@@ -689,10 +691,12 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if (MRScenario.environment.contains("stage")) {//note: stage seemed to take longer...
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 				Assert.assertTrue("PROBLEM - unable to navigate away from the undeliverable email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/undeliverable-email.html"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
