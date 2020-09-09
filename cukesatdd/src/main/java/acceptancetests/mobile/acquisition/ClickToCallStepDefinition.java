@@ -45,6 +45,18 @@ public class ClickToCallStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+
+
+
+	@Given("^the user is on UHC medicare acquisition site landing page in mobile$")
+	public void the_user_is_on_UHC_medicare_acquisition_site_landing_page_in_mobile() throws Throwable {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openUHCURLOnMobile();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
 	
 	@Given("^the user navigates to following medicare acquisition site page on mobile$")
 	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
