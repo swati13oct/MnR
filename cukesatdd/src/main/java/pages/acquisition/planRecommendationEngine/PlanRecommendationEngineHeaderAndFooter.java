@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
@@ -157,7 +157,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
     private WebElement headerPrescriptionLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
+    @FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
     private WebElement headerGetaPlanRecommendationLink;
     
     @FindBy(linkText = "Drug Cost Estimator")
