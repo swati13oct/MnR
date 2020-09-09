@@ -46,7 +46,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | kkumard   | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | kkumard   | mnrs786@  | testUserName            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MA_IHR  | false      |
+	    | 04    | F424804 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_HIP                 | COMBO_SHIP_MA_BOA_IHR  | false      |
 
     @prod_no_ihr_boaGrp1
     Examples: 

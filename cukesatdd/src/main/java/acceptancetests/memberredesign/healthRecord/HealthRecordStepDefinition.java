@@ -724,6 +724,9 @@ public class HealthRecordStepDefinition {
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
+		if (!expComboTab && (memberType.toUpperCase().contains("COMBO_PDP_SHIP") || memberType.toUpperCase().contains("COMBO_MA_SHIP") || memberType.toUpperCase().contains("COMBO_MAPD_SHIP"))) {
+			expHealthRecordLnk=true;
+		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
