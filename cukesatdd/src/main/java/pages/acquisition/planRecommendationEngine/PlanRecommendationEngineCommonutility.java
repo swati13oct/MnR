@@ -15,10 +15,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCommonutility extends UhcDriver {
 	
@@ -126,7 +126,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		}
 
 		public void findPagedetails(String pageName) {
-			flow = PlanRecommendationEngineStepDefinition.PREflow;
+			flow = PlanRecommendationEngineCommonStepDefinition.PREflow;
 			currentPageName = pageName.toUpperCase().trim();
 			currrentPagePercentage = new String();
 			previousPageName = new String();
