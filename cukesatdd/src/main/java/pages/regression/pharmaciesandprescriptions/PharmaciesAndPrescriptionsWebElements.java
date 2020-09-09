@@ -609,8 +609,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='pagination-next']")
 	protected WebElement nextPageArrow;
 
-	@FindBy(xpath = "//div[@class='sc-LzLrs ieWmEy' and contains(text(),'My Medication')]")
+	@FindBy(xpath = "//div[contains(text(),'My Medications (')]")
 	protected WebElement myMedicationsHeader;
+
+	@FindBy(xpath = "//h1[contains(text(),'Pharmacy Overview')]")
+	protected WebElement pharmacyOverview;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
 	protected List<WebElement> listOfLearnMore;
@@ -1336,6 +1339,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//*[@data-testid='ANOC-CTA-external-icon']")
 	protected WebElement ANOCExternalIcon;
+
+	@FindBy(xpath="//span[contains(text(),'View Current Medications')]")
+	protected WebElement viewCurrentMedicationsBtn;
 
 	@FindBy(xpath = "")
 	protected WebElement OptumRxDrugPricePageHeader;

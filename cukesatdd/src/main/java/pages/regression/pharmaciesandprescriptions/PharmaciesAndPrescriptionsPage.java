@@ -2467,7 +2467,44 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateANOCExternalLinkIconDisplayed() {
 		Assert.assertTrue("PROBLEM - ANOC External Link Icon is not displayed",
 				pnpValidate(ANOCExternalIcon));
-	}	
+	}
+
+	public void validateNoMedCabVisible() throws InterruptedException {
+		Assert.assertTrue("PROBLEM - MEDCAB is visible",
+				NoMedCabVisible());
+	}
+
+	public void validateViewCurrentMedicationsBtn() {
+		Assert.assertTrue("PROBLEM - unable to locate View Current Medications button element",
+				pnpValidate(viewCurrentMedicationsBtn));
+	}
+	public void validateViewCurrentMedicationsBtnNotVisible() {
+		Assert.assertFalse("PROBLEM - should not be able to locate View Current Medications button element",
+				pnpValidate(viewCurrentMedicationsBtn));
+	}
+
+
+	public void clickViewCurrentMedicationsBtn() {
+
+		Assert.assertTrue("PROBLEM - unable to locate View Current Medications button element",
+				validate(viewCurrentMedicationsBtn, 50));
+		viewCurrentMedicationsBtn.click();
+
+	}
+
+	public boolean NoMedCabVisible() throws InterruptedException {
+
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		Thread.sleep(3000);
+
+		if (myMedicationsHeader.isDisplayed()){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 	public void clickOnTransferToHDCTABasedOnIndex(int index) {
 		listOfTransferToHDCTA.get(rand_int).click();
