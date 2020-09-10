@@ -750,7 +750,8 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		healthRecordPage.goToSpecificComboTab(planType,false);
+		if (memberType.toUpperCase().contains("COMBO_SHIP"))
+			healthRecordPage.goToSpecificComboTab(planType,false);
 		wd=healthRecordPage.navigateToHwPage();
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
@@ -861,7 +862,8 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		healthRecordPage.goToSpecificComboTab(planType,false);
+		if (memberType.toUpperCase().contains("COMBO_SHIP"))
+			healthRecordPage.goToSpecificComboTab(planType,false);
 		wd=healthRecordPage.navigateToPharmacyLocatorPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	

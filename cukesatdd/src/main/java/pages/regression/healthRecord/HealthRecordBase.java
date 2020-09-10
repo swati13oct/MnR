@@ -171,7 +171,7 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 						comboTab_MA.click();
 					else if (noWaitValidate(comboTab_MA_planDoc)) 
 						comboTab_MA_planDoc.click();
-				} else if (planType.equalsIgnoreCase("ship")) {
+				} else if (planType.toLowerCase().contains("ship")) {
 					if (noWaitValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();
 					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
