@@ -74,8 +74,9 @@ public class AepPlanComparePage extends UhcDriver {
 
 			}else if(key.trim().equals(columnName.trim())) {
 				counter++;
-				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
-				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","");
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","").replace("-","").replace(";","");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","").replace("-","").replace(";","");
+
 
 				if(columnName.equalsIgnoreCase("Monthly Premium"))
 				{
