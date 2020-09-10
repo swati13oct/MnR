@@ -1225,6 +1225,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		Assert.assertTrue("PROBLEM - View Order button for applicable Medication not available", viewOrderButton());
 	}
 
+	public void validateContactPharmacyButton() {
+		Assert.assertTrue("PROBLEM - Contact Pharmacy button for applicable Medication not available", contactPharmacyButton());
+	}
+
 	public void validateHDAssociateOrderStatus() {
 		Assert.assertTrue("PROBLEM - Track Order Status for applicable Home Delivery Drug not available",
 				validateOrderStatusForTrackHDDrug());
@@ -1430,6 +1434,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateWalgreensDrug() {
 		Assert.assertTrue("PROBLEM - unable to locate Walgreens Drug", validateWalgreens());
+		// pnpValidate(RefillMedications));
+	}
+
+	public void validateWalgreensDrugWithoutStoreNumbers() {
+		Assert.assertTrue("PROBLEM - unable to locate Walgreens Drug without store numbers", validateWalgreensWithoutStoreNumbers());
 		// pnpValidate(RefillMedications));
 	}
 
@@ -2175,6 +2184,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public boolean validateWalgreens() {
+		if (walgreens.size() >= 0) {
+			for (int i = 0; i < walgreens.size(); i++) {
+				String text = walgreens.get(i).getText();
+				for (WebElement child : walgreens.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+				if (!text.trim().equals("Walgreens")) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validateWalgreensWithoutStoreNumbers() {
 		if (walgreens.size() >= 0) {
 			for (int i = 0; i < walgreens.size(); i++) {
 				String text = walgreens.get(i).getText();

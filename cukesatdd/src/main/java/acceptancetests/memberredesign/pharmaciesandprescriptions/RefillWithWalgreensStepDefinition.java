@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
@@ -44,8 +45,39 @@ public class RefillWithWalgreensStepDefinition {
 
 	}
 
+	@When("^user has a Walgreens drug without store numbers$")
+	public void user_has_a_Walgreens_drug_without_store_numbers() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateWalgreensDrugWithoutStoreNumbers();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
 	@Then("^user sees the walgreens button$")
 	public void user_sees_the_walgreens_button() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.ViewManageAtWalgreens();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
+
+	@Then("^user sees the contact pharmacy button if it has no store number$")
+	public void user_sees__the_contact_pharmacy_button_if_it_has_no_store_number() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateContactPharmacyButton();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
+	@And("^user will not see manage at walgreens button$")
+	public void user_will_not_see_manage_at_walgreens_button() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);

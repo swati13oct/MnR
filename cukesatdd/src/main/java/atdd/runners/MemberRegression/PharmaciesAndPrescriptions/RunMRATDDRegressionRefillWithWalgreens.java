@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 		overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillWithWalgreens")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 		features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillWithWalgreens.json" }, tags = { "@F482427" }, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillWithWalgreens.json" }, tags = { "@Sprint10Walgreens" }, monochrome=true)
 public class RunMRATDDRegressionRefillWithWalgreens {
 
 }

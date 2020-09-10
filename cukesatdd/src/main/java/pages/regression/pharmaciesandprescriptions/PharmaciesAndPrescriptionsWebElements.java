@@ -376,6 +376,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'VIEW ORDER')]")
 	protected List<WebElement> viewOrder;
 
+	@FindBy(xpath = "//button[contains(@data-testid,'medication-action-contact-pharmacy')]")
+	protected List<WebElement> contactPharmacyBtn;
+
+
 	@FindBy(xpath = "//span[contains(text(),'Overview')]")
 	protected WebElement Overview;
 
@@ -1070,6 +1074,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 			return false;
 		}
 	}
+
+	public boolean contactPharmacyButton() {
+		if (contactPharmacyBtn.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 	public boolean alphaNumeric() {
 		boolean containsDigit = false;

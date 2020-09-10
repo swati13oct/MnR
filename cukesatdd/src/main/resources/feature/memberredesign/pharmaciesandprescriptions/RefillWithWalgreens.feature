@@ -99,3 +99,36 @@ Feature: MVP - Call to Action
     Examples:
       | FID     | planType | memberType                      |
       | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
+
+
+
+
+  @RefillWithWalgreens @F482427 @US2885533@Scenario1 @Sprint10Walgreens @Scenario1
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View Refill with Walgreens CTA
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    Then user views the Current Medications
+    When user has a Walgreens drug without store numbers
+    Then user sees the contact pharmacy button if it has no store number
+
+
+    Examples:
+      | FID     | planType | memberType                      |
+      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
+
+  @RefillWithWalgreens @F482427 @US2885533@Scenario1 @Sprint10Walgreens @Scenario2
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify View Refill with Walgreens CTA
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    When user has a Walgreens drug without store numbers
+    Then user sees the contact pharmacy button if it has no store number
+
+
+    Examples:
+      | FID     | planType | memberType                      |
+      | F482427 | MAPD     | AARP_Individual_PnP_rx_walgreen |
