@@ -491,21 +491,26 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
 
-		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		//CommonUtility.waitForPageLoadNew(driver, People, 30);
+		CommonUtility.waitForPageLoadNew(driver, People, 10);
 		People.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 
 		for (WebElement element : MulitpleSaveBtns) {
-			CommonUtility.waitForPageLoadNew(driver, element, 45);
+			//CommonUtility.waitForPageLoadNew(driver, element, 45);
+			CommonUtility.waitForPageLoadNew(driver, element, 10);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption)) {
-				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
+				//CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
+				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 10);
 				//jsClickNew(selectLocationOption);
 				selectLocationOption.click();
 
@@ -516,7 +521,8 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 			/*New Changes
 			 */
-			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			//CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
 			//continueSearching.click();
 			jsClickNew(continueSearching);
 			
@@ -532,7 +538,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		/*Old Changes
 		 * 
 		 jsClickNew(Savedproviders); 
