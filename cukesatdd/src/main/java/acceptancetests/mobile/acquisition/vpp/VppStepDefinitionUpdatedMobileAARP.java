@@ -28,7 +28,7 @@ import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 //import pages.mobile.acquisition.ulayer.PlanDetailsPage;
 import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 //import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 
 /**
@@ -623,7 +623,7 @@ public class VppStepDefinitionUpdatedMobileAARP {
 	public void the_user_clicks_on_Lookup_zipcode_on_AARP_on_Mobile() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ZipcodeLookupHomePage zipcodeLookuphomePage = aquisitionhomepage.looksupforZipcodes();
+		ZipcodeLookupHomePageMobile zipcodeLookuphomePage = aquisitionhomepage.looksupforZipcodes();
 		getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE, zipcodeLookuphomePage);
 	}
 
@@ -642,7 +642,7 @@ public class VppStepDefinitionUpdatedMobileAARP {
 		String city = memberAttributesMap.get("City");
 		String state = memberAttributesMap.get("State");
 
-		ZipcodeLookupHomePage zipcodeLookuphomePage = (ZipcodeLookupHomePage) getLoginScenario()
+		ZipcodeLookupHomePageMobile zipcodeLookuphomePage = (ZipcodeLookupHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
 		zipcodeLookuphomePage.enterAddressDetails(address, city, state);
 	}
