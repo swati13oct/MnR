@@ -69,7 +69,8 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement UHCSearchLinkfromGoogle1;
 
 //	@FindBy(xpath = "//*[@id='uh-search-box']")
-	@FindBy(xpath = "//input[@id='header-search-input']")
+	//@FindBy(xpath = "//input[@id='header-search-input']")
+	@FindBy(xpath = "//label[text()='Search query']//following-sibling::input[1]")
 	public WebElement YahooSearchField;
 
 	
