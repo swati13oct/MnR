@@ -562,6 +562,7 @@ public class ProviderSearchPage extends UhcDriver {
 		 //finishReturnBtn.click();
 		 jsClickNew(finishReturnBtn); 
 		waitForCountDecrement(2);
+		//
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new VPPPlanSummaryPage(driver);
 		
