@@ -248,6 +248,16 @@ Feature: ACQ-Plan benefits validation
       | workSheet    |
       | Sheet2021_13 |
 
+  @planCompareBenefits_NextYearAARP14
+    Examples:
+      | workSheet    |
+      | Sheet2021_14 |
+
+  @planCompareBenefits_NextYearAARP15
+    Examples:
+      | workSheet    |
+      | Sheet2021_15 |
+
   @planCompareBenefits_NextYearPDPAARP01
     Examples:
       | workSheet      |
@@ -334,6 +344,16 @@ Feature: ACQ-Plan benefits validation
     Examples:
       | workSheet    |
       | Sheet2021_13 |
+
+  @planCompareBenefits_NextYearUHC14
+    Examples:
+      | workSheet    |
+      | Sheet2021_14 |
+
+  @planCompareBenefits_NextYearUHC15
+    Examples:
+      | workSheet    |
+      | Sheet2021_15 |
 
   @planCompareBenefits_NextYearPDPUHC01
     Examples:
