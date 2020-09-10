@@ -175,7 +175,7 @@ Feature: ACQ-Plan benefits validation
       @planSummaryBenefitsAARP05_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | Sheet2020_5  | AARP |
+      | Plan Summary Benefits_Data | Sheet2021_5  | AARP |
       
       @planSummaryBenefitsAARP06_NextYear
       Examples: 
@@ -190,7 +190,7 @@ Feature: ACQ-Plan benefits validation
       @planSummaryBenefitsAARP08_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | Sheet2020_8  | AARP |
+      | Plan Summary Benefits_Data | Sheet2021_8  | AARP |
       
       @planSummaryBenefitsAARP09_NextYear
       Examples: 
