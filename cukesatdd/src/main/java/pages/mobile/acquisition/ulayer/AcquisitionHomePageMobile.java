@@ -34,6 +34,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -1989,6 +1990,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
 			return new keywordSearchAARP(driver);
+		return null;
+	}
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
+		validateNew(getStarted);
+		getStarted.click();
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 

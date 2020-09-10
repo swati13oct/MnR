@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.dceredesign;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,12 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
-public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
+public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver{
 	
-	public ZipCodeAndPlanYearCaptureMobilePage(WebDriver driver){
+	public ZipCodeAndPlanYearCapturePageMobile(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
@@ -26,6 +28,12 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 	}
 	
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
+
+	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
+	public WebElement loadScreenSpinner;
 	
 	@FindBy(xpath = "//button//span[contains(text(),'Add My Drug')]")
 	public WebElement AddMyDrugsBtn;
@@ -54,7 +62,7 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--secondary']")
 	public WebElement continueBtn;
 	
-	public ZipCodeAndPlanYearCaptureMobilePage clickAddDrugsBtn() {
+	public ZipCodeAndPlanYearCapturePageMobile clickAddDrugsBtn() {
 		//mobileswipe("70%",true);
 		//validateNew(AddMyDrugsBtn);
 		//mobileFindElement(AddMyDrugsBtn,4,true);
@@ -67,7 +75,7 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 		if (BuildDrugPage_verificationTxt.isDisplayed()) {
 			System.out.println("Navigated to Build Drug List Page");
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
-			return new ZipCodeAndPlanYearCaptureMobilePage(driver);
+			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 			}
 		}
 		catch(Exception e) {
@@ -77,13 +85,41 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 		return null;
 	}
 	
-	public ZipCodeAndPlanYearCaptureMobilePage validateZipCodePlanYearCapturePageNonAEP() {
+	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
+		validateNew(zipCodeTxtbox);
+		sendkeys(zipCodeTxtbox, zipcode);
+		Thread.sleep(3000);
+		try {
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
+				CommonUtility.waitForPageLoad(driver,countyRows , 30);
+				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+			}
+		} catch (Exception e) {
+			System.out.println("county box not found");
+		}
+		validateNew(continueBtn);
+		//continueBtn.click();
+	}
+	
+	public DrugSummaryPage clickContinueBtn() {
+		validateNew(continueBtn);
+		continueBtn.click();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		if(validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		}
+		Assert.fail("DCE - Drug Summary Page is not displayed");
+		return null;	
+	}
+	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
 		try {
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
 			//mobileUtils.mobileLocateElement(planYearDropdown);
 			mobileUtils.mobileLocateElement(continueBtn);
-			return new ZipCodeAndPlanYearCaptureMobilePage(driver);
+			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -92,7 +128,7 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 		return null;
 	}
 	
-	public ZipCodeAndPlanYearCaptureMobilePage validatePlanYearDrpDownNonAEP() {
+	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {
 		try {
 		if(planYearDropdown.isDisplayed()) {
 			Assert.fail("Plan year dropdown should not be displayed during NonAEP");
@@ -102,7 +138,7 @@ public class ZipCodeAndPlanYearCaptureMobilePage extends UhcDriver{
 		catch(Exception e) {
 			Assert.assertTrue("Plan Year dropdoown should not be displayed", true);
 		}
-		return new ZipCodeAndPlanYearCaptureMobilePage(driver);
+		return new ZipCodeAndPlanYearCapturePageMobile(driver);
 	}
 	
 	public ZipCodePlanYearCapturePage validatePlanYearDrpDownAEP() {

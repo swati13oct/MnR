@@ -1,5 +1,7 @@
 package pages.mobile.acquisition.ulayer;
 
+import org.junit.Assert;
+
 /*@author pagarwa5*/
 
 import org.openqa.selenium.WebDriver;
@@ -7,7 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 
 
 public class GetStartedPageMobile extends UhcDriver {
@@ -20,6 +25,22 @@ public class GetStartedPageMobile extends UhcDriver {
 	
 	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
 	WebElement dceToolFrame;
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
+	public WebElement BuildDrugPage_verificationTxt;
+	
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
+	public WebElement LinktoExitScenario;
+	
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
+	public WebElement getStartedTab;
+
 
 	public GetStartedPageMobile(WebDriver driver) {
 		 super(driver);
@@ -49,6 +70,18 @@ public class GetStartedPageMobile extends UhcDriver {
 		getStartedLink.click();
 		return new AddDrugPageMobile(driver);
 		
+	}
+	
+	public BuildYourDrugListMobile clickAddsDrugs() {
+		if(validate(AddMyDrugsBtn))
+			AddMyDrugsBtn.click();
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 		  
 	public AddDrugPageMobile clicksOnGetStarted() {
