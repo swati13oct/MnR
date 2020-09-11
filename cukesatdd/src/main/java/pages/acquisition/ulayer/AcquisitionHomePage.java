@@ -398,11 +398,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "1-877";
+//	String CallSam= "Call a Licensed Insurance Agent";
 //	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 
@@ -1103,6 +1107,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
+		CommonUtility.checkPageIsReadyNew(driver);
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
@@ -1600,7 +1608,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		driver.findElement(By.xpath("//*[@id='js-ole-plan-select']//option[text()='" + planName + "']")).click();
 		waitforElement(enrollButton);
 		enrollButton.click();
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Online Enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1683,7 +1692,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		if (CallSam.contains(toolTipText)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
