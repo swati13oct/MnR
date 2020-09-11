@@ -1348,6 +1348,7 @@ public boolean changePlanyear(String year) {
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection
 	try {
+		MAViewPlansLink.click();
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
 			return true;

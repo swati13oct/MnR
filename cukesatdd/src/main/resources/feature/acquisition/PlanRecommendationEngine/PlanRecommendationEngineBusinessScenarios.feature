@@ -98,7 +98,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      #      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                |
+    	|   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup  | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario

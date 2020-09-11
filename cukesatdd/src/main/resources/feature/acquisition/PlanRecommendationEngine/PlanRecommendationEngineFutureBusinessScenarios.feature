@@ -64,7 +64,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Fonseca, Mario J |               | No             | No,No,No,No                   | Lower                |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
       |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @APIRanking @MAFutureFlowRanking @SanityTest @PRERegression6
