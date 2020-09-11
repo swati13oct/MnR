@@ -236,7 +236,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
 			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace(" per Month, refill", "").toUpperCase());
+					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace("per Month, refill ", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());

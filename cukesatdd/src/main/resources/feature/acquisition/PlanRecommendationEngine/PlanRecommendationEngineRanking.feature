@@ -22,21 +22,19 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #			| Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
-      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS  | UHGNetwork |                       |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
-      |   94203 | NO            | Sacramento | MAPD          | None         | outsideUS | Lookup     | Robert Deloy Jamieson | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | MA                    | SecureHorizons:SecureHorizons Focus:Advantage Assure |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                |
+      |   94203 | NO            | Sacramento | MAPD          | None         | outsideUS | Lookup     | Heller, Wendy F, DO | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               |
 
   @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
@@ -63,13 +61,11 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
-      |   94203 | NO            | Sacramento | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | MA                    | SecureHorizons Focus:Advantage Assure:SecureHorizons |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   94203 | NO            | Sacramento | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                |
 
   @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -84,13 +80,11 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user selects add drug option without drugs in Drug page
       | Drug Selection | <Drug Selection> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | primaryRecommendation | RankingplansOrder              |
-      |   35034 | Yes           | Bibb County | PDP           | Yes            | PDP                   | Walgreens:Preferred:Saver Plus |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
+      |   35034 | Yes           | Bibb County | PDP           | Yes            |
 
   @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression6
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption>, <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -105,17 +99,15 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     And user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | primaryRecommendation | RankingplansOrder              |
-      |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                                               | Retail         | PDP                   | Saver Plus:Walgreens:Preferred |
-      |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,1,NO,NO | Online         | PDP                   | Preferred:Walgreens:Saver Plus |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 |
+      |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                                               |
+      |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,1,NO,NO |
 
   @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate SNP ranking plans in PRE
@@ -142,12 +134,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate recommendation rankings in results page
-      | Recommendation      | <primaryRecommendation> |
-      | Ranking plans Order | <RankingplansOrder>     |
+    Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder |
-      |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | D-SNP:C-SNP:I-SNP |
-      |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | C-SNP:I-SNP:D-SNP |
-      |   32111 | No            | Marion | MAPD          | Nursing                  | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | I-SNP:D-SNP:C-SNP |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
+      |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
+      |   32111 | No            | Marion | MAPD          | Nursing                  | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
