@@ -3193,7 +3193,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+//		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 	}
 	
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth){
@@ -3315,6 +3316,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitTillElementClickableInTime(Start_ApplicationBtn,60);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(insuredStatus, 15);
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
