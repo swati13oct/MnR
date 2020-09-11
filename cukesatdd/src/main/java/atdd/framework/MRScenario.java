@@ -1178,7 +1178,7 @@ try {
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
 		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
-			capabilities.setCapability("parentTunnel", "optumtest");
+			//capabilities.setCapability("parentTunnel", "optumtest");
 			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		}
 		capabilities.setCapability("nativeWebTap", true);

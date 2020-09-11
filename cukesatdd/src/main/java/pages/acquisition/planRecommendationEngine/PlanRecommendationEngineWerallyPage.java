@@ -134,10 +134,6 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						jsClickNew(saveButton);
 						threadsleep(3000);
 						chooseFirstLocation();
-//						String text = saveModalCloseContinueSearchbutton.getText();
-//						if (text.toUpperCase().contains("CONTINUE"))
-//							newRally = true;
-
 						saveModalCloseContinueSearchbutton.click();
 					}
 				} else {

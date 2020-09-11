@@ -1,6 +1,8 @@
 @PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking using mobile
 
+#Ranking of Plans on given input validaion will not happen.
+
   @PRE @Rankingmobile @MAPlansRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Ranking for MA plans in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
@@ -35,7 +37,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName           | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | RankingplansOrder                                    |
-      |   94203 | NO            | Sacramento | MAPD          | None         | WithinUS     | UHCNetwork       |                       |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Online            | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
+      |   94203 | NO            | Sacramento | MAPD          | None         | WithinUS     | UHCNetwork       |                       |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online            | No,No,No,No                   | Lower                | MA                    | Advantage Assure:SecureHorizons Focus:SecureHorizons |
       |   94203 | NO            | Sacramento | MAPD          | None         | OutsideUS    | lookup           | Robert Deloy Jamieson | NO            | Yes           | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail            | Yes,Yes,Yes,Yes               | Higher               | MA                    | SecureHorizons:SecureHorizons Focus:Advantage Assure |
 
   @PRE @Rankingmobile @MAPlansRankingmobile @F358846

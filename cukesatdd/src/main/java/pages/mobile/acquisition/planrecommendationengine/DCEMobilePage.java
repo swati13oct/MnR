@@ -154,12 +154,14 @@ public class DCEMobilePage extends UhcDriver {
     public void choosePharmacyandBacktoPlans() {
     //mobileUtils.mobileLocateElement(pickPharmacyButton);
 	//mobileUtils.mobileLocateElementClick(pickPharmacyButton);
+    System.out.println("returning to plans...");
 	validate(drugpageButtons.get(0));
+	threadsleep(2000);
 	drugpageButtons.get(0).click();
 	pageloadcomplete();
 	threadsleep(2000);
 	validate(backtoPlansButton.get(0));
-	backtoPlansButton.get(0).click();
+	mobileUtils.mobileLocateElementClick(backtoPlansButton.get(0));
 	pageloadcomplete();
 	threadsleep(2000);
 }
@@ -211,8 +213,8 @@ public class DCEMobilePage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-
-			addDrugButton.click();
+			jsClickMobile(addDrugButton);
+			threadsleep(2000);
 //			Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");

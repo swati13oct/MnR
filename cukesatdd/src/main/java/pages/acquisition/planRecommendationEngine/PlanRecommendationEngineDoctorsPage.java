@@ -233,7 +233,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		if (search.contains(":")) {
 			count = search.split(":").length;
 		}
-		getConfimationPopupResults(count);
+		confirmationProviderResults = getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
 		if (count > 2 && !search.contains(":")) {
 			removeDoctors();
