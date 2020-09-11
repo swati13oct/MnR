@@ -405,7 +405,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "1-877";
+//	String CallSam= "Call a Licensed Insurance Agent";
 //	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 
@@ -1691,7 +1692,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		if (CallSam.contains(toolTipText)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else

@@ -9,7 +9,7 @@ import acceptancetests.util.CommonUtility;
 
 public class ContactUsAARPPage extends GlobalWebElements{
 	 
-	@FindBy(xpath = "//*[contains(@class,'meded layout')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-3') and contains(text(),'Contact')]")
 	public static WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'uhc-container')]")
