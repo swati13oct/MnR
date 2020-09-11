@@ -1,7 +1,5 @@
 package pages.mobile.acquisition.ulayer;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +9,6 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,24 +22,14 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import io.appium.java_client.AppiumDriver;
-
 import org.testng.Assert;
 
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.keywordSearchAARP;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.AboutUsAARPPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
-import pages.acquisition.ulayer.ContactUsAARPPage;
-import pages.acquisition.ulayer.DisclaimersAARPPage;
-import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
-import pages.acquisition.ulayer.SiteMapAARPPage;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 /**
  * @author pperugu
@@ -144,7 +131,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	@FindBy(xpath = "//a[contains(text(),'Get Started')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
@@ -1997,8 +1984,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement AddMyDrugsBtn;
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		validateNew(getStarted);
-		getStarted.click();
-
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", getStarted);
+		//getStarted.click();
+		
+		
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

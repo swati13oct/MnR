@@ -10,13 +10,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
+     Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
@@ -52,18 +52,18 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Given the user is on medicare acquisition site landing page
    		|Site| <site>|
     When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
+    Then the user validates GetStarted Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
+    Then end user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county 
+    When user enters valid zip and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     

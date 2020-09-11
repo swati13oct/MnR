@@ -49,13 +49,13 @@ public class GetStartedPageMobile extends UhcDriver {
 		validateNew(getStartedTab);
 	}
 
-	public BuildYourDrugList clickAddsDrugs() {
+	public BuildYourDrugListMobile clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
 			AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
-			return new BuildYourDrugList(driver);
+			return new BuildYourDrugListMobile(driver);
 		}
 		Assert.fail("Did not Navigate to Build Drug List Page");
 		return null;

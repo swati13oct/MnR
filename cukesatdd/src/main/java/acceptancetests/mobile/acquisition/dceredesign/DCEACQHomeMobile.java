@@ -9,37 +9,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.dce.ulayer.DCETestHarnessPage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.ulayer.AddDrugDetails;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
+//import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
-import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -87,7 +71,7 @@ public class DCEACQHomeMobile {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
-	@Then("^the user validates Get Started Page$")
+	@Then("^the user validates GetStarted Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPage DCEgetStarted = new GetStartedPage(wd);
@@ -107,7 +91,7 @@ public class DCEACQHomeMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 
-	@Then("^the user searches and adds the following Drug to Drug List$")
+	@Then("^end user searches and adds the following Drug to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -127,7 +111,13 @@ public class DCEACQHomeMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
+	
 
+	
+
+	
+
+	
 	@Then("^the user validates all added drugs in DrugList$")
 	public void the_user_validates_all_added_drugs_in_DrugList() throws Throwable {
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -137,14 +127,14 @@ public class DCEACQHomeMobile {
 	}
 
 	@Then("^the user clicks on Review Drug Costs to Land on Zip Entry Page$")
-	public void the_user_clicks_on_Add_Drug() throws Throwable {
+	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Zip_Entry_Page() throws Throwable {
 		BuildYourDrugListMobile DCEbuildDrugList = (BuildYourDrugListMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
-	@When("^user enters valid zipcode and county$")
+	@When("^user enters valid zip and county$")
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

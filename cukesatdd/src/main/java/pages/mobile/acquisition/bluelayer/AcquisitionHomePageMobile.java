@@ -12,7 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
-
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -24,8 +25,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	String CallSam = "Call a Licensed Insurance Agent";
 	String ChatSam = "Chat with a Licensed Insurance Agent";
-	String CallSamPopupTitle="Need Help? Call us.";
-	String ChatSamPopupTitle="Please provide the following information";
+	String CallSamPopupTitle = "Need Help? Call us.";
+	String ChatSamPopupTitle = "Please provide the following information";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 
@@ -45,16 +46,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	@FindBy(xpath = "//*[@id='sam-button--chat']/div//a[@class='sam__button__text']")
 	private WebElement chatSamTooltip;
-	
+
 	@FindBy(xpath = "//*[@id='sam-call-modal']//div[@class='modal-content']")
 	private WebElement callSamPopup;
-	
+
 	@FindBy(xpath = "//*[@id='sam-call-modal']//h3[@id='sam-call-modal__title']")
 	private WebElement callSamPopupTitle;
-	
+
 	@FindBy(xpath = "//div[@id='servicepatternsite-iframe-chat']//div[@id='agent-name']")
 	private WebElement chatSamPopupTitle;
-	
+
 	@FindBy(xpath = "//*[@id='sp-chat-iframe']")
 	private WebElement chatSamPopupFrame;
 
@@ -154,18 +155,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	/**
-	 * @author Rathulya
-	 * This method is used to open the URL on the mobile device
+	 * @author Rathulya This method is used to open the URL on the mobile device
 	 */
 	public void openMobileURL() {
 		startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
-	
 	/**
-	 * @author Rathulya
-	 * This method is used to navigate to the page/URL passed from the feature file examples
+	 * @author Rathulya This method is used to navigate to the page/URL passed from
+	 *         the feature file examples
 	 * @param page
 	 * @return
 	 */
@@ -219,10 +218,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		String toolTipText = callSamPopupTitle.getText();
 		try {
 			validateNew(callSamPopup);
-			}
-			catch (NoSuchElementException e) {
-				System.out.println("Call popup not displayed");
-			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Call popup not displayed");
+		}
 		CallSamTFNClose.click();
 		present = validateNew(callsam);
 		if (present && (CallSamPopupTitle.equalsIgnoreCase(toolTipText))) {
@@ -273,4 +271,33 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		return null;
 	}
 
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
+
+	public void navigateToMedEdPresDrugPage() {
+		waitforElement(lnkLearnAboutMedicare);
+		if (lnkLearnAboutMedicare.isDisplayed()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(lnkLearnAboutMedicare);
+			actions.build().perform();
+			System.out.println("Hover over Learn about Medicare completed");
+		}
+		WebElement PresProvidersBenefitsLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+		jsClickNew(PresProvidersBenefitsLink);
+	}
+
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
+		WebElement DCELink = driver.findElement(By
+				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+		validateNew(DCELink);
+		jsClickNew(DCELink);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
+		return null;
+	}
 }
