@@ -231,3 +231,85 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Summary Benefits_Data | SheetPDP2021_2  | AARP |
+      
+# UHC 
+
+ @planSummaryBenefitsUHC01_NextYear
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_1  | UHC |
+      
+      @planSummaryBenefitsUHC02_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_2  | UHC |
+      
+      @planSummaryBenefitsUHC03_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data |Sheet2021_3  | UHC |
+      
+      @planSummaryBenefitsUHC04_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_4  | UHC |
+      
+      @planSummaryBenefitsUHC05_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_5  | UHC |
+      
+      @planSummaryBenefitsUHC06_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_6  | UHC |
+      
+      @planSummaryBenefitsUHC07_NextYear
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_7  | UHC |
+      
+      @planSummaryBenefitsUHC08_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_8  | UHC |
+      
+      @planSummaryBenefitsUHC09_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_9  | UHC |
+      
+      @planSummaryBenefitsUHC10_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_10  | UHC |
+      
+      @planSummaryBenefitsUHC11_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_11 | UHC |
+      
+      @planSummaryBenefitsUHC12_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_12  | UHC |
+      
+        @planSummaryBenefitsUHC13_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_13 | UHC |
+      
+      @planSummaryBenefitsUHC14_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Sheet2021_14  | UHC |
+      
+      @planSummaryBenefitsPDPUHC01_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | SheetPDP2021_1  | UHC |
+      
+       @planSummaryBenefitsPDPUHC02_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | SheetPDP2021_2  | UHC |
