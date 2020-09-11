@@ -1257,6 +1257,7 @@ public class PlanDetailsPage extends UhcDriver {
 				dentalPopupOptionalRidersLink.click();
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
+//				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
 				jse.executeScript("arguments[0].click()", dentalPopupLink);
 			}
 			System.out.println("Plan Name is : " + planName);
