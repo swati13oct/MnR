@@ -75,7 +75,8 @@ public class CampaignTFNPage extends UhcDriver {
 
 	
 //	@FindBy(xpath = "//*[@id='uh-search-button']")
-	@FindBy(xpath = "//button[contains(@id,'search-button')]")
+	//@FindBy(xpath = "//button[contains(@id,'search-button')]")
+	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
 	public WebElement YahooSearchBttn;
 
 	//@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
