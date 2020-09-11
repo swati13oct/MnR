@@ -108,19 +108,19 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement expirationYearDropdown;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//button[contains(text(),'Review and Submit')]")
 	public WebElement reviewAndSubmitButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h1[contains(text(),'Review and Submit')]")
 	public WebElement reviewAndSubmitPageHeader;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@id='bankHolName']")
 	public WebElement bankHoldersNameTextField;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@id='routNumber']")
 	public WebElement routingNumberTextField;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[@id='accountNum']")
 	public WebElement accountNumberTextField;
 
 	@FindBy(xpath = "//div[2][contains(text(),'Cannot exceed annual remaining amount')]")

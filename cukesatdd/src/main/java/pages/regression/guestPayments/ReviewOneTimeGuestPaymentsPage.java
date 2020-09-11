@@ -28,34 +28,34 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 
 	public static boolean isBusinessValidation = false;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h1[contains(text(),'Review and Submit')]")
 	public WebElement reviewAndSubmitHeader ;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//button[@class='back-btn']")
 	public WebElement reviewAndSubmitBackButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h3[@class='uhc-tempo-header__h3 token-color-gray-dark-base uhc-tempo-header__medium uhc-pay-txt']")
 	public WebElement reviewPaymentDetailsStaticText;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h2[@class='uhc-tempo-header__h2 uhc-tempo-card__header uhc-tempo-header__medium token-color-gray-dark-base'][contains(text(),'Payment Details')]")
 	public WebElement paymentDetailsHeader;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@class='change-details-icon-span']")
 	public WebElement changePaymentsDetailsLink;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Plan:')]")
 	public WebElement planName;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Member Name:')]")
 	public WebElement memberName;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'ID:')]")
 	public WebElement memberID;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Payment Details:')]")
 	public WebElement paymentDetails;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h3[contains(text(),' Total You Pay ')]")
 	public WebElement totalYouPay;
 	
 	@FindBy(xpath = "")
@@ -67,10 +67,10 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "")
 	public WebElement privacyPolicyLink;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//button[contains(text(),'Confirm and Pay')]")
 	public WebElement confirmAndPayButton;
 	
-	@FindBy(id = "")
+	@FindBy(id = "//h1[contains(text(),'Payment Submitted')]")
 	private WebElement confirmationPageHeader;
 	
 	@FindBy(xpath = "")

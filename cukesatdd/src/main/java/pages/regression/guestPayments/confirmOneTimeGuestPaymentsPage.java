@@ -79,28 +79,28 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'confirmationText')]//*[contains(@class,'confirmation__number')][string-length(text())=9]")
 	private WebElement confirmationNumber;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h1[contains(text(),'Payment Submitted')]")
 	private WebElement confirmationPageHeader;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h2[contains(text(),'Thanks')]")
 	private WebElement thankyouPaymentmessage;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//p[contains(text(),'confirmation email')]")
 	private WebElement staticContentBelowHeader;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[contains(@for,'emailID')]")
 	private WebElement emailAddressText;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//input[contains(@placeholder,'Input text')]")
 	private WebElement emailTextField;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//button[contains(@class,'send-button-wrap')]")
 	private WebElement sendEmailButton;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h1[contains(text(),'recurring' )]")
 	private WebElement signinIframeHeader;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//p[contains(text(),'Sign In” or “Register' )]")
 	private WebElement signinIframeBodytext;
 
 	@FindBy(xpath = "")

@@ -208,7 +208,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, reviewAndSubmitPageHeader, 45);
 
-		if (driver.getTitle().contains("Review")) {
+		if (driver.getCurrentUrl().contains("review-submit")) {
 			System.out.println(">>>>>>>>>>Review Guest Payments page is displayed<<<<<<<<<<");
 			return new ReviewOneTimeGuestPaymentsPage(driver);
 		} else {

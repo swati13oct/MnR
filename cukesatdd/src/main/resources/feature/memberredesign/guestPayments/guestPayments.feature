@@ -175,7 +175,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
+    #And I validate all the header and page elements on One-time payment page
     Then I select Past Amount Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
       | AccountHoldersName | <Name>      |
