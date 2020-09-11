@@ -477,7 +477,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PhonePrimary']")
 		private WebElement phoneNumber;
 
-		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+//		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 		private WebElement cancelButton;
 
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
@@ -3321,16 +3322,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
-		validateNew(nextButton);
+		validate(nextButton, 15);
 		jsClickNew(nextButton);
+		validate(medSuppImpDoc_PlanOverview, 15);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(medSuppOleAarpCardImg, 15);
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(firstName, 15);
 		waitforElementVisibilityInTime(firstName,30);
 		sendkeysNew(firstName,FirstName);
 		sendkeysNew(lastName,LastName);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(address1, 15);
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
@@ -3338,13 +3346,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
-		validateNew(medSuppOleDobHeading);
+		validate(medSuppOleDobHeading, 15);
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		String ResumeKey= resumeKey.getText();
 		System.out.println("The return to the application code is- "+ResumeKey);
-		cancelButton.click();
+//		cancelButton.click();
+		validate(cancelButton, 15);
+		jsClickNew(cancelButton);
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+		validate(cancelButtonPopUp, 15);
 		cancelButtonPopUp.click();
 		System.out.println("Cancel application has been clicked on the pop up");
 		return ResumeKey;
@@ -3357,6 +3368,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
+		validate(resumeApplication, 15);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
 	}
@@ -4287,7 +4299,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void RetrieveURL(String ExpectedsupplementURL) {
 		
 		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		validate(Submit, 15);
 		Submit.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
 		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);
