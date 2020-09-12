@@ -49,9 +49,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
-	
-	@FindBy(xpath = "//*[contains(@id,'change-location')]")
-	private WebElement zipcodeChangeLink;
 
 	@FindBy(id = "zipcode")
 	private WebElement healthPlansZipcode;
