@@ -108,12 +108,21 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     And click on Learn how to enroll plan on enroll page
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    When the user performs plan search using Standalone Zipcode information in the UHC site
+    #When the user performs plan search using Standalone Zipcode information in the UHC site
+    When the user performs plan search using Standalone information in the UHC site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user selects future plan year for the UHC site
+    |Plan Year | <planYear> |
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user navigates to Personal Information Page
+    Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
+    Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates cancellation modal for Welcome OLE
+     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
       | Last Name          | <lastname>          |
