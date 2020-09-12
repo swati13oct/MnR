@@ -108,7 +108,8 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
     And click on Learn how to enroll plan on enroll page for AARP
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    When the user performs plan search using Standalone Zipcode information in the AARP site
+    #When the user performs plan search using Standalone Zipcode information in the AARP site
+    When the user performs plan search using Standalone information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
