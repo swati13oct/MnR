@@ -107,7 +107,8 @@ Feature: 2.05.1.ACQ-OLE MA UMS
     And click on Learn how to enroll plan on enroll page
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    When the user performs plan search using Standalone Zipcode information in the UHC site
+   #When the user performs plan search using Standalone Zipcode information in the UHC site
+    When the user performs plan search using Standalone information in the UHC site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
