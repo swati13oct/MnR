@@ -36,6 +36,9 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -77,6 +80,11 @@ public class GetStartedPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}

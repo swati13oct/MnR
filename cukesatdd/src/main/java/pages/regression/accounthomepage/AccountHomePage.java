@@ -506,6 +506,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "globalContentIdForSkipLink")
 	private WebElement PaymentHeadingNew;
 	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
+	private WebElement mnrSignInButton;
+	
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -4344,4 +4347,28 @@ public class AccountHomePage extends UhcDriver {
 		   assertTrue("Navigated page title not matched for Canopy deep link", currentPageTitle.contains(expectedTitle));
 	}
 
+	public void clickElementUnderShadowRootHeader(String cssLocatorToClick) {
+		WebElement root1 = expandRootElement(shadowRootHeader);
+		try {
+			WebElement elementToClickInShadowRoot = root1
+					.findElement(By.cssSelector(cssLocatorToClick));
+			elementToClickInShadowRoot.click();
+		} catch (Exception e) {
+			Assert.fail("PROBLEM - unable to locate element with cssSelector. Element: " + cssLocatorToClick);
+		}
+	}
+	
+	public void clickAccountProfileDashboard() {
+		checkForIPerceptionModel(driver);
+		//Click on Account profile on Rally dashboard. Under shadow element
+		clickElementUnderShadowRootHeader("button[id*=dropdown-toggle]");
+	}
+	
+	public void clickLogoutDashboardAndCheckLoginPage() {
+		//Click on logout under Account profile on Rally dashboard. Under shadow element
+		clickElementUnderShadowRootHeader("a[data-testid*=TARGET_AWARE_LOGOUT]");
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Driver title after logout=" + driver.getTitle());
+		validateNew(mnrSignInButton,5);
+	}
 }

@@ -27,7 +27,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -90,19 +90,19 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//caption[contains(text(), 'Initial Coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_initial_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_initial_coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageLink;
 	
 	@FindBy(xpath = "//caption[contains(text(), 'Coverage Gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_coverage_gap')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_coverage_gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapLink;
 
 	@FindBy(xpath = "//caption[contains(text(), 'Catastrophic Coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_catastrophic_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_catastrophic_coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheLink;
 	
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")

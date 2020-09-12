@@ -50,7 +50,8 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//uhc-menu-item")
 	public List <WebElement> AutoCompleteitems;
 
-	@FindBy(xpath = "//*[@id='drugPopHeading']")
+//	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -192,7 +193,7 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
