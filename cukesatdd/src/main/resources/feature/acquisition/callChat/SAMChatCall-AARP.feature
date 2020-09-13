@@ -13,15 +13,15 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
 
 @samChatVPULayer
  Scenario Outline: 1.19.1.2 To test the SAM chat Call icons on AARP site on Visitor Profile Page to intiate a chat
-    Given the user is on AARP medicare acquisition site landing page
-    And user clicks on Sign in link on home page in aarp
-    And user clicks on register link on home page in aarp
-    Then user validates visitor profile on home page in aarp
+    Given the user is on the AARP medicare site landing page
+    And the user selects the state drop down value in AARP home page
+      | State | <state> |
+    And the user clicks on the shopping cart icon in AARP site
     Then the user validates whether call icon is visible on AARP 
 		Then the user validates whether chat Agent is Available on AARP
 		Examples: 
-			| pagename |
-			|/|
+			| pagename | state   | 
+			|/| Alabama |
 
 @samChat
 Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename> chat agent not available hours
