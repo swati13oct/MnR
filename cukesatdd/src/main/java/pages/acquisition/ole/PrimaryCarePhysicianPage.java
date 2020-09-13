@@ -259,7 +259,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						SelectPCPAddress.click();
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
-						try {
+						/*try {
 							Thread.sleep(2000);
 							if(validate(ReviewPCPButton)){				
 								jsClickNew(ReviewPCPButton);
@@ -269,7 +269,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 						//button[contains(text(),'Submit')]
 
 						//SelectPCPContinueBtn.click();
@@ -292,10 +292,23 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						String PCPname = ProviderName.getText();
+						
+						
+						try {
+							Thread.sleep(2000);
+							if(validate(ReviewPCPButton)){				
+								jsClickNew(ReviewPCPButton);
+
+							}
+
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String PCPname = ProviderName.getText();					
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", AddProvider);
-
+							
 						//AddProvider.click();
 						System.out.println("PCP selected : "+PCPname);
 						try {
