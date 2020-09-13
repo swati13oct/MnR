@@ -93,13 +93,13 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 			waitforElement(maLeanHowToEnrollLink);
 			maLeanHowToEnrollLink.click();
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+			//EnrollmentLink.click();
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollLink);
 			pdpLeanHowToEnrollLink.click();
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+			//EnrollmentLink.click();
 		}		
 	}
 

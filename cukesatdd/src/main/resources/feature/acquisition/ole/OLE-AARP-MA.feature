@@ -108,10 +108,16 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
     And click on Learn how to enroll plan on enroll page for AARP
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    When the user performs plan search using Standalone Zipcode information in the AARP site
+    #When the user performs plan search using Standalone Zipcode information in the AARP site
+    When the user performs plan search using Standalone information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+		And the user selects plan year for the AARP site
+      |Plan Year | <planYear> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
@@ -189,7 +195,7 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
-     @MA_OLE_Ulayer @prodRegression
+     @MA_OLE_Ulayer_standalone @prodRegression
      Examples: 
       | TID   | PlanType | Plan Year|planYear|zipcode | isMultutiCounty | county       | plantype | planName                                               | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       | 15515 | MA-MBI   |current|current|   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CO          |      80002 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|

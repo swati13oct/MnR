@@ -101,7 +101,7 @@ Then the user validates whether chat Agent is not Available on UHC
       | privacy-policy.html           |
 			
 
-@samChatCallRegression @samChatRegression
+
 Scenario Outline: 1.19.1.4 To test the SAM icons on UHC site on <pagename>
 Given user is on blue layer landing page
 And user opens the page to validate on UHC
@@ -109,9 +109,11 @@ And user opens the page to validate on UHC
 Then the user validates whether call icon is visible on UHC   
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat Agent is Available on UHC
+
+@samChatCallRegression @samChatRegressionUHC1
 Examples: 
 			| pagename |
-			|/|
+			|/| 
     #  | medicare-education.html                                  |
     | medicare-education/medicare-eligibility.html             |
       | medicare-education/medicare-parts-and-medigap-plans.html | 
@@ -122,6 +124,10 @@ Examples:
       | medicare-education/medicare-costs.html                | 
       | medicare-education/enrollment-and-changing-plans.html | 
       | medicare-education/medicare-faq.html                  | 
+     
+      @samChatCallRegression @samChatRegressionUHC2
+			Examples:
+			| pagename |
       | shop.html          | 
       | shop/connect       | 
       | shop/compare.html  | 
@@ -142,6 +148,10 @@ Examples:
       | enroll.html                | 
       | enroll/ma-enrollment.html  |
       | enroll/pdp-enrollment.html | 
+      
+      @samChatCallRegression @samChatRegressionUHC3
+			Examples:
+			| pagename |
       | resources.html                                       |
       | resources/medication-therapy-management-program.html | 
       | resources/how-to-appoint-a-representative.html       | 
@@ -160,6 +170,10 @@ Examples:
       | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
       | resources/disenrollment-information.html                                            | 
+      
+      @samChatCallRegression @samChatRegressionUHC4
+			Examples:
+			| pagename |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |                              
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | 
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | 

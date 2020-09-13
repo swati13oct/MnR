@@ -32,6 +32,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 	
+	@FindBy(xpath = "//button[contains(text(),'Submit')]")
+	private WebElement ReviewPCPButton;
+	
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
@@ -256,6 +259,18 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						SelectPCPAddress.click();
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
+						/*try {
+							Thread.sleep(2000);
+							if(validate(ReviewPCPButton)){				
+								jsClickNew(ReviewPCPButton);
+
+							}
+
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}*/
+						//button[contains(text(),'Submit')]
 
 						//SelectPCPContinueBtn.click();
 						try {
@@ -277,10 +292,23 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						String PCPname = ProviderName.getText();
+						
+						
+						try {
+							Thread.sleep(2000);
+							if(validate(ReviewPCPButton)){				
+								jsClickNew(ReviewPCPButton);
+
+							}
+
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String PCPname = ProviderName.getText();					
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", AddProvider);
-
+							
 						//AddProvider.click();
 						System.out.println("PCP selected : "+PCPname);
 						try {
