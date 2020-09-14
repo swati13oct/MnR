@@ -111,7 +111,9 @@ public class AepPlanComparePage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
-	    threadsleep(5000);
+	   // threadsleep(5000);
+
+	    CommonUtility.checkPageIsReady(driver);
 
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
