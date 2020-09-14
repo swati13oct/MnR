@@ -297,12 +297,17 @@ public class VppPlanValidationStepDefinition {
 									 new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									 planComparePage = new AepPlanComparePage(wd);
 
-									 if(sheetName.contains("PDP")) {
-										 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP","");
+									 try {
+										 if (sheetName.contains("PDP")) {
+											 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP", "");
+										 } else {
+											 benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(4).getStringCellValue(), row.getCell(2).getStringCellValue());
+										 }
 									 }
-									 else
+									 catch(Exception ex)
 									 {
-									 	benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(4).getStringCellValue(), row.getCell(2).getStringCellValue());
+									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan -"+rowIndex + "Error - " +ex.getMessage() );
+									 	continue;
 									 }
 								 }
 
