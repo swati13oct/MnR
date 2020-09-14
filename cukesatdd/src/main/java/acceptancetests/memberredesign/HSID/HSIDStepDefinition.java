@@ -1522,7 +1522,13 @@ public class HSIDStepDefinition {
 										@Then("^I click on logout and validate the login page$")
 										public void click_on_logout_validate_login_page() {
 											TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-											testHarnessPage.clickAccountProfile();
-											testHarnessPage.logout();
+											if(testHarnessPage != null) {
+												testHarnessPage.clickAccountProfile();
+												testHarnessPage.logout();
+											} else {
+												AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+												accountHomePage.clickAccountProfileDashboard();
+												accountHomePage.clickLogoutDashboardAndCheckLoginPage();												
+											}
 										}
 }

@@ -80,7 +80,7 @@ Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP A
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -106,12 +106,19 @@ Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP A
     And click on Learn how to enroll plan on enroll page for AARP
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    When the user performs plan search using Standalone Zipcode information in the AARP site
+    #When the user performs plan search using Standalone Zipcode information in the AARP site
+    When the user performs plan search using Standalone information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user selects future plan year for the AARP site
+      |Plan Year | <planYear> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user validates Learn more modal for Welcome OLE
+    Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page

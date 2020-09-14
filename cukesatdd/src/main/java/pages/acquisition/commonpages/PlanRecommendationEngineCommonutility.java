@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.planRecommendationEngine;
+package pages.acquisition.commonpages;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -126,7 +126,8 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		}
 
 		public void findPagedetails(String pageName) {
-			flow = PlanRecommendationEngineStepDefinition.PREflow;
+			flow = PlanRecommendationEngineCommonStepDefinition.PREflow;
+			System.out.println("====================: "+ flow );
 			currentPageName = pageName.toUpperCase().trim();
 			currrentPagePercentage = new String();
 			previousPageName = new String();
