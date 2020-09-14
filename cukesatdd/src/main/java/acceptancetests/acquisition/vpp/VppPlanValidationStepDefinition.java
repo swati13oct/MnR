@@ -308,8 +308,8 @@ public class VppPlanValidationStepDefinition {
 									 {
 									 	int lastcellNum = resultsRow.getLastCellNum();
 									 	resultsRow.createCell(lastcellNum).setCellValue(ex.getMessage());
-									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan -"+rowIndex + " | Error - " +ex.getMessage() );
-									 	continue;
+									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan - "+rowIndex + " | Error - " +ex.getMessage() );
+									 	break;
 									 }
 								 }
 
