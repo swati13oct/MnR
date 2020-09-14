@@ -3837,7 +3837,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return false;
 		}
 		public ArrayList<String> providerinforetreive(String planName){
-			
+			CommonUtility.checkPageIsReadyNew(driver);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
