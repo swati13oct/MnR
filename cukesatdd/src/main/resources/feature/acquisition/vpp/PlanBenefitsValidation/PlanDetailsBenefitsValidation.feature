@@ -224,7 +224,21 @@ Feature: ACQ-Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | Sheet2021_14  | AARP |
       
-# 2021 UHC
+      @planDetailsBenefitsAARP15_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_15  | AARP |
+      
+      @planDetailsBenefitsAARP16_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_16  | AARP |
+      
+       @planDetailsBenefitsAARP17_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_17  | AARP |
+
       
  	  @planDetailsBenefitsPDPAARP01_NextYear
       Examples: 
@@ -234,7 +248,10 @@ Feature: ACQ-Plan benefits validation
        @planDetailsBenefitsPDPAARP02_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Details Benefits_Data | SheetPDP2021_2  | AARP |   
+      | Plan Details Benefits_Data | SheetPDP2021_2  | AARP | 
+      
+            
+# 2021 UHC  
       
       @planDetailsBenefitsUHC01_NextYear  
     	Examples: 
@@ -305,6 +322,22 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | Sheet2021_14  | UHC |
+      
+      @planDetailsBenefitsUHC15_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_15  | UHC |
+      
+      @planDetailsBenefitsUHC16_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_16  | UHC |
+      
+       @planDetailsBenefitsUHC17_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2021_17  | UHC |
+      
  	  @planDetailsBenefitsPDPUHC01_NextYear
       Examples: 
       | excelPath                | workSheet | site |
