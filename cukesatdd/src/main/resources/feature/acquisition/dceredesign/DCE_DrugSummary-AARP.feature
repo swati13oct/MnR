@@ -140,7 +140,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90001 |
      
-     @dceRedesignSwitchtoGenericDrug @F484185 @F495366
+     @dceRedesignSwitchToGenericDrug @F484185 @F495366
    Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
    Given the user is on the AARP medicare site landing page
      When I access the acquisition DCE tool from home page
