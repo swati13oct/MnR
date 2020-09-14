@@ -114,13 +114,13 @@ public class HealthRecordStepDefinition {
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		System.out.println("hasHealthRecordLnk="+hasHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 		} else {
 			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 			if (expHealthRecordLnk) {
 				testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 			} else
-				testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+				testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		}
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -137,7 +137,7 @@ public class HealthRecordStepDefinition {
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass link content validation for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass link content validation for now so to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			return;
@@ -222,7 +222,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -285,7 +285,7 @@ public class HealthRecordStepDefinition {
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE -Rally page for terminated user - Bypass for now to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE -Rally page for terminated user - Bypass for now to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -295,7 +295,7 @@ public class HealthRecordStepDefinition {
 			if (expHealthRecordLnk) {
 				testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 			} else
-				testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+				testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		}
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
@@ -353,7 +353,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -416,7 +416,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -466,7 +466,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		//note: team-atest planDoc page take too long to load, test fail w/ gateway error mostly, skip this page for now
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation - planDoc page takes too long to load on team-atest");
@@ -513,7 +513,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -575,7 +575,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -638,7 +638,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -704,7 +704,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -774,7 +774,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -821,7 +821,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -862,11 +862,16 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		if (memberType.toUpperCase().contains("COMBO_SHIP"))
-			healthRecordPage.goToSpecificComboTab(planType,false);
+		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		healthRecordPage.goToSpecificComboTab(planType,false); //note: if from testharness then will c IHR link if u start with the targeted plan tab
+		if (wd.getCurrentUrl().contains("dashboard") && memberType.toUpperCase().contains("COMBO_SHIP")) {
+			//note: if coming from dashboard then this page will have no IHR link
+			if (planType.toUpperCase().contains("MAPD") || planType.toUpperCase().contains("PDP") || planType.toUpperCase().contains("MA"))
+				expHealthRecordLnk=false;
+		}
 		wd=healthRecordPage.navigateToPharmacyLocatorPage(memberType);
 
-		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
@@ -879,7 +884,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -920,9 +925,16 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
+		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		healthRecordPage.goToSpecificComboTab(planType,false); //note: if from testharness then will c IHR link if u start with the targeted plan tab
+		if (wd.getCurrentUrl().contains("dashboard") && memberType.toUpperCase().contains("COMBO_SHIP")) {
+			//note: if coming from dashboard then this page will have no IHR link
+			if (planType.toUpperCase().contains("MAPD") || planType.toUpperCase().contains("PDP") || planType.toUpperCase().contains("MA"))
+				expHealthRecordLnk=false;
+		}
 		wd=healthRecordPage.navigateToDcePage(memberType);
 
-		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
@@ -935,7 +947,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -982,7 +994,7 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
