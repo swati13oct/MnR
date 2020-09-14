@@ -57,7 +57,7 @@ Feature: 1.24.1.a Member Individual Health Record - Member Auth - P1 - Dashboard
     @memAuth_ihr_p1_pdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
+	    | 10    | F424804 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
 	#note: term user will have IHR link suppressed
