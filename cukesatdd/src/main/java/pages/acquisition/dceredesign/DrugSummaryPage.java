@@ -308,7 +308,7 @@ public class DrugSummaryPage extends UhcDriver {
 		je.executeScript("arguments[0].click()", clickSnpplan);
 	}
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
