@@ -111,7 +111,9 @@ public class AepPlanComparePage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
-	    threadsleep(5000);
+	    threadsleep(7000);
+
+	    CommonUtility.checkPageIsReady(driver);
 
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
@@ -218,9 +220,9 @@ public class AepPlanComparePage extends UhcDriver {
 
 		String formatedCellValue = currentCellValue;
 
-		if(currentColName.equalsIgnoreCase("Dental") && currentCellValue.startsWith("Preventive"))
+		if(currentColName.startsWith("Routine Dental") && currentCellValue.startsWith("Click"))
 		{
-			//formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?";
+			formatedCellValue = currentCellValue + "Ismydentistcoveredforthisplan?-opensinnewwindow";
 		}
 
 		if(currentColName.startsWith("Tier"))
