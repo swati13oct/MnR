@@ -306,7 +306,9 @@ public class VppPlanValidationStepDefinition {
 									 }
 									 catch(Exception ex)
 									 {
-									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan -"+rowIndex + "Error - " +ex.getMessage() );
+									 	int lastcellNum = resultsRow.getLastCellNum();
+									 	resultsRow.createCell(lastcellNum).setCellValue(ex.getMessage());
+									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan -"+rowIndex + " | Error - " +ex.getMessage() );
 									 	continue;
 									 }
 								 }
