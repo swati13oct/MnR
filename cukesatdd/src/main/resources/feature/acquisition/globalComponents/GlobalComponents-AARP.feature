@@ -90,7 +90,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Examples: 
       |	site	| path                                              | pageName              | tfnXpath                                      | tfnFlag |
       |	AARP	| medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //a[contains(@class, 'tel')] | true   				|
       |	AARP	| medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_2_GlobalCompsUHC
