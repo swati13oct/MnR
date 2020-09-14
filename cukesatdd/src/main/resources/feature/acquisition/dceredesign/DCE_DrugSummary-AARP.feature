@@ -256,7 +256,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       |   96799 | PDP      | Western District | no             | Orkambi | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
       
-      @dceSaveplanandBacktoplans   
+      @dceSaveplanandBacktoplans @F478554
    Scenario Outline: Test to verify that user can Save plan on DCE summary page and navigating back to homepage to retain the cart value
     Given the user is on the AARP medicare site landing page
      When I access the acquisition DCE tool from home page
