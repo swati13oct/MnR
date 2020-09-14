@@ -60,7 +60,8 @@ public class CampaignTFNPage extends UhcDriver {
 
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
 	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)')]")
-	@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
+	@FindBy(xpath = "//a//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
+	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "//h3[contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plan')])[1]")
 	public WebElement UHCSearchLinkfromGoogle;
@@ -69,12 +70,14 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement UHCSearchLinkfromGoogle1;
 
 //	@FindBy(xpath = "//*[@id='uh-search-box']")
-	@FindBy(xpath = "//input[@id='header-search-input']")
+	//@FindBy(xpath = "//input[@id='header-search-input']")
+	@FindBy(xpath = "//label[text()='Search query']//following-sibling::input[1]")
 	public WebElement YahooSearchField;
 
 	
 //	@FindBy(xpath = "//*[@id='uh-search-button']")
-	@FindBy(xpath = "//button[contains(@id,'search-button')]")
+	//@FindBy(xpath = "//button[contains(@id,'search-button')]")
+	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
 	public WebElement YahooSearchBttn;
 
 	//@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
@@ -611,5 +614,15 @@ public class CampaignTFNPage extends UhcDriver {
 			Assert.assertTrue("Home Page NOT Displayed", false);
 		}
 	}
+	
+	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
+	private WebElement  CurrentYearPlansBtn;
 
-}
+	public void handlePlanYearSelectionPopup() {
+		CommonUtility.checkPageIsReadyNew(driver);			
+			if(validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);	
+			}
+		}
+		}
