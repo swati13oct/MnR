@@ -1191,26 +1191,24 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
 		if (planName.contains("SNP")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsMA");
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
-			// planName);
-		} else if (planName.contains("HMO")) {
+			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
+		}
+		else if (planName.contains("HMO")) {
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
-			// planName);
+			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			//element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
-		}
-		/*
-		 * else if (planName.contains("Regional PPO")) { //ElementData elementData = new
-		 * ElementData("id", "viewDetailsMA"); element =
-		 * getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
-		 * }
-		 */
+		} 
+		/*else if (planName.contains("Regional PPO")) {
+                        //ElementData elementData = new ElementData("id", "viewDetailsMA");
+                        element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+        } */
+
 
 		return isSpecificPlanInfoPresent;
 	}

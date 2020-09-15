@@ -55,12 +55,12 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
 
   @rightRailRegressionUlayer @fastandfurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
-    Given the user is on AARP medicare acquisition site landing page
+    Given enduser is on AARP medicare acquisition site landing page 
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    And the user views the plans of the below plan type in AARP site and select Next year
+    And Enduser views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     Then the user validates the right rail in AARP Site
     Then the user validates the Need Help Section in the right rail in aarp Site

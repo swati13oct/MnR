@@ -1,3 +1,4 @@
+
 package atdd.framework;
 
 import java.io.BufferedReader;
@@ -13,6 +14,8 @@ import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,11 +33,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +56,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
@@ -56,10 +64,6 @@ import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-
-import java.security.*;
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
@@ -102,6 +106,7 @@ public class MRScenario {
 	private static String sessionId;
 	private static String JobURL = null;
 	public static boolean isSauceLabSelected = false;
+	public static String IsVirtualDeviceExecution = "";
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
 	public static String browserVersion;
@@ -134,6 +139,7 @@ public class MRScenario {
 	// public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+	public static final String URL1 = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -161,9 +167,11 @@ public class MRScenario {
 		props = getProperties();
 
 		if (!(props == null)) { // when running on local this logic will be used
+
 			System.out.println("before accessing props");
 			environment = props.get("Environment");
 			System.out.println("after accessing props");
+
 			environmentMedicare = environment;
 			browsername = props.get("BrowserName");
 			isTestHarness = props.get("isTestHarness");
@@ -172,6 +180,8 @@ public class MRScenario {
 			mobileDeviceName = props.get("SaucelabsDeviceName");
 			mobileDeviceOSName = props.get("SaucelabsDeviceOSName");
 			mobileDeviceOSVersion = props.get("SaucelabsDeviceOSVersion");
+			//appiumVersion = props.get("SaucelabsAppiumVersion");
+			//IsVirtualDeviceExecution = props.get(IsVirtualDeviceExecution);
 		} else { // running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
@@ -205,6 +215,147 @@ public class MRScenario {
 		groovyScript.setWritable(true);
 		groovyScript.setExecutable(true);
 
+	}
+
+	/**
+	 * @author Murali - mmurugas This method will invoke the Appium driver for
+	 *         Mobile automation
+	 */
+	public AppiumDriver getMobileDriver() {
+		if (props == null) {
+			TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
+			mobileDeviceName = System.getenv("DEVICE_NAME");
+			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
+			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
+			//appiumVersion = System.getenv("SaucelabsAppiumVersion");
+			//IsVirtualDeviceExecution = System.getenv(IsVirtualDeviceExecution);
+
+			if (System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
+				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
+		}
+		System.out.println("Launching Device : " + mobileDeviceName);
+		isSauceLabSelected = true;
+
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
+		capabilities.setCapability("privateDevicesOnly", "true");
+		capabilities.setCapability("noReset", "false");
+		// max 30 mins for device allocation - mobileSessionTimeout
+		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout);
+		// capabilities.setCapability("testobject_suite_name", "PRE");
+		// capabilities.setCapability("testobject_test_name", mobileTestName);
+		// Offline prod and prod env. should not use tunnels
+		System.out.println("sauceLabsMobileTunnelIdentifier : " + sauceLabsMobileTunnelIdentifier);
+		if (!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		capabilities.setCapability("nativeWebTap", true);
+		capabilities.setCapability("deviceName", mobileDeviceName);
+		capabilities.setCapability("platformName", mobileDeviceOSName);
+		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
+				+ sauceLabsMobileTunnelIdentifier + " environment";
+		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
+		capabilities.setCapability("appiumVersion", appiumVersion);
+		capabilities.setCapability("forceMjsonwp", true);
+		// capabilities.setCapability("autoAcceptAlerts", true);
+		try {
+			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
+				capabilities.setCapability("browserName", "Chrome");
+				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				// mobileDriver = new AndroidDriver(new URL(URL1), capabilities);
+			} else {
+				capabilities.setCapability("browserName", "Safari");
+				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+			}
+			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+			System.out.println(mobileDeviceName + " JobURL  --- "
+					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
+
+			String VirtualJobURL = "https://app.saucelabs.com/tests/" + mobileDriver.getSessionId();
+			// System.out.println("Virtual test execution Job URL --- " + VirtualJobURL);
+
+			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			// System.out.println("JobReportURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			// System.out.println("APIURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
+			System.out.println(mobileDriver.getContext());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mobileDriver;
+	}
+
+	public WebDriver getWebDriver() {
+
+		isSauceLabSelected = true;
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+		capabilities.setCapability("platform", "Windows 7");
+		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("screenResolution", "1920x1080");
+		// capabilities.setCapability("parent-tunnel", "sauce_admin");
+		capabilities.setCapability("parent-tunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+		// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+		// capabilities.setCapability("name", "MRATDD-TestSuite");
+		// capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  "
+				+ System.getProperty("environment") + " environment";
+		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
+		try {
+			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+			getJobURL(getSessionId());
+		} catch (MalformedURLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return webDriver;
+
+		/*
+		 * File pathToBinary = new
+		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
+		 * Map<String, Object> chromeOptions = new HashMap<String, Object>();
+		 * chromeOptions.put("binary", pathToBinary); DesiredCapabilities capabilities =
+		 * DesiredCapabilities.chrome();
+		 * capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		 * ChromeOptions options = new ChromeOptions();
+		 * System.setProperty("webdriver.chrome.driver",
+		 * "C:/Users/kgupta44/drivers/chromedriver.exe");
+		 * options.setExperimentalOption("useAutomationExtension", false); webDriver =
+		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
+		 * webDriver;
+		 */
+	}
+
+	public WebDriver getIEDriver() {
+		System.setProperty("webdriver.ie.driver", "./IEDriverServer.exe");
+		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+		ieCaps.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+		webDriver = new InternetExplorerDriver(ieCaps);
+		webDriver.manage().window().maximize();
+		return webDriver;
+
+	}
+
+	public WebDriver getMobileWebDriver() {
+		Map<String, String> mobileEmulation = new HashMap<String, String>();
+		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+		Map<String, Object> chromeOptions = new HashMap<String, Object>();
+		chromeOptions.put("mobileEmulation", mobileEmulation);
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+		webDriver = new ChromeDriver(capabilities);
+		return webDriver;
 	}
 
 	public static void loadCSV() {
@@ -721,75 +872,6 @@ public class MRScenario {
 		}
 	}
 
-	public WebDriver getWebDriver() {
-
-		isSauceLabSelected = true;
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
-		capabilities.setCapability("platform", "Windows 7");
-		capabilities.setCapability("version", "66.0");
-		capabilities.setCapability("screenResolution", "1920x1080");
-		// capabilities.setCapability("parent-tunnel", "sauce_admin");
-		capabilities.setCapability("parent-tunnel", "optumtest");
-		capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-		// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-		// capabilities.setCapability("name", "MRATDD-TestSuite");
-		// capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
-		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  "
-				+ System.getProperty("environment") + " environment";
-		capabilities.setCapability("name", jobName);
-		capabilities.setCapability("recordMp4", true);
-		try {
-			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-			getJobURL(getSessionId());
-		} catch (MalformedURLException e) { // TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return webDriver;
-
-		/*
-		 * File pathToBinary = new
-		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
-		 * Map<String, Object> chromeOptions = new HashMap<String, Object>();
-		 * chromeOptions.put("binary", pathToBinary); DesiredCapabilities capabilities =
-		 * DesiredCapabilities.chrome();
-		 * capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		 * ChromeOptions options = new ChromeOptions();
-		 * System.setProperty("webdriver.chrome.driver",
-		 * "C:/Users/kgupta44/drivers/chromedriver.exe");
-		 * options.setExperimentalOption("useAutomationExtension", false); webDriver =
-		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
-		 * webDriver;
-		 */
-	}
-
-	public WebDriver getIEDriver() {
-		System.setProperty("webdriver.ie.driver", "./IEDriverServer.exe");
-		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-		ieCaps.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-		webDriver = new InternetExplorerDriver(ieCaps);
-		webDriver.manage().window().maximize();
-		return webDriver;
-
-	}
-
-	public WebDriver getMobileWebDriver() {
-		Map<String, String> mobileEmulation = new HashMap<String, String>();
-		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-		Map<String, Object> chromeOptions = new HashMap<String, Object>();
-		chromeOptions.put("mobileEmulation", mobileEmulation);
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-		webDriver = new ChromeDriver(capabilities);
-		return webDriver;
-	}
-
 	public void removeMember(String userName) {
 
 		System.out.println("Removing members in registration flow");
@@ -1071,10 +1153,16 @@ public class MRScenario {
 			} else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("platform", "Mac 10.15");
-				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1440");
 				capabilities.setCapability("maxDuration", "3600");
+
+				MutableCapabilities sauceOptions = new MutableCapabilities();
+				sauceOptions.setCapability("screenResolution", "1920x1440");
+
+				SafariOptions browserOptions = new SafariOptions();
+				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("browserVersion", browserVersion);
+				browserOptions.setCapability("sauce:options", sauceOptions);
+				capabilities.merge(browserOptions);
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
@@ -1155,69 +1243,6 @@ public class MRScenario {
 		return digest;
 	}
 
-	/**
-	 * @author Murali - mmurugas This method will invoke the Appium driver for
-	 *         Mobile automation
-	 */
-	public AppiumDriver getMobileDriver() {
-		if (props == null) {
-			TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
-			mobileDeviceName = System.getenv("DEVICE_NAME");
-			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
-			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
-			if (System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
-				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
-		}
-		System.out.println("Launching Device : " + mobileDeviceName);
-		isSauceLabSelected = true;
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
-		capabilities.setCapability("privateDevicesOnly", "true");
-		capabilities.setCapability("noReset", "false");
-		// max 30 mins for device allocation - mobileSessionTimeout
-		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout);
-		// capabilities.setCapability("testobject_suite_name", "PRE");
-		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		// Offline prod and prod env. should not use tunnels
-		System.out.println("sauceLabsMobileTunnelIdentifier : " + sauceLabsMobileTunnelIdentifier);
-		if (!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
-			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
-		capabilities.setCapability("nativeWebTap", true);
-		capabilities.setCapability("deviceName", mobileDeviceName);
-		capabilities.setCapability("platformName", mobileDeviceOSName);
-		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
-		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
-				+ sauceLabsMobileTunnelIdentifier + " environment";
-		capabilities.setCapability("name", jobName);
-		capabilities.setCapability("recordMp4", true);
-		capabilities.setCapability("appiumVersion", appiumVersion);
-		capabilities.setCapability("forceMjsonwp", true);
-		// capabilities.setCapability("autoAcceptAlerts", true);
-		try {
-			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
-				capabilities.setCapability("browserName", "Chrome");
-				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-			} else {
-				capabilities.setCapability("browserName", "Safari");
-				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-			}
-			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(mobileDeviceName + " JobURL  --- "
-					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
-			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
-			// System.out.println("JobReportURL ---
-			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
-			// System.out.println("APIURL ---
-			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
-			System.out.println(mobileDriver.getContext());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return mobileDriver;
-	}
-
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
@@ -1240,11 +1265,11 @@ public class MRScenario {
 			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))";
 			// Below is GPS UAT3 URL (enable/disable based on GPS env that you want to
 			// connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))";
+			// String url =
+			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))";
 			// Below is GPS UAT4 URL (enable/disable based on GPS env that you want to
 			// connect)
-			// String url =
-			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))";
 
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");
@@ -1264,5 +1289,4 @@ public class MRScenario {
 	public static Map<String, String> getProps() {
 		return props;
 	}
-
 }
