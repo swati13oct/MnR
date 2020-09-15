@@ -50,7 +50,7 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP203     | MA       | IHR                | true       |
-	    | 09    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 09    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_Group074    | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @memAuth_ihr_p5_pdp
     Examples: 
