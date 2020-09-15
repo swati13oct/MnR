@@ -419,6 +419,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'request received')]")
 	protected List<WebElement> requestReceived;
 
+	@FindBy(xpath = "//span[contains(text(),'order received')]")
+	protected List<WebElement> orderReceived;
+
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected WebElement isHalfHarveyBall;
 
@@ -1021,6 +1024,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isRequestReceived() {
 		if (requestReceived.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isOrderReceived() {
+		if (orderReceived.size() >= 0) {
 			return true;
 		} else {
 			return false;

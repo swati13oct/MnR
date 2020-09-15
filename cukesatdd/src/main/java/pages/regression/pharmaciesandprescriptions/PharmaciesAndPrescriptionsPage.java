@@ -1375,6 +1375,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				isRequestReceived());
 	}
 
+	public void validateOrderReceived() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Order received elements",
+
+				isOrderReceived());
+	}
+
 	public void validateOptumRx() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements", isOptumRX());
