@@ -54,7 +54,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-packaging')]")
 	public WebElement SelectPackageDrpDwn;
 	
-	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")
+	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")   
 	public WebElement QuantityTxt;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
@@ -76,6 +76,7 @@ public class TellUsAboutDrug extends UhcDriver {
 		validateNew(AddDrugBtn);
 		validateNew(supplyLengthDrpDwn);
 		//validateNew(FrequentyDrpDwn);
+		
 		validateNew(QuantityTxt);
 	}
 
