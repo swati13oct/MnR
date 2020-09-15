@@ -32,7 +32,7 @@ Feature: 1.23.1 Member Provider Search - Member Auth
 	@memAuth_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 03    | qavgogine | qavgogine | q2_jun_aarp0179      | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | qavgogine | qavgogine | q2_jun_aarp0112      | PDP      | AARP_IND_ProviderSearch |
 
 	@memAuth_providerSearch01_ma
     Examples: 

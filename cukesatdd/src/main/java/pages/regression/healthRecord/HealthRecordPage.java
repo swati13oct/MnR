@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class HealthRecordPage  extends HealthRecordBase {
 
@@ -45,6 +46,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPharmacyLocatorPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
 			testharnessTblPharmacyLocatorLnk.click();
 		} else if (noWaitValidate(pharmacySearchLink)) {
@@ -177,8 +179,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToBenefitsPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			try {
+				checkModelPopup(driver,1);
 				benefitsTopMenuLnk.click();
 			} catch (TimeoutException te) {
 				if (memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) {
@@ -255,7 +259,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		Assert.assertTrue("PROBLEM - unable to locate My Documents link on Plan Documents and Resources page", noWaitValidate(myDocLnk));
 		try {
 			myDocLnk.click();
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReady(driver);
 		} catch(UnhandledAlertException ae) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
@@ -267,6 +271,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToOrderPage(String memberType) {
 		navigateToBenefitsPage(memberType);
 		if (noWaitValidate(orderTopMenuLnk)) {
+			checkModelPopup(driver,1);
 			orderTopMenuLnk.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {
@@ -336,9 +341,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return driver;
 	}
 
-	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage) {
+	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage, boolean expectIhrLnk) {
 		System.out.println("Proceed to validate if IHR link is included in the dropdown...");
 		String stageUrl="ihr.int.werally.in";
+		String offprodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.bluesteel.werally.in";
+		String prodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.werally.com";
 		checkModelPopup(driver,1);
 		if (expComboTab) {
 			if (targetPage.equalsIgnoreCase("payments"))
@@ -358,8 +365,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 				acctSettingMenuShadowRootBtn.click();
 				checkModelPopup(driver,1);
-				WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
-				Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+				if (expectIhrLnk) {
+					WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
+					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -384,6 +393,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
 				if (noWaitValidate(healthRecordLink)) {
 					String expUrl=stageUrl;
+					if (MRScenario.environment.equalsIgnoreCase("offline"))
+						expUrl=offprodUrl;
+					else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+						expUrl=prodUrl;
 					String actUrl=healthRecordLink.getAttribute("href");
 					Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 					return true;
@@ -409,6 +422,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
 
 				String expUrl=stageUrl;
+				if (MRScenario.environment.equalsIgnoreCase("offline"))
+					expUrl=offprodUrl;
+				else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+					expUrl=prodUrl;
 				String actUrl=testHarn_desktop_AcctProf_IHRLnk.getAttribute("href");
 				Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 				return true;
