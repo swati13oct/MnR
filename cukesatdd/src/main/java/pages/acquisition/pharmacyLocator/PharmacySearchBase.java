@@ -85,6 +85,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		
 		zipcodeField.sendKeys(zipcode);
 		//if(zipcode.length()!=5){
+		distanceDropDownField.click();
 		distanceOption_15miles.click();
 		//}
 		//searchbtn.click();

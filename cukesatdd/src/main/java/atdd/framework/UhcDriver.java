@@ -822,8 +822,11 @@ try {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
 		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+			}
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement currentSysTimeElement=timeJson;
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
