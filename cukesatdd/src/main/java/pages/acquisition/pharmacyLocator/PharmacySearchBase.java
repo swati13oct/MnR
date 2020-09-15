@@ -180,12 +180,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
-		yearDropdown.click();
+//		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='"+planYear+"' from year dropdown");
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
@@ -216,12 +217,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
 				pdfLink.getText().contains(testPdfLinkTextDate));
 		String winHandleBefore = driver.getWindowHandle();
-		CommonUtility.checkPageIsReady(driver);
-		pdfLink.click();
+//		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickNew(pdfLink);
+//		pdfLink.click();
 		Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		for(String tab : afterClicked_tabs) {
+			if(!tab.equals(winHandleBefore)) {
+				driver.switchTo().window(tab);
+				break;
+			}
+		}
+//		int afterClicked_numTabs=afterClicked_tabs.size();					
+//		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL=pdfType;
 		Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
