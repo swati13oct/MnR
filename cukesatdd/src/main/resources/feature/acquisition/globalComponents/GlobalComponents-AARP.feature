@@ -61,7 +61,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the Medicare Plans All page
     Then the User validates Shop for a Plan Navigation link
     Then the user validates Medicare Education Navigation link
-    Then the user validate ZipCode Components on the page using ZipCode "90210"
+    Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -102,17 +102,17 @@ Feature: 1.12 ACQ - Global Components AARP
     
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                  | pageName                    | tfnXpath                                      								| tfnFlag |
+      |	AARP	| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //span[contains(@style,'inline')]//a[contains(@class, 'tel')] | true    |
+      |	AARP	| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='amp']//a[contains(@class, 'tel')] 								| true    |
       |	AARP	| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
       
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@class, 'tel')] | true    |  
+      |	site	| path                                                  | pageName                    | tfnXpath                                      								| tfnFlag |
+      |	UHC		| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //span[contains(@style,'inline')]//a[contains(@class, 'tel')] | true    |
+      |	UHC		| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@class, 'tel')] 								| true    |
+      |	UHC		| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@class, 'tel')] 								| true    |  
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
