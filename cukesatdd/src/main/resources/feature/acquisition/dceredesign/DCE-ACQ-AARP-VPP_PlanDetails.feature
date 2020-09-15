@@ -203,7 +203,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |catastrophicCoverageMessage|coverageGapMessage|
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |During the Coverage Gap Stage, the plan pays all of the cost for your drugs.|During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs.|
+      |   78006 | SNP      | Bexar County | yes             | Emsam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |During the Coverage Gap Stage, the plan pays all of the cost for your drugs.|During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs.|
             
         @dceRedesignDefaultPharmacy @F497405
         
