@@ -85,6 +85,10 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewPlanChangesSection(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnChgLangDropdown_en=docDisplayMap.get("expPlnChgLangDropdown_en");
+		boolean expPlnChgLangDropdown_es=docDisplayMap.get("expPlnChgLangDropdown_es");
+		boolean expPlnChgLangDropdown_zh=docDisplayMap.get("expPlnChgLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review plan documents - Review your plan changes for next year section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -117,7 +121,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -151,7 +155,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));

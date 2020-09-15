@@ -123,6 +123,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateFindOutNewSection_ind(String section, String subSection, String planType, String memberType, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnChgLangDropdown_en=docDisplayMap.get("expPlnChgLangDropdown_en");
+		boolean expPlnChgLangDropdown_es=docDisplayMap.get("expPlnChgLangDropdown_es");
+		boolean expPlnChgLangDropdown_zh=docDisplayMap.get("expPlnChgLangDropdown_zh");
+
 		List<String> note=new ArrayList<String> ();
 		String targetItem=section+" - checkmark";
 		WebElement targetElement=ind_revPlnChgSec_docSec_checkMark_noGreen;
@@ -148,7 +152,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -171,7 +175,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -181,7 +185,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement1=ind_revPlnChgSec_docSec_langDropdown;
 		langDropdown1_targetLangOptionElement=ind_revPlnChgSec_lang_en_ava;
 		langDropdownElement2=ind_revPlnMatlsSec_docSec_langDropdown; 
-		pdfElement=ind_revPlnChgSec_docSec_anoc_en;
+		pdfElement=ind_revPlnChgSec_docSec_anoc_en; 
 		arrowAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_arrow;
 		svgAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_svg;
 		subSecCookie=cookiePlnChgSection_findNew;
@@ -193,7 +197,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -268,6 +272,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.add("\n\tValidate after all subsection links turned green");
 			targetItem=section+" - green circle";
 			targetElement=ind_revPlnMatlsSec_circle_green;
+			if (MRScenario.environment.equalsIgnoreCase("prod")) 
+				targetElement=ind_revPlnMatlsSec_circle_green_prod;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -279,6 +285,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourBenefitsPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Materials - Plan Benefits section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -324,7 +334,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_es,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -347,7 +357,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_zh,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -369,7 +379,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_en,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -400,6 +410,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -472,7 +486,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -496,7 +510,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -518,7 +532,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -538,6 +552,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewProviderInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Provider section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -619,7 +637,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -642,7 +660,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -658,13 +676,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
+		if (docDisplayMap.get("Vendor Information Sheet English"))
+			willDeleteCookie=true;
+		else
+			willDeleteCookie=false; //note: if user has no Vendor Info, this will be the last step for this section, keep checkmark green
 		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -689,7 +710,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -712,7 +733,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -734,7 +755,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -754,6 +775,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 	
 	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -818,7 +843,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -841,7 +866,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -863,7 +888,7 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
