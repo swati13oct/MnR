@@ -254,7 +254,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
   @vppPlanCompareAARP12 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
-    Given the user is on the medicare site landing page
+    Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |

@@ -1632,7 +1632,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public int checkAllPDPlans() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -3504,7 +3504,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void checkMAPlansOnly(int counter) {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
