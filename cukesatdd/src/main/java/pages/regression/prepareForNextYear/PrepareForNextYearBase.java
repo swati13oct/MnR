@@ -872,7 +872,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 			//keep-for-now } else {
 				if (expLangDropOption) {
-					note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display because other sub section has this language");
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display but expect dropdown to have this language option because because other sub section has this language");
 					targetItem=targetLang+" language dropdown option'";
 					note.addAll(validateHaveItem(targetItem, langDropdown1_targetLangOptionElement));
 				} else {
