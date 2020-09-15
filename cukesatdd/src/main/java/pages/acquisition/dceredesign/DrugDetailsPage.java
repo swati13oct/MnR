@@ -28,7 +28,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -61,7 +61,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'View Plans Details')]")
+	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
