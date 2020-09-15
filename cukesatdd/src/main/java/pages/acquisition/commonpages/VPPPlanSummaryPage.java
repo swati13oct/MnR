@@ -562,6 +562,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		public static WebElement proactiveChatExitBtn;
 
 		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+//		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='startoverdetails']")
 		private WebElement planYearPopup;
 		
 		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
