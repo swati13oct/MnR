@@ -35,7 +35,7 @@ public class EnterZipCodePage extends UhcDriver{
 			int zipCodeNumber = 1;
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
-			while (zipCodeNumber <= zipForm.size()) {
+			while (zipCodeNumber < zipForm.size()) {
 				Thread.sleep(3000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
