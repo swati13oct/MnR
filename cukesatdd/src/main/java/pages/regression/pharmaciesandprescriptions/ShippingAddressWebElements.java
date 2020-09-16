@@ -89,6 +89,9 @@ public class ShippingAddressWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@data-testid='csa__address__delete']")
 	protected WebElement deleteThisAddressBtn;
 	
+	@FindBy(xpath="//*[@data-testid='os__shipping__changeAddressCTA']")
+	protected WebElement changeShippingAddressLink;
+	
 	
 	
 	
