@@ -477,7 +477,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PhonePrimary']")
 		private WebElement phoneNumber;
 
-//		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		//@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 		private WebElement cancelButton;
 
@@ -1599,7 +1599,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//	 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
-
 		}*/
 
 		if(validate(maPlansCount)){
@@ -1820,8 +1819,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		/*System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
 		NextYearRadio.click();
 		System.out.println("*****CLICKING ON Year Toggle Go button*****");
-
-
 		SelectYearGoBtn.click();*/
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
@@ -1839,11 +1836,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 /*		System.out.println("Next Year : "+nextYear);
 		System.out.println("Current Year : "+currentYear);
-
-
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '"+currentYear+"')]"));
 		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
-
 		List <WebElement> NextYearHeadings = driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]"));
 		if( validate(CurrentYearLink) && NextYearHeadings.size()>0){
 			System.out.println("Current and Next year toggle displayed for AEP");
@@ -1852,7 +1846,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else{
 			System.out.println("Current and Next year toggle NOT displayed for AEP");
 		}
-
 		// TODO Auto-generated method stub
 		return null;*/
 	}
@@ -2257,10 +2250,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/* try {
-
            	System.out.println(" The text is " +AnnualDeductibleForPlan.getAttribute("textContent").trim());
            	System.out.println(" The text from feature file is " +annualDeductible);
-
 			} catch (Exception e) {
 				System.out.println(" The text is" +AnnualDeductibleForPlan.getText());
 			}*/
@@ -2302,7 +2293,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	/*public void validatePrimaryCarePhysicianBenefit (String planName , String primaryCarePhysician) {
-
 }*/
 	public void toolTipForPremium0(String planName){
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"));
@@ -2474,7 +2464,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 String parentHandle = driver.getWindowHandle();
 int initialCount = driver.getWindowHandles().size();
 ChooseAVideo.click();
-
 waitForCountIncrement(initialCount);
 ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 String currentHandle = null;
@@ -3864,12 +3853,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 /*		public void setStringList(ArrayList<String> stringList) {
 			
 		    this.stringList = stringList;
-
 		}
 		
 		public ArrayList<String> getStringList() {
 		    return stringList;
-
 		}*/
 		
 		public void setMap(Map<String, ArrayList<String>> dataMap) {
