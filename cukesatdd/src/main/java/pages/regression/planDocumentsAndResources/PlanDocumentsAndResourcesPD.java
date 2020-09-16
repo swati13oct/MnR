@@ -171,8 +171,10 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					expectedUrl="https://member.uat.mymedicareaccount.com/PCP/find-care";
 					redirectUrl="https://member.uat.mymedicareaccount.com/pcp/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
-					redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+					redirectUrl="none";
+					//tbd expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
+					//tbd redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("planType").toUpperCase().contains("MEDICA")) {
@@ -186,8 +188,10 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					expectedUrl="https://member.uat.mymedicareaccount.com/Medica/find-care";
 					redirectUrl="https://member.uat.mymedicareaccount.com/medica/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
-					redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+					redirectUrl="none";
+					//tbd expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
+					//tbd redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
@@ -203,10 +207,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					if (testInputInfoMap.get("memberType").contains("GROUP"))
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://member.uhc.com/AARP/find-care";
-					redirectUrl="https://member.uhc.com/aarp/find-care";
-					if (testInputInfoMap.get("memberType").contains("GROUP"))
-						redirectUrl="https://member.uhc.com/retiree/find-care";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+					redirectUrl="none";
+					//tbd expectedUrl="https://member.uhc.com/AARP/find-care";
+					//tbd redirectUrl="https://member.uhc.com/aarp/find-care";
+					//tbd if (testInputInfoMap.get("memberType").contains("GROUP"))
+					//tbd 	redirectUrl="https://member.uhc.com/retiree/find-care";
 				}
 			}
 		} else {
@@ -224,10 +230,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					if (testInputInfoMap.get("memberType").contains("GROUP")) 
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://member.uhc.com/UHC/find-care";
-					redirectUrl="https://member.uhc.com/uhc/find-care";
-					if (testInputInfoMap.get("memberType").contains("GROUP"))
-						redirectUrl="https://member.uhc.com/retiree/find-care";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+					redirectUrl="none";
+					//tbd expectedUrl="https://member.uhc.com/UHC/find-care";
+					//tbd redirectUrl="https://member.uhc.com/uhc/find-care";
+					//tbd if (testInputInfoMap.get("memberType").contains("GROUP"))
+					//tbd 	redirectUrl="https://member.uhc.com/retiree/find-care";
 				}
 			}
 		}
