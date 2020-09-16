@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
@@ -116,11 +117,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public WebElement AddMyDrugsBtn;
 
 	
-	public GetStartedPage addDrug_DCERedesign(){
+	public GetStartedPageMobile addDrug_DCERedesign(){
 		
 		addrugs.click();
 		if (validateNew(AddMyDrugsBtn))
-			return new GetStartedPage(driver);
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 	
