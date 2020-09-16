@@ -52,13 +52,13 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 09-066 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
+      | 09-066 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
       | 10-067 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 11-068 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
+      | 11-068 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
 
 	@active_mapd
 	Examples: 
@@ -70,14 +70,14 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
-      | 15-072 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
+      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | true     | false    | true     | true     | false    |
+      | 15-072 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true     | true     | false    | true     | true     | false    |
 
 	@active_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 16-073 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
-      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false     | false    | false    |
+      | 16-073 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
+      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false    | false    | false    |
 
 	@active_ssup
 	Examples: 
