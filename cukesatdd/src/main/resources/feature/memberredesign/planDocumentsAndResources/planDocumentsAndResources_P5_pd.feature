@@ -77,7 +77,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 16-092 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | true     | true     | false    |
+      | 16-092 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | false    | false    | false    |
       | 17-093 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | false | true  | false    | false    | false    | false    | false    | false    |
 
 	@active_ssup

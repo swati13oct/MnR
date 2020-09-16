@@ -1318,12 +1318,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
