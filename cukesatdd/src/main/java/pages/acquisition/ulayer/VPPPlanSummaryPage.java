@@ -477,7 +477,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PhonePrimary']")
 		private WebElement phoneNumber;
 
-		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		//@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 		private WebElement cancelButton;
 
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
@@ -885,6 +886,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", ""));
+			if(maPlans == 0)
+			{
+				pdpPlansViewLink.click();
+				sleepBySec(2);
+				CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+				handlePlanYearSelectionPopup();
+				sleepBySec(5);
+			}
+			else
+			{
+				System.out.println("MA plans are available");
+			}
 			validateNew(maPlansViewLink, 30);
 			maPlansViewLink.click();
 			sleepBySec(3);
