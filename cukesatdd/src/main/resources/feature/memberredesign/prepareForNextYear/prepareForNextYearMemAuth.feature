@@ -263,5 +263,5 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #@memAuth_prepareForNextYear04_sars
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
-	#    | 4-02  | F443004 | qavgogine | qavgogine | q2_jun_aarp0106         | PDP      | SARS_PFNY               | false         |
+	#    | 4-02  | F443004 | qavgogine | qavgogine | testUserName            | PDP      | SARS_PFNY               | false         |
 	    

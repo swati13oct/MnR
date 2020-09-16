@@ -24,7 +24,7 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	  | Spanish Current Year               | <an_es_cy> | 
 	  | Chinese Current Year               | <an_zh_cy> | 
 	  | English Next Year                  | <an_en_ny> | 
-	  | Chinese Next Year                  | <an_es_ny> | 
+	  | Spanish Next Year                  | <an_es_ny> | 
 	  | Chinese Next Year                  | <an_zh_ny> | 
 
 	@preeffective_ma_mapd
