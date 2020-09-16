@@ -19,7 +19,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
@@ -314,6 +314,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 }
                                 
                                 public ArrayList<String> getConfimationPopupResults(int count) {
+                                	waitforElement(modalDoctorsCount);
                             		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
                             		if(count==modalDoctorsList.size() && count==confirmationSize) {
                             			confirmationResults = new ArrayList<String>();
@@ -365,10 +366,25 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                             				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",","").replace(".", "").split(" ");
                             				Arrays.sort(dname);
                             				System.out.println(Arrays.equals(wname, dname));
-                            				if(Arrays.equals(wname, dname)) {
+                            				if(wname.length == dname.length && Arrays.equals(wname, dname)) {
                             					result=true;
                             					break;
                             				}
+                            				else if(wname.length != dname.length)
+                                            {
+                                                for(int k=0;k<dname.length;k++)
+                                                {
+                                                   if(! Arrays.asList(wname).contains(dname[k]))
+                                                    {
+                                                        result =false;
+                                                        break;
+                                                    }
+                                                   else
+                                                   {
+                                                       result = true;
+                                                   }
+                                                }
+                                            }
                             				else {
                             					result=false;
                             				}

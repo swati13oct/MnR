@@ -60,7 +60,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And I select the first pharmacy on there
     And I navigate to step3 page and validate drug info for DCE homepage flow uhc
       | Drug | <drug> |
-    And the user clicks on the shopping cart icon on DCE page
+    And the user clicks on the shopping cart icon on DCE page on uhc
     Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
 

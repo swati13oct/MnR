@@ -45,6 +45,9 @@ public class UpdateReviewPage extends UhcDriver {
 
 	@FindBy(id = "memAuthPaymentCancelSubmitError")
 	private WebElement csrUnauthorizedErrorMessage;
+	
+	@FindBy(xpath = "//span[contains(@class,'confirmation__number')]")
+	private WebElement ConfirmationNumber;
 
 
 	public UpdateReviewPage(WebDriver driver) {
@@ -85,7 +88,7 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (ConfirmationNumber.isDisplayed()) {
 			System.out.println("Navigated to Recurring Payments Request Submitted page");
 			return new UpdateConfirmationPage(driver);
 		} else {
@@ -93,6 +96,26 @@ public class UpdateReviewPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public UpdateConfirmationPage CSRselectAgreeAndClickOnContinueforEFT() {
+		validate(EditPaymentInformation);
+		System.out.println("User is on Payment Method Update Page");
+		PaymentsDataVerificationOnUpdateReviewPage();
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Continue button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		return new UpdateConfirmationPage(driver);
+	}
+
 
 	public UpdateConfirmationPage selectAgreeAndClickOnContinueforCC() {
 		validate(ChangeCard);

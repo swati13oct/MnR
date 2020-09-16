@@ -2,19 +2,27 @@
 Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site on <pagename>
-Given the user is on the AARP medicare site landing page
-And user opens the page to validate on AARP
+Given the user is on medicare acquisition site landing page
+  | Site | <site>	|
+And user opens the page to validate
  | pagename | <pagename> |
-Then the user validates whether call icon is visible on AARP 
-Then the user validates whether chat icon is visible on AARP
-
-@header_1 @samChatCall_1 @samChatRegression
+#Then the user validates whether chat icon is visible on AARP
+Then the user validates whether chat Agent is Available on AARP	
+@header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP
 Examples: 
-| pagename |
-|/|
-|plan-recommendation-engine.html|
-|health-plans/estimate-drug-costs.html|
-|health-plans/aarp-pharmacy.html|
+|	site	| pagename 															|
+|	AARP	|	/																			|
+|	AARP	|	plan-recommendation-engine.html				|
+|	AARP	|	health-plans/estimate-drug-costs.html	|
+|	AARP	|	health-plans/aarp-pharmacy.html				|
+
+@header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC
+Examples: 
+|	site	| pagename 															|
+|	UHC		|	/				 															|
+|	UHC		|	plan-recommendation-engine.html				|
+|	UHC		|	health-plans/estimate-drug-costs.html	|
+|	UHC		|	health-plans/aarp-pharmacy.html				|
 
 @header_2 @samChatCall_1
 Examples: 

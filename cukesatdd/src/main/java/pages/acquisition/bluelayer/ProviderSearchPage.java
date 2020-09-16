@@ -339,6 +339,7 @@ public class ProviderSearchPage extends UhcDriver {
 			if(validate(selectLocationOption)){
 				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
 				
+				//jsClickNew(selectLocationOption);
 				selectLocationOption.click();
 				
 				validateNew(NewsaveBtn2);
@@ -348,7 +349,8 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 		
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			continueSearching.click();
+			//continueSearching.click();
+			jsClickNew(continueSearching);
 			
 			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
@@ -366,7 +368,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 		 jsClickNew(Savedproviders); 
 		 validateNew(finishReturnBtn); 
-		 finishReturnBtn.click();
+		 //finishReturnBtn.click();
+		 jsClickNew(finishReturnBtn); 
 		 
 		/*Old Changes
 		 * jsClickNew(Savedproviders); validateNew(providerNameText);
@@ -541,13 +544,13 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 	}
 	
 
-	public int entersZipcodeAndPlancountblayer(String zipcode) {
+	public int entersZipcodeAndPlancountblayer(String zipcode, String planYear) {
 
 		validateNew(zipCodeTextfield);	
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
 		continueButton.click();
-		
+		selectYear(planYear);
 	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
 	   
 	    return topicDropDownValues.size();
@@ -565,5 +568,19 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		 * ) break; }
 		 */
 		Assert.assertTrue(driver.getCurrentUrl().contains("werally"),"Provider Search Rally Page is not displayed");
+	}
+
+	public void selectYear(String year) {
+		if (year.contains("current")) {
+			if (validate(currentYrTile)) {
+				currentYrTile.click();
+			} else {
+				System.out.println("Current year tile is not present");
+			}
+		} else if (year.contains("next")) {
+			if (validate(nextYrTile))
+				nextYrTile.click();
+		}
+		
 	}
 }

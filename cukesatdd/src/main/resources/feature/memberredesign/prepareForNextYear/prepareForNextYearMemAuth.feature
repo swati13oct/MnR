@@ -22,7 +22,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 06/14/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -34,7 +34,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA offcycle user available at the moment
-    @memAuth_prepareForNextYear01a
+    @memAuth_prepareForNextYear01_offcycle
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
 	   #| 1-01  | F437767 | qavgogine | qavgogine | testUserName            | PDP	   | GRP_OFFCYC_PFNY     |
@@ -42,19 +42,24 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	    | 1-03  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group324    | MAPD     | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
-    @memAuth_prepareForNextYear01b
+    @memAuth_prepareForNextYear01_preTermShip
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
 	    | 1-04  | F437767 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA	   | IND_PREEFF_PFNY     |
 	    | 1-05  | F437767 | qavgogine | qavgogine | q2_june_Cosmos_Seg056   | MA	   | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | qavgogine | qavgogine | PaidInFullShip0011      | SHIP	   | IND_PFNY            |
 			
-	@memAuth_prepareForNextYear01c
+	@memAuth_prepareForNextYear01_comboPdpSsp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
-	    | 1-07  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | PDP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	    | 1-08  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | SSP	     | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-07  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | PDP	   | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F443004 | qavgogine | qavgogine | q2_jun_grp0255          | SSP	   | COMBO_PDP_GRP_SSP_GRP_PFNY |
 			
+	@memAuth_prepareForNextYear01_comboMaPdp
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
+	    | 1-09  | F443004 | qavgogine | qavgogine | johndeere1001           | MA	   | COMBO_MA_GRP_PDP_GRP_PFNY |
+	    | 1-10  | F443004 | qavgogine | qavgogine | johndeere1001           | PDP	   | COMBO_MA_GRP_PDP_GRP_PFNY |
 			
 
   #-------------------------------------------------
@@ -78,7 +83,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -111,61 +116,93 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
-	@memAuth_prepareForNextYear02a
+	@memAuth_prepareForNextYear02_ind_mapd_aarp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-01  | F437767 | qavgogine | qavgogine | q2_apr_aarp0250        | MAPD	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 2-02  | F437767 | qavgogine | qavgogine | ucpaarpmapd01          | MAPD	  | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-01  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_002     | MAPD	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	@memAuth_prepareForNextYear02b
+	@memAuth_prepareForNextYear02_ind_mapd_uhc
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-02  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_009     | MAPD	  | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@memAuth_prepareForNextYear02_ind_pdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-03  | F437767 | qavgogine | qavgogine | q2_jun_aarp0112        | PDP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 2-04  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP203    | MA	      | UHC_IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	@memAuth_prepareForNextYear02c
+	@memAuth_prepareForNextYear02_ind_ma
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-04  | F437767 | qavgogine | qavgogine | perftest_federal_000002| MA	      | UHC_IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@memAuth_prepareForNextYear02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-05  | F437767 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020    | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
-	    | 2-06  | F437767 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022    | PCP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-05  | F437767 | qavgogine | qavgogine | RenewActive_Fed_083    | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-	# ignore group cases for now until code is ready
-	#@memAuth_prepareForNextYear02d
+	@memAuth_prepareForNextYear02_ind_pcp
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+	    | 2-06  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_012     | PCP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+
+	@memAuth_prepareForNextYear02_grp_mapd
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName            | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	    | 2-07  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group074   | MAPD	  | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+
+	#note: haven't been able to locate group user w/ 2021 doc yet
+	#@memAuth_prepareForNextYear02_grp_pdp
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName            | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-07  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group074   | MAPD	   | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 2-08  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group267   | PDP	  | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
-	#@memAuth_prepareForNextYear02e
+	#note: haven't been able to locate group user w/ 2021 doc yet
+	#@memAuth_prepareForNextYear02_grp_ma
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName            | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-08  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group267   | PDP	   | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
-	#    | 2-17  | F437767 | qavgogine | qavgogine | q2_jun_grp0428         | MA	   | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 2-09  | F437767 | qavgogine | qavgogine | q2_jun_grp0428         | MA	      | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
-    #@prepareForNextYear02f
+    @memAuth_prepareForNextYear02_ind_zh
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName            | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+        | 2-09  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_005     | MAPD	  | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
+
+	#note: reenable when locate applicable user
+    #@memAuth_prepareForNextYear02_ind_1act
     #Examples: 
-	#    | index | FID     | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-    #    | 2-09  | F437767 | MAPD	  | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
-    #    | 2-10  | F437767 | MAPD	  | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+	#    | index | FID     | username  | password  | MemUserName            | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
+    #    | 2-10  | F437767 | qavgogine | qavgogine | q4_dec_uhc102          | MAPD	  | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
 
-    @prepareForNextYear02g
+    #this user doesn't have anoc, re-enable this when finding a user that has it
+    #@memAuth_prepareForNextYear02_combo_ship_fed
+    #Examples: 
+	#    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+	#    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	    | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+
+    @memAuth_prepareForNextYear02_combo_fed_ship
     Examples: 
 	    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	    | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
-
-    @prepareForNextYear02h
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-12  | F443004 | qavgogine | qavgogine | q3_sep_UAT4_AARP013  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-12  | F443004 | qavgogine | qavgogine | q3_sep_UAT4_AARP023  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
 
   @memAuth_prepareForNextYear03 @hasTab @noCombTabOnPfny
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>         |
-      | Member Type | <memberType>       |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 08/31/2020     |
+      | AEM Show Tab StartDate | 09/14/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 09/15/2020     |
@@ -177,13 +214,54 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-	@prepareForNextYear03a
+	@memAuth_prepareForNextYear03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
 	    | 3-01  | F437767 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
 			
-	@prepareForNextYear03b
+	@memAuth_prepareForNextYear03b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-02  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP013     | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
+	    | 3-02  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
+
+  @memAuth_prepareForNextYear04 @hasTab
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+	Then test setup stores AEM and timeline milestones info for user with SARs plan 
+      | EndOfTestRollBackTime  | false          |
+      | AEM Show Tab StartDate | 09/14/2020     |
+      | AEM Show Tab EndDate   | 12/31/2020     |
+      | AEM Toggle             | ON             |
+      | Milestone 1 Date       | 10/01/2020     |
+      | Milestone 2 Date       | 10/15/2020     |
+      | Milestone 3 Date       | 01/01/2021     |
+    Then test setup stores documents expectation info for user with SARs plan 
+      | Show Next Year PlanName| <showNxtYrPlan>|
+    Then the user validates Prepare For Next Year tab display behavior on Benefits page
+    Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
+	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	Then the user validates Prepare For Next Year page content for user with SARs plan
+
+    @memAuth_prepareForNextYear04_sars @devRegression
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
+	    | 4-01  | F443004 | qavgogine | qavgogine | q3_Sep_FedANOC_037     | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-01  | F443004 | qavgogine | qavgogine | PerfCCM_07109           | MAPD     | SARS_PFNY           | false         |
+
+	#note: don't have PDP SAR user for the time being
+    #@memAuth_prepareForNextYear04_sars
+    #Examples: 
+	#    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
+	#    | 4-02  | F443004 | qavgogine | qavgogine | q2_jun_aarp0106         | PDP      | SARS_PFNY               | false         |
 	    

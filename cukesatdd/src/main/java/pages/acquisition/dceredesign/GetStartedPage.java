@@ -18,7 +18,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPage extends UhcDriver {
 
@@ -33,6 +33,12 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
+	
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
+	public WebElement getStartedTab;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -43,12 +49,12 @@ public class GetStartedPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(AddMyDrugsBtn);
+		validateNew(getStartedTab);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
-		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
+		if(validate(AddMyDrugsBtn))
+			AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -74,6 +80,11 @@ public class GetStartedPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}

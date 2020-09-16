@@ -920,9 +920,51 @@ public class oleStepDefinition {
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			//String planyear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+			String planYear = PreliminaryFlagsMap.get("Plan Year");
 			
 			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber,planName);
+			boolean Validation_Status = medInfoPage.validate_Required_Fields(PlanType, MedicaidNumber,planName,planYear);
+			if(Validation_Status){
+				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "+Validation_Status);
+				Assert.fail();
+			}
+		//}
+	}
+	
+	@Then("^the user validates Medicare Number and not required ESRD question on Medicare Info Page$")
+	public void the_user_validates_not_requierd_fields_for_ESRD_Medicare_Questions_Page(DataTable Flags) throws Throwable {
+
+		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			//String planyear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+			String planYear = PreliminaryFlagsMap.get("Plan Year");
+			
+			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			boolean Validation_Status = medInfoPage.validate_notRequired_ESRD_Fields(PlanType, MedicaidNumber,planName,planYear);
 			if(Validation_Status){
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
@@ -2931,6 +2973,5 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 	Assert.fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
 */
 		}
-
 
 	}

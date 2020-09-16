@@ -22,7 +22,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -49,7 +49,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Drug Total')]")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
 	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
@@ -58,7 +58,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_MonthlyPremium_Amount;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
@@ -109,7 +109,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
 	public WebElement ImportantInfo_Header;
 	
-	@FindBy(xpath = "//a[contains(@dtmname,'view plan formulary')]")
+	@FindBy(xpath = "//h3[contains(text(),'Plan Formulary')]")
 	public WebElement ImportantInfo_planFormularyLink;
 
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
@@ -154,15 +154,6 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 	
-	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
-	public WebElement backtoDrugEstBtn;
-	
-	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
-	public WebElement backtoSummaryBtn;
-	
-	@FindBy(xpath = "//h1']")
-	public WebElement planHeader;
-	
 	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
 	public WebElement keepUsingPharmBtn;
 	
@@ -196,11 +187,17 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
 	public WebElement viewPlanBtn;
 	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+
 	}
 
 	@Override
@@ -215,38 +212,12 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}
 		else
 		Assert.fail("Plan Name validation Failed for Drug Details Page");
-	}
-	
-	public void validateDrugandPanButton() {
-		validateNew(backtoDrugEstBtn);
-		validateNew(backtoSummaryBtn);
-	}
-	
-	public void clickOnBacktoDrugBtn() {
-		validateNew(backtoDrugEstBtn);
-		backtoDrugEstBtn.click();
-	}
-	
-	public void clickOnvppPlan() {
-		validateNew(backtoSummaryBtn);
-		backtoSummaryBtn.click();
-	}
-	
-	public void clickOnvppPlanDetails() {
-		validateNew(viewPlanBtn);
-		viewPlanBtn.click();
-	}
-	
-	public void validatePlanDrugDetails(String planName) {
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
-		validateNew(PlanName_PlanDetails);
 	}
 
 	public void validateDrugCosts() {
@@ -334,26 +305,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(ImportantInfo_Header);
 		validateNew(ImportantInfo_planFormularyLink);
 	}
-	
-	@FindBy(xpath = "//div[@class='text-normal']")
-	private WebElement retailChainPharmacy;
-	
-	public void validateRetailChainPharmacy() {
-		
-			validate(retailChainPharmacy);
-		}
-	
-	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
-	private WebElement alertTextImg;
-	
-	@FindBy(id = "priceLinkBtn_0")
-	private WebElement viewProceBtn;
-	
-	public void validateExtraHelpAlert() {
-		
-			validate(alertTextImg);
-			validate(viewProceBtn);
-		}
+
 	public void validateDisclaimerAccordian() {
 		validateNew(Disclaimer_Accordian);
 		WebElement AccordianContent = driver.findElement(By.xpath("//div[contains(@id,'accordian-content')]//h3[text()='General Disclaimer']"));
@@ -743,5 +695,50 @@ public class DrugDetailsPage extends UhcDriver {
 		else {
 		Assert.fail("Coverage gap Modal not displayed");
 		}
+	}
+	
+	@FindBy(xpath = "//div[@class='text-normal']")
+	private WebElement retailChainPharmacy;
+	
+	public void validateRetailChainPharmacy() {
+		
+			validate(retailChainPharmacy);
+		}
+	
+	public void validateDrugandPanButton() {
+		validateNew(backtoDrugEstBtn);
+		validateNew(backtoSummaryBtn);
+	}
+	
+	public void clickOnBacktoDrugBtn() {
+		validateNew(backtoDrugEstBtn);
+		backtoDrugEstBtn.click();
+	}
+	
+	public void clickOnvppPlan() {
+		validateNew(backtoSummaryBtn);
+		backtoSummaryBtn.click();
+	}
+	
+	public void clickOnvppPlanDetails() {
+		validateNew(viewPlanBtn);
+		viewPlanBtn.click();
+	}
+	
+	public void validatePlanDrugDetails(String planName) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		validateNew(PlanName_PlanDetails);
+	}
+	
+	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	private WebElement alertTextImg;
+	
+	@FindBy(id = "priceLinkBtn_0")
+	private WebElement viewProceBtn;
+	public void validateExtraHelpAlert() {
+		
+		validate(alertTextImg);
+		validate(viewProceBtn);
 	}
 }

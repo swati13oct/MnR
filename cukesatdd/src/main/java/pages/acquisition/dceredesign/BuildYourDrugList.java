@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 public class BuildYourDrugList extends UhcDriver {
@@ -42,14 +43,14 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
-	
 	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
 	public WebElement AutoCompleteList;
 
 	@FindBy(xpath = "//uhc-menu-item")
 	public List <WebElement> AutoCompleteitems;
 
-	@FindBy(xpath = "//*[@id='modal-label']")
+//	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -67,6 +68,9 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
+	
+	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
+	public WebElement returnToCompareBtn;
 
 
 	public BuildYourDrugList(WebDriver driver) {
@@ -255,5 +259,11 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 	
+	public ComparePlansPage returnToPlanComparePage() {
+		
+		validateNew(returnToCompareBtn);
+		returnToCompareBtn.click();
+		return new ComparePlansPage(driver);
+	}
 
 }

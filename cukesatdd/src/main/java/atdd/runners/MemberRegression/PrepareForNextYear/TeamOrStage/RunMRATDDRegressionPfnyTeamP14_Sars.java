@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyTeamP14_Sars.json",detailed
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyTeamP14_Sars")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyTeamP14_Sars.json" }, tags = { "@teamEnv","@prepareForNextYear02i" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyTeamP14_Sars.json" }, tags = { "@teamEnv","@prepareForNextYear04_sars" })
 public class RunMRATDDRegressionPfnyTeamP14_Sars {
 
 }

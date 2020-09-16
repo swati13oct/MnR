@@ -37,6 +37,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
+	private WebElement viewShopPlansButton;
+	
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 
 	@FindBy(id = "takequizbtn")
 	private WebElement takequizbtn;
@@ -319,7 +328,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
 	private WebElement CallSamTFNClose;
 
-	String CallSam = "Call a Licensed Insurance Agent";
+	//String CallSam = "Call a Licensed Insurance Agent";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 	
@@ -362,7 +371,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn phone')]")
 	private WebElement samChatConnect;
 
-	String ChatSamText = "Chat with a Licensed Insurance Agent";
+	//String ChatSamText = "Chat with a Licensed Insurance Agent";
+   	//String ChatSamText= "Chat with a Licensed Insurance Agent";
+	String ChatSamText= "Chat Now";
+	String CallSam= "Call a Licensed Insurance Agent";
+	//String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	@FindBy(id = "pharmacy-zip-search")
 	private WebElement thpharmacyzipsearch;
@@ -573,7 +586,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL);
-			}else if (MRScenario.environment.contains("stage-0")) {
+			}else if (MRScenario.environment.contains("stage-0")||MRScenario.environment.contains("offline-stage-origin")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
 			} else {
@@ -844,7 +857,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		return new VPPPlanSummaryPage(driver);
 	}
-
+	
+	public EnterZipCodePage enterZipCode() {
+		return new EnterZipCodePage(driver);
+	}
+	
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
@@ -1799,7 +1816,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			validateChatSamContent();
+		//	validateChatSamContent();
 		}
 
 	}
@@ -1827,6 +1844,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
 		validateNew(chatsam);
+		System.out.println(chatsam.getText());
 		jsClickNew(chatsam);
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 		//validateandcloseChat();
@@ -2688,5 +2706,31 @@ public boolean isValidatePageLoadError(){
 			e.printStackTrace();
 		}
 		  	return present;
+	}
+	
+		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		// }
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+		public VPPPlanSummaryPage searchPlansShop(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 }

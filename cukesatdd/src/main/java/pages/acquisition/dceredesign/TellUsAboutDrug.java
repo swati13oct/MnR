@@ -21,7 +21,8 @@ import pages.acquisition.ulayer.PageTitleConstants;
 public class TellUsAboutDrug extends UhcDriver {
 
 
-	@FindBy(xpath = "//*[@id='modal-label']")
+//	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -39,7 +40,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button__') and contains(text(), 'Add')]")
+	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -54,10 +55,11 @@ public class TellUsAboutDrug extends UhcDriver {
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-packaging')]")
 	public WebElement SelectPackageDrpDwn;
 	
-	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")   
+	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")
 	public WebElement QuantityTxt;
 	
-	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
+//	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
+	@FindBy(id="selectdosage")
 	public WebElement FrequentyDrpDwn;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
@@ -75,8 +77,7 @@ public class TellUsAboutDrug extends UhcDriver {
 		validateNew(TellUsABoutCloseBtn);
 		validateNew(AddDrugBtn);
 		validateNew(supplyLengthDrpDwn);
-		//validateNew(FrequentyDrpDwn);
-		
+//		validateNew(FrequentyDrpDwn);
 		validateNew(QuantityTxt);
 	}
 

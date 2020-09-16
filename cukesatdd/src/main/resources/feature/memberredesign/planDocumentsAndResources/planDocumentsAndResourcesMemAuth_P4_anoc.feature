@@ -62,7 +62,7 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 09-066 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595 | MA  | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
-      | 10-067 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289 | MA  | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
+      | 10-067 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289 | MA  | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 
 	@memAuth_active_mapd
 	Examples: 
@@ -97,6 +97,6 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
     Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 19-076 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
-      | 20-118 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
+      | 20-118 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 

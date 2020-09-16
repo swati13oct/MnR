@@ -1783,18 +1783,23 @@ public class OneTimePaymentAarpStepDefintion {
 
 			Assert.assertTrue(true);
 		} else {
+			Assert.fail();
+			
+			//boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
 
-			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
-
-			if(Validation_Status) {
-				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
-				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
-				Assert.assertTrue(true);
-			}else{
-				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
-				Assert.fail();
-			}
+			/*
+			 * if(Validation_Status) { System.out.
+			 * println("Only one payment request message is Displayed in review one time PAGE : "
+			 * + Validation_Status + " - Validation Passed");
+			 * getLoginScenario().saveBean(PageConstants.Update_Review_Page,
+			 * updateReviewPage);
+			 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+			 * Assert.assertTrue(true); }else{ System.out.
+			 * println("Only one payment request message is NOT Displayed in review one time PAGE : "
+			 * +Validation_Status);
+			 */
+				
+			
 
 		}
 	}
@@ -1804,7 +1809,7 @@ public class OneTimePaymentAarpStepDefintion {
 			throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFT();
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.CSRselectAgreeAndClickOnContinueforEFT();
 		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Update confirmation page for Checking account");
@@ -2348,6 +2353,23 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user delete update recurring payment record from GPS$")
+	public void DeletePaymentRecordFromGPS(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******the user delete update recurring payment record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);		
+		updateConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+
+		
+	}
+	
 	@And("^Exception the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecordforexception(DataTable givenAttributes) throws InterruptedException{
 		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
@@ -2603,10 +2625,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in billing history table of Second Plan$")
-	public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan() {
+    public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTableSecondPlan();
+		paymentHistoryPage.validateBillingHistoryTableSecondPlan(planType);
 	}
 	
 	
@@ -2698,10 +2730,21 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in Payment history table of Second Plan$")
-	public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan() {
+public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
+
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTableSecondPlan();
+		paymentHistoryPage.validatePaymentHistoryTableSecondPlan(planType);
 	}
 	
 	@Then("^user selects Last 6 months in the Payment History dropdown$")

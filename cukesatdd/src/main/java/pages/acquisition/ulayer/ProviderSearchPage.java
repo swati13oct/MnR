@@ -327,12 +327,13 @@ public class ProviderSearchPage extends UhcDriver {
 
 	}
 
-	public int entersZipcodeAndPlancount(String zipcode) {
+	public int entersZipcodeAndPlancount(String zipcode, String year) {
 
 		validateNew(zipCodeTextfield);
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
 		continueButton.click();
+		selectYear(year);
 
 		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
 
@@ -490,22 +491,27 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
 
-		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		//CommonUtility.waitForPageLoadNew(driver, People, 30);
+		CommonUtility.waitForPageLoadNew(driver, People, 10);
 		People.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 
 		for (WebElement element : MulitpleSaveBtns) {
-			CommonUtility.waitForPageLoadNew(driver, element, 45);
+			//CommonUtility.waitForPageLoadNew(driver, element, 45);
+			CommonUtility.waitForPageLoadNew(driver, element, 10);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption)) {
-				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
-
+				//CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
+				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 10);
+				//jsClickNew(selectLocationOption);
 				selectLocationOption.click();
 
 				validateNew(NewsaveBtn2);
@@ -515,8 +521,10 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 			/*New Changes
 			 */
-			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			continueSearching.click();
+			//CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
+			//continueSearching.click();
+			jsClickNew(continueSearching);
 			
 			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
@@ -530,7 +538,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		/*Old Changes
 		 * 
 		 jsClickNew(Savedproviders); 
@@ -550,8 +559,10 @@ public class ProviderSearchPage extends UhcDriver {
 		
 		 jsClickNew(Savedproviders); 
 		 validateNew(finishReturnBtn); 
-		 finishReturnBtn.click();
+		 //finishReturnBtn.click();
+		 jsClickNew(finishReturnBtn); 
 		waitForCountDecrement(2);
+		//
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new VPPPlanSummaryPage(driver);
 		
@@ -560,5 +571,19 @@ public class ProviderSearchPage extends UhcDriver {
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
+	}
+
+	public void selectYear(String year) {
+		if (year.contains("current")) {
+			if (validate(currentYrTile)) {
+				currentYrTile.click();
+			} else {
+				System.out.println("Current year tile is not present");
+			}
+		} else if (year.contains("next")) {
+			if (validate(nextYrTile))
+				nextYrTile.click();
+		}
+		
 	}
 }

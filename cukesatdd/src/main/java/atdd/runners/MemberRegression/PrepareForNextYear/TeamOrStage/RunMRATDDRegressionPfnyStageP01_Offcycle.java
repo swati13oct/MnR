@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP01_Offcycle.json",det
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP01_Offcycle")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP01_Offcycle.json" }, tags = { "@stageEnv","@prepareForNextYear01a" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP01_Offcycle.json" }, tags = { "@stageEnv","@prepareForNextYear01_offcycle" })
 public class RunMRATDDRegressionPfnyStageP01_Offcycle {
 
 }

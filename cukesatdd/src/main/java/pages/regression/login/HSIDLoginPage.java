@@ -134,7 +134,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 	MRScenario loginScenario;
 
-	boolean doOldSignin;
+	//tbd boolean doOldSignin;
 	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
@@ -195,11 +195,11 @@ public class HSIDLoginPage extends UhcDriver {
 		 * 
 		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
 		 */
-		//note: take out this when new sign-in is stable
-		if (validate(mnrSignInButton,0))
-			doOldSignin=false;
-		else
-			doOldSignin=true;
+		//tbd //note: take out this when new sign-in is stable
+		//tbd if (validate(mnrSignInButton,0))
+		//tbd 	doOldSignin=false;
+		//tbd else
+		//tbd 	doOldSignin=true;
 	}
 
 
@@ -213,10 +213,10 @@ public class HSIDLoginPage extends UhcDriver {
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 		 */
-		if (validate(mnrSignInButton,0))
-			doOldSignin=false;
-		else
-			doOldSignin=true;
+		//tbd if (validate(mnrSignInButton,0))
+		//tbd 	doOldSignin=false;
+		//tbd else
+		//tbd 	doOldSignin=true;
 
 	}
 
@@ -276,19 +276,21 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @toDo : To login through hsid via entering security questions
 	 */
 	public Object doLoginWith(String username, String password) {
-		if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
+		//tbd if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
+		//tbd 	System.out.println(driver.getCurrentUrl());
+		//tbd 	CommonUtility.waitForPageLoad(driver, oldUsername, 20);
+		//tbd 	sendkeys(oldUsername, username);
+		//tbd 	sendkeys(oldPassword, password);
+		//tbd 	oldSignInBtn.click();
+		//tbd } else {
 			System.out.println(driver.getCurrentUrl());
-			sendkeys(oldUsername, username);
-			sendkeys(oldPassword, password);
-			oldSignInBtn.click();
-		} else {
-			System.out.println(driver.getCurrentUrl());
+			CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
 			mnrSignInButton.click();
 			validateHsidPageElements();
 			sendkeys(userNameField, username);
 			sendkeys(passwordField, password);
 			hsidSignInButton.click();
-		}
+		//tbd }
 
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
@@ -325,6 +327,8 @@ public class HSIDLoginPage extends UhcDriver {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			undeliverEmailAddressRequiredWorkaround(username);
+			CommonUtility.checkPageIsReadyNew(driver);
 			emailAddressRequiredWorkaround(username);
 			CommonUtility.checkPageIsReadyNew(driver);
 			goGreenSplashPageWorkaround();
@@ -765,12 +769,67 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 	}
 	
+	public void undeliverEmailAddressRequiredWorkaround(String username) {
+		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted un-deliverable email splash page, handle it");
+				try {
+					try {
+						if (validate(emailGoToHomepageBtn,0)) {
+							System.out.println("'Go To Homepage' button showed up, click it");
+							//goToHomepage.isDisplayed();
+							emailGoToHomepageBtn.click();
+						}
+					} catch (Exception e1) {
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+					}
+
+					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+					CommonUtility.checkPageIsReadyNew(driver);
+					waitToReachDashboard(username);  //note: after page is completed state, still need this wait for the page to finish loading
+
+					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+					}
+				} catch (Exception e) {
+					System.out.println("Unable to resolve un-deliverable page encounter. "+e);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+		}
+		if (driver.getCurrentUrl().contains("bannerpopup.html"))
+		{
+			System.out.println("User landed on banner page and did not see security questions");
+			try {
+				if (noWaitValidate(homePageNotice,0)) {
+					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (noWaitValidate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (noWaitValidate(homePageNotice3,0)) {
+					homePageNotice3.click();
+					CommonUtility.checkPageIsReady(driver);
+				}	
+
+			}
+			catch(Exception e)
+			{
+				System.out.println("User landed on banner page and could not proceed ahead");
+			}
+		}
+	}  
 	
 	public void emailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
-				System.out.println("User encounted email splash page, handle it");
+				System.out.println("User encounted no-email or multiple-emails email splash page, handle it");
 				try {
 					/* note: instead of entering email, click Go to Homepage directly
 					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
@@ -807,7 +866,7 @@ public class HSIDLoginPage extends UhcDriver {
 						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
 					}
 				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter. "+e);
+					System.out.println("Unable to resolve no-email or multiple-emails email page encounter. "+e);
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - will only workaround the no email page on team-atest or stage env, "
