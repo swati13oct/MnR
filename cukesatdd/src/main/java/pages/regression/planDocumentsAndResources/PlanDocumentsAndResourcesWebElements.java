@@ -236,13 +236,13 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 
 	//--------------------------
 	//note: this set works after year switch to 2020
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]")
 	protected WebElement providerSearch_link_PD;
 
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//img")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//img")
 	protected WebElement providerSearch_link_img;
 	
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//following-sibling::p")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//following-sibling::p")
 	protected List<WebElement> providerSearch_instr_PD;
 	
 	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]")
