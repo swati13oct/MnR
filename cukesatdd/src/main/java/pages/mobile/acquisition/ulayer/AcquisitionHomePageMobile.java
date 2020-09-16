@@ -28,6 +28,7 @@ import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.keywordSearchAARP;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
@@ -1960,7 +1961,28 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 		return null;
 	}
-
+	public void navigateToShopPDPpage()
+	{
+		waitforElement(ShopForaplan);
+		if (ShopForaplan.isDisplayed()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(ShopForaplan);
+			actions.build().perform();
+			System.out.println("Hover over Shop for a Plan completed");
+	    }
+		WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+		jsClickNew(PDPplansLink);
+	}
+	
+	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
+		validateNew(DCELink);
+		jsClickNew(DCELink);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
+		return null;
+	}
+	
 	public keywordSearchAARP searchfield() {
 		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());

@@ -106,7 +106,7 @@ public class MRScenario {
 	private static String sessionId;
 	private static String JobURL = null;
 	public static boolean isSauceLabSelected = false;
-	public static String IsVirtualDeviceExecution = "";
+	public static String MobileDeviceType = "";
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
 	public static String browserVersion;
@@ -181,7 +181,7 @@ public class MRScenario {
 			mobileDeviceOSName = props.get("SaucelabsDeviceOSName");
 			mobileDeviceOSVersion = props.get("SaucelabsDeviceOSVersion");
 			//appiumVersion = props.get("SaucelabsAppiumVersion");
-			//IsVirtualDeviceExecution = props.get(IsVirtualDeviceExecution);
+			//MobileDeviceType = props.get("MobileDeviceType");
 		} else { // running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
@@ -228,7 +228,7 @@ public class MRScenario {
 			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
 			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
 			//appiumVersion = System.getenv("SaucelabsAppiumVersion");
-			//IsVirtualDeviceExecution = System.getenv(IsVirtualDeviceExecution);
+			//MobileDeviceType = System.getenv("MobileDeviceType");
 
 			if (System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
 				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
@@ -264,12 +264,11 @@ public class MRScenario {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-				// mobileDriver = new AndroidDriver(new URL(URL1), capabilities);
-			} else {
+			}
+			else {
 				capabilities.setCapability("browserName", "Safari");
 				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-			}
-			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+			}			System.out.println("Session ID --- " + mobileDriver.getSessionId());
 			System.out.println(mobileDeviceName + " JobURL  --- "
 					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 
