@@ -296,19 +296,19 @@ Feature: 1.12 ACQ - Global Components AARP
 				
     @MiscellaneousLinks_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
-      |	AARP	| estimate-drug-costs.html!/drug-cost-estimator              | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      |	AARP	| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      |	AARP	| medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      |	AARP	| profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
+      |	site	| path                                                       		| pageName                | tfnXpath                                                       | tfnFlag |
+      |	AARP	| health-plans/estimate-drug-costs.html!/drug-cost-estimator    | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      |	AARP	| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   		| Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      |	AARP	| medicare-plans.html                                        		| ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	AARP	| profile/guest                                              		| Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
 		
 		@MiscellaneousLinks_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |
-      |	UHC		| estimate-drug-costs.html!/drug-cost-estimator               							| Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      |	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      |	UHC		| medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      |	UHC		| profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
+      |	site	| path                                                          | pageName                | tfnXpath                                                       | tfnFlag |
+      |	UHC		| health-plans/estimate-drug-costs.html!/drug-cost-estimator		| Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      |	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      |	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
 		
     @FooterLinks_GlobalCompsAARP
     Examples: 
