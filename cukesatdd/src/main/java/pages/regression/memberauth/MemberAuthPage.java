@@ -364,6 +364,10 @@ public class MemberAuthPage extends UhcDriver {
 					{
 						System.out.println("Catch block with no significance");
 					}
+					//note: force it to wait 5 seconds for any of those 'My Home Page' splash page button to show if any
+					CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+					undeliverEmailAddressRequiredWorkaround();
+					CommonUtility.checkPageIsReadyNew(driver);
 					emailAddressRequiredWorkaround();
 					CommonUtility.checkPageIsReadyNew(driver);
 					goGreenSplashPageWorkaround();
@@ -633,12 +637,12 @@ public class MemberAuthPage extends UhcDriver {
 	
 	public void emailAddressRequiredWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Proceed to check if need to perform email workaround...");
+		System.out.println("Proceed to check if need to perform no-email or multiple-emails workaround...");
 		//checkModelPopup(driver, 2);
-		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") ) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
-				System.out.println("User encounted email splash page, handle it...");
+				System.out.println("User encounted no-email or multiple-emails email splash page, handle it...");
 				try {
 					if (validate(emailGoToHomepageBtn,0)) {
 						System.out.println("'Go To Homepage' button showed up, click it");
@@ -648,7 +652,53 @@ public class MemberAuthPage extends UhcDriver {
 					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
-				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/no-email.html"));
+				if (MRScenario.environment.contains("stage")) { //note: stage seemed to take longer...
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				Assert.assertTrue("PROBLEM - unable to navigate away from the no-email page after clicking 'Go to My Home Page' button", 
+						!driver.getCurrentUrl().contains("login/no-email.html") && !driver.getCurrentUrl().contains("login/multiple-emails.html"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else {
+			System.out.println("no need to perform no-email or multiple-emails email workaround...");
+		}
+	}  
+	
+	public void undeliverEmailAddressRequiredWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Proceed to check if need to perform undeliverable email workaround...");
+		//checkModelPopup(driver, 2);
+		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
+				System.out.println("User encounted undeliverable email email splash page, handle it...");
+				try {
+					if (validate(emailGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						emailGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (MRScenario.environment.contains("stage")) {//note: stage seemed to take longer...
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				Assert.assertTrue("PROBLEM - unable to navigate away from the undeliverable email page after clicking 'Go to My Home Page' button", !driver.getCurrentUrl().contains("login/undeliverable-email.html"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
 				splashPgWorkaroundForProd();
 			} else {
@@ -657,9 +707,9 @@ public class MemberAuthPage extends UhcDriver {
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
 		} else {
-			System.out.println("no need to perform email workaround...");
+			System.out.println("no need to perform undeliverable email workaround...");
 		}
-	}  
+	} 
 
 
 }

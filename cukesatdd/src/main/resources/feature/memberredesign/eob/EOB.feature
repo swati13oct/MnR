@@ -24,6 +24,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
@@ -31,6 +32,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
@@ -38,6 +40,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
     #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12- months ----  
     And the user selects the desired date range
@@ -45,6 +48,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
     #Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
@@ -53,24 +57,24 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @SHIP_EOBs @SHIP_EOBs1 @devRegression
     Examples: 
-      | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB     | Medical | true        | 
-      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB     | Medical | true        | 
+      | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
+      | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB| Medical | false   | true        | 
+      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | true    | true        | 
 
     @SHIP_EOBs @SHIP_EOBs2
     Examples: 
-      | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB  | Medical | false   |  false      |
 
     @SHIP_EOBs @SHIP_EOBs3
     Examples: 
-      | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | true   | 
+      | index | planType                 | memberType                | eobType | realEob | flagZeroEob |
+      | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | false   |  true       | 
 
     @SHIP_EOBs @SHIP_EOBs4
     Examples: 
-      | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 14    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true  |  
+      | index | planType                 | memberType              | eobType | realEob | flagZeroEob |
+      | 14    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | false   |  true       |  
 
 
   @eob02 @regression_06_06_18FnF @regressionMember

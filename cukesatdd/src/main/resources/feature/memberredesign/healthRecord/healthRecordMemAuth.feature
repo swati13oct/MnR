@@ -15,8 +15,9 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
-    Then the user validates Health Record link display behavior on Account Profile dropdown base on test input
+    Then the user store expected link behavior
       | Expect Link | <expectLink>       |
+    Then the user validates Health Record link display behavior on Account Profile dropdown base on test input
     Then the user validates clicking Health Record link will open to the target page
 	Then the user navigates to Find Care page if applicable and validate Health Record link display behavior
 	#Then the user navigates to Claims page if applicable and validate Health Record link display behavior
@@ -70,12 +71,13 @@ Feature: 1.24.1 Member Individual Health Record - Member Auth
 	    | 10    | F424804 | qavgogine | qavgogine | q2_jun_aarp0179         | PDP      | IHR                | true       |
 
 	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
     @memAuth_ihr_preeff_term
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	 #  | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA       | PREEFF_IHR         | true       |
 	    | 11    | F424804 | qavgogine | qavgogine | preeffectiveFEDPDP_001  | PDP      | PREEFF_IHR         | true       |
-	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | true       |
+	    | 12    | F424804 | qavgogine | qavgogine | q2_jun_grp0440          | MAPD     | TERM_IHR           | false      |
 
     @memAuth_ihr_pdpSspCombo
     Examples: 

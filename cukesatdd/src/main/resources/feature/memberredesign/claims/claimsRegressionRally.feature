@@ -1,9 +1,9 @@
 @claims @thePredetors
 Feature: 1.12.1 Member Rally claims
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
-      | Feature           | ClaimsMicroApp |
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on stage env
+  #    | Feature           | ClaimsMicroApp |
 
   #----- beginning of Regression claims scenarios section ------------------------
   # note: if run on team env, the click MyClaims and landing on Rally Claims page will be skipped
