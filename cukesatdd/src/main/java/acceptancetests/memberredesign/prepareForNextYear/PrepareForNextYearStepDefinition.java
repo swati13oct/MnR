@@ -212,6 +212,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean showNxtYrPlanName=Boolean.valueOf(tmp);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME,showNxtYrPlanName);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean expPlnChgLangDropdown_en=true; //note: dropdown default is english
+		boolean expPlnChgLangDropdown_es=false;
+		boolean expPlnChgLangDropdown_zh=false;
+		boolean expPlnMatLangDropdown_en=true; //note: dropdown default is english
+		boolean expPlnMatLangDropdown_es=false;
+		boolean expPlnMatLangDropdown_zh=false;
 		
 		HashMap<String, Boolean> docDisplayMap=new HashMap<String, Boolean>();
 		//----------------------------------
@@ -227,12 +237,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-	
+		if (display)
+			expPlnChgLangDropdown_es=true;
+		
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display)
+			expPlnChgLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Evidence of Coverage";
@@ -241,18 +255,29 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-
+		if (display) 
+		
 		inputField=docName+" Spanish";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			if (memberType.toUpperCase().contains("_GRP_"))
+				expPlnChgLangDropdown_es=true;
+			else if (memberType.toUpperCase().contains("_IND_"))
+				expPlnMatLangDropdown_es=true;
 	
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			if (memberType.toUpperCase().contains("_GRP_"))
+				expPlnChgLangDropdown_zh=true;
+			else if (memberType.toUpperCase().contains("_IND_"))
+				expPlnMatLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Comprehensive Formulary";
@@ -267,13 +292,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-		
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Provider Directory";
@@ -288,12 +316,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 		
 		//----------------------------------
 		docName="Vendor Information Sheet";
@@ -308,12 +340,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 		
 		//----------------------------------
 		docName="Pharmacy Directory Information";
@@ -328,13 +364,23 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 
+		docDisplayMap.put("expPlnChgLangDropdown_en", expPlnChgLangDropdown_en);
+		docDisplayMap.put("expPlnChgLangDropdown_es", expPlnChgLangDropdown_es);
+		docDisplayMap.put("expPlnChgLangDropdown_zh", expPlnChgLangDropdown_zh);
+		docDisplayMap.put("expPlnMatLangDropdown_en", expPlnMatLangDropdown_en);
+		docDisplayMap.put("expPlnMatLangDropdown_es", expPlnMatLangDropdown_es);
+		docDisplayMap.put("expPlnMatLangDropdown_zh", expPlnMatLangDropdown_zh);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP, docDisplayMap);
 		
 	}

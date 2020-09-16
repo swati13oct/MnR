@@ -477,7 +477,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PhonePrimary']")
 		private WebElement phoneNumber;
 
-		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		//@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 		private WebElement cancelButton;
 
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")

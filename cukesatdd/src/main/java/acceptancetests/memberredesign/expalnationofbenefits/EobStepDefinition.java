@@ -471,13 +471,20 @@ public class EobStepDefinition {
 	}
 
 	@And("^the user clicks on first eob from the list to validate pdf$")
-	public void the_user_clicks_on_first_eob_from_the_list() {
+	public void the_user_clicks_on_first_eob_from_the_list(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String realEob_str = memberAttributesMap.get("Real EOB");
+		Assert.assertTrue("PROBLEM - 'Real EOB' input should either be 'true' or 'false' | Actual='"+realEob_str+"'", 
+				realEob_str.equalsIgnoreCase("true")|| realEob_str.equalsIgnoreCase("false")); 
+		boolean realEob=Boolean.valueOf(realEob_str);
+
+		
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.validateEobEntries(planType, memberId);
+			eobPage.validateEobEntries(planType, memberId, realEob);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}

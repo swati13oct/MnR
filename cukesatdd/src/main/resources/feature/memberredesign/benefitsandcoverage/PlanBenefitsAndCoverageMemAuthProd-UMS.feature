@@ -530,10 +530,11 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then verify ancillary benefit section is not displayed
     And the user validates the Vas section on benefits and coverage page is not displayed
 
-    Examples: 
-      | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
-     | 15239 | kkumard| mnrs786@|BIGDADDY0808|PDP  | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
-      | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
+    Examples:  
+      | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
+      | 15239 | kkumard | mnrs786@ |BIGDADDY0808|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+     #15238 is deprecated 
+     # | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
       
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
   @benefitsAndCoverage5 @WaystoSaveforPdp @regression @SavePdpWidget
