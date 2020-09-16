@@ -207,12 +207,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					if (testInputInfoMap.get("memberType").contains("GROUP"))
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
 					redirectUrl="none";
-					//tbd expectedUrl="https://member.uhc.com/AARP/find-care";
-					//tbd redirectUrl="https://member.uhc.com/aarp/find-care";
-					//tbd if (testInputInfoMap.get("memberType").contains("GROUP"))
-					//tbd 	redirectUrl="https://member.uhc.com/retiree/find-care";
+					if (testInputInfoMap.get("memberType").contains("GROUP")) {
+						expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+					 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+					}
 				}
 			}
 		} else {
@@ -230,12 +230,16 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					if (testInputInfoMap.get("memberType").contains("GROUP")) 
 						redirectUrl="https://member.uat.uhc.com/retiree/find-care";
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
-					redirectUrl="none";
 					//tbd expectedUrl="https://member.uhc.com/UHC/find-care";
 					//tbd redirectUrl="https://member.uhc.com/uhc/find-care";
 					//tbd if (testInputInfoMap.get("memberType").contains("GROUP"))
 					//tbd 	redirectUrl="https://member.uhc.com/retiree/find-care";
+					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+					redirectUrl="none";
+					if (testInputInfoMap.get("memberType").contains("GROUP")) {
+						expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+					 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+					}
 				}
 			}
 		}
