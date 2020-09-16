@@ -49,7 +49,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Drug Total')]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
 	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
@@ -91,19 +91,19 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//caption[contains(text(), 'Initial Coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_initial_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_initial_coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageLink;
 	
 	@FindBy(xpath = "//caption[contains(text(), 'Coverage Gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_coverage_gap')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_coverage_gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapLink;
 
 	@FindBy(xpath = "//caption[contains(text(), 'Catastrophic Coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_catastrophic_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_catastrophic_coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheLink;
 	
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
@@ -181,16 +181,16 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
 	public WebElement monthlyValue;
 	
-	@FindBy(xpath = "//*[@class='uhc-modal__content px-10 py-10']/p")
+	@FindBy(xpath = "//*[contains(@class,'uhc-modal__content p-5 ng-tns-c37')]/div/div/div/p")
 	public WebElement coverageMsg;
 	
 	@FindBy(xpath = "//*[@id='table_coverage_gap']")
-	public WebElement catastrophicCoverage;
-	
-	@FindBy(xpath = "//*[@id='table_catastrophic_coverage']")
 	public WebElement coverageGap;
 	
-	@FindBy(xpath = "//*[contains(@class, 'closeicon')]")
+	@FindBy(xpath = "//*[@id='table_catastrophic_coverage']")
+	public WebElement catastrophicCoverage;
+	
+	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
 	public WebElement modalCloseIcon;
 	
 	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")

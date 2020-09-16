@@ -16,14 +16,14 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
+   Then the user searches and adds the following Drug to Drug List
+    | DrugName | <drug2> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug5> |
+     | DrugName | <drug5> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug6> |
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
@@ -195,15 +195,16 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
-    #Then the user validates Important information section
-    And the user verifies the catastrophic coverage message
-    |catastrophicCoverage|<catastrophicCoverageMessage>|
+    Then the user validates Important information section
     And the user verifies the coverage gap message
     |coverageGap|<coverageGapMessage>|
+    And the user verifies the catastrophic coverage message
+    |catastrophicCoverage|<catastrophicCoverageMessage>|
+    
     
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |catastrophicCoverageMessage|coverageGapMessage|
-      |   78006 | SNP      | Bexar County | yes             | Emsam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |During the Coverage Gap Stage, the plan pays all of the cost for your drugs.|During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs.|
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |coverageGapMessage|catastrophicCoverageMessage|
+      |   78006 | SNP      | Bexar County | yes             | Emsam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |During the Coverage Gap Stage, the plan pays all of the cost for your drugs.|During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs.|
             
         @dceRedesignDefaultPharmacy @F497405
         

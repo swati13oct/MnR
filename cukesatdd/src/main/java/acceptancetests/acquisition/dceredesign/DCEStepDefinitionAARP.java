@@ -991,7 +991,7 @@ public class DCEStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		String coverageGapMessage = memberAttributesMap.get("coverageGapMessage");
+		String coverageGapMessage = memberAttributesMap.get("coverageGap");
 		drugDetailsPage.validateCoverageGapMessage(coverageGapMessage);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
