@@ -378,8 +378,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 				else if(benefitValueUI.contains("Out-of-NetworkBenefits")&&columnName.equalsIgnoreCase("Out-of-Network Benefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
-				}else if(key.equalsIgnoreCase("Dental")&&benefitValueUI.contains("$")) {
-					benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
+				}else if(key.equalsIgnoreCase("Routine Dental")) {
+					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
 					benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
 				}
 			}
@@ -651,7 +651,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 								silverSneakersCheckbox.click();
 							
 							if(listOfCellsPerRow.size()==2) {
-									if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Dental") ) {
+								System.out.println(e.getText());
+									if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Rider") ) {
 										highOptionDentalCheckbox.click();
 										key=e.getText();
 										WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
