@@ -286,6 +286,9 @@ public class VppPlanValidationStepDefinition {
 		                	 }catch (Exception e) {
 		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
+								 int lastcellNum = resultsRow.getLastCellNum();
+								 resultsRow.createCell(lastcellNum).setCellValue(e.getMessage());
+								 break;
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 							 newCell.setCellValue(cell.getStringCellValue());
