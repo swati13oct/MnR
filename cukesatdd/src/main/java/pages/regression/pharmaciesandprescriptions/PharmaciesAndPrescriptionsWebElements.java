@@ -298,7 +298,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-0']")
 	protected WebElement emptyHarveyBall;
 
-	@FindBy(xpath = "//h1[contains(text(),'Medication Order Status')]")
+	@FindBy(xpath = "//h1[contains(text(),'Order Status')]")
 	protected WebElement orderStatusPageHeader;
 
 	//@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
@@ -640,7 +640,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
 	protected List<WebElement> listOfResolveHold;
 
-	@FindBy(xpath = "//button[@data-testid='medication-action-track']")
+	@FindBy(xpath = "//*[@data-testid='medication-action-track']")
 	protected List<WebElement> listOfTrackStatus;
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-view-order']")
