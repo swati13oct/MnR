@@ -34,6 +34,7 @@ import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 /**
  * @author gumeshna
@@ -489,7 +490,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
-	public GetStartedPage navigateToDCERedesign() {
+	public GetStartedPageMobile navigateToDCERedesign() {
 
 		try {
 			Thread.sleep(2000);
@@ -508,7 +509,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (validateNew(AddMyDrugsBtn))
-			return new GetStartedPage(driver);
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 

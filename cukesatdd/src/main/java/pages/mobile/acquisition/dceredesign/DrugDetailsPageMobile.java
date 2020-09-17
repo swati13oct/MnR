@@ -21,6 +21,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class DrugDetailsPageMobile extends UhcDriver {
@@ -534,14 +535,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		
 	}
 
-	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
+	public PlanDetailsPageMobile ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
-			return new PlanDetailsPage(driver);
+			return new PlanDetailsPageMobile(driver);
 		}
 		else {
 			return null;
