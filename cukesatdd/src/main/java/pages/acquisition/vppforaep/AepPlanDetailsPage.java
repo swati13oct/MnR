@@ -657,7 +657,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 										key=e.getText();
 										WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
 										value = g.getText();
-										optionalDentalCheckbox.click();
+										//optionalDentalCheckbox.click();
 										
 									}else if(cellIndex==1) {
 										key=e.getText();//System.out.println("key :"+ key);
