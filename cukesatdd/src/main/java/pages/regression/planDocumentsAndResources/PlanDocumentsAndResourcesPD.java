@@ -158,8 +158,15 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		WebElement lnkElement=providerSearch_link_PD;
 		WebElement imgElement=providerSearch_link_img;
 		List<WebElement> instElement=providerSearch_instr_PD;
-		String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+		//tbd String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+		//tbd String redirectUrl="none";
+		String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=";
 		String redirectUrl="none";
+		if (testInputInfoMap.get("memberType").contains("GROUP")) {
+			expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+		 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+		}
+		/* tbd 
 		if (testInputInfoMap.get("planType").toUpperCase().contains("PCP")) {
 			if (MRScenario.environment.contains("team-a")) {
 				expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
@@ -173,11 +180,11 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 					redirectUrl="none";
-					//tbd expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
-					//tbd redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("planType").toUpperCase().contains("MEDICA")) {
+			expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
+			redirectUrl="none";
 			if (MRScenario.environment.contains("team-a")) {
 				expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
 				redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
@@ -190,8 +197,6 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					expectedUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 					redirectUrl="none";
-					//tbd expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
-					//tbd redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
 				}
 			}
 		} else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
@@ -243,6 +248,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				}
 			}
 		}
+		*/
 
 		testInputInfoMap.put("section", section);
 		testInputInfoMap.put("docName", item);
