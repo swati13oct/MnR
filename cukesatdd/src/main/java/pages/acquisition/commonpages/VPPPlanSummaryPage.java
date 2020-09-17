@@ -1461,6 +1461,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			enrollForPlan.click();
 		}
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validate(NextBtn, 20);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1593,6 +1594,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			dceLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		validate(AddMyDrugsBtn, 20);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -2068,7 +2070,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 }*/
 
 	public void validateMarketingBullets(String planType , String planName){
-
+		sleepBySec(2);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(!planType.equals("PDP")){
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
 			validateNew(marketingBullets);

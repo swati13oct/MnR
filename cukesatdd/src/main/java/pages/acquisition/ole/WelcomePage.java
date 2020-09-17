@@ -118,7 +118,6 @@ public class WelcomePage extends UhcDriver{
 			checkModelPopup(driver,45);
 		else 
 			checkModelPopup(driver,10);
-		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}
