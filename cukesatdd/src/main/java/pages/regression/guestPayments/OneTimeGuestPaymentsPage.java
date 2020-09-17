@@ -180,7 +180,9 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 	private void validateTheeftAccDetailsIframeforEFTAcc() {
 
-		Assert.assertTrue("PROBLEM - unable to locate Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersNameTextField));
+		Assert.assertTrue("PROBLEM - unable to locate First Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersFirstNameTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Middle Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersMiddletNameTextField));
+		Assert.assertTrue("PROBLEM - unable to locate Locate Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersLastNameTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Account Number",guestPaymentsValidate(accountNumberTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Routing Number Text Field",guestPaymentsValidate(routingNumberTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Review And Submit Button",guestPaymentsValidate(reviewAndSubmitButton));
@@ -189,12 +191,20 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 	public ReviewOneTimeGuestPaymentsPage enterEFTAccountDetails(Map<String, String> accountAttributessMap) {
 
-		String AccountHoldersName = accountAttributessMap.get("AccountHoldersName");
+		String AccountHoldersFirstName = accountAttributessMap.get("AccountHoldersFirstName");
+		String AccountHoldersMiddleName = accountAttributessMap.get("AccountHoldersMiddleName");
+		String AccountHoldersLastName = accountAttributessMap.get("AccountHoldersLastName");
 		String AccountNumber = accountAttributessMap.get("AccountNumber");
 		String RoutingNumber = accountAttributessMap.get("RoutingNumber");
 
-		System.out.println(">>>>>>>>>>>>Entering Account Holder's Name<<<<<<<<<<<<<<<<<<<");
-		bankHoldersNameTextField.sendKeys(AccountHoldersName);
+		System.out.println(">>>>>>>>>>>>Entering Account Holder's First Name<<<<<<<<<<<<<<<<<<<");
+		bankHoldersFirstNameTextField.sendKeys(AccountHoldersFirstName);
+
+		System.out.println(">>>>>>>>>>>>Entering Account Holder's Middle Name<<<<<<<<<<<<<<<<<<<");
+		bankHoldersMiddletNameTextField.sendKeys(AccountHoldersMiddleName);
+
+		System.out.println(">>>>>>>>>>>>Entering Account Holder's Last Name<<<<<<<<<<<<<<<<<<<");
+		bankHoldersLastNameTextField.sendKeys(AccountHoldersLastName);
 
 		System.out.println(">>>>>>>>>>>>Entering Account Number<<<<<<<<<<<<<<<<<<<");
 		accountNumberTextField.sendKeys(AccountNumber);

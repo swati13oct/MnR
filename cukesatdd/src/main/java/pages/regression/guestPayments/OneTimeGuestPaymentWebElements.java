@@ -114,8 +114,14 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//h1[contains(text(),'Review and Submit')]")
 	public WebElement reviewAndSubmitPageHeader;
 
-	@FindBy(xpath = "//input[@id='bankHolName']")
-	public WebElement bankHoldersNameTextField;
+	@FindBy(xpath = "//*[@id='bankHolFirstName']")
+	public WebElement bankHoldersFirstNameTextField;
+
+	@FindBy(xpath = "//*[@id='bankHolMiddleName']")
+	public WebElement bankHoldersMiddletNameTextField;
+
+	@FindBy(xpath = "//*[@id='bankHolLastName']")
+	public WebElement bankHoldersLastNameTextField;
 
 	@FindBy(xpath = "//input[@id='routNumber']")
 	public WebElement routingNumberTextField;

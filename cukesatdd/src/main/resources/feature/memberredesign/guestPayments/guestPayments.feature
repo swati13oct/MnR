@@ -178,9 +178,11 @@ Feature: 1.06.7 Member Guest Payments Page
     #And I validate all the header and page elements on One-time payment page
     Then I select Past Amount Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
-      | AccountHoldersName | <Name>      |
-      | AccountNumber      | <accountNo> |
-      | RoutingNumber      | <routingNo> |
+      | AccountHoldersFirstName  | <FirstName>  |
+      | AccountHoldersMiddleName | <MiddleName> |
+      | AccountHoldersLastName   | <LastName>   |
+      | AccountNumber            | <accountNo>  |
+      | RoutingNumber            | <routingNo>  |
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
@@ -190,12 +192,12 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo  | routingNo | Email          |
-      | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest Payments1 | 1234512345 | 123123123 | test@optum.com |
-      | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest Payments2 | 1234512345 | 123123123 | test@optum.com |
-      | 10002 | PDP      |980958988-1  | 04/08/1933 | RETIREE  | Guest Payments3 | 1234512345 | 123123123 | test@optum.com |
-      | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest Payments4 | 1234512345 | 123123123 | test@optum.com |
-      | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest Payments5 | 1234512345 | 123123123 | test@optum.com |
+      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
+      | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
+      | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
+      | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
+      | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
+      | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | test@optum.com |
 
 
   @guestPayment09 @makeOneTimePayment @pastAmount&currentCharges @ccFLow
@@ -241,20 +243,22 @@ Feature: 1.06.7 Member Guest Payments Page
     And I validate all the header and page elements on One-time payment page
     Then I select Past Amount & current charges Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
-      | AccountHoldersName | <Name>      |
-      | AccountNumber      | <accountNo> |
-      | RoutingNumber      | <routingNo> |
+      | AccountHoldersFirstName  | <FirstName>  |
+      | AccountHoldersMiddleName | <MiddleName> |
+      | AccountHoldersLastName   | <LastName>   |
+      | AccountNumber            | <accountNo>  |
+      | RoutingNumber            | <routingNo>  |
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |       
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 | 
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  
+      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo |
+      | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 |
+      | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 |
+      | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 |
+      | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 |
+      | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 |
 
   @guestPayment11 @makeOneTimePayment @otherAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
@@ -301,20 +305,22 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will enter EFT Checking Account Details
-      | AccountHoldersName | <Name>      |
-      | AccountNumber      | <accountNo> |
-      | RoutingNumber      | <routingNo> |
+      | AccountHoldersFirstName  | <FirstName>  |
+      | AccountHoldersMiddleName | <MiddleName> |
+      | AccountHoldersLastName   | <LastName>   |
+      | AccountNumber            | <accountNo>  |
+      | RoutingNumber            | <routingNo>  |
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |otherAmountDue    |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |  10.05           |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  15.20           |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  20.30           |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 |  11.000          |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |
+      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue |
+      | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          |
+      | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          |
+      | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          |
+      | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         |
+      | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         |
       
       
   @guestPayment13 @makeOneTimePayment @changePaymentDetails
@@ -331,9 +337,11 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will enter EFT Checking Account Details
-      | AccountHoldersName | <Name>      |
-      | AccountNumber      | <accountNo> |
-      | RoutingNumber      | <routingNo> |
+      | AccountHoldersFirstName  | <FirstName>  |
+      | AccountHoldersMiddleName | <MiddleName> |
+      | AccountHoldersLastName   | <LastName>   |
+      | AccountNumber            | <accountNo>  |
+      | RoutingNumber            | <routingNo>  |
     Then I validate header and and page elements on Review & Submit page
     Then I click on Change Payment Details link
      Then I select Credit Debit payment Method
@@ -347,12 +355,12 @@ Feature: 1.06.7 Member Guest Payments Page
     And I navigate to Payment confirmation page and validate all the page elements
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | Name            | accountNo      | routingNo   |otherAmountDue    |Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest Payments1 |  1234512345    |   123123123 |  10.05           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest Payments2 |  1234512345    |   123123123 |  15.20           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest Payments3 |  1234512345    |   123123123 |  20.30           |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest Payments4 |  1234512345    |   123123123 |  11.000          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest Payments5 |  1234512345    |   123123123 |  333.00          |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue | Name                 | CreditCardNumber | validMonth | validYear |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
 
 
 
