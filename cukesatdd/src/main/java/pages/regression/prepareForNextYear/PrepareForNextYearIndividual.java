@@ -430,42 +430,51 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_presDrugSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - arrow after Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
+		Date showDocDate2=convertStrToDate(showDocDateStr2);
+		boolean showSection=false;
+		if (currentDate.equals(showDocDate2) || currentDate.after(showDocDate2)) {
+			showSection=true;
+		}
+		
+		if (showSection) {
+			targetItem=section+subSection+" - arrow after Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - svg after Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_svg;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - svg after Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String expUrl="/health-plans/estimate-drug-costs.html";
-		if (memberType.toUpperCase().contains("UHC"))
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-		else 
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			String expUrl="/health-plans/estimate-drug-costs.html";
+			if (memberType.toUpperCase().contains("UHC"))
+				if (MRScenario.environment.contains("stage")) 
+					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+				else
+					expUrl="uhcmedicaresolutions.com"+expUrl;
 			else 
-				expUrl="aarpmedicareplans.com"+expUrl;
-		WebElement expElement=dceHeader;
-		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+				if (MRScenario.environment.contains("stage")) 
+					expUrl="aarpmedicareplans.uhc.com"+expUrl;
+				else 
+					expUrl="aarpmedicareplans.com"+expUrl;
+			WebElement expElement=dceHeader;
+			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-		note.add("\n\tValidate after clicking 'Drug Search' link");
-		targetItem=section+" - green checkmark";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			note.add("\n\tValidate after clicking 'Drug Search' link");
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-		deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
-		targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-		note.addAll(validateDontHaveItem(targetItem, targetElement));
-
+			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
+			deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}
+		
 		//---------------------------------------------
 		String docName="Comprehensive Formulary";
 		//note: if there is spanish doc
