@@ -14,9 +14,9 @@ Feature: HD Order Status - Order Received
     Then user views a status of order received
     When user clicks the Track Status call to action button on that medication's row
     Then user view the Order Status page for the medication
-    And user sees a status of Order received on Step one of the tracker
+    Then user views a status of order received
 
     Examples:
       | FID     | planType | memberType           |
-      | F439294 | MAPD     | Rx_Individual_PnP_OrderReceived |
+      | F499651 | MAPD     | Rx_Individual_PnP_OrderReceived |
 

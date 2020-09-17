@@ -35,8 +35,8 @@ public class OrderStatusOrderReceivedStepDefinition {
 
 
 
-	@And("^user sees a status of Order received on Step one of the tracker$")
-	public void user_sees_a_status_of_Order_received_on_Step_one_of_the_tracker() throws Throwable {
+	@Then("^user view order received on Step one of the tracker$")
+	public void user_view_order_received_on_Step_one_of_the_tracker() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
