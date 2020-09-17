@@ -119,32 +119,32 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_prepareForNextYear02_ind_mapd_aarp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-01  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_002     | MAPD	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-01  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_002     | MAPD	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_ind_mapd_uhc
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-02  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_009     | MAPD	  | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-02  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_009     | MAPD	  | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_ind_pdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-03  | F437767 | qavgogine | qavgogine | q2_jun_aarp0112        | PDP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-03  | F437767 | qavgogine | qavgogine | q2_jun_aarp0112        | PDP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_ind_ma
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-04  | F437767 | qavgogine | qavgogine | perftest_federal_000002| MA	      | UHC_IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-04  | F437767 | qavgogine | qavgogine | perftest_federal_000002| MA	      | UHC_IND_PFNY | true| true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-05  | F437767 | qavgogine | qavgogine | RenewActive_Fed_083    | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-05  | F437767 | qavgogine | qavgogine | RenewActive_Fed_083    | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_ind_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-06  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_012     | PCP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-06  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_012     | PCP	  | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@memAuth_prepareForNextYear02_grp_mapd
     Examples: 
@@ -155,35 +155,35 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	#@memAuth_prepareForNextYear02_grp_pdp
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName            | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-08  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group267   | PDP	  | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 2-08  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_Group267   | PDP	   | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
 	#note: haven't been able to locate group user w/ 2021 doc yet
 	#@memAuth_prepareForNextYear02_grp_ma
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName            | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-09  | F437767 | qavgogine | qavgogine | q2_jun_grp0428         | MA	      | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
+	#    | 2-09  | F437767 | qavgogine | qavgogine | q2_jun_grp0428         | MA	   | UHC_GRP_PFNY | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
     @memAuth_prepareForNextYear02_ind_zh
     Examples: 
 	    | index | FID     | username  | password  | MemUserName            | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-        | 2-09  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_005     | MAPD	  | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true        |
+        | 2-09  | F437767 | qavgogine | qavgogine | q3_Sep_FedANOC_005     | MAPD	  | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | false | false | false   true        |
 
 	#note: reenable when locate applicable user
     #@memAuth_prepareForNextYear02_ind_1act
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName            | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-    #    | 2-10  | F437767 | qavgogine | qavgogine | q4_dec_uhc102          | MAPD	  | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+    #    | 2-10  | F437767 | qavgogine | qavgogine | q4_dec_uhc102          | MAPD	   | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true        |
 
     #this user doesn't have anoc, re-enable this when finding a user that has it
     #@memAuth_prepareForNextYear02_combo_ship_fed
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	    | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+	#    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
 
     @memAuth_prepareForNextYear02_combo_fed_ship
     Examples: 
 	    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-12  | F443004 | qavgogine | qavgogine | q3_sep_UAT4_AARP023  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-12  | F443004 | qavgogine | qavgogine | q3_sep_UAT4_AARP023  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 
   @memAuth_prepareForNextYear03 @hasTab @noCombTabOnPfny
@@ -240,7 +240,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #-------------- navigate to the target test page for testing
 	Then test setup stores AEM and timeline milestones info for user with SARs plan 
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 09/14/2020     |
+      | AEM Show Tab StartDate | 10/01/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 10/01/2020     |

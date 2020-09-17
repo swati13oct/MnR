@@ -272,8 +272,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.add("\n\tValidate after all subsection links turned green");
 			targetItem=section+" - green circle";
 			targetElement=ind_revPlnMatlsSec_circle_green;
-			if (MRScenario.environment.equalsIgnoreCase("prod")) 
-				targetElement=ind_revPlnMatlsSec_circle_green_prod;
+			//tbd if (MRScenario.environment.equalsIgnoreCase("prod")) 
+			//tbd 	targetElement=ind_revPlnMatlsSec_circle_green_prod;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
