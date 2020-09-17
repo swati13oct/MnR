@@ -1209,6 +1209,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(ourPlansHoverLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
+		threadsleep(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {

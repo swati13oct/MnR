@@ -72,7 +72,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Before="+beforeClicked_tabs.size()+" | After="+afterClicked_numTabs,
 				beforeClicked_tabs.size()<afterClicked_numTabs);
 		
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		for(String tab : afterClicked_tabs) {
+			if(!tab.equals(winHandleBefore)) {
+				driver.switchTo().window(tab);
+				break;
+			}
+		}
+//		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="member/pharmacy-locator";
@@ -81,7 +87,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				!currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("TEST - driver.getTitle()="+driver.getTitle());
 		if (driver.getTitle().toLowerCase().contains("locate a pharmacy")) 
 			return new PharmacySearchPage(driver);
@@ -120,6 +126,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(mapToggleElement);
 		moveMouseToElement(mapToggleElement);
 		String targetTooltipName="Standard Network Pharmacy";
 		String testXpath="//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
@@ -174,17 +182,19 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - unable to locate "+targetTooltipName+" tooltip element", 
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
+		scrollToView(testTooltip);
 		moveMouseToElement(testTooltip);//note: then move mouse over to target element
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt=Pattern.compile(expTxt);
 			String actualTxtXpath="//div[@id='tooltip' and contains(text(),'"+targetTooltipName+"')]";
-			String actualTxt=driver.findElement(By.xpath(actualTxtXpath)).getText();
+			String actualTxt=driver.findElement(By.xpath(actualTxtXpath)).getText().replaceAll("\\n", " ");
 			System.out.println("TEST - actualTxt="+actualTxt);
 			Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
 					+ "Expected to contain '"+expectedTxt+"' | Actual='"+actualTxt+"'", 
 					expectedTxt.matcher(actualTxt).find());
 		}
+		scrollToView(moveAwayFromTooltip);
 		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
 	}
 
@@ -282,15 +292,19 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateMapSectionContent() {
-		moveMouseToElement(map_resultSection);
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(map_resultSection);
+//		moveMouseToElement(map_resultSection);
 		Assert.assertTrue("PROBLEM - unable to locate the map", 
 				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
 				pharmacyValidate(map_showHideMapLnk));
-		map_showHideMapLnk.click();
+//		map_showHideMapLnk.click();
+		jsClickNew(map_showHideMapLnk);
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
 				!pharmacyValidate(map_mapImg));
-		map_showHideMapLnk.click();
+//		map_showHideMapLnk.click();
+		jsClickNew(map_showHideMapLnk);
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
 				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", 

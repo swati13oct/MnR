@@ -84,10 +84,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		sleepBySec(8);
 		
 		zipcodeField.sendKeys(zipcode);
-		//if(zipcode.length()!=5){
-		distanceDropDownField.click();
-		distanceOption_15miles.click();
-		//}
+		if(zipcode.length()!=5){
+			distanceDropDownField.click();
+			distanceOption_15miles.click();
+		}
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		//Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
@@ -144,7 +144,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
-		sleepBySec(1); 
+		sleepBySec(2); 
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
@@ -299,6 +299,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				pdfElement=pdf_WalgreenPlans;
 				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				scrollToView(contactUsLink);
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
