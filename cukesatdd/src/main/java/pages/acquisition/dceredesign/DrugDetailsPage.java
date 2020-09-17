@@ -153,6 +153,45 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 	
+	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
+	public WebElement keepUsingPharmBtn;
+	
+	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	public WebElement pharmacyName;
+	
+	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
+	public WebElement selectRockPharm;
+	
+	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
+	public WebElement saveDrugBtn;
+	
+	@FindBy(xpath = "//span[contains(text(),'ROCK PHARMACY, the')]")
+	public WebElement rockPharmAlertText;
+	
+	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
+	public WebElement monthlyValue;
+	
+	@FindBy(xpath = "//*[contains(@class,'uhc-modal__content p-5 ng-tns-c37')]/div/div/div/p")
+	public WebElement coverageMsg;
+	
+	@FindBy(xpath = "//*[@id='table_coverage_gap']")
+	public WebElement coverageGap;
+	
+	@FindBy(xpath = "//*[@id='table_catastrophic_coverage']")
+	public WebElement catastrophicCoverage;
+	
+	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
+	public WebElement modalCloseIcon;
+	
+	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
+	public WebElement viewPlanBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -601,5 +640,103 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void  clickChangePharmacyLinkDetailsPage() {
 		DrugDetails_ChangePharmacyLnk.click();
+	}
+	
+	public void  changePharmacyAndSave() {
+		validateNew(selectRockPharm);
+		selectRockPharm.click();
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();
+	}
+	
+	public void validatePharmVlaues() {
+		validateNew(rockPharmAlertText);
+		System.out.println(rockPharmAlertText.getText());
+		validateNew(monthlyValue);
+		assertTrue(monthlyValue.getText()!="");
+		System.out.println("Monthly Value: "+monthlyValue.getText());		
+	}
+	
+	public void  validatePharmacy() {
+		validateNew(pharmacyName);
+		assertTrue(pharmacyName.getText().contains("WALGREENS"));
+	}
+	
+	public void  validateAndClickKeepPharm() {
+		validateNew(keepUsingPharmBtn);
+		keepUsingPharmBtn.click();
+	}
+	
+	public void validateCatastrophicCoverageMessage(String message) {
+		if(validateNew(catastrophicCoverage)) {
+			catastrophicCoverage.click();
+			System.out.println(coverageMsg.getText());
+			System.out.println(message);
+			String catastrophicCoverage=coverageMsg.getText();
+			modalCloseIcon.click();
+			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
+		}
+		else {
+		Assert.fail("Catastrophic coverage Modal not displayed");
+		}
+	}
+	
+	public void validateCoverageGapMessage(String message) {
+		if(validateNew(coverageGap)) {
+			coverageGap.click();
+			System.out.println(coverageMsg.getText());
+			System.out.println(message);
+			String coverageGap=coverageMsg.getText();
+			modalCloseIcon.click();
+			Assert.assertTrue("Coverage gap message is incorrect",coverageGap.equals(message));
+		}
+		else {
+		Assert.fail("Coverage gap Modal not displayed");
+		}
+	}
+	
+	@FindBy(xpath = "//div[@class='text-normal']")
+	private WebElement retailChainPharmacy;
+	
+	public void validateRetailChainPharmacy() {
+		
+			validate(retailChainPharmacy);
+		}
+	
+	public void validateDrugandPanButton() {
+		validateNew(backtoDrugEstBtn);
+		validateNew(backtoSummaryBtn);
+	}
+	
+	public void clickOnBacktoDrugBtn() {
+		validateNew(backtoDrugEstBtn);
+		backtoDrugEstBtn.click();
+	}
+	
+	public void clickOnvppPlan() {
+		validateNew(backtoSummaryBtn);
+		backtoSummaryBtn.click();
+	}
+	
+	public void clickOnvppPlanDetails() {
+		validateNew(viewPlanBtn);
+		viewPlanBtn.click();
+	}
+	
+	public void validatePlanDrugDetails(String planName) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		validateNew(PlanName_PlanDetails);
+	}
+	
+	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	private WebElement alertTextImg;
+	
+	@FindBy(id = "priceLinkBtn_0")
+	private WebElement viewProceBtn;
+	public void validateExtraHelpAlert() {
+		
+		validate(alertTextImg);
+		validate(viewProceBtn);
 	}
 }

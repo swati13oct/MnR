@@ -72,6 +72,9 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
 	public WebElement planTypeHeading;
+	
+	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+	public WebElement viewPlanButton;
 
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
 	public WebElement mapdPlanToggle;
@@ -153,6 +156,28 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
+	
+	public void validateDrugandPanButton() {
+		validateNew(backtoDrugEstBtn);
+		validateNew(backtoSummaryBtn);
+	}
+	
+	public void clickOnBacktoDrugBtn() {
+		validateNew(backtoDrugEstBtn);
+		backtoDrugEstBtn.click();
+	}
+	
+	public void validatePlanDrugDetails(String planName) {
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		validateNew(PlanName_PlanDetails);
+	}
+	
 	public DrugSummaryPage verifyDefaultPlanType(){
 		validateNew(planTypeHeading);
 		if(planTypeHeading.getText().contains("Medicare Advantage Plans")) {
@@ -161,6 +186,19 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	public void clickOnViewPlan(){
+		validateNew(viewPlanButton);
+		viewPlanButton.click();
+	}
+	
+   @FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	public WebElement returnToHomeBtn;
+	
+	public void clickOnReturnToHome(){
+		validateNew(returnToHomeBtn);
+		returnToHomeBtn.click();
+	}
+
 	public DrugSummaryPage verifyPDPPlanToggle(){
 		pdpPlanToggle.click();
 		if(planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
@@ -183,15 +221,23 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
 	private WebElement switchToGenericBtn;
 	
+	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
+	private WebElement lipitorSwitchToGenericBtn;
+	
 	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
 	private WebElement switchToGenericSubmitBtn;
 	
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private WebElement drugNames;
 	
+	@FindBy(id = "drugPricingClose")
+	private WebElement drugClose;
+	
+	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")
+	private WebElement pdpPlan;
+	
 	@FindBy(id = "drugPricingTitleTxt")
 	private WebElement drugTitle;
-	
 	
 	
 	public void clickViewPricing() {
@@ -210,6 +256,23 @@ public class DrugSummaryPage extends UhcDriver {
 		switchToGenericSubmitBtn.click();
 	}
 	
+	public void clicklipitorswitchToGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		validate(lipitorSwitchToGenericBtn);
+		lipitorSwitchToGenericBtn.click();
+		validate(switchToGenericSubmitBtn);
+		switchToGenericSubmitBtn.click();
+	}
+	
+	public void clickOnPdpPlan() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(pdpPlan);
+		pdpPlan.click();
+		validate(viewProceBtn);
+		viewProceBtn.click();
+	}
+	
 	public void verifyDrugListsUpdated(String genericDrug) throws InterruptedException {
 		Thread.sleep(6000);
 		validate(drugTitle);
@@ -217,8 +280,11 @@ public class DrugSummaryPage extends UhcDriver {
 		 * for(int i=0;i<drugNames.size();i++) {
 		 * System.out.println(drugNames.get(i).getText()); }
 		 */
-		System.out.println(drugNames);
+		validate(drugNames);
+		System.out.println(drugNames.getText()+"   "+genericDrug);
 		Assert.assertTrue("Drug not switched to generic",drugNames.getText().contains(genericDrug));
+		validate(drugClose);
+		drugClose.click();
 	}
 	
 	@FindBy(id = "sign-up-modal-header")

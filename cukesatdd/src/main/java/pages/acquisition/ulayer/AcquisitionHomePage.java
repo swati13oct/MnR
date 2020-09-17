@@ -20,7 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.commonpages.PlanDocsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -2547,4 +2547,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public PlanDocsPage navigateToPlanDocsFromHome() {
+     	navigateToMenuLinks(ShopForaplan, menuShop);
+     	
+     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+     	    	
+     		return new PlanDocsPage(driver);
+	 }
 }
