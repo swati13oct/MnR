@@ -204,6 +204,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		Assert.assertTrue(hearingError.getText().toUpperCase().contains("NO"));
 		Assert.assertTrue(visionError.getText().toUpperCase().contains("NO"));
 		Assert.assertTrue(fitnessError.getText().toUpperCase().contains("NO"));
+		scrollToView(additionalTitleInfo);
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 		if(validate(dentalError,5)==true) {
 			System.out.println("Dental Error is not closed");

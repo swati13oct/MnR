@@ -15,18 +15,18 @@ import cucumber.api.CucumberOptions;
 		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionAgentRecommendationEngine")
+		outputFolder = "target/RunMRATDDAcquisitionAgentRecommendationEngineUlayer")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.agentRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/agentRecommendationEngine" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json" }, 
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngineUlayer.json" }, 
 		tags = {})
-public class RunMRATDDAcquisitionAgentRecommendationEngine {
+public class RunMRATDDAcquisitionAgentRecommendationEngineUlayer {
 
 }
 
