@@ -251,22 +251,22 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal') and (contains(@id,'modal'))]")
 	public WebElement StageInfo_Modal;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//*[contains(text(), 'Done')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(text(), 'Done')]")
 	public WebElement StageInfo_Modal_DoneBtn;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//*[contains(@class, 'closeicon')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'cancelicon')]")
 	public WebElement StageInfo_Modal_Close;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Initial Coverage Stage')]")
 	public WebElement InitialCoverage_Modal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Coverage Gap Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Coverage Gap Stage')]")
 	public WebElement CoverageGap_Modal_Header;
 	
-	@FindBy(xpath = "//*[contains(@class, 'uhc-popover')]//h3[contains(text(), 'Catastrophic Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Catastrophic Coverage Stage')]")
 	public WebElement Catastrophe_Modal_Header;
 
 	public void validateDrugStageInfoModals() {
@@ -468,7 +468,7 @@ public class DrugDetailsPage extends UhcDriver {
 		WebElement LAInfo = driver.findElement(By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Limited Access')]"));
 		WebElement DLInfo = driver.findElement(By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Dispensing Limit')]"));
 		WebElement ST_PDF_Link = driver.findElement(By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::a[contains(@dtmname, 'step therapy')]"));
-		WebElement PA_PDF_Link = driver.findElement(By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::a[contains(@dtmname, 'prior authorization')]"));
+		WebElement PA_PDF_Link = driver.findElement(By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::a[contains(@dtmname, 'authorization')]"));
 
 		if(validateNew(ST_PDF_Link)) {
 			System.out.println("Step Therapy PDF Link is Displayed in Important Information Section");
