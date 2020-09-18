@@ -39,7 +39,7 @@ public class MemberCreateProfile extends UhcDriver {
 	@FindBy(id = "member-dob")
 	private WebElement dob;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Member']//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//input[@id='member-zipCode']/following::button[contains(text(),'Profile')][1]")
 	private WebElement btnCreateProfile;
 	
 	@FindBy(xpath = "//h5")
@@ -59,11 +59,10 @@ public class MemberCreateProfile extends UhcDriver {
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 15);
 		CommonUtility.waitForPageLoadNew(driver, mbi, 15);
-		CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 15);
+		//CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 15);
 	}
 	
 	public ComparePlansPage createProfile(DataTable details) {
-		
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -88,16 +87,16 @@ public class MemberCreateProfile extends UhcDriver {
 			sendkeys(visitorEmail, emailID);
 			sendkeys(firstName, fname);
 			sendkeys(lastName, lname);
+			sendkeys(dob, DOB);
 			if(Strings.isNullOrEmpty(MBI))
 				sendkeys(zipCode, zipcode);
 			else
 				sendkeys(mbi, MBI);
-			sendkeys(dob, DOB);
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);
 			switchToNewTab();
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);
 			}else {
 				System.out.println("Plan Compare page is not loaded");

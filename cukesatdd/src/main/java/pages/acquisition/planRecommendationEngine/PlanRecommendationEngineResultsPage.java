@@ -28,7 +28,7 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -179,7 +179,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) h2")
 	private WebElement MS1stPlanName;
 
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) .swiper-content>a")
+	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content>a")
 	private WebElement MS1stPlanEnroll;
 	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -784,9 +784,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			String wname[] = werallypreproviders.get(i).replace(",", "").replace(".", "").split(" ");
 			List<String> wnam = Arrays.asList(wname);
 			for (int j = 0; j < vppprovider.size(); j++) {
-				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").split(" ");
+				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").replace("\n", " ").split(" ");
 				List<String> dnam = Arrays.asList(dname);
-				if (wnam.containsAll(dnam)) {
+				if (wnam.containsAll(dnam) || dnam.containsAll(wnam)) {
 					result = true;
 					break;
 				} else {

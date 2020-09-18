@@ -4,6 +4,7 @@
 package pages.regression.drugcostestimator;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -306,6 +307,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='plan-name-div']/div/div/div/p/a")
 	public WebElement formularypdf;
+	
+	@FindBy(xpath="//span[text()='Drug Lookup']")
+	public WebElement drugLookupOption;
+	
+	@FindBy(xpath="//p[@class='subtitle ng-binding']")
+	public WebElement drugDosageField;
+	
+	@FindBy(xpath="//p[@class='color-gray margin-extra-small ng-binding']")
+	public WebElement drugQuantityField;
 
 	@Override
 	public void openAndValidate() {
@@ -355,9 +365,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(5000);
+		Assert.assertTrue("PROBLEM - unable to locate addDrug element on page", validate(addDrug, 0));
 		waitforElement(addDrug);
 		addDrug.click();
-		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition") ||  driver.getTitle().equalsIgnoreCase("Overview")|| driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
@@ -515,6 +525,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void navigateToStep2() throws InterruptedException {
 
 		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
 		step2Pharmacy.click();
@@ -561,7 +572,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else Assert.assertTrue("btnSearch is not present", false);
 		Select options = new Select(milesSelection);
 		options.selectByVisibleText(radius);
-
+		if(!validate(first_pharmacy_select_btn)) {
+			btnSearch.click();
+		}
+		
 	}
 
 	/** 
@@ -627,8 +641,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
 		Thread.sleep(15000);
 
-		//String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
-		String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
+		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/../following-sibling::ul//li/a[@class='delete-drug']";
+		//String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
 		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
@@ -720,11 +734,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	/** 
 	 * Select radius in miles drop down
 	 */
-	public void selectRadius() {
+	public void selectRadius(String radius) {
 
-		//Select options = new Select(milesSelection);
+	   // Select options = new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
+
+		if (dceValidate(milesSelection)) {
+			Assert.assertTrue(true);
+		} else Assert.assertTrue("milesSelection is not present", false);
+		
+		Select options = new Select(milesSelection);
+		options.selectByVisibleText(radius);
 	}
 
 	/* 
@@ -1002,7 +1023,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println("--------first_pharmacy_select_btn.click----------------"+ first_pharmacy_select_btn.getText());
 		//first_pharmacy_select_btn.click();
 		jsClickNew(first_pharmacy_select_btn);
-		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 30);
 		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
 
@@ -1667,7 +1688,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrugDetails.continueAddDrugDetailsBranded();
 
 		SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
-		savings_oppurtunity.savedrugbutton();
+		try {
+			CommonUtility.waitForPageLoad(driver, savings_oppurtunity.savedrugbutton, 20);
+			savings_oppurtunity.savedrugbutton.click();
+		}catch(Exception e) {
+			System.out.println("Save button is not displayed");
+		}
 	}
 
 	/** 
@@ -1880,6 +1906,60 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("The PDF page opened");
 		}
 
+	}
+	
+	public void clickDrugLookupOption() {
+		drugLookupOption.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+	public void verifyDrugDosage(String dosage) {
+		String expectedDosage = dosage.toUpperCase();
+		if(validate(drugDosageField)) {
+			System.out.println("drugDosageField value on DCE=" + drugDosageField.getText());
+			Assert.assertTrue("Drug dosage not matched. Expected-"+ dosage +" Actual-" + drugDosageField.getText(), drugDosageField.getText().contains(expectedDosage));
+		} else {
+			Assert.fail("Drug dosage not displayed on DCE");
+		}
+	}
+
+	public void verifyDrugQuantity(String quantityOnDCE) {
+		if(validate(drugQuantityField)) {
+			System.out.println("drugQuantityField value on DCE=" + drugQuantityField.getText());
+			Assert.assertTrue("Drug qty not matched. Expected-"+ quantityOnDCE +" Actual-" + drugQuantityField.getText(), drugQuantityField.getText().contains(quantityOnDCE));
+		} else {
+			Assert.fail("Drug qty not displayed on DCE");
+		}
+	}
+
+	public void verifyTooltips() {
+		WebElement tooltipLocator, tooltipValue;
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap.put("Total Estimated Annual Drug Costs", "This is the amount you pay as your share");
+		memberAttributesMap.put("Annual Deductible", "If your plan has an annual deductible");
+		memberAttributesMap.put("NC - Not Covered", "Not Covered (NC)");
+		memberAttributesMap.put("LA - Limited Access", "Limited Access Drugs");
+		memberAttributesMap.put("7D - Seven Days Supply", "An opioid drug");
+		memberAttributesMap.put("ST - Step Therapy", "Step Therapy There may be effective");
+		memberAttributesMap.put("PA - Prior Authorization", "Prior Authorization The plan requires");
+		memberAttributesMap.put("DL - Dispensing Limit", "Dispensing limits apply to this drug");
+		memberAttributesMap.put("QL - Quantity Limits", "Quantity Limit The plan will cover only a certain amount");
+		memberAttributesMap.put("ADC - Additional Drug Coverage", "Your plan includes extra coverage for certain drugs");
+		
+		try {
+			for(Map.Entry<String, String> entry : memberAttributesMap.entrySet()) {
+				tooltipLocator = driver.findElement(By.xpath("//*[text()='" + entry.getKey() + "']/span[@role='tooltip']"));
+				Actions action = new Actions(driver);
+				action.moveToElement(tooltipLocator).build().perform();
+				tooltipValue = driver.findElement(By.id("tooltip"));
+				Thread.sleep(1000);
+				System.out.println("Tooltip value = " + tooltipValue.getText());
+				System.out.println("Assert value = " + tooltipValue.getText().contains(entry.getValue()));
+				Assert.assertTrue("Tooltip not matched for" + entry.getKey(), tooltipValue.getText().contains(entry.getValue()));
+			}
+		}catch (Exception e) {
+			System.out.println("Error occured while verifying tooltips " + e.getMessage());
+		}
 	}
 
 }

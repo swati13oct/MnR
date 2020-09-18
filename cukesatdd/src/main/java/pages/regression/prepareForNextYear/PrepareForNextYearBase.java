@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -20,8 +21,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.interactions.Actions;
@@ -35,7 +38,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-
+	protected static boolean validateAsMuchAsPossible=false;
+	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -110,7 +114,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
-		String plan2=tmp[2];
 		String targetTabXpath="";
 		if (targetPlanType.equalsIgnoreCase(plan1)) {
 			targetTabXpath=paymentTabListXpath+"[1]//a";
@@ -129,16 +132,13 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		String paymentTabListXpath="//div[contains(@class,'tabs')]//li";
 		String[] tmp=memberType.split("_");
 		//note: assumption - combo of 2 plans only with format of COMBO_<plan1>_<plan2>_<featureIdentifier>
-		System.out.println("TEST 1 - memberType='"+memberType+"' | length='"+tmp.length+"'");
 		Assert.assertTrue("PROBLEM - haven't code to handle this memberType format yet", tmp.length<=4);
 		String targetPlanType=planType;
 		if (planType.toUpperCase().contains("SHIP_")) {
 			String[] tmp2=planType.split("_");
-			System.out.println("TEST 2- planType='"+planType+"' | length='"+tmp2.length+"'");
 			targetPlanType=tmp2[0];
 		}
 		String plan1=tmp[1];
-		String plan2=tmp[2];
 		String targetTabXpath="";
 		if (targetPlanType.equalsIgnoreCase(plan1)) {
 			targetTabXpath=paymentTabListXpath+"[1]//a";
@@ -169,6 +169,34 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 	}
 
+	public boolean valiateNoShipComboTab() {
+		if (noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_HIP))
+			return false;
+		return true;
+	}
+	
+	public boolean findComboTab(String planType) {
+		if (planType.equalsIgnoreCase("mapd")) {
+			if (noWaitValidate(comboTab_MAPD) || noWaitValidate(comboTab_MAPD_planDoc))
+				return true;
+		} else if (planType.equalsIgnoreCase("ma")) {
+			if (noWaitValidate(comboTab_MA) || noWaitValidate(comboTab_MA_planDoc)) 
+				return true;
+		} else if (planType.equalsIgnoreCase("ship")) {
+			if (noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc)) 
+				return true;
+		} else if (planType.toLowerCase().contains("ship_hip")) {
+			if (noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+				return true;
+		} else if (planType.equalsIgnoreCase("pdp")) {
+			if (noWaitValidate(comboTab_PDP) || noWaitValidate(comboTab_PDP_planDoc))
+				return true;
+		} else if (planType.equalsIgnoreCase("ssp") || noWaitValidate(comboTab_SSP_planDoc)) {
+			return true;
+		} 
+		return false;
+	}
+	
 	/**
 	 * Navigate to specific plan for combo user
 	 * @param planType
@@ -194,6 +222,11 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 						comboTab_SHIP.click();
 					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
 						comboTab_SHIP_planDoc.click();
+				} else if (planType.toLowerCase().contains("ship_hip")) {
+					if (noWaitValidate(comboTab_SHIP_HIP)) 
+						comboTab_SHIP_HIP.click();
+					else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
+						comboTab_SHIP_HIP_planDoc.click();
 				} else if (planType.equalsIgnoreCase("pdp")) {
 					if (noWaitValidate(comboTab_PDP))
 						comboTab_PDP.click();
@@ -209,7 +242,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				e.printStackTrace();
 			}
 		}
-		sleepBySec(2);
+		checkModelPopup(driver,3);
 	}
 
 	/**
@@ -261,6 +294,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		checkModelPopup(driver,3);
 	}	
 
 	public WebDriver backToOriginalLinkToPrepNextStep(String planType, String memberType, String originalUrl) {
@@ -269,12 +303,12 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,1);
 		if (!originalUrl.contains("/dashboard")) //note: rally dashboard has no tab for combo
 			handleComboTabIfComboUser(planType, memberType);
-		checkModelPopup(driver,1);
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+		checkModelPopup(driver,3);
 		return driver;
 	}
 
 	public String getConsumerDetailsFromlocalStorage() {
-		//WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
 		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
 		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		LocalStorage localStorage = webStorage.getLocalStorage();
@@ -359,7 +393,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		Date targetDate;
 		try {
 			targetDate = df.parse(strDate);
-		    String newDateString = df.format(targetDate);
+		    //String newDateString = df.format(targetDate);
 		    //System.out.println(newDateString);
 		    return targetDate;
 		} catch (java.text.ParseException e) {
@@ -409,13 +443,13 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public void validateBookmarkError() {
 		String tmpUrl=driver.getCurrentUrl();
 		String tmp[]=tmpUrl.split("/benefits");
-		String bookmark=tmp[0]+"/planfornextyear/overview.html";
+		String bookmark=tmp[0]+"/preparefornextyear/overview.html";
 		driver.get(bookmark);
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
 		Assert.assertTrue("PROBLEM - unable to locate error message when attempting to access bookmark when tab hasn't met conditions to be displayed", noWaitValidate(bookmarkErrMsg));
 		//note: re-enable when the error msg is settle
-		//String actMsg=bookmarkErrMsg.getText();;
+		//String actMsg=bookmarkErrMsg.getText();
 		//String expMsg="Your request can not be Processed at this time. Please try again later";
 		//Assert.assertTrue("PROBLEM - error message is not as expected.  Expect='"+expMsg+"' | Actual='"+actMsg+"'", actMsg.contains(expMsg));
 		Assert.assertTrue("PROBLEM - unable to locate the link that would allow user to go back to home page", noWaitValidate(bookmarkErrPgGoBackHome));
@@ -423,8 +457,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	}
 
 	public List<String> validatePdf(String targetDocName, WebElement pdfLink) {
+		checkModelPopup(driver,1);
 		List<String> note=new ArrayList<String>();
-		note.add("\tValidation for PDF ='"+targetDocName+"'");
+		note.add("\n\tValidation for PDF ='"+targetDocName+"'");
 		String winHandleBefore = driver.getWindowHandle();
 
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -436,41 +471,61 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int afterClicked_numTabs=afterClicked_tabs.size();
-		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+		if (validateAsMuchAsPossible) {
+			if ((afterClicked_numTabs-beforeClicked_numTabs)!=1) {
+				note.add("\t * FAILED - Did not get expected new tab after clicking '"+targetDocName+"' link");
+				note.add("\t * FAILED - validating PDF content");
+				return note;
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+		}
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(1);
 
 		String actUrl=driver.getCurrentUrl();
 		String expUrl=".pdf";
+		if (!actUrl.contains(expUrl)) {
+			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'");
+			note.add("\t * FAILED - validating PDF content");
+			return note;
+		}
 		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 
-		if (!MRScenario.environment.contains("team-a")) {
+		//note: for provider directory, it will take a while to load b/c it's a big file
+		if (MRScenario.environment.equals("offline")) {
 			try {
 				URL TestURL = new URL(driver.getCurrentUrl());
-				sleepBySec(5); //note: let the page settle before validating content
+				sleepBySec(3); //note: let the page settle before validating content
 				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 				PDDocument document = PDDocument.load(TestFile);
 				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : "+PDFText);
+				//keepForDebug System.out.println("PDF text : "+PDFText);
 				if(PDFText!=null && !PDFText.equals("")){
 					note.add("\tPASSED - validated pdf content is not null");
 				} else {
+					if (validateAsMuchAsPossible) 
 					note.add("\t* FAILED - unable to validate pdf content - content either null or empty");
+					else 
 					Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty - doc name="+targetDocName, false);
 				}
 			} catch (MalformedURLException e) {
-				note.add("\t* FAILED - unable to validate pdf content - MalformedURLException");
 				e.printStackTrace();
+				if (validateAsMuchAsPossible)
+				note.add("\t* FAILED - unable to validate pdf content - MalformedURLException");
+				else
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException - doc name="+targetDocName, false);
 			} catch (IOException e) {
-				note.add("\t* FAILED - unable to validate pdf content - IOException");
 				e.printStackTrace();
-				//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
+				if (validateAsMuchAsPossible)
+				note.add("\t* FAILED - unable to validate pdf content - IOException");
+				else
+				Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
-		} else {
-			note.add("\tOn lower env, skip validating PDF content");
-		}
+		} else  {
+			note.add("\tOn '"+MRScenario.environment+"' env, skip validating PDF content to speed up the run");
+		} 
 
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -482,28 +537,61 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 	public List<String> validateHaveItem(String targetItem, WebElement targetElement) {
 		List<String> note=new ArrayList<String>();
-		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for HAVING "+targetItem);
+		if (validateAsMuchAsPossible) {
+			if (noWaitValidate(targetElement))
+				note.add("\tPASSED - validation for HAVING "+targetItem);
+			else
+				if (noWaitValidate(systemError)) 
+					note.add("\t * FAILED - unable to locate element for '"+targetItem+"' - got system error on screen");
+				else
+					note.add("\t * FAILED - unable to locate element for '"+targetItem+"'");
+		} else {
+			if (noWaitValidate(systemError)) 
+				Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"' - got system error on screen", noWaitValidate(targetElement));
+			else
+				Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+			note.add("\tPASSED - validation for HAVING "+targetItem);
+		}
+	
 		return note;
 	}
 
 	public List<String> validateDontHaveItem(String targetItem, WebElement targetElement) {
 		List<String> note=new ArrayList<String>();
-		Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
-		note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		System.out.println("TEST - check validateAsMuchAsPossible="+validateAsMuchAsPossible);
+
+		if (validateAsMuchAsPossible) {
+			if (!noWaitValidate(targetElement)) 
+				note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+			else
+				if (noWaitValidate(systemError)) 
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"' - got system error on screen");
+				else
+					note.add("\t * FAILED - should not be able to locate element for '"+targetItem+"'");
+		} else {
+			if (noWaitValidate(systemError)) 
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"' - got system error on screen", !noWaitValidate(targetElement));
+			else 
+				Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+			note.add("\tPASSED - validation for NOT HAVING "+targetItem);
+		}
 		return note;
 	}
 	
 	public List<String> validatePdfLinkTxt(String docName, WebElement targetElement) {
 		List<String> note=new ArrayList<String>();
 		String lnkTxt=targetElement.getText();
-		String startTxt="Open";
-		Assert.assertTrue("PROBLEM - unable to locate the word '"+startTxt+"' in front of PDF name '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.startsWith(startTxt));
-		note.add("\tPASSED - validation for PDF link text starts with '"+startTxt+"'");
 
 		String endTxt="PDF";
-		Assert.assertTrue("PROBLEM - unable to locate the word '"+endTxt+"' for PDF link '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.contains(endTxt));
-		note.add("\tPASSED - validation for PDF link text ends with '"+endTxt+"'");
+		if (validateAsMuchAsPossible) {
+			if (lnkTxt.contains(endTxt)) 
+				note.add("\tPASSED - validation for PDF link text ends with '"+endTxt+"'");
+			else
+				note.add("\t * FAILED - unable to locate the word '"+endTxt+"' for PDF link '"+docName+"' | Actual link text='"+lnkTxt+"'");
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the word '"+endTxt+"' for PDF link '"+docName+"' | Actual link text='"+lnkTxt+"'", lnkTxt.contains(endTxt));
+			note.add("\tPASSED - validation for PDF link text ends with '"+endTxt+"'");
+		}
 		return note;
 	}
 	
@@ -536,22 +624,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return note;
 	}
 	
-	public void validateReturnToPrevPgLnk() {
-		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
-		Assert.assertTrue("PROBLEM - unable to locate the 'RETURN TO PREVIOUS PAGE' link on 'Prepare For Next Year' page'", noWaitValidate(returnToPrevPgLnk));
-		returnToPrevPgLnk.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitsPgHeaderText, 10);
-		Assert.assertTrue("PROBLEM - unable to navigate back to benefits page by clicking 'RETURN TO PREVIOUS PAGE' link",noWaitValidate(benefitsPgHeaderText));
-		if (noWaitValidate(prepareForNextYearTab)) {
-			prepareForNextYearTab.click();
-		}
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
-		checkModelPopup(driver,1);
-		Assert.assertTrue("PROBLEM - unable to navigate again to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
-	}
-
 	public int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
@@ -559,74 +631,67 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 	public List<String> validateLnkBehavior(String planType, String memberType, String targetItem, WebElement targetElement, String expUrl, WebElement expElement) {
 		List<String> note=new ArrayList<String>();
 		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
-		if (targetItem.contains("Search For Providers link")) {
-			String actHrefUrl=targetElement.getAttribute("ng-click");
-			String[] tmpLnk=expUrl.split("\\|");
-			boolean found=false;
-			for (String u: tmpLnk) {
-				if (actHrefUrl.contains(u)) {
-					found=true;
-					break;
-				}
-			}
-			Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+actHrefUrl+"'", found);
-			note.add("\tPASSED - validation for link element href value for "+targetItem);
-			if (MRScenario.environment.contains("team-a")) { 
-				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
-				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
-			} else {
-				String winHandleBefore = driver.getWindowHandle();
-
-				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int beforeClicked_numTabs=beforeClicked_tabs.size();	
-				CommonUtility.waitForPageLoad(driver, expElement, 5);
-				targetElement.click();
-				CommonUtility.checkPageIsReady(driver);
-
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();
-				Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				CommonUtility.checkPageIsReady(driver);
-
-				String currentUrl=driver.getCurrentUrl();
-				boolean found2=false;
-				for (String u: tmpLnk) {
-					if (currentUrl.contains(u)) {
-						found2=true;
-						break;
+		//		String actHrefUrl=targetElement.getAttribute("href");
+			String winHandleBefore = driver.getWindowHandle();
+			String urlBeforeClick=driver.getCurrentUrl();
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int beforeClicked_numTabs=beforeClicked_tabs.size();	
+			CommonUtility.waitForPageLoad(driver, expElement, 5);
+			scrollElementToCenterScreen(targetElement);
+			targetElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();
+			if (validateAsMuchAsPossible) {
+				if ((afterClicked_numTabs-beforeClicked_numTabs)!=1) {
+					note.add("\t * FAILED - Did not get expected new tab after clicking '"+targetItem+"' link. Number of existing tab before link click='"+beforeClicked_numTabs+"' | After='"+afterClicked_numTabs+"'");
+					//note: back to prior page and move on
+					if (!driver.getCurrentUrl().contains("preparefornextyear/overview.html")) {
+						driver.get(urlBeforeClick);
 					}
+					return note;
+				} else {
+					System.out.println("TEST - link opened on new tab as expected...moving on...");
 				}
-				Assert.assertTrue("PROLEM: element's href value is not as expected for '"+targetItem+"'.  Expect to contain either one of these='"+expUrl+"' | Actual='"+currentUrl+"'", found2);
-				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-				note.add("\tPASSED - validation for link target page loading for "+targetItem);
-
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-
-			}
-		} else {
-			String actHrefUrl=targetElement.getAttribute("href");
-			Assert.assertTrue("PROBLEM - link '"+targetItem+"' element href value is not as expected.  Expected to contain='"+expUrl+"' | Actual='"+actHrefUrl+"'", actHrefUrl.contains(expUrl));
-			note.add("\tPASSED - validation for link element href value for "+targetItem);
-
-			if (MRScenario.environment.contains("team-a")) { 
-				note.add("\tSKIPPED - lower env - validation for link destination after click for "+targetItem);
-				note.add("\tSKIPPED - lower env - validation for link target page loading for "+targetItem);
 			} else {
-				String originalUrl=driver.getCurrentUrl();
-				
-				targetElement.click();
-				CommonUtility.waitForPageLoad(driver, expElement, 10);
-				String currentUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected to land on='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
-				note.add("\tPASSED - validation for link destination after click for "+targetItem);
-				Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-				note.add("\tPASSED - validation for link target page loading for "+targetItem);
-				
-				backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+					Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link. Number of existing tab before link click='"+beforeClicked_numTabs+"' | After='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			}
-		}
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, expElement, 10);
+			checkModelPopup(driver,5);
+			String currentUrl=driver.getCurrentUrl();
+			if (validateAsMuchAsPossible) {
+				if (!currentUrl.contains(expUrl))
+					note.add("\t * FAILED: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'");
+			} else {
+				Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+			}
+			
+			if (noWaitValidate(acqPopupExit))
+				acqPopupExit.click();
+			if (validateAsMuchAsPossible) {
+				if (noWaitValidate(expElement))
+					note.add("\tPASSED - validation for link target page loading for "+targetItem);
+				else {
+					if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+						note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+					else
+						note.add("\t * FAILED, unable to locate expected element on the destination page");
+				}
+			} else {
+				if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+					note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+				else
+					Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+					note.add("\tPASSED - validation for link target page loading for "+targetItem);
+			}
+
+			driver.close();
+			System.out.println("TEST - Closed tab for '"+targetItem+"'");
+			driver.switchTo().window(winHandleBefore);
+			System.out.println("TEST - Switched back to prior tab");
 		
 		return note;
 
@@ -639,10 +704,200 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		System.out.println("Validate PDF Doc text section exists");
 		Assert.assertTrue("PROBLEM - unable to locate the Adobe link",noWaitValidate(adobeLink));
 
-		return "PASSED Adobe PDF doc text validation";
+		validateSiteLeaveingPopUP(adobeLink);
+		
+		return "\tPASSED Adobe PDF doc text validation";
 	}
 
+	public String validateSiteLeaveingPopUP(WebElement targetLink) {
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link", noWaitValidate(targetLink));
+		jsClickNew(targetLink);
+		CommonUtility.waitForPageLoad(driver, siteLeavingProceedButton, 10);
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", noWaitValidate(siteLeavingProceedButton));
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", noWaitValidate(siteLeavingCancelButton));
+		//note: click cancel and validate any element on page
+		checkModelPopup(driver,2);
+		siteLeavingCancelButton.click();
+		sleepBySec(1);
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link after clicking Leave Site Cancel button", noWaitValidate(targetLink));
+		noWaitValidate(targetLink);
+		return "\tPASSED Site Leaving Proceed/Cancel Popup validation";
+	}
 
+	/**
+	 * deleteCookie - return true if successfully deleted the cookie
+	 * @param cookieName
+	 * @return
+	 */
+	public boolean deleteCookie(String cookieName) {
+		driver.manage().deleteCookieNamed(cookieName);
+		return getCookie(cookieName);
+	}
+	
+	public boolean getCookie(String cookieName) {
+		Cookie cookie=driver.manage().getCookieNamed(cookieName);
+		if (cookie==null) 
+			return false;
+		else
+			return true;
+	}	
+	
+	public boolean selectValueFromDropdown(WebElement dropdownElement, String targetLang) {
+		try {
+			String value="en_us";
+			if (targetLang.equals("Spanish"))
+				value="es";
+			else if (targetLang.equals("Chinese"))
+				value="zh";
+			
+			scrollElementToCenterScreen(dropdownElement);
+			Select select = new Select(dropdownElement);    
+			waitTillElementClickableInTime(dropdownElement,10);
+			try {
+				dropdownElement.click();
+			} catch (WebDriverException e) { //note: in case it's timing, try one more time before giving up
+				sleepBySec(1);
+				dropdownElement.click();
+			}
+			select.selectByValue(value);
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			if (validateAsMuchAsPossible) {
+				System.out.println("unable to select expected langauge "+targetLang+" option from dropdown");
+				return false;
+			} else {
+				Assert.assertTrue("PROBLEM - unable to select expected langauge "+targetLang+" option from dropdown", false);
+				return false;
+			}
+		}
+		return true;
+	}
 
+	
+	public void deleteCookieAndReloadPgn(String cookieName) {
+		deleteCookie(cookieName);
+		driver.navigate().refresh();
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+		if (noWaitValidate(loadingSpinnerOnScreen)) {
+			System.out.println("Give it one more try before givng up...");
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
+			Assert.assertTrue("PROBLEM - loading spinner won't go away...", !noWaitValidate(loadingSpinnerOnScreen));
+		}
+		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 5);
+		checkModelPopup(driver,3);
+	}
+	
+	public List<String> validatePdfInSubSection(
+			String planType, 
+			HashMap<String, Boolean> docDisplayMap, 
+			String section, String subSection, 
+			String docName, String targetLang, 
+			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, boolean expLangDropOption,
+			WebElement pdfElement, WebElement arrowAftPdfElement, WebElement svgAftPdfElement,
+			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
+			boolean willDeleteCookie) {
+
+		List<String> note=new ArrayList<String> ();
+		String targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+		if (docDisplayMap.get(docName+" "+targetLang)) {
+			note.add("\tEXPECT "+targetLang+" '"+docName+"' document to display");
+			if (selectValueFromDropdown(langDropdownElement1, targetLang)) {
+				if (langDropdownElement2!=null) {
+					Select select2 = new Select(langDropdownElement2);           
+					String otherDropDownSelectedValue=select2.getFirstSelectedOption().getText();
+					if (validateAsMuchAsPossible) {
+						if (!otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH")) 
+							note.add("\t * FAILED - switching language option in one section should not have impacted the langage option in other section");
+					} else {
+						Assert.assertTrue("PROBLEM - switching language option in one section should not have impacted the langage option in other section", otherDropDownSelectedValue.equalsIgnoreCase("ENGLISH"));
+					}
+				}
+
+				CommonUtility.waitForPageLoad(driver, pdfElement, 10);
+				note.addAll(validateHaveItem(targetItem, pdfElement));
+				if (noWaitValidate(pdfElement)) {
+					note.addAll(validatePdfLinkTxt(docName, pdfElement));
+					note.addAll(validatePdf(targetItem, pdfElement));
+				}
+
+				//targetItem=section+" - arrow before pdf";
+				//note.addAll(validateHaveItem(targetItem, arrowBefPdfElement));
+
+				//targetItem=section+" - the 'or' text";
+				//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
+
+				targetItem=section+" - Arrow after '"+docName+"' doc link'";
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+
+				targetItem=section+" - svg after '"+docName+"' doc link'";
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+
+				//note: after link click, little check should turn green
+				//note: some section has inconsistent way to locate the green chkmrk xpath...that's why need to figure out which xpath to use
+				note.add("\n\tValidate after clicking "+targetLang+" '"+docName+"' link");
+				targetItem=section+" - green checkmark";
+				WebElement subSecChkmrkgreen=subSecChkmrkgreen1;
+				if (noWaitValidate(subSecChkmrkgreen1)) {
+					subSecChkmrkgreen=subSecChkmrkgreen1;
+				} else {
+					subSecChkmrkgreen=subSecChkmrkgreen2;
+				}
+				note.addAll(validateHaveItem(targetItem, subSecChkmrkgreen));
+
+				if (willDeleteCookie) {
+					note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
+					deleteCookieAndReloadPgn(subSecCookie);
+					note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
+				}
+
+			} else {
+				note.add("\t * FAILED - unable to select expected langauge "+targetLang+" option from dropdown");
+			}
+
+		} else {
+			//note: if there is no English ANOC, it should be the SAR case
+			//note: for now just stay here and validate dropdown has English but nothing else.
+			//keep-for-now if (targetLang.equalsIgnoreCase("ENGLISH")) {
+				//keep-for-now note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+				//keep-for-now Assert.assertTrue("SHOULD land on SAR page", false);
+
+			//keep-for-now } else {
+				if (expLangDropOption) {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display but expect dropdown to have this language option because because other sub section has this language");
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				} else {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+					//note: no doc then no dropdown
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				}
+
+				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
+				CommonUtility.waitForPageLoad(driver, pdfElement, 5);
+				note.addAll(validateDontHaveItem(targetItem, pdfElement));
+
+				targetItem=section+" - Arrow after '"+docName+"' doc link'";
+				note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				//keep-for-now }
+		}
+		return note;
+
+	}
+	
+	public String getPlanNameComboUser() {
+		Assert.assertTrue("PROBLEM - unable to locate the plan name on benefits page for this combo user", noWaitValidate(planNameComboUser_benefitsPg));
+		return planNameComboUser_benefitsPg.getText();
+	}
+	
 	
 }

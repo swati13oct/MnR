@@ -112,10 +112,6 @@ Feature: 1.16 Member Contact us Page
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then the user validates the labels and contact numebers on the page
-     Then the pcp and Medica user validates the labels and contact numebers on the page
-    | PlanType       | <plantype>       |
-    | techSupportTFN | <techSupportTFN> |
-    | planSupportTFN | <planSupportTFN> |
     Then user validates clickToCallButton display on contactUS redesign page
     And user clicks on Request Confirmation Click
       | Phone Number | <phoneNumber> |

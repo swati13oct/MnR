@@ -36,6 +36,7 @@ Feature: 2.12 ACQ - Global Components UHC
     When user accesses global footer of the UHC Medicare Solutions All page
     Then the USer validates Shop for a Plan Navigation links on UHC site
     Then the user validates Medicare Education Navigation links on UHC site
+     Then the user validate ZipCode Components on UHC page using ZipCode "90210"
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -68,19 +69,27 @@ Feature: 2.12 ACQ - Global Components UHC
     @ShopPlan_Shop1_GlobalCompsUHC
     Examples: 
       | path                            | pageName                    | tfnXpath                                                       | tfnFlag |
-      | shop.html                       | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | true   |
+      | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true   |
+  	  | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+      | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+      | shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+      | safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    | 
+   
     @ShopPlan_Shop2_GlobalCompsUHC
     Examples: 
       | path                                             | pageName                     | tfnXpath                                                       | tfnFlag |
-      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1]				 | true    |
+      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2]						 | true    |
+      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | (//*[contains(text(),'Find a Plan')]//following::a[2])				| true    |
+      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 						| true    |
+      | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 						| true    |
+      | shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 						| true    |
+			| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 						| true    |
 
     @ShopPlan_Shop3_GlobalCompsUHC
     Examples: 
@@ -95,7 +104,6 @@ Feature: 2.12 ACQ - Global Components UHC
       | path                                                                   | pageName                        | tfnXpath                                                       | tfnFlag |
       | shop/medicare-advantage-plans/wellness-discounts.html                  | ShopPlan: Welness Discount      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/medicare-advantage-plans/health-care-management.html              | ShopPlan: Healthcare management | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | shop/medicare-advantage-plans/ma-plan-benefits.html                    | ShopPlan: MA Plan benefits      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | shop/renew-active.html                                                 | ShopPlan: Renew-Active          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Enroll1_GlobalCompsUHC
@@ -104,7 +112,8 @@ Feature: 2.12 ACQ - Global Components UHC
       | enroll.html                             | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | enroll/ma-enrollment.html               | ShopPlan: Enroll MA Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | enroll/pdp-enrollment.html              | ShopPlan: Enroll PDP Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | enroll/ms-apply.html                    | ShopPlan: Enroll           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    |
+  
     @ShopPlan_Resources1_GlobalCompsUHC
     Examples: 
       | path                                                              | pageName                             | tfnXpath                                                       | tfnFlag |
@@ -132,7 +141,7 @@ Feature: 2.12 ACQ - Global Components UHC
       | resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/ma-resources-materials/ma-information-forms/member-rights.html                         | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html                       | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html              | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | rresources/disenrollment-information.html																						             | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | resources/disenrollment-information.html                                                         | ShopPlan: Resources Disenrollment Page| //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
     
     # Replace any "#" chars in the deeplink with "!"
@@ -144,13 +153,13 @@ Feature: 2.12 ACQ - Global Components UHC
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                                | true    |
       | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                                | true    |
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                                | false   |
-      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
+      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | //a[contains(@href ,'tel') and contains(@class,'tel')] | true    |
 
     @MiscellaneousLinks_GlobalCompsUHC
     Examples: 
       | path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |
       | estimate-drug-costs.html!/drug-cost-estimator                | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      | aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
       | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
 
@@ -175,6 +184,7 @@ Feature: 2.12 ACQ - Global Components UHC
     When user accesses global footer of the UHC Medicare Solutions All page
     Then the USer validates Shop for a Plan Navigation links on UHC site
     Then the user validates Medicare Education Navigation links on UHC site
+    Then the user validate ZipCode Components on UHC page using ZipCode "90210"
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |

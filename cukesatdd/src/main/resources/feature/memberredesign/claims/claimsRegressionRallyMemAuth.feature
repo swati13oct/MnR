@@ -25,29 +25,29 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Then the user click MyClaims top menu sub option
     Then user validates landing on Rally Claims Page
     
-    @memAuth_rallyClaims01a
+    @memAuth_rallyClaims01_ma
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | qavgogine  | qavgogine | q1_uhc_ma001 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group289 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
 
-    @memAuth_rallyClaims01b
+    @memAuth_rallyClaims01_medica_pcp
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15268 | qavgogine  | qavgogine | q2_jun_sofl0002| PCP    | Individual          | COSMOS_CLAIMS   | 
 
-    @memAuth_rallyClaims01c
+    @memAuth_rallyClaims01_mapd
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15230 | qavgogine  | qavgogine | q2_apr_aarp0250 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
+      | xxxxx | qavgogine  | qavgogine | Dream_EOB_MAPD_007 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
 
-    @memAuth_rallyClaims01d
+    @memAuth_rallyClaims01_ship
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | xxxxx | qavgogine  | qavgogine | Dream_EOB_MAPD_007 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
-      | 15236 | qavgogine  | qavgogine | q1_feb_2020SHIP_034 | SHIP | Individual       | COMPASS_CLAIMS  | 
+      | 15236 | qavgogine  | qavgogine | PaidInFullShip0011 | SHIP | Individual       | COMPASS_CLAIMS  | 
 
-    @memAuth_rallyClaims01e
+    @memAuth_rallyClaims01_pdp
     Examples: 
       | TID   | username   | password  | MemUserName    | planType | memberType        | claimSystem     | 
       | 15299 | qavgogine  | qavgogine | q3_sep_UAT4_AARP057 | PDP | Individual        | RX_CLAIMS       | 

@@ -45,6 +45,9 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(xpath="//table//button")
 	private WebElement btnCloakIn;
 	
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
+	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
 	
@@ -188,20 +191,22 @@ public class ProfileSearch extends UhcDriver {
 	 * @return
 	 */
 	public ComparePlansPage doCloakIn() {
+	//public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			ArrayList<String> tabs = new ArrayList<String>(
                     driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			driver.switchTo().window(tabs.get(0)).close();
 			driver.switchTo().window(tabs.get(1));
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+			validateNew(AARPlogo);
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {

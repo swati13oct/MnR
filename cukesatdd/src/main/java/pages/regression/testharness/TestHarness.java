@@ -145,6 +145,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
+	@FindBy(xpath = "//a[@class='ng-scope'][contains(text(),'Premium Payments')]")
+	private WebElement premiumPaymentTabOnHeader;	
+	
 	@FindBy(id = "Help")
 	private WebElement helpLink;
 
@@ -285,12 +288,18 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1")
 	private WebElement hcePageText;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
 	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
 	private WebElement TestHarnesspaymentsLink;
-		
+	
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
+	protected WebElement LookUpDrugsButton;
+	
+	@FindBy(xpath = "//a[contains(@id,'findcarecost')]")
+	private WebElement findCareCostMenu;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -318,7 +327,7 @@ public class TestHarness extends UhcDriver {
 				//(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 				System.out.println("The selected category is " +category);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
-			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
+			//tbd CommonUtility.waitForPageLoad(driver, pcpMedicaLogo, 30);
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
@@ -378,7 +387,13 @@ public class TestHarness extends UhcDriver {
 			if (driver.getCurrentUrl().contains("testharness")) {
 				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 				TestHarness.checkForIPerceptionModel(driver);
-				TestHarnesspaymentsLink.click();
+				try {
+					TestHarnesspaymentsLink.click();
+				} catch (Exception e) {
+					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
+					TestHarness.checkForIPerceptionModel(driver);
+					premiumPaymentTabOnHeader.click();
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		if (MakeAPaymentButton.isDisplayed())
@@ -630,6 +645,7 @@ public class TestHarness extends UhcDriver {
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			return new DrugCostEstimatorPage(driver);
 		}
 		return null;
@@ -1137,8 +1153,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		Thread.sleep(5000);
-		checkForIPerceptionModel(driver);
+		//tbd Thread.sleep(5000);
+		checkModelPopup(driver,5);
+		//checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
@@ -1290,11 +1307,11 @@ public class TestHarness extends UhcDriver {
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
     			driver.quit(); //note: force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception="+e.getMessage(),false);
     		} catch (WebDriverException we) {
     			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
     			//driver.quit(); //force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception="+we.getMessage(),false);
     		}
     		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
     		Thread.sleep(2000); // note: give it a bit more time to settle down
@@ -1338,6 +1355,8 @@ public class TestHarness extends UhcDriver {
     		}
     		CommonUtility.checkPageIsReady(driver);
     		checkForIPerceptionModel(driver);
+    		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
@@ -1706,5 +1725,33 @@ public class TestHarness extends UhcDriver {
 			
 			
 		}
-		   
+		
+		public void clickAccountProfile() {
+			checkForIPerceptionModel(driver);
+			if (accountProfile.isDisplayed()) {
+				accountProfile.click();
+			}
+		}
+		
+		public void logout() {
+			if (validate(logOut,0)) {
+				logOut.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+				Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+			} else {
+				Assert.fail("Logout option not displayed");
+			}
+		}
+		
+		public DrugCostEstimatorPage clickFindCareCostMenu() throws InterruptedException {
+			validateNew(findCareCostMenu);
+			findCareCostMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().contains("Find Care")) {
+				return new DrugCostEstimatorPage(driver);
+			}
+			return null;
+		}
 }

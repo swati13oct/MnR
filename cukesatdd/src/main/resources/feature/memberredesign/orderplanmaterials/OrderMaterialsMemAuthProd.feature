@@ -31,55 +31,55 @@ Feature: 1.10.1 Member  order materials Page - PROD
      @prod_orderPlanMaterials1a
     Examples:
       | TID   | username | password | MemUserName         | planType | memberType            |
-      | 15288 | ashah120 | Mnrqa002 | skho@roadrunner.com | MAPD     | UHC_Individual_order  |
-      | 15288 | ashah120 | Mnrqa002 | TEAKSAMPPALA1       | MAPD     | AARP_Individual_order |
+      | 15288 | ujethwa | 221Umang | skho@roadrunner.com | MAPD     | UHC_Individual_order  |
+      | 15288 | ujethwa | 221Umang | TEAKSAMPPALA1       | MAPD     | AARP_Individual_order |
 
       @prod_orderPlanMaterials1a @ma
     Examples:
       | TID   | username | password | MemUserName  | planType | memberType            |
-      | 15287 | ashah120 | Mnrqa002 | TOMIKOARMER2 | MA       | AARP_Individual_order |
+      | 15287 | ujethwa | 221Umang | TOMIKOARMER2 | MA       | AARP_Individual_order |
 
       @prod_orderPlanMaterials1b @pdp
     Examples:
       | TID   | username | password | MemUserName | planType | memberType            |
-      | 15292 | ashah120 | Mnrqa002 | LSLOMSKI777 | PDP      | AARP_Individual_order |
+      | 15292 | ujethwa | 221Umang | LSLOMSKI777 | PDP      | AARP_Individual_order |
 
     #-------------------
        @prod_orderPlanMaterials1b
     Examples:
       | TID   | username | password | MemUserName           | planType | memberType       |
-      | 15286 | ashah120 | Mnrqa002 | marylamb823           | PCP      | Individual_order |
-      | 15285 | ashah120 | Mnrqa002 | SUSICHAPMAN@GMAIL.COM | MEDICA   | Individual_order |
+      | 15286 | ujethwa | 221Umang | marylamb823           | PCP      | Individual_order |
+      | 15285 | ujethwa | 221Umang | SUSICHAPMAN@GMAIL.COM | MEDICA   | Individual_order |
 
      @prod_orderPlanMaterials1c @ship
     Examples:
       | TID   | username | password | MemUserName        | planType | memberType    |
-      | 15293 | ashah120 | Mnrqa002 | rldf1942 | SHIP     | MEDSUPP_order |
+      | 15293 | ujethwa | 221Umang | rldf1942 | SHIP     | MEDSUPP_order |
 
     #-------------------
        @prod_orderPlanMaterials1c
     Examples:
       | TID   | username | password | MemUserName       | planType | memberType      |
-      | 15289 | ashah120 | Mnrqa002 | WILLIAMGARRISON48 | MAPD     | UHC_Group_order |
+      | 15289 | ujethwa | 221Umang | WILLIAMGARRISON48 | MAPD     | UHC_Group_order |
 
      @prod_orderPlanMaterials1d
     Examples:
       | TID   | username | password | MemUserName  | planType | memberType      |
-      | 15289 | ashah120 | Mnrqa002 | TOMIKOARMER2 | MA       | UHC_Group_order |
-      | 15290 | ashah120 | Mnrqa002 | Norm749   | PDP      | UHC_Group_order |
+      | 15289 | ujethwa | 221Umang | TOMIKOARMER2 | MA       | UHC_Group_order |
+      | 15290 | ujethwa | 221Umang | Norm749   | PDP      | UHC_Group_order |
 
     #-------------------
       @prod_orderPlanMaterials1d
     Examples:
       | TID   | username | password | MemUserName        | planType | memberType  |
-      #| 15281 | ashah120 | Mnrqa002 | aliceb1105@aol.com | MAPD     | COMBO_order |
-      | 15281 | ashah120 | Mnrqa002 | Norm749            | MEDSUPP  | COMBO_order |
+      #| 15281 | ujethwa | 221Umang | aliceb1105@aol.com | MAPD     | COMBO_order |
+      | 15281 | ujethwa | 221Umang | Norm749            | MEDSUPP  | COMBO_order |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
       @prod_orderPlanMaterials1e
     Examples:
       | TID   | username | password | MemUserName | planType | memberType  |
-      | 15291 | ashah120 | Mnrqa002 | Norm749     | PDP      | COMBO_order |
+      | 15291 | ujethwa | 221Umang | Norm749     | PDP      | COMBO_order |
     # | 15291 | qavgogine | qavgogine | testusername    | SSUP     | COMBO_order	         |
 
 
@@ -105,4 +105,4 @@ Feature: 1.10.1 Member  order materials Page - PROD
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType                  |
-      | 15284 | ashah120 | Mnrqa002 | erbenoit56  | MAPD     | AARP_Terminatedmember_order |
+      | 15284 | ujethwa | 221Umang | erbenoit56  | MAPD     | AARP_Terminatedmember_order |

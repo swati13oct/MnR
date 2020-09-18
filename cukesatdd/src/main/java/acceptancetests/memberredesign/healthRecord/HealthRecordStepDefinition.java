@@ -53,26 +53,45 @@ public class HealthRecordStepDefinition {
 		}
 	}
 
+	@Then("^the user store expected link behavior$")
+	public void user_validate_storeExpectedLinkBehavior(DataTable memberAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String tmp=memberAttributesMap.get("Expect Link");
+		Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean expHealthRecordLnk=Boolean.valueOf(tmp);
+		getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
+	}
+
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates Health Record link display behavior on Account Profile dropdown base on test input$")
-	public void user_validate_healthRecordLink(DataTable memberAttributes) throws InterruptedException {
+	public void user_validate_healthRecordLink() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		boolean expHealthRecordLnk= (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);
 
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
+
 		String targetPage="Initial landing page after login";
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
+			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
+
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String tmp=memberAttributesMap.get("Expect Link");
-		Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
-		boolean expHealthRecordLnk=Boolean.valueOf(tmp);
-		getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
+		//tbd Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		//tbd String tmp=memberAttributesMap.get("Expect Link");
+		//tbd Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		//tbd boolean expHealthRecordLnk=Boolean.valueOf(tmp);
+		//tbd getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		boolean expComboTab=false;
@@ -82,26 +101,33 @@ public class HealthRecordStepDefinition {
 				expComboTab=true;
 		}
 		System.out.println("expComboTab="+expComboTab);
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+		System.out.println("expHealthRecordLnk="+expHealthRecordLnk);
+		System.out.println("memberType.toUpperCase().contains('COMBO')="+memberType.toUpperCase().contains("COMBO"));
+		System.out.println("!memberType.toUpperCase().contains('BOA')="+!memberType.toUpperCase().contains("BOA"));
+		System.out.println("3rd="+(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP")));
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("BOA") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		System.out.println("expHealthRecordLnk="+expHealthRecordLnk);
+		
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		System.out.println("hasHealthRecordLnk="+hasHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 		} else {
 			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 			if (expHealthRecordLnk) {
 				testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 			} else
-				testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+				testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		}
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}				
 
 	@SuppressWarnings("unchecked")
-	@Then("^the user validates clicking Health Record link will open new tab to the target page$")
+	@Then("^the user validates clicking Health Record link will open to the target page$")
 	public void user_validate_healthRecordLinkDestination() throws InterruptedException {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -111,7 +137,7 @@ public class HealthRecordStepDefinition {
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass link content validation for now so to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass link content validation for now so to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			return;
@@ -151,6 +177,13 @@ public class HealthRecordStepDefinition {
 		String targetPage="Find Care";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
+			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("SSUP")
 				|| memberType.toUpperCase().contains("COMBO_SHIP_") 
 				|| memberType.toUpperCase().contains("TERM_") 
@@ -161,16 +194,19 @@ public class HealthRecordStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			return;
 		}
-		if (MRScenario.environment.contains("team-a")) {
-			System.out.println("team-atest env doesn't support Rally '"+targetPage+"' page, skipping step...");
-			testNote.add("\tSkip Health Record validation on env '"+MRScenario.environment+"'");
-			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			return;
-		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToFindCarePage();
+		//note: FindCare and Claims page are Rally page, let it bypass if getting some Sorry error or systest3 page
+		if (wd.getCurrentUrl().contains("systest3")) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page land on systest3 sign-in page");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		} else if (healthRecordPage.hasSorryError()) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page has 'Sorry it's not us' error");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		}
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
@@ -181,12 +217,12 @@ public class HealthRecordStepDefinition {
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -226,19 +262,30 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToClaimsPage();
+		CommonUtility.checkPageIsReady(wd);
+		//note: FindCare and Claims page are Rally page, let it bypass if getting some Sorry error or systest3 page
+		if (wd.getCurrentUrl().contains("systest3")) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page land on systest3 sign-in page");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		} else if (healthRecordPage.hasSorryError()) {
+			testNote.add("\tSkip Health Record link destination validation due ot Rally '"+targetPage+"' page has 'Sorry it's not us' error");
+			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
+			return;
+		}
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && 
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !memberType.toUpperCase().contains("BOA") && 
 				(memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
-			testNote.add("\tFAILED - KNOWN ISSUE -Rally page for terminated user - Bypass for now to validate the rest of pages- Health Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tFAILED - KNOWN ISSUE -Rally page for terminated user - Bypass for now to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -248,7 +295,7 @@ public class HealthRecordStepDefinition {
 			if (expHealthRecordLnk) {
 				testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 			} else
-				testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+				testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		}
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
@@ -298,12 +345,15 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo") && !planType.equalsIgnoreCase("SSP"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -343,7 +393,7 @@ public class HealthRecordStepDefinition {
 
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToBenefitsPage();
+		wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
 		//note: consumerDetail only show up on secondary page, get all the info now for later use
 		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
@@ -361,12 +411,12 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -398,25 +448,28 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		//note: navigate to benefits then planDoc
-		wd=healthRecordPage.navigateToBenefitsPage();
+		//note: in these navigation method will first go to benefits then go to planDoc
 		if (memberType.toUpperCase().contains("PREEFF")) 
-			wd=healthRecordPage.navigateToPlanDocPage_preEff();
+			wd=healthRecordPage.navigateToPlanDocPage_preEff(memberType);
 		else
-			wd=healthRecordPage.navigateToPlanDocPage();
+			wd=healthRecordPage.navigateToPlanDocPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
+		//note: team-atest planDoc page take too long to load, test fail w/ gateway error mostly, skip this page for now
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
-			testNote.add("\tSkip Health Record link destination validation");
+			testNote.add("\tSkip Health Record link destination validation - planDoc page takes too long to load on team-atest");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			//note: in this case, don't go back yet, keep going to validate MyDoc page
@@ -452,12 +505,15 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -504,19 +560,22 @@ public class HealthRecordStepDefinition {
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		//note: navigate to benefits then order
-		wd=healthRecordPage.navigateToBenefitsPage();
-		wd=healthRecordPage.navigateToOrderPage();
+		wd=healthRecordPage.navigateToBenefitsPage(memberType);
+		wd=healthRecordPage.navigateToOrderPage(memberType);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -555,7 +614,6 @@ public class HealthRecordStepDefinition {
 		} 
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-
 		boolean hasPaymentTab = (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB);
 		if (!hasPaymentTab) {
 			System.out.println(planType+" user hasPaymentTab=false, doesn't have '"+targetPage+"' page, skipping step...");
@@ -572,12 +630,15 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -609,7 +670,10 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"'");
 		if ((planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("COMBO")) 
 				|| (planType.equalsIgnoreCase("MA")  && !memberType.toUpperCase().contains("COMBO"))
-				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM")) {
+				|| (memberType.toUpperCase().contains("COMBO") && (!memberType.toUpperCase().contains("PDP") || !memberType.toUpperCase().contains("MAPD")))
+				|| planType.equalsIgnoreCase("SSUP") 
+				|| memberType.toUpperCase().contains("TERM") 
+				|| memberType.toUpperCase().contains("PREEFF")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -628,16 +692,19 @@ public class HealthRecordStepDefinition {
 		//note: PnP page doesn't have its own ProductSummary API run, it depends on what was the prior page on
 		//note: ATDD step sequence will land to the target test plan tab first before going to the target page
 		//note: so prior page would be on SHIP plan then clicking PnP will be the SHIP behavior which will NOT have IHR link
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("BOA") 
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -667,6 +734,13 @@ public class HealthRecordStepDefinition {
 		String targetPage="Health and Wellness";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support Rally page '"+targetPage+"', skipping step...");
+			testNote.add("\tSkip Health Record validation for env='"+MRScenario.environment+"'");
+			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			return;
+		}
 		if (memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
@@ -676,6 +750,8 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
+		if (memberType.toUpperCase().contains("COMBO_SHIP"))
+			healthRecordPage.goToSpecificComboTab(planType,false);
 		wd=healthRecordPage.navigateToHwPage();
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
@@ -683,16 +759,22 @@ public class HealthRecordStepDefinition {
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP")
+		if (!expComboTab && memberType.toUpperCase().contains("COMBO") && !planType.toUpperCase().contains("SHIP") && !memberType.toUpperCase().contains("BOA") 
 				&& (memberType.toUpperCase().contains("MA") || memberType.toUpperCase().contains("PDP") || memberType.toUpperCase().contains("SSP"))) {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (!expComboTab && (memberType.toUpperCase().contains("COMBO_PDP_SHIP") || memberType.toUpperCase().contains("COMBO_MA_SHIP") || memberType.toUpperCase().contains("COMBO_MAPD_SHIP"))) {
+			expHealthRecordLnk=true;
+		}
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -731,12 +813,15 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -777,19 +862,29 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToPharmacyLocatorPage();
-
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		healthRecordPage.goToSpecificComboTab(planType,false); //note: if from testharness then will c IHR link if u start with the targeted plan tab
+		if (wd.getCurrentUrl().contains("dashboard") && memberType.toUpperCase().contains("COMBO_SHIP")) {
+			//note: if coming from dashboard then this page will have no IHR link
+			if (planType.toUpperCase().contains("MAPD") || planType.toUpperCase().contains("PDP") || planType.toUpperCase().contains("MA"))
+				expHealthRecordLnk=false;
+		}
+		wd=healthRecordPage.navigateToPharmacyLocatorPage(memberType);
+
+		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -830,19 +925,29 @@ public class HealthRecordStepDefinition {
 		}
 		String originalUrl=wd.getCurrentUrl();
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		wd=healthRecordPage.navigateToDcePage();
-
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
+		healthRecordPage.goToSpecificComboTab(planType,false); //note: if from testharness then will c IHR link if u start with the targeted plan tab
+		if (wd.getCurrentUrl().contains("dashboard") && memberType.toUpperCase().contains("COMBO_SHIP")) {
+			//note: if coming from dashboard then this page will have no IHR link
+			if (planType.toUpperCase().contains("MAPD") || planType.toUpperCase().contains("PDP") || planType.toUpperCase().contains("MA"))
+				expHealthRecordLnk=false;
+		}
+		wd=healthRecordPage.navigateToDcePage(memberType);
+
+		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
 		//	expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -881,12 +986,15 @@ public class HealthRecordStepDefinition {
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
 			expComboTab=true;
-		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage);
-		Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
+		if (memberType.toUpperCase().contains("TERM")) 
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		else
+			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
-			testNote.add("\tHealth Record link is NOT display on dropdown option or href is not as expected");
+			testNote.add("\tHealth Record link is NOT display on dropdown option just as expected");
 		if (!expHealthRecordLnk || MRScenario.environment.contains("team-a")) {
 			testNote.add("\tSkip Health Record link destination validation");
 			getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);

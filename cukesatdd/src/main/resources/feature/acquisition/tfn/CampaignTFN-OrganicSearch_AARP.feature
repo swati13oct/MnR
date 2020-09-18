@@ -17,7 +17,8 @@ Feature: To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
-      |  810106 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+      #|  810106 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+   |  810106 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
   @Scenario3_2_BingSearch_AARP @organicSearchTFN_AARP
   Scenario Outline: - 3.2 Bing search AARP Medicare Advantage Plan
@@ -35,8 +36,8 @@ Feature: To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
-      |  810104 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
-
+     # |  810104 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+ |  810104 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
   @Scenario3_3_YahooSearch_AARP @organicSearchTFN_AARP
   Scenario Outline: - 3.3 Yahoo and search AARP Medicare Advantage Plan
@@ -54,7 +55,8 @@ Feature: To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
-      |  810105 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+     # |  810105 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+ |  810105 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
   @Scenario_5_1to8_Precedence_1_AARP @tfn_Precedence_Campaign_Traffic
   Scenario Outline: 5.1 to 5.8 Campaign Precedence Logic No 1
@@ -128,7 +130,8 @@ Feature: To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | site   | Precedence1PSC | Precedence2PSC | campaign1Url                                                              | Precedence3PSC | campaign2Url                                                 | Precedence4PSC | Precedence5PSC | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
-      | ulayer |         810027 |         810106 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=860002&zipcode=90210 |         860002 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+    #  | ulayer |         810027 |         810106 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=860002&zipcode=90210 |         860002 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+  | ulayer |         810027 |         810106 | /shop/medicare-advantage-plans?WT.mc_id=860002&zipcode=90210 |         860002 | /shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 |        8001533 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
   @Scenario_5_9to15_Precedence_2_AARP @tfn_Precedence_Campaign_Traffic
   Scenario Outline: 5.9 to 5.15 Campaign Precedence Logic No 2 for AARP
@@ -188,4 +191,6 @@ Feature: To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | site   | Precedence1PSC | Precedence2PSC | Precedence3PSC | campaign2Url                                                 | Precedence4PSC | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
-      | ulayer |         810027 |         810106 |         810105 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+     # | ulayer |         810027 |         810106 |         810105 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+   | ulayer |         810027 |         810106 |         810105 | /shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+      

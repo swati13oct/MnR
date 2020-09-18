@@ -4,7 +4,7 @@
 Feature: 1.08. ACQ- Visitor profile AARP
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer_VisitorProfile @prodRegression
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile
     Given the user is on the AARP medicare site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -27,8 +27,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I select the first pharmacy
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user returns to the visitor profile page
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    And the user returns to the visitor profile page on aarp
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
 
     Examples: 
@@ -36,7 +36,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
   @addDrugsDCE1
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -59,7 +59,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
     And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
 
     Examples: 
@@ -67,7 +67,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -109,12 +109,13 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
 
+# The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+#      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile 
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -291,7 +292,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @addDrugAuthenticated
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the authenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
     Given the user is on the AARP medicare site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
@@ -317,8 +318,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I select the first pharmacy
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user returns to the visitor profile page
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    And the user returns to the visitor profile page on aarp
+    Then the user should be able to see the Drug information in the guest profile page on aarp
       | Drugname | <drug> |
     And user delets all the added drugs on visitor profile page of AARP site
 

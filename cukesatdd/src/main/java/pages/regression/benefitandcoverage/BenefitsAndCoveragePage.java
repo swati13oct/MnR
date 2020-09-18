@@ -59,10 +59,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 		try {
-			validateNew(planName,0);
-			validateNew(memberId,0);
-			validateNew(memberName,0);
-			validateNew(effectiveDate,0);
+			if(validate(planName,0)) {
+				validateNew(planName,0);
+				validateNew(memberId,0);
+				validateNew(memberName,0);
+				validateNew(effectiveDate,0);
+			} else {
+				validateNew(coverageBenefitsNewHeader,0);
+			}
 		} catch (Exception e) {
 			System.out.println("Elements are not found ...");
 		}
@@ -669,6 +673,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				System.out.println(">>>>>>>>>>Office Visits value is not displaying<<<<<<<<<<<<<<<<<<<<");
 				Assert.fail();
 			}
+			
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-900)", "");
+			System.out.println(">>>>>scrolled up for verifying jump link section and checks respective sections<<<<<<<<<<<<<");
 		}
 	}
 
@@ -877,7 +885,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,3000)", "");
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {
@@ -3136,6 +3144,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 						comboTab_MA.click();
 					else if (noWaitValidate(comboTab_MA_planDoc)) 
 						comboTab_MA_planDoc.click();
+				} else if (planType.equalsIgnoreCase("hip")) {
+					if (noWaitValidate(comboTab_SHIP_HIP)) 
+						comboTab_SHIP_HIP.click();
 				} else if (planType.equalsIgnoreCase("ship")) {
 					if (noWaitValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();

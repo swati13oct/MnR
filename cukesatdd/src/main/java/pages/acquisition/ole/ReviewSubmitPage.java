@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -125,7 +126,25 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id = 'ole-form-submitted']")
 	private WebElement Form_Sumbitted_ConfirmationPage;
 	
+	@FindBy(xpath = "//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*")
+	private WebElement HealthInsuranceName;
 	
+	@FindBy(xpath = "//*[contains(text(), 'Group Number')]//following-sibling::*")
+	private WebElement HealthInsuranceGroupNo;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Member Number')]//following-sibling::*")
+	private WebElement HealthInsuranceMemberNo;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Name of Insurance')]//following-sibling::*")
+	private WebElement PrescriptionDrugName;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Group ID Number')]//following-sibling::*")
+	private WebElement PrescriptionDrugGroupNo;
+	
+	@FindBy(xpath = "//*[contains(text(), ' Member ID Number')]//following-sibling::*")
+	private WebElement PrescriptionDrugMemberNo;
+	
+
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -162,13 +181,37 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
+		
+		
+	/*	HealthInsuranceName
+		HealthInsuranceGroupNo
+		HealthInsuranceMemberNo
+		PrescriptionDrugName
+		PrescriptionDrugGroupNo
+		PrescriptionDrugMemberNo
+		*/
+		
+		String prescriptionDrugName= detailsMap.get("Prescription Name");
+		String prescriptionGroupNumber = detailsMap.get("PD Group Number");
+		String prescriptionMemberNumber = detailsMap.get("PD Member Number");
+		String healthInsuranceName = detailsMap.get("Health Insurance Name");
+		String healthInsuranceGroupNo = detailsMap.get("Group Number");
+		String healthInsuranceMemberNo = detailsMap.get("Member Number");
+		
+		
+		
 
+		//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*
+		
 		/*try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		//String phoneNumber = Phone_Number.getText();
+		
 		boolean flag = true;
 		validateNew(PlanYear_NameDisplay);
 		String PlanNameDisplayed = PlanYear_NameDisplay.getText();
@@ -210,7 +253,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 		if (StringUtils.isEmpty(PartAeffectiveDate)) {
 			System.out.println("PartAeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else {
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::*"))!=null) {
+			
 			String PartADisplayed = PartADisplay.getText().replaceAll("-", "");
 			if (PartADisplayed.contains(PartAeffectiveDate)) {
 				flag = (!flag) ? false : true;
@@ -218,9 +262,12 @@ public class ReviewSubmitPage extends UhcDriver{
 			} else
 				flag = false;
 		}
+		else {
+			System.out.println("PartAeffectiveDate is not present for User");
+		}
 		if (StringUtils.isEmpty(PartBeffectiveDate)) {
 			System.out.println("PartBeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else {
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*"))!=null) {
 			String PartBDisplayed = PartBDisplay.getText().replaceAll("-", "");
 			if (PartBDisplayed.contains(PartBeffectiveDate)) {
 				flag = (!flag) ? false : true;
@@ -228,6 +275,10 @@ public class ReviewSubmitPage extends UhcDriver{
 			} else
 				flag = false;
 		}
+		else {
+			System.out.println("PartBeffectiveDate is not present for User");
+		}
+		
 		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
 		if(DOBDisplayed.contains(DOB)){
 			flag = (!flag)?false:true;
@@ -286,7 +337,46 @@ public class ReviewSubmitPage extends UhcDriver{
     				flag = (!flag)?false:true;
     				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
     			}else flag =false;
+    			
+    					
+    			String HealthInsuranceName1 = HealthInsuranceName.getText();
+    			if(HealthInsuranceName1.contains(healthInsuranceName)){
+    				flag = (!flag)?false:true;
+    				System.out.println(healthInsuranceName+" : "+HealthInsuranceName1+" : "+flag);
+    			}else flag =false;
+    			
+    			String HealthInsuranceGroupNo1 = HealthInsuranceGroupNo.getText();
+    			if(HealthInsuranceGroupNo1.contains(healthInsuranceGroupNo)){
+    				flag = (!flag)?false:true;
+    				System.out.println(healthInsuranceGroupNo+" : "+HealthInsuranceGroupNo1+" : "+flag);
+    			}else flag =false;
+    			
+    			String HealthInsuranceMemberNo1 = HealthInsuranceMemberNo.getText();
+    			if(HealthInsuranceMemberNo1.contains(healthInsuranceMemberNo)){
+    				flag = (!flag)?false:true;
+    				System.out.println(Gender+" : "+HealthInsuranceMemberNo1+" : "+flag);
+    			}else flag =false;
+    			
+    			String PrescriptionDrugName1 = PrescriptionDrugName.getText();
+    			if(PrescriptionDrugName1.contains(prescriptionDrugName)){
+    				flag = (!flag)?false:true;
+    				System.out.println(prescriptionDrugName+" : "+PrescriptionDrugName1+" : "+flag);
+    			}else flag =false;
+    			
+    			String PrescriptionDrugGroupNo1 = PrescriptionDrugGroupNo.getText();
+    			if(PrescriptionDrugGroupNo1.contains(prescriptionGroupNumber)){
+    				flag = (!flag)?false:true;
+    				System.out.println(prescriptionGroupNumber+" : "+PrescriptionDrugGroupNo1+" : "+flag);
+    			}else flag =false;
+    			String PrescriptionDrugMemberNo1 = PrescriptionDrugMemberNo.getText();
+    			if(PrescriptionDrugMemberNo1.contains(prescriptionMemberNumber)){
+    				flag = (!flag)?false:true;
+    				System.out.println(prescriptionMemberNumber+" : "+PrescriptionDrugMemberNo1+" : "+flag);
+    			}else flag =false;		
+    			
     		}
+    		
+    		
         }
 
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){

@@ -77,7 +77,7 @@ public class GlobalWebElements extends UhcDriver {
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
 	//@FindBy(id = "gfn_lnk_row2_3")
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Supplement')]")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_4")
@@ -243,7 +243,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	
-
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub

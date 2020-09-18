@@ -56,7 +56,7 @@ public class SAMIconsStepDefinitionUHC {
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
+		//aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		
 	}
@@ -67,8 +67,8 @@ public class SAMIconsStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
-		
 		aquisitionhomepage.verifyChatpopup();
+		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
 
@@ -79,6 +79,17 @@ public class SAMIconsStepDefinitionUHC {
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
 		aquisitionhomepage.validateChatpopupconnect();	
+		
+	}
+	
+	@Then("^the user validates whether chat Agent is not Available on UHC")
+	public void the_user_validates_whether_chat_Agent_is_not_visible_on_UHC() throws Throwable {
+		boolean flag= false;
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		flag=aquisitionhomepage.validateChat();
+
+		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
 		
 	}
 	

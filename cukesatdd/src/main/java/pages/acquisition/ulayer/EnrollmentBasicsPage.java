@@ -45,7 +45,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@href,'pdp-enrollment')]")
 	private WebElement pdpLeanHowToEnrollLink;
 	
-	@FindBy(xpath = "//span[text()='Enrollment']")
+	@FindBy(xpath = "//a[contains(text(),'Learn About Enrollment')]")
 	private WebElement EnrollmentLink;
 	
 	@FindBy(id = "js-ole-zip-search")
@@ -93,13 +93,13 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 			waitforElement(maLeanHowToEnrollLink);
 			maLeanHowToEnrollLink.click();
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+			//EnrollmentLink.click();
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollLink);
 			pdpLeanHowToEnrollLink.click();
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+			//EnrollmentLink.click();
 		}		
 	}
 

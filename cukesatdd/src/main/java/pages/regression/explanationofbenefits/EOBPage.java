@@ -94,13 +94,18 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateHeaderSectionContent(String planType) {
+		checkModelPopup(driver,2);
+		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
-		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
-		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) {
+			Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type label",eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - unable to locate EOB Type Dropdown",eobValidate(eobTypeDropdown));	
 			Select eobTypeOptions = new Select(eobTypeDropdown);
@@ -127,8 +132,9 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type label",!eobValidate(eobTypeLabel));	
 			Assert.assertTrue("PROBLEM - should not be able to locate EOB Type dropdown",!eobValidate(eobTypeDropdown));	
 		}
-
-		Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));	
+		if(planType.toUpperCase().contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - unable to locate Date Range Label",eobValidate(eobDateRangeLabel));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate Date Range Dropdown",eobValidate(eobDateRangeDropdown));	
 
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
@@ -196,7 +202,8 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		//tbd if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+		if (planType.contains("SHIP") || planType.contains("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
@@ -214,17 +221,25 @@ public class EOBPage extends EOBBase{
 			sleepBySec(3);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
-			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on new tab after clicking Learn More link.  number of existing tabs before clicking link='"+beforeClicked_numTabs+"' | after='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 
-			String expUrl="How_to_read_Medical_EOB.pdf";
+			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+			System.out.println("total tab size="+newTab.size());
+
+			//note: Use the list of window handles to switch between windows
+			driver.switchTo().window(newTab.get(newTab.size()-1));
+			CommonUtility.checkPageIsReady(driver);
+
+			String expUrl="How_to_Read_Your_EOB.pdf";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			//TODO - validate PDF content when code deploy onto stage
-			
-			driver.navigate().back();
+
+			//note: Switch back to original window
+			driver.close();
+			driver.switchTo().window(newTab.get(newTab.size()-2));
 			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
-			sleepBySec(3);
+			sleepBySec(5);
+
 			if (memberType.contains("COMBO")) 
 				goToSpecificComboTab(planType);
 		}
@@ -232,8 +247,11 @@ public class EOBPage extends EOBBase{
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
-		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+		//tbd Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+		if (!eobValidate(eobHeader) || !eobValidate(eobSubSectionDescription))
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
@@ -309,7 +327,7 @@ public class EOBPage extends EOBBase{
 			Select eobTypeOptions = new Select(eobTypeDropdown);
 			eobTypeOptions.selectByVisibleText(targetEobType);
 			waitForEobPageToLoad();
-		} 		
+		}		
 		return new EOBPage(driver);
 	}
 
@@ -455,6 +473,7 @@ public class EOBPage extends EOBBase{
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
+		sleepBySec(1);
 		sendkeys(fromTxtField,fromDate);
 		sendkeys(toTxtField,toDate);
 		CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -645,7 +664,7 @@ public class EOBPage extends EOBBase{
 	 * this method is to validate the site leaving popup on the eob page
 	 */
 	public void validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		//tbd driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 
@@ -960,7 +979,7 @@ public class EOBPage extends EOBBase{
 		return testNote;
 	}
 
-	public void validateEobEntries (String planType, String memberId) {
+	public void validateEobEntries (String planType, String memberId, boolean realEob) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
 		scrollElementToCenterScreen(eobFirst);
@@ -1001,31 +1020,34 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 ("+urlConnection.getResponseCode()+") response code.  "
 						+ "PDF link='"+pdfUrl+"'",
-						responseCode==200);
-				System.out.println("TEST - is able to open pdf url, proceed to validate content");
-				PDDocument document = PDDocument.load(urlConnection.getInputStream());
-				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : " + PDFText);
+						(responseCode==200 && realEob) || (responseCode!=200 && !realEob));
+				if (responseCode==200) {
+					System.out.println("TEST - is able to open pdf url, proceed to validate content");
+					PDDocument document = PDDocument.load(urlConnection.getInputStream());
+					String PDFText = new PDFTextStripper().getText(document);
+					System.out.println("PDF text : " + PDFText);
 
-				String error="Your Explannation of Benefits is currently unavailable.";
-				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
-						+ "Do not expect to see '"+error+"'", 
-						!PDFText.contains(error));
+					String error="Your Explannation of Benefits is currently unavailable.";
+					Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
+							+ "Do not expect to see '"+error+"'", 
+							!PDFText.contains(error));
 
-				//note: check to see if EOB contains memebr ID
-				String memberId_portion=memberId;
-				//note: strip the leading 0 
-				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
-				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
-				if (memberId.contains("-")) {
-					String[] tmp=memberId.split("-");
-					memberId_portion=tmp[0];
+					//note: check to see if EOB contains memebr ID
+					String memberId_portion=memberId;
+					//note: strip the leading 0 
+					//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+					System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
+					if (memberId.contains("-")) {
+						String[] tmp=memberId.split("-");
+						memberId_portion=tmp[0];
+					}
+					//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+					memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
+					System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
+					Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+							PDFText.contains(memberId_portion));
+					
 				}
-				//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
-				memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
-				System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
-				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
-						PDFText.contains(memberId_portion));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -1062,7 +1084,7 @@ public class EOBPage extends EOBBase{
 			System.out.println("TEST - is able to open pdf url, proceed to validate content");
 			PDDocument document = PDDocument.load(urlConnection.getInputStream());
 			String PDFText = new PDFTextStripper().getText(document);
-			System.out.println("PDF text : " + PDFText);
+			//keepForDebug System.out.println("PDF text : " + PDFText);
 
 			String error="Your Explannation of Benefits is currently unavailable.";
 			if (PDFText.contains(error)) {
@@ -1114,8 +1136,10 @@ public class EOBPage extends EOBBase{
 		int max=eobCount;
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
-			if (eobCount>=2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) 
-				max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+		}
+		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) { 
+			System.out.println("TEST - limit the amount of EOB detail validation to speed up the run on offline/online-prod");
+			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
 		}
 		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
@@ -1217,11 +1241,21 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateComboTab(String memberType) {
-		if (memberType.contains("MULTI_SHIP")) {
+		if (memberType.contains("MULTI_SHIP") && !memberType.contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
 			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
 			//should not see tabs
+		} else if (memberType.contains("COMBO_MULTI_SHIP")) {
+			//note: one of the tab should be for 'SUPPLEMENTAL INSURANCE PLANS' 
+			boolean found=false;
+			for (WebElement e: comboTabList) {
+				if (e.getText().equals("SUPPLEMENTAL INSURANCE PLANS")) {
+					found=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have a tab with text 'SUPPLEMENTAL INSURANCE PLANS'",found);
 		} else 
 			if (memberType.contains("COMBO")) {
 				if (memberType.contains("SSP")) {

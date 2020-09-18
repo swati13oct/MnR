@@ -82,10 +82,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
-	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//a[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")
+	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//button)[4]")
 	private WebElement Newremove4thplan;
 	
-	@FindBy(xpath="//th[@ng-repeat='plan in count'][4]//div[contains(@ng-if,'planName')]")
+	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
 	
 	@FindBy(xpath="//*[@class='view-more-link']")
@@ -106,10 +106,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
 	
-	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -119,10 +119,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
@@ -144,7 +144,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 	
-   	@FindBy(xpath="//div[text()='Your Hospitals']")
+   	@FindBy(xpath="//*[contains(@id,'yourhospitalsheading')]")
 	private WebElement yourHospitalsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Hospitals']")
@@ -159,13 +159,13 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
 	private WebElement HospitalSummaryCoverageHeader;
 
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'provider-name')]")
+	@FindBy(xpath="/tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
 	private WebElement HospitalProviderName;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement HospitalProviderCoverageText;	
 	
-	@FindBy(xpath="//div[text()='Your Doctors']")
+	@FindBy(xpath="//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Doctors']")
@@ -173,16 +173,17 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
+	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
 	private WebElement providerSumamryHeader;
 	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
 	private WebElement providerSumamryHeaderCount;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//th//div[contains(@class,'provider-name')]")
+	@FindBy(xpath="//th//*[contains(@class,'provider-name')]")
 	private WebElement FirstProviderName;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
+	@FindBy(xpath="//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;	
 	
 	@FindBy(xpath="//div[text()='Your Drugs']")
@@ -210,14 +211,14 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		
+		checkModelPopup(driver,20);
 	}
 	
 	public VPPPlanSummaryPage backToVPPPage(){
@@ -266,23 +267,6 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		}
 		return null;
 	}
-
-   	public WelcomePage Enroll_OLE_Plan_UHC() throws InterruptedException {
-   		WebElement enrollForPlan = null;
-   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/span"));
-   		if(enrollForPlan!=null){
-   			//validateNew(enrollForPlan);
-   			enrollForPlan.click();
-   		}
-   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-   		System.out.println(driver.getCurrentUrl());
-   		if(driver.getCurrentUrl().contains("welcome"))
-   		{
-   			System.out.println("OLE Welcome Page is Displayed");
-   			return new WelcomePage(driver);
-   		}
-   		return null;
-   	  	}
    	
    	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
    		WebElement enrollForPlan = null;
@@ -445,19 +429,10 @@ public class ComparePlansPageBlayer extends UhcDriver {
 
 	}
 	
-	public void clickOnRemoveLink(){
-		validateNew(removeLink);
-		String PlanName=remove4thplanName.getText();
-		System.out.println("4th plan name is : " + PlanName );
-		remove4thplan.click();
-		System.out.println("Clicked on Remove Link on plan Compare page");
-
-	}
-	
 	public void clickOnNewRemoveLink(){
 		validateNew(Newremove4thplan);
 		String PlanName=Newremove4thplanName.getText();
-		System.out.println("3rd plan name is : " + PlanName );
+		System.out.println("4th plan name is : " + PlanName );
 		Newremove4thplan.click();
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
@@ -478,23 +453,6 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		System.out.println("Validated all links plan compare");
 		
 	}
-
-     public VPPPlanSummaryPage clickOnAddIcon(){
-    	 
-    	//a[@class='planNameVisibility']//h3
-    	 
-    	 validateNew(add3Plan);
-    	 add3Plan.click();
- 		try {
- 			Thread.sleep(4000);
- 		} catch (InterruptedException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 		}
- 		if(currentUrl().contains("#/plan-summary"))
- 			return new VPPPlanSummaryPage(driver);
- 		return null;
-     }
      
 public VPPPlanSummaryPage clickOnNewAddIcon(){
     	 
@@ -511,19 +469,8 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  		return null;
      }
      
-     public void validatenewlyAddPlan() {
-    	 
-    	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));	
- 		int plansForCompare=allMAPlans.size();
- 		if (plansForCompare == 3) {
- 			Assert.assertTrue(true);
- 			System.out.println("Verified Three plans Added on plan compare");
- 		}
- 		else Assert.assertTrue(false); 		
- 	}
-     
      public void validatenewlyAddPlanonNewPlanComapre() {
-	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//th[@ng-repeat='plan in count']//div[contains(@ng-if,'planName')]"));	
+	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//div[contains(@class,'align-items-lg-start')]//div"));	
 			int plansForCompare=allMAPlans.size();
 			if (plansForCompare == 3) {
 				Assert.assertTrue(true);
@@ -568,15 +515,18 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
         return null;
  	}
  	
- 	public ComparePlansPageBlayer  validateCallpopup() throws InterruptedException {
+ 	public void  validateCallpopup() throws InterruptedException {
  		//CommonUtility.checkPageIsReady(driver);
  		callsam.click();
  		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
  		driver.switchTo().activeElement();
- 		System.out.println(CallSamTFN.getText());
- 		CallSamTFNClose.click();
- 		validateNew(callsam);		
- 		return null;
+		if (CallSamTFN.getText().isEmpty()) {
+			// return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		} else {
+			CallSamTFNClose.click();
+			validateNew(callsam);
+		}
  	}
  	
  	public ComparePlansPageBlayer validateChatSam() throws InterruptedException {
@@ -626,22 +576,6 @@ public VPPPlanSummaryPage clickOnNewAddIcon(){
  		validateNew(chatsam);		
  		return null;
  	}
- 	
- 	public ComparePlansPageBlayer navigateToPlanDetail() {
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View details')])[1]"));
-				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
-				PlanDetailsLink.click();
-				System.out.println("View Plan Details Link is clicked");
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("#/details")) 
-		{	
-			return new ComparePlansPageBlayer(driver);
-		}
-		return null;
-	}
  	
  	public ComparePlansPageBlayer navigateToPlanDetailfromplanCompare() {
 		CommonUtility.checkPageIsReadyNew(driver);

@@ -1,8 +1,8 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test cases 7 to 13
+Feature: 1.19 Verify the premium payment flows on member portal - Part 2 - Test cases 7 to 13
 
   #Test Case 07
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 07 -Verify Update Recurring for Checking Account for Ship Member
+  Scenario Outline: TID: <TID> - Test Case 07 -Verify Setup Recurring payment for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

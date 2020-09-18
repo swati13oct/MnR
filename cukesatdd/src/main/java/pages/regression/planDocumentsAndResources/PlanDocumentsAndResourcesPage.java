@@ -213,5 +213,7 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 			return false;
 	}
 
-
+	public void validateNEWTextAgainstPlanDocument() {
+		Assert.assertTrue("PROBLEM - unable to locate NEW text against SHIP document", planDocValidate(newTextAgainstPlanDocument));
+	}
 }

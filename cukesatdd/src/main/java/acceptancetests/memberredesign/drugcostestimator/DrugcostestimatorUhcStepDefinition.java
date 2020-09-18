@@ -631,10 +631,11 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zipcode");
+		String radisu = memberAttributesMap.get("Radius");
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.validateZipcode(zipcode);
-		dce.selectRadius();
+		dce.selectRadius(radisu);
 		Thread.sleep(10000);
 		dce.selectZipcode(zipcode);
 		//dce.selectPharmacyType(Pharmacy_type);
@@ -1206,19 +1207,17 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@When("^I navigate to drug look up page$")
 	public void i_navigate_to_drug_look_up_page() throws Throwable {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dcePage = null;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
-
-			 dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
-			
+			dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
 		} else {
-		
 			AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	
-			 dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
-			
+			dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
 		}
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
 		Assert.assertTrue("Error in navigating to DCE page", dcePage!=null);
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 	}
@@ -1488,7 +1487,63 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 	
+	@When("^I navigate to find care & costs page from menu$")
+	public void i_navigate_to_find_care_costs_page_from_menu() throws Throwable {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dcePage = null;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
+		} else {
+			AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
+		}
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
+		Assert.assertTrue("Error in navigating to DCE page", dcePage!=null);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+	}
+	
+	@When("^I navigate to Find Care & Cost menu$")
+	public void I_navigate_to_find_care_cost_menu() throws Throwable {
+		DrugCostEstimatorPage dcePage = null;
+		TestHarness testHarness = (TestHarness) getLoginScenario()
+				.getBean(PageConstants.TEST_HARNESS_PAGE);
+		dcePage = testHarness.clickFindCareCostMenu();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+
+	}
+	
+	@When("^I navigate to Drug Lookup option$")
+	public void I_navigate_to_drug_lookup_option() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickDrugLookupOption();
+	}
+	
+	@Then("^I verify dosage and quantity fields data$")
+	public void i_verify_drug_name_and_quantity_fields_data(DataTable memberAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String dosage = memberAttributesMap.get("Dosage");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+		String quantityOnDCE = quantity + " " + frequency;
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyDrugDosage(dosage);
+		dce.verifyDrugQuantity(quantityOnDCE);
+	}
+	
+	@Then("^I verify Total cost Annual deductible and Drug coverage legend tooltips$")
+	public void iVerifyTotalCostAnnualDeductibleAndDrugCoverageLegendTooltips() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyTooltips();
+	}
 }
 
 

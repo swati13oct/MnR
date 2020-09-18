@@ -2,7 +2,7 @@
 Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
 @SiteSearchUHC  @SiteSearchRegressionUHC
- Scenario Outline: Verify search results in UHC site
+ Scenario Outline: Verify search results in UHC site - search value -<newsearchvalue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>| 
@@ -19,15 +19,15 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
   @SiteSearchResultsVPPBlayer    @SiteSearchRegressionUHC
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
+   # When the user performs plan search using following information in UMS site
+     # | Zip Code        | <zipcode>         |
+     # | County Name     | <county>          |
+     # | Is Multi County | <isMultutiCounty> |
+    #When user views plans of the below plan type in UMS site for next year
+     # | Plan Type | <plantype> |
+#    #Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    #Then the user view plan details of the above selected plan in UMS site and validates
+     # | Plan Name | <planName> |
       
       Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>| 
@@ -44,7 +44,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
     
  @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
- Scenario Outline: Verify search results in UHC site for Error
+ Scenario Outline: Verify search results in UHC site for Error - search value -<NewSearchValue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>|
@@ -59,7 +59,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
     |Medicare|InvalidCharacter|medicareeee|  
     
 	@SearchResultsPharmacyLocatorBlayer    @SiteSearchRegressionUHC
-  Scenario Outline: To verify search results in pharmacy locator Blayer page
+  Scenario Outline: To verify search results in pharmacy locator Blayer page - search value -<newsearchvalue>
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |      
    Then the user enter the searchValue in the search text box and hits enter

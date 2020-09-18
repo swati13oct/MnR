@@ -129,9 +129,9 @@ public class DCEVPPAcqStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.navigatetoDCEPage(planName);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//plansummaryPage.viewPlanSummary(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigatetoDCEPage(planName);
+		 
 		if (dce != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -566,7 +566,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {

@@ -35,12 +35,12 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
 
     Examples:
       | TID         | username | password | MemUserName         | planType | memberType | flow   |
-      | 15164,15171 | ashah120 | Mnrqa002 | skho@roadrunner.com | MAPD     | Individual | header |
-      | 15164,15171 | ashah120 | Mnrqa002 | LSLOMSKI777         | PDP      | Individual | header |
+      | 15164,15171 | ujethwa | 221Umang | skho@roadrunner.com | MAPD     | Individual | header |
+      | 15164,15171 | ujethwa | 221Umang | LSLOMSKI777         | PDP      | Individual | header |
 
     Examples:
       | TID         | username | password | MemUserName          | planType | memberType | flow   |
-      | 15164,15171 | ashah120 | Mnrqa002 | ALREALESTATE@AOL.COM | MEDICA   | Individual | header |
+      | 15164,15171 | ujethwa | 221Umang | ALREALESTATE@AOL.COM | MEDICA   | Individual | header |
 
 
   @prod_header02
@@ -62,12 +62,12 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
     @headerRegression
     Examples:
       | TID   | username | password  | MemUserName         | planType | memberType              |
-      | 15252 | ashah120 | Mnrqa002e | skho@roadrunner.com | MAPD     | GroupLessSubsidy_header |
+      | 15252 | ujethwa | 221Umange | skho@roadrunner.com | MAPD     | GroupLessSubsidy_header |
 
     @F287624 @US2037787 @US2037966
     Examples:
       | TID       | username | password | MemUserName | planType | memberType                   |
-      | US2037787 | ashah120 | Mnrqa002 | Norm749 | PDP_SSP  | comboAllNot100Subsidy_header |
+      | US2037787 | ujethwa | 221Umang | Norm749 | PDP_SSP  | comboAllNot100Subsidy_header |
 	    # disable for now without suitable user - covered by comboAll100Subsidy_header case where SHIP payment tab is showing
 	    #  | US2037966 | qavgogine | qavgogine | testusername    | PDP_SSP     | comboSomeHas100Subsidy_header |
 
@@ -102,7 +102,7 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
     @headerRegression
     Examples:
       | TID   | username | password | MemUserName         | planType | memberType             |
-      | 15253 | ashah120 | Mnrqa002 | skho@roadrunner.com | MAPD     | IndividualGroup_header |
+      | 15253 | ujethwa | 221Umang | skho@roadrunner.com | MAPD     | IndividualGroup_header |
 
         #note: in this case at the time of test, this PDP SHIP combo user has 100 percent subsidy on PDP
         #note: user will see payment tab because of ship plan
@@ -110,14 +110,14 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
     @F287624 @US2037783 @US2037945
     Examples:
       | TID       | username | password | MemUserName | planType | memberType                |
-      | US2037783 | ashah120 | Mnrqa002 | LSLOMSKI777 | PDP      | comboAll100Subsidy_header |
+      | US2037783 | ujethwa | 221Umang | LSLOMSKI777 | PDP      | comboAll100Subsidy_header |
 
 	    #note: in this case at the time of test, this combo user has both plans with false premiumPayment
 	    #note: therefore, no payment tab should be showing
     @premiumPaymentFalse
     Examples:
       | TID       | username | password | MemUserName | planType | memberType            |
-      | US2037783 | ashah120 | Mnrqa002 | Norm749     | PDP_SSP  | comboNoPremiumPayment |
+      | US2037783 | ujethwa | 221Umang | Norm749     | PDP_SSP  | comboNoPremiumPayment |
 
 
   @prodAuth_header05
@@ -139,7 +139,7 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType | flow   |
-      | 15251 | ashah120 | Mnrqa002 | kataz2525 | SHIP     | Medsupp    | header |
+      | 15251 | ujethwa | 221Umang | kataz2525 | SHIP     | Medsupp    | header |
 
   @prodAuth_header06
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
@@ -165,7 +165,7 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
 
     Examples:
       | TID   | username | password | MemUserName | memberType        |
-      | 15162 | ashah120 | Mnrqa002 | erbenoit56  | Terminated_header |
+      | 15162 | ujethwa | 221Umang | erbenoit56  | Terminated_header |
 
 ############End of non regression scenarios###################
 

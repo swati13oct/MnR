@@ -1,9 +1,13 @@
 package acceptancetests.acquisition.callChat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
@@ -12,7 +16,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
-
+//import pages.acquisition.commonpages.AcquisitionHomePage;
 /**
  *Functionality:Global Header Footer 
  */
@@ -53,7 +57,7 @@ public class SAMIconsStepDefinitionAARP {
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
+		//aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		/*
 		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
@@ -61,17 +65,16 @@ public class SAMIconsStepDefinitionAARP {
 		 */
 	}
 	
-	
 	@Then("^the user validates whether chat icon is visible on AARP")
 	public void the_user_validates_whether_chaticon_isvisible_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
-		//aquisitionhomepage.validateChatpopupconnect();	
+		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
-
+	
 	@Then("^the user validates whether chat Agent is Available on AARP")
 	public void the_user_validates_whether_chat_Agent_is_visible_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -82,6 +85,15 @@ public class SAMIconsStepDefinitionAARP {
 		
 	}
 
-	
-	
+	@Then("^user validates whether chat Agent is not Available on AARP")
+	public void the_user_validates_whether_chat_Agent_is_not_visible_on_UHC() throws Throwable {
+	boolean flag= false;
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	flag=aquisitionhomepage.validateChat();
+
+		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
+		
+	}
+
 }

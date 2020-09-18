@@ -4,7 +4,7 @@
 Feature: 2.08. ACQ-Visitor profile - UMS
 
   @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC @prodRegression @DCE_Regression_Blayer_VisitorProfile
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile
     Given user is on blue layer landing page
     And the user selects the state drop down value in UHC home page
       | State | <state> |
@@ -30,7 +30,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And I navigate to step3 page and validate drug info for DCE homepage flow uhc
       | Drug | <drug> |
     And the user returns to the visitor profile page in UHC
-    Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
+    Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
 
     Examples: 
@@ -38,7 +38,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2019 |
 
   @addDrugsDCE
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information from DCE to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
       | State | <state> |
@@ -60,8 +60,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And I select the first pharmacy on there
     And I navigate to step3 page and validate drug info for DCE homepage flow uhc
       | Drug | <drug> |
-    And the user clicks on the shopping cart icon on DCE page
-    Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
+    And the user clicks on the shopping cart icon on DCE page on uhc
+    Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
 
     Examples: 
@@ -110,9 +110,10 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
 
+# The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+#      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionUHC @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -297,7 +298,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       |   10001 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @AddDrugsAuthenticated
-  Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile
     Given user is on blue layer landing page
     And the user clicks on the shopping cart icon in UHC site
     Then the user signs in with optum Id credentials in UHC site
@@ -324,7 +325,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And I navigate to step3 page and validate drug info for DCE homepage flow uhc
       | Drug | <drug> |
     And the user returns to the visitor profile page in UHC
-    Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
+    Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
     And user delets all the added drugs on visitor profile page of UHC site
 

@@ -121,7 +121,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='printdetails']")
 	protected WebElement validatePrintButtonOnPlanDetails;
 
-	@FindBy(xpath=".//*[@id='printComparison']")
+	@FindBy(xpath=".//*[contains(@id,'printComparison')]")
 	protected WebElement compare_validateprintbutton;
 
 	@FindBy(xpath=".//*[@id='emailComparison']")

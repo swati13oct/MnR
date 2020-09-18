@@ -1,6 +1,6 @@
 @regressionMember
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
-  
+
   @regressionMemberPROD @memAuthProdOnetimeCreditCardPayment @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 01- To validate Credit Card Payments Flow
     Given the user is on member auth login flow page
@@ -22,7 +22,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+      | F243897 | jkuma14  | Brock@03 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
   @regressionMemberPROD @memAuthProdOneTimeEFT @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 02-Verify EFT payment flow for federal member
@@ -48,10 +48,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | ashah120 | Mnrqa002 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
- 
-   
   @regressionMemberPROD @memAuthProdOneTimeEFTCancel @CodeTransformers
   Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel EFT federal member
     Given the user is on member auth login flow page
@@ -68,6 +66,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      |
-      | F243897 | ashah120 | Mnrqa002 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months |
-
-  
+      | F243897 | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months |

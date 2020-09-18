@@ -315,6 +315,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 							||	planType.toUpperCase().equals("MAPD") 
 							|| planType.toUpperCase().equals("SSP")))
 				testInputInfoMap.put("expectedUrl", "Potential_for_Contract_Termination.pdf");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
+					testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
+			}
 			
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -505,6 +509,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("switchTab", "true");
 			testInputInfoMap.put("headerText","Your Privacy is Important");
 			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
+			//tbd if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				testInputInfoMap.put("headerText","You have the right to privacy");
+				testInputInfoMap.put("sampleBodyText","What you need to do");
+				//tbd }
 			return testInputInfoMap; 
 		}	
 
@@ -588,6 +596,18 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("sampleBodyText","To opt out of the prescription drug coverage");
 			return testInputInfoMap; 
 		}			
+
+		if (docName.equals("Medicare Part D Claim Form")) {
+			testInputInfoMap.put("docName", docName);
+			testInputInfoMap.put("expectedUrl", "Medicare-Part-D-Claim-Form.pdf");
+			testInputInfoMap.put("redirectUrl", "none");
+			testInputInfoMap.put("checkDestUrl", "true");
+			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","MEDICARE PART D CLAIM FORM"); 
+			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement");
+			return testInputInfoMap; 
+		}
+
 		
 		Assert.assertTrue("PROBLEM - need to update ATDD to handle docName='"+docName+"'", false);
 		return testInputInfoMap;

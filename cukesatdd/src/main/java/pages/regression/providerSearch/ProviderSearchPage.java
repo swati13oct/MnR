@@ -256,11 +256,13 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	}
 
 	public WebDriver navigateToBenefitsPage() {
+		checkModelPopup(driver, 1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
 		} else if (noWaitValidate(uhcProviderSearchBenefitsLnk)) {
 			uhcProviderSearchBenefitsLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
+			checkModelPopup(driver, 1);
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
@@ -272,9 +274,10 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 20);
+		checkModelPopup(driver, 1);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page",
-				noWaitValidate(benefitsPgHeader));
+				noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
 		return driver;
 	}
 

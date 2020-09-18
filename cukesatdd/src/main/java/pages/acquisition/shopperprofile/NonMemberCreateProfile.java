@@ -15,6 +15,7 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class NonMemberCreateProfile extends UhcDriver {
 	
@@ -39,7 +40,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	@FindBy(id = "zipCode")
 	private WebElement zipCode;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//input[@id='zipCode']/following::button[contains(text(),'Profile')][1]")
 	private WebElement btnCreateProfile;
 	
 	@FindBy(xpath="//div[contains(@class,'progress-bar')]")
@@ -126,7 +127,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 			switchToNewTab();
 			CommonUtility.checkPageIsReadyNew(driver);
 			Thread.sleep(5000);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-compare")) {
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);
 			}else {
 				System.out.println("Compare Plans page is not loaded");

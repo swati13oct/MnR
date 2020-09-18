@@ -18,7 +18,7 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
@@ -483,16 +483,17 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             			threadsleep(2000);
                             			drugsearchBox.clear();
                             			drugsearchBox.sendKeys(drugName);
-                            			if(searchButtonClick) {
-                            			drugsearchButton.click();
-                            			threadsleep(6000);
-                            			validate(modalSelcetedDrug,30);
-                            			threadsleep(2000);
-                            			Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),"Drug name is not Matched :"+drugName);
-                            			//Select modal
-                            			threadsleep(2000);
-                            			modalcontinue.click();
-                            			threadsleep(2000);
+                            			if(searchButtonClick) 
+                            			{
+                            				drugsearchButton.click();
+                            				threadsleep(6000);
+                            				validate(modalSelcetedDrug,30);
+                            				threadsleep(2000);
+                            				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),"Drug name is not Matched :"+drugName);
+                            				//Select modal
+                            				threadsleep(2000);
+                            				modalcontinue.click();
+                            				threadsleep(2000);
                             			}
                             			else {
                             				drugsAutoList.get(0).click();
