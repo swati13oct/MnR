@@ -1165,5 +1165,26 @@ try {
 		}
 		return ReturnValue;
 	}
+    
+    public boolean waitForPageLoadSafari() {
+//    	CommonUtility.checkPageIsReadyNew(driver);
+//    	List<WebElement> overlay = driver.findElements(By.xpath("//body/div[@id='overlay']"));
+//    	WebElement vppTop = driver.findElement(By.xpath("//div[contains(@class,'overview-main')]//h2"));
+    	threadsleep(2);
+    	WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
+    	int counter = 20;
+    	
+    	do {
+    		if(!overlay.isDisplayed()) {
+    			return true;
+    		}
+    		System.out.println("Waiting for page to load");
+    		counter--;
+    		
+    	} while(counter != 0);
+  
+    	return false;
+    	
+    }
 
 }

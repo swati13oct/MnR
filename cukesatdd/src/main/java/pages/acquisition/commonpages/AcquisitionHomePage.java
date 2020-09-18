@@ -917,9 +917,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			viewPlansButton.click();
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
-			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				waitForPageLoadSafari();
+			}
 			
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+//			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
 			}

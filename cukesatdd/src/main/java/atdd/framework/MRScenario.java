@@ -94,6 +94,7 @@ public class MRScenario {
 
 	public static String environment = System.getProperty("environment");
 	public static String browsername = "chrome";
+	public static String browserName;
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -853,6 +854,7 @@ try {
 
 	}
 
+	
 	public void DriverQuit()
 
 	{
@@ -948,7 +950,7 @@ try {
 
 		// if the browsername is passed in from Jenkins then use that, otherwise use the
 		// one from the CI config properties file
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		// if the browser version is passed in from Jenkins then use that, otherwise use
