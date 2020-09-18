@@ -1941,8 +1941,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(FIndPlansButton);
 		FIndPlansButton.click();
 		
-			CommonUtility.checkPageIsReadyNew(driver);
-		if (countyModal.isDisplayed()) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(countyModal,15)) {
 			return new MultiCountyModalPage(driver);
 		}
 		return null;

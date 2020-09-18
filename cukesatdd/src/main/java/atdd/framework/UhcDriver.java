@@ -824,10 +824,12 @@ try {
 		for(String winHandle : driver.getWindowHandles()){
 			if(!winHandle.equals(winHandleBefore)) {
 				driver.switchTo().window(winHandle);
+				break;
 			}
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement currentSysTimeElement=timeJson;
+//		WebElement currentSysTimeElement=timeJson;
+		WebElement currentSysTimeElement = driver.findElement(By.xpath("//body/pre"));
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
