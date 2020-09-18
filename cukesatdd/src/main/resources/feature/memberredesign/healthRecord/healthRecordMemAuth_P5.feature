@@ -82,7 +82,7 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 17    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl020     | MEDICA   | IHR                | true       |
-	    | 18    | F424804 | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022     | PCP      | IHR                | true       |
+	    | 18    | F424804 | qavgogine | qavgogine | q2_jun_sofl0002         | PCP      | IHR                | true       |
 
 
 	    
