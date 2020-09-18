@@ -208,10 +208,10 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 					}
 				} else if (currentPageName.contains("DRUG")) {
 					previousPageName = "Doctor";
-					previousPagePercentage = "50%";
-					nextPageName = "Pharmacy";
-					nextPagePercentage = "60%";
-					currrentPagePercentage = "50%";
+					previousPagePercentage = "60%";
+					nextPageName = "Additional";
+					nextPagePercentage = "70%";
+					currrentPagePercentage = "60%";
 					if (currentPageName.contains("SKIP"))
 						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
 							nextPageName = "Additional";
@@ -224,7 +224,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 					nextPagePercentage = "70%";
 					currrentPagePercentage = "60%";
 				} else if (currentPageName.contains("ADDITIONAL")) {
-					previousPageName = "Pharmacy";
+					previousPageName = "Drug";
 					previousPagePercentage = "70%";
 					nextPageName = "Cost";
 					nextPagePercentage = "80%";
