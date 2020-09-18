@@ -71,48 +71,48 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   										| tfnXpath                                      													 | tfnFlag |
+      |	AARP	| medicare-education.html                                  | Understanding Medicare | AARP Medicare Plans   								| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		 | true    |
+      |	AARP	| medicare-education/medicare-eligibility.html             | Medicare Eligibility | AARP Medicare Plans     								| //*[@class='amp']//a[contains(@class, 'tel')] 													 | true    |
+      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
+      |	AARP	| medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits | AARP Medicare Plans			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
 
 		@MedEdPages_1_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   											| tfnXpath                                      														| tfnFlag |
+      |	UHC		| medicare-education.html                                  | Understanding Medicare | UnitedHealthcare  											| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]			| true    |
+      |	UHC		| medicare-education/medicare-eligibility.html             | Medicare Eligibility | UnitedHealthcare    											| //*[@class='ums']//a[contains(@class, 'tel')] 														| true    |
+      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare					| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 	| true    |
+      |	UHC		| medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | UnitedHealthcare 	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 			| true    |
 		
 		
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
-      |	site	| path                                              | pageName              | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //a[contains(@class, 'tel')] | true   				|
-      |	AARP	| medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                              | pageName              																					| tfnXpath                                      													| tfnFlag |
+      |	AARP	| medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+      |	AARP	| medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | AARP Medicare Plans 		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true   	|
+      |	AARP	| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | AARP Medicare Plans      		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
-      |	site	| path                                              | pageName              | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                              | pageName              																			| tfnXpath                                      													| tfnFlag |
+      |	UHC		| medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans | UnitedHealthcare       	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+      |	UHC		| medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | UnitedHealthcare 			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	UHC		| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | UnitedHealthcare		      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
     
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      								| tfnFlag |
-      |	AARP	| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //span[contains(@style,'inline')]//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='amp']//a[contains(@class, 'tel')] 								| true    |
-      |	AARP	| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                  | pageName                    													| tfnXpath                                      													| tfnFlag |
+      |	AARP	| medicare-education/medicare-costs.html                | Medicare Cost Basics | AARP Medicare Plans 						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+      |	AARP	| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	AARP	| medicare-education/medicare-faq.html                  | Medicare FAQ | AARP Medicare Plans	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      								| tfnFlag |
-      |	UHC		| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //span[contains(@style,'inline')]//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@class, 'tel')] 								| true    |
-      |	UHC		| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@class, 'tel')] 								| true    |  
+      |	site	| path                                                  | pageName                    											| tfnXpath                                      													| tfnFlag |
+      |	UHC		| medicare-education/medicare-costs.html                | Medicare Cost Basics | UnitedHealthcare						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+      |	UHC		| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | UnitedHealthcare    	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	UHC		| medicare-education/medicare-faq.html                  | Medicare FAQ | UnitedHealthcare	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |  
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
