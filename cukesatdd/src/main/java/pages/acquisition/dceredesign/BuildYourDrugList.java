@@ -43,7 +43,6 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
-	
 	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
 	public WebElement AutoCompleteList;
 

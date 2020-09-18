@@ -78,8 +78,6 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page function
       | Multi Doctor        | <isMultiDoctor>    |
     And user selects skip option in Drug page mobile
       | Drug Selection | <DrugSelection> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
     Then user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validates cost preferences error function in cost preferences page mobile
