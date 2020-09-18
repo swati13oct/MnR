@@ -3,9 +3,12 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -101,6 +104,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
+	private WebElement enterDrugsInfoMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview div.plan-name-div")
 	private List<WebElement> MAPlansId;
 	
@@ -110,10 +116,13 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a[id*='drug-list-title']")
 	private WebElement drugsInfoMA1stPlan;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='DrugName']")
+	private List<WebElement> drugsListMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a[id*='provider-title']")
 	private WebElement providersInfoMA1stPlan;
 	
-	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='ProviderName']")
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='ProviderName'] span:nth-child(1)")
 	private List<WebElement> providersListMA1stPlan;
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1)")
@@ -319,7 +328,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 // VPP Details page
 	
-	@FindBy(css = ".uhc-container div.content h2:nth-child(2)")
+	@FindBy(css = ".uhc-container div.content h2")
 	private WebElement planNameVPPDetailsPage;
 	
 	@FindBy(id = "backToPlanSummaryTop")
@@ -328,7 +337,18 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
 	
-		
+	@FindBy(css = "label[for='currentYear']")
+	private WebElement currentPlanYear;
+	
+	@FindBy(css = "label[for='futureYear']")
+	private WebElement futurePlanYear;
+	
+	@FindBy(css = "input#futureYear[class*='selected']")
+	private WebElement futurePlanYearSelected;
+	
+	@FindBy(css = "input#currentYear[class*='selected']")
+	private WebElement currentPlanYearSelected;
+	
 //Result Loading Page Element Verification Method 
 
 	public void resultsloadingpage() {
@@ -575,7 +595,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void DrugsDetailsVPPtoPRE() {
 			System.out.println("Validating Drugs Details from DCE to VPP Drug Page: ");
-			DrugsInDCE = ACQDrugCostEstimatorPage.DCEDrugsList;
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			DrugsInDCE = dce.vppDrugsResults;
 			int count =DrugsInDCE.size();
 			drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
@@ -590,7 +611,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
     		drugcoveredsession();
     		DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")).click();
     		threadsleep(8000);
-    		drugCoveredeVPP.click();
+//    		drugcoveredsession();
     		pageloadcomplete();
     		drugsCoveredInVPP(count-1);
     		int afterRemove = DrugsList.size();
@@ -614,7 +635,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			for (int i = count-1; i >= 0; i--) {
 				threadsleep(1000);
 				DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() + " " +
-						DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)")).getText().trim().replace("Qty ", ""));
+						DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)")).getText().trim().replace("Qty ", "").toUpperCase());
 				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
 				WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
 				validate(RemoveIcon,20);
@@ -637,7 +658,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
     		if(drug.size()==drugListVPP.size() && count==drug.size()) {
     			String druglist =drug.toString();
     			String vppdruglist =drugListVPP.toString();
-    			if(druglist.equalsIgnoreCase(vppdruglist)) {
+    			if(druglist.contains(vppdruglist)) {
     				System.out.println("Drug and Modal Result's Content matched");
     			}
     			else {
@@ -675,9 +696,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
-		int MAPD = 7;
-		int PDP = 4;
-		int None = 7;
+		int MAPD = 6;
+		int PDP = 3;
+		int None = 6;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
@@ -1290,5 +1311,60 @@ public void browserBack() {
 	driver.navigate().back();
 	plansLoader();
 }
-	
+
+public void useraddDrugsVPP(String drugDetails) {
+	threadsleep(10000);
+	validate(enterDrugsInfoMA1stPlan, 60);
+	enterDrugsInfoMA1stPlan.click();
+	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+	dce.drugsHandlerWithdetails(drugDetails);
+	dce.getDrugsDCE();
+	dce.choosePharmacyandBacktoPlans();
+}
+
+public boolean changePlanyear(String year) {
+	// Checking and Changing to Current Year
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15)) {
+			currentPlanYear.click();
+			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
+			return true;
+		}
+	}
+
+	// Checking and Changing Future Year
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15)) {
+			futurePlanYear.click();
+			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
+		}
+	}
+	return false;
+}
+
+public boolean checkPlanyear(String year) {
+	// Checking Current year selection
+	try {
+		MAViewPlansLink.click();
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
+			return true;
+		}
+	}
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15) && futurePlanYearSelected.getAttribute("id").length()>0) {
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is not available / not selected");
+		}
+	}
+	}catch(Exception e) {
+		System.out.println("Exception Occcured Plan year toggle");
+	}
+	return false;
+}
+
 }

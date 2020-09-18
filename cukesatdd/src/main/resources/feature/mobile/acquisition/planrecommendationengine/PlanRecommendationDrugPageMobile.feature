@@ -100,7 +100,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch     |
-      |   35034 | YES           | Bibb County | MAPD          | None         | Regular      | AcceptsMedicare  |             |               | Yes           | Actiq,NO,Actiq LOZ 400MCG,Box of 30.0(sold in a package of 1),3,3,YES,NO |
+      |   35034 | YES           | Bibb County | MAPD          | None         | Regular      | AcceptsMedicare  |             |               | Yes           | Actiq,NO,Actiq LOZ 400MCG,Box of 30.0(sold in a package of 1),1,3,YES,NO |
 
   @PRE @planrecommandonationmobile @drugpagemobile @multipledrug @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with multiple drug in PRE Mobile
@@ -126,7 +126,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch           |
-      |   10003 | NO            | New York | None          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO |
+      |   10003 | NO            | New York | None          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO |
 
   @PRE @planrecommandonationmobile @drugpagemobile @removedrug @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with remove drug in PRE Mobile
@@ -152,7 +152,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                |
-      |   10003 | NO            | New York | None          | None         | WithinUS     | AcceptsMedicare  |             |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO:Actiq,NO,,,,1,YES,NO |
+      |   10003 | NO            | New York | None          | None         | WithinUS     | AcceptsMedicare  |             |               | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO:Actiq,NO,,,,1,YES,NO |
 
   @PRE @planrecommandonationmobile @drugpagemobile @drugcancelmodal @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page cancel function in PRE Mobile
@@ -274,7 +274,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10003 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,YES                              |
+      |   10003 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,YES                              |
 
   @PRE @planrecommandonationmobile @drugpagemobile @drugnotfound @drugpageadddrugmobile @F374225 @F413341
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page drug not found function in PRE Mobile
