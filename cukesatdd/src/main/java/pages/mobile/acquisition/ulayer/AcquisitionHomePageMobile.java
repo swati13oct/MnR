@@ -177,7 +177,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	// @FindBy(css = "#zipcodebtn")
 	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 
@@ -408,7 +407,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
-	
+
 	private PageData globalFooter;
 
 	public JSONObject globalFooterJson;
@@ -450,27 +449,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
-	
-	
+
 	public AcquisitionHomePageMobile(WebDriver driver, String site) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(site);
 	}
-	
+
 	public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
 	}
-	
-	public AcquisitionHomePageMobile(WebDriver driver, String siteOrPage,String testharnessurl) {
+
+	public AcquisitionHomePageMobile(WebDriver driver, String siteOrPage, String testharnessurl) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate(siteOrPage,testharnessurl);
+		openAndValidate(siteOrPage, testharnessurl);
 	}
-	
+
 	public DCETestHarnessPageMobile GetDCEtestHarnessPage() {
 		return new DCETestHarnessPageMobile(driver);
 	}
@@ -493,80 +490,76 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
-		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
-		//String testharurl = "content/pharmacysearchtestharnesspage.html";
+		String testharurl = "content/" + testharnessurl + "testharnesspage.html";
+		// String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL + testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
-				startNew(AARP_ACQISITION_PROD_PAGE_URL+testharurl);
-				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				startNew(AARP_ACQISITION_PROD_PAGE_URL + testharurl);
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = AARP_ACQISITION_PAGE_URL + testharurl;
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: "+driver.getCurrentUrl());
-		}
-		else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+		} else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL + testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = UMS_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=UMS_ACQISITION_PAGE_URL;
-				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
+				testSiteUrl = UMS_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl + testharurl);
+				MicroAppSiteUrl = UMS_ACQISITION_PAGE_URL + testharurl;
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
 	}
-	
-	
 
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
-			
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		testSiteUrl=driver.getCurrentUrl();
-		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
-		try{
-			if(proactiveChatExitBtn!=null)
-			jsClickNew(proactiveChatExitBtn);
-			
-			else 
-				Assert.fail("Please check booleanvalue");
-			
-		}catch(Exception e){
-			System.out.println("Proactive chat popup not displayed");
-		}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			testSiteUrl = driver.getCurrentUrl();
+			checkModelPopup(driver);
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
+			try {
+				if (proactiveChatExitBtn != null)
+					jsClickNew(proactiveChatExitBtn);
+
+				else
+					Assert.fail("Please check booleanvalue");
+
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
 		}
 	}
 	// public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
@@ -594,83 +587,83 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if ("BLayer".equalsIgnoreCase(site)|| site.equalsIgnoreCase("UHC")||site.equalsIgnoreCase("UMS")) {
+		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
-				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
-				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
-				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 			}
-			
-		} else if("health-plans".equalsIgnoreCase(site)){
+
+		} else if ("health-plans".equalsIgnoreCase(site)) {
 			isHealthPlan = true;
-				CommonUtility.checkPageIsReadyNew(driver);
-				System.out.println("Current page URL: "+driver.getCurrentUrl());
-				testSiteUrl=driver.getCurrentUrl();
-				checkModelPopup(driver,15);
-				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
-				try{
-					if(proactiveChatExitBtn!=null)
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			testSiteUrl = driver.getCurrentUrl();
+			checkModelPopup(driver, 15);
+			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+			try {
+				if (proactiveChatExitBtn != null)
 					jsClickNew(proactiveChatExitBtn);
-					
-					else 
-						Assert.fail("Please check booleanvalue");
-					
-				}catch(Exception e){
-					System.out.println("Proactive chat popup not displayed");
-				}
-		}else if(site.equalsIgnoreCase("AARP")|| site.equalsIgnoreCase("Ulayer")||site.equalsIgnoreCase("AMP")){
+
+				else
+					Assert.fail("Please check booleanvalue");
+
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else if (site.equalsIgnoreCase("AARP") || site.equalsIgnoreCase("Ulayer") || site.equalsIgnoreCase("AMP")) {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
-				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver,45);
-			}
-			else if (MRScenario.environment.equals("prod")) {
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.equals("prod")) {
 				start(AARP_ACQISITION_PROD_PAGE_URL);
-				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver,45);
-			}else if (MRScenario.environment.contains("stage-0")) {
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			}
-			else {
+			} else {
 				start(AARP_ACQISITION_PAGE_URL);
-				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver,30);		
+				checkModelPopup(driver, 30);
 			}
 		}
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,15);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		checkModelPopup(driver, 15);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-		try{
-			if(proactiveChatExitBtn.isDisplayed())
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}
-	
+
 	public void checkForSecurityPage() {
-		if(!MRScenario.domain.contains("uhc.com")) {
+		if (!MRScenario.domain.contains("uhc.com")) {
 			try {
 				if (advancedBtn.isDisplayed()) {
 					advancedBtn.click();
 					proceedLink.click();
 				}
-				} catch (Exception e) {
-					System.out.println("Advanced button not displayed");
-				}
+			} catch (Exception e) {
+				System.out.println("Advanced button not displayed");
+			}
 		}
 	}
-	
+
 	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
@@ -681,6 +674,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
@@ -701,6 +695,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+
 	public AcquisitionHomePageMobile homeFooterClick() {
 		validateNew(footerHomeLink);
 		footerHomeLink.click();
@@ -1961,28 +1956,30 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 		return null;
 	}
-	public void navigateToShopPDPpage()
-	{
+
+	public void navigateToShopPDPpage() {
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(ShopForaplan);
 			actions.build().perform();
 			System.out.println("Hover over Shop for a Plan completed");
-	    }
-		WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+		}
+		WebElement PDPplansLink = driver.findElement(By.xpath(
+				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 		jsClickNew(PDPplansLink);
 	}
-	
+
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
+		WebElement DCELink = driver.findElement(
+				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
-	
+
 	public keywordSearchAARP searchfield() {
 		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
@@ -2001,16 +1998,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return new keywordSearchAARP(driver);
 		return null;
 	}
-	
+
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
+
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		validateNew(getStarted);
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", getStarted);
-		//getStarted.click();
-		
-		
+		// getStarted.click();
+
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

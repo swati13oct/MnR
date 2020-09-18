@@ -250,7 +250,7 @@ checkForIPerceptionModel(driver);
 		lastNameField.sendKeys(lastName);
 		jsClickNew(ElectronicSignatureInput);
 		ContinueButton.click();
-		System.out.println("Clicked on Contuine button");
+		System.out.println("Clicked on Continue button");
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -259,7 +259,7 @@ checkForIPerceptionModel(driver);
 		}
 		
 		//WARNING  Please add your condition if you have to , do not comment someone else code/////
-		if ((driver.getTitle().contains("Review Your Recurring Payments Information")) || (driver.getCurrentUrl().contains("payments/onetime"))) 
+		if ((driver.getTitle().contains("Review Your Recurring Payments Information")) || (driver.getCurrentUrl().contains("payments/onetime") || driver.getCurrentUrl().contains("recurring-eft-review")))  
 		{
 			System.out.println("User is on Review Your Recurring Payments Information Page");
 			return new OneTimePaymentPage(driver);

@@ -877,44 +877,33 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 		// driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
-			validate(pdpPlansViewLink, 30);
-			sleepBySec(2);
-			mobileUtils.mobileLocateElementClick(pdpPlansViewLink);
-			// CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			// note: add sleep for timing issue, tried increase timeout from
 			// waitForPageLoadNew but didn't work
-			// pdpPlansViewLink.click();
-			System.out.println("PDP Plan Type Clicked");
-			validate(planListContainer, 30);
-			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			validate(maPlansViewLink, 30);
-			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 90);
-			sleepBySec(8);
-			mobileUtils.mobileLocateElementClick(maPlansViewLink);
-			// maPlansViewLink.click();
-			validate(planListContainer, 30);
-			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MS")) {
-			validate(msPlansViewLink, 30);
-			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			pdpPlansViewLink.click();
 			sleepBySec(2);
-			mobileUtils.mobileLocateElementClick(msPlansViewLink);
-			// msPlansViewLink.click();
-			validate(medSuppZipCode, 30);
-			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			System.out.println("PDP Plan Type Clicked");
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			validateNew(maPlansViewLink, 30);
+			maPlansViewLink.click();
+			sleepBySec(3);
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			sleepBySec(2);
+			msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
-			validate(snpPlansViewLink, 30);
-			// CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
-			mobileUtils.mobileLocateElementClick(snpPlansViewLink);
-			// snpPlansViewLink.click();
-			validate(planListContainer, 30);
-			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+
+			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
+			snpPlansViewLink.click();
+			sleepBySec(3);
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			/*
 			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
 			 * Auto-generated catch block e.printStackTrace(); }
@@ -952,6 +941,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
+		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
@@ -1191,24 +1181,26 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
 		if (planName.contains("SNP")) {
-			//ElementData elementData = new ElementData("id", "viewDetailsMA");
+			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
-		}
-		else if (planName.contains("HMO")) {
+			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
+			// planName);
+		} else if (planName.contains("HMO")) {
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
-			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			//element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
+			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
+			// planName);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
-		} 
-		/*else if (planName.contains("Regional PPO")) {
-                        //ElementData elementData = new ElementData("id", "viewDetailsMA");
-                        element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
-        } */
-
+		}
+		/*
+		 * else if (planName.contains("Regional PPO")) { //ElementData elementData = new
+		 * ElementData("id", "viewDetailsMA"); element =
+		 * getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+		 * }
+		 */
 
 		return isSpecificPlanInfoPresent;
 	}
@@ -2123,7 +2115,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
+		if (driver.getCurrentUrl().contains("drug-costs")) {
 			System.out.println("DCE Page is loaded");
 			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
 		} else
@@ -4439,6 +4431,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
+
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;

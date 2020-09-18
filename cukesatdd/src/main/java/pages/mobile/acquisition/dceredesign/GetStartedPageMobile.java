@@ -30,12 +30,15 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
-	
+
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
+
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
 	public GetStartedPageMobile(WebDriver driver) {
 		super(driver);
@@ -50,8 +53,9 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
-		if(validate(AddMyDrugsBtn))
-			AddMyDrugsBtn.click();
+		if (validate(AddMyDrugsBtn))
+			// AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -64,7 +68,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
 		AddMyDrugsBtn.click();
-		//return new ZipCodePlanYearCapturePage(driver);
+		// return new ZipCodePlanYearCapturePage(driver);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
 		 * (validateNew(BuildDrugPage_verificationTxt)) {
@@ -78,7 +82,7 @@ public class GetStartedPageMobile extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);	
+			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
@@ -87,9 +91,9 @@ public class GetStartedPageMobile extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
-		return null;	}
-		
+		return null;
+	}
 
 }

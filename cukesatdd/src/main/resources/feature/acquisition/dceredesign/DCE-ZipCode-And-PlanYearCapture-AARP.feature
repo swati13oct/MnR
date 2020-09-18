@@ -7,14 +7,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     	|Site| <site>|
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    When the user clicks on Build Drug List to navigate to Build Drug List Page
+    And the user searches and adds the following Drug to Drug List
     | DrugName | <drugName> |
+    And the user validates all added drugs in DrugList
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     And plan year dropdown should be displayed during AEP
 
-		@dce_redesign_zipcode_planyear_capture_AEP_AARP
+	@dce_redesign_zipcode_planyear_capture_AEP_AARP
     Examples: 
        |drugName|site|
        |Lipitor|AARP|
@@ -42,7 +43,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then load screen should be displayed
     And user should be navigated to Review drug cost estimate page
 
-		@dce_redesign_zipcode_planyear_capture_AEP_AARP
+	@dce_redesign_zipcode_planyear_capture_AEP_AARP
     Examples: 
       |drugName|zipCode |site|
       |Lipitor|  90210 |AARP|
@@ -89,8 +90,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     		|Site| <site>|
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    When the user clicks on Build Drug List to navigate to Build Drug List Page
+    And the user searches and adds the following Drug to Drug List
     | DrugName | <drugName> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP

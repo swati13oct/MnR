@@ -97,6 +97,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 			searchBox.sendKeys(searchParameter);
 			threadsleep(2000);
 			searchButton.click();
+			waitforElement(serachResultsCount);
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
 				for (int i = count-1; i >= 0; i--) {

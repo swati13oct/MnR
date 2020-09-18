@@ -143,6 +143,7 @@ public class VppPlanSummaryMobile {
 
 		plansummaryPage.viewPlanSummary(plantype);
 	}
+
 	
 	/**
 	 * @throws InterruptedException
