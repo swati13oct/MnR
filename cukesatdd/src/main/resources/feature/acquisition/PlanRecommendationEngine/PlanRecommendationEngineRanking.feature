@@ -22,8 +22,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
+#    And user selects pharmacy option in pharmacy page
+#      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -105,8 +105,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     And user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects pharmacy option in pharmacy page
-      | Pharmacy Type | <pharmacyoption> |
+#    And user selects pharmacy option in pharmacy page
+#      | Pharmacy Type | <pharmacyoption> |
     Then user validate elements in loading results page
     Then user validate recommendation rankings in results page
       | Recommendation      | <primaryRecommendation> |
