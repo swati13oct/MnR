@@ -284,7 +284,7 @@ public class VppPlanValidationStepDefinition {
 		                		 currentCellValue = cell.getStringCellValue();
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue().trim();
 		                	 }catch (Exception e) {
-		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
+		                		 System.out.println("Internal Error - Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
 								 int lastcellNum = resultsRow.getLastCellNum();
 								 resultsRow.createCell(lastcellNum).setCellValue(e.getMessage());
@@ -311,7 +311,7 @@ public class VppPlanValidationStepDefinition {
 									 {
 									 	int lastcellNum = resultsRow.getLastCellNum();
 									 	resultsRow.createCell(lastcellNum).setCellValue(ex.getMessage());
-									 	System.out.println("collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan - "+rowIndex + " | Error - " +ex.getMessage() );
+									 	System.out.println("Internal Error - collectInfoVppPlanComparePg - Failed  | Sheet Name - " + sheetName + "| Plan - "+rowIndex + " | Error - " +ex.getMessage() );
 									 	break;
 									 }
 								 }
