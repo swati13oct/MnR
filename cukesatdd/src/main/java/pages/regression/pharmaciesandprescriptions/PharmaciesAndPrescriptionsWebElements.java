@@ -413,7 +413,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[@tabindex='-1']")
 	protected WebElement totalMedicationsInMyMed;
 
-	@FindBy(xpath = "//span[contains(text(),'order processing')]")
+	@FindBy(xpath = "//span[contains(text(),'processing')]")
 	protected List<WebElement> Processing;
 
 	@FindBy(xpath = "//span[contains(text(),'request received')]")
@@ -421,6 +421,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'request placed')]")
 	protected List<WebElement> requestPlaced;
+
+	@FindBy(xpath = "//span[contains(text(),'Your order is in the pharmacy processing')]")
+	protected WebElement  processingMessage;
 
 	@FindBy(xpath = "//div[contains(text(),'Estimated Delivery Date: Pending')]")
 	protected WebElement requestPlacedPending;
@@ -649,6 +652,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'request placed')]")
 	protected List<WebElement> listOfRequestPlaced;
 
+	@FindBy(xpath = "//*[contains(text(),'processing')]")
+	protected List<WebElement> listOfProcessing;
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
 	protected List<WebElement> listOfResolveHold;
@@ -1053,6 +1058,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isRequestPlaced() {
 		if (requestPlaced.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isProcessingMessageDispplayed() {
+		if (processingMessage.getText().contains("pharmacy processing")) {
 			return true;
 		} else {
 			return false;
@@ -1472,6 +1485,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationRequestPlaced;
+
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationProcessing;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
 	protected List<WebElement> listOfRefillLeftEligibleFrRefill;
