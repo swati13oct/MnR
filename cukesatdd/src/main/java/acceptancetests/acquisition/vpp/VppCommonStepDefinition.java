@@ -281,7 +281,7 @@ public class VppCommonStepDefinition {
 
 		}
 		
-		@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary")
+		@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary$")
 		public void User_clicks_BackToPlansLink_and_validates_redirection() {
 
 			PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()

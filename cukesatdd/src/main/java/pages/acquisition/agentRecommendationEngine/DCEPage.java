@@ -1,10 +1,8 @@
 /**
  * 
  */
-package pages.acquisition.planRecommendationEngine;
+package pages.acquisition.agentRecommendationEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -15,12 +13,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-public class ACQDrugCostEstimatorPage extends UhcDriver {
+public class DCEPage extends UhcDriver {
 
-	public ACQDrugCostEstimatorPage(WebDriver driver) {
+	public DCEPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -28,17 +25,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 	}
-
-	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
-	
-	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
-	public static ArrayList<String> DrugsList = new ArrayList<String>();
-	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
-
-	String page = "Drug Cost Estimator";
-
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst;
 
 	// DCE Page Elements
 
@@ -55,13 +41,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	private WebElement drugsearchButton;
 
 	@FindBy(css = "p[id*='drugDosageStrengthId']")
-	private List<WebElement> drugsListed; 
-	
-	@FindBy(css = ".text-regular")
-	private WebElement drugcount;
-	
-	@FindBy(css = "div[class*='list-item-content']")
-	private List<WebElement> drugsListinDCE; 
+	private List<WebElement> drugsListed;
 
 	// drugs Page Modal popup
 
@@ -121,14 +101,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "#nextSummary")
 	private WebElement viewCostButton;
 
-	@FindBy(css = "a[class*='ng-star-inserted']:nth-of-type(1)")
-	private List<WebElement> backtoPlansButton;
+	@FindBy(css = "#atddBackToPlans")
+	private WebElement backtoPlansButton;
 
 	@FindBy(css = "button.delete-drug-confirm")
 	private WebElement deleteBtn;
-	
-	
-	
+
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
 		boolean searchButtonClick = false;
@@ -157,26 +135,20 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				drugAddBtn.click();
-				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
 			}
 		}
+
 	}
 
-    public void choosePharmacyandBacktoPlans() {
-    	validate(drugpageButtons.get(0));
+	public void returnToCompare() {
+		validate(drugpageButtons.get(0));
 		drugpageButtons.get(0).click();
 		pageloadcomplete();
 		threadsleep(2000);
-		validate(backtoPlansButton.get(0));
-		backtoPlansButton.get(0).click();
-		pageloadcomplete();
-		threadsleep(2000);
-}
-	
-	
+	}
+
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
@@ -228,20 +200,37 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Unable to add drug");
 		}
 	}
-	
-	public ArrayList<String> getDrugsDCE() {
-		threadsleep(5000);
-		validate(drugcount, 60);
-		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
-		vppDrugsResults = new ArrayList<String>();
-		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+
+	public void deletedrugsHandlerWithdetails(String drugsDetails) {
+		String dosage = "";
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String drugInfo = drugslist[i];
+			if (drugInfo.trim().length() > 0) {
+				dosage = drugInfo;
+				delete(dosage);
+			}
 		}
-		Collections.sort(vppDrugsResults);
-		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
-		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
-		return vppDrugsResults;
+		threadsleep(2000);
+		returnToCompare();
+	}
+
+	public void delete(String dosage) {
+		validate(drugsearchBox, 30);
+		WebElement deleteLink = driver
+				.findElement(By.xpath("//uhc-list-item[contains(.,'"+dosage+"')]//button[2]"));
+		deleteLink.click();
+		threadsleep(2000);
+		pageloadcomplete();
+	}
+	
+	public void deleteAllDrugs() {
+		int drugLimit = drugDeleteButtons.size(); 
+		for(int i=0;i<drugLimit;i++) {
+			drugDeleteButtons.get(0).click();
+			threadsleep(2000);
+		}
 	}
 
 }
