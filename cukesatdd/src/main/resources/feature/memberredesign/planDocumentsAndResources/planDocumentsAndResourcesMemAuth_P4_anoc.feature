@@ -33,7 +33,7 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	  | Spanish Current Year               | <an_es_cy> | 
 	  | Chinese Current Year               | <an_zh_cy> | 
 	  | English Next Year                  | <an_en_ny> | 
-	  | Chinese Next Year                  | <an_es_ny> | 
+	  | Spanish Next Year                  | <an_es_ny> | 
 	  | Chinese Next Year                  | <an_zh_ny> | 
 
 #	@memAuth_preeffective_ma_mapd
@@ -67,14 +67,14 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	@memAuth_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 11-068 | 15108       | qavgogine | qavgogine | q2_apr_aarp0250    | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
+      | 11-068 | 15108       | qavgogine | qavgogine | q2_apr_aarp0250 | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
 
 	@memAuth_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | qavgogine | qavgogine | q3_sep_UAT4_Group029    | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | qavgogine | qavgogine | q3_sep_UAT4_Group029 | MAPD| GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 #     ### note: PEEHIP group terminated as of 12/31/2019
-#     #| 13-070 | 15130       | qavgogine | qavgogine | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
+#     #| 13-070 | 15130       | qavgogine | qavgogine | testusername   | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 
 #	@memAuth_active_pcp_medica
 #	Examples: 
@@ -84,19 +84,19 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 
 	@memAuth_active_pdp
 	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 16-073 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057    | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
-      | 17-074 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false     | false    | false    |
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny  | an_es_ny | an_zh_ny |
+      | 16-073 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057 | PDP  | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
+      | 17-074 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP    | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | true      | false    | false    |
 
 	@memAuth_active_ssup
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 18-075 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | SSP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
+      | 18-075 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255  | SSP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 
 	@memAuth_active_ship
     Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 19-076 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
-      | 20-118 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012    | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
+      | 19-076 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 20-118 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012| SHIP  | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 
