@@ -1501,6 +1501,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public int checkAllMAPlans(){
 		try {
 			Thread.sleep(5000);
+			waitForPageLoadSafari();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -3369,8 +3370,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//MedSupFormValidation(DateOfBirth);
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
-		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		validate(resumeApplication, 15);
+		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
 	}

@@ -25,6 +25,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
@@ -1167,19 +1168,19 @@ try {
 	}
     
     public boolean waitForPageLoadSafari() {
-//    	CommonUtility.checkPageIsReadyNew(driver);
-//    	List<WebElement> overlay = driver.findElements(By.xpath("//body/div[@id='overlay']"));
-//    	WebElement vppTop = driver.findElement(By.xpath("//div[contains(@class,'overview-main')]//h2"));
     	int counter = 20;
     	boolean ready = false;
     	if(checkIfPageReadySafari()) {
-    		WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
-    		//waitforElementNew(overlay, 10);
-    		//validate(element, timeoutInSec)
     		do {
-    			if(!overlay.isDisplayed()) {
-    				ready = true;
+    			try {
+    				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
+    				if(!overlay.isDisplayed()) {
+    					ready = true;
+    				}
+    			} catch(WebDriverException e) {
+    				counter--;
     			}
+
     			System.out.println("Waiting for page to load");
     			counter--;
 
@@ -1195,8 +1196,12 @@ try {
     	boolean ready = false;
     	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
     		do {
-    			if(!driver.getPageSource().isEmpty()) {
-    				ready = true;
+    			try {
+    				if(!driver.getPageSource().isEmpty()) {
+    					ready = true;
+    				}
+    			} catch(WebDriverException e) {
+    				counter--;
     			}
     			counter--;
     		}
