@@ -144,7 +144,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
-		sleepBySec(2); 
+		sleepBySec(1);
+		checkIfPageReadySafari();
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
@@ -436,6 +437,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 */
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
+		scrollToView(vpp_onlinePharmacyDirectoryLnk);
 		moveMouseToElement(vppDetailSectionHeader);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));

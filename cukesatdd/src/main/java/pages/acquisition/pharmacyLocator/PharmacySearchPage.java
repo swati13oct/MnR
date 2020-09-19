@@ -533,6 +533,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				WebElement contactUsLink=contactUnitedHealthCare;
 				if (!pharmacyValidate(contactUnitedHealthCare)) 
 					contactUsLink=contactUnitedHealthCare_ol;
+				scrollToView(contactUsLink);
 				moveMouseToElement(contactUsLink);
 				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 

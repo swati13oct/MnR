@@ -827,7 +827,7 @@ try {
 				break;
 			}
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
+		checkIfPageReadySafari();
 //		WebElement currentSysTimeElement=timeJson;
 		WebElement currentSysTimeElement = driver.findElement(By.xpath("//body/pre"));
 		String currentSysTimeStr=currentSysTimeElement.getText();
@@ -1170,21 +1170,39 @@ try {
 //    	CommonUtility.checkPageIsReadyNew(driver);
 //    	List<WebElement> overlay = driver.findElements(By.xpath("//body/div[@id='overlay']"));
 //    	WebElement vppTop = driver.findElement(By.xpath("//div[contains(@class,'overview-main')]//h2"));
-    	threadsleep(2);
-    	WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
     	int counter = 20;
-    	
-    	do {
-    		if(!overlay.isDisplayed()) {
-    			return true;
-    		}
-    		System.out.println("Waiting for page to load");
-    		counter--;
-    		
-    	} while(counter != 0);
-  
-    	return false;
-    	
+    	boolean ready = false;
+    	if(checkIfPageReadySafari()) {
+    		WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
+    		//waitforElementNew(overlay, 10);
+    		//validate(element, timeoutInSec)
+    		do {
+    			if(!overlay.isDisplayed()) {
+    				ready = true;
+    			}
+    			System.out.println("Waiting for page to load");
+    			counter--;
+
+    		} while(counter != 0);
+
+    	}
+    	return ready;
     }
 
+    
+    public boolean checkIfPageReadySafari() {
+    	int counter = 20;
+    	boolean ready = false;
+    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    		do {
+    			if(!driver.getPageSource().isEmpty()) {
+    				ready = true;
+    			}
+    			counter--;
+    		}
+    		while(counter != 0);
+    	}
+    	return ready;
+    }
+    
 }
