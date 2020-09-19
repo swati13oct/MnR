@@ -61,8 +61,8 @@ Feature: 1.06.5.1 Member Plans and Documents - section: Provider Directory -or- 
 
 	@memAuth_active_ma
 	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09-085 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595    | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType                    | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 09-085 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595    | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
       | 10-086 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@memAuth_active_mapd
@@ -86,8 +86,8 @@ Feature: 1.06.5.1 Member Plans and Documents - section: Provider Directory -or- 
 	@memAuth_active_pdp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 16-092 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057    | PDP      | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | false    | false    | false    |
-      | 17-093 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP      | COMBO_GROUP_EFF_PDnR  | true  | false | true  | false    | false    | false    | false    | false    | false    |
+      | 16-092 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057 | PDP  | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | false    | false    | false    |
+      | 17-093 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255  | PDP      | COMBO_GROUP_EFF_PDnR  | true  | false | true  | false    | false    | false    | false    | false    | false    |
 
 	@memAuth_active_ssup
 	Examples: 

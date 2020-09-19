@@ -457,11 +457,11 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[contains(@class,'circle')]")
 	protected WebElement ind_revPlnMatlsSec_circle_noGreen;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[contains(@class,'circle')]")
-	protected WebElement ind_revPlnMatlsSec_circle_green;
+	//tbd @FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[contains(@class,'circle')]")
+	//tbd protected WebElement ind_revPlnMatlsSec_circle_green;
 
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and contains(@class,'green')]")
-	protected WebElement ind_revPlnMatlsSec_circle_green_prod;
+	protected WebElement ind_revPlnMatlsSec_circle_green;
 
 	
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//h3")
