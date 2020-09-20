@@ -380,7 +380,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
 				}else if(key.equalsIgnoreCase("Routine Dental")) {
 					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
-					benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
+					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
 				}
 			}
 			//removing footnote values from the end of the key values if any
