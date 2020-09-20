@@ -85,7 +85,17 @@ public class AepPlanComparePage extends UhcDriver {
 					}
 				}
 
-				if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+				if(benefitValueUI.endsWith("1"))
+					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
+				else if(benefitValueUI.endsWith("2"))
+					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
+				else if(benefitValueUI.endsWith("4"))
+					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '4');
+
+				benefitValueUI = benefitValueUI.trim();
+				benefitValue = benefitValue.trim();
+
+				if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 					flag = true;break;
 				}else {
 					flag = false;
@@ -111,9 +121,9 @@ public class AepPlanComparePage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
-	    threadsleep(7000);
+	    threadsleep(5000);
 
-	    CommonUtility.checkPageIsReady(driver);
+	    //CommonUtility.checkPageIsReady(driver);
 
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
