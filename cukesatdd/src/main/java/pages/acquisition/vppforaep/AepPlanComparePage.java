@@ -60,7 +60,8 @@ public class AepPlanComparePage extends UhcDriver {
 			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase();
 			key = key.replace(":", "");
-			columnName = columnName.toLowerCase();
+
+			columnName = columnName.toLowerCase().trim();
 			if(columnName.contains("tier"))
 				System.out.println();
 
@@ -78,20 +79,27 @@ public class AepPlanComparePage extends UhcDriver {
 				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replace(":","").replace(",","").replace("-","").replace(";","");
 
 
-				if(columnName.equalsIgnoreCase("Monthly Premium"))
+				if(columnName.equalsIgnoreCase("Monthly Premium")
+				|| columnName.equalsIgnoreCase("Monthly PremiumPC")
+				|| columnName.equalsIgnoreCase("Monthly PremiumOON"))
 				{
 					if(benefitValue.endsWith(".00") && !benefitValueUI.contains(".")){
 						benefitValue = benefitValue.replace(".00","");
 					}
 				}
+				else {
+					if (benefitValueUI.endsWith("1"))
+						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '1');
+					else if (benefitValueUI.endsWith("2"))
+						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '2');
+					else if (benefitValueUI.endsWith("4"))
+						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '4');
+					else if (benefitValueUI.endsWith("*"))
+						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '*');
+					else if (benefitValueUI.endsWith(".") && !benefitValue.endsWith("."))
+						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '.');
 
-				if(benefitValueUI.endsWith("1"))
-					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
-				else if(benefitValueUI.endsWith("2"))
-					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-				else if(benefitValueUI.endsWith("4"))
-					benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '4');
-
+				}
 				benefitValueUI = benefitValueUI.trim();
 				benefitValue = benefitValue.trim();
 
