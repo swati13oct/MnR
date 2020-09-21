@@ -1460,6 +1460,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(enrollForPlan);
 			enrollForPlan.click();
 		}
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		validate(NextBtn, 20);
 		if(driver.getCurrentUrl().contains("welcome")){

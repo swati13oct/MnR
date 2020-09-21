@@ -1196,7 +1196,6 @@ try {
     	int counter = 10;
     	boolean ready = false;
     	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
-//    		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {
