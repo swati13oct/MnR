@@ -3,6 +3,28 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
 	@DCE_DrugSummary_ValidatePage_AARP 
   Scenario Outline: Test to verify the Drug summary page in AARP
+    Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+   And adds drugs in drug list page
+    | DrugName | <drugName> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+   #And user selects plan year in AARP
+     And user clicks on continue button in Zip Entry Page in AARP
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user verify the drug summary page
+
+     Examples: 
+      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
+      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO)    |
+
+  @DCE_DrugSummary_Page
+  Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user navigates to following medicare acquisition site page
@@ -22,17 +44,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
 
-		@dce_DrugSummary_ValidatePage_AARP
+		@dce_DrugSummary_Page_AARP
     Examples: 
       |	site	| path                     													| pageName                   |	drugName	|	zipCode |
       |	AARP	| health-plans/estimate-drug-costs.html/getstarted 	| DCE Redesign - Get Started |	Lipitor		| 90210 	|
       
-    @dce_DrugSummary_ValidatePage_UHC
+    @dce_DrugSummary_Page_UHC
     Examples: 
       |	site	| path                     													| pageName                   |	drugName	|	zipCode |
       |	UHC		| health-plans/estimate-drug-costs.html/getstarted 	| DCE Redesign - Get Started |	Lipitor		| 90210 	|
-
-      
       
       @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
@@ -149,18 +169,16 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90001 |
      
-     @dceRedesignSwitchtoGenericDrug @F484185
+     @dceRedesignSwitchToGenericDrug @F484185 @F495366
    Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered 
-      Given the user is on AARP medicare acquisition site landing page
-     When the user navigates to following AARP medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-     Then the user validates Get Started Page
-     When the user clicks on Add drugs button
-     And adds drugs in drug list page
-      | DrugName | <drugName> |
-      #And adds drugs in drug list page
-      #| DrugName | <drugName1> |
+   Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+   And adds drugs in drug list page
+      | DrugName | <drug1> |
+      And adds drugs in drug list page
+      | DrugName | <drug2> |
       And clicks on Review drug cost button
      Then user should be navigated to zipcode and plan year capture page for AEP in AARP
      When user enters valid zipcode and county in AARP
@@ -171,16 +189,23 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
      And user should be navigated to Review drug cost estimate page in AARP
      And user should be able to see Medicare Advantage plan by default
      And user click on View Drug Pricing Modal in AARP
-     And user click on Switch To Generic in AARP
+     And user click on lipitor Switch To Generic in AARP
       And user should be navigated to Review drug cost estimate page in AARP
      And user should be able to see Medicare Advantage plan by default
       And user click on View Drug Pricing Modal in AARP
       And user verify drug can switch to generic drug in AARP
      	| DrugName | <drugName2> |
-       
+      And user click on PDP plan to view drug pricing in AARP
+        And user click on Switch To Generic in AARP
+      And user should be navigated to Review drug cost estimate page in AARP
+     And user should be able to see Medicare Advantage plan by default
+      And user click on View Drug Pricing Modal in AARP
+      And user verify drug can switch to generic drug in AARP
+     	| DrugName | <drugName3> |
+      
         Examples: 
-      | path                     | pageName                   |drugName|zipCode |drugName2|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor|90001 |atorvastatin calcium TAB 10MG|
+      |zipCode|drug1|drug2|drugName2|drugName3|
+      | 10001 | Lipitor|Lopressor|atorvastatin calcium TAB 10MG|metoprolol tartrate TAB 50MG|
      
       @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
@@ -210,16 +235,64 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | path                     | pageName                   |drugName|zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  90001 |
       
-      @dceRedesignExtraHelpAlert @F477268
+      @dceRedesignExtraHelpAlert @F477268 @F470669
    Scenario Outline: Test to Verify that Extra help Warning messgae on view drug pricing modal up
-    Given the user is on AARP medicare acquisition site landing page
-    When the user navigates to following AARP medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+   Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+   And adds drugs in drug list page
+    | DrugName | <drugName> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+    When user enters valid zipcode and county in AARP
+      | ZipCode | <zipCode> |
+    And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be able to see Medicare Advantage plan by default
+     And user should verify the Extra help in AARP
+     And user click on View Drug Pricing Modal in AARP
+     And user should verify the drug extra qualification in drug pricing popup in AARP  
+     
+     Examples: 
+      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
+      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO)    |
+      
+      @dceNoDefaultMAPDplan @F492296
+     
+         Scenario Outline: Test to Verify that user can Handle Zip Codes with No Pharmacies Returned
+   Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+   And adds drugs in drug list page
+    | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
+    When user enters valid zipcode and county in AARP
+      | ZipCode | <zipcode> |
+   # And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page in AARP
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be able to see Medicare Advantage plan by default
+    And user should be able to toggle between plan types
+   
+      
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      |   96799 | PDP      | Western District | no             | Orkambi | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      
+      @dceSaveplanandBacktoplans @F492270
+   Scenario Outline: Test to verify that user can Save plan on DCE summary page and navigating back to homepage to retain the cart value
+    Given the user is on the AARP medicare site landing page
+     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     And adds drugs in drug list page
-    | DrugName | <drugName> |
+    | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
@@ -229,11 +302,26 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user should be able to see Medicare Advantage plan by default
-     And user should verify the Extra help in AARP
-     And user click on View Drug Pricing Modal in AARP
-     And user should verify the drug extra qualification in drug pricing popup in AARP  
+    Then user saves plan as favorite on drug summary page AARP site
+       | Test Plans | <testPlans> |
+    Then user save PDP plan as favorite on drug summary page AARP site
+     | PDP Plans | <pdptestPlans> |
+     Then user save SNP plan as favorite on drug summary page AARP site
+     | SNP Plans | <snptestPlans> |
+     And user click on return to home on drug summary in AARP site
+    Then the user clicks on the shopping cart icon in AARP site
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+       |PDP Plans | <pdptestPlans> |
+       | SNP Plans | <snptestPlans> |
+       
+        Examples: 
+     |drug1|zipCode |testPlans|pdptestPlans|snptestPlans|
+     |Orkambi|  10001 |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO)|AARP MedicareRx Preferred (PDP)|UnitedHealthcare Dual Complete (HMO D-SNP)|
+
+      
+       
+      
      
-      Examples: 
-      | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  90001 |
+      
       

@@ -183,12 +183,17 @@ public class DoctorsMobilePage extends UhcDriver {
 		String curdriverhandle = driver.getWindowHandle();
 		modalFinddoctors.click();
 		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
-		confirmationProviderResults=getConfimationPopupResults(count);
+		threadsleep(5000);
+		// Changing the count for multiple doc with : separated
+		if (search.contains(":")) {
+			count = search.split(":").length;
+		}
+		confirmationProviderResults = getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
-		if (count > 2) {
+		if (count > 2 && !search.contains(":")) {
 			removeDoctors();
-			count = count-1;
-			confirmationProviderResults=getConfimationPopupResults(count);
+			count = count - 1;
+			confirmationProviderResults = getConfimationPopupResults(count);
 		}
 		modalContinuedoctors.click();
 	}
@@ -292,10 +297,10 @@ public class DoctorsMobilePage extends UhcDriver {
 	public boolean equalsname(ArrayList<String> werally, ArrayList<String> doctorsmodal) {
 		boolean result = true;
 		for (int i = 0; i < werally.size(); i++) {
-			String wname[] = werally.get(i).toUpperCase().replace(",", "").replace(".", "").split(" ");
+			String wname[] = werally.get(i).toUpperCase().replace(",", " ").replace(".", " ").replace("  ", " ").split(" ");
 			Arrays.sort(wname);
 			for (int j = 0; j < doctorsmodal.size(); j++) {
-				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",", "").replace(".", "").split(" ");
+				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",", " ").replace(".", " ").replace("  ", " ").split(" ");
 				Arrays.sort(dname);
 				System.out.println(Arrays.equals(wname, dname));
 				if (Arrays.equals(wname, dname)) {
@@ -303,6 +308,8 @@ public class DoctorsMobilePage extends UhcDriver {
 					break;
 				} else {
 					result = false;
+					System.out.println("Expected : "+werally.get(i));
+					System.out.println("Actual : "+doctorsmodal.get(j));
 				}
 			}
 		}
