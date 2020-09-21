@@ -57,7 +57,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(id = "otherAmount")
 	public WebElement otherAmountRadioButton;
 	
-	@FindBy(className = "oa-input-control form-control undefined")
+	@FindBy(xpath = "//*[@class='input-group-t']/input")
 	public WebElement otherAmountTextField;
 	
 	@FindBy(xpath = "")
@@ -97,8 +97,8 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	public WebElement sideWidgetTotalYouPayValue;
 	
 	@FindBy(xpath = "//iframe[@class='frame-area']")
-	public WebElement ccIframe ;
-	
+	public WebElement ccAndEftIframe ;
+
 	@FindBy(xpath = "//*[@id='holderName']")
 	public WebElement nameOnCardTextField ;
 	

@@ -121,7 +121,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 
 	private void validateTheAddCardDetailsIframeforCreditCard() {
-		waitTillFrameAvailabeAndSwitch(ccIframe,15);
+		waitTillFrameAvailabeAndSwitch(ccAndEftIframe,15);
 		Assert.assertTrue("PROBLEM - unable to locate Name On Card TextField",guestPaymentsValidate(nameOnCardTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Card Number Text Field",guestPaymentsValidate(cardNumberTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Expiration Month Dropdown",guestPaymentsValidate(expirationMonthDropdown));
@@ -179,7 +179,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 	private void validateTheeftAccDetailsIframeforEFTAcc() {
-
+		waitTillFrameAvailabeAndSwitch(ccAndEftIframe,5);
 		Assert.assertTrue("PROBLEM - unable to locate First Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersFirstNameTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Middle Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersMiddletNameTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Locate Name On Bank Holders's TextField",guestPaymentsValidate(bankHoldersLastNameTextField));

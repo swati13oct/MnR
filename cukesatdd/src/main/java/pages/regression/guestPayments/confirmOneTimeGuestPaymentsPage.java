@@ -218,7 +218,6 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate Email address text field",guestPaymentsValidate(emailTextField));
 		Assert.assertTrue("PROBLEM - unable to locate send email Button",guestPaymentsValidate(sendEmailButton));
 		Assert.assertTrue("PROBLEM - unable to locate Sign in Iframe Header",guestPaymentsValidate(signinIframeHeader));
-		Assert.assertTrue("PROBLEM - unable to locate Body text below header",guestPaymentsValidate(signinIframeBodytext));
 		Assert.assertTrue("PROBLEM - unable to locate Sign in Button",guestPaymentsValidate(signinButton));
 		Assert.assertTrue("PROBLEM - unable to locate Register Now URL Link",guestPaymentsValidate(registerNowURL));
 		Assert.assertTrue("PROBLEM - unable to locate Payment Receipt Header",guestPaymentsValidate(paymentReceiptHeader));
