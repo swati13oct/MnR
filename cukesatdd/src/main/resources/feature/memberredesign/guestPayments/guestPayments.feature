@@ -67,7 +67,6 @@ Feature: 1.06.7 Member Guest Payments Page
      #| 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
       | 10008 | TERMINATEDWithNODUE   | 958542476-1   | 03/28/1941    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
-      | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
       | 10011 | PreffectiveWithNoDue  | 020713181-1   | 09/06/1946    |   RETIREE   |
 
 
@@ -84,6 +83,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
+      | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
       | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE   |
       | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |
 
@@ -119,7 +119,7 @@ Feature: 1.06.7 Member Guest Payments Page
    # And I validate all the header and page elements on One-time payment page
     Then I will entered other amount Due
     #incorrect Amount
-      | Other Amount | 2500 |
+      | Other Amount | 250000 |
     And I will get an error message Cannot exceed annual remaining amount
     Then I will entered other amount Due
     #incorrect Amount
