@@ -560,6 +560,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				CommonUtility.waitForPageLoadNew(driver, resultNavTooltip, 60);
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
 						pharmacyValidate(resultNavTooltip));
+				scrollToView(resultNavTooltip);
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
 						pharmacyValidate(tooltip));
@@ -577,6 +578,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 							+ "Expected='"+expTxt2+"' | "
 							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 				}
+				scrollToView(moveAwayFromTooltip);
 				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",

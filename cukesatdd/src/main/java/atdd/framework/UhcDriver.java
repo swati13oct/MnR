@@ -829,8 +829,7 @@ try {
 			}
 		}
 		checkIfPageReadySafari();
-//		WebElement currentSysTimeElement=timeJson;
-		WebElement currentSysTimeElement = driver.findElement(By.xpath("//body/pre"));
+		WebElement currentSysTimeElement=timeJson;
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
