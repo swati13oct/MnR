@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
@@ -48,7 +49,7 @@ import cucumber.api.java.en.When;
 /**
  * Functionality:DCE Acquisition
  */
-public class DCEACQVPPPlanDetailsMobile {
+public class DCEACQVPPPlanSummaryMobile {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -63,7 +64,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
 
-	@Given("^the consumer is on medicare acquisition site landing page$")
+	@Given("^the enduser is on medicare acquisition site landing page$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
@@ -73,7 +74,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	@When("^the consumer performs plan search using following information$")
+	@When("^the enduser performs plan search using following information$")
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -101,8 +102,53 @@ public class DCEACQVPPPlanDetailsMobile {
 		}
 
 	}
+	
+	@And("^the enduser views the plans of the below plan type and select Next year$")
+	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
-	@Then("^the consumer navigates to the plan details for the given plan type$")
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.viewPlanSummary(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
+	}
+	
+	
+	@And("^enduser access the DCE Redesign from Plan Summary for mentioned plan$")
+	public void accessDCERign_PlanSummaryforPlan(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+		
+	}
+
+	@Then("^the enduser navigates to the plan details for the given plan type in AARP site-$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
 		wd.manage().window().maximize();
@@ -122,7 +168,7 @@ public class DCEACQVPPPlanDetailsMobile {
 
 	}
 
-	@And("^I access the DCE Redesign from Plan Details for the plan$")
+	@And("^enduser access the DCE Redesign from Plan Details for the plan$")
 	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_DETAILS_PAGE);
@@ -133,7 +179,7 @@ public class DCEACQVPPPlanDetailsMobile {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
-	@Then("^the consumer validates Get Started Page$")
+	@Then("^the enduser validates Get Started Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
@@ -141,7 +187,7 @@ public class DCEACQVPPPlanDetailsMobile {
 
 	}
 
-	@Then("^the consumer clicks on Build Drug List to navigate to Build Drug List Page$")
+	@Then("^the enduser clicks on Build Drug List to navigate to Build Drug List Page$")
 	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Build_DrugList() throws Throwable {
 		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
@@ -153,7 +199,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 
-	@Then("^the consumer searches and adds the following Drug to Drug List$")
+	@Then("^the enduser searches and adds the following Drug to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -174,7 +220,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
 
-	@Then("^the consumer clicks on Review Drug Costs to Land on Drug DetailsP Page$")
+	@Then("^the enduser clicks on Review Drug Costs to Land on Drug DetailsP Page$")
 	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_Page() throws Throwable {
 		BuildYourDrugListMobile DCEbuildDrugList = (BuildYourDrugListMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
@@ -182,7 +228,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-	@Then("^the consumer validates planName matches plan Name in VPP$")
+	@Then("^the enduser validates planName matches plan Name in VPP$")
 	public void the_user_validates_planName_matches_plan_Name_in_VPP() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -191,7 +237,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		drugDetailsPage.validatePlanName(PlanName);
 	}
 
-	@Then("^the consumer Captures Drug costs on Drug Details Page$")
+	@Then("^the enduser Captures Drug costs on Drug Details Page$")
 	public void the_user_Captures_Drug_costs_on_Drug_Details_Page() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -208,35 +254,38 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
 	}
 
-	@Then("^the consumer validates Drug Costs section$")
+	@Then("^the enduser validates Drug Costs section$")
 	public void the_user_validates_Drug_Costs_section() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDrugCosts();
 	}
 
-	@Then("^the consumer validates Your Drugs sections$")
+	@Then("^the enduser validates Your Drugs sections$")
 	public void the_user_validates_Your_Drugs_sections() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateYourDrugs();
 	}
 
-	@Then("^the consumer validates Monthly Drug Costs by Stage Section$")
+	@Then("^the enduser validates Monthly Drug Costs by Stage Section$")
 	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Section() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateMonthlyCostStage();
 	}
 
-	@Then("^the consumer validates Important information section$")
-	public void the_user_validates_Important_information_section() throws Throwable {
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+	
+	@Then("^the enduser validates link to Drug Summary Page$")
+	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateImportantInfo();
+		DrugSummaryPage drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+
 	}
 
-	@Then("^the consumer Clicks button to VPP Plan Details Page from Drug Details Page$")
+	@Then("^the enduser Clicks button to VPP Plan Details Page from Drug Details Page$")
 	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -249,8 +298,15 @@ public class DCEACQVPPPlanDetailsMobile {
 			Assert.fail("VPP Plan Details not loaded");
 
 	}
+	
+	@Then("^the enduser validates Important information section$")
+	public void the_user_validates_Important_information_section() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateImportantInfo();
+	}
 
-	@Then("^the consumer validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
+	@Then("^the enduser validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
