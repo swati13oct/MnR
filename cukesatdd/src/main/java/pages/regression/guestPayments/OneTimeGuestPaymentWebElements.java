@@ -48,7 +48,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//h2[@class='uhc-tempo-header__h2 token-font-family-heading-three token-color-gray-dark-base m-0 pad34']/parent::*//p[contains(text(),'Past Amount Due')]")
 	public WebElement pastAmountValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(id = "pastAmountAndCurentChargesFound")
 	public WebElement pastAmountCurrentChargesRadioButton;
 	
 	@FindBy(xpath = "")

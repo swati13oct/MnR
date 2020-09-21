@@ -210,7 +210,6 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
     Then I select Past Amount & current charges Due and choose a Credit Debit payment Method
     Then I will enter Credit card Details
       | Name             | <Name>             |
@@ -223,7 +222,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 915516555-1   | 10/29/1947    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+      | 10000 | MAPD     | 978196889-1   | 10/19/1941    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
       | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
       | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
       | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
@@ -270,7 +269,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
+   # And I validate all the header and page elements on One-time payment page
     Then I select and enter other amount Due and choose a Credit Debit payment Method
      | Other Amount | <otherAmountDue> |
     Then I will enter Credit card Details
