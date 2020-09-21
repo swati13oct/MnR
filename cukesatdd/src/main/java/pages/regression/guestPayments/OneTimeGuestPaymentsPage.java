@@ -121,8 +121,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 
 	private void validateTheAddCardDetailsIframeforCreditCard() {
-		
-		driver.switchTo().frame(ccIframe);
+		waitTillFrameAvailabeAndSwitch(ccIframe,15);
 		Assert.assertTrue("PROBLEM - unable to locate Name On Card TextField",guestPaymentsValidate(nameOnCardTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Card Number Text Field",guestPaymentsValidate(cardNumberTextField));
 		Assert.assertTrue("PROBLEM - unable to locate Expiration Month Dropdown",guestPaymentsValidate(expirationMonthDropdown));
