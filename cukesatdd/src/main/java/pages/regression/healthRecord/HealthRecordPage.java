@@ -143,6 +143,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToClaimsPage() {
+		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 5);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
