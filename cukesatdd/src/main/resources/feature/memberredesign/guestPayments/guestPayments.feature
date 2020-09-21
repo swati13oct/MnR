@@ -160,10 +160,10 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
       | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10001 | PDP      | 915516555-1 | 10/29/1947 | UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10002 | MA       | 915516555-1 | 10/29/1947 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+     # | 10001 | PDP      | 915516555-1 | 10/29/1947 | UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+      #| 10002 | MA       | 915516555-1 | 10/29/1947 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+     # | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+      #| 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
 
   @guestPayment08 @makeOneTimePayment @pastAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
