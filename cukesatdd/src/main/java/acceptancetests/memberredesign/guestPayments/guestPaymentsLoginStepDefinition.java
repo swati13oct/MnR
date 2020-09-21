@@ -180,6 +180,14 @@ public class guestPaymentsLoginStepDefinition {
 		guestPaymentsLogin.verifyDetailsOnErrorPage();
 
 	}
+	@Then("^I will see the sign in link to the authenticated M&R member site$")
+
+	public void signIn_Button_should_be_present() {
+
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
+		guestPaymentsLogin.verifySignInLinkShouldBePresent();
+
+	}
 
 	@Then("^I will not see the sign in link to the authenticated M&R member site$")
 

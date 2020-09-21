@@ -58,6 +58,7 @@ Feature: 1.06.7 Member Guest Payments Page
        | Date of Birth     |  <dob>     |
     And  I will click on the Next Button and navigate to an Error page
     And  I will be instructed to call the number on the back of my ID
+    And I will see the sign in link to the authenticated M&R member site
     #Then I click on the sign in link and navigate to Member Portal sign in page
     #Then I will see the Logo specific to my plan and the Sign in button
 
@@ -74,13 +75,12 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for Blocked Members with No sign in Link
       Given I am on the login screen of Guest Payments Portal
          | Site Name | <siteName> |
-    Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
        | Member ID         | <memberID> |
        | Date of Birth     |  <dob>     |
     And I will click on the Next Button and navigate to an Error page
     And I will be instructed to call the number on the back of my ID
-   # And I will not see the sign in link to the authenticated M&R member site
+    And I will not see the sign in link to the authenticated M&R member site
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
@@ -91,7 +91,6 @@ Feature: 1.06.7 Member Guest Payments Page
   Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
     Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
-   # Then I validate all the header and page elements
     Then I will enter my Member ID and Date of birth
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |

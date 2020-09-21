@@ -212,9 +212,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageOnErrorPage));
 		Assert.assertTrue(errorMessageOnErrorPage.getText().contains("plan information"));
-		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",guestPaymentsValidate(signInLinkOnErrorPage));
-		
-		
+
 		
 		
 	}
@@ -224,6 +222,14 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		
 		
 	}
+	
+	public void verifySignInLinkShouldBePresent() {
+		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",guestPaymentsValidate(signInLinkOnErrorPage));
+		
+		
+	}
+	
+
 
 	public HSIDLoginPage clickOnSignInLink() {
 		signInLink.click();

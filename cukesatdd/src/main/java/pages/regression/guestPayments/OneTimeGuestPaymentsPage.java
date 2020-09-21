@@ -289,7 +289,10 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	}
 
 	public void enterOtherAmount(String otherAmount) {
+		otherAmountRadioButton.click();
+		System.out.println(">>>>>>>>Other Amount due radio button is clicked<<<<<<<<<<<");
 		otherAmountTextField.clear();
+	    System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<");
 		otherAmountTextField.sendKeys(otherAmount);
 	}
 
