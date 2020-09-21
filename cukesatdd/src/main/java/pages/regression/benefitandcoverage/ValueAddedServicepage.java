@@ -109,8 +109,11 @@ public class ValueAddedServicepage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//validateNew(atYourBestTile);
-		validateNew(browseYourOptions);
+		if(atYourBestTile!=null) {
+			validateNew(atYourBestTile);
+		}else {
+			validateNew(browseYourOptions);
+		}
 		//validateNew(hearingCareProgramByHearUSATile);
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
