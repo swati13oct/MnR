@@ -132,6 +132,12 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(1)")
 	private WebElement coverageTitle;
 	
+	// Feedback PopUp
+	@FindBy(css = "iframe[title*=' Survey']")
+	private WebElement popupFrame;
+	
+	@FindBy(css = "button[class*='no']")
+	private WebElement popupNo;
 	
 //Landing Page Element Verification Method 
 	
@@ -311,5 +317,19 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(inputdata.get("CountyDropDown")),
 					"Invalid County Name");
 		}
+	}
+	
+	public boolean close_Popup() {
+		boolean popup_presents = false;
+		System.out.println("Checking Popup Status...");
+		if(validate(popupFrame, 30)) {
+			driver.switchTo().frame(popupFrame);
+			threadsleep(1000);
+			popupNo.click();
+			threadsleep(1000);
+			driver.switchTo().defaultContent();
+			popup_presents = true;
+		}
+			return popup_presents;
 	}
 }

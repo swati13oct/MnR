@@ -62,13 +62,14 @@ public class PlanRecommendationEngineStepDefinition {
 			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
-	
+	boolean if_offline_prod = false, popup_clicked = false;
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
-		aquisitionhomepage.openPRE();
+		if_offline_prod = aquisitionhomepage.openPRE();
 //		aquisitionhomepage.fixPrivateConnection();
+		checkpopup();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
@@ -612,6 +613,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String county = inputValues.get("County Name");
 		String r1 = inputValues.get("1st Recommendation");
 		String r2 = inputValues.get("2nd Recommendation");
+		checkpopup();
 		planSelectorResultspage.resultsUI(zip,county,r1,r2,false);
    	}
 	
@@ -623,6 +625,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String county = inputValues.get("County Name");
 		String r1 = inputValues.get("1st Recommendation");
 		String r2 = inputValues.get("2nd Recommendation");
+		checkpopup();
 		planSelectorResultspage.resultsUI(zip,county,r1,r2,true);
    	}
 	
@@ -799,6 +802,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@When("^user validate email plan list from vpp$")
 	public void user_sendPlanEmail_fromvpp_pdp(DataTable givenAttributes) {
+		checkpopup();
 		readfeaturedata(givenAttributes);
 		String recom = inputValues.get("Recommendation");
 		String email = inputValues.get("EmailID");
@@ -814,6 +818,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate UI and API recommendation rankings in results page$")
    	public void verify_UI_API_rankings_results_page() {
+		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
@@ -830,6 +835,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate Plan Names in VPP Summary and Details in results page$")
    	public void verify_Plan_names_results_page() {
+		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
 	}
@@ -843,6 +849,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
    	public void verify_Future_UI_API_rankings_results_page() {
+		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.checkPlanyear("future");
 		planSelectorResultspage.validateUIAPIRecommendations();
@@ -851,4 +858,11 @@ public class PlanRecommendationEngineStepDefinition {
 		//planSelectorResultspage.validateUIAPIRecommendations();
 		//planSelectorResultspage.validateUIAPIRankingPlans();
    	}
+	
+	public void checkpopup() {
+		if(if_offline_prod && !popup_clicked) {
+			PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
+			popup_clicked = planSelectorhomepage.close_Popup();
+		}
+	}
 }
