@@ -66,10 +66,10 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Pay')]")
 	public WebElement confirmAndPayButton;
 	
-	@FindBy(id = "//h1[contains(text(),'Payment Submitted')]")
+	@FindBy(xpath = "//h1[contains(text(),'Payment Submitted')]")
 	private WebElement confirmationPageHeader;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//span[@class='generic-error'][contains(text(),'Only one payment request can be submitted per business day.')]")
 	private WebElement errorMessage;
 	
 	@FindBy(xpath = "//h1[contains(text(),'Make a One-Time Payment')]")
@@ -144,7 +144,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, confirmationPageHeader, 45);
 			
-			if (driver.getTitle().contains("Payment Submitted")) {
+			if (driver.getCurrentUrl().contains("payment-submit")) {
 				System.out.println(">>>>>>>>>>>>>>>User is on Confirmation Page<<<<<<<<<<<<<<<<<<");
 				return new confirmOneTimeGuestPaymentsPage(driver);
 				

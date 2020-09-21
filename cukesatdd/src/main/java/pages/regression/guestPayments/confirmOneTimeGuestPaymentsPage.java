@@ -91,7 +91,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@for,'emailID')]")
 	private WebElement emailAddressText;
 
-	@FindBy(xpath = "//input[contains(@placeholder,'Input text')]")
+	@FindBy(xpath = "//input[contains(@placeholder,'Email address')]")
 	private WebElement emailTextField;
 
 	@FindBy(xpath = "//button[contains(@class,'send-button-wrap')]")
@@ -103,28 +103,31 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(text(),'Sign In” or “Register' )]")
 	private WebElement signinIframeBodytext;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//a[contains(text(),'Sign In')]")
 	private WebElement signinButton;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//span[contains(text(),'Register Now')]")
 	private WebElement registerNowURL;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "h2[contains(text(),'Payment Receipt')]")
 	private WebElement paymentReceiptHeader;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//span[contains(text(),'Print')]")
 	private WebElement printReceiptURL;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Plan:')]")
 	private WebElement planNameonReceipt;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Member Name:')]")
 	private WebElement memberNameOnReceipt;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'ID:')]")
 	private WebElement idOnReceipt;
+	
+	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Payment Details:')]")
+	public WebElement paymentDetails;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h3[contains(text(),'Total You Paid')]")
 	private WebElement amountPaidOnReceipt;
 
 	@FindBy(xpath = "")
