@@ -96,16 +96,16 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement sideWidgetTotalYouPayValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='holderName']")
 	public WebElement nameOnCardTextField ;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='accountNumber']")
 	public WebElement cardNumberTextField;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='month']")
 	public WebElement expirationMonthDropdown;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='year']")
 	public WebElement expirationYearDropdown;
 	
 	@FindBy(xpath = "//button[contains(text(),'Review and Submit')]")

@@ -58,14 +58,10 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),' Total You Pay ')]")
 	public WebElement totalYouPay;
 	
-	@FindBy(xpath = "")
-	public WebElement agreeToUnitedHealthCareText;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//p/a")
 	public WebElement termsOfServiceLink;
-	
-	@FindBy(xpath = "")
-	public WebElement privacyPolicyLink;
+
 	
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Pay')]")
 	public WebElement confirmAndPayButton;
@@ -126,7 +122,6 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 
 		public void validateHeaderAndPageElementsOnReviewAndSubmitPage() {
 			Assert.assertTrue("PROBLEM - unable to locate Review And Submit Header",guestPaymentsValidate(reviewAndSubmitHeader));
-			Assert.assertTrue("PROBLEM - unable to locate Review And Submit Back Button",guestPaymentsValidate(reviewAndSubmitBackButton));
 			Assert.assertTrue("PROBLEM - unable to locate Review Payment Details Static Text",guestPaymentsValidate(reviewPaymentDetailsStaticText));
 			Assert.assertTrue("PROBLEM - unable to locate payment Details Header",guestPaymentsValidate(paymentDetailsHeader));
 			Assert.assertTrue("PROBLEM - unable to locate change Payments Details Link",guestPaymentsValidate(changePaymentsDetailsLink));
@@ -135,9 +130,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 			Assert.assertTrue("PROBLEM - unable to locate member ID",guestPaymentsValidate(memberID));
 			Assert.assertTrue("PROBLEM - unable to locate payment Details",guestPaymentsValidate(paymentDetails));
 			Assert.assertTrue("PROBLEM - unable to locate total You Pay",guestPaymentsValidate(totalYouPay));
-			Assert.assertTrue("PROBLEM - unable to locate agree To UnitedHealthCare Text",guestPaymentsValidate(agreeToUnitedHealthCareText));
 			Assert.assertTrue("PROBLEM - unable to locate Terms Of Service Link",guestPaymentsValidate(termsOfServiceLink));
-			Assert.assertTrue("PROBLEM - unable to locate privacy Policy Link",guestPaymentsValidate(privacyPolicyLink));
 			Assert.assertTrue("PROBLEM - unable to locate confirm And Pay Button",guestPaymentsValidate(confirmAndPayButton));
 			
 		}
