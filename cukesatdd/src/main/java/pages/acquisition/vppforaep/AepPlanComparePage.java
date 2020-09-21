@@ -68,9 +68,9 @@ public class AepPlanComparePage extends UhcDriver {
 			benefitValue = benefitValue.trim();
 
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
-				counter++;
-				//if(key.contains(columnName)) {
-				flag= true;break;
+//				counter++;
+//				//if(key.contains(columnName)) {
+//				flag= true;break;
 				//	}
 
 			}else if(key.trim().equals(columnName.trim())) {
