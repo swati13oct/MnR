@@ -109,7 +109,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Register Now')]")
 	private WebElement registerNowURL;
 
-	@FindBy(xpath = "h2[contains(text(),'Payment Receipt')]")
+	@FindBy(xpath = "//h2[contains(text(),'Payment Receipt')]")
 	private WebElement paymentReceiptHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'Print')]")
