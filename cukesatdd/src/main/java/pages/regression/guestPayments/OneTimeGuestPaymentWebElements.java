@@ -96,6 +96,9 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement sideWidgetTotalYouPayValue;
 	
+	@FindBy(xpath = "//iframe[@class='frame-area']")
+	public WebElement ccIframe ;
+	
 	@FindBy(xpath = "//*[@id='holderName']")
 	public WebElement nameOnCardTextField ;
 	
