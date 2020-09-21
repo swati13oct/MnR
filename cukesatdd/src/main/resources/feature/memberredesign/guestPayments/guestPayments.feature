@@ -151,7 +151,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate header and and page elements on Review & Submit page
     When I click on Confirm and Pay
     And I navigate to Payment confirmation page and validate all the page elements
-    Then I will click on Print on Confirm Payment page to print my Payment Receipt
+    #Then I will click on Print on Confirm Payment page to print my Payment Receipt
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
     And I validate success Email receipt message and click send to another Email

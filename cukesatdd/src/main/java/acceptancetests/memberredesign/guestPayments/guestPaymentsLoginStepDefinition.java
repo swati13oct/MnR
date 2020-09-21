@@ -365,7 +365,7 @@ public class guestPaymentsLoginStepDefinition {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String emailAddress = memberAttributesRow.get(0).getCells().get(1);
 		confirmOneTimeGuestPaymentsPage confirmOneTimeGuestPaymentsPage = (confirmOneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.Confirm_OneTime_Guest_Payments_Page);
-		confirmOneTimeGuestPaymentsPage.enterEmailAndClickSend(emailAddress);
+	      confirmOneTimeGuestPaymentsPage.enterEmailAndClickSend(emailAddress);
 
 
 	}
