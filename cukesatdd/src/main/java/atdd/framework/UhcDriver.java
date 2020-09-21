@@ -1168,7 +1168,7 @@ try {
 	}
     
     public boolean waitForPageLoadSafari() {
-    	int counter = 20;
+    	int counter = 5;
     	boolean ready = false;
     	if(checkIfPageReadySafari()) {
     		do {
@@ -1176,6 +1176,7 @@ try {
     				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
     				if(!overlay.isDisplayed()) {
     					ready = true;
+    					break;
     				}
     			} catch(WebDriverException e) {
     				counter--;
@@ -1192,13 +1193,17 @@ try {
 
     
     public boolean checkIfPageReadySafari() {
-    	int counter = 20;
+    	int counter = 10;
     	boolean ready = false;
     	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+//    		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {
+    				threadsleep(5);
     				if(!driver.getPageSource().isEmpty()) {
     					ready = true;
+    					break;
     				}
     			} catch(WebDriverException e) {
     				counter--;

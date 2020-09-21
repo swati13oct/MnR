@@ -278,7 +278,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+//  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -1460,7 +1461,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (CallSam.contains(toolTipText)) {
+	        if (toolTipText.contains(CallSam)) {
 	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 	          
 	        }

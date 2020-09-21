@@ -1683,6 +1683,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
@@ -3370,7 +3371,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//MedSupFormValidation(DateOfBirth);
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
-		validate(resumeApplication, 15);
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -4271,7 +4272,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void signInOptumId(String username, String password) {
 		try {
-			
+			checkIfPageReadySafari();
 			signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);

@@ -1277,7 +1277,7 @@ public class PlanDetailsPage extends UhcDriver {
 					break;
 				}
 			}
-			
+			checkIfPageReadySafari();
 			System.out.println(driver.getTitle());
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
 			driver.close();
