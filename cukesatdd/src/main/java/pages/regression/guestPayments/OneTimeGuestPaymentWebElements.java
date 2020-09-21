@@ -63,7 +63,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "")
 	public WebElement chooseAPaymentHeading;
 	
-	@FindBy(xpath = "//input[@name='paymentMethod'][@value='CC ']")
+	@FindBy(xpath = "//input[@name='paymentMethod'][@value='CC']")
 	public WebElement creditcardRadioButton;
 	
 	@FindBy(xpath = "//input[@name='paymentMethod'][@value='EFT']")
