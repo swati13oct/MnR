@@ -20,7 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.commonpages.PlanDocsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -43,6 +43,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
+	private WebElement viewShopPlansButton;
 
 	@FindBy(id = "zipcode")
 	private WebElement healthPlansZipcode;
@@ -138,6 +144,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -398,11 +405,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "1-877";
+//	String CallSam= "Call a Licensed Insurance Agent";
 //	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 
@@ -1103,6 +1114,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
+		CommonUtility.checkPageIsReadyNew(driver);
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
@@ -1600,7 +1615,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		driver.findElement(By.xpath("//*[@id='js-ole-plan-select']//option[text()='" + planName + "']")).click();
 		waitforElement(enrollButton);
 		enrollButton.click();
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Online Enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1683,7 +1699,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		if (CallSam.contains(toolTipText)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
@@ -2505,5 +2521,37 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return present;
 	}
+	public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
 
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		// }
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+		public VPPPlanSummaryPage searchPlansShop(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public PlanDocsPage navigateToPlanDocsFromHome() {
+     	navigateToMenuLinks(ShopForaplan, menuShop);
+     	
+     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+     	    	
+     		return new PlanDocsPage(driver);
+	 }
 }

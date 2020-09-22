@@ -2,21 +2,33 @@
 Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
-  Scenario: To verify links displayed in the global footer of AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When user accesses global footer of the AARP Medicare Plans home page
-    And user vaidates the state drop down link on home page
-    And user clicks on View all disclaimer information link on home page
-    And user verifies visit aarp.org link on home page ulayer
-    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
-    And user clicks on contactus link of aboutus page
-    And user clicks on sitemap link of contactus page
-    And user clicks on privacypolicy link of sitemap page
-    And user clicks on termsOfuse link of privacypolicy page
-    And user clicks on disclaimers link of terms&conditions page
-    And user clicks on agents&brokers link of disclaimers page
-    And user verifies and clicks on home link of agents&brokers page ulayer
-    Then user clicks on back to top link on home page
+  Scenario Outline: To verify links displayed in the global footer of AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When user accesses global footer of the Medicare Plans All page
+    And user vaidates the state drop down link on the home page
+    And user clicks on View all disclaimer information link on the home page
+    And user verifies visit aarp.org link on home page
+    And user clicks on Aboutus link from footer of the Medicare Plans home page
+    And user clicks on contactus link on aboutus page
+    And user clicks on sitemap link on contactus page
+    And user clicks on privacypolicy link on sitemap page
+    And user clicks on termsOfuse link on privacypolicy page
+    And user clicks on disclaimers link on terms&conditions page
+    And user clicks on agents&brokers link on disclaimers page
+    And user verifies home link of agents&brokers page
+    Then user clicks on back to top link of home page
+
+	@globalfooter_AARP
+  Examples: 
+       |	site	|
+       |	AARP	|
+ 
+ @globalfooter_UHC
+  Examples: 
+       |	site	|
+       |	UHC	|      
+       
 
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
@@ -49,7 +61,7 @@ Feature: 1.12 ACQ - Global Components AARP
     When user accesses global footer of the Medicare Plans All page
     Then the User validates Shop for a Plan Navigation link
     Then the user validates Medicare Education Navigation link
-    Then the user validate ZipCode Components on the page using ZipCode "90210"
+    Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -59,76 +71,76 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   										| tfnXpath                                      													 | tfnFlag |
+      |	AARP	| medicare-education.html                                  | Understanding Medicare | AARP Medicare Plans   								| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		 | true    |
+      |	AARP	| medicare-education/medicare-eligibility.html             | Medicare Eligibility | AARP Medicare Plans     								| //*[@class='amp']//a[contains(@class, 'tel')] 													 | true    |
+      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
+      |	AARP	| medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits | AARP Medicare Plans			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
 
 		@MedEdPages_1_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                     | pageName                                   | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                     | pageName                                   											| tfnXpath                                      														| tfnFlag |
+      |	UHC		| medicare-education.html                                  | Understanding Medicare | UnitedHealthcare  											| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]			| true    |
+      |	UHC		| medicare-education/medicare-eligibility.html             | Medicare Eligibility | UnitedHealthcare    											| //*[@class='ums']//a[contains(@class, 'tel')] 														| true    |
+      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare					| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 	| true    |
+      |	UHC		| medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | UnitedHealthcare 	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 			| true    |
 		
 		
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
-      |	site	| path                                              | pageName              | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                              | pageName              																					| tfnXpath                                      													| tfnFlag |
+      |	AARP	| medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+      |	AARP	| medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | AARP Medicare Plans 		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true   	|
+      |	AARP	| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | AARP Medicare Plans      		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
-      |	site	| path                                              | pageName              | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                              | pageName              																			| tfnXpath                                      													| tfnFlag |
+      |	UHC		| medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans | UnitedHealthcare       	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+      |	UHC		| medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | UnitedHealthcare 			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	UHC		| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | UnitedHealthcare		      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
     
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      | tfnFlag |
-      |	AARP	| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
-      |	AARP	| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='amp']//a[contains(@class, 'tel')] | true    |
+      |	site	| path                                                  | pageName                    													| tfnXpath                                      													| tfnFlag |
+      |	AARP	| medicare-education/medicare-costs.html                | Medicare Cost Basics | AARP Medicare Plans 						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+      |	AARP	| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	AARP	| medicare-education/medicare-faq.html                  | Medicare FAQ | AARP Medicare Plans	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                  | pageName                    | tfnXpath                                      | tfnFlag |
-      |	UHC		| medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
-      |	UHC		| medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@class, 'tel')] | true    |  
+      |	site	| path                                                  | pageName                    											| tfnXpath                                      													| tfnFlag |
+      |	UHC		| medicare-education/medicare-costs.html                | Medicare Cost Basics | UnitedHealthcare						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+      |	UHC		| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | UnitedHealthcare    	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+      |	UHC		| medicare-education/medicare-faq.html                  | Medicare FAQ | UnitedHealthcare	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |  
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
-      |	site	| path                            | pageName                    | tfnXpath                                                       			| tfnFlag |
-      |	AARP	| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | true  	|
-      |	AARP	| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true   	| 
-  	  |	AARP	| shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	AARP	| shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	AARP	| shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	AARP	| shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	AARP	| shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   |
-      |	AARP	| shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   | 
-      |	AARP	| shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   | 
-      |	AARP	| safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   |  
+      |	site	| path                            | pageName                    | tfnXpath                                                       														| tfnFlag |
+      |	AARP	| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 											| true  	|
+      |	AARP	| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 											| true   	| 
+  	  |	AARP	| shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| true    |
+      |	AARP	| shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	AARP	| shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	AARP	| shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	AARP	| shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true	  |
+      |	AARP	| shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true	  | 
+      |	AARP	| shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')] 		| true	  | 
+      |	AARP	| safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')] 		| true	  |  
    
    @ShopPlan_Shop1_GlobalCompsUHC
     Examples: 
-      |	site	| path                            | pageName                    | tfnXpath                                                       			| tfnFlag |
-      |	UHC		| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | true  	|
-      |	UHC		| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true   	| 
-  	  |	UHC		| shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	UHC		| shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	UHC		| shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	UHC		| shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| true    |
-      |	UHC		| shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   |
-      |	UHC		| shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   | 
-      |	UHC		| shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   | 
-      |	UHC		| safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 			| false   |
+      |	site	| path                            | pageName                    | tfnXpath                                                       														| tfnFlag |
+      |	UHC		| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] 											| true  	|
+      |	UHC		| shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] 											| true   	| 
+  	  |	UHC		| shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| true    |
+      |	UHC		| shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	UHC		| shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	UHC		| shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] 														| false   |
+      |	UHC		| shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true  	|
+      |	UHC		| shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')]	| true	  | 
+      |	UHC		| shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')]		| true	  | 
+      |	UHC		| safe-shopping.html              | ShopPlan: Shop              | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')]		| true   |
   
     @ShopPlan_Shop2_GlobalCompsAARP
     Examples: 
@@ -222,28 +234,28 @@ Feature: 1.12 ACQ - Global Components AARP
     @ShopPlan_Resources2_GlobalCompsAARP
     Examples: 
       |	site	| path                                                                                           | pageName                                         | tfnXpath                                                       | tfnFlag |
-      |	AARP	| resources/pdp-resources-materials.html                                                         | ShopPlan: Resources PDP Plans                    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      |	AARP	| resources/pdp-resources-materials/pdp-information-forms.html                                   | ShopPlan: Resources PDP Plans Info               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      |	AARP	| resources/pdp-resources-materials.html                                                         | ShopPlan: Resources PDP Plans                    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	AARP	| resources/pdp-resources-materials/pdp-information-forms.html                                   | ShopPlan: Resources PDP Plans Info               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       |	AARP	| resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html              | ShopPlan: Resources PDP EOB                      | //*[contains(@class,'tel')]                                    | true    |
-      |	AARP	| resources/mail-order-pharmacy.html                                                             | ShopPlan: Resources Mail Order Pharmacy          | (//*[contains(@class,'tel')])[2]                               | true    |
+      |	AARP	| resources/mail-order-pharmacy.html                                                             | ShopPlan: Resources Mail Order Pharmacy          | (//*[contains(@class,'tel')])[2]                               | false   |
       |	AARP	| resources/prescription-drug-appeals.html                                                       | ShopPlan: Resources Prescription Drug Appeal     | //*[contains(@class,'tel')]                                    | true    |
       |	AARP	| resources/prescription-drug-transition.html                                                    | ShopPlan: Resources Prescription Drug Transition | //*[contains(@class,'tel')]                                    | true    |
 
     @ShopPlan_Resources2_GlobalCompsUHC
     Examples: 
       |	site	| path                                                                                           | pageName                                         | tfnXpath                                                       | tfnFlag |
-      |	UHC		| resources/pdp-resources-materials.html                                                         | ShopPlan: Resources PDP Plans                    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      |	UHC		| resources/pdp-resources-materials/pdp-information-forms.html                                   | ShopPlan: Resources PDP Plans Info               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      |	UHC		| resources/pdp-resources-materials.html                                                         | ShopPlan: Resources PDP Plans                    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	UHC		| resources/pdp-resources-materials/pdp-information-forms.html                                   | ShopPlan: Resources PDP Plans Info               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false    |
       |	UHC		| resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html              | ShopPlan: Resources PDP EOB                      | //*[contains(@class,'tel')]                                    | true    |
-      |	UHC		| resources/mail-order-pharmacy.html                                                             | ShopPlan: Resources Mail Order Pharmacy          | (//*[contains(@class,'tel')])[2]                               | true    |
+      |	UHC		| resources/mail-order-pharmacy.html                                                             | ShopPlan: Resources Mail Order Pharmacy          | (//*[contains(@class,'tel')])[2]                               | false   |
       |	UHC		| resources/prescription-drug-appeals.html                                                       | ShopPlan: Resources Prescription Drug Appeal     | //*[contains(@class,'tel')]                                    | true    |
       |	UHC		| resources/prescription-drug-transition.html                                                    | ShopPlan: Resources Prescription Drug Transition | //*[contains(@class,'tel')]                                    | true    |
     
     @ShopPlan_Resources3_GlobalCompsAARP
     Examples: 
       |	site	| path                                                                                             | pageName                              | tfnXpath                                                       | tfnFlag |
-      |	AARP	| resources/ma-resources-materials.html                                                            | ShopPlan: Resources MA Plans          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      |	AARP	| resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      |	AARP	| resources/ma-resources-materials.html                                                            | ShopPlan: Resources MA Plans          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	AARP	| resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       |	AARP	| resources/ma-resources-materials/ma-information-forms/member-rights.html                         | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       |	AARP	| resources/ma-resources-materials/ma-information-forms/medicare-appeal.html                       | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       |	AARP	| resources/disenrollment-information.html																					               | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -252,8 +264,8 @@ Feature: 1.12 ACQ - Global Components AARP
     @ShopPlan_Resources3_GlobalCompsUHC
     Examples: 
       |	site	| path                                                                                             | pageName                              | tfnXpath                                                       | tfnFlag |
-      |	UHC		| resources/ma-resources-materials.html                                                            | ShopPlan: Resources MA Plans          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      |	UHC		| resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      |	UHC		| resources/ma-resources-materials.html                                                            | ShopPlan: Resources MA Plans          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	UHC		| resources/ma-resources-materials/ma-information-forms.html                                       | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       |	UHC		| resources/ma-resources-materials/ma-information-forms/member-rights.html                         | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       |	UHC		| resources/ma-resources-materials/ma-information-forms/medicare-appeal.html                       | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       |	UHC		| resources/disenrollment-information.html																						             | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -284,19 +296,19 @@ Feature: 1.12 ACQ - Global Components AARP
 				
     @MiscellaneousLinks_GlobalCompsAARP
     Examples: 
-      |	site	| path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
-      |	AARP	| estimate-drug-costs.html!/drug-cost-estimator              | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      |	AARP	| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      |	AARP	| medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      |	AARP	| profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
+      |	site	| path                                                       		| pageName                | tfnXpath                                                       | tfnFlag |
+      |	AARP	| health-plans/estimate-drug-costs.html!/drug-cost-estimator    | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      |	AARP	| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   		| Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      |	AARP	| medicare-plans.html                                        		| ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	AARP	| profile/guest                                              		| Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
 		
 		@MiscellaneousLinks_GlobalCompsUHC
     Examples: 
-      |	site	| path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |
-      |	UHC		| estimate-drug-costs.html!/drug-cost-estimator               							| Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      |	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      |	UHC		| medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      |	UHC		| profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
+      |	site	| path                                                          | pageName                | tfnXpath                                                       | tfnFlag |
+      |	UHC		| health-plans/estimate-drug-costs.html!/drug-cost-estimator		| Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      |	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      |	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      |	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
 		
     @FooterLinks_GlobalCompsAARP
     Examples: 

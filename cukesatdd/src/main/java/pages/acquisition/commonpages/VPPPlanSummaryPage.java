@@ -146,6 +146,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+	private WebElement  CurrentYearPlansBtn;
 
 	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	@FindBy(xpath=".//*[@id='doctorCoverMA']")
@@ -559,6 +562,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		public static WebElement proactiveChatExitBtn;
 
 		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+//		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='startoverdetails']")
 		private WebElement planYearPopup;
 		
 		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
@@ -1587,7 +1591,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
 			dceLink.click();
-		}	
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -3086,19 +3091,30 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 	
-	public void handlePlanYearSelectionPopup(String planType) {
-		if (!(planType.equalsIgnoreCase("MS"))) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-				planYearPopupGoButton.click();
+	public void handlePlanYearSelectionPopup(String planYear) {
+
+		CommonUtility.checkPageIsReadyNew(driver);			
+			if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+				if(validate(CurrentYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);	
+				}
 			}
-		}
-		}
 	}
+	
+//	public void handlePlanYearSelectionPopup(String planType) {
+//		if (!(planType.equalsIgnoreCase("MS"))) {
+//		CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+//		if (validate(planYearPopup)) {
+//			if (validate(nextYearSelection)) {
+//				nextYearSelection.click();
+//				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+//				planYearPopupGoButton.click();
+//			}
+//		}
+//		}
+//	}
 
 	public void handleChatPopup() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found

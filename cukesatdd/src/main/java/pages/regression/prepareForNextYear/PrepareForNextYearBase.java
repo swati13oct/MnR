@@ -38,7 +38,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
-	protected static boolean validateAsMuchAsPossible=true;
+	protected static boolean validateAsMuchAsPossible=false;
 	
 	public PrepareForNextYearBase(WebDriver driver) {
 		super(driver);
@@ -303,6 +303,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,1);
 		if (!originalUrl.contains("/dashboard")) //note: rally dashboard has no tab for combo
 			handleComboTabIfComboUser(planType, memberType);
+		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
 		checkModelPopup(driver,3);
 		return driver;
 	}
@@ -523,7 +524,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 			}
 		} else  {
-			note.add("\tOn '"+MRScenario.environment.contains("stage")+"' env, skip validating PDF content to speed up the run");
+			note.add("\tOn '"+MRScenario.environment+"' env, skip validating PDF content to speed up the run");
 		} 
 
 		driver.close();
@@ -623,24 +624,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		return note;
 	}
 	
-	public void validateReturnToPrevPgLnk() {
-		CommonUtility.waitForPageLoad(driver, noLoadingSpinner, 10);
-		Assert.assertTrue("PROBLEM - unable to locate the 'RETURN TO PREVIOUS PAGE' link on 'Prepare For Next Year' page'", noWaitValidate(returnToPrevPgLnk));
-		/* keep - when network is stable this works fine
-		returnToPrevPgLnk.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitsPgHeaderText, 10);
-		Assert.assertTrue("PROBLEM - unable to navigate back to benefits page by clicking 'RETURN TO PREVIOUS PAGE' link",noWaitValidate(benefitsPgHeaderText));
-		if (noWaitValidate(prepareForNextYearTab)) {
-			prepareForNextYearTab.click();
-		}
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
-		checkModelPopup(driver,1);
-		Assert.assertTrue("PROBLEM - unable to navigate again to 'Prepare For Next Year' page via 'Prepare For Next Year' tab on Benefit sub menu", noWaitValidate(prepareForNextYearPgHeader));
-		*/
-	}
-
 	public int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
@@ -649,10 +632,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		List<String> note=new ArrayList<String>();
 		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
 		//		String actHrefUrl=targetElement.getAttribute("href");
-	 	//tbd if (targetItem.contains("Search For Providers link") 
-		//tbd 		|| targetItem.contains("Compare New Plans Link")
-		//tbd 		|| targetItem.contains("Drug Search link")
-		//tbd 		|| targetItem.contains("Find a Pharmacy link")) {
 			String winHandleBefore = driver.getWindowHandle();
 			String urlBeforeClick=driver.getCurrentUrl();
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -660,7 +639,8 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			CommonUtility.waitForPageLoad(driver, expElement, 5);
 			scrollElementToCenterScreen(targetElement);
 			targetElement.click();
-			
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			if (validateAsMuchAsPossible) {
@@ -669,9 +649,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 					//note: back to prior page and move on
 					if (!driver.getCurrentUrl().contains("preparefornextyear/overview.html")) {
 						driver.get(urlBeforeClick);
-						//tbd goToSpecificComboTab(planType,false);
-						CommonUtility.checkPageIsReady(driver);
-						checkModelPopup(driver,5);
 					}
 					return note;
 				} else {
@@ -715,19 +692,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			System.out.println("TEST - Closed tab for '"+targetItem+"'");
 			driver.switchTo().window(winHandleBefore);
 			System.out.println("TEST - Switched back to prior tab");
-			/*
-		} else { 
-			String originalUrl=driver.getCurrentUrl();
-			targetElement.click();
-			CommonUtility.waitForPageLoad(driver, expElement, 10);
-			checkModelPopup(driver,2);
-			String currentUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - Unable to land on expected URL after clicking the link.  Expected url to contains '"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
-			note.add("\tPASSED - validation for link destination after click for "+targetItem);
-			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
-			note.add("\tPASSED - validation for link target page loading for "+targetItem);
-			backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
-		} */
 		
 		return note;
 
@@ -826,12 +790,12 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,3);
 	}
 	
-	public List<String> validatePdInSubSection(
+	public List<String> validatePdfInSubSection(
 			String planType, 
 			HashMap<String, Boolean> docDisplayMap, 
 			String section, String subSection, 
 			String docName, String targetLang, 
-			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
+			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, boolean expLangDropOption,
 			WebElement pdfElement, WebElement arrowAftPdfElement, WebElement svgAftPdfElement,
 			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
 			boolean willDeleteCookie) {
@@ -866,10 +830,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//note.addAll(validateHaveItem(targetItem, orTextBefPdfElement));
 
 				targetItem=section+" - Arrow after '"+docName+"' doc link'";
-				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				targetItem=section+" - svg after '"+docName+"' doc link'";
-				note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
+				if (docName.contains("Annual Notice of Changes")) 
+					note.addAll(validateDontHaveItem(targetItem, arrowAftPdfElement));
+				else
+					note.addAll(validateHaveItem(targetItem, arrowAftPdfElement));
 
 				//note: after link click, little check should turn green
 				//note: some section has inconsistent way to locate the green chkmrk xpath...that's why need to figure out which xpath to use
@@ -886,7 +856,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				if (willDeleteCookie) {
 					note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
 					deleteCookieAndReloadPgn(subSecCookie);
-					//tbd goToSpecificComboTab(planType, false);
 					note.addAll(validateDontHaveItem(targetItem, subSecChkmrkgreen));
 				}
 
@@ -902,10 +871,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//keep-for-now Assert.assertTrue("SHOULD land on SAR page", false);
 
 			//keep-for-now } else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem=targetLang+" language dropdown option'";
-				note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				if (expLangDropOption) {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display but expect dropdown to have this language option because because other sub section has this language");
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				} else {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+					//note: no doc then no dropdown
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				}
 
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				CommonUtility.waitForPageLoad(driver, pdfElement, 5);
@@ -917,6 +892,11 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		}
 		return note;
 
+	}
+	
+	public String getPlanNameComboUser() {
+		Assert.assertTrue("PROBLEM - unable to locate the plan name on benefits page for this combo user", noWaitValidate(planNameComboUser_benefitsPg));
+		return planNameComboUser_benefitsPg.getText();
 	}
 	
 	

@@ -281,6 +281,23 @@ public class VppStepDefinitionUHC {
 		
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 	}
+	
+	@And("^the user selects future plan year for the UHC site$")
+	public void user_selects_future_plan_year_UHC_Sites(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
 	public void Enroll_now_button_validation(DataTable givenAttributes) {
@@ -1133,6 +1150,7 @@ public class VppStepDefinitionUHC {
 		switch (planType) {
 		case "MAPD":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "MA":
@@ -1141,6 +1159,7 @@ public class VppStepDefinitionUHC {
 			break;
 		case "SNP":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "PDP":
@@ -3286,4 +3305,37 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 					}
 			vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 		}
-} 
+	
+		@When("^the user performs plan search using Standalone information in the UHC site$")
+	public void Standalone_Shop_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+		}
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+}
+

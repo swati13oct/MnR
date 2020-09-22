@@ -139,7 +139,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00005 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)        | current  |
       | 00006 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            | current  |
       | 00007 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  | current  |
-      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | current  |
+      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)								 | current  |
 #      | 00009 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
 
   @vppPlanDetailsAARP07 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression

@@ -214,7 +214,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 
 	
-	@When("^user navigate Plan Recommendation Engine Using Get Help Choosing in Tools$")
+	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
 	public void navigate_Plan_Selector_tool() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
@@ -665,82 +665,6 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.navigateVPP(zip);
    	}
 	
-	@When("^I have added a drugs to my drug list$")
-	public void added_drugs_to_my_drug_list(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		planSelectorResultspage.vppToDCE();
-		String drug = inputValues.get("Drug");
-		boolean isDrugPresent = dce.isDrugPresent(drug);
-		if(!isDrugPresent)
-			dce.addDrug(drug);
-		else
-			Assert.fail("Drug Details content not loaded");
-	}
-
-	@And("^user selects drugs details in drugs page$")
-	public void user_select_drugs_drug_page(DataTable givenAttributes){
-		readfeaturedata(givenAttributes);
-		String drug = inputValues.get("Drug");
-		String dosage = inputValues.get("Dosage");
-		String quantity = inputValues.get("Quantity");
-		String frequency = inputValues.get("Frequency");
-		String dosages = drug+" "+dosage;
-		ACQDrugCostEstimatorPage DrugDetails = new ACQDrugCostEstimatorPage(wd);
-		DrugDetails.selectDosage(dosages);
-		DrugDetails.selectQnty(quantity);
-		DrugDetails.selectFrequency(frequency);		
-	}
-	
-	
-	@When("^user successfully adds drugs$")
-	public void user_successfully_adds_drugs(DataTable givenAttributes){
-		readfeaturedata(givenAttributes);
-		String isBranded = inputValues.get("Is Branded Drug");
-		String drug = inputValues.get("Drug");
-		ACQDrugCostEstimatorPage DrugDetails = new ACQDrugCostEstimatorPage(wd);
-		if (isBranded.trim().equalsIgnoreCase("YES")) {
-			DrugDetails.continueAddDrugDetailsModWithSaving();
-		} else {
-			DrugDetails.continueAddDrugDetailsModNoSaving();
-		}
-		Assert.assertTrue("Drug not added", null != DrugDetails);
-		DrugDetails.validateAddedDrug(drug);
-	}
-	
-	@And("^I navigate to step2 page in DCE$")
-	public void I_navigate_to_step2_page_dce () 	{
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
-		dce.navigateToStep2();
-	}
-	
-	
-	@When("^I select the first pharmacy in DCE$")
-	public void I_select_the_drug_dce() {
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
-		dce.select_first_pharmacy();
-		
-	}
-	
-	@Then("^I navigate to step3 page and validate in DCE$")
-	public void I_navigate_to_step_page_dce(DataTable givenAttributes)  {
-		readfeaturedata(givenAttributes);
-		String drug = inputValues.get("Drug");
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
-		dce.navigateToStep3();
-	   if(dce.validateDrugOnStep3(drug))
-		   Assert.assertTrue(true);
-	   else
-		   Assert.fail("Error:the drug did not display on step 3 page"); 
-	}
-	
-	@And("^the user clicks on return link to navigate to plan summary page$")
-	public void clickOnReturnLink_page(){
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
-		dce.clickReturnToSummaryLink();
-	}
-	
 	@Then("^user adds Doctors in vpp summary page$")
    	public void add_providers_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -909,4 +833,22 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
 	}
+	
+	@Then("^user adds Drugs in vpp summary page$")
+   	public void add_drugs_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
+   	}
+	
+	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
+   	public void verify_Future_UI_API_rankings_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.checkPlanyear("future");
+		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRankingPlans();
+		planSelectorResultspage.changePlanyear("current");
+		//planSelectorResultspage.validateUIAPIRecommendations();
+		//planSelectorResultspage.validateUIAPIRankingPlans();
+   	}
 }
