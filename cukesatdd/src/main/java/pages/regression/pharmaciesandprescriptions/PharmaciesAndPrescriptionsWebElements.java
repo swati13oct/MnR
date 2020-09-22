@@ -298,7 +298,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-0']")
 	protected WebElement emptyHarveyBall;
 
-	@FindBy(xpath = "//h1[contains(text(),'Medication Order Status')]")
+	@FindBy(xpath = "//h1[contains(text(),'Order Status')]")
 	protected WebElement orderStatusPageHeader;
 
 	//@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
@@ -413,11 +413,26 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[@tabindex='-1']")
 	protected WebElement totalMedicationsInMyMed;
 
-	@FindBy(xpath = "//span[contains(text(),'order processing')]")
+	@FindBy(xpath = "//span[contains(text(),'processing')]")
 	protected List<WebElement> Processing;
 
 	@FindBy(xpath = "//span[contains(text(),'request received')]")
 	protected List<WebElement> requestReceived;
+
+	@FindBy(xpath = "//span[contains(text(),'request placed')]")
+	protected List<WebElement> requestPlaced;
+
+	@FindBy(xpath = "//span[contains(text(),'Your order is in the pharmacy processing')]")
+	protected WebElement  processingMessage;
+
+	@FindBy(xpath = "//div[contains(text(),'Estimated Delivery Date: Pending')]")
+	protected WebElement requestPlacedPending;
+
+	@FindBy(xpath = "//span[contains(text(),'-')]")
+	protected List<WebElement> requestPlacedNoOrderNumber;
+
+	@FindBy(xpath = "//span[contains(text(),'order received')]")
+	protected List<WebElement> orderReceived;
 
 	@FindBy(xpath = "//div[@data-testid='medication-status-percent-50']")
 	protected WebElement isHalfHarveyBall;
@@ -634,10 +649,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-renew']")
 	protected List<WebElement> listOfRenewMedication;
 
+	@FindBy(xpath = "//*[contains(text(),'request placed')]")
+	protected List<WebElement> listOfRequestPlaced;
+
+	@FindBy(xpath = "//*[contains(text(),'processing')]")
+	protected List<WebElement> listOfProcessing;
+
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
 	protected List<WebElement> listOfResolveHold;
 
-	@FindBy(xpath = "//button[@data-testid='medication-action-track']")
+	@FindBy(xpath = "//*[@data-testid='medication-action-track']")
 	protected List<WebElement> listOfTrackStatus;
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-view-order']")
@@ -1021,6 +1042,46 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isRequestReceived() {
 		if (requestReceived.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isOrderReceived() {
+		if (orderReceived.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isRequestPlaced() {
+		if (requestPlaced.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isProcessingMessageDispplayed() {
+		if (processingMessage.getText().contains("pharmacy processing")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isRequestPlacedPending() {
+		if (requestPlacedPending.getText().contains("Pending")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isRequestPlacedOrderNumber() {
+		if (requestPlacedNoOrderNumber.size()>=3) {
 			return true;
 		} else {
 			return false;
@@ -1422,6 +1483,12 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRenew;
 
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationRequestPlaced;
+
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationProcessing;
+
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
 	protected List<WebElement> listOfRefillLeftEligibleFrRefill;
 
@@ -1430,6 +1497,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleFrRenew;
+
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-day-supply']")
+	protected List<WebElement> listOfDaySupplyEligibleFrRequestPlaced;
 	
 	@FindBy(xpath = "//button/span[@data-test-component='text' and contains(text(),'Try Again')]")
 	protected WebElement tryAgainMedCabTimeOut;

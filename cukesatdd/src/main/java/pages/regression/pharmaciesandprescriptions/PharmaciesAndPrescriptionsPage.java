@@ -1375,6 +1375,42 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				isRequestReceived());
 	}
 
+	public void validateOrderReceived() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Order received elements",
+
+				isOrderReceived());
+	}
+
+	public void validateRequestPlaced() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Request Placed elements",
+
+				isRequestPlaced());
+	}
+
+	public void validateProcessingMessage() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Processing message elements",
+
+				isProcessingMessageDispplayed());
+	}
+
+	public void validateRequestPlacedPending() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Request Placed Estimated delivery Pending elements",
+
+				isRequestPlacedPending());
+	}
+
+	public void validateRequestPlacedNoOrderNumber() {
+
+		Assert.assertTrue("PROBLEM - should unable to locate Request Placed order number elements",
+
+				isRequestPlacedOrderNumber());
+	}
+
+
 	public void validateOptumRx() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Request received elements", isOptumRX());
@@ -1382,7 +1418,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateProcessing() {
 
-		Assert.assertTrue("PROBLEM - unable to locate Request received elements",
+		Assert.assertTrue("PROBLEM - unable to locate processing elements",
 
 				isOrderProcessing());
 	}
@@ -2361,12 +2397,52 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfVal;
 	}
 
+	public List<Object> fetchesMedicationInformationFrRequestPlaced() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfRequestPlaced.size());
+
+		String text = listOfMedicationRequestPlaced.get(rand_int).getText();
+		for (WebElement child : listOfMedicationRequestPlaced.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+
+	public List<Object> fetchesMedicationInformationFrProcessing() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfProcessing.size());
+
+		String text = listOfMedicationRequestPlaced.get(rand_int).getText();
+		for (WebElement child : listOfMedicationRequestPlaced.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+
 	public void clickOnRefillMedicationCTABasedOnIndex(int index) {
 		listOfRefillMedication.get(rand_int).click();
 	}
 
 	public void clickOnRenewMedicationCTABasedOnIndex(int index) {
 		listOfRenewMedication.get(rand_int).click();
+	}
+
+	public void clickOnRequestPlacedCTABasedOnIndex(int index) {
+		listOfTrackStatus.get(rand_int).click();
+	}
+
+	public void clickOnProcessingCTABasedOnIndex(int index) {
+		listOfTrackStatus.get(rand_int).click();
 	}
 
 	public void refreshPnPPage() {
@@ -2463,6 +2539,38 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		List<Integer> listOfIndex = new ArrayList<>();
 		for (int i = 0; i < listOfRenewMedication.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+	public List<Integer> getListOfIndexForRequestPlacedOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfRequestPlaced.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+	public List<Integer> getListOfIndexForProcessingOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfProcessing.size(); i++) {
 			listOfIndex.add(i);
 		}
 		return listOfIndex;
