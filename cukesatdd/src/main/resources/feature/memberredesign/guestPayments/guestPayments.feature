@@ -85,7 +85,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | planType              | memberID      | dob           | siteName    |
       | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
       | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE   |
-      | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |
+     # | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |no such member available
 
  @guestPayment05 @selectPaymentAmountValidations
   Scenario Outline: TID: <TID> - To validate the One time payments page with different member types
