@@ -500,7 +500,7 @@ Feature: Refill - Change Shipping Address
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
 
 
-  @F482462 @US2777912 @Scenario1 @Scenario2 @Scenario3
+  @F482462 @US2777912 @Regression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify deleting a shipping address
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

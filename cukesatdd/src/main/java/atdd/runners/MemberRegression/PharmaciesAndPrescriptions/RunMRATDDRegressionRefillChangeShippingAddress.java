@@ -14,6 +14,6 @@ jsonReport = "target/cucumber-RunMRATDDRegressionRefillChangeShippingAddress.jso
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillChangeShippingAddress")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/RefillChangeShippingAddress.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillChangeShippingAddress.json" }, tags = { "@US2777912" }, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRefillChangeShippingAddress.json" }, tags = { "@Regression" }, monochrome=true)
 public class RunMRATDDRegressionRefillChangeShippingAddress {
 }
