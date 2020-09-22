@@ -396,4 +396,15 @@ public class ChangeShippingAddressStepDef {
 		getLoginScenario().saveBean(PageConstants.CHANGE_SHIPPING_ADDRESS_PAGE, shippingAddressPg);
 	}
 
+	@Then("^user will see success message that the address is deleted$")
+	public void user_will_see_success_message_that_the_address_is_deleted() {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateMessageAddressDeleted();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
 }

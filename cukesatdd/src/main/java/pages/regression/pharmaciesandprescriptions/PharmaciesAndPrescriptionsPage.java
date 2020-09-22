@@ -1478,6 +1478,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		// pnpValidate(RefillMedications));
 	}
 
+	public void validateMessageAddressDeleted() {
+		Assert.assertTrue("PROBLEM - unable to locate address deleted message", validate(addressDeleteMessage));
+		// pnpValidate(RefillMedications));
+	}
+
 	public void validateRefillMedications() {
 		Assert.assertTrue("PROBLEM - unable to locate HD Drug Eligible For Refill", validateHDDrugEligibleForRefill());
 		// pnpValidate(RefillMedications));

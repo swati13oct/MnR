@@ -1281,6 +1281,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='walgreens']")
 	protected List<WebElement> walgreens;
 
+	@FindBy(xpath = "//*[contains(@data-testid,'csa__address__successMessage')]")
+	protected WebElement addressDeleteMessage;
+
 	@FindBy(xpath="//a[@data-testid='manage-at-walgreens']")
 	protected List<WebElement> listOfManageAtWalgreens;
 

@@ -520,7 +520,7 @@ Feature: Refill - Change Shipping Address
     When user clicks on Delete this Address CTA
     Then user will see Delete Confirmation Modal
     When user clicks on Yes CTA on Delete Confirmation Modal
-    Then user will see address is deleted
+    Then user will see success message that the address is deleted
 
     Examples:
       | FID     | planType | memberType                  |
