@@ -702,16 +702,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}
@@ -734,16 +737,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}

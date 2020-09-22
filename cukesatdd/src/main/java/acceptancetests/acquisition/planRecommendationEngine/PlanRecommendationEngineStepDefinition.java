@@ -75,80 +75,6 @@ public class PlanRecommendationEngineStepDefinition {
 				aquisitionhomepage);
 	}
 	
-	@Given("^the user is on Acquisition AARP medicare site landing page$")
-	public void the_user_on_AARP_Site_medicaresolutions() {
-		wd = getLoginScenario().getWebDriver();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "Ulayer");
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
-
-	@When("^user scrolls down to Plan selector on VPP page on right rail widget$")
-	public void user_scrolls_down_PST_rightRail() throws Throwable {
-		//AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			//	.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		
-		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.PSTButton();
-		if(planSelectorNewPage != null)
-		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
-				planSelectorNewPage);
-		else
-			System.out.println("PST page not displayed");			
-
-	}
-	
-	@When("^user scrolls down to Plan selector on VPP detail page on right rail widget$")
-	public void user_scrolls_down_PST_detail_rightRail() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		System.out.println(aquisitionhomepage);
-		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.PSTButton();
-		if(planSelectorNewPage != null)
-		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
-				planSelectorNewPage);
-		else
-			System.out.println("PST page not displayed");			
-
-	}
-	
-	
-	@Then("^the user view plan details of the above selected plan in UMS site for DST$")
-	public void user_views_plandetails_selected_plan_ums(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String planName = memberAttributesRow.get(0).getCells().get(1);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		AcquisitionHomePage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetailsDST(planName, planType);
-		System.out.println(vppPlanDetailsPage);
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			} else
-				Assert.fail("Error in validating the Plan Details Page");
-		}
-	
-	
-	@When("^user goes to ours plan tab and click on Plan Selector button$")
-	public void user_goes_to_ours_plan_tab_and_click_on_Plan_Selector_button() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.quizButton();
-		if(planSelectorNewPage != null)
-		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
-				planSelectorNewPage);
-		else {
-			System.out.println("PST page not displayed");
-		Assert.fail("PST page not displayed");
-		}
-
-	}
 		@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
 			readfeaturedata(givenAttributes);
@@ -666,12 +592,14 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		String zip = inputValues.get("Zip Code");
 		planSelectorResultspage.navigateVPP(zip);
+		checkpopup();
    	}
 	
 	@Then("^user adds Doctors in vpp summary page$")
    	public void add_providers_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
 		planSelectorResultspage.addProviderVPP(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
 		planSelectorResultspage.vppToPre();
    	}
@@ -844,6 +772,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void add_drugs_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
