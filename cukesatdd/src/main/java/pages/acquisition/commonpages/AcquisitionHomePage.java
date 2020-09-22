@@ -278,7 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+  	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -1450,26 +1450,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
-			Actions action = new Actions(driver);
-			WebElement element = callsam;
-			action.moveToElement(element).perform();
+//			Actions action = new Actions(driver);
+//			WebElement element = callsam;
+//			action.moveToElement(element).perform();
+			waitforElement(callsamtooltip);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (CallSam.contains(toolTipText)) {
-	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	        if (toolTipText.contains(CallSam)) {
+	          System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
 	          
 	        }
 	        else
-	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			driver.navigate().refresh();
-			CommonUtility.checkPageIsReady(driver);
+//			CommonUtility.checkPageIsReady(driver);
 			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
