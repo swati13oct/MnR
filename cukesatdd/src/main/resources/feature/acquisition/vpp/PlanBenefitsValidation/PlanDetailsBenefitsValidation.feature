@@ -69,6 +69,16 @@ Feature: ACQ-Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | Sheet2020_12  | AARP |
       
+       @planDetailsBenefitsAARP13
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2020_13 | AARP |
+      
+      @planDetailsBenefitsAARP14
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2020_14  | AARP |
+      
       @planDetailsBenefitsPDPAARP01
       Examples: 
       | excelPath                | workSheet | site |
@@ -141,6 +151,16 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | Sheet2020_12  | UHC |
+      
+      @planDetailsBenefitsUHC13
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2020_13 | UHC |
+      
+      @planDetailsBenefitsUHC14
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2020_14  | UHC |
       
       @planDetailsBenefitsPDPUHC01
       Examples: 
