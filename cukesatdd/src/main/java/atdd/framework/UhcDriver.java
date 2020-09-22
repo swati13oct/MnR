@@ -4,21 +4,18 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -29,15 +26,15 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.google.common.base.Predicate;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -45,14 +42,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-
-import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -829,7 +823,8 @@ try {
 			}
 		}
 		checkIfPageReadySafari();
-		WebElement currentSysTimeElement=timeJson;
+//		WebElement currentSysTimeElement=timeJson;
+		WebElement currentSysTimeElement=driver.findElement(By.xpath("//body/pre"));
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
@@ -1053,7 +1048,9 @@ try {
 	
 	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
 		String ReturnValue = "";
-		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+//		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
 			LocalStorage localStorage = webStorage.getLocalStorage();		
 			ReturnValue = localStorage.getItem(StorageKey);
