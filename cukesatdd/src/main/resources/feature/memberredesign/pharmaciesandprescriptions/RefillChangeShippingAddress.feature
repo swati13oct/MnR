@@ -498,3 +498,30 @@ Feature: Refill - Change Shipping Address
     Examples: 
       | FID     | planType | memberType                  |
       | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
+
+
+  @F482462 @US2777912 @Scenario1 @Scenario2 @Scenario3
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify deleting a shipping address
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    And user select the Refill All Medications CTA
+    Then user will see "Complete Your Refill" Page
+    When user select the Change Shipping Address link
+    Then user will view the "Change Shipping Address" page
+    When user clicks on Edit link for editable address
+    Then user will view "Edit Shipping Address" in a full page modal
+    When user clicks on Delete this Address CTA
+    Then user will see Delete Confirmation Modal
+    When user clicks on the Cancel button on the modal
+    Then user will view "Edit Shipping Address" in a full page modal
+    When user clicks on Delete this Address CTA
+    Then user will see Delete Confirmation Modal
+    When user clicks on Yes CTA on Delete Confirmation Modal
+    Then user will see address is deleted
+
+    Examples:
+      | FID     | planType | memberType                  |
+      | F481927 | PDP      | Rx_Individual_PnP_rx_refill |
