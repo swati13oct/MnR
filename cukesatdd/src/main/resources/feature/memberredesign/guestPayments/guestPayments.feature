@@ -101,10 +101,10 @@ Feature: 1.06.7 Member Guest Payments Page
        
     Examples:
       | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
-      | 10000 | memberWithPD     | 978196889-1 | 10/19/1941 | true   | false   | AARP      |
+      | 10000 | memberWithPD     | 920736343-1  | 12/06/1953 | true   | false   | AARP      |
    #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   | UHC       |
       | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  | RETIREE   |
-    # | 10000 | memberWithBOTHDues | 904498840-1 | 06/19/1933 | true | true  | RETIREE   |
+      | 10000 | memberWithBOTHDues | 978196889-1 | 10/19/1941 | true | true  | RETIREE   |
 
   @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -154,7 +154,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
     And I validate success Email receipt message and click send to another Email
-    Then I will click on Sign in and Register Now link to navigate to Member Portal
+    #Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
@@ -188,11 +188,11 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
     And I validate success Email receipt message and click send to another Email
-    Then I will click on Sign in and Register Now link to navigate to Member Portal
+   # Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
-      | 10000 | MAPD     | 939838215-1 | 05/19/1937 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
+      | 10000 | MAPD     | 853026479-1 | 04/25/1942 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
       #| 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
      # | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
      # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
