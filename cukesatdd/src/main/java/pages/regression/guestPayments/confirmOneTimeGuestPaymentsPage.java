@@ -136,7 +136,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "")
 	private WebElement closeWindowButton;
 
-	@FindBy(className = "confirm-payment-2")
+	@FindBy(xpath = "//*[@class='confirm-payment-2'][contains(text(),'Email receipt')]")
 	private WebElement emailSuccessMessage;
 
 	@FindBy(className = "change-details-icon-span")
@@ -244,7 +244,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	}
 
 	public void emailSuccessAndClickEnterAnotherEmail() {
-
+         waitforElementVisibilityInTime(emailSuccessMessage, 10);
 		Assert.assertTrue("PROBLEM - unable to locate Success message for Email Receipt",guestPaymentsValidate(emailSuccessMessage));
 		System.out.println(">>>>>>>>>Email Receipt Success Message Displayed<<<<<<<<<<");
 
