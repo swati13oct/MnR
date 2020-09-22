@@ -67,7 +67,7 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
-		//aquisitionhomepage.validateChatpopupconnect();	
+		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
 
