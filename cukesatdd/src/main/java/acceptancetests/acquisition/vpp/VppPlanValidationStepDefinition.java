@@ -414,6 +414,11 @@ public class VppPlanValidationStepDefinition {
 										 {
 											 newCell.setCellStyle(styleIgnore);
 											 newCell.setCellValue(cell.getStringCellValue());
+
+											 if(cell.getStringCellValue().replace("\n","").trim().equalsIgnoreCase("No Coverage"))
+											 {
+												 newCell.setCellStyle(stylePassed);
+											 }
 										 }
 										 else {//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
 											 newCell.setCellValue("Excel Value: " + cell.getStringCellValue() + " / UI Value: " + resultMap.get(false));
