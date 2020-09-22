@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -151,6 +152,9 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		memberIdTextfield.clear();
 		memberIdTextfield.sendKeys(memberID);
 		dobTextfield.sendKeys(dob);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ENTER).build().perform();
+
 
 
 	}
