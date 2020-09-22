@@ -211,6 +211,15 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 							} else {
 								System.out.println("NO emmail page did not appear");
 							}
+							if (driver.getCurrentUrl().contains("/anoc.html")) {
+								System.out.println("annual notice of changes page has appeared");
+								if (validate(homePageNotice, 0)) {
+									homePageNotice.click();
+									CommonUtility.checkPageIsReady(driver);
+								}
+							} else {
+								System.out.println("annual notice of changes page did not appear");
+							}
 											
 					return;
 						}}}
