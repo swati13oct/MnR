@@ -57,9 +57,10 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		//CommonUtility.waitForPageLoadNew(driver, firstName, 60);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeInput, 60);
 		//validateNew(lastName);
 		//validateNew(state);
-		validate(zipCodeInput);
+		//validate(zipCodeInput);
 		validateNew(getStartedBtn);
 		
 	}

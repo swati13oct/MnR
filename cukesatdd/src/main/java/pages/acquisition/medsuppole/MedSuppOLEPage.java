@@ -107,7 +107,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		private WebElement medSuppOleGI30dayBdayYesRadioBtn;
 		
 		//@FindBy(xpath = "//input[@id='GIClarify_1']/following-sibling::label")
-		@FindBy(xpath = "//body[@class='theme-uhc-mir page-med-supp-ole mobile-nav-closed is-med-supp']/div[@id='site-wrapper']/div[@class='content-section']/div[@class='container']/div[@class='row has-aside']/div[@class='col-md-9']/form[@id='ole-form-element']/div[@id='ole-form']/div[@class='ole-form-container']/div[@id='ole-form-content']/div[@class='wizardpagebody parsys']/fieldset[@class='fieldset-required remove-asterisk']/span[1]/label[1]")
+		@FindBy(xpath ="//div[@id='colctrl_772971250_showhide']//label[@class='radio_choice'][contains(text(),'Yes')]")
 		private WebElement medSuppOleGIClarifyYesRadioBtn;
 				
 		@FindBy(xpath = "//div[@id='ole-form-content']//a[contains(@href,'www.insurance.ca.gov')]")
