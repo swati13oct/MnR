@@ -193,4 +193,8 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
 	protected WebElement disclaimerMessage;
+	
+	@FindBy(xpath="//div[@data-testid='header__title']//*[text()='Change Shipping Address']")
+	protected WebElement changeShippingAddressHeader;
+	
 }

@@ -736,6 +736,7 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
 	
 	public static final String  ORDER_CONFIRMATION_PAGE ="orderConfirmationPage";
+	public static final String CHANGE_SHIPPING_ADDRESS_PAGE = "changeShippingAddressPage";
 
 }
 

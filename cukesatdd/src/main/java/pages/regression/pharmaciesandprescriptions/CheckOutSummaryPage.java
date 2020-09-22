@@ -29,7 +29,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validateCheckoutPageHeader(String expectedVal) {
 		return orderCheckoutPageHeader.getText().equalsIgnoreCase(expectedVal);
 	}
-	
+
 	public boolean validateCheckoutPageHeader() {
 		return orderCheckoutPageHeader.getText().equalsIgnoreCase("Transfer to Home Delivery");
 	}
@@ -410,4 +410,22 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		return disclaimerMessage.getText().contains(expectedVal);
 	}
 
+	public String getShippingAddress() {
+		return shippingAddressContent.getText();
+	}
+
+	public void clickOnChangeShippingAddressCTA() {
+		changeShippingAddrssCTA.click();
+	}
+
+	public ShippingAddressPage navigateToChangeShippingAddressPage() {
+		CommonUtility.waitForPageLoad(driver, changeShippingAddressHeader, 50);
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Current URL val : " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
+			CommonUtility.checkPageIsReady(driver);
+			return new ShippingAddressPage(driver);
+		}
+		return null;
+	}
 }
