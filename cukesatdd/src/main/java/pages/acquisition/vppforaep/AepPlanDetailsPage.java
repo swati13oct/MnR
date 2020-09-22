@@ -387,7 +387,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			
 		
 			//if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
-			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A"))) {
 				counter++;
 				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
