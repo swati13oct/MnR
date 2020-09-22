@@ -441,12 +441,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		moveMouseToElement(vppDetailSectionHeader);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
-		vpp_onlinePharmacyDirectoryLnk.click();
+		switchToNewTabNew(vpp_onlinePharmacyDirectoryLnk);
 		CommonUtility.checkPageIsReady(driver);
 		//	Thread.sleep(2000); //note: keep this for the page to load
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
 		if (("Yes").equalsIgnoreCase(isMultiCounty.trim())) {
