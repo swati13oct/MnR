@@ -452,8 +452,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Try home delivery from OptumRx");
-			testInputInfoMap.put("sampleBodyText","How it works");
+			testInputInfoMap.put("headerText","PrescriPtioN Mail-iN order ForM");
+			testInputInfoMap.put("sampleBodyText","Member and physician");
+			//tbd testInputInfoMap.put("headerText","Try home delivery from OptumRx");
+			//tbd testInputInfoMap.put("sampleBodyText","How it works");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Appeals and Grievances – Senior Supplement Plans")) {

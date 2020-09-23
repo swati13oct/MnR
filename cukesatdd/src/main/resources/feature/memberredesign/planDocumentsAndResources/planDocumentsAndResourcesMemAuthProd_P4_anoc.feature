@@ -99,7 +99,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_pdp @prod_active_pdp_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 17-074 | 15131,15233 | kkumard   | mnrs786@  | DKELLY27        | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false    | false    | false    |
+      | 17-074 | 15131,15233 | kkumard   | mnrs786@  | DKELLY27        | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | true     | false    | false    |
 
 	@prod_active_ssup
 	Examples: 
