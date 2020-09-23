@@ -440,7 +440,7 @@ public class guestPaymentsLoginStepDefinition {
 
 	}
 
-	@Then("^I will get an error valid Account EFT information$")
+	@Then("^I will get an error to enter valid Account EFT information$")
 
 	public void blank_eftAccount_info_Error() {
 

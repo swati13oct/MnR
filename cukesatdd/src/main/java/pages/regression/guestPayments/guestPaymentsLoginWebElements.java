@@ -90,7 +90,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(xpath= "//a[contains(text(),'Sign In')]") 
 	public static WebElement signInLinkOnErrorPage;
 	
-	@FindBy(xpath= "//h1[contains(text(),'Make a One-Time Payment')]")
+	@FindBy(xpath= "//h1[contains(text(),'Make a One-time Payment')]")
 	public static WebElement makeAPaymentsHeader;
 	
 	@FindBy(className= "magnfy-icon")

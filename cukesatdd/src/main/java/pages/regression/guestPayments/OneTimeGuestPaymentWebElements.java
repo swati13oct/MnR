@@ -138,7 +138,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//div[2][contains(text(),'Amount must exceed $1.00')]")
 	public WebElement exceed1errorMessage;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='root']/div/div/div[1]/div[2]/div/a")
 	public WebElement noEftAccountInfo;
 
 }

@@ -238,7 +238,6 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
     Then I select Past Amount & current charges Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
       | AccountHoldersFirstName  | <FirstName>  |
@@ -298,7 +297,6 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will enter EFT Checking Account Details
@@ -330,7 +328,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
+   # And I validate all the header and page elements on One-time payment page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will enter EFT Checking Account Details
@@ -371,21 +369,17 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    And I validate all the header and page elements on One-time payment page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will click on Review and Submit button leaving EFT Account information blank
-    And I will get an error valid Account EFT information
+    And I will get an error to enter valid Account EFT information
     Then I will enter EFT Checking Account Details
-      | AccountHoldersName | <Name>      |
+      | AccountHoldersName | <FirstName> |
       | AccountNumber      | <accountNo> |
       | RoutingNumber      | <routingNo> |
-    And I will get an error valid Account EFT information
+    Then I will click on Review and Submit button leaving EFT Account information blank
+    And I will get an error to enter valid Account EFT information
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | otherAmountDue |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |
-      | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | 15.20          |
-      | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | 20.30          |
-      | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | 11.00        |
-      | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | 333.00         |
+      | TID   | planType | memberID    | dob        | siteName | otherAmountDue |FirstName |accountNo  | routingNo |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |Automation  |1234512345 | 123123123 |
