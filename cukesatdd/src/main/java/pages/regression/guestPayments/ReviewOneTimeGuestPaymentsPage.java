@@ -72,7 +72,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='generic-error'][contains(text(),'Only one payment request can be submitted per business day.')]")
 	private WebElement errorMessage;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Make a One-Time Payment')]")
+	@FindBy(xpath = "//h1[contains(text(),'Make a One-time Payment')]")
 	public WebElement guestPaymentsHeader;
 
 	
