@@ -6,67 +6,51 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC @prodRegression @DCE_Regression_Blayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile
     Given user is on blue layer landing page
-    And the user selects the state drop down value in UHC home page
-      | State | <state> |
     And the user clicks on the shopping cart icon in UHC site
-    #And the user validates the plan year buttons are present or not and chooses the plan year in UHC
-    #      | Plan Year | <planyear> |
     And the user clicks on the add drugs button in the guest profile in UHC site
-    And I have added a drug to my drug list on ums site
-      | Drug | <drug> |
-    And user selects drug details in ums site
-      | Drug      | <drug>      |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-      | Dosage    | <dosage>    |
-    When user successfully adds drug in ums site
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page on ums site
-    And the user selects the pharmacy tab information
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy on there
-    And I navigate to step3 page and validate drug info for DCE homepage flow uhc
-      | Drug | <drug> |
-    And the user returns to the visitor profile page in UHC
-    Then the user should be able to see the Drug information in the profile page on UHC
-      | Drugname | <drug> |
-
-    Examples: 
-      | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
-      | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2019 |
-
-  @addDrugsDCE
-  Scenario Outline: Verify user is able to add drug information from DCE to the unauthenticated visitor profile
-    Given the user is on the uhcmedicaresolutions site landing page
-    And the user selects the state drop down value in UHC home page
-      | State | <state> |
-    When I access the acquisition DCE tool from home page on ums site
-    And I have added a drug to my drug list on ums site
-      | Drug | <drug> |
-    And user selects drug details in ums site
-      | Drug      | <drug>      |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-      | Dosage    | <dosage>    |
-    When user successfully adds drug in ums site
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page on ums site
-    And the user selects the pharmacy tab information
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy on there
-    And I navigate to step3 page and validate drug info for DCE homepage flow uhc
-      | Drug | <drug> |
+    Then the user validates Get Started Page for UHC
+    When the user clicks on Add drugs button on UHC
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+    And clicks on Review drug cost button on UHC
+    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
+    When user enters valid zipcode and county on UHC
+      | ZipCode | <zipCode> |
+    And user clicks on continue button on UHC
+    Then load screen should be displayed on UHC
+    And user should be navigated to Review drug cost estimate page on UHC
+    And user verify the drug summary page on UHC
     And the user clicks on the shopping cart icon on DCE page on uhc
     Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
 
     Examples: 
-      | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
-      | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
+      | state   | drugName | zipCode |
+      | Alabama | lipitor  |   90210 |
+
+  @addDrugsDCE
+  Scenario Outline: Verify user is able to add drug information from DCE to the unauthenticated visitor profile
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I access the acquisition DCE tool from home page on ums site
+    Then the user validates Get Started Page for UHC
+    When the user clicks on Add drugs button on UHC
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+    And clicks on Review drug cost button on UHC
+    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
+    When user enters valid zipcode and county on UHC
+      | ZipCode | <zipCode> |
+    And user clicks on continue button on UHC
+    Then load screen should be displayed on UHC
+    And user should be navigated to Review drug cost estimate page on UHC
+    And user verify the drug summary page on UHC
+    And the user clicks on the shopping cart icon on DCE page on uhc
+    Then the user should be able to see the Drug information in the profile page on UHC
+      | Drugname | <drug> |
+
+    Examples: 
+      | state   | drugName | zipCode |
+      | Alabama | lipitor  |   90210 |
 
   @addPlans @addPlansBLayerSmoke @visitorProfileRegressionUHC @prodRegression
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
@@ -110,11 +94,11 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
 
-# The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
+    # The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-#      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | state | UID | zipcode | isMultiCounty | county | plantype | testPlans |
 
+  #      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
   @addPlansPlanDetail @visitorProfileRegressionUHC @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
@@ -307,31 +291,27 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     #And the user validates the plan year buttons are present or not and chooses the plan year in UHC
     #      | Plan Year | <planyear> |
     And the user clicks on the add drugs button in the guest profile in UHC site
-    And I have added a drug to my drug list on ums site
-      | Drug | <drug> |
-    And user selects drug details in ums site
-      | Drug      | <drug>      |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-      | Dosage    | <dosage>    |
-    When user successfully adds drug in ums site
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page on ums site
-    And the user selects the pharmacy tab information
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy on there
-    And I navigate to step3 page and validate drug info for DCE homepage flow uhc
-      | Drug | <drug> |
-    And the user returns to the visitor profile page in UHC
+    And the user clicks on the add drugs button in the guest profile in UHC site
+    Then the user validates Get Started Page for UHC
+    When the user clicks on Add drugs button on UHC
+    And adds drugs in drug list page on UHC
+      | DrugName | <drugName> |
+    And clicks on Review drug cost button on UHC
+    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
+    When user enters valid zipcode and county on UHC
+      | ZipCode | <zipCode> |
+    And user clicks on continue button on UHC
+    Then load screen should be displayed on UHC
+    And user should be navigated to Review drug cost estimate page on UHC
+    And user verify the drug summary page on UHC
+    And the user clicks on the shopping cart icon on DCE page on uhc
     Then the user should be able to see the Drug information in the profile page on UHC
       | Drugname | <drug> |
     And user delets all the added drugs on visitor profile page of UHC site
 
     Examples: 
-      | state   | userName           | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | planyear |
-      | Alabama | mnrqavd2@gmail.com | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
+      | state   | userName           | password   | drugName | zipCode |
+      | Alabama | mnrqavd2@gmail.com | Password@3 | lipitor  |   90210 |
 
   @providerFlowUHCAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -356,7 +336,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county          | userName           | password   | plantype | planName                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
