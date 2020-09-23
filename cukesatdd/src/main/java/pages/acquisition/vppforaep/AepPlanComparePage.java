@@ -87,14 +87,14 @@ public class AepPlanComparePage extends UhcDriver {
 						benefitValue = benefitValue.replace(".00","");
 					}
 				}
-				else {
-					if (benefitValueUI.endsWith("1"))
+				else if(!columnName.contains("Monthly Premium")){
+					if (benefitValueUI.endsWith("1") && !benefitValue.endsWith("1"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '1');
-					else if (benefitValueUI.endsWith("2"))
+					else if (benefitValueUI.endsWith("2") && !benefitValue.endsWith("2"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-					else if (benefitValueUI.endsWith("4"))
+					else if (benefitValueUI.endsWith("4") && !benefitValue.endsWith("4"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '4');
-					else if (benefitValueUI.endsWith("*"))
+					else if (benefitValueUI.endsWith("*") && !benefitValue.endsWith("*"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '*');
 					else if (benefitValueUI.endsWith(".") && !benefitValue.endsWith("."))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '.');
