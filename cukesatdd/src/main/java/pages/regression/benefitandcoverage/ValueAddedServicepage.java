@@ -109,8 +109,14 @@ public class ValueAddedServicepage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//validateNew(atYourBestTile);
-		validateNew(browseYourOptions);
+		Assert.assertTrue("PROBLEM - unable to locate element for 'At Your Best by UnitedHealthcare' or 'Browse your options'", 
+				validate(atYourBestTile) || validate(browseYourOptions));
+		/* tbd 
+		if(atYourBestTile!=null) {
+			validateNew(atYourBestTile);
+		}else {
+			validateNew(browseYourOptions);
+		} */
 		//validateNew(hearingCareProgramByHearUSATile);
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
