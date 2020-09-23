@@ -160,7 +160,19 @@ public class DCEACQVisitorProfileMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	
+
+	@Given("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
+	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+
+	}	
 	
 	
 	

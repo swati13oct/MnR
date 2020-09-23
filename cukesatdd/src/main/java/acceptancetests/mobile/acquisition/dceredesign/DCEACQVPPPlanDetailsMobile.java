@@ -91,33 +91,13 @@ public class DCEACQVPPPlanDetailsMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = null;
-		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode,county,isMultiCounty);
+		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
-		}
-
-	}
-
-	@Then("^the consumer navigates to the plan details for the given plan type$")
-	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
-			throws Throwable {
-		wd.manage().window().maximize();
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
-		// plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) plansummaryPage.navigateToPlanDetails(planName,
-				planType);
-		if (plandetailspage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
-
 		}
 
 	}
@@ -174,14 +154,6 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
 
-	@Then("^the consumer clicks on Review Drug Costs to Land on Drug DetailsP Page$")
-	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_Page() throws Throwable {
-		BuildYourDrugListMobile DCEbuildDrugList = (BuildYourDrugListMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		DrugDetailsPageMobile drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
 	@Then("^the consumer validates planName matches plan Name in VPP$")
 	public void the_user_validates_planName_matches_plan_Name_in_VPP() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
@@ -189,23 +161,6 @@ public class DCEACQVPPPlanDetailsMobile {
 
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
-	}
-
-	@Then("^the consumer Captures Drug costs on Drug Details Page$")
-	public void the_user_Captures_Drug_costs_on_Drug_Details_Page() throws Throwable {
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		Map<String, String> DrugCosts = drugDetailsPage.CaptureDrugCosts();
-		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
-		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
-		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("ANNUAL_ESTIMATED_TOTAL");
-		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
-
-		System.out.println(DrugCosts);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
 	}
 
 	@Then("^the consumer validates Drug Costs section$")
@@ -236,21 +191,9 @@ public class DCEACQVPPPlanDetailsMobile {
 		drugDetailsPage.validateImportantInfo();
 	}
 
-	@Then("^the consumer Clicks button to VPP Plan Details Page from Drug Details Page$")
-	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+	/////
 
-		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
-		PlanDetailsPageMobile plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
-		if (null != plandetailspage) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
-		} else
-			Assert.fail("VPP Plan Details not loaded");
-
-	}
-
-	@Then("^the consumer validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
+	@Then("^the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
@@ -266,4 +209,61 @@ public class DCEACQVPPPlanDetailsMobile {
 
 	}
 
+	@Then("^the user Clicks button to VPP Plan Details Page from Drug Details Page$")
+	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		PlanDetailsPageMobile plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
+		if (null != plandetailspage) {
+			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		} else
+			Assert.fail("VPP Plan Details not loaded");
+
+	}
+
+	@Then("^the user Captures Drug costs on Drug Details Page$")
+	public void the_user_Captures_Drug_costs_on_Drug_Details_Page() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		Map<String, String> DrugCosts = drugDetailsPage.CaptureDrugCosts();
+		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
+		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("ANNUAL_ESTIMATED_TOTAL");
+		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
+
+		System.out.println(DrugCosts);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+	}
+
+	@Then("^the user navigates to the plan details for the given plan type$")
+	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
+			throws Throwable {
+		wd.manage().window().maximize();
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		String planName = memberAttributesRow.get(1).getCells().get(1);
+		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
+		plansummaryPage.viewPlanSummary(planType);
+		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) plansummaryPage.navigateToPlanDetails(planName,
+				planType);
+		if (plandetailspage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
+			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+
+		}
+	}
+
+	@Then("^the user clicks on Review Drug Costs to Land on Drug DetailsP Page$")
+	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_Page() throws Throwable {
+		BuildYourDrugListMobile DCEbuildDrugList = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugDetailsPageMobile drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
 }

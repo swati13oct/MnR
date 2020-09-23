@@ -27,6 +27,7 @@ import org.testng.Assert;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
@@ -2073,6 +2074,55 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+
+	}
+
+	public void validateCallSam() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(callsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		} else
+			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+	}
+
+	public AcquisitionHomePage validateCallpopup() throws InterruptedException {
+		// CommonUtility.checkPageIsReady(driver);
+		callsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		System.out.println(CallSamTFN.getText());
+		CallSamTFNClose.click();
+		validateNew(callsam);
+		return null;
+	}
+
+	public void validateChatSam() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(chatsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+
+		} else
+			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+	}
+
+	public void verifyChatpopup() throws InterruptedException {
+		// CommonUtility.checkPageIsReady(driver);
+		chatsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 
 	}
 

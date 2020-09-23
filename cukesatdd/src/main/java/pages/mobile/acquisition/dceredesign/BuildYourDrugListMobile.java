@@ -19,6 +19,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
@@ -260,11 +261,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 	}
 	
-	public ComparePlansPage returnToPlanComparePage() {
+	public ComparePlansPageMobile returnToPlanComparePage() {
 		
 		validateNew(returnToCompareBtn);
 		returnToCompareBtn.click();
-		return new ComparePlansPage(driver);
+		return new ComparePlansPageMobile(driver);
 	}
 
 }

@@ -3,12 +3,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @DCE_VisitorProfile
   Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
-    Given user is on AARP site
+    Given the user is on medicare acquisition site landing page
     		|Site| <site>|
     And the user clicks on the shopping cart icon
-    And user goto DCE redesign profile page via add drug button
-    Then end user goto GetStarted button and click on it
-    Then enduser navigate to build drug list by clicking on build drug list
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List
@@ -17,10 +17,10 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
-    Then enduser land on ZipEntry page by clicking on Review Drung Costs
-    Then enduser provide zipcode and select county
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    Then user click on continue button
+    And user clicks on continue button in Zip Entry Page
 
 		@DCE_VisitorProfile_AARP
     Examples: 

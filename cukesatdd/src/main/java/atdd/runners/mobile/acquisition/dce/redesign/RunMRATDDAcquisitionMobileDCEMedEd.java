@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMobileDCEMedEd.json" },
-tags = { "@dce_redesign_MedEd" })
+tags = { "@dce_redesign_MedEd" },dryRun=false)
 
 
 public class RunMRATDDAcquisitionMobileDCEMedEd {

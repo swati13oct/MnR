@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -149,4 +150,47 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver{
 		Assert.fail("Plan year dropdown not displayed during AEP");
 		return null;
 	}
+	
+	public void selectPlanYear() {
+		if(validate(planYearDropdown)) {
+			planYearDropdown.click();
+			Select planYear = new Select(planYearDropdown);
+			planYear.selectByIndex(1);
+		}
+	}
+	
+	public void enterZipCode(String zipcode) {
+		zipCodeTxtbox.clear();
+		zipCodeTxtbox.sendKeys(zipcode);
+	}
+
+	public ZipCodeAndPlanYearCapturePageMobile validateZipCodeErrorMessage() {
+		//String[] zip = zipcode.split(",");
+		//for(String code: zip) {
+			validateNew(zipCodeTxtbox);
+			//sendkeys(zipCodeTxtbox, zipcode);
+		    validateNew(continueBtn);
+		    
+		    continueBtn.click();
+			//countyDropdown.click();
+			CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
+			if(validateNew(zipCodeErrorMsg)) {
+				System.out.println("Error message is Displaying");
+				return new ZipCodeAndPlanYearCapturePageMobile(driver);
+			}
+			Assert.fail("Error Message is not displaying for invalid zipcode");
+			return null;
+	}
+	
+	public void verifyReviewDrugCostPageDisplayed() {
+		CommonUtility.waitForPageLoad(driver,reviewDrugCostPageHeading , 30);
+	if(validateNew(reviewDrugCostPageHeading)) {
+		Assert.assertTrue("Review drug cost page not displayed", true);
+	}
+	else {
+	Assert.assertTrue("Review drug cost page not displayed", false);
+	}
+	
+}
+	
 }
