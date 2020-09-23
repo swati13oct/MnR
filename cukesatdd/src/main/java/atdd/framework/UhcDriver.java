@@ -1174,14 +1174,12 @@ try {
     					ready = true;
     					break;
     				}
-    			} catch(WebDriverException e) {
-    				counter--;
-    			}
+    			} catch(WebDriverException e) {/**decrement counter and retry*/}
 
     			System.out.println("Waiting for page to load");
     			counter--;
 
-    		} while(counter != 0);
+    		} while(counter > 0);
 
     	}
     	return ready;
@@ -1200,12 +1198,10 @@ try {
     					ready = true;
     					break;
     				}
-    			} catch(WebDriverException e) {
-    				counter--;
-    			}
+    			} catch(WebDriverException e) {/**decrement counter and retry*/}
     			counter--;
     		}
-    		while(counter != 0);
+    		while(counter > 0);
     	}
     	return ready;
     }
