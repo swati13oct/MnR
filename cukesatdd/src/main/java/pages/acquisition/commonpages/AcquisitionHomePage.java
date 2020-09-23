@@ -278,8 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-//  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
+  	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -918,12 +917,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			viewPlansButton.click();
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
-//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				waitForPageLoadSafari();
-			}
+			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
 			
-//			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
 			}
@@ -1437,7 +1433,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	 public void validateCallSam() throws InterruptedException {
 	        boolean present;
-//	        driver.navigate().refresh();
+	        driver.navigate().refresh();
 	        try {
 	        validateNew(callsam);
 	        present = true;
@@ -1454,26 +1450,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
-			Actions action = new Actions(driver);
-			WebElement element = callsam;
-			action.moveToElement(element).perform();
+//			Actions action = new Actions(driver);
+//			WebElement element = callsam;
+//			action.moveToElement(element).perform();
+			waitforElement(callsamtooltip);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
 	        if (toolTipText.contains(CallSam)) {
-	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	          System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
 	          
 	        }
 	        else
-	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-//			driver.navigate().refresh();
-			CommonUtility.checkPageIsReady(driver);
+//			CommonUtility.checkPageIsReady(driver);
 			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
@@ -1593,9 +1589,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
-			CommonUtility.checkPageIsReadyNew(driver);
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-			validateNew(DCELink, 10);
+			validateNew(DCELink);
 			jsClickNew(DCELink);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
@@ -2107,7 +2102,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
-} 
-
-
-	 
+}

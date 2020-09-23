@@ -2299,7 +2299,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(marketingBullets);
 		}
 		if(planType.equals("PDP")){
-			WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul)[2]"));
+			WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[@class='ng-scope'])[2]"));
 			validateNew(marketingBullets);
 		}
 
