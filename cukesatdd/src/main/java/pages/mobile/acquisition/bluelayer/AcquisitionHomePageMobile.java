@@ -1,9 +1,7 @@
 package pages.mobile.acquisition.bluelayer;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.junit.Assert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -162,6 +160,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
+	public void openUHCURLOnMobile() {
+		startNewMobile(UMS_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+	}
+
 	
 	/**
 	 * @author Rathulya
@@ -174,6 +177,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("==pageURL==" + pageURL);
 		driver.navigate().to(pageURL);
 		return null;
+	}
+	
+	public void navigateToPath(String page) {
+		String pageURL = driver.getCurrentUrl() + page;
+		System.out.println("==pageURL==" + pageURL);
+		driver.navigate().to(pageURL);
+		
 	}
 
 	public AcquisitionHomePageMobile validateCallSamOnTablet() throws InterruptedException {
@@ -271,6 +281,46 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 		return null;
+	}
+
+	public void validateTFN(String tfnXpath) {
+
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		validateNew(TFNelement, 45);
+		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
+			scrollToView(TFNelement);
+			jsClickMobile(TFNelement);
+			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
+			threadsleep(3000);
+			verifyTFNPopUp(TFNelement);
+		} else {
+			org.testng.Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
+		}
+
+	}
+
+	public void verifyTFNPopUp(WebElement TFNelement)
+	{
+		Alert alert;
+		try {
+			alert = driver.switchTo().alert();
+			System.out.println("Alert message : "+ alert.getText());
+			String TFN= driver.switchTo().alert().getText().replace(" (", "-").replace(") ", "-");
+			System.out.println(TFN);
+			if(TFN.contains(TFNelement.getText()))	{
+				System.out.println("The Call Alert is displayed with correct TFN : VALIDATION PASSED");
+				alert.dismiss();
+			}else{
+
+				System.out.println("The Call Alert is displayed with INCORRECT TFN : Validation FAILED");
+				alert.dismiss();
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("TFN Call pop-up NOT Displayed");
+		}
 	}
 
 }

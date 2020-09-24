@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.acquisition.ole;
 
 import java.util.ArrayList;
@@ -256,7 +253,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						jsClickNew(firstPCP);
 						CommonUtility.waitForPageLoadNew(driver,SelectPCPAddress, 30);
 						//firstPCP.click();
-						SelectPCPAddress.click();
+//						SelectPCPAddress.click();
+						jsClickNew(SelectPCPAddress);
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
 						/*try {
@@ -276,7 +274,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						try {
 							Thread.sleep(2000);
 							if(validate(SelectMedicalGrp)){
-								SelectMedicalGrp.click();
+//								SelectMedicalGrp.click();
+								jsClickNew(SelectMedicalGrp);
 								executor = (JavascriptExecutor)driver;
 								executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
 
@@ -414,4 +413,3 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			
 	}	
 }
-	
