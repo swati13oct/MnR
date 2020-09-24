@@ -613,6 +613,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
     		threadsleep(8000);
 //    		drugcoveredsession();
     		pageloadcomplete();
+    		drugcoveredsession();
     		drugsCoveredInVPP(count-1);
     		int afterRemove = DrugsList.size();
     		if(beforeRemove!=afterRemove) {
@@ -696,6 +697,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
+		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;
 		int None = 6;

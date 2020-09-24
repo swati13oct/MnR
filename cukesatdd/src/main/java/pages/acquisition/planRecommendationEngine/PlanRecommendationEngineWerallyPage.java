@@ -62,6 +62,9 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	// Find doctor element and lookup name
 	@FindBy(css = "h2")
 	private WebElement doctorName;
+	
+	@FindBy(css = "h1.provider-name")
+	private WebElement doctorNameinWerally;
 
 	// div>div[data-test-id*='search-result-person']:nth-of-type(1)
 	// div[class*='hidden'] button
@@ -119,7 +122,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+						doctorsName.add(doctorNameinWerally.getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
