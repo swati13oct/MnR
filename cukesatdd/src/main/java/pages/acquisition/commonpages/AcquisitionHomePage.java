@@ -919,7 +919,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			viewPlansButton.click();
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
-			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+			waitForPageLoadSafari();
 			
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1475,7 +1476,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-//			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReady(driver);
 			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
@@ -1595,8 +1596,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			CommonUtility.checkPageIsReadyNew(driver);
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-			validateNew(DCELink);
+			validateNew(DCELink, 10);
 			jsClickNew(DCELink);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
@@ -2108,7 +2110,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
-} 
-
-
-	 
+}

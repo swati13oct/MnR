@@ -412,7 +412,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+		if(validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading))
 		{
 			return new DrugDetailsPage(driver);
 		}
