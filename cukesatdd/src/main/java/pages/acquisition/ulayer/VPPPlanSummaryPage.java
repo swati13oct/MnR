@@ -3546,6 +3546,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 						jsClickNew(CurrentYearPlansBtn);	
 					}
 				}
+				waitForPageLoadSafari();
 	/*	CommonUtility.checkPageIsReadyNew(driver);			
 		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
 			//if(validate(NextYearPlansBtn, 20)) {
@@ -3648,12 +3649,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 				if (validate(currentYearSelection)) {
 					currentYearSelection.click();
 				}
+				waitForPageLoadSafari();
 				validateNew(planYearPopupGoButton);
 				planYearPopupGoButton.click();
 		}else {														// if the plan year popup is not displayed
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 					jsClickNew(CurrentYearPlansBtn);
+					waitForPageLoadSafari();
 					validateNew(AARPlogo, 10);
 				}
 		}

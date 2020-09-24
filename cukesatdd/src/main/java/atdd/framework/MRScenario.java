@@ -1078,7 +1078,7 @@ try {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "10000");
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
