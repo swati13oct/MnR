@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionFooterUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionFooterUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterUHC.json" }, tags = { "@globalfooterBLayer" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterUHC.json" }, tags = { "@globalfooter_UHC" })
 public class RunMRATDDAcquisitionFooterUHC {
 
 }

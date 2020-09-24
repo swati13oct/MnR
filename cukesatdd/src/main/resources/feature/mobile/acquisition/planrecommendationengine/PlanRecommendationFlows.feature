@@ -60,8 +60,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    When user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #When user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user validate elements in loading page mobile
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
@@ -128,8 +128,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -236,8 +236,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile

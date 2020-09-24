@@ -112,6 +112,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+    When user selects plan year
     And user clicks on continue button in Zip Entry Page
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
@@ -131,13 +132,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
     @DCE_DrugListTiersLimits_AEP_AARP
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17          | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
-      | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol/Codeine | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|
+      | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17  | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
+      | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|
 
 		@DCE_DrugListTiersLimits_AEP_UHC
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17          | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
-      | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol/Codeine | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|
+      | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17  | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
+      | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|
 
 
   @DCE_AllTiers_DrugLimits_Validation

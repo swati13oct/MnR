@@ -197,6 +197,15 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 							} else {
 								System.out.println("NO emmail page did not appear");
 							}
+							if (driver.getCurrentUrl().contains("/anoc.html")) {
+								System.out.println("annual notice of changes page has appeared");
+								if (validate(homePageNotice, 0)) {
+									homePageNotice.click();
+									CommonUtility.checkPageIsReady(driver);
+								}
+							} else {
+								System.out.println("annual notice of changes page did not appear");
+							}
 						
 						
 					return;
@@ -246,7 +255,8 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 					
 					//if (driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best?deeplink=true"))
-					if (driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best"))
+					Assert.assertTrue(driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best"));
+/*					if (driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-introducing-at-your-best"))
 					{
 						//System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on health and wellness deeplink Page **");
@@ -257,7 +267,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 						} else {
 							Assert.fail("The element " + textonpage.getText() + "is not found");
 						}
-									
+*/									
 						return true;	
 					}
 				

@@ -39,7 +39,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
        Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password | 
-      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer

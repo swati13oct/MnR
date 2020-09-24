@@ -554,7 +554,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName=memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		//plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);

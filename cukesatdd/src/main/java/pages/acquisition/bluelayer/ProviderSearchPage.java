@@ -339,6 +339,7 @@ public class ProviderSearchPage extends UhcDriver {
 			if(validate(selectLocationOption)){
 				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
 				
+				//jsClickNew(selectLocationOption);
 				selectLocationOption.click();
 				
 				validateNew(NewsaveBtn2);
@@ -348,7 +349,8 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 		
 			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			continueSearching.click();
+			//continueSearching.click();
+			jsClickNew(continueSearching);
 			
 			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
@@ -366,7 +368,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 		 jsClickNew(Savedproviders); 
 		 validateNew(finishReturnBtn); 
-		 finishReturnBtn.click();
+		 //finishReturnBtn.click();
+		 jsClickNew(finishReturnBtn); 
 		 
 		/*Old Changes
 		 * jsClickNew(Savedproviders); validateNew(providerNameText);

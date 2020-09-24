@@ -255,9 +255,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.3.4.RELEASE</version>
 		</dependency>
-
-		
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>

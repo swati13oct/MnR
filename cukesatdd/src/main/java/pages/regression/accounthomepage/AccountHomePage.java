@@ -506,6 +506,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "globalContentIdForSkipLink")
 	private WebElement PaymentHeadingNew;
 	
+	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
+	private WebElement mnrSignInButton;
+	
 	private PageData myAccountHome;
 	
 	public JSONObject accountHomeJson;
@@ -2409,6 +2412,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public EOBPage navigateDirectToEOBPag() {
+		CommonUtility.checkPageIsReady(driver);
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
 		} else if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod")
@@ -2425,10 +2429,10 @@ public class AccountHomePage extends UhcDriver {
 						WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
 						//WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[href$='claims.html']"));
 						claimsTopMenuShadowRootLink.click();
+						CommonUtility.checkPageIsReady(driver);
 					} catch (Exception e) {
 						Assert.assertTrue("PROBLEM - unable to locate Claims link on Rally Dashboard top menu", false);
 					}		
-					
 					if (noWaitValidate(explainationOfBenefits)) 
 						explainationOfBenefits.click();
 					else if (noWaitValidate(eobTopMenuLink)) 
@@ -3764,11 +3768,11 @@ public class AccountHomePage extends UhcDriver {
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
 			driver.quit(); //force the test to fail instead of waiting time
-			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception: "+e.getMessage(),false);
 		} catch (WebDriverException we) {
 			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
 			driver.quit(); //force the test to fail instead of waiting time
-			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception: "+we.getMessage(),false);
 		}
 		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
 		Thread.sleep(2000); // note: give it a bit more time to settle down
@@ -4343,4 +4347,28 @@ public class AccountHomePage extends UhcDriver {
 		   assertTrue("Navigated page title not matched for Canopy deep link", currentPageTitle.contains(expectedTitle));
 	}
 
+	public void clickElementUnderShadowRootHeader(String cssLocatorToClick) {
+		WebElement root1 = expandRootElement(shadowRootHeader);
+		try {
+			WebElement elementToClickInShadowRoot = root1
+					.findElement(By.cssSelector(cssLocatorToClick));
+			elementToClickInShadowRoot.click();
+		} catch (Exception e) {
+			Assert.fail("PROBLEM - unable to locate element with cssSelector. Element: " + cssLocatorToClick);
+		}
+	}
+	
+	public void clickAccountProfileDashboard() {
+		checkForIPerceptionModel(driver);
+		//Click on Account profile on Rally dashboard. Under shadow element
+		clickElementUnderShadowRootHeader("button[id*=dropdown-toggle]");
+	}
+	
+	public void clickLogoutDashboardAndCheckLoginPage() {
+		//Click on logout under Account profile on Rally dashboard. Under shadow element
+		clickElementUnderShadowRootHeader("a[data-testid*=TARGET_AWARE_LOGOUT]");
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Driver title after logout=" + driver.getTitle());
+		validateNew(mnrSignInButton,5);
+	}
 }
