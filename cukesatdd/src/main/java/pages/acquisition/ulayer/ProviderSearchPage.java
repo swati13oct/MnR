@@ -249,6 +249,7 @@ public class ProviderSearchPage extends UhcDriver {
 		}else
 			System.out.println("Issue with Xpath");
 	
+		threadsleep(3);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

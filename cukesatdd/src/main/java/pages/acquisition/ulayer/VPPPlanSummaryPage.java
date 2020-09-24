@@ -1501,6 +1501,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public int checkAllMAPlans(){
 		try {
 			Thread.sleep(5000);
+			waitForPageLoadSafari();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1612,7 +1613,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//	 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
-
 		}*/
 
 		if(validate(maPlansCount)){
@@ -1683,6 +1683,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
@@ -1833,8 +1834,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		/*System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
 		NextYearRadio.click();
 		System.out.println("*****CLICKING ON Year Toggle Go button*****");
-
-
 		SelectYearGoBtn.click();*/
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
@@ -1852,11 +1851,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 /*		System.out.println("Next Year : "+nextYear);
 		System.out.println("Current Year : "+currentYear);
-
-
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '"+currentYear+"')]"));
 		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
-
 		List <WebElement> NextYearHeadings = driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]"));
 		if( validate(CurrentYearLink) && NextYearHeadings.size()>0){
 			System.out.println("Current and Next year toggle displayed for AEP");
@@ -1865,7 +1861,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else{
 			System.out.println("Current and Next year toggle NOT displayed for AEP");
 		}
-
 		// TODO Auto-generated method stub
 		return null;*/
 	}
@@ -1948,8 +1943,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(FIndPlansButton);
 		FIndPlansButton.click();
 		
-			CommonUtility.checkPageIsReadyNew(driver);
-		if (countyModal.isDisplayed()) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(countyModal,15)) {
 			return new MultiCountyModalPage(driver);
 		}
 		return null;
@@ -2270,10 +2265,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/* try {
-
            	System.out.println(" The text is " +AnnualDeductibleForPlan.getAttribute("textContent").trim());
            	System.out.println(" The text from feature file is " +annualDeductible);
-
 			} catch (Exception e) {
 				System.out.println(" The text is" +AnnualDeductibleForPlan.getText());
 			}*/
@@ -2315,7 +2308,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	/*public void validatePrimaryCarePhysicianBenefit (String planName , String primaryCarePhysician) {
-
 }*/
 	public void toolTipForPremium0(String planName){
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"));
@@ -2487,7 +2479,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 String parentHandle = driver.getWindowHandle();
 int initialCount = driver.getWindowHandles().size();
 ChooseAVideo.click();
-
 waitForCountIncrement(initialCount);
 ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 String currentHandle = null;
@@ -3207,7 +3198,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+//		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 	}
 	
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth){
@@ -3329,19 +3321,28 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitTillElementClickableInTime(Start_ApplicationBtn,60);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(insuredStatus, 15);
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
-		validateNew(nextButton);
+		validate(nextButton, 15);
 		jsClickNew(nextButton);
+		validate(medSuppImpDoc_PlanOverview, 15);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(medSuppOleAarpCardImg, 15);
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(firstName, 15);
 		waitforElementVisibilityInTime(firstName,30);
 		sendkeysNew(firstName,FirstName);
 		sendkeysNew(lastName,LastName);
-		nextButton.click();
+//		nextButton.click();
+		jsClickNew(nextButton);
+		validate(address1, 15);
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
@@ -3349,13 +3350,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
-		validateNew(medSuppOleDobHeading);
+		validate(medSuppOleDobHeading, 15);
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		String ResumeKey= resumeKey.getText();
 		System.out.println("The return to the application code is- "+ResumeKey);
-		cancelButton.click();
+//		cancelButton.click();
+		validate(cancelButton, 15);
+		jsClickNew(cancelButton);
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+		validate(cancelButtonPopUp, 15);
 		cancelButtonPopUp.click();
 		System.out.println("Cancel application has been clicked on the pop up");
 		return ResumeKey;
@@ -3367,6 +3371,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//MedSupFormValidation(DateOfBirth);
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3541,6 +3546,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 						jsClickNew(CurrentYearPlansBtn);	
 					}
 				}
+				waitForPageLoadSafari();
 	/*	CommonUtility.checkPageIsReadyNew(driver);			
 		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
 			//if(validate(NextYearPlansBtn, 20)) {
@@ -3643,12 +3649,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 				if (validate(currentYearSelection)) {
 					currentYearSelection.click();
 				}
+				waitForPageLoadSafari();
 				validateNew(planYearPopupGoButton);
 				planYearPopupGoButton.click();
 		}else {														// if the plan year popup is not displayed
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 					jsClickNew(CurrentYearPlansBtn);
+					waitForPageLoadSafari();
 					validateNew(AARPlogo, 10);
 				}
 		}
@@ -3695,6 +3703,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void clickOnViewMoreForPlan(String planName) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		waitForPageLoadSafari();
 		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'"+planName+"')]//ancestor::div[contains(@class, 'plan-card')]//a[@class='accordion-arrow collapsed']"));
 		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
 				viewMoreLink.get(0).click();
@@ -3836,7 +3845,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return false;
 		}
 		public ArrayList<String> providerinforetreive(String planName){
-			
+			CommonUtility.checkPageIsReadyNew(driver);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -3863,12 +3872,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 /*		public void setStringList(ArrayList<String> stringList) {
 			
 		    this.stringList = stringList;
-
 		}
 		
 		public ArrayList<String> getStringList() {
 		    return stringList;
-
 		}*/
 		
 		public void setMap(Map<String, ArrayList<String>> dataMap) {
@@ -4269,7 +4276,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void signInOptumId(String username, String password) {
 		try {
-			
+			checkIfPageReadySafari();
 			signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
@@ -4298,7 +4305,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void RetrieveURL(String ExpectedsupplementURL) {
 		
 		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		validate(Submit, 15);
 		Submit.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
 		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);

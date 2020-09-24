@@ -290,12 +290,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drugname | <drug1> |
     And the user returns to the visitor profile page on aarp
     Then the user should be able to see the Drug information in the guest profile page on aarp
-      | Drugname | <drug> |
+      | Drugname | <drug1> |
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | state   | userName           | password   | drug1   | zipCode |
-      | Alabama | mnrqavd2@gmail.com | Password@3 | Lipitor |   90210 |
+      | state   | userName  | password  | drug1   | zipCode |
+      | Alabama | mnrqavd3 | Password@1| Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -319,8 +319,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | userName           | password   | plantype | planname                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planname                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
