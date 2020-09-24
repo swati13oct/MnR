@@ -51,7 +51,7 @@ Feature: 1.12 ACQ - Global Components AARP
        |	UHC	| 
 
   @GlobalComponentsAARPPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
     Given the user navigates to following medicare acquisition site page

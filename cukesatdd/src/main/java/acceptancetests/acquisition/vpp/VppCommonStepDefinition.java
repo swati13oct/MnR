@@ -369,5 +369,35 @@ public class VppCommonStepDefinition {
 				Assert.fail("Error Loading Welcome Page for OLE");
 			}
 		}
+		
+		@Then("^user validates plan count for all plan types on plan summary page$")
+		public void user_validates_following_benefits_ui_aarp() {
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Error validating plans in  VPP plan summary page",
+					plansummaryPage.validateVPPPlanSummaryPage());
+			String SiteName = "AARP_ACQ";
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		}
+		
+		/**
+		 * @toDo:user validates the available plans for selected plan types
+		 */
+		@Then("^the user validates the available plans for selected plan types$")
+		public void user_validates_available_plans_aarp() {
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			if (plansummaryPage.validatePlanNames(planType)) {
+				String SiteName = "AARP_ACQ";
+				getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+			}
+		}
 
 }
