@@ -3856,43 +3856,6 @@ public class AccountHomePage extends UhcDriver {
 		if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 			return true;
 		return false;
-		/* tbd 
-		//note: use the 2nd menu link as the base and determine which one I really need
-		// if 2 is FIND CARE then 6 is PnP
-		// if 2 is CARE then 5 is PnP
-		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-				secondTopMenuItemCssStr);
-		Assert.assertTrue("PROBLEM - unable locate top menu item", secondTopMenuItem!=null);
-		if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
-			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-				return true;
-			else { //note: maybe user has no payment tab, try this one before giving up
-				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-						pnpTopMenuItemCssStr);
-				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-					return true;
-			}
-		} else if (secondTopMenuItem.getText().contains("CLAIMS")) { //note: user has no FIND CARE & COSTS tab
-			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-				return true;
-			else { //note: maybe user has no payment tab, try this one before giving up
-				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
-				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-						pnpTopMenuItemCssStr);
-				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-					return true;
-			}
-		} 
-		return false;
-		*/
 	}
 	
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
@@ -3915,9 +3878,6 @@ public class AccountHomePage extends UhcDriver {
 				}
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-		//tbd } else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-		//tbd 	//System.out.println("don't bother to work around the sorry error, page displays won't look right");
-		//tbd 	workaroundAttempt("pnp"); 
 		}
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
