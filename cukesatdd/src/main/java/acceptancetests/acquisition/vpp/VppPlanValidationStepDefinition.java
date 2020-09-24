@@ -337,6 +337,10 @@ public class VppPlanValidationStepDefinition {
 
 								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") || currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
+								 	if(sheetName.contains("PDP") && currentColName.trim().equalsIgnoreCase("Drug Costs from Formulary"))
+									{
+										currentCellValue = currentCellValue + "Estimate drug costs";
+									}
 									 resultMap = planComparePage.compareBenefits(currentColName.trim(), currentCellValue.trim(), benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
 										 valueMatches = false;
