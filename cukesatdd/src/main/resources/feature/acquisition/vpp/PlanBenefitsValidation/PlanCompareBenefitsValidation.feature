@@ -400,7 +400,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet    |
       | Sheet2021_19 |
 
-  @planCompareBenefits_NextYearAARP20
+  @planCompareBenefits_NextYearUHC20
     Examples:
       | workSheet    |
       | Sheet2021_20 |
