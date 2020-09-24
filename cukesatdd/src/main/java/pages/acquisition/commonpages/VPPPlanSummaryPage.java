@@ -92,7 +92,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]//h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
