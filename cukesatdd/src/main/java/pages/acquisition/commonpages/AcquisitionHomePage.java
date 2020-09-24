@@ -309,7 +309,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement CallSamTFNClose;
    	
 //   	String CallSam= "Call a Licensed Insurance Agent";
-   	String CallSam= "1-877";
+   	String CallSam1855= "1-855";
+   	String CallSam1877= "1-877";
+   	
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
@@ -1455,16 +1457,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			Actions action = new Actions(driver);
 //			WebElement element = callsam;
 //			action.moveToElement(element).perform();
-			waitforElement(callsamtooltip);
+			waitforElementNew(callsamtooltip,60);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (toolTipText.contains(CallSam)) {
+	        if (toolTipText.contains(CallSam1877)) {
 	          System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
 	          
 	        }
+	        else if (toolTipText.contains(CallSam1855))	{
+	        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+	        }
+	        		
 	        else
 	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
@@ -1694,7 +1700,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void signInheader() {
 			headerSignInLink.click();
 			validateNew(signIn);
-			if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
+			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
 				System.out.println("Signin page is loaded");
 				driver.navigate().back();
@@ -1784,7 +1790,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CheckPageLoad();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-			if (driver.getCurrentUrl().contains("profile/*")) {
+			if (driver.getCurrentUrl().contains("profile/guest")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
