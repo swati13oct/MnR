@@ -573,3 +573,12 @@ q2_overpaymentShip003/Password@1,SHIP,SHIPOverpaymentCreditFlag,,
 shipRider001/Password@1,SHIP,SHIPOverdueFlag,,
 paidinfullstartingmay001/Password@1,SHIP,SHIPPaidInFullFlag,,
 paymentscombo002/Password@1,FedPDPSHIP,ACTIVEPDPSHIPPayment,NON LIS,
+q2_june_NiceSeg_100/Password@1,MAPD,IND_PREEFF_PnP
+preeffectiveFEDPDP_001/Password@1,PDP,IND_PREEFF_PnP
+testSnpUser01/Password@1,SNP,IND_PREEFF_PnP
+preeffectiveFEDMA_001/Password@1,MA,IND_PREEFF_PnP
+preeffectiveGroupSSUP01/Password@1,SSP,GRP_PREEFF_PnP
+shipPreeffective707/Password@1,SHIP,IND_PREEFF_PnP
+preeffective_GroupMA_001/Password@1,MA,GRP_PREEFF_PnP
+preeffectivegroupmapd_001/Password@1,MAPD,GRP_PREEFF_PnP
+preeffectiveGroupPDP_001/Password@1,PDP,GRP_PREEFF_PnP

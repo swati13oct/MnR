@@ -103,6 +103,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'header') and not(contains(@class,'hide'))]//h1")
 	private WebElement heading;
 
+	@FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
+	private WebElement preEffBnfHeading;
+	
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
 	private List<WebElement> tabsForComboMember;
 
@@ -238,6 +241,9 @@ public class TestHarness extends UhcDriver {
  	
 	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
 	private WebElement pharPresDashboardLink;
+	
+	@FindBy(xpath="//div[contains(@class,'deskHeader')]//a[contains(@id,'preeffectivepharmacies')]")
+	private WebElement preEffPnpMenuLnk;
 
 	@FindBy(xpath="//h1[contains(text(),'Estimate Your Drug Costs')]")
 	private WebElement dceHeaderTxt;
@@ -508,13 +514,16 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
-	public BenefitsAndCoveragePage navigateDirectToBnCPagFromTestharnessPage() {
+	public BenefitsAndCoveragePage navigateDirectToBnCPagFromTestharnessPage(String memberType) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
 		jsClickNew(testHarnessBenefitsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		WebElement heading_e=heading;
+		if (memberType.contains("PREEFF"))
+			heading_e=preEffBnfHeading;
+		CommonUtility.waitForPageLoad(driver, heading_e, 60);
 		System.out.println(driver.getTitle());
 		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
 			try {
@@ -526,6 +535,37 @@ public class TestHarness extends UhcDriver {
 		}
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+	}
+	
+	@FindBy(xpath="//a[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	private WebElement preEffPlanDocLnk;
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPagFromTestharnessPage_preeff(String memberType) {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,50)", "");
+		scrollToView(testHarnessBenefitsPageLink);
+		jsClickNew(testHarnessBenefitsPageLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement heading_e=heading;
+		if (memberType.contains("PREEFF"))
+			heading_e=preEffBnfHeading;
+		CommonUtility.waitForPageLoad(driver, heading_e, 60);
+		System.out.println(driver.getTitle());
+		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("second try - "+driver.getTitle());
+		}
+		if (driver.getTitle().contains("Benefits")) {
+			CommonUtility.waitForPageLoad(driver, preEffPlanDocLnk, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'VIEW PLAN DOCUMENTS' button on pre-effective benefits page", noWaitValidate(preEffPlanDocLnk));
+			preEffPlanDocLnk.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new PlanDocumentsAndResourcesPage(driver);
 		}
 		return null;
 	}
@@ -1366,9 +1406,11 @@ public class TestHarness extends UhcDriver {
     	@FindBy(tagName = "arcade-header")
     	private WebElement shadowRootHeader;
 
-    	public boolean findPnPLinksExistOnPg() {
+    	public boolean findPnPLinksExistOnPg(String memberType) {
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
     		checkForIPerceptionModel(driver);
+    		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
+    			return true;
     		if (noWaitValidate(pharPresDashboardLink)) {
     			return true;
     		} else if (noWaitValidate(testHarnessTopMenuPhaPresLink)) {

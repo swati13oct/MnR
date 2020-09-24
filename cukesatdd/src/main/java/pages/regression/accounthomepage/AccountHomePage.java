@@ -324,7 +324,11 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath= "//nav[@id='sub-nav']//a[contains(text(),'Explanation of Benefits')]")
 	private WebElement EOBLINK;
-	
+
+	@FindBy(xpath="//div[contains(@class,'deskHeader')]//a[contains(@id,'preeffectivepharmacies')]")
+	private WebElement preEffPnpMenuLnk;
+
+
 	/*
 	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
 	 * private WebElement
@@ -3210,6 +3214,41 @@ public class AccountHomePage extends UhcDriver {
 
 		 return null;
 	 }
+	 
+	 @FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
+	 private WebElement preEffBnfHeading;
+
+	 @FindBy(xpath="//a[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	 private WebElement preEffPlanDocLnk;
+	 public PlanDocumentsAndResourcesPage navigateDirectToPlanDoc_preEff(String memberType) {
+		 checkModelPopup(driver,5);
+		 if (noWaitValidate(shadowRootHeader)) {
+			 System.out.println("located shadow-root element, attempt to process further...");
+			 WebElement root1 = expandRootElement(shadowRootHeader);
+			 try {
+				 WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				 benefitsTopMenuShadowRootLink.click();
+			 } catch (Exception e) {
+				 Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			 }		
+
+		 } 
+		 CommonUtility.checkPageIsReady(driver);
+		 checkModelPopup(driver,5);
+		 WebElement heading_e=heading;
+		 if (memberType.contains("PREEFF"))
+			 heading_e=preEffBnfHeading;
+		 CommonUtility.waitForPageLoad(driver, heading_e, 50);
+		 if (driver.getTitle().contains("Benefits")) {
+			 CommonUtility.waitForPageLoad(driver, preEffPlanDocLnk, 5);
+			 Assert.assertTrue("PROBLEM - unable to locate the 'VIEW PLAN DOCUMENTS' button on pre-effective benefits page", noWaitValidate(preEffPlanDocLnk));
+			 preEffPlanDocLnk.click();
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 return new PlanDocumentsAndResourcesPage(driver);
+		 }
+
+		 return null;
+	 }
 
 	public BenefitsAndCoveragePage navigateToBandCPag() {
 
@@ -3892,9 +3931,11 @@ public class AccountHomePage extends UhcDriver {
 			return false;
 	}
 	
-	public boolean findPnPLinksExistOnPg() {
+	public boolean findPnPLinksExistOnPg(String memberType) {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
 		checkForIPerceptionModel(driver);
+		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
+			return true;
 		if (noWaitValidate(pharPresDashboardLink)) {
 			return true;
 		} else if (noWaitValidate(pharPresDashboardLinkAlternative)) {

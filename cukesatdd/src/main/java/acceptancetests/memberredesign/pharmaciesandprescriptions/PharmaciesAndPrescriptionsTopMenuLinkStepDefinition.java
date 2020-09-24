@@ -24,6 +24,7 @@ import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.regression.testharness.TestHarness;
 
@@ -92,7 +93,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 	}
 
 	@Then("^user navigates to the eob page to validate Pharamcies and Prescriptions link$")
-	public void validate_claims_page() throws InterruptedException { 
+	public void validate_eob_page() throws InterruptedException { 
 		//note: claims page will be updated and owned by Rally, team-atest env may not be setup to handle that
 		if (MRScenario.environment.contains("team-a")) {
 			System.out.println("SKIP this validation if running on team-atest env.");
@@ -117,7 +118,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			
 			EOBPage eobPg=testHarness.navigateDirectToEOBPag();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, eobPg!=null);
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -130,7 +131,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			EOBPage eobPg=accountHomePage.navigateDirectToEOBPag();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, eobPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -141,6 +142,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link$")
 	public void validate_bnc_page() throws InterruptedException { 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="benefit and coverage";
 		boolean result=false;
@@ -150,9 +152,9 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			testHarness.waitForTestharnessTableToShow();
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			BenefitsAndCoveragePage bncPg=testHarness.navigateDirectToBnCPagFromTestharnessPage();
+			BenefitsAndCoveragePage bncPg=testHarness.navigateDirectToBnCPagFromTestharnessPage(memberType);
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, bncPg!=null);
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -165,7 +167,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			BenefitsAndCoveragePage bncPg=accountHomePage.navigateDirectToBnCPag();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, bncPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -176,6 +178,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the payment page to validate Pharamcies and Prescriptions link$")
 	public void validate_payment_page() throws InterruptedException { 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="payment";
 		boolean result=false;
@@ -187,13 +190,12 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			if (testHarness.findPaymentTabOnTopMenu()) {
 				PaymentHistoryPage paymentPg=null;
-				String memberType=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 				if (memberType.toLowerCase().contains("preeff"))
 					paymentPg=testHarness.navigateToPaymentOverviewSkipBtnValidation();
 				else
 					paymentPg=testHarness.navigateToPaymentFromTestHarnessPageSkipBtnValidation();
 				Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
-				result=testHarness.findPnPLinksExistOnPg();
+				result=testHarness.findPnPLinksExistOnPg(memberType);
 				if (expectLink.equalsIgnoreCase("yes")) 
 					Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 				else
@@ -211,7 +213,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 				System.out.println("User doesn't have payment option, skip this step validation");
 			else {
 				Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
-				result=accountHomePage.findPnPLinksExistOnPg();
+				result=accountHomePage.findPnPLinksExistOnPg(memberType);
 				if (expectLink.equalsIgnoreCase("yes")) 
 					Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 				else
@@ -247,7 +249,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			HealthAndWellnessPage healthnWellnessPg = new HealthAndWellnessPage(testHarness.driver);
 			healthnWellnessPg.clickHealthnWellnessTab();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null); */
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -261,7 +263,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			HealthAndWellnessPage healthnWellnessPg = new HealthAndWellnessPage(accountHomePage.driver);
 			healthnWellnessPg.clickHealthnWellnessTab();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -285,7 +287,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			ContactUsPage contactUsPg=testHarness.navigateToContactUsPageFromTestHarnessPage(memberType);
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, contactUsPg!=null);
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else 
@@ -300,7 +302,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			//note: go to common question page
 			page="contact us - common questions";
 			contactUsPg.navigateToCommonQuestionsPg();
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -314,7 +316,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			ContactUsPage contactUsPg=accountHomePage.navigateToContactUsPage();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, contactUsPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -328,7 +330,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			//note: go to common question page
 			page="contact us - common questions";
 			contactUsPg.navigateToCommonQuestionsPg();
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -339,6 +341,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the account setting to validate Pharamcies and Prescriptions link$")
 	public void validate_account_setting_page() throws InterruptedException { 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="account setting";
 		boolean result=false;
@@ -350,7 +353,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			ProfileandPreferencesPage acctPg=testHarness.navigateDirectToProfilePageFromTestHarnessPage();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, acctPg!=null);
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -365,7 +368,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			js.executeScript("window.scrollTo(0, 0)");	
 			ProfileandPreferencesPage acctPg=accountHomePage.navigateDirectToProfilePage();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, acctPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -376,6 +379,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link$")
 	public void validate_disclosures_page() throws InterruptedException { 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="notices and disclosures";
 		boolean result=false;
@@ -386,7 +390,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
 			testHarness.navigateToNoticeAndDisclosuresPage();
-			result=testHarness.findPnPLinksExistOnPg();
+			result=testHarness.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -400,7 +404,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			String winHandleBefore = testDriver.getWindowHandle();
 			accountHomePage.navigateToNoticeAndDisclousuresPage();
-			result=accountHomePage.findPnPLinksExistOnPg();
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
@@ -428,6 +432,43 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 				driver.get(expectedUrl);
 				CommonUtility.checkPageIsReady(driver);
 			}
+		}
+	}
+	
+	@Then("^user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link$")
+	public void validate_planDoc_page() throws InterruptedException { 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
+		Assert.assertTrue("PROBLEM - this navegation sequence is designed for pre-effective user only", memberType.toUpperCase().contains("PREEFF"));
+		String page="plan documents and reources";
+		boolean result=false;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario()
+					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.waitForTestharnessTableToShow();
+			WebDriver testDriver=testHarness.driver;
+			String originalUrl=testDriver.getCurrentUrl();
+			PlanDocumentsAndResourcesPage planDocPg=testHarness.navigateDirectToPlanDocPagFromTestharnessPage_preeff(memberType);
+			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, planDocPg!=null);
+			result=testHarness.findPnPLinksExistOnPg(memberType);
+			if (expectLink.equalsIgnoreCase("yes")) 
+				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
+			else
+				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
+			navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			WebDriver testDriver=accountHomePage.driver;
+			String originalUrl=testDriver.getCurrentUrl();
+			PlanDocumentsAndResourcesPage planDocPg=accountHomePage.navigateDirectToPlanDoc_preEff(memberType);
+			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, planDocPg!=null);
+			result=accountHomePage.findPnPLinksExistOnPg(memberType);
+			if (expectLink.equalsIgnoreCase("yes")) 
+				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
+			else
+				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
+			navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);
 		}
 	}
 
