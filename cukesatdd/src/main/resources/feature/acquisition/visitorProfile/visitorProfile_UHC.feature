@@ -310,8 +310,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user delets all the added drugs on visitor profile page of UHC site
 
     Examples: 
-      | state   | userName           | password   | drugName | zipCode |
-      | Alabama | mnrqavd2@gmail.com | Password@3 | lipitor  |   90210 |
+      | state   | userName  | password  | drugName | zipCode |
+      | Alabama | mmnrqavd3 | Password@1| lipitor  |   90210 |
 
   @providerFlowUHCAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -335,8 +335,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And user delets all the added providers on visitor profile page of UHC site
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | userName           | password   | plantype | planName                             | testPlans                                                                 |
-      |   10001 | NO              | New York County | mnrqavd2@gmail.com | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planName                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mmnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
