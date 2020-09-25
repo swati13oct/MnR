@@ -26,10 +26,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   | username  | password  | MemUserName     | planType  | memberType       |
-      | 15084 | qavgogine | qavgogine | q2_jun_aarp00042| MAPD      | providerTier_BNC |
+      | 15084 | qavgogine | qavgogine | q2_apr_aarp0250 | MAPD      | providerTier_BNC |
       
    #TC02_Primarycareprovider_specialist_withprovidertiering
-  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_memAuth
+  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member witprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -50,7 +50,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15085 |qavgogine | qavgogine |q3_sept_UAT4_AARP_001| MAPD  | COSMOSOfficevisit_BnC |
 
   #TC04_OutpatientSurgeryCentervisits_withoutprovidertiering
-  @memAuth_benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @BnC_Part1_memAuth 
+  @memAuth_benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @BnC_Part1_memAuth  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withoutprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -94,7 +94,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15088 |qavgogine | qavgogine |ucpaarpmapd01| MAPD     | memberWithoutProviderTiering_BnC |
       
       #TC07_Copay_Coinsurance_in_DrugCostsTable
-  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @BnC_Part2_memAuth
+  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @BnC_Part2_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the copay coinsurance in drugcosts table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -214,7 +214,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
       
  #TC12_Benefits_for_MedicaMember
-  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_memAuth 
+  @memAuth_benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -302,7 +302,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15095 |qavgogine|qavgogine|q3_Sep_UAT4_Sofl020| Medica  |Individual_BnC|NON LIS      |ENGLISH |Summary of Benefits| Evidence of Coverage|Comprehensive Formulary - Drug List|Alternative Drug List| 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018 | Not Available | Tier 2        | true       |IndEffectiveMedica| 6| NoRider |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
-  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_memAuth 
+  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -339,8 +339,44 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15096 |qavgogine| qavgogine|q2_jun_uhc0050|MA      | Individual_BnC| IndEffectiveUHC| 5     | Rider   |
       | 15098 |qavgogine| qavgogine|q2_jun_grp0255| SSUP   | COMBO_Group_BnC|GrpEffectiveSSUP| 4     | NoRider |
 
+@memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_memAuth 
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigate to Benefits and Coverage page
+    Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates the Benefits for MA member
+      | Plan Type | <planType> |
+
+    Examples: 
+      | TID   |username |password  |MemUserName   | planType| memberType  |Identifier      | count | rider   |
+      | 15098 |qavgogine| qavgogine|q2_jun_grp0255| SSUP   | COMBO_Group_BnC|GrpEffectiveSSUP| 4     | NoRider |
+      
   #TC14_Benefits_for_PCPMember
-  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis @BnC_Part4_memAuth
+  @memAuth_benefitsAndCoverage14_2 @CMFedDrugNonLis @BnC_Part4_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -491,6 +527,44 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     Examples: 
       | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
       | 15239 | qavgogine| qavgogine|q4_grp_dec204|PDP    | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
+      
+      #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
+  @memAuth_benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part5_memAuth @deprecated
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    Then verify ancillary benefit section is not displayed
+    And the user validates the Vas section on benefits and coverage page is not displayed
+
+    Examples: 
+      | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
       | 15238 | qavgogine| qavgogine| EPMP_Enabled_087|MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
 
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -512,8 +586,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
   
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType  |
-      | 15242 |qavgogine| qavgogine| q3_sep_UAT4_AARP209|PDP | Wallgreens_BnC  |
-      | 15243 | qavgogine| qavgogine|q3_sep_UAT4_AARP171|PDP | MailOrderPharamacy_BnC |
+    #  | 15242 |qavgogine| qavgogine| q3_sep_UAT4_AARP209|PDP | Wallgreens_BnC  |
+     # | 15243 | qavgogine| qavgogine|q3_sep_UAT4_AARP171|PDP | MailOrderPharamacy_BnC |
       | 15249 |qavgogine| qavgogine| q2_jun_aarp00042|MAPD  | withoutWaysToSave_BnC  |
         
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
@@ -598,8 +672,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates contactus section
 
     Examples: 
-      | TID   | username |password  |MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
-      | 15247 |qavgogine| qavgogine|q2_jun_grp0019| MAPD|Group_BnC| LIS 4|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
+      | TID   | username |password  |MemUserName    |planType |memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
+      | 15247 |qavgogine | qavgogine|q2_jun_grp0019 | MAPD    |Group_BnC  | LIS 4         |Summary Of Benefits  |Evidence of Coverage  | Comprehensive Formulary         |
 
   #TC26_Group members_PDP_LIS(1,2)
   @memAuth_benefitsAndCoverage2 @BnC_Part6_memAuth @CMGroupmembersPDPLIS_TC26
@@ -813,7 +887,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15245 |qavgogine| qavgogine|q3_sep_UAT4_UHC092| MAPD | Individual_BnC  | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |IndEffectiveAARP |7|Rider |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
-  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_memAuth
+  @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -1055,7 +1129,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15244 |qavgogine| qavgogine|q3_sep_UAT4_AARP163| PDP| Individual_BnC | LIS 1     | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
     
       #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage  @BnC_Part8_memAuth
+  @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage  @BnC_Part8_memAuth @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
