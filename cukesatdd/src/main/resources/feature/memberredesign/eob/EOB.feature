@@ -12,36 +12,36 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to EOB page
-##    Then the user validates the header section content
-##    Then the user validates site leaving pop up after clicking Adobe link
+    Then the user validates the header section content
+    Then the user validates site leaving pop up after clicking Adobe link
     #note: moved to footer feature
     #Then the user validates Need Help section
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
-##    And the user selects the desired date range
-##      | Date Range | Last 90 Days |
-##    Then the user obtains API response info for validation
-##    Then the user validates search result section content
-##    Then the user clicks on first eob from the list to validate pdf
-##      | Real EOB | <realEob> |
-##    #Then the user validates EOB count between API and UI are the same
+    And the user selects the desired date range
+      | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 3-6 months ----  
-##    And the user selects the desired date range
-##      | Date Range | Last 3-6 months |
-##    Then the user obtains API response info for validation
-##    Then the user validates search result section content
-##    Then the user clicks on first eob from the list to validate pdf
-##      | Real EOB | <realEob> |
-##    #Then the user validates EOB count between API and UI are the same
+    And the user selects the desired date range
+      | Date Range | Last 3-6 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6-12 months ----  
-##    And the user selects the desired date range
-##      | Date Range | Last 6-12 months |
-##    Then the user obtains API response info for validation
-##    Then the user validates search result section content
-##    Then the user clicks on first eob from the list to validate pdf
-##      | Real EOB | <realEob> |
-##    #Then the user validates EOB count between API and UI are the same
+    And the user selects the desired date range
+      | Date Range | Last 6-12 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
+    #Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12-18 months ----  
     And the user selects the desired date range
       | Date Range | Last 12-18 months |
@@ -66,12 +66,10 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
       | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB  | Medical | false   |  false      |
 
-    ## note: the user q3_sept_UAT4_AARP_011 has 500 expected error at range Last 12-18 range
-    ## note: script doesn't handle it yet, comment out for now
-    #@SHIP_EOBs @SHIP_EOBs3
-    #Examples: 
-    #  | index | planType                 | memberType                | eobType | realEob | flagZeroEob |
-    #  | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | false   |  true       | 
+    @SHIP_EOBs @SHIP_EOBs3
+    Examples: 
+      | index | planType                 | memberType                | eobType | realEob | flagZeroEob |
+      | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | false   |  true       | 
 
     @SHIP_EOBs @SHIP_EOBs4
     Examples: 

@@ -326,7 +326,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 	}	 
 	
 	@Then("^user validate preeffective content for important note section$")
-	public void preEff_importantNote() throws Throwable {
+	public void preEff_importantNote()  {
 		String  planType=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
 		String memberType= (String) getLoginScenario()
@@ -351,8 +351,8 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			footerPg.validateNeedHelpSection(planType, memberType);
 	}
 	
-	@Then("^user validates preeffective content header section content$")
-	public void preEff_header() throws Throwable {
+	@Then("^user validates preeffective content for header section$")
+	public void preEff_header() {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateHeader_preff();
