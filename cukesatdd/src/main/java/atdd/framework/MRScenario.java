@@ -180,7 +180,7 @@ public class MRScenario {
 			mobileDeviceOSName = props.get("SaucelabsDeviceOSName");
 			mobileDeviceOSVersion = props.get("SaucelabsDeviceOSVersion");
 			// appiumVersion = props.get(CommonConstants.APPIUM_VERSION);
-			mobileDeviceType = props.get("mobileDeviceType");
+			mobileDeviceType = props.get("MOBILE_DEVICE_TYPE");
 		} else { // running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
