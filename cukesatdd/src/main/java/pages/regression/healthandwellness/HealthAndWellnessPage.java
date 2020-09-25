@@ -25,7 +25,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	@FindBy(xpath = "//div[@class='hw-header']//span[contains(text(),'Health & Wellness')]")
 	private WebElement titleText;
-	
+
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
@@ -34,7 +34,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	@FindBy(id  = "healthwellness_4")
 	private WebElement healthAndWellness_harness;
-	
+
 	@FindBy(id = "lifestyle_desk1")
 	private WebElement lifestyleTab;
 
@@ -59,19 +59,19 @@ public class HealthAndWellnessPage extends UhcDriver{
 	private WebElement dashboardHeader;
 	@FindBy (className = "menuL1")
 	private WebElement dashboardHeader_harness;
-	
+
 	@FindBy (id = "rewards_desk")
 	private WebElement rewadsTab;
-	
+
 	@FindBy (id = "renew-rewards-widget-target")
 	private WebElement rewardsPage;
-	
+
 	@FindBy (partialLinkText = "REWARDED")
 	private WebElement rewardsLink;
-	
+
 	@FindBy (linkText = "LEARN MORE")
 	private WebElement learnmorelink;
-	
+
 	@FindBy(tagName="arcade-header")
 	private WebElement shadowRootHeader;
 
@@ -82,19 +82,19 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//h1")
 	protected WebElement generalHeader;
 
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[contains(@data-linkdesc,'Renew Active')]//img")
 	protected WebElement renewActiveIconImg_ship;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
 	protected WebElement cardTitle_ship;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][4]//a[text()='LEARN MORE']")
 	protected WebElement learnMoreBtn_ship;
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][5]//a[text()='Find a gym']")
 	protected WebElement findGymLnk_ship;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][6]//a[text()='Brain health tools']")
 	protected WebElement brainHealthToolsLnk_ship;
 
@@ -109,13 +109,13 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
 	protected WebElement closeTooltipX_ship;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[contains(@href,'term')]")
 	protected WebElement termsAndConditions_ship;
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='FIND YOUR GYM']")
 	protected WebElement findGymLnk;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='TRAIN YOUR BRAIN']")
 	protected WebElement brainHealthToolsLnk;
 
@@ -130,14 +130,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
 	protected WebElement closeTooltipX;
-	
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[contains(@href,'term')]")
 	protected WebElement termsAndConditions;
 
 	boolean testThirdPartyPage=true; //note: consent is to not test 3rd party page, but capable if needs to
 
 
-	
+
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -159,44 +159,45 @@ public class HealthAndWellnessPage extends UhcDriver{
 		int defaultIndex=7;
 		clickHealthnWellnessTab(defaultIndex);
 	}
-	
+
 	public void clickHealthnWellnessTab(int index){
-		   if (MRScenario.environment.contains("team-a")) {
-	            Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
-	        }     
-	        if (hwValidate(healthAndWellness)) {
-	            healthAndWellness.click();
-	            waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
+		hwCheckModelPopup(driver);
+		if (MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
+		}     
+		if (hwValidate(healthAndWellness)) {
+			healthAndWellness.click();
+			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
 
-	 
 
-	        } else if  (hwValidate(healthAndWellness_harness)) {
-	            System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
-	            System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-	            Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
-	            //tbd healthAndWellness_harness.isDisplayed();
-	            healthAndWellness_harness.click();
-	            waitforElement(titleText);
-	        } else {
-	            //String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
-	            System.out.println("Unable to locate Rally or testharness HW button, last attemp for shadow-root");
-	            String targetCssPath="notFound";
-	            for(int i=index; i>=1; i--) {
-	                String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
-	                System.out.println("TEST - check cssPath="+cssPath);
-	                targetCssPath=locateElementWithinShadowRoot(shadowRootHeader,cssPath);
-	                if (!targetCssPath.equals("notFound")) {
-	                    break;
-	                }
-	            }
-	            System.out.println("Will use cssPath='"+targetCssPath+"'");
-	            //String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
-	            locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
-	        }
 
-	 
+		} else if  (hwValidate(healthAndWellness_harness)) {
+			System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
+			System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+			Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
+			//tbd healthAndWellness_harness.isDisplayed();
+			healthAndWellness_harness.click();
+			waitforElement(titleText);
+		} else {
+			//String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
+			System.out.println("Unable to locate Rally or testharness HW button, last attemp for shadow-root");
+			String targetCssPath="notFound";
+			for(int i=index; i>=1; i--) {
+				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
+				System.out.println("TEST - check cssPath="+cssPath);
+				targetCssPath=locateElementWithinShadowRoot(shadowRootHeader,cssPath);
+				if (!targetCssPath.equals("notFound")) {
+					break;
+				}
+			}
+			System.out.println("Will use cssPath='"+targetCssPath+"'");
+			//String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
+			locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
+		}
 
-	        hwCheckModelPopup(driver);
+
+
+		hwCheckModelPopup(driver);
 	}
 
 	/**
@@ -260,7 +261,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				.executeScript("return arguments[0].shadowRoot", element);
 		return ele;
 	}
-	
+
 	public String locateElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
 		String result="notFound";
 		if (hwValidate(shadowRootElement)) {
@@ -284,7 +285,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			return result;
 		}
 	}
-	
+
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
 		CommonUtility.waitForPageLoad(driver, shadowRootElement, 5);;
 		hwCheckModelPopup(driver);
@@ -308,26 +309,26 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("Dashboard header is not displayed", false);
 		}
 	}
-	
+
 	public void validateNoGetReward() {
 		Assert.assertTrue("PROBLEM - expect NOT to see Get Reward link for user", !hwValidate(getRewardLink));
 	}
-	
+
 	@FindBy(xpath="//span[contains(text(),'Gift Card Balance Available')]")
 	protected WebElement giftCardBalanceText;
-	
+
 	@FindBy(xpath="//a[@class='backArrow']")
 	protected WebElement backArrow;
-	
+
 	@FindBy(xpath="//a/img[contains(@class,'logo')]")
 	protected WebElement rewardLogo;
-	
+
 	@FindBy(xpath="//button[contains(text(),'Yes! I accept')]")
 	protected WebElement iAcceptButton;
-	
+
 	@FindBy(xpath="//a[contains(text(),'Not Now')]")
 	protected WebElement notNowLnk;
-	
+
 	public void validateGetReward() {
 		Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
 		String expectedUrl="uhc.com/rewards";
@@ -349,7 +350,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				notNowLnk.click();
 				sleepBySec(15);
 			}
-			
+
 			/* this can be done on stage only, don't accept for prod user
 			//note: click the "Yes! I accept..." button if it shows up in order to move on
 			if (hwValidate(iAcceptButton, 0)) {
@@ -367,7 +368,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.out.println("Tried #1");
 			backArrow.click(); //TODO - this has problem, clicking it won't go back to prior page
 			sleepBySec(15);
-			*/
+			 */
 			CommonUtility.checkPageIsReady(driver);
 			actualUrl=driver.getCurrentUrl();
 
@@ -392,7 +393,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking back arrow from reward-overview page.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		}
 	}
-	
+
 	public void validateNoRenewActive(String planType) {
 		String targetElement="Find Your Gym";
 		WebElement gymElement=findGymLnk;
@@ -408,7 +409,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			brainElement=brainHealthToolsLnk_ship;
 		Assert.assertTrue("PROBLEM - should not be able to locate '"+targetElement+"'", !hwValidate(brainElement));
 	}
-	
+
 	public void validateRenewActive(String planType) {
 		checkModelPopup(driver,3);
 		String originalUrl=driver.getCurrentUrl();
@@ -500,7 +501,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
 		} 
-		*/
+		 */
 
 		//note: Confirmation Code ------------------
 		String targetElement="Your Code";
@@ -565,19 +566,19 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	public void scrollElementToCenterScreen(WebElement element) {
 		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
-		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
-		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+				+ "var elementTop = arguments[0].getBoundingClientRect().top;"
+				+ "window.scrollBy(0, elementTop-(viewPortHeight/2));";
 		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
 		System.out.println("TEST - move element to center view"); 
 		/* JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
-	
+
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
 	}
-	
+
 	public void sleepBySec(int sec) {
 		try {
 			Thread.sleep(sec*1000);
@@ -586,7 +587,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		}
 		//System.out.println("slept for '"+sec+"' sec");
 	}
-	
+
 	public void hwCheckModelPopup(WebDriver driver) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
 		checkModelPopup(driver,5);
@@ -594,7 +595,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
 	}
-	
+
 	public void goBackToPriorPgViaBack(String origUrlBeforeClick) {
 		driver.navigate().back();
 		sleepBySec(15);
@@ -620,7 +621,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		long timeoutInSec=0;
 		return hwValidate(element, timeoutInSec);
 	} 
-	
+
 	/**
 	 * to validate whether element exists with input timeout value control
 	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
@@ -645,6 +646,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	}
-	
+
 
 }
