@@ -57,11 +57,18 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
-	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	//tbd @FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	//tbd public static WebElement IPerceptionsPopup;
+
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsPopup;
-	
-	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+
+	//tbd @FindBy(xpath="//*[contains(@id,'ip-no')]")
+	//tbd public static WebElement IPerceptionNoBtn;
+
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -748,9 +755,9 @@ try {
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
-					//driver.switchTo().frame(IPerceptionsFrame);
+					driver.switchTo().frame(IPerceptionsPopup);
 					IPerceptionNoBtn.click();
-					//driver.switchTo().defaultContent();
+					driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
 				System.out.println("Iperceptions popup not found");
