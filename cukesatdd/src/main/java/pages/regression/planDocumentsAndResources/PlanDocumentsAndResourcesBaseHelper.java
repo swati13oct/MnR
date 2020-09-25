@@ -334,6 +334,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			refreshPage(planType, memberType, origUrlBeforeClick);
 		}
 		CommonUtility.waitForPageLoad(driver, backToTopLink, 5);
+		checkModelPopup(driver, 1);
 		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
 		if (memberType.toLowerCase().contains("combo")) { 
 			System.out.println("This test is for combo plans, select the tab accordingly");
