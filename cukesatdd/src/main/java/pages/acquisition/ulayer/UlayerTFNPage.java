@@ -1072,13 +1072,13 @@ public class UlayerTFNPage extends UhcDriver {
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
 
-		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 		
 		try{
-			if(IPerceptionsFrame.isDisplayed())	{
-				driver.switchTo().frame(IPerceptionsFrame);
+			if(IPerceptionsPopup.isDisplayed())	{
+//				driver.switchTo().frame(IPerceptionsFrame);
 				IPerceptionNoBtn.click();
-				driver.switchTo().defaultContent();
+//				driver.switchTo().defaultContent();
 			}
 		}catch(Exception e){
 			System.out.println("Iperceptions popup not found");
