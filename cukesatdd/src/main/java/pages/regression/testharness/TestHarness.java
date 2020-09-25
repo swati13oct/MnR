@@ -1378,7 +1378,8 @@ public class TestHarness extends UhcDriver {
     		return true;
     	}
 
-
+    	@FindBy(xpath="//div[contains(@class,'pharmacies')]//h1")
+    	private WebElement pnpPreEffHeader;
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
@@ -1393,10 +1394,36 @@ public class TestHarness extends UhcDriver {
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
-    		CommonUtility.checkPageIsReady(driver);
-    		checkForIPerceptionModel(driver);
+    		CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
 			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+    		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+    			return new PharmaciesAndPrescriptionsPage(driver);
+    		}
+    		return null;
+    	} 
+    	
+    	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
+    		CommonUtility.checkPageIsReady(driver);
+			checkForIPerceptionModel(driver);
+    		try{
+    			if (noWaitValidate(testHarnessPharPresLink)) 
+    				testHarnessPharPresLink.click();
+    			else 
+    				testHarnessTopMenuPhaPresLink.click();
+    		} catch (WebDriverException e) {
+    			checkForIPerceptionModel(driver);
+    			CommonUtility.checkPageIsReady(driver);
+    			testHarnessPharPresLink.click();
+    		}
+    		CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,2);
+    		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+    		WebElement pnpElement=LookUpDrugsButton;
+    		if (memberType.toUpperCase().contains("PREEFF")) 
+    			pnpElement=pnpPreEffHeader;
+			CommonUtility.waitForPageLoad(driver, pnpElement, 40);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}

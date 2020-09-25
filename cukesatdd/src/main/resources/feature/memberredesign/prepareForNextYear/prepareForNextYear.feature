@@ -438,7 +438,7 @@ Feature: 1.25 Member Prepare For Next Year
       | Member Type | <memberType>       |
 	Then test setup stores AEM and timeline milestones info for user with SARs plan 
       | EndOfTestRollBackTime  | false          |
-      | AEM Show Tab StartDate | 09/14/2020     |
+      | AEM Show Tab StartDate | 10/02/2020     |
       | AEM Show Tab EndDate   | 12/31/2020     |
       | AEM Toggle             | ON             |
       | Milestone 1 Date       | 10/01/2020     |

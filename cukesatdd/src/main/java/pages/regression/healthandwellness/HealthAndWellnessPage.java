@@ -134,7 +134,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[contains(@href,'term')]")
 	protected WebElement termsAndConditions;
 
-	boolean testThirdPartyPage=false; //note: consent is to not test 3rd party page, but capable if needs to
+	boolean testThirdPartyPage=true; //note: consent is to not test 3rd party page, but capable if needs to
 
 
 	
@@ -325,6 +325,9 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//button[contains(text(),'Yes! I accept')]")
 	protected WebElement iAcceptButton;
 	
+	@FindBy(xpath="//a[contains(text(),'Not Now')]")
+	protected WebElement notNowLnk;
+	
 	public void validateGetReward() {
 		Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
 		String expectedUrl="uhc.com/rewards";
@@ -335,12 +338,19 @@ public class HealthAndWellnessPage extends UhcDriver{
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(15);
 			String actualUrl=driver.getCurrentUrl();
+			expectedUrl="rewards/program-overview";
 			if (!actualUrl.contains(expectedUrl)) { //note: in case sometimes page takes longer to run
 				sleepBySec(15);
 				actualUrl=driver.getCurrentUrl();
 			}
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking Get Reward link.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 
+			if (hwValidate(notNowLnk,0)) {
+				notNowLnk.click();
+				sleepBySec(15);
+			}
+			
+			/* this can be done on stage only, don't accept for prod user
 			//note: click the "Yes! I accept..." button if it shows up in order to move on
 			if (hwValidate(iAcceptButton, 0)) {
 				iAcceptButton.click();
@@ -357,6 +367,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.out.println("Tried #1");
 			backArrow.click(); //TODO - this has problem, clicking it won't go back to prior page
 			sleepBySec(15);
+			*/
 			CommonUtility.checkPageIsReady(driver);
 			actualUrl=driver.getCurrentUrl();
 

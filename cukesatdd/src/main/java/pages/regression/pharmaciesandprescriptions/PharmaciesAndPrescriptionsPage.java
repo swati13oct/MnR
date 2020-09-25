@@ -35,6 +35,17 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				+ "Expected='"+expTxt+"' | Actual='"+actTxt+"'", 
 				expTxt.equals(actTxt));
 	}
+	
+	public void validateHeaderSectionContent(String firstname, String lastName, String planStartDate) {
+		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
+				pnpValidate(pgHeader));
+		String expTxt="Pharmacies & Prescriptions for "+firstname+" "+lastName;
+		String actTxt=pgHeader.getText();
+		Assert.assertTrue("PROBLEM - header text is not as expected. "
+				+ "Expected='"+expTxt+"' | Actual='"+actTxt+"'", 
+				expTxt.equals(actTxt));
+		//TODO validate start date somewhere
+	}
 
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 

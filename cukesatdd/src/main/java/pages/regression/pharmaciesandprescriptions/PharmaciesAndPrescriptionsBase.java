@@ -11,6 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 
@@ -240,7 +243,8 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	}
 
 	public String getConsumerDetailsFromlocalStorage() {
-		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		LocalStorage localStorage = webStorage.getLocalStorage();
 		String consumerDetails=localStorage.getItem("consumerDetails");
 		return consumerDetails;
@@ -261,20 +265,20 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
-		//System.out.println("TEST - consumerDetails="+consumerDetails);
+		System.out.println("TEST - consumerDetails="+consumerDetails);
 		//note: if first / last name, no need to go into planProfiles - infoType: firstName | lastName 
 		//note: LIS and segmentID needs to get within planProfiles - infoType: segmentId | planCategoryId 
 		Assert.assertTrue("PROBLEM - code only support locating the following info "
 				+ "at the moment: firstName, lastName, segmentId, planCategoryId | Actual='"+infoType+"'", 
 				infoType.equals("firstName") || infoType.equals("lastName") 
-				|| infoType.equals("segmentId") || infoType.equals("planCategoryId"));
+				|| infoType.equals("segmentId") || infoType.equals("planCategoryId")|| infoType.equals("planStartDate"));
 		String resultInfo=null;
 		try {
 			JSONObject jsonObj = new JSONObject(consumerDetails);
 			if (infoType.equals("firstName") || infoType.equals("lastName") ) {
 				resultInfo=jsonObj.getString(infoType);
 			}
-			if (infoType.equals("segmentId") || infoType.equals("planCategoryId")) {
+			if (infoType.equals("segmentId") || infoType.equals("planCategoryId")|| infoType.equals("planStartDate")) {
 				JSONArray arr =jsonObj.getJSONArray("planProfiles");
 				if (isComboUser) 
 					Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "

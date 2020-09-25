@@ -1,5 +1,8 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,7 +57,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
 					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPage();
+			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPage(memberType);
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -70,24 +73,48 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String userFirstName=pnpPg.getInfoInConsumerDetails(planType, memberType, "firstName");
 		String userLastName=pnpPg.getInfoInConsumerDetails(planType, memberType, "lastName");
 		String userPlanCategoryId=pnpPg.getInfoInConsumerDetails(planType, memberType, "planCategoryId");
+		String planStartDate=pnpPg.getInfoInConsumerDetails(planType, memberType, "planStartDate");
+		System.out.println("TEST - userFirstName="+userFirstName);
+		System.out.println("TEST - userLastName="+userLastName);
+		System.out.println("TEST - userPlanCategoryId="+userPlanCategoryId);
+		System.out.println("TEST - planStartDate="+planStartDate);
+		
+		try {
+			SimpleDateFormat inputFormt = new SimpleDateFormat("MM/dd/yyyy"); //note: example 12/01/2020
+			SimpleDateFormat outputFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy"); //note: example Friday, January 1, 2021
+			Date date;
+			date = inputFormt.parse(planStartDate);
+			String displayDateStr=outputFormat.format(date);
+			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE, displayDateStr);
+		} catch (ParseException e) {
+			Assert.assertTrue("PROBLEM - unable to convert the planStartDate from consumerDetails to expected display format. planStartDate='"+planStartDate+"'. exception="+e.getMessage(), false);
+			e.printStackTrace();
+		}
 		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE, memberType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME, userFirstName);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME, userLastName);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE, planStartDate);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID, userPlanCategoryId);
 	}
 	
 	@Then("^user validates header section content$")
 	public void validate_header_section() {
+		String memberType= (String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String firstName=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME);
 		String lastName=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME);
-		pnpPg.validateHeaderSectionContent(firstName, lastName);
+		String planStartDate=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE);
+		if (memberType.toUpperCase().contains("PREEFF"))
+			pnpPg.validateHeaderSectionContent(firstName, lastName, planStartDate);
+		else
+			pnpPg.validateHeaderSectionContent(firstName, lastName);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	

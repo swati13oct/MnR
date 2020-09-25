@@ -3839,6 +3839,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return true;
 	}
+
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environment + "' login page");
 		checkForIPerceptionModel(driver);
@@ -3857,9 +3858,6 @@ public class AccountHomePage extends UhcDriver {
 				}
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-		//tbd } else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-		//tbd 	//System.out.println("don't bother to work around the sorry error, page displays won't look right");
-		//tbd 	workaroundAttempt("pnp"); 
 		}
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
