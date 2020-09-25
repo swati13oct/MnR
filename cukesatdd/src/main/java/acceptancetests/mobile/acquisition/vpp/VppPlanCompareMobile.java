@@ -344,14 +344,12 @@ public class VppPlanCompareMobile {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		System.out.println("Select PlanType to view Plans for entered Zip " + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		if (!plantype.equalsIgnoreCase("MS"))
-			plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
 	/**
@@ -1414,11 +1412,11 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkAllMAPlans();
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		} else if (planType.equals("PDP")) {
-			// plansummaryPage.clickOnPDPPlans();
+			//plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
@@ -1429,6 +1427,7 @@ public class VppPlanCompareMobile {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+
 
 	@And("^I Click on DCE link on Plan compare for AARP$")
 	public void I_Click_On_DCE_link_on_Plan_Compare_for_AARP() {

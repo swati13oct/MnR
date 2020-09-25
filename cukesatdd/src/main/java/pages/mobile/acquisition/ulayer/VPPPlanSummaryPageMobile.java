@@ -878,40 +878,30 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void viewPlanSummary(String planType) {
-		// driver.findElement(By.className("uhc-modal__close")).click();
 		if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			// note: add sleep for timing issue, tried increase timeout from
-			// waitForPageLoadNew but didn't work
-			pdpPlansViewLink.click();
-			sleepBySec(2);
+			validateNew(pdpPlansViewLink, 30);
+			sleepBySec(2); // note: add sleep for timing issue, tried increase timeout from
+							// waitForPageLoadNew but didn't work
+			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			validateNew(maPlansViewLink, 30);
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 40);
+			// sleepBySec(9);
+			// jsClickNew(maPlansViewLink);
 			maPlansViewLink.click();
-			sleepBySec(3);
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
+			// driver.navigate().refresh();
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
 			msPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
-			/*
-			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
-			 * medSuppPlanList.get(0), 30);
-			 */
+			// CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
 		} else if (planType.equalsIgnoreCase("SNP")) {
-
-			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
-			snpPlansViewLink.click();
-			sleepBySec(3);
+			validateNew(snpPlansViewLink);
+			jsClickNew(snpPlansViewLink);
+			// snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-			/*
-			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
-			 * Auto-generated catch block e.printStackTrace(); }
-			 */
-
 		}
 	}
 
@@ -1410,6 +1400,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public int checkAllMAPlans() {
 		try {
 			Thread.sleep(5000);
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1423,7 +1414,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(i));
+				//allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -4093,8 +4085,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	}
 
-	
-
 	public String EnrollmentValidation(String PlanName) {
 
 		try {
@@ -4484,59 +4474,58 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return null;
 
 	}
-	
+
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName, String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			MAmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-            WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
 			PDPmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("#/details")) {	
-			return new PlanDetailsPageMobile(driver,planType);
+		if (driver.getCurrentUrl().contains("#/details")) {
+			return new PlanDetailsPageMobile(driver, planType);
 		}
 		return null;
 	}
-	
-	public void validateIsMyProviderCoveredLink(String planType , String planName) {
+
+	public void validateIsMyProviderCoveredLink(String planType, String planName) {
 		int attempts = 0;
-		while(attempts < 2) {
-	        try {
-				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-			    if(planType.equalsIgnoreCase("PDP")){
-			                    validateNonPresenceOfElement(ProviderSearchLink);
-			                    break;
-			    }
-			    else {
-			    			validateclicksOnIsProviderCovered(planName);
-			                    break;
-			    }
-	        }catch(StaleElementReferenceException e) {
-	        }
-	    	attempts++;
-	    	
-	    	
-		}     
+		while (attempts < 2) {
+			try {
+				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+						+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+				if (planType.equalsIgnoreCase("PDP")) {
+					validateNonPresenceOfElement(ProviderSearchLink);
+					break;
+				} else {
+					validateclicksOnIsProviderCovered(planName);
+					break;
+				}
+			} catch (StaleElementReferenceException e) {
+			}
+			attempts++;
+
+		}
 	}
-	
+
 	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
@@ -4556,14 +4545,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
+	public void validateclicksOnIsProviderCovered(String planName) {
 
-	public void validateclicksOnIsProviderCovered(String planName){
-
-		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-		//switchToNewTabNew(ProviderSearchLink);
+		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ProviderSearchLink.click();
@@ -4591,14 +4579,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back to VPP Plan Summary Page");
 				Assert.assertTrue(true);
-			}
-			else
-			{
+			} else {
 				Assert.fail("Unable to navigate back to VPP Plan Summary Page");
 			}
-		}
-		else 
-			Assert.fail("Provider Search Page is not displayed");      
+		} else
+			Assert.fail("Provider Search Page is not displayed");
 	}
 	/*
 	 * public boolean waitForJStoLoad () {
