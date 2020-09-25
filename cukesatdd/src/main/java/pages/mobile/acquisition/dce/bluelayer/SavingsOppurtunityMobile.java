@@ -67,7 +67,7 @@ public class SavingsOppurtunityMobile extends UhcDriver{
 
 		return newPaymentHistoryExpectedJson;
 	}
-	public DrugCostEstimatorPageMobile savedrugbutton() throws InterruptedException {
+	public pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile savedrugbutton() throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(savedrugbutton);
 		savedrugbutton.click();

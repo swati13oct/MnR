@@ -54,6 +54,7 @@ import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.AddDrugDetailsMobile;
@@ -231,7 +232,7 @@ public class VppPlanCompareMobile {
 	public void click_sitemap() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		SiteMapAARPPageMobile siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+		SiteMapUMSPageMobile siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
 		if (siteMapAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
 

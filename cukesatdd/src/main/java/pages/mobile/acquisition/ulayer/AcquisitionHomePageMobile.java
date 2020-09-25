@@ -24,9 +24,18 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import org.testng.Assert;
 
+import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
+import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
+import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
+import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.acquisition.bluelayer.AboutUsPage;
+import pages.acquisition.bluelayer.ContactUsUmsPage;
+import pages.acquisition.bluelayer.DisclaimersPage;
+import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
@@ -717,13 +726,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public SiteMapAARPPageMobile siteMapFooterClick() {
+	public SiteMapUMSPageMobile siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
 		footerSiteMapLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
-			return new SiteMapAARPPageMobile(driver);
+			return new SiteMapUMSPageMobile(driver);
 		}
 		return null;
 	}
@@ -738,6 +747,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+	public PrivacyPolicyUmsPageMobile privacyPolicyClick() {
+		validateNew(footerPrivacyPolicyLink);
+		footerPrivacyPolicyLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
+			return new PrivacyPolicyUmsPageMobile(driver);
+		}
+		return null;
+
+	}
+	
+	public DisclaimersPageMobile disclaimersClick() {
+		validateNew(footerDisclaimersLink);
+		footerDisclaimersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("disclaimer")) {
+			return new DisclaimersPageMobile(driver);
+		}
+		return null;
+
+	}
 	/*
 	 * @SuppressWarnings("deprecation") public void openAndValidate(boolean
 	 * alreadyOnSite) { if (alreadyOnSite) {
@@ -1614,7 +1644,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 			viewPlansButton.click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 40);
 		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2123,6 +2153,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// CommonUtility.checkPageIsReady(driver);
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
+
+	}
+	public AboutUsPageMobile aboutUsClick() {
+		validateNew(footerAboutUsLink);
+		footerAboutUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().contains("About")) {
+			return new AboutUsPageMobile(driver);
+		}
+		return null;
+
+	}
+	public ContactUsUmsPageMobile contactUsClick() {
+		validateNew(footerContactUsLink);
+		footerContactUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsUmsPageMobile(driver);
+		}
+		return null;
 
 	}
 

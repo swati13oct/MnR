@@ -19,6 +19,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
@@ -79,11 +80,11 @@ public class GetStartedPageMobile extends UhcDriver {
 		 */
 	}
 
-	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
+	public VPPPlanSummaryPageMobile ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
+			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
 	}

@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionMobileDCEZipCodeAndPlanYearCapture.json" }, tags = {
-						"@dce_redesign_zipcode_planyear_capture_AEP" }, dryRun=true)
+						"@dce_redesign_zipcode_planyear_capture_AEP" }, dryRun=false)
 
 public class RunMRATDDAcquisitionMobileDCEZipCodeAndPlanYearCapture {
 
