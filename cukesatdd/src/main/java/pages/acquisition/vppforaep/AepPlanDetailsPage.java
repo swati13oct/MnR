@@ -378,9 +378,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 				else if(benefitValueUI.contains("Out-of-NetworkBenefits")&&columnName.equalsIgnoreCase("Out-of-Network Benefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
-				}else if(key.equalsIgnoreCase("Routine Dental")) {
+				}else if(key.equalsIgnoreCase("Routine Dental")||key.equalsIgnoreCase("Out-of-Network Benefits")) {
 					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
 					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
 				}
 			}
 			//removing footnote values from the end of the key values if any
@@ -495,9 +496,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				}
 					if(key.equalsIgnoreCase(columnName)) {	
 						
-						if(key.equalsIgnoreCase("Dental")) {
-							
-						}
+						benefitValueUI = benefitValueUI.replace("/", "");
 						
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 								flag = true;break;
