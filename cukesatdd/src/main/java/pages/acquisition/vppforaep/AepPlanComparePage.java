@@ -101,9 +101,10 @@ public class AepPlanComparePage extends UhcDriver {
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '2');
 					else if (benefitValueUI.endsWith("4") && !benefitValue.endsWith("4"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '4');
-					else if (benefitValueUI.endsWith("*") && !benefitValue.endsWith("*"))
+
+					if (benefitValueUI.endsWith("*") && !benefitValue.endsWith("*"))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '*');
-					else if (benefitValueUI.endsWith(".") && !benefitValue.endsWith("."))
+					if (benefitValueUI.endsWith(".") && !benefitValue.endsWith("."))
 						benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '.');
 
 				}
