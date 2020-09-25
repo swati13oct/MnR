@@ -2823,33 +2823,36 @@ public class VppPlanCompareMobile {
 	}
 	
 	@When("^the user performs plan search using following information$")
-	public void lookUpzipcode_details_in_aarp_sites(DataTable givenAttributes) {
+	public void lookUpzipcode_details_in_aarp_sites(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = null;
-		if (isMultiCounty.contains("YES")) {
-			plansummaryPage = aquisitionhomepage.searchPlansCounty(county);
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlansNoCounty();
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
 
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
 		}
 
 	}
