@@ -11,6 +11,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -18,6 +19,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.testharness.TestHarness;
 
@@ -85,6 +87,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			Date date;
 			date = inputFormt.parse(planStartDate);
 			String displayDateStr=outputFormat.format(date);
+			System.out.println("TEST - displayDateStr="+displayDateStr);
 			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE, displayDateStr);
 		} catch (ParseException e) {
 			Assert.assertTrue("PROBLEM - unable to convert the planStartDate from consumerDetails to expected display format. planStartDate='"+planStartDate+"'. exception="+e.getMessage(), false);
@@ -92,29 +95,24 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		}
 		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		FooterPage footerPg=new FooterPage(pnpPg.driver);
+		getLoginScenario().saveBean(PageConstants.footer_page, footerPg); //note: used for need help or footer validation
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE, memberType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME, userFirstName);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME, userLastName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE, planStartDate);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID, userPlanCategoryId);
 	}
 	
 	@Then("^user validates header section content$")
 	public void validate_header_section() {
-		String memberType= (String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String firstName=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME);
 		String lastName=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME);
-		String planStartDate=(String) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE);
-		if (memberType.toUpperCase().contains("PREEFF"))
-			pnpPg.validateHeaderSectionContent(firstName, lastName, planStartDate);
-		else
-			pnpPg.validateHeaderSectionContent(firstName, lastName);
+		pnpPg.validateHeaderSectionContent(firstName, lastName);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
@@ -312,5 +310,52 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		pnpPg.clickFindAndPriceAMedicationCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	 
+	
+	@Then("^user validate preeffective content for plan start date and links section$")
+	public void preEff_planStartDateAndLinksSection() throws Throwable {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		String planStartDate=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePlanStartDateAndLinks_preff(planType, memberType, planStartDate);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}	 
+	
+	@Then("^user validate preeffective content for important note section$")
+	public void preEff_importantNote() throws Throwable {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateImportNote_preff(planType, memberType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user validates footer section content for pharmacies and prescriptions page$")
+	public void preEff_footer() throws Throwable {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		
+		FooterPage footerPg=(FooterPage) getLoginScenario().getBean(PageConstants.footer_page); 
+		if (memberType.toLowerCase().contains("combo") && memberType.toLowerCase().startsWith("ship_")) 
+			footerPg.validateNeedHelpSection("SHIP", memberType);
+		else
+			footerPg.validateNeedHelpSection(planType, memberType);
+	}
+	
+	@Then("^user validates preeffective content header section content$")
+	public void preEff_header() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHeader_preff();
+	}
+	
 }

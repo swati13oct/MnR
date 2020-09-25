@@ -581,4 +581,6 @@ preeffectiveGroupSSUP01/Password@1,SSP,GRP_PREEFF_PnP
 shipPreeffective707/Password@1,SHIP,IND_PREEFF_PnP
 preeffective_GroupMA_001/Password@1,MA,GRP_PREEFF_PnP
 preeffectivegroupmapd_001/Password@1,MAPD,GRP_PREEFF_PnP
+testGrpLghibUser01/Password@1,MAPD,GRP_LGHIB_PREEFF_PnP
+testGrpSeibUser01/Password@1,MAPD,GRP_SEIB_PREEFF_PnP
 preeffectiveGroupPDP_001/Password@1,PDP,GRP_PREEFF_PnP

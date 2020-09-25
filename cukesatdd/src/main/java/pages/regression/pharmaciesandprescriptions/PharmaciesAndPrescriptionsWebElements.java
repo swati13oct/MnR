@@ -195,6 +195,91 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
 	protected WebElement FindAndPriceCallToActnBtn;
 	
+	//note: pre-eff 
+	@FindBy(xpath="//div/p[contains(@class,'date')]")
+	protected WebElement planStartDate;
+	
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][1]//div[contains(@class,'pre-pharmacies')]//p")
+	protected WebElement drugCostLnk;
+
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][1]//div[contains(@class,'pre-pharmacies')]//img")
+	protected WebElement drugCostImg;
+
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][2]//div[contains(@class,'pre-pharmacies')]//p")
+	protected WebElement pharmacyLocatorLnk;
+
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][2]//div[contains(@class,'pre-pharmacies')]//img")
+	protected WebElement pharmacyLocatorImg;
+
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][3]//div[contains(@class,'pre-pharmacies')]//p")
+	protected WebElement memDocLnk;
+
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][3]//div[contains(@class,'pre-pharmacies')]//img")
+	protected WebElement memDocImg;
+
+	@FindBy(xpath="//h1[contains(@class,'h1') or contains(@class,'heading')]")
+	protected WebElement dceHeader;
+	
+	@FindBy(xpath="//h1[contains(text(),'Pharmacy')]")
+	protected WebElement phaLocHeader;
+	  
+	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	protected WebElement memDocHeader;
+
+	@FindBy(xpath="//div[@class='important-note-section']//a[contains(text(),'Contact us')]")
+	protected WebElement contactUsLnk;
+	
+	@FindBy(xpath="//h3[contains(text(),'Technical Support')]")
+	protected WebElement contactUsTechSupp;
+	
+	@FindBy(xpath="//button[contains(text(),'Exit')]")
+	protected WebElement acqPopupExit;
+	
+	@FindBy(xpath="//div[@class='important-note-section']//h3[contains(text(),'Important Note')]")
+	protected WebElement impNoteSecHead;
+
+	@FindBy(xpath="//div[@class='important-note-section']//p[contains(text(),'Be sure')]")
+	protected WebElement impNoteSecTxt;
+
+	@FindBy(xpath="//div[@class='important-note-section']//img")
+	protected WebElement impNoteSecImg;
+
+	@FindBy(xpath="//div[@class='footer-information']//h3[contains(text(),'Come back soon')]")
+	protected WebElement comBckSecHead;
+
+	@FindBy(xpath="//div[@class='footer-information']//p[contains(text(),'You can save money')]")
+	protected WebElement comBckSecTxt;
+
+	@FindBy(xpath="//div[@class='footer-information']//img")
+	protected WebElement comBckSecImg;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'medicinecabinet')]//h3[contains(text(),'Your medicine cabinet')]")
+	protected WebElement medCabSecHead;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'medicinecabinet')]//p[contains(text(),'You can view a list')]")
+	protected WebElement medCabSecTxt;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'find_price')]//h3[contains(text(),'Find and price a medication')]")
+	protected WebElement priMedSecHead;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'find_price')]//p[contains(text(),'You can price')]")
+	protected WebElement priMedSecTxt;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'home_delivery')]//h3[contains(text(),'Home delivery management')]")
+	protected WebElement delivMgmtSecHead;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'home_delivery')]//p[contains(text(),'You can manage your')]")
+	protected WebElement delivMgmtSecTxt;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'find_pharmacy')]//h3[contains(text(),'Find a pharmacy near you')]")
+	protected WebElement findPharSecHead;
+
+	@FindBy(xpath="//div[@class='footer-information']//div[contains(@class,'find_pharmacy')]//p[contains(text(),'You will be able to search')]")
+	protected WebElement findPharSecTxt;
+	
+	@FindBy(xpath="//h1[contains(text(),'Get the most')]")
+	protected WebElement pnpHeader_preeff;
+	
 	public PharmaciesAndPrescriptionsWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

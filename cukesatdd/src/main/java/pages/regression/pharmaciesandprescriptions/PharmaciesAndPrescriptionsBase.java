@@ -1,21 +1,26 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
@@ -347,4 +352,83 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 
 	}	
 
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
+
+	public void scrollElementToCenterScreen(WebElement element) {
+		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+				+ "var elementTop = arguments[0].getBoundingClientRect().top;"
+				+ "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+		System.out.println("TEST - move element to center view"); 
+	}
+
+	public void validateHaveItem(String targetItem, WebElement targetElement) {
+		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+	}
+	
+	public void validateDoNotHaveItem(String targetItem, WebElement targetElement) {
+		Assert.assertTrue("PROBLEM - should not be able to locate element for '"+targetItem+"'", !noWaitValidate(targetElement));
+	}
+
+	public boolean noWaitValidate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else
+				System.out.println("Element not found/not visible");
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+		}
+		return false;
+	}
+
+	public void validateLnkBehaviorNewTab(String planType, String memberType, String targetItem, WebElement targetElement, String expUrl, WebElement expElement) {
+		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
+		String winHandleBefore = driver.getWindowHandle();
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int beforeClicked_numTabs=beforeClicked_tabs.size();	
+		CommonUtility.waitForPageLoad(driver, expElement, 5);
+		scrollElementToCenterScreen(targetElement);
+		targetElement.click();
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetItem+"' link. Number of existing tab before link click='"+beforeClicked_numTabs+"' | After='"+afterClicked_numTabs+"'", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, expElement, 10);
+		checkModelPopup(driver,5);
+		String currentUrl=driver.getCurrentUrl();
+		Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+
+		if (noWaitValidate(acqPopupExit)) {
+			acqPopupExit.click();
+			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+		}
+
+		driver.close();
+		System.out.println("TEST - Closed tab for '"+targetItem+"'");
+		driver.switchTo().window(winHandleBefore);
+		System.out.println("TEST - Switched back to prior tab");
+	}	
+	
+	public void validateLnkBehaviorSameTab(String planType, String memberType, String targetItem, WebElement targetElement, String expUrl, WebElement expElement) {
+		String origUrl=driver.getCurrentUrl();
+		System.out.println("Proceed to validate link '"+targetItem+"' behavior...");
+		scrollElementToCenterScreen(targetElement);
+		targetElement.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver,5);
+		String currentUrl=driver.getCurrentUrl();
+		Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+
+		driver.get(origUrl);
+		System.out.println("TEST - Switched back to prior page");
+	}	
+	
 }

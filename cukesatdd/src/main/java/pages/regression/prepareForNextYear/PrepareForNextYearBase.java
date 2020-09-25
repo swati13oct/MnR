@@ -675,15 +675,15 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				if (noWaitValidate(expElement))
 					note.add("\tPASSED - validation for link target page loading for "+targetItem);
 				else {
-					if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
-						note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
-					else
+					//tbd if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+					//tbd 	note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+					//tbd else
 						note.add("\t * FAILED, unable to locate expected element on the destination page");
 				}
 			} else {
-				if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
-					note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
-				else
+				//tbd if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
+				//tbd 	note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
+				//tbd else
 					Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
 					note.add("\tPASSED - validation for link target page loading for "+targetItem);
 			}

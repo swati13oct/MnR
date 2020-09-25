@@ -12,26 +12,22 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-#    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
-#    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-#    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
-#    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-#    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
-#    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
-#    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
-#    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
-    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
- 	  | Plan Type   |	<planType>   |
-	  | Member Type |	<memberType> |
-    Then user validates header section content
-    ##Then user validates pharmacies text content
-    ##Then user validates pharmacies tiles section content
-    ##Then user validates pharmacies tile Compare drug pricing page
-    ##Then user validates pharmacies tile Find a network pharmacy page
-    ##Then user validates pharmacies tile Order prescription refills page
-    ##Then user validates pharmacies tile Check home delivery order status page
-    ##Then user validates pharmacies tile Prescription Benefits Information page
-    ##Then user validates Plan Materials link
+    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
+    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
+    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
+    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
+    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
+    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
+    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
+##    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+## 	  | Plan Type   |	<planType>   |
+##	  | Member Type |	<memberType> |
+##    Then user validates preeffective content for header section
+##    Then user validate preeffective content for plan start date and links section
+##    Then user validate preeffective content for important note section
+##    Then user validates Need Help section content for pharmacies and prescriptions page
+##	  Then user validates footer section content for pharmacies and prescriptions page
 
 	@pnpPreff_mapd_ind @devRegression
     Examples: 
@@ -42,6 +38,16 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Examples: 
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | MAPD     | GRP_PREEFF_PnP      | yes        |
+
+	@pnpPreff_mapd_grp_lghib
+    Examples: 
+	  | FID     | planType | memberType          | expectLink |
+	  | F493942 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
+
+	@pnpPreff_mapd_grp_seib
+    Examples: 
+	  | FID     | planType | memberType          | expectLink |
+	  | F493942 | MAPD     | GRP_SEIB_PREEFF_PnP | yes        |
 
 	@pnpPreff_pdp_ind
     Examples: 
@@ -76,7 +82,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-    #Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
+    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link

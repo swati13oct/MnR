@@ -239,6 +239,9 @@ public class TestHarness extends UhcDriver {
  	@FindBy(xpath="//a[@id='pharmacies_5']")
  	private WebElement testHarnessTopMenuPhaPresLink;
  	
+ 	@FindBy(xpath="//a[@id='preeffectivepharmacies_6']")
+ 	private WebElement testHarnessTopMenuPhaPresLink_preeff;
+ 	
 	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
 	private WebElement pharPresDashboardLink;
 	
@@ -1407,16 +1410,20 @@ public class TestHarness extends UhcDriver {
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
-    		try{
-    			if (noWaitValidate(testHarnessPharPresLink)) 
-    				testHarnessPharPresLink.click();
-    			else 
-    				testHarnessTopMenuPhaPresLink.click();
-    		} catch (WebDriverException e) {
-    			checkForIPerceptionModel(driver);
-    			CommonUtility.checkPageIsReady(driver);
-    			testHarnessPharPresLink.click();
-    		}
+			if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("PREEFF")) {
+				testHarnessTopMenuPhaPresLink_preeff.click();
+			} else {
+	    		try{
+	    			if (noWaitValidate(testHarnessPharPresLink)) 
+	    				testHarnessPharPresLink.click();
+	    			else 
+	    				testHarnessTopMenuPhaPresLink.click();
+	    		} catch (WebDriverException e) {
+	    			checkForIPerceptionModel(driver);
+	    			CommonUtility.checkPageIsReady(driver);
+	    			testHarnessPharPresLink.click();
+	    		}
+			}
     		CommonUtility.checkPageIsReadyNew(driver);
 			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
