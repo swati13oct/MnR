@@ -168,14 +168,10 @@ public class HealthAndWellnessPage extends UhcDriver{
 		if (hwValidate(healthAndWellness)) {
 			healthAndWellness.click();
 			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
-
-
-
 		} else if  (hwValidate(healthAndWellness_harness)) {
 			System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
 			System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
 			Assert.assertTrue("PROBLEM - unable to locate H&W tab", hwValidate(healthAndWellness_harness));
-			//tbd healthAndWellness_harness.isDisplayed();
 			healthAndWellness_harness.click();
 			waitforElement(titleText);
 		} else {
