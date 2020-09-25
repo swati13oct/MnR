@@ -790,12 +790,12 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		checkModelPopup(driver,3);
 	}
 	
-	public List<String> validatePdInSubSection(
+	public List<String> validatePdfInSubSection(
 			String planType, 
 			HashMap<String, Boolean> docDisplayMap, 
 			String section, String subSection, 
 			String docName, String targetLang, 
-			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, 
+			WebElement langDropdownElement1, WebElement langDropdown1_targetLangOptionElement, WebElement langDropdownElement2, boolean expLangDropOption,
 			WebElement pdfElement, WebElement arrowAftPdfElement, WebElement svgAftPdfElement,
 			String subSecCookie, WebElement subSecChkmrkgreen1, WebElement subSecChkmrkgreen2,
 			boolean willDeleteCookie) {
@@ -871,10 +871,16 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 				//keep-for-now Assert.assertTrue("SHOULD land on SAR page", false);
 
 			//keep-for-now } else {
-				note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
-				//note: no doc then no dropdown
-				targetItem=targetLang+" language dropdown option'";
-				note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				if (expLangDropOption) {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display but expect dropdown to have this language option because because other sub section has this language");
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				} else {
+					note.add("\tDO NOT EXPECT "+targetLang+" '"+docName+"' document to display");
+					//note: no doc then no dropdown
+					targetItem=targetLang+" language dropdown option'";
+					note.addAll(validateDontHaveItem(targetItem, langDropdown1_targetLangOptionElement));
+				}
 
 				targetItem=section+" - "+targetLang+" '"+docName+" (PDF)'";
 				CommonUtility.waitForPageLoad(driver, pdfElement, 5);

@@ -926,7 +926,7 @@ public class VppStepDefinitionUpdatedAARP {
 
 
 
-		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
+		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary";
 
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -3743,8 +3743,13 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String AARPURL = inputAttributesMap.get("AARP URL");
+		String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.RetrieveURL(AARPURL);
+		if(getLoginScenario().environment.equals("stage")){
+			plansummaryPage.RetrieveURL(AARPURLSTG);
+		}else{
+			plansummaryPage.RetrieveURL(AARPURL);
+		}
 
 	}
 	

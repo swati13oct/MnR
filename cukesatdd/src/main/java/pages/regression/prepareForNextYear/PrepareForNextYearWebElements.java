@@ -428,7 +428,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//span[contains(text(),'or open')]/*[name()='svg']")
 	protected WebElement ind_revPlnChgSec_docSec_aftAnoc_svg;
 
-	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice of Changes')]")
+	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Annual Notice')]")
 	protected WebElement ind_revPlnChgSec_docSec_anoc_en;
 
 	@FindBy(xpath="//div[contains(@class,'reviewplanchanges_IND')]//div[contains(@class,'documentsMain')]//a[contains(text(),'Aviso')]")
@@ -457,9 +457,13 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and not(contains(@class,'green'))]//span[contains(@class,'circle')]")
 	protected WebElement ind_revPlnMatlsSec_circle_noGreen;
 
-	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[contains(@class,'circle')]")
+	//tbd @FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub') and contains(@class,'green')]//span[contains(@class,'circle')]")
+	//tbd protected WebElement ind_revPlnMatlsSec_circle_green;
+
+	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//div[contains(@class,'reviewplans')]//div[contains(@class,'review-sub')]//span[contains(@class,'circle') and contains(@class,'green')]")
 	protected WebElement ind_revPlnMatlsSec_circle_green;
 
+	
 	@FindBy(xpath="//div[contains(@class,'ReviewPlanMaterials_Ind')]//h3")
 	protected WebElement ind_revPlnMatlsSec_header;
 
@@ -853,7 +857,7 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	protected WebElement providerSearchHeaderTxt;
 	
 	//note: Drug Search page
-	@FindBy(xpath="//h1[contains(@class,'h1')]")
+	@FindBy(xpath="//h1[contains(@class,'h1') or contains(@class,'heading')]")
 	protected WebElement dceHeader;
 	
 	//note: Pharmacy Locator page

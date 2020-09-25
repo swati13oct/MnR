@@ -278,7 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+  	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -308,7 +308,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement CallSamTFNClose;
    	
 //   	String CallSam= "Call a Licensed Insurance Agent";
-   	String CallSam= "1-877";
+   	String CallSam1855= "1-855";
+   	String CallSam1877= "1-877";
+   	
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
@@ -917,7 +919,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			viewPlansButton.click();
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
-			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+			waitForPageLoadSafari();
 			
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1433,6 +1436,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	 public void validateCallSam() throws InterruptedException {
 	        boolean present;
+	        driver.navigate().refresh();
 	        try {
 	        validateNew(callsam);
 	        present = true;
@@ -1449,25 +1453,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
-			Actions action = new Actions(driver);
-			WebElement element = callsam;
-			action.moveToElement(element).perform();
+//			Actions action = new Actions(driver);
+//			WebElement element = callsam;
+//			action.moveToElement(element).perform();
+			waitforElementNew(callsamtooltip,60);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (CallSam.contains(toolTipText)) {
-	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	        if (toolTipText.contains(CallSam1877)) {
+	          System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
 	          
 	        }
+	        else if (toolTipText.contains(CallSam1855))	{
+	        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+	        }
+	        		
 	        else
-	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			//CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReady(driver);
 			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
@@ -1587,8 +1596,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			CommonUtility.checkPageIsReadyNew(driver);
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-			validateNew(DCELink);
+			validateNew(DCELink, 10);
 			jsClickNew(DCELink);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
@@ -1688,7 +1698,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void signInheader() {
 			headerSignInLink.click();
 			validateNew(signIn);
-			if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
+			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
 				System.out.println("Signin page is loaded");
 				driver.navigate().back();
@@ -1778,7 +1788,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CheckPageLoad();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-			if (driver.getCurrentUrl().contains("profile/*")) {
+			if (driver.getCurrentUrl().contains("profile/guest")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
@@ -2100,7 +2110,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
-} 
-
-
-	 
+}

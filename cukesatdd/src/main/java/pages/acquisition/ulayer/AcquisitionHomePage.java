@@ -20,7 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.commonpages.PlanDocsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -144,6 +144,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -287,7 +288,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+//	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -1115,7 +1117,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
 			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1206,9 +1209,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
+		scrollToView(ourPlansHoverLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		
+		checkIfPageReadySafari();
+		
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
@@ -1624,6 +1631,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		scrollToView(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 	}
 
@@ -1698,7 +1706,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.contains(toolTipText)) {
+		if (toolTipText.contains(CallSam)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
@@ -2545,4 +2553,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public PlanDocsPage navigateToPlanDocsFromHome() {
+     	navigateToMenuLinks(ShopForaplan, menuShop);
+     	
+     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+     	    	
+     		return new PlanDocsPage(driver);
+	 }
 }

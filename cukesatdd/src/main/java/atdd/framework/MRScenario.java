@@ -64,6 +64,9 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
+import java.security.*;
+import javax.crypto.*;
+
 /**
  * 
  * @author schak38
@@ -91,6 +94,7 @@ public class MRScenario {
 
 	public static String environment = System.getProperty("environment");
 	public static String browsername = "chrome";
+	public static String browserName;
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -850,6 +854,7 @@ try {
 
 	}
 
+	
 	public void DriverQuit()
 
 	{
@@ -945,7 +950,7 @@ try {
 
 		// if the browsername is passed in from Jenkins then use that, otherwise use the
 		// one from the CI config properties file
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		// if the browser version is passed in from Jenkins then use that, otherwise use
@@ -1073,7 +1078,7 @@ try {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "10000");
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
@@ -1188,8 +1193,10 @@ try {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
+			//capabilities.setCapability("parentTunnel", "optumtest");
 			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
